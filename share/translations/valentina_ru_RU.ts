@@ -4589,11 +4589,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Сохранить как PDF</translation>
+        <translation type="vanished">Сохранить как PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Сохранить оригинальную раскладку</translation>
+        <translation type="vanished">Сохранить оригинальную раскладку</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4978,7 +4978,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>При сохранении многостраничного документа все страницы должны быть одного размера. Вместо этого используйте функцию экспорта.</translation>
+        <translation type="vanished">При сохранении многостраничного документа все страницы должны быть одного размера. Вместо этого используйте функцию экспорта.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -4987,6 +4987,10 @@ Do you want to save your changes?</source>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

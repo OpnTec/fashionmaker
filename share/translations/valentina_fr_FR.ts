@@ -4578,11 +4578,11 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Enregistrer en tant que PDF</translation>
+        <translation type="vanished">Enregistrer en tant que PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Enregistrer la mise en page originale</translation>
+        <translation type="vanished">Enregistrer la mise en page originale</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4965,15 +4965,15 @@ Voulez-vous sauvegarder les changements ? </translation>
         <translation>Erreur d&apos;exportation.</translation>
     </message>
     <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

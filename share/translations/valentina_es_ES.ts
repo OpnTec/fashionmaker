@@ -4590,11 +4590,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Guardar como PDF</translation>
+        <translation type="vanished">Guardar como PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Guardar diseño original</translation>
+        <translation type="vanished">Guardar diseño original</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4907,7 +4907,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar patrón</translation>
     </message>
 </context>
 <context>
@@ -4978,7 +4978,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Para guardar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño. Use la función de exportar en cambio.</translation>
+        <translation type="vanished">Para guardar documentos de páginas múltiples todas las hojas deben tener el mismo tamaño. Use la función de exportar en cambio.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -4987,6 +4987,10 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Para imprimir documentos de páginas múltiples todas las hojas deben tener el mismo tamaño.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6523,15 +6527,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotacion en grados (uno de los predefinidos, modo de exportación) El valor predeterminado es 180. 0 significa no rotar. Valores validos: %1. Cada valor muestra cuantas veces los detalles seran rotados. Por ejemplo  180 significar dos veces (360/180=2) por 180 grados.</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unir las páginas si es posible (modo de exportación). Valor máximo limitado por QImage que soporta solo un máximo de 32768x32768 píxeles de imagen.</translation>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar el largo de la hoja si está establecido (modo de exportación). Esta opción le indica al programa que use el ancho de la hoja tanto como sea posible. La calidad del diseño puede ser peor cuando se usa esta opción.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
@@ -6539,7 +6543,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancho del salto del diseño x2, medido en las unidades del diseño. (modo de exportación). Establece la distancia entre los detalles y entre un detalle y la hoja.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
@@ -6547,11 +6551,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejecuta el programa en modo de prueba. El programa en este modo carga un solo archivo de patrón y sale silenciosamente sin mostrar la ventana principal. La clave tiene prioridad antes que la clave &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud del desplazamiento del diseño medido en unidades del diseño (modo de exportación). La opción muestra cuentos puntos a lo largo del límite serán usados para crear un diseño.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>

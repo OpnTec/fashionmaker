@@ -4590,11 +4590,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Save as PDF</translation>
+        <translation type="vanished">Save as PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Save original layout</translation>
+        <translation type="vanished">Save original layout</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4978,7 +4978,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>For saving multipage document all sheet should have the same size. Use export function instead.</translation>
+        <translation type="vanished">For saving multipage document all sheet should have the same size. Use export function instead.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -4987,6 +4987,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>For printing multipages document all sheet should have the same size.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

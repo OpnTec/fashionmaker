@@ -4591,11 +4591,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Als PDF speichern</translation>
+        <translation type="vanished">Als PDF speichern</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Originales Layout speichern</translation>
+        <translation type="vanished">Originales Layout speichern</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4979,7 +4979,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
+        <translation type="vanished">Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -4988,6 +4988,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Zum Drucken eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
