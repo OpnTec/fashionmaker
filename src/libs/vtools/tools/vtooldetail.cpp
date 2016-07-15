@@ -689,16 +689,25 @@ void VToolDetail::UpdateLabel()
         TextLine tl;
         // letter
         tl.m_qsText = data.GetLetter();
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::Bold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 6;
-        dataLabel->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eAlign = Qt::AlignCenter;
+            tl.m_eFontWeight = QFont::Bold;
+            tl.m_eStyle = QFont::StyleNormal;
+            tl.m_iFontSize = 6;
+            dataLabel->AddLine(tl);
+        }
+
+        // name
         tl.m_qsText = detail.getName();
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::DemiBold;
-        tl.m_iFontSize = 2;
-        dataLabel->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eAlign = Qt::AlignCenter;
+            tl.m_eFontWeight = QFont::DemiBold;
+            tl.m_iFontSize = 2;
+            dataLabel->AddLine(tl);
+        }
+
         // MCP
         tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
         tl.m_eFontWeight = QFont::Normal;
@@ -761,33 +770,56 @@ void VToolDetail::UpdatePatternInfo()
 
         // Company name
         tl.m_qsText = doc->GetCompanyName();
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::DemiBold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 4;
-        patternInfo->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eAlign = Qt::AlignCenter;
+            tl.m_eFontWeight = QFont::DemiBold;
+            tl.m_eStyle = QFont::StyleNormal;
+            tl.m_iFontSize = 4;
+            patternInfo->AddLine(tl);
+        }
 
         // Pattern name
         tl.m_qsText = doc->GetPatternName();
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_iFontSize = 2;
-        patternInfo->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eFontWeight = QFont::Normal;
+            tl.m_iFontSize = 2;
+            patternInfo->AddLine(tl);
+        }
 
         // Pattern number
         tl.m_qsText = doc->GetPatternNumber();
-        tl.m_iFontSize = 0;
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        patternInfo->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_iFontSize = 0;
+            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+            patternInfo->AddLine(tl);
+        }
 
         // Customer name
         tl.m_qsText = doc->GetCustomerName();
-        tl.m_eStyle = QFont::StyleItalic;
-        patternInfo->AddLine(tl);
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eStyle = QFont::StyleItalic;
+            patternInfo->AddLine(tl);
+        }
+
+        // Size
+        tl.m_qsText = doc->GetPatternSize();
+        if (tl.m_qsText.isEmpty() == false)
+        {
+            tl.m_eStyle = QFont::StyleNormal;
+            patternInfo->AddLine(tl);
+        }
 
         // Creation date
-        QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
-        tl.m_qsText = qslDate.last();
-        patternInfo->AddLine(tl);
+        if (doc->IsDateVisible() == true)
+        {
+            QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
+            tl.m_qsText = qslDate.last();
+            patternInfo->AddLine(tl);
+        }
 
         QPointF pt = geom.GetPos();
         QRectF rectBB;

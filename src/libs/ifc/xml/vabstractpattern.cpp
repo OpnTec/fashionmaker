@@ -68,6 +68,9 @@ const QString VAbstractPattern::TagPatternNum   = QStringLiteral("patternNumber"
 const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
 const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
+const QString VAbstractPattern::TagSize         = QStringLiteral("size");
+const QString VAbstractPattern::TagShowDate     = QStringLiteral("showDate");
+
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
@@ -1077,6 +1080,36 @@ QDate VAbstractPattern::GetCreationDate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetPatternSize() const
+{
+    return UniqueTagText(TagSize);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetPatternSize(QString qsSize)
+{
+    CheckTagExists(TagSize);
+    setTagText(TagSize, qsSize);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::IsDateVisible() const
+{
+    return UniqueTagText(TagShowDate) != QStringLiteral("false");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetDateVisible(bool bVisible)
+{
+    CheckTagExists(TagShowDate);
+    setTagText(TagShowDate, bVisible == true? QStringLiteral("true") : QStringLiteral("false"));
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);
@@ -1178,7 +1211,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                            << TagCustomerName << TagCreationDate;
+                                            << TagCustomerName << TagCreationDate << TagSize << TagShowDate;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1243,6 +1276,16 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             {
                 element = createElement(TagCreationDate);
                 break;
+            }
+            case 11: // TagSize
+            {
+                 element = createElement(TagSize);
+                 break;
+            }
+            case 12: // TagShowDate
+            {
+                 element = createElement(TagShowDate);
+                 break;
             }
 
             default:

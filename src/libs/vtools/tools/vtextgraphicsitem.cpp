@@ -32,6 +32,7 @@
 #include <QGraphicsView>
 #include <QTransform>
 #include <QCursor>
+#include <QtMath>
 #include <QDebug>
 
 #include "../vmisc/def.h"
@@ -311,7 +312,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             m_dAngle = GetAngle(pME->scenePos());
             return;
         }
-        double dAng = 180*(GetAngle(pME->scenePos()) - m_dAngle)/M_PI;
+		  double dAng =  qRadiansToDegrees(GetAngle(pME->scenePos()) - m_dAngle);
         rectBB.setTopLeft(m_ptStartPos);
         rectBB.setWidth(m_rectBoundingBox.width());
         rectBB.setHeight(m_rectBoundingBox.height());
@@ -480,7 +481,7 @@ QRectF VTextGraphicsItem::GetBoundingRect(QRectF rectBB, qreal dRot) const
     qreal dY1 = 0;
     qreal dY2 = 0;
 
-    double dAng = M_PI*dRot/180;
+	 double dAng = qDegreesToRadians(dRot);
     for (int i = 0; i < 4; ++i)
     {
         QPointF pt = apt[i] - ptCenter;

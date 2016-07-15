@@ -23,6 +23,8 @@
                             <xs:element name="company" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="created" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="gradation" minOccurs="0" maxOccurs="1">
                                 <xs:complexType>
                                        <xs:sequence>

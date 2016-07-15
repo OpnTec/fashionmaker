@@ -139,7 +139,7 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagCreationDate;
+                                     << TagCreationDate << TagSize << TagShowDate;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -213,6 +213,12 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 14: // TagCreationDate
                         qCDebug(vXML, "Creation date.");
+                        break;
+                    case 15: // TagSize
+                        qCDebug(vXML, "Size");
+                        break;
+                    case 16:
+                        qCDebug(vXML, "Show creation date");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
