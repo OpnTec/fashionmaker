@@ -30,7 +30,7 @@
 #include <QDesktopServices>
 #include <QDebug>
 
-const QString defaultFeedURL = QStringLiteral("http://localhost/updateapp/Appcast.xml");
+const QString defaultFeedURL = QStringLiteral("http://valentinaproject.bitbucket.org/Appcast.xml");
 
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
