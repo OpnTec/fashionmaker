@@ -6,10 +6,13 @@ SOURCES += \
     $$PWD/fvupdater.cpp \
     $$PWD/fvavailableupdate.cpp
 
+win32-msvc*:SOURCES += $$PWD/stable.cpp
+
 HEADERS += \
     $$PWD/fvupdatewindow.h \
     $$PWD/fvupdater.h \
-    $$PWD/fvavailableupdate.h
+    $$PWD/fvavailableupdate.h \
+    $$PWD/stable.h
 
 FORMS += \
     $$PWD/fvupdatewindow.ui
