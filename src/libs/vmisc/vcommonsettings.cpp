@@ -436,23 +436,29 @@ void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
 //---------------------------------------------------------------------------------------------------------------------
 int VCommonSettings::GetLatestSkippedVersion() const
 {
-    return value(SettingLatestSkippedVersion, 0x0).toInt();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(SettingLatestSkippedVersion, 0x0).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLatestSkippedVersion(int value)
 {
-    setValue(SettingLatestSkippedVersion, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(SettingLatestSkippedVersion, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QDate VCommonSettings::GetDateOfLastRemind() const
 {
-    return value(SettingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(SettingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetDateOfLastRemind(const QDate &date)
 {
-    setValue(SettingDateOfLastRemind, date);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(SettingDateOfLastRemind, date);
+    settings.sync();
 }

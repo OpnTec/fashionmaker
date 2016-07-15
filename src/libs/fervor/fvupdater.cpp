@@ -30,6 +30,8 @@
 #include <QDesktopServices>
 #include <QDebug>
 
+const QString defaultFeedURL = QStringLiteral("http://localhost/updateapp/Appcast.xml");
+
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,7 +179,7 @@ void FvUpdater::UpdateInstallationConfirmed()
     // Open a link
     if (not QDesktopServices::openUrl(proposedUpdate->GetEnclosureUrl()))
     {
-        showErrorDialog(tr("Unable to open a browser."), true);
+        showErrorDialog(tr("Cannot open your default browser."), true);
         return;
     }
 

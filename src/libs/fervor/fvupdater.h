@@ -32,6 +32,8 @@
 #include "fvupdatewindow.h"
 #include "fvavailableupdate.h"
 
+extern const QString defaultFeedURL;
+
 class FvUpdater : public QObject
 {
     Q_OBJECT

@@ -28,6 +28,7 @@
 
 #include "tmainwindow.h"
 #include "mapplication.h"
+#include "../fervor/fvupdater.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
@@ -50,6 +51,9 @@ int main(int argc, char *argv[])
 
     MApplication app(argc, argv);
     app.InitOptions();
+
+    // Set feed URL before doing anything else
+    FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
 
     QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
 

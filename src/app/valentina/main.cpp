@@ -57,11 +57,14 @@ int main(int argc, char *argv[])
 
     app.InitOptions();
 
-    // Set feed URL before doing anything else
-    FvUpdater::sharedUpdater()->SetFeedURL("http://localhost/updateapp/Appcast.xml");
+    if (VApplication::IsGUIMode())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
 
-    // Check for updates automatically
-    FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
 
     MainWindow w;
 #if !defined(Q_OS_MAC)
