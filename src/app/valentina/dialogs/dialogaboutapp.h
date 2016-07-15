@@ -41,8 +41,8 @@ class DialogAboutApp : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogAboutApp(QWidget *parent = 0);
-    ~DialogAboutApp();
+    explicit DialogAboutApp(QWidget *parent = nullptr);
+    virtual ~DialogAboutApp();
 
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
@@ -53,9 +53,6 @@ private:
     Q_DISABLE_COPY(DialogAboutApp)
 
     void FontPointSize(QWidget *w, int pointSize);
-
-private slots:
-    void webButtonClicked();
 };
 
 #endif // DIALOGABOUTAPP_H

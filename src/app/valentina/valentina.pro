@@ -536,6 +536,15 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
+# Fervor static library (depend on VMisc, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/fervor/$${DESTDIR}/ -lfervor
+
+INCLUDEPATH += $$PWD/../../libs/fervor
+DEPENDPATH += $$PWD/../../libs/fervor
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/fervor.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/libfervor.a
+
 # IFC static library (depend on QMuParser, VMisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
 

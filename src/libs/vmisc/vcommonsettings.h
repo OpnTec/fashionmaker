@@ -99,8 +99,14 @@ public:
     QByteArray GetToolbarsState() const;
     void SetToolbarsState(const QByteArray &value);
 
-     QSize GetPreferenceDialogSize() const;
-     void SetPreferenceDialogSize(const QSize& sz);
+    QSize GetPreferenceDialogSize() const;
+    void SetPreferenceDialogSize(const QSize& sz);
+
+    int  GetLatestSkippedVersion() const;
+    void SetLatestSkippedVersion(int value);
+
+    QDate GetDateOfLastRemind() const;
+    void  SetDateOfLastRemind(const QDate &date);
 
 private:
     Q_DISABLE_COPY(VCommonSettings)
@@ -128,6 +134,8 @@ private:
     static const QString SettingGeneralWindowState;
     static const QString SettingGeneralToolbarsState;
     static const QString SettingPreferenceDialogSize;
+    static const QString SettingLatestSkippedVersion;
+    static const QString SettingDateOfLastRemind;
 };
 
 #endif // VCOMMONSETTINGS_H

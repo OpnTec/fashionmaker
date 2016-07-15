@@ -33,6 +33,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
+#include <QRegularExpression>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
@@ -107,7 +108,7 @@ QString VAbstractConverter::GetVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetVersion(const QString &version) const
+int VAbstractConverter::GetVersion(const QString &version)
 {
     ValidateVersion(version);
 
@@ -138,11 +139,11 @@ int VAbstractConverter::GetVersion(const QString &version) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(const QString &version) const
+void VAbstractConverter::ValidateVersion(const QString &version)
 {
-    const QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
+    const QRegularExpression rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
 
-    if (rx.exactMatch(version) == false)
+    if (rx.match(version).hasMatch() == false)
     {
         const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);
