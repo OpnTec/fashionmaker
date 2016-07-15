@@ -32,6 +32,7 @@
 #include <QDebug>
 #include <QLocale>
 #include <QApplication>
+#include <QDate>
 
 #include "../ifc/ifcdef.h"
 
@@ -65,6 +66,8 @@ const QString VCommonSettings::SettingGeneralGeometry                  = QString
 const QString VCommonSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
+const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
+const QString VCommonSettings::SettingDateOfLastRemind                 = QStringLiteral("dateOfLastRemind");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -428,4 +431,34 @@ QSize VCommonSettings::GetPreferenceDialogSize() const
 void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
 {
     setValue(SettingPreferenceDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetLatestSkippedVersion() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(SettingLatestSkippedVersion, 0x0).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLatestSkippedVersion(int value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(SettingLatestSkippedVersion, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDate VCommonSettings::GetDateOfLastRemind() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(SettingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDateOfLastRemind(const QDate &date)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(SettingDateOfLastRemind, date);
+    settings.sync();
 }

@@ -43,12 +43,13 @@ public:
     void         Convert();
     virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
+    static int GetVersion(const QString &version);
+
 protected:
     int     ver;
     QString fileName;
 
     void ValidateInputFile(const QString &currentSchema) const;
-    int  GetVersion(const QString &version) const;
     Q_NORETURN void InvalidVersion(int ver) const;
     void Save() const;
     void SetVersion(const QString &version);
@@ -72,7 +73,7 @@ private:
 
     QString GetVersionStr() const;
 
-    void ValidateVersion(const QString &version) const;
+    static void ValidateVersion(const QString &version);
 
     void ReserveFile() const;
 };

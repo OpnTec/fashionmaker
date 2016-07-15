@@ -347,6 +347,10 @@
         <source>Built on %1 at %2</source>
         <translation>Built on %1 at %2</translation>
     </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogAboutTape</name>
@@ -385,6 +389,10 @@
     <message>
         <source>Built on %1 at %2</source>
         <translation>Built on %1 at %2</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2026,11 +2034,11 @@
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished">Find:</translation>
+        <translation>Find:</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Search</translation>
+        <translation>Search</translation>
     </message>
 </context>
 <context>
@@ -2912,6 +2920,26 @@ Apply settings anyway?</translation>
     <message>
         <source>untitled</source>
         <translation>untitled</translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Path:</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Show in Explorer</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished">File was not saved yet.</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4381,6 +4409,68 @@ Apply settings anyway?</translation>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>Retain original pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdateWindow</name>
+    <message>
+        <source>Software Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A new version of %1 is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip This Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remind Me Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdater</name>
+    <message>
+        <source>Cannot open your default browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed download failed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed parsing failed: %1 %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No updates were found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Information</translation>
+    </message>
 </context>
 <context>
     <name>InternalStrings</name>
@@ -4740,11 +4830,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="vanished">Stop</translation>
     </message>
     <message>
         <source>Stop using tool</source>
-        <translation>Stop using tool</translation>
+        <translation type="vanished">Stop using tool</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
@@ -5435,7 +5525,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Toolbar pointer</source>
-        <translation>Toolbar pointer</translation>
+        <translation type="vanished">Toolbar pointer</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -5447,7 +5537,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Groups</translation>
+        <translation type="vanished">Groups</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -5464,6 +5554,30 @@ Do you want to save your changes?</translation>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
         <translation>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</translation>
+    </message>
+    <message>
+        <source>Tool pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midpoint between two points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished">Group</translation>
+    </message>
+    <message>
+        <source>Contains all visibility groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show which details will go in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6586,6 +6700,10 @@ Do you want to save your changes?</translation>
         <source>Invalid value</source>
         <translation>Invalid value</translation>
     </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -6706,6 +6824,13 @@ Do you want to save your changes?</translation>
     <message>
         <source>Templates</source>
         <translation>Templates</translation>
+    </message>
+</context>
+<context>
+    <name>ToggleDetailInLayout</name>
+    <message>
+        <source>detail in layout list</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7820,6 +7945,17 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VToolUnionDetails</name>
+    <message>
+        <source>union details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VTranslateVars</name>
     <message>
         <source>Bunka</source>
@@ -8906,6 +9042,11 @@ Do you want to save your changes?</translation>
         <comment>Segment. Left symbol _ in the name</comment>
         <translation>Seg_</translation>
     </message>
+    <message>
+        <source>CurrentLength</source>
+        <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8930,10 +9071,21 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VWidgetDetails</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VWidgetGroups</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation type="vanished">Form</translation>
     </message>
     <message>
         <source>Rename</source>

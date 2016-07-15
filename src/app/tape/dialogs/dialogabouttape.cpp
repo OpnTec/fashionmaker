@@ -30,6 +30,7 @@
 #include "ui_dialogabouttape.h"
 #include "../version.h"
 #include "../vmisc/def.h"
+#include "../fervor/fvupdater.h"
 
 #include <QDate>
 #include <QDesktopServices>
@@ -49,8 +50,16 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, &DialogAboutTape::WebButtonClicked);
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this](){
+        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
+        {
+            qWarning() << tr("Cannot open your default browser");
+        }
+    });
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutTape::close);
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, [](){
+        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+    });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -97,15 +106,6 @@ void DialogAboutTape::showEvent(QShowEvent *event)
     setMinimumSize(size());
 
     isInitialized = true;//first show windows are held
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogAboutTape::WebButtonClicked()
-{
-    if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
-    {
-        qWarning() << tr("Cannot open your default browser");
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

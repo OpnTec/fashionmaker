@@ -347,6 +347,10 @@
         <source>Built on %1 at %2</source>
         <translation>Compilé le %1 à %2</translation>
     </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogAboutTape</name>
@@ -385,6 +389,10 @@
     <message>
         <source>Built on %1 at %2</source>
         <translation>Compilé le %1 à %2</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2907,6 +2915,26 @@ Appliquer les réglages quand-même ?</translation>
         <source>untitled</source>
         <translation type="unfinished">sans titre</translation>
     </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Chemin:</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Montrer dans l&apos;Explorer</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4363,6 +4391,68 @@ Appliquer les réglages quand-même ?</translation>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Retain original pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdateWindow</name>
+    <message>
+        <source>Software Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A new version of %1 is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip This Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remind Me Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdater</name>
+    <message>
+        <source>Cannot open your default browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed download failed: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed parsing failed: %1 %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No updates were found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Information</translation>
+    </message>
 </context>
 <context>
     <name>InternalStrings</name>
@@ -4719,11 +4809,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>stop</translation>
+        <translation type="vanished">stop</translation>
     </message>
     <message>
         <source>Stop using tool</source>
-        <translation>Arrêter d&apos;utiliser cet outil</translation>
+        <translation type="vanished">Arrêter d&apos;utiliser cet outil</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
@@ -5413,19 +5503,11 @@ Voulez-vous sauvegarder les changements ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Toolbar pointer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5442,6 +5524,30 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midpoint between two points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contains all visibility groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show which details will go in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6545,6 +6651,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -6665,6 +6775,13 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Templates</source>
         <translation>Modèles </translation>
+    </message>
+</context>
+<context>
+    <name>ToggleDetailInLayout</name>
+    <message>
+        <source>detail in layout list</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7711,6 +7828,17 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolUnionDetails</name>
+    <message>
+        <source>union details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>United detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8782,6 +8910,11 @@ Voulez-vous enregistrer les changements?</translation>
         <comment>Segment. Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>CurrentLength</source>
+        <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8806,11 +8939,18 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
-    <name>VWidgetGroups</name>
+    <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VWidgetGroups</name>
     <message>
         <source>Rename</source>
         <translation type="unfinished"></translation>
