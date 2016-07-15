@@ -139,8 +139,8 @@ void FvUpdater::SkipUpdate()
 {
     qDebug() << "Skip update";
 
-    FvAvailableUpdate* proposedUpdate = GetProposedUpdate();
-    if (not proposedUpdate)
+    QPointer<FvAvailableUpdate> proposedUpdate = GetProposedUpdate();
+    if (proposedUpdate.isNull())
     {
         qWarning() << "Proposed update is NULL (shouldn't be at this point)";
         return;
