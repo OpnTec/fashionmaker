@@ -28,6 +28,8 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
+#include "../fervor/fvupdater.h"
+
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
@@ -54,6 +56,12 @@ int main(int argc, char *argv[])
     VApplication app(argc, argv);
 
     app.InitOptions();
+
+    // Set feed URL before doing anything else
+    FvUpdater::sharedUpdater()->SetFeedURL("http://localhost/updateapp/Appcast.xml");
+
+    // Check for updates automatically
+    FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
 
     MainWindow w;
 #if !defined(Q_OS_MAC)

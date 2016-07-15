@@ -65,6 +65,7 @@ const QString VCommonSettings::SettingGeneralGeometry                  = QString
 const QString VCommonSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
+const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -428,4 +429,16 @@ QSize VCommonSettings::GetPreferenceDialogSize() const
 void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
 {
     setValue(SettingPreferenceDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetLatestSkippedVersion() const
+{
+    return value(SettingLatestSkippedVersion, 0x0).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLatestSkippedVersion(int value)
+{
+    setValue(SettingLatestSkippedVersion, value);
 }
