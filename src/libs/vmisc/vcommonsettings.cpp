@@ -32,6 +32,7 @@
 #include <QDebug>
 #include <QLocale>
 #include <QApplication>
+#include <QDate>
 
 #include "../ifc/ifcdef.h"
 
@@ -66,6 +67,7 @@ const QString VCommonSettings::SettingGeneralWindowState               = QString
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
 const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
+const QString VCommonSettings::SettingDateOfLastRemind                 = QStringLiteral("dateOfLastRemind");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -441,4 +443,16 @@ int VCommonSettings::GetLatestSkippedVersion() const
 void VCommonSettings::SetLatestSkippedVersion(int value)
 {
     setValue(SettingLatestSkippedVersion, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDate VCommonSettings::GetDateOfLastRemind() const
+{
+    return value(SettingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDateOfLastRemind(const QDate &date)
+{
+    setValue(SettingDateOfLastRemind, date);
 }

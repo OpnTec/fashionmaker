@@ -105,6 +105,9 @@ public:
     int  GetLatestSkippedVersion() const;
     void SetLatestSkippedVersion(int value);
 
+    QDate GetDateOfLastRemind() const;
+    void  SetDateOfLastRemind(const QDate &date);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 
@@ -132,6 +135,7 @@ private:
     static const QString SettingGeneralToolbarsState;
     static const QString SettingPreferenceDialogSize;
     static const QString SettingLatestSkippedVersion;
+    static const QString SettingDateOfLastRemind;
 };
 
 #endif // VCOMMONSETTINGS_H

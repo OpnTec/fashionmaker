@@ -157,6 +157,8 @@ void FvUpdater::RemindMeLater()
 {
     qDebug() << "Remind me later";
 
+    qApp->Settings()->SetDateOfLastRemind(QDate::currentDate());
+
     hideUpdaterWindow();
 }
 
@@ -229,7 +231,14 @@ bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
 //---------------------------------------------------------------------------------------------------------------------
 bool FvUpdater::CheckForUpdatesSilent()
 {
-    return CheckForUpdates(true);
+    if (qApp->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
+    {
+        return CheckForUpdates(true);
+    }
+    else
+    {
+        return true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
