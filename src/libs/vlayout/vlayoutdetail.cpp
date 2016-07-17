@@ -113,6 +113,44 @@ QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutDetail::GetDetailLabelPoints() const
+{
+    return d->detailLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetDetailLabelPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot)
+{
+    qreal dAng = qDegreesToRadians(dRot);
+    QPointF ptCenter(ptPos.x() + dWidth/2, ptPos.y() + dHeight/2);
+    QVector<QPointF> v;
+    v << ptPos << QPointF(ptPos.x() + dWidth, ptPos.y()) << QPointF(ptPos.x() + dWidth, ptPos.y() + dHeight)
+         << QPointF(ptPos.x(), ptPos.y() + dHeight) << ptPos;
+    for (int i = 0; i < v.count(); ++i)
+        v[i] = RotatePoint(ptCenter, v[i], dAng);
+    d->detailLabel = RoundPoints(v);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutDetail::GetPatternInfoPoints() const
+{
+    return d->patternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot)
+{
+    qreal dAng = qDegreesToRadians(dRot);
+    QPointF ptCenter(ptPos.x() + dWidth/2, ptPos.y() + dHeight/2);
+    QVector<QPointF> v;
+    v << ptPos << QPointF(ptPos.x() + dWidth, ptPos.y()) << QPointF(ptPos.x() + dWidth, ptPos.y() + dHeight)
+         << QPointF(ptPos.x(), ptPos.y() + dHeight) << ptPos;
+    for (int i = 0; i < v.count(); ++i)
+        v[i] = RotatePoint(ptCenter, v[i], dAng);
+    d->patternInfo = RoundPoints(v);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QTransform VLayoutDetail::GetMatrix() const
 {
     return d->matrix;
@@ -420,6 +458,34 @@ QPainterPath VLayoutDetail::ContourPath() const
         path.setFillRule(Qt::WindingFill);
     }
 
+    if (d->detailLabel.count() > 0)
+    {
+        points = Map(d->detailLabel);
+
+        QPainterPath pathDet;
+        pathDet.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            pathDet.lineTo(points.at(i));
+        }
+
+        path.addPath(pathDet);
+    }
+
+    if (d->patternInfo.count() > 0)
+    {
+        points = Map(d->patternInfo);
+
+        QPainterPath pathDet;
+        pathDet.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            pathDet.lineTo(points.at(i));
+        }
+
+        path.addPath(pathDet);
+    }
+
     return path;
 }
 
@@ -458,4 +524,15 @@ bool VLayoutDetail::IsMirror() const
 void VLayoutDetail::SetMirror(bool value)
 {
     d->mirror = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
+{
+    QPointF ptDest;
+    QPointF ptRel = pt - ptCenter;
+    ptDest.setX(cos(dAng)*ptRel.x() - sin(dAng)*ptRel.y());
+    ptDest.setY(sin(dAng)*ptRel.x() + cos(dAng)*ptRel.y());
+
+    return ptDest + ptCenter;
 }

@@ -54,6 +54,12 @@ public:
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
 
+    QVector<QPointF> GetDetailLabelPoints() const;
+    void SetDetailLabelPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot);
+
+    QVector<QPointF> GetPatternInfoPoints() const;
+    void SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot);
+
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
 
@@ -86,6 +92,8 @@ private:
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
+
+    QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);

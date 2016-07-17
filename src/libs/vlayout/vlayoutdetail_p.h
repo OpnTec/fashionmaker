@@ -44,13 +44,14 @@ class VLayoutDetailData : public QSharedData
 public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
-          matrix(QMatrix()), layoutWidth(0), mirror(false)
+          matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
+          patternInfo(QVector<QPointF>())
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth),
-          mirror(detail.mirror)
+          mirror(detail.mirror), detailLabel(detail.detailLabel), patternInfo(detail.patternInfo)
     {}
 
     ~VLayoutDetailData() {}
@@ -71,6 +72,11 @@ public:
     qreal layoutWidth;
 
     bool mirror;
+
+    /** @brief detail label rectangle */
+    QVector<QPointF> detailLabel;
+    /** @brief pattern info rectangle */
+    QVector<QPointF> patternInfo;
 
 private:
     VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;
