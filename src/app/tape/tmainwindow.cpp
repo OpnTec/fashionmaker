@@ -1743,7 +1743,17 @@ void TMainWindow::SetupMenu()
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         recentFileActs[i] = new QAction(this);
-        connect(recentFileActs[i], &QAction::triggered, this, &TMainWindow::OpenRecentFile);
+        connect(recentFileActs[i], &QAction::triggered, this, [this]()
+        {
+            if (auto action = qobject_cast<QAction *>(sender()))
+            {
+                const QString filePath = action->data().toString();
+                if (not filePath.isEmpty())
+                {
+                    LoadFile(filePath);
+                }
+            }
+        });
         ui->menuFile->insertAction(ui->actionPreferences, recentFileActs[i]);
         recentFileActs[i]->setVisible(false);
     }
@@ -2774,19 +2784,6 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         if (window->isActiveWindow())
         {
             action->setChecked(true);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenRecentFile()
-{
-    if (auto action=qobject_cast<QAction *>(sender()))
-    {
-        const QString filePath = action->data().toString();
-        if (not filePath.isEmpty())
-        {
-            LoadFile(filePath);
         }
     }
 }
