@@ -122,17 +122,16 @@ public:
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 public slots:
+    void DialogAccepted();
+private slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
-
     void TemplateSelected();
     void FindTemplate();
     void PaperSizeChanged();
     void Swap(bool checked);
-
-    void DialogAccepted();
     void RestoreDefaults();
-private slots:
+
     void CorrectMaxFileds();
     void IgnoreAllFields(int state);
 private:

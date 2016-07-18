@@ -49,13 +49,10 @@ TapeConfigurationPage::TapeConfigurationPage(QWidget *parent)
       langCombo(nullptr),
       systemCombo(nullptr),
       labelCombo(nullptr),
-      unitCombo(nullptr),
       osOptionCheck(nullptr),
       langChanged(false),
       systemChanged(false),
       defGradationChanged(false),
-      unitChanged(false),
-      labelLangChanged(false),
       sendReportCheck(nullptr),
       askPointDeletionCheck(nullptr),
       toolBarStyleCheck(nullptr),
@@ -119,49 +116,6 @@ void TapeConfigurationPage::Apply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapeConfigurationPage::LangChanged()
-{
-    langChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TapeConfigurationPage::SystemChanged()
-{
-    systemChanged = true;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
-#else
-    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
-#endif
-    systemAuthorValueLabel->setText(text);
-    systemAuthorValueLabel->setToolTip(text);
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
-#else
-    text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
-#endif
-    systemBookValueLabel->setPlainText(text);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TapeConfigurationPage::DefGradationChanged()
-{
-    defGradationChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TapeConfigurationPage::UnitChanged()
-{
-    this->unitChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TapeConfigurationPage::LabelLangChanged()
-{
-    labelLangChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TapeConfigurationPage::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
@@ -219,8 +173,10 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     {
         langCombo->setCurrentIndex(index);
     }
-    connect(langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TapeConfigurationPage::LangChanged);
+    connect(langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this]()
+    {
+        langChanged = true;
+    });
 
     QFormLayout *langLayout = new QFormLayout;
     langLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -267,8 +223,23 @@ QGroupBox *TapeConfigurationPage::PMSystemGroup()
 
     pmSystemLayout->addRow(systemBookLabel, systemBookValueLabel);
 
-    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TapeConfigurationPage::SystemChanged);
+    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this]()
+    {
+        systemChanged = true;
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
+    #else
+        QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+    #endif
+        systemAuthorValueLabel->setText(text);
+        systemAuthorValueLabel->setToolTip(text);
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
+    #else
+        text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+    #endif
+        systemBookValueLabel->setPlainText(text);
+    });
 
     // set default pattern making system
     const VTapeSettings *settings = qApp->TapeSettings();
@@ -300,8 +271,14 @@ QGroupBox *TapeConfigurationPage::GradationGroup()
     {
         defHeightCombo->setCurrentIndex(index);
     }
-    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TapeConfigurationPage::DefGradationChanged);
+
+    auto DefGradationChanged = [this]()
+    {
+        defGradationChanged = true;
+    };
+
+    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            DefGradationChanged);
     gradationLayout->addRow(defHeightLabel, defHeightCombo);
 
 
@@ -314,7 +291,7 @@ QGroupBox *TapeConfigurationPage::GradationGroup()
         defSizeCombo->setCurrentIndex(index);
     }
     connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TapeConfigurationPage::DefGradationChanged);
+            DefGradationChanged);
     gradationLayout->addRow(defSizeLabel, defSizeCombo);
 
     gradationGroup->setLayout(gradationLayout);

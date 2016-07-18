@@ -70,8 +70,6 @@ protected slots:
     void UpdateInstallationConfirmed();
 
 private slots:
-    void httpFeedReadyRead();
-    void httpFeedUpdateDataReadProgress(qint64 bytesRead, qint64 totalBytes);
     void httpFeedDownloadFinished();
 
 private:
