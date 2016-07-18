@@ -2755,7 +2755,7 @@ void MainWindow::New()
     if (comboBoxDraws->count() == 0)
     {
         qCDebug(vMainWindow, "New PP.");
-        QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+        QString patternPieceName = tr("Pattern piece %1").arg(comboBoxDraws->count()+1);
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "First PP");
@@ -3499,7 +3499,7 @@ void MainWindow::CreateActions()
     connect(ui->actionNewDraw, &QAction::triggered, [this]()
     {
         qCDebug(vMainWindow, "New PP.");
-        QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+        QString patternPieceName = tr("Pattern piece %1").arg(comboBoxDraws->count()+1);
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
@@ -3988,8 +3988,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
         if (restoreFiles.size() > 0)
         {
             QMessageBox::StandardButton reply;
-            QString mes=QString(tr("Valentina didn't shut down correctly. "
-                                   "Do you want reopen files (%1) you had open?")).arg(restoreFiles.size());
+            const QString mes = tr("Valentina didn't shut down correctly. Do you want reopen files (%1) you had open?")
+                    .arg(restoreFiles.size());
             reply = QMessageBox::question(this, tr("Reopen files."), mes, QMessageBox::Yes|QMessageBox::No,
                                           QMessageBox::Yes);
             if (reply == QMessageBox::Yes)

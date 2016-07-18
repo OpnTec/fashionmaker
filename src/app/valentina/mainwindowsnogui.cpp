@@ -714,7 +714,7 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
     QFile f(params.last());
     if (f.exists() == false)
     {
-        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(params.last()).arg(proc.errorString());
+        const QString msg = tr("Creating file '%1' failed! %2").arg(params.last()).arg(proc.errorString());
         QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
