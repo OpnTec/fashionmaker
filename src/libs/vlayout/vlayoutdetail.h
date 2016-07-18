@@ -93,7 +93,7 @@ private:
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 
-    QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
+    QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng) const;
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);
