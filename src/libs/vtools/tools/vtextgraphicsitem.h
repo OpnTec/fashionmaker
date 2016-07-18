@@ -33,17 +33,7 @@
 #include <QFont>
 #include <QList>
 
-struct TextLine
-{
-    QString             m_qsText;
-    int                 m_iFontSize;  // 0 means default
-    QFont::Weight       m_eFontWeight;
-    QFont::Style        m_eStyle;
-    Qt::Alignment       m_eAlign;
-    int                 m_iHeight;
-
-    TextLine();
-};
+#include "vtextmanager.h"
 
 class VTextGraphicsItem : public QGraphicsObject
 {
@@ -79,8 +69,6 @@ protected:
     void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
     void                UpdateBox();
     void                UpdateFont();
-    bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
-    QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
 
     double              GetAngle(QPointF pt) const;
 
@@ -102,9 +90,7 @@ private:
     QRectF              m_rectResize;
     int                 m_iMinH;
     QRectF              m_rectBoundingBox;
-    QFont               m_font;
-    QList<TextLine>     m_liLines;
-    QList<TextLine>     m_liOutput;
+    VTextManager        m_tm;
 
     QRectF              GetBoundingRect(QRectF rectBB, qreal dRot) const;
 };

@@ -44,23 +44,13 @@
 #define ROTATE_ARC                  50
 #define MIN_W                       120
 #define MIN_H                       60
-#define MIN_FONT_SIZE               12
-#define MAX_FONT_SIZE               128
-#define SPACING                     2
 #define TOP_Z                       2
-
-//---------------------------------------------------------------------------------------------------------------------
-TextLine::TextLine()
-    :m_qsText(), m_iFontSize(MIN_FONT_SIZE), m_eFontWeight(QFont::Normal), m_eStyle(QFont::StyleNormal),
-      m_eAlign(Qt::AlignCenter), m_iHeight(0)
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VTextGraphicsItem::mNormal), m_bReleased(false),
       m_ptStartPos(), m_ptStart(), m_ptRotCenter(), m_szStart(), m_dRotation(0), m_dAngle(0),
-      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_font(), m_liLines(), m_liOutput()
-
+      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm()
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     SetSize(MIN_W, m_iMinH);
@@ -74,7 +64,7 @@ VTextGraphicsItem::~VTextGraphicsItem()
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::SetFont(const QFont& fnt)
 {
-    m_font = fnt;
+    m_tm.SetFont(fnt);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,17 +78,17 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     int iY = 0;
     int iH = 0;
     painter->setPen(Qt::black);
-    QFont fnt = m_font;
-    for (int i = 0; i < m_liOutput.count(); ++i)
+    QFont fnt = m_tm.GetFont();
+    for (int i = 0; i < m_tm.GetCount(); ++i)
     {
-        const TextLine& tl = m_liOutput.at(i);
+        const TextLine& tl = m_tm.GetLine(i);
         iH = tl.m_iHeight;
-        fnt.setPixelSize(m_font.pixelSize() + tl.m_iFontSize);
+        fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
         painter->setFont(fnt);
         painter->drawText(0, iY, qRound(boundingRect().width()), iH, tl.m_eAlign, tl.m_qsText);
-        iY += iH + SPACING;
+        iY += iH + m_tm.GetSpacing();
     }
 
 
@@ -154,8 +144,8 @@ void VTextGraphicsItem::Reset()
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
-    m_liLines << tl;
-    while (IsBigEnough(MIN_W, m_iMinH, MIN_FONT_SIZE) == false)
+    m_tm.AddLine(tl);
+    while (m_tm.IsBigEnough(MIN_W, m_iMinH, MIN_FONT_SIZE) == false)
     {
         m_iMinH += 5;
     }
@@ -168,7 +158,7 @@ void VTextGraphicsItem::AddLine(const TextLine& tl)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Clear()
 {
-    m_liLines.clear();
+    m_tm.Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,7 +223,7 @@ bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 int VTextGraphicsItem::GetFontSize() const
 {
-    return m_font.pixelSize();
+    return m_tm.GetFont().pixelSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,7 +347,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             }
             else
             {
-                emit SignalResized(m_rectBoundingBox.width(), m_font.pixelSize());
+                emit SignalResized(m_rectBoundingBox.width(), m_tm.GetFont().pixelSize());
                 Update();
             }
         }
@@ -387,71 +377,20 @@ void VTextGraphicsItem::UpdateBox()
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::UpdateFont()
 {
-    int iFS = m_font.pixelSize();
+    int iFS = m_tm.GetFont().pixelSize();
 
     // increase the font size until the bounding rect is not big enough
-    while (iFS < MAX_FONT_SIZE && IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == true)
+    while (iFS < MAX_FONT_SIZE && m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == true)
     {
         ++iFS;
     }
     // decrease the font size until the bounding rect is big enough
-    while (iFS >= MIN_FONT_SIZE && IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == false)
+    while (iFS >= MIN_FONT_SIZE && m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == false)
     {
         --iFS;
     }
-    m_font.setPixelSize(iFS);
+    m_tm.SetFontSize(iFS);
     UpdateBox();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VTextGraphicsItem::IsBigEnough(qreal fW, qreal fH, int iFontSize)
-{
-    m_liOutput.clear();
-    QFont fnt = m_font;
-    int iY = 0;
-    for (int i = 0; i < m_liLines.count(); ++i)
-    {
-        const TextLine& tl = m_liLines.at(i);
-        TextLine tlOut = tl;
-        fnt.setPixelSize(iFontSize + tl.m_iFontSize);
-        QFontMetrics fm(fnt);
-        tlOut.m_iHeight = fm.height();
-        QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
-        for (int iL = 0; iL < qslLines.count(); ++iL)
-        {
-            tlOut.m_qsText = qslLines[iL];
-            m_liOutput << tlOut;
-            iY += tlOut.m_iHeight + SPACING;
-        }
-    }
-    return iY < fH;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList VTextGraphicsItem::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
-{
-    QRegularExpression reg("\\s+");
-    QStringList qslWords = qs.split(reg);
-    QStringList qslLines;
-    QString qsCurrent;
-    for (int i = 0; i < qslWords.count(); ++i)
-    {
-        if (qsCurrent.length() > 0)
-        {
-            qsCurrent += QLatin1Literal(" ");
-        }
-        if (fm.width(qsCurrent + qslWords[i]) > fW)
-        {
-            qslLines << qsCurrent;
-            qsCurrent = qslWords[i];
-        }
-        else
-        {
-            qsCurrent += qslWords[i];
-        }
-    }
-    qslLines << qsCurrent;
-    return qslLines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -466,7 +405,7 @@ double VTextGraphicsItem::GetAngle(QPointF pt) const
     }
     else
     {
-        return atan2(dY, dX);
+        return qAtan2(dY, dX);
     }
 }
 
