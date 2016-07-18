@@ -90,10 +90,17 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->comboBoxFormat->addItem(v.first, QVariant(v.second));
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &DialogSaveLayout::ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
+
+    auto ShowExample = [this](){ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());};
+
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, ShowExample);
+    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), ShowExample);
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, [this]()
+    {
+        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
+                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+        ui->lineEditPath->setText(dir);
+    });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
@@ -208,20 +215,6 @@ void DialogSaveLayout::Save()
         }
     }
     accept();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::ShowExample()
-{
-    ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::Browse()
-{
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    ui->lineEditPath->setText(dir);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

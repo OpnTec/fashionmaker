@@ -761,12 +761,6 @@ void MApplication::ProcessCMD()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::OpenFile(const QString &path)
-{
-    MainWindow()->LoadFile(path);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MApplication::NewLocalSocketConnection()
 {
     QLocalSocket *socket = localServer->nextPendingConnection();

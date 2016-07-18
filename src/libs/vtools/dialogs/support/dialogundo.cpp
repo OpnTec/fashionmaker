@@ -48,9 +48,17 @@ DialogUndo::DialogUndo(QWidget *parent)
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, this, &DialogUndo::Undo);
+        connect(ui->pushButtonUndo, &QPushButton::clicked, [this]()
+        {
+            result = UndoButton::Undo;
+            accept();
+        });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, this, &DialogUndo::Fix);
+    connect(ui->pushButtonFix, &QPushButton::clicked, [this]()
+    {
+        result = UndoButton::Fix;
+        accept();
+    });
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 
     setCursor(Qt::ArrowCursor);
@@ -60,20 +68,6 @@ DialogUndo::DialogUndo(QWidget *parent)
 DialogUndo::~DialogUndo()
 {
     delete ui;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogUndo::Undo()
-{
-    result = UndoButton::Undo;
-    accept();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogUndo::Fix()
-{
-    result = UndoButton::Fix;
-    accept();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

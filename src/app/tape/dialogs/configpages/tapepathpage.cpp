@@ -72,16 +72,6 @@ void TapePathPage::Apply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePathPage::TableActivated()
-{
-    defaultButton->setEnabled(true);
-    defaultButton->setDefault(false);
-
-    editButton->setEnabled(true);
-    editButton->setDefault(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TapePathPage::DefaultPath()
 {
     const int row = pathTable->currentRow();
@@ -129,8 +119,8 @@ void TapePathPage::EditPath()
         default:
             break;
     }
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
-                                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
+                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (dir.isEmpty())
     {
         DefaultPath();
@@ -223,7 +213,14 @@ void TapePathPage::InitTable()
     pathTable->resizeRowsToContents();
     pathTable->horizontalHeader()->setStretchLastSection(true);
 
-    connect(pathTable, &QTableWidget::itemSelectionChanged, this, &TapePathPage::TableActivated);
+    connect(pathTable, &QTableWidget::itemSelectionChanged, [this]
+    {
+        defaultButton->setEnabled(true);
+        defaultButton->setDefault(false);
+
+        editButton->setEnabled(true);
+        editButton->setDefault(true);
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

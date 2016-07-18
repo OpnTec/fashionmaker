@@ -52,7 +52,7 @@ public:
 
     QmuParserTester(QObject *parent = nullptr);
 
-public slots:
+private slots:
     void Run();
 
 private:

@@ -93,8 +93,8 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 DrawPoint(point, p, mainColor);
                 ShowIntersection(axis_line, base_line);
 
-                Visualization::toolTip = QString(tr("<b>Intersection line and axis</b>: angle = %1°; <b>Shift</b> - "
-                                                    "sticking angle, <b>Enter</b> - finish creation"))
+                Visualization::toolTip = tr("<b>Intersection line and axis</b>: angle = %1°; <b>Shift</b> - "
+                                            "sticking angle, <b>Enter</b> - finish creation")
                         .arg(this->line().angle());
             }
         }

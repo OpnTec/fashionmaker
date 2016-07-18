@@ -39,14 +39,14 @@
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
-    :formula(QString()), value(QString(tr("Error"))), checkZero(true), data(nullptr), toolId(NULL_ID),
+    :formula(QString()), value(tr("Error")), checkZero(true), data(nullptr), toolId(NULL_ID),
       postfix(QString()), _error(true), dValue(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
     : formula(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator())),
-      value(QString(tr("Error"))),
+      value(tr("Error")),
       checkZero(true),
       data(container),
       toolId(NULL_ID),
@@ -226,7 +226,7 @@ void VFormula::Eval()
     }
     if (formula.isEmpty())
     {
-        value = QString(tr("Error"));
+        value = tr("Error");
         _error = true;
         dValue = 0;
     }
@@ -240,7 +240,7 @@ void VFormula::Eval()
 
             if (qIsInf(result) || qIsNaN(result))
             {
-                value = QString(tr("Error"));
+                value = tr("Error");
                 _error = true;
                 dValue = 0;
             }
@@ -263,7 +263,7 @@ void VFormula::Eval()
         }
         catch (qmu::QmuParserError &e)
         {
-            value = QString(tr("Error"));
+            value = tr("Error");
             _error = true;
             dValue = 0;
             qDebug() << "\nMath parser error:\n"

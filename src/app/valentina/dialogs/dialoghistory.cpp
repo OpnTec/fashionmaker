@@ -232,35 +232,35 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 Q_UNREACHABLE(); //-V501
                 break;
             case Tool::BasePoint:
-                return QString(tr("%1 - Base point")).arg(PointName(tool.getId()));
+                return tr("%1 - Base point").arg(PointName(tool.getId()));
             case Tool::EndLine:
-                return QString(tr("%1_%2 - Line from point %1 to point %2"))
+                return tr("%1_%2 - Line from point %1 to point %2")
                         .arg(PointName(AttrUInt(domElem, AttrBasePoint)))
                         .arg(PointName(tool.getId()));
             case Tool::Line:
-                return QString(tr("%1_%2 - Line from point %1 to point %2"))
+                return tr("%1_%2 - Line from point %1 to point %2")
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
             case Tool::AlongLine:
-                return QString(tr("%3 - Point along line %1_%2"))
+                return tr("%3 - Point along line %1_%2")
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             case Tool::ShoulderPoint:
-                return QString(tr("%1 - Point of shoulder")).arg(PointName(tool.getId()));
+                return tr("%1 - Point of shoulder").arg(PointName(tool.getId()));
             case Tool::Normal:
-                return QString(tr("%3 - normal to line %1_%2"))
+                return tr("%3 - normal to line %1_%2")
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             case Tool::Bisector:
-                return QString(tr("%4 - bisector of angle %1_%2_%3"))
+                return tr("%4 - bisector of angle %1_%2_%3")
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrThirdPoint)))
                         .arg(PointName(tool.getId()));
             case Tool::LineIntersect:
-                return QString(tr("%5 - intersection of lines %1_%2 and %3_%4"))
+                return tr("%5 - intersection of lines %1_%2 and %3_%4")
                         .arg(PointName(AttrUInt(domElem, AttrP1Line1)))
                         .arg(PointName(AttrUInt(domElem, AttrP2Line1)))
                         .arg(PointName(AttrUInt(domElem, AttrP1Line2)))
@@ -288,7 +288,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
                 SCASSERT(arc != nullptr);
-                return QString(tr("%1 with length %2"))
+                return tr("%1 with length %2")
                         .arg(arc->NameForHistory(tr("Arc")))
                         .arg(arc->GetLength());
             }
@@ -305,24 +305,24 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 return splPath->NameForHistory(tr("Cubic bezier curve path"));
             }
             case Tool::PointOfContact:
-                return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3"))
+                return tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")
                         .arg(PointName(AttrUInt(domElem, AttrCenter)))
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             case Tool::Height:
-                return QString(tr("Point of perpendicular from point %1 to line %2_%3"))
+                return tr("Point of perpendicular from point %1 to line %2_%3")
                         .arg(PointName(AttrUInt(domElem, AttrBasePoint)))
                         .arg(PointName(AttrUInt(domElem, AttrP1Line)))
                         .arg(PointName(AttrUInt(domElem, AttrP2Line)));
             case Tool::Triangle:
-                return QString(tr("Triangle: axis %1_%2, points %3 and %4"))
+                return tr("Triangle: axis %1_%2, points %3 and %4")
                         .arg(PointName(AttrUInt(domElem, AttrAxisP1)))
                         .arg(PointName(AttrUInt(domElem, AttrAxisP2)))
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
             case Tool::PointOfIntersection:
-                return QString(tr("%1 - point of intersection %2 and %3"))
+                return tr("%1 - point of intersection %2 and %3")
                         .arg(PointName(tool.getId()))
                         .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
@@ -330,7 +330,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
                 SCASSERT(arc != nullptr);
-                return QString(tr("%1 - cut %2"))
+                return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(arc->NameForHistory(tr("arc")));
             }
@@ -339,7 +339,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
                 const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
                 SCASSERT(spl != nullptr);
-                return QString(tr("%1 - cut %2"))
+                return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(spl->NameForHistory(tr("curve")));
             }
@@ -349,32 +349,32 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QSharedPointer<VAbstractCubicBezierPath> splPath =
                         data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
                 SCASSERT(splPath != nullptr);
-                return QString(tr("%1 - cut %2"))
+                return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(splPath->NameForHistory(tr("curve path")));
             }
             case Tool::LineIntersectAxis:
-                return QString(tr("%1 - point of intersection line %2_%3 and axis through point %4"))
+                return tr("%1 - point of intersection line %2_%3 and axis through point %4")
                         .arg(PointName(tool.getId()))
                         .arg(PointName(AttrUInt(domElem, AttrP1Line)))
                         .arg(PointName(AttrUInt(domElem, AttrP2Line)))
                         .arg(PointName(AttrUInt(domElem, AttrBasePoint)));
             case Tool::CurveIntersectAxis:
-                return QString(tr("%1 - point of intersection curve and axis through point %2"))
+                return tr("%1 - point of intersection curve and axis through point %2")
                         .arg(PointName(tool.getId()))
                         .arg(PointName(AttrUInt(domElem, AttrBasePoint)));
             case Tool::PointOfIntersectionArcs:
-                return QString(tr("%1 - point of arcs intersection")).arg(PointName(tool.getId()));
+                return tr("%1 - point of arcs intersection").arg(PointName(tool.getId()));
             case Tool::PointOfIntersectionCircles:
-                return QString(tr("%1 - point of circles intersection")).arg(PointName(tool.getId()));
+                return tr("%1 - point of circles intersection").arg(PointName(tool.getId()));
             case Tool::PointOfIntersectionCurves:
-                return QString(tr("%1 - point of curves intersection")).arg(PointName(tool.getId()));
+                return tr("%1 - point of curves intersection").arg(PointName(tool.getId()));
             case Tool::PointFromCircleAndTangent:
-                return QString(tr("%1 - point from circle and tangent")).arg(PointName(tool.getId()));
+                return tr("%1 - point from circle and tangent").arg(PointName(tool.getId()));
             case Tool::PointFromArcAndTangent:
-                return QString(tr("%1 - point from arc and tangent")).arg(PointName(tool.getId()));
+                return tr("%1 - point from arc and tangent").arg(PointName(tool.getId()));
             case Tool::TrueDarts:
-                return QString(tr("Correction the dart %1_%2_%3"))
+                return tr("Correction the dart %1_%2_%3")
                         .arg(PointName(AttrUInt(domElem, AttrDartP1)))
                         .arg(PointName(AttrUInt(domElem, AttrDartP2)))
                         .arg(PointName(AttrUInt(domElem, AttrDartP2)));

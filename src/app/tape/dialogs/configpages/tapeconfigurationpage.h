@@ -45,12 +45,6 @@ class TapeConfigurationPage : public QWidget
 public:
     explicit TapeConfigurationPage(QWidget *parent = nullptr);
     void      Apply();
-public slots:
-    void      LangChanged();
-    void      SystemChanged();
-    void      DefGradationChanged();
-    void      UnitChanged();
-    void      LabelLangChanged();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
@@ -58,13 +52,10 @@ private:
     QComboBox *langCombo;
     QComboBox *systemCombo;
     QComboBox *labelCombo;
-    QComboBox *unitCombo;
     QCheckBox *osOptionCheck;
     bool      langChanged;
     bool      systemChanged;
     bool      defGradationChanged;
-    bool      unitChanged;
-    bool      labelLangChanged;
     QCheckBox *sendReportCheck;
     QCheckBox *askPointDeletionCheck;
     QCheckBox *toolBarStyleCheck;

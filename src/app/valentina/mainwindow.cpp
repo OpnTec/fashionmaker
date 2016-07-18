@@ -137,7 +137,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
-    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
+    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
     connect(doc, &VPattern::CheckLayout, [this](){
@@ -163,7 +163,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ToolBarTools();
 
-    connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
+    connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternChangesWereSaved);
 
     InitAutoSave();
 
@@ -178,7 +178,27 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dockWidgetLayoutPages->setVisible(false);
 
     connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
-    connect(qApp, &QApplication::focusChanged, this, &MainWindow::OnWindowFocusChanged);
+    connect(qApp, &QApplication::focusChanged, [this](QWidget *old, QWidget *now)
+    {
+        if (old == nullptr && isAncestorOf(now) == true)
+        {// focus IN
+            if (mChanges && not mChangesAsked)
+            {
+                mChangesAsked = true;
+                const auto answer = QMessageBox::question(this, tr("Measurements"),
+                                                  tr("Measurements was changed. Do you want to sync measurements now?"),
+                                                          QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                if (answer == QMessageBox::Yes)
+                {
+                    SyncMeasurements();
+                }
+            }
+        }
+
+        // In case we will need it
+        // else if (isAncestorOf(old) == true && now == nullptr)
+        // focus OUT
+    });
 
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
@@ -213,28 +233,6 @@ MainWindow::MainWindow(QWidget *parent)
     qt_mac_set_dock_menu(menu);
 #endif
 #endif //defined(Q_OS_MAC)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ActionNewPP add to scene new pattern piece.
- */
-void MainWindow::NewPP()
-{
-    qCDebug(vMainWindow, "New PP.");
-    QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-    qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
-
-    qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
-    patternPieceName = PatternPieceName(patternPieceName);
-    qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
-    if (patternPieceName.isEmpty())
-    {
-        qCDebug(vMainWindow, "Name empty.");
-        return;
-    }
-
-    AddPP(patternPieceName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +333,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableSplineHover, sceneDraw, &VMainGraphicsScene::ToggleSplineHover);
     connect(this, &MainWindow::EnableSplinePathHover, sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
-    connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+    connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
 
     sceneDetails = new VMainGraphicsScene();
     connect(this, &MainWindow::EnableItemMove, sceneDetails, &VMainGraphicsScene::EnableItemMove);
@@ -348,7 +346,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableNodePointHover, sceneDetails, &VMainGraphicsScene::ToggleNodePointHover);
     connect(this, &MainWindow::EnableDetailHover, sceneDetails, &VMainGraphicsScene::ToggleDetailHover);
 
-    connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+    connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
 
     ui->view->setScene(currentScene);
 
@@ -527,22 +525,6 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief OptionDraw help change name of pattern piece.
- */
-void MainWindow::DrawOption()
-{
-    const QString activDraw = doc->GetNameActivPP();
-    const QString nameDraw = PatternPieceName(activDraw);
-    if (nameDraw.isEmpty())
-    {
-        return;
-    }
-    RenamePP *renamePP = new RenamePP(doc, nameDraw, comboBoxDraws);
-    qApp->getUndoStack()->push(renamePP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetToolButton set tool and show dialog.
  * @param checked true if tool button checked.
  * @param t tool type.
@@ -633,7 +615,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(ui->view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
+        connect(ui->view, &VMainGraphicsView::MouseRelease, [this](){EndVisualization(true);});
         ui->view->itemClicked(nullptr);
     }
     else
@@ -1202,62 +1184,12 @@ void MainWindow::ToolTrueDarts(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief About show widows about.
- */
-void MainWindow::About()
-{
-    DialogAboutApp * about_dialog = new DialogAboutApp(this);
-    about_dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    about_dialog->show();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AboutQt show widows aboutQt.
- */
-void MainWindow::AboutQt()
-{
-    QMessageBox::aboutQt(this, tr("About Qt"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief ShowTool  highlight tool.Tip show tools tooltip.
  * @param toolTip tooltip text.
  */
 void MainWindow::ShowToolTip(const QString &toolTip)
 {
     helpLabel->setText(toolTip);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::OpenRecentFile()
-{
-    QAction *action = qobject_cast<QAction *>(sender());
-    if (action)
-    {
-        const QString filePath = action->data().toString();
-        if (filePath.isEmpty() == false)
-        {
-            LoadPattern(filePath);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::PatternProperties()
-{
-    DialogPatternProperties proper(curFile, doc, pattern, this);
-    connect(&proper, &DialogPatternProperties::UpdateGradation, this, &MainWindow::UpdateGradation);
-    proper.exec();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::EditPatternCode()
-{
-    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this, doc);
-    Pattern->setAttribute(Qt::WA_DeleteOnClose, true);
-    Pattern->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1379,7 +1311,7 @@ void MainWindow::LoadIndividual()
             ui->actionUnloadMeasurements->setEnabled(true);
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
-            PatternWasModified(false);
+            PatternChangesWereSaved(false);
             ui->actionShowM->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
@@ -1419,7 +1351,7 @@ void MainWindow::LoadStandard()
             ui->actionUnloadMeasurements->setEnabled(true);
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
-            PatternWasModified(false);
+            PatternChangesWereSaved(false);
             ui->actionShowM->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
@@ -1455,7 +1387,7 @@ void MainWindow::UnloadMeasurements()
     {
         watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
         doc->SetPath(QString());
-        PatternWasModified(false);
+        PatternChangesWereSaved(false);
         ui->actionShowM->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
         helpLabel->setText(tr("Measurements unloaded"));
@@ -1467,14 +1399,6 @@ void MainWindow::UnloadMeasurements()
         qCWarning(vMainWindow, "%s",
                   qUtf8Printable(tr("Couldn't unload measurements. Some of them are used in the pattern.")));
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::CreateMeasurements()
-{
-    const QString tape = qApp->TapeFilePath();
-    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-    QProcess::startDetached(tape, QStringList(), workingDirectory);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1570,29 +1494,6 @@ void MainWindow::SyncMeasurements()
             qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't sync measurements.")));
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
-{
-    if (old == nullptr && isAncestorOf(now) == true)
-    {// focus IN
-        if (mChanges && not mChangesAsked)
-        {
-            mChangesAsked = true;
-            const auto answer = QMessageBox::question(this, tr("Measurements"),
-                                                  tr("Measurements was changed. Do you want to sync measurements now?"),
-                                                      QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
-            if (answer == QMessageBox::Yes)
-            {
-                SyncMeasurements();
-            }
-        }
-    }
-
-    // In case we will need it
-    // else if (isAncestorOf(old) == true && now == nullptr)
-    // focus OUT
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1709,9 +1610,19 @@ void MainWindow::ToolBarDraws()
     comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     comboBoxDraws->setEnabled(false);
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentPPChanged);
+            [this](int index){ChangePP(index);});
 
-    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::DrawOption);
+    connect(ui->actionOptionDraw, &QAction::triggered, [this]()
+    {
+        const QString activDraw = doc->GetNameActivPP();
+        const QString nameDraw = PatternPieceName(activDraw);
+        if (nameDraw.isEmpty())
+        {
+            return;
+        }
+        RenamePP *renamePP = new RenamePP(doc, nameDraw, comboBoxDraws);
+        qApp->getUndoStack()->push(renamePP);
+    });
 }
 
 void MainWindow::ToolBarTools()
@@ -1802,28 +1713,17 @@ void MainWindow::InitToolButtons()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief currentPPChanged change active pattern piece.
- * @param index index in combobox.
- */
-void MainWindow::currentPPChanged(int index)
-{
-    ChangePP(index);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief mouseMove save mouse position and show user.
  * @param scenePos position mouse.
  */
-void MainWindow::mouseMove(const QPointF &scenePos)
+void MainWindow::MouseMove(const QPointF &scenePos)
 {
-    //: Coords in status line: "X, Y (units)"
-    QString string = QString(tr("%1, %2 (%3)")).arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                                      .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                      .arg(doc->UnitsToStr(qApp->patternUnit(), true));
-    if (mouseCoordinate != nullptr)
+    if (mouseCoordinate)
     {
-        mouseCoordinate->setText(string);
+        //: Coords in status line: "X, Y (units)"
+        mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                                       .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
+                                                       .arg(doc->UnitsToStr(qApp->patternUnit(), true)));
     }
 }
 
@@ -2499,36 +2399,6 @@ void MainWindow::Open()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Preferences config dialog.
- */
-void MainWindow::Preferences()
-{
-    ConfigDialog dlg(this);
-    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
-    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
-    if (dlg.exec() == QDialog::Accepted)
-    {
-        InitAutoSave();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::RepotBug()
-{
-    qCDebug(vMainWindow, "Reporting bug");
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::OnlineHelp()
-{
-    qCDebug(vMainWindow, "Showing online help");
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/Content"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Clear reset to default window.
  */
 void MainWindow::Clear()
@@ -2605,20 +2475,6 @@ void MainWindow::FileClosedCorrect()
         autofile.remove();
     }
     qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(curFile));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ResetWindow()
-{
-    if (MaybeSave())
-    {
-        FileClosedCorrect();
-    }
-    else
-    {
-        return;
-    }
-    Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2841,19 +2697,6 @@ void MainWindow::SetEnableWidgets(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ClickEndVisualization()
-{
-    EndVisualization(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::UpdateGradation()
-{
-    UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit()));
-    UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateHeightsList(const QStringList &list)
 {
     QString val;
@@ -2912,7 +2755,7 @@ void MainWindow::New()
     if (comboBoxDraws->count() == 0)
     {
         qCDebug(vMainWindow, "New PP.");
-        QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+        QString patternPieceName = tr("Pattern piece %1").arg(comboBoxDraws->count()+1);
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "First PP");
@@ -2948,7 +2791,7 @@ void MainWindow::New()
 /**
  * @brief haveChange enable action save if we have unsaved change.
  */
-void MainWindow::PatternWasModified(bool saved)
+void MainWindow::PatternChangesWereSaved(bool saved)
 {
     if (guiEnabled)
     {
@@ -3053,78 +2896,6 @@ void MainWindow::SetDefaultSize()
         }
     }
     pattern->SetSize(gradationSizes->currentText().toInt());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ActionTable show table with variables.
- * @param checked true - button checked.
- */
-void MainWindow::ActionTable(bool checked)
-{
-    if (checked)
-    {
-        dialogTable = new DialogIncrements(pattern, doc, this);
-        connect(dialogTable, &DialogIncrements::DialogClosed, this, &MainWindow::ClosedActionTable);
-        dialogTable->show();
-    }
-    else
-    {
-        ui->actionTable->setChecked(true);
-        dialogTable->activateWindow();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedActionTable actions after closing table with variables.
- */
-void MainWindow::ClosedActionTable()
-{
-    ui->actionTable->setChecked(false);
-    delete dialogTable;
-    dialogTable = nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ActionHistory show tool history.
- * @param checked true - button checked.
- */
-void MainWindow::ActionHistory(bool checked)
-{
-    if (checked)
-    {
-        dialogHistory = new DialogHistory(pattern, doc, this);
-        dialogHistory->setWindowFlags(Qt::Window);
-        connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
-        connect(dialogHistory.data(), &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
-        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
-        dialogHistory->setWindowFlags(dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
-        dialogHistory->show();
-    }
-    else
-    {
-        ui->actionHistory->setChecked(true);
-        dialogHistory->activateWindow();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ActionCurveDetailsMode(bool checked)
-{
-    ui->view->itemClicked(nullptr);
-    sceneDraw->EnableDetailsMode(checked);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedActionHistory actions after closing history window with variables.
- */
-void MainWindow::ClosedActionHistory()
-{
-    ui->actionHistory->setChecked(false);
-    delete dialogHistory;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3253,7 +3024,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
             qCDebug(vMainWindow, "File %s saved.", qUtf8Printable(fileName));
-            PatternWasModified(result);
+            PatternChangesWereSaved(result);
         }
     }
     else
@@ -3701,28 +3472,156 @@ void MainWindow::CreateActions()
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
-    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
-    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::NewPP);
+
+    connect(ui->actionHistory, &QAction::triggered, [this](bool checked)
+    {
+        if (checked)
+        {
+            dialogHistory = new DialogHistory(pattern, doc, this);
+            dialogHistory->setWindowFlags(Qt::Window);
+            connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
+            connect(dialogHistory.data(), &DialogHistory::DialogClosed, [this]()
+            {
+                ui->actionHistory->setChecked(false);
+                delete dialogHistory;
+            });
+            // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+            dialogHistory->setWindowFlags(dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
+            dialogHistory->show();
+        }
+        else
+        {
+            ui->actionHistory->setChecked(true);
+            dialogHistory->activateWindow();
+        }
+    });
+
+    connect(ui->actionNewDraw, &QAction::triggered, [this]()
+    {
+        qCDebug(vMainWindow, "New PP.");
+        QString patternPieceName = tr("Pattern piece %1").arg(comboBoxDraws->count()+1);
+        qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
+
+        qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
+        patternPieceName = PatternPieceName(patternPieceName);
+        qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
+        if (patternPieceName.isEmpty())
+        {
+            qCDebug(vMainWindow, "Name empty.");
+            return;
+        }
+
+        AddPP(patternPieceName);
+    });
+
     connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
-    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
-    connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
-    connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
+
+    connect(ui->actionTable, &QAction::triggered, [this](bool checked)
+    {
+        if (checked)
+        {
+            dialogTable = new DialogIncrements(pattern, doc, this);
+            connect(dialogTable.data(), &DialogIncrements::DialogClosed, [this]()
+            {
+                ui->actionTable->setChecked(false);
+                delete dialogTable;
+            });
+            dialogTable->show();
+        }
+        else
+        {
+            ui->actionTable->setChecked(true);
+            dialogTable->activateWindow();
+        }
+    });
+
+    connect(ui->actionAbout_Qt, &QAction::triggered, [this]()
+    {
+        QMessageBox::aboutQt(this, tr("About Qt"));
+    });
+
+    connect(ui->actionAbout_Valentina, &QAction::triggered, [this]()
+    {
+        DialogAboutApp *aboutDialog = new DialogAboutApp(this);
+        aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+        aboutDialog->show();
+    });
+
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
-    connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
-    connect(ui->actionReportBug, &QAction::triggered, this, &MainWindow::RepotBug);
-    connect(ui->actionOnlineHelp, &QAction::triggered, this, &MainWindow::OnlineHelp);
+
+    connect(ui->actionPreferences, &QAction::triggered, [this]()
+    {
+        ConfigDialog dlg(this);
+        connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+        connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
+        connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        if (dlg.exec() == QDialog::Accepted)
+        {
+            InitAutoSave();
+        }
+    });
+
+    connect(ui->actionReportBug, &QAction::triggered, [this]()
+    {
+        qCDebug(vMainWindow, "Reporting bug");
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/issues/new")));
+    });
+
+    connect(ui->actionOnlineHelp, &QAction::triggered, [this]()
+    {
+        qCDebug(vMainWindow, "Showing online help");
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/wiki/manual/Content")));
+    });
+
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
-    connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
+
+    connect(ui->actionPattern_properties, &QAction::triggered, [this]()
+    {
+        DialogPatternProperties proper(curFile, doc, pattern, this);
+        connect(&proper, &DialogPatternProperties::UpdateGradation, [this]()
+        {
+            UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit()));
+            UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit()));
+        });
+        proper.exec();
+    });
+
     ui->actionPattern_properties->setEnabled(false);
-    connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
-    connect(ui->actionClosePattern, &QAction::triggered, this, &MainWindow::ResetWindow);
-    connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
+    connect(ui->actionEdit_pattern_code, &QAction::triggered, [this]()
+    {
+        DialogPatternXmlEdit *pattern = new DialogPatternXmlEdit (this, doc);
+        pattern->setAttribute(Qt::WA_DeleteOnClose, true);
+        pattern->show();
+    });
+
+    connect(ui->actionClosePattern, &QAction::triggered, [this]()
+    {
+        if (MaybeSave())
+        {
+            FileClosedCorrect();
+            Clear();
+        }
+    });
+
+    connect(ui->actionShowCurveDetails, &QAction::triggered, [this](bool checked)
+    {
+        ui->view->itemClicked(nullptr);
+        sceneDraw->EnableDetailsMode(checked);
+    });
+
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
-    connect(ui->actionCreateNew, &QAction::triggered, this, &MainWindow::CreateMeasurements);
+
+    connect(ui->actionCreateNew, &QAction::triggered, [this]()
+    {
+        const QString tape = qApp->TapeFilePath();
+        const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+        QProcess::startDetached(tape, QStringList(), workingDirectory);
+    });
+
     connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
@@ -3737,7 +3636,18 @@ void MainWindow::CreateActions()
     {
         recentFileActs[i] = new QAction(this);
         recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
+        connect(recentFileActs[i], &QAction::triggered, [this]()
+        {
+            QAction *action = qobject_cast<QAction *>(sender());
+            if (action)
+            {
+                const QString filePath = action->data().toString();
+                if (not  filePath.isEmpty())
+                {
+                    LoadPattern(filePath);
+                }
+            }
+        });
     }
 
     connect(ui->actionSyncMeasurements, &QAction::triggered, this, &MainWindow::SyncMeasurements);
@@ -4078,8 +3988,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
         if (restoreFiles.size() > 0)
         {
             QMessageBox::StandardButton reply;
-            QString mes=QString(tr("Valentina didn't shut down correctly. "
-                                   "Do you want reopen files (%1) you had open?")).arg(restoreFiles.size());
+            const QString mes = tr("Valentina didn't shut down correctly. Do you want reopen files (%1) you had open?")
+                    .arg(restoreFiles.size());
             reply = QMessageBox::question(this, tr("Reopen files."), mes, QMessageBox::Yes|QMessageBox::No,
                                           QMessageBox::Yes);
             if (reply == QMessageBox::Yes)
@@ -4228,7 +4138,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     }
 
                     doc->SetPath(RelativeMPath(patternPath, mPath));
-                    PatternWasModified(false);
+                    PatternChangesWereSaved(false);
                     qApp->setPatternType(patternType);
                     return mPath;
                 }

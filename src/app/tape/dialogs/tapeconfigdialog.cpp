@@ -70,7 +70,15 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
-    connect(contentsWidget, &QListWidget::currentItemChanged, this, &TapeConfigDialog::changePage);
+    connect(contentsWidget, &QListWidget::currentItemChanged,
+            [this](QListWidgetItem *current, QListWidgetItem *previous)
+    {
+        if (current == nullptr)
+        {
+            current = previous;
+        }
+        pagesWidget->setCurrentIndex(contentsWidget->row(current));
+    });
     contentsWidget->setCurrentRow(0);
 
     connect(cancelButton, &QPushButton::clicked, this, &TapeConfigDialog::close);
@@ -98,16 +106,6 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     setWindowTitle(tr("Config Dialog"));
 
     qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TapeConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
-{
-    if (current == nullptr)
-    {
-        current = previous;
-    }
-    pagesWidget->setCurrentIndex(contentsWidget->row(current));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

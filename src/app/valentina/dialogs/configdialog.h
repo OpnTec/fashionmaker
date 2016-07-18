@@ -41,15 +41,13 @@ class ConfigDialog : public QDialog
     Q_OBJECT
 public:
     explicit ConfigDialog(QWidget *parent = nullptr);
-public slots:
-    void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
 signals:
-    void              UpdateProperties();
+    void UpdateProperties();
 protected:
-    virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void      showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual void      resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(ConfigDialog)
     QListWidget       *contentsWidget;

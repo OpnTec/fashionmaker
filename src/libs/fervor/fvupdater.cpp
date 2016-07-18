@@ -261,8 +261,24 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply, &QNetworkReply::readyRead, this, &FvUpdater::httpFeedReadyRead);
-    connect(m_reply, &QNetworkReply::downloadProgress, this, &FvUpdater::httpFeedUpdateDataReadProgress);
+    connect(m_reply, &QNetworkReply::readyRead, [this]()
+    {
+        // this slot gets called every time the QNetworkReply has new data.
+        // We read all of its new data and write it into the file.
+        // That way we use less RAM than when reading it at the finished()
+        // signal of the QNetworkReply
+        m_xml.addData(m_reply->readAll());
+    });
+    connect(m_reply, &QNetworkReply::downloadProgress, [this](qint64 bytesRead, qint64 totalBytes)
+    {
+        Q_UNUSED(bytesRead);
+        Q_UNUSED(totalBytes);
+
+        if (m_httpRequestAborted)
+        {
+            return;
+        }
+    });
     connect(m_reply, &QNetworkReply::finished, this, &FvUpdater::httpFeedDownloadFinished);
 }
 
@@ -273,28 +289,6 @@ void FvUpdater::cancelDownloadFeed()
     {
         m_httpRequestAborted = true;
         m_reply->abort();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void FvUpdater::httpFeedReadyRead()
-{
-    // this slot gets called every time the QNetworkReply has new data.
-    // We read all of its new data and write it into the file.
-    // That way we use less RAM than when reading it at the finished()
-    // signal of the QNetworkReply
-    m_xml.addData(m_reply->readAll());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void FvUpdater::httpFeedUpdateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
-{
-    Q_UNUSED(bytesRead);
-    Q_UNUSED(totalBytes);
-
-    if (m_httpRequestAborted)
-    {
-        return;
     }
 }
 
