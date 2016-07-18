@@ -392,7 +392,6 @@ void DialogPatternProperties::DescEdited()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-<<<<<<< local
 void DialogPatternProperties::ToggleComboBox()
 {
     ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
@@ -418,8 +417,6 @@ void DialogPatternProperties::GeneralInfoChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-=======
->>>>>>> other
 void DialogPatternProperties::SetHeightsChecked(bool enabled)
 {
     ui->checkBoxH92->setChecked(enabled);

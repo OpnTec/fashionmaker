@@ -52,13 +52,10 @@ public:
 signals:
     void UpdateGradation();
 private slots:
-<<<<<<< local
     void ToggleComboBox();
     void DefValueChanged();
     void SecurityValueChanged();
     void GeneralInfoChanged();
-    void DeleteImage();
-=======
     void Apply();
     void Ok();
     void SelectAll(int state);
@@ -66,7 +63,6 @@ private slots:
     void CheckStateSize(int state);
     void DescEdited();
     void ChangeImage();
->>>>>>> other
     void SaveImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
