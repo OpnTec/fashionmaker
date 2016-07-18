@@ -31,6 +31,7 @@
 
 #include <QGraphicsItem>
 #include <QPainterPath>
+#include <QFont>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -125,7 +126,7 @@ void VLayoutDetail::SetDetailLabelPoints(const QPointF& ptPos, qreal dWidth, qre
     QPointF ptCenter(ptPos.x() + dWidth/2, ptPos.y() + dHeight/2);
     QVector<QPointF> v;
     v << ptPos << QPointF(ptPos.x() + dWidth, ptPos.y()) << QPointF(ptPos.x() + dWidth, ptPos.y() + dHeight)
-         << QPointF(ptPos.x(), ptPos.y() + dHeight) << ptPos;
+         << QPointF(ptPos.x(), ptPos.y() + dHeight);
     for (int i = 0; i < v.count(); ++i)
         v[i] = RotatePoint(ptCenter, v[i], dAng);
     d->detailLabel = RoundPoints(v);
@@ -144,7 +145,7 @@ void VLayoutDetail::SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qre
     QPointF ptCenter(ptPos.x() + dWidth/2, ptPos.y() + dHeight/2);
     QVector<QPointF> v;
     v << ptPos << QPointF(ptPos.x() + dWidth, ptPos.y()) << QPointF(ptPos.x() + dWidth, ptPos.y() + dHeight)
-         << QPointF(ptPos.x(), ptPos.y() + dHeight) << ptPos;
+         << QPointF(ptPos.x(), ptPos.y() + dHeight);
     for (int i = 0; i < v.count(); ++i)
         v[i] = RotatePoint(ptCenter, v[i], dAng);
     d->patternInfo = RoundPoints(v);
@@ -461,6 +462,7 @@ QPainterPath VLayoutDetail::ContourPath() const
     if (d->detailLabel.count() > 0)
     {
         points = Map(d->detailLabel);
+        points.push_back(points.at(0));
 
         QPainterPath pathDet;
         pathDet.moveTo(points.at(0));
@@ -475,6 +477,7 @@ QPainterPath VLayoutDetail::ContourPath() const
     if (d->patternInfo.count() > 0)
     {
         points = Map(d->patternInfo);
+        points.push_back(points.at(0));
 
         QPainterPath pathDet;
         pathDet.moveTo(points.at(0));
@@ -527,7 +530,7 @@ void VLayoutDetail::SetMirror(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
+QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng) const
 {
     QPointF ptDest;
     QPointF ptRel = pt - ptCenter;
@@ -536,3 +539,4 @@ QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, q
 
     return ptDest + ptCenter;
 }
+
