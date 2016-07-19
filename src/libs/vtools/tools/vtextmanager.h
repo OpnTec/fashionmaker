@@ -32,6 +32,7 @@ public:
     void                AddLine(const TextLine& tl);
     void                Clear();
     int                 GetCount() const;
+    int                 GetSourceLineCount() const;
     const TextLine&     GetLine(int i) const;
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
 

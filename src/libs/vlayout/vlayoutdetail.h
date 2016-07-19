@@ -30,6 +30,8 @@
 #define VLAYOUTDETAIL_H
 
 #include "vabstractdetail.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vtools/tools/vtextmanager.h"
 
 #include <QMatrix>
 #include <QPointF>
@@ -54,8 +56,7 @@ public:
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
 
-    QVector<QPointF> GetDetailLabelPoints() const;
-    void SetDetailLabelPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot);
+    void SetDetail(const QString &qsName, const VPatternPieceData& data);
 
     QVector<QPointF> GetPatternInfoPoints() const;
     void SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot);
@@ -88,12 +89,15 @@ public:
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
-    QSharedDataPointer<VLayoutDetailData> d;
+    QSharedDataPointer<VLayoutDetailData>   d;
+    VTextManager                            m_tmDetail;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 
     QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng) const;
+    QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
+    qreal GetDistance(const QPointF& pt1, const QPointF& pt2) const;
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);

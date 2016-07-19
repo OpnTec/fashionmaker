@@ -712,7 +712,8 @@ void VToolDetail::UpdateLabel()
         tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
         tl.m_eFontWeight = QFont::Normal;
         tl.m_iFontSize = 0;
-        for (int i = 0; i < data.GetMCPCount(); ++i) {
+        for (int i = 0; i < data.GetMCPCount(); ++i)
+        {
             MaterialCutPlacement mcp = data.GetMCP(i);
             if (mcp.m_iCutNumber > 0)
             {

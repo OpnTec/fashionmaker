@@ -34,6 +34,8 @@
 #include <QVector>
 #include <QTransform>
 
+#include "../vpatterndb/vpatternpiecedata.h"
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -45,13 +47,14 @@ public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
           matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
-          patternInfo(QVector<QPointF>())
+          patternInfo(QVector<QPointF>()), detailData()
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth),
-          mirror(detail.mirror), detailLabel(detail.detailLabel), patternInfo(detail.patternInfo)
+          mirror(detail.mirror), detailLabel(detail.detailLabel), patternInfo(detail.patternInfo),
+          detailData(detail.detailData)
     {}
 
     ~VLayoutDetailData() {}
@@ -77,6 +80,8 @@ public:
     QVector<QPointF> detailLabel;
     /** @brief pattern info rectangle */
     QVector<QPointF> patternInfo;
+    /** @brief detail data */
+    VPatternPieceData detailData;
 
 private:
     VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;

@@ -477,7 +477,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         const VPatternPieceData& data = d.GetPatternPieceData();
         if (data.IsVisible() == true)
         {
-            det.SetDetailLabelPoints(data.GetPos(), data.GetLabelWidth(), data.GetLabelHeight(), data.GetRotation());
+            det.SetDetail(d.getName(), data);
         }
         const VPatternInfoGeometry& geom = d.GetPatternInfo();
         if (geom.IsVisible() == true)

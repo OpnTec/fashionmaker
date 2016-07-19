@@ -20,36 +20,57 @@ VTextManager::~VTextManager()
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTextManager::GetSpacing() const
-{   return 2; }
-
+{
+    return 2;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextManager::SetFont(const QFont& font)
-{   m_font = font; }
+{
+    m_font = font;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 const QFont& VTextManager::GetFont() const
-{   return m_font; }
+{
+    return m_font;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextManager::SetFontSize(int iFS)
-{   m_font.setPixelSize(iFS); }
+{
+    m_font.setPixelSize(iFS);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextManager::AddLine(const TextLine& tl)
-{   m_liLines << tl; }
+{
+    m_liLines << tl;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextManager::Clear()
-{   m_liLines.clear(); }
+{
+    m_liLines.clear();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTextManager::GetCount() const
-{   return m_liOutput.count(); }
+{
+    return m_liOutput.count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VTextManager::GetSourceLineCount() const
+{
+    return m_liLines.count();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 const TextLine& VTextManager::GetLine(int i) const
-{   return m_liOutput[i]; }
+{
+    return m_liOutput[i];
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
