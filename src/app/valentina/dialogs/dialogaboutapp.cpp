@@ -61,7 +61,8 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 
 
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this](){
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this]()
+    {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {
             qWarning() << tr("Cannot open your default browser");

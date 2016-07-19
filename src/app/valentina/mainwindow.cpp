@@ -140,7 +140,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
-    connect(doc, &VPattern::CheckLayout, [this](){
+    connect(doc, &VPattern::CheckLayout, [this]()
+    {
         if (pattern->DataDetails()->count() == 0)
         {
             if(not ui->actionDraw->isChecked())

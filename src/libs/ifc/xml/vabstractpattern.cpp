@@ -1158,6 +1158,18 @@ void VAbstractPattern::haveLiteChange()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::NeedFullParsing()
+{
+    emit UndoCommand();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::ClearScene()
+{
+    emit ClearMainWindow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id) const
 {
     if (tools.contains(id) == false)
