@@ -33,7 +33,7 @@
 #include <QFont>
 #include <QList>
 
-#include "vtextmanager.h"
+#include "../vlayout/vtextmanager.h"
 
 class VTextGraphicsItem : public QGraphicsObject
 {

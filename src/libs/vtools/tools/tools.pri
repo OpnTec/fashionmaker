@@ -51,8 +51,7 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezier.h \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.h \
     $$PWD/drawTools/operation/vtoolrotation.h \
-    $$PWD/vtextgraphicsitem.h \
-    $$PWD/vtextmanager.h
+    $$PWD/vtextgraphicsitem.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -101,5 +100,4 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezier.cpp \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.cpp \
     $$PWD/drawTools/operation/vtoolrotation.cpp \
-    $$PWD/vtextgraphicsitem.cpp \
-    $$PWD/vtextmanager.cpp
+    $$PWD/vtextgraphicsitem.cpp
