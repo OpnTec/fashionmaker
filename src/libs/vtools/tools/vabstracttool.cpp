@@ -88,7 +88,7 @@ void VAbstractTool::DeleteTool(bool ask)
 
         qCDebug(vTool, "Begin deleting.");
         DelTool *delTool = new DelTool(doc, id);
-        connect(delTool, &DelTool::NeedFullParsing, [this](){emit doc->UndoCommand();});
+        connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
 
         // Throw exception, this will help prevent case when we forget to immediately quit function.

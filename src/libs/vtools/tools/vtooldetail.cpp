@@ -331,7 +331,7 @@ void VToolDetail::AddToFile()
     }
 
     AddDet *addDet = new AddDet(domElement, doc, detail, drawName);
-    connect(addDet, &AddDet::NeedFullParsing, [this](){emit doc->UndoCommand();});
+    connect(addDet, &AddDet::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addDet);
 }
 
@@ -680,7 +680,7 @@ void VToolDetail::DeleteTool(bool ask)
             return;
         }
         /* If UnionDetails tool delete detail no need emit FullParsing.*/
-        connect(delDet, &DeleteDetail::NeedFullParsing, [this](){emit doc->UndoCommand();});
+        connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
     qApp->getUndoStack()->push(delDet);
 

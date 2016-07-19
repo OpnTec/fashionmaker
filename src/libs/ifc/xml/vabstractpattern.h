@@ -253,6 +253,8 @@ signals:
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;
     void           haveLiteChange();
+    void           NeedFullParsing();
+    void           ClearScene();
 
 protected:
     /** @brief nameActivDraw name current pattern peace. */
