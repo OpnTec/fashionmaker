@@ -85,12 +85,17 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
+    void ClearTextItems();
+    void CreateTextItems();
+    int GetTextItemsCount() const;
+    QGraphicsItem* GetTextItem(int i) const;
     QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
     QSharedDataPointer<VLayoutDetailData>   d;
     VTextManager                            m_tmDetail;
+    QList<QPainterPath>                     m_liPP;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);

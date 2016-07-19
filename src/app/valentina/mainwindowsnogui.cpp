@@ -485,6 +485,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
             det.SetPatternInfoPoints(geom.GetPos(), geom.GetLabelWidth(), geom.GetLabelHeight(), geom.GetRotation());
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
+        det.CreateTextItems();
 
         listDetails.append(det);
         ++i;

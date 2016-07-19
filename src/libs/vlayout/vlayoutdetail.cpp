@@ -34,6 +34,7 @@
 #include <QFont>
 #include <QFontMetrics>
 #include <QApplication>
+#include <QBrush>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -45,12 +46,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
-    :VAbstractDetail(), d(new VLayoutDetailData), m_tmDetail()
+    :VAbstractDetail(), d(new VLayoutDetailData), m_tmDetail(), m_liPP()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
-    :VAbstractDetail(detail), d(detail.d), m_tmDetail(detail.m_tmDetail)
+    :VAbstractDetail(detail), d(detail.d), m_tmDetail(detail.m_tmDetail), m_liPP(detail.m_liPP)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,6 +64,7 @@ VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
     VAbstractDetail::operator=(detail);
     d = detail.d;
     m_tmDetail = detail.m_tmDetail;
+    m_liPP = detail.m_liPP;
     return *this;
 }
 
@@ -516,41 +518,6 @@ QPainterPath VLayoutDetail::ContourPath() const
         }
 
         path.addPath(pathDet);
-
-
-        qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
-        qreal dW = GetDistance(points.at(0), points.at(1));
-        qreal dY = 0;
-        qreal dX;
-        for (int i = 0; i < m_tmDetail.GetCount(); ++i)
-        {
-            const TextLine& tl = m_tmDetail.GetLine(i);
-            QFont fnt = m_tmDetail.GetFont();
-            fnt.setPixelSize(m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setWeight(tl.m_eFontWeight);
-            fnt.setStyle(tl.m_eStyle);
-            dY += tl.m_iHeight;
-            QMatrix mat;
-            mat.translate(points.at(0).x(), points.at(0).y());
-            mat.rotate(qRadiansToDegrees(dAng));
-            QFontMetrics fm(fnt);
-            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
-            {
-                dX = 0;
-            }
-            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
-            {
-                dX = (dW - fm.width(tl.m_qsText))/2;
-            }
-            else
-            {
-                dX = dW - fm.width(tl.m_qsText);
-            }
-            QPainterPath pathText;
-            pathText.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
-            path.addPath(mat.map(pathText));
-            dY += m_tmDetail.GetSpacing();
-        }
     }
 
     if (d->patternInfo.count() > 0)
@@ -569,6 +536,92 @@ QPainterPath VLayoutDetail::ContourPath() const
     }
 
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::ClearTextItems()
+{
+    m_liPP.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::CreateTextItems()
+{
+    ClearTextItems();
+    if (d->detailLabel.count() > 0)
+    {
+        QVector<QPointF> points = Map(Mirror(d->detailLabel));
+        points.push_back(points.at(0));
+        qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
+        qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dY = 0;
+        qreal dX;
+        for (int i = 0; i < m_tmDetail.GetCount(); ++i)
+        {
+            const TextLine& tl = m_tmDetail.GetLine(i);
+            QFont fnt = m_tmDetail.GetFont();
+            fnt.setPixelSize(m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setWeight(tl.m_eFontWeight);
+            fnt.setStyle(tl.m_eStyle);
+            dY += tl.m_iHeight;
+            QMatrix mat;
+            mat.translate(points.at(0).x(), points.at(0).y());
+            mat.rotate(qRadiansToDegrees(dAng));
+
+            QFontMetrics fm(fnt);
+            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (dW - fm.width(tl.m_qsText))/2;
+            }
+            else
+            {
+                dX = dW - fm.width(tl.m_qsText);
+            }
+            QPainterPath path;
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            m_liPP << mat.map(path);
+            dY += m_tmDetail.GetSpacing();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::GetTextItemsCount() const
+{
+    return m_liPP.count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
+{
+    QGraphicsPathItem* item = new QGraphicsPathItem();
+    QTransform transform = d->matrix;
+
+    QPainterPath path = transform.map(m_liPP[i]);
+
+    if (d->mirror == true)
+    {
+        QVector<QPointF> points = Map(Mirror(d->detailLabel));
+        QPointF ptCenter = (points.at(1) + points.at(3))/2;
+        qreal dRot = qRadiansToDegrees(qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x()));
+
+        // we need to move the center back to the origin, rotate it to align it with x axis,
+        // then mirror it to obtain the proper text direction, rotate it and translate it back to original position
+        QTransform t;
+        t.translate(ptCenter.x(), ptCenter.y());
+        t.rotate(dRot);
+        t.scale(-1, 1);
+        t.rotate(-dRot);
+        t.translate(-ptCenter.x(), -ptCenter.y());
+        path = t.map(path);
+    }
+    item->setPath(path);
+    item->setBrush(QBrush(Qt::black));
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
