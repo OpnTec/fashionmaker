@@ -583,36 +583,6 @@ QPainterPath VLayoutDetail::ContourPath() const
         path.setFillRule(Qt::WindingFill);
     }
 
-    if (d->detailLabel.count() > 0)
-    {
-        points = Map(Mirror(d->detailLabel));
-        points.push_back(points.at(0));
-
-        QPainterPath pathDet;
-        pathDet.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            pathDet.lineTo(points.at(i));
-        }
-
-        path.addPath(pathDet);
-    }
-
-    if (d->patternInfo.count() > 0)
-    {
-        points = Map(Mirror(d->patternInfo));
-        points.push_back(points.at(0));
-
-        QPainterPath pathDet;
-        pathDet.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            pathDet.lineTo(points.at(i));
-        }
-
-        path.addPath(pathDet);
-    }
-
     return path;
 }
 
