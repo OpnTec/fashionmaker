@@ -35,6 +35,7 @@ public:
     int                 GetSourceLineCount() const;
     const TextLine&     GetLine(int i) const;
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
+    void                FitFontSize(qreal fW, qreal fH);
 
 protected:
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);

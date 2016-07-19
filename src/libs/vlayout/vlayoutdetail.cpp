@@ -33,8 +33,8 @@
 #include <QPainterPath>
 #include <QFont>
 #include <QFontMetrics>
-#include <QApplication>
 #include <QBrush>
+#include <stdio.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -46,12 +46,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
-    :VAbstractDetail(), d(new VLayoutDetailData), m_tmDetail(), m_liPP()
+    :VAbstractDetail(), d(new VLayoutDetailData), m_tmDetail(), m_tmPattern(), m_liPP()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
-    :VAbstractDetail(detail), d(detail.d), m_tmDetail(detail.m_tmDetail), m_liPP(detail.m_liPP)
+    :VAbstractDetail(detail), d(detail.d), m_tmDetail(detail.m_tmDetail), m_tmPattern(detail.m_tmPattern),
+      m_liPP(detail.m_liPP)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -64,6 +65,7 @@ VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
     VAbstractDetail::operator=(detail);
     d = detail.d;
     m_tmDetail = detail.m_tmDetail;
+    m_tmPattern = detail.m_tmPattern;
     m_liPP = detail.m_liPP;
     return *this;
 }
@@ -119,7 +121,7 @@ QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& data)
+void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& data, const QFont &font)
 {
     d->detailData = data;
     qreal dAng = qDegreesToRadians(data.GetRotation());
@@ -130,12 +132,13 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
       << QPointF(ptPos.x() + data.GetLabelWidth(), ptPos.y() + data.GetLabelHeight())
          << QPointF(ptPos.x(), ptPos.y() + data.GetLabelHeight());
     for (int i = 0; i < v.count(); ++i)
+    {
         v[i] = RotatePoint(ptCenter, v[i], dAng);
+    }
     d->detailLabel = RoundPoints(v);
 
     // generate text
-    QFont fnt = QApplication::font();
-    m_tmDetail.SetFont(fnt);
+    m_tmDetail.SetFont(font);
     m_tmDetail.SetFontSize(data.GetFontSize());
     m_tmDetail.Clear();
     TextLine tl;
@@ -153,7 +156,9 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
     if (qsName.isEmpty() == false)
     {
         tl.m_qsText = qsName;
+        tl.m_eAlign = Qt::AlignCenter;
         tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 2;
         m_tmDetail.AddLine(tl);
     }
@@ -164,6 +169,7 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
     qslPlace << "" << " on Fold";
     tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
     tl.m_eFontWeight = QFont::Normal;
+    tl.m_eStyle = QFont::StyleNormal;
     tl.m_iFontSize = 0;
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
@@ -175,26 +181,98 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
         }
     }
     // will generate the lines of text
-    m_tmDetail.IsBigEnough(data.GetLabelWidth(), data.GetLabelHeight(), data.GetFontSize());
+    m_tmDetail.SetFontSize(data.GetFontSize());
+    m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::GetPatternInfoPoints() const
+void VLayoutDetail::SetPatternInfo(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
+                                   const QString& qsCompany, const QString& qsCustomer, const QDate& date,
+                                   const VPatternInfoGeometry& geom, const QFont &font)
 {
-    return d->patternInfo;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot)
-{
-    qreal dAng = qDegreesToRadians(dRot);
-    QPointF ptCenter(ptPos.x() + dWidth/2, ptPos.y() + dHeight/2);
+    d->patternGeom = geom;
+    qreal dAng = qDegreesToRadians(geom.GetRotation());
+    QPointF ptCenter(geom.GetPos().x() + geom.GetLabelWidth()/2, geom.GetPos().y() + geom.GetLabelHeight()/2);
+    QPointF ptPos = geom.GetPos();
     QVector<QPointF> v;
-    v << ptPos << QPointF(ptPos.x() + dWidth, ptPos.y()) << QPointF(ptPos.x() + dWidth, ptPos.y() + dHeight)
-         << QPointF(ptPos.x(), ptPos.y() + dHeight);
+    v << ptPos << QPointF(ptPos.x() + geom.GetLabelWidth(), ptPos.y())
+         << QPointF(ptPos.x() + geom.GetLabelWidth(), ptPos.y() + geom.GetLabelHeight())
+            << QPointF(ptPos.x(), ptPos.y() + geom.GetLabelHeight());
     for (int i = 0; i < v.count(); ++i)
+    {
         v[i] = RotatePoint(ptCenter, v[i], dAng);
+    }
     d->patternInfo = RoundPoints(v);
+
+    // Generate text
+    m_tmPattern.SetFont(font);
+    m_tmPattern.SetFontSize(geom.GetFontSize());
+    m_tmPattern.Clear();
+    TextLine tl;
+    // Company name
+    tl.m_qsText = qsCompany;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eAlign = Qt::AlignCenter;
+        tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 4;
+        m_tmPattern.AddLine(tl);
+    }
+    // Pattern name
+    tl.m_qsText = qsPattern;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eAlign = Qt::AlignCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 2;
+        m_tmPattern.AddLine(tl);
+    }
+    // Pattern number
+    tl.m_qsText = qsNumber;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        m_tmPattern.AddLine(tl);
+    }
+    // Customer name
+    tl.m_qsText = qsCustomer;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleItalic;
+        tl.m_iFontSize = 0;
+        m_tmPattern.AddLine(tl);
+    }
+    // Size
+    tl.m_qsText = qsSize;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        m_tmPattern.AddLine(tl);
+    }
+    // Creation date
+    if (date.isValid() == true)
+    {
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        QStringList qslDate = date.toString(Qt::SystemLocaleLongDate).split(", ");
+        tl.m_qsText = qslDate.last();
+        m_tmPattern.AddLine(tl);
+    }
+    // generate lines of text
+    m_tmPattern.SetFontSize(geom.GetFontSize());
+    m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -548,6 +626,7 @@ void VLayoutDetail::ClearTextItems()
 void VLayoutDetail::CreateTextItems()
 {
     ClearTextItems();
+    // first add detail texts
     if (d->detailLabel.count() > 0)
     {
         QVector<QPointF> points = Map(Mirror(d->detailLabel));
@@ -587,6 +666,47 @@ void VLayoutDetail::CreateTextItems()
             dY += m_tmDetail.GetSpacing();
         }
     }
+    // and then add pattern texts
+    if (d->patternInfo.count() > 0)
+    {
+        QVector<QPointF> points = Map(Mirror(d->patternInfo));
+        points.push_back(points.at(0));
+        qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
+        qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dY = 0;
+        qreal dX;
+        printf("Pattern lines %d %d\n", m_tmPattern.GetCount(), m_tmPattern.GetSourceLineCount());
+        for (int i = 0; i < m_tmPattern.GetCount(); ++i)
+        {
+            const TextLine& tl = m_tmPattern.GetLine(i);
+            QFont fnt = m_tmPattern.GetFont();
+            fnt.setPixelSize(m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setWeight(tl.m_eFontWeight);
+            fnt.setStyle(tl.m_eStyle);
+            dY += tl.m_iHeight;
+            QMatrix mat;
+            mat.translate(points.at(0).x(), points.at(0).y());
+            mat.rotate(qRadiansToDegrees(dAng));
+
+            QFontMetrics fm(fnt);
+            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (dW - fm.width(tl.m_qsText))/2;
+            }
+            else
+            {
+                dX = dW - fm.width(tl.m_qsText);
+            }
+            QPainterPath path;
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            m_liPP << mat.map(path);
+            dY += m_tmPattern.GetSpacing();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,7 +725,15 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
 
     if (d->mirror == true)
     {
-        QVector<QPointF> points = Map(Mirror(d->detailLabel));
+        QVector<QPointF> points;
+        if (i < m_tmDetail.GetCount())
+        {
+            points = Map(Mirror(d->detailLabel));
+        }
+        else
+        {
+            points = Map(Mirror(d->patternInfo));
+        }
         QPointF ptCenter = (points.at(1) + points.at(3))/2;
         qreal dRot = qRadiansToDegrees(qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x()));
 
@@ -619,6 +747,7 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
         t.translate(-ptCenter.x(), -ptCenter.y());
         path = t.map(path);
     }
+
     item->setPath(path);
     item->setBrush(QBrush(Qt::black));
     return item;

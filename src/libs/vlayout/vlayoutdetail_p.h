@@ -35,6 +35,7 @@
 #include <QTransform>
 
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -47,14 +48,14 @@ public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
           matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
-          patternInfo(QVector<QPointF>()), detailData()
+          patternInfo(QVector<QPointF>()), detailData(), patternGeom()
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix),
           layoutWidth(detail.layoutWidth), mirror(detail.mirror), detailLabel(detail.detailLabel),
-          patternInfo(detail.patternInfo), detailData(detail.detailData)
+          patternInfo(detail.patternInfo), detailData(detail.detailData), patternGeom(detail.patternGeom)
     {}
 
     ~VLayoutDetailData() {}
@@ -76,12 +77,14 @@ public:
 
     bool mirror;
 
-    /** @brief detail label rectangle */
+    /** @brief detailLabel detail label rectangle */
     QVector<QPointF> detailLabel;
-    /** @brief pattern info rectangle */
+    /** @brief patternInfo pattern info rectangle */
     QVector<QPointF> patternInfo;
-    /** @brief detail data */
+    /** @brief detailData detail data */
     VPatternPieceData detailData;
+    /** @brief patternGeom pattern geometry */
+    VPatternInfoGeometry patternGeom;
 
 private:
     VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;

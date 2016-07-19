@@ -704,6 +704,7 @@ void VToolDetail::UpdateLabel()
         {
             tl.m_eAlign = Qt::AlignCenter;
             tl.m_eFontWeight = QFont::DemiBold;
+            tl.m_eStyle = QFont::StyleNormal;
             tl.m_iFontSize = 2;
             dataLabel->AddLine(tl);
         }
@@ -711,6 +712,7 @@ void VToolDetail::UpdateLabel()
         // MCP
         tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
         tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;
         for (int i = 0; i < data.GetMCPCount(); ++i)
         {
@@ -784,7 +786,9 @@ void VToolDetail::UpdatePatternInfo()
         tl.m_qsText = doc->GetPatternName();
         if (tl.m_qsText.isEmpty() == false)
         {
+            tl.m_eAlign = Qt::AlignCenter;
             tl.m_eFontWeight = QFont::Normal;
+            tl.m_eStyle = QFont::StyleNormal;
             tl.m_iFontSize = 2;
             patternInfo->AddLine(tl);
         }
@@ -793,8 +797,10 @@ void VToolDetail::UpdatePatternInfo()
         tl.m_qsText = doc->GetPatternNumber();
         if (tl.m_qsText.isEmpty() == false)
         {
-            tl.m_iFontSize = 0;
             tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+            tl.m_eFontWeight = QFont::Normal;
+            tl.m_eStyle = QFont::StyleNormal;
+            tl.m_iFontSize = 0;
             patternInfo->AddLine(tl);
         }
 
@@ -802,7 +808,10 @@ void VToolDetail::UpdatePatternInfo()
         tl.m_qsText = doc->GetCustomerName();
         if (tl.m_qsText.isEmpty() == false)
         {
+            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+            tl.m_eFontWeight = QFont::Normal;
             tl.m_eStyle = QFont::StyleItalic;
+            tl.m_iFontSize = 0;
             patternInfo->AddLine(tl);
         }
 
@@ -810,13 +819,20 @@ void VToolDetail::UpdatePatternInfo()
         tl.m_qsText = doc->GetPatternSize();
         if (tl.m_qsText.isEmpty() == false)
         {
+            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+            tl.m_eFontWeight = QFont::Normal;
             tl.m_eStyle = QFont::StyleNormal;
+            tl.m_iFontSize = 0;
             patternInfo->AddLine(tl);
         }
 
         // Creation date
         if (doc->IsDateVisible() == true)
         {
+            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+            tl.m_eFontWeight = QFont::Normal;
+            tl.m_eStyle = QFont::StyleNormal;
+            tl.m_iFontSize = 0;
             QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
             tl.m_qsText = qslDate.last();
             patternInfo->AddLine(tl);

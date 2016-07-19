@@ -477,12 +477,20 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         const VPatternPieceData& data = d.GetPatternPieceData();
         if (data.IsVisible() == true)
         {
-            det.SetDetail(d.getName(), data);
+            det.SetDetail(d.getName(), data, qApp->font());
         }
         const VPatternInfoGeometry& geom = d.GetPatternInfo();
         if (geom.IsVisible() == true)
         {
-            det.SetPatternInfoPoints(geom.GetPos(), geom.GetLabelWidth(), geom.GetLabelHeight(), geom.GetRotation());
+            VAbstractPattern* pDoc = qApp->getCurrentDocument();
+            QDate date;
+            if (pDoc->IsDateVisible() == true)
+            {
+                date = pDoc->GetCreationDate();
+            }
+            det.SetPatternInfo(pDoc->GetPatternName(), pDoc->GetPatternNumber(), pDoc->GetPatternSize(),
+                               pDoc->GetCompanyName(), pDoc->GetCustomerName(), date, geom, qApp->font());
+            qApp->getCurrentDocument();
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
         det.CreateTextItems();

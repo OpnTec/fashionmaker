@@ -97,6 +97,21 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextManager::FitFontSize(qreal fW, qreal fH)
+{
+    int iFontSize = GetFont().pixelSize();
+    while (IsBigEnough(fW, fH, iFontSize) == true && iFontSize <= MAX_FONT_SIZE)
+    {
+        ++iFontSize;
+    }
+    while (IsBigEnough(fW, fH, iFontSize) == false && iFontSize >= MIN_FONT_SIZE)
+    {
+        --iFontSize;
+    }
+    SetFontSize(iFontSize);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
 {
     QRegularExpression reg("\\s+");

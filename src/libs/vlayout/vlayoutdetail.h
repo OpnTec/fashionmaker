@@ -31,10 +31,12 @@
 
 #include "vabstractdetail.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vtools/tools/vtextmanager.h"
 
 #include <QMatrix>
 #include <QPointF>
+#include <QDate>
 
 class VLayoutDetailData;
 class QGraphicsItem;
@@ -56,10 +58,11 @@ public:
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
 
-    void SetDetail(const QString &qsName, const VPatternPieceData& data);
+    void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
 
-    QVector<QPointF> GetPatternInfoPoints() const;
-    void SetPatternInfoPoints(const QPointF& ptPos, qreal dWidth, qreal dHeight, qreal dRot);
+    void SetPatternInfo(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
+                        const QString& qsCompany, const QString& qsCustomer, const QDate& date,
+                        const VPatternInfoGeometry& geom, const QFont& font);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
@@ -95,6 +98,7 @@ public:
 private:
     QSharedDataPointer<VLayoutDetailData>   d;
     VTextManager                            m_tmDetail;
+    VTextManager                            m_tmPattern;
     QList<QPainterPath>                     m_liPP;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
