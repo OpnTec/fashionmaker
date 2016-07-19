@@ -3636,13 +3636,12 @@ void MainWindow::CreateActions()
     {
         recentFileActs[i] = new QAction(this);
         recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], &QAction::triggered, [this]()
+        connect(recentFileActs[i], &QAction::triggered, this, [this]()
         {
-            QAction *action = qobject_cast<QAction *>(sender());
-            if (action)
+            if (QAction *action = qobject_cast<QAction *>(sender()))
             {
                 const QString filePath = action->data().toString();
-                if (not  filePath.isEmpty())
+                if (not filePath.isEmpty())
                 {
                     LoadPattern(filePath);
                 }
