@@ -50,7 +50,8 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this](){
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this]()
+    {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {
             qWarning() << tr("Cannot open your default browser");
