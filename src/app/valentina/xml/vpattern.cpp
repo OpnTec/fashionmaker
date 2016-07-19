@@ -83,11 +83,6 @@ void VPattern::CreateEmptyFile()
     version.appendChild(newNodeText);
     patternElement.appendChild(version);
 
-    QDomElement domCreated = createElement(TagCreationDate);
-    QDomText domCreatedText = createTextNode(QDate::currentDate().toString("d.M.yyyy"));
-    domCreated.appendChild(domCreatedText);
-    patternElement.appendChild(domCreated);
-
     QDomElement unit = createElement(TagUnit);
     newNodeText = createTextNode(UnitsToStr(qApp->patternUnit()));
     unit.appendChild(newNodeText);
@@ -139,7 +134,7 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagCreationDate << TagSize << TagShowDate;
+												 << TagSize << TagShowDate;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -211,13 +206,10 @@ void VPattern::Parse(const Document &parse)
                     case 13: // TagCustomerName
                         qCDebug(vXML, "Customer name.");
                         break;
-                    case 14: // TagCreationDate
-                        qCDebug(vXML, "Creation date.");
-                        break;
-                    case 15: // TagSize
+						  case 14: // TagSize
                         qCDebug(vXML, "Size");
                         break;
-                    case 16:
+						  case 15:
                         qCDebug(vXML, "Show creation date");
                         break;
                     default:

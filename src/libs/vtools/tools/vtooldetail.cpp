@@ -833,7 +833,7 @@ void VToolDetail::UpdatePatternInfo()
             tl.m_eFontWeight = QFont::Normal;
             tl.m_eStyle = QFont::StyleNormal;
             tl.m_iFontSize = 0;
-            QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
+				QStringList qslDate = QDate::currentDate().toString(Qt::SystemLocaleLongDate).split(", ");
             tl.m_qsText = qslDate.last();
             patternInfo->AddLine(tl);
         }

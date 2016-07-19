@@ -67,7 +67,6 @@ const QString VAbstractPattern::TagPatternName  = QStringLiteral("patternName");
 const QString VAbstractPattern::TagPatternNum   = QStringLiteral("patternNumber");
 const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
-const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
 const QString VAbstractPattern::TagSize         = QStringLiteral("size");
 const QString VAbstractPattern::TagShowDate     = QStringLiteral("showDate");
 
@@ -1057,29 +1056,6 @@ void VAbstractPattern::SetCustomerName(QString qsName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDate VAbstractPattern::GetCreationDate() const
-{
-    QStringList qsl = UniqueTagText(TagCreationDate).split(".");
-    if (qsl.count() == 3)
-    {
-        bool bDay;
-        bool bMonth;
-        bool bYear;
-        int iDay = qsl[0].toInt(&bDay);
-        int iMonth = qsl[1].toInt(&bMonth);
-        int iYear = qsl[2].toInt(&bYear);
-
-        if (bDay == true && bMonth == true && bYear == true)
-        {
-            QDate date;
-            date.setDate(iYear, iMonth, iDay);
-            return date;
-        }
-    }
-    return QDate::currentDate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetPatternSize() const
 {
     return UniqueTagText(TagSize);
@@ -1211,7 +1187,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                            << TagCustomerName << TagCreationDate << TagSize << TagShowDate;
+														  << TagCustomerName << TagSize << TagShowDate;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1272,17 +1248,12 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element = createElement(TagCustomerName);
                 break;
             }
-            case 10: // TagPatternName
-            {
-                element = createElement(TagCreationDate);
-                break;
-            }
-            case 11: // TagSize
+				case 10: // TagSize
             {
                  element = createElement(TagSize);
                  break;
             }
-            case 12: // TagShowDate
+				case 11: // TagShowDate
             {
                  element = createElement(TagShowDate);
                  break;

@@ -116,7 +116,6 @@ public:
     void           SetPatternNumber(QString qsNum);
     QString        GetCustomerName() const;
     void           SetCustomerName(QString qsName);
-    QDate          GetCreationDate() const;
     QString        GetPatternSize() const;
     void           SetPatternSize(QString qsSize);
     bool           IsDateVisible() const;
@@ -177,8 +176,7 @@ public:
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
-    static const QString TagCreationDate;
-    static const QString TagSize;
+	 static const QString TagSize;
     static const QString TagShowDate;
 
     static const QString AttrName;

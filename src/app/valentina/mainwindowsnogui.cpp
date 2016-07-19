@@ -486,7 +486,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
             QDate date;
             if (pDoc->IsDateVisible() == true)
             {
-                date = pDoc->GetCreationDate();
+					 date = QDate::currentDate();
             }
             det.SetPatternInfo(pDoc->GetPatternName(), pDoc->GetPatternNumber(), pDoc->GetPatternSize(),
                                pDoc->GetCompanyName(), pDoc->GetCustomerName(), date, geom, qApp->font());
