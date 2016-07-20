@@ -75,14 +75,14 @@ Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
-    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
     {
         type = QtWarningMsg;
     }
 
 #if !defined(V_NO_ASSERT)
     // I have decided to hide this annoing message for release builds.
-    if ((type == QtWarningMsg) && msg.contains("setGeometry: Unable to set geometry"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("setGeometry: Unable to set geometry")))
     {
         type = QtDebugMsg;
     }
@@ -93,7 +93,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         // Try hide very annoying, Qt related, warnings in Mac OS X
         // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
         // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains("QNSView"))
+        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
         {
             type = QtDebugMsg;
         }
@@ -102,7 +102,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // Hide Qt bug 'Assertion when reading an icns file'
     // https://bugreports.qt.io/browse/QTBUG-45537
     // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains("QICNSHandler::read()"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
     {
         type = QtDebugMsg;
     }
@@ -111,7 +111,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
+            && msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -119,8 +120,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
-            && QString(msg).contains("Cowardly refusing"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
+            && msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
@@ -132,7 +133,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
     {
-        QString debugdate = "[" + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+        QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
 
         switch (type)
         {
