@@ -179,7 +179,7 @@ void VPatternConverter::ApplyPatches()
     catch (VException &e)
     {
         QString error;
-        const QString backupFileName = fileName + QLatin1Literal(".backup");
+        const QString backupFileName = fileName + QLatin1String(".backup");
         if (SafeCopy(backupFileName, fileName, error) == false)
         {
             const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
@@ -894,7 +894,7 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
-        if (node.tagName() == QLatin1Literal("tools"))
+        if (node.tagName() == QLatin1String("tools"))
         {
             const quint32 toolId = node.attribute(QStringLiteral("id")).toUInt();
             QVector<quint32> children;

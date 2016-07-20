@@ -57,7 +57,7 @@ void VAbstractConverter::Convert()
     }
 
     QString error;
-    const QString backupFileName = fileName + QLatin1Literal(".backup");
+    const QString backupFileName = fileName + QLatin1String(".backup");
     if (SafeCopy(fileName, backupFileName, error) == false)
     {
         const QString errorMsg(tr("Error creating a backup file: %1.").arg(error));

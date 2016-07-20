@@ -67,7 +67,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     ui->lineEditFileName->setValidator( new QRegExpValidator(QRegExp(baseFilenameRegExp), this));
 #endif
 
-    const QString mask = fileName+QLatin1Literal("_");
+    const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
@@ -299,15 +299,15 @@ bool DialogSaveLayout::TestPdf()
 QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
 {
     QVector<std::pair<QString, QString>> list;
-    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1Literal(".svg")));
-    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1Literal(".pdf")));
-    list.append(std::make_pair(tr("Images (*.png)"), QLatin1Literal(".png")));
-    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1Literal(".obj")));
+    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1String(".svg")));
+    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1String(".pdf")));
+    list.append(std::make_pair(tr("Images (*.png)"), QLatin1String(".png")));
+    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
     if (SupportPSTest())
     {
-        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1Literal(".ps")));
-        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1Literal(".eps")));
+        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1String(".ps")));
+        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1String(".eps")));
     }
-    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1Literal(".dxf")));
+    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1String(".dxf")));
     return list;
 }

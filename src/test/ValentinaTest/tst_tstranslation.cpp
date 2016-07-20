@@ -116,7 +116,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
                 continue;
             }
 
-            if (source == QLatin1Literal("..."))
+            if (source == QLatin1String("..."))
             {
                 const QDomElement translationTag = message.firstChildElement(TagTranslation);
                 if (translationTag.hasAttribute(AttrType))
@@ -210,7 +210,7 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
 
             for (int i = 1; i <= 99; ++i)
             {
-                const QString marker = QLatin1Literal("%") + QString().setNum(i);
+                const QString marker = QLatin1String("%") + QString().setNum(i);
                 const bool sourceMark = source.indexOf(marker) != -1;
                 if (sourceMark)
                 {
@@ -218,8 +218,8 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                     if (sourceMarkCount != i)
                     {
                         const QString message = QString("In source string '%1' was missed place marker ")
-                                .arg(source) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
-                                QLatin1Literal("'.");
+                                .arg(source) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
+                                QLatin1String("'.");
                         QFAIL(qUtf8Printable(message));
                     }
                 }
@@ -231,8 +231,8 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                     if (translationMarkCount != i)
                     {
                         const QString message = QString("In translation string '%1' was missed place marker ")
-                                .arg(translation) + QLatin1Literal("'%") + QString().setNum(translationMarkCount) +
-                                QLatin1Literal("'.");
+                                .arg(translation) + QLatin1String("'%") + QString().setNum(translationMarkCount) +
+                                QLatin1String("'.");
                         QFAIL(qUtf8Printable(message));
                     }
                 }
@@ -241,8 +241,8 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                 {
                     const QString message =
                         QString("Compare to source string in the translation string '%1' was missed place marker ")
-                            .arg(translation) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
-                            QLatin1Literal("'.");
+                            .arg(translation) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
+                            QLatin1String("'.");
                     QFAIL(qUtf8Printable(message));
                 }
             }

@@ -43,11 +43,11 @@
 
 //must be the same order as PaperSizeTemplate constants
 const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames =
-        DialogLayoutSettings::FormatsVector () << QLatin1Literal("A0")
-                                               << QLatin1Literal("A1")
-                                               << QLatin1Literal("A2")
-                                               << QLatin1Literal("A3")
-                                               << QLatin1Literal("A4")
+        DialogLayoutSettings::FormatsVector () << QLatin1String("A0")
+                                               << QLatin1String("A1")
+                                               << QLatin1String("A2")
+                                               << QLatin1String("A3")
+                                               << QLatin1String("A4")
                                                << QApplication::translate("DialogLayoutSettings", "Letter")
                                                << QApplication::translate("DialogLayoutSettings", "Legal")
                                                << QApplication::translate("DialogLayoutSettings", "Roll 24in")

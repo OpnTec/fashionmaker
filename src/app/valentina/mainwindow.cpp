@@ -3020,7 +3020,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
-        if (tempInfo.suffix() != QLatin1Literal("autosave"))
+        if (tempInfo.suffix() != QLatin1String("autosave"))
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
@@ -4419,7 +4419,7 @@ QString MainWindow::GetPatternFileName()
     {
         shownName = StrippedName(curFile);
     }
-    shownName += QLatin1Literal("[*]");
+    shownName += QLatin1String("[*]");
     return shownName;
 }
 
@@ -4437,10 +4437,10 @@ QString MainWindow::GetMeasurementFileName()
 
         if(mChanges)
         {
-            shownName += QLatin1Literal("*");
+            shownName += QLatin1String("*");
         }
 
-        shownName += QLatin1Literal("]");
+        shownName += QLatin1String("]");
         return shownName;
     }
 }
@@ -4460,7 +4460,7 @@ void MainWindow::UpdateWindowTitle()
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +
-                                  QLatin1Literal("/../Resources/Valentina.icns"));
+                                  QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
     if (not curFile.isEmpty())
     {

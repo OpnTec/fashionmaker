@@ -179,7 +179,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                             line->RefreshGeometry();
                             if (buildMidpoint)
                             {
-                                SetFormula(currentLength + QLatin1Literal("/2"));
+                                SetFormula(currentLength + QLatin1String("/2"));
                             }
                             prepare = true;
                             this->setModal(true);

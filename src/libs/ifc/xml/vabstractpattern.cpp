@@ -149,7 +149,7 @@ QStringList VAbstractPattern::ListMeasurements() const
         const QList<QString> tValues = tokens.values();
         for (int j = 0; j < tValues.size(); ++j)
         {
-            if (tValues.at(j) == QLatin1Literal("-"))
+            if (tValues.at(j) == QLatin1String("-"))
             {
                 continue;
             }
@@ -1126,11 +1126,11 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element = createElement(TagGradation);
 
                 QDomElement heights = createElement(TagHeights);
-                heights.setAttribute(AttrAll, QLatin1Literal("true"));
+                heights.setAttribute(AttrAll, QLatin1String("true"));
                 element.appendChild(heights);
 
                 QDomElement sizes = createElement(TagSizes);
-                sizes.setAttribute(AttrAll, QLatin1Literal("true"));
+                sizes.setAttribute(AttrAll, QLatin1String("true"));
                 element.appendChild(sizes);
                 break;
             }

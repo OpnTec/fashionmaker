@@ -156,10 +156,10 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
-    lockFile = lockName + QLatin1Literal(".lock");
+    lockFile = lockName + QLatin1String(".lock");
 #if defined(Q_OS_UNIX)
     QFileInfo info(lockFile);
-    lockFile = info.absolutePath() + QLatin1Literal("/.") + info.fileName();
+    lockFile = info.absolutePath() + QLatin1String("/.") + info.fileName();
 #endif
     lock.reset(new QLockFile(lockFile));
 

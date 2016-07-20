@@ -339,13 +339,13 @@ bool FvUpdater::xmlParseFeed()
 
         if (m_xml.isStartElement())
         {
-            if (m_xml.name() == QLatin1Literal("item"))
+            if (m_xml.name() == QLatin1String("item"))
             {
                 xmlEnclosureUrl.clear();
                 xmlEnclosureVersion.clear();
                 xmlEnclosurePlatform.clear();
             }
-            else if (m_xml.name() == QLatin1Literal("enclosure"))
+            else if (m_xml.name() == QLatin1String("enclosure"))
             {
                 const QXmlStreamAttributes attribs = m_xml.attributes();
                 const QString fervorPlatform = QStringLiteral("fervor:platform");
@@ -381,7 +381,7 @@ bool FvUpdater::xmlParseFeed()
         }
         else if (m_xml.isEndElement())
         {
-            if (m_xml.name() == QLatin1Literal("item"))
+            if (m_xml.name() == QLatin1String("item"))
             {
                 // That's it - we have analyzed a single <item> and we'll stop
                 // here (because the topmost is the most recent one, and thus

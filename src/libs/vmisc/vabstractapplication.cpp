@@ -102,12 +102,12 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
     }
     else
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
-                + locale + QLatin1Literal(".lproj");
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
+                + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())
