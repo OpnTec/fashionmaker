@@ -86,7 +86,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 #if !defined(V_NO_ASSERT)
     // I have decided to hide this annoing message for release builds.
-    if ((type == QtWarningMsg) && msg.contains("setGeometryDp: Unable to set geometry"))
+    if ((type == QtWarningMsg) && msg.contains("setGeometry: Unable to set geometry"))
     {
         type = QtDebugMsg;
     }
