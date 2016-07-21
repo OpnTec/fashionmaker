@@ -2002,7 +2002,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr);
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const int index = header.indexOf(QLatin1Literal("("));
+    const int index = header.indexOf(QLatin1String("("));
     if (index != -1)
     {
         header.remove(index-1, 100);
@@ -2026,7 +2026,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     if (curFile.isEmpty())
     {
         shownName = tr("untitled");
-        mType == MeasurementsType::Standard ? shownName += QLatin1Literal(".vst") : shownName += QLatin1Literal(".vit");
+        mType == MeasurementsType::Standard ? shownName += QLatin1String(".vst") : shownName += QLatin1String(".vit");
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
         ui->lineEditPathToFile->setCursorPosition(0);
@@ -2055,7 +2055,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +
-                                  QLatin1Literal("/../Resources/measurements.icns"));
+                                  QLatin1String("/../Resources/measurements.icns"));
     QIcon icon;
     if (not curFile.isEmpty())
     {

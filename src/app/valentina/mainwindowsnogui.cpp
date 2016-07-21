@@ -979,7 +979,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             #ifdef Q_OS_WIN
             printer->setOutputFileName(outputFileName);
             #else
-            printer->setOutputFileName(outputFileName + QLatin1Literal(".pdf"));
+            printer->setOutputFileName(outputFileName + QLatin1String(".pdf"));
             #endif
 
             #ifdef Q_OS_MAC

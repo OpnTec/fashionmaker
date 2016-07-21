@@ -79,6 +79,12 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
         // Connect this slot with VApplication::aboutToQuit.
         Settings()->sync();
     });
+
+#if !defined(V_NO_ASSERT)
+    // Ignore SSL-related warnings
+    // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
+    qputenv("QT_LOGGING_RULES", "qt.network.ssl.warning=false");
+#endif //!defined(V_NO_ASSERT)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,12 +108,12 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
     }
     else
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
-                + locale + QLatin1Literal(".lproj");
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
+                + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())

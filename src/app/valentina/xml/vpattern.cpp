@@ -355,7 +355,7 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error) const
     }
 
     const bool saved = VAbstractPattern::SaveDocument(fileName, error);
-    if (saved && QFileInfo(fileName).suffix() != QLatin1Literal("autosave"))
+    if (saved && QFileInfo(fileName).suffix() != QLatin1String("autosave"))
     {
         modified = false;
     }

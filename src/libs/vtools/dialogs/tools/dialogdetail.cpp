@@ -640,7 +640,7 @@ bool DialogDetail::DetailIsValid() const
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
-    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1Literal("\"/> ");
+    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
 
     if(CreateDetail().ContourPoints(data).count() < 3)
     {

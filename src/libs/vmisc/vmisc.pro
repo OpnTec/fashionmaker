@@ -51,39 +51,7 @@ $$enable_ccache()
 CONFIG(debug, debug|release){
     # Debug mode
     unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
-        # want them in global list. Compromise decision delete them from local list.
-        QMAKE_CXXFLAGS -= \
-            -Wmissing-prototypes
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS += \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$ICC_DEBUG_CXXFLAGS
-        }
+        include(warnings.pri)
     } else {
         *-g++{
             QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
@@ -102,12 +70,13 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
+    checkWarnings{
+        unix:include(warnings.pri)
+    }
+
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-        DEFINES += V_NO_DEBUG
+        # do nothing
     } else {
-        noCrashReports{
-            DEFINES += V_NO_DEBUG
-        }
         !macx:!win32-msvc*{
             # Turn on debug symbols in release mode on Unix systems.
             # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.

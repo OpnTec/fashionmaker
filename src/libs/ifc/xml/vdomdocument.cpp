@@ -771,7 +771,7 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
 
-    QTemporaryFile destFile(destination + QLatin1Literal(".XXXXXX"));
+    QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
     destFile.setAutoRemove(false);
     if (not destFile.open())
     {

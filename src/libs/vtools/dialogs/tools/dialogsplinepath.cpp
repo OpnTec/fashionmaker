@@ -934,6 +934,6 @@ void DialogSplinePath::ShowPointIssue(const QString &pName)
     }
     else
     {
-       item->setText(pName + QLatin1Literal("(!)"));
+       item->setText(pName + QLatin1String("(!)"));
     }
 }

@@ -238,7 +238,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wmissing-include-dirs \
     -Wpacked \
     -Wredundant-decls \
-    -Winline \
+#    -Winline \
     -Winvalid-pch \
     -Wunsafe-loop-optimizations \
     -Wlong-long \
@@ -427,7 +427,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Winherited-variadic-ctor \
     -Winit-self \
     -Winitializer-overrides \
-    -Winline \
+#    -Winline \
     -Wint-conversion \
     -Wint-conversions \
     -Wint-to-pointer-cast \
@@ -641,7 +641,7 @@ ICC_DEBUG_CXXFLAGS += \
     -Weffc++ \
     -Wextra-tokens \
     -Wformat \
-    #-Winline \
+#    -Winline \
     -Wmain \
     -Wmissing-declarations \
     -Wmissing-prototypes \

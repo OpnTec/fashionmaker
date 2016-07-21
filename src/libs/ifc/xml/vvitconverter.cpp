@@ -110,7 +110,7 @@ void VVITConverter::ApplyPatches()
     catch (VException &e)
     {
         QString error;
-        const QString backupFileName = fileName + QLatin1Literal(".backup");
+        const QString backupFileName = fileName + QLatin1String(".backup");
         if (SafeCopy(backupFileName, fileName, error) == false)
         {
             const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
