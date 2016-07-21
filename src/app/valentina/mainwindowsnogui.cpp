@@ -489,7 +489,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
 					 date = QDate::currentDate();
             }
             det.SetPatternInfo(pDoc->GetPatternName(), pDoc->GetPatternNumber(), pDoc->GetPatternSize(),
-                               pDoc->GetCompanyName(), pDoc->GetCustomerName(), date, geom, qApp->font());
+            pDoc->GetCompanyName(), pDoc->GetCustomerName(), date, geom, qApp->font());
             qApp->getCurrentDocument();
         }
         det.setWidth(qApp->toPixel(d.getWidth()));

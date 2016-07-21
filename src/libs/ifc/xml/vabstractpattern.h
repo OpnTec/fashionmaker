@@ -176,7 +176,7 @@ public:
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
-	 static const QString TagSize;
+    static const QString TagSize;
     static const QString TagShowDate;
 
     static const QString AttrName;

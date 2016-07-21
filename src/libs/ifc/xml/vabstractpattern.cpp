@@ -1199,7 +1199,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-														  << TagCustomerName << TagSize << TagShowDate;
+                                         << TagCustomerName << TagSize << TagShowDate;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1260,12 +1260,12 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element = createElement(TagCustomerName);
                 break;
             }
-				case 10: // TagSize
+            case 10: // TagSize
             {
                  element = createElement(TagSize);
                  break;
             }
-				case 11: // TagShowDate
+            case 11: // TagShowDate
             {
                  element = createElement(TagShowDate);
                  break;
