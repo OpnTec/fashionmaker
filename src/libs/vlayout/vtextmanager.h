@@ -3,6 +3,9 @@
 
 #include <QString>
 #include <QFont>
+#include <QDate>
+
+#include "../vpatterndb/vpatternpiecedata.h"
 
 #define MIN_FONT_SIZE               12
 #define MAX_FONT_SIZE               128
@@ -36,6 +39,16 @@ public:
     const TextLine&     GetLine(int i) const;
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
     void                FitFontSize(qreal fW, qreal fH);
+    /** @brief Update(const QString& qsName, const VPatternPieceData& data)
+     *  Updates the manager with detail name and detail data
+     */
+    void                Update(const QString& qsName, const VPatternPieceData& data);
+    /** @brief Updateconst QString& qsPattern, const QString& qsNumber, const QString& qsSize,
+                               const QString& qsCompany, const QString& qsCustomer, const QDate& date)
+        Updates the manager with pattern data
+     */
+    void                Update(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
+                               const QString& qsCompany, const QString& qsCustomer, const QDate& date);
 
 protected:
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);

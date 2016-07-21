@@ -112,6 +112,114 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
+{
+    Clear();
+    TextLine tl;
+    // all text must be centered and normal style!
+    tl.m_eAlign = Qt::AlignCenter;
+    tl.m_eStyle = QFont::StyleNormal;
+
+    // letter
+    tl.m_qsText = data.GetLetter();
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::Bold;
+        tl.m_iFontSize = 6;
+        AddLine(tl);
+    }
+    // name
+    tl.m_qsText = qsName;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_iFontSize = 2;
+        AddLine(tl);
+    }
+    // MCP
+    QString qsText = "Cut %1 on %2%3";
+    QStringList qslPlace;
+    qslPlace << "" << " on Fold";
+    tl.m_eFontWeight = QFont::Normal;
+    tl.m_iFontSize = 0;
+    for (int i = 0; i < data.GetMCPCount(); ++i)
+    {
+        MaterialCutPlacement mcp = data.GetMCP(i);
+        if (mcp.m_iCutNumber > 0)
+        {
+            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).
+                    arg(qslPlace[int(mcp.m_ePlacement)]);
+            AddLine(tl);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, const QString &qsSize,
+                          const QString &qsCompany, const QString &qsCustomer, const QDate& date)
+{
+    Clear();
+    TextLine tl;
+    // all information must be centered
+    tl.m_eAlign = Qt::AlignCenter;
+
+    // Company name
+    tl.m_qsText = qsCompany;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 4;
+        AddLine(tl);
+    }
+    // Pattern name
+    tl.m_qsText = qsPattern;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 2;
+        AddLine(tl);
+    }
+    // Pattern number
+    tl.m_qsText = qsNumber;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        AddLine(tl);
+    }
+    // Customer name
+    tl.m_qsText = qsCustomer;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleItalic;
+        tl.m_iFontSize = 0;
+        AddLine(tl);
+    }
+    // Size
+    tl.m_qsText = qsSize;
+    if (tl.m_qsText.isEmpty() == false)
+    {
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        AddLine(tl);
+    }
+    // Date
+    if (date.isValid() == true)
+    {
+        tl.m_qsText = date.toString("dd MMMM yyyy");
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        AddLine(tl);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
 {
     QRegularExpression reg("\\s+");

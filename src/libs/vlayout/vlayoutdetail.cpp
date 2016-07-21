@@ -140,47 +140,8 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
     // generate text
     m_tmDetail.SetFont(font);
     m_tmDetail.SetFontSize(data.GetFontSize());
-    m_tmDetail.Clear();
-    TextLine tl;
-    // letter
-    tl.m_qsText = data.GetLetter();
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::Bold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 6;
-        m_tmDetail.AddLine(tl);
-    }
-    // name
-    if (qsName.isEmpty() == false)
-    {
-        tl.m_qsText = qsName;
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::DemiBold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 2;
-        m_tmDetail.AddLine(tl);
-    }
-
-    // MCP
-    QString qsText = "Cut %1 of %2%3";
-    QStringList qslPlace;
-    qslPlace << "" << " on Fold";
-    tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-    tl.m_eFontWeight = QFont::Normal;
-    tl.m_eStyle = QFont::StyleNormal;
-    tl.m_iFontSize = 0;
-    for (int i = 0; i < data.GetMCPCount(); ++i)
-    {
-        MaterialCutPlacement mcp = data.GetMCP(i);
-        if (mcp.m_iCutNumber > 0)
-        {
-            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
-            m_tmDetail.AddLine(tl);
-        }
-    }
-    // will generate the lines of text
+    m_tmDetail.Update(qsName, data);
+    // this will generate the lines of text
     m_tmDetail.SetFontSize(data.GetFontSize());
     m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
 }
@@ -207,69 +168,8 @@ void VLayoutDetail::SetPatternInfo(const QString& qsPattern, const QString& qsNu
     // Generate text
     m_tmPattern.SetFont(font);
     m_tmPattern.SetFontSize(geom.GetFontSize());
-    m_tmPattern.Clear();
-    TextLine tl;
-    // Company name
-    tl.m_qsText = qsCompany;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::DemiBold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 4;
-        m_tmPattern.AddLine(tl);
-    }
-    // Pattern name
-    tl.m_qsText = qsPattern;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 2;
-        m_tmPattern.AddLine(tl);
-    }
-    // Pattern number
-    tl.m_qsText = qsNumber;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        m_tmPattern.AddLine(tl);
-    }
-    // Customer name
-    tl.m_qsText = qsCustomer;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleItalic;
-        tl.m_iFontSize = 0;
-        m_tmPattern.AddLine(tl);
-    }
-    // Size
-    tl.m_qsText = qsSize;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        m_tmPattern.AddLine(tl);
-    }
-    // Creation date
-    if (date.isValid() == true)
-    {
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        QStringList qslDate = date.toString(Qt::SystemLocaleLongDate).split(", ");
-        tl.m_qsText = qslDate.last();
-        m_tmPattern.AddLine(tl);
-    }
+
+    m_tmPattern.Update(qsPattern, qsNumber, qsSize, qsCompany, qsCustomer, date);
     // generate lines of text
     m_tmPattern.SetFontSize(geom.GetFontSize());
     m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());

@@ -221,6 +221,19 @@ bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::UpdateData(const QString &qsName, const VPatternPieceData &data)
+{
+    m_tm.Update(qsName, data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::UpdateData(const QString &qsPattern, const QString &qsNumber, const QString &qsSize,
+                                   const QString &qsCompany, const QString &qsCustomer, const QDate &date)
+{
+    m_tm.Update(qsPattern, qsNumber, qsSize, qsCompany, qsCustomer, date);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VTextGraphicsItem::GetFontSize() const
 {
     return m_tm.GetFont().pixelSize();

@@ -685,45 +685,7 @@ void VToolDetail::UpdateLabel()
         fnt.setPixelSize(data.GetFontSize());
         dataLabel->SetFont(fnt);
         dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
-        dataLabel->Clear();
-        TextLine tl;
-        // letter
-        tl.m_qsText = data.GetLetter();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignCenter;
-            tl.m_eFontWeight = QFont::Bold;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 6;
-            dataLabel->AddLine(tl);
-        }
-
-        // name
-        tl.m_qsText = detail.getName();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignCenter;
-            tl.m_eFontWeight = QFont::DemiBold;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 2;
-            dataLabel->AddLine(tl);
-        }
-
-        // MCP
-        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        for (int i = 0; i < data.GetMCPCount(); ++i)
-        {
-            MaterialCutPlacement mcp = data.GetMCP(i);
-            if (mcp.m_iCutNumber > 0)
-            {
-                tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
-                dataLabel->AddLine(tl);
-            }
-        }
-
+        dataLabel->UpdateData(detail.getName(), data);
         QPointF pt = data.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
@@ -768,75 +730,14 @@ void VToolDetail::UpdatePatternInfo()
         fnt.setPixelSize(iFS);
         patternInfo->SetFont(fnt);
         patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
-        patternInfo->Clear();
-        TextLine tl;
 
-        // Company name
-        tl.m_qsText = doc->GetCompanyName();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignCenter;
-            tl.m_eFontWeight = QFont::DemiBold;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 4;
-            patternInfo->AddLine(tl);
-        }
-
-        // Pattern name
-        tl.m_qsText = doc->GetPatternName();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignCenter;
-            tl.m_eFontWeight = QFont::Normal;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 2;
-            patternInfo->AddLine(tl);
-        }
-
-        // Pattern number
-        tl.m_qsText = doc->GetPatternNumber();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-            tl.m_eFontWeight = QFont::Normal;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 0;
-            patternInfo->AddLine(tl);
-        }
-
-        // Customer name
-        tl.m_qsText = doc->GetCustomerName();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-            tl.m_eFontWeight = QFont::Normal;
-            tl.m_eStyle = QFont::StyleItalic;
-            tl.m_iFontSize = 0;
-            patternInfo->AddLine(tl);
-        }
-
-        // Size
-        tl.m_qsText = doc->GetPatternSize();
-        if (tl.m_qsText.isEmpty() == false)
-        {
-            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-            tl.m_eFontWeight = QFont::Normal;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 0;
-            patternInfo->AddLine(tl);
-        }
-
-        // Creation date
+        QDate date;
         if (doc->IsDateVisible() == true)
         {
-            tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-            tl.m_eFontWeight = QFont::Normal;
-            tl.m_eStyle = QFont::StyleNormal;
-            tl.m_iFontSize = 0;
-            QStringList qslDate = QDate::currentDate().toString(Qt::SystemLocaleLongDate).split(", ");
-            tl.m_qsText = qslDate.last();
-            patternInfo->AddLine(tl);
+            date = QDate::currentDate();
         }
+        patternInfo->UpdateData(doc->GetPatternName(), doc->GetPatternNumber(), doc->GetPatternSize(),
+                                doc->GetCompanyName(), doc->GetCustomerName(), date);
 
         QPointF pt = geom.GetPos();
         QRectF rectBB;
