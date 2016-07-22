@@ -34,7 +34,6 @@
 #include <QFont>
 #include <QFontMetrics>
 #include <QBrush>
-#include <stdio.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -159,7 +158,7 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
             << QPointF(ptPos.x(), ptPos.y() + geom.GetLabelHeight());
     for (int i = 0; i < v.count(); ++i)
     {
-        v[i] = RotatePoint(ptCenter, v[i], dAng);
+        v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
     d->patternInfo = RoundPoints(v);
 
@@ -543,7 +542,6 @@ void VLayoutDetail::CreateTextItems()
         qreal dW = GetDistance(points.at(0), points.at(1));
         qreal dY = 0;
         qreal dX;
-        printf("Pattern lines %d %d\n", m_tmPattern.GetCount(), m_tmPattern.GetSourceLineCount());
         for (int i = 0; i < m_tmPattern.GetCount(); ++i)
         {
             const TextLine& tl = m_tmPattern.GetLine(i);

@@ -139,7 +139,7 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = det.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());
@@ -165,7 +165,7 @@ void SaveDetailOptions::SavePatternInfo(QDomElement &domElement, const VDetail &
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternInfoGeometry& data = det.GetPatternInfo();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());

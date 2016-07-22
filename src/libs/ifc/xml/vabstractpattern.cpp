@@ -1002,7 +1002,7 @@ QString VAbstractPattern::GetPatternName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetPatternName(QString qsName)
+void VAbstractPattern::SetPatternName(const QString &qsName)
 {
     CheckTagExists(TagPatternName);
     setTagText(TagPatternName, qsName);
@@ -1017,7 +1017,7 @@ QString VAbstractPattern::GetCompanyName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetCompanyName(QString qsName)
+void VAbstractPattern::SetCompanyName(const QString& qsName)
 {
     CheckTagExists(TagCompanyName);
     setTagText(TagCompanyName, qsName);
@@ -1032,7 +1032,7 @@ QString VAbstractPattern::GetPatternNumber() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetPatternNumber(QString qsNum)
+void VAbstractPattern::SetPatternNumber(const QString& qsNum)
 {
     CheckTagExists(TagPatternNum);
     setTagText(TagPatternNum, qsNum);
@@ -1047,7 +1047,7 @@ QString VAbstractPattern::GetCustomerName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetCustomerName(QString qsName)
+void VAbstractPattern::SetCustomerName(const QString& qsName)
 {
     CheckTagExists(TagCustomerName);
     setTagText(TagCustomerName, qsName);
@@ -1062,7 +1062,7 @@ QString VAbstractPattern::GetPatternSize() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetPatternSize(QString qsSize)
+void VAbstractPattern::SetPatternSize(const QString& qsSize)
 {
     CheckTagExists(TagSize);
     setTagText(TagSize, qsSize);

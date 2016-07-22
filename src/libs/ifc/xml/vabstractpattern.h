@@ -109,15 +109,15 @@ public:
     void           SetNotes(const QString &text);
 
     QString        GetPatternName() const;
-    void           SetPatternName(QString qsName);
+    void           SetPatternName(const QString& qsName);
     QString        GetCompanyName() const;
-    void           SetCompanyName(QString qsName);
+    void           SetCompanyName(const QString& qsName);
     QString        GetPatternNumber() const;
-    void           SetPatternNumber(QString qsNum);
+    void           SetPatternNumber(const QString &qsNum);
     QString        GetCustomerName() const;
-    void           SetCustomerName(QString qsName);
+    void           SetCustomerName(const QString& qsName);
     QString        GetPatternSize() const;
-    void           SetPatternSize(QString qsSize);
+    void           SetPatternSize(const QString &qsSize);
     bool           IsDateVisible() const;
     void           SetDateVisible(bool bVisible);
 

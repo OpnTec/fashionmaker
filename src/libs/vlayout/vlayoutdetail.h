@@ -88,8 +88,8 @@ public:
     QPainterPath ContourPath() const;
     void ClearTextItems();
     void CreateTextItems();
-    int GetTextItemsCount() const;
-    QGraphicsItem* GetTextItem(int i) const;
+    int GetTextItemsCount() const Q_REQUIRED_RESULT;
+    QGraphicsItem* GetTextItem(int i) const Q_REQUIRED_RESULT;
     QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
