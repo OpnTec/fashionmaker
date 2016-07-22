@@ -95,9 +95,6 @@ public:
 
 private:
     QSharedDataPointer<VLayoutDetailData>   d;
-    VTextManager                            m_tmDetail;
-    VTextManager                            m_tmPattern;
-    QList<QPainterPath>                     m_liPP;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);

@@ -36,6 +36,8 @@
 
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
+#include "vtextmanager.h"
+
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -48,14 +50,16 @@ public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
           matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
-          patternInfo(QVector<QPointF>()), detailData(), patternGeom()
+          patternInfo(QVector<QPointF>()), detailData(), patternGeom(), m_tmDetail(),
+          m_tmPattern(), m_liPP(QList<QPainterPath>())
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix),
           layoutWidth(detail.layoutWidth), mirror(detail.mirror), detailLabel(detail.detailLabel),
-          patternInfo(detail.patternInfo), detailData(detail.detailData), patternGeom(detail.patternGeom)
+          patternInfo(detail.patternInfo), detailData(detail.detailData), patternGeom(detail.patternGeom),
+          m_tmDetail(detail.m_tmDetail), m_tmPattern(detail.m_tmPattern), m_liPP(detail.m_liPP)
     {}
 
     ~VLayoutDetailData() {}
@@ -85,6 +89,12 @@ public:
     VPatternPieceData detailData;
     /** @brief patternGeom pattern geometry */
     VPatternInfoGeometry patternGeom;
+    /** @brief m_tmDetail text manager for laying out detail info */
+    VTextManager                            m_tmDetail;
+    /** @brief m_tmPattern text manager for laying out pattern info */
+    VTextManager                            m_tmPattern;
+    /** @bried m_liPP list of generated text painter paths */
+    QList<QPainterPath>                     m_liPP;
 
 private:
     VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;

@@ -45,13 +45,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
-    :VAbstractDetail(), d(new VLayoutDetailData), m_tmDetail(), m_tmPattern(), m_liPP()
+    :VAbstractDetail(), d(new VLayoutDetailData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
-    :VAbstractDetail(detail), d(detail.d), m_tmDetail(detail.m_tmDetail), m_tmPattern(detail.m_tmPattern),
-      m_liPP(detail.m_liPP)
+    :VAbstractDetail(detail), d(detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,9 +62,6 @@ VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
     }
     VAbstractDetail::operator=(detail);
     d = detail.d;
-    m_tmDetail = detail.m_tmDetail;
-    m_tmPattern = detail.m_tmPattern;
-    m_liPP = detail.m_liPP;
     return *this;
 }
 
@@ -137,12 +133,12 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
     d->detailLabel = RoundPoints(v);
 
     // generate text
-    m_tmDetail.SetFont(font);
-    m_tmDetail.SetFontSize(data.GetFontSize());
-    m_tmDetail.Update(qsName, data);
+    d->m_tmDetail.SetFont(font);
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    d->m_tmDetail.Update(qsName, data);
     // this will generate the lines of text
-    m_tmDetail.SetFontSize(data.GetFontSize());
-    m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    d->m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,13 +159,13 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
     d->patternInfo = RoundPoints(v);
 
     // Generate text
-    m_tmPattern.SetFont(font);
-    m_tmPattern.SetFontSize(geom.GetFontSize());
+    d->m_tmPattern.SetFont(font);
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    m_tmPattern.Update(pDoc);
+    d->m_tmPattern.Update(pDoc);
     // generate lines of text
-    m_tmPattern.SetFontSize(geom.GetFontSize());
-    m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+    d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -486,7 +482,7 @@ QPainterPath VLayoutDetail::ContourPath() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::ClearTextItems()
 {
-    m_liPP.clear();
+    d->m_liPP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -502,11 +498,11 @@ void VLayoutDetail::CreateTextItems()
         qreal dW = GetDistance(points.at(0), points.at(1));
         qreal dY = 0;
         qreal dX;
-        for (int i = 0; i < m_tmDetail.GetCount(); ++i)
+        for (int i = 0; i < d->m_tmDetail.GetCount(); ++i)
         {
-            const TextLine& tl = m_tmDetail.GetLine(i);
-            QFont fnt = m_tmDetail.GetFont();
-            fnt.setPixelSize(m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
+            const TextLine& tl = d->m_tmDetail.GetLine(i);
+            QFont fnt = d->m_tmDetail.GetFont();
+            fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
             dY += tl.m_iHeight;
@@ -529,8 +525,8 @@ void VLayoutDetail::CreateTextItems()
             }
             QPainterPath path;
             path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
-            m_liPP << mat.map(path);
-            dY += m_tmDetail.GetSpacing();
+            d->m_liPP << mat.map(path);
+            dY += d->m_tmDetail.GetSpacing();
         }
     }
     // and then add pattern texts
@@ -542,11 +538,11 @@ void VLayoutDetail::CreateTextItems()
         qreal dW = GetDistance(points.at(0), points.at(1));
         qreal dY = 0;
         qreal dX;
-        for (int i = 0; i < m_tmPattern.GetCount(); ++i)
+        for (int i = 0; i < d->m_tmPattern.GetCount(); ++i)
         {
-            const TextLine& tl = m_tmPattern.GetLine(i);
-            QFont fnt = m_tmPattern.GetFont();
-            fnt.setPixelSize(m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
+            const TextLine& tl = d->m_tmPattern.GetLine(i);
+            QFont fnt = d->m_tmPattern.GetFont();
+            fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
             dY += tl.m_iHeight;
@@ -569,8 +565,8 @@ void VLayoutDetail::CreateTextItems()
             }
             QPainterPath path;
             path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
-            m_liPP << mat.map(path);
-            dY += m_tmPattern.GetSpacing();
+            d->m_liPP << mat.map(path);
+            dY += d->m_tmPattern.GetSpacing();
         }
     }
 }
@@ -578,7 +574,7 @@ void VLayoutDetail::CreateTextItems()
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutDetail::GetTextItemsCount() const
 {
-    return m_liPP.count();
+    return d->m_liPP.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -587,12 +583,12 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
     QGraphicsPathItem* item = new QGraphicsPathItem();
     QTransform transform = d->matrix;
 
-    QPainterPath path = transform.map(m_liPP[i]);
+    QPainterPath path = transform.map(d->m_liPP[i]);
 
     if (d->mirror == true)
     {
         QVector<QPointF> points;
-        if (i < m_tmDetail.GetCount())
+        if (i < d->m_tmDetail.GetCount())
         {
             points = Map(Mirror(d->detailLabel));
         }
