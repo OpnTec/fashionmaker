@@ -730,14 +730,7 @@ void VToolDetail::UpdatePatternInfo()
         fnt.setPixelSize(iFS);
         patternInfo->SetFont(fnt);
         patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
-
-        QDate date;
-        if (doc->IsDateVisible() == true)
-        {
-            date = QDate::currentDate();
-        }
-        patternInfo->UpdateData(doc->GetPatternName(), doc->GetPatternNumber(), doc->GetPatternSize(),
-                                doc->GetCompanyName(), doc->GetCustomerName(), date);
+        patternInfo->UpdateData(doc);
 
         QPointF pt = geom.GetPos();
         QRectF rectBB;

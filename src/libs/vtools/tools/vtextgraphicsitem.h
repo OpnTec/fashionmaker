@@ -63,8 +63,7 @@ public:
     void                Update();
     bool                IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
     void                UpdateData(const QString& qsName, const VPatternPieceData& data);
-    void                UpdateData(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
-                                   const QString& qsCompany, const QString& qsCustomer, const QDate& date);
+    void                UpdateData(const VAbstractPattern* pDoc);
 
 protected:
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);

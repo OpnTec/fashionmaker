@@ -133,7 +133,7 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
          << QPointF(ptPos.x(), ptPos.y() + data.GetLabelHeight());
     for (int i = 0; i < v.count(); ++i)
     {
-        v[i] = RotatePoint(ptCenter, v[i], dAng);
+        v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
     d->detailLabel = RoundPoints(v);
 
@@ -147,9 +147,7 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetPatternInfo(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
-                                   const QString& qsCompany, const QString& qsCustomer, const QDate& date,
-                                   const VPatternInfoGeometry& geom, const QFont &font)
+void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font)
 {
     d->patternGeom = geom;
     qreal dAng = qDegreesToRadians(geom.GetRotation());
@@ -169,7 +167,7 @@ void VLayoutDetail::SetPatternInfo(const QString& qsPattern, const QString& qsNu
     m_tmPattern.SetFont(font);
     m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    m_tmPattern.Update(qsPattern, qsNumber, qsSize, qsCompany, qsCustomer, date);
+    m_tmPattern.Update(pDoc);
     // generate lines of text
     m_tmPattern.SetFontSize(geom.GetFontSize());
     m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());

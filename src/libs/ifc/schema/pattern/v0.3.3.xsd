@@ -18,12 +18,6 @@
                             <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="patternName" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="patternNumber" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="company" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                            <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="gradation" minOccurs="0" maxOccurs="1">
                                 <xs:complexType>
                                        <xs:sequence>
@@ -79,6 +73,12 @@
                                        <xs:attribute name="defSize" type="baseSize"></xs:attribute>
                                  </xs:complexType>
                             </xs:element>
+                            <xs:element name="patternName" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="patternNumber" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="company" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
                            <xs:element name="measurements" type="xs:string"></xs:element>
                            <xs:element name="increments" minOccurs="0" maxOccurs="1">
                                  <xs:complexType>
@@ -346,13 +346,13 @@
                                                                                                <xs:complexType>
                                                                                                    <xs:attribute name="cutNumber" type="xs:unsignedInt"/>
                                                                                                    <xs:attribute name="userDef" type="xs:string"/>
-                                                                                                   <xs:attribute name="material" type="xs:unsignedInt"/>
-                                                                                                   <xs:attribute name="placement" type="xs:unsignedInt"/>
+                                                                                                   <xs:attribute name="material" type="materialType"/>
+                                                                                                   <xs:attribute name="placement" type="placementType"/>
                                                                                                </xs:complexType>
                                                                                            </xs:element>
                                                                                        </xs:sequence>
                                                                                        <xs:attribute name="letter" type="xs:string"></xs:attribute>
-                                                                                       <xs:attribute name="visible" type="xs:unsignedInt"></xs:attribute>
+                                                                                       <xs:attribute name="visible" type="xs:boolean"></xs:attribute>
                                                                                        <xs:attribute name="fontSize" type="xs:unsignedInt"></xs:attribute>
                                                                                        <xs:attribute name="mx" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
@@ -363,7 +363,7 @@
                                                                                </xs:element>
 									       <xs:element name="patternInfo" minOccurs="0" maxOccurs="1">
                                                                                    <xs:complexType>
-                                                                                       <xs:attribute name="visible" type="xs:unsignedInt"></xs:attribute>
+                                                                                       <xs:attribute name="visible" type="xs:boolean"></xs:attribute>
                                                                                        <xs:attribute name="fontSize" type="xs:unsignedInt"></xs:attribute>
                                                                                        <xs:attribute name="mx" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
@@ -552,4 +552,19 @@
             <xs:enumeration value="2"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="materialType">
+       <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="0"/><!--Fabric-->
+            <xs:enumeration value="1"/><!--Lining-->
+            <xs:enumeration value="2"/><!--Interfacing-->
+            <xs:enumeration value="3"/><!--Interlining-->
+            <xs:enumeration value="4"/><!--UserDefined-->
+       </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="placementType">
+     <xs:restriction base="xs:unsignedInt">
+       <xs:enumeration value="0"/><!--No placement-->
+       <xs:enumeration value="1"/><!--Cut on Fold-->
+     </xs:restriction>
+   </xs:simpleType>
    </xs:schema>

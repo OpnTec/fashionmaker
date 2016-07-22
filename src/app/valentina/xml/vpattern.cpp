@@ -656,21 +656,27 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
                 else if (element.tagName() == TagData)
                 {
-                    QString qsVisible = element.attribute(AttrVisible, "1");
-                    detail.GetPatternPieceData().SetVisible(qsVisible.toInt() != 0);
-                    QString qsLetter = element.attribute(AttrLetter, "");
-                    detail.GetPatternPieceData().SetLetter(qsLetter);
+                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
+                    detail.GetPatternPieceData().SetVisible(bVisible);
+                    try
+                    {
+                        QString qsLetter = GetParametrString(element, AttrLetter, "");
+                        detail.GetPatternPieceData().SetLetter(qsLetter);
+                    } catch(...)
+                    {
+                        detail.GetPatternPieceData().SetLetter("");
+                    }
                     QPointF ptPos;
-                    ptPos.setX(element.attribute(AttrMx, "0").toDouble());
-                    ptPos.setY(element.attribute(AttrMy, "0").toDouble());
+                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
                     detail.GetPatternPieceData().SetPos(ptPos);
-                    qreal dLW = element.attribute(VToolDetail::AttrWidth, "0").toDouble();
+                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
                     detail.GetPatternPieceData().SetLabelWidth(dLW);
-                    qreal dLH = element.attribute(VToolDetail::AttrHeight, "0").toDouble();
+                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
                     detail.GetPatternPieceData().SetLabelHeight(dLH);
-                    int iFS = element.attribute(VToolDetail::AttrFont, "0").toInt();
+                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
                     detail.GetPatternPieceData().SetFontSize(iFS);
-                    qreal dRot = element.attribute(VToolDetail::AttrRotation, "0").toDouble();
+                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
                     detail.GetPatternPieceData().SetRotation(dRot);
 
                     QDomNodeList nodeListMCP = element.childNodes();
@@ -687,24 +693,23 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
                 else if (element.tagName() == TagPatternInfo)
                 {
-                    detail.GetPatternInfo().SetVisible(element.attribute(AttrVisible, "1").toInt() != 0);
+                    detail.GetPatternInfo().SetVisible(GetParametrBool(element, AttrVisible, trueStr));
                     QPointF ptPos;
-                    ptPos.setX(element.attribute(AttrMx, "0").toDouble());
-                    ptPos.setY(element.attribute(AttrMy, "0").toDouble());
+                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
                     detail.GetPatternInfo().SetPos(ptPos);
-                    qreal dLW = element.attribute(VToolDetail::AttrWidth, "0").toDouble();
+                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
                     detail.GetPatternInfo().SetLabelWidth(dLW);
-                    qreal dLH = element.attribute(VToolDetail::AttrHeight, "0").toDouble();
+                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
                     detail.GetPatternInfo().SetLabelHeight(dLH);
-                    int iFS = element.attribute(VToolDetail::AttrFont, "0").toInt();
+                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
                     detail.GetPatternInfo().SetFontSize(iFS);
-                    qreal dRot = element.attribute(VToolDetail::AttrRotation, "0").toDouble();
+                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
                     detail.GetPatternInfo().SetRotation(dRot);
                 }
             }
         }
         VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
-        SetVersion();
     }
     catch (const VExceptionBadId &e)
     {

@@ -227,10 +227,9 @@ void VTextGraphicsItem::UpdateData(const QString &qsName, const VPatternPieceDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::UpdateData(const QString &qsPattern, const QString &qsNumber, const QString &qsSize,
-                                   const QString &qsCompany, const QString &qsCustomer, const QDate &date)
+void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc)
 {
-    m_tm.Update(qsPattern, qsNumber, qsSize, qsCompany, qsCustomer, date);
+    m_tm.Update(pDoc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

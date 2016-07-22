@@ -155,8 +155,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, const QString &qsSize,
-                          const QString &qsCompany, const QString &qsCustomer, const QDate& date)
+void VTextManager::Update(const VAbstractPattern *pDoc)
 {
     Clear();
     TextLine tl;
@@ -164,7 +163,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
     tl.m_eAlign = Qt::AlignCenter;
 
     // Company name
-    tl.m_qsText = qsCompany;
+    tl.m_qsText = pDoc->GetCompanyName();
     if (tl.m_qsText.isEmpty() == false)
     {
         tl.m_eFontWeight = QFont::DemiBold;
@@ -173,7 +172,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         AddLine(tl);
     }
     // Pattern name
-    tl.m_qsText = qsPattern;
+    tl.m_qsText = pDoc->GetPatternName();
     if (tl.m_qsText.isEmpty() == false)
     {
         tl.m_eFontWeight = QFont::Normal;
@@ -182,7 +181,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         AddLine(tl);
     }
     // Pattern number
-    tl.m_qsText = qsNumber;
+    tl.m_qsText = pDoc->GetPatternNumber();
     if (tl.m_qsText.isEmpty() == false)
     {
         tl.m_eFontWeight = QFont::Normal;
@@ -191,7 +190,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         AddLine(tl);
     }
     // Customer name
-    tl.m_qsText = qsCustomer;
+    tl.m_qsText = pDoc->GetCustomerName();
     if (tl.m_qsText.isEmpty() == false)
     {
         tl.m_eFontWeight = QFont::Normal;
@@ -200,7 +199,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         AddLine(tl);
     }
     // Size
-    tl.m_qsText = qsSize;
+    tl.m_qsText = pDoc->GetPatternSize();
     if (tl.m_qsText.isEmpty() == false)
     {
         tl.m_eFontWeight = QFont::Normal;
@@ -209,6 +208,11 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         AddLine(tl);
     }
     // Date
+    QDate date;
+    if (pDoc->IsDateVisible() == true)
+    {
+        date = QDate::currentDate();
+    }
     if (date.isValid() == true)
     {
         tl.m_qsText = date.toString("dd MMMM yyyy");
@@ -217,6 +221,7 @@ void VTextManager::Update(const QString &qsPattern, const QString &qsNumber, con
         tl.m_iFontSize = 0;
         AddLine(tl);
     }
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

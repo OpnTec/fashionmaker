@@ -60,9 +60,7 @@ public:
 
     void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
 
-    void SetPatternInfo(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
-                        const QString& qsCompany, const QString& qsCustomer, const QDate& date,
-                        const VPatternInfoGeometry& geom, const QFont& font);
+    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);

@@ -1073,14 +1073,14 @@ void VAbstractPattern::SetPatternSize(QString qsSize)
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPattern::IsDateVisible() const
 {
-    return UniqueTagText(TagShowDate) != QStringLiteral("false");
+    return UniqueTagText(TagShowDate) != falseStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetDateVisible(bool bVisible)
 {
     CheckTagExists(TagShowDate);
-    setTagText(TagShowDate, bVisible == true? QStringLiteral("true") : QStringLiteral("false"));
+    setTagText(TagShowDate, bVisible == true? trueStr : falseStr);
     modified = true;
     emit patternChanged(false);
 }
@@ -1245,17 +1245,17 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element = createElement(TagPatternName);
                 break;
             }
-            case 7: // TagPatternName
+            case 7: // TagPatternNum
             {
                 element = createElement(TagPatternNum);
                 break;
             }
-            case 8: // TagPatternName
+            case 8: // TagCompanyName
             {
                 element = createElement(TagCompanyName);
                 break;
             }
-            case 9: // TagPatternName
+            case 9: // TagCustomerName
             {
                 element = createElement(TagCustomerName);
                 break;

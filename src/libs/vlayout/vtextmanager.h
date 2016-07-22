@@ -6,6 +6,7 @@
 #include <QDate>
 
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 #define MIN_FONT_SIZE               12
 #define MAX_FONT_SIZE               128
@@ -43,12 +44,9 @@ public:
      *  Updates the manager with detail name and detail data
      */
     void                Update(const QString& qsName, const VPatternPieceData& data);
-    /** @brief Updateconst QString& qsPattern, const QString& qsNumber, const QString& qsSize,
-                               const QString& qsCompany, const QString& qsCustomer, const QDate& date)
-        Updates the manager with pattern data
+    /** @brief Update(const VAbstractPattern* pDoc) updates the manager with pattern data
      */
-    void                Update(const QString& qsPattern, const QString& qsNumber, const QString& qsSize,
-                               const QString& qsCompany, const QString& qsCustomer, const QDate& date);
+    void                Update(const VAbstractPattern* pDoc);
 
 protected:
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);

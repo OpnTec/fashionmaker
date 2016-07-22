@@ -37,14 +37,18 @@
 
 enum class MaterialType : char
 {
-    mtFabric,
-    mtLining,
-    mtInterfacing,
-    mtInterlining,
-    mtUserDefined
+    mtFabric = 0,
+    mtLining = 1,
+    mtInterfacing = 2,
+    mtInterlining = 3,
+    mtUserDefined = 4
 };
 
-enum class PlacementType : char { ptNone, ptCutOnFold };
+enum class PlacementType : char
+{
+    ptNone = 0,
+    ptCutOnFold = 1
+};
 
 /**
  * @brief This structure holds a material, cut number and placement 3-tuple
