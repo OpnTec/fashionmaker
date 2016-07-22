@@ -490,7 +490,6 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
             }
             det.SetPatternInfo(pDoc->GetPatternName(), pDoc->GetPatternNumber(), pDoc->GetPatternSize(),
                                pDoc->GetCompanyName(), pDoc->GetCustomerName(), date, geom, qApp->font());
-            qApp->getCurrentDocument();
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
         det.CreateTextItems();
