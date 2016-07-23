@@ -37,6 +37,9 @@ MOC_DIR = moc
 # objecs files
 OBJECTS_DIR = obj
 
+# Allow MAC OS X to find library inside a bundle
+macx:QMAKE_SONAME_PREFIX = @rpath
+
 include(vpropertyexplorer.pri)
 
 # Set "make install" command for Unix-like systems.

@@ -111,6 +111,8 @@ private slots:
     void WindowsLocale();
     void ToolBarStyles();
     void ShowPaper(int index);
+    void Preferences();
+    void CreateMeasurements();
 
     void ArrowTool();
     void ToolEndLine(bool checked);
