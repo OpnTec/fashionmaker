@@ -41,6 +41,9 @@ include(qmuparser.pri)
 
 VERSION = 2.4.1
 
+# Allow MAC OS X to find library inside a bundle
+macx:QMAKE_SONAME_PREFIX = @rpath
+
 # Set "make install" command for Unix-like systems.
 unix:!macx{
     isEmpty(PREFIX_LIB){
