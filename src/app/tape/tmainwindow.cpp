@@ -463,6 +463,13 @@ void TMainWindow::CreateFromExisting()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Preferences()
+{
+    TapeConfigDialog dlg(this);
+    dlg.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -1734,11 +1741,7 @@ void TMainWindow::SetupMenu()
 
     connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportToCSV);
     connect(ui->actionReadOnly, &QAction::triggered, this, &TMainWindow::ReadOnly);
-    connect(ui->actionPreferences, &QAction::triggered, [this]()
-    {
-        TapeConfigDialog dlg(this);
-        dlg.exec();
-    });
+    connect(ui->actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {

@@ -3553,18 +3553,7 @@ void MainWindow::CreateActions()
 
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
-    connect(ui->actionPreferences, &QAction::triggered, [this]()
-    {
-        ConfigDialog dlg(this);
-        connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
-        connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-        connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
-        if (dlg.exec() == QDialog::Accepted)
-        {
-            InitAutoSave();
-        }
-    });
-
+    connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionReportBug, &QAction::triggered, [this]()
     {
         qCDebug(vMainWindow, "Reporting bug");
@@ -3952,6 +3941,27 @@ void MainWindow::ShowPaper(int index)
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::Preferences()
+{
+    ConfigDialog dlg(this);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        InitAutoSave();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CreateMeasurements()
+{
+    const QString tape = qApp->TapeFilePath();
+    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+    QProcess::startDetached(tape, QStringList(), workingDirectory);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

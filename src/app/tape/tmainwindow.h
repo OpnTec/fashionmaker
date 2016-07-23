@@ -75,6 +75,7 @@ private slots:
     void OpenStandard();
     void OpenTemplate();
     void CreateFromExisting();
+    void Preferences();
 
     void FileSave();
     void FileSaveAs();
