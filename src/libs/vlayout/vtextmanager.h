@@ -11,6 +11,9 @@
 #define MIN_FONT_SIZE               12
 #define MAX_FONT_SIZE               128
 
+/**
+ * @brief The TextLine struct holds the information about one text line
+ */
 struct TextLine
 {
     QString             m_qsText;
@@ -23,13 +26,17 @@ struct TextLine
     TextLine();
 };
 
+/**
+ * @brief The VTextManager class this class is used to determine whether a collection of
+ * text lines can fit into specified bounding box and with what font size
+ */
 class VTextManager
 {
 public:
     VTextManager();
     ~VTextManager();
 
-    int                 GetSpacing() const;
+    virtual int         GetSpacing() const;
     void                SetFont(const QFont& font);
     const QFont&        GetFont() const;
     void                SetFontSize(int iFS);
@@ -40,12 +47,7 @@ public:
     const TextLine&     GetLine(int i) const;
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
     void                FitFontSize(qreal fW, qreal fH);
-    /** @brief Update(const QString& qsName, const VPatternPieceData& data)
-     *  Updates the manager with detail name and detail data
-     */
     void                Update(const QString& qsName, const VPatternPieceData& data);
-    /** @brief Update(const VAbstractPattern* pDoc) updates the manager with pattern data
-     */
     void                Update(const VAbstractPattern* pDoc);
 
 protected:

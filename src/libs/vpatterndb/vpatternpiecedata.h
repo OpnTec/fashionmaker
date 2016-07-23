@@ -51,7 +51,7 @@ enum class PlacementType : char
 };
 
 /**
- * @brief This structure holds a material, cut number and placement 3-tuple
+ * @brief The MaterialCutPlacement struct used to hold a material, cut number and placement 3-tuple
  */
 struct MaterialCutPlacement
 {
@@ -103,28 +103,36 @@ public:
     void                        SetVisible(bool bVal);
 
 private:
-    /** @brief Pattern piece letter (should be no more than 3 letters)
+    /**
+     * @brief m_qsLetter Detail letter (should be no more than 3 characters)
      */
     QString             m_qsLetter;
-    /** @brief List of material, cut number and placement 3-tuples
+    /**
+     * @brief m_conMCP List of material, cut, placement tuples
      */
     MCPContainer        m_conMCP;
-    /** @brief Location of the label
+    /**
+     * @brief m_ptPos position of label's top left corner
      */
     QPointF             m_ptPos;
-    /** @brief Label width
+    /**
+     * @brief m_dLabelWidth label width
      */
     qreal               m_dLabelWidth;
-    /** @brief Label height
+    /**
+     * @brief m_dLabelHeight label height
      */
     qreal               m_dLabelHeight;
-    /** @brief Label font size
+    /**
+     * @brief m_iFontSize label font size
      */
     int                 m_iFontSize;
-    /** @brief Label rotation
+    /**
+     * @brief m_dRotation label rotation
      */
     qreal               m_dRotation;
-    /** @brief Visibility flag
+    /**
+     * @brief m_bVisible visibility flag
      */
     bool                m_bVisible;
 

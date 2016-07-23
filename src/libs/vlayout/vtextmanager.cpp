@@ -4,75 +4,128 @@
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief TextLine::TextLine default constructor
+ */
 TextLine::TextLine()
     :m_qsText(), m_iFontSize(MIN_FONT_SIZE), m_eFontWeight(QFont::Normal), m_eStyle(QFont::StyleNormal),
       m_eAlign(Qt::AlignCenter), m_iHeight(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::VTextManager constructor
+ */
 VTextManager::VTextManager()
 	 :m_font(), m_liLines(), m_liOutput()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::~VTextManager destructor
+ */
 VTextManager::~VTextManager()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::GetSpacing returns the vertical spacing between the lines
+ * @return
+ */
 int VTextManager::GetSpacing() const
 {
     return 2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::SetFont set the text base font
+ * @param font text base font
+ */
 void VTextManager::SetFont(const QFont& font)
 {
     m_font = font;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::GetFont returns the text base font
+ * @return text base font
+ */
 const QFont& VTextManager::GetFont() const
 {
     return m_font;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::SetFontSize sets the font size
+ * @param iFS font size in pixels
+ */
 void VTextManager::SetFontSize(int iFS)
 {
     m_font.setPixelSize(iFS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::AddLine add new text line to the list
+ * @param tl text line object to be added
+ */
 void VTextManager::AddLine(const TextLine& tl)
 {
     m_liLines << tl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::Clear deletes the list of texts
+ */
 void VTextManager::Clear()
 {
     m_liLines.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::GetCount returns the number of output text lines
+ * @return number of output text lines
+ */
 int VTextManager::GetCount() const
 {
     return m_liOutput.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::GetSourceLineCount returns the number of input text lines
+ * @return number of text lines that were added to the list by calling AddLine
+ */
 int VTextManager::GetSourceLineCount() const
 {
     return m_liLines.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::GetLine returns the i-th output text line
+ * @param i index of the output text line
+ * @return i-th output text line
+ */
 const TextLine& VTextManager::GetLine(int i) const
 {
     return m_liOutput[i];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::IsBigEnough Checks if rectangle of size (fW, fH) is big enough to hold the text with base font
+ * size iFontSize
+ * @param fW rectangle width
+ * @param fH rectangle height
+ * @param iFontSize base font size
+ * @return true, if rectangle of size (fW, fH)
+ */
 bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
 {
     m_liOutput.clear();
@@ -97,6 +150,12 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::FitFontSize sets the font size just big enough, so that the text fits into rectangle of
+ * size (fW, fH)
+ * @param fW rectangle width
+ * @param fH rectangle height
+ */
 void VTextManager::FitFontSize(qreal fW, qreal fH)
 {
     int iFontSize = GetFont().pixelSize();
@@ -112,6 +171,11 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::Update updates the text lines with detail data
+ * @param qsName detail name
+ * @param data reference to the detail data
+ */
 void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
 {
     Clear();
@@ -155,6 +219,10 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::Update updates the text lines with pattern info
+ * @param pDoc pointer to the abstract pattern object
+ */
 void VTextManager::Update(const VAbstractPattern *pDoc)
 {
     Clear();
@@ -225,9 +293,17 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextManager::SplitString splits the string into several lines, which all fit into width fW
+ * @param qs string to split
+ * @param fW required width of every output string
+ * @param fm font metrics of the font used
+ * @return list of strings, each of which is not wider than fW using the font metrics fm
+ */
 QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
 {
     QRegularExpression reg("\\s+");
+    // split the string into words
     QStringList qslWords = qs.split(reg);
     QStringList qslLines;
     QString qsCurrent;
@@ -237,9 +313,12 @@ QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMe
         {
             qsCurrent += QLatin1Literal(" ");
         }
+        // check if another word can be added into current line
         if (fm.width(qsCurrent + qslWords[i]) > fW)
         {
+            // if not, add the current line into the list of text lines
             qslLines << qsCurrent;
+            // and set the current line to contain the current word
             qsCurrent = qslWords[i];
         }
         else

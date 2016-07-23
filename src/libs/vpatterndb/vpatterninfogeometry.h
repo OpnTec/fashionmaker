@@ -33,6 +33,9 @@
 
 #include <QPointF>
 
+/**
+ * @brief The VPatternInfoGeometry class holds the information about pattern info label geometry
+ */
 class VPatternInfoGeometry
 {
 public:
@@ -54,20 +57,28 @@ public:
     void                        SetVisible(bool bVal);
 
 private:
+    /**
+     * @brief m_ptPos position of label's top left corner
+     */
     QPointF             m_ptPos;
-    /** @brief Label width
+    /**
+     * @brief m_dLabelWidth label width
      */
     qreal               m_dLabelWidth;
-    /** @brief Label height
+    /**
+     * @brief m_dLabelHeight label height
      */
     qreal               m_dLabelHeight;
-    /** @brief Label font size
+    /**
+     * @brief m_iFontSize label text base font size
      */
     int                 m_iFontSize;
-    /** @brief Label rotation
+    /**
+     * @brief m_dRotation Label rotation
      */
     qreal               m_dRotation;
-    /** @brief Visibility flag
+    /**
+     * @brief m_bVisible visibility flag
      */
     bool                m_bVisible;
 

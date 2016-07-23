@@ -32,7 +32,8 @@
 #include "vabstractdetail.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
-#include "vtextmanager.h"
+#include "../ifc/xml/vabstractpattern.h"
+
 
 #include <QMatrix>
 #include <QPointF>

@@ -351,7 +351,7 @@ void VToolDetail::AddToFile()
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -373,7 +373,7 @@ void VToolDetail::AddToFile()
 
     domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternInfoGeometry& geom = detail.GetPatternInfo();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? 1:0);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
@@ -410,7 +410,7 @@ void VToolDetail::RefreshDataInFile()
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
         const VPatternPieceData& data = det.GetPatternPieceData();
         doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
         doc->SetAttribute(domData, AttrMx, data.GetPos().x());
         doc->SetAttribute(domData, AttrMy, data.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -432,7 +432,7 @@ void VToolDetail::RefreshDataInFile()
 
         domData = doc->createElement(VAbstractPattern::TagPatternInfo);
         const VPatternInfoGeometry& geom = det.GetPatternInfo();
-        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? 1:0);
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
         doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
         doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());

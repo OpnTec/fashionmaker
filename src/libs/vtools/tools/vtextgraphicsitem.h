@@ -35,6 +35,11 @@
 
 #include "../vlayout/vtextmanager.h"
 
+/**
+ * @brief The VTextGraphicsItem class. This class implements text graphics item,
+ * which can be dragged around, resized and rotated within the parent item. The text font
+ * size will be automatically updated, so that the entire text will fit into the item.
+ */
 class VTextGraphicsItem : public QGraphicsObject
 {
     Q_OBJECT
