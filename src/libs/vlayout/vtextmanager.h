@@ -34,7 +34,7 @@ class VTextManager
 {
 public:
     VTextManager();
-    ~VTextManager();
+    virtual ~VTextManager();
 
     virtual int         GetSpacing() const;
     void                SetFont(const QFont& font);

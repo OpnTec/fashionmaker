@@ -390,7 +390,7 @@
                                                                            <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                            <xs:attribute name="width" type="xs:double"></xs:attribute>
                                                                            <xs:attribute name="name" type="xs:string"></xs:attribute>
-                                                                           <xs:attribute name="closed" type="xs:unsignedInt"></xs:attribute>
+									   <xs:attribute name="closed" type="xs:unsignedInt"></xs:attribute>
                                                                            <xs:attribute name="inLayout" type="xs:boolean"></xs:attribute>
                                                                      </xs:complexType>
                                                                </xs:element>

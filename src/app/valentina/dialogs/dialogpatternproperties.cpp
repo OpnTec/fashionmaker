@@ -173,7 +173,16 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->labelCreationDate->setText(QDate::currentDate().toString(Qt::SystemLocaleLongDate));
     ui->lineEditSize->setText(doc->GetPatternSize());
     ui->checkBoxShowDate->setChecked(doc->IsDateVisible());
-    ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
+    if (doc->MPath().isEmpty() == true)
+    {
+        ui->checkBoxShowMeasurements->setChecked(false);
+        ui->checkBoxShowMeasurements->hide();
+    }
+    else
+    {
+        ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
+    }
+
 
     connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
     connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);

@@ -1,5 +1,6 @@
 #include <QRegularExpression>
 #include <QFontMetrics>
+#include <QDir>
 
 #include "vtextmanager.h"
 
@@ -281,7 +282,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
         AddLine(tl);
     }
     // Measurements
-    tl.m_qsText = pDoc->MPath();
+    tl.m_qsText = QDir::toNativeSeparators(pDoc->MPath()).split(QDir::separator()).last();
     if (tl.m_qsText.isEmpty() == false && pDoc->IsMeasurementsVisible() == true)
     {
         tl.m_eFontWeight = QFont::Normal;

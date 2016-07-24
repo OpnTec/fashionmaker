@@ -213,7 +213,7 @@ void VPattern::Parse(const Document &parse)
                         qCDebug(vXML, "Show creation date");
                         break;
                     case 16:
-                        qCDebug(vXML, "Show creation measurements");
+                        qCDebug(vXML, "Show measurements");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
