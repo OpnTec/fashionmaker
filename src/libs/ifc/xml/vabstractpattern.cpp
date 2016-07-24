@@ -34,98 +34,98 @@
 #include "../exception/vexceptionobjecterror.h"
 #include "../vtools/tools/vdatatool.h"
 
-const QString VAbstractPattern::TagPattern      = QStringLiteral("pattern");
-const QString VAbstractPattern::TagCalculation  = QStringLiteral("calculation");
-const QString VAbstractPattern::TagModeling     = QStringLiteral("modeling");
-const QString VAbstractPattern::TagDetails      = QStringLiteral("details");
-const QString VAbstractPattern::TagDetail       = QStringLiteral("detail");
-const QString VAbstractPattern::TagAuthor       = QStringLiteral("author");
-const QString VAbstractPattern::TagDescription  = QStringLiteral("description");
-const QString VAbstractPattern::TagNotes        = QStringLiteral("notes");
-const QString VAbstractPattern::TagImage        = QStringLiteral("image");
-const QString VAbstractPattern::TagMeasurements = QStringLiteral("measurements");
-const QString VAbstractPattern::TagIncrements   = QStringLiteral("increments");
-const QString VAbstractPattern::TagIncrement    = QStringLiteral("increment");
-const QString VAbstractPattern::TagDraw         = QStringLiteral("draw");
-const QString VAbstractPattern::TagGroups       = QStringLiteral("groups");
-const QString VAbstractPattern::TagGroup        = QStringLiteral("group");
-const QString VAbstractPattern::TagGroupItem    = QStringLiteral("item");
-const QString VAbstractPattern::TagPoint        = QStringLiteral("point");
-const QString VAbstractPattern::TagLine         = QStringLiteral("line");
-const QString VAbstractPattern::TagSpline       = QStringLiteral("spline");
-const QString VAbstractPattern::TagArc          = QStringLiteral("arc");
-const QString VAbstractPattern::TagTools        = QStringLiteral("tools");
-const QString VAbstractPattern::TagOperation    = QStringLiteral("operation");
-const QString VAbstractPattern::TagGradation    = QStringLiteral("gradation");
-const QString VAbstractPattern::TagHeights      = QStringLiteral("heights");
-const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
-const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
-const QString VAbstractPattern::TagData         = QStringLiteral("data");
-const QString VAbstractPattern::TagPatternInfo  = QStringLiteral("patternInfo");
-const QString VAbstractPattern::TagMCP          = QStringLiteral("mcp");
-const QString VAbstractPattern::TagPatternName  = QStringLiteral("patternName");
-const QString VAbstractPattern::TagPatternNum   = QStringLiteral("patternNumber");
-const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
-const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
-const QString VAbstractPattern::TagSize         = QStringLiteral("size");
-const QString VAbstractPattern::TagShowDate     = QStringLiteral("showDate");
+const QString VAbstractPattern::TagPattern          = QStringLiteral("pattern");
+const QString VAbstractPattern::TagCalculation      = QStringLiteral("calculation");
+const QString VAbstractPattern::TagModeling         = QStringLiteral("modeling");
+const QString VAbstractPattern::TagDetails          = QStringLiteral("details");
+const QString VAbstractPattern::TagDetail           = QStringLiteral("detail");
+const QString VAbstractPattern::TagAuthor           = QStringLiteral("author");
+const QString VAbstractPattern::TagDescription      = QStringLiteral("description");
+const QString VAbstractPattern::TagNotes            = QStringLiteral("notes");
+const QString VAbstractPattern::TagImage            = QStringLiteral("image");
+const QString VAbstractPattern::TagMeasurements     = QStringLiteral("measurements");
+const QString VAbstractPattern::TagIncrements       = QStringLiteral("increments");
+const QString VAbstractPattern::TagIncrement        = QStringLiteral("increment");
+const QString VAbstractPattern::TagDraw             = QStringLiteral("draw");
+const QString VAbstractPattern::TagGroups           = QStringLiteral("groups");
+const QString VAbstractPattern::TagGroup            = QStringLiteral("group");
+const QString VAbstractPattern::TagGroupItem        = QStringLiteral("item");
+const QString VAbstractPattern::TagPoint            = QStringLiteral("point");
+const QString VAbstractPattern::TagLine             = QStringLiteral("line");
+const QString VAbstractPattern::TagSpline           = QStringLiteral("spline");
+const QString VAbstractPattern::TagArc              = QStringLiteral("arc");
+const QString VAbstractPattern::TagTools            = QStringLiteral("tools");
+const QString VAbstractPattern::TagOperation        = QStringLiteral("operation");
+const QString VAbstractPattern::TagGradation        = QStringLiteral("gradation");
+const QString VAbstractPattern::TagHeights          = QStringLiteral("heights");
+const QString VAbstractPattern::TagSizes            = QStringLiteral("sizes");
+const QString VAbstractPattern::TagUnit             = QStringLiteral("unit");
+const QString VAbstractPattern::TagData             = QStringLiteral("data");
+const QString VAbstractPattern::TagPatternInfo      = QStringLiteral("patternInfo");
+const QString VAbstractPattern::TagMCP              = QStringLiteral("mcp");
+const QString VAbstractPattern::TagPatternName      = QStringLiteral("patternName");
+const QString VAbstractPattern::TagPatternNum       = QStringLiteral("patternNumber");
+const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer");
+const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
+const QString VAbstractPattern::TagSize             = QStringLiteral("size");
+const QString VAbstractPattern::TagShowDate         = QStringLiteral("showDate");
+const QString VAbstractPattern::TagShowMeasurements = QStringLiteral("showMeasurements");
 
+const QString VAbstractPattern::AttrName            = QStringLiteral("name");
+const QString VAbstractPattern::AttrVisible         = QStringLiteral("visible");
+const QString VAbstractPattern::AttrObject          = QStringLiteral("object");
+const QString VAbstractPattern::AttrTool            = QStringLiteral("tool");
+const QString VAbstractPattern::AttrType            = QStringLiteral("type");
+const QString VAbstractPattern::AttrLetter          = QStringLiteral("letter");
+const QString VAbstractPattern::AttrMaterial        = QStringLiteral("material");
+const QString VAbstractPattern::AttrUserDefined     = QStringLiteral("userDef");
+const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber");
+const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
 
-const QString VAbstractPattern::AttrName        = QStringLiteral("name");
-const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
-const QString VAbstractPattern::AttrObject      = QStringLiteral("object");
-const QString VAbstractPattern::AttrTool        = QStringLiteral("tool");
-const QString VAbstractPattern::AttrType        = QStringLiteral("type");
-const QString VAbstractPattern::AttrLetter      = QStringLiteral("letter");
-const QString VAbstractPattern::AttrMaterial    = QStringLiteral("material");
-const QString VAbstractPattern::AttrUserDefined = QStringLiteral("userDef");
-const QString VAbstractPattern::AttrCutNumber   = QStringLiteral("cutNumber");
-const QString VAbstractPattern::AttrPlacement   = QStringLiteral("placement");
+const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
-const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
+const QString VAbstractPattern::AttrH92             = QStringLiteral("h92");
+const QString VAbstractPattern::AttrH98             = QStringLiteral("h98");
+const QString VAbstractPattern::AttrH104            = QStringLiteral("h104");
+const QString VAbstractPattern::AttrH110            = QStringLiteral("h110");
+const QString VAbstractPattern::AttrH116            = QStringLiteral("h116");
+const QString VAbstractPattern::AttrH122            = QStringLiteral("h122");
+const QString VAbstractPattern::AttrH128            = QStringLiteral("h128");
+const QString VAbstractPattern::AttrH134            = QStringLiteral("h134");
+const QString VAbstractPattern::AttrH140            = QStringLiteral("h140");
+const QString VAbstractPattern::AttrH146            = QStringLiteral("h146");
+const QString VAbstractPattern::AttrH152            = QStringLiteral("h152");
+const QString VAbstractPattern::AttrH158            = QStringLiteral("h158");
+const QString VAbstractPattern::AttrH164            = QStringLiteral("h164");
+const QString VAbstractPattern::AttrH170            = QStringLiteral("h170");
+const QString VAbstractPattern::AttrH176            = QStringLiteral("h176");
+const QString VAbstractPattern::AttrH182            = QStringLiteral("h182");
+const QString VAbstractPattern::AttrH188            = QStringLiteral("h188");
+const QString VAbstractPattern::AttrH194            = QStringLiteral("h194");
 
-const QString VAbstractPattern::AttrH92         = QStringLiteral("h92");
-const QString VAbstractPattern::AttrH98         = QStringLiteral("h98");
-const QString VAbstractPattern::AttrH104        = QStringLiteral("h104");
-const QString VAbstractPattern::AttrH110        = QStringLiteral("h110");
-const QString VAbstractPattern::AttrH116        = QStringLiteral("h116");
-const QString VAbstractPattern::AttrH122        = QStringLiteral("h122");
-const QString VAbstractPattern::AttrH128        = QStringLiteral("h128");
-const QString VAbstractPattern::AttrH134        = QStringLiteral("h134");
-const QString VAbstractPattern::AttrH140        = QStringLiteral("h140");
-const QString VAbstractPattern::AttrH146        = QStringLiteral("h146");
-const QString VAbstractPattern::AttrH152        = QStringLiteral("h152");
-const QString VAbstractPattern::AttrH158        = QStringLiteral("h158");
-const QString VAbstractPattern::AttrH164        = QStringLiteral("h164");
-const QString VAbstractPattern::AttrH170        = QStringLiteral("h170");
-const QString VAbstractPattern::AttrH176        = QStringLiteral("h176");
-const QString VAbstractPattern::AttrH182        = QStringLiteral("h182");
-const QString VAbstractPattern::AttrH188        = QStringLiteral("h188");
-const QString VAbstractPattern::AttrH194        = QStringLiteral("h194");
+const QString VAbstractPattern::AttrS22             = QStringLiteral("s22");
+const QString VAbstractPattern::AttrS24             = QStringLiteral("s24");
+const QString VAbstractPattern::AttrS26             = QStringLiteral("s26");
+const QString VAbstractPattern::AttrS28             = QStringLiteral("s28");
+const QString VAbstractPattern::AttrS30             = QStringLiteral("s30");
+const QString VAbstractPattern::AttrS32             = QStringLiteral("s32");
+const QString VAbstractPattern::AttrS34             = QStringLiteral("s34");
+const QString VAbstractPattern::AttrS36             = QStringLiteral("s36");
+const QString VAbstractPattern::AttrS38             = QStringLiteral("s38");
+const QString VAbstractPattern::AttrS40             = QStringLiteral("s40");
+const QString VAbstractPattern::AttrS42             = QStringLiteral("s42");
+const QString VAbstractPattern::AttrS44             = QStringLiteral("s44");
+const QString VAbstractPattern::AttrS46             = QStringLiteral("s46");
+const QString VAbstractPattern::AttrS48             = QStringLiteral("s48");
+const QString VAbstractPattern::AttrS50             = QStringLiteral("s50");
+const QString VAbstractPattern::AttrS52             = QStringLiteral("s52");
+const QString VAbstractPattern::AttrS54             = QStringLiteral("s54");
+const QString VAbstractPattern::AttrS56             = QStringLiteral("s56");
 
-const QString VAbstractPattern::AttrS22         = QStringLiteral("s22");
-const QString VAbstractPattern::AttrS24         = QStringLiteral("s24");
-const QString VAbstractPattern::AttrS26         = QStringLiteral("s26");
-const QString VAbstractPattern::AttrS28         = QStringLiteral("s28");
-const QString VAbstractPattern::AttrS30         = QStringLiteral("s30");
-const QString VAbstractPattern::AttrS32         = QStringLiteral("s32");
-const QString VAbstractPattern::AttrS34         = QStringLiteral("s34");
-const QString VAbstractPattern::AttrS36         = QStringLiteral("s36");
-const QString VAbstractPattern::AttrS38         = QStringLiteral("s38");
-const QString VAbstractPattern::AttrS40         = QStringLiteral("s40");
-const QString VAbstractPattern::AttrS42         = QStringLiteral("s42");
-const QString VAbstractPattern::AttrS44         = QStringLiteral("s44");
-const QString VAbstractPattern::AttrS46         = QStringLiteral("s46");
-const QString VAbstractPattern::AttrS48         = QStringLiteral("s48");
-const QString VAbstractPattern::AttrS50         = QStringLiteral("s50");
-const QString VAbstractPattern::AttrS52         = QStringLiteral("s52");
-const QString VAbstractPattern::AttrS54         = QStringLiteral("s54");
-const QString VAbstractPattern::AttrS56         = QStringLiteral("s56");
-
-const QString VAbstractPattern::AttrCustom      = QStringLiteral("custom");
-const QString VAbstractPattern::AttrDefHeight   = QStringLiteral("defHeight");
-const QString VAbstractPattern::AttrDefSize     = QStringLiteral("defSize");
-const QString VAbstractPattern::AttrExtension   = QStringLiteral("extension");
+const QString VAbstractPattern::AttrCustom          = QStringLiteral("custom");
+const QString VAbstractPattern::AttrDefHeight       = QStringLiteral("defHeight");
+const QString VAbstractPattern::AttrDefSize         = QStringLiteral("defSize");
+const QString VAbstractPattern::AttrExtension       = QStringLiteral("extension");
 
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
 const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
@@ -1086,6 +1086,21 @@ void VAbstractPattern::SetDateVisible(bool bVisible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::IsMeasurementsVisible() const
+{
+    return UniqueTagText(TagShowMeasurements) == trueStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetMesurementsVisible(bool bVisible)
+{
+    CheckTagExists(TagShowMeasurements);
+    setTagText(TagShowMeasurements, bVisible == true? trueStr : falseStr);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);
@@ -1199,7 +1214,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                         << TagCustomerName << TagSize << TagShowDate;
+                                         << TagCustomerName << TagSize << TagShowDate << TagShowMeasurements;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1268,6 +1283,11 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 11: // TagShowDate
             {
                  element = createElement(TagShowDate);
+                 break;
+            }
+            case 12: // TagShowMeasurements
+            {
+                 element = createElement(TagShowMeasurements);
                  break;
             }
 

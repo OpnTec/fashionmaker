@@ -1053,7 +1053,7 @@
          <x>10</x>
          <y>10</y>
          <width>401</width>
-         <height>221</height>
+         <height>241</height>
         </rect>
        </property>
        <layout class="QFormLayout" name="formLayout">
@@ -1068,7 +1068,11 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEditPatternName"/>
+         <widget class="QLineEdit" name="lineEditPatternName">
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+         </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_7">
@@ -1078,7 +1082,11 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEditPatternNumber"/>
+         <widget class="QLineEdit" name="lineEditPatternNumber">
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+         </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_8">
@@ -1088,7 +1096,11 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEditCompanyName"/>
+         <widget class="QLineEdit" name="lineEditCompanyName">
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+         </widget>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_10">
@@ -1098,7 +1110,11 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEditCustomerName"/>
+         <widget class="QLineEdit" name="lineEditCustomerName">
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+         </widget>
         </item>
         <item row="7" column="1">
          <widget class="QLabel" name="labelCreationDate">
@@ -1122,9 +1138,20 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEditSize"/>
+         <widget class="QLineEdit" name="lineEditSize">
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+         </widget>
         </item>
-        <item row="8" column="0" colspan="2">
+        <item row="9" column="0">
+         <widget class="QCheckBox" name="checkBoxShowMeasurements">
+          <property name="text">
+           <string>Show measurements</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
          <widget class="QCheckBox" name="checkBoxShowDate">
           <property name="text">
            <string>Show date of creation</string>

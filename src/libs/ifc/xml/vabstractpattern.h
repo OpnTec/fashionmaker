@@ -120,6 +120,8 @@ public:
     void           SetPatternSize(const QString &qsSize);
     bool           IsDateVisible() const;
     void           SetDateVisible(bool bVisible);
+    bool           IsMeasurementsVisible() const;
+    void           SetMesurementsVisible(bool bVisible);
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -178,6 +180,7 @@ public:
     static const QString TagCustomerName;
     static const QString TagSize;
     static const QString TagShowDate;
+    static const QString TagShowMeasurements;
 
     static const QString AttrName;
     static const QString AttrVisible;

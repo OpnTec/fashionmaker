@@ -141,6 +141,11 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
         QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
         for (int iL = 0; iL < qslLines.count(); ++iL)
         {
+            // check if every line fits within the label width
+            if (fm.width(qslLines[iL]) + 2*GetSpacing() > fW)
+            {
+                return false;
+            }
             tlOut.m_qsText = qslLines[iL];
             m_liOutput << tlOut;
             iY += tlOut.m_iHeight + GetSpacing();
@@ -275,6 +280,15 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
         tl.m_iFontSize = 0;
         AddLine(tl);
     }
+    // Measurements
+    tl.m_qsText = pDoc->MPath();
+    if (tl.m_qsText.isEmpty() == false && pDoc->IsMeasurementsVisible() == true)
+    {
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 0;
+        AddLine(tl);
+    }
     // Date
     QDate date;
     if (pDoc->IsDateVisible() == true)
@@ -317,7 +331,10 @@ QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMe
         if (fm.width(qsCurrent + qslWords[i]) > fW)
         {
             // if not, add the current line into the list of text lines
-            qslLines << qsCurrent;
+            if (qsCurrent.isEmpty() == false)
+            {
+                qslLines << qsCurrent;
+            }
             // and set the current line to contain the current word
             qsCurrent = qslWords[i];
         }

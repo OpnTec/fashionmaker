@@ -79,6 +79,7 @@
                             <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="showMeasurements" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
                            <xs:element name="measurements" type="xs:string"></xs:element>
                            <xs:element name="increments" minOccurs="0" maxOccurs="1">
                                  <xs:complexType>
