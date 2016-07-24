@@ -173,7 +173,9 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000302), fileName);
                 V_FALLTHROUGH
             case (0x000302):
-                break;
+                ToV0_3_3();
+                ValidateXML(XSDSchema(0x000303), fileName);
+                V_FALLTHROUGH
             default:
                 break;
         }
@@ -313,6 +315,13 @@ void VPatternConverter::ToV0_3_1()
 void VPatternConverter::ToV0_3_2()
 {
     SetVersion(QStringLiteral("0.3.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_3_3()
+{
+    SetVersion(QStringLiteral("0.3.3"));
     Save();
 }
 
