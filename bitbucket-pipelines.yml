@@ -19,4 +19,5 @@ pipelines:
             - qmake --version
             - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
             - make -j4
+            - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/opt/atlassian/bitbucketci/agent/build/build/src/libs/vpropertyexplorer/bin:/opt/atlassian/bitbucketci/agent/build/build/src/libs/qmuparser/bin"
             - make check
