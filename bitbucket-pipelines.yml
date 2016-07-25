@@ -8,7 +8,6 @@ pipelines:
     develop:
       - step:
           script:
-            - lsb_release -a
             - uname -a
             - grep -i processor /proc/cpuinfo | wc -l
             - gcc --version
