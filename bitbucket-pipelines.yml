@@ -13,7 +13,6 @@ pipelines:
             - gcc --version
             - mkdir build
             - cd build
-            - which qmake
             - qmake --version
             - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
             - make
