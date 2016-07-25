@@ -9,6 +9,8 @@ pipelines:
       - step:
           script:
             - locale
+            - locale-gen "en_US.UTF-8"
+            - dpkg-reconfigure locales
             - cat /etc/*-release
             - uname -a
             - grep -i processor /proc/cpuinfo | wc -l
