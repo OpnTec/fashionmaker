@@ -240,7 +240,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wredundant-decls \
 #    -Winline \
     -Winvalid-pch \
-    -Wunsafe-loop-optimizations \
+#    -Wunsafe-loop-optimizations \
     -Wlong-long \
     -Wmissing-format-attribute \
     -Wswitch-default \
