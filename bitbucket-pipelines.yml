@@ -14,13 +14,11 @@ pipelines:
             - gcc --version
             - apt-get update # required to install qt
             - apt-get install -y qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
-            # QTestLib require GUI support for some tests
-            - export DISPLAY=:99.0
-            - /etc/init.d/xvfb start
             - mkdir build
             - cd build
             - qmake --version
             - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
             - make -j$(nproc)
             - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/opt/atlassian/bitbucketci/agent/build/build/src/libs/vpropertyexplorer/bin:/opt/atlassian/bitbucketci/agent/build/build/src/libs/qmuparser/bin"
-            - DISPLAY=:99.0 make check
+            # QTestLib require GUI support for some tests
+            - xvfb-run -a make check
