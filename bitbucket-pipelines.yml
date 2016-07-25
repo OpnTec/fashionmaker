@@ -1,0 +1,21 @@
+image: gcc
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "This script runs on all branches that don't have any specific pipeline assigned in 'branches'."
+  branches:
+    develop:
+      - step:
+          script:
+            - lsb_release -a
+            - uname -a
+            - grep -i processor /proc/cpuinfo | wc -l
+            - gcc --version
+            - mkdir build
+            - cd build
+            - which qmake
+            - qmake --version
+            - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
+            - make
+            - make check
