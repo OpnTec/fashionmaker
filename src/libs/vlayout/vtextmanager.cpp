@@ -282,7 +282,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
         AddLine(tl);
     }
     // Measurements
-    tl.m_qsText = QDir::toNativeSeparators(pDoc->MPath()).split(QDir::separator()).last();
+    tl.m_qsText = QFileInfo(pDoc->MPath()).fileName();
     if (tl.m_qsText.isEmpty() == false && pDoc->IsMeasurementsVisible() == true)
     {
         tl.m_eFontWeight = QFont::Normal;

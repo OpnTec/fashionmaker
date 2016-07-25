@@ -176,7 +176,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     if (doc->MPath().isEmpty() == true)
     {
         ui->checkBoxShowMeasurements->setChecked(false);
-        ui->checkBoxShowMeasurements->hide();
+        ui->checkBoxShowMeasurements->setEnabled(false);
     }
     else
     {

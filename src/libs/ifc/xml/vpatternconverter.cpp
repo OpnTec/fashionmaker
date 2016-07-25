@@ -176,6 +176,8 @@ void VPatternConverter::ApplyPatches()
                 ToV0_3_3();
                 ValidateXML(XSDSchema(0x000303), fileName);
                 V_FALLTHROUGH
+            case (0x000303):
+                break;
             default:
                 break;
         }
