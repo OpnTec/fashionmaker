@@ -13,7 +13,7 @@ pipelines:
             - grep -i processor /proc/cpuinfo | wc -l
             - gcc --version
             - apt-get update # required to install qt
-            - apt-get install -y qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
+            - apt-get install -y xvfb qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
             - mkdir build
             - cd build
             - qmake --version
