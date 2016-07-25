@@ -40,7 +40,7 @@ TST_TapeCommandLine::TST_TapeCommandLine(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_TapeCommandLine::init()
+void TST_TapeCommandLine::initTestCase()
 {
     QDir tmpDir(tmpTestFolder);
     if (not tmpDir.removeRecursively())
@@ -141,7 +141,7 @@ void TST_TapeCommandLine::OpenMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_TapeCommandLine::cleanup()
+void TST_TapeCommandLine::cleanupTestCase()
 {
     QDir tmpDir(tmpTestFolder);
     if (not tmpDir.removeRecursively())

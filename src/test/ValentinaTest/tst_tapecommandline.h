@@ -38,10 +38,10 @@ public:
     explicit TST_TapeCommandLine(QObject *parent = nullptr);
 
 private slots:
-    void init();
+    void initTestCase();
     void OpenMeasurements_data() const;
     void OpenMeasurements();
-    void cleanup();
+    void cleanupTestCase();
 
 private:
     Q_DISABLE_COPY(TST_TapeCommandLine)

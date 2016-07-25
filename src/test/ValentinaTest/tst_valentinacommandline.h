@@ -38,7 +38,7 @@ public:
     explicit TST_ValentinaCommandLine(QObject *parent = nullptr);
 
 private slots:
-    void init();
+    void initTestCase();
     void OpenPatterns_data() const;
     void OpenPatterns();
     void ExportMode_data() const;
@@ -47,7 +47,7 @@ private slots:
     void TestMode();
     void TestOpenCollection_data() const;
     void TestOpenCollection();
-    void cleanup();
+    void cleanupTestCase();
 
 private:
     Q_DISABLE_COPY(TST_ValentinaCommandLine)
