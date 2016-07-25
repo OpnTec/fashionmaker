@@ -1,4 +1,3 @@
-image: gcc
 pipelines:
   default:
     - step:
@@ -8,6 +7,7 @@ pipelines:
     develop:
       - step:
           script:
+            - cat /etc/*-release
             - uname -a
             - grep -i processor /proc/cpuinfo | wc -l
             - gcc --version
@@ -15,5 +15,5 @@ pipelines:
             - cd build
             - qmake --version
             - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
-            - make
+            - make -j4
             - make check
