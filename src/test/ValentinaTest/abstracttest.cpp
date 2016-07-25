@@ -140,6 +140,7 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         targetDir.cdUp();
         if (not targetDir.mkdir(QFileInfo(tgtFilePath).fileName()))
         {
+            QWARN("Can't create subdir./n");
             return false;
         }
         QDir sourceDir(srcFilePath);
@@ -154,10 +155,12 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
                 return false;
             }
         }
-    } else
+    }
+    else
     {
         if (not QFile::copy(srcFilePath, tgtFilePath))
         {
+            QWARN("Can't copy file./n");
             return false;
         }
     }

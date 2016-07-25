@@ -41,7 +41,7 @@ TST_ValentinaCommandLine::TST_ValentinaCommandLine(QObject *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_ValentinaCommandLine::init()
+void TST_ValentinaCommandLine::initTestCase()
 {
     {// Test files
         QDir tmpDir(tmpTestFolder);
@@ -308,7 +308,7 @@ void TST_ValentinaCommandLine::TestOpenCollection()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_ValentinaCommandLine::cleanup()
+void TST_ValentinaCommandLine::cleanupTestCase()
 {
     {
         QDir tmpDir(tmpTestFolder);
