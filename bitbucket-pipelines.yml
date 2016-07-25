@@ -8,6 +8,7 @@ pipelines:
     develop:
       - step:
           script:
+            - locale
             - cat /etc/*-release
             - uname -a
             - grep -i processor /proc/cpuinfo | wc -l
