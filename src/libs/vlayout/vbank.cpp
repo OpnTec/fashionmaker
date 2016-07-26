@@ -28,10 +28,27 @@
 
 #include "vbank.h"
 #include "vlayoutdetail.h"
+#include "../vmisc/logging.h"
 
 #include <QPointF>
 #include <climits>
 #include <QRectF>
+
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(Q_CC_INTEL)
+    #pragma warning( push )
+    #pragma warning( disable: 1418 )
+#endif
+
+Q_LOGGING_CATEGORY(lBank, "layout.bank")
+
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic pop
+#elif defined(Q_CC_INTEL)
+    #pragma warning( pop )
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
@@ -158,12 +175,14 @@ bool VBank::Prepare()
 {
     if (layoutWidth <= 0)
     {
+        qCDebug(lBank, "Preparing data for layout error: Layout paper sheet <= 0");
         prepare = false;
         return prepare;
     }
 
     if (details.isEmpty())
     {
+        qCDebug(lBank, "Preparing data for layout error: List of details is empty");
         prepare = false;
         return prepare;
     }
@@ -183,6 +202,7 @@ bool VBank::Prepare()
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
+            qCDebug(lBank, "Preparing data for layout error: Detail squere <= 0");
             prepare = false;
             return prepare;
         }
