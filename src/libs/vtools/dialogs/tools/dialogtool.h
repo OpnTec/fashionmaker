@@ -91,7 +91,6 @@ signals:
      */
     void             ToolTip(const QString &toolTip);
 public slots:
-    void             ShowVisToolTip(const QString &toolTip);
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     virtual void     SelectedObject(bool selected, quint32 object, quint32 tool);
     void             NamePointChanged();

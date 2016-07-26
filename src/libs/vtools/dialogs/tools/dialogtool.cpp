@@ -908,12 +908,6 @@ QString DialogTool::getPointName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::ShowVisToolTip(const QString &toolTip)
-{
-    emit ToolTip(toolTip);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ShowDialog(bool click)
 {
     Q_UNUSED(click);

@@ -38,6 +38,7 @@
 #include "../../visualization/line/vistoolrotation.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../qmuparser/qmudef.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)
@@ -217,7 +218,9 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
                 VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
                 SCASSERT(operation != nullptr);
 
-                connect(operation, &Visualization::ToolTip, this, &DialogTool::ShowVisToolTip);
+                VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                SCASSERT(window != nullptr);
+                connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
                 operation->SetOriginPointId(id);
                 operation->RefreshGeometry();

@@ -29,6 +29,7 @@
 #include "dialogcubicbezierpath.h"
 #include "ui_dialogcubicbezierpath.h"
 #include "../../visualization/path/vistoolcubicbezierpath.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -129,7 +130,9 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            connect(visPath, &VisToolCubicBezierPath::ToolTip, this, &DialogTool::ShowVisToolTip);
+            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            SCASSERT(window != nullptr);
+            connect(visPath, &VisToolCubicBezierPath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
         else
         {

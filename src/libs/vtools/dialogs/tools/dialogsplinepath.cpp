@@ -33,6 +33,7 @@
 #include "../../visualization/path/vistoolsplinepath.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 #include <QTimer>
 
@@ -182,7 +183,10 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            connect(visPath, &VisToolSplinePath::ToolTip, this, &DialogTool::ShowVisToolTip);
+            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            SCASSERT(window != nullptr);
+            connect(visPath, &VisToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
             connect(visPath, &VisToolSplinePath::PathChanged, this, &DialogSplinePath::PathUpdated);
         }
         else
