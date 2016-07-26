@@ -95,6 +95,8 @@ signals:
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
     void                    LiteUpdateTree(const Document &parse);
+
+    void                    ToolTip(const QString &toolTip);
 protected:
     /** @brief doc dom document container */
     VAbstractPattern         *doc;
@@ -166,6 +168,7 @@ inline void VAbstractTool::AddVisualization()
     scene->addItem(visual);
 
     vis = visual;
+    connect(vis, &Visualization::ToolTip, [=] (const QString &toolTip) {emit ToolTip(toolTip);});
 }
 
 #endif // VABSTRACTTOOL_H

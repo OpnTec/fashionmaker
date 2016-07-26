@@ -36,6 +36,7 @@
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 #include <QTimer>
 
@@ -217,8 +218,10 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         line->VisualMode(id);
-                        connect(line, &VisToolCurveIntersectAxis::ToolTip,
-                                [this](const QString &toolTip){emit ToolTip(toolTip);});
+                        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                        SCASSERT(window != nullptr);
+                        connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
                     }
                 }
                 break;

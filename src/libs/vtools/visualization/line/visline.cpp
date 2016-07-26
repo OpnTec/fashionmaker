@@ -43,7 +43,7 @@ VisLine::~VisLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VisLine::CorrectAngle(const qreal &angle) const
+qreal VisLine::CorrectAngle(const qreal &angle)
 {
     qreal ang = angle;
     if (angle > 360)

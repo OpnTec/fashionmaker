@@ -36,6 +36,7 @@
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,7 +168,9 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
                 vis->VisualMode(id);
-                connect(vis.data(), &Visualization::ToolTip, [this](const QString &toolTip){emit ToolTip(toolTip);});
+                VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                SCASSERT(window != nullptr);
+                connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 prepare = true;
             }
         }

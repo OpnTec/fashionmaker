@@ -66,7 +66,9 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::~VisToolSpline()
-{}
+{
+    emit ToolTip("");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
@@ -150,6 +152,8 @@ void VisToolSpline::RefreshGeometry()
             {
                 VSpline spline(*first, *second, angle1, angle2, kAsm1, kAsm2, kCurve);
                 DrawPath(this, spline.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+                Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
+                emit ToolTip(Visualization::toolTip);
             }
         }
     }
