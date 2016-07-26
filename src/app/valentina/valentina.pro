@@ -67,52 +67,10 @@ $$enable_ccache()
 CONFIG(debug, debug|release){
     # Debug mode
     unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-            # want them in global list. Compromise decision delete them from local list.
-            QMAKE_CXXFLAGS -= \
-                -Wmissing-prototypes \
-                -Wundefined-reinterpret-cast
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS+= \
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$ICC_DEBUG_CXXFLAGS
-        }
+        include(warnings.pri)
     } else {
         *-g++{
-        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
+            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 
@@ -126,6 +84,10 @@ CONFIG(debug, debug|release){
     DEFINES += V_NO_ASSERT
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
+    }
+
+    checkWarnings{
+        unix:include(warnings.pri)
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
@@ -252,7 +214,17 @@ unix{
         # Some macx stuff
         QMAKE_MAC_SDK = macosx
 
-        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+        # Check which minimal OSX version supports current Qt version
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+        } else {
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+            } else {
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+            }
+        }
+
         # Path to resources in app bundle
         #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
         FRAMEWORKS_DIR = "Contents/Frameworks"
@@ -535,6 +507,15 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
+# Fervor static library (depend on VMisc, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/fervor/$${DESTDIR}/ -lfervor
+
+INCLUDEPATH += $$PWD/../../libs/fervor
+DEPENDPATH += $$PWD/../../libs/fervor
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/fervor.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/libfervor.a
 
 # IFC static library (depend on QMuParser, VMisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc

@@ -498,6 +498,10 @@ qreal estimate(int elen, qreal *e)
     return Q;
 }
 
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
 qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
 {
     INEXACT qreal adx, bdx, cdx, ady, bdy, cdy;
@@ -1031,6 +1035,9 @@ qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
 
     return finnow[finlength - 1];
 }
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 qreal incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd)
 {

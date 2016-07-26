@@ -106,7 +106,6 @@ void DialogCutArc::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
-    DeleteVisualization<VisToolCutArc>();
     delete ui;
 }
 

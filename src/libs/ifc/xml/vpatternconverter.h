@@ -38,8 +38,10 @@ public:
     explicit VPatternConverter(const QString &fileName);
     virtual ~VPatternConverter() Q_DECL_OVERRIDE;
 
-    static const QString    PatternMaxVerStr;
-    static const QString    CurrentSchema;
+    static const QString PatternMaxVerStr;
+    static const QString CurrentSchema;
+    static constexpr int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
+    static constexpr int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 2);
 
 protected:
     virtual int     MinVer() const Q_DECL_OVERRIDE;
@@ -54,7 +56,7 @@ protected:
 
 private:
     Q_DISABLE_COPY(VPatternConverter)
-    static const QString    PatternMinVerStr;
+    static const QString PatternMinVerStr;
 
     void ToV0_1_1();
     void ToV0_1_2();
@@ -104,5 +106,29 @@ private:
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_0();
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_1();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VPatternConverter::MinVer() const
+{
+    return PatternMinVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VPatternConverter::MaxVer() const
+{
+    return PatternMaxVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VPatternConverter::MinVerStr() const
+{
+    return PatternMinVerStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VPatternConverter::MaxVerStr() const
+{
+    return PatternMaxVerStr;
+}
 
 #endif // VPATTERNCONVERTER_H

@@ -73,7 +73,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSpline::~DialogCutSpline()
 {
-    DeleteVisualization<VisToolCutSpline>();
     delete ui;
 }
 

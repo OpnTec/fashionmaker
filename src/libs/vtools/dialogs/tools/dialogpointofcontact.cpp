@@ -81,7 +81,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfContact::~DialogPointOfContact()
 {
-    DeleteVisualization<VisToolPointOfContact>();
     delete ui;
 }
 

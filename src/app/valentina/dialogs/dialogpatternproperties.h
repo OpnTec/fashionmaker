@@ -50,23 +50,16 @@ public:
                                      QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
 signals:
-    void         UpdateGradation();
-public slots:
-    void         Apply();
-    void         Ok();
-    void         SelectAll(int state);
-    void         CheckStateHeight(int state);
-    void         CheckStateSize(int state);
-    void         DescEdited();
-    void         ChangeImage();
-    void         ShowContextMenu();
+    void UpdateGradation();
 private slots:
-    void ToggleComboBox();
-    void DefValueChanged();
-    void SecurityValueChanged();
-    void DeleteImage();
+    void Apply();
+    void Ok();
+    void SelectAll(int state);
+    void CheckStateHeight(int state);
+    void CheckStateSize(int state);
+    void DescEdited();
+    void ChangeImage();
     void SaveImage();
-    void ShowImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;

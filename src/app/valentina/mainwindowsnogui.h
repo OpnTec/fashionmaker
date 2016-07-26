@@ -55,12 +55,10 @@ public slots:
     void ToolLayoutSettings(bool checked);
     void ExportLayoutAs();
     void SaveAsTiledPDF();
-    void PrintPages (QPrinter *printer);
     void PrintPreviewOrigin();
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
-    void ErrorConsoleMode(const LayoutErrors &state);
 protected:
     QVector<VLayoutDetail> listDetails;
 
@@ -100,6 +98,9 @@ protected:
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
     bool LayoutSettings(VLayoutGenerator& lGenerator);
+private slots:
+    void PrintPages (QPrinter *printer);
+    void ErrorConsoleMode(const LayoutErrors &state);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 

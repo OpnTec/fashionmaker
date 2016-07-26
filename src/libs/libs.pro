@@ -11,4 +11,5 @@ SUBDIRS = \
     vmisc \
     vwidgets \
     vtools \
-    vformat
+    vformat \
+    fervor

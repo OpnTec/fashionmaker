@@ -42,12 +42,11 @@ class TapePathPage : public QWidget
 public:
     explicit TapePathPage(QWidget *parent = nullptr);
     void      Apply();
-public slots:
-    void TableActivated();
-    void DefaultPath();
-    void EditPath();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+private slots:
+    void DefaultPath();
+    void EditPath();
 private:
     Q_DISABLE_COPY(TapePathPage)
     QPushButton  *defaultButton;

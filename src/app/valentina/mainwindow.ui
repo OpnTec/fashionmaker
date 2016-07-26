@@ -1558,9 +1558,7 @@
    </attribute>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
-   <addaction name="actionZoomOriginal"/>
    <addaction name="actionZoomFitBest"/>
-   <addaction name="actionStopTool"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetToolOptions">
    <property name="minimumSize">
@@ -2089,28 +2087,6 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionStopTool">
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset theme="process-stop">
-     <normaloff/>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Stop</string>
-   </property>
-   <property name="toolTip">
-    <string>Stop using tool</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
    </property>
   </action>
   <action name="actionReportBug">

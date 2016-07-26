@@ -78,7 +78,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 {
-    DeleteVisualization<VisToolCurveIntersectAxis>();
     delete ui;
 }
 
@@ -222,6 +221,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                         VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
                         SCASSERT(window != nullptr);
                         connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
                     }
                 }
                 break;

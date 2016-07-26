@@ -38,8 +38,10 @@ public:
     explicit VVSTConverter(const QString &fileName);
     virtual ~VVSTConverter() Q_DECL_OVERRIDE;
 
-    static const QString    MeasurementMaxVerStr;
-    static const QString    CurrentSchema;
+    static const QString MeasurementMaxVerStr;
+    static const QString CurrentSchema;
+    static constexpr int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
+    static constexpr int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 2);
 
 protected:
     virtual int     MinVer() const Q_DECL_OVERRIDE;
@@ -54,7 +56,7 @@ protected:
 
 private:
     Q_DISABLE_COPY(VVSTConverter)
-    static const QString    MeasurementMinVerStr;
+    static const QString MeasurementMinVerStr;
 
     void AddNewTagsForV0_4_0();
     void RemoveTagsForV0_4_0();
@@ -67,5 +69,29 @@ private:
     void ToV0_4_1();
     void ToV0_4_2();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VVSTConverter::MinVer() const
+{
+    return MeasurementMinVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VVSTConverter::MaxVer() const
+{
+    return MeasurementMaxVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VVSTConverter::MinVerStr() const
+{
+    return MeasurementMinVerStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VVSTConverter::MaxVerStr() const
+{
+    return MeasurementMaxVerStr;
+}
 
 #endif // VMEASUREMENTCONVERTER_H

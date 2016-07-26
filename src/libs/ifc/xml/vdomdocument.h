@@ -139,9 +139,7 @@ template <typename T>
  */
 inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
 {
-    QString val = QString().setNum(value);
-    val = val.replace(",", ".");
-    domElement.setAttribute(name, val);
+    domElement.setAttribute(name, QString().setNum(value).replace(QLatin1String(","), QLatin1String(".")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,16 +154,7 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 template <>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
-    QString string;
-    if (value)
-    {
-        string = "true";
-    }
-    else
-    {
-        string = "false";
-    }
-    domElement.setAttribute(name, string);
+    domElement.setAttribute(name, value ? QStringLiteral("true") : QStringLiteral("false"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,14 +162,8 @@ template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
                                                               const MeasurementsType &value) const
 {
-    if (value == MeasurementsType::Standard)
-    {
-        domElement.setAttribute(name, "standard");
-    }
-    else
-    {
-        domElement.setAttribute(name, "individual");
-    }
+    domElement.setAttribute(name, value == MeasurementsType::Standard ? QStringLiteral("standard") :
+                                                                        QStringLiteral("individual"));
 }
 
 #ifdef Q_CC_GNU

@@ -55,7 +55,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr);
-    connect(bCancel, &QPushButton::clicked, this, &DialogLayoutProgress::StopWorking);
+    connect(bCancel, &QPushButton::clicked, [this](){emit Abort();});
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -107,12 +107,6 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
 void DialogLayoutProgress::Finished()
 {
     done(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::StopWorking()
-{
-    emit Abort();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

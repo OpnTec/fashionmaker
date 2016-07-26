@@ -65,7 +65,6 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCurves::~DialogPointOfIntersectionCurves()
 {
-    DeleteVisualization<VisToolPointOfIntersectionCurves>();
     delete ui;
 }
 

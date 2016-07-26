@@ -212,6 +212,6 @@ void TST_QmuParserErrorMsg::CheckStrings(int code, bool tok, bool pos)
     const QString translated = (*msg)[code];
     const QString message = QString("String: '%1'.").arg(translated);
 
-    QVERIFY2((translated.indexOf(QLatin1Literal("$TOK$")) != -1) == tok, qUtf8Printable(message));
-    QVERIFY2((translated.indexOf(QLatin1Literal("$POS$")) != -1) == pos, qUtf8Printable(message));
+    QVERIFY2((translated.indexOf(QLatin1String("$TOK$")) != -1) == tok, qUtf8Printable(message));
+    QVERIFY2((translated.indexOf(QLatin1String("$POS$")) != -1) == pos, qUtf8Printable(message));
 }

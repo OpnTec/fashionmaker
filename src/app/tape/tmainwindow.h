@@ -62,14 +62,7 @@ public:
     void SetBaseMSize(int size);
     void SetPUnit(Unit unit);
 
-public slots:
     bool LoadFile(const QString &path);
-    void FileNew();
-    void OpenIndividual();
-    void OpenStandard();
-    void OpenTemplate();
-    void CreateFromExisting();
-    void OpenRecentFile();
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
@@ -77,13 +70,18 @@ protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
+    void FileNew();
+    void OpenIndividual();
+    void OpenStandard();
+    void OpenTemplate();
+    void CreateFromExisting();
+    void Preferences();
+
     void FileSave();
     void FileSaveAs();
     void ExportToCSV();
     void AboutToShowWindowMenu();
-    void ShowWindow();
-    void AboutApplication();
-    void AboutQt();
+    void ShowWindow() const;
 
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
@@ -125,8 +123,6 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
 
-    void NewWindow();
-    void Preferences();
     void PatternUnitChanged(int index);
 
 private:

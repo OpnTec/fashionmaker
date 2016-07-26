@@ -431,7 +431,7 @@ int TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const 
     const QString path = TranslationsPath();
     const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem).arg(checkedLocale);
 
-    if (QFileInfo(path+QLatin1Literal("/")+file).size() <= 34)
+    if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
     {
         const QString message = QString("Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4")
                 .arg(checkedSystem)
@@ -482,7 +482,7 @@ int TST_MeasurementRegExp::LoadVariables(const QString &checkedLocale)
     const QString path = TranslationsPath();
     const QString file = QString("valentina_%1.qm").arg(checkedLocale);
 
-    if (QFileInfo(path+QLatin1Literal("/")+file).size() <= 34)
+    if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
     {
         const QString message = QString("Translation variables for locale = %1 is empty. \nFull path: %2/%3")
                 .arg(checkedLocale)
@@ -660,7 +660,7 @@ void TST_MeasurementRegExp::CheckUnderlineExists() const
     while (i != data.constEnd())
     {
         const QString translated = trMs->InternalVarToUser(i.key());
-        if ((translated.right(1) == QLatin1Literal("_")) != i.value())
+        if ((translated.right(1) == QLatin1String("_")) != i.value())
         {
             const QString message = QString("String '%1' doesn't contain underline. Original string is '%2'")
                     .arg(translated).arg(i.key());
@@ -676,11 +676,11 @@ void TST_MeasurementRegExp::CheckInternalVaribleRegExp() const
     const QString regex = QStringLiteral("(.){1,}_(.){1,}$");
     foreach(const QString &var, builInVariables)
     {
-        const QString sourceRegex = QLatin1Literal("^") + var + regex;
+        const QString sourceRegex = QLatin1String("^") + var + regex;
         const QRegularExpression sourceRe(sourceRegex);
 
         const QString translated = trMs->InternalVarToUser(var);
-        const QString translationRegex = QLatin1Literal("^") + translated + regex;
+        const QString translationRegex = QLatin1String("^") + translated + regex;
         const QRegularExpression translationRe(translationRegex);
 
         const QStringList originalNames = AllGroupNames() + builInFunctions + builInVariables;

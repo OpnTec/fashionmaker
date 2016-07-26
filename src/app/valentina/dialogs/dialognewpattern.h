@@ -45,13 +45,13 @@ class DialogNewPattern : public QDialog
     Q_OBJECT
 public:
     DialogNewPattern(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
-    ~DialogNewPattern();
+    virtual ~DialogNewPattern();
     QString name() const;
     Unit PatternUnit() const;
-public slots:
-    void CheckState();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void CheckState();
 private:
     Q_DISABLE_COPY(DialogNewPattern)
     Ui::DialogNewPattern *ui;

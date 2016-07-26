@@ -49,9 +49,10 @@ public:
     void ClearPropertyBrowser();
 public slots:
     void itemClicked(QGraphicsItem *item);
-    void userChangedData(VPE::VProperty* property);
     void UpdateOptions();
     void RefreshOptions();
+private slots:
+    void userChangedData(VPE::VProperty* property);
 private:
     Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
 

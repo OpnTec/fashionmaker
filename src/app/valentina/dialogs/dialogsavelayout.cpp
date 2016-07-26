@@ -67,7 +67,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     ui->lineEditFileName->setValidator( new QRegExpValidator(QRegExp(baseFilenameRegExp), this));
 #endif
 
-    const QString mask = fileName+QLatin1Literal("_");
+    const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
@@ -90,10 +90,17 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->comboBoxFormat->addItem(v.first, QVariant(v.second));
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &DialogSaveLayout::ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
+
+    auto ShowExample = [this](){ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());};
+
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, ShowExample);
+    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), ShowExample);
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, [this]()
+    {
+        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
+                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+        ui->lineEditPath->setText(dir);
+    });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
@@ -211,20 +218,6 @@ void DialogSaveLayout::Save()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::ShowExample()
-{
-    ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::Browse()
-{
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    ui->lineEditPath->setText(dir);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::PathChanged(const QString &text)
 {
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -306,15 +299,15 @@ bool DialogSaveLayout::TestPdf()
 QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
 {
     QVector<std::pair<QString, QString>> list;
-    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1Literal(".svg")));
-    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1Literal(".pdf")));
-    list.append(std::make_pair(tr("Images (*.png)"), QLatin1Literal(".png")));
-    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1Literal(".obj")));
+    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1String(".svg")));
+    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1String(".pdf")));
+    list.append(std::make_pair(tr("Images (*.png)"), QLatin1String(".png")));
+    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
     if (SupportPSTest())
     {
-        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1Literal(".ps")));
-        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1Literal(".eps")));
+        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1String(".ps")));
+        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1String(".eps")));
     }
-    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1Literal(".dxf")));
+    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1String(".dxf")));
     return list;
 }

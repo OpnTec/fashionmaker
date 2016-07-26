@@ -82,7 +82,6 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::~DialogRotation()
 {
-    DeleteVisualization<VisToolRotation>();
     delete ui;
 }
 
@@ -217,7 +216,6 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
             {
                 VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
                 SCASSERT(operation != nullptr);
-
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
                 SCASSERT(window != nullptr);
                 connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);

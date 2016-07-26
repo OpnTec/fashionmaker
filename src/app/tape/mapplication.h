@@ -60,6 +60,7 @@ public:
     virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
+    TMainWindow *NewMainWindow();
 
     void InitOptions();
 
@@ -77,7 +78,6 @@ public:
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
 
 public slots:
-    TMainWindow *NewMainWindow();
     void ProcessCMD();
 
 protected:
@@ -85,7 +85,6 @@ protected:
     virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
 
 private slots:
-    void OpenFile(const QString &path);
     void NewLocalSocketConnection();
 
 private:

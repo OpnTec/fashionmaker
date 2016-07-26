@@ -98,16 +98,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
-{
-    if (current == nullptr)
-    {
-        current = previous;
-    }
-    pagesWidget->setCurrentIndex(contentsWidget->row(current));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::closeEvent(QCloseEvent *event)
 {
     if (result() == QDialog::Accepted)
@@ -177,7 +167,15 @@ void ConfigDialog::createIcons()
     createIcon("://icon/community_config.png", tr("Community"));
     createIcon("://icon/path_config.png", tr("Paths"));
 
-    connect(contentsWidget, &QListWidget::currentItemChanged, this, &ConfigDialog::changePage);
+    connect(contentsWidget, &QListWidget::currentItemChanged,
+            [this](QListWidgetItem *current, QListWidgetItem *previous)
+    {
+        if (current == nullptr)
+        {
+            current = previous;
+        }
+        pagesWidget->setCurrentIndex(contentsWidget->row(current));
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -346,7 +346,6 @@ void DialogEndLine::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
-    DeleteVisualization<VisToolEndLine>();
     delete ui;
 }
 

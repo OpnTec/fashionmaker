@@ -1,0 +1,28 @@
+image: gcc
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "This script runs on all branches that don't have any specific pipeline assigned in 'branches'."
+  branches:
+    develop:
+      - step:
+          script:
+            - cat /etc/*-release
+            - uname -a
+            - grep -i processor /proc/cpuinfo | wc -l
+            - gcc --version
+            - apt-get update # required to install qt
+            - apt-get install -y locales xvfb qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
+            - locale
+            - echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+            - locale-gen "en_US.UTF-8"
+            - update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+            - mkdir build
+            - cd build
+            - qmake --version
+            - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
+            - make -j$(nproc)
+            - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/opt/atlassian/bitbucketci/agent/build/build/src/libs/vpropertyexplorer/bin:/opt/atlassian/bitbucketci/agent/build/build/src/libs/qmuparser/bin"
+            # QTestLib require GUI support for some tests
+            - xvfb-run -a make check

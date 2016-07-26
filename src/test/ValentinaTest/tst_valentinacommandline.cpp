@@ -41,7 +41,7 @@ TST_ValentinaCommandLine::TST_ValentinaCommandLine(QObject *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_ValentinaCommandLine::init()
+void TST_ValentinaCommandLine::initTestCase()
 {
     {// Test files
         QDir tmpDir(tmpTestFolder);
@@ -51,7 +51,7 @@ void TST_ValentinaCommandLine::init()
         }
 
         if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
-                                QLatin1Literal("tst_valentina"),
+                                QLatin1String("tst_valentina"),
                                 QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
         {
             QFAIL("Fail to prepare test files for testing.");
@@ -66,7 +66,7 @@ void TST_ValentinaCommandLine::init()
         }
 
         if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
-                                QLatin1Literal("tst_valentina_collection"),
+                                QLatin1String("tst_valentina_collection"),
                                 QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder))
         {
             QFAIL("Fail to prepare collection files for testing.");
@@ -199,25 +199,25 @@ void TST_ValentinaCommandLine::TestMode_data() const
 
     QTest::newRow("Issue #256. Correct individual measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
-                                                                QLatin1Literal("issue_256_correct.vit"))
+                                                                QLatin1String("issue_256_correct.vit"))
                                << true
                                << V_EX_OK;
 
     QTest::newRow("Issue #256. Wrong individual measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
-                                                                QLatin1Literal("issue_256_wrong.vit"))
+                                                                QLatin1String("issue_256_wrong.vit"))
                                << false
                                << V_EX_NOINPUT;
 
     QTest::newRow("Issue #256. Correct standard measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
-                                                                QLatin1Literal("issue_256_correct.vst"))
+                                                                QLatin1String("issue_256_correct.vst"))
                                << true
                                << V_EX_OK;
 
     QTest::newRow("Issue #256. Wrong standard measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
-                                                                QLatin1Literal("issue_256_wrong.vst"))
+                                                                QLatin1String("issue_256_wrong.vst"))
                                << false
                                << V_EX_NOINPUT;
 
@@ -254,7 +254,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::addColumn<int>("exitCode");
 
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
-    const QString testGOST = QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1Literal("GOST_man_ru.vst"));
+    const QString testGOST = QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("GOST_man_ru.vst"));
     const QString keyTest = QStringLiteral("--test");
 
     QTest::newRow("bra")               << "bra.val"               << keyTest  << true << V_EX_OK;
@@ -308,7 +308,7 @@ void TST_ValentinaCommandLine::TestOpenCollection()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_ValentinaCommandLine::cleanup()
+void TST_ValentinaCommandLine::cleanupTestCase()
 {
     {
         QDir tmpDir(tmpTestFolder);

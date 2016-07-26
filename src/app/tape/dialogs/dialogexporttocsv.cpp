@@ -57,7 +57,13 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr);
-    connect(bDefaults, &QPushButton::clicked, this, &DialogExportToCSV::RestoreDefaults);
+    connect(bDefaults, &QPushButton::clicked, [this]()
+    {
+        ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetDefCSVWithHeader());
+        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetDefCSVCodec()));
+
+        SetSeparator(qApp->TapeSettings()->GetDefCSVSeparator());
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -135,15 +141,6 @@ void DialogExportToCSV::showEvent(QShowEvent *event)
     setMinimumSize(size());
 
     isInitialized = true;//first show windows are held
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogExportToCSV::RestoreDefaults()
-{
-    ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetDefCSVWithHeader());
-    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetDefCSVCodec()));
-
-    SetSeparator(qApp->TapeSettings()->GetDefCSVSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -72,7 +72,19 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     // Enable support for HiDPI bitmap resources
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-    connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::SyncSettings);
+    connect(this, &QApplication::aboutToQuit, [this]()
+    {
+        // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+        // instance. Solution is to call sync() before quit.
+        // Connect this slot with VApplication::aboutToQuit.
+        Settings()->sync();
+    });
+
+#if !defined(V_NO_ASSERT)
+    // Ignore SSL-related warnings
+    // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
+    qputenv("QT_LOGGING_RULES", "qt.network.ssl.warning=false");
+#endif //!defined(V_NO_ASSERT)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,12 +108,12 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
     }
     else
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
-                + locale + QLatin1Literal(".lproj");
+        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
+                + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())
@@ -254,15 +266,6 @@ double VAbstractApplication::toPixel(double val) const
 double VAbstractApplication::fromPixel(double pix) const
 {
     return FromPixel(pix, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::SyncSettings()
-{
-    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
-    // instance. Solution is to call sync() before quit.
-    // Connect this slot with VApplication::aboutToQuit.
-    Settings()->sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

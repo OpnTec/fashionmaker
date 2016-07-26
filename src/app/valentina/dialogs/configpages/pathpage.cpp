@@ -71,16 +71,6 @@ void PathPage::Apply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PathPage::TableActivated()
-{
-    defaultButton->setEnabled(true);
-    defaultButton->setDefault(false);
-
-    editButton->setEnabled(true);
-    editButton->setDefault(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void PathPage::DefaultPath()
 {
     const int row = pathTable->currentRow();
@@ -243,7 +233,14 @@ void PathPage::InitTable()
     pathTable->resizeRowsToContents();
     pathTable->horizontalHeader()->setStretchLastSection(true);
 
-    connect(pathTable, &QTableWidget::itemSelectionChanged, this, &PathPage::TableActivated);
+    connect(pathTable, &QTableWidget::itemSelectionChanged, [this]()
+    {
+        defaultButton->setEnabled(true);
+        defaultButton->setDefault(false);
+
+        editButton->setEnabled(true);
+        editButton->setDefault(true);
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

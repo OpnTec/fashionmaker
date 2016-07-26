@@ -96,9 +96,6 @@ public:
 
     virtual bool     IsAppInGUIMode()const =0;
 
-protected slots:
-    void SyncSettings();
-
 protected:
     QUndoStack         *undoStack;
 

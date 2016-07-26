@@ -104,7 +104,6 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::~DialogPointOfIntersectionCircles()
 {
-    DeleteVisualization<VisToolPointOfIntersectionCircles>();
     delete ui;
 }
 

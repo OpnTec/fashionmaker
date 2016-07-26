@@ -55,7 +55,7 @@ QString AbstractTest::ValentinaPath() const
 {
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QLatin1Literal(".exe");
+    return QApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
@@ -66,7 +66,7 @@ QString AbstractTest::TapePath() const
 {
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QLatin1Literal(".exe");
+    return QApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
@@ -138,8 +138,11 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
     {
         QDir targetDir(tgtFilePath);
         targetDir.cdUp();
-        if (not targetDir.mkdir(QFileInfo(tgtFilePath).fileName()))
+        const QString dirName = QFileInfo(tgtFilePath).fileName();
+        if (not targetDir.mkdir(dirName))
         {
+            const QString msg = QString("Can't create dir '%1'.").arg(dirName);
+            QWARN(qUtf8Printable(msg));
             return false;
         }
         QDir sourceDir(srcFilePath);
@@ -154,10 +157,29 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
                 return false;
             }
         }
-    } else
+    }
+    else
     {
+        if (QFileInfo(tgtFilePath).exists())
+        {
+            const QString msg = QString("File '%1' exists.").arg(srcFilePath);
+            QWARN(qUtf8Printable(msg));
+
+            if (QFile::remove(tgtFilePath))
+            {
+                QWARN("File successfully removed.");
+            }
+            else
+            {
+                QWARN("Can't remove file.");
+                return false;
+            }
+        }
+
         if (not QFile::copy(srcFilePath, tgtFilePath))
         {
+            const QString msg = QString("Can't copy file '%1' to '%2'.").arg(srcFilePath).arg(tgtFilePath);
+            QWARN(qUtf8Printable(msg));
             return false;
         }
     }

@@ -43,6 +43,9 @@ const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
 const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.2");
 const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
 
+constexpr int VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+constexpr int VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
     :VAbstractMConverter(fileName)
@@ -53,30 +56,6 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::~VVSTConverter()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVSTConverter::MinVer() const
-{
-    return GetVersion(MeasurementMinVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVSTConverter::MaxVer() const
-{
-    return GetVersion(MeasurementMaxVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::MinVerStr() const
-{
-    return MeasurementMinVerStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::MaxVerStr() const
-{
-    return MeasurementMaxVerStr;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VVSTConverter::XSDSchema(int ver) const
@@ -125,7 +104,7 @@ void VVSTConverter::ApplyPatches()
     catch (VException &e)
     {
         QString error;
-        const QString backupFileName = fileName + QLatin1Literal(".backup");
+        const QString backupFileName = fileName + QLatin1String(".backup");
         if (SafeCopy(backupFileName, fileName, error) == false)
         {
             const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));

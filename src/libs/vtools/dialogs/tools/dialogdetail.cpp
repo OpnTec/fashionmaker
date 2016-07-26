@@ -130,6 +130,8 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
         }
 
         ValidObjects(DetailIsValid());
+        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+        setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
         this->show();
     }
 }
@@ -187,6 +189,7 @@ void DialogDetail::NameDetailChanged()
 void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                            qreal mx, qreal my, bool reverse)
 {
+    SCASSERT(id > NULL_ID);
     QString name;
     switch (typeTool)
     {
@@ -214,8 +217,7 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     }
     else
     {
-        const QString previousItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
-        if(QString::compare(previousItemName, name) != 0)
+        if(RowId(ui.listWidget->count()-1) != id)
         {
             canAddNewPoint = true;
         }
@@ -287,6 +289,15 @@ void DialogDetail::EnableObjectGUI(bool value)
     {
         ui.checkBoxReverse->setEnabled(value);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 DialogDetail::RowId(int i) const
+{
+    const QListWidgetItem *rowItem = ui.listWidget->item(i);
+    SCASSERT(rowItem != nullptr);
+    const VNodeDetail rowNode = qvariant_cast<VNodeDetail>(rowItem->data(Qt::UserRole));
+    return rowNode.getId();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -497,7 +508,7 @@ bool DialogDetail::DetailIsValid() const
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
-    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1Literal("\"/> ");
+    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
 
     if(CreateDetail().ContourPoints(data).count() < 3)
     {
@@ -523,10 +534,7 @@ bool DialogDetail::DetailIsValid() const
         {
             for (int i=0, sz = ui.listWidget->count()-1; i<sz; ++i)
             {
-                const QString previousRow = ui.listWidget->item(i)->text();
-                const QString nextRow = ui.listWidget->item(i+1)->text();
-
-                if (QString::compare(previousRow, nextRow) == 0)
+                if (RowId(i) == RowId(i+1))
                 {
                     url += tr("You have double points!");
                     ui.helpLabel->setText(url);
@@ -544,10 +552,7 @@ bool DialogDetail::FirstPointEqualLast() const
 {
     if (ui.listWidget->count() > 1)
     {
-        const QString firstDetailPoint = ui.listWidget->item(0)->text();
-        const QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
-
-        if (QString::compare(firstDetailPoint, lastDetailPoint) == 0)
+        if (RowId(0) == RowId(ui.listWidget->count()-1))
         {
             return true;
         }

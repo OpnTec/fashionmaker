@@ -463,6 +463,13 @@ void TMainWindow::CreateFromExisting()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Preferences()
+{
+    TapeConfigDialog dlg(this);
+    dlg.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -750,7 +757,7 @@ void TMainWindow::AboutToShowWindowMenu()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowWindow()
+void TMainWindow::ShowWindow() const
 {
     if (QAction *action = qobject_cast<QAction*>(sender()))
     {
@@ -758,25 +765,11 @@ void TMainWindow::ShowWindow()
         if (v.canConvert<int>())
         {
             const int offset = qvariant_cast<int>(v);
-            QList<TMainWindow*> windows = qApp->MainWindows();
+            const QList<TMainWindow*> windows = qApp->MainWindows();
             windows.at(offset)->raise();
             windows.at(offset)->activateWindow();
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AboutApplication()
-{
-    DialogAboutTape * aboutDialog = new DialogAboutTape(this);
-    aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    aboutDialog->show();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AboutQt()
-{
-    QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1721,20 +1714,6 @@ void TMainWindow::SaveMFullName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::NewWindow()
-{
-    qApp->NewMainWindow();
-    qApp->MainWindow()->activateWindow();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::Preferences()
-{
-    TapeConfigDialog dlg(this);
-    dlg.exec();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::PatternUnitChanged(int index)
 {
     pUnit = static_cast<Unit>(comboBoxUnits->itemData(index).toInt());
@@ -1767,7 +1746,17 @@ void TMainWindow::SetupMenu()
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         recentFileActs[i] = new QAction(this);
-        connect(recentFileActs[i], &QAction::triggered, this, &TMainWindow::OpenRecentFile);
+        connect(recentFileActs[i], &QAction::triggered, this, [this]()
+        {
+            if (auto action = qobject_cast<QAction *>(sender()))
+            {
+                const QString filePath = action->data().toString();
+                if (not filePath.isEmpty())
+                {
+                    LoadFile(filePath);
+                }
+            }
+        });
         ui->menuFile->insertAction(ui->actionPreferences, recentFileActs[i]);
         recentFileActs[i]->setVisible(false);
     }
@@ -1798,8 +1787,13 @@ void TMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
-    connect(ui->actionAboutQt, &QAction::triggered, this, &TMainWindow::AboutQt);
-    connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
+    connect(ui->actionAboutQt, &QAction::triggered, [this](){QMessageBox::aboutQt(this, tr("About Qt"));});
+    connect(ui->actionAboutTape, &QAction::triggered, [this]()
+    {
+        DialogAboutTape *aboutDialog = new DialogAboutTape(this);
+        aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+        aboutDialog->show();
+    });
 
     //Actions for recent files loaded by a tape window application.
     UpdateRecentFileActions();
@@ -2011,7 +2005,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr);
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const int index = header.indexOf(QLatin1Literal("("));
+    const int index = header.indexOf(QLatin1String("("));
     if (index != -1)
     {
         header.remove(index-1, 100);
@@ -2035,7 +2029,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     if (curFile.isEmpty())
     {
         shownName = tr("untitled");
-        mType == MeasurementsType::Standard ? shownName += QLatin1Literal(".vst") : shownName += QLatin1Literal(".vit");
+        mType == MeasurementsType::Standard ? shownName += QLatin1String(".vst") : shownName += QLatin1String(".vit");
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
         ui->lineEditPathToFile->setCursorPosition(0);
@@ -2064,7 +2058,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +
-                                  QLatin1Literal("/../Resources/measurements.icns"));
+                                  QLatin1String("/../Resources/measurements.icns"));
     QIcon icon;
     if (not curFile.isEmpty())
     {
@@ -2765,11 +2759,16 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
 {
     SCASSERT(menu != nullptr);
 
-    QAction *action = menu->addAction(tr("&New Window"), this, SLOT(NewWindow()));
+    QAction *action = menu->addAction(tr("&New Window"));
+    connect(action, &QAction::triggered, [this]()
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->activateWindow();
+    });
     action->setMenuRole(QAction::NoRole);
     menu->addSeparator();
 
-    QList<TMainWindow*> windows = qApp->MainWindows();
+    const QList<TMainWindow*> windows = qApp->MainWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
         TMainWindow *window = windows.at(i);
@@ -2788,19 +2787,6 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         if (window->isActiveWindow())
         {
             action->setChecked(true);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenRecentFile()
-{
-    if (auto action=qobject_cast<QAction *>(sender()))
-    {
-        const QString filePath = action->data().toString();
-        if (not filePath.isEmpty())
-        {
-            LoadFile(filePath);
         }
     }
 }
