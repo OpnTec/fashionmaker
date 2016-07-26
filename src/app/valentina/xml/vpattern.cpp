@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vpattern.h"
-#include "mainwindow.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vtools/tools/vdatatool.h"
 #include "../vtools/tools/vtooldetail.h"
 #include "../vtools/tools/vtooluniondetails.h"
