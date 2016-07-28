@@ -153,14 +153,14 @@ build_script:
 
 # scripts to run after build
 after_build:
-  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" mingw32-make install
+  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" mingw32-make install
 
 # to run your custom scripts instead of automatic tests
 test_script:
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" (mingw32-make check)
 
 # to disable automatic tests 
-test: off
+#test: off
 
 matrix:
   fast_finish: true
