@@ -115,7 +115,7 @@ init:
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X86" set PATH="C:\Program Files\Inno Setup 5";%PATH%
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X64" set PATH="C:\Program Files (x86)\Inno Setup 5";%PATH%
   - set PATH="C:\%QT5%\bin";%PATH%
-  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%\bin;%PATH%
+  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH="%MINGW_PATH%";%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
   - qmake -v
 
