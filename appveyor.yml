@@ -42,71 +42,57 @@ environment:
   - QT5: Qt\5.7\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: X64
   - QT5: Qt\5.7\msvc2015
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: X86
   - QT5: Qt\5.7\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X64
   - QT5: Qt\5.7\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X86
   - QT5: Qt\5.6\mingw49_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
   - QT5: Qt\5.6\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: X64
   - QT5: Qt\5.6\msvc2015
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: X86
   - QT5: Qt\5.6\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X64
   - QT5: Qt\5.6\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X86
   - QT5: Qt\5.5\mingw492_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
   - QT5: Qt\5.5\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X64
   - QT5: Qt\5.5\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X86
   - QT5: Qt\5.4\mingw491_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
   - QT5: Qt\5.4\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X64
   - QT5: Qt\5.4\msvc2013_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X86
   - QT5: Qt\5.3\mingw482_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
   - QT5: Qt\5.3\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X64
   - QT5: Qt\5.3\msvc2013_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
-    PLATFORM: X86
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -138,11 +124,6 @@ init:
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
-
-# build platform
-platform:
-  - x86
-  - x64
 
 before_build:
   - cd c:\projects\valentina
