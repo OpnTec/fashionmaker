@@ -13,11 +13,7 @@ pipelines:
             - grep -i processor /proc/cpuinfo | wc -l
             - gcc --version
             - apt-get update # required to install qt
-            - apt-get install -y locales xvfb qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
-            - locale
-            - echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-            - locale-gen "en_US.UTF-8"
-            - update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+            - apt-get install -y xvfb qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
             - mkdir build
             - cd build
             - qmake --version

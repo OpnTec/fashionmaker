@@ -176,9 +176,11 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
             }
         }
 
-        if (not QFile::copy(srcFilePath, tgtFilePath))
+        QFile srcFile(srcFilePath);
+        if (not srcFile.copy(tgtFilePath))
         {
-            const QString msg = QString("Can't copy file '%1' to '%2'.").arg(srcFilePath).arg(tgtFilePath);
+            const QString msg = QString("Can't copy file '%1' to '%2'. Error: %3").arg(srcFilePath).arg(tgtFilePath)
+                    .arg(srcFile.errorString());
             QWARN(qUtf8Printable(msg));
             return false;
         }
