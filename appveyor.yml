@@ -38,7 +38,7 @@ environment:
   matrix:
   - QT5: Qt\5.7\mingw53_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw53_32\bin
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
   - QT5: Qt\5.7\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
@@ -57,7 +57,7 @@ environment:
     PLATFORM: X86
   - QT5: Qt\5.6\mingw49_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw49_32\bin
+    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
   - QT5: Qt\5.6\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
@@ -76,6 +76,7 @@ environment:
     PLATFORM: X86
   - QT5: Qt\5.5\mingw492_32
     QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
   - QT5: Qt\5.5\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
