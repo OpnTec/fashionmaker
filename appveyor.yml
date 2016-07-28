@@ -38,7 +38,7 @@ environment:
   matrix:
   - QT5: Qt\5.7\mingw53_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw53_32
+    MINGW_PATH: C:\Qt\Tools\mingw53_32\bin
   - QT5: Qt\5.7\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
@@ -57,7 +57,7 @@ environment:
     PLATFORM: X86
   - QT5: Qt\5.6\mingw49_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw49_32
+    MINGW_PATH: C:\Qt\Tools\mingw49_32\bin
   - QT5: Qt\5.6\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
@@ -86,7 +86,7 @@ environment:
     PLATFORM: X86
   - QT5: Qt\5.4\mingw491_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw491_32
+    MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
   - QT5: Qt\5.4\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
@@ -97,7 +97,7 @@ environment:
     PLATFORM: X86
   - QT5: Qt\5.3\mingw482_32
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw482_32
+    MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
   - QT5: Qt\5.3\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
