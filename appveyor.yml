@@ -121,6 +121,7 @@ init:
   - set PATH=%QTDIR%\bin;C:\Tools\PsTools;C:\Program Files\Mercurial\ #;%PATH%
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+  - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
   # Path after
   - path
   - qmake -v
