@@ -110,7 +110,7 @@ environment:
 # scripts that are called at very beginning, before repo cloning
 init:
   # Installing various utilities
-  - choco install cppcheck
+  #- choco install cppcheck
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" choco install -y InnoSetup
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X86" set PATH="C:\Program Files\Inno Setup 5";%PATH%
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X64" set PATH="C:\Program Files (x86)\Inno Setup 5";%PATH%
@@ -141,7 +141,7 @@ build_script:
   - if "%CMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "X64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - if "%CMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "X64" call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
   - cd build
-  - cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --force --report-progress --enable=performance,portability ..\src
+  #- cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --force --report-progress --enable=performance,portability ..\src
   - qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
   - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
 
