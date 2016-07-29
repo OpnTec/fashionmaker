@@ -87,3 +87,8 @@ CONFIG(debug, debug|release){
         }
     }
 }
+
+win32-msvc*{
+    #VMisc static library
+    INCLUDEPATH += $$PWD/../vmisc
+}
