@@ -138,12 +138,13 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
         TextLine tlOut = tl;
         fnt.setPixelSize(iFontSize + tl.m_iFontSize);
         QFontMetrics fm(fnt);
+        int iHorSp = fm.width(" ");
         tlOut.m_iHeight = fm.height();
         QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
         for (int iL = 0; iL < qslLines.count(); ++iL)
         {
             // check if every line fits within the label width
-            if (fm.width(qslLines[iL]) + 2*GetSpacing() > fW)
+            if (fm.width(qslLines[iL]) + iHorSp > fW)
             {
                 return false;
             }

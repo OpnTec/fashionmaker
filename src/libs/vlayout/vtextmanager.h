@@ -9,7 +9,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 
 #define MIN_FONT_SIZE               12
-#define MAX_FONT_SIZE               128
+#define MAX_FONT_SIZE               1024
 
 /**
  * @brief The TextLine struct holds the information about one text line
