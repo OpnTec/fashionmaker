@@ -44,8 +44,8 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
+    static qreal CorrectAngle(const qreal &angle);
 protected:
-    qreal        CorrectAngle(const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;
     QLineF       Axis(const QPointF &p, const qreal &angle) const;

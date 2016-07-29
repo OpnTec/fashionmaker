@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vpattern.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vtools/tools/vdatatool.h"
 #include "../vtools/tools/vtooldetail.h"
 #include "../vtools/tools/vtooluniondetails.h"
@@ -1992,8 +1993,16 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, duplicate, color, scene, this, data, parse,
-                            Source::FromFile);
+        VToolSpline *spl = VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, duplicate, color, scene, this,
+                                                data, parse, Source::FromFile);
+
+        if (spl != nullptr)
+        {
+            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            SCASSERT(window != nullptr);
+            connect(spl, &VToolSpline::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+        }
+
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (a1 != angle1 || a2 != angle2 || l1 != length1 || l2 != length2)
         {
@@ -2173,7 +2182,16 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         l1 = length1;
         l2 = length2;
 
-        VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, scene, this, data, parse, Source::FromFile);
+        VToolSplinePath *spl = VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, scene, this, data, parse,
+                                                        Source::FromFile);
+
+        if (spl != nullptr)
+        {
+            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            SCASSERT(window != nullptr);
+            connect(spl, &VToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+        }
+
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         int count = 0;
         for (qint32 i = 0; i < num; ++i)

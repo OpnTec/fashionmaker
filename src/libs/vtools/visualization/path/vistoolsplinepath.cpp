@@ -48,6 +48,7 @@ VisToolSplinePath::~VisToolSplinePath()
 {
     qDeleteAll(ctrlPoints);
     qDeleteAll(points);
+    emit ToolTip("");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,6 +99,11 @@ void VisToolSplinePath::RefreshGeometry()
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select three or more points, "
                                         "<b>Enter</b> - finish creation");
+        }
+        if (mode == Mode::Show)
+        {
+            Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
+            emit ToolTip(Visualization::toolTip);
         }
     }
 }

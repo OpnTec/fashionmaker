@@ -37,13 +37,14 @@
 #include "xml/vpattern.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 
 class QGraphicsScene;
 class QPrinter;
 class PosterData;
 
-class MainWindowsNoGUI : public QMainWindow
+class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
 public:

@@ -45,7 +45,11 @@ for(lang, LANGUAGES) {
 
 # Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
 isEmpty(LRELEASE){
-    LRELEASE = lrelease
+    win32{
+        LRELEASE = lrelease.exe
+    } else {
+        LRELEASE = lrelease
+    }
 }
 
 # Run generation *.qm file for available *.ts files each time you run qmake.

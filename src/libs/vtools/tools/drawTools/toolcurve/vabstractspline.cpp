@@ -261,6 +261,10 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
     if (position == SplinePointPosition::FirstPoint)
     {
         QLineF line(spline.GetP1(), pos);
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            line.setAngle(VisLine::CorrectAngle(line.angle()));
+        }
 
         qreal newAngle1 = line.angle();
         QString newAngle1F = QString().setNum(newAngle1);
@@ -287,6 +291,10 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
     else
     {
         QLineF line(spline.GetP4(), pos);
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            line.setAngle(VisLine::CorrectAngle(line.angle()));
+        }
 
         qreal newAngle2 = line.angle();
         QString newAngle2F = QString().setNum(newAngle2);

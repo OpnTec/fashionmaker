@@ -138,9 +138,11 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
     {
         QDir targetDir(tgtFilePath);
         targetDir.cdUp();
-        if (not targetDir.mkdir(QFileInfo(tgtFilePath).fileName()))
+        const QString dirName = QFileInfo(tgtFilePath).fileName();
+        if (not targetDir.mkdir(dirName))
         {
-            QWARN("Can't create subdir./n");
+            const QString msg = QString("Can't create dir '%1'.").arg(dirName);
+            QWARN(qUtf8Printable(msg));
             return false;
         }
         QDir sourceDir(srcFilePath);
@@ -158,9 +160,37 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
     }
     else
     {
-        if (not QFile::copy(srcFilePath, tgtFilePath))
+        if (QFileInfo(tgtFilePath).exists())
         {
-            QWARN("Can't copy file./n");
+            const QString msg = QString("File '%1' exists.").arg(srcFilePath);
+            QWARN(qUtf8Printable(msg));
+
+            if (QFile::remove(tgtFilePath))
+            {
+                QWARN("File successfully removed.");
+            }
+            else
+            {
+                QWARN("Can't remove file.");
+                return false;
+            }
+        }
+
+        // Check error: Cannot open %file for input
+        QFile srcFile(srcFilePath);
+        if (not srcFile.open(QFile::ReadOnly))
+        {
+            const QString msg = QString("Can't copy file '%1'. Error: %2").arg(srcFilePath).arg(srcFile.errorString());
+            QWARN(qUtf8Printable(msg));
+            return false;
+        }
+        srcFile.close();
+
+        if (not srcFile.copy(tgtFilePath))
+        {
+            const QString msg = QString("Can't copy file '%1' to '%2'. Error: %3").arg(srcFilePath).arg(tgtFilePath)
+                    .arg(srcFile.errorString());
+            QWARN(qUtf8Printable(msg));
             return false;
         }
     }

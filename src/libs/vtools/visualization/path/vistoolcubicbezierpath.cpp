@@ -275,6 +275,11 @@ void VisToolCubicBezierPath::RefreshToolTip()
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select more points for complete segment");
         }
+
+        if (mode == Mode::Show)
+        {
+            Visualization::toolTip = "";
+        }
         emit ToolTip(Visualization::toolTip);
     }
 }

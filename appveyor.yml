@@ -1,0 +1,164 @@
+
+# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# version format
+version: '{build}-{branch}'
+
+os: Visual Studio 2015
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - develop
+    - release
+
+# Do not build on tags (GitHub and BitBucket)
+skip_tags: true
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# set clone depth
+clone_depth: 1                       # clone entire repository history if not defined
+
+# fetch repository as zip archive
+shallow_clone: false                 # default is "false"
+
+environment:
+  matrix:
+  - QT5: Qt\5.7\mingw53_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
+  - QT5: Qt\5.7\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+  - QT5: Qt\5.7\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+  - QT5: Qt\5.7\msvc2013_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.7\msvc2013
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.6\mingw49_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+  - QT5: Qt\5.6\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+  - QT5: Qt\5.6\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+  - QT5: Qt\5.6\msvc2013_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.6\msvc2013
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.5\mingw492_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+  - QT5: Qt\5.5\msvc2013_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.5\msvc2013
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.4\mingw491_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
+  - QT5: Qt\5.4\msvc2013_64_opengl
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.4\msvc2013_opengl
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.3\mingw482_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
+  - QT5: Qt\5.3\msvc2013_64_opengl
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+  - QT5: Qt\5.3\msvc2013_opengl
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 12
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  # Path before
+  - path
+  # Installing various utilities
+  #- choco install cppcheck
+  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" choco install -y InnoSetup
+  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X86" set PATH="C:\Program Files\Inno Setup 5";%PATH%
+  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "X64" set PATH="C:\Program Files (x86)\Inno Setup 5";%PATH%
+  - set QTDIR=C:\%QT5%
+  - set PATH=%QTDIR%\bin;C:\Tools\PsTools;C:\Program Files\Mercurial\ #;%PATH%
+  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
+  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+  - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
+  # Set VC variables for the platform
+  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if %PLATFORM% == x64 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\vcvarsx86_amd64.bat"
+  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if %PLATFORM% == x86 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\vcvars32.bat"
+  - ps: $env:VSCOMNTOOLS=(Get-Content ("env:VS" + "$env:VSVER" + "0COMNTOOLS"))
+  - if NOT "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using Visual Studio %VSVER%.0 at %VSCOMNTOOLS%"
+  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using MinGW"
+  - if "%CMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "X86" call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat"
+  - if "%CMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "X64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  - if "%CMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "X64" call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+  # Path after
+  - path
+  - qmake -v
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+before_build:
+  - cd c:\projects\valentina
+  - md build
+
+# to run your custom scripts instead of automatic MSBuild
+build_script:
+  - cd build
+  #- cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --force --report-progress --enable=performance,portability ..\src
+  - qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
+  - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
+
+# scripts to run after build
+after_build:
+  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" mingw32-make install
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" (mingw32-make check)
+
+# to disable automatic tests 
+#test: off
+
+matrix:
+  fast_finish: true
+
+#---------------------------------#
+#         notifications           #
+#---------------------------------#
+  
+notifications:
+  # Email
+  - provider: Email
+    to:
+      - dismine@gmail.com
+      - susan.spencer@gmail.com
+      - zhuravska19@gmail.com
+    on_build_status_changed: true
