@@ -54,8 +54,8 @@ static const quint32 null_id = 0;
 #    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
 #      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
 #    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-#    define V_NOEXCEPT_EXPR(x) noexcept(x)
+#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#    define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
 #  else
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
