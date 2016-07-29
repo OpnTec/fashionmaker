@@ -63,17 +63,10 @@ OTHER_FILES += \
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
+include(warnings.pri)
 
 CONFIG(debug, debug|release){
     # Debug mode
-    unix {
-        include(warnings.pri)
-    } else {
-        *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-
     #Calculate latest tag distance and build revision only in release mode. Change number each time requare
     #recompilation precompiled headers file.
     DEFINES += "LATEST_TAG_DISTANCE=0"
@@ -84,10 +77,6 @@ CONFIG(debug, debug|release){
     DEFINES += V_NO_ASSERT
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
-    }
-
-    checkWarnings{
-        unix:include(warnings.pri)
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols

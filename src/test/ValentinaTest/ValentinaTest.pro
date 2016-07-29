@@ -76,25 +76,14 @@ HEADERS += \
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        include(warnings.pri)
-    } else {
-        *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-}else{
+include(warnings.pri)
+
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
-    }
-
-    checkWarnings{
-        unix:include(warnings.pri)
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols

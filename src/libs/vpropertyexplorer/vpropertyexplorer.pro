@@ -63,17 +63,9 @@ unix:!macx{
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        include(warnings.pri)
-    } else {
-        *-g++{
-        QMAKE_CXXFLAGS += $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
+include(warnings.pri)
 
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
 
