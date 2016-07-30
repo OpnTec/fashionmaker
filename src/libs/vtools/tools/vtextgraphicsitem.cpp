@@ -295,6 +295,16 @@ void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief VTextGraphicsItem::GetTextLines returns the number of lines of text to show
+ * @return number of lines of text
+ */
+int VTextGraphicsItem::GetTextLines() const
+{
+    return m_tm.GetCount();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief VTextGraphicsItem::GetFontSize returns the currently used text base font size
  * @return current text base font size
  */

@@ -748,7 +748,14 @@ void VToolDetail::UpdatePatternInfo()
         patternInfo->setPos(pt);
         patternInfo->setRotation(geom.GetRotation());
         patternInfo->Update();
-        patternInfo->show();
+        if (patternInfo->GetTextLines() > 0)
+        {
+            patternInfo->show();
+        }
+        else
+        {
+            patternInfo->hide();
+        }
     }
     else
     {
