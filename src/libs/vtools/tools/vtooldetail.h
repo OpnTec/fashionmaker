@@ -31,6 +31,7 @@
 
 #include "vabstracttool.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
+#include "vtextgraphicsitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
@@ -68,8 +69,11 @@ public:
     static const QString AttrSupplement;
     static const QString AttrClosed;
     static const QString AttrWidth;
+    static const QString AttrHeight;
     static const QString AttrNodeType;
     static const QString AttrReverse;
+    static const QString AttrFont;
+    static const QString AttrRotation;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static const QString NodeArc;
@@ -89,6 +93,8 @@ public slots:
     void               EnableToolMove(bool move);
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void       ResetChildren(QGraphicsItem* pItem);
+    virtual void       UpdateAll();
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
@@ -101,16 +107,29 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
+
+protected slots:
+    virtual void       UpdateLabel();
+    virtual void       UpdatePatternInfo();
+    virtual void       SaveMoveDetail(const QPointF &ptPos);
+    virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
+    virtual void       SaveRotationDetail(qreal dRot);
+    virtual void       SaveMovePattern(const QPointF& ptPos);
+    virtual void       SaveResizePattern(qreal dLabelW, int iFontSize);
+    virtual void       SaveRotationPattern(qreal dRot);
+
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */
-    DialogTool         *dialog;
+    DialogTool                  *dialog;
 
     /** @brief sceneDetails pointer to the scene. */
-    VMainGraphicsScene *sceneDetails;
-    QString            drawName;
+    VMainGraphicsScene          *sceneDetails;
+    QString                      drawName;
 
-    VNoBrushScalePathItem *seamAllowance;
+    VNoBrushScalePathItem       *seamAllowance;
+    VTextGraphicsItem           *dataLabel;
+    VTextGraphicsItem           *patternInfo;
 
     VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);

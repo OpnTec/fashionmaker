@@ -93,6 +93,7 @@ signals:
 
     void          MouseLeftPressed();
     void          MouseLeftReleased();
+    void          ItemClicked(QGraphicsItem* pItem);
 
     /**
      * @brief ChoosedObject send option choosed object.

@@ -37,6 +37,8 @@
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vposter.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -472,7 +474,24 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         det.SetCountourPoints(d.ContourPoints(pattern));
         det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
         det.setName(d.getName());
+        const VPatternPieceData& data = d.GetPatternPieceData();
+        if (data.IsVisible() == true)
+        {
+            det.SetDetail(d.getName(), data, qApp->font());
+        }
+        const VPatternInfoGeometry& geom = d.GetPatternInfo();
+        if (geom.IsVisible() == true)
+        {
+            VAbstractPattern* pDoc = qApp->getCurrentDocument();
+            QDate date;
+            if (pDoc->IsDateVisible() == true)
+            {
+                date = QDate::currentDate();
+            }
+            det.SetPatternInfo(pDoc, geom, qApp->font());
+        }
         det.setWidth(qApp->toPixel(d.getWidth()));
+        det.CreateTextItems();
 
         listDetails.append(det);
         ++i;

@@ -48,6 +48,8 @@
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 #include <QMessageBox>
 #include <QUndoStack>
@@ -131,7 +133,9 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
-                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit;
+                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
+                                     << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
+                                     << TagSize << TagShowDate << TagShowMeasurements;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -190,6 +194,27 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 9: // TagUnit
                         qCDebug(vXML, "Tag unit.");
+                        break;
+                    case 10: // TagPatternName
+                        qCDebug(vXML, "Pattern name.");
+                        break;
+                    case 11: // TagPatternNumber
+                        qCDebug(vXML, "Pattern number.");
+                        break;
+                    case 12: // TagCompanyName
+                        qCDebug(vXML, "Company name.");
+                        break;
+                    case 13: // TagCustomerName
+                        qCDebug(vXML, "Customer name.");
+                        break;
+                    case 14: // TagSize
+                        qCDebug(vXML, "Size");
+                        break;
+                    case 15:
+                        qCDebug(vXML, "Show creation date");
+                        break;
+                    case 16:
+                        qCDebug(vXML, "Show measurements");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
@@ -632,6 +657,59 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             throw e;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
+                }
+                else if (element.tagName() == TagData)
+                {
+                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
+                    detail.GetPatternPieceData().SetVisible(bVisible);
+                    try
+                    {
+                        QString qsLetter = GetParametrString(element, AttrLetter, "");
+                        detail.GetPatternPieceData().SetLetter(qsLetter);
+                    } catch(...)
+                    {
+                        detail.GetPatternPieceData().SetLetter("");
+                    }
+                    QPointF ptPos;
+                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+                    detail.GetPatternPieceData().SetPos(ptPos);
+                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
+                    detail.GetPatternPieceData().SetLabelWidth(dLW);
+                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
+                    detail.GetPatternPieceData().SetLabelHeight(dLH);
+                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
+                    detail.GetPatternPieceData().SetFontSize(iFS);
+                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
+                    detail.GetPatternPieceData().SetRotation(dRot);
+
+                    QDomNodeList nodeListMCP = element.childNodes();
+                    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
+                    {
+                        MaterialCutPlacement mcp;
+                        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+                        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
+                        mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+                        mcp.m_iCutNumber = GetParametrUInt(domMCP, AttrCutNumber, 0);
+                        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
+                        detail.GetPatternPieceData().Append(mcp);
+                    }
+                }
+                else if (element.tagName() == TagPatternInfo)
+                {
+                    detail.GetPatternInfo().SetVisible(GetParametrBool(element, AttrVisible, trueStr));
+                    QPointF ptPos;
+                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+                    detail.GetPatternInfo().SetPos(ptPos);
+                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
+                    detail.GetPatternInfo().SetLabelWidth(dLW);
+                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
+                    detail.GetPatternInfo().SetLabelHeight(dLH);
+                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
+                    detail.GetPatternInfo().SetFontSize(iFS);
+                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
+                    detail.GetPatternInfo().SetRotation(dRot);
                 }
             }
         }

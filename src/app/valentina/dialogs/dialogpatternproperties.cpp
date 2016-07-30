@@ -55,6 +55,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       gradationChanged(false),
       defaultChanged(false),
       securityChanged(false),
+      generalInfoChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
@@ -164,6 +165,32 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     gradationChanged = false;
     defaultChanged = false;
     securityChanged = false;
+
+    ui->lineEditPatternName->setText(doc->GetPatternName());
+    ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
+    ui->lineEditCompanyName->setText(doc->GetCompanyName());
+    ui->lineEditCustomerName->setText(doc->GetCustomerName());
+    ui->labelCreationDate->setText(QDate::currentDate().toString(Qt::SystemLocaleLongDate));
+    ui->lineEditSize->setText(doc->GetPatternSize());
+    ui->checkBoxShowDate->setChecked(doc->IsDateVisible());
+    if (doc->MPath().isEmpty() == true)
+    {
+        ui->checkBoxShowMeasurements->setChecked(false);
+        ui->checkBoxShowMeasurements->setEnabled(false);
+    }
+    else
+    {
+        ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
+    }
+
+
+    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,6 +221,12 @@ void DialogPatternProperties::Apply()
             securityChanged = false;
             emit doc->patternChanged(false);
             break;
+        case 3:
+            SaveGeneralInfo();
+            generalInfoChanged = false;
+            emit doc->patternChanged(false);
+            break;
+
         default:
             break;
     }
@@ -227,6 +260,13 @@ void DialogPatternProperties::Ok()
     {
         doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
         securityChanged = false;
+        emit doc->patternChanged(false);
+    }
+
+    if (generalInfoChanged == true)
+    {
+        SaveGeneralInfo();
+        generalInfoChanged = false;
         emit doc->patternChanged(false);
     }
 
@@ -365,6 +405,31 @@ void DialogPatternProperties::DescEdited()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ToggleComboBox()
+{
+    ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
+    ui->comboBoxSize->setEnabled(ui->radioButtonDefFromP->isChecked());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::DefValueChanged()
+{
+    defaultChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SecurityValueChanged()
+{
+    securityChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::GeneralInfoChanged()
+{
+    generalInfoChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SetHeightsChecked(bool enabled)
 {
     ui->checkBoxH92->setChecked(enabled);
@@ -498,6 +563,18 @@ void DialogPatternProperties::SaveDefValues()
         doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
     }
     defaultChanged = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveGeneralInfo()
+{
+    doc->SetPatternName(ui->lineEditPatternName->text());
+    doc->SetPatternNumber(ui->lineEditPatternNumber->text());
+    doc->SetCompanyName(ui->lineEditCompanyName->text());
+    doc->SetCustomerName(ui->lineEditCustomerName->text());
+    doc->SetPatternSize(ui->lineEditSize->text());
+    doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
+    doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

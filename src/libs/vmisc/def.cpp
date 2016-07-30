@@ -440,6 +440,28 @@ void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void SetOverrideCursor(Qt::CursorShape shape)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    QCursor* pOldCursor = QGuiApplication::overrideCursor();
+    if (pOldCursor != 0)
+    {
+        oldPixmap = pOldCursor->pixmap();
+    }
+    QCursor cursor(shape);
+    QPixmap newPixmap = cursor.pixmap();
+    if (oldPixmap.toImage() != newPixmap.toImage())
+    {
+        QApplication::setOverrideCursor(cursor);
+    }
+
+#else
+    Q_UNUSED(shape);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void RestoreOverrideCursor(const QString &pixmapPath)
 {
 #ifndef QT_NO_CURSOR
@@ -459,6 +481,28 @@ void RestoreOverrideCursor(const QString &pixmapPath)
     }
 #else
     Q_UNUSED(pixmapPath);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RestoreOverrideCursor(Qt::CursorShape shape)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    QCursor* pOldCursor = QGuiApplication::overrideCursor();
+    if (pOldCursor != 0)
+    {
+        oldPixmap = pOldCursor->pixmap();
+    }
+    QCursor cursor(shape);
+    QPixmap newPixmap = cursor.pixmap();
+    if (oldPixmap.toImage() == newPixmap.toImage())
+    {
+        QApplication::restoreOverrideCursor();
+    }
+
+#else
+    Q_UNUSED(shape);
 #endif
 }
 

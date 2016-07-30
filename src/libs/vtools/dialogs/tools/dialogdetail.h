@@ -32,6 +32,8 @@
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
 #include "../vpatterndb/vdetail.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.
@@ -62,6 +64,13 @@ protected:
      */
     virtual void     SaveData() Q_DECL_OVERRIDE;
     virtual void     CheckState() Q_DECL_OVERRIDE;
+
+protected slots:
+    void             UpdateList();
+    void             AddUpdate();
+    void             Cancel();
+    void             Remove();
+
 private slots:
     void             NameDetailChanged();
 private:
@@ -78,6 +87,16 @@ private:
     /** @brief closed keep option about equdistant (closed or not) */
     bool             closed;
     bool             flagWidth;
+    bool             m_bAddMode;
+
+    QStringList      m_qslMaterials;
+    QStringList      m_qslPlacements;
+    // temporary container for Material/Cut/Placement 3-tuples
+    MCPContainer     m_conMCP;
+    VPatternPieceData       m_oldData;
+    VPatternInfoGeometry    m_oldGeom;
+
+
     bool             DetailIsValid() const;
     bool             FirstPointEqualLast() const;
     bool             DetailIsClockwise() const;
@@ -87,7 +106,14 @@ private:
     VDetail          CreateDetail() const;
     void             ValidObjects(bool value);
     void             EnableObjectGUI(bool value);
+
+    void             ClearFields();
+
     quint32          RowId(int i) const;
+
+private slots:
+    void             SetAddMode();
+    void             SetEditMode();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

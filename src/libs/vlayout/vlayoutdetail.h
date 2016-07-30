@@ -30,9 +30,14 @@
 #define VLAYOUTDETAIL_H
 
 #include "vabstractdetail.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../ifc/xml/vabstractpattern.h"
+
 
 #include <QMatrix>
 #include <QPointF>
+#include <QDate>
 
 class VLayoutDetailData;
 class QGraphicsItem;
@@ -53,6 +58,10 @@ public:
 
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
+
+    void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
+
+    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
@@ -78,14 +87,22 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
+    void ClearTextItems();
+    void CreateTextItems();
+    int GetTextItemsCount() const Q_REQUIRED_RESULT;
+    QGraphicsItem* GetTextItem(int i) const Q_REQUIRED_RESULT;
     QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
-    QSharedDataPointer<VLayoutDetailData> d;
+    QSharedDataPointer<VLayoutDetailData>   d;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
+
+    QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng) const;
+    QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
+    qreal GetDistance(const QPointF& pt1, const QPointF& pt2) const;
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);

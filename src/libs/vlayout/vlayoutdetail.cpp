@@ -31,6 +31,9 @@
 
 #include <QGraphicsItem>
 #include <QPainterPath>
+#include <QFont>
+#include <QFontMetrics>
+#include <QBrush>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -47,7 +50,7 @@ VLayoutDetail::VLayoutDetail()
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
-    :VAbstractDetail(detail), d (detail.d)
+    :VAbstractDetail(detail), d(detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,6 +113,59 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
 QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
 {
     return Map(d->layoutAllowence);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& data, const QFont &font)
+{
+    d->detailData = data;
+    qreal dAng = qDegreesToRadians(data.GetRotation());
+    QPointF ptCenter(data.GetPos().x() + data.GetLabelWidth()/2, data.GetPos().y() + data.GetLabelHeight()/2);
+    QPointF ptPos = data.GetPos();
+    QVector<QPointF> v;
+    v << ptPos << QPointF(ptPos.x() + data.GetLabelWidth(), ptPos.y())
+      << QPointF(ptPos.x() + data.GetLabelWidth(), ptPos.y() + data.GetLabelHeight())
+         << QPointF(ptPos.x(), ptPos.y() + data.GetLabelHeight());
+    for (int i = 0; i < v.count(); ++i)
+    {
+        v[i] = RotatePoint(ptCenter, v.at(i), dAng);
+    }
+    d->detailLabel = RoundPoints(v);
+
+    // generate text
+    d->m_tmDetail.SetFont(font);
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    d->m_tmDetail.Update(qsName, data);
+    // this will generate the lines of text
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    d->m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font)
+{
+    d->patternGeom = geom;
+    qreal dAng = qDegreesToRadians(geom.GetRotation());
+    QPointF ptCenter(geom.GetPos().x() + geom.GetLabelWidth()/2, geom.GetPos().y() + geom.GetLabelHeight()/2);
+    QPointF ptPos = geom.GetPos();
+    QVector<QPointF> v;
+    v << ptPos << QPointF(ptPos.x() + geom.GetLabelWidth(), ptPos.y())
+         << QPointF(ptPos.x() + geom.GetLabelWidth(), ptPos.y() + geom.GetLabelHeight())
+            << QPointF(ptPos.x(), ptPos.y() + geom.GetLabelHeight());
+    for (int i = 0; i < v.count(); ++i)
+    {
+        v[i] = RotatePoint(ptCenter, v.at(i), dAng);
+    }
+    d->patternInfo = RoundPoints(v);
+
+    // Generate text
+    d->m_tmPattern.SetFont(font);
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+
+    d->m_tmPattern.Update(pDoc);
+    // generate lines of text
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+    d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -424,6 +480,163 @@ QPainterPath VLayoutDetail::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::ClearTextItems()
+{
+    d->m_liPP.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::CreateTextItems()
+{
+    ClearTextItems();
+    // first add detail texts
+    if (d->detailLabel.count() > 0)
+    {
+        // get the mapped label vertices
+        QVector<QPointF> points = Map(Mirror(d->detailLabel));
+        // append the first point to obtain the closed rectangle
+        points.push_back(points.at(0));
+        // calculate the angle of rotation
+        qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
+        // calculate the label width
+        qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dY = 0;
+        qreal dX;
+        // set up the rotation around top-left corner matrix
+        QMatrix mat;
+        mat.translate(points.at(0).x(), points.at(0).y());
+        mat.rotate(qRadiansToDegrees(dAng));
+
+        for (int i = 0; i < d->m_tmDetail.GetCount(); ++i)
+        {
+            const TextLine& tl = d->m_tmDetail.GetLine(i);
+            QFont fnt = d->m_tmDetail.GetFont();
+            fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setWeight(tl.m_eFontWeight);
+            fnt.setStyle(tl.m_eStyle);
+            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+            // find the correct horizontal offset, depending on the alignment flag
+            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (dW - fm.width(tl.m_qsText))/2;
+            }
+            else
+            {
+                dX = dW - fm.width(tl.m_qsText);
+            }
+            // create text path and add it to the list
+            QPainterPath path;
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            d->m_liPP << mat.map(path);
+            dY += d->m_tmDetail.GetSpacing();
+        }
+    }
+    // and then add pattern texts
+    if (d->patternInfo.count() > 0)
+    {
+        // similar approach like for the detail label
+        QVector<QPointF> points = Map(Mirror(d->patternInfo));
+        points.push_back(points.at(0));
+        qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
+        qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dY = 0;
+        qreal dX;
+        QMatrix mat;
+        mat.translate(points.at(0).x(), points.at(0).y());
+        mat.rotate(qRadiansToDegrees(dAng));
+
+        for (int i = 0; i < d->m_tmPattern.GetCount(); ++i)
+        {
+            const TextLine& tl = d->m_tmPattern.GetLine(i);
+            QFont fnt = d->m_tmPattern.GetFont();
+            fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setWeight(tl.m_eFontWeight);
+            fnt.setStyle(tl.m_eStyle);
+            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (dW - fm.width(tl.m_qsText))/2;
+            }
+            else
+            {
+                dX = dW - fm.width(tl.m_qsText);
+            }
+            QPainterPath path;
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            d->m_liPP << mat.map(path);
+            dY += d->m_tmPattern.GetSpacing();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::GetTextItemsCount() const
+{
+    return d->m_liPP.count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VLayoutDetail::GetTextItem Creates and returns the i-th text item
+ * @param i index of the requested item
+ * @return pointer to the newly created item. The caller is responsible to delete it.
+ */
+QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
+{
+    QGraphicsPathItem* item = new QGraphicsPathItem();
+    QTransform transform = d->matrix;
+
+    QPainterPath path = transform.map(d->m_liPP[i]);
+
+    if (d->mirror == true)
+    {
+        QVector<QPointF> points;
+        if (i < d->m_tmDetail.GetCount())
+        {
+            points = Map(Mirror(d->detailLabel));
+        }
+        else
+        {
+            points = Map(Mirror(d->patternInfo));
+        }
+        QPointF ptCenter = (points.at(1) + points.at(3))/2;
+        qreal dRot = qRadiansToDegrees(qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x()));
+
+        // we need to move the center back to the origin, rotate it to align it with x axis,
+        // then mirror it to obtain the proper text direction, rotate it and translate it back to original position.
+        // The operations must be added in reverse order
+        QTransform t;
+        // move the label back to its original position
+        t.translate(ptCenter.x(), ptCenter.y());
+        // rotate the label back to original angle
+        t.rotate(dRot);
+        // mirror the label horizontally
+        t.scale(-1, 1);
+        // rotate the label to normal position
+        t.rotate(-dRot);
+        // move the label center into origin
+        t.translate(-ptCenter.x(), -ptCenter.y());
+        path = t.map(path);
+    }
+
+    item->setPath(path);
+    item->setBrush(QBrush(Qt::black));
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VLayoutDetail::LayoutAllowencePath() const
 {
     QPainterPath path;
@@ -458,4 +671,62 @@ bool VLayoutDetail::IsMirror() const
 void VLayoutDetail::SetMirror(bool value)
 {
     d->mirror = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VLayoutDetail::RotatePoint rotates a point around the center for given angle
+ * @param ptCenter center around which the point is rotated
+ * @param pt point, which is rotated around the center
+ * @param dAng angle of rotation
+ * @return position of point pt after rotating it around the center for dAng radians
+ */
+QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng) const
+{
+    QPointF ptDest;
+    QPointF ptRel = pt - ptCenter;
+    ptDest.setX(cos(dAng)*ptRel.x() - sin(dAng)*ptRel.y());
+    ptDest.setY(sin(dAng)*ptRel.x() + cos(dAng)*ptRel.y());
+
+    return ptDest + ptCenter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VLayoutDetail::Mirror if the detail layout is rotated, this method will flip the
+ *  label points over vertical axis, which goes through the center of the label
+ * @param list of 4 label vertices
+ * @return list of flipped points
+ */
+QVector<QPointF> VLayoutDetail::Mirror(const QVector<QPointF> &points) const
+{
+    // should only call this method with rectangular shapes
+    Q_ASSERT(points.count() == 4);
+    if (d->mirror == false)
+    {
+        return points;
+    }
+
+    QVector<QPointF> v;
+    v.resize(4);
+    v[0] = points.at(2);
+    v[1] = points.at(3);
+    v[2] = points.at(0);
+    v[3] = points.at(1);
+    return v;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VLayoutDetail::GetDistance calculates the Euclidian distance between the points
+ * @param pt1 first point
+ * @param pt2 second point
+ * @return Euclidian distance between the two points
+ */
+qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2) const
+{
+    qreal dX = pt1.x() - pt2.x();
+    qreal dY = pt1.y() - pt2.y();
+
+    return qSqrt(dX*dX + dY*dY);
 }

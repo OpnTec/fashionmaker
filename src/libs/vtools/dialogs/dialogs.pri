@@ -40,6 +40,7 @@ HEADERS += \
     $$PWD/tools/dialoggroup.h \
     $$PWD/tools/dialogrotation.h
 
+
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
     $$PWD/tools/dialogarc.cpp \

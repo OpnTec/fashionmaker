@@ -313,6 +313,10 @@ QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
     for (int i=0; i < d->details.count(); ++i)
     {
         list.append(d->details.at(i).GetItem());
+        for (int iT = 0; iT < d->details.at(i).GetTextItemsCount(); ++iT)
+        {
+            list.append(d->details.at(i).GetTextItem(iT));
+        }
     }
     return list;
 }

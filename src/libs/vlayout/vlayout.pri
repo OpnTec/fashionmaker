@@ -16,6 +16,7 @@ HEADERS += \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
     $$PWD/vposition.h \
+    $$PWD/vtextmanager.h \
     vposter.h
 
 SOURCES += \
@@ -27,6 +28,7 @@ SOURCES += \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
     $$PWD/vposition.cpp \
+    $$PWD/vtextmanager.cpp \
     vposter.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp

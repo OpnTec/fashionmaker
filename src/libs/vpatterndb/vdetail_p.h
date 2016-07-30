@@ -31,6 +31,8 @@
 
 #include <QSharedData>
 #include "vnodedetail.h"
+#include "vpatternpiecedata.h"
+#include "vpatterninfogeometry.h"
 #include "../ifc/ifcdef.h"
 
 #ifdef Q_CC_GNU
@@ -50,7 +52,8 @@ public:
     {}
 
     VDetailData(const VDetailData &detail)
-        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my), inLayout(detail.inLayout)
+        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my),
+          m_ppData(detail.m_ppData), m_piPatternInfo(detail.m_piPatternInfo), inLayout(detail.inLayout)
     {}
 
     ~VDetailData() {}
@@ -66,6 +69,11 @@ public:
 
     /** @brief my bias y axis. */
     qreal          my;
+
+    /** @brief Pattern piece data */
+    VPatternPieceData m_ppData;
+    /** @brief Pattern info coordinates */
+    VPatternInfoGeometry m_piPatternInfo;
 
     bool           inLayout;
 

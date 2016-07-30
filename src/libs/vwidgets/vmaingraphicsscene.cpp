@@ -80,6 +80,10 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 
     QGraphicsScene::mousePressEvent(event);
+
+    QTransform t;
+    QGraphicsItem* pItem = itemAt(event->scenePos(), t);
+    emit ItemClicked(pItem);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

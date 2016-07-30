@@ -44,15 +44,16 @@
  * @param parent parent widget
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true)
+    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true),
+      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom()
 {
     ui.setupUi(this);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
-    ui.lineEditNameDetail->setClearButtonEnabled(true);
+    ui.lineEditName->setClearButtonEnabled(true);
 #endif
 
-    labelEditNamePoint = ui.labelEditNameDetail;
+    labelEditNamePoint = ui.labelEditName;
     ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -85,11 +86,24 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
     connect(ui.checkBoxReverse, &QCheckBox::clicked, this, &DialogDetail::ClickedReverse);
-    connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NameDetailChanged);
+    connect(ui.lineEditName, &QLineEdit::textChanged, this, &DialogDetail::NameDetailChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
     connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
     connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
+
+    m_qslMaterials << tr("Fabric") << tr("Lining") << tr("Interfacing") << tr("Interlining");
+    ui.comboBoxMaterial->addItems(m_qslMaterials);
+    m_qslPlacements << tr("None") << tr("Cut on fold");
+    ui.comboBoxPlacement->addItems(m_qslPlacements);
+
+    connect(ui.pushButtonAdd, &QPushButton::clicked, this, &DialogDetail::AddUpdate);
+    connect(ui.pushButtonCancel, &QPushButton::clicked, this, &DialogDetail::Cancel);
+    connect(ui.pushButtonRemove, &QPushButton::clicked, this, &DialogDetail::Remove);
+    connect(ui.listWidgetMCP, &QListWidget::itemClicked, this, &DialogDetail::SetEditMode);
+    SetAddMode();
+
+    ui.tabWidget->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,6 +170,85 @@ void DialogDetail::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::UpdateList()
+{
+    ui.listWidgetMCP->clear();
+    for (int i = 0; i < m_conMCP.count(); ++i)
+    {
+        MaterialCutPlacement mcp = m_conMCP.at(i);
+        QString qsText = tr("Cut %1 of %2%3").arg(mcp.m_iCutNumber);
+        if (mcp.m_eMaterial < MaterialType::mtUserDefined)
+        {
+            qsText = qsText.arg(m_qslMaterials[int(mcp.m_eMaterial)]);
+        }
+        else
+        {
+            qsText = qsText.arg(mcp.m_qsMaterialUserDef);
+        }
+        if (mcp.m_ePlacement == PlacementType::ptCutOnFold)
+        {
+            qsText = qsText.arg(tr(" on Fold"));
+        }
+        else
+        {
+            qsText = qsText.arg("");
+        }
+
+        ui.listWidgetMCP->addItem(qsText);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::AddUpdate()
+{
+    MaterialCutPlacement mcp;
+    mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
+    mcp.m_eMaterial = MaterialType::mtUserDefined;
+    for (int i = 0; i < m_qslMaterials.count(); ++i)
+    {
+        if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
+        {
+            mcp.m_eMaterial = MaterialType(i);
+        }
+    }
+
+    mcp.m_iCutNumber = ui.spinBoxCutNumber->value();
+    mcp.m_ePlacement = PlacementType(ui.comboBoxPlacement->currentIndex());
+
+    if (m_bAddMode == true)
+    {
+        m_conMCP << mcp;
+    }
+    else
+    {
+        int iR = ui.listWidgetMCP->currentRow();
+        SCASSERT(iR >= 0);
+        m_conMCP[iR] = mcp;
+        SetAddMode();
+    }
+    UpdateList();
+    ClearFields();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::Cancel()
+{
+    ClearFields();
+    SetAddMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::Remove()
+{
+    int iR = ui.listWidgetMCP->currentRow();
+    SCASSERT(iR >= 0);
+    m_conMCP.removeAt(iR);
+    UpdateList();
+    ClearFields();
+    SetAddMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::NameDetailChanged()
 {
     SCASSERT(labelEditNamePoint != nullptr);
@@ -166,11 +259,15 @@ void DialogDetail::NameDetailChanged()
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);
+            QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+            ui.tabWidget->setTabIcon(1, icon);
         }
         else
         {
             flagName = true;
             ChangeColor(labelEditNamePoint, okColor);
+            QIcon icon;
+            ui.tabWidget->setTabIcon(1, icon);
         }
     }
     CheckState();
@@ -265,9 +362,29 @@ VDetail DialogDetail::CreateDetail() const
         detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
     detail.setWidth(ui.doubleSpinBoxSeams->value());
-    detail.setName(ui.lineEditNameDetail->text());
+    detail.setName(ui.lineEditName->text());
     detail.setSeamAllowance(supplement);
     detail.setClosed(closed);
+
+    detail.GetPatternPieceData().SetLetter(ui.lineEditLetter->text());
+
+    for (int i = 0; i < m_conMCP.count(); ++i)
+    {
+        detail.GetPatternPieceData().Append(m_conMCP[i]);
+    }
+
+    detail.GetPatternPieceData().SetPos(m_oldData.GetPos());
+    detail.GetPatternPieceData().SetLabelWidth(m_oldData.GetLabelWidth());
+    detail.GetPatternPieceData().SetLabelHeight(m_oldData.GetLabelHeight());
+    detail.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
+    detail.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
+    detail.GetPatternPieceData().SetVisible(ui.checkBoxDetail->isChecked());
+
+    qDebug() << "DD VISIBLE" << detail.GetPatternPieceData().IsVisible();
+
+    detail.GetPatternInfo() = m_oldGeom;
+    detail.GetPatternInfo().SetVisible(ui.checkBoxPattern->isChecked());
+
     return detail;
 }
 
@@ -315,7 +432,7 @@ void DialogDetail::setDetail(const VDetail &value)
         NewItem(node.getId(), node.getTypeTool(), node.getTypeNode(), node.getMx(),
                 node.getMy(), node.getReverse());
     }
-    ui.lineEditNameDetail->setText(detail.getName());
+    ui.lineEditName->setText(detail.getName());
     ui.checkBoxSeams->setChecked(detail.getSeamAllowance());
     ui.checkBoxClosed->setChecked(detail.getClosed());
     ClickedClosed(detail.getClosed());
@@ -324,6 +441,21 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
+
+    ui.lineEditLetter->setText(detail.GetPatternPieceData().GetLetter());
+    ui.checkBoxDetail->setChecked(detail.GetPatternPieceData().IsVisible());
+    ui.checkBoxPattern->setChecked(detail.GetPatternInfo().IsVisible());
+
+    m_conMCP.clear();
+    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    {
+        m_conMCP << detail.GetPatternPieceData().GetMCP(i);
+    }
+
+    UpdateList();
+    m_oldData = detail.GetPatternPieceData();
+    m_oldGeom = detail.GetPatternInfo();
+
     ValidObjects(DetailIsValid());
 }
 
@@ -580,4 +712,44 @@ bool DialogDetail::DetailIsClockwise() const
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ClearFields()
+{
+    ui.comboBoxMaterial->setCurrentIndex(0);
+    ui.spinBoxCutNumber->setValue(0);
+    ui.comboBoxPlacement->setCurrentIndex(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::SetAddMode()
+{
+    ui.pushButtonAdd->setText(tr("Add"));
+    ui.pushButtonCancel->hide();
+    ui.pushButtonRemove->hide();
+    ui.listWidgetMCP->setCurrentRow(-1);
+    m_bAddMode = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::SetEditMode()
+{
+    int iR = ui.listWidgetMCP->currentRow();
+    // this method can be called by clicking on item or by update. In the latter case there is nothing else to do!
+    if (iR < 0 || iR >= m_conMCP.count())
+    {
+        return;
+    }
+
+    ui.pushButtonAdd->setText(tr("Update"));
+    ui.pushButtonCancel->show();
+    ui.pushButtonRemove->show();
+
+    MaterialCutPlacement mcp = m_conMCP.at(iR);
+    ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+    ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
+    ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
+
+    m_bAddMode = false;
 }

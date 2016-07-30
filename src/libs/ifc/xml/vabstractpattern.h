@@ -33,6 +33,7 @@
 #include "vtoolrecord.h"
 
 #include <QObject>
+#include <QDate>
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
@@ -107,6 +108,21 @@ public:
     QString        GetNotes() const;
     void           SetNotes(const QString &text);
 
+    QString        GetPatternName() const;
+    void           SetPatternName(const QString& qsName);
+    QString        GetCompanyName() const;
+    void           SetCompanyName(const QString& qsName);
+    QString        GetPatternNumber() const;
+    void           SetPatternNumber(const QString &qsNum);
+    QString        GetCustomerName() const;
+    void           SetCustomerName(const QString& qsName);
+    QString        GetPatternSize() const;
+    void           SetPatternSize(const QString &qsSize);
+    bool           IsDateVisible() const;
+    void           SetDateVisible(bool bVisible);
+    bool           IsMeasurementsVisible() const;
+    void           SetMesurementsVisible(bool bVisible);
+
     QString        GetImage() const;
     QString        GetImageExtension() const;
     void           SetImage(const QString &text, const QString &extension);
@@ -155,12 +171,27 @@ public:
     static const QString TagHeights;
     static const QString TagSizes;
     static const QString TagUnit;
+    static const QString TagData;
+    static const QString TagPatternInfo;
+    static const QString TagMCP;
+    static const QString TagPatternName;
+    static const QString TagPatternNum;
+    static const QString TagCompanyName;
+    static const QString TagCustomerName;
+    static const QString TagSize;
+    static const QString TagShowDate;
+    static const QString TagShowMeasurements;
 
     static const QString AttrName;
     static const QString AttrVisible;
     static const QString AttrObject;
     static const QString AttrTool;
     static const QString AttrType;
+    static const QString AttrLetter;
+    static const QString AttrMaterial;
+    static const QString AttrUserDefined;
+    static const QString AttrCutNumber;
+    static const QString AttrPlacement;
 
     static const QString AttrAll;
 
@@ -283,6 +314,8 @@ protected:
 
     QDomElement    CheckTagExists(const QString &tag);
     void           InsertTag(const QStringList &tags, const QDomElement &element);
+
+    void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
 
     int GetIndexActivPP() const;
 private:

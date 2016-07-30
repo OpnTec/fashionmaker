@@ -92,6 +92,7 @@ void VDetail::Clear()
     d->nodes.clear();
     d->mx = 0;
     d->my = 0;
+    GetPatternPieceData().Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,6 +523,46 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
         }
     }
     return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns full access to the pattern piece data object
+ * @return pattern piece data object
+ */
+VPatternPieceData& VDetail::GetPatternPieceData()
+{
+    return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern piece data object
+ * @return pattern piece data object
+ */
+const VPatternPieceData& VDetail::GetPatternPieceData() const
+{
+    return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns full access to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+VPatternInfoGeometry& VDetail::GetPatternInfo()
+{
+    return d->m_piPatternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+const VPatternInfoGeometry& VDetail::GetPatternInfo() const
+{
+    return d->m_piPatternInfo;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

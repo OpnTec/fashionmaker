@@ -241,6 +241,8 @@ int VPoster::CountColumns(int width) const
 //---------------------------------------------------------------------------------------------------------------------
 PosterData VPoster::Cut(int i, int j, const QRect &imageRect) const
 {
+    Q_UNUSED(imageRect);
+
     const int x = j*PageRect().width()  - j*static_cast<int>(allowence);
     const int y = i*PageRect().height() - i*static_cast<int>(allowence);
 
