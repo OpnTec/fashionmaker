@@ -93,7 +93,7 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
         return false;
     }
 
-    QProcess *process = new QProcess(this);
+    QScopedPointer<QProcess> process(new QProcess());
     process->setWorkingDirectory(info.absoluteDir().absolutePath());
     process->start(program, arguments);
 
@@ -102,6 +102,7 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
         const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
         QWARN(qUtf8Printable(msg));
         exitCode = TST_EX_TIME_OUT;
+        process->kill();
         return false;
     }
 
@@ -126,7 +127,6 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
     }
 
     exitCode = process->exitCode();
-    delete process;
     return true;
 }
 
