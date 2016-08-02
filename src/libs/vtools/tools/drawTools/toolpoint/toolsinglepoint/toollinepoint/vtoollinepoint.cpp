@@ -46,10 +46,9 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
     :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr), lineColor(ColorBlack)
+      mainLine(nullptr), lineColor(lineColor)
 {
     this->typeLine = typeLine;
-    this->lineColor = lineColor;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = *data->GeometricObject<VPointF>(basePointId);
     QPointF point2 = *data->GeometricObject<VPointF>(id);

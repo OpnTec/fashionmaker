@@ -18,7 +18,7 @@ TextLine::TextLine()
  * @brief VTextManager::VTextManager constructor
  */
 VTextManager::VTextManager()
-	 :m_font(), m_liLines(), m_liOutput()
+     :m_font(), m_liLines(), m_liOutput()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,7 +327,7 @@ QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMe
     {
         if (qsCurrent.length() > 0)
         {
-            qsCurrent += QLatin1Literal(" ");
+            qsCurrent += QLatin1String(" ");
         }
         // check if another word can be added into current line
         if (fm.width(qsCurrent + qslWords[i]) > fW)

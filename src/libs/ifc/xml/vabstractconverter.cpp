@@ -262,7 +262,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
     {
         if (ver < MinVer())
         { // Version less than minimally supported version. Can't do anything.
-            throw e;
+            throw;
         }
         else if (ver > MaxVer())
         { // Version bigger than maximum supported version. We still have a chance to open the file.
@@ -278,7 +278,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
         }
         else
         { // Unexpected version. Most time mean that we do not catch all versions between min and max.
-            throw e;
+            throw;
         }
 
         return; // All is fine and we can try to convert to current max version.

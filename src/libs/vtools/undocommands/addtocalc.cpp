@@ -89,7 +89,7 @@ void AddToCalc::redo()
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        if (cursor <= 0)
+        if (cursor == NULL_ID)
         {
             calcElement.appendChild(xml);
         }

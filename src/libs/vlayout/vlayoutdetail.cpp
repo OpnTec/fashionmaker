@@ -681,7 +681,7 @@ void VLayoutDetail::SetMirror(bool value)
  * @param dAng angle of rotation
  * @return position of point pt after rotating it around the center for dAng radians
  */
-QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng) const
+QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 {
     QPointF ptDest;
     QPointF ptRel = pt - ptCenter;
@@ -723,10 +723,10 @@ QVector<QPointF> VLayoutDetail::Mirror(const QVector<QPointF> &points) const
  * @param pt2 second point
  * @return Euclidian distance between the two points
  */
-qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2) const
+qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2)
 {
-    qreal dX = pt1.x() - pt2.x();
-    qreal dY = pt1.y() - pt2.y();
+    const qreal dX = pt1.x() - pt2.x();
+    const qreal dY = pt1.y() - pt2.y();
 
     return qSqrt(dX*dX + dY*dY);
 }

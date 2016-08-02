@@ -306,7 +306,7 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
     }
 
     quint32 cursor = doc->getCursor();
-    if (cursor <= 0)
+    if (cursor == NULL_ID)
     {
         history->append(record);
     }

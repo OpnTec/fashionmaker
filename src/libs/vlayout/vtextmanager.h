@@ -51,7 +51,7 @@ public:
     void                Update(const VAbstractPattern* pDoc);
 
 protected:
-    QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
+    static QStringList  SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
 
 private:
     QFont               m_font;

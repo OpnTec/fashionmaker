@@ -81,6 +81,7 @@ protected:
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
+    // cppcheck-suppress unusedPrivateFunction
     QVector<qreal> GetAngles () const;
     qreal          MaxLength() const;
     QPointF        GetPoint (qreal angle) const;

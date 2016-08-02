@@ -351,13 +351,13 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
+    quint32 id = NULL_ID;
 
-    QString message = tr("Got wrong parameter id. Need only id > 0.");
+    const QString message = tr("Got wrong parameter id. Need only id > 0.");
     try
     {
         id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
-        if (id <= 0)
+        if (id == NULL_ID)
         {
             throw VExceptionWrongId(message, domElement);
         }

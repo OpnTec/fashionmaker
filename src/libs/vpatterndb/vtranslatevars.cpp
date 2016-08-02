@@ -784,7 +784,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator) const
+QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator)
 {
     try
     {

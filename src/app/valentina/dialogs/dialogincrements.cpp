@@ -615,9 +615,7 @@ void DialogIncrements::SaveIncrFormula()
     }
 
     QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
-    const bool ok = EvalIncrementFormula(text, true, incr->GetData(), ui->labelCalculatedValue);
-
-    if (not ok)
+    if (not EvalIncrementFormula(text, true, incr->GetData(), ui->labelCalculatedValue))
     {
         return;
     }

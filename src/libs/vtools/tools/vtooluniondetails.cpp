@@ -525,7 +525,6 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                                              VContainer *data, const Document &parse, const Source &typeCreation,
                                              bool retainPieces)
 {
-    VToolUnionDetails *unionDetails = 0;
     quint32 id = _id;
     QString drawName;
     if (typeCreation == Source::FromGui)
@@ -546,10 +545,12 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     if (parse == Document::FullParse)
     {
         //Scene doesn't show this tool, so doc will destroy this object.
-        unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, drawName, doc);
+        VToolUnionDetails *unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation,
+                                                                drawName, doc);
         doc->AddTool(id, unionDetails);
         // Unfortunatelly doc will destroy all objects only in the end, but we should delete them before each FullParse
         doc->AddToolOnRemove(unionDetails);
+        return unionDetails;
     }
     //Then create new details
     VNodeDetail det1p1;

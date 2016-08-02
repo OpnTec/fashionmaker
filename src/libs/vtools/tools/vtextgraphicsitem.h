@@ -52,8 +52,8 @@ class VTextGraphicsItem : public QGraphicsObject
     };
 
 public:
-    VTextGraphicsItem(QGraphicsItem* pParent = 0);
-    ~VTextGraphicsItem();
+    explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
+    virtual ~VTextGraphicsItem();
 
     void                SetFont(const QFont& fnt);
     void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

@@ -599,6 +599,7 @@ bool VToolSplinePath::IsMovable(int index) const
     const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
 
     //index == -1 - can delete, but decided to left
+    // cppcheck-suppress redundantCondition
     if (index == -1 || index < 1 || index > splPath->CountSubSpl())
     {
         return false;
