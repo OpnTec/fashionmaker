@@ -54,7 +54,7 @@
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VTextGraphicsItem::mNormal), m_bReleased(false),
       m_ptStartPos(), m_ptStart(), m_ptRotCenter(), m_szStart(), m_dRotation(0), m_dAngle(0),
-      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm(), m_bResizeCursor(false)
+      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm()
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     SetSize(MIN_W, m_iMinH);
@@ -161,7 +161,6 @@ void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
     m_bReleased = false;
-    m_bResizeCursor = false;
     Update();
     setZValue(TOP_Z);
 }

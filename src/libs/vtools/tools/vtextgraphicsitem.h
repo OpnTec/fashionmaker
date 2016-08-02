@@ -102,7 +102,6 @@ private:
     int                 m_iMinH;
     QRectF              m_rectBoundingBox;
     VTextManager        m_tm;
-    bool                m_bResizeCursor;
 
     QRectF              GetBoundingRect(QRectF rectBB, qreal dRot) const;
 };
