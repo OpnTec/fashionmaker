@@ -76,6 +76,8 @@ protected:
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
+    void                hoverMoveEvent(QGraphicsSceneHoverEvent* pHE);
+    void                hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE);
     void                UpdateBox();
     void                UpdateFont();
 
@@ -100,6 +102,7 @@ private:
     int                 m_iMinH;
     QRectF              m_rectBoundingBox;
     VTextManager        m_tm;
+    bool                m_bResizeCursor;
 
     QRectF              GetBoundingRect(QRectF rectBB, qreal dRot) const;
 };

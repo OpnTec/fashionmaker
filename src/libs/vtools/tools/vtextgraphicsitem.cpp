@@ -35,6 +35,8 @@
 #include <QtMath>
 #include <QDebug>
 
+#include <stdio.h>
+
 #include "../vmisc/def.h"
 #include "vtextgraphicsitem.h"
 
@@ -54,11 +56,12 @@
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VTextGraphicsItem::mNormal), m_bReleased(false),
       m_ptStartPos(), m_ptStart(), m_ptRotCenter(), m_szStart(), m_dRotation(0), m_dAngle(0),
-      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm()
+      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm(), m_bResizeCursor(false)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     SetSize(MIN_W, m_iMinH);
     setZValue(TOP_Z);
+    setAcceptHoverEvents(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +163,7 @@ void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
     m_bReleased = false;
+    m_bResizeCursor = false;
     Update();
     setZValue(TOP_Z);
 }
@@ -365,6 +369,10 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
         }
+        else
+        {
+            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        }
         // raise the label and redraw it
         setZValue(TOP_Z + 1);
         UpdateBox();
@@ -446,7 +454,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     if (pME->button() == Qt::LeftButton)
     {
         // restore the cursor
-        if (m_eMode == mMove)
+        if (m_eMode == mMove || m_eMode == mRotate)
         {
             RestoreOverrideCursor(cursorArrowCloseHand);
         }
@@ -496,6 +504,37 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         }
         m_bReleased = true;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextGraphicsItem::hoverMoveEvent checks if cursor has to be changed
+ * @param pHE pointer to the scene hover event
+ */
+void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
+{
+    if (m_eMode == mMove || m_eMode == mResize)
+    {
+        if (m_rectResize.contains(pHE->pos()) == true)
+        {
+            SetOverrideCursor(Qt::SizeFDiagCursor);
+        }
+        else
+        {
+            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VTextGraphicsItem::hoverLeaveEvent tries to restore normal mouse cursor
+ * @param pHE not used
+ */
+void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
+{
+    Q_UNUSED(pHE);
+    RestoreOverrideCursor(Qt::SizeFDiagCursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
