@@ -172,12 +172,12 @@ bool DL_Dxf::in(std::stringstream& stream,
  */
 bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 {
-    static int line = 1;
-
     // Read one group of the DXF file and strip the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, fp) &&
         DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp, false) )
     {
+        static int line = 1;
+
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
@@ -196,12 +196,11 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 bool DL_Dxf::readDxfGroups(std::stringstream& stream,
                            DL_CreationInterface* creationInterface)
 {
-    static int line = 1;
-
     // Read one group of the DXF file and chop the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, stream) &&
         DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream, false) )
     {
+        static int line = 1;
 
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 

@@ -574,8 +574,7 @@ void TMainWindow::FileSave()
     else
     {
         QString error;
-        bool result = SaveMeasurements(curFile, error);
-        if (not result)
+        if (not SaveMeasurements(curFile, error))
         {
             QMessageBox messageBox;
             messageBox.setIcon(QMessageBox::Warning);
@@ -1534,9 +1533,7 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    const bool ok = EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue);
-
-    if (not ok)
+    if (not EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue))
     {
         return;
     }

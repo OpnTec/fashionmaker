@@ -80,11 +80,13 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
         Settings()->sync();
     });
 
-#if !defined(V_NO_ASSERT)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
+#if defined(V_NO_ASSERT)
     // Ignore SSL-related warnings
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
     qputenv("QT_LOGGING_RULES", "qt.network.ssl.warning=false");
-#endif //!defined(V_NO_ASSERT)
+#endif //defined(V_NO_ASSERT)
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

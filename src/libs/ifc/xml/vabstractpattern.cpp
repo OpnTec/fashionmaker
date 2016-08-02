@@ -1218,30 +1218,19 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
-            {
-                return QDomElement();
-                break;// Mandatory tag
-            }
+                return QDomElement();// Mandatory tag
             case 1: //TagImage
-            {
                 element = createElement(TagImage);
                 break;
-            }
             case 2: //TagAuthor
-            {
                 element = createElement(TagAuthor);
                 break;
-            }
             case 3: //TagDescription
-            {
                 element = createElement(TagDescription);
                 break;
-            }
             case 4: //TagNotes
-            {
                 element = createElement(TagNotes);
                 break;
-            }
             case 5: //TagGradation
             {
                 element = createElement(TagGradation);
@@ -1256,46 +1245,28 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 break;
             }
             case 6: // TagPatternName
-            {
                 element = createElement(TagPatternName);
                 break;
-            }
             case 7: // TagPatternNum
-            {
                 element = createElement(TagPatternNum);
                 break;
-            }
             case 8: // TagCompanyName
-            {
                 element = createElement(TagCompanyName);
                 break;
-            }
             case 9: // TagCustomerName
-            {
                 element = createElement(TagCustomerName);
                 break;
-            }
             case 10: // TagSize
-            {
                  element = createElement(TagSize);
                  break;
-            }
             case 11: // TagShowDate
-            {
                  element = createElement(TagShowDate);
                  break;
-            }
             case 12: // TagShowMeasurements
-            {
                  element = createElement(TagShowMeasurements);
                  break;
-            }
-
             default:
-            {
                 return QDomElement();
-                break;
-            }
         }
         InsertTag(tags, element);
         return element;

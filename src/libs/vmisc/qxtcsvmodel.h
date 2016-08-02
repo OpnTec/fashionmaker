@@ -46,9 +46,9 @@ class QxtCsvModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    QxtCsvModel(QObject *parent = nullptr);
+    explicit QxtCsvModel(QObject *parent = nullptr);
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',');
-    explicit QxtCsvModel(const QString filename, QObject *parent = nullptr, bool withHeader = false,
+    explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
                          QChar separator = ',');
     virtual ~QxtCsvModel();
 
@@ -82,10 +82,11 @@ public:
     virtual bool removeColumns(int col, int count, const QModelIndex& parent = QModelIndex()) Q_DECL_OVERRIDE;
 
     void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr);
-    void setSource(const QString filename, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr);
+    void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
+                   QTextCodec* codec = nullptr);
 
     void toCSV(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr) const;
-    void toCSV(const QString filename, bool withHeader = false, QChar separator = ',',
+    void toCSV(const QString &filename, bool withHeader = false, QChar separator = ',',
                QTextCodec* codec = nullptr) const;
 
     enum QuoteOption { NoQuotes = 0,

@@ -49,10 +49,9 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
                      const QString &typeLine, const QString &lineColor, const Source &typeCreation,
                      QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
-      lineColor(ColorBlack)
+      lineColor(lineColor)
 {
     this->typeLine = typeLine;
-    this->lineColor = lineColor;
     //Line
     const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);

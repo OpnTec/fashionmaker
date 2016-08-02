@@ -90,7 +90,7 @@ QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QCha
 
   \sa setSource
   */
-QxtCsvModel::QxtCsvModel(const QString filename, QObject *parent, bool withHeader, QChar separator)
+QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator)
     : QAbstractTableModel(parent)
 {
     QXT_INIT_PRIVATE(QxtCsvModel);
@@ -176,7 +176,7 @@ QVariant QxtCsvModel::headerData(int section, Qt::Orientation orientation, int r
 
   Reads in a CSV file from the provided \a file using \a codec.
   */
-void QxtCsvModel::setSource(const QString filename, bool withHeader, QChar separator, QTextCodec* codec)
+void QxtCsvModel::setSource(const QString &filename, bool withHeader, QChar separator, QTextCodec* codec)
 {
     QFile src(filename);
     setSource(&src, withHeader, separator, codec);
@@ -194,6 +194,7 @@ void QxtCsvModel::setSource(const QString filename, bool withHeader, QChar separ
 void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, QTextCodec* codec)
 {
     QxtCsvModelPrivate* d_ptr = &qxt_d();
+    // cppcheck-suppress unreadVariable
     bool headerSet = !withHeader;
     if (not file->isOpen())
     {
@@ -653,7 +654,7 @@ void QxtCsvModel::toCSV(QIODevice* dest, bool withHeader, QChar separator, QText
   Fields in the output file will be separated by \a separator. Set \a withHeader to true
   to output a row of headers at the top of the file.
  */
-void QxtCsvModel::toCSV(const QString filename, bool withHeader, QChar separator, QTextCodec* codec) const
+void QxtCsvModel::toCSV(const QString &filename, bool withHeader, QChar separator, QTextCodec* codec) const
 {
     QFile dest(filename);
     toCSV(&dest, withHeader, separator, codec);
@@ -695,6 +696,7 @@ void QxtCsvModel::setQuoteMode(QuoteMode mode)
   */
 void QxtCsvModel::setText(int row, int column, const QString& value)
 {
+// cppcheck-suppress indexCalled
     setData(index(row, column), value);
 }
 
@@ -705,6 +707,7 @@ void QxtCsvModel::setText(int row, int column, const QString& value)
   */
 QString QxtCsvModel::text(int row, int column) const
 {
+// cppcheck-suppress indexCalled
     return data(index(row, column)).toString();
 }
 

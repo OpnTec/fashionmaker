@@ -134,6 +134,7 @@ static point2d_t* point_alloc()
 
     p	= (point2d_t*)malloc(sizeof(point2d_t));
     assert( p != NULL );
+// cppcheck-suppress memsetClassFloat
     memset(p, 0, sizeof(point2d_t));
 
     return p;

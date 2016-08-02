@@ -1021,7 +1021,7 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
-    VToolBasePoint *spoint = 0;
+    VToolBasePoint *spoint = nullptr;
     try
     {
         quint32 id = 0;
@@ -1034,7 +1034,7 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
         const qreal y = qApp->toPixel(GetParametrDouble(domElement, AttrY, "10.0"));
 
         VPointF *point = new VPointF(x, y, name, mx, my);
-        VToolBasePoint::Create(id, nameActivPP, point, scene, this, data, parse, Source::FromFile);
+        spoint = VToolBasePoint::Create(id, nameActivPP, point, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {

@@ -100,9 +100,9 @@ private:
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 
-    QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng) const;
+    static QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
     QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
-    qreal GetDistance(const QPointF& pt1, const QPointF& pt2) const;
+    static qreal GetDistance(const QPointF& pt1, const QPointF& pt2);
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);
