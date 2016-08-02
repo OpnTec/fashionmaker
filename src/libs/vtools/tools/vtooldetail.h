@@ -96,6 +96,8 @@ public slots:
     virtual void       ResetChildren(QGraphicsItem* pItem);
     virtual void       UpdateAll();
 protected:
+    virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                             QWidget *widget) Q_DECL_OVERRIDE;
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;

@@ -59,6 +59,7 @@ public:
     void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void                Reset();
+    bool                IsIdle() const;
 
     int                 GetFontSize() const;
     QRectF              boundingRect() const;

@@ -166,6 +166,16 @@ void VTextGraphicsItem::Reset()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief VTextGraphicsItem::IsIdle checks if the item is in normal mode.
+ * @return true, if item is in normal mode and false otherwise.
+ */
+bool VTextGraphicsItem::IsIdle() const
+{
+    return m_eMode == mNormal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief VTextGraphicsItem::AddLine adds a line of text to the label list. If necessary, it also resizes the
  * label bounding box until it is big enough to contain all the text
  * @param tl line of text to add
