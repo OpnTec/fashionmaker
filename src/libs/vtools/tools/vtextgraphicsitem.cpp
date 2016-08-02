@@ -35,8 +35,6 @@
 #include <QtMath>
 #include <QDebug>
 
-#include <stdio.h>
-
 #include "../vmisc/def.h"
 #include "vtextgraphicsitem.h"
 
