@@ -47,6 +47,8 @@
 #include "tst_vdetail.h"
 #include "tst_vabstractcurve.h"
 
+#include "../vmisc/def.h"
+
 int main(int argc, char** argv)
 {
     Q_INIT_RESOURCE(schema);
@@ -67,12 +69,27 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_NameRegExp());
     ASSERT_TEST(new TST_VLayoutDetail());
     ASSERT_TEST(new TST_VArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
+
+    {
+        const QStringList locales = SupportedLocales();
+        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
+        {
+            for(int l = 0, sz = locales.size(); l < sz; ++l)
+            {
+                ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
+            }
+        }
+
+        for(int l = 0, sz = locales.size(); l < sz; ++l)
+        {
+            ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+        }
+    }
+
     ASSERT_TEST(new TST_TapeCommandLine());
     ASSERT_TEST(new TST_ValentinaCommandLine());
     ASSERT_TEST(new TST_QmuTokenParser());
     ASSERT_TEST(new TST_VMeasurements());
-    ASSERT_TEST(new TST_QmuParserErrorMsg());
     ASSERT_TEST(new TST_VLockGuard());
     ASSERT_TEST(new TST_Misc());
     ASSERT_TEST(new TST_VCommandLine());

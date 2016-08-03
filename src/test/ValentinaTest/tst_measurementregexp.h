@@ -40,26 +40,40 @@ class TST_MeasurementRegExp : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_MeasurementRegExp(QObject *parent = 0);
+    TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent = nullptr);
     virtual ~TST_MeasurementRegExp() Q_DECL_OVERRIDE;
 
+    static const quint32 systemCounts;
+
 private slots:
-    void TestOriginalMeasurementNamesRegExp();
-    void TestVariableStrings_data();
-    void TestVariableStrings();
-    void TestCorrectOrderMeasurement_data();
-    void TestCorrectOrderMeasurement();
+    void initTestCase();
+    void TestCheckNoEndLine_data();
+    void TestCheckNoEndLine();
+    void TestCheckRegExpNames_data();
+    void TestCheckRegExpNames();
+    void TestCheckIsNamesUnique_data();
+    void TestCheckIsNamesUnique();
+    void TestCheckNoOriginalNamesInTranslation_data();
+    void TestCheckNoOriginalNamesInTranslation();
+    void TestCheckUnderlineExists_data();
+    void TestCheckUnderlineExists();
+    void TestCheckInternalVaribleRegExp_data();
+    void TestCheckInternalVaribleRegExp();
+    void cleanupTestCase();
 
 private:
     Q_DISABLE_COPY(TST_MeasurementRegExp)
 
+    quint32 m_systemCode;
+    QString m_system;
+    QString m_locale;
     QPointer<QTranslator>   pmsTranslator;
     QPointer<QTranslator>   vTranslator;
     VTranslateVars *trMs;
 
+    void    TestCombinations(int systemCounts, const QStringList &locales) const;
     void    PrepareMeasurementData();
 
-    int     LoadTranslation(const QString &checkedSystem, const QString &checkedLocale);
     int     LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale);
     int     LoadVariables(const QString &checkedLocale);
 
@@ -67,11 +81,6 @@ private:
     void    RemoveTrVariables(const QString &checkedLocale);
 
     void    InitTrMs();
-    void    CheckRegExpNames() const;
-    void    CheckIsNamesUnique() const;
-    void    CheckNoOriginalNamesInTranslation() const;
-    void    CheckUnderlineExists() const;
-    void    CheckInternalVaribleRegExp() const;
 };
 
 #endif // TST_MEASUREMENTREGEXP_H
