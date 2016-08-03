@@ -247,6 +247,8 @@ PosterData VPoster::Cut(int i, int j, const QRect &imageRect) const
     SCASSERT(x <= imageRect.width());
     SCASSERT(y <= imageRect.height());
 
+    Q_UNUSED(imageRect)
+
     PosterData data;
     data.row = i;
     data.column = j;

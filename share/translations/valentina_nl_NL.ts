@@ -85,31 +85,31 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Server Naam/IP:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy adres:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy poort:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy gebruiker</translation>
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy pas:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikersnaam:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Paswoord</translation>
     </message>
 </context>
 <context>
@@ -239,19 +239,19 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI taal:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished"></translation>
+        <translation>Decimale gescheiden delen</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardwaarde eenheid</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal label</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon teken systeem:</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt  als de standaardbasis voor uw volgende patrooncreatie</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Na elke crash zal Valentina informatie verzamelen dat ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan informatie verzamelen :&lt;ahref=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;&quot;.</translation>
     </message>
 </context>
 <context>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebouwd op %3 op %2 {1 ?}</translation>
+        <translation>Gebouwd op %1 op %2</translation>
     </message>
 </context>
 <context>
@@ -370,7 +370,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebouwd op %3 op %2 {1 ?}</translation>
+        <translation>Gebouwd op %1 op %2</translation>
     </message>
 </context>
 <context>
@@ -433,11 +433,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -445,43 +445,43 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>First point of the line</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt van de lijn</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Second point of the line</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt van de lijn</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
 </context>
 <context>
@@ -556,11 +556,11 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -568,31 +568,31 @@
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste hoek:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede hoek</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecentreerde punt</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het gecentreerde punt van de boog</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
 </context>
 <context>
@@ -667,11 +667,11 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -679,23 +679,23 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste hoek:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecentreerde punt</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
 </context>
 <context>
@@ -770,11 +770,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -782,39 +782,39 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Derde punt</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -873,11 +873,11 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -885,35 +885,35 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation type="unfinished"></translation>
+        <translation>As punt:</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -956,11 +956,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -968,27 +968,27 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Arc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
 </context>
 <context>
@@ -1031,11 +1031,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1043,27 +1043,27 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
 </context>
 <context>
@@ -1106,11 +1106,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1118,27 +1118,27 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
 </context>
 <context>
@@ -1201,7 +1201,7 @@
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Rol naar beneden op de lijst</translation>
     </message>
     <message>
         <source>...</source>
@@ -1209,35 +1209,39 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Rol naar boven op de lijst</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished"></translation>
+        <translation>Je hebt meer punten nodig!</translation>
+    </message>
+    <message>
+        <source>First point can not equal the last point!</source>
+        <translation type="vanished">Eerste punt is niet gelijk aan het laatste punt!</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished"></translation>
+        <translation>Je hebt dubble punten!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished"></translation>
+        <translation>Je moet punten kiezen in de &apos;met de klok mee&apos; richting</translation>
     </message>
     <message>
         <source>Bias X:</source>
-        <translation type="unfinished"></translation>
+        <translation>Richting X:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Richting Y:</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished"></translation>
+        <translation>Detailnaam:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -1245,7 +1249,7 @@
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt is niet gelijk aan het laatste punt!</translation>
     </message>
 </context>
 <context>
@@ -1368,7 +1372,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
 </context>
 <context>
@@ -1431,11 +1435,11 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1443,35 +1447,35 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek:</translation>
     </message>
     <message>
         <source>Base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basis punt:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -1522,35 +1526,35 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basis punt:</translation>
     </message>
     <message>
         <source>First point of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt van de lijn</translation>
     </message>
     <message>
         <source>Second point of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt van de lijn</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -1804,15 +1808,15 @@
     </message>
     <message>
         <source>Unique increment name</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke vermeerdering naam</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
 </context>
 <context>
@@ -1970,64 +1974,69 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished"></translation>
+        <translation>Papier Formaat</translation>
     </message>
     <message>
         <source>Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Velden</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Links:</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodem:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Negeer velden</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Op maat</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkeerde velden</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Velden zijn groter dan velden. 
+
+Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>
 	Three groups: big, middle, small = 0;
 	Two groups: big, small = 1;
 	Descending area = 2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+	Drie groepen: groot, middel, klein = 0;
+	Twee groepen: groot, klein = 1;
+	Vermindering gebied = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opmaak opties</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset lengte:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel voor het kiezen van het volgende werkstuk</translation>
     </message>
 </context>
 <context>
@@ -2062,19 +2071,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -2117,23 +2126,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
 </context>
 <context>
@@ -2208,11 +2217,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2220,39 +2229,39 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation type="unfinished"></translation>
+        <translation>As punt:</translation>
     </message>
     <message>
         <source>First line point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste lijnpunt</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede lijnpunt:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -2360,11 +2369,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check all</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlleer alles</translation>
     </message>
     <message>
         <source>Uncheck all</source>
-        <translation type="unfinished"></translation>
+        <translation>On-controlleer alles.</translation>
     </message>
 </context>
 <context>
@@ -2438,19 +2447,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroondeel naam</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke patroondeel naam</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke patroondeel naam.</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw patroon</translation>
     </message>
 </context>
 <context>
@@ -2517,11 +2526,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2529,39 +2538,39 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanvullende graden van de hoek</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -2600,15 +2609,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardhoogte en grootte</translation>
     </message>
     <message>
         <source>From standard measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Van standaard maten</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Op maat</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -2616,7 +2625,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat:</translation>
     </message>
 </context>
 <context>
@@ -2755,7 +2764,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas onmiddelijk aan</translation>
     </message>
 </context>
 <context>
@@ -2790,27 +2799,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raaklijn punt</translation>
     </message>
     <message>
         <source>Arc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem:</translation>
     </message>
 </context>
 <context>
@@ -2865,11 +2874,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2877,31 +2886,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden van de cirkel</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raaklijn punt</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem:</translation>
     </message>
 </context>
 <context>
@@ -2952,11 +2961,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2964,31 +2973,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden van de boog</translation>
     </message>
     <message>
         <source>Top of the line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenkant van de lijn</translation>
     </message>
     <message>
         <source>End of the line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde van de lijn:</translation>
     </message>
 </context>
 <context>
@@ -3023,23 +3032,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
-        <translation type="unfinished"></translation>
+        <translation>X: verticaal punt:</translation>
     </message>
     <message>
         <source>Y: horizontal point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y: horizontaal punt:</translation>
     </message>
 </context>
 <context>
@@ -3074,27 +3083,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First arc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste boog</translation>
     </message>
     <message>
         <source>Second arc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede boog:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem:</translation>
     </message>
 </context>
 <context>
@@ -3157,11 +3166,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius of the first circle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal van de eerste cirkel</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3169,35 +3178,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Radius of the second circle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal van de tweede cirkel</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden van de eerste cirkel:</translation>
     </message>
     <message>
         <source>Center of the second circle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden van de tweede cirkel:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem:</translation>
     </message>
 </context>
 <context>
@@ -3228,23 +3237,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Doelmap</translation>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>pad naar doelmap.</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer pad naar doelman</translation>
     </message>
     <message>
         <source>File base name</source>
-        <translation type="unfinished"></translation>
+        <translation>Basis bestandsnaam</translation>
     </message>
     <message>
         <source>File base name. </source>
-        <translation type="unfinished"></translation>
+        <translation>Basis bestandsnaam.</translation>
     </message>
 </context>
 <context>
@@ -3311,7 +3320,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>De basis bestandsnaam komt niet overeen met een reguliere expressie.</translation>
     </message>
 </context>
 <context>
@@ -3374,11 +3383,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule wizard</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3386,39 +3395,39 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Derde punt</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort lijn:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnkleur:</translation>
     </message>
 </context>
 <context>
@@ -3449,11 +3458,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
 </context>
 <context>
@@ -3500,15 +3509,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Getal waarmee de kronkel van de kromming vermenigvuldigd wordt:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlle punt</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -3563,11 +3572,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Getal waarmee de kronkel van de kromming vermenigvuldigd wordt:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <source>Point</source>
@@ -3575,7 +3584,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste controllepunt</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -3587,7 +3596,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede controllepunt</translation>
     </message>
 </context>
 <context>
@@ -3677,31 +3686,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt van de as:</translation>
     </message>
     <message>
         <source>Second point of axis:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt van de as:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede punt:</translation>
     </message>
 </context>
 <context>
@@ -3772,39 +3781,39 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste basis punt:</translation>
     </message>
     <message>
         <source>Second base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede basis punt:</translation>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste coupenaad punt:</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede coupenaad punt:</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Derde coupenaad punt:</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste nieuwe figuurnaad punt:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies unieke label.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede nieuwe figuurnaad punt:</translation>
     </message>
 </context>
 <context>
@@ -3831,7 +3840,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout tijdens het berekenen van de formule. Je kunt proberen om de laatste actie ongedaan te maken of de formule te herstellen.</translation>
     </message>
 </context>
 <context>
@@ -3870,7 +3879,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt de details verenigen?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -3976,7 +3985,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik voor unit testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te tonen.</translation>
     </message>
 </context>
 <context>
@@ -4817,7 +4826,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus voor het werken met patroon delen. Deze patroon delen zijn de basis om naar de volgende fase te gaan &amp;quote; Details modus&amp;quote;. Voor het mogelijk maken van de &amp;quote;Details modus&amp;quote; moet je op zijn minst een detail maken.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4849,7 +4858,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw patroon</translation>
     </message>
     <message>
         <source>Open pattern</source>
@@ -5935,11 +5944,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand was nog niet opgeslagen</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek:</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula</source>
@@ -6057,19 +6066,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI taal:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished"></translation>
+        <translation>Decimale gescheiden delen</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon teken systeem:</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardhoogte en grootte</translation>
     </message>
     <message>
         <source>Default height:</source>

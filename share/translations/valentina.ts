@@ -4990,7 +4990,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pages will be cropped because they do not fit printer paper size.</translation>
     </message>
 </context>
 <context>
