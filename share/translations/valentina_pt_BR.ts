@@ -1229,7 +1229,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Detalhe</translation>
+        <translation type="vanished">Detalhe</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1330,6 +1330,90 @@
     <message>
         <source>First point cannot be equal to the last point!</source>
         <translation>O ponto inicial não pode ser o mesmo que o último! </translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">nenhum</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2818,6 +2902,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show date of creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4954,11 +5074,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1, %2 (%3)</source>
-        <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7187,6 +7302,30 @@ Do you want to save your changes?</source>
         <source>Delete</source>
         <translation>Excluir</translation>
     </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -8579,6 +8718,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VisToolSpline</name>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
@@ -8587,6 +8733,10 @@ Do you want to save your changes?</source>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione três ou mais pontos,&lt;b&gt;Enter&lt;/b&gt; - finalizar criação</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8613,19 +8763,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>AVISO.</translation>
+        <translation type="vanished">AVISO.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Erro crítico.</translation>
+        <translation type="vanished">Erro crítico.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Erro fatal.</translation>
+        <translation type="vanished">Erro fatal.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Informação.</translation>
+        <translation type="vanished">Informação.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

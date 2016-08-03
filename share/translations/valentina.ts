@@ -349,7 +349,7 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Check For Updates</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Check For Updates</translation>
     </message>
 </context>
 <context>
@@ -1241,7 +1241,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Detail</translation>
+        <translation type="vanished">Detail</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1346,6 +1346,90 @@
     <message>
         <source>First point cannot be equal to the last point!</source>
         <translation>First point cannot be equal to the last point!</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">None</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2923,22 +3007,58 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Path:</translation>
+        <translation>Path:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Show in Explorer</translation>
+        <translation>Show in Explorer</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Empty&gt;</translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation type="unfinished">File was not saved yet.</translation>
+        <translation>File was not saved yet.</translation>
     </message>
     <message>
         <source>Show in Finder</source>
+        <translation>Show in Finder</translation>
+    </message>
+    <message>
+        <source>General info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="unfinished">Show measurements</translation>
+    </message>
+    <message>
+        <source>Show date of creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4411,65 +4531,65 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Retain original pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Retain original pieces</translation>
     </message>
 </context>
 <context>
     <name>FvUpdateWindow</name>
     <message>
         <source>Software Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Software Update</translation>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>A new version of %1 is available!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 is now available - you have %3. Would you like to download it now?</translation>
     </message>
     <message>
         <source>Skip This Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Skip This Version</translation>
     </message>
     <message>
         <source>Remind Me Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Remind Me Later</translation>
     </message>
     <message>
         <source>Get Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Get Update</translation>
     </message>
 </context>
 <context>
     <name>FvUpdater</name>
     <message>
         <source>Cannot open your default browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot open your default browser.</translation>
     </message>
     <message>
         <source>Feed download failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Feed download failed: %1.</translation>
     </message>
     <message>
         <source>Feed parsing failed: %1 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Feed parsing failed: %1 %2.</translation>
     </message>
     <message>
         <source>No updates were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>No updates were found.</translation>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation type="unfinished"></translation>
+        <translation>Feed error: invalid &quot;enclosure&quot; with the download link</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>
@@ -5313,7 +5433,7 @@ Do you want to save your changes?</translation>
     <message>
         <source>%1, %2 (%3)</source>
         <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
-        <translation>%1, %2 (%3)</translation>
+        <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -5557,27 +5677,27 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Tool pointer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool pointer</translation>
     </message>
     <message>
         <source>Midpoint between two points</source>
-        <translation type="unfinished"></translation>
+        <translation>Midpoint between two points</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">Group</translation>
+        <translation>Group</translation>
     </message>
     <message>
         <source>Contains all visibility groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Contains all visibility groups</translation>
     </message>
     <message>
         <source>Show which details will go in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Show which details will go in layout</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</translation>
     </message>
 </context>
 <context>
@@ -6702,7 +6822,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Show in Finder</translation>
     </message>
 </context>
 <context>
@@ -6830,7 +6950,7 @@ Do you want to save your changes?</translation>
     <name>ToggleDetailInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation type="unfinished"></translation>
+        <translation>detail in layout list</translation>
     </message>
 </context>
 <context>
@@ -7692,6 +7812,30 @@ Do you want to save your changes?</translation>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -7948,11 +8092,11 @@ Do you want to save your changes?</translation>
     <name>VToolUnionDetails</name>
     <message>
         <source>union details</source>
-        <translation type="unfinished"></translation>
+        <translation>union details</translation>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="unfinished"></translation>
+        <translation>United detail</translation>
     </message>
 </context>
 <context>
@@ -9045,7 +9189,7 @@ Do you want to save your changes?</translation>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>CurrentLength</translation>
     </message>
 </context>
 <context>
@@ -9074,11 +9218,11 @@ Do you want to save your changes?</translation>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unnamed</translation>
     </message>
 </context>
 <context>
@@ -9137,6 +9281,13 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VisToolSpline</name>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
@@ -9145,6 +9296,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9171,19 +9326,35 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Warning.</translation>
+        <translation type="vanished">Warning.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Critical error.</translation>
+        <translation type="vanished">Critical error.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Fatal error.</translation>
+        <translation type="vanished">Fatal error.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Information.</translation>
+        <translation type="vanished">Information.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Information</translation>
     </message>
 </context>
 <context>
