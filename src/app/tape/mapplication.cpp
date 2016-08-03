@@ -84,13 +84,18 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtWarningMsg;
     }
 
-#if !defined(V_NO_ASSERT)
+#if defined(V_NO_ASSERT)
     // I have decided to hide this annoing message for release builds.
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QSslSocket: cannot resolve")))
+    {
+        type = QtDebugMsg;
+    }
+
     if ((type == QtWarningMsg) && msg.contains(QStringLiteral("setGeometry: Unable to set geometry")))
     {
         type = QtDebugMsg;
     }
-#endif //!defined(V_NO_ASSERT)
+#endif //defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
 #   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -169,20 +174,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
             case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
             #endif
