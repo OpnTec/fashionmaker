@@ -70,6 +70,7 @@ static const auto V_EX_CONFIG = 78;          /*Something was found in an unconfi
 inline QTextStream& vStdErr()
 {
     static QTextStream ts( stderr );
+    ts.flush();
     return ts;
 }
 
@@ -77,6 +78,7 @@ inline QTextStream& vStdErr()
 inline QTextStream& vStdOut()
 {
     static QTextStream ts( stdout );
+    ts.flush();
     return ts;
 }
 
