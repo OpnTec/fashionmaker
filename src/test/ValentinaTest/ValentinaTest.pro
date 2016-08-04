@@ -41,8 +41,6 @@ SOURCES += \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
     tst_varc.cpp \
-    tst_tapecommandline.cpp \
-    tst_valentinacommandline.cpp \
     tst_qmutokenparser.cpp \
     tst_vmeasurements.cpp \
     tst_vlockguard.cpp \
@@ -64,8 +62,6 @@ HEADERS += \
     tst_vlayoutdetail.h \
     tst_varc.h \
     stable.h \
-    tst_tapecommandline.h \
-    tst_valentinacommandline.h \
     tst_qmutokenparser.h \
     tst_vmeasurements.h \
     tst_vlockguard.h \
@@ -202,102 +198,3 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
-
-TAPE_TEST_FILES += \
-    tst_tape/keiko.vit \
-    tst_tape/empty.vit \
-    tst_tape/all_measurements_v0.3.0.vit \
-    tst_tape/all_measurements_v0.4.0.vst \
-    tst_tape/GOST_man_ru_v0.3.0.vst \
-    tst_tape/all_measurements_v0.3.3.vit \
-    tst_tape/all_measurements_v0.4.2.vst \
-    tst_tape/GOST_man_ru_v0.4.2.vst \
-    tst_tape/broken1.vit \
-    tst_tape/broken2.vit \
-    tst_tape/broken3.vit \
-    tst_tape/broken4.vit \
-    tst_tape/text.vit \
-    tst_tape/text.vst
-
-VALENTINA_TEST_FILES += \
-    tst_valentina/empty.val \
-    tst_valentina/issue_372.val \
-    tst_valentina/wrong_obj_type.val \
-    tst_valentina/text.val \
-    tst_valentina/glimited_no_m.val \
-    tst_valentina/glimited_vit.val \
-    tst_valentina/glimited.vit \
-    tst_valentina/glimited_vst.val \
-    tst_valentina/glimited.vst \
-    tst_valentina/issue_256.val \
-    tst_valentina/issue_256_wrong_path.val \
-    tst_valentina/issue_256_correct.vit \
-    tst_valentina/issue_256_wrong.vit \
-    tst_valentina/issue_256_correct.vst \
-    tst_valentina/issue_256_wrong.vit \
-    tst_valentina/wrong_formula.val
-
-COLLECTION_FILES += \
-    $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
-    $${PWD}/../../app/share/collection/bra.val \
-    $${PWD}/../../app/share/collection/bra.vit \
-    $${PWD}/../../app/share/collection/jacketМ1_52-176.val \
-    $${PWD}/../../app/share/collection/jacketМ2_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ3_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ4_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ5_30-110.val \
-    $${PWD}/../../app/share/collection/jacketМ6_30-110.val \
-    $${PWD}/../../app/share/collection/pantsМ1_52-176.val \
-    $${PWD}/../../app/share/collection/pantsМ2_40-146.val \
-    $${PWD}/../../app/share/collection/pantsМ7.val \
-    $${PWD}/../../app/share/collection/TShirt_test.val \
-    $${PWD}/../../app/share/collection/TestDart.val \
-    $${PWD}/../../app/share/collection/patrón_blusa.val \
-    $${PWD}/../../app/share/collection/blusa.vit \
-    $${PWD}/../../app/share/collection/PajamaTopWrap2.val \
-    $${PWD}/../../app/share/collection/Susan.vit \
-    $${PWD}/../../app/share/collection/Moulage_0.5_armhole_neckline.val \
-    $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val \
-    $${PWD}/../../app/share/collection/my_calculated_measurements_for_val.vit \
-    $${PWD}/../../app/share/collection/Keiko_skirt.val \
-    $${PWD}/../../app/share/collection/keiko.vit \
-    $${PWD}/../../app/share/collection/medidas_eli2015.vit \
-    $${PWD}/../../app/share/collection/pantalon_base_Eli.val \
-    $${PWD}/../../app/share/collection/Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit \
-    $${PWD}/../../app/share/collection/IMK_Zhaketa_poluprilegayuschego_silueta.val \
-    $${PWD}/../../app/share/collection/Lara_Jil.vit \
-    $${PWD}/../../app/share/collection/modell_2.val \
-    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.val \
-    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.vit \
-    $${PWD}/../../app/share/collection/Trousers/Trousers.val \
-    $${PWD}/../../app/share/collection/Trousers/trousers.vit
-
-# Compilation will fail without this files after we added them to this section.
-OTHER_FILES += \
-    $$TAPE_TEST_FILES \
-    $$VALENTINA_TEST_FILES \
-    $$COLLECTION_FILES
-
-for(DIR, TAPE_TEST_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     tape_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$tape_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_tape))
-
-for(DIR, VALENTINA_TEST_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     valentina_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$valentina_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina))
-
-for(DIR, COLLECTION_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     collection_path += $$DIR
-}
-
-copyToDestdir($$collection_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina_collection))

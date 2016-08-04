@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   stable.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,55 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef STABLE_H
-#define STABLE_H
-
-/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
-#pragma message("Compiling precompiled headers for Translation Tests.\n")
-
-/* Add C includes here */
-
-#if defined __cplusplus
-/* Add C++ includes here */
-#include <csignal>
-
-/*In all cases we need include core header for getting defined values*/
-#ifdef QT_CORE_LIB
-#   include <QtCore>
-#endif
-
-#ifdef QT_GUI_LIB
-#   include <QtGui>
-#endif
-
-#ifdef QT_XML_LIB
-#   include <QtXml>
-#endif
-
-//In Windows you can't use same header in all modes.
-#if !defined(Q_OS_WIN)
-#   ifdef QT_WIDGETS_LIB
-#       include <QtWidgets>
-#   endif
-
-#   ifdef QT_SVG_LIB
-#       include <QtSvg/QtSvg>
-#   endif
-
-#   ifdef QT_PRINTSUPPORT_LIB
-#       include <QtPrintSupport>
-#   endif
-
-    //Build doesn't work, if include this headers on Windows.
-#   ifdef QT_XMLPATTERNS_LIB
-#       include <QtXmlPatterns>
-#   endif
-
-#   ifdef QT_NETWORK_LIB
-#       include <QtNetwork>
-#   endif
-#endif/*Q_OS_WIN*/
-
-#endif /*__cplusplus*/
-
-#endif // STABLE_H
+// Build the precompiled headers.
+#include "stable.h"
