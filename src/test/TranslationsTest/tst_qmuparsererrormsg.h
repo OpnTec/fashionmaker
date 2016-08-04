@@ -29,7 +29,7 @@
 #ifndef TST_QMUPARSERERRORMSG_H
 #define TST_QMUPARSERERRORMSG_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QTranslator>

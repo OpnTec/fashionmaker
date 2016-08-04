@@ -29,7 +29,7 @@
 #ifndef TST_MEASUREMENTREGEXP_H
 #define TST_MEASUREMENTREGEXP_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 
 #include <QPointer>
 

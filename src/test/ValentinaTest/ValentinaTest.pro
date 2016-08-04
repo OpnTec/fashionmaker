@@ -38,46 +38,39 @@ SOURCES += \
     tst_vposter.cpp \
     tst_vabstractdetail.cpp \
     tst_vspline.cpp \
-    abstracttest.cpp \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
     tst_varc.cpp \
-    stable.cpp \
-    tst_measurementregexp.cpp \
     tst_tapecommandline.cpp \
     tst_valentinacommandline.cpp \
     tst_qmutokenparser.cpp \
     tst_vmeasurements.cpp \
-    tst_qmuparsererrormsg.cpp \
     tst_vlockguard.cpp \
     tst_misc.cpp \
     tst_vcommandline.cpp \
-    tst_tstranslation.cpp \
     tst_vdetail.cpp \
     tst_vabstractcurve.cpp \
     tst_findpoint.cpp \
     tst_vellipticalarc.cpp \
     tst_vcubicbezierpath.cpp
 
+win32-msvc*:SOURCES += stable.cpp
+
 HEADERS += \
     tst_vposter.h \
     tst_vabstractdetail.h \
     tst_vspline.h \
-    abstracttest.h \
     tst_nameregexp.h \
     tst_vlayoutdetail.h \
     tst_varc.h \
     stable.h \
-    tst_measurementregexp.h \
     tst_tapecommandline.h \
     tst_valentinacommandline.h \
     tst_qmutokenparser.h \
     tst_vmeasurements.h \
-    tst_qmuparsererrormsg.h \
     tst_vlockguard.h \
     tst_misc.h \
     tst_vcommandline.h \
-    tst_tstranslation.h \
     tst_vdetail.h \
     tst_vabstractcurve.h \
     tst_findpoint.h \
@@ -86,8 +79,6 @@ HEADERS += \
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
-
-DEFINES += TS_DIR=\\\"$${PWD}/../../../share/translations\\\"
 
 CONFIG(debug, debug|release){
     # Debug mode

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tst_valentinacommandline.h
+ **  @file   qttestmainlambda.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   4 10, 2015
+ **  @date   31 3, 2015
  **
  **  @brief
  **  @copyright
@@ -26,31 +26,44 @@
  **
  *************************************************************************/
 
-#ifndef TST_VALENTINACOMMANDLINE_H
-#define TST_VALENTINACOMMANDLINE_H
+#include <QtTest>
 
-#include "../vmisc/abstracttest.h"
+#include "tst_measurementregexp.h"
+#include "tst_qmuparsererrormsg.h"
+#include "tst_tstranslation.h"
 
-class TST_ValentinaCommandLine : public AbstractTest
+#include "../vmisc/def.h"
+
+int main(int argc, char** argv)
 {
-    Q_OBJECT
-public:
-    explicit TST_ValentinaCommandLine(QObject *parent = nullptr);
+    QApplication app( argc, argv );// For translation
 
-private slots:
-    void initTestCase();
-    void OpenPatterns_data() const;
-    void OpenPatterns();
-    void ExportMode_data() const;
-    void ExportMode();
-    void TestMode_data() const;
-    void TestMode();
-    void TestOpenCollection_data() const;
-    void TestOpenCollection();
-    void cleanupTestCase();
+    int status = 0;
+    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
+    {
+        status |= QTest::qExec(obj, argc, argv);
+        delete obj;
+    };
 
-private:
-    Q_DISABLE_COPY(TST_ValentinaCommandLine)
-};
+    ASSERT_TEST(new TST_TSTranslation());
 
-#endif // TST_VALENTINACOMMANDLINE_H
+    {
+        const QStringList locales = SupportedLocales();
+        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
+        {
+            for(int l = 0, sz = locales.size(); l < sz; ++l)
+            {
+                ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
+            }
+        }
+
+        for(int l = 0, sz = locales.size(); l < sz; ++l)
+        {
+            ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+        }
+    }
+
+
+
+    return status;
+}

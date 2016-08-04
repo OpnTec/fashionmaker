@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "abstracttest.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vsysexits.h"
+#include "logging.h"
+#include "vsysexits.h"
 
 #include <QtTest>
 

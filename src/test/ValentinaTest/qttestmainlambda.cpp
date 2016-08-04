@@ -35,16 +35,13 @@
 #include "tst_vlayoutdetail.h"
 #include "tst_varc.h"
 #include "tst_vellipticalarc.h"
-#include "tst_measurementregexp.h"
 #include "tst_tapecommandline.h"
 #include "tst_valentinacommandline.h"
 #include "tst_qmutokenparser.h"
 #include "tst_vmeasurements.h"
-#include "tst_qmuparsererrormsg.h"
 #include "tst_vlockguard.h"
 #include "tst_misc.h"
 #include "tst_vcommandline.h"
-#include "tst_tstranslation.h"
 #include "tst_vdetail.h"
 #include "tst_findpoint.h"
 #include "tst_vabstractcurve.h"
@@ -74,23 +71,6 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VLayoutDetail());
     ASSERT_TEST(new TST_VArc());
     ASSERT_TEST(new TST_VEllipticalArc());
-
-    {
-        const QStringList locales = SupportedLocales();
-        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
-        {
-            for(int l = 0, sz = locales.size(); l < sz; ++l)
-            {
-                ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
-            }
-        }
-
-        for(int l = 0, sz = locales.size(); l < sz; ++l)
-        {
-            ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
-        }
-    }
-
     ASSERT_TEST(new TST_TapeCommandLine());
     ASSERT_TEST(new TST_ValentinaCommandLine());
     ASSERT_TEST(new TST_QmuTokenParser());
@@ -98,7 +78,6 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VLockGuard());
     ASSERT_TEST(new TST_Misc());
     ASSERT_TEST(new TST_VCommandLine());
-    ASSERT_TEST(new TST_TSTranslation());
     ASSERT_TEST(new TST_VAbstractCurve());
     ASSERT_TEST(new TST_VCubicBezierPath());
 

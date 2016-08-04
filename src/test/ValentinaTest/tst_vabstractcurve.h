@@ -29,7 +29,7 @@
 #ifndef TST_VABSTRACTCURVE_H
 #define TST_VABSTRACTCURVE_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 
 class TST_VAbstractCurve : public AbstractTest
 {

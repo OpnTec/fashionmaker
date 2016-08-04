@@ -42,8 +42,9 @@ HEADERS += \
     stable.h
 
 SOURCES += \
-    main.cpp \
-    stable.cpp
+    main.cpp
+
+win32-msvc*:SOURCES += stable.cpp
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

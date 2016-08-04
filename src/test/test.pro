@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     ParserTest \
-    ValentinaTest
+    ValentinaTest \
+    TranslationsTest

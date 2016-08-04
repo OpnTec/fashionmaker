@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_valentinacommandline.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   4 10, 2015
+ **  @date   November 15, 2013
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,31 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef TST_VALENTINACOMMANDLINE_H
-#define TST_VALENTINACOMMANDLINE_H
-
-#include "../vmisc/abstracttest.h"
-
-class TST_ValentinaCommandLine : public AbstractTest
-{
-    Q_OBJECT
-public:
-    explicit TST_ValentinaCommandLine(QObject *parent = nullptr);
-
-private slots:
-    void initTestCase();
-    void OpenPatterns_data() const;
-    void OpenPatterns();
-    void ExportMode_data() const;
-    void ExportMode();
-    void TestMode_data() const;
-    void TestMode();
-    void TestOpenCollection_data() const;
-    void TestOpenCollection();
-    void cleanupTestCase();
-
-private:
-    Q_DISABLE_COPY(TST_ValentinaCommandLine)
-};
-
-#endif // TST_VALENTINACOMMANDLINE_H
+// Build the precompiled headers.
+#include "stable.h"

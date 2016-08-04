@@ -11,7 +11,8 @@ SOURCES += \
     $$PWD/vtapesettings.cpp \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
-    $$PWD/vtablesearch.cpp
+    $$PWD/vtablesearch.cpp \
+    $$PWD/abstracttest.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -31,7 +32,8 @@ HEADERS += \
     $$PWD/vsysexits.h \
     $$PWD/commandoptions.h \
     $$PWD/qxtcsvmodel.h \
-    $$PWD/vtablesearch.h
+    $$PWD/vtablesearch.h \
+    $$PWD/abstracttest.h
 
 # Qt's versions
 # 5.0.0, 5.0.1, 5.0.2

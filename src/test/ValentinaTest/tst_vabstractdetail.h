@@ -29,7 +29,7 @@
 #ifndef TST_VABSTRACTDETAIL_H
 #define TST_VABSTRACTDETAIL_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 
 class TST_VAbstractDetail : public AbstractTest
 {
