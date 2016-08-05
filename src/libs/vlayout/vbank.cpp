@@ -50,6 +50,14 @@ Q_LOGGING_CATEGORY(lBank, "layout.bank")
     #pragma warning( pop )
 #endif
 
+// An annoying char define, from the Windows team in <rpcndr.h>
+// #define small char
+// http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma push_macro("small")
+#undef small
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
     :details(QVector<VLayoutDetail>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
@@ -423,3 +431,7 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin) const
     }
 
 }
+
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma pop_macro("small")
+#endif
