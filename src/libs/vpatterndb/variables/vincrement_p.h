@@ -32,7 +32,7 @@
 #include <QSharedData>
 
 #include "../ifc/ifcdef.h"
-#include "vcontainer.h"
+#include "../vcontainer.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
