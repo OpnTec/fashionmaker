@@ -43,8 +43,8 @@ const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
 const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.2");
 const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
 
-constexpr int VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
-constexpr int VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+//VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+//VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)

@@ -40,8 +40,8 @@ public:
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
-    static constexpr int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
-    static constexpr int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 2);
+    static Q_DECL_CONSTEXPR const int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
+    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 2);
 
 protected:
     virtual int     MinVer() const Q_DECL_OVERRIDE;
