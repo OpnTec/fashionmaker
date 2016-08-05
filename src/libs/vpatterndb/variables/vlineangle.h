@@ -29,7 +29,7 @@
 #ifndef VLINEANGLE_H
 #define VLINEANGLE_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
+#include "vinternalvariable.h"
 
 class VPointF;
 class VLineAngleData;

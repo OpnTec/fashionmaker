@@ -29,7 +29,7 @@
 #ifndef VVARIABLE_H
 #define VVARIABLE_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
+#include "vinternalvariable.h"
 #include "../ifc/ifcdef.h"
 
 class VVariableData;

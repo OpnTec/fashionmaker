@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
-#include "exception/vexception.h"
-#include "exception/vexceptionwrongid.h"
+#include "../exception/vexception.h"
+#include "../exception/vexceptionwrongid.h"
 
 #include <QFile>
 #include <QFileInfo>

@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vabstractpattern.h"
-#include "exception/vexceptionbadid.h"
-#include "exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionbadid.h"
+#include "../exception/vexceptionemptyparameter.h"
 #include "vpatternconverter.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../exception/vexceptionobjecterror.h"

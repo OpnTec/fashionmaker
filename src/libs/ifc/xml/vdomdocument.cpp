@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vdomdocument.h"
-#include "exception/vexceptionconversionerror.h"
-#include "exception/vexceptionemptyparameter.h"
-#include "exception/vexceptionbadid.h"
-#include "exception/vexceptionwrongid.h"
+#include "../exception/vexceptionconversionerror.h"
+#include "../exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionbadid.h"
+#include "../exception/vexceptionwrongid.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/backport/qsavefile.h"

@@ -26,7 +26,7 @@
 #define DL_ENTITIES_H
 
 #include "dl_global.h"
-#include "dxfdef.h"
+#include "../dxfdef.h"
 
 #include <string>
 #include <vector>

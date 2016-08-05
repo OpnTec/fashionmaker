@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vvitconverter.h"
-#include "exception/vexception.h"
+#include "../exception/vexception.h"
 
 #include <QFile>
 

@@ -29,7 +29,7 @@
 #ifndef VLINELENGTH_H
 #define VLINELENGTH_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
+#include "vinternalvariable.h"
 #include "../ifc/ifcdef.h"
 
 class VPointF;

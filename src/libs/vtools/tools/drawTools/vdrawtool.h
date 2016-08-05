@@ -30,7 +30,7 @@
 #define VDRAWTOOL_H
 
 #include "../vabstracttool.h"
-#include "dialogs/tools/dialogtool.h"
+#include "../../dialogs/tools/dialogtool.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 #include <QMenu>

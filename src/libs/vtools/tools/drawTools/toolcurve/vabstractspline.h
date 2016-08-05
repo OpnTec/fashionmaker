@@ -30,7 +30,7 @@
 #define VABSTRACTSPLINE_H
 
 #include "../vdrawtool.h"
-#include "visualization/line/visline.h"
+#include "../../../visualization/line/visline.h"
 
 #include <QGraphicsPathItem>
 

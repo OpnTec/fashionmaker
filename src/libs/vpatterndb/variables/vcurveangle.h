@@ -29,7 +29,7 @@
 #ifndef VCURVEANGLE_H
 #define VCURVEANGLE_H
 
-#include "../vpatterndb/variables/vcurvevariable.h"
+#include "vcurvevariable.h"
 
 class VAbstractCurve;
 class VSpline;

@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vpatternconverter.h"
-#include "exception/vexception.h"
-#include "exception/vexceptionemptyparameter.h"
+#include "../exception/vexception.h"
+#include "../exception/vexceptionemptyparameter.h"
 #include "../qmuparser/qmutokenparser.h"
 
 #include <QDir>

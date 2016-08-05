@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vcmdexport.h"
-#include "dialogs/dialoglayoutsettings.h"
-#include "dialogs/dialogsavelayout.h"
-#include "xml/vdomdocument.h"
+#include "../dialogs/dialoglayoutsettings.h"
+#include "../dialogs/dialogsavelayout.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsettings.h"
