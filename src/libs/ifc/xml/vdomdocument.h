@@ -36,13 +36,12 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/diagnostic.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 /**
  * @brief The VDomDocument class represents a Valentina document (.val file).
@@ -166,8 +165,6 @@ inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement
                                                                         QStringLiteral("individual"));
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VDOMDOCUMENT_H

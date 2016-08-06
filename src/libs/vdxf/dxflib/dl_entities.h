@@ -27,6 +27,7 @@
 
 #include "dl_global.h"
 #include "../dxfdef.h"
+#include "../vmisc/diagnostic.h"
 
 #include <string>
 #include <vector>
@@ -809,11 +810,8 @@ struct DXFLIB_EXPORT DL_MTextData
     double angle;
 };
 
-
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 
 /**
  * Text Data.
@@ -945,9 +943,7 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
     std::string tag;
 };
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 /**
  * Generic Dimension Data.

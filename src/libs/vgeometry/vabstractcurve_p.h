@@ -32,11 +32,10 @@
 #include <QSharedData>
 
 #include "../ifc/ifcdef.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VAbstractCurveData : public QSharedData
 {
@@ -64,8 +63,6 @@ private:
 VAbstractCurveData::~VAbstractCurveData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VABSTRACTCURVE_P_H

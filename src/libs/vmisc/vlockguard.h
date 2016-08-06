@@ -34,6 +34,8 @@
 #include <stdint.h>
 #include <memory>
 
+#include "../vmisc/diagnostic.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #include <QFileInfo>
 #include <QLockFile>
@@ -195,10 +197,8 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 //use pointer and function below to persistent things like class-member, because lock is taken by constructor
 //helper functions allow to write shorter creating and setting new lock-pointer
 
-#if defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_INTEL(1418)
 
 template <typename Guarded>
 void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockName, int stale = 0, int timeout = 0)
@@ -220,8 +220,6 @@ void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockN
     r.reset(new VLockGuard<Guarded>(lockName, a, d, stale, timeout));
 }
 
-#if defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 #endif // VLOCKGUARD_H

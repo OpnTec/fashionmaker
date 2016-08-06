@@ -39,13 +39,9 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#elif defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 68 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+QT_WARNING_DISABLE_INTEL(68)
 
     return QPaintEngine::PaintEngineFeatures(
         QPaintEngine::AllFeatures
@@ -54,11 +50,7 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -566,10 +558,8 @@ void VDxfEngine::setInsunits(const VarInsunits &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
 double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
 {
@@ -585,6 +575,4 @@ double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
     return 0;
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

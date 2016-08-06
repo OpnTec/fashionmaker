@@ -36,10 +36,8 @@
 #include "vlayoutdetail.h"
 #include "vcontour.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VLayoutPaperData : public QSharedData
 {
@@ -79,8 +77,6 @@ private:
     VLayoutPaperData &operator=(const VLayoutPaperData &) Q_DECL_EQ_DELETE;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VLAYOUTPAPER_P_H

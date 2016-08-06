@@ -38,6 +38,7 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
+#include "../vmisc/diagnostic.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -196,10 +197,8 @@ void DialogHistory::FillTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 /**
  * @brief Record return description for record
  * @param tool record data
@@ -400,9 +399,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     return tr("Can't create record.");
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

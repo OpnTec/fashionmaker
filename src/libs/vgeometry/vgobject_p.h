@@ -32,11 +32,10 @@
 #include <QSharedData>
 #include "vgeometrydef.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VGObjectData : public QSharedData
 {
@@ -77,8 +76,6 @@ private:
 VGObjectData::~VGObjectData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VGOBJECT_P_H

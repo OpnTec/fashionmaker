@@ -1026,25 +1026,17 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 continue;
             case cmLAND:
                 --sidx;
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wfloat-equal"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wfloat-equal")
                 Stack[sidx] = static_cast<bool>(Stack[sidx]) && static_cast<bool>(Stack[sidx+1]);
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
                 continue;
             case cmLOR:
                 --sidx;
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wfloat-equal"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wfloat-equal")
                 Stack[sidx] = static_cast<bool>(Stack[sidx]) || static_cast<bool>(Stack[sidx+1]);
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
                 continue;
             case cmASSIGN:
                 // Bugfix for Bulkmode:

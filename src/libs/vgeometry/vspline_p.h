@@ -36,10 +36,8 @@
 #include "vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VSplineData : public QSharedData
 {
@@ -209,8 +207,6 @@ qreal VSplineData::GetL(const QPointF &p1, const QPointF &p4, qreal kCurve)
     return kCurve * radius * 4 / 3 * qTan( angle * M_PI_4 / 180.0 );
 }
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VSPLINE_P_H

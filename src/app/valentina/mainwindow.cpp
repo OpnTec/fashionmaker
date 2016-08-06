@@ -83,21 +83,13 @@
 #include <QDrag>
 #endif //defined(Q_OS_MAC)
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-prototypes"
-#elif defined(Q_CC_INTEL)
-    #pragma warning( push )
-    #pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-    #pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 const QString autosavePrefix = QStringLiteral(".autosave");
 
@@ -1730,10 +1722,8 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 /**
  * @brief CancelTool cancel tool.
  */
@@ -1889,9 +1879,7 @@ void MainWindow::CancelTool()
     redoAction->setEnabled(qApp->getUndoStack()->canRedo());
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -3235,10 +3223,8 @@ void MainWindow::CreateMenus()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
@@ -3411,9 +3397,7 @@ void MainWindow::LastUsedTool()
     }
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()

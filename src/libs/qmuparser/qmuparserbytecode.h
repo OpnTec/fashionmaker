@@ -24,16 +24,15 @@
 
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
+#include "qmudef.h"
 
 /**
  * @file
  * @brief Definition of the parser bytecode class.
  */
 
-#ifdef Q_CC_CLANG
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnested-anon-types"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wnested-anon-types")
 namespace qmu
 {
 struct SToken
@@ -69,9 +68,7 @@ struct SToken
     };
 };
 
-#ifdef Q_CC_CLANG
-#pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 /**
  * @brief Bytecode implementation of the Math Parser.

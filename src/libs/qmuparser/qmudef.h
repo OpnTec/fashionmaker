@@ -84,10 +84,8 @@
 
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wattributes"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wattributes")
 
 #ifdef Q_CC_MSVC
     #include <ciso646>
@@ -99,9 +97,7 @@ inline QString NameRegExp()
     return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`'\"]){0,}$");
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
 static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)

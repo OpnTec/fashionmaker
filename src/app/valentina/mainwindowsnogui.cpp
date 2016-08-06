@@ -757,10 +757,8 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
 void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
 {
@@ -796,9 +794,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
     }
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PreparePaper(int index) const

@@ -33,14 +33,14 @@
 
 #include <QMetaType>
 
+#include "../vmisc/diagnostic.h"
+
 class QPointF;
 class QString;
 class VPointFData;
 
-#if defined (Q_CC_INTEL)
-#pragma warning(push)
-#pragma warning(disable : 2304)
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_INTEL(2304)
 
 /**
  * @brief The VPointF class keep data of point.
@@ -78,8 +78,6 @@ private:
 Q_DECLARE_METATYPE(VPointF)
 Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
 
-#if defined(Q_CC_INTEL)
-#pragma warning(pop)
-#endif
+QT_WARNING_POP
 
 #endif // VPOINTF_H

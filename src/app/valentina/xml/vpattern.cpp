@@ -3295,10 +3295,8 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
@@ -3430,9 +3428,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
     return rec;
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>

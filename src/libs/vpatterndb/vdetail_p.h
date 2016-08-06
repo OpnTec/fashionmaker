@@ -34,11 +34,10 @@
 #include "vpatternpiecedata.h"
 #include "vpatterninfogeometry.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VDetailData : public QSharedData
 {
@@ -81,8 +80,6 @@ private:
     VDetailData &operator=(const VDetailData &) Q_DECL_EQ_DELETE;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VDETAIL_P_H

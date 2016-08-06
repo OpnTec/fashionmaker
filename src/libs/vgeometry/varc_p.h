@@ -32,11 +32,10 @@
 #include <QSharedData>
 #include "vgeometrydef.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VArcData : public QSharedData
 {
@@ -86,8 +85,6 @@ VArcData::VArcData(const VArcData &arc)
 VArcData::~VArcData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VARC_P_H

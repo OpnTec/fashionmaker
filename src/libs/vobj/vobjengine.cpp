@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vobjengine.h"
+#include "../vmisc/diagnostic.h"
 
 #include <QTextStream>
 #include <QDebug>
@@ -44,14 +45,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#elif defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 68 )
-#pragma warning( disable: 2022 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+QT_WARNING_DISABLE_INTEL(68)
+QT_WARNING_DISABLE_INTEL(2022)
 
     return QPaintEngine::PaintEngineFeatures(
         QPaintEngine::AllFeatures
@@ -60,9 +57,7 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

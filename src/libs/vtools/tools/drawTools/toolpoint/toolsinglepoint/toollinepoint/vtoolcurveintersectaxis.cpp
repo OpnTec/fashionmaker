@@ -299,10 +299,8 @@ void VToolCurveIntersectAxis::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
                                            VContainer *data)
 {
@@ -444,6 +442,4 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
     }
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

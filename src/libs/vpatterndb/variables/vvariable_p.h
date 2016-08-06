@@ -31,10 +31,10 @@
 
 #include <QSharedData>
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VVariableData : public QSharedData
 {
@@ -83,8 +83,6 @@ private:
 VVariableData::~VVariableData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VVARIABLE_P_H

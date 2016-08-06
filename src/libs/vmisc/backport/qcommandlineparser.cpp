@@ -29,12 +29,12 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-    #pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
-#endif
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
+QT_WARNING_DISABLE_GCC("-Wsuggest-attribute=noreturn")
 
 typedef QHash<QString, int> NameHash_t;
 
@@ -891,9 +891,6 @@ QString QCommandLineParserPrivate::helpText() const
     return text;
 }
 
-
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif //QT_VERSION < QT_VERSION_CHECK(5, 2, 0)

@@ -38,11 +38,8 @@
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "vtextmanager.h"
 
-
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VLayoutDetailData : public QSharedData
 {
@@ -100,8 +97,6 @@ private:
     VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VLAYOUTDETAIL_P_H

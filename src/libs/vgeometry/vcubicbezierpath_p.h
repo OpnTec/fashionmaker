@@ -32,11 +32,10 @@
 #include <QSharedData>
 
 #include "vpointf.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VCubicBezierPathData : public QSharedData
 {
@@ -63,8 +62,6 @@ private:
 VCubicBezierPathData::~VCubicBezierPathData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VCUBICBEZIERPATH_P_H

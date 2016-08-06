@@ -25,12 +25,11 @@
 #include <QtGlobal>
 
 #include "delaunay.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wold-style-cast"
-    #pragma GCC diagnostic ignored "-Wcast-qual"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wold-style-cast")
+QT_WARNING_DISABLE_GCC("-Wcast-qual")
 
 #if PREDICATE == EXACT_PREDICATE
 extern void exactinit();
@@ -1083,6 +1082,4 @@ void delaunay2d_release(delaunay2d_t *del) {
     free(del);
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

@@ -39,6 +39,8 @@
 #include <QTextStream>
 #include <QDebug>
 
+#include "../vmisc/diagnostic.h"
+
 class QxtCsvModelPrivate : public QxtPrivate<QxtCsvModel>
 {
 public:
@@ -52,10 +54,8 @@ public:
     QxtCsvModel::QuoteMode quoteMode;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 /*!
   Creates an empty QxtCsvModel with parent \a parent.
@@ -98,9 +98,7 @@ QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHead
     setSource(&src, withHeader, separator);
 }
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 QxtCsvModel::~QxtCsvModel()
 {}

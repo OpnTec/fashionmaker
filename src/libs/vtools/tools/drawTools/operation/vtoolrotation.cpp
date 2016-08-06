@@ -68,10 +68,8 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
         switch(static_cast<GOType>(obj->getType()))
         {
             case GOType::Point:
@@ -124,9 +122,7 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
             case GOType::Unknown:
                 break;
         }
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
     }
 
     ToolCreation(typeCreation);
@@ -198,10 +194,8 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
             switch(static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -229,9 +223,7 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
                 case GOType::Unknown:
                     break;
             }
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
         }
     }
     else
@@ -244,10 +236,8 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
             switch(static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -276,9 +266,7 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
                 case GOType::Unknown:
                     break;
             }
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
         }
         if (parse != Document::FullParse)
         {

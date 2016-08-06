@@ -35,6 +35,7 @@
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vmisc/diagnostic.h"
 #include "vtranslatevars.h"
 
 #include <QCoreApplication>
@@ -42,13 +43,9 @@
 #include <QSet>
 #include <QSharedPointer>
 
-#if defined(Q_CC_INTEL)
-    #pragma warning( push )
-    #pragma warning( disable: 2021 )
-#elif defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_INTEL(2021)
 
 class VContainerData : public QSharedData //-V690
 {
@@ -88,11 +85,7 @@ private:
     VContainerData &operator=(const VContainerData &) Q_DECL_EQ_DELETE;
 };
 
-#if defined(Q_CC_INTEL)
-    #pragma warning( pop )
-#elif defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 /**
  * @brief The VContainer class container of all variables.
