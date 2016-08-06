@@ -310,6 +310,8 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
  * @return The Position of the first character not listed in a_szCharSet.
  * @throw nothrow
  */
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4309)
 int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const
 {
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
@@ -366,6 +368,7 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
         return ExtractToken ( QMUP_CHARS, a_sTok, a_iPos );
     }
 }
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
