@@ -1262,6 +1262,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
 int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass )
 {
     QmuParserTester::c_iCount++;
+    // cppcheck-suppress variableScope
     int iRet ( 0 );
     qreal fVal[5] = { -999, -998, -997, -996, -995}; // initially should be different
 
