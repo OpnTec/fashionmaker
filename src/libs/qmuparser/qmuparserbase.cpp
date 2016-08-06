@@ -1097,10 +1097,10 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
             case cmFUNC:
             {
                 int iArgCount = pTok->Fun.argc;
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wundefined-reinterpret-cast"
-#endif
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
+QT_WARNING_DISABLE_MSVC(4191)
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1293,9 +1293,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 return 0;
         } // switch CmdCode
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
     } // for all bytecode tokens
 

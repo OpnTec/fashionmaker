@@ -204,10 +204,9 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
     } // switch opcode
 }
 
-#if defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 1195 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_INTEL(1195)
+QT_WARNING_DISABLE_MSVC(4826)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -369,9 +368,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
     }
 }
 
-#if defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)

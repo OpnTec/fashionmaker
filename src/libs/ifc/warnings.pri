@@ -63,7 +63,7 @@ unix {
         QMAKE_CXXFLAGS += $$MSVC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
-            #QMAKE_CXXFLAGS += -WX
+            QMAKE_CXXFLAGS += -WX
         }
     }
 }
