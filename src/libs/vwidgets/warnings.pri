@@ -13,11 +13,14 @@ unix {
         noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
             # do nothing
         } else {
-            #gcc’s 4.8.0 Address Sanitizer
-            #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-            QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-            QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-            QMAKE_LFLAGS += -fsanitize=address
+            CONFIG(debug, debug|release){
+                # Debug mode
+                #gcc’s 4.8.0 Address Sanitizer
+                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
+                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_LFLAGS += -fsanitize=address
+            }
         }
     }
 
