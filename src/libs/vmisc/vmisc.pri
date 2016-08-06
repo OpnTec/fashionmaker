@@ -33,7 +33,8 @@ HEADERS += \
     $$PWD/commandoptions.h \
     $$PWD/qxtcsvmodel.h \
     $$PWD/vtablesearch.h \
-    $$PWD/abstracttest.h
+    $$PWD/abstracttest.h \
+    $$PWD/diagnostic.h
 
 # Qt's versions
 # 5.0.0, 5.0.1, 5.0.2

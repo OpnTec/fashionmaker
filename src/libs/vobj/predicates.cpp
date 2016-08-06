@@ -108,7 +108,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <QtGlobal>
+
+#include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4701)

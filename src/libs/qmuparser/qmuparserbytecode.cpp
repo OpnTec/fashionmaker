@@ -27,7 +27,6 @@
 #include <QString>
 #include <QDebug>
 #include <QtCore/qmath.h>
-#include <QtGlobal>
 
 namespace qmu
 {
