@@ -59,6 +59,7 @@ public:
     void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void                Reset();
+    bool                IsIdle() const;
 
     int                 GetFontSize() const;
     QRectF              boundingRect() const;
@@ -75,6 +76,8 @@ protected:
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
+    void                hoverMoveEvent(QGraphicsSceneHoverEvent* pHE);
+    void                hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE);
     void                UpdateBox();
     void                UpdateFont();
 

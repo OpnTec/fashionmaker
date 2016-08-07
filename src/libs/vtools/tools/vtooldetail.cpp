@@ -333,6 +333,22 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief VToolDetail::paint draws a bounding box around detail, if one of its text items is not idle.
+ */
+void VToolDetail::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false)
+    {
+        painter->save();
+        painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
+        painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
+        painter->restore();
+    }
+    VNoBrushScalePathItem::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief AddToFile add tag with informations about tool into file.
  */
 void VToolDetail::AddToFile()
