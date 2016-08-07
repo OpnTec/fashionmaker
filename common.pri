@@ -256,6 +256,25 @@ GCC_DEBUG_CXXFLAGS += \
     -Wno-unused \
     -ftrapv
 
+# Since GCC 5
+g++5:GCC_DEBUG_CXXFLAGS += \
+    -Wswitch-bool \
+    -Wlogical-not-parentheses \
+    -Wsizeof-array-argument \
+    -Wbool-compare \
+    -Wsuggest-final-types \
+    -Wsuggest-final-methods
+
+# Since GCC 6
+g++6:GCC_DEBUG_CXXFLAGS += \
+    -Wshift-negative-value \
+    -Wshift-overflow \
+    -Wshift-overflow=2 \
+    -Wtautological-compare \
+    -Wnull-dereference \
+    -Wduplicated-cond \
+    -Wmisleading-indentation
+
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
     -O0 \ # Turn off oprimization.
