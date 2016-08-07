@@ -70,7 +70,7 @@ public:
     virtual void setVector(const Vector3D& vect);
 
     //! Sets the Vector3d
-    virtual void setVector(float x, float y, float z);
+    virtual void setVector(double x, double y, double z);
 
     //! Returns a string containing the type of the property
     virtual QString type() const Q_DECL_OVERRIDE;

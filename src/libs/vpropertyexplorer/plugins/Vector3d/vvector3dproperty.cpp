@@ -73,9 +73,9 @@ Vector3D QVector3DProperty::getVector() const
         return tmpVect;
     }
 
-    tmpVect.X = d_ptr->Children.at(0)->getValue().toFloat();
-    tmpVect.Y = d_ptr->Children.at(1)->getValue().toFloat();
-    tmpVect.Z = d_ptr->Children.at(2)->getValue().toFloat();
+    tmpVect.X = d_ptr->Children.at(0)->getValue().toDouble();
+    tmpVect.Y = d_ptr->Children.at(1)->getValue().toDouble();
+    tmpVect.Z = d_ptr->Children.at(2)->getValue().toDouble();
 
     return tmpVect;
 }
@@ -86,7 +86,7 @@ void QVector3DProperty::setVector(const Vector3D &vect)
     setVector(vect.X, vect.Y, vect.Z);
 }
 
-void QVector3DProperty::setVector(float x, float y, float z)
+void QVector3DProperty::setVector(double x, double y, double z)
 {
     if (d_ptr->Children.count() < 3)
     {
@@ -131,7 +131,7 @@ void QVector3DProperty::setValue(const QVariant &value)
     QStringList tmpStrings = value.toString().split(",");
     if (tmpStrings.count() == 3)
     {
-        setVector(tmpStrings[0].toFloat(), tmpStrings[1].toFloat(), tmpStrings[2].toFloat());
+        setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());
     }
 
 }
