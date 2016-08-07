@@ -51,6 +51,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui.lineEditName->setClearButtonEnabled(true);
+    ui.lineEditLetter->setClearButtonEnabled(true);
 #endif
 
     labelEditNamePoint = ui.labelEditName;
