@@ -55,8 +55,10 @@ CONFIG(release, debug|release){
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
-    QMAKE_CXXFLAGS -= -O2 # Disable default optimization level
-    QMAKE_CXXFLAGS += -O3 # For vlayout library enable speed optimizations
+    !win32-msvc* {
+        QMAKE_CXXFLAGS -= -O2 # Disable default optimization level
+        QMAKE_CXXFLAGS += -O3 # For vlayout library enable speed optimizations
+    }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         # do nothing
