@@ -741,5 +741,6 @@ MSVC_DEBUG_CXXFLAGS += \
     -wd4265 \
     -wd4599 \
     -wd4371 \
-    -wd4718
+    -wd4718 \
+    -wd4946
 }

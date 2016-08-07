@@ -38,6 +38,8 @@
 
 #include "iostream"
 
+#include "../vmisc/diagnostic.h"
+
 /**
  * Default constructor.
  */
@@ -109,7 +111,11 @@ bool DL_Dxf::in(const std::string& file, DL_CreationInterface* creationInterface
     firstCall = true;
     currentObjectType = DL_UNKNOWN;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     fp = fopen(file.c_str(), "rt");
+QT_WARNING_POP
+
     if (fp)
     {
         while (readDxfGroups(fp, creationInterface)) {}
@@ -2538,7 +2544,10 @@ void DL_Dxf::endSequence(DL_CreationInterface* creationInterface)
 DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
     char* f = new char[strlen(file)+1];
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     strcpy(f, file);
+QT_WARNING_POP
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);
@@ -3121,11 +3130,17 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     int i;
     for (i=250; i<length; i+=250)
     {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
         strncpy(chunk, &data.text.c_str()[i-250], 250);
+QT_WARNING_POP
         chunk[250]='\0';
         dw.dxfString(3, chunk);
     }
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     strncpy(chunk, &data.text.c_str()[i-250], 250);
+QT_WARNING_POP
     chunk[250]='\0';
     dw.dxfString(1, chunk);
 
@@ -5864,12 +5879,15 @@ void DL_Dxf::test()
     char* buf5 = new char[10];
     char* buf6 = new char[10];
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     strcpy(buf1, "  10\n");
     strcpy(buf2, "10");
     strcpy(buf3, "10\n");
     strcpy(buf4, "  10 \n");
     strcpy(buf5, "  10 \r");
     strcpy(buf6, "\t10 \n");
+QT_WARNING_POP
 
     // Try to avoid deleting array from an offset
     char* buf1Copy = buf1;

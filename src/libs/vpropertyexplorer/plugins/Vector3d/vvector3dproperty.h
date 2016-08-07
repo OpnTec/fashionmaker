@@ -40,7 +40,7 @@ public:
 
     ~Vector3D() {}
 
-    float X, Y, Z;
+    double X, Y, Z;
 };
 /*
 }

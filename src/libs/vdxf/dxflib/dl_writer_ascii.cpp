@@ -64,15 +64,18 @@ bool DL_WriterA::openFailed() const
 void DL_WriterA::dxfReal(int gc, double value) const
 {
     char str[256];
-    if (version==DL_Codes::AC1009_MIN) 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
+    if (version==DL_Codes::AC1009_MIN)
     {
         sprintf(str, "%.6lf", value);
     }
-    else 
+    else
     {
         sprintf(str, "%.16lf", value);
     }
-    
+QT_WARNING_POP
+
     // fix for german locale:
     strReplace(str, ',', '.');
 
@@ -125,7 +128,10 @@ void DL_WriterA::dxfInt(int gc, int value) const
 void DL_WriterA::dxfHex(int gc, int value) const
 {
     char str[12];
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     sprintf(str, "%0X", value);
+QT_WARNING_POP
     dxfString(gc, str);
 }
 
