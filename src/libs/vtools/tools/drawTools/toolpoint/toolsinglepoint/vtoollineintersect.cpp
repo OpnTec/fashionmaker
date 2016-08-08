@@ -27,9 +27,33 @@
  *************************************************************************/
 
 #include "vtoollineintersect.h"
+
+#include <QLine>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../dialogs/tools/dialoglineintersect.h"
-#include "../vgeometry/vpointf.h"
 #include "../../../../visualization/line/vistoollineintersect.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+template <class T> class QSharedPointer;
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 

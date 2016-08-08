@@ -29,6 +29,14 @@
 #include "renamepp.h"
 
 #include <QComboBox>
+#include <QDomElement>
+
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)

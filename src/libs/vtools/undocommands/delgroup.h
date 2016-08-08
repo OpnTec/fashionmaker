@@ -29,7 +29,16 @@
 #ifndef DELGROUP_H
 #define DELGROUP_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
+
+class QUndoCommand;
+class VAbstractPattern;
 
 class DelGroup : public VUndoCommand
 {

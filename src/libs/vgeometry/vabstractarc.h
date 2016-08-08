@@ -29,7 +29,14 @@
 #ifndef VABSTRACTARC_H
 #define VABSTRACTARC_H
 
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
+#include "vgeometrydef.h"
 
 class VAbstractArcData;
 class VPointF;

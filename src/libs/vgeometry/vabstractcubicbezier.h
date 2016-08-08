@@ -29,8 +29,17 @@
 #ifndef VABSTRACTCUBICBEZIER_H
 #define VABSTRACTCUBICBEZIER_H
 
-#include "vabstractcurve.h"
+#include <qcompilerdetection.h>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 
+#include "../ifc/ifcdef.h"
+#include "vabstractcurve.h"
+#include "vgeometrydef.h"
+
+class QPointF;
 class VPointF;
 
 class VAbstractCubicBezier : public VAbstractCurve

@@ -29,10 +29,28 @@
 #ifndef VTOOLCUTSPLINEPATH_H
 #define VTOOLCUTSPLINEPATH_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoolcut.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
 class VAbstractCubicBezierPath;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+class VPointF;
 class VSplinePath;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on

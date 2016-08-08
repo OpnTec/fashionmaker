@@ -20,13 +20,17 @@
  ******************************************************************************************************/
 
 #include "qmuparserbytecode.h"
-#include "qmuparsertoken.h"
-#include "qmudef.h"
 
+#include <QtCore/qmath.h>
+#include <assert.h>
+#include <QDebug>
+#include <QMessageLogger>
 #include <QStack>
 #include <QString>
-#include <QDebug>
-#include <QtCore/qmath.h>
+#include <QtDebug>
+
+#include "qmudef.h"
+#include "qmuparsererror.h"
 
 namespace qmu
 {

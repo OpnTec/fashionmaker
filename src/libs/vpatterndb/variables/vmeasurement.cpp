@@ -27,10 +27,15 @@
  *************************************************************************/
 
 #include "vmeasurement.h"
-#include "vmeasurement_p.h"
 
+#include <QDebug>
 #include <QMap>
+#include <QMessageLogger>
 #include <QtDebug>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "variables/vvariable.h"
+#include "vmeasurement_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

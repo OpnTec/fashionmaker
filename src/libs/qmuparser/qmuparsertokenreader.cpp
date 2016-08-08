@@ -20,9 +20,23 @@
  ******************************************************************************************************/
 
 #include "qmuparsertokenreader.h"
-#include "qmuparserbase.h"
-#include <QStringList>
+
+#include <assert.h>
+#include <QCharRef>
 #include <QDebug>
+#include <QList>
+#include <QMessageLogger>
+#include <QStringList>
+#include <QtDebug>
+#include <fstream>
+#include <iterator>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+
+#include "qmudef.h"
+#include "qmuparserbase.h"
 
 /**
  * @file
@@ -31,9 +45,6 @@
 
 namespace qmu
 {
-
-// Forward declaration
-class QmuParserBase;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

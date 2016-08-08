@@ -27,17 +27,36 @@
  *************************************************************************/
 
 #include "dialogendline.h"
-#include "ui_dialogendline.h"
+
+#include <QDialog>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPlainTextEdit>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QSharedPointer>
+#include <QTimer>
+#include <QToolButton>
+#include <new>
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/line/vistoolendline.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolendline.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include <QTimer>
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "ui_dialogendline.h"
+
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -29,7 +29,10 @@
 #ifndef IFCDEF_H
 #define IFCDEF_H
 
+#include <QString>
+#include <QStringList>
 #include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 extern const QString CustomMSign;

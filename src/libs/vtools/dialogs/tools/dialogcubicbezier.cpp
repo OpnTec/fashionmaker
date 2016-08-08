@@ -27,8 +27,22 @@
  *************************************************************************/
 
 #include "dialogcubicbezier.h"
-#include "ui_dialogcubicbezier.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+#include <new>
+
 #include "../../visualization/path/vistoolcubicbezier.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogcubicbezier.h"
+
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent)

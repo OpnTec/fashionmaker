@@ -27,14 +27,51 @@
  *************************************************************************/
 
 #include "vtoolbasepoint.h"
+
+#include <QApplication>
+#include <QEvent>
+#include <QFlags>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
+#include <QList>
+#include <QMessageBox>
+#include <QPen>
+#include <QPointF>
+#include <QPolygonF>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <new>
+
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../../../../undocommands/movespoint.h"
 #include "../../../../undocommands/addpatternpiece.h"
 #include "../../../../undocommands/deletepatternpiece.h"
+#include "../../../../undocommands/movespoint.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/../../vmisc/logging.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vdatatool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
 
-#include <QMessageBox>
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
 
 const QString VToolBasePoint::ToolType = QStringLiteral("single");
 

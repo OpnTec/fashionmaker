@@ -27,9 +27,32 @@
  *************************************************************************/
 
 #include "vtoolheight.h"
+
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogheight.h"
-#include "../vgeometry/vpointf.h"
 #include "../../../../../visualization/line/vistoolheight.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QLineF;
+class QPointF;
+template <class T> class QSharedPointer;
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 

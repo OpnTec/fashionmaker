@@ -27,13 +27,47 @@
  *************************************************************************/
 
 #include "vdxfengine.h"
-#include <QDebug>
+
+#include <math.h>
+#include <QByteArray>
+#include <QColor>
 #include <QDateTime>
+#include <QDebug>
+#include <QFlag>
+#include <QFlags>
+#include <QFont>
+#include <QLineF>
+#include <QList>
+#include <QMessageLogger>
+#include <QPaintEngineState>
+#include <QPainterPath>
+#include <QPen>
+#include <QPolygonF>
+#include <QTextItem>
+#include <Qt>
+#include <QtDebug>
+
+#include "../vmisc/def.h"
+#include "../vmisc/diagnostic.h"
+#include "dxflib/dl_attributes.h"
+#include "dxflib/dl_codes.h"
+#include "dxflib/dl_dxf.h"
+#include "dxflib/dl_entities.h"
+#include "dxflib/dl_writer_ascii.h"
+
+class QLine;
+class QLineF;
+class QPaintDevice;
+class QPixmap;
+class QPoint;
+class QPointF;
+class QPolygonF;
+class QRect;
+class QRectF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

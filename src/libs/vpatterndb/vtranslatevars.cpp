@@ -27,15 +27,23 @@
  *************************************************************************/
 
 #include "vtranslatevars.h"
-#include "calculator.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "../qmuparser/qmutokenparser.h"
-#include "../ifc/ifcdef.h"
 
+#include <QDebug>
+#include <QList>
 #include <QLocale>
+#include <QMap>
+#include <QMessageLogger>
+#include <QString>
 #include <QtDebug>
+
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../qmuparser/qmutranslation.h"
+#include "../vmisc/../vpatterndb/vtranslatevars.h"
+#include "../vmisc/vabstractapplication.h"
+#include "vtranslatemeasurements.h"
 
 using namespace qmu;
 

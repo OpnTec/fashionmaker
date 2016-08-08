@@ -27,12 +27,40 @@
  *************************************************************************/
 
 #include "vtoolcutsplinepath.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QPointF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QVector>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogcutsplinepath.h"
-#include "../vgeometry/vpointf.h"
 #include "../../../../../visualization/path/vistoolcutsplinepath.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VGObject;
+template <class T> class QSharedPointer;
 
 const QString VToolCutSplinePath::ToolType       = QStringLiteral("cutSplinePath");
 const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");

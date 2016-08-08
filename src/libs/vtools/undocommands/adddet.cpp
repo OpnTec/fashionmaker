@@ -28,6 +28,16 @@
 
 #include "adddet.h"
 
+#include <QByteArray>
+#include <QDomNode>
+
+#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+
 //---------------------------------------------------------------------------------------------------------------------
 AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, const QString &drawName,
                QUndoCommand *parent)

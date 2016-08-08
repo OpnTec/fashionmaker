@@ -29,19 +29,21 @@
 #ifndef VPOSITION_H
 #define VPOSITION_H
 
+#include <qcompilerdetection.h>
 #include <QRunnable>
 #include <QVector>
+#include <QtGlobal>
 
-#include "vlayoutdef.h"
 #include "vbestsquare.h"
 #include "vcontour.h"
+#include "vlayoutdef.h"
 #include "vlayoutdetail.h"
 
-class QPointF;
-class QRectF;
 class QLineF;
-class QPolygonF;
 class QPainterPath;
+class QPointF;
+class QPolygonF;
+class QRectF;
 
 class VPosition : public QRunnable
 {

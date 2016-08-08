@@ -29,7 +29,27 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolBisector class tool for creation bisector point.

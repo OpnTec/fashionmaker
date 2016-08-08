@@ -29,7 +29,21 @@
 #ifndef VGRAPHICSLINEITEM_H
 #define VGRAPHICSLINEITEM_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QGraphicsItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class QLineF;
+class VContainer;
 
 class VisToolLine : public VisLine
 {

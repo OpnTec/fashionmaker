@@ -27,8 +27,23 @@
  *************************************************************************/
 
 #include "vistoolcutspline.h"
+
+#include <QGraphicsEllipseItem>
+#include <QGraphicsPathItem>
+#include <QPainterPath>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcubicbezier.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
+#include "visualization/path/../visualization.h"
+#include "visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)

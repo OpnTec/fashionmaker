@@ -29,12 +29,27 @@
 #ifndef VSIMPLEPOINT_H
 #define VSIMPLEPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
 
+#include "../ifc/../vmisc/def.h"
 #include "vabstractsimple.h"
 
-class VPointF;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+class QPointF;
 class VGraphicsSimpleTextItem;
+class VPointF;
 
 class VSimplePoint : public VAbstractSimple, public QGraphicsEllipseItem
 {

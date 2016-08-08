@@ -28,9 +28,18 @@
 
 #include "vnodesplinepath.h"
 
-#include "../../../vgeometry/vsplinepath.h"
-#include <QGraphicsSceneMouseEvent>
-#include <QPen>
+#include <QDomElement>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "tools/nodeDetails/../vabstracttool.h"
+#include "tools/nodeDetails/../vdatatool.h"
+#include "tools/nodeDetails/vabstractnode.h"
+
+class VContainer;
 
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 

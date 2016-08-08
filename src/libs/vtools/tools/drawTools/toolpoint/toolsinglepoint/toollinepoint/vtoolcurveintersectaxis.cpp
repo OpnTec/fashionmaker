@@ -27,19 +27,47 @@
  *************************************************************************/
 
 #include "vtoolcurveintersectaxis.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <limits.h>
+#include <QLineF>
+#include <QMap>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QVector>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
-#include "../../../../../dialogs/support/dialogeditwrongformula.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/varc.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
+#include "../ifc/exception/vexception.h"
+#include "../qmuparser/qmudef.h"
+#include "../toolcut/vtoolcutsplinepath.h"
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vtools/visualization/line/../visualization.h"
 #include "../vtools/visualization/line/vistoolcurveintersectaxis.h"
-#include "../toolcut/vtoolcutsplinepath.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/support/../tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../toolcut/../../../toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+template <class T> class QSharedPointer;
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");
 

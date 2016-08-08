@@ -27,10 +27,30 @@
  *************************************************************************/
 
 #include "abstracttest.h"
+
+#include <qtestcase.h>
+#include <QApplication>
+#include <QByteArray>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QFlags>
+#include <QForeachContainer>
+#include <QIODevice>
+#include <QPointF>
+#include <QProcess>
+#include <QScopedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+#include <QVector>
+#include <QtGlobal>
+
 #include "logging.h"
 #include "vsysexits.h"
 
-#include <QtTest>
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 AbstractTest::AbstractTest(QObject *parent) :

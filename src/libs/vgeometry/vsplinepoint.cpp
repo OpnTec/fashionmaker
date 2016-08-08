@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vsplinepoint.h"
-#include "vsplinepoint_p.h"
-#include "../qmuparser/qmutokenparser.h"
 
-#include <QDebug>
 #include <QLineF>
+
+#include "../qmuparser/qmutokenparser.h"
+#include "vsplinepoint_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -29,8 +29,18 @@
 #ifndef VCOMMONSETTINGS_H
 #define VCOMMONSETTINGS_H
 
+#include <QByteArray>
+#include <QMetaObject>
+#include <QObject>
 #include <QSettings>
+#include <QSize>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>
+
 #include "../vlayout/vbank.h"
+
+class QDate;
 
 class VCommonSettings : public QSettings
 {

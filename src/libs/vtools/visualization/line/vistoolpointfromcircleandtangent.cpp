@@ -27,9 +27,22 @@
  *************************************************************************/
 
 #include "vistoolpointfromcircleandtangent.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
+
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)

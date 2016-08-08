@@ -29,9 +29,25 @@
 #ifndef VTOOLARCWITHLENGTH_H
 #define VTOOLARCWITHLENGTH_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VContainer;
 class VFormula;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 class VToolArcWithLength : public VAbstractSpline
 {

@@ -29,7 +29,25 @@
 #ifndef VTOOLALONGLINE_H
 #define VTOOLALONGLINE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolAlongLine class tool for creation point along line.

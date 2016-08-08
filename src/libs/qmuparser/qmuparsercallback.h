@@ -22,6 +22,10 @@
 #ifndef QMUPARSERCALLBACK_H
 #define QMUPARSERCALLBACK_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <map>
+
 #include "qmuparserdef.h"
 
 /**

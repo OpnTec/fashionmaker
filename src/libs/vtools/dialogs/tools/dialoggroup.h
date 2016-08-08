@@ -29,7 +29,18 @@
 #ifndef DIALOGGROUP_H
 #define DIALOGGROUP_H
 
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vtools/tools/drawTools/../../dialogs/tools/dialogtool.h"
 #include "dialogtool.h"
+
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

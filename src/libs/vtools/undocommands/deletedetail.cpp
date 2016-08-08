@@ -27,7 +27,20 @@
  *************************************************************************/
 
 #include "deletedetail.h"
+
+#include <QDomElement>
+#include <QHash>
+
 #include "../tools/vtooldetail.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "undocommands/../../ifc/xml/vdomdocument.h"
+#include "undocommands/../tools/vdatatool.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 DeleteDetail::DeleteDetail(VAbstractPattern *doc, quint32 id, const VDetail &detail, QUndoCommand *parent)

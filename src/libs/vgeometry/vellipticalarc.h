@@ -29,10 +29,20 @@
 #ifndef VELLIPTICALARC_H
 #define VELLIPTICALARC_H
 
-#include "vabstractarc.h"
-#include "vpointf.h"
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
 
+#include "vabstractarc.h"
+#include "vgeometrydef.h"
+#include "vpointf.h"
+
+class QPointF;
 class VEllipticalArcData;
 
 class VEllipticalArc : public VAbstractArc

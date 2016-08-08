@@ -19,12 +19,16 @@
  *************************************************************************/
 
 #include "vshortcutproperty.h"
-#include <QFileInfo>
-#include <QAbstractItemDelegate>
 
-#include "vshortcutpropertyeditor.h"
+#include <QAbstractItemDelegate>
+#include <QKeySequence>
+#include <QLocale>
+#include <QWidget>
 
 #include "../vproperty_p.h"
+#include "vshortcutpropertyeditor.h"
+
+class QStyleOptionViewItem;
 
 
 using namespace VPE;

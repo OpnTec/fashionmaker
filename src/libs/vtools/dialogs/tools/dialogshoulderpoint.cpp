@@ -27,15 +27,32 @@
  *************************************************************************/
 
 #include "dialogshoulderpoint.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QToolButton>
+
+#include "../../../vpatterndb/vtranslatevars.h"
+#include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolshoulderpoint.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
 #include "ui_dialogshoulderpoint.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/line/vistoolshoulderpoint.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../tools/vabstracttool.h"
-#include "../support/dialogeditwrongformula.h"
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

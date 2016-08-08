@@ -29,7 +29,17 @@
 #ifndef DIALOGTRIANGLE_H
 #define DIALOGTRIANGLE_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
+
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

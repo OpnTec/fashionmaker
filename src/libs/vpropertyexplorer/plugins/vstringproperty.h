@@ -21,8 +21,24 @@
 #ifndef VSTRINGPROPERTY_H
 #define VSTRINGPROPERTY_H
 
-#include "../vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <QtGlobal>
+
 #include "../vproperty.h"
+#include "../vpropertyexplorer_global.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
+class QWidget;
 
 namespace VPE
 {

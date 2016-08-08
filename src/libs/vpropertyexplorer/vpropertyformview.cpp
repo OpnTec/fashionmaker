@@ -19,13 +19,19 @@
  *************************************************************************/
 
 #include "vpropertyformview.h"
-#include "vpropertymodel.h"
-#include "vpropertyset.h"
-#include <QFormLayout>
-#include <QGroupBox>
-#include <QShowEvent>
+
+#include <QForeachContainer>
+#include <QList>
+#include <Qt>
 
 #include "vpropertyformview_p.h"
+#include "vpropertyformwidget_p.h"
+#include "vpropertymodel.h"
+#include "vpropertyset.h"
+
+class QModelIndex;
+class QShowEvent;
+class QWidget;
 
 using namespace VPE;
 

@@ -32,6 +32,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QMenu>
+#include <QDate>
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"

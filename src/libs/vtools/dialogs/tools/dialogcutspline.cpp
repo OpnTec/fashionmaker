@@ -27,13 +27,27 @@
  *************************************************************************/
 
 #include "dialogcutspline.h"
-#include "ui_dialogcutspline.h"
 
-#include "../../../vgeometry/vspline.h"
-#include "../../../vpatterndb/vcontainer.h"
+#include <QDialog>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QToolButton>
+
 #include "../../../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolcutspline.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "ui_dialogcutspline.h"
+
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -27,12 +27,18 @@
  *************************************************************************/
 
 #include "vellipticalarc.h"
+
+#include <QtCore/qmath.h>
+#include <math.h>
+#include <QLineF>
+#include <QPoint>
+
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "vabstractcurve.h"
 #include "vellipticalarc_p.h"
 #include "vspline.h"
-#include "../ifc/ifcdef.h"
-#include <QtCore/qmath.h>
-#include <QLineF>
-#include <QPainterPath>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

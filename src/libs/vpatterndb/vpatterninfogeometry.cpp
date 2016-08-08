@@ -28,6 +28,8 @@
 
 #include "vpatterninfogeometry.h"
 
+class QPointF;
+
 //---------------------------------------------------------------------------------------------------------------------
 VPatternInfoGeometry::VPatternInfoGeometry()
     :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(MIN_FONT_SIZE),

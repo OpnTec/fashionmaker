@@ -29,8 +29,29 @@
 #ifndef VTOOLLINE_H
 #define VTOOLLINE_H
 
-#include "vdrawtool.h"
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
 #include <QGraphicsLineItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "vdrawtool.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QKeyEvent;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolLine class tool for creation line.

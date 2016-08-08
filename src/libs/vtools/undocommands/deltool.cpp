@@ -27,8 +27,15 @@
  *************************************************************************/
 
 #include "deltool.h"
-#include <QGraphicsItem>
-#include "../tools/vtooldetail.h"
+
+#include <QDomElement>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)

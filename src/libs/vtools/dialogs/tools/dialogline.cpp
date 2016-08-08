@@ -27,13 +27,24 @@
  *************************************************************************/
 
 #include "dialogline.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QIcon>
+#include <QLabel>
+#include <QMap>
+#include <QPointer>
+#include <QVariant>
+
+#include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolline.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "dialogs/tools/dialogtool.h"
 #include "ui_dialogline.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../visualization/line/vistoolline.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../tools/vabstracttool.h"
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

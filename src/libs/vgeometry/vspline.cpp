@@ -27,10 +27,14 @@
  *************************************************************************/
 
 #include "vspline.h"
+
+#include <math.h>
+#include <QLineF>
+
+#include "vabstractcurve.h"
 #include "vspline_p.h"
-#include <QDebug>
-#include <QPainterPath>
-#include <QtCore/qmath.h>
+
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

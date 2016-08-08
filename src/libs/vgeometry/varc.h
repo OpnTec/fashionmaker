@@ -29,11 +29,21 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include "vabstractarc.h"
-#include "vpointf.h"
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
+#include "vabstractarc.h"
+#include "vgeometrydef.h"
+#include "vpointf.h"
 
 class QPainterPath;
+class QPointF;
 class VArcData;
 
 /**

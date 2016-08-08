@@ -27,9 +27,17 @@
  *************************************************************************/
 
 #include "dialoguniondetails.h"
-#include "ui_dialoguniondetails.h"
-#include "../vpatterndb/vdetail.h"
+
+#include <QCheckBox>
+#include <QVector>
+
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vdetail.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialoguniondetails.h"
+
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

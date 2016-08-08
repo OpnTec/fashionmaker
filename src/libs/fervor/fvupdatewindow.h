@@ -23,8 +23,13 @@
 #define FVUPDATEWINDOW_H
 
 #include <QDialog>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
 
 class QGraphicsScene;
+class QWidget;
 
 namespace Ui
 {

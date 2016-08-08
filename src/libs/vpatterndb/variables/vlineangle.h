@@ -29,10 +29,15 @@
 #ifndef VLINEANGLE_H
 #define VLINEANGLE_H
 
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "vinternalvariable.h"
 
-class VPointF;
 class VLineAngleData;
+class VPointF;
 
 class VLineAngle :public VInternalVariable
 {

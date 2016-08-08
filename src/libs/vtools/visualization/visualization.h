@@ -29,13 +29,17 @@
 #ifndef VISUALIZATION_H
 #define VISUALIZATION_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QGraphicsItem>
+#include <QLoggingCategory>
+#include <QObject>
+#include <QtGlobal>
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/def.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 

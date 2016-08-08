@@ -27,9 +27,20 @@
  *************************************************************************/
 
 #include "vistoolbisector.h"
+
+#include <QGraphicsLineItem>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <new>
+
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)

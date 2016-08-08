@@ -29,11 +29,30 @@
 #ifndef VTEXTGRAPHICSITEM_H
 #define VTEXTGRAPHICSITEM_H
 
-#include <QGraphicsObject>
 #include <QFont>
+#include <QGraphicsObject>
 #include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QRectF>
+#include <QSizeF>
+#include <QString>
+#include <QtGlobal>
 
 #include "../vlayout/vtextmanager.h"
+
+class QFont;
+class QGraphicsItem;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QPainter;
+class QPointF;
+class QRectF;
+class QStyleOptionGraphicsItem;
+class QWidget;
+class VAbstractPattern;
+class VPatternPieceData;
 
 /**
  * @brief The VTextGraphicsItem class. This class implements text graphics item,

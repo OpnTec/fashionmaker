@@ -27,8 +27,19 @@
  *************************************************************************/
 
 #include "movesplinepath.h"
+
 #include <QDomElement>
+
+#include "../ifc/xml/vabstractpattern.h"
 #include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "undocommands/../../vgeometry/vsplinepath.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,

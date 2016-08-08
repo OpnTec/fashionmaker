@@ -29,8 +29,21 @@
 #ifndef DIALOGCUBICBEZIER_H
 #define DIALOGCUBICBEZIER_H
 
-#include "dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QSharedPointer>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vgeometry/vcubicbezier.h"
+#include "../vmisc/def.h"
+#include "dialogtool.h"
+
+class QWidget;
+class VContainer;
+class VPointF;
+template <class T> class QSharedPointer;
 
 namespace Ui
 {

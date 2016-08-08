@@ -20,13 +20,18 @@
  ******************************************************************************************************/
 
 #include "fvupdatewindow.h"
-#include "ui_fvupdatewindow.h"
-#include "fvupdater.h"
-#include "fvavailableupdate.h"
 
 #include <QApplication>
-#include <QCloseEvent>
-#include <QDebug>
+#include <QLabel>
+#include <QPointer>
+#include <QPushButton>
+#include <Qt>
+
+#include "fvavailableupdate.h"
+#include "fvupdater.h"
+#include "ui_fvupdatewindow.h"
+
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 FvUpdateWindow::FvUpdateWindow(QWidget *parent)

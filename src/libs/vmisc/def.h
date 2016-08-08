@@ -29,16 +29,21 @@
 #ifndef DEF_H
 #define DEF_H
 
-#include <csignal>
-#include <QtGlobal>
+#include <qcompilerdetection.h>
+#include <QPrinter>
+#include <QString>
 #include <QStringList>
-#include <QSharedPointer>
-#include <QtPrintSupport/QPrinter>
+#include <Qt>
+#include <QtGlobal>
+#include <csignal>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
 
 #include "debugbreak.h"
+
+class QPixmap;
+template <class T> class QSharedPointer;
 
 #ifdef Q_CC_MSVC
     #include <ciso646>

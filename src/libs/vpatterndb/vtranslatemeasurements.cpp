@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vtranslatemeasurements.h"
+
+#include "../qmuparser/qmutranslation.h"
 #include "../vmisc/def.h"
 
 using namespace qmu;

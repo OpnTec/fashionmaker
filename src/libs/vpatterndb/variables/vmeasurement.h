@@ -29,14 +29,20 @@
 #ifndef VSTANDARDTABLEROW_H
 #define VSTANDARDTABLEROW_H
 
-#include "vvariable.h"
-#include "../ifc/ifcdef.h"
-
-#include <QStringList>
+#include <qcompilerdetection.h>
 #include <QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QStringList>
+#include <QTypeInfo>
+#include <QtGlobal>
 
-class VMeasurementData;
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vvariable.h"
+
 class VContainer;
+class VMeasurementData;
 
 /**
  * @brief The VMeasurement class keep data row of standard table

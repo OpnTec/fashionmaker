@@ -29,7 +29,19 @@
 #ifndef VISTOOLHEIGHT_H
 #define VISTOOLHEIGHT_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class QLineF;
+class VContainer;
 
 class VisToolHeight : public VisLine
 {

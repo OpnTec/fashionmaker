@@ -27,12 +27,21 @@
  *************************************************************************/
 
 #include "dialogpointofintersectionarcs.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+
+#include "../../visualization/line/vistoolpointofintersectionarcs.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
 #include "ui_dialogpointofintersectionarcs.h"
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/line/vistoolpointofintersectionarcs.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,

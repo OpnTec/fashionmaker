@@ -27,12 +27,30 @@
  *************************************************************************/
 
 #include "dialoglineintersect.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLine>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QSharedPointer>
+#include <new>
+
+#include "../../visualization/line/vistoollineintersect.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
 #include "ui_dialoglineintersect.h"
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/line/vistoollineintersect.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -27,12 +27,39 @@
  *************************************************************************/
 
 #include "visualization.h"
-#include "../tools/drawTools/vdrawtool.h"
+
+#include <qnumeric.h>
+#include <QBrush>
+#include <QColor>
+#include <QDebug>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPen>
+#include <QPointF>
+#include <QRectF>
+#include <QScopedPointer>
+#include <QString>
+#include <Qt>
+#include <QtDebug>
+
 #include "../../vpatterndb/calculator.h"
 #include "../../vpatterndb/vtranslatevars.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../tools/drawTools/vdrawtool.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "visualization/../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
 
-#include <QGraphicsEllipseItem>
-#include <QtNumeric>
+class QLineF;
+class QPainterPath;
+class QPointF;
+template <class K, class V> class QHash;
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")
 

@@ -27,16 +27,36 @@
  *************************************************************************/
 
 #include "vistoolrotation.h"
-#include "../vgeometry/vpointf.h"
+
+#include <limits.h>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QGuiApplication>
+#include <QLineF>
+#include <QPainterPath>
+#include <QSharedPointer>
+#include <Qt>
+#include <QtAlgorithms>
+#include <new>
+
+#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "visualization/line/../visualization.h"
+#include "visualization/line/visline.h"
 
-#include <QGraphicsScene>
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)

@@ -28,6 +28,13 @@
 
 #include "vispath.h"
 
+#include <QPen>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/path/../visualization.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
     :Visualization(data), QGraphicsPathItem(parent)

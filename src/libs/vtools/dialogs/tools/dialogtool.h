@@ -29,29 +29,56 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/logging.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../../visualization/visualization.h"
-#include "../ifc/xml/vabstractpattern.h"
-
+#include <qcompilerdetection.h>
+#include <QCheckBox>
+#include <QColor>
+#include <QComboBox>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QLineEdit>
+#include <QList>
 #include <QListWidget>
-#include <QRadioButton>
+#include <QLocale>
+#include <QLoggingCategory>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointer>
 #include <QPushButton>
-#include <QCheckBox>
-#include <QComboBox>
+#include <QRadioButton>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../../visualization/visualization.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+
+class QCloseEvent;
+class QEvent;
+class QIcon;
+class QLineEdit;
+class QShowEvent;
+class QTimer;
+class QWidget;
+class VGObject;
+template <class T> class QSharedPointer;
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
 class QDoubleSpinBox;
 class QLabel;
 class QListWidgetItem;
-class VContainer;
 class QPlainTextEdit;
 class VAbstractTool;
+class VContainer;
 
 enum class FillComboBox : char { Whole, NoChildren};
 

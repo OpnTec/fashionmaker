@@ -27,13 +27,23 @@
  *************************************************************************/
 
 #include "vabstractapplication.h"
-#include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QLibraryInfo>
+#include <QLoggingCategory>
+#include <QMessageLogger>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
 #include <QTranslator>
+#include <Qt>
 #include <QtDebug>
+
+#include "../vmisc/def.h"
+
+class QGraphicsScene;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)

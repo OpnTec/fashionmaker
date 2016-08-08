@@ -27,7 +27,15 @@
  *************************************************************************/
 
 #include "deletepatternpiece.h"
-#include "addpatternpiece.h"
+
+#include <QDomNode>
+#include <QDomNodeList>
+
+#include "../vmisc/logging.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)

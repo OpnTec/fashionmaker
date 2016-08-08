@@ -29,7 +29,15 @@
 #ifndef VABSTRACTCONVERTER_H
 #define VABSTRACTCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <sys/sysmacros.h>
+#include <QCoreApplication>
+#include <QString>
+#include <QtGlobal>
+
 #include "vdomdocument.h"
+
+template <class Key, class T> class QMap;
 
 #define CONVERTER_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 

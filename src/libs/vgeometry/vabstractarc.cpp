@@ -27,7 +27,12 @@
  *************************************************************************/
 
 #include "vabstractarc.h"
+
+#include <QLineF>
+
+#include "../ifc/../vmisc/def.h"
 #include "vabstractarc_p.h"
+#include "vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const quint32 &idObject, const Draw &mode)

@@ -27,11 +27,37 @@
  *************************************************************************/
 
 #include "vtoolline.h"
-#include "../../dialogs/tools/dialogline.h"
+
+#include <QDebug>
 #include <QKeyEvent>
-#include "../vgeometry/vpointf.h"
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPen>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <QtDebug>
+#include <new>
+
 #include "../../dialogs/tools/dialogline.h"
 #include "../../visualization/line/vistoolline.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/../../visualization/line/../visualization.h"
+#include "tools/drawTools/../vabstracttool.h"
+#include "tools/drawTools/vdrawtool.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QKeyEvent;
+template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

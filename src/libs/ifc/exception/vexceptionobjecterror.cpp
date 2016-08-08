@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vexceptionobjecterror.h"
-#include <QDebug>
+
 #include <QDomElement>
+#include <QTextStream>
+
+#include "exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -27,6 +27,11 @@
  *************************************************************************/
 
 #include "vvariable.h"
+
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "variables/vinternalvariable.h"
 #include "vvariable_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------

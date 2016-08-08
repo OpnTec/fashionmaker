@@ -27,9 +27,22 @@
  *************************************************************************/
 
 #include "vistoolpointofintersectioncircles.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QGraphicsEllipseItem>
+#include <QPen>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent)

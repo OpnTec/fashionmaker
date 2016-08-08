@@ -20,12 +20,18 @@
 
 #include "vnumberproperty.h"
 
-#include <QDoubleSpinBox>
-#include <QSpinBox>
-#include <QSizePolicy>
 #include <QCoreApplication>
+#include <QDoubleSpinBox>
+#include <QLatin1String>
+#include <QLocale>
+#include <QSizePolicy>
+#include <QSpinBox>
+#include <QWidget>
 
 #include "../vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

@@ -20,12 +20,30 @@
 
 #include "vfilepropertyeditor.h"
 
-#include "vfileproperty.h"
-
-#include <QHBoxLayout>
+#include <QDragEnterEvent>
+#include <QDragLeaveEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QEvent>
+#include <QFile>
 #include <QFileDialog>
-#include <QKeyEvent>
+#include <QFileInfo>
+#include <QForeachContainer>
+#include <QHBoxLayout>
+#include <QLineEdit>
+#include <QList>
+#include <QMimeData>
+#include <QRegExp>
+#include <QSizePolicy>
+#include <QToolButton>
 #include <QUrl>
+#include <Qt>
+
+class QDragEnterEvent;
+class QDragLeaveEvent;
+class QDragMoveEvent;
+class QDropEvent;
+class QHBoxLayout;
 
 using namespace VPE;
 

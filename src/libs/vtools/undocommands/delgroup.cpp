@@ -27,9 +27,19 @@
  *************************************************************************/
 
 #include "delgroup.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/vmaingraphicsview.h"
+
+#include <QDomElement>
+#include <QDomNode>
+#include <QDomNodeList>
+
+#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/../../vmisc/def.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 DelGroup::DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)

@@ -29,8 +29,12 @@
 #ifndef VARCRADIUS_H
 #define VARCRADIUS_H
 
-#include "vcurvevariable.h"
+#include <qcompilerdetection.h>
+#include <QtGlobal>
+
+#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
+#include "vcurvevariable.h"
 
 class VArc;
 

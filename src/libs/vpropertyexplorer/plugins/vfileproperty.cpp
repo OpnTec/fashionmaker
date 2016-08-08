@@ -19,12 +19,17 @@
  *************************************************************************/
 
 #include "vfileproperty.h"
-#include <QFileInfo>
-#include <QAbstractItemDelegate>
 
-#include "vfilepropertyeditor.h"
+#include <QAbstractItemDelegate>
+#include <QFileInfo>
+#include <QLocale>
+#include <QWidget>
 
 #include "../vfileproperty_p.h"
+#include "vfilepropertyeditor.h"
+#include "vproperty_p.h"
+
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

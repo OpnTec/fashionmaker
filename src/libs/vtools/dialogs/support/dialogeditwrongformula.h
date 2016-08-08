@@ -29,8 +29,23 @@
 #ifndef DIALOGEDITWRONGFORMULA_H
 #define DIALOGEDITWRONGFORMULA_H
 
-#include "../tools/dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
 #include <QTableWidgetItem>
+#include <QtGlobal>
+
+#include "../tools/dialogtool.h"
+
+class QCloseEvent;
+class QShowEvent;
+class QTableWidgetItem;
+class QWidget;
+class VContainer;
+class VMeasurement;
+template <class T> class QSharedPointer;
 
 namespace Ui
 {

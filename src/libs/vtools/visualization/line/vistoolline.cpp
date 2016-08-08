@@ -27,9 +27,21 @@
  *************************************************************************/
 
 #include "vistoolline.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QGraphicsLineItem>
+#include <QPen>
+#include <QPointF>
+#include <QSharedPointer>
+#include <new>
+
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../../tools/drawTools/vdrawtool.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
+
+class QLineF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)

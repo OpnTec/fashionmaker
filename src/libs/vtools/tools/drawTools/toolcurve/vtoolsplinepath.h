@@ -29,11 +29,33 @@
 #ifndef VTOOLSPLINEPATH_H
 #define VTOOLSPLINEPATH_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/toolcurve/../../../undocommands/../../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QPointF;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+class VSpline;
 class VSplinePath;
 class VSplinePoint;
-class VSpline;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolSplinePath class tool for creation spline path.

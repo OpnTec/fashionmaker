@@ -27,15 +27,35 @@
  *************************************************************************/
 
 #include "vobjengine.h"
+
+#include <qmath.h>
+#include <QByteArray>
+#include <QDebug>
+#include <QFlag>
+#include <QFlags>
+#include <QIODevice>
+#include <QLatin1Char>
+#include <QMessageLogger>
+#include <QPaintEngineState>
+#include <QPainterPath>
+#include <QPointF>
+#include <QString>
+#include <QTextStream>
+#include <QVector>
+#include <QtDebug>
+
 #include "../vmisc/diagnostic.h"
 
-#include <QTextStream>
-#include <QDebug>
+class QPaintDevice;
+class QPixmap;
+class QPoint;
+class QPointF;
+class QPolygonF;
+class QRectF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 #ifdef Q_CC_MSVC

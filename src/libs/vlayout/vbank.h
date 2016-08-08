@@ -29,9 +29,10 @@
 #ifndef VBANK_H
 #define VBANK_H
 
-#include <QVector>
 #include <QHash>
 #include <QRectF>
+#include <QVector>
+#include <QtGlobal>
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char

@@ -27,9 +27,24 @@
  *************************************************************************/
 
 #include "vabstractnode.h"
-#include "../../undocommands/adddetnode.h"
 
-#include <QDebug>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <Qt>
+
+#include "../../undocommands/adddetnode.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/nodeDetails/../../undocommands/../../ifc/xml/vabstractpattern.h"
+#include "tools/nodeDetails/../vabstracttool.h"
+
+class QDomElement;
 
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 

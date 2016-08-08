@@ -29,9 +29,17 @@
 #ifndef MOVESPOINT_H
 #define MOVESPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
 
 class QGraphicsScene;
+class QUndoCommand;
+class VAbstractPattern;
 
 class MoveSPoint : public VUndoCommand
 {

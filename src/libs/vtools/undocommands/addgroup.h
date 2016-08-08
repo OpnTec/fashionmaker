@@ -29,7 +29,18 @@
 #ifndef ADDGROUP_H
 #define ADDGROUP_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+class VAbstractPattern;
 
 class AddGroup : public VUndoCommand
 {

@@ -28,10 +28,17 @@
 
 #include "vwidgetpopup.h"
 
-#include <QVBoxLayout>
 #include <QDesktopWidget>
-#include <QTimer>
+#include <QFont>
 #include <QLabel>
+#include <QLayout>
+#include <QMessageLogger>
+#include <QPoint>
+#include <QRect>
+#include <QTimer>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <Qt>
 
 #include "../vmisc/def.h"
 

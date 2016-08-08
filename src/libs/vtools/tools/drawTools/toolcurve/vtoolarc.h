@@ -29,9 +29,25 @@
 #ifndef VTOOLARC_H
 #define VTOOLARC_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VContainer;
 class VFormula;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolArc class tool for creation arc.

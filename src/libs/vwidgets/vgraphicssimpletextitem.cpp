@@ -27,17 +27,29 @@
  *************************************************************************/
 
 #include "vgraphicssimpletextitem.h"
+
+#include <QEvent>
+#include <QFlags>
 #include <QFont>
-#include <QBrush>
-#include <QStyle>
-#include <QStyleOptionGraphicsItem>
-#include <QGraphicsSceneMouseEvent>
-#include <QKeyEvent>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
+#include <QKeyEvent>
+#include <QList>
+#include <QMessageLogger>
+#include <QPalette>
+#include <QPoint>
+#include <QPolygonF>
+#include <QRectF>
+#include <Qt>
 
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
+
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

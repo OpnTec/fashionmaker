@@ -22,9 +22,19 @@
 #ifndef QMUPARSERTEST_H
 #define QMUPARSERTEST_H
 
-#include "qmuparser_global.h"
-#include "qmuparser.h"
+#include <stdlib.h>
+#include <QMetaObject>
+#include <QObject>
 #include <QString>
+#include <QVector>
+#include <QtGlobal>
+#include <locale>
+
+#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser.h"
+#include "qmuparser_global.h"
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
 
 /**
  * @file

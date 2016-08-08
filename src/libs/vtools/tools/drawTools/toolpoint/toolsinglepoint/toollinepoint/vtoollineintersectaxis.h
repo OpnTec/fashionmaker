@@ -29,7 +29,30 @@
 #ifndef VTOOLLINEINTERSECTAXIS_H
 #define VTOOLLINEINTERSECTAXIS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vformula.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QLineF;
+class QPointF;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 class VToolLineIntersectAxis : public VToolLinePoint
 {

@@ -27,12 +27,13 @@
  *************************************************************************/
 
 #include "vbank.h"
-#include "vlayoutdetail.h"
-#include "../vmisc/logging.h"
 
-#include <QPointF>
+#include <QLoggingCategory>
 #include <climits>
-#include <QRectF>
+
+#include "../vmisc/diagnostic.h"
+#include "../vmisc/logging.h"
+#include "vlayoutdetail.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")

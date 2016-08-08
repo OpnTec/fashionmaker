@@ -20,14 +20,27 @@
  ******************************************************************************************************/
 
 #include "qmuparsertest.h"
-#include "qmudef.h"
 
-#include <QString>
-#include <QDebug>
+#include <math.h>
+#include <stdio.h>
+#include <QChar>
 #include <QCoreApplication>
-#include "qmuparsererror.h"
-#include <QtCore/qmath.h>
+#include <QDebug>
+#include <QMessageLogger>
+#include <QString>
+#include <QtDebug>
+#include <exception>
+#include <limits>
+#include <map>
+#include <memory>
+#include <sstream>
 #include <stdexcept>
+#include <string>
+#include <utility>
+
+#include "qmudef.h"
+#include "qmuparser.h"
+#include "qmuparsererror.h"
 
 using namespace std;
 

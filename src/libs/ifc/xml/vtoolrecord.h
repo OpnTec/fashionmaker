@@ -29,9 +29,10 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
-#include "../vmisc/def.h"
-
 #include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 
 /**
  * @brief The VToolRecord class record about tool in history.

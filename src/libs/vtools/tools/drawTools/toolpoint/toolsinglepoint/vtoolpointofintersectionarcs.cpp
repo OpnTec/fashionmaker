@@ -27,10 +27,32 @@
  *************************************************************************/
 
 #include "vtoolpointofintersectionarcs.h"
+
+#include <QLineF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/varc.h"
 #include "../../../../visualization/line/vistoolpointofintersectionarcs.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+template <class T> class QSharedPointer;
 
 const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIntersectionArcs");
 

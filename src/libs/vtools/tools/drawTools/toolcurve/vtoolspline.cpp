@@ -27,17 +27,57 @@
  *************************************************************************/
 
 #include "vtoolspline.h"
-#include "../vgeometry/vspline.h"
+
+#include <math.h>
+#include <qmath.h>
+#include <QDomElement>
+#include <QEvent>
+#include <QFlags>
+#include <QForeachContainer>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
+#include <QList>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <QVector>
+#include <Qt>
+#include <new>
+
 #include "../../../dialogs/tools/dialogspline.h"
 #include "../../../undocommands/movespline.h"
 #include "../../../visualization/path/vistoolspline.h"
-#include "../vwidgets/vcontrolpointspline.h"
+#include "../ifc/exception/vexception.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolcurve/../../vabstracttool.h"
+#include "tools/drawTools/toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolcurve/vabstractspline.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive");

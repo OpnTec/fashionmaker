@@ -29,13 +29,29 @@
 #ifndef VNODEPOINT_H
 #define VNODEPOINT_H
 
-#include "vabstractnode.h"
+#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
 
-class VPointF;
-class VGraphicsSimpleTextItem;
-class QGraphicsLineItem;
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "vabstractnode.h"
+
 class QGraphicsItem;
+class QGraphicsLineItem;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QPointF;
+class VContainer;
+class VGraphicsSimpleTextItem;
+class VMainGraphicsScene;
+class VPointF;
 
 /**
  * @brief The VNodePoint class point detail node.

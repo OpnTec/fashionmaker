@@ -27,7 +27,20 @@
  *************************************************************************/
 
 #include "rotationmovelabel.h"
+
+#include <QDomNode>
+#include <QDomNodeList>
+
 #include "../../tools/drawTools/operation/vtoolrotation.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "undocommands/label/../vundocommand.h"
+#include "undocommands/label/moveabstractlabel.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 RotationMoveLabel::RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,

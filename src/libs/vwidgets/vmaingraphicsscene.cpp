@@ -27,13 +27,25 @@
  *************************************************************************/
 
 #include "vmaingraphicsscene.h"
-#include <QGraphicsSceneMouseEvent>
-#include <QList>
-#include <QGraphicsItem>
-#include <QApplication>
 
-#include "../vmisc/def.h"
+#include <QBrush>
+#include <QEvent>
+#include <QForeachContainer>
+#include <QGraphicsItem>
+#include <QGraphicsLineItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSimpleTextItem>
+#include <QLineF>
+#include <QPen>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
+
 #include "../ifc/ifcdef.h"
+
+class QGraphicsSceneMouseEvent;
+class QRectF;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

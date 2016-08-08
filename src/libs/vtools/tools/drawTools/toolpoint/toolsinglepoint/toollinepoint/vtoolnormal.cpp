@@ -27,11 +27,35 @@
  *************************************************************************/
 
 #include "vtoolnormal.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLineF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialognormal.h"
-#include "../vgeometry/vpointf.h"
 #include "../../../../../visualization/line/vistoolnormal.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+template <class T> class QSharedPointer;
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 

@@ -21,12 +21,21 @@
 #ifndef VSHORTCUTPROPERTYEDITOR_H
 #define VSHORTCUTPROPERTYEDITOR_H
 
+#include <qcompilerdetection.h>
+#include <QKeySequence>
+#include <QLineEdit>
+#include <QMetaObject>
+#include <QMimeData>
+#include <QObject>
+#include <QString>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
 #include "../vpropertyexplorer_global.h"
 
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
-#include <QMimeData>
+class QEvent;
+class QLineEdit;
 
 namespace VPE
 {

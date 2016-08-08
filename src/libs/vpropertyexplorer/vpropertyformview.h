@@ -21,9 +21,19 @@
 #ifndef VPROPERTYFORMVIEW_H
 #define VPROPERTYFORMVIEW_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
 #include <QPointer>
+#include <QString>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
 #include "vpropertyformwidget.h"
+
+class QModelIndex;
+class QShowEvent;
+class QWidget;
 
 namespace VPE
 {

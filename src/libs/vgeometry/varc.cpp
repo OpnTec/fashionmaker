@@ -27,15 +27,18 @@
  *************************************************************************/
 
 #include "varc.h"
-#include "varc_p.h"
+
+#include <QtCore/qmath.h>
+#include <QLineF>
+#include <QPointF>
+
+#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
+#include "vabstractcurve.h"
+#include "varc_p.h"
 #include "vspline.h"
 
-#include <QDebug>
-#include <QLineF>
-#include <QPainterPath>
-#include <QPointF>
-#include <QtCore/qmath.h>
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

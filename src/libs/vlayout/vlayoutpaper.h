@@ -29,15 +29,21 @@
 #ifndef VLAYOUTPAPER_H
 #define VLAYOUTPAPER_H
 
+#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "vlayoutdef.h"
 
-class VLayoutPaperData;
-class VLayoutDetail;
 class QGraphicsItem;
-class VBestSquare;
 class QGraphicsRectItem;
 class QRectF;
+class VBestSquare;
+class VLayoutDetail;
+class VLayoutPaperData;
+template <typename T> class QList;
+template <typename T> class QVector;
 
 class VLayoutPaper
 {

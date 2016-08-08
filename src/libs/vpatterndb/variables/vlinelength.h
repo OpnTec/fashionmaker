@@ -29,11 +29,17 @@
 #ifndef VLINELENGTH_H
 #define VLINELENGTH_H
 
-#include "vinternalvariable.h"
-#include "../ifc/ifcdef.h"
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
 
-class VPointF;
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vinternalvariable.h"
+
 class VLengthLineData;
+class VPointF;
 
 class VLengthLine :public VInternalVariable
 {

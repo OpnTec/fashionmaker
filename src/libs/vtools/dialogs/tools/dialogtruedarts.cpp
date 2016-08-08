@@ -27,12 +27,29 @@
  *************************************************************************/
 
 #include "dialogtruedarts.h"
-#include "ui_dialogtruedarts.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QSet>
+#include <Qt>
+
 #include "../../visualization/line/vistooltruedarts.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogtruedarts.h"
+
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, QWidget *parent)

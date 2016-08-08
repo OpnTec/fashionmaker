@@ -21,9 +21,21 @@
 #ifndef VPOINTFPROPERTY_H
 #define VPOINTFPROPERTY_H
 
-#include "../vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
 #include "../vproperty.h"
+#include "../vpropertyexplorer_global.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QPointF;
 
 namespace VPE
 {

@@ -29,9 +29,19 @@
 #ifndef VABSTRACTCURVE_H
 #define VABSTRACTCURVE_H
 
-#include "vgobject.h"
-#include "../ifc/ifcdef.h"
+#include <qcompilerdetection.h>
 #include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../ifc/ifcdef.h"
+#include "vgeometrydef.h"
+#include "vgobject.h"
+
+class QPointF;
 
 #ifndef M_2PI
 #define M_2PI 6.28318530717958647692528676655900576
@@ -39,8 +49,8 @@
 
 enum class PathDirection : char { Hide, Show };
 
-class QPainterPath;
 class QLineF;
+class QPainterPath;
 class VAbstractCurveData;
 
 class VAbstractCurve :public VGObject

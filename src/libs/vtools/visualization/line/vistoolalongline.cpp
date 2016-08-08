@@ -27,8 +27,21 @@
  *************************************************************************/
 
 #include "vistoolalongline.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QColor>
+#include <QGraphicsLineItem>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)

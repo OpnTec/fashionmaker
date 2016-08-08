@@ -27,10 +27,16 @@
  *************************************************************************/
 
 #include "vabstractcubicbezierpath.h"
-#include "../ifc/exception/vexception.h"
-#include "vspline.h"
 
 #include <QPainterPath>
+
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/exception/../ifcdef.h"
+#include "../ifc/exception/vexception.h"
+#include "vpointf.h"
+#include "vspline.h"
+
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)

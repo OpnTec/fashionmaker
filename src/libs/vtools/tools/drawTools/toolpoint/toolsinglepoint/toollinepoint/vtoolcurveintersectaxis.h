@@ -29,7 +29,31 @@
 #ifndef VTOOLCURVEINTERSECTAXIS_H
 #define VTOOLCURVEINTERSECTAXIS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vpatterndb/vformula.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+class VAbstractCurve;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+class VPointF;
+template <class T> class QSharedPointer;
 
 class VToolCurveIntersectAxis : public VToolLinePoint
 {

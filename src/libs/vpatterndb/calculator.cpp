@@ -27,9 +27,14 @@
  *************************************************************************/
 
 #include "calculator.h"
-#include <QDebug>
-#include <QSettings>
-#include "vcontainer.h"
+
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+
+#include "../ifc/../vmisc/def.h"
+#include "../qmuparser/qmuparsererror.h"
 
 using namespace qmu;
 

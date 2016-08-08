@@ -29,9 +29,11 @@
 #ifndef VEXCEPTION_H
 #define VEXCEPTION_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
 #include <QException>
 #include <QString>
-#include <QCoreApplication>
+
 #include "../ifcdef.h"
 
 /**

@@ -29,8 +29,15 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include "../vpatterndb/vcontainer.h"
+#include <qcompilerdetection.h>
+#include <QLoggingCategory>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vmisc/logging.h"
+#include "../vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)
 

@@ -21,14 +21,16 @@
 #ifndef VASTANDARDPROPERTYFACTORY_H
 #define VASTANDARDPROPERTYFACTORY_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QString>
+
 #include "vabstractpropertyfactory.h"
+#include "vpropertyexplorer_global.h"
 
 namespace VPE
 {
 
 class VProperty;
-
 class VPropertyFactoryManager;
 
 //! The standard property factory is able to create all the properties that are included in VPropertyExplorer

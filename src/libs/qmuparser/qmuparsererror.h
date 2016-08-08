@@ -22,12 +22,17 @@
 #ifndef QMUPARSERERROR_H
 #define QMUPARSERERROR_H
 
-#include "qmuparser_global.h"
-#include <sstream>
-#include <QException>
-#include <QVector>
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
+#include <QException>
+#include <QMap>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+#include <sstream>
 
+#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser_global.h"
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
 

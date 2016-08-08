@@ -28,6 +28,10 @@
 
 #include "ifcdef.h"
 
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
 const QString CustomMSign    = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
 

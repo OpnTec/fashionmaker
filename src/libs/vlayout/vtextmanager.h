@@ -1,12 +1,20 @@
 #ifndef VTEXTMANAGER_H
 #define VTEXTMANAGER_H
 
-#include <QString>
-#include <QFont>
 #include <QDate>
+#include <QFont>
+#include <QList>
+#include <QString>
+#include <QStringList>
+#include <Qt>
+#include <QtGlobal>
 
-#include "../vpatterndb/vpatternpiecedata.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+
+class QFontMetrics;
+class VAbstractPattern;
+class VPatternPieceData;
 
 #define MIN_FONT_SIZE               12
 #define MAX_FONT_SIZE               128

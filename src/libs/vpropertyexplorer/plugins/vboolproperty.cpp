@@ -20,12 +20,8 @@
 
 #include "vboolproperty.h"
 
-#include <QCheckBox>
-#include <QApplication>
-#include <QStyle>
-#include <QSizePolicy>
+#include <QFlags>
 #include <QObject>
-#include <QSpinBox>
 
 #include "../vproperty_p.h"
 

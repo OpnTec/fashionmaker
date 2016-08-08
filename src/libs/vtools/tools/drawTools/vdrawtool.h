@@ -29,12 +29,35 @@
 #ifndef VDRAWTOOL_H
 #define VDRAWTOOL_H
 
-#include "../vabstracttool.h"
-#include "../../dialogs/tools/dialogtool.h"
-#include "../vwidgets/vmaingraphicsview.h"
-
-#include <QMenu>
+#include <qcompilerdetection.h>
+#include <QAction>
+#include <QByteArray>
+#include <QColor>
+#include <QDomElement>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QIcon>
+#include <QMenu>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../../dialogs/tools/dialogtool.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vabstracttool.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "tools/drawTools/../../dialogs/support/../tools/dialogtool.h"
+#include "tools/drawTools/../vdatatool.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VAbstractPattern;
+class VContainer;
+class VGObject;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.

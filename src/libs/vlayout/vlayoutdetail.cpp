@@ -27,18 +27,37 @@
  *************************************************************************/
 
 #include "vlayoutdetail.h"
-#include "vlayoutdetail_p.h"
 
-#include <QGraphicsItem>
-#include <QPainterPath>
+#include <math.h>
+#include <qmath.h>
+#include <QBrush>
+#include <QFlags>
 #include <QFont>
 #include <QFontMetrics>
-#include <QBrush>
+#include <QGraphicsPathItem>
+#include <QList>
+#include <QMatrix>
+#include <QMessageLogger>
+#include <QPainterPath>
+#include <QPoint>
+#include <QPolygonF>
+#include <QTransform>
+#include <Qt>
+#include <QtDebug>
+
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "vlayoutdef.h"
+#include "vlayoutdetail_p.h"
+#include "vtextmanager.h"
+
+class QGraphicsPathItem;
+class QLineF;
+class VAbstractPattern;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 #include <QDebug>

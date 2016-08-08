@@ -20,8 +20,13 @@
 
 #include "vwidgetproperty.h"
 
+#include <QPointer>
+#include <QVariant>
+#include <QWidget>
 
 #include "../vwidgetproperty_p.h"
+#include "plugins/vemptyproperty.h"
+#include "vproperty.h"
 
 using namespace VPE;
 

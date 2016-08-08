@@ -19,12 +19,24 @@
  *************************************************************************/
 
 #include "vproperty.h"
-#include <QObject>
-#include <QMetaProperty>
+
+#include <QByteArray>
+#include <QFlags>
+#include <QForeachContainer>
 #include <QItemEditorFactory>
 #include <QLineEdit>
+#include <QList>
+#include <QMetaProperty>
+#include <QObject>
+#include <QStandardItemEditorCreator>
+#include <QWidget>
 
 #include "vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QModelIndex;
+class QPainter;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

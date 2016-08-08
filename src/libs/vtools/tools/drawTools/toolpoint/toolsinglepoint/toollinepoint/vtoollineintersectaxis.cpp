@@ -27,13 +27,34 @@
  *************************************************************************/
 
 #include "vtoollineintersectaxis.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLine>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialoglineintersectaxis.h"
-#include "../../../../../dialogs/support/dialogeditwrongformula.h"
-#include "../vgeometry/vpointf.h"
 #include "../../../../../visualization/line/vistoollineintersectaxis.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/support/../tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VGObject;
+template <class T> class QSharedPointer;
 
 const QString VToolLineIntersectAxis::ToolType = QStringLiteral("lineIntersectAxis");
 

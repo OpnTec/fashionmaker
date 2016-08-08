@@ -28,18 +28,25 @@
 
 #include "vcommonsettings.h"
 
-#include <QDir>
-#include <QDebug>
-#include <QLocale>
 #include <QApplication>
 #include <QDate>
+#include <QDebug>
+#include <QDir>
+#include <QLocale>
+#include <QMessageLogger>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QVariant>
+#include <QtDebug>
 
-#include "../ifc/ifcdef.h"
+#include "../ifc/../vmisc/def.h"
+
+class QDate;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");

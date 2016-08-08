@@ -27,12 +27,32 @@
  *************************************************************************/
 
 #include "dialognormal.h"
-#include "ui_dialognormal.h"
-#include "../../visualization/line/vistoolnormal.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../tools/vabstracttool.h"
-#include "../support/dialogeditwrongformula.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QDoubleSpinBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QToolButton>
+
 #include "../../../vpatterndb/vtranslatevars.h"
+#include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolnormal.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "ui_dialognormal.h"
+
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

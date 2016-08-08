@@ -30,7 +30,12 @@
 #define VTABLESEARCH_H
 
 #include <QList>
+#include <QString>
 #include <QTableWidget>
+#include <QtGlobal>
+
+class QTableWidget;
+class QTableWidgetItem;
 
 class VTableSearch
 {

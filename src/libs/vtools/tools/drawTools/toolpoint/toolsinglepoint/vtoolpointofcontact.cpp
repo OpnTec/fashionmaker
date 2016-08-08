@@ -27,13 +27,40 @@
  *************************************************************************/
 
 #include "vtoolpointofcontact.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QDebug>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+#include <new>
+
 #include "../../../../dialogs/tools/dialogpointofcontact.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vformula.h"
 #include "../../../../visualization/line/vistoolpointofcontact.h"
-#include <QtCore/qmath.h>
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../visualization/line/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+template <class T> class QSharedPointer;
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 

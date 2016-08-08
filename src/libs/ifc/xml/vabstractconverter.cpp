@@ -27,13 +27,25 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
-#include "../exception/vexception.h"
-#include "../exception/vexceptionwrongid.h"
 
+#include <QDir>
+#include <QDomElement>
+#include <QDomNode>
+#include <QDomNodeList>
 #include <QFile>
 #include <QFileInfo>
-#include <QDir>
+#include <QLatin1String>
+#include <QMap>
 #include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+
+#include "../exception/vexception.h"
+#include "../exception/vexceptionwrongid.h"
+#include "xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)

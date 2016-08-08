@@ -30,7 +30,14 @@
 #define VTRANSLATEMEASUREMENTS_H
 
 #include <QMap>
+#include <QString>
+#include <QtGlobal>
+
 #include "../qmuparser/qmutranslation.h"
+
+namespace qmu {
+class QmuTranslation;
+}  // namespace qmu
 
 class VTranslateMeasurements
 {

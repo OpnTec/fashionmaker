@@ -27,11 +27,23 @@
  *************************************************************************/
 
 #include "dialogtriangle.h"
-#include "ui_dialogtriangle.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+#include <QSet>
+
 #include "../../visualization/line/vistooltriangle.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogtriangle.h"
+
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -19,12 +19,22 @@
  *************************************************************************/
 
 #include "vpropertydelegate.h"
+
+#include <QAbstractItemModel>
+#include <QApplication>
+#include <QColor>
+#include <QModelIndex>
+#include <QPainter>
+#include <QPen>
+#include <QRect>
+#include <QRgb>
+#include <QStyle>
+#include <QVariant>
+
 #include "vproperty.h"
 
-#include <QApplication>
-#include <QStyle>
-#include <QPen>
-#include <QPainter>
+class QStyleOptionViewItem;
+class QWidget;
 
 using namespace VPE;
 

@@ -29,9 +29,23 @@
 #ifndef VGRAPHICSSIMPLETEXTITEM_H
 #define VGRAPHICSSIMPLETEXTITEM_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
 #include <QGraphicsSimpleTextItem>
+#include <QMetaObject>
 #include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
 #include "../vmisc/def.h"
+
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+class QPointF;
 
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.

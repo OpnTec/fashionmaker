@@ -32,6 +32,8 @@
 ****************************************************************************/
 
 #include "qmarginsf.h"
+
+#include <QDebugStateSaver>
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #include <QDataStream>
 #include <QDebug>

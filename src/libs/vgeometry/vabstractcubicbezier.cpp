@@ -27,11 +27,16 @@
  *************************************************************************/
 
 #include "vabstractcubicbezier.h"
-#include "../vgeometry/vpointf.h"
 
-#include <QPainterPath>
+#include <math.h>
 #include <QDebug>
-#include <QtCore/qmath.h>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPoint>
+#include <QtDebug>
+
+#include "../ifc/../vmisc/def.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)

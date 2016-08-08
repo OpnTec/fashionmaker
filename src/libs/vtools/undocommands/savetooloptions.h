@@ -29,7 +29,18 @@
 #ifndef SAVETOOLOPTIONS_H
 #define SAVETOOLOPTIONS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+class VAbstractPattern;
 
 class SaveToolOptions : public VUndoCommand
 {

@@ -29,9 +29,22 @@
 #ifndef VISTOOLSPLINEPATH_H
 #define VISTOOLSPLINEPATH_H
 
-#include "vispath.h"
-#include "../vgeometry/vsplinepath.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/def.h"
+#include "../vwidgets/../vgeometry/vsplinepath.h"
+#include "vispath.h"
+
+class QPointF;
+class VContainer;
 class VControlPointSpline;
 
 class VisToolSplinePath : public VisPath

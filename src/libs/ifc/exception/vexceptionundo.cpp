@@ -28,6 +28,8 @@
 
 #include "vexceptionundo.h"
 
+#include "exception/vexception.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 VExceptionUndo::VExceptionUndo(const QString &what)
     :VException(what)

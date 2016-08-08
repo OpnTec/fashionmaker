@@ -28,6 +28,16 @@
 
 #include "savetooloptions.h"
 
+#include <QDomNode>
+
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc,
                                  const quint32 &id, QUndoCommand *parent)

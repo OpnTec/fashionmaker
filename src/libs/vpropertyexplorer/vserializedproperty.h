@@ -21,14 +21,18 @@
 #ifndef VSERIALIZEDPROPERTY_H
 #define VSERIALIZEDPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
-
-#include <QString>
 #include <QList>
+#include <QString>
 #include <QVariant>
 
 #include "vproperty.h"
+#include "vpropertyexplorer_global.h"
 #include "vpropertyset.h"
+
+namespace VPE {
+class VProperty;
+class VPropertySet;
+}  // namespace VPE
 
 namespace VPE
 {

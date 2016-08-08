@@ -27,13 +27,11 @@
  *************************************************************************/
 
 #include "vexception.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/def.h"
 
-#include <QGridLayout>
-#include <QMessageBox>
-#include <QSpacerItem>
-#include <QApplication>
+#include <QByteArray>
+#include <QtGlobal>
+
+#include "exception/../ifcdef.h"
 
 //Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
 

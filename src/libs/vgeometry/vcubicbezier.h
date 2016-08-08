@@ -29,9 +29,19 @@
 #ifndef VCUBICBEZIER_H
 #define VCUBICBEZIER_H
 
+#include <qcompilerdetection.h>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
 #include "vabstractcubicbezier.h"
+#include "vgeometrydef.h"
 #include "vpointf.h"
 
+class QPointF;
 class VCubicBezierData;
 
 class VCubicBezier : public VAbstractCubicBezier

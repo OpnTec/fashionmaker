@@ -21,13 +21,25 @@
 #ifndef VCOLORPROPERTYEDITOR_H
 #define VCOLORPROPERTYEDITOR_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMetaObject>
+#include <QObject>
+#include <QPixmap>
+#include <QSpacerItem>
+#include <QString>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
 #include "../vpropertyexplorer_global.h"
 
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
-#include <QLabel>
-#include <QSpacerItem>
+class QEvent;
+class QLabel;
+class QSpacerItem;
+class QToolButton;
 
 namespace VPE
 {

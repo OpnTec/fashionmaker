@@ -29,8 +29,20 @@
 #ifndef VMEASUREMENTS_H
 #define VMEASUREMENTS_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QDomElement>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>
+
 #include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
+
+class QDate;
+class QDomElement;
+class VContainer;
 
 enum class GenderType : char { Male, Female, Unknown };
 

@@ -27,16 +27,37 @@
  *************************************************************************/
 
 #include "dialogspline.h"
-#include "ui_dialogspline.h"
 
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QHash>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QTimer>
+#include <QToolButton>
+#include <Qt>
+#include <new>
+
+#include "../../visualization/path/vistoolspline.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../visualization/path/vistoolspline.h"
-#include "../support/dialogeditwrongformula.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "ui_dialogspline.h"
+#include "vtranslatevars.h"
 
-#include <QDebug>
-#include <QTimer>
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

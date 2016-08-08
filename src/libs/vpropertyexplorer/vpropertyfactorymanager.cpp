@@ -19,10 +19,16 @@
  *************************************************************************/
 
 #include "vpropertyfactorymanager.h"
-#include "vpropertyfactorymanager_p.h"
 
-#include "vstandardpropertyfactory.h"
+#include <stddef.h>
+#include <QList>
+#include <QMap>
+#include <QStringList>
+
+#include "vabstractpropertyfactory.h"
 #include "vproperty.h"
+#include "vpropertyfactorymanager_p.h"
+#include "vstandardpropertyfactory.h"
 
 using namespace VPE;
 

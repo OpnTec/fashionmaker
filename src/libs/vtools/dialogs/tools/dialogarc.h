@@ -29,7 +29,20 @@
 #ifndef DIALOGARC_H
 #define DIALOGARC_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
+#include "dialogs/tools/../support/../tools/dialogtool.h"
 #include "dialogtool.h"
+
+class QCloseEvent;
+class QTimer;
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

@@ -23,9 +23,18 @@
 
 #include <QGroupBox>
 #include <QLabel>
+#include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "plugins/../vproperty.h"
 #include "vproperty.h"
 
+class QEvent;
 class QFormLayout;
+class QWidget;
 
 namespace VPE
 {

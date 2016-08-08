@@ -27,14 +27,37 @@
  *************************************************************************/
 
 #include "vtoolarc.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../../../dialogs/tools/dialogarc.h"
-#include "../vgeometry/varc.h"
-#include "../vpatterndb/vformula.h"
-#include "../../../visualization/path/vistoolarc.h"
 
-#include <QKeyEvent>
+#include <QPen>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
+#include <new>
+
+#include "../../../dialogs/tools/dialogarc.h"
+#include "../../../visualization/path/vistoolarc.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolcurve/../../vabstracttool.h"
+#include "tools/drawTools/toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolcurve/vabstractspline.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
 
 const QString VToolArc::ToolType = QStringLiteral("simple");
 

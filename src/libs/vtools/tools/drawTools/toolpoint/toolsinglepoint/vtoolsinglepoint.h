@@ -29,11 +29,31 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
-#include "../vabstractpoint.h"
+#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
 
-class VPointF;
+#include "../vabstractpoint.h"
+#include "../vwidgets/../vmisc/def.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+class QPointF;
+class VAbstractPattern;
+class VContainer;
+class VGObject;
 class VGraphicsSimpleTextItem;
+class VPointF;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolSinglePoint class parent for all tools what create points.

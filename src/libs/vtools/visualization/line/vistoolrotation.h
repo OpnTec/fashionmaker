@@ -29,7 +29,22 @@
 #ifndef VISTOOLROTATION_H
 #define VISTOOLROTATION_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class QPointF;
+class VContainer;
 
 class VisToolRotation : public VisLine
 {

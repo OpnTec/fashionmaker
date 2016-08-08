@@ -27,13 +27,18 @@
  *************************************************************************/
 
 #include "vgobject.h"
-#include "vgobject_p.h"
 
+#include <QtCore/qmath.h>
+#include <math.h>
+#include <QLine>
 #include <QLineF>
+#include <QPoint>
 #include <QPointF>
 #include <QRectF>
-#include <QtCore/qmath.h>
-#include <climits>
+
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vgobject_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

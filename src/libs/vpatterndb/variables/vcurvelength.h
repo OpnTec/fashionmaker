@@ -29,8 +29,13 @@
 #ifndef VCURVELENGTH_H
 #define VCURVELENGTH_H
 
-#include "vcurvevariable.h"
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
+#include "vcurvevariable.h"
 
 class VAbstractCurve;
 class VSpline;

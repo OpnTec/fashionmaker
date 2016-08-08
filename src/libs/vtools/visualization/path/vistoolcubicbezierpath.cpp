@@ -27,7 +27,22 @@
  *************************************************************************/
 
 #include "vistoolcubicbezierpath.h"
+
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QPainterPath>
+#include <QPointF>
+#include <Qt>
+#include <QtAlgorithms>
+
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "visualization/path/../visualization.h"
+#include "visualization/path/vispath.h"
+
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezierPath::VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent)

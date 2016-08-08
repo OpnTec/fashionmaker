@@ -27,11 +27,24 @@
  *************************************************************************/
 
 #include "vistoolendline.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../tools/vabstracttool.h"
 
-#include <QGraphicsScene>
+#include <QColor>
+#include <QGuiApplication>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/../visualization/visualization.h"
+#include "visualization/line/visline.h"
+#include "vtranslatevars.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)

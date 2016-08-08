@@ -21,15 +21,22 @@
 #ifndef VPROPERTYFACTORYMANAGER_H
 #define VPROPERTYFACTORYMANAGER_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
 #include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
+
+class QStringList;
 
 namespace VPE
 {
 
 class VAbstractPropertyFactory;
-class VPropertyFactoryManagerPrivate;
 class VProperty;
+class VPropertyFactoryManagerPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFactoryManager : public QObject
 {

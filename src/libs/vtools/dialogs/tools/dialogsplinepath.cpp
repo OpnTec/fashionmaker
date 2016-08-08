@@ -27,15 +27,44 @@
  *************************************************************************/
 
 #include "dialogsplinepath.h"
-#include "ui_dialogsplinepath.h"
-#include "../vgeometry/vsplinepoint.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/path/vistoolsplinepath.h"
-#include "../support/dialogeditwrongformula.h"
-#include "../qmuparser/qmuparsererror.h"
-#include "../vwidgets/vabstractmainwindow.h"
 
-#include <QTimer>
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QFont>
+#include <QLabel>
+#include <QLatin1String>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QSharedPointer>
+#include <QToolButton>
+#include <QVariant>
+#include <Qt>
+#include <new>
+
+#include "../../visualization/path/vistoolsplinepath.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "ui_dialogsplinepath.h"
+#include "vtranslatevars.h"
+
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

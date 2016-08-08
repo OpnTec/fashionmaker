@@ -27,10 +27,26 @@
  *************************************************************************/
 
 #include "vistoolpointfromarcandtangent.h"
-#include "../vpatterndb/vcontainer.h"
+
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QPainterPath>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../vgeometry/vpointf.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
+
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)

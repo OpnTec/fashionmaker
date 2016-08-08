@@ -29,6 +29,10 @@
 #ifndef VCURVEANGLE_H
 #define VCURVEANGLE_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
 #include "vcurvevariable.h"
 
 class VAbstractCurve;

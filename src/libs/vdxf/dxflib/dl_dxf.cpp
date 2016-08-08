@@ -24,21 +24,27 @@
 
 #include "dl_dxf.h"
 
+#include <ctype.h>
+#include <ext/alloc_traits.h>
+#include <qcompilerdetection.h>
+#include <string.h>
+#include <QString>
+#include <QStringList>
 #include <algorithm>
-#include <string>
-#include <cstdio>
 #include <cassert>
 #include <cmath>
-#include <QStringList>
-
-#include "dl_attributes.h"
-#include "dl_codes.h"
-#include "dl_creationadapter.h"
-#include "dl_writer_ascii.h"
-
-#include "iostream"
+#include <memory>
+#include <string>
+#include <utility>
 
 #include "../vmisc/diagnostic.h"
+#include "dl_attributes.h"
+#include "dl_codes.h"
+#include "dl_writer_ascii.h"
+#include "dxflib/../dxfdef.h"
+#include "dxflib/dl_creationinterface.h"
+#include "dxflib/dl_entities.h"
+#include "iostream"
 
 /**
  * Default constructor.

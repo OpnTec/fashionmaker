@@ -29,8 +29,16 @@
 #ifndef VSETTINGS_H
 #define VSETTINGS_H
 
-#include "vcommonsettings.h"
+#include <QMetaObject>
+#include <QObject>
+#include <QSettings>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vlayout/vbank.h"
+#include "vcommonsettings.h"
+
+class QMarginsF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"

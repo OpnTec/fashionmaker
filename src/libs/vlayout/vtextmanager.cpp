@@ -1,7 +1,11 @@
-#include <QRegularExpression>
+#include <QDate>
+#include <QFileInfo>
 #include <QFontMetrics>
-#include <QDir>
+#include <QLatin1String>
+#include <QRegularExpression>
 
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vpatternpiecedata.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------

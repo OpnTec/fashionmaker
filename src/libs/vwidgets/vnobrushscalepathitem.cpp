@@ -29,7 +29,12 @@
 #include "vnobrushscalepathitem.h"
 
 #include <QBrush>
+#include <QMatrix>
 #include <QPainter>
+
+class QGraphicsItem;
+class QStyleOptionGraphicsItem;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 VNoBrushScalePathItem::VNoBrushScalePathItem(QGraphicsItem *parent) :

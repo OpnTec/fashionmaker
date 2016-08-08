@@ -33,6 +33,7 @@
 #include <string.h>
 #include <QtGlobal>
 
+#include "../vmisc/diagnostic.h"
 #include "dl_writer_ascii.h"
 
 /**

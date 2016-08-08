@@ -29,15 +29,21 @@
 #ifndef VABSTRACTSIMPLE_H
 #define VABSTRACTSIMPLE_H
 
+#include <QColor>
+#include <QMetaObject>
 #include <QObject>
 #include <QPen>
-#include <QColor>
-#include "../vmisc/def.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "../ifc/ifcdef.h"
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
 
-class QGraphicsSceneContextMenuEvent;
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+
 class QGraphicsItem;
+class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject
 {

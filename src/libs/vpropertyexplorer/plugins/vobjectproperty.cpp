@@ -19,11 +19,16 @@
  *************************************************************************/
 
 #include "vobjectproperty.h"
-#include "../vproperty_p.h"
 
 #include <QComboBox>
 #include <QCoreApplication>
-#include <QDebug>
+#include <QLocale>
+#include <QWidget>
+
+#include "../vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

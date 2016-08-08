@@ -29,7 +29,18 @@
 #ifndef ROTATIONMOVELABEL_H
 #define ROTATIONMOVELABEL_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "moveabstractlabel.h"
+
+class QDomElement;
+class QUndoCommand;
+class VAbstractPattern;
 
 class RotationMoveLabel : public MoveAbstractLabel
 {

@@ -27,18 +27,35 @@
  *************************************************************************/
 
 #include "dialogcurveintersectaxis.h"
-#include "ui_dialogcurveintersectaxis.h"
+
+#include <QDialog>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPlainTextEdit>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QSharedPointer>
+#include <QTimer>
+#include <QToolButton>
+#include <new>
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/line/vistoolcurveintersectaxis.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolcurveintersectaxis.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "ui_dialogcurveintersectaxis.h"
 
-#include <QTimer>
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)

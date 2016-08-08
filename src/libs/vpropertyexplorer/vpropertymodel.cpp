@@ -20,7 +20,9 @@
 
 #include "vpropertymodel.h"
 
-#include <QBrush>
+#include <QList>
+
+#include "vproperty.h"
 #include "vpropertyset.h"
 
 using namespace VPE;

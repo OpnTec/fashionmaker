@@ -27,10 +27,16 @@
  *************************************************************************/
 
 #include "vlinelength.h"
-#include "vlinelength_p.h"
-#include "../vgeometry/vpointf.h"
 
 #include <QLineF>
+#include <QMessageLogger>
+#include <QPointF>
+#include <QString>
+
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "variables/vinternalvariable.h"
+#include "vlinelength_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine()

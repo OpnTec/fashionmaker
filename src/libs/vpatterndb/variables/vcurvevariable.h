@@ -29,6 +29,11 @@
 #ifndef VCURVEVARIABLE_H
 #define VCURVEVARIABLE_H
 
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "vinternalvariable.h"
 
 class VAbstractCurve;

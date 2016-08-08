@@ -20,6 +20,12 @@
 
 #include "vserializedproperty.h"
 
+#include <QForeachContainer>
+#include <QtGlobal>
+
+#include "vproperty.h"
+#include "vpropertyset.h"
+
 using namespace VPE;
 
 VSerializedProperty::VSerializedProperty()

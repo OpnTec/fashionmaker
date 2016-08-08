@@ -27,6 +27,7 @@
 #define DL_WRITER_ASCII_H
 
 #include "dl_global.h"
+#include "dxflib/dl_codes.h"
 
 #if defined(Q_CC_MSVC)
     #if (_MSC_VER > 1000)
@@ -34,9 +35,10 @@
     #endif // _MSC_VER > 1000
 #endif // Q_CC_MSVC
 
-#include "dl_writer.h"
 #include <fstream>
 #include <string>
+
+#include "dl_writer.h"
 
 /**
  * Implements functions defined in DL_Writer for writing low

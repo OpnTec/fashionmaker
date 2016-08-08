@@ -20,8 +20,15 @@
 
 #include "vshortcutpropertyeditor.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QKeyEvent>
+#include <QLineEdit>
+#include <QSizePolicy>
+#include <Qt>
+
+class QHBoxLayout;
+class QKeyEvent;
 
 using namespace VPE;
 

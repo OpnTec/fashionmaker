@@ -27,12 +27,35 @@
  *************************************************************************/
 
 #include "vtoolcutarc.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QPointF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogcutarc.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/varc.h"
 #include "../../../../../visualization/path/vistoolcutarc.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VGObject;
+template <class T> class QSharedPointer;
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 

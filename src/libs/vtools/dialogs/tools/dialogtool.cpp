@@ -27,29 +27,55 @@
  *************************************************************************/
 
 #include "dialogtool.h"
+
+#include <limits.h>
+#include <qiterator.h>
+#include <qnumeric.h>
+#include <QCloseEvent>
+#include <QComboBox>
+#include <QDebug>
+#include <QDoubleSpinBox>
+#include <QEvent>
+#include <QHash>
+#include <QIcon>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMapIterator>
+#include <QMessageLogger>
+#include <QPalette>
+#include <QPixmap>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QScopedPointer>
+#include <QSharedPointer>
+#include <QShowEvent>
+#include <QSize>
+#include <QTextCursor>
+#include <QTimer>
+#include <QWidget>
+#include <Qt>
+#include <QtDebug>
+#include <new>
+
+#include "../../../ifc/xml/vdomdocument.h"
+#include "../../../qmuparser/qmudef.h"
+#include "../../../qmuparser/qmuparsererror.h"
+#include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/calculator.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../../vgeometry/varc.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vgeometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
-#include "../../../qmuparser/qmuparsererror.h"
-#include "../../../qmuparser/qmudef.h"
-#include "../../../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgobject.h"
 
-#include <QTimer>
-#include <QCloseEvent>
-#include <QShowEvent>
-#include <QComboBox>
-#include <QListWidgetItem>
-#include <QTextCursor>
-#include <QPlainTextEdit>
-#include <QLabel>
-#include <QSettings>
-#include <QPushButton>
-#include <QDoubleSpinBox>
-#include <QtNumeric>
+class QCloseEvent;
+class QKeyEvent;
+class QShowEvent;
+template <class T> class QSharedPointer;
 
 Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 

@@ -21,11 +21,25 @@
 #ifndef VOBJECTPROPERTY_H
 #define VOBJECTPROPERTY_H
 
-#include "../vproperty.h"
-
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
 #include <QStringList>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
+#include "../vproperty.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
 class QComboBox;
+class QStyleOptionViewItem;
+class QWidget;
 
 namespace VPE
 {

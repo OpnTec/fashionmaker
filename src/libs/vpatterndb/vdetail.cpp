@@ -27,13 +27,29 @@
  *************************************************************************/
 
 #include "vdetail.h"
-#include "vdetail_p.h"
-#include "vcontainer.h"
-#include "../vgeometry/vpointf.h"
 
 #include <QDebug>
+#include <QList>
+#include <QMessageLogger>
 #include <QPainterPath>
+#include <QSet>
+#include <QSharedPointer>
 #include <QString>
+#include <Qt>
+#include <QtDebug>
+#include <new>
+
+#include "../ifc/../vmisc/def.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vlayout/vlayoutdef.h"
+#include "vcontainer.h"
+#include "vdetail_p.h"
+#include "vnodedetail.h"
+#include "vpatternpiecedata.h"
+
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

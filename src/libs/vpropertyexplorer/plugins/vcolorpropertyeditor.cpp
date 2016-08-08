@@ -20,13 +20,20 @@
 
 #include "vcolorpropertyeditor.h"
 
-#include <QHBoxLayout>
-#include <QFileDialog>
-#include <QKeyEvent>
-#include <QApplication>
 #include <QColorDialog>
+#include <QCoreApplication>
+#include <QEvent>
+#include <QHBoxLayout>
+#include <QImage>
+#include <QLabel>
+#include <QRgb>
+#include <QSizePolicy>
+#include <QSpacerItem>
+#include <QToolButton>
 
 #include "../vproperty.h"
+
+class QHBoxLayout;
 
 using namespace VPE;
 

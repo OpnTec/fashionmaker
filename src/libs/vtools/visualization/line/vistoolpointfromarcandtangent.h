@@ -29,8 +29,21 @@
 #ifndef VISTOOLPOINTFROMARCANDTANGENT_H
 #define VISTOOLPOINTFROMARCANDTANGENT_H
 
-#include "visline.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "visline.h"
+
+class QPointF;
+class VArc;
+class VContainer;
 
 class VisToolPointFromArcAndTangent : public VisLine
 {

@@ -27,9 +27,23 @@
  *************************************************************************/
 
 #include "vvitconverter.h"
-#include "../exception/vexception.h"
 
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomText>
 #include <QFile>
+#include <QForeachContainer>
+#include <QLatin1String>
+#include <QList>
+#include <QMap>
+#include <QMultiMap>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
+#include "../exception/vexception.h"
+#include "../vmisc/def.h"
+#include "xml/vabstractmconverter.h"
 
 /*
  * Version rules:

@@ -27,7 +27,18 @@
  *************************************************************************/
 
 #include "dialogsinglepoint.h"
+
+#include <QDoubleSpinBox>
+#include <QLineEdit>
+
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/dialogtool.h"
 #include "ui_dialogsinglepoint.h"
+
+class QPointF;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

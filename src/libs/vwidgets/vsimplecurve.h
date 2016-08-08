@@ -29,11 +29,26 @@
 #ifndef VSIMPLECURVE_H
 #define VSIMPLECURVE_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QGraphicsItem>
+#include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QSharedPointer>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../ifc/../vmisc/def.h"
 #include "vabstractsimple.h"
 
-#include <QGraphicsPathItem>
-
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
 class VAbstractCurve;
+template <class T> class QSharedPointer;
 
 class VSimpleCurve : public VAbstractSimple, public QGraphicsPathItem
 {

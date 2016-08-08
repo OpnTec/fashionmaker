@@ -27,18 +27,39 @@
  *************************************************************************/
 
 #include "dialoglineintersectaxis.h"
-#include "ui_dialoglineintersectaxis.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPlainTextEdit>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QSharedPointer>
+#include <QTimer>
+#include <QToolButton>
+#include <new>
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/line/vistoollineintersectaxis.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoollineintersectaxis.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "ui_dialoglineintersectaxis.h"
 
-#include <QTimer>
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)

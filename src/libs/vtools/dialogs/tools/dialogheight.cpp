@@ -27,13 +27,32 @@
  *************************************************************************/
 
 #include "dialogheight.h"
-#include "ui_dialogheight.h"
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPoint>
+#include <QPointF>
+#include <QPointer>
+#include <QSet>
+#include <QSharedPointer>
+#include <new>
+
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolheight.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "dialogs/tools/../../visualization/line/visline.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogheight.h"
+
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

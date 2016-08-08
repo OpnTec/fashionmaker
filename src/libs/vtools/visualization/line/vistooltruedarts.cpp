@@ -27,9 +27,20 @@
  *************************************************************************/
 
 #include "vistooltruedarts.h"
+
+#include <QGraphicsLineItem>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/tooldoublepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent)

@@ -27,9 +27,24 @@
  *************************************************************************/
 
 #include "vistoolcurveintersectaxis.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vgeometry/vpointf.h"
+
+#include <QColor>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QPainterPath>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent)

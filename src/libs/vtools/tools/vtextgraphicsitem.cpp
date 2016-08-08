@@ -26,17 +26,29 @@
  **
  *************************************************************************/
 
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
+#include <math.h>
+#include <qmath.h>
+#include <QColor>
+#include <QFlags>
+#include <QFont>
+#include <QGraphicsItem>
+#include <QGraphicsSceneHoverEvent>
 #include <QGraphicsSceneMouseEvent>
-#include <QGraphicsView>
-#include <QTransform>
-#include <QCursor>
-#include <QtMath>
-#include <QDebug>
+#include <QPainter>
+#include <QPen>
+#include <QPoint>
+#include <QStyleOptionGraphicsItem>
+#include <Qt>
 
-#include "../vmisc/def.h"
+#include "../ifc/../vmisc/def.h"
 #include "vtextgraphicsitem.h"
+
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QStyleOptionGraphicsItem;
+class QWidget;
+class VAbstractPattern;
+class VPatternPieceData;
 
 #define RESIZE_SQUARE               30
 #define ROTATE_CIRCLE               20

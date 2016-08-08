@@ -29,18 +29,21 @@
 #ifndef VCONTOUR_H
 #define VCONTOUR_H
 
-#include "vlayoutdef.h"
-
-#include <QVector>
 #include <QSharedDataPointer>
 #include <QSizeF>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
 
-class VContourData;
-class QPointF;
-class VLayoutDetail;
+#include "vlayoutdef.h"
+
 class QLineF;
-class QRectF;
 class QPainterPath;
+class QPointF;
+class QRectF;
+class QSizeF;
+class VContourData;
+class VLayoutDetail;
 
 class VContour
 {

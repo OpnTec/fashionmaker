@@ -29,8 +29,14 @@
 #ifndef VSPLINEPOINT_H
 #define VSPLINEPOINT_H
 
-#include "vpointf.h"
 #include <QMetaType>
+#include <QMetaTypeId>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
+#include "vpointf.h"
 
 class VFSplinePointData;
 

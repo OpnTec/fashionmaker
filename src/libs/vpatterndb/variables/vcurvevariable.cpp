@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vcurvevariable.h"
+
+#include "../ifc/../vmisc/def.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "variables/vinternalvariable.h"
 #include "vcurvevariable_p.h"
-#include "../vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable()

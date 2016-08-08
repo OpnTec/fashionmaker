@@ -29,11 +29,23 @@
 #ifndef VUNDOCOMMAND_H
 #define VUNDOCOMMAND_H
 
-#include <QUndoCommand>
+#include <qcompilerdetection.h>
 #include <QDomElement>
+#include <QLoggingCategory>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QUndoCommand>
+#include <QVector>
+#include <QtGlobal>
 
-#include "../../vmisc/logging.h"
 #include "../../ifc/xml/vabstractpattern.h"
+#include "../../vmisc/logging.h"
+#include "../ifc/xml/vabstractpattern.h"
+
+class QDomElement;
+class QDomNode;
+class QUndoCommand;
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
@@ -54,8 +66,8 @@ enum class UndoCommand: char { AddPatternPiece,
                                ToggleDetailInLayout
                              };
 
-class VPattern;
 class VNodeDetail;
+class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {

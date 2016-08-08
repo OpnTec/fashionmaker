@@ -29,6 +29,9 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
+#include <qcompilerdetection.h>
+#include <QtGlobal>
+
 #include "vtranslatemeasurements.h"
 
 class VTranslateVars : public VTranslateMeasurements

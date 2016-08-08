@@ -27,11 +27,20 @@
  *************************************************************************/
 
 #include "movespline.h"
-#include "../tools/vabstracttool.h"
-#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QDomElement>
-#include <QGraphicsView>
+
+#include "../ifc/exception/../ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "undocommands/../../vgeometry/vpointf.h"
+#include "undocommands/../../vgeometry/vspline.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,

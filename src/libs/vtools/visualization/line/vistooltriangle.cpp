@@ -27,10 +27,25 @@
  *************************************************************************/
 
 #include "vistooltriangle.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+
 #include <QtCore/qmath.h>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QPainterPath>
+#include <QPen>
+#include <QPointF>
+#include <QSharedPointer>
+#include <new>
+
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
+
+class QLineF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)

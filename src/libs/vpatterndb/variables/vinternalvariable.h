@@ -29,8 +29,11 @@
 #ifndef VINTERNALVARIABLE_H
 #define VINTERNALVARIABLE_H
 
-#include <QString>
 #include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 class VInternalVariableData;

@@ -29,7 +29,22 @@
 #ifndef DIALOGROTATION_H
 #define DIALOGROTATION_H
 
+#include <qcompilerdetection.h>
+#include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
+#include "dialogs/tools/../support/../tools/dialogtool.h"
 #include "dialogtool.h"
+
+class QCloseEvent;
+class QTimer;
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

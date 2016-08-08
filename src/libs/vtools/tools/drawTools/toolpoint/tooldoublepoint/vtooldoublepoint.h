@@ -29,13 +29,30 @@
 #ifndef VTOOLDOUBLEPOINT_H
 #define VTOOLDOUBLEPOINT_H
 
-#include "../vabstractpoint.h"
-
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
 #include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
 
-class VPointF;
+#include "../vabstractpoint.h"
+#include "../vwidgets/../vmisc/def.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QKeyEvent;
+class QPointF;
+class VAbstractPattern;
+class VContainer;
+class VGObject;
 class VGraphicsSimpleTextItem;
+class VPointF;
 class VSimplePoint;
+template <class T> class QSharedPointer;
 
 class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
 {

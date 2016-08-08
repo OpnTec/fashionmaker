@@ -27,9 +27,16 @@
  *************************************************************************/
 
 #include "vundocommand.h"
-#include "../vmisc/def.h"
-#include "../vgeometry/vpointf.h"
-#include "../vtools/tools/vabstracttool.h"
+
+#include <QDomNode>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "vnodedetail.h"
+
+class QDomElement;
+class QDomNode;
+class QUndoCommand;
 
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 

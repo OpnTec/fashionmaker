@@ -27,9 +27,19 @@
  *************************************************************************/
 
 #include "addgroup.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/vmaingraphicsview.h"
+
+#include <QDomNode>
+#include <QDomNodeList>
+
+#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/../../vmisc/def.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 AddGroup::AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)

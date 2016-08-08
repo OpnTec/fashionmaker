@@ -29,7 +29,17 @@
 #ifndef VISTOOLSHOULDERPOINT_H
 #define VISTOOLSHOULDERPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class VContainer;
 
 class VisToolShoulderPoint : public VisLine
 {

@@ -20,15 +20,36 @@
  ******************************************************************************************************/
 
 #include "fvupdater.h"
+
+#include <qsystemdetection.h>
+#include <qxmlstream.h>
+#include <QApplication>
+#include <QByteArray>
+#include <QDate>
+#include <QDebug>
+#include <QDesktopServices>
+#include <QLatin1String>
+#include <QMessageBox>
+#include <QMessageLogger>
+#include <QMutex>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+#include <QStringRef>
+#include <QVariant>
+#include <QXmlStreamAttributes>
+#include <QtDebug>
+
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vabstractconverter.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../ifc/xml/vabstractconverter.h"
-#include "../ifc/exception/vexception.h"
-
-#include <QtNetwork>
-#include <QMessageBox>
-#include <QDesktopServices>
-#include <QDebug>
+#include "../vmisc/vcommonsettings.h"
+#include "fvavailableupdate.h"
+#include "fvupdatewindow.h"
 
 const QString defaultFeedURL = QStringLiteral("http://valentinaproject.bitbucket.org/Appcast.xml");
 

@@ -27,12 +27,43 @@
  *************************************************************************/
 
 #include "vtoolsinglepoint.h"
-#include "../vmisc/logging.h"
-#include "../vgeometry/vpointf.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../../../../undocommands/label/movelabel.h"
 
+#include <QBrush>
+#include <QFlags>
+#include <QFont>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include <QLoggingCategory>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QUndoStack>
+#include <Qt>
+#include <new>
+
+#include "../../../../undocommands/label/movelabel.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/label/../../../ifc/xml/vabstractpattern.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../vabstractpoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")

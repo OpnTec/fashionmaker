@@ -29,8 +29,12 @@
 #ifndef VTOOLDETAIL_H
 #define VTOOLDETAIL_H
 
-#include "vabstracttool.h"
+#include <qcompilerdetection.h>
+#include <QObject>
+#include <QtGlobal>
+
 #include "../vwidgets/vnobrushscalepathitem.h"
+#include "vabstracttool.h"
 #include "vtextgraphicsitem.h"
 
 class VMainGraphicsScene;

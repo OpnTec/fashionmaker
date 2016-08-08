@@ -29,12 +29,19 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 #include <memory>
 
-#include "vlayoutdef.h"
 #include "vbank.h"
+#include "vlayoutdef.h"
+
+class QMarginsF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -42,9 +49,9 @@
 #   include <QMargins>
 #endif
 
-class VLayoutPaper;
-class VLayoutDetail;
 class QGraphicsItem;
+class VLayoutDetail;
+class VLayoutPaper;
 
 class VLayoutGenerator :public QObject
 {

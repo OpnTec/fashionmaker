@@ -27,11 +27,18 @@
  *************************************************************************/
 
 #include "dialogundo.h"
-#include "ui_dialogundo.h"
-#include "../../../ifc/exception/vexceptionundo.h"
-#include "../../../vmisc/vabstractapplication.h"
+
 #include <QCloseEvent>
-#include <QUndoStack>
+#include <QLocale>
+#include <QPushButton>
+#include <Qt>
+
+#include "../../../vmisc/vabstractapplication.h"
+#include "dialogs/support/../../../ifc/exception/../../vmisc/vcommonsettings.h"
+#include "ui_dialogundo.h"
+
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogUndo::DialogUndo(QWidget *parent)

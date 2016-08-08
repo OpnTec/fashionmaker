@@ -22,15 +22,22 @@
 #ifndef FVUPDATER_H
 #define FVUPDATER_H
 
-#include <QObject>
+#include <QMetaObject>
 #include <QMutex>
 #include <QNetworkAccessManager>
+#include <QObject>
+#include <QPointer>
+#include <QString>
 #include <QUrl>
 #include <QXmlStreamReader>
-#include <QPointer>
+#include <QtGlobal>
 
-#include "fvupdatewindow.h"
 #include "fvavailableupdate.h"
+#include "fvupdatewindow.h"
+
+class FvAvailableUpdate;
+class FvUpdateWindow;
+class QNetworkReply;
 
 extern const QString defaultFeedURL;
 

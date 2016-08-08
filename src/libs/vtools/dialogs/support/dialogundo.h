@@ -29,7 +29,15 @@
 #ifndef DIALOGUNDO_H
 #define DIALOGUNDO_H
 
+#include <qcompilerdetection.h>
 #include <QDialog>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+class QCloseEvent;
+class QWidget;
 
 namespace Ui
 {

@@ -27,13 +27,27 @@
  *************************************************************************/
 
 #include "vsimplecurve.h"
-#include "../ifc/ifcdef.h"
+
+#include <QBrush>
+#include <QDebug>
+#include <QFlags>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
+#include <QMessageLogger>
+#include <QPainterPath>
+#include <QPen>
+#include <Qt>
+#include <QtDebug>
+
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 
-#include <QDebug>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsScene>
-#include <QKeyEvent>
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)

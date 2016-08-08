@@ -27,16 +27,62 @@
  *************************************************************************/
 
 #include "vtoolsplinepath.h"
+
+#include <math.h>
+#include <qmath.h>
+#include <QDomElement>
+#include <QEvent>
+#include <QFlags>
+#include <QForeachContainer>
+#include <QGraphicsScene>
+#include <QGraphicsSceneHoverEvent>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
+#include <QList>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <Qt>
+#include <new>
+
 #include "../../../dialogs/tools/dialogsplinepath.h"
 #include "../../../undocommands/movesplinepath.h"
 #include "../../../visualization/path/vistoolsplinepath.h"
-#include "../vwidgets/vcontrolpointspline.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/../vgeometry/vsplinepath.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolcurve/../../../undocommands/vundocommand.h"
+#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolcurve/../../vabstracttool.h"
+#include "tools/drawTools/toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolcurve/vabstractspline.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 const QString VToolSplinePath::ToolType = QStringLiteral("pathInteractive");

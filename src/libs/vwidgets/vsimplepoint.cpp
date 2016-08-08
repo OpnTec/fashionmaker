@@ -27,16 +27,29 @@
  *************************************************************************/
 
 #include "vsimplepoint.h"
-#include "vgraphicssimpletextitem.h"
+
+#include <QBrush>
+#include <QFlags>
+#include <QFont>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
+#include <QLineF>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <Qt>
+
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "vgraphicssimpletextitem.h"
 
-#include <QGraphicsSceneMouseEvent>
-#include <QStyleOptionGraphicsItem>
-#include <QPen>
-#include <QKeyEvent>
-#include <QGraphicsScene>
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)

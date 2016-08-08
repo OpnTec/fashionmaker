@@ -22,6 +22,12 @@
 #ifndef QMUPARSER_H
 #define QMUPARSER_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+#include <locale>
+
+#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser_global.h"
 #include "qmuparserbase.h"
 

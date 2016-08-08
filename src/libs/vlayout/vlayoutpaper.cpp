@@ -27,15 +27,29 @@
  *************************************************************************/
 
 #include "vlayoutpaper.h"
-#include "vlayoutpaper_p.h"
+
+#include <QBrush>
+#include <QCoreApplication>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QList>
+#include <QPen>
+#include <QPointF>
+#include <QRect>
+#include <QRectF>
+#include <QThread>
+#include <QThreadPool>
+#include <QVector>
+#include <Qt>
+#include <QtAlgorithms>
+
 #include "vbestsquare.h"
+#include "vcontour.h"
+#include "vlayoutdetail.h"
+#include "vlayoutpaper_p.h"
 #include "vposition.h"
 
-#include <QGraphicsItem>
-#include <QCoreApplication>
-#include <QThreadPool>
-#include <QPen>
-#include <QGraphicsScene>
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()

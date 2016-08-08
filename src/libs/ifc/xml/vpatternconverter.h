@@ -29,7 +29,19 @@
 #ifndef VPATTERNCONVERTER_H
 #define VPATTERNCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QDomElement>
+#include <QMap>
+#include <QSet>
+#include <QString>
+#include <QStringList>
+#include <QVector>
+#include <QtGlobal>
+
 #include "vabstractconverter.h"
+
+class QDomElement;
 
 class VPatternConverter : public VAbstractConverter
 {

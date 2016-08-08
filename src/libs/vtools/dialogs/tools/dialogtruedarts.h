@@ -29,7 +29,19 @@
 #ifndef DIALOGTRUEDARTS_H
 #define DIALOGTRUEDARTS_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
+
+class QLabel;
+class QLineEdit;
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

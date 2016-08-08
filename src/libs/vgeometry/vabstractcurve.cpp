@@ -27,10 +27,16 @@
  *************************************************************************/
 
 #include "vabstractcurve.h"
-#include "vabstractcurve_p.h"
 
-#include <QPainterPath>
 #include <QDebug>
+#include <QLine>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPainterPath>
+#include <QPoint>
+#include <QtDebug>
+
+#include "vabstractcurve_p.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())

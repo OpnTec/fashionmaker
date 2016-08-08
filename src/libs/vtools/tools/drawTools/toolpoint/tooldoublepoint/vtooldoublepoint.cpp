@@ -27,11 +27,35 @@
  *************************************************************************/
 
 #include "vtooldoublepoint.h"
-#include "../vwidgets/vsimplepoint.h"
-#include "../vgeometry/vpointf.h"
-#include "../../../../undocommands/label/movedoublelabel.h"
 
+#include <QColor>
+#include <QDomElement>
 #include <QKeyEvent>
+#include <QPoint>
+#include <QSharedPointer>
+#include <QUndoStack>
+#include <Qt>
+#include <new>
+
+#include "../../../../undocommands/label/movedoublelabel.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/../ifc/ifcdef.h"
+#include "../vwidgets/vsimplepoint.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../../../../undocommands/label/../../../ifc/xml/vabstractpattern.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../../../../undocommands/label/../../../vmisc/logging.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../../../vdatatool.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/tooldoublepoint/../vabstractpoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QKeyEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,

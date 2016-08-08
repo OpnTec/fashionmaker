@@ -29,9 +29,26 @@
 #ifndef VTOOLCUBICBEZIERPATH_H
 #define VTOOLCUBICBEZIERPATH_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VContainer;
 class VCubicBezierPath;
+class VGObject;
+class VMainGraphicsScene;
+class VPointF;
+template <class T> class QSharedPointer;
 
 class VToolCubicBezierPath:public VAbstractSpline
 {

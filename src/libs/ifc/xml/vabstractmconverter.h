@@ -29,6 +29,12 @@
 #ifndef VABSTRACTMCONVERTER_H
 #define VABSTRACTMCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMultiMap>
+#include <QString>
+#include <QtGlobal>
+
 #include "vabstractconverter.h"
 
 class VAbstractMConverter : public VAbstractConverter

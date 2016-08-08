@@ -29,8 +29,24 @@
 #ifndef VMAINGRAPHICSSCENE_H
 #define VMAINGRAPHICSSCENE_H
 
+#include <qcompilerdetection.h>
 #include <QGraphicsScene>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QRectF>
+#include <QString>
+#include <QTransform>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../ifc/../vmisc/def.h"
 #include "../vmisc/def.h"
+
+class QGraphicsItem;
+class QGraphicsSceneMouseEvent;
+class QPointF;
+class QRectF;
 
 /**
  * @brief The VMainGraphicsScene class main scene.

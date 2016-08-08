@@ -28,6 +28,14 @@
 
 #include "addpatternpiece.h"
 
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                                  QUndoCommand *parent)

@@ -29,11 +29,25 @@
 #ifndef VLINETYPEPROPERTY_H
 #define VLINETYPEPROPERTY_H
 
-#include "../vproperty.h"
-
-#include <QMap>
-#include <QString>
+#include <qcompilerdetection.h>
 #include <QIcon>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <QVector>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vproperty.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
+class QWidget;
 
 namespace VPE
 {

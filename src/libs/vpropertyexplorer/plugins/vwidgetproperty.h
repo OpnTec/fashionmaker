@@ -21,11 +21,18 @@
 #ifndef VWIDGETROPERTY_H
 #define VWIDGETROPERTY_H
 
-#include "../vpropertyexplorer_global.h"
-
-#include "vemptyproperty.h"
-
+#include <qcompilerdetection.h>
 #include <QPointer>
+#include <QString>
+
+#include "../vpropertyexplorer_global.h"
+#include "vemptyproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QWidget;
+namespace VPE {
+class VProperty;
+}  // namespace VPE
 
 namespace VPE
 {

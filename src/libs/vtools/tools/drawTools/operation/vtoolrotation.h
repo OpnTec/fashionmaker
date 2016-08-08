@@ -29,7 +29,34 @@
 #ifndef VTOOLROTATION_H
 #define VTOOLROTATION_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QGraphicsLineItem>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
 #include "../vdrawtool.h"
+#include "../vwidgets/../vgeometry/vgeometrydef.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/operation/../../../undocommands/label/../../../ifc/xml/vabstractpattern.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPainter;
+class QPointF;
+class QStyleOptionGraphicsItem;
+class QWidget;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 struct DestinationItem
 {
@@ -39,8 +66,8 @@ struct DestinationItem
 };
 
 class VAbstractSimple;
-class VSimpleCurve;
 class VFormula;
+class VSimpleCurve;
 
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
 // QGraphicsItem itself produce case where clicking on empty space produce call to QGraphicsItem.

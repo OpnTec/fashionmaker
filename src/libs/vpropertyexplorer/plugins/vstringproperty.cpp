@@ -20,10 +20,19 @@
 
 #include "vstringproperty.h"
 
+#include <QLatin1String>
 #include <QLineEdit>
+#include <QLocale>
 #include <QSizePolicy>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QWidget>
 
 #include "../vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

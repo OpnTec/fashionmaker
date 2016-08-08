@@ -29,7 +29,17 @@
 #ifndef VISTOOLTRUEDARTS_H
 #define VISTOOLTRUEDARTS_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class VContainer;
 
 class VisToolTrueDarts :public VisLine
 {

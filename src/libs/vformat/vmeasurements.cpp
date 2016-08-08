@@ -27,14 +27,34 @@
  *************************************************************************/
 
 #include "vmeasurements.h"
-#include "../ifc/xml/vvstconverter.h"
-#include "../ifc/xml/vvitconverter.h"
-#include "../ifc/exception/vexceptionemptyparameter.h"
-#include "../vpatterndb/calculator.h"
-#include "../qmuparser/qmutokenparser.h"
 
+#include <qnumeric.h>
 #include <QDate>
-#include <QtNumeric>
+#include <QDebug>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomText>
+#include <QForeachContainer>
+#include <QLatin1Char>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QSet>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+
+#include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../vpatterndb/../qmuparser/qmuparsererror.h"
+#include "../vpatterndb/../vgeometry/../ifc/ifcdef.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
+
+class QDate;
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");

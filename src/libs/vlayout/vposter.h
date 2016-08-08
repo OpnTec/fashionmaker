@@ -29,11 +29,13 @@
 #ifndef VPOSTER_H
 #define VPOSTER_H
 
-#include <QRect>
 #include <QCoreApplication>
+#include <QRect>
+#include <QtGlobal>
 
-class QPrinter;
 class QGraphicsItem;
+class QPrinter;
+template <class T> class QVector;
 
 struct PosterData
 {

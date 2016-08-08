@@ -29,7 +29,17 @@
 #ifndef VISTOOLLINEINTERSECT_H
 #define VISTOOLLINEINTERSECT_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class VContainer;
 
 class VisToolLineIntersect :public VisLine
 {

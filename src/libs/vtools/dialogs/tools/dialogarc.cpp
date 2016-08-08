@@ -27,17 +27,29 @@
  *************************************************************************/
 
 #include "dialogarc.h"
-#include "ui_dialogarc.h"
 
+#include <limits.h>
+#include <QDialog>
+#include <QLabel>
+#include <QPlainTextEdit>
+#include <QPointer>
 #include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
 #include "../../../ifc/xml/vdomdocument.h"
+#include "../../../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolarc.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "ui_dialogarc.h"
+
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

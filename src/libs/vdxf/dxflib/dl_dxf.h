@@ -25,18 +25,20 @@
 #ifndef DL_DXF_H
 #define DL_DXF_H
 
-#include "dl_global.h"
-
-#include <limits>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
-#include <sstream>
+#include <QtGlobal>
+#include <algorithm>
+#include <limits>
 #include <map>
+#include <sstream>
+#include <string>
+#include <vector>
 
 #include "dl_attributes.h"
 #include "dl_codes.h"
 #include "dl_entities.h"
+#include "dl_global.h"
 #include "dl_writer_ascii.h"
 
 #ifndef DL_NANDOUBLE

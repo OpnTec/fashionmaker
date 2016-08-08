@@ -27,12 +27,31 @@
  *************************************************************************/
 
 #include "vabstractpattern.h"
-#include "../exception/vexceptionbadid.h"
+
+#include <QDebug>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QLatin1String>
+#include <QList>
+#include <QMessageLogger>
+#include <QSet>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+
 #include "../exception/vexceptionemptyparameter.h"
-#include "vpatternconverter.h"
-#include "../qmuparser/qmutokenparser.h"
 #include "../exception/vexceptionobjecterror.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../vpatterndb/../ifc/exception/vexceptionbadid.h"
+#include "../vpatterndb/../vgeometry/../ifc/ifcdef.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vdatatool.h"
+#include "vpatternconverter.h"
+#include "xml/vdomdocument.h"
+#include "xml/vtoolrecord.h"
+
+class QDomElement;
 
 const QString VAbstractPattern::TagPattern          = QStringLiteral("pattern");
 const QString VAbstractPattern::TagCalculation      = QStringLiteral("calculation");

@@ -21,9 +21,18 @@
 
 #include "qmuparser.h"
 
-#include <QtGlobal>
 #include <QtCore/qmath.h>
+#include <math.h>
 #include <QCoreApplication>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtGlobal>
+#include <sstream>
+#include <string>
+
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
 
 using namespace std;
 

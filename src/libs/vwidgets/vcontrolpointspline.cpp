@@ -28,13 +28,29 @@
 
 #include "vcontrolpointspline.h"
 
+#include <QBrush>
+#include <QEvent>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
+#include <QLineF>
+#include <QList>
+#include <QMessageLogger>
 #include <QPen>
-#include <QStyleOptionGraphicsItem>
+#include <QPoint>
+#include <QPolygonF>
+#include <QRectF>
+#include <Qt>
 
-#include "vmaingraphicsview.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "vmaingraphicsscene.h"
+#include "vmaingraphicsview.h"
+
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,

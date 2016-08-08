@@ -27,8 +27,21 @@
  *************************************************************************/
 
 #include "toggledetailinlayout.h"
-#include "../vpatterndb/vdetail.h"
+
+#include <QDomElement>
+#include <QHash>
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
+#include "undocommands/../../ifc/xml/vabstractpattern.h"
+#include "undocommands/vundocommand.h"
+#include "vdetail.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 ToggleDetailInLayout::ToggleDetailInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,

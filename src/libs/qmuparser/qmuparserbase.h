@@ -22,14 +22,30 @@
 #ifndef QMUQPARSERBASE_H
 #define QMUQPARSERBASE_H
 
-#include "qmuparser_global.h"
+#include <limits.h>
+#include <qcompilerdetection.h>
+#include <QChar>
+#include <QMap>
 #include <QStack>
 #include <QString>
 #include <QStringList>
+#include <QVector>
+#include <QtGlobal>
+#include <locale>
+#include <memory>
+#include <string>
 
-#include "qmuparserdef.h"
-#include "qmuparsertokenreader.h"
+#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser_global.h"
 #include "qmuparserbytecode.h"
+#include "qmuparsercallback.h"
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
+#include "qmuparsertoken.h"
+#include "qmuparsertokenreader.h"
+
+class QStringList;
+template <class T> class QStack;
 
 namespace qmu
 {

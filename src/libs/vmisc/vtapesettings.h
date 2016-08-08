@@ -29,6 +29,14 @@
 #ifndef VTAPESETTINGS_H
 #define VTAPESETTINGS_H
 
+#include <QByteArray>
+#include <QChar>
+#include <QMetaObject>
+#include <QObject>
+#include <QSettings>
+#include <QString>
+#include <QtGlobal>
+
 #include "vcommonsettings.h"
 
 class VTapeSettings : public VCommonSettings

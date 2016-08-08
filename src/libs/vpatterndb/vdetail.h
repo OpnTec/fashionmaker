@@ -29,16 +29,24 @@
 #ifndef VDETAIL_H
 #define VDETAIL_H
 
-#include "vnodedetail.h"
+#include <qcompilerdetection.h>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
 #include <QVector>
+#include <QtGlobal>
 
 #include "../vlayout/vabstractdetail.h"
+#include "vnodedetail.h"
 
-class VDetailData;
-class VContainer;
 class QPainterPath;
-class VPatternPieceData;
+class QPointF;
+class VContainer;
+class VDetailData;
+class VNodeDetail;
 class VPatternInfoGeometry;
+class VPatternPieceData;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).

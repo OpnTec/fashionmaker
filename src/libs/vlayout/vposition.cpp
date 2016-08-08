@@ -27,23 +27,31 @@
  *************************************************************************/
 
 #include "vposition.h"
-#include "../vmisc/def.h"
 
-#include <QPointF>
-#include <QRectF>
-#include <QLineF>
-#include <QPolygonF>
-#include <QPainterPath>
-#include <QImage>
-#include <QPainter>
-#include <QCoreApplication>
+#include <qmath.h>
 #include <QDir>
-#include <QtWidgets>
+#include <QImage>
+#include <QLineF>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPen>
+#include <QPicture>
+#include <QPointF>
+#include <QPolygonF>
+#include <QRect>
+#include <QRectF>
+#include <QSizeF>
+#include <QStaticStringData>
+#include <QString>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
+
+#include "../vmisc/def.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

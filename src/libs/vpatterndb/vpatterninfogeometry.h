@@ -32,6 +32,9 @@
 #define MIN_FONT_SIZE               12
 
 #include <QPointF>
+#include <QtGlobal>
+
+class QPointF;
 
 /**
  * @brief The VPatternInfoGeometry class holds the information about pattern info label geometry

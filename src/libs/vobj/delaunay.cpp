@@ -17,15 +17,14 @@
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
-#include <assert.h>
 #include <QtGlobal>
 
-#include "delaunay.h"
 #include "../vmisc/diagnostic.h"
+#include "delaunay.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wold-style-cast")
@@ -44,10 +43,10 @@ extern real incircle(real* pa, real* pb, real* pc, real* pd);
 #define	ON_CIRCLE	0
 #define INSIDE		1
 
-struct	point2d_s;
+struct	delaunay_s;
 struct	face_s;
 struct	halfedge_s;
-struct	delaunay_s;
+struct	point2d_s;
 
 
 #ifdef USE_DOUBLE

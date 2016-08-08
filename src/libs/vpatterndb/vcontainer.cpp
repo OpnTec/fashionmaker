@@ -27,15 +27,33 @@
  *************************************************************************/
 
 #include "vcontainer.h"
+
+#include <limits.h>
+#include <QDebug>
+#include <QLoggingCategory>
+#include <QVector>
+#include <QtDebug>
+
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "variables/varcradius.h"
+#include "variables/vcurveangle.h"
+#include "variables/vcurvelength.h"
+#include "variables/vincrement.h"
+#include "variables/vlineangle.h"
+#include "variables/vlinelength.h"
+#include "variables/vmeasurement.h"
+#include "variables/vvariable.h"
 #include "vtranslatevars.h"
-
-#include <QLineF>
-#include <QtAlgorithms>
-#include <QDebug>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")

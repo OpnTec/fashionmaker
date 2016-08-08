@@ -29,19 +29,45 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include "variables.h"
-#include "vdetail.h"
-#include "../vgeometry/vgobject.h"
-#include "../ifc/exception/vexceptionbadid.h"
-#include "../vgeometry/vabstractcurve.h"
-#include "../vgeometry/vabstractcubicbezierpath.h"
-#include "../vmisc/diagnostic.h"
-#include "vtranslatevars.h"
-
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QHash>
+#include <QMap>
+#include <QMessageLogger>
 #include <QSet>
 #include <QSharedPointer>
+#include <QSharedData>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QStringList>
+#include <QTypeInfo>
+#include <QtGlobal>
+#include <new>
+
+#include "../ifc/../vmisc/def.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/diagnostic.h"
+#include "variables.h"
+#include "variables/vinternalvariable.h"
+#include "vdetail.h"
+#include "vtranslatevars.h"
+
+class VAbstractCubicBezierPath;
+class VAbstractCurve;
+class VArc;
+class VArcRadius;
+class VCurveAngle;
+class VCurveLength;
+class VGObject;
+class VIncrement;
+class VLengthLine;
+class VLineAngle;
+class VMeasurement;
+class VTranslateVars;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

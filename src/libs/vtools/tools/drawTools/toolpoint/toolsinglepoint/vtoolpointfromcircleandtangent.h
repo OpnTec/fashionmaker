@@ -29,9 +29,28 @@
 #ifndef VTOOLPOINTFROMCIRCLEANDTANGENT_H
 #define VTOOLPOINTFROMCIRCLEANDTANGENT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+class VContainer;
 class VFormula;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 class VToolPointFromCircleAndTangent : public VToolSinglePoint
 {

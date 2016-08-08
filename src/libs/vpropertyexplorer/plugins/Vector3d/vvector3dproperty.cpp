@@ -22,9 +22,13 @@
 
 using namespace VPE;
 
+#include <QFlags>
+#include <QForeachContainer>
+#include <QList>
+#include <QStringList>
+
 #include "../../vproperty_p.h"
 #include "../vnumberproperty.h"
-#include <QStringList>
 
 QVector3DProperty::QVector3DProperty(const QString& name)
     : VProperty(name, QVariant::String) // todo: QVariant::Vector3D??

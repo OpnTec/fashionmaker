@@ -20,6 +20,21 @@
 
 #include "vemptyproperty.h"
 
+#include <stddef.h>
+#include <QBrush>
+#include <QColor>
+#include <QFlags>
+#include <QFont>
+
+#include "plugins/../vproperty.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
+class QWidget;
+namespace VPE {
+class VPropertyPrivate;
+}  // namespace VPE
+
 using namespace VPE;
 
 VEmptyProperty::VEmptyProperty(const QString& name)

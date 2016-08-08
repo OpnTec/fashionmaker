@@ -27,9 +27,18 @@
  *************************************************************************/
 
 #include "projectversion.h"
+
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QObject>
+#include <QStaticStringData>
 #include <QString>
-#include <QApplication>
+#include <QStringData>
+#include <QStringDataPtr>
 #include <QSysInfo>
+#include <QtGlobal>
 
 extern const int MAJOR_VERSION = 0;
 extern const int MINOR_VERSION = 5;

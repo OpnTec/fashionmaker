@@ -29,9 +29,13 @@
 #ifndef VBESTSQUARE_H
 #define VBESTSQUARE_H
 
+#include <QSizeF>
+#include <QTransform>
+#include <QtGlobal>
+
 #include "vlayoutdef.h"
 
-#include <QTransform>
+class QSizeF;
 
 class VBestSquare
 {

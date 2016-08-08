@@ -29,8 +29,23 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QGraphicsView>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QRectF>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
+
+class QEvent;
+class QGraphicsItem;
+class QGraphicsScene;
+class QMouseEvent;
+class QRectF;
+class QWheelEvent;
+class QWidget;
 
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor

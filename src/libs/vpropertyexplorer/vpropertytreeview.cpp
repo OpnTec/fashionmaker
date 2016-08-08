@@ -20,10 +20,14 @@
 
 #include "vpropertytreeview.h"
 
+#include <QAbstractItemView>
+#include <QFlags>
+
 #include "vpropertydelegate.h"
 #include "vpropertymodel.h"
-
 #include "vpropertytreeview_p.h"
+
+class QWidget;
 
 using namespace VPE;
 

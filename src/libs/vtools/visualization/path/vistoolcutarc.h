@@ -29,7 +29,17 @@
 #ifndef VISTOOLCUTARC_H
 #define VISTOOLCUTARC_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "vispath.h"
+
+class VContainer;
 
 class VisToolCutArc : public VisPath
 {

@@ -29,7 +29,14 @@
 #ifndef VNOBRUSHSCALEPATHITEM_H
 #define VNOBRUSHSCALEPATHITEM_H
 
+#include <qcompilerdetection.h>
 #include <QGraphicsPathItem>
+#include <QtGlobal>
+
+class QGraphicsItem;
+class QPainter;
+class QStyleOptionGraphicsItem;
+class QWidget;
 
 class VNoBrushScalePathItem : public QGraphicsPathItem
 {

@@ -27,8 +27,16 @@
  *************************************************************************/
 
 #include "moveabstractlabel.h"
-#include "../vwidgets/vmaingraphicsview.h"
+
+#include <QDomElement>
+
+#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "undocommands/label/../vundocommand.h"
+
+class QUndoCommand;
+class VAbstractPattern;
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y,

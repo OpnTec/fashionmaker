@@ -29,19 +29,23 @@
 #include "vsettings.h"
 
 #include <QDir>
-#include <QDebug>
 #include <QLocale>
-#include <QApplication>
+#include <QMetaType>
+#include <QMetaTypeId>
 #include <QPrinter>
 #include <QSharedPointer>
-#include <QDataStream>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QVariant>
 
-#include "../ifc/ifcdef.h"
+#include "../ifc/../vmisc/def.h"
+
+class QMarginsF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 Q_DECLARE_METATYPE(QMarginsF)

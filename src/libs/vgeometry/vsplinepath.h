@@ -29,13 +29,23 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QPainterPath>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
 #include "vabstractcubicbezierpath.h"
+#include "vgeometrydef.h"
+#include "vpointf.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
-#include <QCoreApplication>
-#include <QVector>
-#include <QPainterPath>
 
+class QPointF;
 class VSplinePathData;
 
 /**

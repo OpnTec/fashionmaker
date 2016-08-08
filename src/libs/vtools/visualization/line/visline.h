@@ -29,10 +29,24 @@
 #ifndef VISLINE_H
 #define VISLINE_H
 
-#include "../visualization.h"
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QGraphicsItem>
 #include <QGraphicsLineItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
 #include <QPointF>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
 
+#include "../visualization.h"
+#include "../vmisc/def.h"
+#include "visualization/line/../../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
+
+class QLineF;
+class QPointF;
 class VContainer;
 
 class VisLine: public Visualization, public QGraphicsLineItem

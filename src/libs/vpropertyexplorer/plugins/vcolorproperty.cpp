@@ -19,9 +19,17 @@
  *************************************************************************/
 
 #include "vcolorproperty.h"
-#include "vcolorpropertyeditor.h"
+
+#include <QColor>
+#include <QLocale>
+#include <QPixmap>
+#include <QWidget>
 
 #include "../vproperty_p.h"
+#include "vcolorpropertyeditor.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

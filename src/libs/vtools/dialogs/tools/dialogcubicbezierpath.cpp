@@ -27,14 +27,37 @@
  *************************************************************************/
 
 #include "dialogcubicbezierpath.h"
-#include "ui_dialogcubicbezierpath.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QDialogButtonBox>
+#include <QFont>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QPointer>
+#include <QPushButton>
+#include <QSharedPointer>
+#include <QVariant>
+#include <QVector>
+#include <Qt>
+#include <new>
+
 #include "../../visualization/path/vistoolcubicbezierpath.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogcubicbezierpath.h"
+
+class QWidget;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

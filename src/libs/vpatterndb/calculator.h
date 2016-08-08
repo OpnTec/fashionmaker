@@ -29,6 +29,12 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
+#include <qcompilerdetection.h>
+#include <QHash>
+#include <QMap>
+#include <QString>
+#include <QtGlobal>
+
 #include "../qmuparser/qmuformulabase.h"
 #include "../vmisc/def.h"
 

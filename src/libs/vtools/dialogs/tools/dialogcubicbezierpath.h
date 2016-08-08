@@ -29,8 +29,20 @@
 #ifndef DIALOGCUBICBEZIERPATH_H
 #define DIALOGCUBICBEZIERPATH_H
 
-#include "dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QSet>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/def.h"
+#include "dialogtool.h"
+
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

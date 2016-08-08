@@ -29,9 +29,18 @@
 #ifndef MOVEDETAIL_H
 #define MOVEDETAIL_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
 
+class QDomElement;
 class QGraphicsScene;
+class QUndoCommand;
+class VAbstractPattern;
 
 class MoveDetail : public VUndoCommand
 {

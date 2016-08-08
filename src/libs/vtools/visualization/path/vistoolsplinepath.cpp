@@ -27,7 +27,23 @@
  *************************************************************************/
 
 #include "vistoolsplinepath.h"
+
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QPainterPath>
+#include <QPoint>
+#include <Qt>
+#include <QtAlgorithms>
+
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "visualization/path/../visualization.h"
+#include "visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)

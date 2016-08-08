@@ -27,7 +27,30 @@
  *************************************************************************/
 
 #include "vtoollinepoint.h"
+
+#include <QColor>
+#include <QGraphicsLineItem>
+#include <QLineF>
+#include <QPen>
+#include <QPoint>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../vtoolsinglepoint.h"
+
+class QDomElement;
+template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

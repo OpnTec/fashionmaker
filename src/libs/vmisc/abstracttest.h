@@ -29,7 +29,13 @@
 #ifndef ABSTRACTTEST_H
 #define ABSTRACTTEST_H
 
+#include <QMetaObject>
 #include <QObject>
+#include <QString>
+
+class QPointF;
+class QStringList;
+template <class T> class QVector;
 
 #ifdef Q_CC_MSVC
 #include <ciso646>

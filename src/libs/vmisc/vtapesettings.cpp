@@ -28,9 +28,11 @@
 
 #include "vtapesettings.h"
 
-#include <QApplication>
-#include <QDir>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
 #include <QTextCodec>
+#include <QVariant>
 
 const QString VTapeSettings::SettingDataBaseGeometry    = QStringLiteral("database/geometry");
 

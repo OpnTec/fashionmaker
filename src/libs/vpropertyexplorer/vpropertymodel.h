@@ -21,13 +21,23 @@
 #ifndef VPROPERTYMODEL_H
 #define VPROPERTYMODEL_H
 
-#include "vpropertyexplorer_global.h"
-
+#include <qcompilerdetection.h>
 #include <QAbstractItemModel>
 #include <QMap>
+#include <QMetaObject>
+#include <QModelIndex>
+#include <QObject>
 #include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
 #include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+namespace VPE {
+class VProperty;
+}  // namespace VPE
 
 namespace VPE
 {

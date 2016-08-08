@@ -27,10 +27,35 @@
  *************************************************************************/
 
 #include "vtoolcubicbezier.h"
-#include "../vgeometry/vcubicbezier.h"
+
+#include <QDomElement>
+#include <QPen>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
+#include <new>
+
 #include "../../../dialogs/tools/dialogcubicbezier.h"
-#include "../../../undocommands/movespline.h"
 #include "../../../visualization/path/vistoolcubicbezier.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
+#include "tools/drawTools/toolcurve/../../vabstracttool.h"
+#include "tools/drawTools/toolcurve/../vdrawtool.h"
+#include "tools/drawTools/toolcurve/vabstractspline.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
 
 const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 

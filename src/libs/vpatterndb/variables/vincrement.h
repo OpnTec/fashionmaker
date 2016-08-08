@@ -29,10 +29,16 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "vvariable.h"
 
-class VIncrementData;
 class VContainer;
+class VIncrementData;
 
 /**
  * @brief The VIncrement class keep data row of increment table

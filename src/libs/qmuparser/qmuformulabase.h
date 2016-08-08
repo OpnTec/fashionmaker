@@ -22,8 +22,15 @@
 #ifndef QMUFORMULABASE_H
 #define QMUFORMULABASE_H
 
-#include "qmuparser_global.h"
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
+#include "qmuparser_global.h"
+
+template <class Key, class T> class QMap;
 
 namespace qmu
 {

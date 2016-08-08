@@ -29,10 +29,18 @@
 #ifndef VABSTRACTCUBICBEZIERPATH_H
 #define VABSTRACTCUBICBEZIERPATH_H
 
-#include "vabstractcurve.h"
-
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 
+#include "vabstractcurve.h"
+#include "vgeometrydef.h"
+
+class QPainterPath;
+class QPointF;
 class VPointF;
 class VSpline;
 class VSplinePoint;

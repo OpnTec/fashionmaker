@@ -21,14 +21,28 @@
 #ifndef VPROPERTY_H
 #define VPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
-
-#include <QVariant>
-#include <QString>
-#include <QSharedPointer>
-#include <QStyleOptionViewItem>
+#include <qcompilerdetection.h>
 #include <QAbstractItemDelegate>
 #include <QEvent>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QSharedPointer>
+#include <QString>
+#include <QStringList>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
+class QModelIndex;
+class QPainter;
+class QStyleOptionViewItem;
+class QWidget;
+template <typename T> class QList;
 
 namespace VPE
 {

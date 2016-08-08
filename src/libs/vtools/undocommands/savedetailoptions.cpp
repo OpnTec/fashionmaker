@@ -27,13 +27,22 @@
  *************************************************************************/
 
 #include "savedetailoptions.h"
-#include "../tools/nodeDetails/vabstractnode.h"
-#include "../../vwidgets/vmaingraphicsview.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatternpiecedata.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
 
-#include <QGraphicsView>
+#include <QDomElement>
+#include <QPointF>
+#include <QUndoCommand>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "undocommands/../tools/vtooldetail.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveDetailOptions::SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VAbstractPattern *doc,

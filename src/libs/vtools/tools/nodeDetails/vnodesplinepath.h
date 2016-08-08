@@ -29,8 +29,18 @@
 #ifndef VNODESPLINEPATH_H
 #define VNODESPLINEPATH_H
 
-#include "vabstractnode.h"
+#include <qcompilerdetection.h>
 #include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "vabstractnode.h"
+
+class VContainer;
 
 /**
  * @brief The VNodeSplinePath class spline path detail node.

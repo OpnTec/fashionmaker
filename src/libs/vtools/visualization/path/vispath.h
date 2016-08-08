@@ -29,8 +29,18 @@
 #ifndef VISPATH_H
 #define VISPATH_H
 
-#include "../visualization.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
 #include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../visualization.h"
+#include "../vmisc/def.h"
+
+class VContainer;
 
 class VisPath : public Visualization, public QGraphicsPathItem
 {

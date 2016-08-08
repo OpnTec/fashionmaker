@@ -29,10 +29,24 @@
 #ifndef VLINECOLORPROPERTY_H
 #define VLINECOLORPROPERTY_H
 
-#include "../vproperty.h"
-
+#include <qcompilerdetection.h>
 #include <QMap>
+#include <QMetaObject>
+#include <QObject>
 #include <QString>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <QVector>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vproperty.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
+class QWidget;
 
 namespace VPE
 {

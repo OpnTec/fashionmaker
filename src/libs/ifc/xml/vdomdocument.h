@@ -29,14 +29,28 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
-#include <QDomDocument>
-#include <QDebug>
 #include <QCoreApplication>
+#include <QDebug>
+#include <QDomDocument>
+#include <QDomElement>
+#include <QDomNode>
+#include <QHash>
+#include <QLatin1String>
+#include <QLoggingCategory>
+#include <QStaticStringData>
+#include <QString>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtGlobal>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/logging.h"
+
+class QDomElement;
+class QDomNode;
+template <typename T> class QVector;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 

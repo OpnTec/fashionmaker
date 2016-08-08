@@ -27,17 +27,22 @@
  *************************************************************************/
 
 #include "vcontour.h"
-#include "vcontour_p.h"
-#include "vlayoutdetail.h"
 
-#include <QPointF>
+#include <qmath.h>
 #include <QLineF>
 #include <QPainterPath>
+#include <QPoint>
+#include <QPointF>
+#include <QPolygonF>
+#include <QRectF>
+#include <Qt>
+
+#include "vcontour_p.h"
+#include "vlayoutdetail.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

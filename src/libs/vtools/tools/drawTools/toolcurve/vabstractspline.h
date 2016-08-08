@@ -29,13 +29,40 @@
 #ifndef VABSTRACTSPLINE_H
 #define VABSTRACTSPLINE_H
 
-#include "../vdrawtool.h"
-#include "../../../visualization/line/visline.h"
-
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
 #include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPainterPath>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QVector>
+#include <QtGlobal>
 
+#include "../../../visualization/line/visline.h"
+#include "../vdrawtool.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "tools/drawTools/toolcurve/../../../visualization/line/../visualization.h"
+
+class QDomElement;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+class QPointF;
+class VAbstractPattern;
+class VContainer;
 class VControlPointSpline;
+class VGObject;
 class VSpline;
+template <class T> class QSharedPointer;
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {

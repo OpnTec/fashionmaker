@@ -27,16 +27,32 @@
  *************************************************************************/
 
 #include "dialogpointofintersectioncircles.h"
-#include "ui_dialogpointofintersectioncircles.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
+#include <limits.h>
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QTimer>
+#include <QToolButton>
+#include <Qt>
+
 #include "../../../vpatterndb/vtranslatevars.h"
 #include "../../visualization/line/vistoolpointofintersectioncircles.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "ui_dialogpointofintersectioncircles.h"
 
-#include <QTimer>
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId,

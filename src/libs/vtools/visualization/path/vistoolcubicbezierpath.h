@@ -29,8 +29,20 @@
 #ifndef VISTOOLCUBICBEZIERPATH_H
 #define VISTOOLCUBICBEZIERPATH_H
 
-#include "vispath.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vmisc/def.h"
+#include "vispath.h"
+
+class VContainer;
+class VPointF;
 
 class VisToolCubicBezierPath : public VisPath
 {

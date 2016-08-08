@@ -29,18 +29,34 @@
 #ifndef VLAYOUTDETAIL_H
 #define VLAYOUTDETAIL_H
 
-#include "vabstractdetail.h"
-#include "../vpatterndb/vpatternpiecedata.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
-#include "../ifc/xml/vabstractpattern.h"
-
-
+#include <qcompilerdetection.h>
+#include <QDate>
+#include <QLineF>
 #include <QMatrix>
 #include <QPointF>
-#include <QDate>
+#include <QRectF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
 
-class VLayoutDetailData;
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "vabstractdetail.h"
+
+class QFont;
 class QGraphicsItem;
+class QLineF;
+class QPainterPath;
+class QPointF;
+class QRectF;
+class QTransform;
+class VAbstractPattern;
+class VLayoutDetailData;
+class VPatternInfoGeometry;
+class VPatternPieceData;
 
 class VLayoutDetail :public VAbstractDetail
 {

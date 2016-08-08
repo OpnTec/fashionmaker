@@ -27,14 +27,21 @@
  *************************************************************************/
 
 #include "vformula.h"
+
+#include <qnumeric.h>
+#include <QDebug>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QtDebug>
+
+#include "../ifc/../vmisc/def.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "calculator.h"
 #include "vcontainer.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vsettings.h"
 #include "vtranslatevars.h"
-
-#include <QDebug>
-#include <QtNumeric>
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------

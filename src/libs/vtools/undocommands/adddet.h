@@ -29,8 +29,20 @@
 #ifndef ADDDET_H
 #define ADDDET_H
 
-#include "vundocommand.h"
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../tools/vtooldetail.h"
+#include "vdetail.h"
+#include "vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
+class VAbstractPattern;
 
 class AddDet : public VUndoCommand
 {

@@ -19,10 +19,16 @@
  *************************************************************************/
 
 #include "venumproperty.h"
-#include "../vproperty_p.h"
 
 #include <QComboBox>
 #include <QCoreApplication>
+#include <QLocale>
+#include <QWidget>
+
+#include "../vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

@@ -31,19 +31,28 @@
 #ifndef QXTCSVMODEL_H
 #define QXTCSVMODEL_H
 
+#include <qcompilerdetection.h>
 #include <QAbstractTableModel>
-#include <QVariant>
-#include <QIODevice>
 #include <QChar>
+#include <QFlags>
+#include <QIODevice>
+#include <QIncompatibleFlag>
+#include <QMetaObject>
+#include <QModelIndex>
+#include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QModelIndex>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
 #include "def.h"
 
+class QIODevice;
+class QModelIndex;
 class QTextCodec;
-
 class QxtCsvModelPrivate;
+
 class QxtCsvModel : public QAbstractTableModel
 {
     Q_OBJECT

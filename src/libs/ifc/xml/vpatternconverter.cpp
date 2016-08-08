@@ -27,12 +27,27 @@
  *************************************************************************/
 
 #include "vpatternconverter.h"
+
+#include <QDir>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomText>
+#include <QFile>
+#include <QFileInfo>
+#include <QLatin1String>
+#include <QList>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <algorithm>
+
 #include "../exception/vexception.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vmisc/def.h"
+#include "xml/vabstractconverter.h"
 
-#include <QDir>
-#include <QFile>
+class QDomElement;
 
 /*
  * Version rules:

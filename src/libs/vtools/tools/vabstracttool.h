@@ -29,21 +29,36 @@
 #ifndef VABSTRACTTOOL_H
 #define VABSTRACTTOOL_H
 
-#include "vdatatool.h"
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../visualization/visualization.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/../undocommands/../../ifc/xml/vabstractpattern.h"
+#include "vdatatool.h"
 
 class QDomElement;
-class QLineF;
-class QPointF;
+class QGraphicsEllipseItem;
+class QGraphicsItem;
+class QGraphicsLineItem;
 class QGraphicsScene;
 class QGraphicsView;
-class QGraphicsItem;
+class QIcon;
+class QLineF;
+class QPointF;
 class QRectF;
-class Visualization;
+class VContainer;
 class VGraphicsSimpleTextItem;
+class Visualization;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.

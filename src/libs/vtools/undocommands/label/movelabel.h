@@ -29,7 +29,16 @@
 #ifndef MOVELABEL_H
 #define MOVELABEL_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "moveabstractlabel.h"
+
+class QUndoCommand;
+class VAbstractPattern;
 
 class MoveLabel : public MoveAbstractLabel
 {

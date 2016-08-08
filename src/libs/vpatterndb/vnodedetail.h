@@ -30,8 +30,12 @@
 #define VNODEDETAIL_H
 
 #include <QMetaType>
+#include <QMetaTypeId>
 #include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
 
+#include "../ifc/../vmisc/def.h"
 #include "../vmisc/def.h"
 
 class VNodeDetailData;

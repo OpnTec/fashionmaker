@@ -29,7 +29,15 @@
 #ifndef VVITCONVERTER_H
 #define VVITCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QString>
+#include <QtGlobal>
+
 #include "vabstractmconverter.h"
+#include "vabstractconverter.h"
+
+class QDomElement;
 
 class VVITConverter : public VAbstractMConverter
 {

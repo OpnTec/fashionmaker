@@ -27,16 +27,20 @@
  *************************************************************************/
 
 #include "vcubicbezierpath.h"
+
+#include <qmath.h>
+#include <QLineF>
+#include <QPoint>
+
+#include "../ifc/exception/vexception.h"
+#include "vabstractcurve.h"
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
-#include "../ifc/exception/vexception.h"
 #include "vsplinepoint.h"
-#include "../vmisc/vabstractapplication.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
 #else
-#   include <QtMath>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

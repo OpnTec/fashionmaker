@@ -27,9 +27,18 @@
  *************************************************************************/
 
 #include "addtocalc.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsscene.h"
+
+#include <QDomNode>
+
 #include "../../vwidgets/vmaingraphicsview.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "undocommands/vundocommand.h"
+
+class QDomElement;
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)

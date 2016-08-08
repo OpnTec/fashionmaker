@@ -30,6 +30,13 @@
 #define VWIDGETPOPUP_H
 
 #include <QFrame>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+class QPoint;
+class QWidget;
 
 /**
     \brief Class showing a widget as popup window.

@@ -29,11 +29,17 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include "vgobject.h"
-
+#include <qcompilerdetection.h>
 #include <QMetaType>
+#include <QMetaTypeId>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
 
 #include "../vmisc/diagnostic.h"
+#include "vgeometrydef.h"
+#include "vgobject.h"
 
 class QPointF;
 class QString;

@@ -29,10 +29,18 @@
 #ifndef MOVEABSTRACTLABEL_H
 #define MOVEABSTRACTLABEL_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vundocommand.h"
 
 class QGraphicsScene;
 class QGraphicsView;
+class QUndoCommand;
+class VAbstractPattern;
 
 class MoveAbstractLabel : public VUndoCommand
 {

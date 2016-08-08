@@ -27,11 +27,37 @@
  *************************************************************************/
 
 #include "vnodepoint.h"
+
+#include <QBrush>
+#include <QDomElement>
+#include <QFlags>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
+#include <new>
+
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vwidgets/vgraphicssimpletextitem.h"
-#include <QPen>
-#include <QBrush>
-#include <QGraphicsSceneMouseEvent>
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/nodeDetails/../vabstracttool.h"
+#include "tools/nodeDetails/../vdatatool.h"
+#include "tools/nodeDetails/vabstractnode.h"
+
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 

@@ -27,7 +27,13 @@
  *************************************************************************/
 
 #include "vabstractpoint.h"
-#include "../vgeometry/vpointf.h"
+
+#include <QSharedPointer>
+
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgobject.h"
+#include "tools/drawTools/toolpoint/../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id)

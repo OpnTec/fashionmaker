@@ -27,7 +27,18 @@
  *************************************************************************/
 
 #include "movedoublelabel.h"
+
+#include <QDomElement>
+
+#include "../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "undocommands/label/../../../ifc/xml/vabstractpattern.h"
+#include "undocommands/label/../../../vmisc/def.h"
+#include "undocommands/label/../vundocommand.h"
+#include "undocommands/label/moveabstractlabel.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,

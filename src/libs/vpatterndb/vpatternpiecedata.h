@@ -32,8 +32,13 @@
 #define MIN_FONT_SIZE           12
 
 #include <QList>
-#include <QString>
 #include <QPointF>
+#include <QSet>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+class QPointF;
 
 enum class MaterialType : char
 {

@@ -27,14 +27,19 @@
  *************************************************************************/
 
 #include "vabstractdetail.h"
-#include "vabstractdetail_p.h"
+
+#include <QDebug>
+#include <QLine>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPoint>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtDebug>
 
 #include "../vgeometry/vgobject.h"
-
-#include <QVector>
-#include <QPointF>
-#include <QLineF>
-#include <QDebug>
+#include "vabstractdetail_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

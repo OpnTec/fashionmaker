@@ -27,11 +27,17 @@
  *************************************************************************/
 
 #include "movespoint.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsview.h"
 
-#include <QGraphicsScene>
 #include <QDomElement>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "undocommands/vundocommand.h"
+
+class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,

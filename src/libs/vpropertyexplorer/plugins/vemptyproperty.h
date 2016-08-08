@@ -21,7 +21,24 @@
 #ifndef VEMPTYPROPERTY_H
 #define VEMPTYPROPERTY_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../vproperty.h"
+#include "vpropertyexplorer_global.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
+class QWidget;
+namespace VPE {
+class VPropertyPrivate;
+}  // namespace VPE
 
 namespace VPE
 {

@@ -27,8 +27,22 @@
  *************************************************************************/
 
 #include "dialogpointofintersectioncurves.h"
-#include "ui_dialogpointofintersectioncurves.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+#include <QPushButton>
+
 #include "../../visualization/path/vistoolpointofintersectioncurves.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogpointofintersectioncurves.h"
+
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId,

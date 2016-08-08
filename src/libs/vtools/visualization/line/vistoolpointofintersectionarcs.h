@@ -29,8 +29,18 @@
 #ifndef VISTOOLPOINTOFINTERSECTIONARCS_H
 #define VISTOOLPOINTOFINTERSECTIONARCS_H
 
-#include "visline.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "visline.h"
+
+class VContainer;
 
 class VisToolPointOfIntersectionArcs : public VisLine
 {

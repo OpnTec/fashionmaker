@@ -27,9 +27,50 @@
  *************************************************************************/
 
 #include "dialogeditwrongformula.h"
-#include "ui_dialogeditwrongformula.h"
+
+#include <qiterator.h>
+#include <QAbstractItemView>
+#include <QApplication>
+#include <QCheckBox>
+#include <QCursor>
+#include <QDialog>
+#include <QFont>
+#include <QHeaderView>
+#include <QLabel>
+#include <QMapIterator>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSharedPointer>
+#include <QShowEvent>
+#include <QSize>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QTextCursor>
+#include <QToolButton>
+#include <QWidget>
+#include <Qt>
+#include <new>
+
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "dialogs/support/../tools/dialogtool.h"
+#include "ui_dialogeditwrongformula.h"
+#include "variables/varcradius.h"
+#include "variables/vcurveangle.h"
+#include "variables/vcurvelength.h"
+#include "variables/vincrement.h"
+#include "variables/vlineangle.h"
+#include "variables/vlinelength.h"
+#include "variables/vmeasurement.h"
+
+class QCloseEvent;
+class QShowEvent;
+template <class T> class QSharedPointer;
 
 enum {ColumnName = 0, ColumnFullName};
 

@@ -20,10 +20,8 @@
 
 #include "vstandardpropertyfactory.h"
 
-#include "vpropertyfactorymanager.h"
-
-// Supported Properties
-#include "vproperty.h"
+#include "plugins/Vector3d/../../vproperty.h"
+#include "plugins/Vector3d/vvector3dproperty.h"
 #include "plugins/vboolproperty.h"
 #include "plugins/vcolorproperty.h"
 #include "plugins/vemptyproperty.h"
@@ -31,7 +29,7 @@
 #include "plugins/vfileproperty.h"
 #include "plugins/vnumberproperty.h"
 #include "plugins/vshortcutproperty.h"
-#include "plugins/Vector3d/vvector3dproperty.h"
+#include "vpropertyfactorymanager.h"
 
 
 using namespace VPE;

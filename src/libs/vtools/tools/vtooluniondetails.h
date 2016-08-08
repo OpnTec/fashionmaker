@@ -29,11 +29,31 @@
 #ifndef VTOOLUNIONDETAILS_H
 #define VTOOLUNIONDETAILS_H
 
-#include "vabstracttool.h"
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QDomNode>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 
-class VPointF;
-class VMainGraphicsScene;
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/nodeDetails/../vabstracttool.h"
+#include "vabstracttool.h"
+#include "vdetail.h"
+
 class DialogTool;
+class QDomElement;
+class QDomNode;
+class QPointF;
+class VContainer;
+class VMainGraphicsScene;
+class VNodeDetail;
+class VPointF;
 
 /**
  * @brief The VToolUnionDetails class tool union details.

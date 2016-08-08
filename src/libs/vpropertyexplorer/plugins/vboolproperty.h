@@ -21,7 +21,18 @@
 #ifndef VBOOLPROPERTY_H
 #define VBOOLPROPERTY_H
 
+#include <qcompilerdetection.h>
+#include <stddef.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../vproperty.h"
+#include "vproperty.h"
+#include "vpropertyexplorer_global.h"
 
 namespace VPE
 {

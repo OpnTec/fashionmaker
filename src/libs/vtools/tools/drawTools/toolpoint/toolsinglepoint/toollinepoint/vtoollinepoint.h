@@ -29,8 +29,22 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
-#include "../vtoolsinglepoint.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vpatterndb/vformula.h"
+#include "../vtoolsinglepoint.h"
+#include "../vwidgets/../vmisc/def.h"
+
+class QDomElement;
+class VAbstractPattern;
+class VContainer;
+class VGObject;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.

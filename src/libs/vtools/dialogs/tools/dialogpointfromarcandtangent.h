@@ -29,7 +29,18 @@
 #ifndef DIALOGPOINTFROMARCANDTANGENT_H
 #define DIALOGPOINTFROMARCANDTANGENT_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "dialogtool.h"
+
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

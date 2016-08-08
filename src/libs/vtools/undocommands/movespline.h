@@ -29,10 +29,18 @@
 #ifndef MOVESPLINE_H
 #define MOVESPLINE_H
 
-#include "vundocommand.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../../vgeometry/vspline.h"
+#include "vundocommand.h"
 
 class QGraphicsScene;
+class QUndoCommand;
+class VAbstractPattern;
 
 class MoveSpline : public VUndoCommand
 {

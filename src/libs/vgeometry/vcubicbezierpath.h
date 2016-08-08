@@ -29,13 +29,23 @@
 #ifndef VCUBICBEZIERPATH_H
 #define VCUBICBEZIERPATH_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
 #include "vabstractcubicbezierpath.h"
+#include "vgeometrydef.h"
 #include "vpointf.h"
 
-#include <QCoreApplication>
-
+class QPointF;
 class VCubicBezierPathData;
 class VSpline;
+class VSplinePoint;
 
 class VCubicBezierPath : public VAbstractCubicBezierPath
 {

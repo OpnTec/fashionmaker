@@ -29,11 +29,22 @@
 #ifndef VABSTRACTPATTERN_H
 #define VABSTRACTPATTERN_H
 
+#include <qcompilerdetection.h>
+#include <QHash>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QPair>
+#include <QString>
+#include <QStringList>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
 
-#include <QObject>
-#include <QDate>
+class QDomElement;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
@@ -43,8 +54,8 @@ enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
 enum class VCrossCurvesPoint : char {HighestPoint = 1, LowestPoint = 2};
 enum class HCrossCurvesPoint : char {LeftmostPoint = 1, RightmostPoint = 2};
 
-class VDataTool;
 class VContainer;
+class VDataTool;
 
 class VAbstractPattern : public QObject, public VDomDocument
 {

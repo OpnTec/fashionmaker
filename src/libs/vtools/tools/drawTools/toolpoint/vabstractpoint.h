@@ -29,8 +29,28 @@
 #ifndef VABSTRACTPOINT_H
 #define VABSTRACTPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QMetaObject>
+#include <QObject>
+#include <QPen>
+#include <QPointF>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../vdrawtool.h"
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/toolpoint/../../../dialogs/tools/../../visualization/visualization.h"
+#include "tools/drawTools/toolpoint/../../vabstracttool.h"
+
+class QPointF;
+class VAbstractPattern;
 
 class VAbstractPoint: public VDrawTool
 {

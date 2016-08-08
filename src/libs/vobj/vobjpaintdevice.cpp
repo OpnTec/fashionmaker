@@ -27,9 +27,15 @@
  *************************************************************************/
 
 #include "vobjpaintdevice.h"
-#include "vobjengine.h"
 
 #include <QFile>
+#include <QIODevice>
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "vobjengine.h"
+
+class QPaintEngine;
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjPaintDevice::VObjPaintDevice()

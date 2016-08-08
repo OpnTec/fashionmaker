@@ -29,11 +29,22 @@
 #ifndef DIALOGDETAIL_H
 #define DIALOGDETAIL_H
 
-#include "ui_dialogdetail.h"
-#include "dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "../vpatterndb/vdetail.h"
-#include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "dialogtool.h"
+#include "ui_dialogdetail.h"
+
+class QWidget;
+class VContainer;
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.

@@ -19,8 +19,15 @@
  *************************************************************************/
 
 #include "vpropertyset.h"
+
+#include <stddef.h>
+#include <QForeachContainer>
+#include <QList>
+#include <QMap>
+
 using namespace VPE;
 
+#include "vproperty.h"
 #include "vpropertyset_p.h"
 
 

@@ -27,19 +27,50 @@
  *************************************************************************/
 
 #include "vabstracttool.h"
-#include "../../vpropertyexplorer/checkablemessagebox.h"
-#include "../../vgeometry/vpointf.h"
-#include "../../vwidgets/vmaingraphicsview.h"
-#include "../../vmisc/vsettings.h"
-#include "../undocommands/deltool.h"
-#include "../undocommands/savetooloptions.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
 
-#include <QGraphicsView>
+#include <QBrush>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QFlags>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
+#include <QHash>
 #include <QIcon>
-#include <QStyle>
+#include <QLineF>
 #include <QMessageBox>
-#include <QtCore/qmath.h>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
+#include <QPoint>
+#include <QPointF>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStyle>
+#include <QUndoStack>
+#include <QVector>
+#include <new>
+
+#include "../../vgeometry/vpointf.h"
+#include "../../vpropertyexplorer/checkablemessagebox.h"
+#include "../../vwidgets/vmaingraphicsview.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vtoolrecord.h"
+#include "../undocommands/deltool.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "tools/../undocommands/../../vmisc/logging.h"
+#include "tools/vdatatool.h"
+
+class QGraphicsEllipseItem;
+class QGraphicsLineItem;
+template <class T> class QSharedPointer;
 
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 

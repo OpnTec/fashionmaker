@@ -27,8 +27,13 @@
  *************************************************************************/
 
 #include "dialoggroup.h"
+
+#include <QLineEdit>
+
 #include "ui_dialoggroup.h"
-#include "../vtools/tools/drawTools/drawtools.h"
+
+class QWidget;
+class VContainer;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogGroup::DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent)

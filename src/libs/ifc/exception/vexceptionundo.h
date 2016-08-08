@@ -29,6 +29,10 @@
 #ifndef VEXCEPTIONUNDO_H
 #define VEXCEPTIONUNDO_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+
+#include "../ifcdef.h"
 #include "vexception.h"
 
 class VExceptionUndo : public VException

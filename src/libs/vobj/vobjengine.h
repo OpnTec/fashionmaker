@@ -29,9 +29,25 @@
 #ifndef VOBJENGINE_H
 #define VOBJENGINE_H
 
+#include <qcompilerdetection.h>
+#include <QMatrix>
 #include <QPaintEngine>
+#include <QPolygonF>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QSize>
+#include <QtGlobal>
+
 #include "delaunay.h"
 
+class QIODevice;
+class QPaintDevice;
+class QPainterPath;
+class QPixmap;
+class QPoint;
+class QPointF;
+class QPolygonF;
+class QRectF;
 class QTextStream;
 
 #define MAX_POINTS      512

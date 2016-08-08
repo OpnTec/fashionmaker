@@ -22,8 +22,11 @@
 #ifndef FVAVAILABLEUPDATE_H
 #define FVAVAILABLEUPDATE_H
 
+#include <QMetaObject>
 #include <QObject>
+#include <QString>
 #include <QUrl>
+#include <QtGlobal>
 
 class FvAvailableUpdate : public QObject
 {

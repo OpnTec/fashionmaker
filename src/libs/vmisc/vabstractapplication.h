@@ -29,19 +29,32 @@
 #ifndef VABSTRACTAPPLICATION_H
 #define VABSTRACTAPPLICATION_H
 
+#include <qcompilerdetection.h>
 #include <QApplication>
+#include <QCoreApplication>
 #include <QGraphicsScene>
+#include <QLocale>
+#include <QMetaObject>
+#include <QObject>
 #include <QPointer>
+#include <QString>
+#include <QtGlobal>
 
-#include "def.h"
-#include "vsettings.h"
-#include "vlockguard.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "def.h"
+#include "vcommonsettings.h"
+#include "vlockguard.h"
+#include "vsettings.h"
 
+class QGraphicsScene;
+class QTranslator;
+class QUndoStack;
+class QWidget;
 class VAbstractApplication;// use in define
 class VAbstractPattern;
 class VMainGraphicsView;
-class QUndoStack;
+class VTranslateVars;
 
 #if defined(qApp)
 #undef qApp

@@ -36,10 +36,13 @@
 #include "qxtcsvmodel.h"
 
 #include <QFile>
+#include <QIODevice>
+#include <QList>
 #include <QTextStream>
-#include <QDebug>
 
 #include "../vmisc/diagnostic.h"
+
+class QModelIndex;
 
 class QxtCsvModelPrivate : public QxtPrivate<QxtCsvModel>
 {

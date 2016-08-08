@@ -29,7 +29,15 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QString>
+#include <QtGlobal>
+
 #include "vabstractmconverter.h"
+#include "vabstractconverter.h"
+
+class QDomElement;
 
 class VVSTConverter : public VAbstractMConverter
 {

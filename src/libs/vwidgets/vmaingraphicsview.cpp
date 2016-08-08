@@ -28,16 +28,31 @@
 
 #include "vmaingraphicsview.h"
 
-#include <QTimeLine>
-#include <QWheelEvent>
-#include <QApplication>
-#include <QScrollBar>
-#include "vsimplecurve.h"
-#include "vmaingraphicsscene.h"
-
-#include <QGraphicsItem>
-#include <QMouseEvent>
 #include <qmath.h>
+#include <QApplication>
+#include <QCursor>
+#include <QEvent>
+#include <QFlags>
+#include <QGraphicsItem>
+#include <QGraphicsScene>
+#include <QLineF>
+#include <QList>
+#include <QMessageLogger>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPoint>
+#include <QScrollBar>
+#include <QTimeLine>
+#include <QTransform>
+#include <QWheelEvent>
+#include <QWidget>
+
+#include "../ifc/../vmisc/def.h"
+#include "vmaingraphicsscene.h"
+#include "vsimplecurve.h"
+
+class QMouseEvent;
+class QWheelEvent;
 
 const int GraphicsViewZoom::duration = 300;
 const int GraphicsViewZoom::updateInterval = 40;

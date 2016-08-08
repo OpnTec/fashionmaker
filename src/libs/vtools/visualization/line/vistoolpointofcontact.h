@@ -29,7 +29,17 @@
 #ifndef VISTOOLPOINTOFCONTACT_H
 #define VISTOOLPOINTOFCONTACT_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "visline.h"
+
+class VContainer;
 
 class VisToolPointOfContact : public VisLine
 {

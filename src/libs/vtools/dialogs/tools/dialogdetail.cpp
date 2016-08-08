@@ -29,13 +29,45 @@
 #include "dialogdetail.h"
 
 #include <QBuffer>
+#include <QByteArray>
+#include <QCheckBox>
+#include <QComboBox>
 #include <QDebug>
+#include <QDialogButtonBox>
+#include <QDoubleSpinBox>
+#include <QFlags>
+#include <QFont>
+#include <QIcon>
+#include <QLabel>
+#include <QLatin1String>
+#include <QLineEdit>
+#include <QList>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QMessageLogger>
+#include <QPixmap>
+#include <QPointF>
+#include <QPushButton>
+#include <QSharedPointer>
+#include <QSize>
+#include <QSpinBox>
+#include <QTabWidget>
+#include <QToolButton>
+#include <QVariant>
+#include <QVector>
+#include <Qt>
+#include <QtDebug>
+#include <new>
 
-#include "../../../vgeometry/varc.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vgeometry/vsplinepath.h"
-#include "../../../vpatterndb/vcontainer.h"
 #include "../../../ifc/xml/vdomdocument.h"
+#include "../../../vpatterndb/vcontainer.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/dialogtool.h"
+#include "vnodedetail.h"
+
+class QPointF;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

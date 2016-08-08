@@ -27,15 +27,37 @@
  *************************************************************************/
 
 #include "dialogalongline.h"
-#include "ui_dialogalongline.h"
-#include "../../visualization/line/vistoolalongline.h"
-#include "../../tools/vabstracttool.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../support/dialogeditwrongformula.h"
-#include "../vgeometry/vpointf.h"
 
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLatin1String>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
 #include <QPushButton>
+#include <QSharedPointer>
+#include <QToolButton>
+#include <new>
+
+#include "../../../vpatterndb/vtranslatevars.h"
+#include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolalongline.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "ui_dialogalongline.h"
+#include "variables/vlinelength.h"
+
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

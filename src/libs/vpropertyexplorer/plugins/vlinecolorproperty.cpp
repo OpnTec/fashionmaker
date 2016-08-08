@@ -27,10 +27,23 @@
  *************************************************************************/
 
 #include "vlinecolorproperty.h"
-#include "../vproperty_p.h"
 
+#include <QColor>
 #include <QComboBox>
 #include <QCoreApplication>
+#include <QIcon>
+#include <QLocale>
+#include <QPixmap>
+#include <QSize>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QWidget>
+
+#include "../vproperty_p.h"
+
+class QAbstractItemDelegate;
+class QStyleOptionViewItem;
 
 using namespace VPE;
 

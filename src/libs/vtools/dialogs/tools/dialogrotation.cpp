@@ -27,18 +27,43 @@
  *************************************************************************/
 
 #include "dialogrotation.h"
-#include "ui_dialogrotation.h"
 
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPlainTextEdit>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QSharedPointer>
+#include <QStringList>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
+#include <new>
 
+#include "../../visualization/line/vistoolrotation.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmudef.h"
+#include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../ifc/xml/vdomdocument.h"
-#include "../../visualization/line/vistoolrotation.h"
-#include "../support/dialogeditwrongformula.h"
-#include "../qmuparser/qmudef.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "dialogs/tools/../../visualization/line/../visualization.h"
+#include "ui_dialogrotation.h"
+
+class QCloseEvent;
+class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)

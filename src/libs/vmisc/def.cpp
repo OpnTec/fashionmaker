@@ -27,14 +27,33 @@
  *************************************************************************/
 
 #include "def.h"
-#include "vabstractapplication.h"
-#include "../vpatterndb/vtranslatevars.h"
 
+#include <QApplication>
+#include <QChar>
+#include <QColor>
 #include <QComboBox>
-#include <QDir>
-#include <QPrinterInfo>
+#include <QCursor>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
+#include <QGuiApplication>
+#include <QImage>
+#include <QLatin1Char>
+#include <QList>
+#include <QMap>
+#include <QMessageLogger>
+#include <QObject>
+#include <QPixmap>
+#include <QPrinterInfo>
 #include <QProcess>
+#include <QRgb>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "vabstractapplication.h"
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements

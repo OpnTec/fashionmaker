@@ -29,9 +29,30 @@
 #ifndef VTOOLSPLINE_H
 #define VTOOLSPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/toolcurve/../../../undocommands/../../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QPointF;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
 class VSpline;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.

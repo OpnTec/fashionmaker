@@ -28,6 +28,10 @@
 
 #include "vexceptionconversionerror.h"
 
+#include <QtGlobal>
+
+#include "exception/vexception.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionConversionError exception conversion error

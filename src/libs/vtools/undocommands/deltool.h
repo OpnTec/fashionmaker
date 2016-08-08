@@ -29,8 +29,18 @@
 #ifndef DELTOOL_H
 #define DELTOOL_H
 
+#include <qcompilerdetection.h>
+#include <QDomNode>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
+
 class QGraphicsItem;
+class QUndoCommand;
+class VAbstractPattern;
 
 class DelTool : public VUndoCommand
 {

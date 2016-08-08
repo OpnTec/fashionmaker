@@ -29,8 +29,23 @@
 #ifndef DIALOGSPLINEPATH_H
 #define DIALOGSPLINEPATH_H
 
-#include "dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QSet>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/def.h"
+#include "dialogs/tools/../support/../tools/dialogtool.h"
+#include "dialogtool.h"
+
+class QCloseEvent;
+class QWidget;
+class VContainer;
+class VSplinePoint;
 
 namespace Ui
 {

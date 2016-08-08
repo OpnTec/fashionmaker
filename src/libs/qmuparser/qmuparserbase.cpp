@@ -20,13 +20,22 @@
  ******************************************************************************************************/
 
 #include "qmuparserbase.h"
-#include "qmudef.h"
 
 #include <QDebug>
+#include <QList>
+#include <QMessageLogger>
+#include <QStack>
+#include <QStringList>
+#include <QTextStream>
+#include <QtDebug>
+#include <map>
+
+#include "qmudef.h"
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
 #include <QtCore/qmath.h>
+#include <assert.h>
 
 using namespace std;
 

@@ -27,10 +27,17 @@
  *************************************************************************/
 
 #include "vdomdocument.h"
+
+#include <qcompilerdetection.h>
+#include <qdom.h>
+
+#include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionwrongid.h"
+#include "../vmisc/logging.h"
+#include "xml/../exception/../ifcdef.h"
+#include "xml/../exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/backport/qsavefile.h"
@@ -39,11 +46,23 @@
 #endif
 
 #include <QAbstractMessageHandler>
+#include <QByteArray>
+#include <QDebug>
+#include <QDomNodeList>
+#include <QDomText>
+#include <QFile>
+#include <QIODevice>
+#include <QMessageLogger>
+#include <QObject>
+#include <QSourceLocation>
+#include <QStringList>
+#include <QTemporaryFile>
+#include <QTextStream>
+#include <QUrl>
+#include <QVector>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
-#include <QFile>
-#include <QFileInfo>
-#include <QTemporaryFile>
+#include <QtDebug>
 
 //This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler

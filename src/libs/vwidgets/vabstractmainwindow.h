@@ -29,7 +29,13 @@
 #ifndef VABSTRACTMAINWINDOW_H
 #define VABSTRACTMAINWINDOW_H
 
+#include <qcompilerdetection.h>
 #include <QMainWindow>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+
+class QWidget;
 
 class VAbstractMainWindow : public QMainWindow
 {

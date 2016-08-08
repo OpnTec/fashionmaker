@@ -29,9 +29,19 @@
 #ifndef VABSTRACTNODE_H
 #define VABSTRACTNODE_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vabstracttool.h"
 
-#include <QColor>
+class QDomElement;
+class VAbstractPattern;
+class VContainer;
 
 enum class ParentType : bool {Scene, Item};
 

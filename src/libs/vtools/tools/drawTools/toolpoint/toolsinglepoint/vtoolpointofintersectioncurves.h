@@ -29,7 +29,28 @@
 #ifndef VTOOLPOINTOFINTERSECTIONCURVES_H
 #define VTOOLPOINTOFINTERSECTIONCURVES_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/../vmisc/def.h"
 #include "vtoolsinglepoint.h"
+
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPointF;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {

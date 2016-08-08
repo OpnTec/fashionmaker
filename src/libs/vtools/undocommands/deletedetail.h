@@ -29,10 +29,20 @@
 #ifndef DELETEDETAIL_H
 #define DELETEDETAIL_H
 
-#include "vundocommand.h"
+#include <qcompilerdetection.h>
+#include <QDomNode>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../tools/vtooldetail.h"
+#include "vdetail.h"
+#include "vundocommand.h"
 
 class QGraphicsItem;
+class QUndoCommand;
+class VAbstractPattern;
 
 class DeleteDetail : public VUndoCommand
 {

@@ -22,9 +22,12 @@
 #ifndef QMUPARSERBYTECODE_H
 #define QMUPARSERBYTECODE_H
 
+#include <QVector>
+#include <QtGlobal>
+
+#include "qmudef.h"
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
-#include "qmudef.h"
 
 /**
  * @file

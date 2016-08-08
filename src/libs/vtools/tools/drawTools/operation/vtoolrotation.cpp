@@ -27,19 +27,57 @@
  *************************************************************************/
 
 #include "vtoolrotation.h"
+
+#include <limits.h>
+#include <qiterator.h>
+#include <QColor>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QMapIterator>
+#include <QPoint>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <new>
+
 #include "../../../dialogs/tools/dialogrotation.h"
-#include "../vgeometry/vpointf.h"
+#include "../../../undocommands/label/rotationmovelabel.h"
+#include "../../../visualization/line/vistoolrotation.h"
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
-#include "../../../visualization/line/vistoolrotation.h"
-#include "../vwidgets/vsimplepoint.h"
-#include "../vwidgets/vsimplecurve.h"
-#include "../../../undocommands/label/rotationmovelabel.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/../vpatterndb/vtranslatevars.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
+#include "../vwidgets/../ifc/ifcdef.h"
+#include "../vwidgets/vabstractsimple.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vsimplecurve.h"
+#include "../vwidgets/vsimplepoint.h"
+#include "tools/drawTools/operation/../../../dialogs/tools/dialogtool.h"
+#include "tools/drawTools/operation/../../../undocommands/label/../../../vmisc/logging.h"
+#include "tools/drawTools/operation/../../../visualization/line/../visualization.h"
+#include "tools/drawTools/operation/../../vabstracttool.h"
+#include "tools/drawTools/operation/../../vdatatool.h"
+#include "tools/drawTools/operation/../vdrawtool.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QPainter;
+class QStyleOptionGraphicsItem;
+class QWidget;
+template <class T> class QSharedPointer;
 
 const QString VToolRotation::ToolType       = QStringLiteral("rotation");
 const QString VToolRotation::TagItem        = QStringLiteral("item");

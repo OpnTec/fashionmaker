@@ -28,15 +28,34 @@
 
 #include "vdrawtool.h"
 
-#include "../../../qmuparser/qmuparsererror.h"
+#include <qnumeric.h>
+#include <QDebug>
+#include <QDialog>
+#include <QDomNode>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QSharedPointer>
+#include <QUndoStack>
+#include <Qt>
+#include <QtDebug>
+
+#include "../../../ifc/exception/vexceptionundo.h"
+#include "../../../vpatterndb/calculator.h"
 #include "../../dialogs/support/dialogeditwrongformula.h"
 #include "../../dialogs/support/dialogundo.h"
-#include "../../../vpatterndb/calculator.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
-#include "../../../ifc/exception/vexceptionundo.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vpatterndb/vcontainer.h"
+#include "tools/drawTools/../../undocommands/../../ifc/xml/vabstractpattern.h"
+#include "tools/drawTools/../../undocommands/../../vmisc/logging.h"
+#include "tools/drawTools/../vabstracttool.h"
 
-#include <QtNumeric>
+class QDomElement;
+class VGObject;
+template <class T> class QSharedPointer;
 
 qreal VDrawTool::factor = 1;
 

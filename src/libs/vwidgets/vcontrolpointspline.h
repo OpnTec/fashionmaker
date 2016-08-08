@@ -29,10 +29,24 @@
 #ifndef VCONTROLPOINTSPLINE_H
 #define VCONTROLPOINTSPLINE_H
 
+#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
 #include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
+
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QPointF;
 
 /**
  * @brief The VControlPointSpline class control spline point.

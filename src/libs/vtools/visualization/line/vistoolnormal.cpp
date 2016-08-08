@@ -27,8 +27,21 @@
  *************************************************************************/
 
 #include "vistoolnormal.h"
-#include "../vgeometry/vpointf.h"
+
+#include <QColor>
+#include <QGraphicsLineItem>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/../../visualization/visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)

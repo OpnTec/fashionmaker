@@ -29,10 +29,20 @@
 #ifndef SAVEDETAILOPTIONS_H
 #define SAVEDETAILOPTIONS_H
 
-#include "vundocommand.h"
-#include "../tools/vtooldetail.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
 
+#include "../tools/vtooldetail.h"
+#include "vdetail.h"
+#include "vundocommand.h"
+
+class QDomElement;
 class QGraphicsScene;
+class QUndoCommand;
+class VAbstractPattern;
 
 class SaveDetailOptions : public VUndoCommand
 {

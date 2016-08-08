@@ -28,9 +28,6 @@
 
 #include "vabstractsimple.h"
 
-#include <QGraphicsItem>
-#include <QGraphicsSceneContextMenuEvent>
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor,
                                  QObject *parent)

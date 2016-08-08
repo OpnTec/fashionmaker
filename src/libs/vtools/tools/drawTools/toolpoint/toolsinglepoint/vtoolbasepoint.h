@@ -29,7 +29,29 @@
 #ifndef VTOOLBASEPOINT_H
 #define VTOOLBASEPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/../../ifc/xml/vabstractpattern.h"
 #include "vtoolsinglepoint.h"
+
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class VContainer;
+class VGObject;
+class VMainGraphicsScene;
+class VPointF;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolBasePoint class tool for creation pattern base point. Only base point can move. All object

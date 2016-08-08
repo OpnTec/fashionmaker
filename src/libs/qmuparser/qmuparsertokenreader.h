@@ -22,7 +22,16 @@
 #ifndef QMUPARSERTOKENREADER_H
 #define QMUPARSERTOKENREADER_H
 
+#include <qcompilerdetection.h>
+#include <QChar>
+#include <QString>
+#include <QtGlobal>
+#include <list>
+#include <locale>
+
+#include "qmuparsercallback.h"
 #include "qmuparserdef.h"
+#include "qmuparsererror.h"
 #include "qmuparsertoken.h"
 
 /**

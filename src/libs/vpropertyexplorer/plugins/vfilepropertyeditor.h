@@ -21,12 +21,27 @@
 #ifndef VFILEPROPERTYEDITOR_H
 #define VFILEPROPERTYEDITOR_H
 
+#include <qcompilerdetection.h>
+#include <QLineEdit>
+#include <QMetaObject>
+#include <QMimeData>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
 #include "../vpropertyexplorer_global.h"
 
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
-#include <QMimeData>
+class QDragEnterEvent;
+class QDragLeaveEvent;
+class QDragMoveEvent;
+class QDropEvent;
+class QEvent;
+class QLineEdit;
+class QMimeData;
+class QToolButton;
 
 namespace VPE
 {

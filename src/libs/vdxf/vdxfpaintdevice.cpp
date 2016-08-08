@@ -27,9 +27,13 @@
  *************************************************************************/
 
 #include "vdxfpaintdevice.h"
+
+#include <QMessageLogger>
+#include <QtDebug>
+
 #include "vdxfengine.h"
 
-#include <QFile>
+class QPaintEngine;
 
  //---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::VDxfPaintDevice()

@@ -28,6 +28,8 @@
 
 #include "vpatternpiecedata.h"
 
+class QPointF;
+
 //---------------------------------------------------------------------------------------------------------------------
 MaterialCutPlacement::MaterialCutPlacement()
     :m_eMaterial(MaterialType::mtFabric), m_qsMaterialUserDef(), m_iCutNumber(0), m_ePlacement(PlacementType::ptNone)

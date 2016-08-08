@@ -20,14 +20,23 @@
 
 #include "vpropertyformwidget.h"
 
+#include <QEvent>
+#include <QForeachContainer>
 #include <QFormLayout>
-#include "vpropertyformwidget_p.h"
+#include <QKeyEvent>
+#include <QLayout>
+#include <QLayoutItem>
+#include <QMargins>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <QWidget>
+#include <Qt>
 
 #include "plugins/vwidgetproperty.h"
-#include <QEvent>
-#include <QKeyEvent>
 #include "vproperty.h"
-#include <QDebug>
+#include "vpropertyformwidget_p.h"
+
+class QKeyEvent;
 
 using namespace VPE;
 

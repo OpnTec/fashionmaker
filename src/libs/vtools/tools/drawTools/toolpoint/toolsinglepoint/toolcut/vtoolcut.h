@@ -29,9 +29,21 @@
 #ifndef VTOOLCUT_H
 #define VTOOLCUT_H
 
-#include "../vtoolsinglepoint.h"
-#include "../../../toolcurve/vabstractspline.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
 
+#include "../../../toolcurve/vabstractspline.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vtoolsinglepoint.h"
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vdatatool.h"
+#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../../../visualization/line/../visualization.h"
+
+class VContainer;
 class VFormula;
 
 class VToolCut : public VToolSinglePoint

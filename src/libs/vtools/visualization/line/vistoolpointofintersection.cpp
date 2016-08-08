@@ -27,8 +27,20 @@
  *************************************************************************/
 
 #include "vistoolpointofintersection.h"
+
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
+#include <QLine>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
+#include "visualization/line/../visualization.h"
+#include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)

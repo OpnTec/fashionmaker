@@ -29,8 +29,18 @@
 #ifndef VISTOOLPOINTOFINTERSECTIONCURVES_H
 #define VISTOOLPOINTOFINTERSECTIONCURVES_H
 
-#include "vispath.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "vispath.h"
+
+class VContainer;
 
 class VisToolPointOfIntersectionCurves : public VisPath
 {

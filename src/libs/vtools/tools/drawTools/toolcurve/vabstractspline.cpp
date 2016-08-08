@@ -27,10 +27,38 @@
  *************************************************************************/
 
 #include "vabstractspline.h"
-#include "../vwidgets/vcontrolpointspline.h"
-#include "../qmuparser/qmutokenparser.h"
 
+#include <QColor>
+#include <QFlags>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGuiApplication>
 #include <QKeyEvent>
+#include <QLineF>
+#include <QPen>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "tools/drawTools/toolcurve/../../../visualization/line/visline.h"
+#include "tools/drawTools/toolcurve/../../vabstracttool.h"
+#include "tools/drawTools/toolcurve/../vdrawtool.h"
+
+class QDomElement;
+class QGraphicsSceneHoverEvent;
+class QGraphicsSceneMouseEvent;
+class QKeyEvent;
+class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)

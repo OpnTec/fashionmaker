@@ -27,15 +27,50 @@
  *************************************************************************/
 
 #include "vtooluniondetails.h"
-#include "nodeDetails/nodedetails.h"
-#include "vtooldetail.h"
-#include "../../vgeometry/vpointf.h"
+
+#include <QByteArray>
+#include <QDebug>
+#include <QDomNodeList>
+#include <QHash>
+#include <QLineF>
+#include <QLoggingCategory>
+#include <QMessageLogger>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <QtDebug>
+#include <new>
+
 #include "../../vgeometry/varc.h"
 #include "../../vgeometry/vsplinepath.h"
 #include "../dialogs/tools/dialoguniondetails.h"
+#include "../ifc/xml/vabstractconverter.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../vgeometry/vabstractcubicbezier.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "tools/../dialogs/tools/dialogtool.h"
+#include "tools/nodeDetails/vnodearc.h"
+#include "tools/nodeDetails/vnodepoint.h"
+#include "tools/nodeDetails/vnodespline.h"
+#include "tools/nodeDetails/vnodesplinepath.h"
+#include "tools/vdatatool.h"
+#include "vnodedetail.h"
+#include "vtooldetail.h"
 
-#include <QUndoStack>
+class QDomElement;
+class QDomNode;
+class QPointF;
 
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
 const QString VToolUnionDetails::TagDetail        = QStringLiteral("det");

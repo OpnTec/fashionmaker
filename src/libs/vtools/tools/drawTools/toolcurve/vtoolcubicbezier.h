@@ -29,9 +29,25 @@
 #ifndef VTOOLCUBICBEZIER_H
 #define VTOOLCUBICBEZIER_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vwidgets/../vmisc/def.h"
+#include "tools/drawTools/toolcurve/../../../undocommands/../../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
 
+class DialogTool;
+class QDomElement;
+class QGraphicsSceneContextMenuEvent;
+class VContainer;
 class VCubicBezier;
+class VGObject;
+class VMainGraphicsScene;
+template <class T> class QSharedPointer;
 
 class VToolCubicBezier : public VAbstractSpline
 {

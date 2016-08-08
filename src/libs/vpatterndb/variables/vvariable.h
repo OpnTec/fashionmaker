@@ -29,8 +29,15 @@
 #ifndef VVARIABLE_H
 #define VVARIABLE_H
 
-#include "vinternalvariable.h"
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
+#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
+#include "vinternalvariable.h"
 
 class VVariableData;
 

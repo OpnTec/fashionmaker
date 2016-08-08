@@ -29,17 +29,19 @@
 #ifndef VGOBJECT_H
 #define VGOBJECT_H
 
-#include "vgeometrydef.h"
-#include <QString>
-#include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
 #include <QVector>
+#include <QtGlobal>
 
-class VGObjectData;
+#include "vgeometrydef.h"
+
 class QLineF;
 class QPoint;
 class QPointF;
 class QRectF;
+class VGObjectData;
 
 /**
  * @brief The VGObject class keep information graphical objects.

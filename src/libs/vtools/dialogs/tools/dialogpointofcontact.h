@@ -29,8 +29,20 @@
 #ifndef DIALOGPOINTOFCONTACT_H
 #define DIALOGPOINTOFCONTACT_H
 
-#include "ui_dialogpointofcontact.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
+#include "dialogs/tools/../support/../tools/dialogtool.h"
 #include "dialogtool.h"
+#include "ui_dialogpointofcontact.h"
+
+class QCloseEvent;
+class QWidget;
+class VContainer;
 
 namespace Ui
 {

@@ -30,13 +30,16 @@
 #define VABSTRACTDETAIL_H
 
 #include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
 
 #include "vlayoutdef.h"
 
+class QLineF;
+class QPointF;
 class QString;
 class VAbstractDetailData;
-class QPointF;
-class QLineF;
+template <typename T> class QVector;
 
 /**
  * @brief The VAbstractDetail class abstract class for all details.

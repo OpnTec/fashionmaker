@@ -27,16 +27,17 @@
  *************************************************************************/
 
 #include "vlayoutgenerator.h"
-#include "vlayoutpaper.h"
-#include "vlayoutdetail.h"
-#include "../vmisc/def.h"
 
-#include <QRectF>
-#include <QImage>
-#include <QDir>
-#include <QGraphicsItem>
-#include <QThreadPool>
 #include <QtCore/qmath.h>
+#include <QGraphicsRectItem>
+#include <QRectF>
+#include <QThreadPool>
+
+#include "../vmisc/def.h"
+#include "vlayoutdetail.h"
+#include "vlayoutpaper.h"
+
+class QMarginsF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
