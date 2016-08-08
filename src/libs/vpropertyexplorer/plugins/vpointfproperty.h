@@ -32,8 +32,6 @@
 
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
-#include "vproperty.h"
-#include "vpropertyexplorer_global.h"
 
 class QPointF;
 

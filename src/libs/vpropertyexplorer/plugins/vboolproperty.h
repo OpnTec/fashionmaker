@@ -31,8 +31,7 @@
 #include <QtGlobal>
 
 #include "../vproperty.h"
-#include "vproperty.h"
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {

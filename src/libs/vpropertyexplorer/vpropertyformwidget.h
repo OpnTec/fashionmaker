@@ -29,7 +29,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "plugins/../vproperty.h"
 #include "vproperty.h"
 
 class QEvent;

@@ -31,7 +31,7 @@
 #include <QtGlobal>
 
 #include "../vproperty.h"
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
