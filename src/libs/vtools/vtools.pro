@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += widgets xml
+QT       += widgets xml printsupport
 
 # Name of the library
 TARGET = vtools

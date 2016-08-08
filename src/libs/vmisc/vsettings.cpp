@@ -31,7 +31,6 @@
 #include <QDir>
 #include <QLocale>
 #include <QMetaType>
-#include <QMetaTypeId>
 #include <QPrinter>
 #include <QSharedPointer>
 #include <QStaticStringData>

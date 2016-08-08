@@ -30,7 +30,6 @@
 #define VSPLINEPOINT_H
 
 #include <QMetaType>
-#include <QMetaTypeId>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>

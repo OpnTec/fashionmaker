@@ -32,7 +32,6 @@
 #include <qcompilerdetection.h>
 #include <QLineF>
 #include <QMetaType>
-#include <QMetaTypeId>
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QString>

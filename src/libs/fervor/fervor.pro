@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += network widgets xml
+QT       += network widgets xml printsupport
 
 # Name of library
 TARGET = fervor

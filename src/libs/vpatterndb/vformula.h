@@ -31,7 +31,6 @@
 
 #include <QCoreApplication>
 #include <QMetaType>
-#include <QMetaTypeId>
 #include <QString>
 #include <QtGlobal>
 
