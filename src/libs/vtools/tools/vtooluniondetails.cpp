@@ -158,7 +158,6 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
         break;
         case (Tool::NodeArc):
         {
-            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
             VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
             VPointF p2 = VPointF(arc->GetP2(), "A", 0, 0);
@@ -166,6 +165,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                 BiasRotatePoint(&p1, dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(center, dx, dy, p, angle);
@@ -194,7 +195,6 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             const QSharedPointer<VAbstractCubicBezier> spline =
                     data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
-            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
             VPointF *p1 = new VPointF(spline->GetP1());
             VPointF p2 = VPointF(spline->GetP2());
             VPointF p3 = VPointF(spline->GetP3());
@@ -202,6 +202,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                 BiasRotatePoint(p1, dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(&p3, dx, dy, p, angle);
@@ -231,13 +233,14 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             {
                 const VSpline spline = splinePath->GetSpline(i);
 
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline.GetP1());
                 VPointF p2 = VPointF(spline.GetP2());
                 VPointF p3 = VPointF(spline.GetP3());
                 VPointF *p4 = new VPointF(spline.GetP4());
                 if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
                 {
+                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                     BiasRotatePoint(p1, dx, dy, p, angle);
                     BiasRotatePoint(&p2, dx, dy, p, angle);
                     BiasRotatePoint(&p3, dx, dy, p, angle);
@@ -319,7 +322,6 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         break;
         case (Tool::NodeArc):
         {
-            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
             VPointF p1 = VPointF(arc->GetP1());
             VPointF p2 = VPointF(arc->GetP2());
@@ -327,6 +329,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                 BiasRotatePoint(&p1, dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(center, dx, dy, p, angle);
@@ -347,7 +351,6 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             const QSharedPointer<VAbstractCubicBezier> spline =
                     data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
-            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
             VPointF *p1 = new VPointF(spline->GetP1());
             VPointF p2 = VPointF(spline->GetP2());
             VPointF p3 = VPointF(spline->GetP3());
@@ -355,6 +358,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                 BiasRotatePoint(p1, dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(&p3, dx, dy, p, angle);
@@ -378,7 +383,6 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 const VSpline spline = splinePath->GetSpline(i);
 
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline.GetP1());
                 VPointF p2 = VPointF(spline.GetP2());
                 VPointF p3 = VPointF(spline.GetP3());
@@ -386,6 +390,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
 
                 if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
                 {
+                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
                     BiasRotatePoint(p1, dx, dy, p, angle);
                     BiasRotatePoint(&p2, dx, dy, p, angle);
                     BiasRotatePoint(&p3, dx, dy, p, angle);
@@ -552,6 +558,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                                              VContainer *data, const Document &parse, const Source &typeCreation,
                                              bool retainPieces)
 {
+    VToolUnionDetails *unionDetails = nullptr;
     quint32 id = _id;
     QString drawName;
     if (typeCreation == Source::FromGui)
@@ -567,17 +574,16 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             doc->UpdateToolData(id, data);
         }
     }
+
     //First add tool to file
     VAbstractTool::AddRecord(id, Tool::UnionDetails, doc);
     if (parse == Document::FullParse)
     {
         //Scene doesn't show this tool, so doc will destroy this object.
-        VToolUnionDetails *unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation,
-                                                                drawName, doc);
+        unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, drawName, doc);
         doc->AddTool(id, unionDetails);
         // Unfortunatelly doc will destroy all objects only in the end, but we should delete them before each FullParse
         doc->AddToolOnRemove(unionDetails);
-        return unionDetails;
     }
     //Then create new details
     VNodeDetail det1p1;
@@ -712,7 +718,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             } while (i<countNodeD1);
         }
     }
-    return nullptr;
+    return unionDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
