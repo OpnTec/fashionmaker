@@ -29,8 +29,11 @@
 #ifndef VABSTRACTCONVERTER_H
 #define VABSTRACTCONVERTER_H
 
-#include <qcompilerdetection.h>
+#if defined(__GNUC__) && !defined(__APPLE__) && !defined(WIN32)
 #include <sys/sysmacros.h>
+#endif
+
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QString>
 #include <QtGlobal>
