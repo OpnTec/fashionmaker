@@ -632,7 +632,7 @@
               <string>Set multiplier for length of the biggest workpiece in layout.</string>
              </property>
              <property name="prefix">
-              <string>x</string>
+              <string notr="true">x</string>
              </property>
              <property name="minimum">
               <number>1</number>

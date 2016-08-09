@@ -305,8 +305,7 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-down">
-                    <normaloff/>
-                   </iconset>
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -320,8 +319,7 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-up">
-                    <normaloff/>
-                   </iconset>
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>

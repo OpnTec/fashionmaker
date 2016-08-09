@@ -758,8 +758,8 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
-                                                          tr("Images (*.png *.jpg *.jpeg *.bmp)"));
+    const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter);
     QImage image;
     if (fileName.isEmpty())
     {

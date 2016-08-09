@@ -669,9 +669,9 @@ void TMainWindow::FileSaveAs()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ExportToCSV()
 {
-    const QString filters = tr("Comma-Separated Values (*.cvs)");
+    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.cvs)");
     const QString suffix("csv");
-    const QString path = QDir::homePath()  + "/" + tr("measurements"); + "." + suffix;
+    const QString path = QDir::homePath()  + QLatin1String("/") + tr("measurements") + QLatin1String(".") + suffix;
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters);
 
@@ -683,7 +683,7 @@ void TMainWindow::ExportToCSV()
     QFileInfo f( fileName );
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += "." + suffix;
+        fileName += QLatin1String(".") + suffix;
     }
 
     DialogExportToCSV dialog(this);
