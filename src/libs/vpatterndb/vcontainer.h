@@ -44,9 +44,9 @@
 #include <QtGlobal>
 #include <new>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"

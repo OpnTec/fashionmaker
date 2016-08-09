@@ -52,14 +52,13 @@
 
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "dialogs/tools/../../tools/../visualization/visualization.h"
 
 class QCloseEvent;
 class QEvent;

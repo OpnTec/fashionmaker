@@ -33,10 +33,10 @@
 
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "undocommands/../../ifc/xml/vabstractpattern.h"
-#include "undocommands/../../vmisc/def.h"
-#include "undocommands/vundocommand.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
 class QDomElement;
 class QUndoCommand;

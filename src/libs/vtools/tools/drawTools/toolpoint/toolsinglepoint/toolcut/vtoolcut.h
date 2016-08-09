@@ -39,9 +39,9 @@
 #include "../../../toolcurve/vabstractspline.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vtoolsinglepoint.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vdatatool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../../../visualization/line/../visualization.h"
+#include "../vmisc/def.h"
+#include "../../../../vdatatool.h"
+#include "../../../../../visualization/visualization.h"
 
 class VContainer;
 class VFormula;

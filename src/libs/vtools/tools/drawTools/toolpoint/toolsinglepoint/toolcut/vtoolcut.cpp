@@ -33,15 +33,15 @@
 #include <new>
 
 #include "../ifc/xml/vdomdocument.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../vtoolsinglepoint.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "../vtoolsinglepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,

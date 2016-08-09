@@ -39,19 +39,19 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../../../ifc/exception/vexceptionundo.h"
-#include "../../../vpatterndb/calculator.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/exception/vexceptionundo.h"
+#include "../vpatterndb/calculator.h"
 #include "../../dialogs/support/dialogeditwrongformula.h"
 #include "../../dialogs/support/dialogundo.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmuparsererror.h"
-#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
-#include "tools/drawTools/../../undocommands/../../ifc/xml/vabstractpattern.h"
-#include "tools/drawTools/../../undocommands/../../vmisc/logging.h"
-#include "tools/drawTools/../vabstracttool.h"
+#include "../vmisc/logging.h"
+#include "../vabstracttool.h"
 
 class QDomElement;
 class VGObject;

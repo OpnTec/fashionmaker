@@ -31,12 +31,12 @@
 #include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "undocommands/vundocommand.h"
+#include "vundocommand.h"
 
 class QDomElement;
 class QUndoCommand;

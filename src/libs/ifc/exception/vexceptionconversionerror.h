@@ -32,7 +32,7 @@
 #include <qcompilerdetection.h>
 #include <QString>
 
-#include "exception/../ifcdef.h"
+#include "../ifcdef.h"
 #include "vexception.h"
 
 /**

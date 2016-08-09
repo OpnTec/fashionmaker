@@ -31,9 +31,9 @@
 #include <QMessageLogger>
 #include <QString>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
-#include "variables/vcurvevariable.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius()

@@ -43,7 +43,7 @@
 
 #include "../visualization.h"
 #include "../vmisc/def.h"
-#include "visualization/line/../../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
+
 
 class QLineF;
 class QPointF;

@@ -38,7 +38,7 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
 
 class DialogTool;

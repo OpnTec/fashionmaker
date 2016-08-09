@@ -43,14 +43,14 @@
 #include <QtGlobal>
 
 #include "../../dialogs/tools/dialogtool.h"
+#include "../../dialogs/tools/dialogtool.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vabstracttool.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "tools/drawTools/../../dialogs/support/../tools/dialogtool.h"
-#include "tools/drawTools/../vdatatool.h"
+#include "../vdatatool.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

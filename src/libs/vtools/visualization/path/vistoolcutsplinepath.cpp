@@ -36,14 +36,14 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/path/../../tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../../../visualization/line/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)

@@ -31,11 +31,11 @@
 #include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "undocommands/vundocommand.h"
+#include "../vmisc/def.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

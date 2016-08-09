@@ -36,11 +36,13 @@
 #include <Qt>
 #include <new>
 
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogarcwithlength.h"
+#include "../../../visualization/visualization.h"
 #include "../../../visualization/path/vistoolarcwithlength.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -50,11 +52,9 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
-#include "tools/drawTools/toolcurve/../../vabstracttool.h"
-#include "tools/drawTools/toolcurve/../vdrawtool.h"
-#include "tools/drawTools/toolcurve/vabstractspline.h"
+#include "../../vabstracttool.h"
+#include "../vdrawtool.h"
+#include "vabstractspline.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

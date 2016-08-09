@@ -35,7 +35,7 @@
 #include <QPoint>
 #include <QtDebug>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------

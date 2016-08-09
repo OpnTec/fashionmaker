@@ -37,7 +37,9 @@
 #include <Qt>
 #include <new>
 
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogcubicbezier.h"
+#include "../../../visualization/visualization.h"
 #include "../../../visualization/path/vistoolcubicbezier.h"
 #include "../ifc/exception/vexception.h"
 #include "../vgeometry/../ifc/ifcdef.h"
@@ -48,11 +50,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
-#include "tools/drawTools/toolcurve/../../vabstracttool.h"
-#include "tools/drawTools/toolcurve/../vdrawtool.h"
-#include "tools/drawTools/toolcurve/vabstractspline.h"
+#include "../../vabstracttool.h"
+#include "../vdrawtool.h"
+#include "vabstractspline.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

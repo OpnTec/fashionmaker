@@ -37,7 +37,6 @@
 #include <Qt>
 #include <QtGlobal>
 
-#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"

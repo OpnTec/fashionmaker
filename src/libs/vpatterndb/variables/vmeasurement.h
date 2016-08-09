@@ -37,7 +37,7 @@
 #include <QTypeInfo>
 #include <QtGlobal>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "vvariable.h"
 

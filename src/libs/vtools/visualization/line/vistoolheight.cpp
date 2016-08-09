@@ -36,11 +36,11 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/../../visualization/visualization.h"
-#include "visualization/line/visline.h"
+#include "../visualization.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)

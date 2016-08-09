@@ -39,14 +39,14 @@
 #include <QSet>
 #include <QToolButton>
 
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofcontact.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
 #include "ui_dialogpointofcontact.h"
 
 class QCloseEvent;

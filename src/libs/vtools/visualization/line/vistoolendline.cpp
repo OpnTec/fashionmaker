@@ -42,8 +42,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/line/../../tools/../visualization/visualization.h"
-#include "visualization/line/visline.h"
+#include "../visualization.h"
+#include "visline.h"
 #include "vtranslatevars.h"
 
 //---------------------------------------------------------------------------------------------------------------------

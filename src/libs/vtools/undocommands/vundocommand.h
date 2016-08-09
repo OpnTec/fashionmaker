@@ -39,9 +39,8 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../../ifc/xml/vabstractpattern.h"
-#include "../../vmisc/logging.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
 
 class QDomElement;
 class QDomNode;

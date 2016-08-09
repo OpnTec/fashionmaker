@@ -36,9 +36,11 @@
 #include <new>
 
 #include "../../../../../dialogs/tools/dialogcutspline.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/path/vistoolcutspline.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
@@ -48,11 +50,9 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../../visualization/path/../visualization.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/../../../toolcurve/../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoolcut.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

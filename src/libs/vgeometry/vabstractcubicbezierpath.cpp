@@ -30,8 +30,8 @@
 
 #include <QPainterPath>
 
-#include "../ifc/../vmisc/def.h"
-#include "../ifc/exception/../ifcdef.h"
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
 #include "vpointf.h"
 #include "vspline.h"

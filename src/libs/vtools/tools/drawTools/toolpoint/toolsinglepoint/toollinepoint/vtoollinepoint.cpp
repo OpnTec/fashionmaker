@@ -40,14 +40,14 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../vtoolsinglepoint.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "../vtoolsinglepoint.h"
 
 class QDomElement;
 template <class T> class QSharedPointer;

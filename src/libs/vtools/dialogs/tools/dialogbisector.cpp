@@ -41,13 +41,13 @@
 
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolbisector.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "dialogs/tools/../../tools/../visualization/visualization.h"
 #include "ui_dialogbisector.h"
 
 class QCloseEvent;

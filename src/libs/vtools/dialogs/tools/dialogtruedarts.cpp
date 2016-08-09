@@ -39,14 +39,14 @@
 #include <QSet>
 #include <Qt>
 
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistooltruedarts.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogtruedarts.h"
 
 class QWidget;

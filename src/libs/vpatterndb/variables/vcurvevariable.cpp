@@ -28,9 +28,9 @@
 
 #include "vcurvevariable.h"
 
-#include "../ifc/../vmisc/def.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "variables/vinternalvariable.h"
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vinternalvariable.h"
 #include "vcurvevariable_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------

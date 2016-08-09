@@ -38,7 +38,6 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "dialogs/tools/../support/../tools/dialogtool.h"
 #include "dialogtool.h"
 
 class QCloseEvent;

@@ -47,17 +47,17 @@
 #include "../../../../undocommands/label/movelabel.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/diagnostic.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/label/../../../ifc/xml/vabstractpattern.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../vabstractpoint.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "../vabstractpoint.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

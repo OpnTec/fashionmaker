@@ -37,18 +37,18 @@
 #include <new>
 
 #include "../../../../dialogs/tools/dialogtruedarts.h"
+#include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistooltruedarts.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolpoint/tooldoublepoint/../../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolpoint/tooldoublepoint/../../../../visualization/line/../visualization.h"
-#include "tools/drawTools/toolpoint/tooldoublepoint/../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/tooldoublepoint/../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "vtooldoublepoint.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

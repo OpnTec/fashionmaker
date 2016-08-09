@@ -36,13 +36,13 @@
 #include <Qt>
 
 #include "../../undocommands/adddetnode.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "tools/nodeDetails/../../undocommands/../../ifc/xml/vabstractpattern.h"
-#include "tools/nodeDetails/../vabstracttool.h"
+#include "../vabstracttool.h"
 
 class QDomElement;
 

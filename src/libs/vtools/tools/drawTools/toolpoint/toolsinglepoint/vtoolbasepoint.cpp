@@ -48,12 +48,13 @@
 #include <QUndoStack>
 #include <new>
 
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
 #include "../../../../undocommands/addpatternpiece.h"
 #include "../../../../undocommands/deletepatternpiece.h"
 #include "../../../../undocommands/movespoint.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
@@ -61,12 +62,11 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/../../vmisc/logging.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vdatatool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
+#include "../vmisc/logging.h"
+#include "../../../vabstracttool.h"
+#include "../../../vdatatool.h"
+#include "../../vdrawtool.h"
+#include "vtoolsinglepoint.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

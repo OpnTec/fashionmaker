@@ -42,14 +42,14 @@
 
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolheight.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/visline.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
-#include "dialogs/tools/../../visualization/line/visline.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogheight.h"
 
 class QWidget;

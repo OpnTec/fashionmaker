@@ -40,7 +40,7 @@
 #include <QVariant>
 #include <QtGlobal>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vabstractsimple.h"
 
 class QGraphicsSceneContextMenuEvent;

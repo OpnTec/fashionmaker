@@ -50,13 +50,16 @@
 #include <Qt>
 #include <new>
 
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogsplinepath.h"
 #include "../../../undocommands/movesplinepath.h"
+#include "../../../undocommands/vundocommand.h"
+#include "../../../visualization/visualization.h"
 #include "../../../visualization/path/vistoolsplinepath.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/ifcdef.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
@@ -68,12 +71,9 @@
 #include "../vwidgets/../vgeometry/vsplinepath.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolcurve/../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolcurve/../../../undocommands/vundocommand.h"
-#include "tools/drawTools/toolcurve/../../../visualization/path/../visualization.h"
-#include "tools/drawTools/toolcurve/../../vabstracttool.h"
-#include "tools/drawTools/toolcurve/../vdrawtool.h"
-#include "tools/drawTools/toolcurve/vabstractspline.h"
+#include "../../vabstracttool.h"
+#include "../vdrawtool.h"
+#include "vabstractspline.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

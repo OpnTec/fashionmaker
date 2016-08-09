@@ -36,12 +36,12 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/path/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "../visualization.h"
 #include "visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------

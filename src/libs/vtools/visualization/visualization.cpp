@@ -46,15 +46,14 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../../vpatterndb/calculator.h"
-#include "../../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../tools/drawTools/vdrawtool.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
 
 class QLineF;
 class QPainterPath;

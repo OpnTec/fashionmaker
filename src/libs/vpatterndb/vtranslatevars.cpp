@@ -36,12 +36,12 @@
 #include <QString>
 #include <QtDebug>
 
-#include "../ifc/../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../qmuparser/qmutranslation.h"
-#include "../vmisc/../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vtranslatemeasurements.h"
 

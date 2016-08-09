@@ -37,9 +37,9 @@
 #include <QVariant>
 
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "../ifc/ifcdef.h"
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogline.h"
 

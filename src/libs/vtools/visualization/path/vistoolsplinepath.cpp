@@ -42,8 +42,8 @@
 #include "../vgeometry/vsplinepoint.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
-#include "visualization/path/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)

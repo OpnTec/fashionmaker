@@ -38,8 +38,8 @@
 #include <QtGlobal>
 
 #include "../vgeometry/vgeometrydef.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "tools/drawTools/toolcurve/../../../undocommands/../../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
 
 class DialogTool;

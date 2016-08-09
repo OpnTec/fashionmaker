@@ -36,14 +36,14 @@
 #include <Qt>
 #include <new>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/path/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)

@@ -33,7 +33,7 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "exception/../ifcdef.h"
+#include "../ifcdef.h"
 #include "vexception.h"
 
 class QDomElement;

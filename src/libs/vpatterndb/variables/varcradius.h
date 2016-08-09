@@ -32,7 +32,7 @@
 #include <qcompilerdetection.h>
 #include <QtGlobal>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "vcurvevariable.h"
 

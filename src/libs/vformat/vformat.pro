@@ -68,3 +68,5 @@ CONFIG(release, debug|release){
         }
     }
 }
+
+include (../libs.pri)

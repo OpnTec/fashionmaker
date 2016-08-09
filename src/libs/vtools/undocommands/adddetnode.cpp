@@ -32,8 +32,8 @@
 #include <QDomNode>
 
 #include "../vmisc/logging.h"
-#include "undocommands/../../ifc/xml/vabstractpattern.h"
-#include "undocommands/vundocommand.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
 class QDomElement;
 class QUndoCommand;

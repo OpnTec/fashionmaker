@@ -34,15 +34,15 @@
 #include <Qt>
 #include <new>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
-#include "visualization/path/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 const int EMPTY_ANGLE = -1;
 

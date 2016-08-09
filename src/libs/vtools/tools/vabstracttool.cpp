@@ -53,9 +53,9 @@
 #include <QVector>
 #include <new>
 
-#include "../../vgeometry/vpointf.h"
-#include "../../vpropertyexplorer/checkablemessagebox.h"
-#include "../../vwidgets/vmaingraphicsview.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../undocommands/deltool.h"
@@ -63,10 +63,10 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
-#include "tools/../undocommands/../../vmisc/logging.h"
-#include "tools/vdatatool.h"
+#include "vdatatool.h"
 
 class QGraphicsEllipseItem;
 class QGraphicsLineItem;

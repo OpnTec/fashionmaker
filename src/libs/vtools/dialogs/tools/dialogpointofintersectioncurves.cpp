@@ -36,9 +36,9 @@
 #include <QPushButton>
 
 #include "../../visualization/path/vistoolpointofintersectioncurves.h"
+#include "../../visualization/visualization.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogpointofintersectioncurves.h"
 
 class QWidget;

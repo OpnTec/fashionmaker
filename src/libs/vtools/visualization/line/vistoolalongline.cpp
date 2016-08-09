@@ -36,12 +36,12 @@
 #include <Qt>
 #include <new>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/line/../visualization.h"
-#include "visualization/line/visline.h"
+#include "../visualization.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)

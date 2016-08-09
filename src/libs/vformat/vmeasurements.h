@@ -37,7 +37,7 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vdomdocument.h"
-#include "../vpatterndb/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
 
 class QDate;

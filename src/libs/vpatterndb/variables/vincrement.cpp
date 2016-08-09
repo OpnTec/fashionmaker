@@ -28,8 +28,8 @@
 
 #include "vincrement.h"
 
-#include "../ifc/../vmisc/def.h"
-#include "variables/vvariable.h"
+#include "../vmisc/def.h"
+#include "vvariable.h"
 #include "vincrement_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------

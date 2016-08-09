@@ -36,7 +36,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../vtools/tools/drawTools/../../dialogs/tools/dialogtool.h"
 #include "dialogtool.h"
 
 class QWidget;

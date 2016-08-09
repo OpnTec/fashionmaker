@@ -40,7 +40,7 @@
 #include <QtGlobal>
 
 #include "../vabstractpoint.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

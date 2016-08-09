@@ -33,13 +33,13 @@
 #include <QMessageLogger>
 #include <QtDebug>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
-#include "undocommands/../../ifc/xml/vabstractpattern.h"
-#include "undocommands/vundocommand.h"
-#include "vdetail.h"
+#include "../vpatterndb/vdetail.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

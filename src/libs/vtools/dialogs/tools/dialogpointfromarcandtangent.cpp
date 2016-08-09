@@ -32,9 +32,9 @@
 #include <QLineEdit>
 #include <QPointer>
 
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointfromarcandtangent.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogpointfromarcandtangent.h"
 

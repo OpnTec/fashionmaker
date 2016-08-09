@@ -37,14 +37,14 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
-#include "visualization/line/visline.h"
+#include "../visualization.h"
+#include "visline.h"
 
 class QPointF;
 

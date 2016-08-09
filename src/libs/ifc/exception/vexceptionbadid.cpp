@@ -28,7 +28,7 @@
 
 #include "vexceptionbadid.h"
 
-#include "exception/vexception.h"
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

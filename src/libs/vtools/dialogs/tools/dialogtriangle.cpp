@@ -35,11 +35,11 @@
 #include <QPointer>
 #include <QSet>
 
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistooltriangle.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogtriangle.h"
 
 class QWidget;

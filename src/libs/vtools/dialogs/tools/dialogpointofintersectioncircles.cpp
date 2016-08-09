@@ -41,13 +41,13 @@
 #include <QToolButton>
 #include <Qt>
 
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersectioncircles.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
 #include "ui_dialogpointofintersectioncircles.h"
 
 class QCloseEvent;

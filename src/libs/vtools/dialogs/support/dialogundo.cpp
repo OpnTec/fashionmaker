@@ -33,8 +33,8 @@
 #include <QPushButton>
 #include <Qt>
 
-#include "../../../vmisc/vabstractapplication.h"
-#include "dialogs/support/../../../ifc/exception/../../vmisc/vcommonsettings.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "ui_dialogundo.h"
 
 class QCloseEvent;

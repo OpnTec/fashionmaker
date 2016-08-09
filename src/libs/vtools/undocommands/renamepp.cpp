@@ -33,8 +33,8 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
-#include "undocommands/../../ifc/xml/vabstractpattern.h"
-#include "undocommands/vundocommand.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

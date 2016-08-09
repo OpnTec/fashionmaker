@@ -33,7 +33,7 @@
 #include <QLineF>
 #include <QPoint>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vabstractcurve.h"

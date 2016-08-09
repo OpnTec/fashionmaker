@@ -32,13 +32,13 @@
 #include <QHash>
 
 #include "../tools/vtooldetail.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/logging.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "undocommands/../../ifc/xml/vdomdocument.h"
-#include "undocommands/../tools/vdatatool.h"
-#include "undocommands/vundocommand.h"
+#include "../vmisc/def.h"
+#include "../tools/vdatatool.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

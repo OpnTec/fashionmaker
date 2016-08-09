@@ -33,12 +33,12 @@
 
 #include "../../tools/drawTools/operation/vtoolrotation.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "undocommands/label/../vundocommand.h"
-#include "undocommands/label/moveabstractlabel.h"
+#include "../vmisc/def.h"
+#include "../vundocommand.h"
+#include "moveabstractlabel.h"
 
 class QUndoCommand;
 

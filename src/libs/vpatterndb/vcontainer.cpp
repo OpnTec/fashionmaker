@@ -42,7 +42,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/varc.h"
-#include "../vmisc/../vmisc/diagnostic.h"
+#include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "variables/varcradius.h"

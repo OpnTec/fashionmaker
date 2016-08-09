@@ -38,7 +38,7 @@
 #include <QStringDataPtr>
 #include <QVariant>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 
 class QMarginsF;
 

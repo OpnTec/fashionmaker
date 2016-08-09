@@ -39,7 +39,7 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "visline.h"
 

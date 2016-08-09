@@ -40,14 +40,14 @@
 #include <QtGlobal>
 
 #include "../vdrawtool.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolpoint/../../../dialogs/tools/../../visualization/visualization.h"
-#include "tools/drawTools/toolpoint/../../vabstracttool.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 
 class QPointF;
 class VAbstractPattern;

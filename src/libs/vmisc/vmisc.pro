@@ -102,3 +102,5 @@ CONFIG(debug, debug|release){
     message("Build revision:" $${HG_HESH})
     DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+include (../libs.pri)

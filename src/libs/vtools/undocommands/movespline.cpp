@@ -30,15 +30,15 @@
 
 #include <QDomElement>
 
-#include "../ifc/exception/../ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "undocommands/../../vgeometry/vpointf.h"
-#include "undocommands/../../vgeometry/vspline.h"
-#include "undocommands/vundocommand.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

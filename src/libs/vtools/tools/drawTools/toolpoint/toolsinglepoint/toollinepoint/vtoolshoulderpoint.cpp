@@ -39,9 +39,11 @@
 #include <new>
 
 #include "../../../../../dialogs/tools/dialogshoulderpoint.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolshoulderpoint.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
@@ -49,11 +51,9 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../../visualization/line/../visualization.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/../../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoollinepoint.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

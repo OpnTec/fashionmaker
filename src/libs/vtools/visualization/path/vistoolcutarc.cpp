@@ -36,12 +36,12 @@
 #include <Qt>
 #include <new>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/path/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)

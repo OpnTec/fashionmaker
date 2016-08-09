@@ -39,7 +39,7 @@
 #include <QtAlgorithms>
 #include <new>
 
-#include "../vgeometry/../vmisc/diagnostic.h"
+#include "../vmisc/diagnostic.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -53,8 +53,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/line/../visualization.h"
-#include "visualization/line/visline.h"
+#include "../visualization.h"
+#include "visline.h"
 
 class QPointF;
 

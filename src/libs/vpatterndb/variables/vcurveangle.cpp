@@ -31,11 +31,11 @@
 #include <QLatin1String>
 #include <QMessageLogger>
 
-#include "../vgeometry/../ifc/../vmisc/def.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vspline.h"
-#include "variables/vcurvevariable.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle()

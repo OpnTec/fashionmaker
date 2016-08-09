@@ -33,8 +33,8 @@
 #include <QMessageLogger>
 #include <QtDebug>
 
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "variables/vvariable.h"
+#include "../ifc/ifcdef.h"
+#include "vvariable.h"
 #include "vmeasurement_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------

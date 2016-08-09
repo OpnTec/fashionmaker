@@ -28,7 +28,7 @@
 
 #include "vexceptionundo.h"
 
-#include "exception/vexception.h"
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VExceptionUndo::VExceptionUndo(const QString &what)

@@ -35,9 +35,9 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
+#include "../exception/vexception.h"
 #include "../vmisc/logging.h"
-#include "xml/../exception/../ifcdef.h"
-#include "xml/../exception/vexception.h"
+#include "../ifcdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/backport/qsavefile.h"

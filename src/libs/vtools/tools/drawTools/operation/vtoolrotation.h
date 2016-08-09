@@ -42,9 +42,9 @@
 #include <QtGlobal>
 
 #include "../vdrawtool.h"
-#include "../vwidgets/../vgeometry/vgeometrydef.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "tools/drawTools/operation/../../../undocommands/label/../../../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 class DialogTool;
 class QDomElement;

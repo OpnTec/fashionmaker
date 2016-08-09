@@ -43,6 +43,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../visualization/visualization.h"
 #include "../../visualization/path/vistoolspline.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
@@ -52,7 +53,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
 #include "ui_dialogspline.h"
 #include "vtranslatevars.h"
 

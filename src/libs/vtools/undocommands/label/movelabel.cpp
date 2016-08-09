@@ -31,12 +31,12 @@
 #include <QDomElement>
 
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "undocommands/label/../../../ifc/xml/vabstractpattern.h"
-#include "undocommands/label/../../../vmisc/def.h"
-#include "undocommands/label/../vundocommand.h"
-#include "undocommands/label/moveabstractlabel.h"
+#include "../vundocommand.h"
+#include "moveabstractlabel.h"
 
 class QUndoCommand;
 

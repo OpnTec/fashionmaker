@@ -39,11 +39,11 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../visualization/visualization.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/../undocommands/../../ifc/xml/vabstractpattern.h"
 #include "vdatatool.h"
 
 class QDomElement;

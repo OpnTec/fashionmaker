@@ -40,7 +40,6 @@
 
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
-#include "../vwidgets/../vgeometry/vsplinepath.h"
 #include "vispath.h"
 
 class QPointF;

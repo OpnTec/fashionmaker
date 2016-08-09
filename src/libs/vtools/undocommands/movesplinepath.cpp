@@ -34,10 +34,10 @@
 #include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "undocommands/../../vgeometry/vsplinepath.h"
-#include "undocommands/vundocommand.h"
+#include "../vgeometry/vsplinepath.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

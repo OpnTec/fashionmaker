@@ -60,13 +60,13 @@
 #include <QtDebug>
 #include <new>
 
-#include "../../../ifc/xml/vdomdocument.h"
-#include "../../../qmuparser/qmudef.h"
-#include "../../../qmuparser/qmuparsererror.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmudef.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vabstractcurve.h"

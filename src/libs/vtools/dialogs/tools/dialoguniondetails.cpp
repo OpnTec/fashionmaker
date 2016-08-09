@@ -31,10 +31,10 @@
 #include <QCheckBox>
 #include <QVector>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vdetail.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialoguniondetails.h"
 
 class QWidget;

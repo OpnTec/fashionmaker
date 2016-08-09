@@ -43,7 +43,7 @@
 #include <QRectF>
 #include <Qt>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"

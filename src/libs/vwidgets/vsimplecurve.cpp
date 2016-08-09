@@ -40,7 +40,7 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 
 class QGraphicsSceneContextMenuEvent;

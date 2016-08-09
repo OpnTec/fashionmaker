@@ -30,9 +30,9 @@
 
 #include <QDomNode>
 
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "../vwidgets/../vmisc/def.h"
-#include "vnodedetail.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vnodedetail.h"
 
 class QDomElement;
 class QDomNode;

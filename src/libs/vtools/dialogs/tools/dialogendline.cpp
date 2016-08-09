@@ -40,19 +40,19 @@
 #include <QToolButton>
 #include <new>
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolendline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vwidgets/vabstractmainwindow.h"
-#include "dialogs/tools/../../tools/../visualization/visualization.h"
 #include "ui_dialogendline.h"
 
 class QCloseEvent;

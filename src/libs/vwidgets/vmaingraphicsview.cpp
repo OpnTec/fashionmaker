@@ -47,7 +47,7 @@
 #include <QWheelEvent>
 #include <QWidget>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 

@@ -45,7 +45,7 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/def.h"
-#include "xml/vabstractconverter.h"
+#include "vabstractconverter.h"
 
 class QDomElement;
 

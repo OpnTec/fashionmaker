@@ -34,11 +34,11 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/line/../../tools/drawTools/../../dialogs/tools/../../visualization/visualization.h"
+#include "../visualization.h"
 #include "visualization/line/visline.h"
 
 class QLineF;

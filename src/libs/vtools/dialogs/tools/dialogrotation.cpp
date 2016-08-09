@@ -47,6 +47,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolrotation.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -59,7 +60,6 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "dialogs/tools/../../visualization/line/../visualization.h"
 #include "ui_dialogrotation.h"
 
 class QCloseEvent;

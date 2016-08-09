@@ -33,7 +33,7 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
-#include "tools/drawTools/toolpoint/../vdrawtool.h"
+#include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id)

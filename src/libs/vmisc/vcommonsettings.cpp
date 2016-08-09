@@ -40,7 +40,7 @@
 #include <QVariant>
 #include <QtDebug>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 
 class QDate;
 

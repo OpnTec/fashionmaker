@@ -30,7 +30,7 @@
 
 #include <QLineF>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vabstractarc_p.h"
 #include "vpointf.h"
 

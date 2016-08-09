@@ -40,18 +40,18 @@
 #include <new>
 
 #include "../../dialogs/tools/dialogline.h"
+#include "../../dialogs/tools/dialogtool.h"
+#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/../../visualization/line/../visualization.h"
-#include "tools/drawTools/../vabstracttool.h"
-#include "tools/drawTools/vdrawtool.h"
+#include "../vabstracttool.h"
+#include "vdrawtool.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

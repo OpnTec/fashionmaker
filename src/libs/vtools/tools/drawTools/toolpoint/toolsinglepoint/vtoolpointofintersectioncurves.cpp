@@ -36,19 +36,19 @@
 #include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectioncurves.h"
+#include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/path/../visualization.h"
 #include "../../../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../ifc/exception/vexception.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/dialogtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../visualization/path/../visualization.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../vabstracttool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../vdrawtool.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "vtoolsinglepoint.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

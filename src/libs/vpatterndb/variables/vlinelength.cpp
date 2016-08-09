@@ -35,7 +35,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "variables/vinternalvariable.h"
+#include "vinternalvariable.h"
 #include "vlinelength_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------

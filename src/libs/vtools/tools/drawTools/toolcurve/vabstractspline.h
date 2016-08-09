@@ -42,15 +42,15 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../../../visualization/visualization.h"
 #include "../../../visualization/line/visline.h"
 #include "../vdrawtool.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "tools/drawTools/toolcurve/../../../visualization/line/../visualization.h"
 
 class QDomElement;
 class QGraphicsSceneHoverEvent;

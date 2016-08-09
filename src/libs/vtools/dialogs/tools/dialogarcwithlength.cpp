@@ -38,13 +38,13 @@
 #include <QToolButton>
 #include <Qt>
 
-#include "../../../ifc/xml/vdomdocument.h"
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolarcwithlength.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
+#include "../../visualization/visualization.h"
 #include "ui_dialogarcwithlength.h"
 
 class QCloseEvent;

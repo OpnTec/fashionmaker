@@ -52,21 +52,21 @@
 #include <Qt>
 #include <new>
 
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/variables/varcradius.h"
+#include "../vpatterndb/variables/vcurveangle.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vlineangle.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "dialogs/support/../tools/dialogtool.h"
+#include "../tools/dialogtool.h"
 #include "ui_dialogeditwrongformula.h"
-#include "variables/varcradius.h"
-#include "variables/vcurveangle.h"
-#include "variables/vcurvelength.h"
-#include "variables/vincrement.h"
-#include "variables/vlineangle.h"
-#include "variables/vlinelength.h"
-#include "variables/vmeasurement.h"
 
 class QCloseEvent;
 class QShowEvent;

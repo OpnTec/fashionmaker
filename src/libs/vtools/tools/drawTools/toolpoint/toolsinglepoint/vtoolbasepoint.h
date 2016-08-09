@@ -39,8 +39,8 @@
 #include <Qt>
 #include <QtGlobal>
 
-#include "../vwidgets/../vmisc/def.h"
-#include "tools/drawTools/toolpoint/toolsinglepoint/../../../../undocommands/../../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "vtoolsinglepoint.h"
 
 class QDomElement;

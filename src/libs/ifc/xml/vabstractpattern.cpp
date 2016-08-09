@@ -43,13 +43,13 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vpatterndb/../ifc/exception/vexceptionbadid.h"
-#include "../vpatterndb/../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vdatatool.h"
 #include "vpatternconverter.h"
-#include "xml/vdomdocument.h"
-#include "xml/vtoolrecord.h"
+#include "vdomdocument.h"
+#include "vtoolrecord.h"
 
 class QDomElement;
 

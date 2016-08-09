@@ -75,3 +75,5 @@ CONFIG(release, debug|release){
 
 RESOURCES += \
     share/icons.qrc
+
+include (../libs.pri)

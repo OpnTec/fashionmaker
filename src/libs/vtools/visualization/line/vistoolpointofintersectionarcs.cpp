@@ -38,13 +38,13 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/line/../../tools/drawTools/toolpoint/toolsinglepoint/../../../../dialogs/tools/../../visualization/visualization.h"
+#include "../visualization.h"
 #include "visualization/line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------

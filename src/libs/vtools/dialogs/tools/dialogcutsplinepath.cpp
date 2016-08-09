@@ -35,14 +35,14 @@
 #include <QPushButton>
 #include <QToolButton>
 
-#include "../../../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolcutsplinepath.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
 #include "ui_dialogcutsplinepath.h"
 
 class QCloseEvent;

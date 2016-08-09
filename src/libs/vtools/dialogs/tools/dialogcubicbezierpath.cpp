@@ -45,12 +45,12 @@
 #include <new>
 
 #include "../../visualization/path/vistoolcubicbezierpath.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../../visualization/visualization.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogcubicbezierpath.h"
 
 class QWidget;

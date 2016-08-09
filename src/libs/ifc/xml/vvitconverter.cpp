@@ -43,7 +43,7 @@
 
 #include "../exception/vexception.h"
 #include "../vmisc/def.h"
-#include "xml/vabstractmconverter.h"
+#include "vabstractmconverter.h"
 
 /*
  * Version rules:

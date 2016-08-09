@@ -33,7 +33,7 @@
 #include <QStringDataPtr>
 #include <QStringList>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
 
 using namespace qmu;

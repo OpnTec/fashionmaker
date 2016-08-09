@@ -33,7 +33,7 @@
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "undocommands/label/../vundocommand.h"
+#include "../vundocommand.h"
 
 class QUndoCommand;
 class VAbstractPattern;

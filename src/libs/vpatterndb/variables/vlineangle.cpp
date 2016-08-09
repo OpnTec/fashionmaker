@@ -34,10 +34,10 @@
 #include <QPointF>
 #include <QString>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "variables/vinternalvariable.h"
+#include "vinternalvariable.h"
 #include "vlineangle_p.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)

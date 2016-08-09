@@ -36,7 +36,7 @@
 #include <QPointF>
 #include <QRectF>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 

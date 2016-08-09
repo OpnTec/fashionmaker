@@ -41,7 +41,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vpatterndb/vformula.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
 
 class DialogTool;

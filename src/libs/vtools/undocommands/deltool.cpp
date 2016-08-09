@@ -30,10 +30,10 @@
 
 #include <QDomElement>
 
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
-#include "undocommands/vundocommand.h"
+#include "vundocommand.h"
 
 class QUndoCommand;
 

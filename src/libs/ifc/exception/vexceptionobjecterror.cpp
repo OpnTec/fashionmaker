@@ -31,7 +31,7 @@
 #include <QDomElement>
 #include <QTextStream>
 
-#include "exception/vexception.h"
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

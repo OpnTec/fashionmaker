@@ -33,7 +33,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 
-#include "xml/vabstractconverter.h"
+#include "vabstractconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMConverter::VAbstractMConverter(const QString &fileName)

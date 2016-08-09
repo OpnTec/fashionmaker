@@ -31,9 +31,9 @@
 #include <QByteArray>
 #include <QDomNode>
 
-#include "../vlayout/../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
-#include "undocommands/vundocommand.h"
+#include "vundocommand.h"
 
 class QDomElement;
 class QUndoCommand;

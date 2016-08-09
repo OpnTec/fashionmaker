@@ -37,7 +37,7 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vabstractnode.h"
 
 class VContainer;

@@ -41,9 +41,9 @@
 #include <QToolButton>
 #include <new>
 
-#include "../../../vpatterndb/vtranslatevars.h"
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolalongline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
@@ -52,9 +52,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "dialogs/tools/../../tools/../visualization/visualization.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogalongline.h"
-#include "variables/vlinelength.h"
 
 class QCloseEvent;
 class QWidget;

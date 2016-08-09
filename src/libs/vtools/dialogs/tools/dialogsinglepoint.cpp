@@ -33,7 +33,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogsinglepoint.h"
 
 class QPointF;

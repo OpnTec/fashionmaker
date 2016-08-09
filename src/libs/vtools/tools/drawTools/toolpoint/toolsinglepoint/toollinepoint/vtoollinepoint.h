@@ -38,7 +38,7 @@
 
 #include "../vpatterndb/vformula.h"
 #include "../vtoolsinglepoint.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 
 class QDomElement;
 class VAbstractPattern;

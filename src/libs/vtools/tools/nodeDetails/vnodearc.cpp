@@ -34,10 +34,10 @@
 #include <QStringDataPtr>
 
 #include "../ifc/xml/vdomdocument.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "tools/nodeDetails/../vabstracttool.h"
-#include "tools/nodeDetails/../vdatatool.h"
-#include "tools/nodeDetails/vabstractnode.h"
+#include "../ifc/ifcdef.h"
+#include "../vabstracttool.h"
+#include "../vdatatool.h"
+#include "vabstractnode.h"
 
 class VContainer;
 

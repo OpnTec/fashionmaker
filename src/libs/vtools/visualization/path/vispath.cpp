@@ -30,10 +30,10 @@
 
 #include <QPen>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "visualization/path/../visualization.h"
+#include "../visualization.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)

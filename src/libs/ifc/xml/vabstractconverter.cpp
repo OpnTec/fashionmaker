@@ -45,7 +45,7 @@
 
 #include "../exception/vexception.h"
 #include "../exception/vexceptionwrongid.h"
-#include "xml/vdomdocument.h"
+#include "vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)

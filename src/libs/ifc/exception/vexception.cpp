@@ -31,7 +31,7 @@
 #include <QByteArray>
 #include <QtGlobal>
 
-#include "exception/../ifcdef.h"
+#include "../ifcdef.h"
 
 //Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
 

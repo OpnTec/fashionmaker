@@ -39,7 +39,7 @@
 #include <QtDebug>
 #include <new>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"

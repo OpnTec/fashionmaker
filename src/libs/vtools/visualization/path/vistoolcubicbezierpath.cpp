@@ -39,8 +39,8 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
-#include "visualization/path/../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../visualization.h"
+#include "vispath.h"
 
 class VContainer;
 

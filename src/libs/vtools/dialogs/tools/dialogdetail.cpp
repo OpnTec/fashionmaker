@@ -59,11 +59,11 @@
 #include <QtDebug>
 #include <new>
 
-#include "../../../ifc/xml/vdomdocument.h"
-#include "../../../vpatterndb/vcontainer.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "vnodedetail.h"
 
 class QPointF;

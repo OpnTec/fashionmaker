@@ -47,13 +47,13 @@
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vwidgets/vgraphicssimpletextitem.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "tools/nodeDetails/../vabstracttool.h"
-#include "tools/nodeDetails/../vdatatool.h"
-#include "tools/nodeDetails/vabstractnode.h"
+#include "../vabstracttool.h"
+#include "../vdatatool.h"
+#include "vabstractnode.h"
 
 class QGraphicsSceneContextMenuEvent;
 class QGraphicsSceneHoverEvent;

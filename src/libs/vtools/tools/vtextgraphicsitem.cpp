@@ -40,7 +40,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <Qt>
 
-#include "../ifc/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "vtextgraphicsitem.h"
 
 class QGraphicsSceneHoverEvent;

@@ -50,9 +50,9 @@
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
-#include "tools/drawTools/toolcurve/../../../visualization/line/visline.h"
-#include "tools/drawTools/toolcurve/../../vabstracttool.h"
-#include "tools/drawTools/toolcurve/../vdrawtool.h"
+#include "../../../visualization/line/visline.h"
+#include "../../vabstracttool.h"
+#include "../vdrawtool.h"
 
 class QDomElement;
 class QGraphicsSceneHoverEvent;

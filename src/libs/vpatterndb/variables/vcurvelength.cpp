@@ -31,10 +31,10 @@
 #include <QLatin1String>
 #include <QMessageLogger>
 
-#include "../vgeometry/../ifc/ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vspline.h"
-#include "variables/vcurvevariable.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()

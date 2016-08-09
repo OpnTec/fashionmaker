@@ -36,10 +36,10 @@
 #include <new>
 
 #include "../../visualization/path/vistoolcubicbezier.h"
+#include "../../visualization/visualization.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "dialogs/tools/../../visualization/path/../visualization.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogcubicbezier.h"
 
 class QWidget;

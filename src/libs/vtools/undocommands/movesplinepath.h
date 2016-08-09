@@ -35,7 +35,7 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../../vgeometry/vsplinepath.h"
+#include "../vgeometry/vsplinepath.h"
 #include "vundocommand.h"
 
 class QGraphicsScene;
