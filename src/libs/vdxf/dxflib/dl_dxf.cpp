@@ -25,7 +25,7 @@
 #include "dl_dxf.h"
 
 #include <ctype.h>
-#if defined(__GNUC__)
+#if defined(__GNUC__) && !defined(__APPLE__)
 #include <ext/alloc_traits.h>
 #endif
 #include <qcompilerdetection.h>
