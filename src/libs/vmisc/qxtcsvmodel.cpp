@@ -195,7 +195,6 @@ void QxtCsvModel::setSource(const QString &filename, bool withHeader, QChar sepa
 void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, QTextCodec* codec)
 {
     QxtCsvModelPrivate* d_ptr = &qxt_d();
-    // cppcheck-suppress unreadVariable
     bool headerSet = !withHeader;
     if (not file->isOpen())
     {
