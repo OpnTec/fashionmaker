@@ -27,7 +27,7 @@
 
 #include "../vfileproperty_p.h"
 #include "vfilepropertyeditor.h"
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 class QStyleOptionViewItem;
 

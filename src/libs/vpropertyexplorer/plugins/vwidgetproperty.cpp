@@ -25,8 +25,8 @@
 #include <QWidget>
 
 #include "../vwidgetproperty_p.h"
-#include "plugins/vemptyproperty.h"
-#include "vproperty.h"
+#include "vemptyproperty.h"
+#include "../vproperty.h"
 
 using namespace VPE;
 

@@ -26,7 +26,7 @@
 #include <QFlags>
 #include <QFont>
 
-#include "plugins/../vproperty.h"
+#include "../vproperty.h"
 
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;

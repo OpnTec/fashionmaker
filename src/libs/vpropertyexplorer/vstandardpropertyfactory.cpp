@@ -20,7 +20,7 @@
 
 #include "vstandardpropertyfactory.h"
 
-#include "plugins/Vector3d/../../vproperty.h"
+#include "vproperty.h"
 #include "plugins/Vector3d/vvector3dproperty.h"
 #include "plugins/vboolproperty.h"
 #include "plugins/vcolorproperty.h"
