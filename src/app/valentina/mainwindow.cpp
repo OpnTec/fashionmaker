@@ -1266,7 +1266,6 @@ void MainWindow::CleanLayout()
     shadows.clear();
     papers.clear();
     ui->listWidget->clear();
-    listDetails.clear();
     SetLayoutModeActions();
 }
 
@@ -2440,6 +2439,7 @@ void MainWindow::Clear()
     QApplication::restoreOverrideCursor();
 #endif
     CleanLayout();
+    listDetails.clear(); // don't move to CleanLayout()
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup--; // turn it off again

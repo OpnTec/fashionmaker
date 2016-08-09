@@ -92,7 +92,6 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
     {
         VLayoutGenerator lGenerator;
 
-
         DialogLayoutSettings layout(&lGenerator, this);
         if (layout.exec() == QDialog::Rejected)
         {
@@ -458,14 +457,13 @@ void MainWindowsNoGUI::PrintTiled()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
 {
+    listDetails.clear();
     SCASSERT(details != nullptr)
     if (details->count() == 0)
     {
-        listDetails.clear();
         return;
     }
 
-    listDetails.clear();
     QHash<quint32, VDetail>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
