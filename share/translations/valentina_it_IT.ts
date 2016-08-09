@@ -7758,6 +7758,17 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
+    <name>VTextManager</name>
+    <message>
+        <source>Cut %1 on %2%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>

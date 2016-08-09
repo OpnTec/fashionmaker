@@ -1421,7 +1421,7 @@
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Вирізати на згиб</translation>
+        <translation>Вирізати на згин</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
@@ -1429,7 +1429,7 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation>Вирізати на згиб</translation>
+        <translation> на згин</translation>
     </message>
     <message>
         <source>Update</source>
@@ -7796,6 +7796,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
         <translation type="vanished">Не можу розрізати складну криву що складається з одної точки</translation>
+    </message>
+</context>
+<context>
+    <name>VTextManager</name>
+    <message>
+        <source>Cut %1 on %2%3</source>
+        <translation>Вирізати %1на %2%3</translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation> на згин</translation>
     </message>
 </context>
 <context>

@@ -756,11 +756,6 @@ void VToolDetail::UpdateLabel()
 
     if (data.IsVisible() == true)
     {
-        //dataLabel->Reset();
-
-        QString qsText = "Cut %1 of %2%3";
-        QStringList qslPlace;
-        qslPlace << "" << " on Fold";
         QFont fnt = qApp->font();
         fnt.setPixelSize(data.GetFontSize());
         dataLabel->SetFont(fnt);

@@ -126,6 +126,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
 
     m_qslMaterials << tr("Fabric") << tr("Lining") << tr("Interfacing") << tr("Interlining");
+
     ui.comboBoxMaterial->addItems(m_qslMaterials);
     m_qslPlacements << tr("None") << tr("Cut on fold");
     ui.comboBoxPlacement->addItems(m_qslPlacements);
@@ -220,7 +221,7 @@ void DialogDetail::UpdateList()
         }
         if (mcp.m_ePlacement == PlacementType::ptCutOnFold)
         {
-            qsText = qsText.arg(tr(" on Fold"));
+            qsText = qsText.arg(QLatin1String(" ") + tr("on Fold"));
         }
         else
         {

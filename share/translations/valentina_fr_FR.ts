@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr_FR" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr_FR">
 <context>
     <name>AddDet</name>
     <message>
@@ -841,7 +843,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation>Bezier Cubique</translation>
+        <translation type="vanished">Bezier Cubique</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -883,12 +885,16 @@
         <source>Invalid spline</source>
         <translation>Spline invalide</translation>
     </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation>Dialogue trajectoire de Bezier Cubique</translation>
+        <translation type="vanished">Dialogue trajectoire de Bezier Cubique</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -909,6 +915,10 @@
     <message>
         <source>Invalid spline path</source>
         <translation>Trajectoire de spline invalide</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1239,7 +1249,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation type="vanished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -2357,7 +2367,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>x</source>
-        <translation>x</translation>
+        <translation type="vanished">x</translation>
     </message>
 </context>
 <context>
@@ -2986,7 +2996,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation>Images (*.png *.jpg *.jpeg *.bmp)</translation>
+        <translation type="vanished">Images (*.png *.jpg *.jpeg *.bmp)</translation>
     </message>
     <message>
         <source>Images</source>
@@ -6810,7 +6820,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Comma-Separated Values (*.cvs)</source>
-        <translation>Valeur de signe de séparation (*.cvs)</translation>
+        <translation type="vanished">Valeur de signe de séparation (*.cvs)</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -6819,6 +6829,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Show in Finder</source>
         <translation>Révéler dans le finder</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7263,15 +7277,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -7294,44 +7304,24 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Règle les marge à 0.</translation>
     </message>
     <message>
-        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Shift length must be used together with shift units.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation>Largeur d&apos;espacement devant être utilisé avec les largeurs de décalage.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
@@ -7339,7 +7329,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
@@ -7347,19 +7337,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -7399,7 +7389,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7455,13 +7445,13 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Conversion du paramètre impossible vers toDouble</translation>
     </message>
     <message>
-        <source>Can't open file %1:
+        <source>Can&apos;t open file %1:
 %2.</source>
         <translation>impossible d&apos;ouvrir le fichier %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can't open schema file %1:
+        <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Erreur d&apos;ouverture du fichier de schéma %1: %2.</translation>
     </message>
@@ -7795,6 +7785,17 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
         <translation type="vanished">Impossible de couper une spline avec un point</translation>
+    </message>
+</context>
+<context>
+    <name>VTextManager</name>
+    <message>
+        <source>Cut %1 on %2%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="unfinished">au pli</translation>
     </message>
 </context>
 <context>
@@ -9214,7 +9215,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -9223,10 +9224,6 @@ Voulez-vous enregistrer les changements?</translation>
 </context>
 <context>
     <name>VWidgetGroups</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <source>Rename</source>
         <translation>Renommer</translation>

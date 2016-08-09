@@ -40,6 +40,7 @@ struct TextLine
  */
 class VTextManager
 {
+    Q_DECLARE_TR_FUNCTIONS(VTextManager)
 public:
     VTextManager();
     virtual ~VTextManager();

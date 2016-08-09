@@ -212,9 +212,9 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
         AddLine(tl);
     }
     // MCP
-    QString qsText = "Cut %1 on %2%3";
+    QString qsText = tr("Cut %1 on %2%3");
     QStringList qslPlace;
-    qslPlace << "" << " on Fold";
+    qslPlace << "" << QLatin1String(" ") + tr("on Fold");
     tl.m_eFontWeight = QFont::Normal;
     tl.m_iFontSize = 0;
     for (int i = 0; i < data.GetMCPCount(); ++i)
