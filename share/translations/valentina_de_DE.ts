@@ -349,7 +349,7 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Updates suchen</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Updates suchen</translation>
     </message>
 </context>
 <context>
@@ -843,7 +843,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation>Kubische Bezierkurve</translation>
+        <translation type="vanished">Kubische Bezierkurve</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -885,12 +885,16 @@
         <source>Invalid spline</source>
         <translation>Ungültige Spline</translation>
     </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation>Kubische Bezierkurve-Dialogfeld</translation>
+        <translation type="vanished">Kubische Bezierkurve-Dialogfeld</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -911,6 +915,10 @@
     <message>
         <source>Invalid spline path</source>
         <translation>Ungültiger Spline-Pfad/glatte Kurve</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1241,7 +1249,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation type="vanished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1357,31 +1365,31 @@
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Material/Schnittnummer/Platzierung</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Materialart:</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittnummer</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Platzierung:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Letter:</source>
@@ -1397,7 +1405,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoff</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -1413,7 +1421,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keine</translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Cut on fold</source>
@@ -1421,7 +1429,7 @@
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 von %2%3 schneiden</translation>
     </message>
     <message>
         <source> on Fold</source>
@@ -1429,7 +1437,7 @@
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Updaten</translation>
     </message>
 </context>
 <context>
@@ -1556,11 +1564,11 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished">Vollständiger Name</translation>
+        <translation>Vollständiger Name</translation>
     </message>
 </context>
 <context>
@@ -1670,11 +1678,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportoptionen</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Export</translation>
     </message>
     <message>
         <source>With header</source>
@@ -1694,15 +1702,15 @@
     </message>
     <message>
         <source>Comma</source>
-        <translation type="unfinished"></translation>
+        <translation>Komma</translation>
     </message>
     <message>
         <source>Semicolon</source>
-        <translation type="unfinished"></translation>
+        <translation>Semikolon</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Leertaste</translation>
     </message>
 </context>
 <context>
@@ -2114,15 +2122,15 @@
     </message>
     <message>
         <source>Invalid value</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Wert</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished">Finden:</translation>
+        <translation>Finden:</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
 </context>
 <context>
@@ -2362,7 +2370,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>x</source>
-        <translation>x</translation>
+        <translation type="vanished">x</translation>
     </message>
 </context>
 <context>
@@ -2991,7 +2999,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation>Bilder (*.png *.jpg *.jpeg *.bmp)</translation>
+        <translation type="vanished">Bilder (*.png *.jpg *.jpeg *.bmp)</translation>
     </message>
     <message>
         <source>Images</source>
@@ -3007,19 +3015,19 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Verzeichnis:</translation>
+        <translation>Verzeichnis:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished">Im Dateiexplorer anzeigen</translation>
+        <translation>Im Dateiexplorer anzeigen</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;leer&gt;</translation>
+        <translation>&lt;leer&gt;</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation type="unfinished">Datei konnte nicht gespeichert werden.</translation>
+        <translation>Die Datei wurde noch nicht gespeichert.</translation>
     </message>
     <message>
         <source>Show in Finder</source>
@@ -3031,35 +3039,35 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Schnittmusters:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer des Schnittmusters:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name der Firma/des Designers:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Kunden:</translation>
     </message>
     <message>
         <source>Created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellt:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe des Schnittmusters:</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="unfinished">Maße anzeigen</translation>
+        <translation>Maße anzeigen</translation>
     </message>
     <message>
         <source>Show date of creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelldatum anzeigen</translation>
     </message>
 </context>
 <context>
@@ -3686,27 +3694,27 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Drehung</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Winkel:</translation>
+        <translation>Winkel:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formel-Assistent</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Berechnung</translation>
+        <translation>Berechnung</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Origin Point:</source>
@@ -3718,7 +3726,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished">Winkel bearbeiten</translation>
+        <translation>Winkel bearbeiten</translation>
     </message>
 </context>
 <context>
@@ -4275,7 +4283,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Invalid value</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Wert</translation>
     </message>
 </context>
 <context>
@@ -4542,30 +4550,30 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine neue Version von %1 ist verfügbar!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%2 ist jetzt verfügbar - Sie haben %3. Möchten Sie es jetzt herunterladen?</translation>
     </message>
     <message>
         <source>Skip This Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Version überspringen</translation>
     </message>
     <message>
         <source>Remind Me Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Später erinnern</translation>
     </message>
     <message>
         <source>Get Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Update herunterladen</translation>
     </message>
 </context>
 <context>
     <name>FvUpdater</name>
     <message>
         <source>Cannot open your default browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Standard-Browser nicht öffnen.</translation>
     </message>
     <message>
         <source>Feed download failed: %1.</source>
@@ -4577,7 +4585,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>No updates were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Updates gefunden.</translation>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
@@ -4585,11 +4593,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>
@@ -5665,11 +5673,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Rotate objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekte drehen</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster schließen</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
@@ -5685,7 +5693,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">Gruppe</translation>
+        <translation>Gruppe</translation>
     </message>
     <message>
         <source>Contains all visibility groups</source>
@@ -5693,11 +5701,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Show which details will go in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt, welche Details ins Layout kommen</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können nicht in den Layoutmodus wechseln. Bitte verwenden Sie mindestens ein Detail im Layout.</translation>
     </message>
 </context>
 <context>
@@ -6809,18 +6817,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comma-Separated Values (*.cvs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Als CSV exportieren</translation>
     </message>
     <message>
         <source>Invalid value</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Wert</translation>
     </message>
     <message>
         <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9220,7 +9228,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbenannt</translation>
     </message>
 </context>
 <context>
@@ -9340,19 +9348,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritischer Fehler</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fataler Fehler</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>

@@ -843,7 +843,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation>Cubic bezier</translation>
+        <translation type="vanished">Cubic bezier</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -885,12 +885,16 @@
         <source>Invalid spline</source>
         <translation>Invalid spline</translation>
     </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation>Dialog cubic bezier path</translation>
+        <translation type="vanished">Dialog cubic bezier path</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -911,6 +915,10 @@
     <message>
         <source>Invalid spline path</source>
         <translation>Invalid spline path</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1241,7 +1249,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation type="vanished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1349,87 +1357,87 @@
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>General</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="unfinished"></translation>
+        <translation>Pattern piece data</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Material/Cut number/Placement</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Material type:</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cut number:</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Placement:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Add</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Letter:</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Detail label visible</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Pattern label visible</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Fabric</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>Lining</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfacing</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Interlining</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">None</translation>
+        <translation>None</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Cut on fold</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Cut %1 of %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="unfinished"></translation>
+        <translation> on Fold</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Update</translation>
     </message>
 </context>
 <context>
@@ -2362,7 +2370,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>x</source>
-        <translation>x</translation>
+        <translation type="vanished">x</translation>
     </message>
 </context>
 <context>
@@ -2991,7 +2999,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation>Images (*.png *.jpg *.jpeg *.bmp)</translation>
+        <translation type="vanished">Images (*.png *.jpg *.jpeg *.bmp)</translation>
     </message>
     <message>
         <source>Images</source>
@@ -3027,39 +3035,39 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>General info</source>
-        <translation type="unfinished"></translation>
+        <translation>General info</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pattern name:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pattern number:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Company/Designer name:</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Customer name:</translation>
     </message>
     <message>
         <source>Created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Created:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pattern size:</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="unfinished">Show measurements</translation>
+        <translation>Show measurements</translation>
     </message>
     <message>
         <source>Show date of creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Show date of creation</translation>
     </message>
 </context>
 <context>
@@ -6814,7 +6822,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Comma-Separated Values (*.cvs)</source>
-        <translation>Comma-Separated Values (*.cvs)</translation>
+        <translation type="vanished">Comma-Separated Values (*.cvs)</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -6823,6 +6831,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>Show in Finder</source>
         <translation>Show in Finder</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7814,27 +7826,27 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>move pattern piece label</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>resize pattern piece label</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>rotate pattern piece label</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>move pattern info label</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>resize pattern info label</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>rotate pattern info label</translation>
     </message>
 </context>
 <context>
@@ -9284,7 +9296,7 @@ Do you want to save your changes?</translation>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</translation>
     </message>
 </context>
 <context>
@@ -9299,7 +9311,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</translation>
     </message>
 </context>
 <context>
@@ -9342,19 +9354,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Critical error</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatal error</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>

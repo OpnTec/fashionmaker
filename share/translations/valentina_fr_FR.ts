@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr_FR" version="2.1">
 <context>
     <name>AddDet</name>
     <message>
@@ -459,7 +457,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -582,7 +580,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -693,7 +691,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -796,7 +794,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -890,7 +888,7 @@
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation>Dialogue chemin de Bezier Cubique</translation>
+        <translation>Dialogue trajectoire de Bezier Cubique</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -910,7 +908,7 @@
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation>Chemin de spline invalide</translation>
+        <translation>Trajectoire de spline invalide</translation>
     </message>
 </context>
 <context>
@@ -973,7 +971,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1056,7 +1054,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1131,7 +1129,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1182,7 +1180,7 @@
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation type="vanished">Chemin de courbe sélectionné</translation>
+        <translation type="vanished">Trajectoire de courbe sélectionné</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1190,7 +1188,7 @@
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Segmenter un chemin courbe</translation>
+        <translation>Segmenter une trajectoire de courbe</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1206,7 +1204,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1349,87 +1347,87 @@
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Général</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="unfinished"></translation>
+        <translation>Données de pièces de patron</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Matière/Numéro de coupe/Placement</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de matière :</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de découpe :</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Placement:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Retirer</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettre :</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>étiquette pièce de patron visible</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>étiquette élément de patron visible</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Tissu</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>Lin</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfaçage</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Interlignage</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Vide</translation>
+        <translation>Rien</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper au pli</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper %1 de %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="unfinished"></translation>
+        <translation>au pli</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour</translation>
     </message>
 </context>
 <context>
@@ -1627,7 +1625,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1887,7 +1885,7 @@
     </message>
     <message>
         <source>%1 - cut curve path %2</source>
-        <translation type="vanished">%1 - coup le chemin de la courbe %2</translation>
+        <translation type="vanished">%1 - coupe trajectoire de courbe %2</translation>
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
@@ -1943,11 +1941,11 @@
     </message>
     <message>
         <source>Spline path</source>
-        <translation>Chemin de spline</translation>
+        <translation>Trajectoire de spline</translation>
     </message>
     <message>
         <source>Cubic bezier curve path</source>
-        <translation>Chemin de courbe de bezier cubique</translation>
+        <translation>Trajectoire de la courbe de bezier cubique</translation>
     </message>
     <message>
         <source>%1 - cut %2</source>
@@ -1963,7 +1961,7 @@
     </message>
     <message>
         <source>curve path</source>
-        <translation>chemin de courbe</translation>
+        <translation>Trajectoire de courbe</translation>
     </message>
 </context>
 <context>
@@ -2110,7 +2108,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -2232,7 +2230,7 @@
     </message>
     <message>
         <source>Gap width:</source>
-        <translation>Ecartement :</translation>
+        <translation>Largeur d&apos;espacement :</translation>
     </message>
     <message>
         <source>Save length of the sheet</source>
@@ -2331,11 +2329,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation>Options de plan de coupe.</translation>
+        <translation>Options du plan de coupe.</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Longueur de décalage</translation>
+        <translation>Longueur de décalage :</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -2544,7 +2542,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2680,7 +2678,7 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Patternmaking measurements</source>
         <comment>Measurement section</comment>
-        <translation>Mesures de modélisme</translation>
+        <translation>Mesures de patronnage</translation>
     </message>
     <message>
         <source>Collapse All</source>
@@ -2853,7 +2851,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3024,39 +3022,39 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>General info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations générales</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du patron :</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de patron :</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de Société/Modéliste :</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du client :</translation>
     </message>
     <message>
         <source>Created:</source>
-        <translation type="unfinished"></translation>
+        <translation>Crée le :</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille du patron :</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="unfinished">Montrer mesures</translation>
+        <translation>Voir les mensurations</translation>
     </message>
     <message>
         <source>Show date of creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir la date de création</translation>
     </message>
 </context>
 <context>
@@ -3309,7 +3307,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3396,7 +3394,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3601,7 +3599,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3668,11 +3666,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation>Correction verticale</translation>
+        <translation>Correction verticale :</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation>Correction horizontale</translation>
+        <translation>Correction horizontale :</translation>
     </message>
     <message>
         <source>Select second curve</source>
@@ -3691,7 +3689,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3750,11 +3748,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation>Le chemin du dossier de destination</translation>
+        <translation>Emplacement du dossier de destination</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
-        <translation>Sélectionnez un chemin pour le dossier de destination</translation>
+        <translation>Sélectionnez un emplacement pour le dossier de destination</translation>
     </message>
     <message>
         <source>File base name</source>
@@ -3896,7 +3894,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4058,7 +4056,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4101,7 +4099,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogSplinePath</name>
     <message>
         <source>Curved path</source>
-        <translation>Chemin de courbe</translation>
+        <translation>Trajectoire de courbe</translation>
     </message>
     <message>
         <source>Point of curve</source>
@@ -4133,7 +4131,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation>Choisir un point sur la courbe</translation>
+        <translation>Choisir un point sur la trajectoire de la courbe</translation>
     </message>
     <message>
         <source>Color</source>
@@ -4173,7 +4171,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation>Chemin de spline invalide</translation>
+        <translation>Trajectoire de spline invalide</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -4181,7 +4179,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Fromule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4426,27 +4424,27 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>First base point:</source>
-        <translation>Premier point de base</translation>
+        <translation>Premier point de base :</translation>
     </message>
     <message>
         <source>Second base point:</source>
-        <translation>Second point de base</translation>
+        <translation>Second point de base :</translation>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation>Premier point de la pince</translation>
+        <translation>Premier point de la pince :</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation>Deuxième point de la pince</translation>
+        <translation>Deuxième point de la pince :</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation>Troisième point de la pince</translation>
+        <translation>Troisième point de la pince :</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation>Premier nouveau point de la pince</translation>
+        <translation>Premier nouveau point de la pince :</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -4458,7 +4456,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation>Second nouveau point de la pince</translation>
+        <translation>Second nouveau point de la pince :</translation>
     </message>
 </context>
 <context>
@@ -4860,11 +4858,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation>Dessin</translation>
+        <translation>Modélisme</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Pièces de patron</translation>
+        <translation>Isolation</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -5012,11 +5010,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation>Choisir un point sur la courbe</translation>
+        <translation>Choisir un point sur la trajectoire de courbe</translation>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation>Choisir le chemin de courbe</translation>
+        <translation>Choisir la trajectoire de courbe</translation>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
@@ -5194,7 +5192,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Curved path</source>
-        <translation>Courbe multiple</translation>
+        <translation>Trajectoire de courbe</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -5202,7 +5200,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Segmenter une courbe multiple</translation>
+        <translation>Segmenter une trajectoire de courbe</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
@@ -5362,7 +5360,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Detail mode</source>
-        <translation>Mode pièce de patron</translation>
+        <translation>Mode Isolation</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
@@ -5535,15 +5533,15 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode de travail fait pour travailler avec des pi&amp;Eagrave;ces de patron. Ces pi&amp;Eagrave;ces servent pour l&apos;&amp;Eacute;tape suivante: le mode &amp;quot;D&amp;Eacute;tail&amp;quot;. Avant de passer a ce mode, vous devez au moins cr&amp;Eacute;er une pi&amp;Eagrave;ce de patron.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode de travail fait pour travailler avec des pi&amp;egrave;ces de patron. Ces pi&amp;egrave;ces servent pour l&apos;&amp;eacute;tape suivante: le mode &amp;quot;Isolation&amp;quot;. Avant de passer a ce mode, vous devez au moins cr&amp;eacute;er une pi&amp;egrave;ce de patron.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode pour travailler avec despi&amp;egrave;ces de patron. Avant d&apos;activer le mode &amp;quot;Isolation&amp;quot;, vous devez cr&amp;eacute;er au moins un &amp;eacute;l&amp;eacute;ment de patron dans le mode &amp;quot;Trac&amp;eacute;&amp;quot;. Les pi&amp;egrave;ces de patrons ainsi cr&amp;eacute;es serviront &amp;agrave; cr&amp;eacute;er le plan de coupe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode pour cr&amp;eacute;er une imposition des pi&amp;egrave;ces de patron. Ce mode n&apos;est accessible que si au moins une pi&amp;egrave;ce de patron a &amp;eacute;t&amp;eacute; cr&amp;eacute;e dans le mode &amp;quot;Isolation&amp;quot;. Le plan de coupe peut &amp;ecirc;tre export&amp;eacute; au format choisi et enregistr&amp;eacute; sur votre disque dur.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
@@ -5639,7 +5637,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
-        <translation>Choisir un point de la courbe de bézier cubique</translation>
+        <translation>Choisir un point sur la trajectoire de la courbe de bézier cubique</translation>
     </message>
     <message>
         <source>Toolbar pointer</source>
@@ -5810,14 +5808,14 @@ Voulez-vous sauvegarder les changements ? </translation>
     <name>MoveSpline</name>
     <message>
         <source>move spline</source>
-        <translation>Déplacer la cannelure</translation>
+        <translation>Déplacer la spline</translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
         <source>move spline path</source>
-        <translation>Déplacer un chemin de cannelure</translation>
+        <translation>Déplacer le trajet de la spline</translation>
     </message>
 </context>
 <context>
@@ -5828,7 +5826,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Dossiers utilisés</translation>
+        <translation>Dossiers utilisés par Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6279,7 +6277,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Pièces de patron</translation>
+        <translation>Détails</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -6343,7 +6341,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Path to file</source>
-        <translation type="vanished">Chemin du fichier</translation>
+        <translation type="vanished">Emplacement du fichier</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -6589,7 +6587,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation>Trouver:</translation>
+        <translation>Rechercher:</translation>
     </message>
     <message>
         <source>Find Previous</source>
@@ -6673,7 +6671,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Function Wizard</source>
-        <translation>Fonction magique</translation>
+        <translation>Assistant fonction</translation>
     </message>
     <message>
         <source>Move measurement top</source>
@@ -6708,7 +6706,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>PM system:</source>
-        <translation>Système PM:</translation>
+        <translation>Méthode:</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
@@ -6764,7 +6762,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation>Nom du client.</translation>
+        <translation>Prénom du client.</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
@@ -6913,7 +6911,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Chemin de travail de Valentina</translation>
+        <translation>Dossier de travail de Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -7006,7 +7004,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation>Erreur pendant la création d&apos;un copie de réserve: %1.</translation>
+        <translation>Erreur lors de la création d&apos;un copie de réserve: %1.</translation>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
@@ -7181,11 +7179,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
-        <translation type="vanished">Largeur de marge x2, mesuré en fonction des dimensions du plan de coupe. (mode export)</translation>
+        <translation type="vanished">Largeur d&apos;espacement x2, mesuré en fonction des dimensions du plan de coupe. (mode export)</translation>
     </message>
     <message>
         <source>The gap width</source>
-        <translation>Largeur de marge</translation>
+        <translation>Largeur d&apos;espacement</translation>
     </message>
     <message>
         <source>Sets layout groupping (export mode): </source>
@@ -7241,7 +7239,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
-        <translation type="vanished">Le dossier de destination</translation>
+        <translation type="vanished">Emplacement du dossier de destination</translation>
     </message>
     <message>
         <source>The destination folder</source>
@@ -7265,11 +7263,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -7289,55 +7291,75 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Set all margins to 0.</source>
-        <translation type="vanished">Ignorer les marges d&apos;impression (mode exort). Règle les marge à 0.</translation>
+        <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Règle les marge à 0.</translation>
+    </message>
+    <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur d&apos;espacement devant être utilisé avec les largeurs de décalage.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
-        <translation>Le chemin du dossier de destination. Par défaut, le répertoire est celui de l&apos;application.</translation>
+        <translation>Emplacement du dossier de destination. Par défaut, le répertoire est celui de l&apos;application.</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation>Ignorer les marges d&apos;impression (mode export). Inactive les valeurs clée: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle les marge à 0.</translation>
+        <translation>Ignorer les marges d&apos;impression (mode export). Inactive les valeurs clés: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle les marge à 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -7357,7 +7379,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>La largeur d&apos;espaces entre pièces x2, mesurée en fonction des dimensions du plan de coupe (mode export). Réglage de la distance entre les pièces de patron et une pièce de patron et le bord de la feuille.</translation>
+        <translation>La largeur d&apos;espacement entre pièces x2, mesurée en fonction des dimensions du plan de coupe (mode export). Réglage de la distance entre les pièces de patron et une pièce de patron et le bord de la feuille.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
@@ -7365,7 +7387,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lance le logiciel en mode test. Dans ce mode, le logiciel charge un fichier de patron simple puis quitte sans afficher la fenêtre principale. La clé a priorité sur la clé &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
@@ -7373,11 +7395,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur de décalage</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -7433,13 +7455,13 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Conversion du paramètre impossible vers toDouble</translation>
     </message>
     <message>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
         <translation>impossible d&apos;ouvrir le fichier %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
         <translation>Erreur d&apos;ouverture du fichier de schéma %1: %2.</translation>
     </message>
@@ -7574,7 +7596,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
-        <translation>Erreur : Création ou mise à jour de le pièce de patronl</translation>
+        <translation>Erreur lors de la création ou mise à jour de le pièce de patron</translation>
     </message>
     <message>
         <source>Error creating or updating single point</source>
@@ -7590,7 +7612,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of shoulder</source>
-        <translation>Erreur : Création ou mise à jour du point d&apos;épaule</translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;épaule</translation>
     </message>
     <message>
         <source>Error creating or updating point of normal</source>
@@ -7598,23 +7620,23 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation>Erreur : Création ou mise à jour du point de bisection</translation>
+        <translation>Erreur lors de la création ou mise à jour du point de bisection</translation>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation>Erreur : Création ou mise à jour du point d&apos;intersection de ligne</translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de ligne</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation>Erreur : Création ou mise à jour du point de contact</translation>
+        <translation>Erreur lors de la création ou mise à jour du point de contact</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
-        <translation>Erreur : Création ou mise à jour du point de modélisation</translation>
+        <translation>Erreur lors de la création ou mise à jour du point de modélisation</translation>
     </message>
     <message>
         <source>Error creating or updating height</source>
-        <translation>Erreur : Création ou mise à jour de la taille</translation>
+        <translation>Erreur lors de la création ou mise à jour de la taille</translation>
     </message>
     <message>
         <source>Error creating or updating triangle</source>
@@ -7622,15 +7644,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection</source>
-        <translation>Erreur : Création ou mise à jour du point d&apos;intersection</translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline point</source>
-        <translation>Erreur : Création ou mise à jour du point de découpe de crannelure </translation>
+        <translation>Erreur lors de la création ou mise à jour du point de découpe de crannelure </translation>
     </message>
     <message>
         <source>Error creating or updating cut spline path point</source>
-        <translation>Erreur : Création ou mise à jour du point du chemine de cannelure</translation>
+        <translation>Erreur lors de la création ou mise à jour de la trajectoire de la spline.</translation>
     </message>
     <message>
         <source>Error creating or updating cut arc point</source>
@@ -7638,11 +7660,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection line and axis</source>
-        <translation>Erreur : Création ou mise à jour du point d&apos;intersection de ligne et d&apos;axe</translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de ligne et d&apos;axe</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curve and axis</source>
-        <translation>Erreur : Création ou mise à jour du point d&apos;intersection de courbe et d&apos;axe</translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de courbe et d&apos;axe</translation>
     </message>
     <message>
         <source>Error creating or updating line</source>
@@ -7662,35 +7684,35 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating modeling curve path</source>
-        <translation>Erreur lors de la création ou de la mise à jour du chemin de la coubre</translation>
+        <translation>Erreur lors de la création ou de la mise à jour de la trajectoire de la courbe</translation>
     </message>
     <message>
         <source>Error creating or updating simple arc</source>
-        <translation>Erreur : Création ou mise à jour d&apos;un arc simple</translation>
+        <translation>Erreur lors de la création ou mise à jour d&apos;un arc simple</translation>
     </message>
     <message>
         <source>Error creating or updating modeling arc</source>
-        <translation>Erreur : Création ou mise à jour d&apos;un arc modelé</translation>
+        <translation>Erreur lors de la création ou mise à jour d&apos;un arc modelé</translation>
     </message>
     <message>
         <source>Error creating or updating union details</source>
-        <translation>Erreur : Création ou mise à jour d&apos;une réunion de pièces de patron</translation>
+        <translation>Erreur lors de la création ou mise à jour d&apos;une réunion de pièces de patron</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection d&apos;arcs</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de cercles</translation>
     </message>
     <message>
         <source>Error creating or updating point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de cercle et tangente</translation>
     </message>
     <message>
         <source>Error creating or updating point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de l&apos;arc et la tangente</translation>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
@@ -7722,31 +7744,31 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point d&apos;intersection de courbes</translation>
     </message>
     <message>
         <source>Error creating or updating simple interactive spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou de la mise à jour de la spline interactive simple</translation>
     </message>
     <message>
         <source>Error creating or updating interactive spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour du point de découpe de la trajectoire de la spline interactive</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou de la mise à jour de la courbe cubique de bezier</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou de la mise à jour de la trajectoire de la courbe de bezier</translation>
     </message>
     <message>
         <source>Error creating or updating operation of rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou mise à jour de l&apos;opération de rotation</translation>
     </message>
     <message>
         <source>Unknown operation type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opération inconnue de type &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -7764,15 +7786,15 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Pas assez de poins pour créer une cannelure.</translation>
+        <translation>Pas assez de poins pour créer une spline.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>La cannelure n&apos;existe pas.</translation>
+        <translation>La spline n&apos;existe pas.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation type="vanished">Impossible de couper une cannelure avec un point</translation>
+        <translation type="vanished">Impossible de couper une spline avec un point</translation>
     </message>
 </context>
 <context>
@@ -7787,27 +7809,27 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>déplace l&apos;étiquette de pièce de patron</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>redimensionne l&apos;étiquette de pièce de patron</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>tourne l&apos;étiquette de pièce de patron</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>déplace l&apos;étiquette d&apos;information du patron</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>redimensionne l&apos;étiquette d&apos;information du patron</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>tourne l&apos;étiquette d&apos;information du patron</translation>
     </message>
 </context>
 <context>
@@ -7874,7 +7896,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tool segment a pathed curve</source>
-        <translation>Outil segmantation de chemin de courbe</translation>
+        <translation>Outil segmentation de la trajectoire de la courbe</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -7919,7 +7941,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tool for path curve</source>
-        <translation>Outil pour chemin de courbe</translation>
+        <translation>Outil la trajectoire de la courbe</translation>
     </message>
     <message>
         <source>Tool triangle</source>
@@ -8015,15 +8037,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
-        <translation type="unfinished"></translation>
+        <translation>outil pour créer un point d&apos;intersection entre deux courbes</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Correction verticale</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Correction horizontale</translation>
     </message>
     <message>
         <source>Name</source>
@@ -8031,19 +8053,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: angle</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: longueur</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: angle</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: longueur</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -8051,26 +8073,26 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil courbe de bezier</translation>
     </message>
     <message>
         <source>Tool rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil rotation</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffixe</translation>
     </message>
 </context>
 <context>
     <name>VToolUnionDetails</name>
     <message>
         <source>union details</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusion de pièces de patron</translation>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièces de patron fusionnées</translation>
     </message>
 </context>
 <context>
@@ -8083,42 +8105,42 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Bunka Fashion College</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bunka Fashion College</translation>
     </message>
     <message>
         <source>Fundamentals of Garment Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fundamentals of Garment Design</translation>
     </message>
     <message>
         <source>Barnfield and Richard</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Barnfield and Richard</translation>
     </message>
     <message>
         <source>Jo Barnfield and Andrew Richards</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jo Barnfield and Andrew Richards</translation>
     </message>
     <message>
         <source>Pattern Making Primer</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Making Primer</translation>
     </message>
     <message>
         <source>Friendship/Women</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Friendship/Women</translation>
     </message>
     <message>
         <source>Elizabeth Friendship</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elizabeth Friendship</translation>
     </message>
     <message>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
     </message>
     <message>
         <source>Morris, K.</source>
@@ -8133,7 +8155,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Sewing Lingerie that Fits</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sewing Lingerie that Fits</translation>
     </message>
     <message>
         <source>Castro</source>
@@ -8148,7 +8170,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking in Practic</translation>
     </message>
     <message>
         <source>Kim &amp; Uh</source>
@@ -8158,12 +8180,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Injoo Kim and Mykyung Uh</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Injoo Kim and Mykyung Uh</translation>
     </message>
     <message>
         <source>Apparel Making in Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Apparel Making in Fashion Design</translation>
     </message>
     <message>
         <source>Waugh</source>
@@ -8178,7 +8200,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Corsets and Crinolines</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Corsets and Crinolines</translation>
     </message>
     <message>
         <source>Grimble</source>
@@ -8193,12 +8215,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Fashions of the Gilded Age</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fashions of the Gilded Age</translation>
     </message>
     <message>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Thornton&apos;s International System</translation>
     </message>
     <message>
         <source>ed. R. L. Shep</source>
@@ -8208,7 +8230,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Great War: Styles and Patterns of the 1910s</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Great War: Styles and Patterns of the 1910s</translation>
     </message>
     <message>
         <source>Hillhouse &amp; Mansfield</source>
@@ -8218,12 +8240,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Marion S. Hillhouse and Evelyn A. Mansfield</translation>
     </message>
     <message>
         <source>Dress Design: Draping and Flat Pattern Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dress Design: Draping and Flat Pattern Making</translation>
     </message>
     <message>
         <source>Pivnick</source>
@@ -8238,7 +8260,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Design Beautiful Clothes: Designing and Pattern Making</translation>
     </message>
     <message>
         <source>Minister &amp; Son</source>
@@ -8253,7 +8275,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Complete Guide to Practical Cutting (1853)</translation>
     </message>
     <message>
         <source>Strickland</source>
@@ -8268,7 +8290,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>A Tailoring Manual</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>A Tailoring Manual</translation>
     </message>
     <message>
         <source>Loh &amp; Lewis</source>
@@ -8278,12 +8300,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>May Loh and Diehl Lewis</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>May Loh and Diehl Lewis</translation>
     </message>
     <message>
         <source>Patternless Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternless Fashion Design</translation>
     </message>
     <message>
         <source>Morris, F. R.</source>
@@ -8298,7 +8320,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Ladies Garment Cutting and Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ladies Garment Cutting and Making</translation>
     </message>
     <message>
         <source>Mason</source>
@@ -8313,7 +8335,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Mason&apos;s Patternmaking Book</translation>
     </message>
     <message>
         <source>Kimata</source>
@@ -8328,22 +8350,22 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</translation>
     </message>
     <message>
         <source>Master Designer</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Master Designer</translation>
     </message>
     <message>
         <source>The Master Designer (Chicago, IL)</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Master Designer (Chicago, IL)</translation>
     </message>
     <message>
         <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Master Designer&apos;s System of Designing, Cutting and Grading</translation>
     </message>
     <message>
         <source>Kopp</source>
@@ -8358,7 +8380,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Draft Basic Patterns</translation>
     </message>
     <message>
         <source>Ekern</source>
@@ -8373,7 +8395,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Slacks Cut-to-Fit for Your Figure</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Slacks Cut-to-Fit for Your Figure</translation>
     </message>
     <message>
         <source>Doyle</source>
@@ -8388,7 +8410,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sarah&apos;s Key to Pattern Drafting</translation>
     </message>
     <message>
         <source>Shelton</source>
@@ -8403,7 +8425,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Design and Sew Jeans</translation>
     </message>
     <message>
         <source>Lady Boutique</source>
@@ -8418,7 +8440,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Lady Boutique magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lady Boutique magazine (Japan)</translation>
     </message>
     <message>
         <source>Rohr</source>
@@ -8433,7 +8455,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</translation>
     </message>
     <message>
         <source>Moore</source>
@@ -8448,7 +8470,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</translation>
     </message>
     <message>
         <source>Abling</source>
@@ -8463,7 +8485,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Integrating Draping, Drafting and Drawing</translation>
     </message>
     <message>
         <source>Fukomoto</source>
@@ -8478,22 +8500,22 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</translation>
     </message>
     <message>
         <source>Dressmaking International</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International magazine (Japan)</translation>
     </message>
     <message>
         <source>Erwin</source>
@@ -8508,7 +8530,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Practical Dress Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Practical Dress Design</translation>
     </message>
     <message>
         <source>Gough</source>
@@ -8523,7 +8545,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Principles of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Principles of Garment Cutting</translation>
     </message>
     <message>
         <source>Allemong</source>
@@ -8538,7 +8560,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>European Cut</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>European Cut</translation>
     </message>
     <message>
         <source>McCunn</source>
@@ -8553,7 +8575,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Make Your Own Sewing Patterns</translation>
     </message>
     <message>
         <source>Zarapkar</source>
@@ -8568,7 +8590,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Zarapkar System of Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zarapkar System of Cutting</translation>
     </message>
     <message>
         <source>Kunick</source>
@@ -8583,7 +8605,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</translation>
     </message>
     <message>
         <source>Handford</source>
@@ -8598,7 +8620,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</translation>
     </message>
     <message>
         <source>Davis</source>
@@ -8613,7 +8635,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</translation>
     </message>
     <message>
         <source>MacLochlainn</source>
@@ -8628,7 +8650,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Victorian Tailor: An Introduction to Period Tailoring</translation>
     </message>
     <message>
         <source>Joseph-Armstrong</source>
@@ -8643,7 +8665,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Patternmaking for Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking for Fashion Design</translation>
     </message>
     <message>
         <source>Supreme System</source>
@@ -8658,7 +8680,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</translation>
     </message>
     <message>
         <source>Sugino</source>
@@ -8668,17 +8690,17 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Dressmaking</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking</translation>
     </message>
     <message>
         <source>Pattern Drafting Vols. I, II, III (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Drafting Vols. I, II, III (Japan)</translation>
     </message>
     <message>
         <source>Centre Point System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Centre Point System</translation>
     </message>
     <message>
         <source>Louis Devere</source>
@@ -8688,12 +8710,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Handbook of Practical Cutting on the Centre Point System</translation>
     </message>
     <message>
         <source>Aldrich/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Aldrich/Men</translation>
     </message>
     <message>
         <source>Winifred Aldrich</source>
@@ -8703,17 +8725,17 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Metric Pattern Cutting for Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Metric Pattern Cutting for Menswear</translation>
     </message>
     <message>
         <source>Aldrich/Women</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Aldrich/Women</translation>
     </message>
     <message>
         <source>Metric Pattern Cutting for Women&apos;s Wear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Metric Pattern Cutting for Women&apos;s Wear</translation>
     </message>
     <message>
         <source>Kershaw</source>
@@ -8728,7 +8750,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Patternmaking for Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking for Menswear</translation>
     </message>
     <message>
         <source>Gilewska</source>
@@ -8743,7 +8765,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Pattern-Drafting for Fashion: The Basics</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern-Drafting for Fashion: The Basics</translation>
     </message>
     <message>
         <source>Lo</source>
@@ -8758,7 +8780,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Pattern Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Cutting</translation>
     </message>
     <message>
         <source>Bray</source>
@@ -8773,12 +8795,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dress Pattern Designing: The Basic Principles of Cut and Fit</translation>
     </message>
     <message>
         <source>Knowles/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Knowles/Men</translation>
     </message>
     <message>
         <source>Lori A. Knowles</source>
@@ -8788,17 +8810,17 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Practical Guide to Patternmaking for Fashion Designers: Menswear</translation>
     </message>
     <message>
         <source>Friendship/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Friendship/Men</translation>
     </message>
     <message>
         <source>Pattern Cutting for Men&apos;s Costume</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Cutting for Men&apos;s Costume</translation>
     </message>
     <message>
         <source>Brown</source>
@@ -8813,7 +8835,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Art in Dress</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Art in Dress</translation>
     </message>
     <message>
         <source>Mitchell</source>
@@ -8828,7 +8850,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</translation>
     </message>
     <message>
         <source>GOST 17917-86</source>
@@ -8838,12 +8860,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Ministry of consumer industry of the USSR</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ministry of consumer industry of the USSR</translation>
     </message>
     <message>
         <source>Standard figure boys</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Standard figure boys</translation>
     </message>
     <message>
         <source>Eddy</source>
@@ -8868,12 +8890,12 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</translation>
     </message>
     <message>
         <source>American Garment Cutter</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>American Garment Cutter</translation>
     </message>
     <message>
         <source>None</source>
@@ -8929,6 +8951,26 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="vanished">Angle2Arc_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angle1Spl_</translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Angle2Spl_</translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">Angle1SplPath</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">Angle2SplPath</translation>
     </message>
     <message>
         <source>sin</source>
@@ -9058,7 +9100,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
-        <translation type="unfinished"></translation>
+        <translation>fmod</translation>
     </message>
     <message>
         <source>cm</source>
@@ -9078,72 +9120,72 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Ligne_</translation>
+        <translation>Ligne_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angleligne_</translation>
+        <translation>AngleLine_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Arc_</translation>
+        <translation>Arc_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Crb_</translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">CrbChemin</translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">RayonArc_</translation>
+        <translation>RadiusArc_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle1Arc_</translation>
+        <translation>Angle1Arc_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle2Arc_</translation>
+        <translation>Angle2Arc_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>Seg_</source>
         <comment>Segment. Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Seg_</translation>
     </message>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>CurrentLength</translation>
     </message>
 </context>
 <context>
@@ -9172,37 +9214,41 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sans nom</translation>
     </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Effacer</translation>
     </message>
 </context>
 <context>
     <name>VisToolCubicBezierPath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trajectoire de courbe&lt;/b&gt; : sélectionner au moins sept points </translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trajectoire de courbe&lt;/b&gt; : sélectionner au moins sept points, &lt;b&gt;Entrée&lt;/b&gt; - pour terminer</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trajectoire de courbe&lt;/b&gt; : sélectionner plus de points pour compléter le segment</translation>
     </message>
 </context>
 <context>
@@ -9220,7 +9266,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Point à la distance et l&apos;angle&lt;/b&gt;: angle = %1°, distance = %2%3; &lt;b&gt;Majuscule&lt;/b&gt; - angle contraint, &lt;b&gt;Entrée&lt;/b&gt; -valide la création</translation>
     </message>
 </context>
 <context>
@@ -9234,29 +9280,29 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisez &lt;b&gt;Majuscule&lt;/b&gt; pour contraindre l&apos;angle!</translation>
     </message>
 </context>
 <context>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation>&lt;b&gt;Chemin courbe&lt;/b&gt; : sélectionner au moins trois points </translation>
+        <translation>&lt;b&gt;Trajectoire de courbe&lt;/b&gt; : sélectionner au moins trois points </translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Chemin courbe&lt;/b&gt; : sélectionner au moins trois points, &lt;b&gt;Entrée&lt;/b&gt; - Valider la création</translation>
+        <translation>&lt;b&gt;Trajectoire de courbe&lt;/b&gt; : sélectionner au moins trois points, &lt;b&gt;Entrée&lt;/b&gt; - pour terminer</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisez &lt;b&gt;Majuscule&lt;/b&gt; pour contraindre l&apos;angle!</translation>
     </message>
 </context>
 <context>
     <name>mNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>DEBUGAGE :</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -9292,26 +9338,26 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur critique</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur fatale</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>
     <name>vNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>DEBUGAGE :</translation>
     </message>
     <message>
         <source>WARNING:</source>

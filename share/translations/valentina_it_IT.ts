@@ -842,10 +842,6 @@
 <context>
     <name>DialogCubicBezier</name>
     <message>
-        <source>Cubic bezier</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -885,13 +881,13 @@
         <source>Invalid spline</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
-    <message>
-        <source>Dialog cubic bezier path</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Point:</source>
         <translation type="unfinished"></translation>
@@ -910,6 +906,10 @@
     </message>
     <message>
         <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1241,7 +1241,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation type="vanished">Dettaglio</translation>
+        <translation>Dettaglio</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -2361,10 +2361,6 @@ Applicare le impostazioni comunque?</translation>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>x</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2988,10 +2984,6 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Image for pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6798,15 +6790,15 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Comma-Separated Values (*.cvs)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

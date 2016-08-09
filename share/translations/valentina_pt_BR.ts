@@ -487,7 +487,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -800,7 +800,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -829,10 +829,6 @@
 </context>
 <context>
     <name>DialogCubicBezier</name>
-    <message>
-        <source>Cubic bezier</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Color:</source>
         <translation>Cor:</translation>
@@ -873,13 +869,13 @@
         <source>Invalid spline</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
-    <message>
-        <source>Dialog cubic bezier path</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Point:</source>
         <translation>Ponto:</translation>
@@ -898,6 +894,10 @@
     </message>
     <message>
         <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -985,7 +985,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1064,7 +1064,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1139,7 +1139,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1214,7 +1214,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1229,7 +1229,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation type="vanished">Detalhe</translation>
+        <translation>Detalhe</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1627,7 +1627,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1748,7 +1748,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2259,10 +2259,6 @@ Apply settings anyway?</source>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>x</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2331,23 +2327,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second line</source>
-        <translation type="unfinished"></translation>
+        <translation>Segunda linha</translation>
     </message>
     <message>
         <source>Select second point of first line</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o segundo ponto da segunda linha</translation>
     </message>
     <message>
         <source>Select first point of second line</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o primeiro ponto da segunda linha</translation>
     </message>
     <message>
         <source>Select second point of second line</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o segundo ponto da segunda linha</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponto na linha de interseção</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -2355,7 +2351,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2466,7 +2462,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2751,7 +2747,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -2866,10 +2862,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Image for pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3104,7 +3096,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3183,7 +3175,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3258,7 +3250,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3305,7 +3297,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3344,7 +3336,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3427,7 +3419,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3466,7 +3458,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3706,7 +3698,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3761,7 +3753,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4053,7 +4045,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4140,7 +4132,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta única</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -4421,7 +4413,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponto na linha de interseção</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -6397,15 +6389,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Comma-Separated Values (*.cvs)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7403,7 +7395,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponto na linha de interseção</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
