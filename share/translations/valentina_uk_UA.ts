@@ -1421,7 +1421,7 @@
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Вирізати на згин</translation>
+        <translation>Вирізати на згиб</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
@@ -1429,11 +1429,15 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation> на згин</translation>
+        <translation type="vanished">Вирізати на згиб</translation>
     </message>
     <message>
         <source>Update</source>
         <translation>Оновити</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7802,11 +7806,11 @@ Do you want to save your changes?</source>
     <name>VTextManager</name>
     <message>
         <source>Cut %1 on %2%3</source>
-        <translation>Вирізати %1на %2%3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
-        <translation> на згин</translation>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

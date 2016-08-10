@@ -1433,12 +1433,12 @@
         <translation>Cortar %1 de %2%3</translation>
     </message>
     <message>
-        <source> on Fold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update</source>
         <translation>Actualizar</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4551,7 +4551,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Una nueva versión de 1% está disponible!</translation>
+        <translation>Una nueva versión de %1 está disponible!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -7817,7 +7817,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9208,7 +9208,7 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation>Longitud actual</translation>
+        <translation>LongitudActual</translation>
     </message>
 </context>
 <context>

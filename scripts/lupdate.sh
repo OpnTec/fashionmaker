@@ -12,7 +12,13 @@ lupdate -recursive ../share/translations/measurements.pro
 #clean stale QM files
 rm -f -v ../share/translations/*.qm
 # force to run qmake
-touch -am ../Valentina.pro
+MAKEFILES=`find ../../ -name Makefile`
+
+for var in $MAKEFILES
+do
+    rm -f -v $var
+done
 
 echo Done.
-echo For updating files run: clean all, qmake, rebuild all.
+echo For updating files run: build all.
+

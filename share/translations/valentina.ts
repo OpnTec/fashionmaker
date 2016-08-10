@@ -887,7 +887,7 @@
     </message>
     <message>
         <source>Tool cubic bezier</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool cubic bezier</translation>
     </message>
 </context>
 <context>
@@ -918,7 +918,7 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool cubic bezier path</translation>
     </message>
 </context>
 <context>
@@ -1433,11 +1433,15 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation> on Fold</translation>
+        <translation type="vanished"> on Fold</translation>
     </message>
     <message>
         <source>Update</source>
         <translation>Update</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6834,7 +6838,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Comma-Separated Values</translation>
     </message>
 </context>
 <context>
@@ -7818,11 +7822,15 @@ Do you want to save your changes?</translation>
     <name>VTextManager</name>
     <message>
         <source>Cut %1 on %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Cut %1 on %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="unfinished"> on Fold</translation>
+        <translation type="vanished"> on Fold</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

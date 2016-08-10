@@ -1433,11 +1433,15 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation>au pli</translation>
+        <translation type="vanished">au pli</translation>
     </message>
     <message>
         <source>Update</source>
         <translation>Mise à jour</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7794,8 +7798,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
-        <translation type="unfinished">au pli</translation>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

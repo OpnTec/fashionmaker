@@ -1425,11 +1425,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7464,7 +7464,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -313,7 +313,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="310"/>
         <source>height_neck_back_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Altura posterior desde el cuello a la rodilla</translation>
+        <translation>altura_posterior_desde_el_cuello_a_la_rodilla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="312"/>

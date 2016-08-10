@@ -1432,11 +1432,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7346,7 +7346,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation>Negeer printmarges (export modus). Maak de waarde sleutels onbruikbaar: &quot;%1&quot;, &quot;%2&quot;, &quot;3 %&quot;, &quot;%4&quot;. Stel alle marges in op 0.</translation>
+        <translation>Negeer printmarges (export modus). Maak de waarde sleutels onbruikbaar: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Stel alle marges in op 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
@@ -7808,7 +7808,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

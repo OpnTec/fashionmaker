@@ -1432,12 +1432,12 @@
         <translation>%1 von %2%3 schneiden</translation>
     </message>
     <message>
-        <source> on Fold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update</source>
         <translation>Updaten</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7815,7 +7815,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
