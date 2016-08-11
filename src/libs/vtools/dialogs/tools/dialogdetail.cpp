@@ -125,9 +125,16 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
     connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
 
-    m_qslMaterials << tr("Fabric") << tr("Lining") << tr("Interfacing") << tr("Interlining");
+    m_qslMaterials << QApplication::translate("Detail", "Fabric", 0)
+                   << QApplication::translate("Detail", "Lining", 0)
+                   << QApplication::translate("Detail", "Interfacing", 0)
+                   << QApplication::translate("Detail", "Interlining", 0);
 
-    ui.comboBoxMaterial->addItems(m_qslMaterials);
+    //ui.comboBoxMaterial->addItems(m_qslMaterials);
+    for (int i = 0; i < m_qslMaterials.count(); ++i)
+    {
+        ui.comboBoxMaterial->addItem(m_qslMaterials[i], i);
+    }
     m_qslPlacements << tr("None") << tr("Cut on fold");
     ui.comboBoxPlacement->addItems(m_qslPlacements);
 
@@ -237,13 +244,14 @@ void DialogDetail::AddUpdate()
 {
     MaterialCutPlacement mcp;
     mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
-    mcp.m_eMaterial = MaterialType::mtUserDefined;
-    for (int i = 0; i < m_qslMaterials.count(); ++i)
+    int i = ui.comboBoxMaterial->currentData().toInt();
+    if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
     {
-        if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
-        {
-            mcp.m_eMaterial = MaterialType(i);
-        }
+        mcp.m_eMaterial = MaterialType(i);
+    }
+    else
+    {
+        mcp.m_eMaterial = MaterialType::mtUserDefined;
     }
 
     mcp.m_iCutNumber = ui.spinBoxCutNumber->value();
@@ -413,8 +421,6 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
     detail.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
     detail.GetPatternPieceData().SetVisible(ui.checkBoxDetail->isChecked());
-
-    qDebug() << "DD VISIBLE" << detail.GetPatternPieceData().IsVisible();
 
     detail.GetPatternInfo() = m_oldGeom;
     detail.GetPatternInfo().SetVisible(ui.checkBoxPattern->isChecked());
@@ -781,7 +787,14 @@ void DialogDetail::SetEditMode()
     ui.pushButtonRemove->show();
 
     MaterialCutPlacement mcp = m_conMCP.at(iR);
-    ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+    if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+    {
+        ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+    }
+    else
+    {
+        ui.comboBoxMaterial->setCurrentText(m_qslMaterials[int(mcp.m_eMaterial)]);
+    }
     ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
     ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
 

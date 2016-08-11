@@ -689,7 +689,14 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         MaterialCutPlacement mcp;
                         QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
                         mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
-                        mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+                        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+                        {
+                            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+                        }
+                        else
+                        {
+                            mcp.m_qsMaterialUserDef.clear();
+                        }
                         mcp.m_iCutNumber = GetParametrUInt(domMCP, AttrCutNumber, 0);
                         mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
                         detail.GetPatternPieceData().Append(mcp);

@@ -444,7 +444,10 @@ void VToolDetail::AddToFile()
         MaterialCutPlacement mcp = data.GetMCP(i);
         QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+        {
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        }
         doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
         domData.appendChild(domMCP);
@@ -503,7 +506,10 @@ void VToolDetail::RefreshDataInFile()
             MaterialCutPlacement mcp = data.GetMCP(i);
             QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+            {
+                doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            }
             doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
             domData.appendChild(domMCP);
