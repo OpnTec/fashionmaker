@@ -75,6 +75,7 @@ const QString VCommonSettings::SettingGeneralToolbarsState             = QString
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
 const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
 const QString VCommonSettings::SettingDateOfLastRemind                 = QStringLiteral("dateOfLastRemind");
+const QString VCommonSettings::SettingUserDefinedMaterials             = QStringLiteral("configuration/userDefinedMaterials");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -468,4 +469,25 @@ void VCommonSettings::SetDateOfLastRemind(const QDate &date)
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(SettingDateOfLastRemind, date);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VCommonSettings::GetUserDefinedMaterials() const
+{
+    return value(SettingUserDefinedMaterials).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::AddUserDefinedMaterial(QString qsMaterial)
+{
+    QStringList qsl = GetUserDefinedMaterials();
+    qsl << qsMaterial;
+    setValue(SettingUserDefinedMaterials, qsl);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::ClearUserDefinedMaterial()
+{
+    QStringList qsl;
+    setValue(SettingUserDefinedMaterials, qsl);
 }

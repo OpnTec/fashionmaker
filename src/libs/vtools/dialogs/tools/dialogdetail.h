@@ -84,6 +84,7 @@ protected slots:
 
 private slots:
     void             NameDetailChanged();
+    void             MaterialChanged();
 private:
 
     /** @brief ui keeps information about user interface */

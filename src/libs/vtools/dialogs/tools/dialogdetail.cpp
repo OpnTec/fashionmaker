@@ -135,6 +135,13 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     {
         ui.comboBoxMaterial->addItem(m_qslMaterials[i], i);
     }
+
+    QStringList qsl = qApp->Settings()->GetUserDefinedMaterials();
+    for (int i = 0; i < qsl.count(); ++i)
+    {
+        ui.comboBoxMaterial->addItem(qsl[i], int(MaterialType::mtUserDefined));
+    }
+
     m_qslPlacements << tr("None") << tr("Cut on fold");
     ui.comboBoxPlacement->addItems(m_qslPlacements);
 
@@ -142,6 +149,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.pushButtonCancel, &QPushButton::clicked, this, &DialogDetail::Cancel);
     connect(ui.pushButtonRemove, &QPushButton::clicked, this, &DialogDetail::Remove);
     connect(ui.listWidgetMCP, &QListWidget::itemClicked, this, &DialogDetail::SetEditMode);
+    connect(ui.comboBoxMaterial, &QComboBox::currentTextChanged, this, &DialogDetail::MaterialChanged);
     SetAddMode();
 
     ui.tabWidget->setCurrentIndex(0);
@@ -243,15 +251,32 @@ void DialogDetail::UpdateList()
 void DialogDetail::AddUpdate()
 {
     MaterialCutPlacement mcp;
+    QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
+
     mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
     int i = ui.comboBoxMaterial->currentData().toInt();
-    if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
+    if (i < m_qslMaterials.count() && mcp.m_qsMaterialUserDef == m_qslMaterials[i])
     {
         mcp.m_eMaterial = MaterialType(i);
     }
     else
     {
         mcp.m_eMaterial = MaterialType::mtUserDefined;
+        // check if we have new user defined material
+        bool bFound = false;
+        for (int i = 0; i < qslUserMaterials.count() && bFound == false; ++i)
+        {
+            if (mcp.m_qsMaterialUserDef == qslUserMaterials[i])
+            {
+                bFound = true;
+            }
+        }
+        if (bFound == false)
+        {
+            qApp->Settings()->AddUserDefinedMaterial(mcp.m_qsMaterialUserDef);
+            qApp->Settings()->sync();
+            ui.comboBoxMaterial->addItem(mcp.m_qsMaterialUserDef, int(MaterialType::mtUserDefined));
+        }
     }
 
     mcp.m_iCutNumber = ui.spinBoxCutNumber->value();
@@ -313,6 +338,12 @@ void DialogDetail::NameDetailChanged()
         }
     }
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::MaterialChanged()
+{
+    ui.pushButtonAdd->setEnabled(ui.comboBoxMaterial->currentText().isEmpty() == false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -789,11 +820,20 @@ void DialogDetail::SetEditMode()
     MaterialCutPlacement mcp = m_conMCP.at(iR);
     if (mcp.m_eMaterial == MaterialType::mtUserDefined)
     {
-        ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+        int iRow = qApp->Settings()->GetUserDefinedMaterials().indexOf(mcp.m_qsMaterialUserDef);
+        if (iRow >= 0)
+        {
+            ui.comboBoxMaterial->setCurrentIndex(iRow + m_qslMaterials.count());
+        }
+        else
+        {
+            ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+        }
     }
     else
     {
-        ui.comboBoxMaterial->setCurrentText(m_qslMaterials[int(mcp.m_eMaterial)]);
+        //ui.comboBoxMaterial->setCurrentText(m_qslMaterials[int(mcp.m_eMaterial)]);
+        ui.comboBoxMaterial->setCurrentIndex(int(mcp.m_eMaterial));
     }
     ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
     ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
