@@ -2445,6 +2445,7 @@ void MainWindow::Clear()
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
     qApp->getUndoStack()->clear();
+    toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
 }
 
