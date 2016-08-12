@@ -91,7 +91,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Value :</string>
+            <string>Value:</string>
            </property>
           </widget>
          </item>
@@ -118,7 +118,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Name :</string>
+            <string>Name:</string>
            </property>
           </widget>
          </item>
@@ -165,7 +165,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Type : </string>
+              <string>Type: </string>
              </property>
             </widget>
            </item>

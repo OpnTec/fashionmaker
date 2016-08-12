@@ -607,7 +607,7 @@
         <item>
          <widget class="QGroupBox" name="groupBoxStrips">
           <property name="toolTip">
-           <string>Enabling for sheets that have big height will speed up creating. </string>
+           <string>Enabling for sheets that have big height will speed up creating.</string>
           </property>
           <property name="title">
            <string>Divide into strips</string>
@@ -700,7 +700,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>

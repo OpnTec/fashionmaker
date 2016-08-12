@@ -492,8 +492,8 @@ void TMainWindow::changeEvent(QEvent *event)
             ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
                                               VDomDocument::UnitsToStr(m->MUnit(), true));
 
-            labelGradationHeights = new QLabel(tr("Height: "));
-            labelGradationSizes = new QLabel(tr("Size: "));
+            labelGradationHeights = new QLabel(tr("Height:"));
+            labelGradationSizes = new QLabel(tr("Size:"));
         }
         else
         {
@@ -1834,13 +1834,13 @@ void TMainWindow::InitWindow()
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
 
-        labelGradationHeights = new QLabel(tr("Height: "));
+        labelGradationHeights = new QLabel(tr("Height:"));
         gradationHeights = SetGradationList(labelGradationHeights, listHeights);
         SetDefaultHeight(static_cast<int>(data->height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedHeight);
 
-        labelGradationSizes = new QLabel(tr("Size: "));
+        labelGradationSizes = new QLabel(tr("Size:"));
         gradationSizes = SetGradationList(labelGradationSizes, listSizes);
         SetDefaultSize(static_cast<int>(data->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),

@@ -1303,8 +1303,7 @@
           </property>
           <property name="icon">
            <iconset theme="emblem-system">
-            <normaloff/>
-           </iconset>
+            <normaloff>.</normaloff>.</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1654,8 +1653,7 @@
   <action name="actionNew">
    <property name="icon">
     <iconset theme="document-new">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -1676,8 +1674,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset theme="document-open">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -1701,8 +1698,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-save">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -1726,8 +1722,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-save-as">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save &amp;As...</string>
@@ -1939,8 +1934,7 @@
   <action name="actionAbout_Valentina">
    <property name="icon">
     <iconset theme="help-about">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;About Valentina</string>
@@ -1955,8 +1949,7 @@
   <action name="actionExit">
    <property name="icon">
     <iconset theme="application-exit">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>E&amp;xit</string>
@@ -1999,8 +1992,7 @@
    </property>
    <property name="icon">
     <iconset theme="zoom-in">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Zoom in</string>
@@ -2021,8 +2013,7 @@
    </property>
    <property name="icon">
     <iconset theme="zoom-out">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Zoom out</string>
@@ -2054,14 +2045,13 @@
    </property>
    <property name="icon">
     <iconset theme="zoom-original">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Original zoom </string>
+    <string>Original zoom</string>
    </property>
    <property name="toolTip">
-    <string>Original Zoom </string>
+    <string>Original zoom</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2076,8 +2066,7 @@
    </property>
    <property name="icon">
     <iconset theme="zoom-fit-best">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Zoom fit best</string>
@@ -2123,8 +2112,7 @@
   <action name="actionOnlineHelp">
    <property name="icon">
     <iconset theme="help-contents">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Online help</string>
@@ -2200,8 +2188,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-print">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Print</string>
@@ -2219,8 +2206,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-print">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Print tiled PDF</string>
@@ -2238,8 +2224,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-print-preview">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Print preview</string>
@@ -2257,8 +2242,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-print-preview">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Preview tiled PDF</string>
@@ -2392,8 +2376,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

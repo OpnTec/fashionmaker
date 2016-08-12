@@ -96,12 +96,11 @@
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation>Adresă Proxy</translation>
+        <translation>Adresă Proxy:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation>Port Proxy:
-</translation>
+        <translation>Port Proxy:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
@@ -243,7 +242,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>Textul apare sub pictograma. (Recomandat pentru începători.)</translation>
+        <translation type="vanished">Textul apare sub pictograma. (Recomandat pentru începători.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -284,6 +283,10 @@
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>După fiecare prăbușire, Valentina colectează informații care pot ajuta să rezolvăm problema. Noi nu colectăm informații personale. Află mai multe despre ce &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; fel de informații &lt;/a&gt; colectăm noi.</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -342,7 +345,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Revizie Versiune</translation>
+        <translation>Revizie Versiune:</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -365,7 +368,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Revizie Versiune</translation>
+        <translation>Revizie Versiune:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -504,7 +507,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
 </context>
 <context>
@@ -817,7 +820,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -1002,7 +1005,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1081,7 +1084,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1156,7 +1159,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1231,7 +1234,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1648,7 +1651,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1777,7 +1780,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2122,7 +2125,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Găsirea celei mai bune poziții pentru piese. Te rog asteapta.</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Găsirea celei mai bune poziții pentru piese. Te rog asteapta.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -2309,10 +2312,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Divide into strips</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2322,6 +2321,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2420,7 +2423,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2539,7 +2542,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2836,7 +2839,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2963,7 +2966,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Rută</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -3026,11 +3029,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Valoare:</translation>
+        <translation type="vanished">Valoare:</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Nume:</translation>
+        <translation type="vanished">Nume:</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
@@ -3038,7 +3041,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Tip:</translation>
+        <translation type="vanished">Tip:</translation>
     </message>
     <message>
         <source>Add  attribute</source>
@@ -3152,6 +3155,10 @@ Apply settings anyway?</source>
         <source>Immediately apply</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromArcAndTangent</name>
@@ -3185,7 +3192,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -3264,7 +3271,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -3339,7 +3346,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -3386,7 +3393,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -3401,7 +3408,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3425,7 +3432,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -3439,12 +3446,16 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3508,7 +3519,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -3520,6 +3531,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3547,7 +3562,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
@@ -3613,7 +3628,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Rută</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -3640,7 +3655,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File base name. </source>
+        <source>File base name.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3791,7 +3806,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3846,7 +3861,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
 </context>
 <context>
@@ -4198,7 +4213,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -4285,7 +4300,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -4762,11 +4777,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Zoom Original</translation>
+        <translation type="vanished">Zoom Original</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Zoom Original</translation>
+        <translation type="vanished">Zoom Original</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -4874,15 +4889,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Înălțime:</translation>
+        <translation type="vanished">Înălțime:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Dimensiune:</translation>
+        <translation type="vanished">Dimensiune:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Piesă Tipar:</translation>
+        <translation type="vanished">Piesă Tipar:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -5158,14 +5173,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select first circle center </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select point on tangent </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point of the center of the arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5283,10 +5290,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5495,6 +5498,34 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Înălțime:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6115,7 +6146,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Rută</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -6303,11 +6334,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Înălțime:</translation>
+        <translation type="vanished">Înălțime:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Dimensiune:</translation>
+        <translation type="vanished">Dimensiune:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6514,18 +6545,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Customer&apos;s name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s family name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s email address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6571,6 +6590,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Înălțime:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6871,15 +6910,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7084,6 +7115,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

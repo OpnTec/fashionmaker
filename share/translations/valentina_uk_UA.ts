@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>Ім&apos;я / IP сервера</translation>
+        <translation>Ім&apos;я / IP сервера:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>Текст відображається під іконкою. (рекомендується для новачків.)</translation>
+        <translation type="vanished">Текст відображається під іконкою. (рекомендується для новачків.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -283,6 +283,10 @@
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;інформацію&lt;/a&gt; яку ми збираємо.</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -855,11 +859,11 @@
     </message>
     <message>
         <source>First point:</source>
-        <translation>Перша точка</translation>
+        <translation>Перша точка:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Друга точка</translation>
+        <translation>Друга точка:</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -1147,7 +1151,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива</translation>
+        <translation>Крива:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1222,7 +1226,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива</translation>
+        <translation>Крива:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1686,7 +1690,7 @@
     </message>
     <message>
         <source>With header</source>
-        <translation>Із заголовком </translation>
+        <translation>Із заголовком</translation>
     </message>
     <message>
         <source>Codec:</source>
@@ -1939,7 +1943,7 @@
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation>Кубічна крива бьзье </translation>
+        <translation>Кубічна крива бьзье</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -2281,7 +2285,6 @@
 	Descending area = 2
 </source>
         <translation type="vanished">
-
 ⇥Три групи: великі, середні, малі = 0
 ⇥Дві групи: великі, маленькі = 1
 ⇥За зменшенням площі = 2
@@ -2339,8 +2342,7 @@ Apply settings anyway?</source>
         <translation>
 ⇥Три групи: великі, середні, малі = 0;
 ⇥Дві групи: великі, маленькі = 1;
-⇥За зменшенням площі = 2
-</translation>
+⇥За зменшенням площі = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
@@ -2356,7 +2358,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation>При ввімкненні для листів що мають велику довжину пришвидшує створення.</translation>
+        <translation type="vanished">При ввімкненні для листів що мають велику довжину пришвидшує створення.</translation>
     </message>
     <message>
         <source>Divide into strips</source>
@@ -2368,7 +2370,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
-        <translation>Встановить множник для найбільшої деталі в розкладці</translation>
+        <translation>Встановить множник для найбільшої деталі в розкладці.</translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2619,7 +2625,7 @@ Apply settings anyway?</source>
     <message>
         <source>Indentation</source>
         <comment>Measurement section</comment>
-        <translation>Положення корпусу </translation>
+        <translation>Положення корпусу</translation>
     </message>
     <message>
         <source>Circumference and Arc</source>
@@ -3072,11 +3078,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Значення:</translation>
+        <translation type="vanished">Значення:</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Ім&apos;я:</translation>
+        <translation type="vanished">Ім&apos;я:</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
@@ -3084,7 +3090,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Тип:</translation>
+        <translation type="vanished">Тип:</translation>
     </message>
     <message>
         <source>Add  attribute</source>
@@ -3201,6 +3207,10 @@ Apply settings anyway?</source>
     <message>
         <source>Immediately apply</source>
         <translation>Негайно застосувати</translation>
+    </message>
+    <message>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3491,7 +3501,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Діалог</translation>
+        <translation type="vanished">Діалог</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3541,12 +3551,16 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation>Взяти:</translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation>Діалог</translation>
+        <translation type="vanished">Діалог</translation>
     </message>
     <message>
         <source>Radius of the first circle</source>
@@ -3643,6 +3657,10 @@ Apply settings anyway?</source>
     <message>
         <source>Take:</source>
         <translation>Взяти:</translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3767,7 +3785,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File base name. </source>
-        <translation>Базова назва файлу.</translation>
+        <translation type="vanished">Базова назва файлу.</translation>
+    </message>
+    <message>
+        <source>File base name.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4031,7 +4053,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Перша точка</translation>
+        <translation>Перша точка:</translation>
     </message>
     <message>
         <source>Control point</source>
@@ -4047,7 +4069,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Друга точка</translation>
+        <translation>Друга точка:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4583,7 +4605,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation>Помилка feed: неправильний &quot;enclosure&quot; з посиланням на скачування.</translation>
+        <translation>Помилка feed: неправильний &quot;enclosure&quot; з посиланням на скачування</translation>
     </message>
     <message>
         <source>Error</source>
@@ -4669,11 +4691,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos; </translation>
+        <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів. </translation>
+        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -4940,11 +4962,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Початковий масштаб</translation>
+        <translation type="vanished">Початковий масштаб</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Початковий масштаб</translation>
+        <translation type="vanished">Початковий масштаб</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -5052,15 +5074,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Зріст:</translation>
+        <translation type="vanished">Зріст:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Розмір:</translation>
+        <translation type="vanished">Розмір:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Креслення:</translation>
+        <translation type="vanished">Креслення:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -5309,7 +5331,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Зберегти плиткою як PDF </translation>
+        <translation>Зберегти плиткою як PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
@@ -5349,11 +5371,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select first circle center </source>
-        <translation>Виберіть центр першого кола</translation>
+        <translation type="vanished">Виберіть центр першого кола</translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation>Виберіть точку на дотичній</translation>
+        <translation type="vanished">Виберіть точку на дотичній</translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
@@ -5482,7 +5504,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження </translation>
+        <translation type="vanished">Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -5502,7 +5524,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
-        <translation>Метод %1 не працює в графічному режимі.</translation>
+        <translation>Метод %1 не працює в графічному режимі</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
@@ -5700,6 +5722,34 @@ Do you want to save your changes?</source>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
         <translation>Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Розмір:</translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5777,7 +5827,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру</translation>
+        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
@@ -6538,11 +6588,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Зріст:</translation>
+        <translation type="vanished">Зріст:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Розмір:</translation>
+        <translation type="vanished">Розмір:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6767,15 +6817,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation>Ім&apos;я клієнта.</translation>
+        <translation type="vanished">Ім&apos;я клієнта.</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation>Прізвище клієнта.</translation>
+        <translation type="vanished">Прізвище клієнта.</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation>Email клієнта.</translation>
+        <translation type="vanished">Email клієнта.</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -6824,6 +6874,26 @@ Do you want to save your changes?</source>
     <message>
         <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Розмір:</translation>
     </message>
 </context>
 <context>
@@ -7124,7 +7194,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation>Номер вихідного формату (за замовчуванням = 0, режим експорту):</translation>
+        <translation type="vanished">Номер вихідного формату (за замовчуванням = 0, режим експорту):</translation>
     </message>
     <message>
         <source>Format number</source>
@@ -7132,7 +7202,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation>Номер, відповідаючий шаблону (за замовчуванням = 0, режим експорту):</translation>
+        <translation type="vanished">Номер, відповідаючий шаблону (за замовчуванням = 0, режим експорту):</translation>
     </message>
     <message>
         <source>Template number</source>
@@ -7376,7 +7446,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Зберігає довжину листа якщо встановлено (режим експорту). Опція наказує програмі використовувати максимально ширину листа. Якість розкладки при цьому може погіршитися. </translation>
+        <translation>Зберігає довжину листа якщо встановлено (режим експорту). Опція наказує програмі використовувати максимально ширину листа. Якість розкладки при цьому може погіршитися.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
@@ -7396,15 +7466,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
+        <translation>Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation>Довжина зміщення:</translation>
+        <translation>Довжина зміщення</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
         <translation>Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8084,7 +8162,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation>Кубічна крива бьзье </translation>
+        <translation>Кубічна крива бьзье</translation>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>

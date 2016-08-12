@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
+        <translation type="vanished">Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Разделитель дробовой части:</translation>
+        <translation>Разделитель дробной части:</translation>
     </message>
     <message>
         <source>Default unit:</source>
@@ -278,11 +278,15 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
+        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -479,7 +483,7 @@
     </message>
     <message>
         <source>First point of the line</source>
-        <translation>Первая точка линии:</translation>
+        <translation>Первая точка линии</translation>
     </message>
     <message>
         <source>Second point:</source>
@@ -503,7 +507,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
 </context>
 <context>
@@ -610,7 +614,7 @@
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation>Выберите точку центра дуги:</translation>
+        <translation>Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -816,7 +820,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -1001,7 +1005,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1080,7 +1084,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1155,7 +1159,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1230,7 +1234,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1655,7 +1659,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1784,7 +1788,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2345,10 +2349,6 @@ Apply settings anyway?</source>
         <translation>Правило выбора очередной детали</translation>
     </message>
     <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Divide into strips</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2358,6 +2358,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2456,7 +2460,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2575,7 +2579,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2872,7 +2876,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3062,11 +3066,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Значение:</translation>
+        <translation type="vanished">Значение:</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Имя:</translation>
+        <translation type="vanished">Имя:</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
@@ -3074,7 +3078,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Тип: </translation>
+        <translation type="vanished">Тип: </translation>
     </message>
     <message>
         <source>Add  attribute</source>
@@ -3192,6 +3196,10 @@ Apply settings anyway?</source>
         <source>Immediately apply</source>
         <translation>Немедленно применить</translation>
     </message>
+    <message>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromArcAndTangent</name>
@@ -3233,7 +3241,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -3324,7 +3332,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -3411,7 +3419,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -3466,7 +3474,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -3481,7 +3489,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3517,7 +3525,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -3531,12 +3539,16 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation>Взять:</translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Radius of the first circle</source>
@@ -3620,7 +3632,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -3633,6 +3645,10 @@ Apply settings anyway?</source>
     <message>
         <source>Take:</source>
         <translation>Взять:</translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3659,7 +3675,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished">Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
@@ -3757,7 +3773,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File base name. </source>
-        <translation>Базовое имя файла.</translation>
+        <translation type="vanished">Базовое имя файла.</translation>
+    </message>
+    <message>
+        <source>File base name.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3911,7 +3931,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3966,7 +3986,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
 </context>
 <context>
@@ -4326,7 +4346,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -4441,7 +4461,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Выберите уникальное имя точки. </translation>
+        <translation>Выберите уникальное имя точки.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -4922,11 +4942,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Начальный масштаб</translation>
+        <translation type="vanished">Начальный масштаб</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Начальный масштаб</translation>
+        <translation type="vanished">Начальный масштаб</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -5034,15 +5054,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Рост:</translation>
+        <translation type="vanished">Рост:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Размеры: </translation>
+        <translation type="vanished">Размеры: </translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Чертеж:</translation>
+        <translation type="vanished">Чертеж:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -5331,11 +5351,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select first circle center </source>
-        <translation>Выберите центр первой окружности</translation>
+        <translation type="vanished">Выберите центр первой окружности</translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation>Выберите точку на касательной</translation>
+        <translation type="vanished">Выберите точку на касательной</translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
@@ -5453,11 +5473,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t sync measurements.</source>
-        <translation>Невозможно синхронизировать мерки </translation>
+        <translation>Невозможно синхронизировать мерки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t update measurements.</source>
-        <translation>Невозможно обновить мерки</translation>
+        <translation>Невозможно обновить мерки.</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
@@ -5465,7 +5485,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не может быть найден. Вы хотите обновить путь к файлу</translation>
+        <translation type="vanished">Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не может быть найден. Вы хотите обновить путь к файлу</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -5485,7 +5505,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
-        <translation>Метод %1 не делает ничего в графическом режиме.</translation>
+        <translation>Метод %1 не делает ничего в графическом режиме</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
@@ -5589,7 +5609,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает доступа.</translation>
+        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -5673,6 +5693,34 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Высота:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Размер:</translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5877,7 +5925,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation>Количество шагов (0 - без ограничений)</translation>
+        <translation>Количество шагов (0 - без ограничений):</translation>
     </message>
 </context>
 <context>
@@ -6513,11 +6561,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Рост:</translation>
+        <translation type="vanished">Рост:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Размер:</translation>
+        <translation type="vanished">Размер:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6730,7 +6778,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula</source>
-        <translation>Название мерки в формуле.</translation>
+        <translation>Название мерки в формуле</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula.</source>
@@ -6742,15 +6790,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation>Имя клиента.</translation>
+        <translation type="vanished">Имя клиента.</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation>Фамилия клиента.</translation>
+        <translation type="vanished">Фамилия клиента.</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation>Электронная почта клиента.</translation>
+        <translation type="vanished">Электронная почта клиента.</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -6778,7 +6826,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает доступа</translation>
+        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -6799,6 +6847,26 @@ Do you want to save your changes?</source>
     <message>
         <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Высота:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Размер:</translation>
     </message>
 </context>
 <context>
@@ -6864,11 +6932,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Разделитель дробной части</translation>
+        <translation>Разделитель дробной части:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Система создания выкроек</translation>
+        <translation>Система создания выкроек:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -6876,11 +6944,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default height:</source>
-        <translation>Рост по умолчанию</translation>
+        <translation>Рост по умолчанию:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation>Размер по умолчанию</translation>
+        <translation>Размер по умолчанию:</translation>
     </message>
 </context>
 <context>
@@ -6956,7 +7024,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation>Версия &quot;%1&quot; недействительная</translation>
+        <translation>Версия &quot;%1&quot; недействительная.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
@@ -7099,7 +7167,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation>Номер выходного формата (по умолчанию = 0, режим экспорта):</translation>
+        <translation type="vanished">Номер выходного формата (по умолчанию = 0, режим экспорта):</translation>
     </message>
     <message>
         <source>Format number</source>
@@ -7107,7 +7175,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation>Номер, соответствующий шаблону (по умолчанию = 0, режим экспорта):</translation>
+        <translation type="vanished">Номер, соответствующий шаблону (по умолчанию = 0, режим экспорта):</translation>
     </message>
     <message>
         <source>Template number</source>
@@ -7379,7 +7447,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation>Длина сдвига/смещения должна быть использована вместе с единицами измерения смещения</translation>
+        <translation>Длина сдвига/смещения должна быть использована вместе с единицами измерения смещения.</translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7460,7 +7536,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation>Не удалось получить узел.</translation>
+        <translation>Не удалось получить узел</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
@@ -8798,7 +8874,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Knowles/Men</source>
         <comment>System name</comment>
-        <translation>Knowles/Мужчины  </translation>
+        <translation>Knowles/Мужчины</translation>
     </message>
     <message>
         <source>Lori A. Knowles</source>
