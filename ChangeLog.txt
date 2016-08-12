@@ -14,6 +14,7 @@
 - Fixed Bisector tool bug. The tool created internal variable for wrong segment.  
 - [#526] Dialog Detail is not on top after selection second object on Mac.
 - [#532] Unexpected error occurs when zoom out image.
+- [#537] Valentina crashes when use undo command.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
