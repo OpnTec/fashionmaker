@@ -47,12 +47,14 @@ void TST_VPoster::BigPoster()
     QPrinter printer;
     printer.setResolution(96);// By default
     printer.setPaperSize(QPrinter::A4);
+    printer.setFullPage(true);
+    // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
     const QRect image(0, 0, 2622, 3178); // Little bit bigger than A1
     VPoster posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0);
 
-    QCOMPARE(poster.size(), 16);
+    QCOMPARE(poster.size(), 12);
 
     for (int i=0; i < poster.size(); i++)
     {
