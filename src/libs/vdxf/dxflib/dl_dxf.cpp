@@ -43,9 +43,9 @@
 #include "dl_attributes.h"
 #include "dl_codes.h"
 #include "dl_writer_ascii.h"
-#include "dxflib/../dxfdef.h"
-#include "dxflib/dl_creationinterface.h"
-#include "dxflib/dl_entities.h"
+#include "../dxfdef.h"
+#include "dl_creationinterface.h"
+#include "dl_entities.h"
 #include "iostream"
 
 /**
