@@ -182,43 +182,21 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportLayoutAs()
-{
-    if (isLayoutStale)
-    {
-        if (ContinueIfLayoutStale() == QMessageBox::No)
-        {
-            return;
-        }
-    }
-
-    try
-    {
-        DialogSaveLayout dialog(scenes.size(), FileName(), this);
-
-        if (dialog.exec() == QDialog::Rejected)
-        {
-            return;
-        }
-
-        ExportLayout(dialog);
-    }
-    catch (const VException &e)
-    {
-        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-}
-//---------------------------------------------------------------------------------------------------------------------
-
 void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
 {
 
-    QString suf = dialog.Formate();
-    suf.replace(".", "");
-
+    const QString suf = dialog.Format().replace(".", "");
     const QString path = dialog.Path();
+    QDir dir(path);
+    dir.setPath(path);
+    if (not dir.exists(path))
+    {
+        if (not dir.mkpath(path))
+        {
+            qCritical() << tr("Can't create path");
+            return;
+        }
+    }
     qApp->ValentinaSettings()->SetPathLayout(path);
     const QString mask = dialog.FileName();
 
@@ -227,13 +205,19 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper)
         {
-            const QString name = path + "/" + mask+QString::number(i+1) + dialog.Formate();
+            const QString name = path + QLatin1String("/") + mask+QString::number(i+1) + dialog.Format();
             QBrush *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             scenes[i]->setBackgroundBrush( *brush );
             shadows[i]->setVisible(false);
             paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
-            const QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj" << "dxf";
+            const QStringList suffix = QStringList() << QLatin1String("svg")
+                                                     << QLatin1String("png")
+                                                     << QLatin1String("pdf")
+                                                     << QLatin1String("eps")
+                                                     << QLatin1String("ps")
+                                                     << QLatin1String("obj")
+                                                     << QLatin1String("dxf");
             switch (suffix.indexOf(suf))
             {
                 case 0: //svg

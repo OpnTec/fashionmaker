@@ -48,14 +48,14 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>100</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>248</height>
         </rect>
        </property>
@@ -1063,8 +1063,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>356</height>
+         <width>100</width>
+         <height>104</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1163,7 +1163,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -1304,6 +1304,32 @@
           <property name="icon">
            <iconset theme="emblem-system">
             <normaloff>.</normaloff>.</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QToolButton" name="toolButtonLayoutExportAs">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Export original layout</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/export_to_picture_document.png</normaloff>:/icon/32x32/export_to_picture_document.png</iconset>
           </property>
           <property name="iconSize">
            <size>

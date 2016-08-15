@@ -53,7 +53,6 @@ public:
 
 public slots:
     void ToolLayoutSettings(bool checked);
-    void ExportLayoutAs();
     void SaveAsTiledPDF();
     void PrintPreviewOrigin();
     void PrintPreviewTiled();
@@ -98,6 +97,8 @@ protected:
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
     bool LayoutSettings(VLayoutGenerator& lGenerator);
+    int ContinueIfLayoutStale();
+    QString FileName() const;
 private slots:
     void PrintPages (QPrinter *printer);
     void ErrorConsoleMode(const LayoutErrors &state);
@@ -135,9 +136,6 @@ private:
 
     bool isPagesUniform() const;
     bool IsPagesFit(const QSizeF &printPaper) const;
-    QString FileName() const;
-
-    int ContinueIfLayoutStale();
 };
 
 #endif // MAINWINDOWSNOGUI_H

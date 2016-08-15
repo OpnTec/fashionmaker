@@ -53,7 +53,7 @@ public:
 
     QString Path() const;
     QString FileName() const;
-    QString Formate() const;
+    QString Format() const;
     void    SelectFormate(const int formate);
     static QString MakeHelpFormatList();
     void   SetDestinationPath(const QString& cmdDestinationPath);

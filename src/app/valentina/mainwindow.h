@@ -113,6 +113,7 @@ private slots:
     void ShowPaper(int index);
     void Preferences();
     void CreateMeasurements();
+    void ExportLayoutAs();
 
     void ArrowTool();
     void ToolEndLine(bool checked);
