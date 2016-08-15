@@ -53,8 +53,8 @@ VArc::VArc ()
  * @param f1 start angle (degree).
  * @param f2 end angle (degree).
  */
-VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-            QString formulaF2, quint32 idObject, Draw mode)
+VArc::VArc (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
+            qreal f2, const QString &formulaF2, quint32 idObject, Draw mode)
     : VAbstractCurve(GOType::Arc, idObject, mode),
       d (new VArcData(center, radius, formulaRadius, f1, formulaF1, f2, formulaF2))
 {
@@ -62,15 +62,15 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
+VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
     : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1, f2))
 {
     ArcName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(qreal length, QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1,
-           QString formulaF1, quint32 idObject, Draw mode)
+VArc::VArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius,
+           const QString &formulaRadius, qreal f1, const QString &formulaF1, quint32 idObject, Draw mode)
     : VAbstractCurve(GOType::Arc, idObject, mode),
       d (new VArcData(formulaLength, center, radius, formulaRadius, f1, formulaF1))
 {
@@ -79,7 +79,7 @@ VArc::VArc(qreal length, QString formulaLength, VPointF center, qreal radius, QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(qreal length, VPointF center, qreal radius, qreal f1)
+VArc::VArc(qreal length, const VPointF &center, qreal radius, qreal f1)
     : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1))
 {
     ArcName();

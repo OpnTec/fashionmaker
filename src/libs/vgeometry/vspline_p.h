@@ -51,7 +51,8 @@ public:
           angle2(spline.angle2), kAsm1(spline.kAsm1), kAsm2(spline.kAsm2), kCurve(spline.kCurve)
     {}
 
-    VSplineData (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve)
+    VSplineData (const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
+                 qreal kCurve)
         :p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2),
           kCurve(kCurve)
     {
@@ -68,7 +69,7 @@ public:
         this->p3 = p4p3.p2();
     }
 
-    VSplineData (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve)
+    VSplineData (const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, qreal kCurve)
         :p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1)
     {
         this->angle1 = QLineF ( this->p1.toQPointF(), this->p2 ).angle();

@@ -60,8 +60,8 @@ VSpline::VSpline ( const VSpline & spline )
  * @param kAsm1 coefficient of length first control line.
  * @param kAsm2 coefficient of length second control line.
  */
-VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-                  quint32 idObject, Draw mode)
+VSpline::VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
+                  qreal kCurve, quint32 idObject, Draw mode)
     :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve))
 {
     CreateName();
@@ -75,7 +75,8 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
  * @param p3 second control point.
  * @param p4 second point spline.
  */
-VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Draw mode)
+VSpline::VSpline (const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, qreal kCurve,
+                  quint32 idObject, Draw mode)
     :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p2, p3, p4, kCurve))
 {
     CreateName();
