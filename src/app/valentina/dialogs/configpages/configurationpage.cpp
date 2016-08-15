@@ -386,7 +386,7 @@ QGroupBox *ConfigurationPage::ToolBarGroup()
 {
     toolBarGroup = new QGroupBox(tr("Toolbar"));
 
-    toolBarStyleCheck = new QCheckBox(tr("The text appears under the icon. (recommended for beginners.)"));
+    toolBarStyleCheck = new QCheckBox(tr("The text appears under the icon (recommended for beginners)."));
     toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
 
     QVBoxLayout *editLayout = new QVBoxLayout;
@@ -456,7 +456,7 @@ void ConfigurationPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::RetranslateUi()
 {
-    toolBarStyleCheck->setText(tr("The text appears under the icon. (recommended for beginners.)"));
+    toolBarStyleCheck->setText(tr("The text appears under the icon (recommended for beginners)."));
     askPointDeletionCheck->setText(tr("Confirm item deletion"));
 
     saveGroup->setTitle(tr("Save"));
@@ -514,5 +514,5 @@ void ConfigurationPage::RetranslateUi()
     drawGroup->setTitle(tr("Pattern Editing"));
     askPointDeletionCheck->setText(tr("Confirm item deletion"));
     toolBarGroup->setTitle(tr("Toolbar"));
-    toolBarStyleCheck->setText(tr("The text appears under the icon. (recommended for beginners.)"));
+    toolBarStyleCheck->setText(tr("The text appears under the icon (recommended for beginners)."));
 }

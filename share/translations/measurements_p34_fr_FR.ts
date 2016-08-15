@@ -2491,13 +2491,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1269"/>
         <source>shoulder_tip_to_shoulder_tip_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Demie distance entre les deux points d&apos;épaule, devant</translation>
+        <translation>demie_distance_entre_les_deux_points_dépaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1271"/>
         <source>Shoulder Tip to Shoulder Tip, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demie distance entre les deux points d&apos;épaule, devant</translation>
+        <translation>demie_distance_entre_les_deux_points_dépaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1272"/>

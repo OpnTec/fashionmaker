@@ -47,6 +47,10 @@ private slots:
     void CheckEmptyToolButton();
     void CheckPlaceMarkerExist_data();
     void CheckPlaceMarkerExist();
+    void TestPunctuation_data();
+    void TestPunctuation();
+    void TestHTMLTags_data();
+    void TestHTMLTags();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)

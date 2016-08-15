@@ -1116,7 +1116,7 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(checked, Tool::PointOfIntersectionCircles,
                                                              "://cursor/point_of_intersection_circles.png",
-                                                             tr("Select first circle center "),
+                                                             tr("Select first circle center"),
                                                     &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionCircles>,
                                                              &MainWindow::ApplyDialog<VToolPointOfIntersectionCircles>);
 }
@@ -1138,7 +1138,7 @@ void MainWindow::ToolPointFromCircleAndTangent(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(checked, Tool::PointFromCircleAndTangent,
                                                             "://cursor/point_from_circle_and_tangent_cursor.png",
-                                                            tr("Select point on tangent "),
+                                                            tr("Select point on tangent"),
                                                     &MainWindow::ClosedDialogWithApply<VToolPointFromCircleAndTangent>,
                                                             &MainWindow::ApplyDialog<VToolPointFromCircleAndTangent>);
 }
@@ -1149,7 +1149,7 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
     ToolSelectPointArc();
     SetToolButtonWithApply<DialogPointFromArcAndTangent>(checked, Tool::PointFromArcAndTangent,
                                                          "://cursor/point_from_arc_and_tangent_cursor.png",
-                                                         tr("Select point on tangent "),
+                                                         tr("Select point on tangent"),
                                                         &MainWindow::ClosedDialogWithApply<VToolPointFromArcAndTangent>,
                                                          &MainWindow::ApplyDialog<VToolPointFromArcAndTangent>);
 }
@@ -1220,7 +1220,7 @@ void MainWindow::changeEvent(QEvent *event)
         undoAction->setText(tr("&Undo"));
         redoAction->setText(tr("&Redo"));
         helpLabel->setText(QObject::tr("Changes applied."));
-        patternPieceLabel->setText(tr("Pattern Piece: "));
+        patternPieceLabel->setText(tr("Pattern Piece:"));
         UpdateWindowTitle();
     }
     // remember to call base class implementation
@@ -1537,7 +1537,7 @@ void MainWindow::ToolBarOption()
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit());
 
-        gradationHeightsLabel = new QLabel(tr("Height: "), this);
+        gradationHeightsLabel = new QLabel(tr("Height:"), this);
         gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
 
         // set default height
@@ -1547,7 +1547,7 @@ void MainWindow::ToolBarOption()
                 static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
-        gradationSizesLabel = new QLabel(tr("Size: "), this);
+        gradationSizesLabel = new QLabel(tr("Size:"), this);
         gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
 
         // set default size
@@ -1594,7 +1594,7 @@ void MainWindow::ToolBarStages()
  */
 void MainWindow::ToolBarDraws()
 {
-    patternPieceLabel = new QLabel(tr("Pattern Piece: "));
+    patternPieceLabel = new QLabel(tr("Pattern Piece:"));
     ui->toolBarDraws->addWidget(patternPieceLabel);
 
     // By using Qt UI Designer we can't add QComboBox to toolbar
@@ -2445,6 +2445,7 @@ void MainWindow::Clear()
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
     qApp->getUndoStack()->clear();
+    toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
 }
 
@@ -4031,7 +4032,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         else
         {
             const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
-                                    "want to update the file location").arg(path);
+                                    "want to update the file location?").arg(path);
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
                                                                     QMessageBox::Yes | QMessageBox::No,
                                                                     QMessageBox::Yes);

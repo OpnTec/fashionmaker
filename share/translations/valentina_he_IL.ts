@@ -182,10 +182,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>GUI language:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -223,6 +219,10 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1201,11 +1201,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1977,10 +1977,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Divide into strips</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1990,6 +1986,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2641,19 +2641,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;No selection&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2766,6 +2754,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2996,10 +2988,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
     </message>
@@ -3031,13 +3019,13 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
@@ -3108,6 +3096,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3228,7 +3220,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File base name. </source>
+        <source>File base name.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4245,14 +4237,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Original zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original Zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Zoom fit best</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4338,18 +4322,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Piece: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4626,14 +4598,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select first circle center </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select point on tangent </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point of the center of the arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4751,10 +4715,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4963,6 +4923,34 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5770,14 +5758,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Individual measurements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5982,18 +5962,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Customer&apos;s name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s family name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s email address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6039,6 +6007,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6331,15 +6319,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6544,6 +6524,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6924,7 +6912,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

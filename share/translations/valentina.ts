@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>The text appears under the icon. (recommended for beginners.)</translation>
+        <translation type="vanished">The text appears under the icon. (recommended for beginners.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -283,6 +283,10 @@
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -887,7 +891,7 @@
     </message>
     <message>
         <source>Tool cubic bezier</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool cubic bezier</translation>
     </message>
 </context>
 <context>
@@ -918,7 +922,7 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool cubic bezier path</translation>
     </message>
 </context>
 <context>
@@ -1433,11 +1437,15 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation> on Fold</translation>
+        <translation type="vanished"> on Fold</translation>
     </message>
     <message>
         <source>Update</source>
         <translation>Update</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2354,7 +2362,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation>Enabling for sheets that have big height will speed up creating. </translation>
+        <translation type="vanished">Enabling for sheets that have big height will speed up creating. </translation>
     </message>
     <message>
         <source>Divide into strips</source>
@@ -2371,6 +2379,10 @@ Apply settings anyway?</translation>
     <message>
         <source>x</source>
         <translation type="vanished">x</translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3078,11 +3090,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Value :</translation>
+        <translation type="vanished">Value :</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Name :</translation>
+        <translation type="vanished">Name :</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
@@ -3090,7 +3102,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Type : </translation>
+        <translation type="vanished">Type : </translation>
     </message>
     <message>
         <source>Add  attribute</source>
@@ -3207,6 +3219,10 @@ Apply settings anyway?</translation>
     <message>
         <source>Immediately apply</source>
         <translation>Immediately apply</translation>
+    </message>
+    <message>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3497,7 +3513,7 @@ Apply settings anyway?</translation>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3547,12 +3563,16 @@ Apply settings anyway?</translation>
         <source>Take:</source>
         <translation>Take:</translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
         <source>Radius of the first circle</source>
@@ -3649,6 +3669,10 @@ Apply settings anyway?</translation>
     <message>
         <source>Take:</source>
         <translation>Take:</translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3773,7 +3797,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>File base name. </source>
-        <translation>File base name. </translation>
+        <translation type="vanished">File base name. </translation>
+    </message>
+    <message>
+        <source>File base name.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4946,11 +4974,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Original zoom </translation>
+        <translation type="vanished">Original zoom </translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Original Zoom </translation>
+        <translation type="vanished">Original Zoom </translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -5058,15 +5086,15 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Height: </translation>
+        <translation type="vanished">Height: </translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Size: </translation>
+        <translation type="vanished">Size: </translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Pattern Piece: </translation>
+        <translation type="vanished">Pattern Piece: </translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -5356,11 +5384,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Select first circle center </source>
-        <translation>Select first circle center </translation>
+        <translation type="vanished">Select first circle center </translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation>Select point on tangent </translation>
+        <translation type="vanished">Select point on tangent </translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
@@ -5489,7 +5517,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</translation>
+        <translation type="vanished">The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -5706,6 +5734,34 @@ Do you want to save your changes?</translation>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
         <translation>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Height:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Size:</translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6545,11 +6601,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Height: </translation>
+        <translation type="vanished">Height: </translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Size: </translation>
+        <translation type="vanished">Size: </translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6774,15 +6830,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation>Customer&apos;s name.</translation>
+        <translation type="vanished">Customer&apos;s name.</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation>Customer&apos;s family name.</translation>
+        <translation type="vanished">Customer&apos;s family name.</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation>Customer&apos;s email address.</translation>
+        <translation type="vanished">Customer&apos;s email address.</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -6834,7 +6890,27 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
+        <translation>Comma-Separated Values</translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Height:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Size:</translation>
     </message>
 </context>
 <context>
@@ -7135,7 +7211,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation>Number corresponding to output format (default = 0, export mode): </translation>
+        <translation type="vanished">Number corresponding to output format (default = 0, export mode): </translation>
     </message>
     <message>
         <source>Format number</source>
@@ -7143,7 +7219,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation>Number corresponding to page template (default = 0, export mode): </translation>
+        <translation type="vanished">Number corresponding to page template (default = 0, export mode): </translation>
     </message>
     <message>
         <source>Template number</source>
@@ -7416,6 +7492,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
         <translation>Shift/Offset length must be used together with shift units.</translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7818,11 +7902,15 @@ Do you want to save your changes?</translation>
     <name>VTextManager</name>
     <message>
         <source>Cut %1 on %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Cut %1 on %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="unfinished"> on Fold</translation>
+        <translation type="vanished"> on Fold</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>User Name:</source>
-        <translation>用户名：</translation>
+        <translation>用户名:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>密码：</translation>
+        <translation>密码:</translation>
     </message>
 </context>
 <context>
@@ -194,10 +194,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>GUI language:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,7 +203,7 @@
     </message>
     <message>
         <source>Default unit:</source>
-        <translation>默认单位</translation>
+        <translation>默认单位:</translation>
     </message>
     <message>
         <source>Label language:</source>
@@ -235,6 +231,10 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -380,7 +380,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>First point of the line</source>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Second point of the line</source>
@@ -416,11 +416,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -471,7 +471,7 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>半径</translation>
+        <translation>半径:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>中点</translation>
+        <translation>中点:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
@@ -507,7 +507,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>颜色：</translation>
+        <translation>颜色:</translation>
     </message>
 </context>
 <context>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>半径</translation>
+        <translation>半径:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -574,15 +574,15 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation>中点</translation>
+        <translation>中点:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>颜色：</translation>
+        <translation>颜色:</translation>
     </message>
 </context>
 <context>
@@ -629,7 +629,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -657,11 +657,11 @@
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -669,18 +669,18 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">颜色：</translation>
+        <translation>颜色:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -688,11 +688,11 @@
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -735,7 +735,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">颜色：</translation>
+        <translation>颜色:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -814,11 +814,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -845,7 +845,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -877,7 +877,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="vanished">颜色：</translation>
+        <translation type="vanished">颜色:</translation>
     </message>
 </context>
 <context>
@@ -904,7 +904,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -936,7 +936,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="vanished">颜色：</translation>
+        <translation type="vanished">颜色:</translation>
     </message>
 </context>
 <context>
@@ -963,7 +963,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -995,7 +995,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="vanished">颜色：</translation>
+        <translation type="vanished">颜色:</translation>
     </message>
 </context>
 <context>
@@ -1082,7 +1082,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation>宽度：</translation>
+        <translation>宽度:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -1165,11 +1165,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1304,7 +1304,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1340,11 +1340,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -1457,11 +1457,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -1781,7 +1781,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation>宽度：</translation>
+        <translation>宽度:</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -1937,10 +1937,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Divide into strips</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1950,6 +1946,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1981,19 +1981,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -2044,11 +2044,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
 </context>
 <context>
@@ -2139,11 +2139,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -2376,7 +2376,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2404,11 +2404,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
@@ -2416,11 +2416,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -2589,19 +2589,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;No selection&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2716,6 +2704,10 @@ Apply settings anyway?</source>
         <source>Immediately apply</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointFromArcAndTangent</name>
@@ -2780,7 +2772,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius:</source>
-        <translation>半径</translation>
+        <translation>半径:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2843,7 +2835,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius:</source>
-        <translation>半径</translation>
+        <translation>半径:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2916,10 +2908,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select second an arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2947,13 +2935,13 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
@@ -3020,6 +3008,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3140,7 +3132,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File base name. </source>
+        <source>File base name.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3251,7 +3243,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation>长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3279,11 +3271,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -3291,11 +3283,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>线类型：</translation>
+        <translation>线类型:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>线颜色：</translation>
+        <translation>线颜色:</translation>
     </message>
 </context>
 <context>
@@ -3357,11 +3349,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation>颜色：</translation>
+        <translation>颜色:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Control point</source>
@@ -3373,7 +3365,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">第二点：</translation>
+        <translation>第二点:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -3385,7 +3377,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3448,7 +3440,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation>颜色：</translation>
+        <translation>颜色:</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -3476,7 +3468,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">长度：</translation>
+        <translation>长度:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3622,11 +3614,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation>第一点：</translation>
+        <translation>第一点:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>第二点：</translation>
+        <translation>第二点:</translation>
     </message>
 </context>
 <context>
@@ -4149,14 +4141,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Original zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original Zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Zoom fit best</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4245,18 +4229,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Piece: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pattern files (*.val)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4290,7 +4262,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>错误：编码错误</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -4331,7 +4303,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation>这个文件已经在别的窗李打开的</translation>
+        <translation>这个文件已经在别的窗李打开的.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -4530,14 +4502,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select first circle center </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select point on tangent </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point of the center of the arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4655,10 +4619,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4869,6 +4829,34 @@ Do you want to save your changes?</source>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5043,7 +5031,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User name:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名:</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
@@ -5479,7 +5467,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>类型：</translation>
+        <translation>类型:</translation>
     </message>
     <message>
         <source>Measurement type</source>
@@ -5527,11 +5515,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Email:</source>
-        <translation>邮箱：</translation>
+        <translation>邮箱:</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>备注：</translation>
+        <translation>备注:</translation>
     </message>
     <message>
         <source>File</source>
@@ -5623,7 +5611,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation>这个文件已经在别的窗李打开的</translation>
+        <translation>这个文件已经在别的窗李打开的.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -5676,14 +5664,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Standard measurements</source>
         <translation>标准尺寸</translation>
-    </message>
-    <message>
-        <source>Height: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -5890,18 +5870,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Customer&apos;s name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s family name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s email address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save...</source>
         <translation>保存...</translation>
     </message>
@@ -5947,6 +5915,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6243,15 +6231,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6458,6 +6438,14 @@ Do you want to save your changes?</source>
         <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -6628,7 +6616,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>错误：编码错误</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -6836,7 +6824,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8280,11 +8268,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>INFO:</source>
-        <translation>信息：</translation>
+        <translation>信息:</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="vanished">信息</translation>
+        <translation type="vanished">信息.</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -8323,7 +8311,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>INFO:</source>
-        <translation>信息：</translation>
+        <translation>信息:</translation>
     </message>
     <message>
         <source>Warning.</source>
@@ -8339,7 +8327,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information.</source>
-        <translation>信息</translation>
+        <translation>信息.</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Tool point of intersection circles</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -183,8 +183,7 @@
        </property>
        <property name="icon">
         <iconset theme="go-down">
-         <normaloff/>
-        </iconset>
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -364,8 +363,7 @@
        </property>
        <property name="icon">
         <iconset theme="go-down">
-         <normaloff/>
-        </iconset>
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="iconSize">
         <size>

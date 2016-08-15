@@ -86,7 +86,7 @@
         <string>File base name</string>
        </property>
        <property name="placeholderText">
-        <string>File base name. </string>
+        <string>File base name.</string>
        </property>
       </widget>
      </item>

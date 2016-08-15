@@ -94,7 +94,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_EXP2FORMAT, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
                                           translate("VCommandLine", "Number corresponding to output format (default = "
-                                                                    "0, export mode): ") +
+                                                                    "0, export mode):") +
                                                                     DialogSaveLayout::MakeHelpFormatList(),
                                           translate("VCommandLine", "Format number"), "0"));
 
@@ -118,7 +118,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_PAGETEMPLATE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
                                           translate("VCommandLine", "Number corresponding to page template (default = "
-                                                                    "0, export mode): ") +
+                                                                    "0, export mode):") +
                                                                     DialogLayoutSettings::MakeHelpTemplateList(),
                                           translate("VCommandLine", "Template number"), "0"));
 

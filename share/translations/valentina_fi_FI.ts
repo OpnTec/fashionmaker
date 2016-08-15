@@ -234,10 +234,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>GUI language:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -275,6 +271,10 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1401,11 +1401,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1784,7 +1784,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Ohjelma ei pystynyt luomaan tietuetta</translation>
+        <translation>Ohjelma ei pystynyt luomaan tietuetta.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -2281,10 +2281,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Divide into strips</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2294,6 +2290,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2998,11 +2998,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Arvo: </translation>
+        <translation type="vanished">Arvo: </translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Nimi :</translation>
+        <translation type="vanished">Nimi :</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
@@ -3010,7 +3010,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Tyyppi :</translation>
+        <translation type="vanished">Tyyppi :</translation>
     </message>
     <message>
         <source>Add  attribute</source>
@@ -3058,7 +3058,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Ei muutoksia </translation>
+        <translation>Ei muutoksia</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
@@ -3126,6 +3126,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3396,10 +3400,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation type="vanished">Pisteen nimi</translation>
     </message>
@@ -3435,13 +3435,13 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -3516,6 +3516,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3636,7 +3640,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File base name. </source>
+        <source>File base name.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4420,7 +4424,7 @@ Apply settings anyway?</source>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation>Ohjelma on saatavilla sellaisena kuin se on ilman mitään takuita, mukaan lukien suunnitelun, kaupallisuuden tai tiettyyn tarkoitukseen sopivuuden suhteen. </translation>
+        <translation>Ohjelma on saatavilla sellaisena kuin se on ilman mitään takuita, mukaan lukien suunnitelun, kaupallisuuden tai tiettyyn tarkoitukseen sopivuuden suhteen.</translation>
     </message>
 </context>
 <context>
@@ -4758,11 +4762,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Alkuperäinen tarkennus</translation>
+        <translation type="vanished">Alkuperäinen tarkennus</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Alkuperäinen tarkennus</translation>
+        <translation type="vanished">Alkuperäinen tarkennus</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -4842,7 +4846,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Valitse pisteet, kaaret, käyrät myötäpäivään</translation>
+        <translation>Valitse pisteet, kaaret, käyrät myötäpäivään.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -4870,15 +4874,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Pituus:</translation>
+        <translation type="vanished">Pituus:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Koko:</translation>
+        <translation type="vanished">Koko:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Kaavan osa:</translation>
+        <translation type="vanished">Kaavan osa:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -4906,11 +4910,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Virhe: arvoa ei voi muuntaa</translation>
+        <translation>Virhe: arvoa ei voi muuntaa.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Virhe: tyhjä parametri</translation>
+        <translation>Virhe: tyhjä parametri.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -4918,7 +4922,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä.</translation>
     </message>
     <message>
         <source>Bad id.</source>
@@ -5159,14 +5163,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select first circle center </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select point on tangent </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point of the center of the arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5284,10 +5280,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5496,6 +5488,34 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Korkeus:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5861,12 +5881,12 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Kaava on tyhjä</translation>
+        <translation>Kaava on tyhjä.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Väärä osoitin muuttujaan</translation>
+        <translation>Väärä osoitin muuttujaan.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
@@ -5941,7 +5961,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation>Väärä operaattorin prioriteetti arvo (täytyy olla suurempi tai yhtä suuri kuin nolla)</translation>
+        <translation>Väärä operaattorin prioriteetti arvo (täytyy olla suurempi tai yhtä suuri kuin nolla).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
@@ -5951,32 +5971,32 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Yllättävä merkki kohdassa $POS$</translation>
+        <translation>Yllättävä merkki kohdassa $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Tekstistä puuttuu sulku kohdassa $POS$</translation>
+        <translation>Tekstistä puuttuu sulku kohdassa $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla</translation>
+        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan</translation>
+        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$</translation>
+        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Funktion tulos on tekstiä</translation>
+        <translation>Funktion tulos on tekstiä.</translation>
     </message>
     <message>
         <source>Parser error.</source>
@@ -5991,7 +6011,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku</translation>
+        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
@@ -6312,11 +6332,11 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Pituus:</translation>
+        <translation type="vanished">Pituus:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Koko:</translation>
+        <translation type="vanished">Koko:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6523,18 +6543,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Customer&apos;s name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s family name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer&apos;s email address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6580,6 +6588,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Korkeus:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6730,11 +6758,11 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation>Versiotietoja ei voitu palattaa</translation>
+        <translation>Versiotietoja ei voitu palattaa.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Liian monta merkkiä &lt;%1&gt; tiedostossa</translation>
+        <translation>Liian monta merkkiä &lt;%1&gt; tiedostossa.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
@@ -6754,11 +6782,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Virhe: id ei ole yksikäsitteinen</translation>
+        <translation>Virhe: id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation>Versiota ei voitu vaihtaa</translation>
+        <translation>Versiota ei voitu vaihtaa.</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
@@ -6784,7 +6812,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation>Työkalua ei löydy taulukosta</translation>
+        <translation>Työkalua ei löydy taulukosta.</translation>
     </message>
     <message>
         <source>Error creating or updating group</source>
@@ -6880,15 +6908,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7005,7 +7025,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation>Kaavan luonti ohjelma. </translation>
+        <translation>Kaavan luonti ohjelma.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
@@ -7095,6 +7115,14 @@ Do you want to save your changes?</source>
         <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -7123,11 +7151,11 @@ Do you want to save your changes?</source>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished">Pisteitä ei ole tarpeeksi splinin luomiseen</translation>
+        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished">Tämä splini ei ole olemassa</translation>
+        <translation>Tämä splini ei ole olemassa.</translation>
     </message>
 </context>
 <context>
@@ -7152,7 +7180,7 @@ Do you want to save your changes?</source>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Tiedostoa %1 ei voitu avata:
-%2</translation>
+%2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
@@ -7178,11 +7206,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Väärä parametri id. Täytyy olla id &gt; 0</translation>
+        <translation>Väärä parametri id. Täytyy olla id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Tämä id ei ole yksikäsitteinen</translation>
+        <translation>Tämä id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -7267,7 +7295,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Virhe: id ei ole yksikäsitteinen</translation>
+        <translation type="vanished">Virhe: id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -7275,11 +7303,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Virhe: arvoa ei voi muuntaa</translation>
+        <translation>Virhe: arvoa ei voi muuntaa.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Virhe: tyhjä parametri</translation>
+        <translation>Virhe: tyhjä parametri.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -7287,7 +7315,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä.</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
@@ -7481,11 +7509,11 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen</translation>
+        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>Tämä splini ei ole olemassa</translation>
+        <translation>Tämä splini ei ole olemassa.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
@@ -7499,7 +7527,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> on Fold</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

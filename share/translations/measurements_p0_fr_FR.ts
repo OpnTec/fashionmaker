@@ -2497,7 +2497,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1271"/>
         <source>Shoulder Tip to Shoulder Tip, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demie distance entre les deux points d&apos;épaule, devant</translation>
+        <translation>demie_distance_entre_les_deux_points_dépaule_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1272"/>

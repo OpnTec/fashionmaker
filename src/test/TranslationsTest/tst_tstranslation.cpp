@@ -292,6 +292,199 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::TestPunctuation_data()
+{
+    const QStringList locales = SupportedLocales();
+
+    {
+        QDir dir(TS_DIR);
+        const QStringList fileNames = dir.entryList(QStringList("valentina*.ts"));
+        QVERIFY2(locales.size() == fileNames.size()-1, "Unexpected count of files.");
+    }
+
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QString>("translation");
+
+    for(int j = 0; j < locales.size(); ++j)
+    {
+        const QString filename = QString("valentina_%1.ts").arg(locales.at(j));
+
+        const QDomNodeList messages = LoadTSFile(filename);
+        if (messages.isEmpty())
+        {
+            QFAIL("Can't begin test.");
+        }
+
+        for (qint32 i = 0, num = messages.size(); i < num; ++i)
+        {
+            const QDomElement message = messages.at(i).toElement();
+            if (message.isNull() == false)
+            {
+                const QString source = message.firstChildElement(TagSource).text();
+                if (source.isEmpty())
+                {
+                    continue;
+                }
+
+                const QDomElement translationTag = message.firstChildElement(TagTranslation);
+                if (translationTag.hasAttribute(AttrType))
+                {
+                    const QString attrVal = translationTag.attribute(AttrType);
+                    if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
+                    {
+                        continue;
+                    }
+                }
+                const QString translation = translationTag.text();
+                if (translation.isEmpty())
+                {
+                    continue;
+                }
+
+                const QString message = QString("File '%1'.").arg(filename);
+                QTest::newRow(qUtf8Printable(message)) << source << translation;
+            }
+            else
+            {
+                const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
+                QFAIL(qUtf8Printable(message));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::TestPunctuation()
+{
+    QFETCH(QString, source);
+    QFETCH(QString, translation);
+
+    static const QStringList punctuation = QStringList() << QLatin1String(".")
+                                                         << QLatin1String(":")
+                                                         << QLatin1String(" ")
+                                                         << QLatin1String("\n")
+                                                         << QLatin1String("!")
+                                                         << QLatin1String("?");
+    bool testFail = false;
+    QChar c = source.at(source.length()-1);
+    if (punctuation.contains(c))
+    {
+        if (not (source.endsWith(c) && translation.endsWith(c)))
+        {
+            testFail = true;
+        }
+    }
+    else
+    {
+        c = translation.at(translation.length()-1);
+        if (punctuation.contains(c))
+        {
+            testFail = true;
+        }
+    }
+
+    if (testFail)
+    {
+        const QString message = QString("Translation string does not end with the same punctuation character '%1' or "
+                                        "vice versa. ").arg(c) + QString("Original name:'%1'").arg(source) +
+                QString(", translated name:'%1'").arg(translation);
+        QFAIL(qUtf8Printable(message));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::TestHTMLTags_data()
+{
+    const QStringList locales = SupportedLocales();
+
+    {
+        QDir dir(TS_DIR);
+        const QStringList fileNames = dir.entryList(QStringList("valentina*.ts"));
+        QVERIFY2(locales.size() == fileNames.size()-1, "Unexpected count of files.");
+    }
+
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QString>("translation");
+
+    for(int j = 0; j < locales.size(); ++j)
+    {
+        const QString filename = QString("valentina_%1.ts").arg(locales.at(j));
+
+        const QDomNodeList messages = LoadTSFile(filename);
+        if (messages.isEmpty())
+        {
+            QFAIL("Can't begin test.");
+        }
+
+        for (qint32 i = 0, num = messages.size(); i < num; ++i)
+        {
+            const QDomElement message = messages.at(i).toElement();
+            if (message.isNull() == false)
+            {
+                const QString source = message.firstChildElement(TagSource).text();
+                if (source.isEmpty())
+                {
+                    continue;
+                }
+
+                const QDomElement translationTag = message.firstChildElement(TagTranslation);
+                if (translationTag.hasAttribute(AttrType))
+                {
+                    const QString attrVal = translationTag.attribute(AttrType);
+                    if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
+                    {
+                        continue;
+                    }
+                }
+                const QString translation = translationTag.text();
+                if (translation.isEmpty())
+                {
+                    continue;
+                }
+
+                const QString message = QString("File '%1'.").arg(filename);
+                QTest::newRow(qUtf8Printable(message)) << source << translation;
+            }
+            else
+            {
+                const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
+                QFAIL(qUtf8Printable(message));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::TestHTMLTags()
+{
+    QFETCH(QString, source);
+    QFETCH(QString, translation);
+
+    static const QStringList tags = QStringList() << QLatin1String("p")
+                                                  << QLatin1String("html")
+                                                  << QLatin1String("body");
+    static const QString pattern("{1}.*>");
+    for (int i=0; i < tags.size(); ++i)
+    {
+        const QRegularExpression openRegex(QLatin1String("<") + tags.at(i) + pattern,
+                                           QRegularExpression::DotMatchesEverythingOption);
+        if (source.contains(openRegex))
+        {
+            const int countOpenTag = source.count(openRegex);
+            const QRegularExpression closeRegex(QLatin1String("</") + tags.at(i) + pattern,
+                                                QRegularExpression::DotMatchesEverythingOption);
+            const int countCloseTag = translation.count(closeRegex);
+            if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
+            {
+                const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tags.at(i)) +
+                        QString("Original name:'%1'").arg(source) + QString(", translated name:'%1'").arg(translation);
+                QFAIL(qUtf8Printable(message));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QDomNodeList TST_TSTranslation::LoadTSFile(const QString &filename)
 {
     tsFile.reset();
