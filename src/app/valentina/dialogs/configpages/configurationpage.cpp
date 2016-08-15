@@ -78,9 +78,7 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
       sendGroup(nullptr),
       description(nullptr),
       drawGroup(nullptr),
-      toolBarGroup(nullptr),
-      userMaterialsGroup(nullptr),
-      userMaterialClearButton(nullptr)
+      toolBarGroup(nullptr)
 {
     QGroupBox *saveGroup     = SaveGroup();
     QGroupBox *langGroup     = LangGroup();
@@ -88,7 +86,6 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
     QGroupBox *sendGroup     = SendGroup();
     QGroupBox *drawGroup     = DrawGroup();
     QGroupBox *toolBarGroup  = ToolBarGroup();
-    QGroupBox *userMatGroup  = UserMaterialGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(saveGroup);
@@ -97,7 +94,6 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
     mainLayout->addWidget(sendGroup);
     mainLayout->addWidget(drawGroup);
     mainLayout->addWidget(toolBarGroup);
-    mainLayout->addWidget(userMatGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -164,16 +160,6 @@ void ConfigurationPage::UnitChanged()
 void ConfigurationPage::LabelLangChanged()
 {
     labelLangChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ConfigurationPage::ClearUserDefinedMaterials()
-{
-    VSettings* pSet = qApp->ValentinaSettings();
-    pSet->ClearUserDefinedMaterial();
-    pSet->sync();
-    QString qsMsg = tr("All user defined materials have been deleted!");
-    QMessageBox::information(this, QApplication::applicationName(), qsMsg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,21 +380,6 @@ QGroupBox *ConfigurationPage::ToolBarGroup()
 
     toolBarGroup->setLayout(editLayout);
     return toolBarGroup;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGroupBox *ConfigurationPage::UserMaterialGroup()
-{
-    userMaterialsGroup = new QGroupBox(tr("User defined materials"));
-    userMaterialClearButton = new QPushButton(tr("Delete all"));
-    connect(userMaterialClearButton, &QPushButton::clicked, this, &ConfigurationPage::ClearUserDefinedMaterials);
-
-    QHBoxLayout* pLayout = new QHBoxLayout;
-    pLayout->addWidget(userMaterialClearButton);
-    pLayout->addStretch(1);
-
-    userMaterialsGroup->setLayout(pLayout);
-    return userMaterialsGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

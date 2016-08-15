@@ -277,7 +277,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
  * @brief VTextManager::Update updates the text lines with pattern info
  * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(const VAbstractPattern *pDoc)
+void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeight)
 {
     Clear();
     TextLine tl;
@@ -324,6 +324,8 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
     tl.m_qsText = pDoc->GetPatternSize();
     if (tl.m_qsText.isEmpty() == false)
     {
+        tl.m_qsText.replace(QApplication::translate("Detail", "%size%", 0), QString::number(dSize));
+        tl.m_qsText.replace(QApplication::translate("Detail", "%height%", 0), QString::number(dHeight));
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;

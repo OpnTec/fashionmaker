@@ -37,6 +37,7 @@ class QSpinBox;
 class QGroupBox;
 class QLineEdit;
 class QLabel;
+class QPushButton;
 
 class PatternPage : public QWidget
 {
@@ -44,6 +45,8 @@ class PatternPage : public QWidget
 public:
     explicit PatternPage(QWidget *parent = nullptr);
     void      Apply();
+public slots:
+    void      ClearUserDefinedMaterials();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
@@ -56,9 +59,13 @@ private:
     QGroupBox *undoGroup;
     QSpinBox  *undoCount;
     QLabel    *countStepsLabel;
+    QGroupBox *userMaterialsGroup;
+    QPushButton* userMaterialClearButton;
+
     QGroupBox *UserGroup() Q_REQUIRED_RESULT;
     QGroupBox *GraphOutputGroup() Q_REQUIRED_RESULT;
     QGroupBox *UndoGroup() Q_REQUIRED_RESULT;
+    QGroupBox *UserMaterialGroup() Q_REQUIRED_RESULT;
 
     void      RetranslateUi();
 };

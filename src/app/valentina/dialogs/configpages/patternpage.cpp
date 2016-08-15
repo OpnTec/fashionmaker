@@ -39,6 +39,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QFormLayout>
+#include <QMessageBox>
+#include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
@@ -50,16 +52,20 @@ PatternPage::PatternPage(QWidget *parent):
     graphOutputCheck(nullptr),
     undoGroup(nullptr),
     undoCount(nullptr),
-    countStepsLabel(nullptr)
+    countStepsLabel(nullptr),
+    userMaterialsGroup(nullptr),
+    userMaterialClearButton(nullptr)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
     QGroupBox *undoGroup = UndoGroup();
+    QGroupBox *userMatGroup  = UserMaterialGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(userGroup);
     mainLayout->addWidget(graphOutputGroup);
     mainLayout->addWidget(undoGroup);
+    mainLayout->addWidget(userMatGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -79,6 +85,16 @@ void PatternPage::Apply()
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
     settings->SetUndoCount(undoCount->value());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PatternPage::ClearUserDefinedMaterials()
+{
+    VSettings* pSet = qApp->ValentinaSettings();
+    pSet->ClearUserDefinedMaterial();
+    pSet->sync();
+    QString qsMsg = tr("All user defined materials have been deleted!");
+    QMessageBox::information(this, QApplication::applicationName(), qsMsg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,6 +166,21 @@ QGroupBox *PatternPage::UndoGroup()
     undoLayout->addLayout(countLayout);
     undoGroup->setLayout(undoLayout);
     return undoGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGroupBox *PatternPage::UserMaterialGroup()
+{
+    userMaterialsGroup = new QGroupBox(tr("User defined materials"));
+    userMaterialClearButton = new QPushButton(tr("Delete all"));
+    connect(userMaterialClearButton, &QPushButton::clicked, this, &PatternPage::ClearUserDefinedMaterials);
+
+    QHBoxLayout* pLayout = new QHBoxLayout;
+    pLayout->addWidget(userMaterialClearButton);
+    pLayout->addStretch(1);
+
+    userMaterialsGroup->setLayout(pLayout);
+    return userMaterialsGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -161,7 +161,8 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font)
+void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font,
+                                   qreal dSize, qreal dHeight)
 {
     d->patternGeom = geom;
     qreal dAng = qDegreesToRadians(geom.GetRotation());
@@ -181,7 +182,7 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
     d->m_tmPattern.SetFont(font);
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    d->m_tmPattern.Update(pDoc);
+    d->m_tmPattern.Update(pDoc, dSize, dHeight);
     // generate lines of text
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
     d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());

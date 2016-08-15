@@ -811,7 +811,7 @@ void VToolDetail::UpdatePatternInfo()
         fnt.setPixelSize(iFS);
         patternInfo->SetFont(fnt);
         patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
-        patternInfo->UpdateData(doc);
+        patternInfo->UpdateData(doc, getData()->size(), getData()->height());
 
         QPointF pt = geom.GetPos();
         QRectF rectBB;

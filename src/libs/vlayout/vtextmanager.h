@@ -85,7 +85,7 @@ public:
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
     void                FitFontSize(qreal fW, qreal fH);
     void                Update(const QString& qsName, const VPatternPieceData& data);
-    void                Update(const VAbstractPattern* pDoc);
+    void                Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
 
 protected:
     static QStringList  SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);

@@ -77,7 +77,8 @@ public:
 
     void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
 
-    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font);
+    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font,
+                        qreal dSize, qreal dHeight);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);

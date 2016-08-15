@@ -38,7 +38,6 @@ class QSpinBox;
 class QComboBox;
 class QGroupBox;
 class QLabel;
-class QPushButton;
 
 class ConfigurationPage : public QWidget
 {
@@ -51,7 +50,6 @@ public slots:
     void      SystemChanged();
     void      UnitChanged();
     void      LabelLangChanged();
-    void      ClearUserDefinedMaterials();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
@@ -92,16 +90,12 @@ private:
     QGroupBox *drawGroup;
     QGroupBox *toolBarGroup;
 
-    QGroupBox *userMaterialsGroup;
-    QPushButton* userMaterialClearButton;
-
     QGroupBox *SaveGroup() Q_REQUIRED_RESULT;
     QGroupBox *LangGroup() Q_REQUIRED_RESULT;
     QGroupBox *PMSystemGroup() Q_REQUIRED_RESULT;
     QGroupBox *SendGroup() Q_REQUIRED_RESULT;
     QGroupBox *DrawGroup() Q_REQUIRED_RESULT;
     QGroupBox *ToolBarGroup() Q_REQUIRED_RESULT;
-    QGroupBox *UserMaterialGroup() Q_REQUIRED_RESULT;
     void      SetLabelComboBox(const QStringList &list);
 
     void      RetranslateUi();
