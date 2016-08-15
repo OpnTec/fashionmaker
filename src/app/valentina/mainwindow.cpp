@@ -2805,6 +2805,7 @@ void MainWindow::ChangedSize(const QString & text)
     if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), text.toInt(), static_cast<int>(pattern->height())))
     {
         doc->LiteParseTree(Document::LiteParse);
+        emit sceneDetails->DimensionsChanged();
     }
     else
     {
@@ -2833,6 +2834,7 @@ void MainWindow::ChangedHeight(const QString &text)
     if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), static_cast<int>(pattern->size()), text.toInt()))
     {
         doc->LiteParseTree(Document::LiteParse);
+        emit sceneDetails->DimensionsChanged();
     }
     else
     {

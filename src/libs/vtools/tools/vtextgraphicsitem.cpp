@@ -230,6 +230,23 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
         return;
     }
 
+    if (fW > parentItem()->boundingRect().width())
+    {
+        fW = parentItem()->boundingRect().width();
+    }
+    if (fW < MIN_W)
+    {
+        fW = MIN_W;
+    }
+    if (fH > parentItem()->boundingRect().height())
+    {
+        fH = parentItem()->boundingRect().height();
+    }
+    if (fH < m_iMinH)
+    {
+        fH = m_iMinH;
+    }
+
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);

@@ -206,6 +206,10 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
+
+    connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdateLabel);
+    connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdatePatternInfo);
+
     UpdateLabel();
     UpdatePatternInfo();
 }
@@ -770,8 +774,8 @@ void VToolDetail::UpdateLabel()
         QPointF pt = data.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
-        rectBB.setWidth(data.GetLabelWidth());
-        rectBB.setHeight(data.GetLabelHeight());
+        rectBB.setWidth(dataLabel->boundingRect().width());
+        rectBB.setHeight(dataLabel->boundingRect().height());
         qreal dX;
         qreal dY;
         if (dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
@@ -816,8 +820,8 @@ void VToolDetail::UpdatePatternInfo()
         QPointF pt = geom.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
-        rectBB.setWidth(geom.GetLabelWidth());
-        rectBB.setHeight(geom.GetLabelHeight());
+        rectBB.setWidth(patternInfo->boundingRect().width());
+        rectBB.setHeight(patternInfo->boundingRect().height());
         qreal dX;
         qreal dY;
         if (patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
