@@ -219,9 +219,13 @@ void DialogSaveLayout::ShowExample()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::Browse()
 {
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
+    const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"),
+                                                          qApp->ValentinaSettings()->GetPathLayout(),
                                                           QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    ui->lineEditPath->setText(dir);
+    if (not dir.isEmpty())
+    {// If paths equal the signal will not be called, we will do this manually
+        dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -213,6 +213,16 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
     suf.replace(".", "");
 
     const QString path = dialog.Path();
+    QDir dir(path);
+    dir.setPath(path);
+    if (not dir.exists(path))
+    {
+        if (not dir.mkpath(path))
+        {
+            qCritical() << tr("Can't create path");
+            return;
+        }
+    }
     qApp->ValentinaSettings()->SetPathLayout(path);
     const QString mask = dialog.FileName();
 
