@@ -47,7 +47,7 @@ public:
           center(VPointF()), isFlipped(false), formulaLength()
     {}
 
-    VArcData (const VPointF &center, qreal radius,const QString &formulaRadius, qreal f1, const QString &formulaF1,
+    VArcData (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
               qreal f2, const QString &formulaF2)
         : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
           center(center), isFlipped(false), formulaLength()
@@ -59,7 +59,7 @@ public:
     {}
 
     VArcData (const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1,
-              QString formulaF1 )
+              const QString &formulaF1 )
         : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
           center(center), isFlipped(false), formulaLength(formulaLength)
     {}
