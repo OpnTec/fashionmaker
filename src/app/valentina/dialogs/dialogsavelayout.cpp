@@ -91,15 +91,22 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
 
-    auto ShowExample = [this](){ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());};
+    auto ShowExample = [this]()
+    {
+        ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + Format());
+    };
 
     connect(ui->lineEditFileName, &QLineEdit::textChanged, ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, [this]()
     {
-        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), QDir::homePath(),
+        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"),
+                                                              qApp->ValentinaSettings()->GetPathLayout(),
                                                           QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-        ui->lineEditPath->setText(dir);
+        if (not dir.isEmpty())
+        {// If paths equal the signal will not be called, we will do this manually
+            dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
+        }
     });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
@@ -128,12 +135,12 @@ void DialogSaveLayout::SelectFormate(const int formate)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::MakeHelpFormatList()
 {
-   QString out = "\n";
+   QString out("\n");
    int cntr = 0;
    const QVector<std::pair<QString, QString>> availFormats = InitAvailFormats();
    foreach(auto& v, availFormats)
    {
-       out += "\t"+v.first+" = "+ QString::number(cntr++)+"\n";
+       out += QLatin1String("\t") + v.first+QLatin1String(" = ") + QString::number(cntr++) + QLatin1String("\n");
    }
    return out;
 }
@@ -184,7 +191,7 @@ QString DialogSaveLayout::FileName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Formate() const
+QString DialogSaveLayout::Format() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
     return ui->comboBoxFormat->itemData(ui->comboBoxFormat->currentIndex()).toString();
@@ -198,7 +205,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+"/"+FileName()+QString::number(i+1)+Formate();
+        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+Format();
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -256,8 +263,7 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
-    setMinimumSize(size());
+    setFixedHeight(size().height());
 
     isInitialized = true;//first show windows are held
 }
@@ -280,7 +286,8 @@ bool DialogSaveLayout::TestPdf()
 
     QProcess proc;
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    proc.start(qApp->applicationDirPath()+"/"+PDFTOPS); // Seek pdftops in app bundle or near valentin.exe
+    // Seek pdftops in app bundle or near valentin.exe
+    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS);
 #else
     proc.start(PDFTOPS); // Seek pdftops in standard path
 #endif

@@ -1702,6 +1702,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
     connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
+    connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2970,6 +2971,7 @@ void MainWindow::SetLayoutModeActions()
 {
     const bool enabled = not scenes.isEmpty();
 
+    ui->toolButtonLayoutExportAs->setEnabled(enabled);
     ui->actionExportAs->setEnabled(enabled);
     ui->actionPrintPreview->setEnabled(enabled);
     ui->actionPrintPreviewTiled->setEnabled(enabled);
@@ -3948,6 +3950,40 @@ void MainWindow::CreateMeasurements()
     const QString tape = qApp->TapeFilePath();
     const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
     QProcess::startDetached(tape, QStringList(), workingDirectory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ExportLayoutAs()
+{
+    if (isLayoutStale)
+    {
+        if (ContinueIfLayoutStale() == QMessageBox::No)
+        {
+            ui->toolButtonLayoutExportAs->setChecked(false);
+            return;
+        }
+    }
+
+    try
+    {
+        DialogSaveLayout dialog(scenes.size(), FileName(), this);
+
+        if (dialog.exec() == QDialog::Rejected)
+        {
+            ui->toolButtonLayoutExportAs->setChecked(false);
+            return;
+        }
+
+        ExportLayout(dialog);
+    }
+    catch (const VException &e)
+    {
+        ui->toolButtonLayoutExportAs->setChecked(false);
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
+    ui->toolButtonLayoutExportAs->setChecked(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
