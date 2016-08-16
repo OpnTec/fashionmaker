@@ -44,6 +44,7 @@
 #include "tst_findpoint.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vcubicbezierpath.h"
+#include "tst_vgobject.h"
 
 #include "../vmisc/def.h"
 
@@ -76,6 +77,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VCommandLine());
     ASSERT_TEST(new TST_VAbstractCurve());
     ASSERT_TEST(new TST_VCubicBezierPath());
+    ASSERT_TEST(new TST_VGObject());
 
     return status;
 }
