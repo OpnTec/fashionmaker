@@ -946,3 +946,9 @@ void VTranslateVars::Retranslate()
     InitFunctions();
     InitPostfixOperators();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QmuTranslation> VTranslateVars::GetFunctions() const
+{
+    return functions;
+}
