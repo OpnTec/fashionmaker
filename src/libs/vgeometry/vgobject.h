@@ -89,6 +89,8 @@ public:
 
     static QVector<QPointF> GetReversePoints(const QVector<QPointF> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
+
+    static double accuracyPointOnLine;
 private:
     QSharedDataPointer<VGObjectData> d;
 
