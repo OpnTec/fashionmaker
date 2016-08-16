@@ -28,7 +28,6 @@
 
 #include "vabstractcurve.h"
 
-#include <QDebug>
 #include <QLine>
 #include <QLineF>
 #include <QMessageLogger>

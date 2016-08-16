@@ -29,7 +29,6 @@
 #include "vtooluniondetails.h"
 
 #include <QByteArray>
-#include <QDebug>
 #include <QDomNodeList>
 #include <QHash>
 #include <QLineF>

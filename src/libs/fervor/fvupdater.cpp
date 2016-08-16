@@ -26,7 +26,6 @@
 #include <QApplication>
 #include <QByteArray>
 #include <QDate>
-#include <QDebug>
 #include <QDesktopServices>
 #include <QLatin1String>
 #include <QMessageBox>

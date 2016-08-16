@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include <QCoreApplication>
-#include <QDebug>
 #include <QTimer>
 #include <QtGlobal>
 #include "../qmuparser/qmuparsertest.h"

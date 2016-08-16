@@ -39,7 +39,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 
-#include <QDebug>
+#include <QtDebug>
 #include <QDir>
 #include <QProcess>
 #include <QTemporaryFile>

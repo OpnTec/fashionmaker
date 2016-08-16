@@ -59,7 +59,7 @@
 #include "dialogs/vwidgetdetails.h"
 
 #include <QInputDialog>
-#include <QDebug>
+#include <QtDebug>
 #include <QMessageBox>
 #include <QShowEvent>
 #include <QScrollBar>

@@ -30,7 +30,6 @@
 
 #include <QApplication>
 #include <QDate>
-#include <QDebug>
 #include <QDir>
 #include <QLocale>
 #include <QMessageLogger>

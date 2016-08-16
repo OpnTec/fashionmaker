@@ -28,7 +28,6 @@
 
 #include "vtoolline.h"
 
-#include <QDebug>
 #include <QKeyEvent>
 #include <QLineF>
 #include <QMessageLogger>

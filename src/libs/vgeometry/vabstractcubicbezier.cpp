@@ -28,7 +28,6 @@
 
 #include "vabstractcubicbezier.h"
 
-#include <QDebug>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPoint>

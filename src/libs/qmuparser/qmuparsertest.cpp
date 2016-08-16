@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <QChar>
 #include <QCoreApplication>
-#include <QDebug>
 #include <QMessageLogger>
 #include <QString>
 #include <QtDebug>

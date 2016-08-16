@@ -30,7 +30,6 @@
 
 #include <qnumeric.h>
 #include <QDate>
-#include <QDebug>
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QDomText>

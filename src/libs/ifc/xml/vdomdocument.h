@@ -30,7 +30,6 @@
 #define VDOMDOCUMENT_H
 
 #include <QCoreApplication>
-#include <QDebug>
 #include <QDomDocument>
 #include <QDomElement>
 #include <QDomNode>

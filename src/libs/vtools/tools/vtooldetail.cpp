@@ -30,7 +30,6 @@
 
 #include <QAction>
 #include <QBrush>
-#include <QDebug>
 #include <QDialog>
 #include <QDomElement>
 #include <QEvent>

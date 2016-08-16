@@ -31,7 +31,6 @@
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
-#include <QDebug>
 #include <QFlag>
 #include <QFlags>
 #include <QFont>

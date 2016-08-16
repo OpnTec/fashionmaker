@@ -37,7 +37,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QProcess>
-#include <QDebug>
+#include <QtDebug>
 
 const QString baseFilenameRegExp = QStringLiteral("^[\\w\\-. ]+$");
 

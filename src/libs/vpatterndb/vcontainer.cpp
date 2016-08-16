@@ -29,7 +29,6 @@
 #include "vcontainer.h"
 
 #include <limits.h>
-#include <QDebug>
 #include <QLoggingCategory>
 #include <QVector>
 #include <QtDebug>

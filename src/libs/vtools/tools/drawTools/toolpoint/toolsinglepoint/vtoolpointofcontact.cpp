@@ -28,7 +28,6 @@
 
 #include "vtoolpointofcontact.h"
 
-#include <QDebug>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QSharedPointer>

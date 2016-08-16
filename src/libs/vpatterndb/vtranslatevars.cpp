@@ -28,7 +28,6 @@
 
 #include "vtranslatevars.h"
 
-#include <QDebug>
 #include <QList>
 #include <QLocale>
 #include <QMap>

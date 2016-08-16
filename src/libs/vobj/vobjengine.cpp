@@ -29,7 +29,6 @@
 #include "vobjengine.h"
 
 #include <QByteArray>
-#include <QDebug>
 #include <QFlag>
 #include <QFlags>
 #include <QIODevice>

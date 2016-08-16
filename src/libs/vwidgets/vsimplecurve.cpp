@@ -29,7 +29,6 @@
 #include "vsimplecurve.h"
 
 #include <QBrush>
-#include <QDebug>
 #include <QFlags>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>

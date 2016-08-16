@@ -33,7 +33,6 @@
 #include <QColor>
 #include <QComboBox>
 #include <QCursor>
-#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QGuiApplication>
