@@ -76,7 +76,8 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     QPointF point1 = *data->GeometricObject<VPointF>(basePointId);
     QPointF point2 = *data->GeometricObject<VPointF>(id);
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+    mainLine->setPen(QPen(CorrectColor(lineColor),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
@@ -93,7 +94,7 @@ VToolLinePoint::~VToolLinePoint()
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(CorrectColor(QColor(lineColor)),
+    mainLine->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));

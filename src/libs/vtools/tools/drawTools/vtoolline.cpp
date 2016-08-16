@@ -85,7 +85,8 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
 
     ToolCreation(typeCreation);
@@ -233,7 +234,7 @@ void VToolLine::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(baseColor),
+    this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
 }
