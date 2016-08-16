@@ -28,7 +28,6 @@
 
 #include "vobjengine.h"
 
-#include <qmath.h>
 #include <QByteArray>
 #include <QDebug>
 #include <QFlag>
@@ -45,6 +44,7 @@
 #include <QtDebug>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vmath.h"
 
 class QPaintDevice;
 class QPixmap;
@@ -52,11 +52,6 @@ class QPoint;
 class QPointF;
 class QPolygonF;
 class QRectF;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 #ifdef Q_CC_MSVC
     #include <ciso646>

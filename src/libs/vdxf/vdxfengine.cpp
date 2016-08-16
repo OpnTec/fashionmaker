@@ -28,7 +28,6 @@
 
 #include "vdxfengine.h"
 
-#include <math.h>
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
@@ -49,6 +48,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vmath.h"
 #include "dxflib/dl_attributes.h"
 #include "dxflib/dl_codes.h"
 #include "dxflib/dl_dxf.h"
@@ -64,11 +64,6 @@ class QPointF;
 class QPolygonF;
 class QRect;
 class QRectF;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()

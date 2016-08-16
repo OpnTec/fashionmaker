@@ -28,7 +28,6 @@
 
 #include "vposition.h"
 
-#include <qmath.h>
 #include <QDir>
 #include <QImage>
 #include <QLineF>
@@ -48,11 +47,7 @@
 #include <Qt>
 
 #include "../vmisc/def.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
+#include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,

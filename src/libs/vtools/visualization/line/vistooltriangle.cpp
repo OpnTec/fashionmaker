@@ -28,7 +28,6 @@
 
 #include "vistooltriangle.h"
 
-#include <QtCore/qmath.h>
 #include <QGraphicsLineItem>
 #include <QGraphicsPathItem>
 #include <QPainterPath>
@@ -41,6 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"

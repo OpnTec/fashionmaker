@@ -28,20 +28,15 @@
 
 #include "vcubicbezierpath.h"
 
-#include <qmath.h>
 #include <QLineF>
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
+#include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(quint32 idObject, Draw mode)

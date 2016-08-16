@@ -28,7 +28,6 @@
 
 #include "vtooltriangle.h"
 
-#include <QtCore/qmath.h>
 #include <QLine>
 #include <QLineF>
 #include <QSharedPointer>
@@ -50,6 +49,7 @@
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
+#include "../vmisc/vmath.h"
 
 class QDomElement;
 class QGraphicsSceneContextMenuEvent;

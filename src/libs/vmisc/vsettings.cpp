@@ -39,13 +39,9 @@
 #include <QVariant>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 
 class QMarginsF;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 Q_DECLARE_METATYPE(QMarginsF)
 

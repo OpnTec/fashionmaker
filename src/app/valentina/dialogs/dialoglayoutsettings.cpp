@@ -31,12 +31,7 @@
 #include "../core/vapplication.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/vsettings.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include "../vmisc/vmath.h"
 
 #include <QMessageBox>
 #include <QPushButton>

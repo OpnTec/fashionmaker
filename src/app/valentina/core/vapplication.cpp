@@ -35,6 +35,7 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 
@@ -43,7 +44,6 @@
 #include <QProcess>
 #include <QTemporaryFile>
 #include <QUndoStack>
-#include <QtCore/qmath.h>
 #include <QTemporaryFile>
 #include <QFile>
 #include <QStandardPaths>

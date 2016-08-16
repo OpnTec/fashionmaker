@@ -28,8 +28,6 @@
 
 #include "vtoolsplinepath.h"
 
-#include <math.h>
-#include <qmath.h>
 #include <QDomElement>
 #include <QEvent>
 #include <QFlags>
@@ -67,6 +65,7 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../vgeometry/vsplinepath.h"
 #include "../vwidgets/vcontrolpointspline.h"
@@ -79,11 +78,6 @@ class QDomElement;
 class QGraphicsSceneContextMenuEvent;
 class QGraphicsSceneHoverEvent;
 class QGraphicsSceneMouseEvent;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 const QString VToolSplinePath::ToolType = QStringLiteral("pathInteractive");
 const QString VToolSplinePath::OldToolType = QStringLiteral("path");

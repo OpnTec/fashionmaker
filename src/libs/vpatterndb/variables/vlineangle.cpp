@@ -28,22 +28,17 @@
 
 #include "vlineangle.h"
 
-#include <qmath.h>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPointF>
 #include <QString>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "vinternalvariable.h"
 #include "vlineangle_p.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle()

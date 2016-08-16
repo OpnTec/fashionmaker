@@ -28,12 +28,12 @@
 
 #include "vlayoutgenerator.h"
 
-#include <QtCore/qmath.h>
 #include <QGraphicsRectItem>
 #include <QRectF>
 #include <QThreadPool>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "vlayoutdetail.h"
 #include "vlayoutpaper.h"
 

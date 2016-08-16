@@ -28,8 +28,6 @@
 
 #include "vlayoutdetail.h"
 
-#include <math.h>
-#include <qmath.h>
 #include <QBrush>
 #include <QFlags>
 #include <QFont>
@@ -47,6 +45,7 @@
 
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vmisc/vmath.h"
 #include "vlayoutdef.h"
 #include "vlayoutdetail_p.h"
 #include "vtextmanager.h"
@@ -54,13 +53,6 @@
 class QGraphicsPathItem;
 class QLineF;
 class VAbstractPattern;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
-
-#include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()

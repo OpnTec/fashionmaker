@@ -28,11 +28,11 @@
 
 #include "varc.h"
 
-#include <QtCore/qmath.h>
 #include <QLineF>
 #include <QPointF>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
 #include "varc_p.h"

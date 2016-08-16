@@ -28,8 +28,6 @@
 
 #include "vgobject.h"
 
-#include <QtCore/qmath.h>
-#include <math.h>
 #include <QLine>
 #include <QLineF>
 #include <QPoint>
@@ -37,6 +35,7 @@
 #include <QRectF>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 

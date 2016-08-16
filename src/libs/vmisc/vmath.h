@@ -18,10 +18,12 @@
 **
 ****************************************************************************/
 
-#ifndef QMATH_H
-#define QMATH_H
+#ifndef VMATH_H
+#define VMATH_H
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+#include <QtMath>
+#else
 
 #if 0
 #pragma qt_class(QtMath)

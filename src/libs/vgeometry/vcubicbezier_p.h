@@ -31,11 +31,11 @@
 
 #include <QSharedData>
 #include <QLineF>
-#include <QtCore/qmath.h>
 
 #include "vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vmath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

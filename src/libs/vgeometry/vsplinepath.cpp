@@ -31,13 +31,9 @@
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
+#include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

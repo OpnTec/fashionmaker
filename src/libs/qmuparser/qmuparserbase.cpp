@@ -29,13 +29,13 @@
 #include <QTextStream>
 #include <QtDebug>
 #include <map>
-
-#include "qmudef.h"
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
-#include <QtCore/qmath.h>
 #include <assert.h>
+
+#include "qmudef.h"
+#include "../vmisc/vmath.h"
 
 using namespace std;
 

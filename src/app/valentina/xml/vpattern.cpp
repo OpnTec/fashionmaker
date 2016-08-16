@@ -41,6 +41,7 @@
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
@@ -53,7 +54,6 @@
 
 #include <QMessageBox>
 #include <QUndoStack>
-#include <QtCore/qmath.h>
 #include <QtNumeric>
 
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");

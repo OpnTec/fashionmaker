@@ -28,7 +28,6 @@
 
 #include "vposter.h"
 
-#include <qmath.h>
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
@@ -40,11 +39,7 @@
 #include <QVector>
 #include <Qt>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
-
+#include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
