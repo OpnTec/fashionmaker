@@ -36,6 +36,7 @@
 - [#496] Selector for selecting which pieces to print.
 - [#520] Improve Union tool. An option to select about original pieces.
 - [#262] Automatic Update notification.
+- [#424] Improve Formula Wizard dialog.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

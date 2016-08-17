@@ -217,6 +217,11 @@ void DialogEditWrongFormula::ValChanged(int row)
                        degreeSymbol, tr("Curve angle"));
         return;
     }
+    if (ui->radioButtonFunctions->isChecked())
+    {
+        ui->labelDescription->setText(item->toolTip());
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -310,6 +315,16 @@ void DialogEditWrongFormula::Increments()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Functions show in list functions
+ */
+void DialogEditWrongFormula::Functions()
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+    ShowFunctions();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
     SCASSERT(bOk != nullptr);
@@ -384,6 +399,7 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
+    connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -473,6 +489,34 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
             ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnFullName, itemFullName);
         }
     }
+    ui->tableWidget->blockSignals(false);
+    ui->tableWidget->selectRow(0);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowFunctions show functions in list
+ */
+void DialogEditWrongFormula::ShowFunctions()
+{
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+    ui->tableWidget->setColumnHidden(ColumnFullName, true);
+    ui->labelDescription->setText("");
+
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = qApp->TrVars()->GetFunctions().constBegin();
+    while (i != qApp->TrVars()->GetFunctions().constEnd())
+    {
+        ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
+        QTableWidgetItem *item = new QTableWidgetItem(i.value().translate());
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
+        item->setToolTip(i.value().getMdisambiguation());
+        ++i;
+    }
+
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
