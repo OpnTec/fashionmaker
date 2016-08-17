@@ -208,6 +208,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdateLabel);
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdatePatternInfo);
+    connect(sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolDetail::retranslateUi);
 
     UpdateLabel();
     UpdatePatternInfo();
@@ -1131,4 +1132,11 @@ void VToolDetail::UpdateAll()
 {
     sceneDetails->update();
     update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::retranslateUi()
+{
+    UpdateLabel();
+    UpdatePatternInfo();
 }

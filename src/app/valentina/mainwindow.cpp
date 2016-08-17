@@ -1222,6 +1222,7 @@ void MainWindow::changeEvent(QEvent *event)
         helpLabel->setText(QObject::tr("Changes applied."));
         patternPieceLabel->setText(tr("Pattern Piece:"));
         UpdateWindowTitle();
+        emit sceneDetails->LanguageChanged();
     }
     // remember to call base class implementation
     QMainWindow::changeEvent(event);

@@ -1140,7 +1140,7 @@
         <item row="6" column="1">
          <widget class="QLineEdit" name="lineEditSize">
           <property name="toolTip">
-           <string>Use %width% and %height% to insert pattern width and height</string>
+           <string>Use %size% and %height% to insert pattern size and height</string>
           </property>
           <property name="maxLength">
            <number>40</number>

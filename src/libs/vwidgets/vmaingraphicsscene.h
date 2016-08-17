@@ -147,6 +147,7 @@ signals:
     void          EnableDetailItemHover(bool enabled);
     void          EnableLineItemHover(bool enabled);
     void          DimensionsChanged();
+    void          LanguageChanged();
 
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
