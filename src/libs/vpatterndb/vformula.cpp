@@ -29,7 +29,6 @@
 #include "vformula.h"
 
 #include <qnumeric.h>
-#include <QDebug>
 #include <QMessageLogger>
 #include <QScopedPointer>
 #include <QtDebug>

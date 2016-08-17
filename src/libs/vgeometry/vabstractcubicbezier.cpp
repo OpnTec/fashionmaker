@@ -28,14 +28,13 @@
 
 #include "vabstractcubicbezier.h"
 
-#include <math.h>
-#include <QDebug>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPoint>
 #include <QtDebug>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------

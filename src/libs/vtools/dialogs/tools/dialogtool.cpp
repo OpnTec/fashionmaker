@@ -33,7 +33,6 @@
 #include <qnumeric.h>
 #include <QCloseEvent>
 #include <QComboBox>
-#include <QDebug>
 #include <QDoubleSpinBox>
 #include <QEvent>
 #include <QHash>

@@ -28,7 +28,6 @@
 
 #include "vdetail.h"
 
-#include <QDebug>
 #include <QList>
 #include <QMessageLogger>
 #include <QPainterPath>

@@ -31,7 +31,6 @@
 #include <qnumeric.h>
 #include <QBrush>
 #include <QColor>
-#include <QDebug>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>

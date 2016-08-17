@@ -26,8 +26,6 @@
  **
  *************************************************************************/
 
-#include <math.h>
-#include <qmath.h>
 #include <QColor>
 #include <QFlags>
 #include <QFont>
@@ -41,6 +39,7 @@
 #include <Qt>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "vtextgraphicsitem.h"
 
 class QGraphicsSceneHoverEvent;

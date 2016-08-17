@@ -28,7 +28,6 @@
 
 #include "vmaingraphicsview.h"
 
-#include <qmath.h>
 #include <QApplication>
 #include <QCursor>
 #include <QEvent>
@@ -48,6 +47,7 @@
 #include <QWidget>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 

@@ -47,7 +47,6 @@
 
 #include <QAbstractMessageHandler>
 #include <QByteArray>
-#include <QDebug>
 #include <QDomNodeList>
 #include <QDomText>
 #include <QFile>

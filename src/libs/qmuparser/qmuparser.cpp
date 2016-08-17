@@ -21,8 +21,6 @@
 
 #include "qmuparser.h"
 
-#include <QtCore/qmath.h>
-#include <math.h>
 #include <QCoreApplication>
 #include <QStaticStringData>
 #include <QStringData>
@@ -33,6 +31,7 @@
 
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
+#include "../vmisc/vmath.h"
 
 using namespace std;
 

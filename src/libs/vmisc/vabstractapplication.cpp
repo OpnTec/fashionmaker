@@ -28,7 +28,6 @@
 
 #include "vabstractapplication.h"
 
-#include <QDebug>
 #include <QDir>
 #include <QLibraryInfo>
 #include <QLoggingCategory>

@@ -121,7 +121,7 @@ init:
   # Path before
   - path
   - set QTDIR=C:\%QT5%
-  - set PATH=%QTDIR%\bin;C:\Tools\PsTools;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Mercurial\
+  - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Mercurial\
   # Installing various utilities
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" choco install -y InnoSetup
   #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "x86" set PATH="C:\Program Files\Inno Setup 5";%PATH%
@@ -181,4 +181,6 @@ notifications:
       - dismine@gmail.com
       - susan.spencer@gmail.com
       - zhuravska19@gmail.com
+    on_build_success: false
+    on_build_failure: true
     on_build_status_changed: true

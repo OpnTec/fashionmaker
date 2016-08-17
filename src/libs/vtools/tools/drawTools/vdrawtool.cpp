@@ -29,7 +29,6 @@
 #include "vdrawtool.h"
 
 #include <qnumeric.h>
-#include <QDebug>
 #include <QDialog>
 #include <QDomNode>
 #include <QMessageLogger>

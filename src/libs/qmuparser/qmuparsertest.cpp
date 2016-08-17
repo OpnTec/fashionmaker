@@ -21,11 +21,9 @@
 
 #include "qmuparsertest.h"
 
-#include <math.h>
 #include <stdio.h>
 #include <QChar>
 #include <QCoreApplication>
-#include <QDebug>
 #include <QMessageLogger>
 #include <QString>
 #include <QtDebug>
@@ -41,6 +39,7 @@
 #include "qmudef.h"
 #include "qmuparser.h"
 #include "qmuparsererror.h"
+#include "../vmisc/vmath.h"
 
 using namespace std;
 

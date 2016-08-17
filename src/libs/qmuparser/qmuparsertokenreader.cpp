@@ -23,7 +23,6 @@
 
 #include <assert.h>
 #include <QCharRef>
-#include <QDebug>
 #include <QList>
 #include <QMessageLogger>
 #include <QStringList>

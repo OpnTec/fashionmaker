@@ -21,9 +21,7 @@
 
 #include "qmuparserbytecode.h"
 
-#include <QtCore/qmath.h>
 #include <assert.h>
-#include <QDebug>
 #include <QMessageLogger>
 #include <QStack>
 #include <QString>
@@ -31,6 +29,7 @@
 
 #include "qmudef.h"
 #include "qmuparsererror.h"
+#include "../vmisc/vmath.h"
 
 namespace qmu
 {

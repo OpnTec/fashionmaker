@@ -28,7 +28,6 @@
 
 #include "vabstractpattern.h"
 
-#include <QDebug>
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QLatin1String>

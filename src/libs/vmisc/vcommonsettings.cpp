@@ -30,7 +30,6 @@
 
 #include <QApplication>
 #include <QDate>
-#include <QDebug>
 #include <QDir>
 #include <QLocale>
 #include <QMessageLogger>
@@ -41,13 +40,9 @@
 #include <QtDebug>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 
 class QDate;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");
 const QString VCommonSettings::SettingPathsStandardMeasurements       = QStringLiteral("paths/standard_measurements");

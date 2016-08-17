@@ -28,11 +28,11 @@
 
 #include "vspline.h"
 
-#include <math.h>
 #include <QLineF>
 
 #include "vabstractcurve.h"
 #include "vspline_p.h"
+#include "../vmisc/vmath.h"
 
 class QPointF;
 

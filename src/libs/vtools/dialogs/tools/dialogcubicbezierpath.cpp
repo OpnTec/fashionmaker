@@ -48,17 +48,13 @@
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezierpath.h"
 
 class QWidget;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint32 &toolId, QWidget *parent)

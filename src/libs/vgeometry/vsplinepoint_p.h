@@ -30,7 +30,7 @@
 #define VSPLINEPOINT_P_H
 
 #include <QSharedData>
-#include <QDebug>
+#include <QtDebug>
 
 #include "vpointf.h"
 #include "../vmisc/def.h"

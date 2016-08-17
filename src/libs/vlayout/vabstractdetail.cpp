@@ -28,7 +28,6 @@
 
 #include "vabstractdetail.h"
 
-#include <QDebug>
 #include <QLine>
 #include <QLineF>
 #include <QMessageLogger>

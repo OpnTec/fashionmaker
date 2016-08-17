@@ -28,7 +28,6 @@
 
 #include "vmeasurement.h"
 
-#include <QDebug>
 #include <QMap>
 #include <QMessageLogger>
 #include <QtDebug>

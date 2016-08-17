@@ -27,8 +27,7 @@
 
 #include "dl_global.h"
 
-#include <math.h>
-
+#include "../vmisc/vmath.h"
 
 /**
  * Storing and passing around attributes. Attributes
@@ -103,7 +102,7 @@ public:
     /**
      * @param dir vector.
      */
-    void getDirection(double dir[]) const 
+    void getDirection(double dir[]) const
     {
         dir[0]=direction[0];
         dir[1]=direction[1];

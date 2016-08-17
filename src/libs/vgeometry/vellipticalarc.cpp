@@ -28,12 +28,11 @@
 
 #include "vellipticalarc.h"
 
-#include <QtCore/qmath.h>
-#include <math.h>
 #include <QLineF>
 #include <QPoint>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vabstractcurve.h"
