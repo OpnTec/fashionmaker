@@ -331,6 +331,12 @@
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonFunctions">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Functions</string>
            </property>

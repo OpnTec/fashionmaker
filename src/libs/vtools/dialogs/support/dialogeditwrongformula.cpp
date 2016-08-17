@@ -506,16 +506,15 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText("");
 
-    QMap<QString, qmu::QmuTranslation> var = qApp->TrVars()->GetFunctions();
-    QMapIterator<QString, qmu::QmuTranslation> iMap(var);
-    while (iMap.hasNext())
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = qApp->TrVars()->GetFunctions().constBegin();
+    while (i != qApp->TrVars()->GetFunctions().constEnd())
     {
-        iMap.next();
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-        QTableWidgetItem *item = new QTableWidgetItem(iMap.key());
+        QTableWidgetItem *item = new QTableWidgetItem(i.value().translate());
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
-        item->setToolTip(iMap.value().getMdisambiguation());
+        item->setToolTip(i.value().getMdisambiguation());
+        ++i;
     }
 
     ui->tableWidget->blockSignals(false);
