@@ -17,6 +17,7 @@
 - [#537] Valentina crashes when use undo command.
 - [#544] Error: Color Lines are black until touched.
 - [#543] Detail loses details.
+- [#548] Bug Detail tool. Case when seam allowance is wrong.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
