@@ -1296,8 +1296,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 }
                 case 2: //strPointOfIntersectionCurves
                 {
-                    quint32 spl = NULL_ID;
-                    spl = element.attribute(strCurve1).toUInt();
+                    quint32 spl = element.attribute(strCurve1).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
                         element.setAttribute(strCurve1, baseCurve);
@@ -1330,8 +1329,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 }
                 case 5: //strPointOfIntersectionArcs
                 {
-                    quint32 arc = NULL_ID;
-                    arc = element.attribute(strFirstArc).toUInt();
+                    quint32 arc = element.attribute(strFirstArc).toUInt();
                     if (arc == id+1 || arc == id+2)
                     {
                         element.setAttribute(strFirstArc, baseCurve);
