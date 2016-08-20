@@ -310,6 +310,46 @@ void TST_VAbstractDetail::BrokenDetailEquidistant() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::TestCorrectEquidistantPoints_data()
+{
+    QTest::addColumn<QVector<QPointF>>("before");
+    QTest::addColumn<QVector<QPointF>>("expect");
+
+    QVector<QPointF> before;
+    before << QPointF(30.0, 39.999874015748034);
+    before << QPointF(785.9055118110236, 39.999874015748034);
+    before << QPointF(785.9055118110236, 3819.527433070866);
+    before << QPointF(483.54330708661416, 3819.527433070866);
+    before << QPointF(483.54330708661416, 1929.763653543307);
+    before << QPointF(407.9527559055629, 984.8817637795973);
+    before << QPointF(407.9527559055118, 1929.763653543307);
+    before << QPointF(407.9527559055118, 3819.527433070866);
+    before << QPointF(30.0, 3819.527433070866);
+
+    QVector<QPointF> expect;
+    expect << QPointF(30.0, 39.999874015748034);
+    expect << QPointF(785.9055118110236, 39.999874015748034);
+    expect << QPointF(785.9055118110236, 3819.527433070866);
+    expect << QPointF(483.54330708661416, 3819.527433070866);
+    expect << QPointF(483.54330708661416, 1929.763653543307);
+    expect << QPointF(407.9527559055629, 984.8817637795973);
+    expect << QPointF(407.9527559055118, 3819.527433070866);
+    expect << QPointF(30.0, 3819.527433070866);
+
+    QTest::newRow("Test case issue #548") << before << expect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::TestCorrectEquidistantPoints() const
+{
+    QFETCH(QVector<QPointF>, before);
+    QFETCH(QVector<QPointF>, expect);
+
+    QVector<QPointF> after = VAbstractDetail::CorrectEquidistantPoints(before);
+    Comparison(after, expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::Case3() const
 {
     const QVector<QPointF> points = InputPointsCase3(); // Input points.

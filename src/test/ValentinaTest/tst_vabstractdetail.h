@@ -46,6 +46,8 @@ private slots:
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;
     void BrokenDetailEquidistant() const;
+    void TestCorrectEquidistantPoints_data();
+    void TestCorrectEquidistantPoints() const;
 
 private:
     void Case3() const;
