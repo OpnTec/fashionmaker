@@ -66,42 +66,55 @@ const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pa
 
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-const QString strUnit          = QStringLiteral("unit");
-const QString strVersion       = QStringLiteral("version");
-const QString strName          = QStringLiteral("name");
-const QString strBase          = QStringLiteral("base");
-const QString strFormula       = QStringLiteral("formula");
-const QString strId            = QStringLiteral("id");
-const QString strKGrowth       = QStringLiteral("kgrowth");
-const QString strKSize         = QStringLiteral("ksize");
-const QString strPoint         = QStringLiteral("point");
-const QString strLength        = QStringLiteral("length");
-const QString strAngle         = QStringLiteral("angle");
-const QString strC1Radius      = QStringLiteral("c1Radius");
-const QString strC2Radius      = QStringLiteral("c2Radius");
-const QString strCRadius       = QStringLiteral("cRadius");
-const QString strArc           = QStringLiteral("arc");
-const QString strAngle1        = QStringLiteral("angle1");
-const QString strAngle2        = QStringLiteral("angle2");
-const QString strRadius        = QStringLiteral("radius");
-const QString strPathPoint     = QStringLiteral("pathPoint");
-const QString strKAsm1         = QStringLiteral("kAsm1");
-const QString strKAsm2         = QStringLiteral("kAsm2");
-const QString strPath          = QStringLiteral("path");
-const QString strType          = QStringLiteral("type");
-const QString strCutArc        = QStringLiteral("cutArc");
-const QString strCutSpline     = QStringLiteral("cutSpline");
-const QString strCutSplinePath = QStringLiteral("cutSplinePath");
-const QString strColor         = QStringLiteral("color");
-const QString strMeasurements  = QStringLiteral("measurements");
-const QString strIncrement     = QStringLiteral("increment");
-const QString strIncrements    = QStringLiteral("increments");
-const QString strModeling      = QStringLiteral("modeling");
-const QString strTools         = QStringLiteral("tools");
-const QString strIdTool        = QStringLiteral("idTool");
-const QString strIdObject      = QStringLiteral("idObject");
-const QString strChildren      = QStringLiteral("children");
-const QString strChild         = QStringLiteral("child");
+const QString strUnit                      = QStringLiteral("unit");
+const QString strVersion                   = QStringLiteral("version");
+const QString strName                      = QStringLiteral("name");
+const QString strBase                      = QStringLiteral("base");
+const QString strFormula                   = QStringLiteral("formula");
+const QString strId                        = QStringLiteral("id");
+const QString strKGrowth                   = QStringLiteral("kgrowth");
+const QString strKSize                     = QStringLiteral("ksize");
+const QString strPoint                     = QStringLiteral("point");
+const QString strLength                    = QStringLiteral("length");
+const QString strAngle                     = QStringLiteral("angle");
+const QString strC1Radius                  = QStringLiteral("c1Radius");
+const QString strC2Radius                  = QStringLiteral("c2Radius");
+const QString strCRadius                   = QStringLiteral("cRadius");
+const QString strArc                       = QStringLiteral("arc");
+const QString strAngle1                    = QStringLiteral("angle1");
+const QString strAngle2                    = QStringLiteral("angle2");
+const QString strRadius                    = QStringLiteral("radius");
+const QString strPathPoint                 = QStringLiteral("pathPoint");
+const QString strKAsm1                     = QStringLiteral("kAsm1");
+const QString strKAsm2                     = QStringLiteral("kAsm2");
+const QString strPath                      = QStringLiteral("path");
+const QString strType                      = QStringLiteral("type");
+const QString strCutArc                    = QStringLiteral("cutArc");
+const QString strSpline                    = QStringLiteral("spline");
+const QString strSplinePath                = QStringLiteral("splinePath");
+const QString strCutSpline                 = QStringLiteral("cutSpline");
+const QString strCutSplinePath             = QStringLiteral("cutSplinePath");
+const QString strColor                     = QStringLiteral("color");
+const QString strMeasurements              = QStringLiteral("measurements");
+const QString strIncrement                 = QStringLiteral("increment");
+const QString strIncrements                = QStringLiteral("increments");
+const QString strModeling                  = QStringLiteral("modeling");
+const QString strTools                     = QStringLiteral("tools");
+const QString strIdTool                    = QStringLiteral("idTool");
+const QString strIdObject                  = QStringLiteral("idObject");
+const QString strChildren                  = QStringLiteral("children");
+const QString strChild                     = QStringLiteral("child");
+const QString strPointOfIntersectionCurves = QStringLiteral("pointOfIntersectionCurves");
+const QString strCurveIntersectAxis        = QStringLiteral("curveIntersectAxis");
+const QString strCurve                     = QStringLiteral("curve");
+const QString strCurve1                    = QStringLiteral("curve1");
+const QString strCurve2                    = QStringLiteral("curve2");
+const QString strModelingPath              = QStringLiteral("modelingPath");
+const QString strModelingSpline            = QStringLiteral("modelingSpline");
+const QString strPointFromArcAndTangent    = QStringLiteral("pointFromArcAndTangent");
+const QString strPointOfIntersectionArcs   = QStringLiteral("pointOfIntersectionArcs");
+const QString strFirstArc                  = QStringLiteral("firstArc");
+const QString strSecondArc                 = QStringLiteral("secondArc");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -355,6 +368,9 @@ void VPatternConverter::ToV0_2_7()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_0()
 {
+    //Cutting path do not create anymore subpaths
+    FixCutPoint();
+    FixCutPoint();
     SetVersion(QStringLiteral("0.3.0"));
     Save();
 }
@@ -1195,4 +1211,196 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
     names.insert(QStringLiteral("size"), QStringLiteral("bust_arc_f"));
 
     return names;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::FixCutPoint()
+{
+    const QStringList types = QStringList() << strCutSplinePath
+                                            << strCutSpline
+                                            << strCutArc;
+
+    const QDomNodeList list = elementsByTagName(strPoint);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement element = list.at(i).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(types.indexOf(type))
+            {
+                case 0: //strCutSplinePath
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strSplinePath).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                case 1: //strCutSpline
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strSpline).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                case 2: //strCutArc
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strArc).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
+{
+    const QStringList pointTypes = QStringList() << strCutSplinePath
+                                                 << strCutSpline
+                                                 << strPointOfIntersectionCurves
+                                                 << strCurveIntersectAxis
+                                                 << strPointFromArcAndTangent
+                                                 << strPointOfIntersectionArcs;
+
+    const QDomNodeList listPoints = elementsByTagName(strPoint);
+    for (int j = i+1; j < listPoints.size(); ++j)
+    {
+        QDomElement element = listPoints.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(pointTypes.indexOf(type))
+            {
+                case 0: //strCutSplinePath
+                {
+                    const quint32 spl = element.attribute(strSplinePath).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strSplinePath, baseCurve);
+                    }
+                    break;
+                }
+                case 1: //strCutSpline
+                {
+                    const quint32 spl = element.attribute(strSpline).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strSpline, baseCurve);
+                    }
+                    break;
+                }
+                case 2: //strPointOfIntersectionCurves
+                {
+                    quint32 spl = NULL_ID;
+                    spl = element.attribute(strCurve1).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve1, baseCurve);
+                    }
+
+                    spl = element.attribute(strCurve2).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve2, baseCurve);
+                    }
+                    break;
+                }
+                case 3: //strCurveIntersectAxis
+                {
+                    const quint32 spl = element.attribute(strCurve).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve, baseCurve);
+                    }
+                    break;
+                }
+                case 4: //strPointFromArcAndTangent
+                {
+                    const quint32 spl = element.attribute(strArc).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strArc, baseCurve);
+                    }
+                    break;
+                }
+                case 5: //strPointOfIntersectionArcs
+                {
+                    quint32 arc = NULL_ID;
+                    arc = element.attribute(strFirstArc).toUInt();
+                    if (arc == id+1 || arc == id+2)
+                    {
+                        element.setAttribute(strFirstArc, baseCurve);
+                    }
+
+                    arc = element.attribute(strSecondArc).toUInt();
+                    if (arc == id+1 || arc == id+2)
+                    {
+                        element.setAttribute(strSecondArc, baseCurve);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    const QStringList splTypes = QStringList() << strModelingPath
+                                               << strModelingSpline;
+
+    const QDomNodeList listSplines = elementsByTagName(strSpline);
+    for (int j = 0; j < listSplines.size(); ++j)
+    {
+        QDomElement element = listSplines.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(splTypes.indexOf(type))
+            {
+                case 0: //strModelingPath
+                {
+                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strIdObject, baseCurve);
+                    }
+                    break;
+                }
+                case 1: //strModelingSpline
+                {
+                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strIdObject, baseCurve);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    const QDomNodeList listArcs = elementsByTagName(strArc);
+    for (int j = 0; j < listArcs.size(); ++j)
+    {
+        QDomElement element = listArcs.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            if (type == strModeling)
+            {
+                const quint32 arc = element.attribute(strIdObject).toUInt();
+                if (arc == id+1 || arc == id+2)
+                {
+                    element.setAttribute(strIdObject, baseCurve);
+                }
+            }
+        }
+    }
 }
