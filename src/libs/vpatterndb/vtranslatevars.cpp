@@ -403,7 +403,7 @@ void VTranslateVars::InitFunctions()
     functions.insert(cosh_F, translate("VTranslateVars", "cosh", "hyperbolic cosine"));
     functions.insert(tanh_F, translate("VTranslateVars", "tanh", "hyperbolic tangens function"));
     functions.insert(asinh_F, translate("VTranslateVars", "asinh", "hyperbolic arcus sine function"));
-    functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus tangens function"));
+    functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus cosine function"));
     functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcur tangens function"));
     functions.insert(log2_F, translate("VTranslateVars", "log2", "logarithm to the base 2"));
     functions.insert(log10_F, translate("VTranslateVars", "log10", "logarithm to the base 10"));
@@ -945,4 +945,10 @@ void VTranslateVars::Retranslate()
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QmuTranslation> VTranslateVars::GetFunctions() const
+{
+    return functions;
 }

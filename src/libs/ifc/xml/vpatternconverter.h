@@ -118,6 +118,9 @@ private:
 
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_0();
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_1();
+
+    void FixCutPoint();
+    void FixSubPaths(int i, quint32 id, quint32 baseCurve);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -3855,9 +3855,15 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         ZoomFirstShow();
 
         ActionDraw(true);
+
+        qApp->setOpeningPattern();// End opening file
+        return true;
     }
-    qApp->setOpeningPattern();// End opening file
-    return true;
+    else
+    {
+        qApp->setOpeningPattern();// End opening file
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

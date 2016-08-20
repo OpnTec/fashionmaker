@@ -366,7 +366,11 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
 
         if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
         {
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+            splPoints.remove(splPoints.size() - 1);
+#else
             splPoints.removeLast();
+#endif
         }
         points << splPoints;
         currentAngle += sectionAngle.at(i);

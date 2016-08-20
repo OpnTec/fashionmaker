@@ -40,15 +40,16 @@ public:
 signals:
 
 private slots:
+    void EquidistantRemoveLoop_data();
     void EquidistantRemoveLoop() const;
     void SumTrapezoids() const;
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;
     void BrokenDetailEquidistant() const;
+    void TestCorrectEquidistantPoints_data();
+    void TestCorrectEquidistantPoints() const;
 
 private:
-    void Case1() const;
-    void Case2() const;
     void Case3() const;
     void Case4() const;
     void Case5() const;

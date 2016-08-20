@@ -676,45 +676,61 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         QVector<quint32> children = AllChildren(doc, id);
         if (not children.isEmpty())
         {
-            qint32 i = 0;
-            do
+            // This check need for backward compatibility
+            // Remove check and "else" part if min version is 0.3.2
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                              "Time to refactor the code.");
+            if (children.size() == countNodeD1 + countNodeD2-1)
             {
-                // This check need for backward compatibility
-                // Remove it if min version is 0.3.2
-                // Instead:
-                // UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
-                Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
-                                  "Time to refactor the code.");
-                if (children.size() != countNodeD2)
+                qint32 i = 0;
+                do
                 {
                     UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
-                }
-                ++i;
-                if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
-                {
-                    VDetail d2REdge = d2.RemoveEdge(indexD2);
-                    qint32 j = 0;
-                    FindIndexJ(pointsD2, d2, indexD2, j);
-                    do
+                    ++i;
+                    if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
                     {
-                        if (j >= countNodeD2)
+                        VDetail d2REdge = d2.RemoveEdge(indexD2);
+                        qint32 j = 0;
+                        FindIndexJ(pointsD2, d2, indexD2, j);
+                        do
                         {
-                            j=0;
-                        }
-                        UpdatePoints(data, d2REdge, j, children, dx, dy, det1p1.getId(), angle);
-                        ++pointsD2;
-                        ++j;
-                    } while (pointsD2 < countNodeD2-1);
-                    // This check need for backward compatibility
-                    // Remove it if min version is 0.3.2
-                    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
-                                      "Time to refactor the code.");
-                    if (children.size() == countNodeD2)
+                            if (j >= countNodeD2)
+                            {
+                                j=0;
+                            }
+                            UpdatePoints(data, d2REdge, j, children, dx, dy, det1p1.getId(), angle);
+                            ++pointsD2;
+                            ++j;
+                        } while (pointsD2 < countNodeD2-1);
+                    }
+                } while (i<countNodeD1);
+            }
+            else // remove if min version is 0.3.2
+            {
+                qint32 i = 0;
+                do
+                {
+                    ++i;
+                    if (i > d1.indexOfNode(det1p1.getId()))
                     {
+                        const int childrenCount = children.size();
+                        VDetail d2REdge = d2.RemoveEdge(indexD2);
+                        qint32 j = 0;
+                        FindIndexJ(pointsD2, d2, indexD2, j);
+                        do
+                        {
+                            if (j >= countNodeD2)
+                            {
+                                j=0;
+                            }
+                            UpdatePoints(data, d2REdge, j, children, dx, dy, det1p1.getId(), angle);
+                            ++pointsD2;
+                            ++j;
+                        } while (pointsD2 < childrenCount);
                         break;
                     }
-                }
-            } while (i<countNodeD1);
+                } while (i<countNodeD1);
+            }
         }
     }
     return unionDetails;

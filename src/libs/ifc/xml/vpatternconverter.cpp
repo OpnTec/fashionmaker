@@ -64,6 +64,58 @@ const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pa
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+// The list of all string we use for conversion
+// Better to use global variables because repeating QStringLiteral blows up code size
+const QString strUnit                      = QStringLiteral("unit");
+const QString strVersion                   = QStringLiteral("version");
+const QString strName                      = QStringLiteral("name");
+const QString strBase                      = QStringLiteral("base");
+const QString strFormula                   = QStringLiteral("formula");
+const QString strId                        = QStringLiteral("id");
+const QString strKGrowth                   = QStringLiteral("kgrowth");
+const QString strKSize                     = QStringLiteral("ksize");
+const QString strPoint                     = QStringLiteral("point");
+const QString strLength                    = QStringLiteral("length");
+const QString strAngle                     = QStringLiteral("angle");
+const QString strC1Radius                  = QStringLiteral("c1Radius");
+const QString strC2Radius                  = QStringLiteral("c2Radius");
+const QString strCRadius                   = QStringLiteral("cRadius");
+const QString strArc                       = QStringLiteral("arc");
+const QString strAngle1                    = QStringLiteral("angle1");
+const QString strAngle2                    = QStringLiteral("angle2");
+const QString strRadius                    = QStringLiteral("radius");
+const QString strPathPoint                 = QStringLiteral("pathPoint");
+const QString strKAsm1                     = QStringLiteral("kAsm1");
+const QString strKAsm2                     = QStringLiteral("kAsm2");
+const QString strPath                      = QStringLiteral("path");
+const QString strType                      = QStringLiteral("type");
+const QString strCutArc                    = QStringLiteral("cutArc");
+const QString strSpline                    = QStringLiteral("spline");
+const QString strSplinePath                = QStringLiteral("splinePath");
+const QString strCutSpline                 = QStringLiteral("cutSpline");
+const QString strCutSplinePath             = QStringLiteral("cutSplinePath");
+const QString strColor                     = QStringLiteral("color");
+const QString strMeasurements              = QStringLiteral("measurements");
+const QString strIncrement                 = QStringLiteral("increment");
+const QString strIncrements                = QStringLiteral("increments");
+const QString strModeling                  = QStringLiteral("modeling");
+const QString strTools                     = QStringLiteral("tools");
+const QString strIdTool                    = QStringLiteral("idTool");
+const QString strIdObject                  = QStringLiteral("idObject");
+const QString strChildren                  = QStringLiteral("children");
+const QString strChild                     = QStringLiteral("child");
+const QString strPointOfIntersectionCurves = QStringLiteral("pointOfIntersectionCurves");
+const QString strCurveIntersectAxis        = QStringLiteral("curveIntersectAxis");
+const QString strCurve                     = QStringLiteral("curve");
+const QString strCurve1                    = QStringLiteral("curve1");
+const QString strCurve2                    = QStringLiteral("curve2");
+const QString strModelingPath              = QStringLiteral("modelingPath");
+const QString strModelingSpline            = QStringLiteral("modelingSpline");
+const QString strPointFromArcAndTangent    = QStringLiteral("pointFromArcAndTangent");
+const QString strPointOfIntersectionArcs   = QStringLiteral("pointOfIntersectionArcs");
+const QString strFirstArc                  = QStringLiteral("firstArc");
+const QString strSecondArc                 = QStringLiteral("secondArc");
+
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
@@ -316,6 +368,9 @@ void VPatternConverter::ToV0_2_7()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_0()
 {
+    //Cutting path do not create anymore subpaths
+    FixCutPoint();
+    FixCutPoint();
     SetVersion(QStringLiteral("0.3.0"));
     Save();
 }
@@ -345,12 +400,12 @@ void VPatternConverter::ToV0_3_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagUnitToV0_2_0()
 {
-    QDomElement unit = createElement("unit");
+    QDomElement unit = createElement(strUnit);
     QDomText newNodeText = createTextNode(MUnitV0_1_4());
     unit.appendChild(newNodeText);
 
     QDomElement patternElement = documentElement();
-    patternElement.insertAfter(unit, patternElement.firstChildElement("version"));
+    patternElement.insertAfter(unit, patternElement.firstChildElement(strVersion));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,16 +440,16 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
             QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == "increment")
+                if (domElement.tagName() == strIncrement)
                 {
                     try
                     {
-                        const QString name = GetParametrString(domElement, "name");
+                        const QString name = GetParametrString(domElement, strName);
                         names.insert(name);
-                        domElement.setAttribute("name", "#"+name);
+                        domElement.setAttribute(strName, QLatin1String("#")+name);
 
-                        const QString base = GetParametrString(domElement, "base");
-                        domElement.setAttribute("formula", base);
+                        const QString base = GetParametrString(domElement, strBase);
+                        domElement.setAttribute(strFormula, base);
                     }
                     catch (VExceptionEmptyParameter &e)
                     {
@@ -402,10 +457,10 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
                         excep.AddMoreInformation(e.ErrorMessage());
                         throw excep;
                     }
-                    domElement.removeAttribute("id");
-                    domElement.removeAttribute("kgrowth");
-                    domElement.removeAttribute("ksize");
-                    domElement.removeAttribute("base");
+                    domElement.removeAttribute(strId);
+                    domElement.removeAttribute(strKGrowth);
+                    domElement.removeAttribute(strKSize);
+                    domElement.removeAttribute(strBase);
                 }
             }
         }
@@ -418,15 +473,15 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("point");
+    const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "length");
-            dom.setAttribute("length", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strLength);
+            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -435,8 +490,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, "angle");
-            dom.setAttribute("angle", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle);
+            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -444,18 +499,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
         }
         try
         {
-            formula = GetParametrString(dom, "c1Radius");
-            dom.setAttribute("c1Radius", FixIncrementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, "c2Radius");
-            dom.setAttribute("c2Radius", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strC1Radius);
+            dom.setAttribute(strC1Radius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -464,8 +509,18 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, "cRadius");
-            dom.setAttribute("cRadius", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strC2Radius);
+            dom.setAttribute(strC2Radius, FixIncrementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, strCRadius);
+            dom.setAttribute(strCRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -478,15 +533,15 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("arc");
+    const QDomNodeList list = elementsByTagName(strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "angle1");
-            dom.setAttribute("angle1", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle1);
+            dom.setAttribute(strAngle1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -495,8 +550,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, "angle2");
-            dom.setAttribute("angle2", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle2);
+            dom.setAttribute(strAngle2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -505,8 +560,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, "radius");
-            dom.setAttribute("radius", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strRadius);
+            dom.setAttribute(strRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -515,8 +570,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, "length");
-            dom.setAttribute("length", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strLength);
+            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -529,15 +584,15 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("pathPoint");
+    const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "kAsm1");
-            dom.setAttribute("kAsm1", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strKAsm1);
+            dom.setAttribute(strKAsm1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -546,8 +601,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, "kAsm2");
-            dom.setAttribute("kAsm2", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strKAsm2);
+            dom.setAttribute(strKAsm2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -556,8 +611,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, "angle");
-            dom.setAttribute("angle", FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle);
+            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -570,15 +625,15 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("point");
+    const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "length");
-            dom.setAttribute("length", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strLength);
+            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -587,8 +642,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, "angle");
-            dom.setAttribute("angle", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle);
+            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -596,18 +651,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
         }
         try
         {
-            formula = GetParametrString(dom, "c1Radius");
-            dom.setAttribute("c1Radius", FixMeasurementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, "c2Radius");
-            dom.setAttribute("c2Radius", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strC1Radius);
+            dom.setAttribute(strC1Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -616,8 +661,18 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, "cRadius");
-            dom.setAttribute("cRadius", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strC2Radius);
+            dom.setAttribute(strC2Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, strCRadius);
+            dom.setAttribute(strCRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -630,15 +685,15 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("arc");
+    const QDomNodeList list = elementsByTagName(strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "angle1");
-            dom.setAttribute("angle1", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle1);
+            dom.setAttribute(strAngle1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -647,8 +702,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, "angle2");
-            dom.setAttribute("angle2", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle2);
+            dom.setAttribute(strAngle2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -657,8 +712,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, "radius");
-            dom.setAttribute("radius", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strRadius);
+            dom.setAttribute(strRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -667,8 +722,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, "length");
-            dom.setAttribute("length", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strLength);
+            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -681,15 +736,15 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     QString formula;
-    const QDomNodeList list = elementsByTagName("pathPoint");
+    const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, "kAsm1");
-            dom.setAttribute("kAsm1", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strKAsm1);
+            dom.setAttribute(strKAsm1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -698,8 +753,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, "kAsm2");
-            dom.setAttribute("kAsm2", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strKAsm2);
+            dom.setAttribute(strKAsm2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -708,8 +763,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, "angle");
-            dom.setAttribute("angle", FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, strAngle);
+            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -782,11 +837,11 @@ QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula,
 void VPatternConverter::TagMeasurementsToV0_2_0()
 {
     QDomElement ms = TagMeasurementsV0_1_4();
-    const QString path = GetParametrString(ms, "path");
+    const QString path = GetParametrString(ms, strPath);
 
-    ms.removeAttribute("unit");
-    ms.removeAttribute("type");
-    ms.removeAttribute("path");
+    ms.removeAttribute(strUnit);
+    ms.removeAttribute(strType);
+    ms.removeAttribute(strPath);
 
     QDomText newNodeText = createTextNode(QFileInfo(fileName).absoluteDir().relativeFilePath(path));
     ms.appendChild(newNodeText);
@@ -806,18 +861,16 @@ void VPatternConverter::ConvertMeasurementsToV0_2_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::RemoveColorToolCutV0_3_1()
 {
-    const QDomNodeList list = elementsByTagName("point");
+    const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement element = list.at(i).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(QStringLiteral("type"));
-            if (type == QStringLiteral("cutArc") ||
-                type == QStringLiteral("cutSpline") ||
-                type == QStringLiteral("cutSplinePath"))
+            const QString type = element.attribute(strType);
+            if (type == strCutArc || type == strCutSpline || type == strCutSplinePath)
             {
-                element.removeAttribute(QStringLiteral("color"));
+                element.removeAttribute(strColor);
             }
         }
     }
@@ -829,7 +882,7 @@ QString VPatternConverter::MUnitV0_1_4() const
     const QDomElement element = TagMeasurementsV0_1_4();
     try
     {
-        return GetParametrString(element, "unit");
+        return GetParametrString(element, strUnit);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -842,7 +895,7 @@ QString VPatternConverter::MUnitV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 {
-    const QDomNodeList list = elementsByTagName("measurements");
+    const QDomNodeList list = elementsByTagName(strMeasurements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -855,7 +908,7 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 {
-    const QDomNodeList list = elementsByTagName("increments");
+    const QDomNodeList list = elementsByTagName(strIncrements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -869,14 +922,14 @@ QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 {
     QStringList expressions;
-    const QDomNodeList list = elementsByTagName("pathPoint");
+    const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         const QDomElement dom = list.at(i).toElement();
 
         try
         {
-            expressions.append(GetParametrString(dom, "kAsm1"));
+            expressions.append(GetParametrString(dom, strKAsm1));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -885,7 +938,7 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 
         try
         {
-            expressions.append(GetParametrString(dom, "kAsm2"));
+            expressions.append(GetParametrString(dom, strKAsm2));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -894,7 +947,7 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 
         try
         {
-            expressions.append(GetParametrString(dom, "angle"));
+            expressions.append(GetParametrString(dom, strAngle));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -909,7 +962,7 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 void VPatternConverter::FixToolUnionToV0_2_4()
 {
     QDomElement root = documentElement();
-    const QDomNodeList modelings = root.elementsByTagName(QStringLiteral("modeling"));
+    const QDomNodeList modelings = root.elementsByTagName(strModeling);
     for (int i=0; i<modelings.size(); ++i)
     {
         ParseModelingToV0_2_4(modelings.at(i).toElement());
@@ -922,17 +975,16 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
-        if (node.tagName() == QLatin1String("tools"))
+        if (node.tagName() == strTools)
         {
-            const quint32 toolId = node.attribute(QStringLiteral("id")).toUInt();
+            const quint32 toolId = node.attribute(strId).toUInt();
             QVector<quint32> children;
             QDomElement childNode = node.nextSibling().toElement();
-            const QString attrIdTool = QStringLiteral("idTool");
             while (not childNode.isNull())
             {
-                if (childNode.hasAttribute(attrIdTool) && childNode.attribute(attrIdTool).toUInt() == toolId)
+                if (childNode.hasAttribute(strIdTool) && childNode.attribute(strIdTool).toUInt() == toolId)
                 {
-                    children.append(childNode.attribute(QStringLiteral("idObject")).toUInt());
+                    children.append(childNode.attribute(strIdObject).toUInt());
                 }
                 else
                 {
@@ -961,11 +1013,11 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
         return;
     }
 
-    QDomElement tagChildren = createElement(QString("children"));
+    QDomElement tagChildren = createElement(strChildren);
 
     for (int i=0; i<children.size(); ++i)
     {
-        QDomElement tagChild = createElement(QString("child"));
+        QDomElement tagChild = createElement(strChild);
         tagChild.appendChild(createTextNode(QString().setNum(children.at(i))));
         tagChildren.appendChild(tagChild);
     }
@@ -1159,4 +1211,194 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
     names.insert(QStringLiteral("size"), QStringLiteral("bust_arc_f"));
 
     return names;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::FixCutPoint()
+{
+    const QStringList types = QStringList() << strCutSplinePath
+                                            << strCutSpline
+                                            << strCutArc;
+
+    const QDomNodeList list = elementsByTagName(strPoint);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement element = list.at(i).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(types.indexOf(type))
+            {
+                case 0: //strCutSplinePath
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strSplinePath).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                case 1: //strCutSpline
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strSpline).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                case 2: //strCutArc
+                {
+                    const quint32 id = element.attribute(strId).toUInt();
+                    quint32 curve = element.attribute(strArc).toUInt();
+                    FixSubPaths(i, id, curve);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
+{
+    const QStringList pointTypes = QStringList() << strCutSplinePath
+                                                 << strCutSpline
+                                                 << strPointOfIntersectionCurves
+                                                 << strCurveIntersectAxis
+                                                 << strPointFromArcAndTangent
+                                                 << strPointOfIntersectionArcs;
+
+    const QDomNodeList listPoints = elementsByTagName(strPoint);
+    for (int j = i+1; j < listPoints.size(); ++j)
+    {
+        QDomElement element = listPoints.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(pointTypes.indexOf(type))
+            {
+                case 0: //strCutSplinePath
+                {
+                    const quint32 spl = element.attribute(strSplinePath).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strSplinePath, baseCurve);
+                    }
+                    break;
+                }
+                case 1: //strCutSpline
+                {
+                    const quint32 spl = element.attribute(strSpline).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strSpline, baseCurve);
+                    }
+                    break;
+                }
+                case 2: //strPointOfIntersectionCurves
+                {
+                    quint32 spl = element.attribute(strCurve1).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve1, baseCurve);
+                    }
+
+                    spl = element.attribute(strCurve2).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve2, baseCurve);
+                    }
+                    break;
+                }
+                case 3: //strCurveIntersectAxis
+                {
+                    const quint32 spl = element.attribute(strCurve).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strCurve, baseCurve);
+                    }
+                    break;
+                }
+                case 4: //strPointFromArcAndTangent
+                {
+                    const quint32 spl = element.attribute(strArc).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strArc, baseCurve);
+                    }
+                    break;
+                }
+                case 5: //strPointOfIntersectionArcs
+                {
+                    quint32 arc = element.attribute(strFirstArc).toUInt();
+                    if (arc == id+1 || arc == id+2)
+                    {
+                        element.setAttribute(strFirstArc, baseCurve);
+                    }
+
+                    arc = element.attribute(strSecondArc).toUInt();
+                    if (arc == id+1 || arc == id+2)
+                    {
+                        element.setAttribute(strSecondArc, baseCurve);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    const QStringList splTypes = QStringList() << strModelingPath
+                                               << strModelingSpline;
+
+    const QDomNodeList listSplines = elementsByTagName(strSpline);
+    for (int j = 0; j < listSplines.size(); ++j)
+    {
+        QDomElement element = listSplines.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            switch(splTypes.indexOf(type))
+            {
+                case 0: //strModelingPath
+                {
+                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strIdObject, baseCurve);
+                    }
+                    break;
+                }
+                case 1: //strModelingSpline
+                {
+                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    if (spl == id+1 || spl == id+2)
+                    {
+                        element.setAttribute(strIdObject, baseCurve);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    const QDomNodeList listArcs = elementsByTagName(strArc);
+    for (int j = 0; j < listArcs.size(); ++j)
+    {
+        QDomElement element = listArcs.at(j).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(strType);
+            if (type == strModeling)
+            {
+                const quint32 arc = element.attribute(strIdObject).toUInt();
+                if (arc == id+1 || arc == id+2)
+                {
+                    element.setAttribute(strIdObject, baseCurve);
+                }
+            }
+        }
+    }
 }
