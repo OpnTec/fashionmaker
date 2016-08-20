@@ -18,6 +18,7 @@
 - [#544] Error: Color Lines are black until touched.
 - [#543] Detail loses details.
 - [#548] Bug Detail tool. Case when seam allowance is wrong.
+- Called the main app in console mode doesn't show opening file error in some cases. 
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
