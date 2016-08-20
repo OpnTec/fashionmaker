@@ -269,7 +269,6 @@ QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &point
  */
 QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF> &points)
 {
-    QVector<QPointF> correctPoints;
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
         qDebug()<<"Only three points.";
@@ -277,20 +276,17 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
     }
 
     //Clear equivalent points
-    correctPoints = RemoveDublicates(points);
+    QVector<QPointF> correctPoints = RemoveDublicates(points);
 
     if (correctPoints.size()<3)
     {
         return correctPoints;
     }
     //Remove point on line
-    QPointF point;
     for (qint32 i = 1; i <correctPoints.size()-1; ++i)
-    {
-        QLineF l1(correctPoints.at(i-1), correctPoints.at(i));
-        QLineF l2(correctPoints.at(i), correctPoints.at(i+1));
-        QLineF::IntersectType intersect = l1.intersect(l2, &point);
-        if (intersect == QLineF::NoIntersection)
+    {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
+     // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
+        if (VGObject::IsPointOnLineviaPDP(correctPoints.at(i), correctPoints.at(i-1), correctPoints.at(i+1)))
         {
             correctPoints.remove(i);
         }
