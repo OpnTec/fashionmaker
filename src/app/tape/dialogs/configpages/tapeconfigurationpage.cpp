@@ -290,7 +290,7 @@ QGroupBox *TapeConfigurationPage::GradationGroup()
     {
         defSizeCombo->setCurrentIndex(index);
     }
-    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             DefGradationChanged);
     gradationLayout->addRow(defSizeLabel, defSizeCombo);
 

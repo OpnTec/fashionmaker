@@ -239,7 +239,7 @@ QString VDrawTool::ObjectName(quint32 id) const
 {
     try
     {
-        return VAbstractTool::data.GeometricObject<T>(id)->name();
+        return data.GeometricObject<T>(id)->name();
     }
     catch (const VExceptionBadId &e)
     {

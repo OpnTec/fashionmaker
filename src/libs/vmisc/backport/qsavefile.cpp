@@ -47,7 +47,7 @@
 #include <QtCore/QTemporaryFile>
 
 QSaveFilePrivate::QSaveFilePrivate()
-    : tempFile(0), error(QFile::NoError)
+    : fileName(), tempFile(0), error(QFile::NoError)
 {
 }
 
@@ -256,7 +256,7 @@ bool QSaveFile::open(OpenMode mode)
   Cannot be called.
   Call commit() instead.
 */
-void QSaveFile::close()
+Q_NORETURN void QSaveFile::close()
 {
     qFatal("QSaveFile::close called");
 }

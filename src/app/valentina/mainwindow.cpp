@@ -3612,11 +3612,12 @@ void MainWindow::CreateActions()
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
-        recentFileActs[i] = new QAction(this);
-        recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], &QAction::triggered, this, [this]()
+        QAction *action = new QAction(this);
+        action->setVisible(false);
+        recentFileActs[i] = action;
+        connect(recentFileActs[i], &QAction::triggered, [action, this]()
         {
-            if (QAction *action = qobject_cast<QAction *>(sender()))
+            if (action)
             {
                 const QString filePath = action->data().toString();
                 if (not filePath.isEmpty())
@@ -4524,6 +4525,7 @@ void MainWindow::UpdateWindowTitle()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::IgnoreLocking(int error, const QString &path)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (VApplication::IsGUIMode())
     {
@@ -4586,6 +4588,11 @@ bool MainWindow::IgnoreLocking(int error, const QString &path)
         return false;
     }
     return true;
+#else
+    Q_UNUSED(error);
+    Q_UNUSED(path);
+    return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
