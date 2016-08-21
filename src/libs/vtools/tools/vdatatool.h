@@ -30,7 +30,6 @@
 #define VDATATOOL_H
 
 #include <qcompilerdetection.h>
-#include <QLoggingCategory>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>

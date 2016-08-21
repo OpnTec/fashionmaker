@@ -26,7 +26,9 @@
 
 #include <ctype.h>
 #if defined(__GNUC__) && !defined(__APPLE__)
+#if (__GNUC__ * 100 + __GNUC_MINOR__) > 406
 #include <ext/alloc_traits.h>
+#endif
 #endif
 #include <qcompilerdetection.h>
 #include <string.h>

@@ -39,7 +39,6 @@
 #include <QList>
 #include <QListWidget>
 #include <QLocale>
-#include <QLoggingCategory>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

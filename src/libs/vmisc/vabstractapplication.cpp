@@ -30,7 +30,6 @@
 
 #include <QDir>
 #include <QLibraryInfo>
-#include <QLoggingCategory>
 #include <QMessageLogger>
 #include <QStaticStringData>
 #include <QStringData>
@@ -40,6 +39,7 @@
 #include <QtDebug>
 
 #include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 
 class QGraphicsScene;
 class QWidget;

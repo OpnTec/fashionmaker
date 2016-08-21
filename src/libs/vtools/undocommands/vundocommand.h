@@ -31,7 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QDomElement>
-#include <QLoggingCategory>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>

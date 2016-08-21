@@ -31,7 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QGraphicsItem>
-#include <QLoggingCategory>
 #include <QObject>
 #include <QtGlobal>
 
