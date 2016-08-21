@@ -24,7 +24,7 @@
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #include <QtMath>
 #else
-#include <QtMath>
+#include "qmath.h"
 
 Q_DECL_CONSTEXPR inline float qDegreesToRadians(float degrees)
 {
