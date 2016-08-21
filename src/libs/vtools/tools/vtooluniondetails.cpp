@@ -32,7 +32,6 @@
 #include <QDomNodeList>
 #include <QHash>
 #include <QLineF>
-#include <QLoggingCategory>
 #include <QMessageLogger>
 #include <QSharedPointer>
 #include <QStaticStringData>

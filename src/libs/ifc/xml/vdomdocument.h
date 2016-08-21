@@ -35,7 +35,6 @@
 #include <QDomNode>
 #include <QHash>
 #include <QLatin1String>
-#include <QLoggingCategory>
 #include <QStaticStringData>
 #include <QString>
 #include <QStringData>
