@@ -252,15 +252,16 @@ void DialogDetail::AddUpdate()
     MaterialCutPlacement mcp;
     QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
 
-    mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
     int i = ui.comboBoxMaterial->currentData().toInt();
     if (i < m_qslMaterials.count() && mcp.m_qsMaterialUserDef == m_qslMaterials[i])
     {
         mcp.m_eMaterial = MaterialType(i);
+        mcp.m_qsMaterialUserDef.clear();
     }
     else
     {
         mcp.m_eMaterial = MaterialType::mtUserDefined;
+        mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
         // check if we have new user defined material
         bool bFound = false;
         for (int i = 0; i < qslUserMaterials.count() && bFound == false; ++i)
