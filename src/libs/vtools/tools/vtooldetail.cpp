@@ -452,6 +452,10 @@ void VToolDetail::AddToFile()
         {
             doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
         }
+        else
+        {
+            domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
+        }
         doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
         domData.appendChild(domMCP);
@@ -513,6 +517,10 @@ void VToolDetail::RefreshDataInFile()
             if (mcp.m_eMaterial == MaterialType::mtUserDefined)
             {
                 doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            }
+            else
+            {
+                domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
             }
             doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));

@@ -129,7 +129,6 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
                    << QApplication::translate("Detail", "Interfacing", 0)
                    << QApplication::translate("Detail", "Interlining", 0);
 
-    //ui.comboBoxMaterial->addItems(m_qslMaterials);
     for (int i = 0; i < m_qslMaterials.count(); ++i)
     {
         ui.comboBoxMaterial->addItem(m_qslMaterials[i], i);
@@ -253,7 +252,8 @@ void DialogDetail::AddUpdate()
     QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
 
     int i = ui.comboBoxMaterial->currentData().toInt();
-    if (i < m_qslMaterials.count() && mcp.m_qsMaterialUserDef == m_qslMaterials[i])
+    QString qsMat = ui.comboBoxMaterial->currentText();
+    if (i < m_qslMaterials.count() && qsMat == m_qslMaterials[i])
     {
         mcp.m_eMaterial = MaterialType(i);
         mcp.m_qsMaterialUserDef.clear();
@@ -261,7 +261,7 @@ void DialogDetail::AddUpdate()
     else
     {
         mcp.m_eMaterial = MaterialType::mtUserDefined;
-        mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
+        mcp.m_qsMaterialUserDef = qsMat;
         // check if we have new user defined material
         bool bFound = false;
         for (int i = 0; i < qslUserMaterials.count() && bFound == false; ++i)
@@ -832,7 +832,6 @@ void DialogDetail::SetEditMode()
     }
     else
     {
-        //ui.comboBoxMaterial->setCurrentText(m_qslMaterials[int(mcp.m_eMaterial)]);
         ui.comboBoxMaterial->setCurrentIndex(int(mcp.m_eMaterial));
     }
     ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
