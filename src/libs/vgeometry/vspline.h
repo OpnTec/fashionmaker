@@ -55,11 +55,11 @@ class VSpline :public VAbstractCubicBezier
 public:
     VSpline();
     VSpline (const VSpline &spline );
-    VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
+    VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, quint32 idObject = 0,
+    VSpline (const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, quint32 idObject = 0,
              Draw mode = Draw::Calculation);
-    VSpline (VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
+    VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, const QString &angle1Formula, qreal angle2,
              const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
              const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;

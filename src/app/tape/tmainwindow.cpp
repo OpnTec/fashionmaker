@@ -1738,7 +1738,7 @@ void TMainWindow::SetupMenu()
         recentFileActs[i] = action;
         connect(action, &QAction::triggered, [action, this]()
         {
-            if (action)
+            if (action != nullptr)
             {
                 const QString filePath = action->data().toString();
                 if (not filePath.isEmpty())
