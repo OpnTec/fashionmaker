@@ -928,11 +928,6 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         printer->setOrientation(QPrinter::Landscape);
     }
 
-    const qreal left = FromPixel(margins.left(), Unit::Mm);
-    const qreal top = FromPixel(margins.top(), Unit::Mm);
-    const qreal right = FromPixel(margins.right(), Unit::Mm);
-    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-
     if (not isTiled)
     {
         QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
@@ -941,15 +936,14 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
             if (paper)
             {
-                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paper->rect().height(), Unit::Mm));
+                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm),
+                              FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm));
             }
         }
 
         const QPrinter::PageSize pSZ = FindTemplate(size);
         if (pSZ == QPrinter::Custom)
         {
-            size.setWidth(size.width() + left + right);
-            size.setHeight(size.height() + top + bottom);
             printer->setPaperSize (size, QPrinter::Millimeter );
         }
         else
@@ -958,6 +952,10 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         }
     }
 
+    const qreal left = FromPixel(margins.left(), Unit::Mm);
+    const qreal top = FromPixel(margins.top(), Unit::Mm);
+    const qreal right = FromPixel(margins.right(), Unit::Mm);
+    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
     printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
 
     switch(printType)
