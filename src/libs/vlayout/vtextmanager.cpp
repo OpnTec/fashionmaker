@@ -246,7 +246,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
                  << QApplication::translate("Detail", "Lining", 0)
                  << QApplication::translate("Detail", "Interfacing", 0)
                  << QApplication::translate("Detail", "Interlining", 0);
-    QString qsText = tr("Cut %1 on %2%3");
+    QString qsText = QLatin1String("%1. ") + tr("Cut") + QLatin1String(" %2%3");
     QStringList qslPlace;
     qslPlace << "" << QLatin1String(" ") + tr("on Fold");
     tl.m_eFontWeight = QFont::Normal;
@@ -265,7 +265,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
             {
                 qsMat = qslMaterials[int(mcp.m_eMaterial)];
             }
-            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(qsMat).
+            tl.m_qsText = qsText.arg(qsMat).arg(mcp.m_iCutNumber).
                     arg(qslPlace[int(mcp.m_ePlacement)]);
             AddLine(tl);
         }
