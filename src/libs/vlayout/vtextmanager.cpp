@@ -254,7 +254,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
         MaterialCutPlacement mcp = data.GetMCP(i);
-        if (mcp.m_iCutNumber > 0)
+        if (mcp.m_iCutNumber > 0)//Not gonna happen because min value is 1 now, but decided to left
         {
             QString qsMat;
             if (mcp.m_eMaterial == MaterialType::mtUserDefined)

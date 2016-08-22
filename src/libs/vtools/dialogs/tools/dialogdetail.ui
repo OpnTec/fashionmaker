@@ -305,8 +305,7 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-down">
-                    <normaloff/>
-                   </iconset>
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -320,8 +319,7 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-up">
-                    <normaloff/>
-                   </iconset>
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -431,6 +429,9 @@
               </item>
               <item row="1" column="2" colspan="2">
                <widget class="QSpinBox" name="spinBoxCutNumber">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
                 <property name="maximum">
                  <number>1000</number>
                 </property>
