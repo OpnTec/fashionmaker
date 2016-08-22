@@ -631,7 +631,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
     if (paper)
     {
         QPrinter printer;
-        printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+        printer.setCreator(qApp->applicationDisplayName()+QLatin1String(" ")+qApp->applicationVersion());
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(name);
         printer.setDocName(FileName());
@@ -646,7 +646,8 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         {
             printer.setOrientation(QPrinter::Landscape);
         }
-        printer.setPaperSize ( QSizeF(FromPixel(r.width(), Unit::Mm), FromPixel(r.height(), Unit::Mm)),
+        printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
+                                      FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
                                QPrinter::Millimeter );
         QPainter painter;
         if (painter.begin( &printer ) == false)
