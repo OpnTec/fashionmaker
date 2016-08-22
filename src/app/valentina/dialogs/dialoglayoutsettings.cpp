@@ -35,6 +35,7 @@
 
 #include <QMessageBox>
 #include <QPushButton>
+#include <QPrinterInfo>
 
 //must be the same order as PaperSizeTemplate constants
 const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames =
@@ -68,6 +69,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     InitTemplates();
     MinimumPaperSize();
     MinimumLayoutSize();
+    InitPrinter();
 
     //in export console mode going to use defaults
     if (disableSettings == false)
@@ -79,24 +81,27 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
         RestoreDefaults();
     }
 
-    connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPrinter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogLayoutSettings::PrinterMargins);
+
+    connect(ui->comboBoxTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
-    connect(ui->comboBoxPaperSizeUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPaperSizeUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertPaperSize);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
 
     connect(ui->checkBoxIgnoreFileds, &QCheckBox::stateChanged, this, &DialogLayoutSettings::IgnoreAllFields);
@@ -331,6 +336,12 @@ bool DialogLayoutSettings::IsIgnoreAllFields() const
 void DialogLayoutSettings::SetIgnoreAllFields(bool value)
 {
     ui->checkBoxIgnoreFileds->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLayoutSettings::SelectedPrinter() const
+{
+    return ui->comboBoxPrinter->currentText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,6 +628,10 @@ void DialogLayoutSettings::RestoreDefaults()
     TemplateSelected();
     ui->comboBoxTemplates->blockSignals(false);
 
+    ui->comboBoxPrinter->blockSignals(true);
+    InitPrinter();
+    ui->comboBoxPrinter->blockSignals(false);
+
     SetLayoutWidth(VSettings::GetDefLayoutWidth());
     SetShift(VSettings::GetDefLayoutShift());
     SetGroup(VSettings::GetDefLayoutGroup());
@@ -628,6 +643,16 @@ void DialogLayoutSettings::RestoreDefaults()
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::PrinterMargins()
+{
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        SetFields(VSettings::GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -712,6 +737,51 @@ void DialogLayoutSettings::InitTemplates()
         }
     }
     ui->comboBoxTemplates->setCurrentIndex(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::InitPrinter()
+{
+    ui->comboBoxPrinter->clear();
+    QStringList printerNames;
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+    const QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
+    for(int i = 0; i < printers.size(); ++i)
+    {
+        const QString name = printers.at(i).printerName();
+        if (not name.isEmpty())
+        {
+            printerNames.append(name);
+        }
+    }
+#else
+    printerNames = QPrinterInfo::availablePrinterNames();
+#endif
+
+    ui->comboBoxPrinter->addItems(printerNames);
+
+    if (ui->comboBoxPrinter->count() == 0)
+    {
+        ui->comboBoxPrinter->addItem(tr("None", "Printer"));
+    }
+    else
+    {
+        QString defPrinterName;
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+        const QPrinterInfo def = QPrinterInfo::defaultPrinter();
+        if(not def.isNull())
+        {
+            defPrinterName = def.printerName();
+        }
+#else
+        defPrinterName = QPrinterInfo::defaultPrinterName();
+#endif
+        const int index = ui->comboBoxPrinter->findText(defPrinterName);
+        if(index != -1)
+        {
+            ui->comboBoxPrinter->setCurrentIndex(index);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

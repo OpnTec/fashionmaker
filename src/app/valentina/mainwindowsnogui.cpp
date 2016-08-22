@@ -69,7 +69,8 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       paperSize(),
       isTiled(false),
       isAutoCrop(false),
-      isUnitePages(false)
+      isUnitePages(false),
+      layoutPrinterName()
 
 {
     InitTempLayoutScene();
@@ -98,6 +99,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             tButton->setChecked(false);
             return;
         }
+        layoutPrinterName = layout.SelectedPrinter();
         LayoutSettings(lGenerator);
         tButton->setChecked(false);
     }
@@ -854,7 +856,12 @@ void MainWindowsNoGUI::PrintPreview()
         }
     }
 
-    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    QPrinterInfo info = QPrinterInfo::printerInfo(layoutPrinterName);
+    if(info.isNull() || info.printerName().isEmpty())
+    {
+        info = QPrinterInfo::defaultPrinter();
+    }
+    QSharedPointer<QPrinter> printer = PreparePrinter(info);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -881,7 +888,12 @@ void MainWindowsNoGUI::LayoutPrint()
         }
     }
     // display print dialog and if accepted print
-    QSharedPointer<QPrinter> printer = DefaultPrinter(QPrinter::HighResolution);
+    QPrinterInfo info = QPrinterInfo::printerInfo(layoutPrinterName);
+    if(info.isNull() || info.printerName().isEmpty())
+    {
+        info = QPrinterInfo::defaultPrinter();
+    }
+    QSharedPointer<QPrinter> printer = PreparePrinter(info, QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),

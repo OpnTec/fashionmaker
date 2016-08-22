@@ -111,6 +111,8 @@ public:
     bool IsIgnoreAllFields() const;
     void SetIgnoreAllFields(bool value);
 
+    QString SelectedPrinter() const;
+
     //support functions for the command line parser which uses invisible dialog to properly build layout generator
     bool SelectTemplate(const PaperSizeTemplate& id);
     static QString MakeHelpTemplateList();
@@ -131,6 +133,7 @@ private slots:
     void PaperSizeChanged();
     void Swap(bool checked);
     void RestoreDefaults();
+    void PrinterMargins();
 
     void CorrectMaxFileds();
     void IgnoreAllFields(int state);
@@ -151,6 +154,7 @@ private:
     void InitPaperUnits();
     void InitLayoutUnits();
     void InitTemplates();
+    void InitPrinter();
     QSizeF Template();
     QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
     QSizeF RoundTemplateSize(qreal width, qreal height) const;

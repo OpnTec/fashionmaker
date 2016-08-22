@@ -37,6 +37,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QVariant>
+#include <QPrinterInfo>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -375,7 +376,12 @@ QMarginsF VSettings::GetFields() const
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF VSettings::GetDefFields()
 {
-    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    return GetPrinterFields(PreparePrinter(QPrinterInfo::defaultPrinter()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VSettings::GetPrinterFields(const QSharedPointer<QPrinter> &printer)
+{
     if (printer.isNull())
     {
         return QMarginsF();

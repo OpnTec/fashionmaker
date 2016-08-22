@@ -1813,24 +1813,35 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode)
+QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode)
 {
-    QPrinterInfo def = QPrinterInfo::defaultPrinter();
-
-    //if there is no default printer set the print preview won't show
-    if(def.isNull() || def.printerName().isEmpty())
+    QPrinterInfo tmpInfo = info;
+    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
     {
-        if(QPrinterInfo::availablePrinters().isEmpty())
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+        const QList<QPrinterInfo> list = QPrinterInfo::availablePrinters();
+        if(list.isEmpty())
         {
             return QSharedPointer<QPrinter>();
         }
         else
         {
-            def = QPrinterInfo::availablePrinters().first();
+            tmpInfo = list.first();
         }
+#else
+    const QStringList list = QPrinterInfo::availablePrinterNames();
+    if(list.isEmpty())
+    {
+        return QSharedPointer<QPrinter>();
+    }
+    else
+    {
+        tmpInfo = QPrinterInfo::printerInfo(list.first());
+    }
+#endif
     }
 
-    auto printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
+    auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }

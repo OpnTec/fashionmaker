@@ -39,6 +39,8 @@
 #include "vcommonsettings.h"
 
 class QMarginsF;
+class QPrinter;
+template <class T> class QSharedPointer;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -112,6 +114,7 @@ public:
 
     QMarginsF GetFields() const;
     static QMarginsF GetDefFields();
+    static QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
     void SetFields(const QMarginsF &value);
 
     Cases GetLayoutGroup() const;
