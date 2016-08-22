@@ -229,6 +229,23 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
         return;
     }
 
+    if (fW > parentItem()->boundingRect().width())
+    {
+        fW = parentItem()->boundingRect().width();
+    }
+    if (fW < MIN_W)
+    {
+        fW = MIN_W;
+    }
+    if (fH > parentItem()->boundingRect().height())
+    {
+        fH = parentItem()->boundingRect().height();
+    }
+    if (fH < m_iMinH)
+    {
+        fH = m_iMinH;
+    }
+
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
@@ -308,9 +325,9 @@ void VTextGraphicsItem::UpdateData(const QString &qsName, const VPatternPieceDat
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
  * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc)
+void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight)
 {
-    m_tm.Update(pDoc);
+    m_tm.Update(pDoc, dSize, dHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

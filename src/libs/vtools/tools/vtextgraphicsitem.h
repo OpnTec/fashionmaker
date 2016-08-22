@@ -88,7 +88,7 @@ public:
     void                Update();
     bool                IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
     void                UpdateData(const QString& qsName, const VPatternPieceData& data);
-    void                UpdateData(const VAbstractPattern* pDoc);
+    void                UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
     int                 GetTextLines() const;
 
 protected:

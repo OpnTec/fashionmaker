@@ -118,6 +118,10 @@ public:
     QDate GetDateOfLastRemind() const;
     void  SetDateOfLastRemind(const QDate &date);
 
+    QStringList GetUserDefinedMaterials() const;
+    void AddUserDefinedMaterial(QString qsMaterial);
+    void ClearUserDefinedMaterial();
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 
@@ -146,6 +150,7 @@ private:
     static const QString SettingPreferenceDialogSize;
     static const QString SettingLatestSkippedVersion;
     static const QString SettingDateOfLastRemind;
+    static const QString SettingUserDefinedMaterials;
 };
 
 #endif // VCOMMONSETTINGS_H

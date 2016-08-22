@@ -1,8 +1,37 @@
+/************************************************************************
+ **
+ **  @file   vpatternpiecedata.cpp
+ **  @author Bojan Kverh
+ **  @date   July 19, 2016
+ **
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013-2015 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **
+ **  Valentina is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Valentina is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
+ **
+ *************************************************************************/
+
 #include <QDate>
 #include <QFileInfo>
 #include <QFontMetrics>
 #include <QLatin1String>
 #include <QRegularExpression>
+#include <QApplication>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
@@ -212,6 +241,11 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
         AddLine(tl);
     }
     // MCP
+    QStringList qslMaterials;
+    qslMaterials << QApplication::translate("Detail", "Fabric", 0)
+                 << QApplication::translate("Detail", "Lining", 0)
+                 << QApplication::translate("Detail", "Interfacing", 0)
+                 << QApplication::translate("Detail", "Interlining", 0);
     QString qsText = tr("Cut %1 on %2%3");
     QStringList qslPlace;
     qslPlace << "" << QLatin1String(" ") + tr("on Fold");
@@ -222,7 +256,16 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
         MaterialCutPlacement mcp = data.GetMCP(i);
         if (mcp.m_iCutNumber > 0)
         {
-            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).
+            QString qsMat;
+            if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+            {
+                qsMat = mcp.m_qsMaterialUserDef;
+            }
+            else
+            {
+                qsMat = qslMaterials[int(mcp.m_eMaterial)];
+            }
+            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(qsMat).
                     arg(qslPlace[int(mcp.m_ePlacement)]);
             AddLine(tl);
         }
@@ -234,7 +277,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
  * @brief VTextManager::Update updates the text lines with pattern info
  * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(const VAbstractPattern *pDoc)
+void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeight)
 {
     Clear();
     TextLine tl;
@@ -281,6 +324,8 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
     tl.m_qsText = pDoc->GetPatternSize();
     if (tl.m_qsText.isEmpty() == false)
     {
+        tl.m_qsText.replace(QApplication::translate("Detail", "%size%", 0), QString::number(dSize));
+        tl.m_qsText.replace(QApplication::translate("Detail", "%height%", 0), QString::number(dHeight));
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;

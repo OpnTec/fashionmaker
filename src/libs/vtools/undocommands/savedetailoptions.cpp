@@ -161,7 +161,16 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
         MaterialCutPlacement mcp = data.GetMCP(i);
         QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+        {
+            qDebug() << "USER DEFINED MATERIAL";
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        }
+        else
+        {
+            qDebug() << "PREDEFINED MATERIAL";
+            domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
+        }
         doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
         domData.appendChild(domMCP);

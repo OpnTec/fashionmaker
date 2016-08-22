@@ -43,6 +43,7 @@
 #include <QVBoxLayout>
 #include <QDirIterator>
 #include <QFormLayout>
+#include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)

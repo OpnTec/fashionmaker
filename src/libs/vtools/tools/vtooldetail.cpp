@@ -205,6 +205,11 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
+
+    connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdateLabel);
+    connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdatePatternInfo);
+    connect(sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolDetail::retranslateUi);
+
     UpdateLabel();
     UpdatePatternInfo();
 }
@@ -443,7 +448,14 @@ void VToolDetail::AddToFile()
         MaterialCutPlacement mcp = data.GetMCP(i);
         QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+        {
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        }
+        else
+        {
+            domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
+        }
         doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
         domData.appendChild(domMCP);
@@ -502,7 +514,14 @@ void VToolDetail::RefreshDataInFile()
             MaterialCutPlacement mcp = data.GetMCP(i);
             QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+            {
+                doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            }
+            else
+            {
+                domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
+            }
             doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
             domData.appendChild(domMCP);
@@ -763,8 +782,8 @@ void VToolDetail::UpdateLabel()
         QPointF pt = data.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
-        rectBB.setWidth(data.GetLabelWidth());
-        rectBB.setHeight(data.GetLabelHeight());
+        rectBB.setWidth(dataLabel->boundingRect().width());
+        rectBB.setHeight(dataLabel->boundingRect().height());
         qreal dX;
         qreal dY;
         if (dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
@@ -804,13 +823,13 @@ void VToolDetail::UpdatePatternInfo()
         fnt.setPixelSize(iFS);
         patternInfo->SetFont(fnt);
         patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
-        patternInfo->UpdateData(doc);
+        patternInfo->UpdateData(doc, getData()->size(), getData()->height());
 
         QPointF pt = geom.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
-        rectBB.setWidth(geom.GetLabelWidth());
-        rectBB.setHeight(geom.GetLabelHeight());
+        rectBB.setWidth(patternInfo->boundingRect().width());
+        rectBB.setHeight(patternInfo->boundingRect().height());
         qreal dX;
         qreal dY;
         if (patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
@@ -1121,4 +1140,11 @@ void VToolDetail::UpdateAll()
 {
     sceneDetails->update();
     update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::retranslateUi()
+{
+    UpdateLabel();
+    UpdatePatternInfo();
 }

@@ -598,3 +598,4 @@ void VSettings::SetMultiplier(quint8 value)
 {
     setValue(SettingMultiplier, value);
 }
+

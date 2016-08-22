@@ -470,7 +470,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
             {
                 date = QDate::currentDate();
             }
-            det.SetPatternInfo(pDoc, geom, qApp->font());
+            det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
         det.CreateTextItems();

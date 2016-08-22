@@ -99,6 +99,7 @@ public slots:
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
     virtual void       ResetChildren(QGraphicsItem* pItem);
     virtual void       UpdateAll();
+    virtual void       retranslateUi();
 protected:
     virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                              QWidget *widget) Q_DECL_OVERRIDE;
