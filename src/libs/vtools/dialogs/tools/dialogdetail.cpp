@@ -251,7 +251,11 @@ void DialogDetail::AddUpdate()
     MaterialCutPlacement mcp;
     QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    int i = ui.comboBoxMaterial->itemData(ui.comboBoxMaterial->currentIndex()).toInt();
+#else
     int i = ui.comboBoxMaterial->currentData().toInt();
+#endif
     QString qsMat = ui.comboBoxMaterial->currentText();
     if (i < m_qslMaterials.count() && qsMat == m_qslMaterials[i])
     {
