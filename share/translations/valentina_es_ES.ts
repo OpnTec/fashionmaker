@@ -3245,8 +3245,8 @@ Apply settings anyway?</source>
         <translation>Aplicar inmediatamente</translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Tipo:</translation>
     </message>
 </context>
 <context>

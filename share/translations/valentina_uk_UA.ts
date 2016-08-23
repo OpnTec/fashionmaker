@@ -3245,8 +3245,8 @@ Apply settings anyway?</source>
         <translation>Негайно застосувати</translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Тип:</translation>
     </message>
 </context>
 <context>

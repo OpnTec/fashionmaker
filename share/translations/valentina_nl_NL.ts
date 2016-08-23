@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation>De tekst verschijnt onder het icoon. ( Aanbevolen voor beginners)</translation>
+        <translation>De tekst verschijnt onder het icoon. (Aanbevolen voor beginners).</translation>
     </message>
 </context>
 <context>
@@ -1862,7 +1862,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Kan geen aantekening creeren</translation>
+        <translation>Kan geen aantekening creeren.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -3111,7 +3111,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation>Toon maten:</translation>
+        <translation>Toon maten</translation>
     </message>
     <message>
         <source>Show date of creation</source>
@@ -3262,7 +3262,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Soort:</translation>
+        <translation type="vanished">Soort:</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Soort:</translation>
     </message>
 </context>
 <context>
@@ -4445,7 +4449,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogTrueDarts</name>
     <message>
         <source>True darts</source>
-        <translation>Coupenaden </translation>
+        <translation>Coupenaden</translation>
     </message>
     <message>
         <source>First base point</source>
@@ -7159,7 +7163,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Onverwachte versie &quot;%1&quot;. </translation>
+        <translation>Onverwachte versie &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -7577,11 +7581,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Number of free id exhausted.</source>
-        <translation>Hoeveelheid aan gratis id is verbruikt</translation>
+        <translation>Hoeveelheid aan gratis id is verbruikt.</translation>
     </message>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
-        <translation>Kan geen kromming maken met soort &apos;%1&apos;.</translation>
+        <translation>Kan geen kromming maken met soort &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -7935,7 +7939,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Onverwachte versie &quot;%1&quot;. </translation>
+        <translation type="vanished">Onverwachte versie &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -9396,7 +9400,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Onverwachte versie &quot;%1&quot;. </translation>
+        <translation type="vanished">Onverwachte versie &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>

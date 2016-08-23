@@ -843,7 +843,7 @@
     </message>
     <message>
         <source>Third point:</source>
-        <translation>Terceiro ponto</translation>
+        <translation>Terceiro ponto:</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -874,7 +874,7 @@
     </message>
     <message>
         <source>Third point:</source>
-        <translation>Terceiro ponto</translation>
+        <translation>Terceiro ponto:</translation>
     </message>
     <message>
         <source>Fourth point:</source>
@@ -2009,7 +2009,7 @@
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Valor calculado</translation>
+        <translation>Valor calculado:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -3088,7 +3088,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: </source>
+        <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3734,7 +3734,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Third point:</source>
-        <translation>Terceiro ponto</translation>
+        <translation>Terceiro ponto:</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -5958,7 +5958,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Valor calculado</translation>
+        <translation>Valor calculado:</translation>
     </message>
     <message>
         <source>Full name:</source>

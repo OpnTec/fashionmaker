@@ -3244,8 +3244,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Sofort übernehmen</translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Typ:</translation>
     </message>
 </context>
 <context>

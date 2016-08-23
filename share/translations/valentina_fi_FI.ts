@@ -3153,7 +3153,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: </source>
+        <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

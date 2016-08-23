@@ -3262,7 +3262,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Type: </translation>
+        <translation type="vanished">Type: </translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Type:</translation>
     </message>
 </context>
 <context>

@@ -3258,8 +3258,8 @@ Appliquer les réglages quand-même ?</translation>
         <translation>Appliquer immédiatement</translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Type:</translation>
     </message>
 </context>
 <context>

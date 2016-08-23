@@ -3221,8 +3221,8 @@ Applicare le impostazioni comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Tipo:</translation>
     </message>
 </context>
 <context>
