@@ -63,6 +63,7 @@ public:
     virtual QVariant getEditorData(const QWidget* editor) const Q_DECL_OVERRIDE;
 
     void         setReadOnly(bool readOnly);
+    void         setOsSeparator(bool separator);
     void         setClearButtonEnable(bool value);
 
     //! Sets the settings.
@@ -94,6 +95,9 @@ protected:
     bool readOnly;
     int typeForParent;
     bool clearButton;
+    bool m_osSeparator;
+
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VStringProperty)

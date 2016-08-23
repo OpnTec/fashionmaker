@@ -346,8 +346,7 @@ void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::eventFilter(QObject *object, QEvent *event)
 {
-    QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object);
-    if (plainTextEdit != nullptr)
+    if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
@@ -357,6 +356,18 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
                 // Ignore Enter key
                 return true;
             }
+            else if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    plainTextEdit->insertPlainText(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
         }
     }
     else
@@ -364,7 +375,7 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
         // pass the event on to the parent class
         return QDialog::eventFilter(object, event);
     }
-    return false;
+    return false;// pass the event to the widget
 }
 
 //---------------------------------------------------------------------------------------------------------------------

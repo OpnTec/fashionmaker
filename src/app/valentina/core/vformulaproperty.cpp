@@ -33,6 +33,7 @@
 #include "vformulapropertyeditor.h"
 #include "../vpropertyexplorer/vproperties.h"
 #include "../vpatterndb/vformula.h"
+#include "../vmisc/vabstractapplication.h"
 
 enum class ChildType : char {Invalid = 0, Value = 1, Formula = 2};
 
@@ -48,12 +49,14 @@ VFormulaProperty::VFormulaProperty(const QString &name)
     addChild(tmpValue);
     tmpValue->setUpdateBehaviour(true, false);
     tmpValue->setReadOnly(true);
+    tmpValue->setOsSeparator(qApp->Settings()->GetOsSeparator());
     tmpValue->setTypeForParent(static_cast<int>(ChildType::Value));
 
     VStringProperty* tmpFormula = new VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
+    tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
     tmpFormula->setTypeForParent(static_cast<int>(ChildType::Formula));
 
     setValue(0);

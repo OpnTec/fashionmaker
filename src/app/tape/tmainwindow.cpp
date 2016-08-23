@@ -110,6 +110,9 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->lineEditEmail->setClearButtonEnabled(true);
 #endif
 
+    ui->lineEditFind->installEventFilter(this);
+    ui->plainTextEditFormula->installEventFilter(this);
+
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
@@ -554,6 +557,60 @@ void TMainWindow::showEvent(QShowEvent *event)
     ui->dockWidgetDiagram->setVisible(false);
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+            {
+                // Ignore Enter key
+                return true;
+            }
+            else if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    plainTextEdit->insertPlainText(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    textEdit->insert(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return QMainWindow::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -68,9 +68,12 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->lineEditFind->setClearButtonEnabled(true);
 #endif
 
+    ui->lineEditFind->installEventFilter(this);
+
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
 
     formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
@@ -726,7 +729,37 @@ void DialogIncrements::changeEvent(QEvent *event)
         FullUpdateFromFile();
     }
     // remember to call base class implementation
-   QWidget::changeEvent(event);
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
+{
+    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    textEdit->insert(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return DialogTool::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }
 
 //---------------------------------------------------------------------------------------------------------------------
