@@ -821,6 +821,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
     }
     QPrinter printer;
     SetPrinterSettings(&printer, PrintType::PrintPDF);
+    printer.setPageSize(QPrinter::A4);// Want to be sure that page size is correct.
 
     // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
     if (not isTiled && not IsPagesFit(printer.paperRect().size()))
