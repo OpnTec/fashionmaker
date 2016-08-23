@@ -592,6 +592,10 @@ extern const QString in_Oprt;
 
 extern const QStringList builInPostfixOperators;
 
+// Placeholders
+extern const QString pl_size;
+extern const QString pl_height;
+
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 

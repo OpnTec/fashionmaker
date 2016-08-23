@@ -423,6 +423,9 @@ const QStringList builInPostfixOperators = QStringList() << cm_Oprt
                                                          << mm_Oprt
                                                          << in_Oprt;
 
+const QString pl_size   = QStringLiteral("size");
+const QString pl_height = QStringLiteral("height");
+
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
 

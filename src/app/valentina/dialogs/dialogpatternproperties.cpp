@@ -173,6 +173,11 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->lineEditCustomerName->setText(doc->GetCustomerName());
     ui->labelCreationDate->setText(QDate::currentDate().toString(Qt::SystemLocaleLongDate));
     ui->lineEditSize->setText(doc->GetPatternSize());
+
+    const QString plSize = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
+    const QString plHeight = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
+    ui->lineEditSize->setToolTip(tr("Use %1 and %2 to insert pattern size and height").arg(plSize, plHeight));
+
     ui->checkBoxShowDate->setChecked(doc->IsDateVisible());
     if (doc->MPath().isEmpty() == true)
     {
@@ -183,7 +188,6 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     {
         ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
     }
-
 
     connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
     connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);

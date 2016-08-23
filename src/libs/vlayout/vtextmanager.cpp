@@ -35,6 +35,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,8 +325,14 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
     tl.m_qsText = pDoc->GetPatternSize();
     if (tl.m_qsText.isEmpty() == false)
     {
-        tl.m_qsText.replace(QApplication::translate("Detail", "%size%", 0), QString::number(dSize));
-        tl.m_qsText.replace(QApplication::translate("Detail", "%height%", 0), QString::number(dHeight));
+        // Such describing placeholders will help avoid mistake of localization.
+        // Translators very often remove '%'.
+        QString placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
+        tl.m_qsText.replace(placeholder, QString::number(dSize));
+
+        placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
+        tl.m_qsText.replace(placeholder, QString::number(dHeight));
+
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;

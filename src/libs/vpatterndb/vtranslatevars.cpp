@@ -55,12 +55,14 @@ VTranslateVars::VTranslateVars()
       variables(QMap<QString, QmuTranslation>()),
       functions(QMap<QString, QmuTranslation>()),
       postfixOperators(QMap<QString, QmuTranslation>()),
+      placeholders(QMap<QString, QmuTranslation>()),
       stDescriptions(QMap<QString, QmuTranslation>())
 {
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+    InitPlaceholder();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,6 +432,13 @@ void VTranslateVars::InitPostfixOperators()
     postfixOperators.insert(in_Oprt, translate("VTranslateVars", "in", "inch"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::InitPlaceholder()
+{
+    placeholders.insert(pl_size, translate("VTranslateVars", "size", "placeholder"));
+    placeholders.insert(pl_height, translate("VTranslateVars", "height", "placeholder"));
+}
+
 #undef translate
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -612,6 +621,17 @@ QString VTranslateVars::InternalVarToUser(const QString &var) const
     {
         return var;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderToUser(const QString &var) const
+{
+    if (placeholders.contains(var))
+    {
+        return placeholders.value(var).translate();
+    }
+
+    return var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -945,6 +965,7 @@ void VTranslateVars::Retranslate()
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+    InitPlaceholder();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
