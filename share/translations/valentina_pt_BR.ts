@@ -185,6 +185,10 @@
         <translation type="vanished">Idioma da GUI</translation>
     </message>
     <message>
+        <source>Decimal separator parts</source>
+        <translation type="vanished">Partes do separador decimal</translation>
+    </message>
+    <message>
         <source>With OS options (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -303,6 +307,25 @@
     <message>
         <source>delete pattern piece %1</source>
         <translation>Excluir molde %1</translation>
+    </message>
+</context>
+<context>
+    <name>Detail</name>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -820,7 +843,7 @@
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terceiro ponto</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -851,7 +874,7 @@
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terceiro ponto</translation>
     </message>
     <message>
         <source>Fourth point:</source>
@@ -1384,22 +1407,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fabric</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished">nenhum</translation>
     </message>
@@ -1417,6 +1424,10 @@
     </message>
     <message>
         <source>on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1544,6 +1555,10 @@
     </message>
     <message>
         <source>Full name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Functions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1994,7 +2009,7 @@
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor calculado</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -2018,7 +2033,7 @@
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished"></translation>
+        <translation>Campo vazio</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2263,6 +2278,15 @@ Apply settings anyway?</source>
         <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Printer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>Printer</comment>
+        <translation type="unfinished">nenhum</translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2284,11 +2308,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select second point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecioneo segundo ponto</translation>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha entre pontos</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -2319,7 +2343,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First line</source>
-        <translation type="unfinished"></translation>
+        <translation>Primeira linha</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2786,11 +2810,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <source>Author name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome do autor</translation>
     </message>
     <message>
         <source>Pattern description</source>
@@ -2810,7 +2834,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>All sizes (cm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os tamanhos (cm)</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -2934,6 +2958,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show date of creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use %1 and %2 to insert pattern size and height</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3539,10 +3567,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Path to destination folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select path to destination folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3551,7 +3575,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File base name.</source>
+        <source>Path to destination folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3710,7 +3734,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terceiro ponto</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -3954,7 +3978,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished"></translation>
+        <translation>Campo vazio</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
@@ -4025,7 +4049,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select second point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecioneo segundo ponto</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -4405,7 +4429,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha entre pontos</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
@@ -5376,10 +5400,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5389,6 +5409,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5502,6 +5526,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User defined materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5922,7 +5958,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor calculado</translation>
     </message>
     <message>
         <source>Full name:</source>
@@ -6159,7 +6195,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished"></translation>
+        <translation>Campo vazio</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6457,6 +6493,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Book:</source>
         <translation>Livro:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts</source>
+        <translation type="vanished">Partes do separador decimal</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -7295,11 +7335,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VTextManager</name>
     <message>
-        <source>Cut %1 on %2%3</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>on Fold</source>
+        <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7410,7 +7450,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha entre pontos</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
@@ -8481,7 +8521,7 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
@@ -8641,6 +8681,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>size</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>placeholder</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
