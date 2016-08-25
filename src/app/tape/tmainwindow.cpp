@@ -101,6 +101,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditName->setClearButtonEnabled(true);
@@ -484,15 +486,17 @@ void TMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
+        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
         if (mType == MeasurementsType::Standard)
         {
             ui->labelMType->setText(tr("Standard measurements"));
-            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
+            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QLatin1String(" ") +
                                             VDomDocument::UnitsToStr(m->MUnit(), true));
-            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
+            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QLatin1String(" ") +
                                               VDomDocument::UnitsToStr(m->MUnit(), true));
 
             labelGradationHeights = new QLabel(tr("Height:"));
@@ -2295,7 +2299,7 @@ void TMainWindow::RefreshTable()
             }
 
             const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
+            AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula;
@@ -2327,16 +2331,16 @@ void TMainWindow::RefreshTable()
             }
 
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, ColumnCalcValue,
+            AddCell(locale().toString(value), currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
-            AddCell(QString().setNum(meash->GetBase()), currentRow, ColumnBaseValue,
+            AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
                     Qt::AlignHCenter | Qt::AlignVCenter); // base value
 
-            AddCell(QString().setNum(meash->GetKsize()), currentRow, ColumnInSizes,
+            AddCell(locale().toString(meash->GetKsize()), currentRow, ColumnInSizes,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
 
-            AddCell(QString().setNum(meash->GetKheight()), currentRow, ColumnInHeights,
+            AddCell(locale().toString(meash->GetKheight()), currentRow, ColumnInHeights,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in heights
         }
     }

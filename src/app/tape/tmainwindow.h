@@ -51,7 +51,7 @@ class TMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit TMainWindow(QWidget *parent = 0);
+    explicit TMainWindow(QWidget *parent = nullptr);
     virtual ~TMainWindow() Q_DECL_OVERRIDE;
 
     QString CurrentFile() const;
