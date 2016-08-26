@@ -37,8 +37,9 @@
 #include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VTableSearch::VTableSearch(QTableWidget *table)
-    :table(table),
+VTableSearch::VTableSearch(QTableWidget *table, QObject *parent)
+    : QObject(parent),
+      table(table),
       searchIndex(-1),
       searchList()
 {
@@ -69,6 +70,8 @@ void VTableSearch::Clear()
 
     searchList.clear();
     searchIndex = -1;
+
+    emit HasResult(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,6 +115,8 @@ void VTableSearch::Find(const QString &term)
             QTableWidgetItem *item = searchList.at(searchIndex);
             item->setBackground(Qt::red);
             table->scrollToItem(item);
+
+            emit HasResult(true);
         }
     }
 }
@@ -217,5 +222,11 @@ void VTableSearch::RefreshList(const QString &term)
         QTableWidgetItem *item = searchList.at(searchIndex);
         item->setBackground(Qt::red);
         table->scrollToItem(item);
+
+        emit HasResult(true);
+    }
+    else
+    {
+        emit HasResult(false);
     }
 }

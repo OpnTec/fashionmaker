@@ -113,6 +113,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=](){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, [=](){search->FindNext();});
 
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+    });
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindNext->setEnabled(state);
+    });
+
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
         ui->tableWidgetIncrement->selectRow(0);

@@ -1984,6 +1984,15 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
 
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+    });
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindNext->setEnabled(state);
+    });
+
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
 
@@ -2433,8 +2442,16 @@ void TMainWindow::MFields(bool enabled)
     }
 
     ui->lineEditFind->setEnabled(enabled);
-    ui->toolButtonFindPrevious->setEnabled(enabled);
-    ui->toolButtonFindNext->setEnabled(enabled);
+    if (enabled && not ui->lineEditFind->text().isEmpty())
+    {
+        ui->toolButtonFindPrevious->setEnabled(enabled);
+        ui->toolButtonFindNext->setEnabled(enabled);
+    }
+    else
+    {
+        ui->toolButtonFindPrevious->setEnabled(false);
+        ui->toolButtonFindNext->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

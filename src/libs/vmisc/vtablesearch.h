@@ -29,6 +29,7 @@
 #ifndef VTABLESEARCH_H
 #define VTABLESEARCH_H
 
+#include <QObject>
 #include <QList>
 #include <QString>
 #include <QTableWidget>
@@ -37,10 +38,11 @@
 class QTableWidget;
 class QTableWidgetItem;
 
-class VTableSearch
+class VTableSearch: public QObject
 {
+    Q_OBJECT
 public:
-    explicit VTableSearch(QTableWidget *table);
+    explicit VTableSearch(QTableWidget *table, QObject *parent = nullptr);
 
     void Find(const QString &term);
     void FindPrevious();
@@ -48,6 +50,9 @@ public:
     void RemoveRow(int row);
     void AddRow(int row);
     void RefreshList(const QString &term);
+
+signals:
+    void HasResult(bool state);
 
 private:
     Q_DISABLE_COPY(VTableSearch)
