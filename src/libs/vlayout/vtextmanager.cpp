@@ -247,9 +247,9 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
                  << QApplication::translate("Detail", "Lining", 0)
                  << QApplication::translate("Detail", "Interfacing", 0)
                  << QApplication::translate("Detail", "Interlining", 0);
-    QString qsText = QLatin1String("%1. ") + tr("Cut") + QLatin1String(" %2%3");
+    QString qsText = QLatin1String("%1, ") + tr("cut") + QLatin1String(" %2%3");
     QStringList qslPlace;
-    qslPlace << "" << QLatin1String(" ") + tr("on Fold");
+    qslPlace << "" << QLatin1String(" ") + tr("on fold");
     tl.m_eFontWeight = QFont::Normal;
     tl.m_iFontSize = 0;
     for (int i = 0; i < data.GetMCPCount(); ++i)
