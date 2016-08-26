@@ -1980,7 +1980,7 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textEdited, [=] (const QString &term){search->Find(term);});
+    connect(ui->lineEditFind, &QLineEdit::textChanged, [=] (const QString &term){search->Find(term);});
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
 
