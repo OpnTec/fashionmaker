@@ -602,13 +602,13 @@ void DialogSplinePath::EvalLength1()
     labelEditFormula = ui->labelEditLength1;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const qreal length1 = Eval(ui->plainTextEditLength1F->toPlainText(), flagLength1[row], ui->labelResultLength1,
-                               postfix);
+                               postfix, false);
 
     if (length1 < 0)
     {
         flagLength1[row] = false;
         ChangeColor(labelEditFormula, Qt::red);
-        ui->labelResultLength1->setText(tr("Error") + " (" + postfix + ")");
+        ui->labelResultLength1->setText(tr("Error") + QLatin1String(" (") + postfix + QLatin1String(")"));
         ui->labelResultLength1->setToolTip(tr("Length can't be negative"));
 
         CheckState();
@@ -633,13 +633,13 @@ void DialogSplinePath::EvalLength2()
     labelEditFormula = ui->labelEditLength2;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const qreal length2 = Eval(ui->plainTextEditLength2F->toPlainText(), flagLength2[row], ui->labelResultLength2,
-                               postfix);
+                               postfix, false);
 
     if (length2 < 0)
     {
         flagLength2[row] = false;
         ChangeColor(labelEditFormula, Qt::red);
-        ui->labelResultLength2->setText(tr("Error") + " (" + postfix + ")");
+        ui->labelResultLength2->setText(tr("Error") + QLatin1String(" (") + postfix + QLatin1String(")"));
         ui->labelResultLength2->setToolTip(tr("Length can't be negative"));
 
         CheckState();
