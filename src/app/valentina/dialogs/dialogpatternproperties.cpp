@@ -171,7 +171,8 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
     ui->lineEditCustomerName->setText(doc->GetCustomerName());
-    ui->labelCreationDate->setText(QDate::currentDate().toString(Qt::SystemLocaleLongDate));
+    ui->checkBoxShowDate->setText(ui->checkBoxShowDate->text()
+                                  .arg(QDate::currentDate().toString(Qt::SystemLocaleLongDate)));
     ui->lineEditSize->setText(doc->GetPatternSize());
 
     const QString plSize = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
