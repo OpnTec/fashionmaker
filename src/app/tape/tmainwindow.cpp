@@ -2200,6 +2200,7 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
+    item->setToolTip(text);
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
