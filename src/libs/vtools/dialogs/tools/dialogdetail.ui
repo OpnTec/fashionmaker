@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>523</width>
+    <width>581</width>
     <height>442</height>
    </rect>
   </property>
@@ -62,8 +62,11 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
+        <widget class="QSplitter" name="splitter_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QWidget" name="">
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -329,11 +332,9 @@
             </widget>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QListWidget" name="listWidget"/>
-         </item>
-        </layout>
+         </widget>
+         <widget class="QListWidget" name="listWidget"/>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="helpLabel">
@@ -356,8 +357,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QWidget" name="">
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QFormLayout" name="formLayout">
@@ -376,6 +380,9 @@
                <property name="maxLength">
                 <number>3</number>
                </property>
+               <property name="placeholderText">
+                <string>Letter of pattern piece</string>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -392,6 +399,9 @@
                </property>
                <property name="maxLength">
                 <number>30</number>
+               </property>
+               <property name="placeholderText">
+                <string>Name can't be empty</string>
                </property>
               </widget>
              </item>
@@ -490,21 +500,19 @@
             </layout>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QListWidget" name="listWidgetMCP">
-           <property name="minimumSize">
-            <size>
-             <width>180</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::ClickFocus</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
+         </widget>
+         <widget class="QListWidget" name="listWidgetMCP">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
