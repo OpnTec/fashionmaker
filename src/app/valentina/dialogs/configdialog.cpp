@@ -94,7 +94,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     setWindowTitle(tr("Config Dialog"));
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,7 +208,7 @@ void ConfigDialog::Apply()
         default:
             break;
     }
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

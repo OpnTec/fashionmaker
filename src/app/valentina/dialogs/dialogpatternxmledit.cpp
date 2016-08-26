@@ -46,7 +46,7 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     this->xmlmodel = new VXMLTreeView();
     this->doc=xmldoc;

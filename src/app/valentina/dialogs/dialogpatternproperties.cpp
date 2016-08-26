@@ -71,7 +71,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
 
     SCASSERT(doc != nullptr);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     if (m_filePath.isEmpty())
     {

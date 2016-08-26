@@ -45,13 +45,13 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
+    QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
     ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",

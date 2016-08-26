@@ -3914,7 +3914,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::WindowsLocale()
 {
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

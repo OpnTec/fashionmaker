@@ -779,7 +779,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
 
     QLocale loc = QLocale::system(); // User locale
-    if (loc != QLocale(QLocale::C) && osSeparator)
+    if (loc != QLocale::c() && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
@@ -794,7 +794,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
                 continue;//Leave with out translation
             }
 
-            loc = QLocale(QLocale::C);// To internal locale
+            loc = QLocale::c();// To internal locale
             const QString dStr = loc.toString(d);// Internal look for number
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
@@ -922,7 +922,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale(QLocale::C);// From pattern locale
+            loc = QLocale::c();// From pattern locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
