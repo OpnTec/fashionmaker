@@ -462,7 +462,7 @@ void DialogSplinePath::FXAngle1()
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle1F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -487,7 +487,7 @@ void DialogSplinePath::FXAngle2()
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle2F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());

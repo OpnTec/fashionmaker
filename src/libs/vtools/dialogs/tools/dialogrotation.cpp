@@ -294,7 +294,7 @@ void DialogRotation::FXAngle()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         SetAngle(dialog->GetFormula());
