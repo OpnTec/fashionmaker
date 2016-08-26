@@ -173,6 +173,7 @@ void TMainWindow::RetranslateTable()
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
         ui->tableWidget->selectRow(row);
+        search->RefreshList(ui->lineEditFind->text());
     }
 }
 
