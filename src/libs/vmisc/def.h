@@ -592,6 +592,10 @@ extern const QString in_Oprt;
 
 extern const QStringList builInPostfixOperators;
 
+// Placeholders
+extern const QString pl_size;
+extern const QString pl_height;
+
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 
@@ -620,7 +624,8 @@ QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
 QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
 QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
 
-QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
+QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
+                                        QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
 
 QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 

@@ -109,6 +109,8 @@ private:
     bool isAutoCrop;
     bool isUnitePages;
 
+    QString layoutPrinterName;
+
     void CreateShadows();
     void CreateScenes();
 

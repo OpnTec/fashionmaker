@@ -45,7 +45,7 @@
 #define PEDANT_COMPILER ,lock(nullptr)
 #else
 #define PEDANT_COMPILER
-#warning To have lock-file support you must use Qt 5.1+. Expect collissions when run 2 copies of the program.
+#pragma message("To have lock-file support you must use Qt 5.1+. Expect collissions when run 2 copies of the program.")
 #endif
 
 /*@brief
@@ -188,6 +188,10 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
         SetFileAttributesW(lockFile.toStdWString().c_str(), FILE_ATTRIBUTE_HIDDEN);
 #endif
     }
+#else
+    Q_UNUSED(lockName);
+    Q_UNUSED(stale);
+    Q_UNUSED(timeout);
 #endif
     return res;
 }

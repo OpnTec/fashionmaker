@@ -43,7 +43,7 @@ class VAbstractArcData : public QSharedData
 public:
     VAbstractArcData();
     VAbstractArcData(const VPointF &center, qreal f1, const QString &formulaF1, qreal f2, const QString &formulaF2);
-    VAbstractArcData(const QString &formulaLength, VPointF center, qreal f1, QString formulaF1);
+    VAbstractArcData(const QString &formulaLength, const VPointF &center, qreal f1, const QString &formulaF1);
     VAbstractArcData(const VPointF &center, qreal f1);
     VAbstractArcData(const VPointF &center, qreal f1, qreal f2);
     VAbstractArcData(const VAbstractArcData &arc);
@@ -96,7 +96,8 @@ VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1, const QStrin
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const QString &formulaLength, VPointF center, qreal f1, QString formulaF1)
+VAbstractArcData::VAbstractArcData(const QString &formulaLength, const VPointF &center, qreal f1,
+                                   const QString &formulaF1)
     : f1(f1),
       formulaF1(formulaF1),
       f2(0),

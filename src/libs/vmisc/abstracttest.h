@@ -41,10 +41,18 @@ template <class T> class QVector;
 #include <ciso646>
 #endif /* Q_CC_MSVC */
 
+#ifdef __GNUC__
+#define V_UNUSED __attribute__ ((unused))
+#else
+#define V_UNUSED
+#endif
+
 // Return codes for testing run application
-static const auto TST_EX_BIN = -1;      // Can't find binary.
-static const auto TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
-static const auto TST_EX_CRASH = -3;    // Program crashed.
+static const auto V_UNUSED TST_EX_BIN = -1;      // Can't find binary.
+static const auto V_UNUSED TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
+static const auto V_UNUSED TST_EX_CRASH = -3;    // Program crashed.
+
+#undef V_UNUSED
 
 enum ErrorState {ErrorLoad = 0, ErrorInstall, ErrorSize, NoError};
 

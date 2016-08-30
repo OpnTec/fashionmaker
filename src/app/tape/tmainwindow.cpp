@@ -101,6 +101,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditName->setClearButtonEnabled(true);
@@ -109,6 +111,9 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->lineEditFamilyName->setClearButtonEnabled(true);
     ui->lineEditEmail->setClearButtonEnabled(true);
 #endif
+
+    ui->lineEditFind->installEventFilter(this);
+    ui->plainTextEditFormula->installEventFilter(this);
 
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
@@ -168,6 +173,7 @@ void TMainWindow::RetranslateTable()
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
         ui->tableWidget->selectRow(row);
+        search->RefreshList(ui->lineEditFind->text());
     }
 }
 
@@ -481,15 +487,17 @@ void TMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
+        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
         if (mType == MeasurementsType::Standard)
         {
             ui->labelMType->setText(tr("Standard measurements"));
-            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
+            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QLatin1String(" ") +
                                             VDomDocument::UnitsToStr(m->MUnit(), true));
-            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
+            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QLatin1String(" ") +
                                               VDomDocument::UnitsToStr(m->MUnit(), true));
 
             labelGradationHeights = new QLabel(tr("Height:"));
@@ -554,6 +562,60 @@ void TMainWindow::showEvent(QShowEvent *event)
     ui->dockWidgetDiagram->setVisible(false);
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+            {
+                // Ignore Enter key
+                return true;
+            }
+            else if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    plainTextEdit->insertPlainText(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    textEdit->insert(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return QMainWindow::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1734,10 +1796,11 @@ void TMainWindow::SetupMenu()
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
-        recentFileActs[i] = new QAction(this);
-        connect(recentFileActs[i], &QAction::triggered, this, [this]()
+        QAction *action = new QAction(this);
+        recentFileActs[i] = action;
+        connect(action, &QAction::triggered, [action, this]()
         {
-            if (auto action = qobject_cast<QAction *>(sender()))
+            if (action != nullptr)
             {
                 const QString filePath = action->data().toString();
                 if (not filePath.isEmpty())
@@ -1917,9 +1980,18 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textEdited, [=] (const QString &term){search->Find(term);});
+    connect(ui->lineEditFind, &QLineEdit::textChanged, [=] (const QString &term){search->Find(term);});
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
+
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+    });
+    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    {
+        ui->toolButtonFindNext->setEnabled(state);
+    });
 
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
@@ -2128,6 +2200,7 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
+    item->setToolTip(text);
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
@@ -2237,7 +2310,7 @@ void TMainWindow::RefreshTable()
             }
 
             const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
+            AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula;
@@ -2269,16 +2342,16 @@ void TMainWindow::RefreshTable()
             }
 
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, ColumnCalcValue,
+            AddCell(locale().toString(value), currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
-            AddCell(QString().setNum(meash->GetBase()), currentRow, ColumnBaseValue,
+            AddCell(locale().toString(meash->GetBase()), currentRow, ColumnBaseValue,
                     Qt::AlignHCenter | Qt::AlignVCenter); // base value
 
-            AddCell(QString().setNum(meash->GetKsize()), currentRow, ColumnInSizes,
+            AddCell(locale().toString(meash->GetKsize()), currentRow, ColumnInSizes,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
 
-            AddCell(QString().setNum(meash->GetKheight()), currentRow, ColumnInHeights,
+            AddCell(locale().toString(meash->GetKheight()), currentRow, ColumnInHeights,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in heights
         }
     }
@@ -2370,8 +2443,16 @@ void TMainWindow::MFields(bool enabled)
     }
 
     ui->lineEditFind->setEnabled(enabled);
-    ui->toolButtonFindPrevious->setEnabled(enabled);
-    ui->toolButtonFindNext->setEnabled(enabled);
+    if (enabled && not ui->lineEditFind->text().isEmpty())
+    {
+        ui->toolButtonFindPrevious->setEnabled(enabled);
+        ui->toolButtonFindNext->setEnabled(enabled);
+    }
+    else
+    {
+        ui->toolButtonFindPrevious->setEnabled(false);
+        ui->toolButtonFindNext->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2783,6 +2864,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
 //---------------------------------------------------------------------------------------------------------------------
 bool TMainWindow::IgnoreLocking(int error, const QString &path)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (not qApp->IsTestMode())
     {
@@ -2844,6 +2926,11 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
         return false;
     }
     return true;
+#else
+    Q_UNUSED(error);
+    Q_UNUSED(path);
+    return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

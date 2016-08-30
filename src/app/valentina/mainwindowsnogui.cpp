@@ -69,7 +69,8 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       paperSize(),
       isTiled(false),
       isAutoCrop(false),
-      isUnitePages(false)
+      isUnitePages(false),
+      layoutPrinterName()
 
 {
     InitTempLayoutScene();
@@ -98,6 +99,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             tButton->setChecked(false);
             return;
         }
+        layoutPrinterName = layout.SelectedPrinter();
         LayoutSettings(lGenerator);
         tButton->setChecked(false);
     }
@@ -629,7 +631,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
     if (paper)
     {
         QPrinter printer;
-        printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+        printer.setCreator(qApp->applicationDisplayName()+QLatin1String(" ")+qApp->applicationVersion());
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(name);
         printer.setDocName(FileName());
@@ -644,7 +646,8 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         {
             printer.setOrientation(QPrinter::Landscape);
         }
-        printer.setPaperSize ( QSizeF(FromPixel(r.width(), Unit::Mm), FromPixel(r.height(), Unit::Mm)),
+        printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
+                                      FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
                                QPrinter::Millimeter );
         QPainter painter;
         if (painter.begin( &printer ) == false)
@@ -818,6 +821,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
     }
     QPrinter printer;
     SetPrinterSettings(&printer, PrintType::PrintPDF);
+    printer.setPageSize(QPrinter::A4);// Want to be sure that page size is correct.
 
     // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
     if (not isTiled && not IsPagesFit(printer.paperRect().size()))
@@ -854,7 +858,12 @@ void MainWindowsNoGUI::PrintPreview()
         }
     }
 
-    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    QPrinterInfo info = QPrinterInfo::printerInfo(layoutPrinterName);
+    if(info.isNull() || info.printerName().isEmpty())
+    {
+        info = QPrinterInfo::defaultPrinter();
+    }
+    QSharedPointer<QPrinter> printer = PreparePrinter(info);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -881,7 +890,12 @@ void MainWindowsNoGUI::LayoutPrint()
         }
     }
     // display print dialog and if accepted print
-    QSharedPointer<QPrinter> printer = DefaultPrinter(QPrinter::HighResolution);
+    QPrinterInfo info = QPrinterInfo::printerInfo(layoutPrinterName);
+    if(info.isNull() || info.printerName().isEmpty())
+    {
+        info = QPrinterInfo::defaultPrinter();
+    }
+    QSharedPointer<QPrinter> printer = PreparePrinter(info, QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -924,7 +938,8 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
             if (paper)
             {
-                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paper->rect().height(), Unit::Mm));
+                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm),
+                              FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm));
             }
         }
 
@@ -939,13 +954,11 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         }
     }
 
-    {
-        const qreal left = FromPixel(margins.left(), Unit::Mm);
-        const qreal top = FromPixel(margins.top(), Unit::Mm);
-        const qreal right = FromPixel(margins.right(), Unit::Mm);
-        const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-        printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
-    }
+    const qreal left = FromPixel(margins.left(), Unit::Mm);
+    const qreal top = FromPixel(margins.top(), Unit::Mm);
+    const qreal right = FromPixel(margins.right(), Unit::Mm);
+    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+    printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
 
     switch(printType)
     {

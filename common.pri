@@ -66,12 +66,9 @@ defineTest(copyToDestdir) {
     DDIR = $$2
     mkpath($$DDIR)
 
-    message("----------------------------------------------begin------------------------------------------------")
-    message("Copy to" $$DDIR "after link")
     for(FILE, files) {
         unix{
             QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
-            message("Command:" ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)))
         } else {
             !exists($$DDIR/$$basename(FILE)) {
                 # Replace slashes in paths with backslashes for Windows
@@ -80,9 +77,6 @@ defineTest(copyToDestdir) {
                     DDIR ~= s,/,\\,g
                 }
                 QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-                message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
-            } else {
-                message("File:" $$DDIR/$$basename(FILE) "already exist")
             }
 
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
@@ -91,7 +85,6 @@ defineTest(copyToDestdir) {
 
     export(QMAKE_POST_LINK)
     export(QMAKE_CLEAN)
-    message("----------------------------------------------end---------------------------------------------------")
 }
 
 # Alwayse copies the given files to the destination directory
@@ -100,12 +93,9 @@ defineTest(forceCopyToDestdir) {
     DDIR = $$2
     mkpath($$DDIR)
 
-    message("----------------------------------------------begin------------------------------------------------")
-    message("Copy to" $$DDIR "after link")
     for(FILE, files) {
         unix{
             QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
-            message("Command:" ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)))
         } else {
             # Replace slashes in paths with backslashes for Windows
             win32{
@@ -113,14 +103,12 @@ defineTest(forceCopyToDestdir) {
                 DDIR ~= s,/,\\,g
             }
             QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-            message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
         }
     }
 
     export(QMAKE_POST_LINK)
     export(QMAKE_CLEAN)
-    message("----------------------------------------------end---------------------------------------------------")
 }
 
 # We use precompiled headers for more fast compilation source code.

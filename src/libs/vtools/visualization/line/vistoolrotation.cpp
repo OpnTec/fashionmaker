@@ -271,7 +271,7 @@ QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i, const QColor &color)
 template <class Item>
 int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, int i)
 {
-    const QSharedPointer<Item> curve = Visualization::data->GeometricObject<Item>(id);
+    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
     QGraphicsPathItem *path = GetCurve(i, supportColor2);

@@ -59,8 +59,9 @@ signals:
     void                 FullUpdateTree(const Document &parse);
 
 protected:
-    virtual void         closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void         changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
+    virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();

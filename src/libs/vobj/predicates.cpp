@@ -113,7 +113,11 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4701)
 QT_WARNING_DISABLE_GCC("-Wold-style-cast")
 QT_WARNING_DISABLE_GCC("-Wfloat-equal")
+#if defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) >= 408
 QT_WARNING_DISABLE_GCC("-Wmaybe-uninitialized")
+#else
+QT_WARNING_DISABLE_GCC("-Wuninitialized")
+#endif
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */

@@ -47,7 +47,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     RetranslateUi();
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this]()
@@ -126,7 +126,7 @@ void DialogAboutTape::RetranslateUi()
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    const QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
+    const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
     ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",

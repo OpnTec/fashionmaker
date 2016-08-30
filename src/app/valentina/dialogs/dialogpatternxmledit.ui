@@ -165,7 +165,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Type: </string>
+              <string>Type:</string>
              </property>
             </widget>
            </item>

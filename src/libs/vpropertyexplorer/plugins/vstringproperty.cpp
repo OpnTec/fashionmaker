@@ -20,6 +20,7 @@
 
 #include "vstringproperty.h"
 
+#include <QKeyEvent>
 #include <QLatin1String>
 #include <QLineEdit>
 #include <QLocale>
@@ -38,7 +39,7 @@ using namespace VPE;
 
 
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false)
+    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
@@ -46,7 +47,7 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
-    : VProperty(name), readOnly(false), typeForParent(0), clearButton(false)
+    : VProperty(name), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     d_ptr->VariantValue.setValue(QString());
     d_ptr->VariantValue.convert(QVariant::String);
@@ -61,6 +62,7 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     QLineEdit* tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
+    tmpEditor->installEventFilter(this);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     tmpEditor->setClearButtonEnabled(clearButton);
 #endif
@@ -85,6 +87,11 @@ QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
 void VPE::VStringProperty::setReadOnly(bool readOnly)
 {
     this->readOnly = readOnly;
+}
+
+void VStringProperty::setOsSeparator(bool separator)
+{
+    m_osSeparator = separator;
 }
 
 void VStringProperty::setClearButtonEnable(bool value)
@@ -149,4 +156,33 @@ int VStringProperty::getTypeForParent() const
 void VStringProperty::setTypeForParent(int value)
 {
     typeForParent = value;
+}
+
+bool VStringProperty::eventFilter(QObject *object, QEvent *event)
+{
+    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (m_osSeparator)
+                {
+                    textEdit->insert(QLocale::system().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return VProperty::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }

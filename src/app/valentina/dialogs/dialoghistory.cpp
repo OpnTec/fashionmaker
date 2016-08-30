@@ -53,7 +53,7 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHistory::DialogAccepted);

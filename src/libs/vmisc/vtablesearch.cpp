@@ -37,8 +37,9 @@
 #include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VTableSearch::VTableSearch(QTableWidget *table)
-    :table(table),
+VTableSearch::VTableSearch(QTableWidget *table, QObject *parent)
+    : QObject(parent),
+      table(table),
       searchIndex(-1),
       searchList()
 {
@@ -49,18 +50,28 @@ void VTableSearch::Clear()
 {
     SCASSERT(table != nullptr);
 
-    foreach(QTableWidgetItem *item, searchList)
+    for(int i = 0; i < table->rowCount(); ++i)
     {
-        if (item->row() % 2 != 0 && table->alternatingRowColors())
+        for(int j = 0; j < table->columnCount(); ++j)
         {
-            item->setBackground(QPalette().alternateBase());
-        }
-        else
-        {
-            item->setBackground(QPalette().base());
+            if (QTableWidgetItem *item = table->item(i, j))
+            {
+                if (item->row() % 2 != 0 && table->alternatingRowColors())
+                {
+                    item->setBackground(QPalette().alternateBase());
+                }
+                else
+                {
+                    item->setBackground(QPalette().base());
+                }
+            }
         }
     }
+
+    searchList.clear();
     searchIndex = -1;
+
+    emit HasResult(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,26 +98,26 @@ void VTableSearch::Find(const QString &term)
 {
     SCASSERT(table != nullptr);
 
-    const QList<QTableWidgetItem *> list = table->findItems(term, Qt::MatchContains);
+    Clear();
 
-    if (list.isEmpty() || term.isEmpty())
+    if (not term.isEmpty())
     {
-        Clear();
-    }
-    else
-    {
-        Clear();
+        searchList = table->findItems(term, Qt::MatchContains);
 
-        searchList = list;
-        foreach(QTableWidgetItem *item, searchList)
+        if (not searchList.isEmpty())
         {
-            item->setBackground(Qt::yellow);
-        }
+            foreach(QTableWidgetItem *item, searchList)
+            {
+                item->setBackground(Qt::yellow);
+            }
 
-        searchIndex = 0;
-        QTableWidgetItem *item = searchList.at(searchIndex);
-        item->setBackground(Qt::red);
-        table->scrollToItem(item);
+            searchIndex = 0;
+            QTableWidgetItem *item = searchList.at(searchIndex);
+            item->setBackground(Qt::red);
+            table->scrollToItem(item);
+
+            emit HasResult(true);
+        }
     }
 }
 
@@ -211,5 +222,11 @@ void VTableSearch::RefreshList(const QString &term)
         QTableWidgetItem *item = searchList.at(searchIndex);
         item->setBackground(Qt::red);
         table->scrollToItem(item);
+
+        emit HasResult(true);
+    }
+    else
+    {
+        emit HasResult(false);
     }
 }

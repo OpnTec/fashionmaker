@@ -51,7 +51,7 @@ class TMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit TMainWindow(QWidget *parent = 0);
+    explicit TMainWindow(QWidget *parent = nullptr);
     virtual ~TMainWindow() Q_DECL_OVERRIDE;
 
     QString CurrentFile() const;
@@ -68,6 +68,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
     void FileNew();

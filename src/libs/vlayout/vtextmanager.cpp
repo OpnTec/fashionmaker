@@ -35,6 +35,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,15 +247,15 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
                  << QApplication::translate("Detail", "Lining", 0)
                  << QApplication::translate("Detail", "Interfacing", 0)
                  << QApplication::translate("Detail", "Interlining", 0);
-    QString qsText = tr("Cut %1 on %2%3");
+    QString qsText = QLatin1String("%1, ") + tr("cut") + QLatin1String(" %2%3");
     QStringList qslPlace;
-    qslPlace << "" << QLatin1String(" ") + tr("on Fold");
+    qslPlace << "" << QLatin1String(" ") + tr("on fold");
     tl.m_eFontWeight = QFont::Normal;
     tl.m_iFontSize = 0;
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
         MaterialCutPlacement mcp = data.GetMCP(i);
-        if (mcp.m_iCutNumber > 0)
+        if (mcp.m_iCutNumber > 0)//Not gonna happen because min value is 1 now, but decided to left
         {
             QString qsMat;
             if (mcp.m_eMaterial == MaterialType::mtUserDefined)
@@ -265,7 +266,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
             {
                 qsMat = qslMaterials[int(mcp.m_eMaterial)];
             }
-            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(qsMat).
+            tl.m_qsText = qsText.arg(qsMat).arg(mcp.m_iCutNumber).
                     arg(qslPlace[int(mcp.m_ePlacement)]);
             AddLine(tl);
         }
@@ -324,8 +325,14 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
     tl.m_qsText = pDoc->GetPatternSize();
     if (tl.m_qsText.isEmpty() == false)
     {
-        tl.m_qsText.replace(QApplication::translate("Detail", "%size%", 0), QString::number(dSize));
-        tl.m_qsText.replace(QApplication::translate("Detail", "%height%", 0), QString::number(dHeight));
+        // Such describing placeholders will help avoid mistake of localization.
+        // Translators very often remove '%'.
+        QString placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
+        tl.m_qsText.replace(placeholder, QString::number(dSize));
+
+        placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
+        tl.m_qsText.replace(placeholder, QString::number(dHeight));
+
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;

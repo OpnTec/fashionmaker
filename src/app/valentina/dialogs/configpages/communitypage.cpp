@@ -90,7 +90,6 @@ void CommunityPage::Apply()
     settings->SetUsername(this->username->text());
     settings->SetSavePassword(this->savePassword->isChecked());
     settings->SetUserPassword(this->userpassword->text());
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------

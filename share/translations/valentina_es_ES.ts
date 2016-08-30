@@ -318,6 +318,25 @@
     </message>
 </context>
 <context>
+    <name>Detail</name>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished">Tela</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogAboutApp</name>
     <message>
         <source>About Valentina</source>
@@ -1410,19 +1429,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation>Tela</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Tela</translation>
     </message>
     <message>
         <source>None</source>
@@ -1442,6 +1449,10 @@
     </message>
     <message>
         <source>on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1574,6 +1585,10 @@
     <message>
         <source>Full name</source>
         <translation>Apellido</translation>
+    </message>
+    <message>
+        <source>Functions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2380,6 +2395,15 @@ Apply settings anyway?</source>
         <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Printer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>Printer</comment>
+        <translation type="unfinished">Ninguno</translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -3077,6 +3101,10 @@ Apply settings anyway?</source>
         <source>Show date of creation</source>
         <translation>Mostrar fecha de creación</translation>
     </message>
+    <message>
+        <source>Use %1 and %2 to insert pattern size and height</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3217,8 +3245,8 @@ Apply settings anyway?</source>
         <translation>Aplicar inmediatamente</translation>
     </message>
     <message>
-        <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <source>Type:</source>
+        <translation type="unfinished">Tipo:</translation>
     </message>
 </context>
 <context>
@@ -3781,7 +3809,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation>Ruta a la carpeta de destino.</translation>
+        <translation type="vanished">Ruta a la carpeta de destino.</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
@@ -3796,7 +3824,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Nombre base del archivo.</translation>
     </message>
     <message>
-        <source>File base name.</source>
+        <source>Path to destination folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5820,7 +5848,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation>Error en exportación.</translation>
+        <translation type="vanished">Error en exportación.</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
@@ -5837,6 +5865,10 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
         <translation>Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5958,6 +5990,18 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Contar los pasos (0 - sin limite):</translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User defined materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7892,11 +7936,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VTextManager</name>
     <message>
-        <source>Cut %1 on %2%3</source>
+        <source>on Fold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>on Fold</source>
+        <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9127,7 +9171,7 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
@@ -9288,6 +9332,21 @@ Do you want to save your changes?</source>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
         <translation>LongitudActual</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>size</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

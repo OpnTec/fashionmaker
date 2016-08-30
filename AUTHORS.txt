@@ -34,3 +34,5 @@ Patch contributors:
 		* Translation.
 	Bettina Gatzlaff <bettina.gatzlaff@gmail.com>
 		* Testing
+    Timo Virtaneva
+		* Testing

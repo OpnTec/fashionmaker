@@ -342,7 +342,7 @@ inline void DialogTool::InitOkCancel(T *ui)
     SCASSERT(bCancel != nullptr);
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

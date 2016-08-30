@@ -58,7 +58,7 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
   _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
     !exists($$_translation_name) {
-        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($$_translation_name))
+        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -silent $$shell_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($$_translation_name))
         unix {
             exists($${OUT_PWD}/$$DESTDIR/valentina) {
                 system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking

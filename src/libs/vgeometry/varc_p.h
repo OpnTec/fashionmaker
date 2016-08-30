@@ -41,7 +41,7 @@ class VArcData : public QSharedData
 {
 public:
     VArcData();
-    VArcData(qreal radius, QString formulaRadius);
+    VArcData(qreal radius, const QString &formulaRadius);
     explicit VArcData(qreal radius);
     VArcData(const VArcData &arc);
     virtual ~VArcData();
@@ -63,7 +63,7 @@ VArcData::VArcData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius, QString formulaRadius)
+VArcData::VArcData(qreal radius, const QString &formulaRadius)
     : radius(radius),
       formulaRadius(formulaRadius)
 {}

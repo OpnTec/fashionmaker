@@ -105,7 +105,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
 
     setWindowTitle(tr("Config Dialog"));
 
-    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,18 +190,10 @@ void TapeConfigDialog::createIcon(const QString &icon, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void TapeConfigDialog::Apply()
 {
-    switch (contentsWidget->currentRow())
-    {
-        case (0):
-            configurationPage->Apply();
-            break;
-        case (1):
-            pathPage->Apply();
-            break;
-        default:
-            break;
-    }
-    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    configurationPage->Apply();
+    pathPage->Apply();
+
+    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

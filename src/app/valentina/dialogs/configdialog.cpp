@@ -94,7 +94,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     setWindowTitle(tr("Config Dialog"));
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -191,24 +191,12 @@ void ConfigDialog::createIcon(const QString &icon, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::Apply()
 {
-    switch (contentsWidget->currentRow())
-    {
-        case (0):
-            configurationPage->Apply();
-            break;
-        case (1):
-            patternPage->Apply();
-            break;
-        case (2):
-            communityPage->Apply();
-            break;
-        case (3):
-            pathPage->Apply();
-            break;
-        default:
-            break;
-    }
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    configurationPage->Apply();
+    patternPage->Apply();
+    communityPage->Apply();
+    pathPage->Apply();
+
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

@@ -42,11 +42,11 @@ extern "C" {
 enum {
     /* gcc optimizers consider code after __builtin_trap() dead.
      * Making __builtin_trap() unsuitable for breaking into the debugger */
-    DEBUG_BREAK_PREFER_BUILTIN_TRAP_TO_SIGTRAP = 0,
+    DEBUG_BREAK_PREFER_BUILTIN_TRAP_TO_SIGTRAP = 0
 };
 
 #if defined(__i386__) || defined(__x86_64__)
-enum { HAVE_TRAP_INSTRUCTION = 1, };
+enum { HAVE_TRAP_INSTRUCTION = 1 };
 __attribute__((gnu_inline, always_inline))
 __inline__ static void trap_instruction(void)
 {
@@ -81,7 +81,7 @@ __inline__ static void trap_instruction(void)
      */
 }
 #elif defined(__arm__) && !defined(__thumb__)
-enum { HAVE_TRAP_INSTRUCTION = 1, };
+enum { HAVE_TRAP_INSTRUCTION = 1 };
 __attribute__((gnu_inline, always_inline))
 __inline__ static void trap_instruction(void)
 {
@@ -92,7 +92,7 @@ __inline__ static void trap_instruction(void)
      * as Thumb mode */
 }
 #elif defined(__aarch64__)
-enum { HAVE_TRAP_INSTRUCTION = 1, };
+enum { HAVE_TRAP_INSTRUCTION = 1 };
 __attribute__((gnu_inline, always_inline))
 __inline__ static void trap_instruction(void)
 {
@@ -101,7 +101,7 @@ __inline__ static void trap_instruction(void)
     __asm__ volatile(".inst 0xd4200000");
 }
 #else
-enum { HAVE_TRAP_INSTRUCTION = 0, };
+enum { HAVE_TRAP_INSTRUCTION = 0 };
 #endif
 
 __attribute__((gnu_inline, always_inline))

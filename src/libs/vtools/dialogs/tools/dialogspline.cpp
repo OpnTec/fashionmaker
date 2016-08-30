@@ -290,7 +290,7 @@ void DialogSpline::FXAngle1()
     QString angle1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
                                                          qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(angle1F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -313,7 +313,7 @@ void DialogSpline::FXAngle2()
     QString angle2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
                                                          qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(angle2F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -405,7 +405,8 @@ void DialogSpline::EvalLength1()
 {
     labelEditFormula = ui->labelEditLength1;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    const qreal length1 = Eval(ui->plainTextEditLength1F->toPlainText(), flagLength1, ui->labelResultLength1, postfix);
+    const qreal length1 = Eval(ui->plainTextEditLength1F->toPlainText(), flagLength1, ui->labelResultLength1, postfix,
+                               false);
 
     if (length1 < 0)
     {
@@ -423,7 +424,8 @@ void DialogSpline::EvalLength2()
 {
     labelEditFormula = ui->labelEditLength2;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    const qreal length2 = Eval(ui->plainTextEditLength2F->toPlainText(), flagLength2, ui->labelResultLength2, postfix);
+    const qreal length2 = Eval(ui->plainTextEditLength2F->toPlainText(), flagLength2, ui->labelResultLength2, postfix,
+                               false);
 
     if (length2 < 0)
     {

@@ -1053,7 +1053,12 @@ quint32 VToolUnionDetails::TakeNextId(QVector<quint32> &children)
     quint32 idChild = NULL_ID;
     if (not children.isEmpty())
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         idChild = children.takeFirst();
+#else 
+        idChild = children.first(); 
+        children.remove(0); 
+#endif
     }
     else
     {
