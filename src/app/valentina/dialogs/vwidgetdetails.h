@@ -53,6 +53,7 @@ public slots:
 
 private slots:
     void InLayoutStateChanged(int row, int column);
+    void ShowContextMenu(const QPoint &pos);
 
 private:
     Q_DISABLE_COPY(VWidgetDetails)
