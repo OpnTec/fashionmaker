@@ -39,15 +39,6 @@
     #endif // _MSC_VER > 1000
 #endif // Q_CC_MSVC
 
-#if defined(__OS2__)||defined(__EMX__)
-#define strcasecmp(s,t) stricmp(s,t)
-#endif
-
-#if defined(_WIN32)&&!defined(strcasecmp)
-#define strcasecmp(s,t) _stricmp(s,t)
-#endif
-
-
 #ifdef _WIN32
 #undef M_PI
 #define M_PI   3.14159265358979323846
