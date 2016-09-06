@@ -122,6 +122,9 @@ public:
     void AddUserDefinedMaterial(QString qsMaterial);
     void ClearUserDefinedMaterial();
 
+    bool GetForbidWorkpieceFlipping() const;
+    void SetForbidWorkpieceFlipping(bool value);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 
@@ -141,6 +144,7 @@ private:
 
     static const QString SettingPatternUser;
     static const QString SettingPatternUndo;
+    static const QString SettingPatternForbidFlipping;
 
     static const QString SettingGeneralRecentFileList;
     static const QString SettingGeneralRestoreFileList;

@@ -61,11 +61,14 @@ private:
     QLabel    *countStepsLabel;
     QGroupBox *userMaterialsGroup;
     QPushButton* userMaterialClearButton;
+    QGroupBox *workpieceGroup;
+    QCheckBox *forbidFlippingCheck;
 
     QGroupBox *UserGroup() Q_REQUIRED_RESULT;
     QGroupBox *GraphOutputGroup() Q_REQUIRED_RESULT;
     QGroupBox *UndoGroup() Q_REQUIRED_RESULT;
     QGroupBox *UserMaterialGroup() Q_REQUIRED_RESULT;
+    QGroupBox *UserWorkpieceGroup() Q_REQUIRED_RESULT;
 
     void      RetranslateUi();
 };

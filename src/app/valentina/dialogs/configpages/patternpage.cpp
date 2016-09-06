@@ -54,18 +54,22 @@ PatternPage::PatternPage(QWidget *parent):
     undoCount(nullptr),
     countStepsLabel(nullptr),
     userMaterialsGroup(nullptr),
-    userMaterialClearButton(nullptr)
+    userMaterialClearButton(nullptr),
+    workpieceGroup(nullptr),
+    forbidFlippingCheck(nullptr)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
     QGroupBox *undoGroup = UndoGroup();
-    QGroupBox *userMatGroup  = UserMaterialGroup();
+    QGroupBox *userMatGroup = UserMaterialGroup();
+    QGroupBox *workpieceGroup = UserWorkpieceGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(userGroup);
     mainLayout->addWidget(graphOutputGroup);
     mainLayout->addWidget(undoGroup);
     mainLayout->addWidget(userMatGroup);
+    mainLayout->addWidget(workpieceGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -85,6 +89,8 @@ void PatternPage::Apply()
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
     settings->SetUndoCount(undoCount->value());
+
+    settings->SetForbidWorkpieceFlipping(forbidFlippingCheck->isChecked());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,6 +187,22 @@ QGroupBox *PatternPage::UserMaterialGroup()
 
     userMaterialsGroup->setLayout(pLayout);
     return userMaterialsGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGroupBox *PatternPage::UserWorkpieceGroup()
+{
+    workpieceGroup = new QGroupBox(tr("Workpiece"));
+
+    forbidFlippingCheck = new QCheckBox(tr("Forbid flipping"));
+    forbidFlippingCheck->setToolTip(tr("By default forbid flipping for all workpieces"));
+    forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
+
+    QVBoxLayout *editLayout = new QVBoxLayout;
+    editLayout->addWidget(forbidFlippingCheck);
+
+    workpieceGroup->setLayout(editLayout);
+    return workpieceGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

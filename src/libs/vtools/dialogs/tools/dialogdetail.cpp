@@ -85,6 +85,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     ui.lineEditLetter->setClearButtonEnabled(true);
 #endif
 
+    ui.checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+
     labelEditNamePoint = ui.labelEditName;
     ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));

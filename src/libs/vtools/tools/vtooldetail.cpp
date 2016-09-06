@@ -433,11 +433,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrSupplement, static_cast<quint8>(detail.getSeamAllowance()));
     doc->SetAttribute(domElement, AttrClosed, static_cast<quint8>(detail.getClosed()));
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
-
-    if (detail.getForbidFlipping())//for backward compatibility
-    {
-        doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(detail.getForbidFlipping()));
-    }
+    doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(detail.getForbidFlipping()));
 
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
