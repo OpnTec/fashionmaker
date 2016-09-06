@@ -435,6 +435,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
     doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(detail.getForbidFlipping()));
 
+    // detail data
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
@@ -461,6 +462,7 @@ void VToolDetail::AddToFile()
     }
     domElement.appendChild(domData);
 
+    // pattern info
     domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternInfoGeometry& geom = detail.GetPatternInfo();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
@@ -471,6 +473,16 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
 
+    // grainline
+    domData = doc->createElement(VAbstractPattern::TagGrainline);
+    const VGrainlineGeometry& glGeom = detail.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+    doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+    doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+
+    // nodes
     for (int i = 0; i < detail.CountNode(); ++i)
     {
        AddNode(doc, domElement, detail.at(i));
@@ -497,6 +509,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         doc->RemoveAllChildren(domElement);
 
+        // detail data
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
         const VPatternPieceData& data = det.GetPatternPieceData();
         doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
@@ -527,6 +540,7 @@ void VToolDetail::RefreshDataInFile()
         }
         domElement.appendChild(domData);
 
+        // pattern info
         domData = doc->createElement(VAbstractPattern::TagPatternInfo);
         const VPatternInfoGeometry& geom = det.GetPatternInfo();
         doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
@@ -537,6 +551,16 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
         doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
 
+        // grainline
+        domData = doc->createElement(VAbstractPattern::TagGrainline);
+        const VGrainlineGeometry& glGeom = det.GetGrainlineGeometry();
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
+        doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+        doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+        doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+        doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+
+        // nodes
         for (int i = 0; i < det.CountNode(); ++i)
         {
            AddNode(doc, domElement, det.at(i));

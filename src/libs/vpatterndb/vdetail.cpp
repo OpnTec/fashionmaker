@@ -47,6 +47,7 @@
 #include "vdetail_p.h"
 #include "vnodedetail.h"
 #include "vpatternpiecedata.h"
+#include "vgrainlinegeometry.h"
 
 class QPointF;
 
@@ -578,6 +579,28 @@ VPatternInfoGeometry& VDetail::GetPatternInfo()
 const VPatternInfoGeometry& VDetail::GetPatternInfo() const
 {
     return d->m_piPatternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
+ * @return reference to grainline geometry object
+ */
+VGrainlineGeometry& VDetail::GetGrainlineGeometry()
+{
+    return d->m_glGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief VDetail::GetGrainlineGeometry returns the read-only reference to the grainline geometry object
+ * @return reference to grainline geometry object
+ */
+const VGrainlineGeometry& VDetail::GetGrainlineGeometry() const
+{
+    return d->m_glGrainline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>468</height>
+    <height>478</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -318,7 +318,8 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-down">
-                    <normaloff>.</normaloff>.</iconset>
+                    <normaloff/>
+                   </iconset>
                   </property>
                  </widget>
                 </item>
@@ -332,7 +333,8 @@
                   </property>
                   <property name="icon">
                    <iconset theme="go-up">
-                    <normaloff>.</normaloff>.</iconset>
+                    <normaloff/>
+                   </iconset>
                   </property>
                  </widget>
                 </item>
@@ -526,6 +528,50 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_3">
+      <property name="cursor">
+       <cursorShape>SizeVerCursor</cursorShape>
+      </property>
+      <attribute name="title">
+       <string>Grainline</string>
+      </attribute>
+      <widget class="QWidget" name="formLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>62</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Rotation:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="spinBoxGrainlineRotation">
+          <property name="suffix">
+           <string>°</string>
+          </property>
+          <property name="maximum">
+           <number>359</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QCheckBox" name="checkBoxGrainline">
+          <property name="text">
+           <string>Grainline visible</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </widget>
    </item>
    <item>
@@ -539,11 +585,8 @@
     </widget>
    </item>
   </layout>
-  <zorder>buttonBox</zorder>
-  <zorder>tabWidget</zorder>
  </widget>
  <tabstops>
-  <tabstop>lineEditLetter</tabstop>
   <tabstop>lineEditName</tabstop>
   <tabstop>comboBoxMaterial</tabstop>
   <tabstop>spinBoxCutNumber</tabstop>
@@ -551,8 +594,6 @@
   <tabstop>pushButtonAdd</tabstop>
   <tabstop>pushButtonCancel</tabstop>
   <tabstop>pushButtonRemove</tabstop>
-  <tabstop>listWidgetMCP</tabstop>
-  <tabstop>buttonBox</tabstop>
   <tabstop>toolButtonUp</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>checkBoxClosed</tabstop>
@@ -563,6 +604,13 @@
   <tabstop>checkBoxSeams</tabstop>
   <tabstop>doubleSpinBoxSeams</tabstop>
   <tabstop>toolButtonDown</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>checkBoxForbidFlipping</tabstop>
+  <tabstop>checkBoxDetail</tabstop>
+  <tabstop>checkBoxPattern</tabstop>
+  <tabstop>lineEditLetter</tabstop>
+  <tabstop>checkBoxGrainline</tabstop>
+  <tabstop>spinBoxGrainlineRotation</tabstop>
  </tabstops>
  <resources>
   <include location="../../../vmisc/share/resources/icon.qrc"/>

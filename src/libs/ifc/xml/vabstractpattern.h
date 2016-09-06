@@ -192,6 +192,7 @@ public:
     static const QString TagSize;
     static const QString TagShowDate;
     static const QString TagShowMeasurements;
+    static const QString TagGrainline;
 
     static const QString AttrName;
     static const QString AttrVisible;

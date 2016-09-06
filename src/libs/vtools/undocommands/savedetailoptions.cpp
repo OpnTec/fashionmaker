@@ -38,6 +38,7 @@
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
 #include "../tools/vtooldetail.h"
 #include "vundocommand.h"
 
@@ -69,6 +70,8 @@ void SaveDetailOptions::undo()
         doc->RemoveAllChildren(domElement);
         SavePatternPieceData(domElement, oldDet);
         SavePatternInfo(domElement, oldDet);
+        SaveGrainline(domElement, oldDet);
+
         for (int i = 0; i < oldDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
@@ -95,6 +98,7 @@ void SaveDetailOptions::redo()
         doc->RemoveAllChildren(domElement);
         SavePatternPieceData(domElement, newDet);
         SavePatternInfo(domElement, newDet);
+        SaveGrainline(domElement, newDet);
 
         for (int i = 0; i < newDet.CountNode(); ++i)
         {
@@ -191,6 +195,20 @@ void SaveDetailOptions::SavePatternInfo(QDomElement &domElement, const VDetail &
     doc->SetAttribute(domData, VToolDetail::AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, VToolDetail::AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VToolDetail::AttrRotation, data.GetRotation());
+
+    domElement.appendChild(domData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SaveDetailOptions::SaveGrainline(QDomElement &domElement, const VDetail &det)
+{
+    QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
+    const VGrainlineGeometry& glGeom = det.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+    doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+    doc->SetAttribute(domData, VToolDetail::AttrRotation, glGeom.GetRotation());
 
     domElement.appendChild(domData);
 }

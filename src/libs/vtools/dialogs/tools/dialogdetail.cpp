@@ -76,7 +76,7 @@ class QWidget;
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true),
-      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom()
+      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom(), m_oldGrainline()
 {
     ui.setupUi(this);
 
@@ -150,7 +150,9 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.pushButtonRemove, &QPushButton::clicked, this, &DialogDetail::Remove);
     connect(ui.listWidgetMCP, &QListWidget::itemClicked, this, &DialogDetail::SetEditMode);
     connect(ui.comboBoxMaterial, &QComboBox::currentTextChanged, this, &DialogDetail::MaterialChanged);
+    connect(ui.checkBoxGrainline, &QCheckBox::toggled, this, &DialogDetail::EnableGrainlineRotation);
     SetAddMode();
+    EnableGrainlineRotation();
 
     ui.tabWidget->setCurrentIndex(0);
 }
@@ -463,6 +465,12 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetPatternInfo() = m_oldGeom;
     detail.GetPatternInfo().SetVisible(ui.checkBoxPattern->isChecked());
 
+    detail.GetGrainlineGeometry() = m_oldGrainline;
+    detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
+    if (ui.checkBoxGrainline->isChecked() == true)
+    {
+        detail.GetGrainlineGeometry().SetRotation(ui.spinBoxGrainlineRotation->value());
+    }
     return detail;
 }
 
@@ -532,10 +540,16 @@ void DialogDetail::setDetail(const VDetail &value)
     }
 
     UpdateList();
+
+    ui.checkBoxGrainline->setChecked(detail.GetGrainlineGeometry().IsVisible());
+    ui.spinBoxGrainlineRotation->setValue(detail.GetGrainlineGeometry().GetRotation());
+
     m_oldData = detail.GetPatternPieceData();
     m_oldGeom = detail.GetPatternInfo();
+    m_oldGrainline = detail.GetGrainlineGeometry();
 
     ValidObjects(DetailIsValid());
+    EnableGrainlineRotation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -846,4 +860,10 @@ void DialogDetail::SetEditMode()
     ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
 
     m_bAddMode = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::EnableGrainlineRotation()
+{
+    ui.spinBoxGrainlineRotation->setEnabled(ui.checkBoxGrainline->isChecked());
 }

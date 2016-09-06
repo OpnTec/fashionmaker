@@ -40,6 +40,7 @@
 #include "../vpatterndb/vdetail.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
 #include "dialogtool.h"
 #include "ui_dialogdetail.h"
 
@@ -107,6 +108,7 @@ private:
     MCPContainer     m_conMCP;
     VPatternPieceData       m_oldData;
     VPatternInfoGeometry    m_oldGeom;
+    VGrainlineGeometry      m_oldGrainline;
 
 
     bool             DetailIsValid() const;
@@ -126,6 +128,7 @@ private:
 private slots:
     void             SetAddMode();
     void             SetEditMode();
+    void             EnableGrainlineRotation();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
