@@ -85,6 +85,12 @@ void VLayoutGenerator::Generate()
     papers.clear();
     state = LayoutErrors::NoError;
 
+    if (bank->IsForbiddenFlipping() && not rotate)
+    { // Compensate forbidden flipping by rotating. 180 degree will be enough.
+        rotate = true;
+        rotationIncrease = 180;
+    }
+
 #ifdef LAYOUT_DEBUG
     const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
     QDir debugDir(path);

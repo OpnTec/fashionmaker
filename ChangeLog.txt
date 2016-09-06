@@ -38,6 +38,7 @@
 - [#262] Automatic Update notification.
 - [#424] Improve Formula Wizard dialog.
 - Added "All/None" menu in detail list area for easier handling of many parts.
+- [#560] Flipped pattern pieces in Layout.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

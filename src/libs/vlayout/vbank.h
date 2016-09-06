@@ -72,6 +72,8 @@ public:
 
     qreal GetBiggestDiagonal() const;
 
+    bool IsForbiddenFlipping() const;
+
 private:
     Q_DISABLE_COPY(VBank)
     QVector<VLayoutDetail> details;

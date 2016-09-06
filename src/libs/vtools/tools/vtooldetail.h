@@ -72,6 +72,7 @@ public:
     static const QString TagNode;
     static const QString AttrSupplement;
     static const QString AttrClosed;
+    static const QString AttrForbidFlipping;
     static const QString AttrWidth;
     static const QString AttrHeight;
     static const QString AttrNodeType;

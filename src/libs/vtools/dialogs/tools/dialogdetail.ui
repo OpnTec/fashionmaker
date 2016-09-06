@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>442</height>
+    <height>468</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -66,7 +66,7 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -186,6 +186,16 @@
               <string>Options</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QCheckBox" name="checkBoxForbidFlipping">
+                <property name="toolTip">
+                 <string>Forbid piece be mirrored in a layout.</string>
+                </property>
+                <property name="text">
+                 <string>Forbid flipping</string>
+                </property>
+               </widget>
+              </item>
               <item>
                <widget class="QCheckBox" name="checkBoxSeams">
                 <property name="text">
@@ -361,7 +371,7 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QFormLayout" name="formLayout">

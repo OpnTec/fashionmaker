@@ -41,16 +41,16 @@ class VAbstractDetailData : public QSharedData
 {
 public:
     VAbstractDetailData()
-        :name(QString()), seamAllowance(false), closed(true), width(0)
+        :name(QString()), seamAllowance(false), closed(true), width(0), forbidFlipping(false)
     {}
 
     explicit VAbstractDetailData(const QString &name)
-        :name(name), seamAllowance(false), closed(true), width(0)
+        :name(name), seamAllowance(false), closed(true), width(0), forbidFlipping(false)
     {}
 
     VAbstractDetailData(const VAbstractDetailData &detail)
         :QSharedData(detail), name(detail.name), seamAllowance(detail.seamAllowance), closed(detail.closed),
-          width(detail.width)
+          width(detail.width), forbidFlipping(detail.forbidFlipping)
     {}
 
     ~VAbstractDetailData() {}
@@ -63,6 +63,8 @@ public:
     bool           closed;
     /** @brief width value seamAllowance in mm. */
     qreal          width;
+    /** @brief forbidFlipping forbid piece be mirrored in a layout. */
+    bool           forbidFlipping;
 
 private:
     VAbstractDetailData &operator=(const VAbstractDetailData &) Q_DECL_EQ_DELETE;
