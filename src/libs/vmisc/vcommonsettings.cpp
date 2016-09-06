@@ -61,6 +61,7 @@ const QString VCommonSettings::SettingConfigurationToolBarStyle        = QString
 
 const QString VCommonSettings::SettingPatternUser                      = QStringLiteral("pattern/user");
 const QString VCommonSettings::SettingPatternUndo                      = QStringLiteral("pattern/undo");
+const QString VCommonSettings::SettingPatternForbidFlipping            = QStringLiteral("pattern/forbidFlipping");
 
 const QString VCommonSettings::SettingGeneralRecentFileList            = QStringLiteral("recentFileList");
 const QString VCommonSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
@@ -70,7 +71,7 @@ const QString VCommonSettings::SettingGeneralToolbarsState             = QString
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
 const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
 const QString VCommonSettings::SettingDateOfLastRemind                 = QStringLiteral("dateOfLastRemind");
-const QString VCommonSettings::SettingUserDefinedMaterials             = QStringLiteral("configuration/userDefinedMaterials");
+const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLiteral("configuration/userDefinedMaterials");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -485,4 +486,16 @@ void VCommonSettings::ClearUserDefinedMaterial()
 {
     QStringList qsl;
     setValue(SettingUserDefinedMaterials, qsl);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetForbidWorkpieceFlipping() const
+{
+    return value(SettingPatternForbidFlipping, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetForbidWorkpieceFlipping(bool value)
+{
+    setValue(SettingPatternForbidFlipping, value);
 }

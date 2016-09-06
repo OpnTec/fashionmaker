@@ -294,7 +294,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             break;
     }
 
-    if (flagMirror)
+    if (flagMirror && not detail.getForbidFlipping())
     {
         #ifdef LAYOUT_DEBUG
             #ifdef SHOW_MIRROR

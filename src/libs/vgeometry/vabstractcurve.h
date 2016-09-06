@@ -38,14 +38,11 @@
 #include <QtGlobal>
 
 #include "../ifc/ifcdef.h"
+#include "../vmisc/vmath.h"
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
 class QPointF;
-
-#ifndef M_2PI
-#define M_2PI 6.28318530717958647692528676655900576
-#endif
 
 enum class PathDirection : char { Hide, Show };
 

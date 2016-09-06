@@ -476,6 +476,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
         det.CreateTextItems();
+        det.setForbidFlipping(d.getForbidFlipping());
 
         listDetails.append(det);
         ++i;

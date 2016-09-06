@@ -67,6 +67,9 @@ public:
     qreal   getWidth() const;
     void    setWidth(const qreal &value);
 
+    bool    getForbidFlipping() const;
+    void    setForbidFlipping(bool value);
+
     static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);

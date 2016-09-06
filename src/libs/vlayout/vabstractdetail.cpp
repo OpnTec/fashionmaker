@@ -179,6 +179,18 @@ void VAbstractDetail::setWidth(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractDetail::getForbidFlipping() const
+{
+    return d->forbidFlipping;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractDetail::setForbidFlipping(bool value)
+{
+    d->forbidFlipping = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width)
 {
     QVector<QPointF> ekvPoints;

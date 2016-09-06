@@ -616,6 +616,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
         detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
         detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
+        detail.setForbidFlipping(GetParametrUInt(domElement, VToolDetail::AttrForbidFlipping,
+                                           QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
 
         QStringList types = QStringList() << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline

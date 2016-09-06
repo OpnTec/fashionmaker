@@ -33,6 +33,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/toggledetailinlayout.h"
 
+#include <QMenu>
 #include <QUndoStack>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,7 +47,10 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
 
     FillTable(m_data->DataDetails());
 
+    ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetDetails::InLayoutStateChanged);
+    connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,4 +135,71 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
     ui->tableWidget->resizeRowsToContents();
 
     ui->tableWidget->setCurrentCell(selectedRow, 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::ShowContextMenu(const QPoint &pos)
+{
+    QMenu *menu = new QMenu;
+    QAction *actionSelectAll = menu->addAction(tr("Select all"));
+    QAction *actionSelectNone = menu->addAction(tr("Select none"));
+
+    const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
+    if (not allDetails->count() == 0)
+    {
+        int selectedDetails = 0;
+
+        QHash<quint32, VDetail>::const_iterator iter = allDetails->constBegin();
+        while (iter != allDetails->constEnd())
+        {
+            if(iter.value().IsInLayout())
+            {
+                selectedDetails++;
+            }
+            ++iter;
+        }
+        if (selectedDetails == 0)
+        {
+            actionSelectNone->setDisabled(true);
+        }
+        else if (selectedDetails == allDetails->size())
+        {
+            actionSelectAll->setDisabled(true);
+        }
+
+        QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+
+        bool select;
+        if (selectedAction == actionSelectAll)
+        {
+            select = true;
+            qApp->getUndoStack()->beginMacro(tr("select all details"));
+        }
+        else if (selectedAction == actionSelectNone)
+        {
+            select = false;
+            qApp->getUndoStack()->beginMacro(tr("select none details"));
+        }
+        else
+        {
+            return;
+        }
+
+        for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+        {
+            QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+            const quint32 id = item->data(Qt::UserRole).toUInt();
+            if (not select == m_data->DataDetails()->value(id).IsInLayout())
+            {
+                ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
+                connect(togglePrint, &ToggleDetailInLayout::NeedLiteParsing, m_doc, &VAbstractPattern::LiteParseTree);
+                qApp->getUndoStack()->push(togglePrint);
+            }
+        }
+        qApp->getUndoStack()->endMacro();
+    }
+    else
+    {
+        return;
+    }
 }

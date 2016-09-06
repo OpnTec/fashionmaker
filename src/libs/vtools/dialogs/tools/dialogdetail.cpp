@@ -85,6 +85,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     ui.lineEditLetter->setClearButtonEnabled(true);
 #endif
 
+    ui.checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+
     labelEditNamePoint = ui.labelEditName;
     ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -442,6 +444,7 @@ VDetail DialogDetail::CreateDetail() const
     detail.setName(ui.lineEditName->text());
     detail.setSeamAllowance(supplement);
     detail.setClosed(closed);
+    detail.setForbidFlipping(ui.checkBoxForbidFlipping->isChecked());
 
     detail.GetPatternPieceData().SetLetter(ui.lineEditLetter->text());
 
@@ -510,6 +513,7 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.lineEditName->setText(detail.getName());
     ui.checkBoxSeams->setChecked(detail.getSeamAllowance());
     ui.checkBoxClosed->setChecked(detail.getClosed());
+    ui.checkBoxForbidFlipping->setChecked(detail.getForbidFlipping());
     ClickedClosed(detail.getClosed());
     ClickedSeams(detail.getSeamAllowance());
     ui.doubleSpinBoxSeams->setValue(detail.getWidth());

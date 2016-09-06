@@ -112,24 +112,25 @@ class QStyleOptionGraphicsItem;
 class QWidget;
 class VDataTool;
 
-const QString VToolDetail::TagNode          = QStringLiteral("node");
+const QString VToolDetail::TagNode            = QStringLiteral("node");
 
-const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
-const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
-const QString VToolDetail::AttrWidth        = QStringLiteral("width");
-const QString VToolDetail::AttrHeight       = QStringLiteral("height");
-const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
-const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
-const QString VToolDetail::AttrFont         = QStringLiteral("fontSize");
-const QString VToolDetail::AttrRotation     = QStringLiteral("rotation");
+const QString VToolDetail::AttrSupplement     = QStringLiteral("supplement");
+const QString VToolDetail::AttrClosed         = QStringLiteral("closed");
+const QString VToolDetail::AttrForbidFlipping = QStringLiteral("forbidFlipping");
+const QString VToolDetail::AttrWidth          = QStringLiteral("width");
+const QString VToolDetail::AttrHeight         = QStringLiteral("height");
+const QString VToolDetail::AttrNodeType       = QStringLiteral("nodeType");
+const QString VToolDetail::AttrReverse        = QStringLiteral("reverse");
+const QString VToolDetail::AttrFont           = QStringLiteral("fontSize");
+const QString VToolDetail::AttrRotation       = QStringLiteral("rotation");
 
-const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
-const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
+const QString VToolDetail::NodeTypeContour    = QStringLiteral("Contour");
+const QString VToolDetail::NodeTypeModeling   = QStringLiteral("Modeling");
 
-const QString VToolDetail::NodeArc          = QStringLiteral("NodeArc");
-const QString VToolDetail::NodePoint        = QStringLiteral("NodePoint");
-const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
-const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
+const QString VToolDetail::NodeArc            = QStringLiteral("NodeArc");
+const QString VToolDetail::NodePoint          = QStringLiteral("NodePoint");
+const QString VToolDetail::NodeSpline         = QStringLiteral("NodeSpline");
+const QString VToolDetail::NodeSplinePath     = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -306,6 +307,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
     det.setWidth(detail.getWidth());
     det.setClosed(detail.getClosed());
     det.setSeamAllowance(detail.getSeamAllowance());
+    det.setForbidFlipping(detail.getForbidFlipping());
     Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
@@ -431,6 +433,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrSupplement, static_cast<quint8>(detail.getSeamAllowance()));
     doc->SetAttribute(domElement, AttrClosed, static_cast<quint8>(detail.getClosed()));
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
+    doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(detail.getForbidFlipping()));
 
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
@@ -451,10 +454,6 @@ void VToolDetail::AddToFile()
         if (mcp.m_eMaterial == MaterialType::mtUserDefined)
         {
             doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
-        }
-        else
-        {
-            domMCP.removeAttribute(VAbstractPattern::AttrUserDefined);
         }
         doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));

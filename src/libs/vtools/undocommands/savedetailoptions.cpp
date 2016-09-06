@@ -140,6 +140,7 @@ void SaveDetailOptions::SaveDet(QDomElement &domElement, const VDetail &det)
     doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(det.getSeamAllowance()));
     doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(det.getClosed()));
     doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(det.getWidth()));
+    doc->SetAttribute(domElement, VToolDetail::AttrForbidFlipping, QString().setNum(det.getForbidFlipping()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
