@@ -143,28 +143,63 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     QMenu *menu = new QMenu;
     QAction *actionSelectAll = menu->addAction(tr("Select all"));
     QAction *actionSelectNone = menu->addAction(tr("Select none"));
-    QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
-    bool select;
-    if (selectedAction == actionSelectAll)
+    const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
+    if (not allDetails->count() == 0)
     {
-        select = true;
-    }
-    else if (selectedAction == actionSelectNone)
-    {
-        select = false;
+        int selectedDetails = 0;
+
+        QHash<quint32, VDetail>::const_iterator iter = allDetails->constBegin();
+        while (iter != allDetails->constEnd())
+        {
+            if(iter.value().IsInLayout())
+            {
+                selectedDetails++;
+            }
+            ++iter;
+        }
+        if (selectedDetails == 0)
+        {
+            actionSelectNone->setDisabled(true);
+        }
+        else if (selectedDetails == allDetails->size())
+        {
+            actionSelectAll->setDisabled(true);
+        }
+
+        QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+
+        bool select;
+        if (selectedAction == actionSelectAll)
+        {
+            select = true;
+            qApp->getUndoStack()->beginMacro(tr("select all details"));
+        }
+        else if (selectedAction == actionSelectNone)
+        {
+            select = false;
+            qApp->getUndoStack()->beginMacro(tr("select none details"));
+        }
+        else
+        {
+            return;
+        }
+
+        for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+        {
+            QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+            const quint32 id = item->data(Qt::UserRole).toUInt();
+            if (not select == m_data->DataDetails()->value(id).IsInLayout())
+            {
+                ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
+                connect(togglePrint, &ToggleDetailInLayout::NeedLiteParsing, m_doc, &VAbstractPattern::LiteParseTree);
+                qApp->getUndoStack()->push(togglePrint);
+            }
+        }
+        qApp->getUndoStack()->endMacro();
     }
     else
     {
         return;
-    }
-
-    for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
-    {
-        QTableWidgetItem *item = ui->tableWidget->item(i, 0);
-        const quint32 id = item->data(Qt::UserRole).toUInt();
-        ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
-        connect(togglePrint, &ToggleDetailInLayout::NeedLiteParsing, m_doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(togglePrint);
     }
 }
