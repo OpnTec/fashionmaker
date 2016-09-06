@@ -251,20 +251,6 @@ qreal VBank::GetBiggestDiagonal() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::IsForbiddenFlipping() const
-{
-    for (int i = 0; i < details.size(); ++i)
-    {
-        if (details.at(i).getForbidFlipping())
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 int VBank::ArrangedCount() const
 {
     return details.size() - AllDetailsCount();

@@ -135,30 +135,35 @@ void VLayoutPaper::SetShift(quint32 shift)
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::GetRotate() const
 {
-    return d->rotate;
+    return d->globalRotate;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetRotate(bool value)
 {
-    d->rotate = value;
+    d->globalRotate = value;
+    d->localRotate = d->globalRotate;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::GetRotationIncrease() const
 {
-    return d->rotationIncrease;
+    return d->globalRotationIncrease;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetRotationIncrease(int value)
 {
-    d->rotationIncrease = value;
+    d->globalRotationIncrease = value;
 
-    if ((d->rotationIncrease >= 1 && d->rotationIncrease <= 180 && 360 % d->rotationIncrease == 0) == false)
+    if ((d->globalRotationIncrease >= 1
+         && d->globalRotationIncrease <= 180
+         && 360 % d->globalRotationIncrease == 0) == false)
     {
-        d->rotationIncrease = 180;
+        d->globalRotationIncrease = 180;
     }
+
+    d->localRotationIncrease = d->globalRotationIncrease;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,6 +198,17 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &sto
         return false;//Not enough edges
     }
 
+    if (detail.getForbidFlipping() && not d->globalRotate)
+    { // Compensate forbidden flipping by rotating. 180 degree will be enough.
+        d->localRotate = true;
+        d->localRotationIncrease = 180;
+    }
+    else
+    { // Return to global values if was changed
+        d->localRotate = d->globalRotate;
+        d->localRotationIncrease = d->globalRotationIncrease;
+    }
+
     d->frame = 0;
 
     return AddToSheet(detail, stop);
@@ -216,7 +232,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
     {
         for (int i=1; i<= detail.EdgesCount(); ++i)
         {
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease,
+            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
+                                              d->localRotationIncrease,
                                               d->saveLength);
             //Info for debug
             #ifdef LAYOUT_DEBUG
@@ -230,7 +247,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
             threads.append(thread);
             thread_pool->start(thread);
 
-            d->frame = d->frame + 3 + static_cast<quint32>(360/d->rotationIncrease*2);
+            d->frame = d->frame + 3 + static_cast<quint32>(360/d->localRotationIncrease*2);
         }
     }
 
