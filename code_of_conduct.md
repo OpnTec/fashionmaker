@@ -18,14 +18,14 @@ include:
 * Being respectful of differing viewpoints and experiences
 * Gracefully accepting constructive criticism
 * Focusing on what is best for the community
-* Showing empathy towards other community members
+* Showing empathy and kindness towards other community members
 
 Examples of unacceptable behavior by participants include:
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
+* The use of sexualized language or imagery and unwelcome sexual attention or advances  
 * Trolling, insulting/derogatory comments, and personal or political attacks
 * Public or private harassment
+* Angry, demanding, or self-aggrandizing comments
 * Publishing others' private information, such as a physical or electronic
   address, without explicit permission
 * Other conduct which could reasonably be considered inappropriate in a
@@ -49,8 +49,10 @@ This Code of Conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community. Examples of
 representing a project or community include using an official project e-mail
 address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
+representative at an online or offline event. The Code of Conduct also applies 
+to attendees of a project-sponsored online or physical event, whether as part 
+of another larger event or as a project community event. Representation of a 
+project may be further defined and clarified by project maintainers.
 
 ## Enforcement
 
