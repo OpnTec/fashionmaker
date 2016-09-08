@@ -33,7 +33,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 
 VGrainlineGeometry::VGrainlineGeometry()
-    :m_ptPos(0, 0), m_dLength(0), m_dRotation(0), m_bVisible(true)
+    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,30 +57,30 @@ void VGrainlineGeometry::SetPos(const QPointF &ptPos)
 
 //---------------------------------------------------------------------------------------------------------------------
 
-qreal VGrainlineGeometry::GetLength() const
+QString VGrainlineGeometry::GetLength() const
 {
-    return m_dLength;
+    return m_qsLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetLength(qreal dLen)
+void VGrainlineGeometry::SetLength(QString qsLen)
 {
-    m_dLength = dLen;
+    m_qsLength = qsLen;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-qreal VGrainlineGeometry::GetRotation() const
+QString VGrainlineGeometry::GetRotation() const
 {
-    return m_dRotation;
+    return m_qsRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetRotation(qreal dRot)
+void VGrainlineGeometry::SetRotation(QString qsRot)
 {
-    m_dRotation = dRot;
+    m_qsRotation = qsRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

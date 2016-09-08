@@ -30,6 +30,7 @@
 #define VGRAINLINEGEOMETRY_H
 
 #include <QtGlobal>
+#include <QString>
 
 class QPointF;
 
@@ -46,10 +47,10 @@ public:
     // methods, which set and return values of different parameters
     QPointF                 GetPos() const;
     void                    SetPos(const QPointF& ptPos);
-    qreal                   GetLength() const;
-    void                    SetLength(qreal dLen);
-    qreal                   GetRotation() const;
-    void                    SetRotation(qreal dRot);
+    QString                 GetLength() const;
+    void                    SetLength(QString qsLen);
+    QString                 GetRotation() const;
+    void                    SetRotation(QString qsRot);
     bool                    IsVisible() const;
     void                    SetVisible(bool bVisible);
 
@@ -59,13 +60,13 @@ private:
      */
     QPointF                 m_ptPos;
     /**
-     * @brief m_dLength total length of grainline
+     * @brief m_dLength formula to calculate the length of grainline
      */
-    qreal                   m_dLength;
+    QString                 m_qsLength;
     /**
-     * @brief m_dRotation rotation of grainline in [degrees]
+     * @brief m_dRotation formula to calculate the rotation of grainline in [degrees]
      */
-    qreal                   m_dRotation;
+    QString                 m_qsRotation;
     /**
      * @brief m_bVisible visibility flag
      */

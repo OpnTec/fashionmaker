@@ -469,7 +469,8 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
     if (ui.checkBoxGrainline->isChecked() == true)
     {
-        detail.GetGrainlineGeometry().SetRotation(ui.spinBoxGrainlineRotation->value());
+        detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->text());
+        detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->text());
     }
     return detail;
 }
@@ -542,7 +543,8 @@ void DialogDetail::setDetail(const VDetail &value)
     UpdateList();
 
     ui.checkBoxGrainline->setChecked(detail.GetGrainlineGeometry().IsVisible());
-    ui.spinBoxGrainlineRotation->setValue(detail.GetGrainlineGeometry().GetRotation());
+    ui.lineEditRotFormula->setText(detail.GetGrainlineGeometry().GetRotation());
+    ui.lineEditLenFormula->setText(detail.GetGrainlineGeometry().GetLength());
 
     m_oldData = detail.GetPatternPieceData();
     m_oldGeom = detail.GetPatternInfo();
@@ -865,5 +867,10 @@ void DialogDetail::SetEditMode()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::EnableGrainlineRotation()
 {
-    ui.spinBoxGrainlineRotation->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.lineEditRotValue->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.lineEditRotFormula->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.lineEditLenValue->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.lineEditLenFormula->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.pushButtonRot->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.pushButtonLen->setEnabled(ui.checkBoxGrainline->isChecked());
 }
