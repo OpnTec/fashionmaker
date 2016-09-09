@@ -368,7 +368,18 @@ void VCommonSettings::SetUndoCount(const int &value)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::GetRecentFileList() const
 {
-    return value(SettingGeneralRecentFileList).toStringList();
+    const QStringList files = value(SettingGeneralRecentFileList).toStringList();
+    QStringList cleared;
+
+    for (int i = 0; i < files.size(); ++i)
+    {
+        if (QFileInfo(files.at(i)).exists())
+        {
+            cleared.append(files.at(i));
+        }
+    }
+
+    return cleared;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

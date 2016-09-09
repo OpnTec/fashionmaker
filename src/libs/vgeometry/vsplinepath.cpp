@@ -106,16 +106,14 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
-        const VSplinePoint &p1 = d->path.at(i-1);
-        const VSplinePoint &p2 = d->path.at(i);
-        VSpline spl = GetSpline(i).Rotate(originPoint, degrees);
+        const VSpline spl = GetSpline(i).Rotate(originPoint, degrees);
 
-        newPoints[i-1].SetP(p1.P());
-        newPoints[i-1].SetAngle2(p1.Angle2(), spl.GetStartAngleFormula());
+        newPoints[i-1].SetP(spl.GetP1());
+        newPoints[i-1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
         newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
-        newPoints[i].SetP(p2.P());
-        newPoints[i].SetAngle1(p2.Angle1(), spl.GetEndAngleFormula());
+        newPoints[i].SetP(spl.GetP4());
+        newPoints[i].SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
         newPoints[i].SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
     }
 
