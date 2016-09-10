@@ -77,6 +77,7 @@ public:
     void    setY(const qreal &value);
 
     static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
+    static QPointF FlipPF(const QLineF &axis, const QPointF &point);
 private:
     QSharedDataPointer<VPointFData> d;
 };

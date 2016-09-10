@@ -246,3 +246,74 @@ void TST_VArc::TestRotation()
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestFlip_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QString>("prefix");
+
+    const qreal radius = 5;
+    QPointF center(10, 5);
+
+    QPointF p1(10, 0);
+    QPointF p2(5, 5);
+
+    QLineF axis(QPointF(4, 6), QPointF(12, 6));
+
+    QTest::newRow("Vertical axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                   << axis << "a2";
+
+    p1 = QPointF(15, 5);
+    p2 = QPointF(10, 0);
+
+    axis = QLineF(QPointF(9, -1), QPointF(9, 6));
+
+    QTest::newRow("Horizontal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                     << axis << "a2";
+
+    QLineF l(center.x(), center.y(), center.x() + radius, center.y());
+
+    l.setAngle(45);
+    p2 = l.p2();
+
+    l.setAngle(225);
+    p1 = l.p2();
+
+    l.setAngle(45+90);
+    l.setLength(5);
+
+    const QPointF p1Axis = l.p2();
+    axis = QLineF(p1Axis.x(), p1Axis.y(), p1Axis.x() + radius, p1Axis.y());
+    axis.setAngle(45);
+
+    QTest::newRow("Diagonal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                   << axis << "a2";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestFlip()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(QLineF, axis);
+    QFETCH(QString, prefix);
+
+    VArc originArc(center, radius, startAngle, endAngle);
+    const VArc res = originArc.Flip(axis, prefix);
+
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    QVERIFY2(res.IsFlipped(), qUtf8Printable("The arc is not flipped"));
+
+    QCOMPARE(originArc.GetLength()*-1, res.GetLength());
+    QCOMPARE(originArc.GetRadius(), res.GetRadius());
+    QCOMPARE(originArc.AngleArc(), res.AngleArc());
+}

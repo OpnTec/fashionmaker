@@ -117,8 +117,7 @@ VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VPointF::Flip(const QLineF &axis, const QString &prefix) const
 {
-    const QTransform matrix = FlippingMatrix(axis);
-    const QPointF p = matrix.map(toQPointF());
+    const QPointF p = FlipPF(axis, toQPointF());
     return VPointF(p, name() + prefix, mx(), my());
 }
 
@@ -214,4 +213,11 @@ QPointF VPointF::RotatePF(const QPointF &originPoint, const QPointF &point, qrea
     QLineF axis(originPoint, point);
     axis.setAngle(axis.angle() + degrees);
     return axis.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::FlipPF(const QLineF &axis, const QPointF &point)
+{
+    const QTransform matrix = FlippingMatrix(axis);
+    return matrix.map(point);
 }

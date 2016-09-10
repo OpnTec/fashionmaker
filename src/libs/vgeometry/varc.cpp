@@ -132,6 +132,20 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const VPointF center = GetCenter().Flip(axis);
+
+    const QPointF p1 = VPointF::FlipPF(axis, GetP1());
+    const QPointF p2 = VPointF::FlipPF(axis, GetP2());
+
+    VArc arc(center, GetRadius(), QLineF(center, p1).angle(), QLineF(center, p2).angle());
+    arc.setName(name() + prefix);
+    arc.SetFlipped(true);
+    return arc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArc::~VArc()
 {}
 
