@@ -544,7 +544,7 @@
          <height>201</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0" columnminimumwidth="0,0,30">
+       <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0" columnminimumwidth="0,0,25">
         <item row="0" column="0" colspan="2">
          <widget class="QCheckBox" name="checkBoxGrainline">
           <property name="text">
@@ -633,7 +633,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>f(x)</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -646,7 +646,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>f(x)</string>
+           <string/>
           </property>
          </widget>
         </item>

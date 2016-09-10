@@ -469,8 +469,11 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  */
 qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
 {
+    qDebug() << "Eval started";
     SCASSERT(label != nullptr);
+    qDebug() << "Label ok";
     SCASSERT(labelEditFormula != nullptr);
+    qDebug() << "lef ok";
 
     qreal result = INT_MIN;//Value can be 0, so use max imposible value
 
