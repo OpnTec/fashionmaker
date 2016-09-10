@@ -127,6 +127,20 @@ VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Flip(axis);
+    const VPointF p4 = GetP4().Flip(axis);
+
+    const QPointF p2 = VPointF::FlipPF(axis, GetP2());
+    const QPointF p3 = VPointF::FlipPF(axis, GetP3());
+
+    VSpline spl(p1, p2, p3, p4);
+    spl.setName(name() + prefix);
+    return spl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::~VSpline()
 {}
 

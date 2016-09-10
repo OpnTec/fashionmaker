@@ -79,6 +79,18 @@ VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezier VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Flip(axis);
+    const VPointF p2 = GetP2().Flip(axis);
+    const VPointF p3 = GetP3().Flip(axis);
+    const VPointF p4 = GetP4().Flip(axis);
+    VCubicBezier curve(p1, p2, p3, p4);
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::~VCubicBezier()
 {
 }
