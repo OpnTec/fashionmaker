@@ -50,7 +50,7 @@ VFSplinePoint::VFSplinePoint()
  * @param kAsm2 coefficient of length second control line.
  * @param angle2 second angle control line.
  */
-VFSplinePoint::VFSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
+VFSplinePoint::VFSplinePoint(const VPointF &pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
     :d(new VFSplinePointData(pSpline, kAsm1, angle1, kAsm2, angle2))
 {}
 
@@ -195,8 +195,9 @@ VSplinePoint::VSplinePoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint::VSplinePoint(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
-                           qreal length1, const QString &length1F, qreal length2, const QString &length2F)
+VSplinePoint::VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2,
+                           const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
+                           const QString &length2F)
     : d(new VSplinePointData(pSpline, angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F))
 {
 }

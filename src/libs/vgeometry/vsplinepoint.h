@@ -47,7 +47,7 @@ class VFSplinePoint
 {
 public:
     VFSplinePoint();
-    VFSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    VFSplinePoint(const VPointF &pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     VFSplinePoint(const VFSplinePoint &point);
     VFSplinePoint &operator=(const VFSplinePoint &point);
     ~VFSplinePoint();
@@ -79,7 +79,7 @@ class VSplinePoint
 {
 public:
     VSplinePoint();
-    VSplinePoint(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
+    VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
                  qreal length1, const QString &length1F, qreal length2, const QString &length2F);
     VSplinePoint(const VSplinePoint &point);
     VSplinePoint &operator=(const VSplinePoint &point);
