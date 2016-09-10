@@ -36,6 +36,7 @@
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "vabstracttool.h"
 #include "vtextgraphicsitem.h"
+#include "vgrainlineitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
@@ -119,6 +120,7 @@ protected:
 protected slots:
     virtual void       UpdateLabel();
     virtual void       UpdatePatternInfo();
+    virtual void       UpdateGrainline();
     virtual void       SaveMoveDetail(const QPointF &ptPos);
     virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
     virtual void       SaveRotationDetail(qreal dRot);
@@ -138,6 +140,7 @@ private:
     VNoBrushScalePathItem       *seamAllowance;
     VTextGraphicsItem           *dataLabel;
     VTextGraphicsItem           *patternInfo;
+    VGrainlineItem              *grainLine;
 
     VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);

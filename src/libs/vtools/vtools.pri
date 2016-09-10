@@ -10,3 +10,4 @@ HEADERS += \
     $$PWD/stable.h
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
+

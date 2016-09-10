@@ -132,7 +132,7 @@ private slots:
     void             SetEditMode();
     void             EnableGrainlineRotation();
     void             EditFormula();
-    void             UpdateValue(const QString &);
+    void             UpdateValue(const QString& qsText);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

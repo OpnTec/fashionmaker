@@ -961,7 +961,7 @@ void DialogDetail::EditFormula()
     }
     else
     {
-        // should get here!
+        // should not get here!
         return;
     }
 
@@ -978,7 +978,8 @@ void DialogDetail::EditFormula()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogDetail::UpdateValue(const QString&)
+void DialogDetail::UpdateValue(const QString& qsText)
 {
+    Q_UNUSED(qsText);
     SetValue(sender());
 }

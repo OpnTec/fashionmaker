@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vtextgraphicsitem.h
+ **  @file   vtextgraphicsitem.cpp
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **

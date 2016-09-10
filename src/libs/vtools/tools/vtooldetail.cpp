@@ -89,6 +89,7 @@
 #include "../vpatterndb/vdetail.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/calculator.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -146,7 +147,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
       drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)), dataLabel(new VTextGraphicsItem(this)),
-      patternInfo(new VTextGraphicsItem(this))
+      patternInfo(new VTextGraphicsItem(this)), grainLine(new VGrainlineItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -206,6 +207,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateGrainline);
 
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdateLabel);
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdatePatternInfo);
@@ -213,6 +215,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     UpdateLabel();
     UpdatePatternInfo();
+    UpdateGrainline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -880,7 +883,46 @@ void VToolDetail::UpdatePatternInfo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolDetail::UpdateGrainline updates the grain line item
+ */
+void VToolDetail::UpdateGrainline()
+{
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    const VGrainlineGeometry& geom = detail.GetGrainlineGeometry();
 
+    if (geom.IsVisible() == true)
+    {
+        qreal dRotation;
+        qreal dLength;
+        try
+        {
+            QString qsFormula;
+            qsFormula = geom.GetRotation().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal1;
+            dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+
+            qsFormula = geom.GetLength().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal2;
+            dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+        }
+        catch(...)
+        {
+            grainLine->hide();
+            return;
+        }
+        grainLine->UpdateGeometry(geom.GetPos(), dRotation, dLength);
+        grainLine->show();
+    }
+    else
+    {
+        grainLine->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveMoveDetail saves the move detail operation to the undo stack
  */
