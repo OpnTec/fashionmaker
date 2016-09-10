@@ -65,6 +65,7 @@ public:
     VPointF &operator=(const VPointF &point);
             operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
+    VPointF Flip(const QLineF &axis, const QString &prefix = QString()) const;
     qreal   mx() const;
     qreal   my() const;
     void    setMx(qreal mx);

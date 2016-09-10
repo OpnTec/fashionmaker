@@ -52,7 +52,8 @@ SOURCES += \
     tst_vellipticalarc.cpp \
     tst_vcubicbezierpath.cpp \
     tst_vgobject.cpp \
-    tst_vsplinepath.cpp
+    tst_vsplinepath.cpp \
+    tst_vpointf.cpp
 
 win32-msvc*:SOURCES += stable.cpp
 
@@ -75,7 +76,8 @@ HEADERS += \
     tst_vellipticalarc.h \
     tst_vcubicbezierpath.h \
     tst_vgobject.h \
-    tst_vsplinepath.h
+    tst_vsplinepath.h \
+    tst_vpointf.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

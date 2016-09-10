@@ -31,6 +31,7 @@
 #include <QLineF>
 #include <QPointF>
 #include <QString>
+#include <QTransform>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -110,6 +111,14 @@ VPointF::operator QPointF() const
 VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
 {
     const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
+    return VPointF(p, name() + prefix, mx(), my());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const QTransform matrix = FlippingMatrix(axis);
+    const QPointF p = matrix.map(toQPointF());
     return VPointF(p, name() + prefix, mx(), my());
 }
 
