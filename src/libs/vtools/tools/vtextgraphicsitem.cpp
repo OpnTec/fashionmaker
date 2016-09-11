@@ -55,7 +55,8 @@ class VPatternPieceData;
 #define ROTATE_ARC                  50
 #define MIN_W                       120
 #define MIN_H                       60
-#define TOP_Z                       2
+#define INACTIVE_Z                  2
+#define ACTIVE_Z                    10
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -69,7 +70,7 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     SetSize(MIN_W, m_iMinH);
-    setZValue(TOP_Z);
+    setZValue(INACTIVE_Z);
     setAcceptHoverEvents(true);
 }
 
@@ -173,7 +174,7 @@ void VTextGraphicsItem::Reset()
     m_eMode = mNormal;
     m_bReleased = false;
     Update();
-    setZValue(TOP_Z);
+    setZValue(INACTIVE_Z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -399,7 +400,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
         // raise the label and redraw it
-        setZValue(TOP_Z + 1);
+        setZValue(ACTIVE_Z);
         UpdateBox();
     }
 }

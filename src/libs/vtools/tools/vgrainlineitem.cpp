@@ -30,39 +30,59 @@
 
 #include <QPainter>
 #include <QtMath>
+#include <QGraphicsSceneMouseEvent>
+#include <QDebug>
 
 #include "vgrainlineitem.h"
 
 #define ARROW_ANGLE                     0.5
 #define ARROW_LENGTH                    0.05
 #define RECT_WIDTH                      30
+#define ACTIVE_Z                        10
+#define INACTIVE_Z                      5
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::VGrainlineItem constructor
+ * @param pParent pointer to the parent item
+ */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
-    :QGraphicsObject(pParent), m_eMode(mNormal), m_ptPos(QPointF(0, 0)), m_dRotation(0), m_dLength(0),
-      m_rectBoundingBox()
+    :QGraphicsObject(pParent), m_eMode(mNormal), m_dRotation(0), m_dLength(0), m_rectBoundingBox(),
+      m_polyBound(), m_ptStartPos(), m_ptStartMove()
 {
-    m_rectBoundingBox.setTopLeft(QPointF(0, 0));
-    m_rectBoundingBox.setSize(QSizeF(200, 200));
+    setAcceptHoverEvents(true);
+    Reset();
+    UpdateRectangle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::~VGrainlineItem destructor
+ */
 VGrainlineItem::~VGrainlineItem()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::paint paints the item content
+ * @param pP pointer to the painter object
+ * @param pOption not used
+ * @param pWidget not used
+ */
 void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget)
 {
     Q_UNUSED(pOption);
     Q_UNUSED(pWidget);
+    pP->save();
     QColor clr = Qt::black;
     pP->setPen(QPen(clr, 3));
-    QPointF pt1 = m_ptPos;
-    QPointF pt2 = pt1;
+    QPointF pt1 = pos();
+    QPointF pt2;
+
+    pt2.setX(pt1.x() + m_dLength * cos(m_dRotation));
+    pt2.setY(pt1.y() + m_dLength * sin(m_dRotation));
 
     pP->setRenderHints(QPainter::Antialiasing);
-    pt2.setX(pt2.x() + m_dLength * cos(m_dRotation));
-    pt2.setY(pt2.y() + m_dLength * sin(m_dRotation));
     pP->drawLine(pt1, pt2);
 
     QPolygonF poly;
@@ -91,35 +111,178 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     {
         pP->setPen(QPen(clr, 2, Qt::DashLine));
         pP->setBrush(Qt::NoBrush);
-        poly.clear();
-        ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
-        ptA.setY(pt1.y() + RECT_WIDTH*sin(m_dRotation + M_PI/2));
-        poly << ptA;
-        ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
-        ptA.setY(pt1.y() + RECT_WIDTH*sin(m_dRotation - M_PI/2));
-        poly << ptA;
-        ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
-        ptA.setY(pt2.y() + RECT_WIDTH*sin(m_dRotation - M_PI/2));
-        poly << ptA;
-        ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
-        ptA.setY(pt2.y() + RECT_WIDTH*sin(m_dRotation + M_PI/2));
-        poly << ptA;
-        pP->drawPolygon(poly);
+        pP->drawPolygon(m_polyBound);
+    }
+    pP->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::UpdateGeometry updates the item with grainline parameters
+ * @param ptPos position of one grainline's end
+ * @param dRotation rotation of the grainline in [degrees]
+ * @param dLength length of the grainline in user's units
+ */
+void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength)
+{
+    m_dRotation = qDegreesToRadians(dRotation);
+    m_dLength = dLength;
+
+    setPos(ptPos);
+    UpdateRectangle();
+    UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::boundingRect returns the bounding rect around the grainline
+ * @return bounding rect
+ */
+QRectF VGrainlineItem::boundingRect() const
+{
+    return m_rectBoundingBox;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::Reset resets the item parameters.
+ */
+void VGrainlineItem::Reset()
+{
+    m_eMode = mNormal;
+    setZValue(INACTIVE_Z);
+    UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::IsIdle returns the idle flag.
+ * @return true, if item mode is normal and false otherwise.
+ */
+bool VGrainlineItem::IsIdle() const
+{
+    return m_eMode == mNormal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::IsContained checks, if both ends of the grainline, starting at pt, are contained in
+ * parent widget.
+ * @param pt starting point of the grainline.
+ * @return true, if both ends of the grainline, starting at pt, are contained in the parent widget and
+ * false otherwise.
+ */
+bool VGrainlineItem::IsContained(const QPointF& pt) const
+{
+    QRectF rectParent = parentItem()->boundingRect();
+    if (rectParent.contains(pt) == false)
+    {
+        qDebug() << "First point out" << pt << rectParent;
+        return false;
+    }
+    QPointF ptA;
+    ptA.setX(pt.x() + m_dLength * cos(m_dRotation));
+    ptA.setY(pt.y() + m_dLength * sin(m_dRotation));
+    if (rectParent.contains(ptA) == false)
+    {
+        qDebug() << "Second point out" << ptA << rectParent;
+    }
+    return (rectParent.contains(ptA));
+}
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::mousePressEvent handles left button mouse press events
+ * @param pME pointer to QGraphicsSceneMouseEvent object
+ */
+void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
+{
+    if (pME->button() == Qt::LeftButton)
+    {
+        m_eMode = mMove;
+        setZValue(ACTIVE_Z);
+        m_ptStartPos = pos();
+        m_ptStartMove = pME->scenePos();
+        UpdateBox();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength)
+/**
+ * @brief VGrainlineItem::mouseMoveEvent handles mouse move events, making sure that the item is moved properly
+ * @param pME pointer to QGraphicsSceneMouseEvent object
+ */
+void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 {
-    m_ptPos = ptPos;
-    m_dRotation = qDegreesToRadians(dRotation);
-    m_dLength = dLength;
-    m_eMode = mMove;
+    if (m_eMode == mMove)
+    {
+        QPointF ptDiff = pME->scenePos() - m_ptStartMove;
+        QPointF pt = m_ptStartPos + ptDiff/2;
+        if (IsContained(pt) == true)
+        {
+            setPos(pt);
+            UpdateRectangle();
+            UpdateBox();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::mouseReleaseEvent handles mouse release events and emits the proper signal if the item was
+ * moved
+ * @param pME pointer to QGraphicsSceneMouseEvent object
+ */
+void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
+{
+    if (pME->button() == Qt::LeftButton)
+    {
+        if (m_eMode == mMove)
+        {
+            qreal dD = fabs(pME->scenePos().x() - m_ptStartMove.x()) + fabs(pME->scenePos().y() - m_ptStartMove.y());
+            bool bShort = (dD < 2);
+            if (bShort == false)
+            {
+                emit SignalMoved(pos());
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::UpdateBox updates the item
+ */
+void VGrainlineItem::UpdateBox()
+{
     update(m_rectBoundingBox);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VGrainlineItem::boundingRect() const
+/**
+ * @brief VGrainlineItem::UpdateRectangle updates the polygon for the box around active item
+ * and the bounding rectangle
+ */
+void VGrainlineItem::UpdateRectangle()
 {
-    return m_rectBoundingBox;
+    m_polyBound.clear();
+    QPointF pt1 = pos();
+    QPointF pt2;
+
+    pt2.setX(pt1.x() + m_dLength * cos(m_dRotation));
+    pt2.setY(pt1.y() + m_dLength * sin(m_dRotation));
+
+    QPointF ptA;
+    ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
+    ptA.setY(pt1.y() + RECT_WIDTH*sin(m_dRotation + M_PI/2));
+    m_polyBound << ptA;
+    ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
+    ptA.setY(pt1.y() + RECT_WIDTH*sin(m_dRotation - M_PI/2));
+    m_polyBound << ptA;
+    ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
+    ptA.setY(pt2.y() + RECT_WIDTH*sin(m_dRotation - M_PI/2));
+    m_polyBound << ptA;
+    ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
+    ptA.setY(pt2.y() + RECT_WIDTH*sin(m_dRotation + M_PI/2));
+    m_polyBound << ptA;
+    m_rectBoundingBox = m_polyBound.boundingRect();
 }

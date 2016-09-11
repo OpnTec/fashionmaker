@@ -55,13 +55,28 @@ public:
     void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength);
 
     QRectF                  boundingRect() const;
+    void                    Reset();
+    bool                    IsIdle() const;
+    bool                    IsContained(const QPointF &pt) const;
+
+protected:
+    void                    mousePressEvent(QGraphicsSceneMouseEvent* pME);
+    void                    mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
+    void                    mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
+    void                    UpdateBox();
+    void                    UpdateRectangle();
+
+signals:
+    void                    SignalMoved(const QPointF& ptPos);
 
 private:
     Mode                    m_eMode;
-    QPointF                 m_ptPos;
     qreal                   m_dRotation;
     qreal                   m_dLength;
     QRectF                  m_rectBoundingBox;
+    QPolygonF                m_polyBound;
+    QPointF                 m_ptStartPos;
+    QPointF                 m_ptStartMove;
 };
 
 #endif // VGRAINLINEITEM_H

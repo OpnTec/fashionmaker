@@ -204,6 +204,8 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
 
+    connect(grainLine, &VGrainlineItem::SignalMoved, this, &VToolDetail::SaveMoveGrainline);
+
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
@@ -1039,6 +1041,20 @@ void VToolDetail::SaveRotationPattern(qreal dRot)
 
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveMoveGrainline(const QPointF& ptPos)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    qDebug() << "******* new grainline pos" << ptPos;
+
+    SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    moveCommand->setText(tr("move grainline"));
+    connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddNode add node to the file.
  * @param domElement tag in xml tree.
@@ -1197,6 +1213,11 @@ void VToolDetail::ResetChildren(QGraphicsItem *pItem)
     if (pVGI != patternInfo)
     {
         patternInfo->Reset();
+    }
+    VGrainlineItem* pGLI = dynamic_cast<VGrainlineItem*>(pItem);
+    if (pGLI != grainLine)
+    {
+        grainLine->Reset();
     }
 }
 
