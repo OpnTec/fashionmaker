@@ -408,11 +408,20 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VToolDetail::paint draws a bounding box around detail, if one of its text items is not idle.
+ * @brief VToolDetail::paint draws a bounding box around detail, if one of its text or grainline items is not idle.
  */
 void VToolDetail::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false)
+    if (scene()->views().count() > 0)
+    {
+        QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
+        QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
+        qreal dScale = qSqrt(QPoint::dotProduct(pt - pt0, pt - pt0));
+        grainLine->SetScale(100/dScale);
+        qDebug() << "SCALE" << dScale << 10/dScale;
+    }
+
+    if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false || grainLine->IsIdle() == false)
     {
         painter->save();
         painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
@@ -915,7 +924,8 @@ void VToolDetail::UpdateGrainline()
             grainLine->hide();
             return;
         }
-        grainLine->UpdateGeometry(geom.GetPos(), dRotation, dLength);
+
+        grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()));
         grainLine->show();
     }
     else

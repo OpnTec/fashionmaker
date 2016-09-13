@@ -57,7 +57,8 @@ public:
     QRectF                  boundingRect() const;
     void                    Reset();
     bool                    IsIdle() const;
-    bool                    IsContained(const QPointF &pt) const;
+    bool                    IsContained(const QPointF &pt, qreal &dX, qreal &dY) const;
+    void                    SetScale(qreal dScale);
 
 protected:
     void                    mousePressEvent(QGraphicsSceneMouseEvent* pME);
@@ -77,6 +78,7 @@ private:
     QPolygonF                m_polyBound;
     QPointF                 m_ptStartPos;
     QPointF                 m_ptStartMove;
+    qreal                   m_dScale;
 };
 
 #endif // VGRAINLINEITEM_H
