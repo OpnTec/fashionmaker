@@ -70,5 +70,7 @@
         <file>cursor/rotation_cursor@2x.png</file>
         <file>cursor/midpoint_cursor.png</file>
         <file>cursor/midpoint_cursor@2x.png</file>
+        <file>cursor/flipping_line_cursor@2x.png</file>
+        <file>cursor/flipping_line_cursor.png</file>
     </qresource>
 </RCC>

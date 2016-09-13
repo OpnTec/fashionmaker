@@ -75,7 +75,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
 
     switch (item->type())
     {
@@ -185,6 +185,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolRotation::Type:
             ShowOptionsToolRotation(item);
             break;
+        case VToolFlippingByLine::Type:
+            ShowOptionsToolFlippingByLine(item);
+            break;
         default:
             break;
     }
@@ -199,7 +202,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -299,6 +302,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolRotation::Type:
             UpdateOptionsToolRotation();
             break;
+        case VToolFlippingByLine::Type:
+            UpdateOptionsToolFlippingByLine();
+            break;
         default:
             break;
     }
@@ -334,7 +340,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -427,6 +433,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolRotation::Type:
             ChangeDataToolRotation(prop);
+            break;
+        case VToolFlippingByLine::Type:
+            ChangeDataToolFlippingByLine(prop);
             break;
         default:
             break;
@@ -1602,6 +1611,27 @@ void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VProperty *property)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolFlippingByLine *i = qgraphicsitem_cast<VToolFlippingByLine *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 38: // AttrSuffix
+            SetOperationSuffix<VToolFlippingByLine>(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -1989,6 +2019,16 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
 
     AddPropertyOperationSuffix(i, tr("Suffix"));
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *item)
+{
+    VToolFlippingByLine *i = qgraphicsitem_cast<VToolFlippingByLine *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool flipping by line"));
+
+    AddPropertyOperationSuffix(i, tr("Suffix"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2449,6 +2489,13 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByLine()
+{
+    VToolFlippingByLine *i = qgraphicsitem_cast<VToolFlippingByLine *>(currentItem);
+    idToProperty[AttrSuffix]->setValue(i->Suffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

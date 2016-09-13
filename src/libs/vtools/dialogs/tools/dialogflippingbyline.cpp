@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogrotation.cpp
+ **  @file   dialogflippingbyline.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 4, 2016
+ **  @date   12 9, 2016
  **
  **  @brief
  **  @copyright
@@ -26,15 +26,13 @@
  **
  *************************************************************************/
 
-#include "dialogrotation.h"
+#include "dialogflippingbyline.h"
 
 #include <QColor>
 #include <QComboBox>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
-#include <QLineF>
-#include <QPlainTextEdit>
 #include <QPointF>
 #include <QPointer>
 #include <QPushButton>
@@ -42,134 +40,108 @@
 #include <QRegularExpressionMatch>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QTimer>
 #include <QToolButton>
 #include <Qt>
 #include <new>
 
 #include "../../visualization/visualization.h"
-#include "../../visualization/line/operation/vistoolrotation.h"
+#include "../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
-#include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "ui_dialogrotation.h"
-
-class QCloseEvent;
-class QWidget;
+#include "ui_dialogflippingbyline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogRotation),
-      flagAngle(false),
-      timerAngle(nullptr),
-      formulaAngle(),
-      formulaBaseHeightAngle(0),
+      ui(new Ui::DialogFlippingByLine),
       objects(),
       stage1(true),
       m_suffix()
 {
     ui->setupUi(this);
 
-    this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
-    ui->plainTextEditFormula->installEventFilter(this);
-
     ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
-
-    timerAngle = new QTimer(this);
-    connect(timerAngle, &QTimer::timeout, this, &DialogRotation::EvalAngle);
 
     InitOkCancelApply(ui);
 
-    FillComboBoxPoints(ui->comboBoxOriginPoint);
+    FillComboBoxPoints(ui->comboBoxFirstLinePoint);
+    FillComboBoxPoints(ui->comboBoxSecondLinePoint);
 
     flagName = true;
     CheckState();
 
-    connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogRotation::SuffixChanged);
-    connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogRotation::FXAngle);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogRotation::AngleChanged);
-    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
-    connect(ui->comboBoxOriginPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogRotation::PointChanged);
+    connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
+    connect(ui->comboBoxFirstLinePoint,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogFlippingByLine::PointChanged);
 
-    vis = new VisToolRotation(data);
+    vis = new VisToolFlippingByLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogRotation::~DialogRotation()
+DialogFlippingByLine::~DialogFlippingByLine()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogRotation::GetOrigPointId() const
+quint32 DialogFlippingByLine::GetFirstLinePointId() const
 {
-    return getCurrentObjectId(ui->comboBoxOriginPoint);
+    return getCurrentObjectId(ui->comboBoxFirstLinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SetOrigPointId(const quint32 &value)
+void DialogFlippingByLine::SetFirstLinePointId(quint32 value)
 {
-    ChangeCurrentData(ui->comboBoxOriginPoint, value);
-    VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+    ChangeCurrentData(ui->comboBoxFirstLinePoint, value);
+    VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr);
-    operation->SetOriginPointId(value);
+    operation->SetFirstLinePointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetAngle() const
+quint32 DialogFlippingByLine::GetSecondLinePointId() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return getCurrentObjectId(ui->comboBoxSecondLinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SetAngle(const QString &value)
+void DialogFlippingByLine::SetSecondLinePointId(quint32 value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
-    // increase height if needed.
-    if (formulaAngle.length() > 80)
-    {
-        this->DeployAngleTextEdit();
-    }
-    ui->plainTextEditFormula->setPlainText(formulaAngle);
-
-    VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+    ChangeCurrentData(ui->comboBoxSecondLinePoint, value);
+    VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr);
-    operation->SetAngle(formulaAngle);
-
-    MoveCursorToEnd(ui->plainTextEditFormula);
+    operation->SetSecondLinePointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetSuffix() const
+QString DialogFlippingByLine::GetSuffix() const
 {
     return m_suffix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SetSuffix(const QString &value)
+void DialogFlippingByLine::SetSuffix(const QString &value)
 {
     m_suffix = value;
     ui->lineEditSuffix->setText(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> DialogRotation::GetObjects() const
+QVector<quint32> DialogFlippingByLine::GetObjects() const
 {
     return objects.toVector();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::ShowDialog(bool click)
+void DialogFlippingByLine::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
@@ -184,7 +156,7 @@ void DialogRotation::ShowDialog(bool click)
         SCASSERT(scene != nullptr);
         scene->clearSelection();
 
-        VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+        VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr);
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
@@ -197,36 +169,18 @@ void DialogRotation::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        emit ToolTip("Select origin point");
+        emit ToolTip("Select first line point");
     }
     else if (not stage1 && prepare && click)
     {
-        /*We will ignore click if pointer is in point circle*/
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
-        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetOrigPointId());
-        const QLineF line = QLineF(*point, scene->getScenePos());
-
-        //Radius of point circle, but little bigger. Need handle with hover sizes.
-        const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-        if (line.length() <= radius)
-        {
-            return;
-        }
-
-        VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-        SCASSERT(operation != nullptr);
-
-        SetAngle(operation->Angle());//Show in dialog angle that a user choose
         setModal(true);
         emit ToolTip("");
-        timerAngle->start();
         show();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
+void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare)// After first choose we ignore all objects
     {
@@ -237,25 +191,45 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
                 return;
             }
 
-            if (SetObject(id, ui->comboBoxOriginPoint, ""))
+            switch (number)
             {
-                VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-                SCASSERT(operation != nullptr);
-                VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-                SCASSERT(window != nullptr);
-                connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+                case 0:
+                    if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
+                    {
+                        number++;
+                        VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+                        SCASSERT(operation != nullptr);
+                        operation->SetFirstLinePointId(id);
+                        operation->RefreshGeometry();
+                    }
+                    break;
+                case 1:
+                    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
+                    {
+                        if (SetObject(id, ui->comboBoxSecondLinePoint, ""))
+                        {
+                            if (flagError)
+                            {
+                                number = 0;
+                                prepare = true;
 
-                operation->SetOriginPointId(id);
-                operation->RefreshGeometry();
-
-                prepare = true;
+                                VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+                                SCASSERT(operation != nullptr);
+                                operation->SetSecondLinePointId(id);
+                                operation->RefreshGeometry();
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
+void DialogFlippingByLine::SelectedObject(bool selected, quint32 object, quint32 tool)
 {
     Q_UNUSED(tool)
     if (stage1)
@@ -275,35 +249,7 @@ void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::DeployAngleTextEdit()
-{
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeightAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::AngleChanged()
-{
-    labelEditFormula = ui->labelEditAngle;
-    labelResultCalculation = ui->labelResultAngle;
-    ValFormulaChanged(flagAngle, ui->plainTextEditFormula, timerAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::FXAngle()
-{
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
-    dialog->setWindowTitle(tr("Edit angle"));
-    dialog->SetFormula(GetAngle());
-    dialog->setPostfix(degreeSymbol);
-    if (dialog->exec() == QDialog::Accepted)
-    {
-        SetAngle(dialog->GetFormula());
-    }
-    delete dialog;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SuffixChanged()
+void DialogFlippingByLine::SuffixChanged()
 {
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
@@ -343,65 +289,61 @@ void DialogRotation::SuffixChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::CheckState()
+void DialogFlippingByLine::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagAngle && flagName);
+    bOk->setEnabled(flagError && flagName);
     SCASSERT(bApply != nullptr);
     bApply->setEnabled(bOk->isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::ShowVisualization()
+void DialogFlippingByLine::ShowVisualization()
 {
-    AddVisualization<VisToolRotation>();
+    AddVisualization<VisToolFlippingByLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SaveData()
+void DialogFlippingByLine::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
 
-    formulaAngle = ui->plainTextEditFormula->toPlainText();
-    formulaAngle.replace("\n", " ");
-
-    VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+    VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr);
 
     operation->SetObjects(objects.toVector());
-    operation->SetOriginPointId(GetOrigPointId());
-    operation->SetAngle(formulaAngle);
+    operation->SetFirstLinePointId(GetFirstLinePointId());
+    operation->SetSecondLinePointId(GetSecondLinePointId());
     operation->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::closeEvent(QCloseEvent *event)
-{
-    ui->plainTextEditFormula->blockSignals(true);
-    DialogTool::closeEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::PointChanged()
+void DialogFlippingByLine::PointChanged()
 {
     QColor color = okColor;
-    if (objects.contains(getCurrentObjectId(ui->comboBoxOriginPoint)))
+    flagError = true;
+    ChangeColor(ui->labelFirstLinePoint, color);
+    ChangeColor(ui->labelSecondLinePoint, color);
+
+    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) == getCurrentObjectId(ui->comboBoxSecondLinePoint))
     {
         flagError = false;
         color = errorColor;
+        ChangeColor(ui->labelFirstLinePoint, color);
+        ChangeColor(ui->labelSecondLinePoint, color);
     }
-    else
+    else if (objects.contains(getCurrentObjectId(ui->comboBoxFirstLinePoint)))
     {
-        flagError = true;
-        color = okColor;
+        flagError = false;
+        color = errorColor;
+        ChangeColor(ui->labelFirstLinePoint, color);
     }
-    ChangeColor(ui->labelOriginPoint, color);
-    CheckState();
-}
+    else if (objects.contains(getCurrentObjectId(ui->comboBoxSecondLinePoint)))
+    {
+        flagError = false;
+        color = errorColor;
+        ChangeColor(ui->labelSecondLinePoint, color);
+    }
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::EvalAngle()
-{
-    labelEditFormula = ui->labelEditAngle;
-    Eval(ui->plainTextEditFormula->toPlainText(), flagAngle, ui->labelResultAngle, degreeSymbol, false);
+    CheckState();
 }

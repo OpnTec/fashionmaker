@@ -62,6 +62,7 @@
 #include "tools/dialogtruedarts.h"
 #include "tools/dialoggroup.h"
 #include "tools/dialogrotation.h"
+#include "tools/dialogflippingbyline.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

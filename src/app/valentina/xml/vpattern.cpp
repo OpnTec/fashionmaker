@@ -2519,7 +2519,7 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
 
         QVector<quint32> source;
         QVector<DestinationItem> destination;
-        VToolRotation::ExtractData(this, domElement, source, destination);
+        VAbstractOperation::ExtractData(this, domElement, source, destination);
 
         VToolRotation::Create(id, center, a, suffix, source, destination, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2540,6 +2540,36 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
     {
         VExceptionObjectError excep(tr("Error creating or updating operation of rotation"), domElement);
         excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = NULL_ID;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 p1 = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+        const quint32 p2 = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+        const QString suffix = GetParametrString(domElement, AttrSuffix, "");
+
+        QVector<quint32> source;
+        QVector<DestinationItem> destination;
+        VAbstractOperation::ExtractData(this, domElement, source, destination);
+
+        VToolFlippingByLine::Create(id, p1, p2, suffix, source, destination, scene, this, data, parse,
+                                    Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating operation of flipping by line"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
 }
@@ -2794,12 +2824,16 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of operation is empty");
 
-    const QStringList opers = QStringList() << VToolRotation::ToolType; /*0*/
+    const QStringList opers = QStringList() << VToolRotation::ToolType        /*0*/
+                                            << VToolFlippingByLine::ToolType; /*1*/
 
     switch (opers.indexOf(type))
     {
         case 0: //VToolRotation::ToolType
             ParseToolRotation(scene, domElement, parse);
+            break;
+        case 1: //VToolFlippingByLine::ToolType
+            ParseToolFlippingByLine(scene, domElement, parse);
             break;
         default:
             VException e(tr("Unknown operation type '%1'.").arg(type));
@@ -3306,7 +3340,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3417,6 +3451,9 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 case Tool::Rotation:
                     rec = ToolBoundingRect<VToolRotation>(rec, tool.getId());
+                    break;
+                case Tool::FlippingByLine:
+                    rec = ToolBoundingRect<VToolFlippingByLine>(rec, tool.getId());
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:
