@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   moverotationlabel.h
+ **  @file   operationmovelabel.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   13 5, 2016
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef ROTATIONMOVELABEL_H
-#define ROTATIONMOVELABEL_H
+#ifndef OPERATIONMOVELABEL_H
+#define OPERATIONMOVELABEL_H
 
 #include <qcompilerdetection.h>
 #include <QDomElement>
@@ -42,13 +42,13 @@ class QDomElement;
 class QUndoCommand;
 class VAbstractPattern;
 
-class RotationMoveLabel : public MoveAbstractLabel
+class OperationMoveLabel : public MoveAbstractLabel
 {
     Q_OBJECT
 public:
-    RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
+    OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
                       QUndoCommand *parent = nullptr);
-    virtual ~RotationMoveLabel();
+    virtual ~OperationMoveLabel();
 
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
@@ -57,16 +57,16 @@ public:
 protected:
     virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(RotationMoveLabel)
+    Q_DISABLE_COPY(OperationMoveLabel)
     quint32 m_idTool;
 
     QDomElement GetDestinationObject(quint32 idTool, quint32 idPoint) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 RotationMoveLabel::GetToolId() const
+inline quint32 OperationMoveLabel::GetToolId() const
 {
     return m_idTool;
 }
 
-#endif // ROTATIONMOVELABEL_H
+#endif // OPERATIONMOVELABEL_H

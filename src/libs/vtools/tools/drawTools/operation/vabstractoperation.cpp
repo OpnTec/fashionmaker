@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vabstractoperation.h"
-#include "../../../undocommands/label/rotationmovelabel.h"
+#include "../../../undocommands/label/operationmovelabel.h"
 #include "../vgeometry/vpointf.h"
 
 const QString VAbstractOperation::TagItem        = QStringLiteral("item");
@@ -419,8 +419,8 @@ void VAbstractOperation::RefreshDataInFile()
 void VAbstractOperation::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    auto moveLabel = new RotationMoveLabel(this->id, doc, point->mx(), point->my(), id);
-    connect(moveLabel, &RotationMoveLabel::ChangePosition, this, &VAbstractOperation::DoChangePosition);
+    auto moveLabel = new OperationMoveLabel(this->id, doc, point->mx(), point->my(), id);
+    connect(moveLabel, &OperationMoveLabel::ChangePosition, this, &VAbstractOperation::DoChangePosition);
     qApp->getUndoStack()->push(moveLabel);
 }
 
