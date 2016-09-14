@@ -346,7 +346,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
 
     QVector<QPointF> ekvPoints;
 
-    qint32 i, j, jNext;
+    qint32 i, j, jNext = 0;
     for (i = 0; i < count; ++i)
     {
         /*Last three points no need check.*/
