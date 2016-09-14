@@ -226,7 +226,10 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         }
         if (i == p.size()-1 && eqv == EquidistantType::CloseEquidistant)
         {//last point, polyline closed
-            ekvPoints.append(ekvPoints.at(0));
+            if (not ekvPoints.isEmpty())
+            {
+                ekvPoints.append(ekvPoints.at(0));
+            }
             continue;
         }
         else if (i == p.size()-1 && eqv == EquidistantType::OpenEquidistant)
@@ -238,25 +241,35 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         //points in the middle of polyline
         ekvPoints<<EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
     }
-    ekvPoints = CheckLoops(ekvPoints);//Result path can contain loops
+
+    bool removeFirstAndLast = true;
+    if (eqv == EquidistantType::CloseEquidistant)
+    {
+        removeFirstAndLast = false;
+    }
+
+    ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
     return ekvPoints;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &points)
+QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &points, bool removeFirstAndLast)
 {
     QVector<QPointF> p = points;
 
-    if (not p.isEmpty() && p.size() > 1)
+    if (removeFirstAndLast)
     {
-        // Path can't be closed
-        if (p.first() == p.last())
+        if (not p.isEmpty() && p.size() > 1)
         {
-        #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-            p.remove(p.size() - 1);
-        #else
-            p.removeLast();
-        #endif
+            // Path can't be closed
+            if (p.first() == p.last())
+            {
+            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+                p.remove(p.size() - 1);
+            #else
+                p.removeLast();
+            #endif
+            }
         }
     }
 
@@ -264,6 +277,11 @@ QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &point
     {
         if (p.at(i) == p.at(i+1))
         {
+            if (not removeFirstAndLast && (i == p.size()-1))
+            {
+                continue;
+            }
+
             p.erase(p.begin() + i + 1);
             --i;
             continue;
@@ -279,7 +297,7 @@ QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &point
  * @param points list of points equdistant.
  * @return corrected list.
  */
-QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF> &points)
+QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast)
 {
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
@@ -288,12 +306,13 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
     }
 
     //Clear equivalent points
-    QVector<QPointF> correctPoints = RemoveDublicates(points);
+    QVector<QPointF> correctPoints = RemoveDublicates(points, removeFirstAndLast);
 
     if (correctPoints.size()<3)
     {
         return correctPoints;
     }
+
     //Remove point on line
     for (qint32 i = 1; i <correctPoints.size()-1; ++i)
     {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
@@ -303,6 +322,7 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
             correctPoints.remove(i);
         }
     }
+
     return correctPoints;
 }
 
@@ -322,9 +342,11 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         return points;
     }
 
+    const bool pathClosed = (points.first() == points.last());
+
     QVector<QPointF> ekvPoints;
 
-    qint32 i, j;
+    qint32 i, j, jNext;
     for (i = 0; i < count; ++i)
     {
         /*Last three points no need check.*/
@@ -344,8 +366,20 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         // That's why we parse from the end
         for (j = count-1; j >= i+2; --j)
         {
-            QLineF line2;
-            j == count-1 ? line2 = QLineF(points.at(j), points.at(0)) : line2 = QLineF(points.at(j), points.at(j+1));
+
+            j == count-1 ? jNext = 0 : jNext = j+1;
+            QLineF line2(points.at(j), points.at(jNext));
+
+            if(qFuzzyIsNull(line2.length()))
+            {//If a path is closed the edge (count-1;0) length will be 0
+                continue;
+            }
+
+            QSet<qint32> uniqueVertices;
+            uniqueVertices << i << i+1 << j;
+
+            // For closed path last point is equal to first. Using index of the first.
+            pathClosed && jNext == count-1 ? uniqueVertices << 0 : uniqueVertices << jNext;
 
             const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
             if (intersect == QLineF::NoIntersection)
@@ -353,11 +387,12 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
               // i.e. they are parallel. But parallel also mean they can be on the same line.
               // Method IsPointOnLineviaPDP will check it.
                 if (VGObject::IsPointOnLineviaPDP(points.at(j), points.at(i), points.at(i+1))
-                        // Next cases are valid for us.
-                        && line1.p2() != line2.p2()
-                        && line1.p1() != line2.p1()
-                        && line1.p2() != line2.p1()
-                        && line1.p1() != line2.p2())
+                    // Lines are not neighbors
+                    && uniqueVertices.size() == 4
+                    && line1.p2() != line2.p2()
+                    && line1.p1() != line2.p1()
+                    && line1.p2() != line2.p1()
+                    && line1.p1() != line2.p2())
                 {
                     // Left to catch case where segments are on the same line, but do not have real intersections.
                     QLineF tmpLine1 = line1;
@@ -380,11 +415,14 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
                     }
                 }
             }
-            else if (intersect == QLineF::BoundedIntersection && not (i == 0 && j == count-1))
-            { // Break, but not if intersects the first edge and the last edge in closed path
-                if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
-                    line2.p1() != crosPoint && line2.p2() != crosPoint)
-                { // Break, but not if loop creates crosPoint when it is first or last point of lines
+            else if (intersect == QLineF::BoundedIntersection)
+            {
+                if (uniqueVertices.size() == 4
+                    && line1.p1() != crosPoint
+                    && line1.p2() != crosPoint
+                    && line2.p1() != crosPoint
+                    && line2.p2() != crosPoint)
+                { // Break, but not if lines are neighbors
                     status = BoundedIntersection;
                     break;
                 }
@@ -396,10 +434,10 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         {
             case ParallelIntersection:
                 /*We have found a loop.*/
-                // Theoretically there is no big difference which point j or j+1 to select.
+                // Theoretically there is no big difference which point j or jNext to select.
                 // In the end we will draw a line in any case.
                 ekvPoints.append(points.at(i));
-                ekvPoints.append(points.at(j+1));
+                ekvPoints.append(points.at(jNext));
                 i = j;
                 break;
             case BoundedIntersection:
@@ -440,8 +478,8 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
         return QVector<QPointF>();
     }
     QPointF CrosPoint;
-    QLineF bigLine1 = ParallelLine(line1, width );
-    QLineF bigLine2 = ParallelLine(QLineF(line2.p2(), line2.p1()), width );
+    const QLineF bigLine1 = ParallelLine(line1, width );
+    const QLineF bigLine2 = ParallelLine(QLineF(line2.p2(), line2.p1()), width );
     QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
     switch (type)
     {
@@ -451,7 +489,13 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
             break;
         case (QLineF::UnboundedIntersection):
         {
-                QLineF line( line1.p2(), CrosPoint );
+            QLineF line( line1.p2(), CrosPoint );
+
+            const int angle1 = BisectorAngle(line1.p1(), line1.p2(), line2.p1());
+            const int angle2 = BisectorAngle(bigLine1.p1(), CrosPoint, bigLine2.p2());
+
+            if (angle1 == angle2)
+            {//Regular equdistant case
                 const qreal length = line.length();
                 if (length > width*2.4)
                 { // Cutting too long a cut angle
@@ -482,6 +526,18 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
                     points.append(CrosPoint);
                     return points;
                 }
+            }
+            else
+            {// Dart. Ignore if going outside of equdistant
+                const QLineF bigEdge = ParallelLine(QLineF(line1.p1(), line2.p1()), width );
+                QPointF px;
+                const QLineF::IntersectType type = bigEdge.intersect(line, &px);
+                if (type != QLineF::BoundedIntersection)
+                {
+                    points.append(CrosPoint);
+                    return points;
+                }
+            }
             break;
         }
         case (QLineF::NoIntersection):
@@ -585,6 +641,30 @@ QPointF VAbstractDetail::SingleParallelPoint(const QLineF &line, const qreal &an
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VAbstractDetail::BisectorAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3)
+{
+    QLineF line1(p2, p1);
+    QLineF line2(p2, p3);
+    QLineF bLine;
+
+    const qreal angle1 = line1.angleTo(line2);
+    const qreal angle2 = line2.angleTo(line1);
+
+    if (angle1 <= angle2)
+    {
+        bLine = line1;
+        bLine.setAngle(bLine.angle() + angle1/2.0);
+    }
+    else
+    {
+        bLine = line2;
+        bLine.setAngle(bLine.angle() + angle2/2.0);
+    }
+
+    return qRound(bLine.angle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
