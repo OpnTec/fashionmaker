@@ -44,7 +44,7 @@
 
 #include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogflippingbyline.h"
-#include "../../../../undocommands/label/rotationmovelabel.h"
+#include "../../../../undocommands/label/operationmovelabel.h"
 #include "../../../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../../../visualization/visualization.h"
 #include "../vgeometry/vabstractcurve.h"
