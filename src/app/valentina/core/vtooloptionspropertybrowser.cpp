@@ -1651,8 +1651,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VProperty *proper
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolFlippingByLine *i = qgraphicsitem_cast<VToolFlippingByLine *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 38: // AttrSuffix
@@ -1672,8 +1670,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VProperty *proper
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 39: // AttrAxisType
