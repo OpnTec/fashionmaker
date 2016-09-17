@@ -172,7 +172,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        emit ToolTip("Select first line point");
+        emit ToolTip(tr("Select first line point"));
     }
     else if (not stage1 && prepare && click)
     {
@@ -194,7 +194,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                 case 0:
                     if (objects.contains(id))
                     {
-                        emit ToolTip("Select first line point that is not part of the list of objects");
+                        emit ToolTip(tr("Select first line point that is not part of the list of objects"));
                         return;
                     }
 
@@ -210,7 +210,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                 case 1:
                     if (objects.contains(id))
                     {
-                        emit ToolTip("Select second line point that is not part of the list of objects");
+                        emit ToolTip(tr("Select second line point that is not part of the list of objects"));
                         return;
                     }
 

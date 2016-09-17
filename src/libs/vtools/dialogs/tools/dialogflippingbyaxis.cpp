@@ -173,7 +173,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        emit ToolTip("Select origin point");
+        emit ToolTip(tr("Select origin point"));
     }
     else if (not stage1 && prepare && click)
     {
@@ -192,7 +192,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (objects.contains(id))
             {
-                emit ToolTip("Select origin point that is not part of the list of objects");
+                emit ToolTip(tr("Select origin point that is not part of the list of objects"));
                 return;
             }
 
