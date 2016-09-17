@@ -192,6 +192,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (objects.contains(id))
             {
+                emit ToolTip("Select origin point that is not part of the list of objects");
                 return;
             }
 

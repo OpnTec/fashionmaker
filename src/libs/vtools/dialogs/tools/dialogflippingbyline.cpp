@@ -189,14 +189,15 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (objects.contains(id))
-            {
-                return;
-            }
-
             switch (number)
             {
                 case 0:
+                    if (objects.contains(id))
+                    {
+                        emit ToolTip("Select first line point that is not part of the list of objects");
+                        return;
+                    }
+
                     if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
                     {
                         number++;
@@ -207,6 +208,12 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
+                    if (objects.contains(id))
+                    {
+                        emit ToolTip("Select second line point that is not part of the list of objects");
+                        return;
+                    }
+
                     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
                     {
                         if (SetObject(id, ui->comboBoxSecondLinePoint, ""))
