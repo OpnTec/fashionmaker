@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 9, 2016
+ **  @date   16 9, 2016
  **
  **  @brief
  **  @copyright
@@ -26,22 +26,22 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLFLIPPINGBYLINE_H
-#define VTOOLFLIPPINGBYLINE_H
+#ifndef VTOOLFLIPPINGBYAXIS_H
+#define VTOOLFLIPPINGBYAXIS_H
 
 #include <QtGlobal>
 
 #include "vabstractflipping.h"
 
-class VToolFlippingByLine : public VAbstractFlipping
+class VToolFlippingByAxis : public VAbstractFlipping
 {
     Q_OBJECT
 public:
-    virtual ~VToolFlippingByLine();
+    virtual ~VToolFlippingByAxis();
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolFlippingByLine* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolFlippingByAxis* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data);
-    static VToolFlippingByLine* Create(const quint32 _id, quint32 firstLinePointId, quint32 secondLinePointId,
+    static VToolFlippingByAxis* Create(const quint32 _id, quint32 originPointId, AxisType axisType,
                                        const QString &suffix, const QVector<quint32> &source,
                                        const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data, const Document &parse,
@@ -50,7 +50,10 @@ public:
     static const QString ToolType;
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
+    enum { Type = UserType + static_cast<int>(Tool::FlippingByAxis)};
+
+    AxisType GetAxisType() const;
+    void     SetAxisType(AxisType value);
 
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
@@ -60,15 +63,15 @@ protected:
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(VToolFlippingByLine)
+    Q_DISABLE_COPY(VToolFlippingByAxis)
 
-    quint32 m_firstLinePointId;
-    quint32 m_secondLinePointId;
+    quint32  m_originPointId;
+    AxisType m_axisType;
 
-    VToolFlippingByLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstLinePointId,
-                        quint32 secondLinePointId, const QString &suffix, const QVector<quint32> &source,
+    VToolFlippingByAxis(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 originPointId,
+                        AxisType axisType, const QString &suffix, const QVector<quint32> &source,
                         const QVector<DestinationItem> &destination, const Source &typeCreation,
                         QGraphicsItem *parent = nullptr);
 };
 
-#endif // VTOOLFLIPPINGBYLINE_H
+#endif // VTOOLFLIPPINGBYAXIS_H

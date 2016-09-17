@@ -140,6 +140,7 @@ private slots:
     void ToolGroup(bool checked);
     void ToolRotation(bool checked);
     void ToolFlippingByLine(bool checked);
+    void ToolFlippingByAxis(bool checked);
     void ToolCutArc(bool checked);
     void ToolLineIntersectAxis(bool checked);
     void ToolCurveIntersectAxis(bool checked);

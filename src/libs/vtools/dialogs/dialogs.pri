@@ -39,7 +39,8 @@ HEADERS += \
     $$PWD/tools/dialogcubicbezierpath.h \
     $$PWD/tools/dialoggroup.h \
     $$PWD/tools/dialogrotation.h \
-    $$PWD/tools/dialogflippingbyline.h
+    $$PWD/tools/dialogflippingbyline.h \
+    $$PWD/tools/dialogflippingbyaxis.h
 
 
 SOURCES += \
@@ -79,7 +80,8 @@ SOURCES += \
     $$PWD/tools/dialogcubicbezierpath.cpp \
     $$PWD/tools/dialoggroup.cpp \
     $$PWD/tools/dialogrotation.cpp \
-    $$PWD/tools/dialogflippingbyline.cpp
+    $$PWD/tools/dialogflippingbyline.cpp \
+    $$PWD/tools/dialogflippingbyaxis.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -117,4 +119,5 @@ FORMS += \
     $$PWD/tools/dialogcubicbezierpath.ui \
     $$PWD/tools/dialoggroup.ui \
     $$PWD/tools/dialogrotation.ui \
-    $$PWD/tools/dialogflippingbyline.ui
+    $$PWD/tools/dialogflippingbyline.ui \
+    $$PWD/tools/dialogflippingbyaxis.ui

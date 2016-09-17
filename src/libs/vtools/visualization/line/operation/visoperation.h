@@ -55,8 +55,34 @@ protected:
 
     QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
     QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
+
+    template <class Item>
+    int AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i);
+
+    void RefreshFlippedObjects(const QPointF &firstPoint, const QPointF &secondPoint);
 private:
     Q_DISABLE_COPY(VisOperation)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class Item>
+int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i)
+{
+    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
+
+    ++i;
+    QGraphicsPathItem *path = GetCurve(i, supportColor2);
+    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+
+    ++i;
+    path = GetCurve(i, supportColor);
+    if (object1Id != NULL_ID)
+    {
+        const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));
+        DrawPath(path, flipped.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+    }
+
+    return i;
+}
 
 #endif // VISOPERATION_H

@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 9, 2016
+ **  @date   16 9, 2016
  **
  **  @brief
  **  @copyright
@@ -26,27 +26,25 @@
  **
  *************************************************************************/
 
-#include "vistoolflippingbyline.h"
+#include "vistoolflippingbyaxis.h"
 #include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolFlippingByLine::VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent)
+VisToolFlippingByAxis::VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent)
     : VisOperation(data, parent),
-      object2Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr)
+      m_axisType(AxisType::VerticalAxis),
+      point1(nullptr)
 {
     point1 = InitPoint(supportColor2, this);
-    point2 = InitPoint(supportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolFlippingByLine::~VisToolFlippingByLine()
+VisToolFlippingByAxis::~VisToolFlippingByAxis()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::RefreshGeometry()
+void VisToolFlippingByAxis::RefreshGeometry()
 {
     if (objects.isEmpty())
     {
@@ -61,30 +59,29 @@ void VisToolFlippingByLine::RefreshGeometry()
         firstPoint = *Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(point1, firstPoint, supportColor2);
 
-        if (object2Id == NULL_ID)
+        if (m_axisType == AxisType::VerticalAxis)
         {
-            secondPoint = Visualization::scenePos;
+            secondPoint = QPointF(firstPoint.x(), firstPoint.y() + 100);
         }
         else
         {
-            secondPoint = *Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(point2, secondPoint, supportColor2);
+            secondPoint = QPointF(firstPoint.x() + 100, firstPoint.y());
         }
 
-        DrawLine(this, QLineF(firstPoint, secondPoint), supportColor2, Qt::DashLine);
+        DrawLine(this, Axis(firstPoint, secondPoint), supportColor2, Qt::DashLine);
     }
 
     RefreshFlippedObjects(firstPoint, secondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
+void VisToolFlippingByAxis::SetOriginPointId(quint32 value)
 {
     object1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
+void VisToolFlippingByAxis::SetAxisType(AxisType value)
 {
-    object2Id = value;
+    m_axisType = value;
 }

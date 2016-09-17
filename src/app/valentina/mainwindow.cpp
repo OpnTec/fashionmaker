@@ -1045,6 +1045,17 @@ void MainWindow::ToolFlippingByLine(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolFlippingByAxis(bool checked)
+{
+    ToolSelectOperationObjects();
+    SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis,
+                                           ":/cursor/flipping_axis_cursor.png",
+                                           tr("Select one or more objects, <b>Enter</b> - confirm selection"),
+                                           &MainWindow::ClosedDialogWithApply<VToolFlippingByAxis>,
+                                           &MainWindow::ApplyDialog<VToolFlippingByAxis>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogGroup(int result)
 {
     SCASSERT(dialogTool != nullptr);
@@ -1714,6 +1725,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
     connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
     connect(ui->toolButtonFlippingByLine, &QToolButton::clicked, this, &MainWindow::ToolFlippingByLine);
+    connect(ui->toolButtonFlippingByAxis, &QToolButton::clicked, this, &MainWindow::ToolFlippingByAxis);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
 }
@@ -1743,7 +1755,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1885,6 +1897,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::FlippingByLine:
             ui->toolButtonFlippingByLine->setChecked(false);
+            break;
+        case Tool::FlippingByAxis:
+            ui->toolButtonFlippingByAxis->setChecked(false);
             break;
     }
 
@@ -2934,6 +2949,9 @@ void MainWindow::SetEnableTool(bool enable)
             break;
     }
 
+    // This check helps to find missed tools
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools were handled.");
+
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
     ui->toolButtonLine->setEnabled(drawTools);
@@ -2968,6 +2986,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonGroup->setEnabled(drawTools);
     ui->toolButtonRotation->setEnabled(drawTools);
     ui->toolButtonFlippingByLine->setEnabled(drawTools);
+    ui->toolButtonFlippingByAxis->setEnabled(drawTools);
     ui->toolButtonMidpoint->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
@@ -3250,7 +3269,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3419,6 +3438,10 @@ void MainWindow::LastUsedTool()
         case Tool::FlippingByLine:
             ui->toolButtonFlippingByLine->setChecked(true);
             ToolFlippingByLine(true);
+            break;
+        case Tool::FlippingByAxis:
+            ui->toolButtonFlippingByAxis->setChecked(true);
+            ToolFlippingByAxis(true);
             break;
     }
 }

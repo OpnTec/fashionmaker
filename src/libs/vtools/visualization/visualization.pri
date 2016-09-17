@@ -35,7 +35,8 @@ HEADERS += \
     $$PWD/path/vistoolpointofintersectioncurves.h \
     $$PWD/path/vistoolcubicbezier.h \
     $$PWD/path/vistoolcubicbezierpath.h \
-    $$PWD/line/operation/visoperation.h
+    $$PWD/line/operation/visoperation.h \
+    $$PWD/line/operation/vistoolflippingbyaxis.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -71,4 +72,5 @@ SOURCES += \
     $$PWD/path/vistoolpointofintersectioncurves.cpp \
     $$PWD/path/vistoolcubicbezier.cpp \
     $$PWD/path/vistoolcubicbezierpath.cpp \
-    $$PWD/line/operation/visoperation.cpp
+    $$PWD/line/operation/visoperation.cpp \
+    $$PWD/line/operation/vistoolflippingbyaxis.cpp

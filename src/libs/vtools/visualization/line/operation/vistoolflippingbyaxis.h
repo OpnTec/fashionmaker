@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 9, 2016
+ **  @date   16 9, 2016
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLFLIPPINGBYLINE_H
-#define VISTOOLFLIPPINGBYLINE_H
+#ifndef VISTOOLFLIPPINGBYAXIS_H
+#define VISTOOLFLIPPINGBYAXIS_H
 
 #include <QtGlobal>
 
 #include "visoperation.h"
+#include "../ifc/xml/vabstractpattern.h"
 
-class VisToolFlippingByLine : public VisOperation
+class VisToolFlippingByAxis : public VisOperation
 {
     Q_OBJECT
 public:
-    explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByLine();
+    explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolFlippingByAxis();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void SetFirstLinePointId(quint32 value);
-    void SetSecondLinePointId(quint32 value);
+    void SetOriginPointId(quint32 value);
+    void SetAxisType(AxisType value);
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
+    enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
 private:
-    Q_DISABLE_COPY(VisToolFlippingByLine)
-    quint32               object2Id;
+    Q_DISABLE_COPY(VisToolFlippingByAxis)
+
+    AxisType m_axisType;
+
     QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
 };
 
-#endif // VISTOOLFLIPPINGBYLINE_H
+#endif // VISTOOLFLIPPINGBYAXIS_H

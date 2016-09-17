@@ -110,6 +110,7 @@ enum class Tool : ToolVisHolderType
     Group,
     Rotation,
     FlippingByLine,
+    FlippingByAxis,
     Midpoint,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
@@ -152,7 +153,8 @@ enum class Vis : ToolVisHolderType
     ToolCurveIntersectAxis,
     ToolTrueDarts,
     ToolRotation,
-    ToolFlippingByLine
+    ToolFlippingByLine,
+    ToolFlippingByAxis
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, LineAngle, CurveAngle, ArcRadius,

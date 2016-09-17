@@ -27,6 +27,16 @@
  *************************************************************************/
 
 #include "visoperation.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
@@ -97,3 +107,73 @@ QGraphicsPathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
     return nullptr;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
+void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPointF &secondPoint)
+{
+    int iPoint = -1;
+    int iCurve = -1;
+    for (int i = 0; i < objects.size(); ++i)
+    {
+        const quint32 id = objects.at(i);
+        const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
+
+        // This check helps to find missed objects in the switch
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+
+        switch(static_cast<GOType>(obj->getType()))
+        {
+            case GOType::Point:
+            {
+                const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
+
+                ++iPoint;
+                QGraphicsEllipseItem *point = GetPoint(iPoint, supportColor2);
+                DrawPoint(point, *p, supportColor2);
+
+                ++iPoint;
+                point = GetPoint(iPoint, supportColor);
+
+                if (object1Id != NULL_ID)
+                {
+                    DrawPoint(point, p->Flip(QLineF(firstPoint, secondPoint)), supportColor);
+                }
+                break;
+            }
+            case GOType::Arc:
+            {
+                iCurve = AddFlippedCurve<VArc>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::EllipticalArc:
+            {
+                iCurve = AddFlippedCurve<VEllipticalArc>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::Spline:
+            {
+                iCurve = AddFlippedCurve<VSpline>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::SplinePath:
+            {
+                iCurve = AddFlippedCurve<VSplinePath>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::CubicBezier:
+            {
+                iCurve = AddFlippedCurve<VCubicBezier>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::CubicBezierPath:
+            {
+                iCurve = AddFlippedCurve<VCubicBezierPath>(firstPoint, secondPoint, id, iCurve);
+                break;
+            }
+            case GOType::Unknown:
+                break;
+        }
+    }
+}
+QT_WARNING_POP

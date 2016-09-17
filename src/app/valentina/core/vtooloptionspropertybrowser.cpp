@@ -75,7 +75,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was used in switch.");
 
     switch (item->type())
     {
@@ -188,6 +188,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolFlippingByLine::Type:
             ShowOptionsToolFlippingByLine(item);
             break;
+        case VToolFlippingByAxis::Type:
+            ShowOptionsToolFlippingByAxis(item);
+            break;
         default:
             break;
     }
@@ -202,7 +205,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -305,6 +308,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolFlippingByLine::Type:
             UpdateOptionsToolFlippingByLine();
             break;
+        case VToolFlippingByAxis::Type:
+            UpdateOptionsToolFlippingByAxis();
+            break;
         default:
             break;
     }
@@ -340,7 +346,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 46, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -436,6 +442,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolFlippingByLine::Type:
             ChangeDataToolFlippingByLine(prop);
+            break;
+        case VToolFlippingByAxis::Type:
+            ChangeDataToolFlippingByAxis(prop);
             break;
         default:
             break;
@@ -563,6 +572,16 @@ void VToolOptionsPropertyBrowser::AddPropertyHCrossPoint(Tool *i, const QString 
     itemProperty->setLiterals(QStringList()<< tr("Leftmost point") << tr("Rightmost point"));
     itemProperty->setValue(static_cast<int>(i->GetHCrossPoint())-1);
     AddProperty(itemProperty, AttrHCrossPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyAxisType(Tool *i, const QString &propertyName)
+{
+    auto itemProperty = new VEnumProperty(propertyName);
+    itemProperty->setLiterals(QStringList()<< tr("Vertical axis") << tr("Horizontal axis"));
+    itemProperty->setValue(static_cast<int>(i->GetAxisType())-1);
+    AddProperty(itemProperty, AttrAxisType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -774,6 +793,20 @@ void VToolOptionsPropertyBrowser::SetHCrossCurvesPoint(const QVariant &value)
     if (auto i = qgraphicsitem_cast<Tool *>(currentItem))
     {
         i->SetHCrossPoint(GetCrossPoint<HCrossCurvesPoint>(value));
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetAxisType(const QVariant &value)
+{
+    if (auto i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        i->SetAxisType(GetCrossPoint<AxisType>(value));
     }
     else
     {
@@ -1632,6 +1665,33 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VProperty *proper
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 39: // AttrAxisType
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            SetAxisType<VToolFlippingByAxis>(value);
+            break;
+        }
+        case 38: // AttrSuffix
+            SetOperationSuffix<VToolFlippingByAxis>(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -2028,6 +2088,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *i
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool flipping by line"));
 
+    AddPropertyOperationSuffix(i, tr("Suffix"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *item)
+{
+    VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool flipping by axis"));
+
+    AddPropertyAxisType(i, tr("Axis type"));
     AddPropertyOperationSuffix(i, tr("Suffix"));
 }
 
@@ -2499,6 +2570,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByAxis()
+{
+    VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(currentItem);
+    idToProperty[AttrAxisType]->setValue(static_cast<int>(i->GetAxisType())-1);
+    idToProperty[AttrSuffix]->setValue(i->Suffix());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
     QStringList attr = QStringList() << AttrName                           /* 0 */
@@ -2539,6 +2618,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrHCrossPoint                    /* 35 */
                                      << AttrLength1                        /* 36 */
                                      << AttrLength2                        /* 37 */
-                                     << AttrSuffix;                        /* 38 */
+                                     << AttrSuffix                         /* 38 */
+                                     << AttrAxisType;                      /* 39 */
     return attr;
 }

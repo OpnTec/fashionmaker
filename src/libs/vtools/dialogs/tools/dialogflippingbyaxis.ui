@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogFlippingByLine</class>
- <widget class="QDialog" name="DialogFlippingByLine">
+ <class>DialogFlippingByAxis</class>
+ <widget class="QDialog" name="DialogFlippingByAxis">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,22 +13,18 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../../vmisc/share/resources/icon.qrc">
-    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="labelFirstLinePoint">
+      <widget class="QLabel" name="labelOriginPoint">
        <property name="text">
-        <string>First line point:</string>
+        <string>Origin point:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxFirstLinePoint"/>
+      <widget class="QComboBox" name="comboBoxOriginPoint"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelSuffix">
@@ -41,14 +37,14 @@
       <widget class="QLineEdit" name="lineEditSuffix"/>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="labelSecondLinePoint">
+      <widget class="QLabel" name="labelAxisType">
        <property name="text">
-        <string>Second line point:</string>
+        <string>Axis type:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxSecondLinePoint"/>
+      <widget class="QComboBox" name="comboBoxAxisType"/>
      </item>
     </layout>
    </item>
@@ -64,14 +60,12 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../../vmisc/share/resources/icon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogFlippingByLine</receiver>
+   <receiver>DialogFlippingByAxis</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -87,7 +81,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogFlippingByLine</receiver>
+   <receiver>DialogFlippingByAxis</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
