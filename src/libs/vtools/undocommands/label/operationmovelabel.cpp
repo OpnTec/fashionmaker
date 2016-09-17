@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "rotationmovelabel.h"
+#include "operationmovelabel.h"
 
 #include <QDomNode>
 #include <QDomNodeList>
@@ -43,8 +43,8 @@
 class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
-RotationMoveLabel::RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
-                                     QUndoCommand *parent)
+OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
+                                       QUndoCommand *parent)
     : MoveAbstractLabel(doc, idPoint, x, y, parent),
       m_idTool(idTool)
 {
@@ -69,14 +69,14 @@ RotationMoveLabel::RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, doub
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-RotationMoveLabel::~RotationMoveLabel()
+OperationMoveLabel::~OperationMoveLabel()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool RotationMoveLabel::mergeWith(const QUndoCommand *command)
+bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
 {
-    const RotationMoveLabel *moveCommand = static_cast<const RotationMoveLabel *>(command);
+    const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
     SCASSERT(moveCommand != nullptr);
 
     if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
@@ -93,13 +93,13 @@ bool RotationMoveLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int RotationMoveLabel::id() const
+int OperationMoveLabel::id() const
 {
     return static_cast<int>(UndoCommand::RotationMoveLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RotationMoveLabel::Do(double mx, double my)
+void OperationMoveLabel::Do(double mx, double my)
 {
     qCDebug(vUndo, "New mx %f", mx);
     qCDebug(vUndo, "New my %f", my);
@@ -118,7 +118,7 @@ void RotationMoveLabel::Do(double mx, double my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement RotationMoveLabel::GetDestinationObject(quint32 idTool, quint32 idPoint) const
+QDomElement OperationMoveLabel::GetDestinationObject(quint32 idTool, quint32 idPoint) const
 {
     const QDomElement tool = doc->elementById(idTool);
     if (tool.isElement())

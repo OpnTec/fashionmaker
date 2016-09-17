@@ -42,6 +42,7 @@ class QPoint;
 class QPointF;
 class QRectF;
 class VGObjectData;
+class QTransform;
 
 /**
  * @brief The VGObject class keep information graphical objects.
@@ -93,6 +94,8 @@ public:
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
 
     static double accuracyPointOnLine;
+protected:
+    static QTransform FlippingMatrix(const QLineF &axis);
 private:
     QSharedDataPointer<VGObjectData> d;
 

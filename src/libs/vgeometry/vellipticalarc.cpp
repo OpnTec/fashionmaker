@@ -135,6 +135,20 @@ VEllipticalArc VEllipticalArc::Rotate(const QPointF &originPoint, qreal degrees,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VEllipticalArc VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const VPointF center = GetCenter().Flip(axis);
+    const QPointF p1 = VPointF::FlipPF(axis, GetP1());
+    const QPointF p2 = VPointF::FlipPF(axis, GetP2());
+    const qreal f1 = QLineF(center, p1).angle() - GetRotationAngle();
+    const qreal f2 = QLineF(center, p2).angle() - GetRotationAngle();
+    VEllipticalArc elArc(center, GetRadius1(), GetRadius2(), f1, f2, GetRotationAngle());
+    elArc.setName(name() + prefix);
+    elArc.SetFlipped(true);
+    return elArc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VEllipticalArc::~VEllipticalArc()
 {}
 

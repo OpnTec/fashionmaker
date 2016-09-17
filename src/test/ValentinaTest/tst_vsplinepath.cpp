@@ -135,3 +135,64 @@ void TST_VSplinePath::TestRotation()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSplinePath::TestFlip_data()
+{
+    QTest::addColumn<QVector<VSplinePoint>>("originPoints");
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QString>("prefix");
+
+    QVector<VSplinePoint> originPoints;
+
+    {
+        VPointF pSpline(30, 39.999874015748034, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint p(pSpline, 89.208600000000004, "89.2086", 269.20859999999999, "269.209", 0, "0",
+                       153.33618897637794, "4.05702");
+        originPoints.append(p);
+    }
+
+    {
+        VPointF pSpline(198.77104389529981, 249.18158602595835, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint p(pSpline, 146.43199999999999, "146.432", 326.43200000000002, "326.432",
+                       36.387590551181106, "0.962755", 60.978897637795278, "1.6134");
+        originPoints.append(p);
+    }
+
+    {
+        VPointF pSpline(820.42771653543309, 417.95262992125987, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint p(pSpline, 173.39500000000001, "173.395", 353.39499999999998, "353.395",
+                       381.23716535433073, "10.0869", 0, "0");
+        originPoints.append(p);
+    }
+
+    QLineF axis(QPointF(0, 0), QPointF(0, 10));
+
+    QTest::newRow("Vertical axis") << originPoints << axis << "a2";
+
+    axis = QLineF(QPointF(0, 0), QPointF(10, 0));
+
+    QTest::newRow("Horizontal axis") << originPoints << axis << "a2";
+
+    axis = QLineF(QPointF(0, 0), QPointF(0, 10));
+    axis.setAngle(45);
+
+    QTest::newRow("Diagonal axis") << originPoints << axis << "a2";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSplinePath::TestFlip()
+{
+    QFETCH(QVector<VSplinePoint>, originPoints);
+    QFETCH(QLineF, axis);
+    QFETCH(QString, prefix);
+
+    const VSplinePath splPath(originPoints);
+    const VSplinePath res = splPath.Flip(axis, prefix);
+
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    QCOMPARE(splPath.GetLength(), res.GetLength());
+    QCOMPARE(splPath.CountPoints(), res.CountPoints());
+}
+

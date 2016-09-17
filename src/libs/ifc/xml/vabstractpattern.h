@@ -53,6 +53,7 @@ enum class LabelType : char {NewPatternPiece, NewLabel};
 enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
 enum class VCrossCurvesPoint : char {HighestPoint = 1, LowestPoint = 2};
 enum class HCrossCurvesPoint : char {LeftmostPoint = 1, RightmostPoint = 2};
+enum class AxisType : char {VerticalAxis = 1, HorizontalAxis = 2};
 
 class VContainer;
 class VDataTool;

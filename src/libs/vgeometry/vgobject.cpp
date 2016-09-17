@@ -33,6 +33,7 @@
 #include <QPoint>
 #include <QPointF>
 #include <QRectF>
+#include <QTransform>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -574,4 +575,40 @@ int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QP
         length += line.length();
     }
     return qFloor(length);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTransform VGObject::FlippingMatrix(const QLineF &axis)
+{
+    QTransform matrix;
+
+    if (axis.isNull())
+    {
+        return matrix;
+    }
+
+    const QLineF axisOX = QLineF(axis.x2(), axis.y2(), axis.x2() + 100, axis.y2()); // Ox axis
+
+    const qreal angle = axis.angleTo(axisOX);
+    const QPointF p2 = axis.p2();
+
+    QTransform m;
+    m.translate(p2.x(), p2.y());
+    m.rotate(-angle);
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    m.reset();
+    m.translate(p2.x(), p2.y());
+    m.scale(m.m11(), m.m22()*-1);
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    m.reset();
+    m.translate(p2.x(), p2.y());
+    m.rotate(-(360-angle));
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    return matrix;
 }

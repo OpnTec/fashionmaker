@@ -124,6 +124,7 @@ const QString AttrSecondArc   = QStringLiteral("secondArc");
 const QString AttrCrossPoint  = QStringLiteral("crossPoint");
 const QString AttrVCrossPoint = QStringLiteral("vCrossPoint");
 const QString AttrHCrossPoint = QStringLiteral("hCrossPoint");
+const QString AttrAxisType    = QStringLiteral("axisType");
 const QString AttrC1Center    = QStringLiteral("c1Center");
 const QString AttrC2Center    = QStringLiteral("c2Center");
 const QString AttrC1Radius    = QStringLiteral("c1Radius");

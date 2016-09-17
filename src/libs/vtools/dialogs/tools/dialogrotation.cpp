@@ -48,7 +48,7 @@
 #include <new>
 
 #include "../../visualization/visualization.h"
-#include "../../visualization/line/vistoolrotation.h"
+#include "../../visualization/line/operation/vistoolrotation.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"

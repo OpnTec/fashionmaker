@@ -92,6 +92,19 @@ VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const QVector<VPointF> points = GetCubicPath();
+    VCubicBezierPath curve;
+    for(int i=0; i < points.size(); ++i)
+    {
+        curve.append(points.at(i).Flip(axis));
+    }
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::~VCubicBezierPath()
 {
 }

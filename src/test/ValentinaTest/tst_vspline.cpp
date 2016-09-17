@@ -28,6 +28,7 @@
 
 #include "tst_vspline.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
 
@@ -386,6 +387,49 @@ void TST_VSpline::TestLengthByPoint()
     const qreal resLength = spl.GetLengthByPoint(point);
 
     QVERIFY(qAbs(resLength - length) < ToPixel(0.5, Unit::Mm));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestFlip_data()
+{
+    QTest::addColumn<VSpline>("spl");
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QString>("prefix");
+
+    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+
+    QLineF axis(QPointF(600, 30), QPointF(600, 1800));
+
+    QTest::newRow("Vertical axis") << spl << axis << "a2";
+
+    axis = QLineF(QPointF(600, 30), QPointF(1200, 30));
+
+    QTest::newRow("Horizontal axis") << spl << axis << "a2";
+
+    axis = QLineF(QPointF(600, 30), QPointF(600, 1800));
+    axis.setAngle(45);
+
+    QTest::newRow("Diagonal axis") << spl << axis << "a2";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestFlip()
+{
+    QFETCH(VSpline, spl);
+    QFETCH(QLineF, axis);
+    QFETCH(QString, prefix);
+
+    const VSpline res = spl.Flip(axis, prefix);
+
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    QCOMPARE(spl.GetLength(), res.GetLength());
+    QCOMPARE(spl.GetC1Length(), res.GetC1Length());
+    QCOMPARE(spl.GetC2Length(), res.GetC2Length());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

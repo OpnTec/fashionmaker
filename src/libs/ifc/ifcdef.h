@@ -125,6 +125,7 @@ extern const QString AttrSecondArc;
 extern const QString AttrCrossPoint;
 extern const QString AttrVCrossPoint;
 extern const QString AttrHCrossPoint;
+extern const QString AttrAxisType;
 extern const QString AttrC1Center;
 extern const QString AttrC2Center;
 extern const QString AttrC1Radius;

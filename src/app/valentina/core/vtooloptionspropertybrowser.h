@@ -91,6 +91,9 @@ private:
     void SetHCrossCurvesPoint(const QVariant &value);
 
     template<class Tool>
+    void SetAxisType(const QVariant &value);
+
+    template<class Tool>
     void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template<class Tool>
@@ -110,6 +113,9 @@ private:
 
     template<class Tool>
     void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAxisType(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
@@ -152,6 +158,8 @@ private:
     void ChangeDataToolLineIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolCurveIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolRotation(VPE::VProperty *property);
+    void ChangeDataToolFlippingByLine(VPE::VProperty *property);
+    void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -183,6 +191,8 @@ private:
     void ShowOptionsToolLineIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolCurveIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolRotation(QGraphicsItem *item);
+    void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
+    void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -214,6 +224,8 @@ private:
     void UpdateOptionsToolLineIntersectAxis();
     void UpdateOptionsToolCurveIntersectAxis();
     void UpdateOptionsToolRotation();
+    void UpdateOptionsToolFlippingByLine();
+    void UpdateOptionsToolFlippingByAxis();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

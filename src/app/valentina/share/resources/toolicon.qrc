@@ -68,5 +68,9 @@
         <file>toolicon/32x32/rotation@2x.png</file>
         <file>toolicon/32x32/midpoint.png</file>
         <file>toolicon/32x32/midpoint@2x.png</file>
+        <file>toolicon/32x32/flipping_line@2x.png</file>
+        <file>toolicon/32x32/flipping_line.png</file>
+        <file>toolicon/32x32/flipping_axis.png</file>
+        <file>toolicon/32x32/flipping_axis@2x.png</file>
     </qresource>
 </RCC>
