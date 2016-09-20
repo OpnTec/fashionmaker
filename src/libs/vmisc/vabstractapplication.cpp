@@ -89,7 +89,8 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
     rules += QLatin1String("qt.network.ssl.warning=false\n");
     // See issue #568: Certificate checking on Mac OS X.
-    rules += QLatin1String("qt.network.ssl.critical=false\n");
+    rules += QLatin1String("qt.network.ssl.critical=false\n"
+                           "qt.network.ssl.fatal=false\n");
 #endif //defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
