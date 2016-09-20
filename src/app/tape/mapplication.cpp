@@ -110,7 +110,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     // See issue #568
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("Error receiving trust for a CA certificate")))
+    if (msg.contains(QStringLiteral("Error receiving trust for a CA certificate")))
     {
         type = QtDebugMsg;
     }
