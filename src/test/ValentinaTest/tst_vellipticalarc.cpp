@@ -31,6 +31,7 @@
 #include "../vlayout/vabstractdetail.h"
 #include "../vmisc/logging.h"
 
+#include <QtGlobal>
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -454,4 +455,44 @@ void TST_VEllipticalArc::TestRotation()
     QCOMPARE(arcOrigin.GetRotationAngle(), rotatedArc.GetRotationAngle());
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestFlip_data()
+{
+    QTest::addColumn<VEllipticalArc>("elArc");
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QString>("prefix");
+
+    const VEllipticalArc elArc(QPointF(), 10., 20.0, 1., 91., 0.);
+
+    QLineF axis(QPointF(600, 30), QPointF(600, 1800));
+
+    QTest::newRow("Vertical axis") << elArc << axis << "a2";
+
+    axis = QLineF(QPointF(600, 30), QPointF(1200, 30));
+
+    QTest::newRow("Horizontal axis") << elArc << axis << "a2";
+
+    axis = QLineF(QPointF(600, 30), QPointF(600, 1800));
+    axis.setAngle(45);
+
+    QTest::newRow("Diagonal axis") << elArc << axis << "a2";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestFlip()
+{
+    QFETCH(VEllipticalArc, elArc);
+    QFETCH(QLineF, axis);
+    QFETCH(QString, prefix);
+
+    const VEllipticalArc res = elArc.Flip(axis, prefix);
+
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    QCOMPARE(qRound(elArc.GetLength()*-1), qRound(res.GetLength()));
+    QCOMPARE(elArc.GetRadius1(), res.GetRadius1());
+    QCOMPARE(elArc.GetRadius2(), res.GetRadius2());
 }

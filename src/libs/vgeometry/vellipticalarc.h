@@ -63,6 +63,7 @@ public:
 
     VEllipticalArc& operator= (const VEllipticalArc &arc);
     VEllipticalArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
+    VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
 
     virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
 
@@ -99,6 +100,7 @@ private:
     static int GetQuadransRad(qreal &rad);
 };
 
+Q_DECLARE_METATYPE(VEllipticalArc)
 Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE);
 
 #endif // VELLIPTICALARC_H

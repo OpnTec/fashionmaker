@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   moverotationlabel.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 5, 2016
+ **  @date   12 9, 2016
  **
  **  @brief
  **  @copyright
@@ -26,47 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef ROTATIONMOVELABEL_H
-#define ROTATIONMOVELABEL_H
+#ifndef VISTOOLFLIPPINGBYLINE_H
+#define VISTOOLFLIPPINGBYLINE_H
 
-#include <qcompilerdetection.h>
-#include <QDomElement>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
 #include <QtGlobal>
 
-#include "moveabstractlabel.h"
+#include "visoperation.h"
 
-class QDomElement;
-class QUndoCommand;
-class VAbstractPattern;
-
-class RotationMoveLabel : public MoveAbstractLabel
+class VisToolFlippingByLine : public VisOperation
 {
     Q_OBJECT
 public:
-    RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
-                      QUndoCommand *parent = nullptr);
-    virtual ~RotationMoveLabel();
+    explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolFlippingByLine();
 
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    quint32 GetToolId() const;
-protected:
-    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
+    void SetFirstLinePointId(quint32 value);
+    void SetSecondLinePointId(quint32 value);
+
+    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
-    Q_DISABLE_COPY(RotationMoveLabel)
-    quint32 m_idTool;
-
-    QDomElement GetDestinationObject(quint32 idTool, quint32 idPoint) const;
+    Q_DISABLE_COPY(VisToolFlippingByLine)
+    quint32               object2Id;
+    QGraphicsEllipseItem *point1;
+    QGraphicsEllipseItem *point2;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 RotationMoveLabel::GetToolId() const
-{
-    return m_idTool;
-}
-
-#endif // ROTATIONMOVELABEL_H
+#endif // VISTOOLFLIPPINGBYLINE_H

@@ -53,22 +53,17 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../visualization.h"
-#include "visline.h"
+#include "visoperation.h"
 
 class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent),
+    : VisOperation(data, parent),
       angle(INT_MIN),
-      objects(),
       point(nullptr),
       angleArc(nullptr),
-      xAxis(nullptr),
-      supportColor2(Qt::darkGreen),
-      points(),
-      curves()
+      xAxis(nullptr)
 {
     point = InitPoint(supportColor2, this);
     angleArc = InitItem<QGraphicsPathItem>(supportColor2, this);
@@ -78,8 +73,6 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VisToolRotation::~VisToolRotation()
 {
-    qDeleteAll(points);
-    qDeleteAll(curves);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -199,12 +192,6 @@ void VisToolRotation::RefreshGeometry()
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolRotation::SetObjects(QVector<quint32> objects)
-{
-    this->objects = objects;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetOriginPointId(quint32 value)
 {
     object1Id = value;
@@ -220,51 +207,6 @@ QString VisToolRotation::Angle() const
 void VisToolRotation::SetAngle(const QString &expression)
 {
     angle = FindVal(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolRotation::VisualMode(const quint32 &pointId)
-{
-    Q_UNUSED(pointId);
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
-
-    Visualization::scenePos = scene->getScenePos();
-    RefreshGeometry();
-
-    AddOnScene();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolRotation::GetPoint(quint32 i, const QColor &color)
-{
-    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
-    {
-        return points.at(static_cast<int>(i));
-    }
-    else
-    {
-        auto point = InitPoint(color, this);
-        points.append(point);
-        return point;
-    }
-    return nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i, const QColor &color)
-{
-    if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
-    {
-        return curves.at(static_cast<int>(i));
-    }
-    else
-    {
-        auto curve = InitItem<QGraphicsPathItem>(color, this);
-        curves.append(curve);
-        return curve;
-    }
-    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

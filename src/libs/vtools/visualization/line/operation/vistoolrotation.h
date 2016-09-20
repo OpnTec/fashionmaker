@@ -41,12 +41,12 @@
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
-#include "visline.h"
+#include "visoperation.h"
 
 class QPointF;
 class VContainer;
 
-class VisToolRotation : public VisLine
+class VisToolRotation : public VisOperation
 {
     Q_OBJECT
 public:
@@ -55,30 +55,19 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void SetObjects(QVector<quint32> objects);
     void SetOriginPointId(quint32 value);
 
     QString Angle() const;
     void    SetAngle(const QString &expression);
-
-    virtual void VisualMode(const quint32 &pointId = NULL_ID) Q_DECL_OVERRIDE;
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
     Q_DISABLE_COPY(VisToolRotation)
     qreal                angle;
-    QVector<quint32>     objects;
     QGraphicsEllipseItem *point;
     QGraphicsPathItem    *angleArc;
     QGraphicsLineItem    *xAxis;
-    QColor               supportColor2;
-
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<QGraphicsPathItem *>    curves;
-
-    QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
-    QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
     int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);

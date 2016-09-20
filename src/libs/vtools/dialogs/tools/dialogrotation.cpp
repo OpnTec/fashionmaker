@@ -48,7 +48,7 @@
 #include <new>
 
 #include "../../visualization/visualization.h"
-#include "../../visualization/line/vistoolrotation.h"
+#include "../../visualization/line/operation/vistoolrotation.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
@@ -197,7 +197,7 @@ void DialogRotation::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        emit ToolTip("Select origin point");
+        emit ToolTip(tr("Select origin point"));
     }
     else if (not stage1 && prepare && click)
     {
@@ -234,6 +234,7 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (objects.contains(id))
             {
+                emit ToolTip(tr("Select origin point that is not part of the list of objects"));
                 return;
             }
 

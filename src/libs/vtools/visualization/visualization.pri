@@ -22,6 +22,8 @@ HEADERS += \
     $$PWD/line/vistoolpointofintersectioncircles.h \
     $$PWD/line/vistoolpointfromcircleandtangent.h \
     $$PWD/line/vistoolpointfromarcandtangent.h \
+    $$PWD/line/operation/vistoolrotation.h \
+    $$PWD/line/operation/vistoolflippingbyline.h \
     $$PWD/path/vispath.h \
     $$PWD/path/vistoolarc.h \
     $$PWD/path/vistoolcutarc.h \
@@ -33,7 +35,8 @@ HEADERS += \
     $$PWD/path/vistoolpointofintersectioncurves.h \
     $$PWD/path/vistoolcubicbezier.h \
     $$PWD/path/vistoolcubicbezierpath.h \
-    visualization/line/vistoolrotation.h
+    $$PWD/line/operation/visoperation.h \
+    $$PWD/line/operation/vistoolflippingbyaxis.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -56,6 +59,8 @@ SOURCES += \
     $$PWD/line/vistoolpointofintersectioncircles.cpp \
     $$PWD/line/vistoolpointfromcircleandtangent.cpp \
     $$PWD/line/vistoolpointfromarcandtangent.cpp \
+    $$PWD/line/operation/vistoolrotation.cpp \
+    $$PWD/line/operation/vistoolflippingbyline.cpp \
     $$PWD/path/vispath.cpp \
     $$PWD/path/vistoolarc.cpp \
     $$PWD/path/vistoolcutarc.cpp \
@@ -67,4 +72,5 @@ SOURCES += \
     $$PWD/path/vistoolpointofintersectioncurves.cpp \
     $$PWD/path/vistoolcubicbezier.cpp \
     $$PWD/path/vistoolcubicbezierpath.cpp \
-    visualization/line/vistoolrotation.cpp
+    $$PWD/line/operation/visoperation.cpp \
+    $$PWD/line/operation/vistoolflippingbyaxis.cpp

@@ -39,6 +39,8 @@ public:
 private slots:
     void TestRotation_data();
     void TestRotation();
+    void TestFlip_data();
+    void TestFlip();
 private:
     Q_DISABLE_COPY(TST_VSplinePath)
 };

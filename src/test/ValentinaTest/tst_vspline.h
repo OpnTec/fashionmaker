@@ -51,6 +51,8 @@ private slots:
     void TestParametrT();
     void TestLengthByPoint_data();
     void TestLengthByPoint();
+    void TestFlip_data();
+    void TestFlip();
 
 private:
     Q_DISABLE_COPY(TST_VSpline)

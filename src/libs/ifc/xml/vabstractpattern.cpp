@@ -1373,7 +1373,7 @@ QStringList VAbstractPattern::ListPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1444,7 +1444,7 @@ QStringList VAbstractPattern::ListArcExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1505,7 +1505,7 @@ QStringList VAbstractPattern::ListPathPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1571,7 +1571,7 @@ QStringList VAbstractPattern::ListOperationExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);

@@ -209,6 +209,9 @@
                                                                                  <xs:attribute name="angle" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="suffix" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="p1Line" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p2Line" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="axisType" type="axisType"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element> 
                                                                      <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
@@ -362,7 +365,7 @@
                                                                                        <xs:attribute name="rotation" type="xs:double"></xs:attribute>
                                                                                    </xs:complexType>
                                                                                </xs:element>
-									       <xs:element name="patternInfo" minOccurs="0" maxOccurs="1">
+                                                                               <xs:element name="patternInfo" minOccurs="0" maxOccurs="1">
                                                                                    <xs:complexType>
                                                                                        <xs:attribute name="visible" type="xs:boolean"></xs:attribute>
                                                                                        <xs:attribute name="fontSize" type="xs:unsignedInt"></xs:attribute>
@@ -371,15 +374,6 @@
                                                                                        <xs:attribute name="width" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="height" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="rotation" type="xs:double"></xs:attribute>
-                                                                                   </xs:complexType>
-                                                                               </xs:element>
-                                                                               <xs:element name="grainline" minOccurs="0" maxOccurs="1">
-                                                                                   <xs:complexType>
-                                                                                       <xs:attribute name="visible" type="xs:boolean"></xs:attribute>
-                                                                                       <xs:attribute name="mx" type="xs:double"></xs:attribute>
-                                                                                       <xs:attribute name="my" type="xs:double"></xs:attribute>
-                                                                                       <xs:attribute name="length" type="xs:string"></xs:attribute>
-                                                                                       <xs:attribute name="rotation" type="xs:string"></xs:attribute>
                                                                                    </xs:complexType>
                                                                                </xs:element>
                                                                                <xs:element name="node" maxOccurs="unbounded">
@@ -558,6 +552,12 @@
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="crossType">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="axisType">
         <xs:restriction base="xs:unsignedInt">
             <xs:enumeration value="1"/>
             <xs:enumeration value="2"/>
