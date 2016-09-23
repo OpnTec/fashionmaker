@@ -231,7 +231,9 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/Trousers/Trousers.val \
     $${PWD}/../../app/share/collection/Trousers/trousers.vit \
     $${PWD}/../../app/share/collection/Steampunk_trousers.val \
-    $${PWD}/../../app/share/collection/Steampunk_trousers.vit
+    $${PWD}/../../app/share/collection/Steampunk_trousers.vit \
+    $${PWD}/../../app/share/collection/Basic_block_women-2016.val \
+    $${PWD}/../../app/share/collection/Gent_Jacket_with_tummy.val
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
