@@ -323,7 +323,7 @@ void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domEl
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolPointFromCircleAndTangent *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
         SCASSERT(visual != nullptr);

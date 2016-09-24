@@ -313,7 +313,7 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(visual != nullptr);

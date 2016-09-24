@@ -329,7 +329,7 @@ void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
         SCASSERT(visual != nullptr);

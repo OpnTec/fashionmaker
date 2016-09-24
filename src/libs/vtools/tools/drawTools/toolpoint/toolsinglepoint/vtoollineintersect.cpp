@@ -286,7 +286,7 @@ void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
         SCASSERT(visual != nullptr);
@@ -295,7 +295,7 @@ void VToolLineIntersect::SetVisualization()
         visual->setLine1P2Id(p2Line1);
         visual->setLine2P1Id(p1Line2);
         visual->setLine2P2Id(p2Line2);
-        vis->RefreshGeometry();
+        visual->RefreshGeometry();
     }
 }
 

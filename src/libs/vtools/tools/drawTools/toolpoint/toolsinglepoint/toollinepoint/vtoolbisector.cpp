@@ -320,7 +320,7 @@ void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
         SCASSERT(visual != nullptr);

@@ -174,7 +174,7 @@ void VToolFlippingByAxis::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolFlippingByAxis *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(visual != nullptr);

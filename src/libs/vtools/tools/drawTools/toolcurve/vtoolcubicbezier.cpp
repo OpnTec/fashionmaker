@@ -216,7 +216,7 @@ void VToolCubicBezier::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolCubicBezier *>(vis);
         SCASSERT(visual != nullptr);

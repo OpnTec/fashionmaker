@@ -83,7 +83,7 @@ const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(nullptr),
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
     SCASSERT(doc != nullptr);
@@ -94,7 +94,12 @@ VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractTool::~VAbstractTool()
-{}
+{
+    if (not vis.isNull())
+    {
+        delete vis;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

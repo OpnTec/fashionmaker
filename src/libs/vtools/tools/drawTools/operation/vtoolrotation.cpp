@@ -285,7 +285,7 @@ void VToolRotation::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolRotation *visual = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(visual != nullptr);

@@ -164,7 +164,7 @@ void VToolAlongLine::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolAlongLine *visual = qobject_cast<VisToolAlongLine *>(vis);
         SCASSERT(visual != nullptr)

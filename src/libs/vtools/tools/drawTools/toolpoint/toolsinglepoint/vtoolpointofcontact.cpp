@@ -339,7 +339,7 @@ void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
         SCASSERT(visual != nullptr);

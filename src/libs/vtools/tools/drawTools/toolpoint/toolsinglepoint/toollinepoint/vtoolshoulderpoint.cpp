@@ -326,7 +326,7 @@ void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
         SCASSERT(visual != nullptr);

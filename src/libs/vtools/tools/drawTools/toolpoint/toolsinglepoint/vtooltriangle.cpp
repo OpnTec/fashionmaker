@@ -307,7 +307,7 @@ void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
         SCASSERT(visual != nullptr);

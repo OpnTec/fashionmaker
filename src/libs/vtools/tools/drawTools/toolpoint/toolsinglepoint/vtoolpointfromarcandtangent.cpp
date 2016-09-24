@@ -336,7 +336,7 @@ void VToolPointFromArcAndTangent::ReadToolAttributes(const QDomElement &domEleme
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolPointFromArcAndTangent *visual = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
         SCASSERT(visual != nullptr);

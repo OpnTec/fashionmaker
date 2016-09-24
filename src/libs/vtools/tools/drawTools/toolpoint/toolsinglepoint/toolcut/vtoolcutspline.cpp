@@ -241,7 +241,7 @@ void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSpline::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
         SCASSERT(visual != nullptr);
