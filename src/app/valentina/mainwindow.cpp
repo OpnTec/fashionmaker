@@ -271,8 +271,8 @@ void MainWindow::AddPP(const QString &PPName)
     comboBoxDraws->blockSignals(false);
 
     // Show best for new PP
-    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
+    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
     ui->view->NewFactor(ui->view->transform().m11());
 
     ui->actionNewDraw->setEnabled(true);
