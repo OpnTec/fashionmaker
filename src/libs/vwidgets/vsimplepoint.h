@@ -62,7 +62,6 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
-    void ChangedActivDraw(bool flag);
     void RefreshLine();
     void RefreshGeometry(const VPointF &point);
     virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
@@ -70,8 +69,6 @@ public:
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
     virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
-
-    void SetCurrentColor(const QColor &value);
 signals:
     /**
      * @brief Choosed send id when clicked.

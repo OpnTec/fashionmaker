@@ -67,22 +67,17 @@ VSimpleCurve::~VSimpleCurve()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::SetCurrentColor(const QColor &value)
-{
-    SetSimpleCurrentColor(this, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::ChangedActivDraw(bool flag)
-{
-    SimpleChangedActivDraw(this, flag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
     ShowPath();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::SetEnabled(bool enabled)
+{
+    VAbstractSimple::SetEnabled(enabled);
+    SetPen(this, currentColor, WidthHairLine(patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

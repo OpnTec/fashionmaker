@@ -28,6 +28,8 @@
 
 #include "vabstractsimple.h"
 
+const qreal VAbstractSimple::m_defFactor = 1;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor,
                                  QObject *parent)
@@ -39,7 +41,12 @@ VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit pa
       patternUnit(patternUnit),
       selectionType(SelectionType::ByMouseRelease),
       type(GOType::Unknown)
-{}
+{
+    if (this->factor == nullptr)
+    {
+        this->factor = const_cast<qreal *>(&m_defFactor);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::~VAbstractSimple()
@@ -69,6 +76,12 @@ QColor VAbstractSimple::CorrectColor(const QColor &color) const
 QColor VAbstractSimple::GetCurrentColor() const
 {
     return currentColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSimple::SetEnabled(bool enabled)
+{
+    this->enabled = enabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -61,10 +61,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
 
-    void SetCurrentColor(const QColor &value);
-
-    void ChangedActivDraw(bool flag);
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
+
+    virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief Choosed send id when clicked.
