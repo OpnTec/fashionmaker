@@ -36,7 +36,7 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "vabstractcurve.h"
+#include "vabstractbezier.h"
 #include "vgeometrydef.h"
 
 class QPainterPath;
@@ -45,7 +45,7 @@ class VPointF;
 class VSpline;
 class VSplinePoint;
 
-class VAbstractCubicBezierPath : public VAbstractCurve
+class VAbstractCubicBezierPath : public VAbstractBezier
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath)
 public:

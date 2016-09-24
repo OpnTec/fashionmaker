@@ -103,7 +103,7 @@ DestinationItem VAbstractFlipping::CreateCurve(quint32 idTool, quint32 idItem, c
                                                  const QPointF &secondPoint, const QString &suffix, VContainer *data)
 {
     const DestinationItem item = CreateItem<Item>(idTool, idItem, firstPoint, secondPoint, suffix, data);
-    data->AddCurve(data->GeometricObject<Item>(item.id), item.id);
+    data->AddSpline(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
@@ -135,7 +135,7 @@ void VAbstractFlipping::UpdateCurve(quint32 idTool, quint32 idItem, const QPoint
                                     const QPointF &secondPoint, const QString &suffix, VContainer *data, quint32 id)
 {
     UpdateItem<Item>(idTool, idItem, firstPoint, secondPoint, suffix, data, id);
-    data->AddCurve(data->GeometricObject<Item>(id), id);
+    data->AddSpline(data->GeometricObject<Item>(id), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

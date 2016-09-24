@@ -36,13 +36,13 @@
 #include <QtGlobal>
 
 #include "../ifc/ifcdef.h"
-#include "vabstractcurve.h"
+#include "vabstractbezier.h"
 #include "vgeometrydef.h"
 
 class QPointF;
 class VPointF;
 
-class VAbstractCubicBezier : public VAbstractCurve
+class VAbstractCubicBezier : public VAbstractBezier
 {
 public:
     VAbstractCubicBezier(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);

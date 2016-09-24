@@ -72,6 +72,9 @@ public:
     virtual qreal   GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal   GetEndAngle () const Q_DECL_OVERRIDE;
 
+    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+
     virtual QVector<VSplinePoint> GetSplinePath() const Q_DECL_OVERRIDE;
     QVector<VPointF> GetCubicPath() const;
 

@@ -88,6 +88,7 @@ public slots:
     void         RadiusArcs();
     void         AnglesCurves();
     void         LengthCurves();
+    void         CurvesCLength();
     void         AngleLines();
     void         Increments();
     void         Functions();

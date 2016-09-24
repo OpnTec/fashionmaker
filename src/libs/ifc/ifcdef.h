@@ -168,6 +168,8 @@ extern const QString radius_V;
 extern const QString radiusArc_;
 extern const QString angle1_V;
 extern const QString angle2_V;
+extern const QString c1Length_V;
+extern const QString c2Length_V;
 extern const QString angle1Arc_;
 extern const QString angle2Arc_;
 extern const QString angle1Spl_;

@@ -40,13 +40,13 @@ class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractCurve(type, idObject, mode)
+    : VAbstractBezier(type, idObject, mode)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve)
-    : VAbstractCurve(curve)
+    : VAbstractBezier(curve)
 {
 }
 
@@ -57,7 +57,7 @@ VAbstractCubicBezierPath &VAbstractCubicBezierPath::operator=(const VAbstractCub
     {
         return *this;
     }
-    VAbstractCurve::operator=(curve);
+    VAbstractBezier::operator=(curve);
     return *this;
 }
 

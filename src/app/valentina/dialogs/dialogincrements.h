@@ -98,6 +98,7 @@ private:
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
+    void                 FillCurvesCLengths();
     void                 FillRadiusesArcs();
     void                 FillAnglesCurves();
 

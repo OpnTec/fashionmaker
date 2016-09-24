@@ -46,6 +46,7 @@
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"
 #include "variables/vcurvelength.h"
+#include "variables/vcurveclength.h"
 #include "variables/vincrement.h"
 #include "variables/vlineangle.h"
 #include "variables/vlinelength.h"
@@ -276,6 +277,7 @@ void VContainer::ClearForFullParse()
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
     ClearVariables(VarType::CurveLength);
+    ClearVariables(VarType::CurveCLength);
     ClearVariables(VarType::ArcRadius);
     ClearVariables(VarType::CurveAngle);
     ClearGObjects();
@@ -408,10 +410,22 @@ void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const qui
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId)
+{
+    AddCurve(curve, id, parentId);
+
+    VCurveCLength *c1Length = new VCurveCLength(id, parentId, curve.data(), CurveCLength::C1, *GetPatternUnit());
+    AddVariable(c1Length->GetName(), c1Length);
+
+    VCurveCLength *c2Length = new VCurveCLength(id, parentId, curve.data(), CurveCLength::C2, *GetPatternUnit());
+    AddVariable(c2Length->GetName(), c2Length);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
                                       quint32 parentId)
 {
-    AddCurve(curve, id, parentId);
+    AddSpline(curve, id, parentId);
 
     for (qint32 i = 1; i <= curve->CountSubSpl(); ++i)
     {
@@ -425,6 +439,14 @@ void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierP
 
         VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::EndAngle, i);
         AddVariable(endAngle->GetName(), endAngle);
+
+        VCurveCLength *c1Length = new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C1,
+                                                    *GetPatternUnit(), i);
+        AddVariable(c1Length->GetName(), c1Length);
+
+        VCurveCLength *c2Length = new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C2,
+                                                    *GetPatternUnit(), i);
+        AddVariable(c2Length->GetName(), c2Length);
     }
 }
 
@@ -522,6 +544,12 @@ const QMap<QString, QSharedPointer<VLengthLine> > VContainer::DataLengthLines() 
 const QMap<QString, QSharedPointer<VCurveLength> > VContainer::DataLengthCurves() const
 {
     return DataVar<VCurveLength>(VarType::CurveLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VCurveCLength> > VContainer::DataCurvesCLength() const
+{
+    return DataVar<VCurveCLength>(VarType::CurveCLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

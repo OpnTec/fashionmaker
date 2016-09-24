@@ -80,6 +80,9 @@ public:
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
 
+    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+
     void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
     VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
 

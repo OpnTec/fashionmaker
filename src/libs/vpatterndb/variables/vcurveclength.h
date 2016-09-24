@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   variables.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   24 9, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,17 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef VARIABLES_H
-#define VARIABLES_H
+#ifndef VCURVECLENGTH_H
+#define VCURVECLENGTH_H
 
-#include "variables/vinternalvariable.h"
-#include "variables/vmeasurement.h"
-#include "variables/vincrement.h"
-#include "variables/vcurvelength.h"
-#include "variables/vlinelength.h"
-#include "variables/vlineangle.h"
-#include "variables/varcradius.h"
-#include "variables/vcurveangle.h"
-#include "variables/vcurveclength.h"
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
 
-#endif // VARIABLES_H
+#include "vcurvevariable.h"
+
+enum class CurveCLength : char { C1, C2 };
+
+class VAbstractBezier;
+class VSpline;
+
+class VCurveCLength : public VCurveVariable
+{
+public:
+    VCurveCLength();
+    VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *curve, CurveCLength cType,
+                  Unit patternUnit);
+    VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+                 CurveCLength cType, Unit patternUnit, qint32 segment);
+    VCurveCLength(const VCurveCLength &var);
+    VCurveCLength &operator=(const VCurveCLength &var);
+    virtual ~VCurveCLength() Q_DECL_OVERRIDE;
+};
+
+#endif // VCURVECLENGTH_H

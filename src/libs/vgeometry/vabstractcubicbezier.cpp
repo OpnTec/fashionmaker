@@ -39,13 +39,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractCurve(type, idObject, mode)
+    : VAbstractBezier(type, idObject, mode)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const VAbstractCubicBezier &curve)
-    : VAbstractCurve(curve)
+    : VAbstractBezier(curve)
 {
 }
 
@@ -56,7 +56,7 @@ VAbstractCubicBezier &VAbstractCubicBezier::operator=(const VAbstractCubicBezier
     {
         return *this;
     }
-    VAbstractCurve::operator=(curve);
+    VAbstractBezier::operator=(curve);
     return *this;
 }
 

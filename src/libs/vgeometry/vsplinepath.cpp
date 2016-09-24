@@ -318,6 +318,32 @@ qreal VSplinePath::GetEndAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VSplinePath::GetC1Length() const
+{
+    if (CountPoints() > 0)
+    {
+        return GetSplinePath().first().Length2();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSplinePath::GetC2Length() const
+{
+    if (CountPoints() > 0)
+    {
+        return GetSplinePath().last().Length1();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPointF VSplinePath::FirstPoint() const
 {
     if (not d->path.isEmpty())

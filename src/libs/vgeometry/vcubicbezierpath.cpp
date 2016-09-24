@@ -211,6 +211,33 @@ qreal VCubicBezierPath::GetEndAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VCubicBezierPath::GetC1Length() const
+{
+    if (CountSubSpl() > 0)
+    {
+        return GetSpline(1).GetC1Length();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCubicBezierPath::GetC2Length() const
+{
+    const qint32 count = CountSubSpl();
+    if (count > 0)
+    {
+        return GetSpline(count).GetC2Length();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VSplinePoint> VCubicBezierPath::GetSplinePath() const
 {
     const int size = CountSubSpl();

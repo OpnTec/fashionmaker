@@ -157,8 +157,8 @@ enum class Vis : ToolVisHolderType
     ToolFlippingByAxis
 };
 
-enum class VarType : char { Measurement, Increment, LineLength, CurveLength, LineAngle, CurveAngle, ArcRadius,
-                            Unknown };
+enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,
+                            ArcRadius, Unknown };
 
 enum class GHeights : unsigned char { ALL,
                                       H92=92,   H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134,
