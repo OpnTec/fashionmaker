@@ -201,10 +201,7 @@ void TST_MeasurementRegExp::TestCheckUnderlineExists_data()
     data.insert(arc_, true);
     data.insert(spl_, true);
     data.insert(splPath, false);
-    data.insert(radius_V, false);
     data.insert(radiusArc_, true);
-    data.insert(angle1_V, false);
-    data.insert(angle2_V, false);
     data.insert(angle1Arc_, true);
     data.insert(angle2Arc_, true);
     data.insert(angle1Spl_, true);
@@ -213,6 +210,10 @@ void TST_MeasurementRegExp::TestCheckUnderlineExists_data()
     data.insert(angle2SplPath, false);
     data.insert(seg_, true);
     data.insert(currentLength, false);
+    data.insert(c1LengthSpl_, true);
+    data.insert(c2LengthSpl_, true);
+    data.insert(c1LengthSplPath, false);
+    data.insert(c2LengthSplPath, false);
 
     //Catch case when new internal variable appears.
     QCOMPARE(data.size(), builInVariables.size());
