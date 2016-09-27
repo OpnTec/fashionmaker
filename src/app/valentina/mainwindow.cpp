@@ -402,6 +402,12 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
+    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Standard)
+    {
+        qWarning()<<"Gradation doesn't support inches.";
+        return false;
+    }
+
     if (m->Type() == MeasurementsType::Standard)
     {
         m->SetDataSize();
