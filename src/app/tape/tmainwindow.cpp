@@ -384,7 +384,8 @@ void TMainWindow::FileNew()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenIndividual()
 {
-    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
+    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Standard measurements") +
+            QLatin1String(" (*.vst);;") + tr("All files") + QLatin1String(" (*.*)");
     //Use standard path to individual measurements
     const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
 
@@ -394,7 +395,8 @@ void TMainWindow::OpenIndividual()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenStandard()
 {
-    const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
+    const QString filter = tr("Standard measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
+            QLatin1String(" (*.vit);;") + tr("All files") + QLatin1String(" (*.*)");
     //Use standard path to standard measurements
     const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
 
@@ -404,7 +406,8 @@ void TMainWindow::OpenStandard()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenTemplate()
 {
-    const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
+    const QString filter = tr("Measurements") + QLatin1String(" (*.vst *.vit);;") + tr("All files") +
+            QLatin1String(" (*.*)");
     //Use standard path to template files
     const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
 
@@ -420,7 +423,7 @@ void TMainWindow::OpenTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateFromExisting()
 {
-    const QString filter = tr("Individual measurements (*.vit)");
+    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit)");
     //Use standard path to standard measurements
     const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
