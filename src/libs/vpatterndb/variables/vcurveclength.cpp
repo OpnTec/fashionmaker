@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractsimple.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 6, 2015
+ **  @date   24 9, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,78 +26,80 @@
  **
  *************************************************************************/
 
-#include "vabstractsimple.h"
+#include "vcurveclength.h"
 
-const qreal VAbstractSimple::m_defFactor = 1;
+#include <QLatin1String>
+#include <QMessageLogger>
+
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vspline.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor,
-                                 QObject *parent)
-    : QObject(parent),
-      id (id),
-      factor(factor),
-      currentColor(currentColor),
-      enabled(true),
-      patternUnit(patternUnit),
-      selectionType(SelectionType::ByMouseRelease),
-      type(GOType::Unknown)
+VCurveCLength::VCurveCLength()
+    : VCurveVariable()
 {
-    if (this->factor == nullptr)
-    {
-        this->factor = const_cast<qreal *>(&m_defFactor);
-    }
+    SetType(VarType::CurveCLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::~VAbstractSimple()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ToolSelectionType(const SelectionType &type)
+VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *curve,
+                             CurveCLength cType, Unit patternUnit)
+    : VCurveVariable(id, parentId)
 {
-    selectionType = type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QColor VAbstractSimple::CorrectColor(const QColor &color) const
-{
-    if (enabled)
+    SetType(VarType::CurveCLength);
+    SCASSERT(curve != nullptr);
+    if (cType == CurveCLength::C1)
     {
-        return color;
+        SetValue(FromPixel(curve->GetC1Length(), patternUnit));
+        SetName(c1Length_V + curve->name());
     }
     else
     {
-        return Qt::gray;
+        SetValue(FromPixel(curve->GetC2Length(), patternUnit));
+        SetName(c2Length_V + curve->name());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QColor VAbstractSimple::GetCurrentColor() const
+VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName,
+                             const VSpline &spl, CurveCLength cType, Unit patternUnit, qint32 segment)
+    : VCurveVariable(id, parentId)
 {
-    return currentColor;
+    SetType(VarType::CurveCLength);
+    if (cType == CurveCLength::C1)
+    {
+        SetValue(FromPixel(spl.GetC1Length(), patternUnit));
+        SetName(c1Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+    }
+    else
+    {
+        SetValue(FromPixel(spl.GetC2Length(), patternUnit));
+        SetName(c2Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::SetEnabled(bool enabled)
+VCurveCLength::VCurveCLength(const VCurveCLength &var)
+    : VCurveVariable(var)
 {
-    this->enabled = enabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ContextMenu(QGraphicsSceneContextMenuEvent *event)
+VCurveCLength &VCurveCLength::operator=(const VCurveCLength &var)
 {
-    emit ShowContextMenu(event);
+    if ( &var == this )
+    {
+        return *this;
+    }
+    VCurveVariable::operator=(var);
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GOType VAbstractSimple::GetType() const
+VCurveCLength::~VCurveCLength()
 {
-    return type;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::SetType(const GOType &value)
-{
-    type = value;
-}

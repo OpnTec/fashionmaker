@@ -73,6 +73,9 @@ public:
     virtual qreal            GetLength() const Q_DECL_OVERRIDE;
     virtual QVector<QPointF> GetPoints() const Q_DECL_OVERRIDE;
 
+    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+
 protected:
     virtual QPointF GetControlPoint1() const Q_DECL_OVERRIDE;
     virtual QPointF GetControlPoint2() const Q_DECL_OVERRIDE;

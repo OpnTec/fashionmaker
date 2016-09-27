@@ -376,7 +376,7 @@ void VToolTrueDarts::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolTrueDarts *visual = qobject_cast<VisToolTrueDarts *>(vis);
         SCASSERT(visual != nullptr);

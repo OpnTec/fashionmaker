@@ -179,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent)
             {
                 mChangesAsked = true;
                 const auto answer = QMessageBox::question(this, tr("Measurements"),
-                                                  tr("Measurements was changed. Do you want to sync measurements now?"),
+                                                 tr("Measurements were changed. Do you want to sync measurements now?"),
                                                           QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 if (answer == QMessageBox::Yes)
                 {
@@ -271,8 +271,8 @@ void MainWindow::AddPP(const QString &PPName)
     comboBoxDraws->blockSignals(false);
 
     // Show best for new PP
-    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
+    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
     ui->view->NewFactor(ui->view->transform().m11());
 
     ui->actionNewDraw->setEnabled(true);
@@ -443,6 +443,12 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->isNull())
     {
+        return false;
+    }
+
+    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Standard)
+    {
+        qWarning()<<tr("Gradation doesn't support inches");
         return false;
     }
 
@@ -1495,7 +1501,7 @@ void MainWindow::SyncMeasurements()
             {
                 watcher->addPath(path);
             }
-            const QString msg = tr("Measurements was synced");
+            const QString msg = tr("Measurements have been synced");
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
             helpLabel->setText(msg);
             VWidgetPopup::PopupMessage(this, msg);

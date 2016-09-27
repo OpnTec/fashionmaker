@@ -295,7 +295,7 @@ void VToolNormal::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
         SCASSERT(visual != nullptr);

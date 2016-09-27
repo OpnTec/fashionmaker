@@ -176,6 +176,18 @@ QVector<QPointF> VCubicBezier::GetPoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VCubicBezier::GetC1Length() const
+{
+    return QLineF(GetP1(), GetP2()).length();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCubicBezier::GetC2Length() const
+{
+    return QLineF(GetP4(), GetP3()).length();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VCubicBezier::GetControlPoint1() const
 {
     return GetP2();

@@ -241,7 +241,7 @@ void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
         SCASSERT(visual != nullptr);

@@ -341,7 +341,7 @@ void VToolPointOfIntersectionArcs::ReadToolAttributes(const QDomElement &domElem
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolPointOfIntersectionArcs *visual = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
         SCASSERT(visual != nullptr);

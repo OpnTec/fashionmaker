@@ -621,7 +621,7 @@ void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
         SCASSERT(visual != nullptr);

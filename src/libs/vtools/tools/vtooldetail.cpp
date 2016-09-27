@@ -313,6 +313,8 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
     det.setClosed(detail.getClosed());
     det.setSeamAllowance(detail.getSeamAllowance());
     det.setForbidFlipping(detail.getForbidFlipping());
+    det.SetPatternPieceData(detail.GetPatternPieceData());
+    det.SetPatternInfo(detail.GetPatternInfo());
     Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
@@ -486,6 +488,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
+    domElement.appendChild(domData);
 
     // grainline
     domData = doc->createElement(VAbstractPattern::TagGrainline);

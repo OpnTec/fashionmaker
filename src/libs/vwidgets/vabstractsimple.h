@@ -49,14 +49,14 @@ class VAbstractSimple : public QObject
     Q_OBJECT
 public:
     VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
-                    QObject *parent = 0);
+                    QObject *parent = nullptr);
     virtual ~VAbstractSimple();
 
     virtual void ToolSelectionType(const SelectionType &type);
 
     QColor GetCurrentColor() const;
 
-    virtual void SetEnabled(bool enabled) { Q_UNUSED(enabled); }
+    virtual void SetEnabled(bool enabled);
 
     GOType GetType() const;
     void   SetType(const GOType &value);
@@ -91,45 +91,18 @@ protected:
     template <class T>
     void SetPen(T *item, const QColor &color, qreal width);
 
-    template <class T>
-    void SimpleChangedActivDraw(T *item, const bool &flag);
-
-    template <class T>
-    void SetSimpleCurrentColor(T *item, const QColor &value);
-
 private:
     Q_DISABLE_COPY(VAbstractSimple)
+
+    const static qreal m_defFactor;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
 void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
 {
-    if (factor == nullptr)
-    {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit), Qt::SolidLine, Qt::RoundCap));
-    }
-    else
-    {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VAbstractSimple::SimpleChangedActivDraw(T *item, const bool &flag)
-{
-    enabled = flag;
-    item->setEnabled(enabled);
-    SetPen(item, currentColor, WidthHairLine(patternUnit));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VAbstractSimple::SetSimpleCurrentColor(T *item, const QColor &value)
-{
-    currentColor = value;
-    SetPen(item, CorrectColor(currentColor), item->pen().widthF());
+    SCASSERT(item);
+    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
 }
 
 #endif // VABSTRACTSIMPLE_H

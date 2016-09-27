@@ -196,12 +196,12 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
+        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
+        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -500,7 +500,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
         SCASSERT(visual != nullptr);

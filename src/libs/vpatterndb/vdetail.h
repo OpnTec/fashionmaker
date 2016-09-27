@@ -98,9 +98,13 @@ public:
     QPainterPath ContourPath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const VContainer *data) const;
     QVector<VNodeDetail> listNodePoint()const;
-    VPatternPieceData& GetPatternPieceData();
+
+    void                     SetPatternPieceData(const VPatternPieceData &data);
+    VPatternPieceData&       GetPatternPieceData();
     const VPatternPieceData& GetPatternPieceData() const;
-    VPatternInfoGeometry& GetPatternInfo();
+
+    void                        SetPatternInfo(const VPatternInfoGeometry &info);
+    VPatternInfoGeometry&       GetPatternInfo();
     const VPatternInfoGeometry& GetPatternInfo() const;
     VGrainlineGeometry& GetGrainlineGeometry();
     const VGrainlineGeometry& GetGrainlineGeometry() const;

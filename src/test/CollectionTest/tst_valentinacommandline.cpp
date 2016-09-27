@@ -275,7 +275,9 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("TestDart")          << "TestDart.val"          << keyTest  << true << V_EX_OK;
     QTest::newRow("MaleShirt")         << "MaleShirt.val"         << keyTest  << true << V_EX_OK;
     QTest::newRow("Trousers")          << "Trousers.val"          << keyTest  << true << V_EX_OK;
-    QTest::newRow("Steampunk_trousers")  << "Steampunk_trousers.val"  << keyTest << true << V_EX_OK;
+    QTest::newRow("Basic block women")      << "Basic_block_women-2016.val" << keyTest << true << V_EX_OK;
+    QTest::newRow("Gent Jacket with tummy") << "Gent_Jacket_with_tummy.val" << keyTest << true << V_EX_OK;
+    QTest::newRow("Steampunk_trousers")     << "Steampunk_trousers.val"     << keyTest << true << V_EX_OK;
 #ifndef Q_OS_WIN
     QTest::newRow("patrón_blusa")      << "patrón_blusa.val"      << keyTest  << true << V_EX_OK;
     QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << true << V_EX_OK;

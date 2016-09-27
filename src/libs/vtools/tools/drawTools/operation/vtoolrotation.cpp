@@ -285,7 +285,7 @@ void VToolRotation::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolRotation *visual = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(visual != nullptr);
@@ -390,7 +390,7 @@ DestinationItem VToolRotation::CreateCurve(quint32 idTool, quint32 idItem, const
                                            const QString &suffix, VContainer *data)
 {
     const DestinationItem item = CreateItem<Item>(idTool, idItem, origin, angle, suffix, data);
-    data->AddCurve(data->GeometricObject<Item>(item.id), item.id);
+    data->AddSpline(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
@@ -429,7 +429,7 @@ void VToolRotation::UpdateItem(quint32 idTool, quint32 idItem, const QPointF &or
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::UpdateArc(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
-                               const QString &suffix, VContainer *data, quint32 id)
+                              const QString &suffix, VContainer *data, quint32 id)
 {
     UpdateItem<VArc>(idTool, idItem, origin, angle, suffix, data, id);
     data->AddArc(data->GeometricObject<VArc>(id), id);
@@ -438,16 +438,16 @@ void VToolRotation::UpdateArc(quint32 idTool, quint32 idItem, const QPointF &ori
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
 void VToolRotation::UpdateCurve(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
-                               const QString &suffix, VContainer *data, quint32 id)
+                                const QString &suffix, VContainer *data, quint32 id)
 {
     UpdateItem<Item>(idTool, idItem, origin, angle, suffix, data, id);
-    data->AddCurve(data->GeometricObject<Item>(id), id);
+    data->AddSpline(data->GeometricObject<Item>(id), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
 void VToolRotation::UpdateCurveWithSegments(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
-                               const QString &suffix, VContainer *data, quint32 id)
+                                            const QString &suffix, VContainer *data, quint32 id)
 {
     UpdateItem<Item>(idTool, idItem, origin, angle, suffix, data, id);
     data->AddCurveWithSegments(data->GeometricObject<Item>(id), id);

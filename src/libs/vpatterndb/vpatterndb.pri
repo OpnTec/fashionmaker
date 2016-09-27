@@ -20,7 +20,8 @@ SOURCES += \
     $$PWD/vformula.cpp \
     $$PWD/vpatternpiecedata.cpp \
     $$PWD/vpatterninfogeometry.cpp \
-    $$PWD/vgrainlinegeometry.cpp
+    $$PWD/vgrainlinegeometry.cpp \
+    $$PWD/variables/vcurveclength.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -55,4 +56,5 @@ HEADERS += \
     $$PWD/vformula.h \
     $$PWD/vpatternpiecedata.h \
     $$PWD/vpatterninfogeometry.h \
-    $$PWD/vgrainlinegeometry.h
+    $$PWD/vgrainlinegeometry.h \
+    $$PWD/variables/vcurveclength.h

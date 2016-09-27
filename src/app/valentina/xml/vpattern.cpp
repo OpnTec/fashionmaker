@@ -3369,6 +3369,7 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearVariables(VarType::LineAngle);
         data->ClearVariables(VarType::LineLength);
         data->ClearVariables(VarType::CurveLength);
+        data->ClearVariables(VarType::CurveCLength);
         data->ClearVariables(VarType::ArcRadius);
         data->ClearVariables(VarType::CurveAngle);
     }

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>453</height>
+    <width>448</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -326,6 +326,13 @@
            </property>
            <property name="text">
             <string>Angles of curves</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonCLength">
+           <property name="text">
+            <string>Lengths to control points</string>
            </property>
           </widget>
          </item>

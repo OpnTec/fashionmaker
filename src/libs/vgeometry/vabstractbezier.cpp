@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   variables.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   24 9, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,17 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VARIABLES_H
-#define VARIABLES_H
+#include "vabstractbezier.h"
 
-#include "variables/vinternalvariable.h"
-#include "variables/vmeasurement.h"
-#include "variables/vincrement.h"
-#include "variables/vcurvelength.h"
-#include "variables/vlinelength.h"
-#include "variables/vlineangle.h"
-#include "variables/varcradius.h"
-#include "variables/vcurveangle.h"
-#include "variables/vcurveclength.h"
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractBezier::VAbstractBezier(const GOType &type, const quint32 &idObject, const Draw &mode)
+    : VAbstractCurve(type, idObject, mode)
+{
+}
 
-#endif // VARIABLES_H
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractBezier::VAbstractBezier(const VAbstractBezier &curve)
+    : VAbstractCurve(curve)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractBezier &VAbstractBezier::operator=(const VAbstractBezier &curve)
+{
+    if ( &curve == this )
+    {
+        return *this;
+    }
+    VAbstractCurve::operator=(curve);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractBezier::~VAbstractBezier()
+{
+}

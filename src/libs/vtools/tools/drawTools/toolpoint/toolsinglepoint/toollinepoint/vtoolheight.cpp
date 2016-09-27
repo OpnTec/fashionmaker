@@ -261,7 +261,7 @@ void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(visual != nullptr);

@@ -319,7 +319,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (vis == nullptr)
+    if (vis.isNull())
     {
         this->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
@@ -421,7 +421,7 @@ void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
         SCASSERT(visual != nullptr);
@@ -456,7 +456,7 @@ void VToolLine::ShowVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<VisToolLine>();
             SetVisualization();
@@ -472,7 +472,6 @@ void VToolLine::ShowVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
         hoverLeaveEvent(nullptr);
     }
 }

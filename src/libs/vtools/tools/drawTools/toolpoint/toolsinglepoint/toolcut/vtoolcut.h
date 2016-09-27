@@ -89,7 +89,7 @@ inline void VToolCut::ShowToolVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<T>();
             SetVisualization();
@@ -105,7 +105,6 @@ inline void VToolCut::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
     }
     if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
     {

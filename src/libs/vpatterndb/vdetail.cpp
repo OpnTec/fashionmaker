@@ -542,6 +542,12 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDetail::SetPatternPieceData(const VPatternPieceData &data)
+{
+    d->m_ppData = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns full access to the pattern piece data object
  * @return pattern piece data object
@@ -559,6 +565,12 @@ VPatternPieceData& VDetail::GetPatternPieceData()
 const VPatternPieceData& VDetail::GetPatternPieceData() const
 {
     return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::SetPatternInfo(const VPatternInfoGeometry &info)
+{
+    d->m_piPatternInfo = info;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

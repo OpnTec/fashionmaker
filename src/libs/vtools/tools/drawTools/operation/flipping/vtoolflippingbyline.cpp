@@ -154,7 +154,7 @@ void VToolFlippingByLine::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolFlippingByLine *visual = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(visual != nullptr);

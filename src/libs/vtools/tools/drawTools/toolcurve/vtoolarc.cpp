@@ -365,7 +365,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
         VisToolArc *visual = qobject_cast<VisToolArc *>(vis);

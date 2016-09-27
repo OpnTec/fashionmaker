@@ -362,7 +362,7 @@ void VToolPointOfIntersectionCircles::ReadToolAttributes(const QDomElement &domE
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolPointOfIntersectionCircles *visual = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
         SCASSERT(visual != nullptr);

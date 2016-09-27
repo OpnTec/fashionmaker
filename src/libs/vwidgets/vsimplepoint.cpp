@@ -74,18 +74,6 @@ VSimplePoint::~VSimplePoint()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::SetCurrentColor(const QColor &value)
-{
-    SetSimpleCurrentColor(this, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ChangedActivDraw(bool flag)
-{
-    SimpleChangedActivDraw(this, flag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::RefreshLine()
 {
     QRectF nRec = namePoint->sceneBoundingRect();
@@ -97,7 +85,7 @@ void VSimplePoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
-        SetPen(lineName, QColor(Qt::black), WidthHairLine(patternUnit));
+        SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
 
         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
@@ -126,14 +114,7 @@ void VSimplePoint::RefreshGeometry(const VPointF &point)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     namePoint->blockSignals(true);
     QFont font = namePoint->font();
-    if (factor == nullptr)
-    {
-        font.setPointSize(static_cast<qint32>(namePoint->FontSize()));
-    }
-    else
-    {
-        font.setPointSize(static_cast<qint32>(namePoint->FontSize()/ *factor));
-    }
+    font.setPointSize(static_cast<qint32>(namePoint->FontSize()/ *factor));
     namePoint->setFont(font);
     namePoint->setText(point.name());
     namePoint->setPos(QPointF(point.mx(), point.my()));
@@ -145,6 +126,9 @@ void VSimplePoint::RefreshGeometry(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::SetEnabled(bool enabled)
 {
+    VAbstractSimple::SetEnabled(enabled);
+    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
     namePoint->setEnabled(enabled);
 }
 

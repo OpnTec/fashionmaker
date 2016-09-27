@@ -140,9 +140,8 @@ public:
     quint32            AddGObject(VGObject *obj);
     quint32            AddDetail(const VDetail &detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
-    void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = 0);
-    void               AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id,
-                                quint32 parentId = NULL_ID);
+    void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = NULL_ID);
+    void               AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId = NULL_ID);
     void               AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
                                             quint32 parentId = NULL_ID);
 
@@ -176,13 +175,14 @@ public:
     const QHash<quint32, VDetail>                           *DataDetails() const;
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 
-    const QMap<QString, QSharedPointer<VMeasurement> > DataMeasurements() const;
-    const QMap<QString, QSharedPointer<VIncrement> >   DataIncrements() const;
-    const QMap<QString, QSharedPointer<VLengthLine> >  DataLengthLines() const;
-    const QMap<QString, QSharedPointer<VCurveLength> > DataLengthCurves() const;
-    const QMap<QString, QSharedPointer<VLineAngle> >   DataAngleLines() const;
-    const QMap<QString, QSharedPointer<VArcRadius> >   DataRadiusesArcs() const;
-    const QMap<QString, QSharedPointer<VCurveAngle> >  DataAnglesCurves() const;
+    const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
+    const QMap<QString, QSharedPointer<VIncrement> >    DataIncrements() const;
+    const QMap<QString, QSharedPointer<VLengthLine> >   DataLengthLines() const;
+    const QMap<QString, QSharedPointer<VCurveLength> >  DataLengthCurves() const;
+    const QMap<QString, QSharedPointer<VCurveCLength> > DataCurvesCLength() const;
+    const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
+    const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
+    const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
 
     const QHash<QString, qreal *> PlainVariables() const;
 
@@ -202,6 +202,8 @@ private:
     static QSet<QString> uniqueNames;
 
     QSharedDataPointer<VContainerData> d;
+
+    void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
 
     template <class T>
     uint qHash( const QSharedPointer<T> &p );

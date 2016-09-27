@@ -156,7 +156,7 @@ void VAbstractOperation::ShowToolVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<T>();
             SetVisualization();
@@ -172,7 +172,6 @@ void VAbstractOperation::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
     }
 }
 

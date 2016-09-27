@@ -85,8 +85,8 @@ public:
     void    SetStartAngle(qreal angle, const QString &formula);
     void    SetEndAngle(qreal angle, const QString &formula);
 
-    qreal   GetC1Length() const;
-    qreal   GetC2Length() const;
+    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
 
     QString GetC1LengthFormula() const;
     QString GetC2LengthFormula() const;

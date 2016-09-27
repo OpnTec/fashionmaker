@@ -298,6 +298,13 @@ void DialogEditWrongFormula::LengthCurves()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::CurvesCLength()
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+    ShowVariable(data->DataCurvesCLength());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AngleLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
@@ -399,6 +406,7 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
+    connect(ui->radioButtonCLength, &QRadioButton::clicked, this, &DialogEditWrongFormula::CurvesCLength);
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
 }
 

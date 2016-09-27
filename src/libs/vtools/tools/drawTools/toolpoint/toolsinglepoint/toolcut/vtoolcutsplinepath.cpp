@@ -166,15 +166,15 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     {
         id = data->AddGObject(p);
 
-        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath1), NULL_ID, id);
-        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath2), NULL_ID, id);
+        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, id);
+        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, id);
     }
     else
     {
         data->UpdateGObject(id, p);
 
-        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath1), NULL_ID, id);
-        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath2), NULL_ID, id);
+        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, id);
+        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, id);
 
         if (parse != Document::FullParse)
         {
@@ -329,7 +329,7 @@ void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
         SCASSERT(visual != nullptr);

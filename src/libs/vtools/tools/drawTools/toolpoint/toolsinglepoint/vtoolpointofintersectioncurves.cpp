@@ -404,7 +404,7 @@ void VToolPointOfIntersectionCurves::ReadToolAttributes(const QDomElement &domEl
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(visual != nullptr);

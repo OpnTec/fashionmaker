@@ -122,7 +122,7 @@ protected:
     /** @brief baseColor base color for tool. */
     Qt::GlobalColor         baseColor;
 
-    Visualization           *vis;
+    QPointer<Visualization> vis;
     SelectionType           selectionType;
 
     /**
@@ -182,8 +182,8 @@ inline void VAbstractTool::AddVisualization()
     connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
     scene->addItem(visual);
 
+    connect(visual, &Visualization::ToolTip, [=] (const QString &toolTip) {emit ToolTip(toolTip);});
     vis = visual;
-    connect(vis, &Visualization::ToolTip, [=] (const QString &toolTip) {emit ToolTip(toolTip);});
 }
 
 #endif // VABSTRACTTOOL_H

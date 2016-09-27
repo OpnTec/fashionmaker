@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   variables.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   24 9, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,17 +26,23 @@
  **
  *************************************************************************/
 
-#ifndef VARIABLES_H
-#define VARIABLES_H
+#ifndef VABSTRACTBEZIER_H
+#define VABSTRACTBEZIER_H
 
-#include "variables/vinternalvariable.h"
-#include "variables/vmeasurement.h"
-#include "variables/vincrement.h"
-#include "variables/vcurvelength.h"
-#include "variables/vlinelength.h"
-#include "variables/vlineangle.h"
-#include "variables/varcradius.h"
-#include "variables/vcurveangle.h"
-#include "variables/vcurveclength.h"
+#include <QtGlobal>
 
-#endif // VARIABLES_H
+#include "vabstractcurve.h"
+
+class VAbstractBezier : public VAbstractCurve
+{
+public:
+    VAbstractBezier(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
+    VAbstractBezier(const VAbstractBezier &curve);
+    VAbstractBezier& operator= (const VAbstractBezier &curve);
+    virtual ~VAbstractBezier();
+
+    virtual qreal GetC1Length() const =0;
+    virtual qreal GetC2Length() const =0;
+};
+
+#endif // VABSTRACTBEZIER_H

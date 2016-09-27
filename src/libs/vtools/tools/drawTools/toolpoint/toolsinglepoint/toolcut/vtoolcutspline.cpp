@@ -150,20 +150,20 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
 
     quint32 id = _id;
     VPointF *p = new VPointF(point, pointName, mx, my);
-    auto spline1 = QSharedPointer<VAbstractCurve>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
-    auto spline2 = QSharedPointer<VAbstractCurve>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
+    auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
+    auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);
-        data->AddCurve(spline1, NULL_ID, id);
-        data->AddCurve(spline2, NULL_ID, id);
+        data->AddSpline(spline1, NULL_ID, id);
+        data->AddSpline(spline2, NULL_ID, id);
     }
     else
     {
         data->UpdateGObject(id, p);
-        data->AddCurve(spline1, NULL_ID, id);
-        data->AddCurve(spline2, NULL_ID, id);
+        data->AddSpline(spline1, NULL_ID, id);
+        data->AddSpline(spline2, NULL_ID, id);
 
         if (parse != Document::FullParse)
         {
@@ -241,7 +241,7 @@ void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSpline::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
         SCASSERT(visual != nullptr);

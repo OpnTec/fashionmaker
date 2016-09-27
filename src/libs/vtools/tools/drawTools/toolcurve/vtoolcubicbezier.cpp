@@ -117,12 +117,12 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
+        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
+        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -216,7 +216,7 @@ void VToolCubicBezier::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolCubicBezier *>(vis);
         SCASSERT(visual != nullptr);

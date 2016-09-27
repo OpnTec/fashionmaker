@@ -313,7 +313,7 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(visual != nullptr);
@@ -378,8 +378,8 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
         case GOType::CubicBezier:
         case GOType::Spline:
         {
-            QSharedPointer<VAbstractCurve> spline1;
-            QSharedPointer<VAbstractCurve> spline2;
+            QSharedPointer<VAbstractBezier> spline1;
+            QSharedPointer<VAbstractBezier> spline2;
 
             const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
             QPointF spl1p2, spl1p3, spl2p2, spl2p3;
@@ -397,13 +397,13 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
 
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
-                spline1 = QSharedPointer<VAbstractCurve>(spl1);
-                spline2 = QSharedPointer<VAbstractCurve>(spl2);
+                spline1 = QSharedPointer<VAbstractBezier>(spl1);
+                spline2 = QSharedPointer<VAbstractBezier>(spl2);
             }
             else
             {
-                spline1 = QSharedPointer<VAbstractCurve>(new VSpline());
-                spline2 = QSharedPointer<VAbstractCurve>(new VSpline());
+                spline1 = QSharedPointer<VAbstractBezier>(new VSpline());
+                spline2 = QSharedPointer<VAbstractBezier>(new VSpline());
 
                 // Take names for empty splines from donors.
                 spline1->setName(spl1->name());
@@ -413,15 +413,15 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
                 delete spl2;
             }
 
-            data->AddCurve(spline1, NULL_ID, p->id());
-            data->AddCurve(spline2, NULL_ID, p->id());
+            data->AddSpline(spline1, NULL_ID, p->id());
+            data->AddSpline(spline2, NULL_ID, p->id());
             break;
         }
         case GOType::CubicBezierPath:
         case GOType::SplinePath:
         {
-            QSharedPointer<VAbstractCurve> splP1;
-            QSharedPointer<VAbstractCurve> splP2;
+            QSharedPointer<VAbstractBezier> splP1;
+            QSharedPointer<VAbstractBezier> splP2;
 
             const auto splPath = data->GeometricObject<VAbstractCubicBezierPath>(curveId);
             VSplinePath *splPath1 = nullptr;
@@ -442,13 +442,13 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
 
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
-                splP1 = QSharedPointer<VAbstractCurve>(splPath1);
-                splP2 = QSharedPointer<VAbstractCurve>(splPath2);
+                splP1 = QSharedPointer<VAbstractBezier>(splPath1);
+                splP2 = QSharedPointer<VAbstractBezier>(splPath2);
             }
             else
             {
-                splP1 = QSharedPointer<VAbstractCurve>(new VSplinePath());
-                splP2 = QSharedPointer<VAbstractCurve>(new VSplinePath());
+                splP1 = QSharedPointer<VAbstractBezier>(new VSplinePath());
+                splP2 = QSharedPointer<VAbstractBezier>(new VSplinePath());
 
                 // Take names for empty spline paths from donors.
                 splP1->setName(splPath1->name());
@@ -458,8 +458,8 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
                 delete splPath2;
             }
 
-            data->AddCurve(splP1, NULL_ID, p->id());
-            data->AddCurve(splP2, NULL_ID, p->id());
+            data->AddSpline(splP1, NULL_ID, p->id());
+            data->AddSpline(splP2, NULL_ID, p->id());
             break;
         }
         case GOType::EllipticalArc:

@@ -144,7 +144,7 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<T>();
             SetVisualization();
@@ -160,7 +160,6 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
     }
 
     if (detailsMode)
