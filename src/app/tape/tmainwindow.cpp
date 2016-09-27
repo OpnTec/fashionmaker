@@ -372,79 +372,57 @@ void TMainWindow::FileNew()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenIndividual()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
-        //Use standard path to individual measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
-        Open(pathTo, filter);
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenIndividual();
-    }
+    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
+    //Use standard path to individual measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+
+    Open(pathTo, filter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenStandard()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
-        //Use standard path to standard measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
-        Open(pathTo, filter);
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenStandard();
-    }
+    const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
+    //Use standard path to standard measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
+
+    Open(pathTo, filter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenTemplate()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
-        //Use standard path to template files
-        const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-        Open(pathTo, filter);
+    const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
+    //Use standard path to template files
+    const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
 
-        if (m != nullptr)
-        {// The file was opened.
-            SetCurrentFile(""); // Force user to to save new file
-            lock.reset();// remove lock from template
-        }
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenTemplate();
+    Open(pathTo, filter);
+
+    if (m != nullptr)
+    {// The file was opened.
+        SetCurrentFile(""); // Force user to to save new file
+        lock.reset();// remove lock from template
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateFromExisting()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Individual measurements (*.vit)");
-        //Use standard path to standard measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
-        const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
+    const QString filter = tr("Individual measurements (*.vit)");
+    //Use standard path to standard measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
 
-        if (not mPath.isEmpty())
+    if (not mPath.isEmpty())
+    {
+        if (m == nullptr)
         {
             LoadFromExistingFile(mPath);
         }
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->CreateFromExisting();
+        else
+        {
+            qApp->NewMainWindow()->CreateFromExisting();
+        }
     }
 }
 
@@ -2337,13 +2315,16 @@ void TMainWindow::Open(const QString &pathTo, const QString &filter)
 {
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter);
 
-    if (mPath.isEmpty())
+    if (not mPath.isEmpty())
     {
-        return;
-    }
-    else
-    {
-        LoadFile(mPath);
+        if (m == nullptr)
+        {
+            LoadFile(mPath);
+        }
+        else
+        {
+            qApp->NewMainWindow()->LoadFile(mPath);
+        }
     }
 }
 
