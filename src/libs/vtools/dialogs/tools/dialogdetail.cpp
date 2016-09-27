@@ -28,6 +28,7 @@
 
 #include "dialogdetail.h"
 
+#include <QtNumeric>
 #include <QBuffer>
 #include <QByteArray>
 #include <QCheckBox>
