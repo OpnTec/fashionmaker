@@ -98,7 +98,7 @@ protected:
     void                hoverMoveEvent(QGraphicsSceneHoverEvent* pHE);
     void                hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE);
     void                UpdateBox();
-    void                UpdateFont();
+    void                CorrectLabel();
 
     double              GetAngle(QPointF pt) const;
 

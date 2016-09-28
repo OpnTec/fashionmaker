@@ -420,7 +420,7 @@ void VToolDetail::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
         qreal dScale = qSqrt(QPoint::dotProduct(pt - pt0, pt - pt0));
         grainLine->SetScale(100/dScale);
-        qDebug() << "SCALE" << dScale << 10/dScale;
+        //qDebug() << "SCALE" << dScale << 10/dScale;
     }
 
     if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false || grainLine->IsIdle() == false)

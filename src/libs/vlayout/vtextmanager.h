@@ -82,7 +82,7 @@ public:
     int                 GetCount() const;
     int                 GetSourceLineCount() const;
     const TextLine&     GetLine(int i) const;
-    bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
+    bool                IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH);
     void                FitFontSize(qreal fW, qreal fH);
     void                Update(const QString& qsName, const VPatternPieceData& data);
     void                Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
