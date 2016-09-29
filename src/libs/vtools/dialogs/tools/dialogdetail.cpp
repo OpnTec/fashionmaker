@@ -830,7 +830,7 @@ void DialogDetail::ClearFields()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::SetValue(QObject *pobjSender)
 {
-    QLineEdit* pleSender = dynamic_cast<QLineEdit*>(pobjSender);
+    QLineEdit* pleSender = qobject_cast<QLineEdit*>(pobjSender);
     SCASSERT(pleSender != 0);
 
     QString qsFormula = pleSender->text().simplified();

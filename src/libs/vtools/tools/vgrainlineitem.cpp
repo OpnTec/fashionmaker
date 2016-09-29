@@ -29,12 +29,12 @@
 #include <math.h>
 
 #include <QPainter>
-#include <QtMath>
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 
 #include "vgrainlineitem.h"
 

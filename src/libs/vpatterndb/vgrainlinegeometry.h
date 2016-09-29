@@ -48,9 +48,9 @@ public:
     QPointF                 GetPos() const;
     void                    SetPos(const QPointF& ptPos);
     QString                 GetLength() const;
-    void                    SetLength(QString qsLen);
+    void                    SetLength(const QString& qsLen);
     QString                 GetRotation() const;
-    void                    SetRotation(QString qsRot);
+    void                    SetRotation(const QString& qsRot);
     bool                    IsVisible() const;
     void                    SetVisible(bool bVisible);
 

@@ -50,10 +50,10 @@ HEADERS += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h \
     $$PWD/drawTools/toolcurve/vtoolcubicbezier.h \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.h \
-	 $$PWD/drawTools/operation/vtoolrotation.h \
-	 $$PWD/vtextgraphicsitem.h \
-	 $$PWD/vgrainlineitem.h \
-	 $$PWD/drawTools/operation/flipping/vtoolflippingbyline.h \
+    $$PWD/drawTools/operation/vtoolrotation.h \
+    $$PWD/vtextgraphicsitem.h \
+    $$PWD/vgrainlineitem.h \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyline.h \
     $$PWD/drawTools/operation/vabstractoperation.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.h \
     $$PWD/drawTools/operation/flipping/vabstractflipping.h
@@ -106,8 +106,8 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.cpp \
     $$PWD/drawTools/operation/vtoolrotation.cpp \
     $$PWD/vtextgraphicsitem.cpp \
-	 $$PWD/vgrainlineitem.cpp \
-	 $$PWD/drawTools/operation/flipping/vtoolflippingbyline.cpp \
+    $$PWD/vgrainlineitem.cpp \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyline.cpp \
     $$PWD/drawTools/operation/vabstractoperation.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.cpp \
     $$PWD/drawTools/operation/flipping/vabstractflipping.cpp

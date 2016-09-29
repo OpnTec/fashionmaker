@@ -64,7 +64,7 @@ QString VGrainlineGeometry::GetLength() const
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetLength(QString qsLen)
+void VGrainlineGeometry::SetLength(const QString& qsLen)
 {
     m_qsLength = qsLen;
 }
@@ -78,7 +78,7 @@ QString VGrainlineGeometry::GetRotation() const
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetRotation(QString qsRot)
+void VGrainlineGeometry::SetRotation(const QString& qsRot)
 {
     m_qsRotation = qsRot;
 }
