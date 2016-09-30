@@ -42,9 +42,9 @@ class QMarginsF;
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0), margins(),
-      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
-      autoCrop(false), saveLength(false), unitePages(false), stripOptimizationEnabled(false), multiplier(1),
-      stripOptimization(false)
+      usePrinterFields(true),stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true),
+      rotationIncrease(180), autoCrop(false), saveLength(false), unitePages(false), stripOptimizationEnabled(false),
+      multiplier(1), stripOptimization(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -499,14 +499,21 @@ void VLayoutGenerator::SetPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VLayoutGenerator::GetFields() const
+bool VLayoutGenerator::IsUsePrinterFields() const
+{
+    return usePrinterFields;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VLayoutGenerator::GetPrinterFields() const
 {
     return margins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetFields(const QMarginsF &value)
+void VLayoutGenerator::SetPrinterFields(bool usePrinterFields, const QMarginsF &value)
 {
+    this->usePrinterFields = usePrinterFields;
     margins = value;
 }
 

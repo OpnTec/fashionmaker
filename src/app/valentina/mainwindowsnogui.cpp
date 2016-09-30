@@ -65,6 +65,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), actionDockWidgetGroups(nullptr),
       curFile(QString()),
       isLayoutStale(true),
+      ignorePrinterFields(false),
       margins(),
       paperSize(),
       isTiled(false),
@@ -137,7 +138,8 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CreateShadows();
             CreateScenes();
             PrepareSceneList();
-            margins = lGenerator.GetFields();
+            ignorePrinterFields = not lGenerator.IsUsePrinterFields();
+            margins = lGenerator.GetPrinterFields();
             paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
             isAutoCrop = lGenerator.GetAutoCrop();
             isUnitePages = lGenerator.IsUnitePages();
@@ -647,6 +649,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         {
             printer.setOrientation(QPrinter::Landscape);
         }
+        printer.setFullPage(ignorePrinterFields);
         printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
                                       FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
                                QPrinter::Millimeter );
@@ -954,6 +957,8 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             printer->setPaperSize (pSZ);
         }
     }
+
+    printer->setFullPage(ignorePrinterFields);
 
     const qreal left = FromPixel(margins.left(), Unit::Mm);
     const qreal top = FromPixel(margins.top(), Unit::Mm);
