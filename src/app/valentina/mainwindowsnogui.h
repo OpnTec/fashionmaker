@@ -86,6 +86,7 @@ protected:
     QString            curFile;
 
     bool isLayoutStale;
+    bool ignorePrinterFields;
     QMarginsF margins;
     QSizeF paperSize;
 

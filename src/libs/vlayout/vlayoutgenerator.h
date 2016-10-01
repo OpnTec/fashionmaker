@@ -71,8 +71,9 @@ public:
     qreal GetPaperWidth() const;
     void SetPaperWidth(qreal value);
 
-    QMarginsF GetFields() const;
-    void SetFields(const QMarginsF &value);
+    bool IsUsePrinterFields() const;
+    QMarginsF GetPrinterFields() const;
+    void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
     quint32 GetShift() const;
     void    SetShift(quint32 shift);
@@ -121,6 +122,7 @@ private:
     qreal paperHeight;
     qreal paperWidth;
     QMarginsF margins;
+    bool usePrinterFields;
     volatile bool stopGeneration;
     LayoutErrors state;
     quint32 shift;

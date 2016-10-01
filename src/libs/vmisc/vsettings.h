@@ -112,9 +112,7 @@ public:
     static qreal GetDefLayoutWidth();
     void SetLayoutWidth(qreal value);
 
-    QMarginsF GetFields() const;
-    static QMarginsF GetDefFields();
-    static QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
+    QMarginsF GetFields(const QMarginsF &def = QMarginsF()) const;
     void SetFields(const QMarginsF &value);
 
     Cases GetLayoutGroup() const;

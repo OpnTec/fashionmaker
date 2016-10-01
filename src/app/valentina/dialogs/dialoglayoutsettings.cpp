@@ -572,44 +572,58 @@ void DialogLayoutSettings::DialogAccepted()
 
     if (IsIgnoreAllFields())
     {
-        generator->SetFields(QMarginsF());
+        generator->SetPrinterFields(false, QMarginsF());
     }
     else
     {
-        const QMarginsF minFields = RoundMargins(VSettings::GetDefFields());
-        const QMarginsF fields = RoundMargins(GetFields());
-        if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
-            fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
+        QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        if (printer.isNull())
         {
-            QMessageBox::StandardButton answer;
-            answer = QMessageBox::question(this, tr("Wrong fields."),
-                                           tr("Fields go beyond printing. \n\nApply settings anyway?"),
-                                           QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-            if (answer == QMessageBox::No)
+            generator->SetPrinterFields(true, GetFields());
+        }
+        else
+        {
+            const QMarginsF minFields = RoundMargins(GetMinPrinterFields());
+            const QMarginsF fields = RoundMargins(GetFields());
+            if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
+                fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
             {
-                if (fields.left() < minFields.left())
+                QMessageBox::StandardButton answer;
+                answer = QMessageBox::question(this, tr("Wrong fields."),
+                                               tr("Fields go beyond printing. \n\nApply settings anyway?"),
+                                               QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+                if (answer == QMessageBox::No)
                 {
-                    ui->doubleSpinBoxLeftField->setValue(UnitConvertor(minFields.left(), Unit::Px, LayoutUnit()));
-                }
+                    const QMarginsF defFields = RoundMargins(GetDefPrinterFields());
+                    if (fields.left() < defFields.left())
+                    {
+                        ui->doubleSpinBoxLeftField->setValue(UnitConvertor(defFields.left(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.right() < minFields.right())
-                {
-                    ui->doubleSpinBoxRightField->setValue(UnitConvertor(minFields.right(), Unit::Px, LayoutUnit()));
-                }
+                    if (fields.right() < defFields.right())
+                    {
+                        ui->doubleSpinBoxRightField->setValue(UnitConvertor(defFields.right(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.top() < minFields.top())
-                {
-                    ui->doubleSpinBoxTopField->setValue(UnitConvertor(minFields.top(), Unit::Px, LayoutUnit()));
-                }
+                    if (fields.top() < defFields.top())
+                    {
+                        ui->doubleSpinBoxTopField->setValue(UnitConvertor(defFields.top(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.bottom() < minFields.bottom())
+                    if (fields.bottom() < defFields.bottom())
+                    {
+                        ui->doubleSpinBoxBottomField->setValue(UnitConvertor(defFields.bottom(), Unit::Px,
+                                                                             LayoutUnit()));
+                    }
+
+                    generator->SetPrinterFields(true, GetFields());
+                }
+                else
                 {
-                    ui->doubleSpinBoxBottomField->setValue(UnitConvertor(minFields.bottom(), Unit::Px, LayoutUnit()));
+                    generator->SetPrinterFields(false, GetFields());
                 }
             }
         }
-
-        generator->SetFields(GetFields());
     }
 
     //don't want to break visual settings when cmd used
@@ -637,7 +651,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetGroup(VSettings::GetDefLayoutGroup());
     SetRotate(VSettings::GetDefLayoutRotate());
     SetIncrease(VSettings::GetDefLayoutRotationIncrease());
-    SetFields(VSettings::GetDefFields());
+    SetFields(GetDefPrinterFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
     SetMultiplier(VSettings::GetDefMultiplier());
 
@@ -651,7 +665,11 @@ void DialogLayoutSettings::PrinterMargins()
     QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
     if (not printer.isNull())
     {
-        SetFields(VSettings::GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
+        SetFields(GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
+    }
+    else
+    {
+        SetFields(QMarginsF());
     }
 }
 
@@ -941,6 +959,50 @@ QMarginsF DialogLayoutSettings::RoundMargins(const QMarginsF &margins) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QMarginsF DialogLayoutSettings::GetMinPrinterFields() const
+{
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        QSharedPointer<QPrinter> pr = QSharedPointer<QPrinter>(new QPrinter(printer));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+        QPageLayout layout = pr->pageLayout();
+        layout.setUnits(QPageLayout::Millimeter);
+        const QMarginsF minMargins = layout.minimumMargins();
+
+        QMarginsF min;
+        min.setLeft(UnitConvertor(minMargins.left(), Unit::Mm, Unit::Px));
+        min.setRight(UnitConvertor(minMargins.right(), Unit::Mm, Unit::Px));
+        min.setTop(UnitConvertor(minMargins.top(), Unit::Mm, Unit::Px));
+        min.setBottom(UnitConvertor(minMargins.bottom(), Unit::Mm, Unit::Px));
+        return min;
+#else
+        pr->setFullPage(false);
+        pr->setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
+        return GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    }
+    else
+    {
+        return QMarginsF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF DialogLayoutSettings::GetDefPrinterFields() const
+{
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        return GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
+    }
+    else
+    {
+        return QMarginsF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
@@ -1043,7 +1105,7 @@ void DialogLayoutSettings::ReadSettings()
     SetAutoCrop(settings->GetLayoutAutoCrop());
     SetSaveLength(settings->GetLayoutSaveLength());
     SetUnitePages(settings->GetLayoutUnitePages());
-    SetFields(settings->GetFields());
+    SetFields(settings->GetFields(GetDefPrinterFields()));
     SetIgnoreAllFields(settings->GetIgnoreAllFields());
     SetStripOptimization(settings->GetStripOptimization());
     SetMultiplier(settings->GetMultiplier());
@@ -1095,4 +1157,26 @@ void DialogLayoutSettings::SetAdditionalOptions(bool value)
     SetSaveLength(value);
     SetUnitePages(value);
     SetStripOptimization(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF DialogLayoutSettings::GetPrinterFields(const QSharedPointer<QPrinter> &printer)
+{
+    if (printer.isNull())
+    {
+        return QMarginsF();
+    }
+
+    qreal left = 0;
+    qreal top = 0;
+    qreal right = 0;
+    qreal bottom = 0;
+    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+    // We can't use Unit::Px because our dpi in most cases is different
+    QMarginsF def;
+    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
+    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
+    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
+    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
+    return def;
 }

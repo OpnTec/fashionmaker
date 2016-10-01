@@ -362,42 +362,13 @@ void VSettings::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetFields() const
+QMarginsF VSettings::GetFields(const QMarginsF &def) const
 {
-    const QMarginsF def = GetDefFields();
     const QVariant val = value(SettingFields, QVariant::fromValue(def));
     if (val.canConvert<QMarginsF>())
     {
         return val.value<QMarginsF>();
     }
-    return def;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetDefFields()
-{
-    return GetPrinterFields(PreparePrinter(QPrinterInfo::defaultPrinter()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetPrinterFields(const QSharedPointer<QPrinter> &printer)
-{
-    if (printer.isNull())
-    {
-        return QMarginsF();
-    }
-
-    qreal left = 0;
-    qreal top = 0;
-    qreal right = 0;
-    qreal bottom = 0;
-    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
-    // We can't use Unit::Px because our dpi in most cases is different
-    QMarginsF def;
-    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
-    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
-    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
-    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
     return def;
 }
 
