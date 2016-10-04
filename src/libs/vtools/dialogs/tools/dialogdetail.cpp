@@ -79,7 +79,8 @@ class QWidget;
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true),
-      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom(), m_oldGrainline()
+      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom(), m_oldGrainline(),
+      m_iRotBaseHeight(0), m_iLenBaseHeight(0)
 {
     ui.setupUi(this);
 
@@ -158,13 +159,19 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.checkBoxGrainline, &QCheckBox::toggled, this, &DialogDetail::EnableGrainlineRotation);
     connect(ui.pushButtonRot, &QPushButton::clicked, this, &DialogDetail::EditFormula);
     connect(ui.pushButtonLen, &QPushButton::clicked, this, &DialogDetail::EditFormula);
-    connect(ui.lineEditLenFormula, &QLineEdit::textChanged, this, &DialogDetail::UpdateValue);
-    connect(ui.lineEditRotFormula, &QLineEdit::textChanged, this, &DialogDetail::UpdateValue);
+    connect(ui.lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValue);
+    connect(ui.lineEditRotFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValue);
+
+    connect(ui.pushButtonShowRot, &QPushButton::clicked, this, &DialogDetail::DeployRotation);
+    connect(ui.pushButtonShowLen, &QPushButton::clicked, this, &DialogDetail::DeployLength);
 
     SetAddMode();
     EnableGrainlineRotation();
 
     ui.tabWidget->setCurrentIndex(0);
+
+    m_iRotBaseHeight = ui.lineEditRotFormula->height();
+    m_iLenBaseHeight = ui.lineEditLenFormula->height();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -479,8 +486,8 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
     if (ui.checkBoxGrainline->isChecked() == true)
     {
-        detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->text());
-        detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->text());
+        detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->toPlainText());
+        detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->toPlainText());
     }
     return detail;
 }
@@ -553,8 +560,8 @@ void DialogDetail::setDetail(const VDetail &value)
     UpdateList();
 
     ui.checkBoxGrainline->setChecked(detail.GetGrainlineGeometry().IsVisible());
-    ui.lineEditRotFormula->setText(detail.GetGrainlineGeometry().GetRotation());
-    ui.lineEditLenFormula->setText(detail.GetGrainlineGeometry().GetLength());
+    ui.lineEditRotFormula->setPlainText(detail.GetGrainlineGeometry().GetRotation());
+    ui.lineEditLenFormula->setPlainText(detail.GetGrainlineGeometry().GetLength());
 
     m_oldData = detail.GetPatternPieceData();
     m_oldGeom = detail.GetPatternInfo();
@@ -830,10 +837,10 @@ void DialogDetail::ClearFields()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::SetValue(QObject *pobjSender)
 {
-    QLineEdit* pleSender = qobject_cast<QLineEdit*>(pobjSender);
+    QPlainTextEdit* pleSender = qobject_cast<QPlainTextEdit*>(pobjSender);
     SCASSERT(pleSender != 0);
 
-    QString qsFormula = pleSender->text().simplified();
+    QString qsFormula = pleSender->toPlainText().simplified();
     Calculator cal;
     QString qsVal;
     try
@@ -856,18 +863,15 @@ void DialogDetail::SetValue(QObject *pobjSender)
         qsVal.clear();
     }
 
-    QLineEdit* pleVal;
     QLabel* plbVal;
     QString qsUnit;
     if (pobjSender == ui.lineEditLenFormula)
     {
-        pleVal = ui.lineEditLenValue;
         plbVal = ui.labelLen;
         qsUnit = " " + VDomDocument::UnitsToStr(qApp->patternUnit());
     }
     else if (pobjSender == ui.lineEditRotFormula)
     {
-        pleVal = ui.lineEditRotValue;
         plbVal = ui.labelRot;
         QChar ch(0x00b0);
         qsUnit = ch;
@@ -882,7 +886,6 @@ void DialogDetail::SetValue(QObject *pobjSender)
     {
         qsVal += qsUnit;
     }
-    pleVal->setText(qsVal);
     plbVal->setText(qsVal);
 }
 
@@ -936,18 +939,18 @@ void DialogDetail::SetEditMode()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::EnableGrainlineRotation()
 {
-    ui.lineEditRotValue->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.lineEditRotFormula->setEnabled(ui.checkBoxGrainline->isChecked());
-    ui.lineEditLenValue->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.lineEditLenFormula->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.pushButtonRot->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.pushButtonLen->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.pushButtonShowLen->setEnabled(ui.checkBoxGrainline->isChecked());
+    ui.pushButtonShowRot->setEnabled(ui.checkBoxGrainline->isChecked());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::EditFormula()
 {
-    QLineEdit* pleFormula;
+    QPlainTextEdit* pleFormula;
     bool bCheckZero;
 
     if (sender() == ui.pushButtonLen)
@@ -967,20 +970,33 @@ void DialogDetail::EditFormula()
     }
 
     DialogEditWrongFormula dlg(data, NULL_ID, this);
-    dlg.SetFormula(pleFormula->text());
+    dlg.SetFormula(pleFormula->toPlainText());
     dlg.setCheckZero(bCheckZero);
     if (dlg.exec() == true)
     {
         QString qsFormula = dlg.GetFormula();
         qsFormula.replace("\n", " ");
-        pleFormula->setText(qsFormula);
+        pleFormula->setPlainText(qsFormula);
         SetValue(pleFormula);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogDetail::UpdateValue(const QString& qsText)
+void DialogDetail::UpdateValue()
 {
-    Q_UNUSED(qsText);
     SetValue(sender());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::DeployRotation()
+{
+    DeployFormula(ui.lineEditRotFormula, ui.pushButtonShowRot, m_iRotBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::DeployLength()
+{
+    DeployFormula(ui.lineEditLenFormula, ui.pushButtonShowLen, m_iLenBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
