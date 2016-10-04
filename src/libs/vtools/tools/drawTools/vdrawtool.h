@@ -43,7 +43,6 @@
 #include <QtGlobal>
 
 #include "../../dialogs/tools/dialogtool.h"
-#include "../../dialogs/tools/dialogtool.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vabstracttool.h"
 #include "../vmisc/vabstractapplication.h"
