@@ -904,7 +904,11 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 
             loc = QLocale::system();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            dStr.replace(" ", ""); // Remove thousand separator
+            const QChar thSep = loc.groupSeparator();
+            if (thSep.isSpace())
+            {
+                dStr.remove(thSep);// Remove thousand separator
+            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
