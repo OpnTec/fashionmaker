@@ -1,29 +1,29 @@
 #VTools static library
-INCLUDEPATH += $$PWD/vtools
+INCLUDEPATH += $${PWD}/vtools
 
 #VWidgets static library
-INCLUDEPATH += $$PWD/vwidgets
+INCLUDEPATH += $${PWD}/vwidgets
 
 #VFormat static library
-INCLUDEPATH += $$PWD/vformat
+INCLUDEPATH += $${PWD}/vformat
 
 #VPatternDB static library
-INCLUDEPATH += $$PWD/vpatterndb
+INCLUDEPATH += $${PWD}/vpatterndb
 
 # Fervor static library
-INCLUDEPATH += $$PWD/fervor
+INCLUDEPATH += $${PWD}/fervor
 
 #VMisc static library
-INCLUDEPATH += $$PWD/vmisc
+INCLUDEPATH += $${PWD}/vmisc
 
 #VGeometry static library
-INCLUDEPATH += $$PWD/vgeometry
+INCLUDEPATH += $${PWD}/vgeometry
 
 # IFC static library
-INCLUDEPATH += $$PWD/ifc
+INCLUDEPATH += $${PWD}/ifc
 
 #VLayout static library
-INCLUDEPATH += $$PWD/vlayout
+INCLUDEPATH += $${PWD}/vlayout
 
 #QMuParser library
 INCLUDEPATH += $${PWD}/qmuparser
