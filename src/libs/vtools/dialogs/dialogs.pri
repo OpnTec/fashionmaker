@@ -40,7 +40,8 @@ HEADERS += \
     $$PWD/tools/dialoggroup.h \
     $$PWD/tools/dialogrotation.h \
     $$PWD/tools/dialogflippingbyline.h \
-    $$PWD/tools/dialogflippingbyaxis.h
+    $$PWD/tools/dialogflippingbyaxis.h \
+    $$PWD/tools/dialogmove.h
 
 
 SOURCES += \
@@ -81,7 +82,8 @@ SOURCES += \
     $$PWD/tools/dialoggroup.cpp \
     $$PWD/tools/dialogrotation.cpp \
     $$PWD/tools/dialogflippingbyline.cpp \
-    $$PWD/tools/dialogflippingbyaxis.cpp
+    $$PWD/tools/dialogflippingbyaxis.cpp \
+    $$PWD/tools/dialogmove.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -120,4 +122,5 @@ FORMS += \
     $$PWD/tools/dialoggroup.ui \
     $$PWD/tools/dialogrotation.ui \
     $$PWD/tools/dialogflippingbyline.ui \
-    $$PWD/tools/dialogflippingbyaxis.ui
+    $$PWD/tools/dialogflippingbyaxis.ui \
+    $$PWD/tools/dialogmove.ui

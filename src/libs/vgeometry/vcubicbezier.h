@@ -54,6 +54,7 @@ public:
     VCubicBezier &operator=(const VCubicBezier &curve);
     VCubicBezier Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VCubicBezier Flip(const QLineF &axis, const QString &prefix = QString()) const;
+    VCubicBezier Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VCubicBezier();
 
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;

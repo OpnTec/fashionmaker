@@ -64,6 +64,7 @@ public:
     VEllipticalArc& operator= (const VEllipticalArc &arc);
     VEllipticalArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
+    VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
 
     virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
 

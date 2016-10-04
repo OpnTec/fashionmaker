@@ -40,6 +40,7 @@
 - Added "All/None" menu in detail list area for easier handling of many parts.
 - [#560] Flipped pattern pieces in Layout.
 - [#138] New tool: 'Mirror Point' or 'Symmetric Point'.
+- [#573] New tool: 'Move Point'.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

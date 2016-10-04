@@ -55,10 +55,10 @@ public:
 // GCC 4.6 doesn't allow constexpr and const together
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
     static Q_DECL_CONSTEXPR int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 5);
+    static Q_DECL_CONSTEXPR int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 6);
 #else
     static Q_DECL_CONSTEXPR const int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 5);
+    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 6);
 #endif
 
 protected:
@@ -94,6 +94,7 @@ private:
     void ToV0_3_3();
     void ToV0_3_4();
     void ToV0_3_5();
+    void ToV0_3_6();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();

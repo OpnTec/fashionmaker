@@ -61,5 +61,6 @@
 #include "operation/vtoolrotation.h"
 #include "operation/flipping/vtoolflippingbyline.h"
 #include "operation/flipping/vtoolflippingbyaxis.h"
+#include "operation/vtoolmove.h"
 
 #endif // DRAWTOOLS_H

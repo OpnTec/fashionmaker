@@ -1058,7 +1058,18 @@ void MainWindow::ToolFlippingByAxis(bool checked)
                                            ":/cursor/flipping_axis_cursor.png",
                                            tr("Select one or more objects, <b>Enter</b> - confirm selection"),
                                            &MainWindow::ClosedDialogWithApply<VToolFlippingByAxis>,
-                                           &MainWindow::ApplyDialog<VToolFlippingByAxis>);
+                                                 &MainWindow::ApplyDialog<VToolFlippingByAxis>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolMove(bool checked)
+{
+    ToolSelectOperationObjects();
+    SetToolButtonWithApply<DialogMove>(checked, Tool::Move,
+                                         ":/cursor/move_cursor.png",
+                                         tr("Select one or more objects, <b>Enter</b> - confirm selection"),
+                                         &MainWindow::ClosedDialogWithApply<VToolMove>,
+                                         &MainWindow::ApplyDialog<VToolMove>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1732,6 +1743,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
     connect(ui->toolButtonFlippingByLine, &QToolButton::clicked, this, &MainWindow::ToolFlippingByLine);
     connect(ui->toolButtonFlippingByAxis, &QToolButton::clicked, this, &MainWindow::ToolFlippingByAxis);
+    connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
 }
@@ -1761,7 +1773,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1906,6 +1918,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::FlippingByAxis:
             ui->toolButtonFlippingByAxis->setChecked(false);
+            break;
+        case Tool::Move:
+            ui->toolButtonMove->setChecked(false);
             break;
     }
 
@@ -2956,7 +2971,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -2993,6 +3008,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonRotation->setEnabled(drawTools);
     ui->toolButtonFlippingByLine->setEnabled(drawTools);
     ui->toolButtonFlippingByAxis->setEnabled(drawTools);
+    ui->toolButtonMove->setEnabled(drawTools);
     ui->toolButtonMidpoint->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
@@ -3275,7 +3291,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3448,6 +3464,10 @@ void MainWindow::LastUsedTool()
         case Tool::FlippingByAxis:
             ui->toolButtonFlippingByAxis->setChecked(true);
             ToolFlippingByAxis(true);
+            break;
+        case Tool::Move:
+            ui->toolButtonMove->setChecked(true);
+            ToolMove(true);
             break;
     }
 }
