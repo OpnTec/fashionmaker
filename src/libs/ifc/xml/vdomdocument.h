@@ -150,7 +150,9 @@ template <typename T>
  */
 inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
 {
-    domElement.setAttribute(name, QString().setNum(value).replace(QLatin1String(","), QLatin1String(".")));
+    // See specification for xs:decimal
+    const QLocale locale = QLocale::c();
+    domElement.setAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
