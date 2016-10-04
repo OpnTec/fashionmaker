@@ -109,6 +109,8 @@ private:
     VPatternPieceData       m_oldData;
     VPatternInfoGeometry    m_oldGeom;
     VGrainlineGeometry      m_oldGrainline;
+    int                     m_iRotBaseHeight;
+    int                     m_iLenBaseHeight;
 
 
     bool             DetailIsValid() const;
@@ -132,7 +134,9 @@ private slots:
     void             SetEditMode();
     void             EnableGrainlineRotation();
     void             EditFormula();
-    void             UpdateValue(const QString& qsText);
+    void             UpdateValue();
+    void             DeployRotation();
+    void             DeployLength();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
