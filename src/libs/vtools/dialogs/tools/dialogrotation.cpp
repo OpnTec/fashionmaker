@@ -347,7 +347,7 @@ void DialogRotation::SuffixChanged()
 void DialogRotation::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagAngle && flagName);
+    bOk->setEnabled(flagAngle && flagName && flagError);
     SCASSERT(bApply != nullptr);
     bApply->setEnabled(bOk->isEnabled());
 }
