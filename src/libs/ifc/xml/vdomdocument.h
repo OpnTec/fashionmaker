@@ -167,7 +167,7 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 template <>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
-    domElement.setAttribute(name, value ? QStringLiteral("true") : QStringLiteral("false"));
+    domElement.setAttribute(name, value ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
