@@ -57,6 +57,7 @@ public:
     VCubicBezierPath &operator=(const VCubicBezierPath &curve);
     VCubicBezierPath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VCubicBezierPath Flip(const QLineF &axis, const QString &prefix = QString()) const;
+    VCubicBezierPath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VCubicBezierPath();
 
     VPointF &operator[](int indx);

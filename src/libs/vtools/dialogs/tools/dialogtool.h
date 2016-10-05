@@ -49,7 +49,7 @@
 #include <QVariant>
 #include <QtGlobal>
 
-#include "../../visualization/visualization.h"
+#include "../vtools/visualization/visualization.h" // Issue on Windows
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"

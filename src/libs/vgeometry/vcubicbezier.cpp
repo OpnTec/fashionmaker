@@ -91,6 +91,18 @@ VCubicBezier VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezier VCubicBezier::Move(qreal length, qreal angle, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Move(length, angle);
+    const VPointF p2 = GetP2().Move(length, angle);
+    const VPointF p3 = GetP3().Move(length, angle);
+    const VPointF p4 = GetP4().Move(length, angle);
+    VCubicBezier curve(p1, p2, p3, p4);
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::~VCubicBezier()
 {
 }

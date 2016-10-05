@@ -2618,6 +2618,51 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = NULL_ID;
+
+        ToolsCommonAttributes(domElement, id);
+        const QString angle = GetParametrString(domElement, AttrAngle, "0");
+        QString a = angle;//need for saving fixed formula;
+        const QString length = GetParametrString(domElement, AttrLength, "0");
+        QString len = length;//need for saving fixed formula;
+        const QString suffix = GetParametrString(domElement, AttrSuffix, "");
+
+        QVector<quint32> source;
+        QVector<DestinationItem> destination;
+        VAbstractOperation::ExtractData(this, domElement, source, destination);
+
+        VToolMove::Create(id, a, len, suffix, source, destination, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (a != angle || len != length)
+        {
+            SetAttribute(domElement, AttrAngle, a);
+            SetAttribute(domElement, AttrLength, len);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating operation of moving"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating operation of moving"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const
 {
     if (formula.isEmpty())
@@ -2869,7 +2914,8 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
 
     const QStringList opers = QStringList() << VToolRotation::ToolType        /*0*/
                                             << VToolFlippingByLine::ToolType  /*1*/
-                                            << VToolFlippingByAxis::ToolType; /*2*/
+                                            << VToolFlippingByAxis::ToolType  /*2*/
+                                            << VToolMove::ToolType;           /*3*/
 
     switch (opers.indexOf(type))
     {
@@ -2881,6 +2927,9 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
             break;
         case 2: //VToolFlippingByAxis::ToolType
             ParseToolFlippingByAxis(scene, domElement, parse);
+            break;
+        case 3: //VToolMove::ToolType
+            ParseToolMove(scene, domElement, parse);
             break;
         default:
             VException e(tr("Unknown operation type '%1'.").arg(type));
@@ -3388,7 +3437,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 47, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3505,6 +3554,9 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 case Tool::FlippingByAxis:
                     rec = ToolBoundingRect<VToolFlippingByAxis>(rec, tool.getId());
+                    break;
+                case Tool::Move:
+                    rec = ToolBoundingRect<VToolMove>(rec, tool.getId());
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:

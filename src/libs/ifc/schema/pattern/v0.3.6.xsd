@@ -207,6 +207,7 @@
                                                                                  <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                                  <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="angle" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="length" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="suffix" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
                                                                                  <xs:attribute name="p1Line" type="xs:unsignedInt"></xs:attribute>

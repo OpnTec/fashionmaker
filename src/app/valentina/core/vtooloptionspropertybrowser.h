@@ -158,6 +158,7 @@ private:
     void ChangeDataToolLineIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolCurveIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolRotation(VPE::VProperty *property);
+    void ChangeDataToolMove(VPE::VProperty *property);
     void ChangeDataToolFlippingByLine(VPE::VProperty *property);
     void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
 
@@ -191,6 +192,7 @@ private:
     void ShowOptionsToolLineIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolCurveIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolRotation(QGraphicsItem *item);
+    void ShowOptionsToolMove(QGraphicsItem *item);
     void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
     void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
 
@@ -224,6 +226,7 @@ private:
     void UpdateOptionsToolLineIntersectAxis();
     void UpdateOptionsToolCurveIntersectAxis();
     void UpdateOptionsToolRotation();
+    void UpdateOptionsToolMove();
     void UpdateOptionsToolFlippingByLine();
     void UpdateOptionsToolFlippingByAxis();
 };

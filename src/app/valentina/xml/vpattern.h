@@ -196,6 +196,7 @@ private:
     void ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 

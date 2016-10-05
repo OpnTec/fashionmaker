@@ -146,6 +146,19 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
+{
+    const VPointF center = GetCenter().Move(length, angle);
+
+    const QPointF p1 = VPointF::MovePF(GetP1(), length, angle);
+    const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
+
+    VArc arc(center, GetRadius(), QLineF(center, p1).angle(), QLineF(center, p2).angle());
+    arc.setName(name() + prefix);
+    return arc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArc::~VArc()
 {}
 

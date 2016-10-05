@@ -122,6 +122,13 @@ VPointF VPointF::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Move(qreal length, qreal angle, const QString &prefix) const
+{
+    const QPointF p = MovePF(toQPointF(), length, angle);
+    return VPointF(p, name() + prefix, mx(), my());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mx return offset name respect to x
  * @return offset
@@ -220,4 +227,12 @@ QPointF VPointF::FlipPF(const QLineF &axis, const QPointF &point)
 {
     const QTransform matrix = FlippingMatrix(axis);
     return matrix.map(point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::MovePF(const QPointF &originPoint, qreal length, qreal angle)
+{
+    QLineF line(originPoint.x(), originPoint.y(), originPoint.x() + length, originPoint.y());
+    line.setAngle(angle);
+    return line.p2();
 }

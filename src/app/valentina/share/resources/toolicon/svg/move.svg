@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="32"
+   height="32"
+   id="svg2985"
+   inkscape:version="0.91 r"
+   sodipodi:docname="moving.svg"
+   inkscape:export-filename="/home/dismine/CAD/Valentina_0.5.x/valentina/src/app/valentina/share/resources/toolicon/32x32/moving@2x.png"
+   inkscape:export-xdpi="183.09656"
+   inkscape:export-ydpi="183.09656">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="11.189427"
+     inkscape:cx="-20.65711"
+     inkscape:cy="17.916139"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2985" />
+  <defs
+     id="defs2987">
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker4515"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4517"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleInL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleInL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4274"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(-0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker4443"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4445"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4141"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleOutL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4283"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#f70000;fill-opacity:1;stroke:#f70000;stroke-width:2.40142107;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path2985-2-9-3-5"
+     d="m 30.568187,4.1706391 a 2.6159858,2.697521 0 0 1 -5.231971,0 2.6159858,2.697521 0 1 1 5.231971,0 z" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.56853676;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path2985-2-9-3"
+     d="m 7.2847855,27.609193 a 2.8452232,2.8373884 0 0 1 -5.6904461,0 2.8452232,2.8373884 0 1 1 5.6904461,0 z" />
+  <path
+     style="fill:#000000"
+     d="m 11.486434,17.126775 c 2.481404,-2.537702 4.476369,-4.643916 4.433253,-4.680479 -0.04311,-0.03657 -1.317602,-0.561306 -2.832196,-1.166099 -1.514591,-0.604792 -2.814212,-1.144975 -2.88805,-1.200408 -0.160041,-0.1201531 -0.19441,-0.5437624 -0.0514,-0.6335841 0.05555,-0.034889 3.284489,-0.5101456 7.175416,-1.0561174 4.929476,-0.6916999 7.132384,-0.9638939 7.265617,-0.8977485 0.105166,0.052213 0.193428,0.1730439 0.196138,0.2685214 0.01187,0.4157045 -1.315064,13.7895066 -1.378777,13.8970036 -0.0937,0.158105 -0.525661,0.158503 -0.662446,6.27e-4 -0.05963,-0.06883 -0.656883,-1.257143 -1.327228,-2.640692 -0.670344,-1.383553 -1.268068,-2.600588 -1.328272,-2.704524 -0.09543,-0.164748 -0.696798,0.411264 -4.69077,4.492961 -2.519722,2.575067 -4.623899,4.682504 -4.675953,4.683197 -0.05205,6.8e-4 -0.9128181,-0.749445 -1.912808,-1.666958 C 7.6399461,22.749856 6.987936,22.08043 6.9827926,21.947499 6.9774627,21.809845 8.4825598,20.198776 11.486437,17.126747 Z"
+     id="path3347"
+     inkscape:connector-curvature="0" />
+</svg>

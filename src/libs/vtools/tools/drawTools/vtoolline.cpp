@@ -175,7 +175,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
         scene->addItem(line);
         InitDrawToolConnections(scene, line);
-        connect(scene, &VMainGraphicsScene::EnablePointItemSelection, line, &VToolLine::AllowSelecting);
+        connect(scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
         connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
         doc->AddTool(id, line);
 

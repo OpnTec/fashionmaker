@@ -141,6 +141,20 @@ VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSpline VSpline::Move(qreal length, qreal angle, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Move(length, angle);
+    const VPointF p4 = GetP4().Move(length, angle);
+
+    const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
+    const QPointF p3 = VPointF::MovePF(GetP3(), length, angle);
+
+    VSpline spl(p1, p2, p3, p4);
+    spl.setName(name() + prefix);
+    return spl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::~VSpline()
 {}
 

@@ -64,6 +64,7 @@ public:
              const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VSpline Flip(const QLineF &axis, const QString &prefix = QString()) const;
+    VSpline Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSpline();
     VSpline &operator=(const VSpline &spl);
 

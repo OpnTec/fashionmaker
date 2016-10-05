@@ -40,6 +40,7 @@
 - Added "All/None" menu in detail list area for easier handling of many parts.
 - [#560] Flipped pattern pieces in Layout.
 - [#138] New tool: 'Mirror Point' or 'Symmetric Point'.
+- [#573] New tool: 'Move Point'.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
@@ -65,6 +66,7 @@
 - [#553] Tape.exe crash. Issue with the Search field.
 - [#569] Tape app. Options that open new file open new instance even if a user doesn't want this.
 - [#539] Infinite alert loop "Gradation doesn't support inches" when loading standard table.
+- [#572] Issue with thousand separator during a formula translations to user.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
