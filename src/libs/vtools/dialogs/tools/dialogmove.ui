@@ -154,7 +154,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Calulation</string>
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -334,7 +334,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Calulation</string>
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>

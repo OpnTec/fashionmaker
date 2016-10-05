@@ -7,7 +7,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>рост</translation>
+        <translation>Рост</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="193"/>

@@ -589,10 +589,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>First angle:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1355,6 +1351,22 @@
         <source>You can choose one of the predefined materials or enter a new one</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1464,6 +1476,10 @@
     </message>
     <message>
         <source>Functions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lengths to control points</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1598,6 +1614,76 @@
     </message>
     <message>
         <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogFlippingByAxis</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select origin point that is not part of the list of objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogFlippingByLine</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first line point that is not part of the list of objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second line point that is not part of the list of objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1966,6 +2052,10 @@
     </message>
     <message>
         <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curves control point lengths</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2503,6 +2593,49 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogMove</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
@@ -2830,23 +2963,19 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Created:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pattern size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show date of creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show date of layout creation (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3401,10 +3530,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3418,6 +3543,18 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select origin point that is not part of the list of objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3716,10 +3853,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3745,6 +3878,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3803,10 +3940,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3836,6 +3969,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Not used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4959,10 +5096,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measurements was synced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t sync measurements.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5119,10 +5252,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measurements was changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Curve tool which uses point as control handle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5208,6 +5337,30 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping objects by line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping objects by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements were changed. Do you want to sync measurements now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gradation doesn&apos;t support inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements have been synced</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5318,6 +5471,13 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
+    <name>OperationMoveLabel</name>
+    <message>
+        <source>move point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
@@ -5400,6 +5560,18 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Delete all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By default forbid flipping for all workpieces</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5724,13 +5896,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RotationMoveLabel</name>
-    <message>
-        <source>move point label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6092,18 +6257,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements (*.vst *.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6296,6 +6449,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7163,6 +7320,18 @@ Do you want to save your changes?</source>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating operation of flipping by line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of moving</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7185,11 +7354,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VTextManager</name>
     <message>
-        <source>on Fold</source>
+        <source>cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cut</source>
+        <source>on fold</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7472,6 +7641,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool flipping by line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8528,6 +8721,26 @@ Do you want to save your changes?</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>C1LengthSpl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2LengthSpl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1LengthSplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2LengthSplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8551,6 +8764,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select all details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select none details</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8598,6 +8827,20 @@ Do you want to save your changes?</source>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolMove</name>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolRotation</name>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

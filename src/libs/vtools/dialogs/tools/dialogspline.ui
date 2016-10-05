@@ -196,7 +196,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>Calulation</string>
+                 <string>Calculation</string>
                 </property>
                 <property name="tabChangesFocus">
                  <bool>true</bool>
@@ -225,8 +225,7 @@
                 </property>
                 <property name="icon">
                  <iconset theme="go-down">
-                  <normaloff/>
-                 </iconset>
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -377,7 +376,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>Calulation</string>
+                 <string>Calculation</string>
                 </property>
                 <property name="tabChangesFocus">
                  <bool>true</bool>
@@ -406,8 +405,7 @@
                 </property>
                 <property name="icon">
                  <iconset theme="go-down">
-                  <normaloff/>
-                 </iconset>
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -596,7 +594,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>Calulation</string>
+                 <string>Calculation</string>
                 </property>
                 <property name="tabChangesFocus">
                  <bool>true</bool>
@@ -625,8 +623,7 @@
                 </property>
                 <property name="icon">
                  <iconset theme="go-down">
-                  <normaloff/>
-                 </iconset>
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -777,7 +774,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>Calulation</string>
+                 <string>Calculation</string>
                 </property>
                 <property name="tabChangesFocus">
                  <bool>true</bool>
@@ -806,8 +803,7 @@
                 </property>
                 <property name="icon">
                  <iconset theme="go-down">
-                  <normaloff/>
-                 </iconset>
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
