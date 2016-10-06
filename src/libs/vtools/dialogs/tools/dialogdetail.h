@@ -127,14 +127,12 @@ private:
 
     quint32          RowId(int i) const;
 
-    void             SetValue(QObject* pobjSender);
-
 private slots:
+    void             UpdateValues();
     void             SetAddMode();
     void             SetEditMode();
     void             EnableGrainlineRotation();
     void             EditFormula();
-    void             UpdateValue();
     void             DeployRotation();
     void             DeployLength();
 };

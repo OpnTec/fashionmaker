@@ -159,8 +159,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.checkBoxGrainline, &QCheckBox::toggled, this, &DialogDetail::EnableGrainlineRotation);
     connect(ui.pushButtonRot, &QPushButton::clicked, this, &DialogDetail::EditFormula);
     connect(ui.pushButtonLen, &QPushButton::clicked, this, &DialogDetail::EditFormula);
-    connect(ui.lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValue);
-    connect(ui.lineEditRotFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValue);
+    connect(ui.lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValues);
+    connect(ui.lineEditRotFormula, &QPlainTextEdit::textChanged, this, &DialogDetail::UpdateValues);
 
     connect(ui.pushButtonShowRot, &QPushButton::clicked, this, &DialogDetail::DeployRotation);
     connect(ui.pushButtonShowLen, &QPushButton::clicked, this, &DialogDetail::DeployLength);
@@ -484,11 +484,8 @@ VDetail DialogDetail::CreateDetail() const
 
     detail.GetGrainlineGeometry() = m_oldGrainline;
     detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
-    if (ui.checkBoxGrainline->isChecked() == true)
-    {
-        detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->toPlainText());
-        detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->toPlainText());
-    }
+    detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->toPlainText());
+    detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->toPlainText());
     return detail;
 }
 
@@ -835,58 +832,80 @@ void DialogDetail::ClearFields()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogDetail::SetValue(QObject *pobjSender)
+void DialogDetail::UpdateValues()
 {
-    QPlainTextEdit* pleSender = qobject_cast<QPlainTextEdit*>(pobjSender);
-    SCASSERT(pleSender != 0);
+    QPlainTextEdit* apleSender[2];
+    apleSender[0] = ui.lineEditRotFormula;
+    apleSender[1] = ui.lineEditLenFormula;
+    bool bFormulasOK = true;
 
-    QString qsFormula = pleSender->toPlainText().simplified();
-    Calculator cal;
-    QString qsVal;
-    try
+    for (int i = 0; i < 2; ++i)
     {
-        qsFormula.replace("\n", " ");
-        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
-        qreal dVal;
-        dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
-        if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
+        QLabel* plbVal;
+        QLabel* plbText;
+        QString qsUnit;
+        if (i == 0)
         {
-            qsVal.clear();
+            plbVal = ui.labelRot;
+            plbText = ui.labelEditRot;
+            QChar ch(0x00b0);
+            qsUnit = ch;
         }
         else
         {
-            qsVal.setNum(dVal, 'f', 5);
+            plbVal = ui.labelLen;
+            plbText = ui.labelEditLen;
+            qsUnit = " " + VDomDocument::UnitsToStr(qApp->patternUnit());
         }
-    }
-    catch (...)
-    {
-        qsVal.clear();
+
+        QString qsFormula = apleSender[i]->toPlainText().simplified();
+        Calculator cal;
+        QString qsVal;
+        try
+        {
+            qsFormula.replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            qreal dVal;
+            dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
+            {
+                throw qmu::QmuParserError(tr("Infinite/undefined result"));
+            }
+            else if (i == 1 && dVal <= 0.0)
+            {
+                throw qmu::QmuParserError(tr("Length should be positive"));
+            }
+            else
+            {
+                qsVal.setNum(dVal, 'f', 2);
+                ChangeColor(plbText, okColor);
+            }
+        }
+        catch (...)
+        {
+            qsVal.clear();
+            ChangeColor(plbText, Qt::red);
+            bFormulasOK = false;
+        }
+
+        if (qsVal.isEmpty() == false)
+        {
+            qsVal += qsUnit;
+        }
+        plbVal->setText(qsVal);
     }
 
-    QLabel* plbVal;
-    QString qsUnit;
-    if (pobjSender == ui.lineEditLenFormula)
+    bOk->setEnabled(bFormulasOK);
+    if (bFormulasOK == false)
     {
-        plbVal = ui.labelLen;
-        qsUnit = " " + VDomDocument::UnitsToStr(qApp->patternUnit());
-    }
-    else if (pobjSender == ui.lineEditRotFormula)
-    {
-        plbVal = ui.labelRot;
-        QChar ch(0x00b0);
-        qsUnit = ch;
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui.tabWidget->setTabIcon(2, icon);
     }
     else
     {
-        // should not get here
-        return;
+        QIcon icon;
+        ui.tabWidget->setTabIcon(2, icon);
     }
-
-    if (qsVal.isEmpty() == false)
-    {
-        qsVal += qsUnit;
-    }
-    plbVal->setText(qsVal);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -945,6 +964,17 @@ void DialogDetail::EnableGrainlineRotation()
     ui.pushButtonLen->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.pushButtonShowLen->setEnabled(ui.checkBoxGrainline->isChecked());
     ui.pushButtonShowRot->setEnabled(ui.checkBoxGrainline->isChecked());
+
+    if (ui.checkBoxGrainline->isChecked() == true)
+    {
+        UpdateValues();
+    }
+    else
+    {
+        ChangeColor(ui.labelEditLen, okColor);
+        ChangeColor(ui.labelEditRot, okColor);
+        bOk->setEnabled(true);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -977,14 +1007,8 @@ void DialogDetail::EditFormula()
         QString qsFormula = dlg.GetFormula();
         qsFormula.replace("\n", " ");
         pleFormula->setPlainText(qsFormula);
-        SetValue(pleFormula);
+        UpdateValues();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogDetail::UpdateValue()
-{
-    SetValue(sender());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
