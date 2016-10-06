@@ -41,7 +41,7 @@
 #include <Qt>
 #include <QtGlobal>
 
-#include "../visualization.h"
+#include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
 
 
