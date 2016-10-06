@@ -964,7 +964,12 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     const qreal top = FromPixel(margins.top(), Unit::Mm);
     const qreal right = FromPixel(margins.right(), Unit::Mm);
     const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-    printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+    const bool success = printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+
+    if (not success)
+    {
+        qWarning() << tr("Cannot set printer margins");
+    }
 
     switch(printType)
     {

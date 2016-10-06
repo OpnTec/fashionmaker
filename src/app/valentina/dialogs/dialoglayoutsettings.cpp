@@ -583,8 +583,8 @@ void DialogLayoutSettings::DialogAccepted()
         }
         else
         {
-            const QMarginsF minFields = RoundMargins(MinPrinterFields());
-            const QMarginsF fields = RoundMargins(GetFields());
+            const QMarginsF minFields = MinPrinterFields();
+            const QMarginsF fields = GetFields();
             if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
                 fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
             {
@@ -594,25 +594,24 @@ void DialogLayoutSettings::DialogAccepted()
                                                QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
                 if (answer == QMessageBox::No)
                 {
-                    const QMarginsF defFields = RoundMargins(GetDefPrinterFields());
-                    if (fields.left() < defFields.left())
+                    if (fields.left() < minFields.left())
                     {
-                        ui->doubleSpinBoxLeftField->setValue(UnitConvertor(defFields.left(), Unit::Px, LayoutUnit()));
+                        ui->doubleSpinBoxLeftField->setValue(UnitConvertor(minFields.left(), Unit::Px, LayoutUnit()));
                     }
 
-                    if (fields.right() < defFields.right())
+                    if (fields.right() < minFields.right())
                     {
-                        ui->doubleSpinBoxRightField->setValue(UnitConvertor(defFields.right(), Unit::Px, LayoutUnit()));
+                        ui->doubleSpinBoxRightField->setValue(UnitConvertor(minFields.right(), Unit::Px, LayoutUnit()));
                     }
 
-                    if (fields.top() < defFields.top())
+                    if (fields.top() < minFields.top())
                     {
-                        ui->doubleSpinBoxTopField->setValue(UnitConvertor(defFields.top(), Unit::Px, LayoutUnit()));
+                        ui->doubleSpinBoxTopField->setValue(UnitConvertor(minFields.top(), Unit::Px, LayoutUnit()));
                     }
 
-                    if (fields.bottom() < defFields.bottom())
+                    if (fields.bottom() < minFields.bottom())
                     {
-                        ui->doubleSpinBoxBottomField->setValue(UnitConvertor(defFields.bottom(), Unit::Px,
+                        ui->doubleSpinBoxBottomField->setValue(UnitConvertor(minFields.bottom(), Unit::Px,
                                                                              LayoutUnit()));
                     }
 
@@ -945,17 +944,6 @@ QSizeF DialogLayoutSettings::RoundTemplateSize(qreal width, qreal height) const
     }
 
     return QSizeF(width, height);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF DialogLayoutSettings::RoundMargins(const QMarginsF &margins) const
-{
-    QMarginsF newMargins;
-    newMargins.setLeft(qRound(margins.left() * 100.0) / 100.0);
-    newMargins.setRight(qRound(margins.right() * 100.0) / 100.0);
-    newMargins.setTop(qRound(margins.top() * 100.0) / 100.0);
-    newMargins.setBottom(qRound(margins.bottom() * 100.0) / 100.0);
-    return newMargins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

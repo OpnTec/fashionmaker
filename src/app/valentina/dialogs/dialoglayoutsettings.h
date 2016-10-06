@@ -158,7 +158,6 @@ private:
     QSizeF Template();
     QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
     QSizeF RoundTemplateSize(qreal width, qreal height) const;
-    QMarginsF RoundMargins(const QMarginsF &margins) const;
     QMarginsF MinPrinterFields() const;
     QMarginsF GetDefPrinterFields() const;
 
