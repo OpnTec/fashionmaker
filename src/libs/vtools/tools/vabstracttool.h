@@ -40,9 +40,9 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../visualization/visualization.h"
+#include "../vtools/visualization/visualization.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/../vmisc/def.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vdatatool.h"
 

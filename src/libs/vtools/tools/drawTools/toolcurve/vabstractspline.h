@@ -42,7 +42,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../../../visualization/visualization.h"
 #include "../../../visualization/line/visline.h"
 #include "../vdrawtool.h"
 #include "../vgeometry/vabstractcurve.h"

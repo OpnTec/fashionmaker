@@ -50,6 +50,7 @@ template <class T> class QSharedPointer;
 #endif /* Q_CC_MSVC */
 
 class QComboBox;
+class QMarginsF;
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
@@ -633,6 +634,9 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) 
 
 QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
                                         QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
+
+QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer);
+QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
 
 QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 

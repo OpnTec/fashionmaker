@@ -158,8 +158,7 @@ private:
     QSizeF Template();
     QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
     QSizeF RoundTemplateSize(qreal width, qreal height) const;
-    QMarginsF RoundMargins(const QMarginsF &margins) const;
-    QMarginsF GetMinPrinterFields() const;
+    QMarginsF MinPrinterFields() const;
     QMarginsF GetDefPrinterFields() const;
 
     Unit PaperUnit() const;
@@ -176,8 +175,6 @@ private:
 
     void SheetSize(const QSizeF &size);
     void SetAdditionalOptions(bool value);
-
-    static QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
 };
 
 #endif // DIALOGLAYOUTSETTINGS_H
