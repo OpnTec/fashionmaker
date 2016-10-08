@@ -195,7 +195,7 @@ QGroupBox *PatternPage::UserWorkpieceGroup()
     workpieceGroup = new QGroupBox(tr("Workpiece"));
 
     forbidFlippingCheck = new QCheckBox(tr("Forbid flipping"));
-    forbidFlippingCheck->setToolTip(tr("By default forbid flipping for all workpieces"));
+    forbidFlippingCheck->setToolTip(tr("By default forbid flipping for all new created workpieces"));
     forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
 
     QVBoxLayout *editLayout = new QVBoxLayout;
