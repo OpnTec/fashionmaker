@@ -622,6 +622,10 @@ void DialogLayoutSettings::DialogAccepted()
                     generator->SetPrinterFields(false, GetFields());
                 }
             }
+            else
+            {
+                generator->SetPrinterFields(true, GetFields());
+            }
         }
     }
 

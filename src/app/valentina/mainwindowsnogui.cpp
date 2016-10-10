@@ -957,6 +957,10 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             printer->setPaperSize (pSZ);
         }
     }
+    else
+    {
+        printer->setPaperSize(QPrinter::A4);
+    }
 
     printer->setFullPage(ignorePrinterFields);
 
