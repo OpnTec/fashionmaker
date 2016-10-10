@@ -44,7 +44,8 @@ class VGrainlineItem : public QGraphicsObject
 
     enum Mode {
         mNormal,
-        mMove
+        mMove,
+        mResize
     };
 
 public:
@@ -69,16 +70,19 @@ protected:
 
 signals:
     void                    SignalMoved(const QPointF& ptPos);
+    void                    SignalResized(qreal dLength);
 
 private:
     Mode                    m_eMode;
     qreal                   m_dRotation;
     qreal                   m_dLength;
     QRectF                  m_rectBoundingBox;
-    QPolygonF                m_polyBound;
+    QPolygonF               m_polyBound;
     QPointF                 m_ptStartPos;
     QPointF                 m_ptStartMove;
     qreal                   m_dScale;
+    QPolygonF               m_polyResize;
+    qreal                   m_dStartLength;
 };
 
 #endif // VGRAINLINEITEM_H

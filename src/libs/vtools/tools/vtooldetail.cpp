@@ -205,6 +205,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
 
     connect(grainLine, &VGrainlineItem::SignalMoved, this, &VToolDetail::SaveMoveGrainline);
+    connect(grainLine, &VGrainlineItem::SignalResized, this, &VToolDetail::SaveResizeGrainline);
 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
@@ -1063,6 +1064,20 @@ void VToolDetail::SaveMoveGrainline(const QPointF& ptPos)
 
     SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
     moveCommand->setText(tr("move grainline"));
+    connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveResizeGrainline(qreal dLength)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+
+    dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
+    newDet.GetGrainlineGeometry().SetLength(qApp->LocaleToString(dLength));
+    SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    moveCommand->setText(tr("resize grainline"));
     connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveCommand);
 }

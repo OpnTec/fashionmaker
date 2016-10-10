@@ -41,6 +41,7 @@
 #define ARROW_ANGLE                     0.35
 #define ARROW_LENGTH                    15
 #define RECT_WIDTH                      30
+#define RESIZE_RECT_SIZE                10
 #define ACTIVE_Z                        10
 #define INACTIVE_Z                      5
 
@@ -51,7 +52,7 @@
  */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_dRotation(0), m_dLength(0), m_rectBoundingBox(),
-      m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1)
+      m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize()
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     setAcceptHoverEvents(true);
@@ -120,6 +121,17 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         pP->setBrush(Qt::NoBrush);
         // bounding polygon
         pP->drawPolygon(m_polyBound);
+
+        pP->setBrush(clr);
+        pP->drawPolygon(m_polyResize);
+
+        pP->setBrush(Qt::NoBrush);
+        if (m_eMode == mResize)
+        {
+            pP->drawLine(m_polyBound.at(0), m_polyBound.at(2));
+            pP->drawLine(m_polyBound.at(1), m_polyBound.at(3));
+        }
+
     }
     pP->restore();
 }
@@ -250,6 +262,7 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal &dX, qreal &dY) const
 void VGrainlineItem::SetScale(qreal dScale)
 {
     m_dScale = dScale;
+    UpdateRectangle();
     UpdateBox();
 }
 
@@ -262,13 +275,23 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        m_eMode = mMove;
-        setZValue(ACTIVE_Z);
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();
-        UpdateBox();
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        m_dStartLength = m_dLength;
+
+        if (m_polyResize.containsPoint(pME->pos(), Qt::OddEvenFill) == true)
+        {
+            m_eMode = mResize;
+            SetOverrideCursor(Qt::SizeFDiagCursor);
+        }
+        else
+        {
+            m_eMode = mMove;
+            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        }
     }
+    setZValue(ACTIVE_Z);
+    UpdateBox();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,9 +301,9 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
  */
 void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 {
+    QPointF ptDiff = pME->scenePos() - m_ptStartMove;
     if (m_eMode == mMove)
     {
-        QPointF ptDiff = pME->scenePos() - m_ptStartMove;
         QPointF pt = m_ptStartPos + ptDiff;
         qreal dX;
         qreal dY;
@@ -290,6 +313,22 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             pt.setY(pt.y() + dY);
         }
         setPos(pt);
+        UpdateBox();
+    }
+    else if (m_eMode == mResize)
+    {
+        qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
+        qreal dAng = qAtan2(ptDiff.y(), ptDiff.x());
+        dLen = dLen*qCos(dAng - m_dRotation);
+        qreal dPrevLen = m_dLength;
+        // try with new length
+        m_dLength = m_dStartLength + dLen;
+        qreal dX;
+        qreal dY;
+        if (IsContained(m_ptStartPos, dX, dY) == false)
+        {
+            m_dLength = dPrevLen;
+        }
         UpdateRectangle();
         UpdateBox();
     }
@@ -307,14 +346,35 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     {
         if (m_eMode == mMove)
         {
-            qreal dD = fabs(pME->scenePos().x() - m_ptStartMove.x()) + fabs(pME->scenePos().y() - m_ptStartMove.y());
-            bool bShort = (dD < 2);
-            if (bShort == false)
+            RestoreOverrideCursor(cursorArrowCloseHand);
+        }
+        else if (m_eMode == mResize)
+        {
+            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+        }
+
+        qreal dD = fabs(pME->scenePos().x() - m_ptStartMove.x()) + fabs(pME->scenePos().y() - m_ptStartMove.y());
+        bool bShort = (dD < 2);
+
+        if (m_eMode == mMove || m_eMode == mResize)
+        {
+            if (bShort == true)
             {
-                emit SignalMoved(pos());
+                // TODO: switch to rotate mode
+            }
+            else
+            {
+                if (m_eMode == mMove)
+                {
+                    emit SignalMoved(pos());
+                }
+                else
+                {
+                    emit SignalResized(m_dLength);
+                }
+                UpdateBox();
             }
         }
-        RestoreOverrideCursor(cursorArrowCloseHand);
     }
 }
 
@@ -356,5 +416,23 @@ void VGrainlineItem::UpdateRectangle()
     m_polyBound << ptA;
     m_rectBoundingBox = m_polyBound.boundingRect();
     setTransformOriginPoint(m_rectBoundingBox.center());
+
+    m_polyResize.clear();
+    ptA = m_polyBound.at(2);
+    m_polyResize << ptA;
+    double dSize = m_dScale * RESIZE_RECT_SIZE;
+
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation + M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation + M_PI/2));
+    m_polyResize << ptA;
+
+    ptA.setX(ptA.x() - dSize*cos(m_dRotation));
+    ptA.setY(ptA.y() - dSize*sin(m_dRotation));
+    m_polyResize << ptA;
+
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation - M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));
+    m_polyResize << ptA;
+
     prepareGeometryChange();
 }

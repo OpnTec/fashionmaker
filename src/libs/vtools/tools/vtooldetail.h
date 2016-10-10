@@ -128,6 +128,7 @@ protected slots:
     virtual void       SaveResizePattern(qreal dLabelW, int iFontSize);
     virtual void       SaveRotationPattern(qreal dRot);
     virtual void       SaveMoveGrainline(const QPointF& ptPos);
+    virtual void       SaveResizeGrainline(qreal dLength);
 
 private:
     Q_DISABLE_COPY(VToolDetail)
