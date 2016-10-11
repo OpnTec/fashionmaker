@@ -6,7 +6,7 @@
 #define MyAppPublisher "Roman Telezhynskyi"
 #define MyAppURL "http://www.valentina-project.org/"
 #define MyAppExeName "valentina.exe"
-#define MyAppCopyright "(C) 2013-2015 Valentina project"
+#define MyAppCopyright "(C) 2013-2016 Valentina project"
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)
@@ -37,8 +37,13 @@ SolidCompression=yes
 VersionInfoVersion={#MyAppVersion}
 ShowLanguageDialog=auto
 VersionInfoProductName=Valentina
+AppComments=Patternmaking program
+AppContact={#MyAppURL}
 AppCopyright={#MyAppCopyright}
 ChangesAssociations=yes
+;SignTool=MySign
+;Uncomment the previous string for code signing
+;MySign=signtool.exe sign /v /a /n $qSeamly, LLC$q /t http://timestamp.comodoca.com/authenticode /d $qPatternmaking program$q $f
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -78,8 +83,10 @@ Name: "fileassoc2"; Description: "{cm:CreateFileAssocVit}"; GroupDescription: "{
 Name: "fileassoc3"; Description: "{cm:CreateFileAssocVst}"; GroupDescription: "{cm:FileAssoc}"
 
 [Files]
-Source: ".\valentina\valentina.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\valentina\tape.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\valentina\valentina.exe"; DestDir: "{app}"; Flags: ignoreversion sign
+Source: ".\valentina\tape.exe"; DestDir: "{app}"; Flags: ignoreversion sign
+Source: ".\valentina\vpropertyexplorer.dll"; DestDir: "{app}"; Flags: ignoreversion sign
+Source: ".\valentina\qmuparser2.dll"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
