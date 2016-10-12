@@ -304,6 +304,12 @@ void VMainGraphicsScene::ItemsSelection(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::HighlightItem(quint32 id)
+{
+    emit HighlightDetail(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::ToggleLabelSelection(bool enabled)
 {
     emit EnableLabelItemSelection(enabled);

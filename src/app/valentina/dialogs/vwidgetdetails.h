@@ -48,6 +48,9 @@ public:
     explicit VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent = nullptr);
     virtual ~VWidgetDetails();
 
+signals:
+    void Highlight(quint32 id);
+
 public slots:
     void UpdateList();
 

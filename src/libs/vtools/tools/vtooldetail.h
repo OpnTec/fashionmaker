@@ -101,6 +101,7 @@ public slots:
     virtual void       ResetChildren(QGraphicsItem* pItem);
     virtual void       UpdateAll();
     virtual void       retranslateUi();
+    void               Highlight(quint32 id);
 protected:
     virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                              QWidget *widget) Q_DECL_OVERRIDE;

@@ -68,13 +68,15 @@ void VWidgetDetails::UpdateList()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
+    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    const quint32 id = item->data(Qt::UserRole).toUInt();
+    emit Highlight(id);
+
     if (column != 0)
     {
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, column);
-    const quint32 id = item->data(Qt::UserRole).toUInt();
     const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
     const bool inLayout = not allDetails->value(id).IsInLayout();
 

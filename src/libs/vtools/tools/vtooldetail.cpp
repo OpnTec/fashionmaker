@@ -348,6 +348,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::EnableDetailItemHover, detail, &VToolDetail::AllowHover);
         connect(scene, &VMainGraphicsScene::EnableDetailItemSelection, detail, &VToolDetail::AllowSelecting);
+        connect(scene, &VMainGraphicsScene::HighlightDetail, detail, &VToolDetail::Highlight);
         doc->AddTool(id, detail);
     }
 }
@@ -1149,4 +1150,10 @@ void VToolDetail::retranslateUi()
 {
     UpdateLabel();
     UpdatePatternInfo();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::Highlight(quint32 id)
+{
+    setSelected(this->id == id);
 }
