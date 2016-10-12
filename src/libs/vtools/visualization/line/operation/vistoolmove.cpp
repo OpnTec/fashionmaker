@@ -155,7 +155,7 @@ qreal VisToolMove::LengthValue() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetLength(const QString &expression)
 {
-    length = FindVal(expression, Visualization::data->PlainVariables());
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
