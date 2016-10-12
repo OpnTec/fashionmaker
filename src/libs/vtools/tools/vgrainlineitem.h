@@ -45,7 +45,8 @@ class VGrainlineItem : public QGraphicsObject
     enum Mode {
         mNormal,
         mMove,
-        mResize
+        mResize,
+        mRotate
     };
 
 public:
@@ -58,7 +59,7 @@ public:
     QRectF                  boundingRect() const;
     void                    Reset();
     bool                    IsIdle() const;
-    bool                    IsContained(const QPointF &pt, qreal &dX, qreal &dY) const;
+    bool                    IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
     void                    SetScale(qreal dScale);
 
 protected:
@@ -68,12 +69,16 @@ protected:
     void                    UpdateBox();
     void                    UpdateRectangle();
 
+    qreal                   GetAngle(QPointF pt) const;
+
 signals:
     void                    SignalMoved(const QPointF& ptPos);
     void                    SignalResized(qreal dLength);
+    void                    SignalRotated(qreal dRot);
 
 private:
     Mode                    m_eMode;
+    bool                    m_bReleased;
     qreal                   m_dRotation;
     qreal                   m_dLength;
     QRectF                  m_rectBoundingBox;
@@ -83,6 +88,10 @@ private:
     qreal                   m_dScale;
     QPolygonF               m_polyResize;
     qreal                   m_dStartLength;
+    QPointF                 m_ptStart;
+    QPointF                 m_ptFinish;
+    QPointF                 m_ptCenter;
+    qreal                   m_dAngle;
 };
 
 #endif // VGRAINLINEITEM_H
