@@ -757,7 +757,6 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
     }
 
     token_type funTok = a_stOpt.pop();
-    // cppcheck-suppress assertWithSideEffect
     assert(funTok.GetFuncAddr());
 
     // Binary operators must rely on their internal operator number
