@@ -52,8 +52,8 @@
  * @param pParent pointer to the parent item
  */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
-    :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_bReleased(false), m_dRotation(0), m_dLength(0),
-      m_rectBoundingBox(), m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize(),
+    :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_bReleased(false), m_dRotation(0), m_dStartRotation(0),
+      m_dLength(0), m_rectBoundingBox(), m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize(),
       m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
@@ -145,6 +145,19 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
             qreal dRad = m_dScale * ROTATE_CIRC_R;
             pP->setBrush(clr);
             pP->drawEllipse(ptC, dRad, dRad);
+
+            pP->setBrush(Qt::NoBrush);
+            pP->save();
+            pP->translate(ptC);
+            pP->rotate(qRadiansToDegrees(-m_dRotation));
+            int iX = int(qRound(m_dLength/2 - 0.5*dRad));
+            int iY = int(qRound(RECT_WIDTH - 0.5*dRad));
+            int iR = int(qRound(dRad*3));
+            pP->drawArc(iX - iR, iY - iR, iR, iR, 0*16, -90*16);
+            pP->drawArc(-iX, iY - iR, iR, iR, 270*16, -90*16);
+            pP->drawArc(-iX, -iY, iR, iR, 180*16, -90*16);
+            pP->drawArc(iX - iR, -iY, iR, iR, 90*16, -90*16);
+            pP->restore();
         }
 
     }
@@ -295,7 +308,9 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();
         m_dStartLength = m_dLength;
+        m_dStartRotation = m_dRotation;
         m_dAngle = GetAngle(mapToParent(pME->pos()));
+        m_ptRotCenter = m_ptCenter;
 
         if (m_eMode != mRotate)
         {
@@ -343,7 +358,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     else if (m_eMode == mResize)
     {
         qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
-        qreal dAng = qAtan2(ptDiff.y(), ptDiff.x());
+        qreal dAng = qAtan2(-ptDiff.y(), ptDiff.x());
         dLen = dLen*qCos(dAng - m_dRotation);
         qreal dPrevLen = m_dLength;
         // try with new length
@@ -359,19 +374,28 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     }
     else if (m_eMode == mRotate)
     {
+        // prevent strange angle changes due to singularities
+        qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
+        if (dLen < 2)
+        {
+            return;
+        }
+
         if (fabs(m_dAngle) < 0.01)
         {
             m_dAngle = GetAngle(mapToParent(pME->pos()));
             return;
         }
 
-       qreal dAng = GetAngle(mapToParent(pME->pos())) - m_dAngle;
-       if (IsContained(m_ptStartPos, m_dRotation + dAng, dX, dY) == true)
-       {
-           m_dRotation += dAng;
-           UpdateRectangle();
-           UpdateBox();
-       }
+        qreal dAng = GetAngle(mapToParent(pME->pos())) - m_dAngle;
+        QPointF ptNewPos = Rotate(m_ptStartPos, m_ptRotCenter, dAng);
+        if (IsContained(ptNewPos, m_dStartRotation + dAng, dX, dY) == true)
+        {
+            setPos(ptNewPos);
+            m_dRotation = m_dStartRotation + dAng;
+            UpdateRectangle();
+            UpdateBox();
+        }
     }
 }
 
@@ -394,8 +418,9 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             RestoreOverrideCursor(Qt::SizeFDiagCursor);
         }
 
-        qreal dD = fabs(pME->scenePos().x() - m_ptStartMove.x()) + fabs(pME->scenePos().y() - m_ptStartMove.y());
-        bool bShort = (dD < 2);
+        QPointF ptDiff = pME->scenePos() - m_ptStartMove;
+        qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
+        bool bShort = (dLen < 2);
 
         if (m_eMode == mMove || m_eMode == mResize)
         {
@@ -428,7 +453,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             }
             else
             {
-                emit SignalRotated(m_dRotation);
+                emit SignalRotated(m_dRotation, m_ptStart);
             }
             UpdateBox();
         }
@@ -506,10 +531,10 @@ void VGrainlineItem::UpdateRectangle()
  * @param pt point of interest
  * @return the angle between line from rotation center and point of interest and x axis
  */
-double VGrainlineItem::GetAngle(QPointF pt) const
+qreal VGrainlineItem::GetAngle(const QPointF& pt) const
 {
-    double dX = pt.x() - m_ptCenter.x();
-    double dY = pt.y() - m_ptCenter.y();
+    double dX = pt.x() - m_ptRotCenter.x();
+    double dY = pt.y() - m_ptRotCenter.y();
 
     if (fabs(dX) < 1 && fabs(dY) < 1)
     {
@@ -517,7 +542,44 @@ double VGrainlineItem::GetAngle(QPointF pt) const
     }
     else
     {
-        return qAtan2(dY, dX);
+        return qAtan2(-dY, dX);
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::Rotate rotates point pt around ptCenter by angle dAng [rad]
+ * and returns the resulting point
+ * @param pt point to rotate
+ * @param ptCenter center of rotation
+ * @param dAng angle of rotation
+ * @return point, which is a result of rotating pt around ptCenter by angle dAng
+ */
+QPointF VGrainlineItem::Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const
+{
+    QPointF ptRel = pt - ptCenter;
+    QPointF ptFinal;
+    ptFinal.setX(ptRel.x()*qCos(dAng) + ptRel.y()*qSin(dAng));
+    ptFinal.setY(-ptRel.x()*qSin(dAng) + ptRel.y()*qCos(dAng));
+    ptFinal += ptCenter;
+    return ptFinal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGrainlineItem::GetInsideCorner calculates a point inside the bounding polygon,
+ * dDist away of i-th point in each direction
+ * @param i index of corner
+ * @param dDist distance
+ * @return resulting point
+ */
+QPointF VGrainlineItem::GetInsideCorner(int i, qreal dDist) const
+{
+    QPointF pt1 = m_polyBound.at((i + 1) % m_polyBound.count()) - m_polyBound.at(i);
+    QPointF pt2 = m_polyBound.at((i + m_polyBound.count() - 1) % m_polyBound.count()) - m_polyBound.at(i);
+
+    pt1 = dDist*pt1/qSqrt(pt1.x()*pt1.x() + pt1.y()*pt1.y());
+    pt2 = dDist*pt2/qSqrt(pt2.x()*pt2.x() + pt2.y()*pt2.y());
+
+    return m_polyBound.at(i) + pt1 + pt2;
+}

@@ -69,17 +69,20 @@ protected:
     void                    UpdateBox();
     void                    UpdateRectangle();
 
-    qreal                   GetAngle(QPointF pt) const;
+    qreal                   GetAngle(const QPointF& pt) const;
+    QPointF                 Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
+    QPointF                 GetInsideCorner(int i, qreal dDist) const;
 
 signals:
     void                    SignalMoved(const QPointF& ptPos);
     void                    SignalResized(qreal dLength);
-    void                    SignalRotated(qreal dRot);
+    void                    SignalRotated(qreal dRot, const QPointF& ptNewPos);
 
 private:
     Mode                    m_eMode;
     bool                    m_bReleased;
     qreal                   m_dRotation;
+    qreal                   m_dStartRotation;
     qreal                   m_dLength;
     QRectF                  m_rectBoundingBox;
     QPolygonF               m_polyBound;
@@ -91,6 +94,7 @@ private:
     QPointF                 m_ptStart;
     QPointF                 m_ptFinish;
     QPointF                 m_ptCenter;
+    QPointF                 m_ptRotCenter;
     qreal                   m_dAngle;
 };
 

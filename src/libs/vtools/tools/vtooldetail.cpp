@@ -206,6 +206,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     connect(grainLine, &VGrainlineItem::SignalMoved, this, &VToolDetail::SaveMoveGrainline);
     connect(grainLine, &VGrainlineItem::SignalResized, this, &VToolDetail::SaveResizeGrainline);
+    connect(grainLine, &VGrainlineItem::SignalRotated, this, &VToolDetail::SaveRotateGrainline);
 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
@@ -1077,10 +1078,25 @@ void VToolDetail::SaveResizeGrainline(qreal dLength)
 
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
     newDet.GetGrainlineGeometry().SetLength(qApp->LocaleToString(dLength));
-    SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
-    moveCommand->setText(tr("resize grainline"));
-    connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(moveCommand);
+    SaveDetailOptions* resizeCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    resizeCommand->setText(tr("resize grainline"));
+    connect(resizeCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+
+    dRot = qRadiansToDegrees(dRot);
+    newDet.GetGrainlineGeometry().SetRotation(qApp->LocaleToString(dRot));
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    SaveDetailOptions* rotateCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    rotateCommand->setText(tr("rotate grainline"));
+    connect(rotateCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

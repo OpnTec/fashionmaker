@@ -130,6 +130,7 @@ protected slots:
     virtual void       SaveRotationPattern(qreal dRot);
     virtual void       SaveMoveGrainline(const QPointF& ptPos);
     virtual void       SaveResizeGrainline(qreal dLength);
+    virtual void       SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
 
 private:
     Q_DISABLE_COPY(VToolDetail)

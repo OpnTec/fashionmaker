@@ -530,7 +530,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <property name="cursor">
-       <cursorShape>SizeVerCursor</cursorShape>
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <attribute name="title">
        <string>Grainline</string>
