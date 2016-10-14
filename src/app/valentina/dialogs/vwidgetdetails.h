@@ -66,6 +66,7 @@ private:
     VContainer         *m_data;
 
     void FillTable(const QHash<quint32, VDetail> *details);
+    void ToggleSectionDetails(bool select);
 };
 
 #endif // VWIDGETDETAILS_H
