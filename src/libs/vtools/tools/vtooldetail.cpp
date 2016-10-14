@@ -76,6 +76,7 @@
 #include "../undocommands/deletedetail.h"
 #include "../undocommands/movedetail.h"
 #include "../undocommands/savedetailoptions.h"
+#include "../undocommands/toggledetailinlayout.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -731,15 +732,15 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+    QAction *inLayoutOption = menu.addAction(tr("In layout"));
+    inLayoutOption->setCheckable(true);
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    inLayoutOption->setChecked(detail.IsInLayout());
+
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-    if (_referens > 1)
-    {
-        actionRemove->setEnabled(false);
-    }
-    else
-    {
-        actionRemove->setEnabled(true);
-    }
+    _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
@@ -750,6 +751,13 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
         setDialog();
         dialog->show();
+    }
+    else if (selectedAction == inLayoutOption)
+    {
+        ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, selectedAction->isChecked(),
+                                                                     &(VAbstractTool::data), doc);
+        connect(togglePrint, &ToggleDetailInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
+        qApp->getUndoStack()->push(togglePrint);
     }
     else if (selectedAction == actionRemove)
     {

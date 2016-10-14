@@ -1203,6 +1203,12 @@ void VAbstractPattern::ClearScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::CheckInLayoutList()
+{
+    emit UpdateInLayoutList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id) const
 {
     if (tools.contains(id) == false)

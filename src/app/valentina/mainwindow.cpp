@@ -3510,6 +3510,7 @@ void MainWindow::InitDocksContain()
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);
+    connect(doc, &VPattern::UpdateInLayoutList, detailsWidget, &VWidgetDetails::UpdateList);
     connect(detailsWidget, &VWidgetDetails::Highlight, sceneDetails, &VMainGraphicsScene::HighlightItem);
     detailsWidget->setVisible(false);
 }
