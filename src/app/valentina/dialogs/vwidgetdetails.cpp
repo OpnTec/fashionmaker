@@ -81,7 +81,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
     ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, inLayout, m_data, m_doc);
-    connect(togglePrint, &ToggleDetailInLayout::NeedLiteParsing, m_doc, &VAbstractPattern::LiteParseTree);
+    connect(togglePrint, &ToggleDetailInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
     qApp->getUndoStack()->push(togglePrint);
 }
 
@@ -194,7 +194,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
             if (not select == m_data->DataDetails()->value(id).IsInLayout())
             {
                 ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &ToggleDetailInLayout::NeedLiteParsing, m_doc, &VAbstractPattern::LiteParseTree);
+                connect(togglePrint, &ToggleDetailInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
                 qApp->getUndoStack()->push(togglePrint);
             }
         }
