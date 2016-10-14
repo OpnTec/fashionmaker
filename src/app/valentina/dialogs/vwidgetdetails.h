@@ -53,6 +53,7 @@ signals:
 
 public slots:
     void UpdateList();
+    void SelectDetail(quint32 id);
 
 private slots:
     void InLayoutStateChanged(int row, int column);

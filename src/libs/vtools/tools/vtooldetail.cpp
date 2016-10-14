@@ -671,6 +671,7 @@ void VToolDetail::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
+        doc->SelectedDetail(id);
         emit ChoosedTool(id, SceneObject::Detail);
     }
 

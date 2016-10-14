@@ -66,6 +66,22 @@ void VWidgetDetails::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::SelectDetail(quint32 id)
+{
+    const int rowCount = ui->tableWidget->rowCount();
+    for (int row = 0; row < rowCount; ++row)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+
+        if (item->data(Qt::UserRole).toUInt() == id)
+        {
+            ui->tableWidget->setCurrentItem(item);
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);

@@ -1209,6 +1209,12 @@ void VAbstractPattern::CheckInLayoutList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SelectedDetail(quint32 id)
+{
+    emit ShowDetail(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id) const
 {
     if (tools.contains(id) == false)
