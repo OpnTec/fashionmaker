@@ -1847,7 +1847,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška: </translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -2593,7 +2593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška: </translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -4024,7 +4024,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Uložit j&amp;ako…</translation>
+        <translation>Uložit j&amp;ako...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -4330,7 +4330,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
-        <translation>Znovu otevřít soubory</translation>
+        <translation>Znovu otevřít soubory.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -4846,6 +4846,10 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Intervalo</translation>
+        <translation>Intervalo:</translation>
     </message>
     <message>
         <source>Language</source>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
 </context>
 <context>
@@ -794,7 +794,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -905,7 +905,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -984,7 +984,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1059,7 +1059,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1134,7 +1134,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1467,7 +1467,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1534,7 +1534,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2023,8 +2023,7 @@ Apply settings anyway?</source>
         <translation>
 	Tres grupos: grande, mediano, pequeño = 0
 	Dos grupos: grande, pequeño = 1
-	Área descendente = 2
-</translation>
+	Área descendente = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
@@ -2134,7 +2133,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2253,7 +2252,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2506,7 +2505,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Punto a lo largo de la perpendicular </translation>
+        <translation>Punto a lo largo de la perpendicular</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -2550,7 +2549,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2807,7 +2806,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -2898,7 +2897,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -2985,7 +2984,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -3040,7 +3039,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -3091,7 +3090,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -3194,7 +3193,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -3241,7 +3240,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation>Ruta a la carpeta de destino</translation>
+        <translation>Ruta a la carpeta de destino.</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
@@ -3320,7 +3319,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
-        <translation>El nombre de archivo base no coincide con la expresión regular</translation>
+        <translation>El nombre de archivo base no coincide con la expresión regular.</translation>
     </message>
 </context>
 <context>
@@ -3407,7 +3406,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3462,7 +3461,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
 </context>
 <context>
@@ -3662,7 +3661,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Selección primer punto </translation>
+        <translation>Selección primer punto</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -3694,7 +3693,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -3809,7 +3808,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Seleccione etiqueta única</translation>
+        <translation>Seleccione etiqueta única.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -3855,7 +3854,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation>Selección un primer punto </translation>
+        <translation>Selección un primer punto</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
@@ -3933,7 +3932,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base height</source>
-        <translation>La altura base:</translation>
+        <translation>La altura base</translation>
     </message>
     <message>
         <source>The base size</source>
@@ -4004,7 +4003,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Punto a lo largo de la perpendicular </translation>
+        <translation>Punto a lo largo de la perpendicular</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -4072,7 +4071,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Pieza de patrón </translation>
+        <translation>&amp;Pieza de patrón</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -4883,15 +4882,15 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Este archivo esta abierto en otra ventana. Si desea continuar: click en Ignorar (no recomendado puede causar datos erróneos)</translation>
+        <translation>Este archivo esta abierto en otra ventana. Si desea continuar: click en Ignorar (no recomendado puede causar datos erróneos).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Archivo bloqueado, no puede ser mostrado por falta de permisos. Si desea continuar apriete ignorar (no recomendado, puede causar errores)</translation>
+        <translation>Archivo bloqueado, no puede ser mostrado por falta de permisos. Si desea continuar apriete ignorar (no recomendado, puede causar errores).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos)</translation>
+        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -4990,6 +4989,10 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation>Las páginas serán recortadas porque no se ajustan al tamaño de papel de la impresora.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5293,7 +5296,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Puntero inválido a variable</translation>
+        <translation>Puntero inválido a variable.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
@@ -5368,7 +5371,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation>valor invalido para el operador (debe ser mayor o igual a cero)</translation>
+        <translation>Valor invalido para el operador (debe ser mayor o igual a cero).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
@@ -5408,7 +5411,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Error en análisis</translation>
+        <translation>Error en análisis.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
@@ -5948,7 +5951,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation>Aun no se guardó el archivo</translation>
+        <translation>Aun no se guardó el archivo.</translation>
     </message>
     <message>
         <source>Search</source>
@@ -5992,15 +5995,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Este archivo esta abierto en otra ventana. Si desea continuar: click en Ignorar (no recomendado puede causar datos erroneos)</translation>
+        <translation>Este archivo esta abierto en otra ventana. Si desea continuar: click en Ignorar (no recomendado puede causar datos erroneos).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Archivo bloqueado, no puede ser mostrado por falta de permisos. Si desea continuar apriete ignorar (no recomendado, puede causar errores)</translation>
+        <translation>Archivo bloqueado, no puede ser mostrado por falta de permisos. Si desea continuar apriete ignorar (no recomendado, puede causar errores).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos)</translation>
+        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -6183,7 +6186,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Error, creando archivo de resguardo: %1</translation>
+        <translation>Error, creando archivo de resguardo: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -6331,7 +6334,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The unit</source>
-        <translation>La unidad </translation>
+        <translation>La unidad</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
@@ -6367,19 +6370,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Valor invalido de rotación. Utilice algunos de los valores predeterminados</translation>
+        <translation>Valor invalido de rotación. Utilice algunos de los valores predeterminados.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
-        <translation>seleccion de plantilla desconocido</translation>
+        <translation>Seleccion de plantilla desconocido.</translation>
     </message>
     <message>
         <source>Unsupported paper units.</source>
-        <translation>Medidas de papel no soportadas</translation>
+        <translation>Medidas de papel no soportadas.</translation>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation>Unidades del diseño no soportadas</translation>
+        <translation>Unidades del diseño no soportadas.</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
@@ -6427,11 +6430,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>El ancho de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación)</translation>
+        <translation>El ancho de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;), modo de exportación)</translation>
+        <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
@@ -6447,7 +6450,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation>Programa generando patrón</translation>
+        <translation>Programa generando patrón.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
@@ -6603,13 +6606,13 @@ Do you want to save your changes?</source>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>No se pudo abrir el archivo %1:
-%2</translation>
+%2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>No se pudo abrir el archivo de esquema %1:
-%2</translation>
+%2.</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
@@ -6982,7 +6985,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cut arc tool</source>
-        <translation>Herramienta cortar arco.</translation>
+        <translation>Herramienta cortar arco</translation>
     </message>
     <message>
         <source>Tool for segmenting a curve</source>
@@ -7006,7 +7009,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Punto a lo largo de la perpendicular </translation>
+        <translation>Punto a lo largo de la perpendicular</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>

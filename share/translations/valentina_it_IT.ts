@@ -85,31 +85,31 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>nome del server</translation>
+        <translation>Nome del server:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation>indirizzo proxy</translation>
+        <translation>Indirizzo proxy:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation>porta del proxy</translation>
+        <translation>Porta del proxy:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
-        <translation>Utente Proxy</translation>
+        <translation>Utente Proxy:</translation>
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>ProxyPass</translation>
+        <translation>Proxy Pass:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation>nome utente</translation>
+        <translation>Nome utente:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>password</translation>
+        <translation>Password:</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Intervallo</translation>
+        <translation>Intervallo:</translation>
     </message>
     <message>
         <source>Language</source>
@@ -239,19 +239,19 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Lingua di interfaccia</translation>
+        <translation>Lingua di interfaccia:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>separatore decimale</translation>
+        <translation>Separatore decimale:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation>Unità di default</translation>
+        <translation>Unità di default:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation>Lingua etichetta</translation>
+        <translation>Lingua etichetta:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Sistema di modellistica</translation>
+        <translation>Sistema di modellistica:</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;unità di default è stata aggiornata e verrà utilizzata come impostazione predefinita nella creazione del prossimo modello.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più su &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tipo d&apos;informazioni&lt;/a&gt; raccolte.</translation>
     </message>
 </context>
 <context>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -449,11 +449,11 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>First point of the line</source>
@@ -461,7 +461,7 @@
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
     <message>
         <source>Second point of the line</source>
@@ -469,11 +469,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
 </context>
 <context>
@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Raggio</translation>
+        <translation>Raggio:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -572,7 +572,7 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>primo angolo</translation>
+        <translation>Primo angolo:</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -580,11 +580,11 @@
     </message>
     <message>
         <source>Second angle:</source>
-        <translation>Secondo angolo</translation>
+        <translation>Secondo angolo:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punto centrale</translation>
+        <translation>Punto centrale:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
@@ -592,7 +592,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
 </context>
 <context>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Raggio</translation>
+        <translation>Raggio:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -683,19 +683,19 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>primo angolo</translation>
+        <translation>Primo angolo:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation>Punto centrale</translation>
+        <translation>Punto centrale:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
 </context>
 <context>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -786,7 +786,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -794,27 +794,27 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation>Terzo punto</translation>
+        <translation>Terzo punto:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -873,7 +873,7 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Angolo</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -889,15 +889,15 @@
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Punto dell&apos;asse</translation>
+        <translation>Punto dell&apos;asse:</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation>curva</translation>
+        <translation>Curva:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -905,15 +905,15 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -956,7 +956,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -972,11 +972,11 @@
     </message>
     <message>
         <source>Arc:</source>
-        <translation>Arco</translation>
+        <translation>Arco:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -984,11 +984,11 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
 </context>
 <context>
@@ -1031,7 +1031,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1047,11 +1047,11 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>curva</translation>
+        <translation>Curva:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1059,11 +1059,11 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
 </context>
 <context>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1122,11 +1122,11 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>curva</translation>
+        <translation>Curva:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1134,11 +1134,11 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
 </context>
 <context>
@@ -1233,15 +1233,15 @@
     </message>
     <message>
         <source>Bias X:</source>
-        <translation>Sbieco X</translation>
+        <translation>Sbieco X:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
-        <translation>Sbieco Y</translation>
+        <translation>Sbieco Y:</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Nome del dettaglio</translation>
+        <translation>Nome del dettaglio:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -1435,7 +1435,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1451,15 +1451,15 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Angolo</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Base point:</source>
-        <translation>Punto base</translation>
+        <translation>Punto base:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1467,15 +1467,15 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -1526,7 +1526,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1534,27 +1534,27 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Base point:</source>
-        <translation>Punto base</translation>
+        <translation>Punto base:</translation>
     </message>
     <message>
         <source>First point of line:</source>
-        <translation>Primo punto della linea</translation>
+        <translation>Primo punto della linea:</translation>
     </message>
     <message>
         <source>Second point of line:</source>
-        <translation>Secondo punto della linea</translation>
+        <translation>Secondo punto della linea:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -1569,7 +1569,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Impossibile creare registro</translation>
+        <translation>Impossibile creare registro.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -1823,7 +1823,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Impossibile preparare i dati per la creazione del layout </translation>
+        <translation>Impossibile preparare i dati per la creazione del layout</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -1994,7 +1994,7 @@
     </message>
     <message>
         <source>Bottom:</source>
-        <translation>Fondo</translation>
+        <translation>Fondo:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
@@ -2006,7 +2006,7 @@
     </message>
     <message>
         <source>Wrong fields.</source>
-        <translation>Campi sbagliati</translation>
+        <translation>Campi sbagliati.</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
@@ -2024,16 +2024,15 @@ Applicare le impostazioni comunque?</translation>
         <translation>
 ⇥Tre gruppi: grande, medio, piccolo = 0
 ⇥Due gruppi: grande, piccolo = 1
-⇥Area discendente = 2
-</translation>
+⇥Area discendente = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni di Layout</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset lunghezza:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -2072,19 +2071,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -2127,7 +2126,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2135,15 +2134,15 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
 </context>
 <context>
@@ -2218,7 +2217,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Angolo</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2234,19 +2233,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Punto dell&apos;asse</translation>
+        <translation>Punto dell&apos;asse:</translation>
     </message>
     <message>
         <source>First line point:</source>
-        <translation>Primo punto della linea</translation>
+        <translation>Primo punto della linea:</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation>Secondo punto della linea</translation>
+        <translation>Secondo punto della linea:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2254,15 +2253,15 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -2370,7 +2369,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Check all</source>
-        <translation>Seleziona tutto </translation>
+        <translation>Seleziona tutto</translation>
     </message>
     <message>
         <source>Uncheck all</source>
@@ -2448,7 +2447,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Pattern piece name:</source>
-        <translation>Nome del pezzo del modello</translation>
+        <translation>Nome del pezzo del modello:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
@@ -2456,11 +2455,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli nome del pezzo del modello unico.</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Nuovo pattern</translation>
+        <translation>Nuovo pattern</translation>
     </message>
 </context>
 <context>
@@ -2527,7 +2526,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2543,7 +2542,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2551,27 +2550,27 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
-        <translation>Ulteriori gradi di rotazione</translation>
+        <translation>Ulteriori gradi di rotazione:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -2594,7 +2593,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>For technical notes.</source>
-        <translation>Note tecniche</translation>
+        <translation>Note tecniche.</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
@@ -2765,7 +2764,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Applica immediatamente</translation>
     </message>
 </context>
 <context>
@@ -2800,7 +2799,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2808,19 +2807,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation>Punto tangente</translation>
+        <translation>Punto tangente:</translation>
     </message>
     <message>
         <source>Arc:</source>
-        <translation>Arco</translation>
+        <translation>Arco:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation>Prendi</translation>
+        <translation>Prendi:</translation>
     </message>
 </context>
 <context>
@@ -2875,7 +2874,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Raggio</translation>
+        <translation>Raggio:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2891,7 +2890,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2899,19 +2898,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
-        <translation>centro del cerchio</translation>
+        <translation>Centro del cerchio:</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation>Punto tangente</translation>
+        <translation>Punto tangente:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation>Prendi</translation>
+        <translation>Prendi:</translation>
     </message>
 </context>
 <context>
@@ -2962,7 +2961,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Raggio</translation>
+        <translation>Raggio:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2978,7 +2977,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2986,19 +2985,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
-        <translation>Centro dell&apos;arco</translation>
+        <translation>Centro dell&apos;arco:</translation>
     </message>
     <message>
         <source>Top of the line:</source>
-        <translation>Inizio della linea</translation>
+        <translation>Inizio della linea:</translation>
     </message>
     <message>
         <source>End of the line:</source>
-        <translation>Fine della linea</translation>
+        <translation>Fine della linea:</translation>
     </message>
 </context>
 <context>
@@ -3033,7 +3032,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3041,15 +3040,15 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
-        <translation>X: punto verticale</translation>
+        <translation>X: punto verticale:</translation>
     </message>
     <message>
         <source>Y: horizontal point:</source>
-        <translation>Y: punto orizzontale</translation>
+        <translation>Y: punto orizzontale:</translation>
     </message>
 </context>
 <context>
@@ -3084,7 +3083,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3092,19 +3091,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First arc:</source>
-        <translation>Primo arco</translation>
+        <translation>Primo arco:</translation>
     </message>
     <message>
         <source>Second arc:</source>
-        <translation>Secondo arco</translation>
+        <translation>Secondo arco:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation>Prendi</translation>
+        <translation>Prendi:</translation>
     </message>
 </context>
 <context>
@@ -3167,7 +3166,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Radius of the first circle:</source>
-        <translation>Raggio del primo cerchio</translation>
+        <translation>Raggio del primo cerchio:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3183,11 +3182,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Radius of the second circle:</source>
-        <translation>Raggio del secondo cerchio</translation>
+        <translation>Raggio del secondo cerchio:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3195,19 +3194,19 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
-        <translation>centro del primo cerchio</translation>
+        <translation>Centro del primo cerchio:</translation>
     </message>
     <message>
         <source>Center of the second circle:</source>
-        <translation>Centro del secondo cerchio</translation>
+        <translation>Centro del secondo cerchio:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation>Prendi</translation>
+        <translation>Prendi:</translation>
     </message>
 </context>
 <context>
@@ -3238,7 +3237,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Destination folder</source>
-        <translation>La cartella di destinazione.</translation>
+        <translation>La cartella di destinazione</translation>
     </message>
     <message>
         <source>Path to destination folder.</source>
@@ -3384,7 +3383,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Lunghezza</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3400,7 +3399,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3408,27 +3407,27 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation>Terzo punto</translation>
+        <translation>Terzo punto:</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Tipo di linea</translation>
+        <translation>Tipo di linea:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Colore della linea</translation>
+        <translation>Colore della linea:</translation>
     </message>
 </context>
 <context>
@@ -3463,7 +3462,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
 </context>
 <context>
@@ -3510,23 +3509,23 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficiente di curvatura della curva</translation>
+        <translation>Coefficiente di curvatura della curva:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Controllo punto</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation>Angol</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Adatta lunghezza</translation>
     </message>
 </context>
 <context>
@@ -3573,31 +3572,31 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficiente di curvatura della curva</translation>
+        <translation>Coefficiente di curvatura della curva:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished">Punto</translation>
+        <translation>Punto</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Primo controllo del punto</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation>Angol</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Adatta lunghezza</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo controllo del punto</translation>
     </message>
 </context>
 <context>
@@ -3687,7 +3686,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Nome del punto</translation>
+        <translation>Nome del punto:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3695,23 +3694,23 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
-        <translation>Primo punto dell&apos;asse</translation>
+        <translation>Primo punto dell&apos;asse:</translation>
     </message>
     <message>
         <source>Second point of axis:</source>
-        <translation>Secondo punto dell&apos;asse</translation>
+        <translation>Secondo punto dell&apos;asse:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation>Primo punto</translation>
+        <translation>Primo punto:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto </translation>
+        <translation>Secondo punto:</translation>
     </message>
 </context>
 <context>
@@ -3782,27 +3781,27 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>First base point:</source>
-        <translation>Primo punto base</translation>
+        <translation>Primo punto base:</translation>
     </message>
     <message>
         <source>Second base point:</source>
-        <translation>Secondo punto base</translation>
+        <translation>Secondo punto base:</translation>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation>Primo punto della pince</translation>
+        <translation>Primo punto della pince:</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation>Secondo punto della pince</translation>
+        <translation>Secondo punto della pince:</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation>Terzo punto della pince</translation>
+        <translation>Terzo punto della pince:</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation>Primo nuovo punto della pince</translation>
+        <translation>Primo nuovo punto della pince:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3810,11 +3809,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli una etichetta</translation>
+        <translation>Scegli una etichetta.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation>Secondo nuovo punto della pince</translation>
+        <translation>Secondo nuovo punto della pince:</translation>
     </message>
 </context>
 <context>
@@ -3841,7 +3840,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante la formula di calcolo. Prova ad annullare l&apos;ultima operazione o a correggere la formula errata.</translation>
     </message>
 </context>
 <context>
@@ -3997,7 +3996,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Tools for creating points.</source>
-        <translation>Strumenti per creare punti</translation>
+        <translation>Strumenti per creare punti.</translation>
     </message>
     <message>
         <source>Point</source>
@@ -4025,7 +4024,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
-        <translation>Strumenti per creare linee</translation>
+        <translation>Strumenti per creare linee.</translation>
     </message>
     <message>
         <source>Line</source>
@@ -4373,7 +4372,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation>Errore di analisi del file</translation>
+        <translation>Errore di analisi del file.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
@@ -4728,11 +4727,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Impossibile bloccare. Questo file è già aperto in un&apos;altra finestra. </translation>
+        <translation>Impossibile bloccare. Questo file è già aperto in un&apos;altra finestra.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Impossibile bloccare. </translation>
+        <translation>Impossibile bloccare. Questo file è già aperto in un altra finestra. Previsti conflitti quando 2 copie del programma sono in esecuzione.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
@@ -4744,7 +4743,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Il file delle misure non include tutte le misure richieste. </translation>
+        <translation>Il file delle misure non include tutte le misure richieste.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -4776,7 +4775,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
-        <translation>File delle misure in carica.</translation>
+        <translation>File delle misure in carica</translation>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
@@ -4824,11 +4823,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
-        <translation>Anteprima di stampa del layout piastrellato.</translation>
+        <translation>Anteprima di stampa del layout piastrellato</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt; &lt;head /&gt; &lt;body&gt; &lt;p&gt; Modalità per lavorare con i pezzi del modello. Questi pezzi del modello sono la base per andare alla fase successiva &amp;quot; dettagli mode&amp;quot;. Prima si sarà in grado di abilitare i &amp;quot; Dettagli mode&amp;quot; devono creare almeno un dettaglio. &lt;/ p&gt; &lt;/ body&gt; &lt;/ html&gt;</translation>
+        <translation>&lt;html&gt; &lt;head/&gt; &lt;body&gt; &lt;p&gt; Modalità per lavorare con i pezzi del modello. Questi pezzi del modello sono la base per andare alla fase successiva &amp;quot; dettagli mode&amp;quot;. Prima si sarà in grado di abilitare i &amp;quot; Dettagli mode&amp;quot; devono creare almeno un dettaglio. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4880,35 +4879,35 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>File bloccato</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati). </translation>
+        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file bloccato non può essere creato, per mancanza di autorizzazione. Ignora se vuoi continuare (scelta non consigliata, può causare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato. Ignora se vuoi continuare (scelta non consigliata, può causare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file bloccato non può essere creato, per mancanza di autorizzazione.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Segnala Bug...</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi pezzo</translation>
     </message>
 </context>
 <context>
@@ -4963,7 +4962,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Impossibile preparare i dati per la creazione del layout </translation>
+        <translation>Impossibile preparare i dati per la creazione del layout</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -4991,6 +4990,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation>Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5108,29 +5111,29 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>User name:</source>
-        <translation>Nome utente</translation>
+        <translation>Nome utente:</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation>Conto passi (0-infinito)</translation>
+        <translation>Conto passi (0-infinito):</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;andamento delle misure è già relativo.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;andamento delle misure è già assoluto.</translation>
     </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Visualizza informazioni versione</translation>
+        <translation>Visualizza informazioni versione.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
@@ -5218,7 +5221,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifiche applicate.</translation>
     </message>
 </context>
 <context>
@@ -5233,7 +5236,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrittura parziale. Partizione completa?</translation>
     </message>
 </context>
 <context>
@@ -5241,7 +5244,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>too few arguments for function sum.</source>
         <comment>parser error message</comment>
-        <translation>troppo pochi elementi per la funzione somma</translation>
+        <translation>troppo pochi elementi per la funzione somma.</translation>
     </message>
     <message>
         <source>too few arguments for function min.</source>
@@ -5284,7 +5287,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Puntatore non valido per la funzione di richiamo. </translation>
+        <translation>Puntatore non valido per la funzione di richiamo.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
@@ -5294,7 +5297,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Puntatore non valido per la variabile. </translation>
+        <translation>Puntatore non valido per la variabile.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
@@ -5394,7 +5397,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Valore stringa utilizzato dove è previsto un argomento numerico. </translation>
+        <translation>Valore stringa utilizzato dove è previsto un argomento numerico.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
@@ -5827,11 +5830,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Impossibile bloccare. Questo file è già aperto in un&apos;altra finestra. </translation>
+        <translation>Impossibile bloccare. Questo file è già aperto in un&apos;altra finestra.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Impossibile bloccare. </translation>
+        <translation>Impossibile bloccare. Questo file è già aperto in un altra finestra. Previsti conflitti quando 2 copie del programma sono in esecuzione.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
@@ -5851,7 +5854,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The name of known measurement forbidden to change.</source>
-        <translation>è proibito cambiare il nome di misure note. </translation>
+        <translation>è proibito cambiare il nome di misure note.</translation>
     </message>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
@@ -5950,7 +5953,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation>Il file non è stato ancora salvato</translation>
+        <translation>Il file non è stato ancora salvato.</translation>
     </message>
     <message>
         <source>Search</source>
@@ -5962,11 +5965,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula.</source>
-        <translation>Nome della misura nella formula</translation>
+        <translation>Nome della misura nella formula.</translation>
     </message>
     <message>
         <source>Measurement&apos;s human-readable name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome leggibile della misura.</translation>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
@@ -5990,27 +5993,27 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>File bloccato</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati). </translation>
+        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file bloccato non può essere creato, per mancanza di autorizzazione. Ignora se vuoi continuare (scelta non consigliata, può causare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato. Ignora se vuoi continuare (scelta non consigliata, può causare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file bloccato non può essere creato, per mancanza di autorizzazione.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato.</translation>
     </message>
 </context>
 <context>
@@ -6072,15 +6075,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Lingua di interfaccia</translation>
+        <translation>Lingua di interfaccia:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>separatore decimale</translation>
+        <translation>Separatore decimale:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Sistema di modellistica</translation>
+        <translation>Sistema di modellistica:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -6088,11 +6091,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Default height:</source>
-        <translation>Altezza di default</translation>
+        <translation>Altezza di default:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation>Taglia di default</translation>
+        <translation>Taglia di default:</translation>
     </message>
 </context>
 <context>
@@ -6329,7 +6332,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Unità layout (come per la carta eccetto px, modalità esportazione)</translation>
+        <translation>Unità layout (come per la carta eccetto px, modalità esportazione).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -6369,7 +6372,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Valore di rotazione non valido. Deve essere uno dei valori predefiniti. </translation>
+        <translation>Valore di rotazione non valido. Deve essere uno dei valori predefiniti.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -6385,7 +6388,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation>Le opzioni di esportazione posso venire utilizzate solo con file di input singoli. </translation>
+        <translation>Le opzioni di esportazione posso venire utilizzate solo con file di input singoli.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
@@ -6393,7 +6396,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
-        <translation>L&apos; opzione test può essere usata solo con file di input singolo. </translation>
+        <translation>L&apos; opzione test può essere usata solo con file di input singolo.</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
@@ -6401,7 +6404,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation>Il nome del file base dei file di layout.</translation>
+        <translation>Il nome del file base dei file di layout</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
@@ -6409,7 +6412,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The destination folder</source>
-        <translation>La cartella di destinazione.</translation>
+        <translation>La cartella di destinazione</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -6433,7 +6436,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>Altezza pagina in unità correnti come 12.0 (non possono venire utilizzate con &quot;%1&quot;, modalità di esportazione)</translation>
+        <translation>Altezza pagina in unità correnti come 12.0 (non possono venire utilizzate con &quot;%1&quot;, modalità di esportazione).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
@@ -6485,7 +6488,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation>Il margine sinistro deve essere usato con le unità della pagina</translation>
+        <translation>Il margine sinistro deve essere usato con le unità della pagina.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
@@ -6568,7 +6571,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
-        <translation>Impossibile trovare l&apos;oggetto.</translation>
+        <translation>Impossibile trovare l&apos;oggetto</translation>
     </message>
     <message>
         <source>Can&apos;t cast object</source>
@@ -6608,6 +6611,10 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Could not load schema file.</source>
+        <translation type="vanished">Impossibile caricare il file di schema</translation>
+    </message>
+    <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6625,7 +6632,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo ID è già esistente</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
@@ -6706,7 +6713,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation>Errore di analisi del file</translation>
+        <translation>Errore di analisi del file.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>

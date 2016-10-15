@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>Ім&apos;я / IP сервера</translation>
+        <translation>Ім&apos;я / IP сервера:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>Одиниці вимірювання по замовчуванню були оновлені і будуть використанні як основні наступного разу при створенні нової викрійки.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;інформацію&lt;/a&gt; яку ми збираємо.</translation>
     </message>
 </context>
 <context>
@@ -893,7 +893,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива</translation>
+        <translation>Крива:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1047,7 +1047,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива</translation>
+        <translation>Крива:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1122,7 +1122,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива</translation>
+        <translation>Крива:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1967,7 +1967,6 @@
 	Descending area = 2
 </source>
         <translation type="vanished">
-
 ⇥Три групи: великі, середні, малі = 0
 ⇥Дві групи: великі, маленькі = 1
 ⇥За зменшенням площі = 2
@@ -2025,20 +2024,19 @@ Apply settings anyway?</source>
         <translation>
 ⇥Три групи: великі, середні, малі = 0;
 ⇥Дві групи: великі, маленькі = 1;
-⇥За зменшенням площі = 2
-</translation>
+⇥За зменшенням площі = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри розкладки</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина зміщення:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Принцип вибору настпної деталі</translation>
     </message>
 </context>
 <context>
@@ -2289,7 +2287,7 @@ Apply settings anyway?</source>
     <message>
         <source>Indentation</source>
         <comment>Measurement section</comment>
-        <translation>Положення корпусу </translation>
+        <translation>Положення корпусу</translation>
     </message>
     <message>
         <source>Circumference and Arc</source>
@@ -2461,7 +2459,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Нове лекало</translation>
+        <translation>Нове лекало</translation>
     </message>
 </context>
 <context>
@@ -2766,7 +2764,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Негайно застосувати</translation>
     </message>
 </context>
 <context>
@@ -3519,15 +3517,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Контрольна точка</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Кут</translation>
+        <translation>Кут</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Коефіцієнт довжини</translation>
     </message>
 </context>
 <context>
@@ -3582,23 +3580,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished">Точка</translation>
+        <translation>Точка</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Перша контрольна точка</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Кут</translation>
+        <translation>Кут</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Коефіцієнт довжини</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Друга контрольна точка</translation>
     </message>
 </context>
 <context>
@@ -3842,7 +3840,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
     </message>
 </context>
 <context>
@@ -3959,11 +3957,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos; </translation>
+        <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів. </translation>
+        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -4599,7 +4597,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Зберегти плиткою як PDF </translation>
+        <translation>Зберегти плиткою як PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
@@ -4772,7 +4770,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження </translation>
+        <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -4792,7 +4790,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
-        <translation>Метод %1 не працює в графічному режимі.</translation>
+        <translation>Метод %1 не працює в графічному режимі</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
@@ -4904,11 +4902,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомити про помилку...</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити викрійку</translation>
     </message>
 </context>
 <context>
@@ -4987,10 +4985,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру</translation>
+        <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation>Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5119,11 +5121,11 @@ Do you want to save your changes?</source>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях до мірок вже відносний.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях до мірок вже абсолютний.</translation>
     </message>
 </context>
 <context>
@@ -6537,7 +6539,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Зберігає довжину листа якщо встановлено (режим експорту). Опція наказує програмі використовувати максимально ширину листа. Якість розкладки при цьому може погіршитися. </translation>
+        <translation>Зберігає довжину листа якщо встановлено (режим експорту). Опція наказує програмі використовувати максимально ширину листа. Якість розкладки при цьому може погіршитися.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
@@ -6557,15 +6559,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина зміщення</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
     </message>
 </context>
 <context>

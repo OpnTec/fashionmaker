@@ -1558,7 +1558,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Ohjelma ei pystynyt luomaan tietuetta</translation>
+        <translation>Ohjelma ei pystynyt luomaan tietuetta.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -2668,7 +2668,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Ei muutoksia </translation>
+        <translation>Ei muutoksia</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
@@ -3770,7 +3770,7 @@ Apply settings anyway?</source>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation>Ohjelma on saatavilla sellaisena kuin se on ilman mitään takuita, mukaan lukien suunnitelun, kaupallisuuden tai tiettyyn tarkoitukseen sopivuuden suhteen. </translation>
+        <translation>Ohjelma on saatavilla sellaisena kuin se on ilman mitään takuita, mukaan lukien suunnitelun, kaupallisuuden tai tiettyyn tarkoitukseen sopivuuden suhteen.</translation>
     </message>
 </context>
 <context>
@@ -4192,7 +4192,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Valitse pisteet, kaaret, käyrät myötäpäivään</translation>
+        <translation>Valitse pisteet, kaaret, käyrät myötäpäivään.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -4256,11 +4256,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Virhe: arvoa ei voi muuntaa</translation>
+        <translation>Virhe: arvoa ei voi muuntaa.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Virhe: tyhjä parametri</translation>
+        <translation>Virhe: tyhjä parametri.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -4268,7 +4268,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä.</translation>
     </message>
     <message>
         <source>Bad id.</source>
@@ -4848,6 +4848,10 @@ Haluatko tallentaa muutokset?</translation>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t create path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveDoubleLabel</name>
@@ -5144,12 +5148,12 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Kaava on tyhjä</translation>
+        <translation>Kaava on tyhjä.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Väärä osoitin muuttujaan</translation>
+        <translation>Väärä osoitin muuttujaan.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
@@ -5224,7 +5228,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation>Väärä operaattorin prioriteetti arvo (täytyy olla suurempi tai yhtä suuri kuin nolla)</translation>
+        <translation>Väärä operaattorin prioriteetti arvo (täytyy olla suurempi tai yhtä suuri kuin nolla).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
@@ -5234,32 +5238,32 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Yllättävä merkki kohdassa $POS$</translation>
+        <translation>Yllättävä merkki kohdassa $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Tekstistä puuttuu sulku kohdassa $POS$</translation>
+        <translation>Tekstistä puuttuu sulku kohdassa $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla</translation>
+        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan</translation>
+        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$</translation>
+        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Funktion tulos on tekstiä</translation>
+        <translation>Funktion tulos on tekstiä.</translation>
     </message>
     <message>
         <source>Parser error.</source>
@@ -5274,7 +5278,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku</translation>
+        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
@@ -5983,11 +5987,11 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation>Versiotietoja ei voitu palattaa</translation>
+        <translation>Versiotietoja ei voitu palattaa.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Liian monta merkkiä &lt;%1&gt; tiedostossa</translation>
+        <translation>Liian monta merkkiä &lt;%1&gt; tiedostossa.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
@@ -6007,11 +6011,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Virhe: id ei ole yksikäsitteinen</translation>
+        <translation>Virhe: id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation>Versiota ei voitu vaihtaa</translation>
+        <translation>Versiota ei voitu vaihtaa.</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
@@ -6026,7 +6030,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation>Työkalua ei löydy taulukosta</translation>
+        <translation>Työkalua ei löydy taulukosta.</translation>
     </message>
 </context>
 <context>
@@ -6239,7 +6243,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation>Kaavan luonti ohjelma. </translation>
+        <translation>Kaavan luonti ohjelma.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
@@ -6367,7 +6371,7 @@ Do you want to save your changes?</source>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Tiedostoa %1 ei voitu avata:
-%2</translation>
+%2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
@@ -6393,11 +6397,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Väärä parametri id. Täytyy olla id &gt; 0</translation>
+        <translation>Väärä parametri id. Täytyy olla id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Tämä id ei ole yksikäsitteinen</translation>
+        <translation>Tämä id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -6482,7 +6486,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Virhe: id ei ole yksikäsitteinen</translation>
+        <translation type="vanished">Virhe: id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6490,11 +6494,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Virhe: arvoa ei voi muuntaa</translation>
+        <translation>Virhe: arvoa ei voi muuntaa.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Virhe: tyhjä parametri</translation>
+        <translation>Virhe: tyhjä parametri.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -6502,7 +6506,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä.</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
@@ -6668,11 +6672,11 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen</translation>
+        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>Tämä splini ei ole olemassa</translation>
+        <translation>Tämä splini ei ole olemassa.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
