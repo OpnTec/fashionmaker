@@ -50,16 +50,18 @@ public:
     virtual ~ToggleDetailInLayout();
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getDetId() const;
     bool         getNewState() const;
+
+signals:
+    void UpdateList();
 private:
     Q_DISABLE_COPY(ToggleDetailInLayout)
-    quint32           m_id;
-    VContainer       *m_data;
-    bool              m_oldState;
-    bool              m_newState;
+    quint32     m_id;
+    VContainer *m_data;
+    bool        m_oldState;
+    bool        m_newState;
 
     void Do(bool state);
 };

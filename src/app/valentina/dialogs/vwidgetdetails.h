@@ -53,6 +53,7 @@ signals:
 
 public slots:
     void UpdateList();
+    void SelectDetail(quint32 id);
 
 private slots:
     void InLayoutStateChanged(int row, int column);
@@ -65,6 +66,7 @@ private:
     VContainer         *m_data;
 
     void FillTable(const QHash<quint32, VDetail> *details);
+    void ToggleSectionDetails(bool select);
 };
 
 #endif // VWIDGETDETAILS_H

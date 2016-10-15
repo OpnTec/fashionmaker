@@ -78,14 +78,19 @@ class VContainerData : public QSharedData //-V690
 public:
 
     VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
-        :gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
-          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>()),
+        : gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
+          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
+          details(QSharedPointer<QHash<quint32, VDetail>>(new QHash<quint32, VDetail>())),
           trVars(trVars), patternUnit(patternUnit)
     {}
 
     VContainerData(const VContainerData &data)
-        :QSharedData(data), gObjects(data.gObjects),
-          variables(data.variables), details(data.details), trVars(data.trVars), patternUnit(data.patternUnit)
+        : QSharedData(data),
+          gObjects(data.gObjects),
+          variables(data.variables),
+          details(data.details),
+          trVars(data.trVars),
+          patternUnit(data.patternUnit)
     {}
 
     virtual ~VContainerData();
@@ -102,7 +107,7 @@ public:
     /**
      * @brief details container of details
      */
-    QHash<quint32, VDetail> details;
+    QSharedPointer<QHash<quint32, VDetail>> details;
 
     const VTranslateVars *trVars;
     const Unit *patternUnit;

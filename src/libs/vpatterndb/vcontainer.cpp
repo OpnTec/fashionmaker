@@ -156,9 +156,9 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
  */
 const VDetail VContainer::GetDetail(quint32 id) const
 {
-    if (d->details.contains(id))
+    if (d->details->contains(id))
     {
-        return d->details.value(id);
+        return d->details->value(id);
     }
     else
     {
@@ -188,8 +188,8 @@ quint32 VContainer::AddGObject(VGObject *obj)
  */
 quint32 VContainer::AddDetail(const VDetail &detail)
 {
-    quint32 id = getNextId();
-    d->details[id] = detail;
+    const quint32 id = getNextId();
+    d->details->insert(id, detail);
     return id;
 }
 
@@ -260,7 +260,7 @@ void VContainer::Clear()
     qCDebug(vCon, "Clearing container data.");
     _id = NULL_ID;
 
-    d->details.clear();
+    d->details->clear();
     ClearVariables();
     ClearGObjects();
     ClearUniqueNames();
@@ -272,7 +272,7 @@ void VContainer::ClearForFullParse()
     qCDebug(vCon, "Clearing container data for full parse.");
     _id = NULL_ID;
 
-    d->details.clear();
+    d->details->clear();
     ClearVariables(VarType::Increment);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
@@ -496,7 +496,7 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    d->details[id] = detail;
+    d->details->insert(id, detail);
     UpdateId(id);
 }
 
@@ -653,7 +653,7 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
 // cppcheck-suppress unusedFunction
 void VContainer::ClearDetails()
 {
-    d->details.clear();
+    d->details->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -731,7 +731,7 @@ const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() cons
  */
 const QHash<quint32, VDetail> *VContainer::DataDetails() const
 {
-    return &d->details;
+    return d->details.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

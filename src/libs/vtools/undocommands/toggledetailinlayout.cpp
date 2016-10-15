@@ -83,22 +83,6 @@ void ToggleDetailInLayout::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool ToggleDetailInLayout::mergeWith(const QUndoCommand *command)
-{
-    const ToggleDetailInLayout *stateCommand = static_cast<const ToggleDetailInLayout *>(command);
-    SCASSERT(stateCommand != nullptr);
-    const quint32 id = stateCommand->getDetId();
-
-    if (id != m_id)
-    {
-        return false;
-    }
-
-    m_newState = stateCommand->getNewState();
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 int ToggleDetailInLayout::id() const
 {
     return static_cast<int>(UndoCommand::ToggleDetailInLayout);
@@ -134,8 +118,7 @@ void ToggleDetailInLayout::Do(bool state)
         VDetail det = m_data->DataDetails()->value(m_id);
         det.SetInLayout(state);
         m_data->UpdateDetail(m_id, det);
-
-        emit NeedLiteParsing(Document::LiteParse);
+        emit UpdateList();
     }
     else
     {

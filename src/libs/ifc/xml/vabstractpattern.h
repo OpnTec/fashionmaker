@@ -292,6 +292,8 @@ signals:
     void           UndoCommand();
     void           SetEnabledGUI(bool enabled);
     void           CheckLayout();
+    void           UpdateInLayoutList();
+    void           ShowDetail(quint32 id);
     void           SetCurrentPP(const QString &patterPiece);
 
 public slots:
@@ -299,6 +301,8 @@ public slots:
     void           haveLiteChange();
     void           NeedFullParsing();
     void           ClearScene();
+    void           CheckInLayoutList();
+    void           SelectedDetail(quint32 id);
 
 protected:
     /** @brief nameActivDraw name current pattern peace. */
