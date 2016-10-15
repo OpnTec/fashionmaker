@@ -277,7 +277,7 @@ void DialogPointOfContact::setCenter(const quint32 &value)
  */
 void DialogPointOfContact::setRadius(const QString &value)
 {
-    radius = qApp->TrVars()->FormulaToUser(value);
+    radius = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius.length() > 80)
     {

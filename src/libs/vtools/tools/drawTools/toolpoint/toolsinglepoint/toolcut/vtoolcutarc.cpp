@@ -242,7 +242,7 @@ void VToolCutArc::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formula));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }

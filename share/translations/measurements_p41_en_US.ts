@@ -13,7 +13,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Height: Total</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="192"/>
@@ -841,7 +841,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="591"/>
         <source>Neck circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Neck circumference</translation>
+        <translation>Neck Size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="592"/>
@@ -877,7 +877,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="606"/>
         <source>Bust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bust circumference</translation>
+        <translation>Chest</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
@@ -931,7 +931,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="628"/>
         <source>Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Waist circumference</translation>
+        <translation>Natural Waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="634"/>
@@ -955,19 +955,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="344"/>
         <source>height_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>waist_to_floor</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="346"/>
         <source>Height: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Height: Waist Back</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="347"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="637"/>
@@ -985,7 +985,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="644"/>
         <source>Hip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Hip circumference</translation>
+        <translation>Seat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="645"/>
@@ -1993,7 +1993,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1062"/>
         <source>Neck Back to Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Neck Back to Waist Back</translation>
+        <translation>Natural Waist Length</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1063"/>
@@ -2029,7 +2029,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1076"/>
         <source>Neck Back to Highbust Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Neck Back to Highbust Back</translation>
+        <translation>Scye Depth</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1077"/>
@@ -2425,7 +2425,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1241"/>
         <source>Shoulder length</source>
         <comment>Full measurement name.</comment>
-        <translation>Shoulder length</translation>
+        <translation>Shoulder</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1242"/>
@@ -2605,7 +2605,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1313"/>
         <source>Across Back, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Across Back, half</translation>
+        <translation>Half Back</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1314"/>
@@ -2833,19 +2833,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1413"/>
         <source>bustpoint_to_shoulder_center</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bustpoint_to_shoulder_center</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1415"/>
         <source>Bustpoint to Shoulder Center</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bustpoint to Shoulder Center</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1416"/>
         <source>From center of Shoulder to Bustpoint.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>From center of Shoulder to Bustpoint.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1431"/>
@@ -3091,7 +3091,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1537"/>
         <source>Arm: Shoulder Tip to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Arm: Shoulder Tip to Wrist, bent</translation>
+        <translation>Sleeve Length, one piece sleeve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1538"/>
@@ -3271,7 +3271,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1610"/>
         <source>Arm: Upper Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Arm: Upper Arm circumference</translation>
+        <translation>Arm Circumference</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1611"/>
@@ -3343,7 +3343,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1635"/>
         <source>Arm: Wrist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Arm: Wrist circumference</translation>
+        <translation>Close Wrist Measurement</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1636"/>
@@ -3487,7 +3487,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1705"/>
         <source>Leg: Crotch to floor</source>
         <comment>Full measurement name.</comment>
-        <translation>Leg: Crotch to floor</translation>
+        <translation>Inside Leg</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1706"/>
@@ -3540,7 +3540,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1713"/>
         <source>Leg: Waist Side to floor</source>
         <comment>Full measurement name.</comment>
-        <translation>Leg: Waist Side to floor</translation>
+        <translation>Side Seam Length for trousers</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1714"/>
@@ -3816,19 +3816,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
-        <translation>Rise length, side, sitting</translation>
+        <translation>Body Rise</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
         <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1863"/>
         <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1867"/>
@@ -3945,7 +3945,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1902"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Natural Waist circumference</translation>
+        <translation>Trouser Waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1903"/>
@@ -4053,7 +4053,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1946"/>
         <source>Arm: Neck Back to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Arm: Neck Back to Wrist, high bend</translation>
+        <translation>Sleeve Length for Shirts</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1947"/>
@@ -4125,7 +4125,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1976"/>
         <source>Arm: Across Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Arm: Across Back Center to Wrist, high bend</translation>
+        <translation>Sleeve Length, two piece sleeve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1977"/>

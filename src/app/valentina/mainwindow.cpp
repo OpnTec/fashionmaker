@@ -402,6 +402,12 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
+    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Standard)
+    {
+        qWarning()<<"Gradation doesn't support inches.";
+        return false;
+    }
+
     if (m->Type() == MeasurementsType::Standard)
     {
         m->SetDataSize();
@@ -1758,6 +1764,11 @@ void  MainWindow::ArrowTool()
     ui->actionStopTool->setEnabled(false);
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
+
+    // Fix issue #435. https://bitbucket.org/dismine/valentina/issues/435/error-valentina-doesnt-change-the-cursor
+    RestoreOverrideCursor(cursorArrowCloseHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
+
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
@@ -2222,6 +2233,10 @@ void MainWindow::Clear()
     sceneDetails->clear();
     ArrowTool();
     comboBoxDraws->clear();
+    ui->actionDraw->setEnabled(false);
+    ui->actionDetails->setEnabled(false);
+    ui->actionLayout->setEnabled(false);
+    ui->actionNewDraw->setEnabled(false);
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
     ui->actionSaveAs->setEnabled(false);
@@ -2252,6 +2267,7 @@ void MainWindow::Clear()
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
     qApp->getUndoStack()->clear();
+    toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
 }
 
@@ -2790,6 +2806,8 @@ void MainWindow::ActionHistory(bool checked)
         dialogHistory->setWindowFlags(Qt::Window);
         connect(this, &MainWindow::RefreshHistory, dialogHistory, &DialogHistory::UpdateHistory);
         connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
+        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+        dialogHistory->setWindowFlags(dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
         dialogHistory->show();
     }
     else
@@ -2891,7 +2909,6 @@ void MainWindow::SetLayoutModeActions(bool enable)
     ui->actionExportAs->setEnabled(value);
     ui->actionPrintPreview->setEnabled(value);
     ui->actionPrintPreviewTiled->setEnabled(value);
-    ui->actionSaveAsPDF->setEnabled(value);
     ui->actionSaveAsTiledPDF->setEnabled(value);
     ui->actionPrint->setEnabled(value);
     ui->actionPrintTiled->setEnabled(value);
@@ -3329,7 +3346,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
-    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
+    connect(ui->actionClosePattern, &QAction::triggered, this, &MainWindow::ResetWindow);
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
@@ -3338,7 +3355,6 @@ void MainWindow::CreateActions()
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTiled, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
-    connect(ui->actionSaveAsPDF, &QAction::triggered, this, &MainWindow::SaveAsPDF);
     connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
     connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
     connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);
@@ -3577,9 +3593,15 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         ZoomFirstShow();
 
         ActionDraw(true);
+
+        qApp->setOpeningPattern();// End opening file
+        return true;
     }
-    qApp->setOpeningPattern();// End opening file
-    return true;
+    else
+    {
+        qApp->setOpeningPattern();// End opening file
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

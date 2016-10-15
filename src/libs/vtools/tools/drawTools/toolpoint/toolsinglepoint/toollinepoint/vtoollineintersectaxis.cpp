@@ -160,7 +160,15 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
     QLineF::IntersectType intersect = axis.intersect(line, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        return fPoint;
+        if(VFuzzyComparePossibleNulls(axis.angle(), line.angle())
+           || VFuzzyComparePossibleNulls(qAbs(axis.angle() - line.angle()), 180))
+        {
+            return QPointF();
+        }
+        else
+        {
+            return fPoint;
+        }
     }
     else
     {
@@ -295,7 +303,7 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

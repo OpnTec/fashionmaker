@@ -54,7 +54,8 @@ SOURCES += \
     tst_vcommandline.cpp \
     tst_tstranslation.cpp \
     tst_vdetail.cpp \
-    tst_vabstractcurve.cpp
+    tst_vabstractcurve.cpp \
+    tst_vgobject.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -76,7 +77,8 @@ HEADERS += \
     tst_vcommandline.h \
     tst_tstranslation.h \
     tst_vdetail.h \
-    tst_vabstractcurve.h
+    tst_vabstractcurve.h \
+    tst_vgobject.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

@@ -39,22 +39,25 @@ class TST_QmuParserErrorMsg : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_QmuParserErrorMsg(QObject *parent = nullptr);
+    explicit TST_QmuParserErrorMsg(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_QmuParserErrorMsg() Q_DECL_OVERRIDE;
 
 private slots:
+    void initTestCase();
     void TestEErrorCodes_data();
     void TestEErrorCodes();
+    void cleanupTestCase();
 
 private:
     Q_DISABLE_COPY(TST_QmuParserErrorMsg)
 
+    QString m_locale;
     QPointer<QTranslator> appTranslator;
     qmu::QmuParserErrorMsg *msg;
 
     void AddCase(int code, bool tok, bool pos);
     int  LoadTranslation(const QString &checkedLocale);
-    void CheckStrings(int code, bool tok, bool pos);
+    void RemoveTranslation();
 };
 
 #endif // TST_QMUPARSERERRORMSG_H

@@ -40,24 +40,34 @@ public:
 signals:
 
 private slots:
+    void EquidistantRemoveLoop_data();
     void EquidistantRemoveLoop() const;
     void SumTrapezoids() const;
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;
     void BrokenDetailEquidistant() const;
+    void TestCorrectEquidistantPoints_data();
+    void TestCorrectEquidistantPoints() const;
 
 private:
-    void Case1() const;
-    void Case2() const;
     void Case3() const;
     void Case4() const;
     void Case5() const;
 
-    QVector<QPointF> InputPointsCase1() const;
-    QVector<QPointF> OutputPointsCase1() const;
+    QVector<QPointF> InputPointsIssue298Case1() const;
+    QVector<QPointF> OutputPointsIssue298Case1() const;
 
-    QVector<QPointF> InputPointsCase2() const;
-    QVector<QPointF> OutputPointsCase2() const;
+    QVector<QPointF> InputPointsIssue298Case2() const;
+    QVector<QPointF> OutputPointsIssue298Case2() const;
+
+    QVector<QPointF> InputPointsIssue548Case1() const;
+    QVector<QPointF> OutputPointsIssue548Case1() const;
+
+    QVector<QPointF> InputPointsIssue548Case2() const;
+    QVector<QPointF> OutputPointsIssue548Case2() const;
+
+    QVector<QPointF> InputPointsIssue548Case3() const;
+    QVector<QPointF> OutputPointsIssue548Case3() const;
 
     QVector<QPointF> InputPointsCase3() const;
     QVector<QPointF> InputPointsCase4() const;

@@ -33,7 +33,7 @@
 
 extern const int MAJOR_VERSION = 0;
 extern const int MINOR_VERSION = 4;
-extern const int DEBUG_VERSION = 4;
+extern const int DEBUG_VERSION = 5;
 
 extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
                                  .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
@@ -44,13 +44,13 @@ QString compilerString()
 #if defined(Q_CC_INTEL) // must be before GNU, Clang and MSVC because ICC/ICL claim to be them
     QString iccCompact;
 #ifdef __INTEL_CLANG_COMPILER
-    iccCompact = QLatin1Literal("Clang");
+    iccCompact = QLatin1String("Clang");
 #elif defined(__INTEL_MS_COMPAT_LEVEL)
-    iccCompact = QLatin1Literal("Microsoft");
+    iccCompact = QLatin1String("Microsoft");
 #elif defined(__GNUC__)
-    iccCompact = QLatin1Literal("GCC");
+    iccCompact = QLatin1String("GCC");
 #else
-    iccCompact = QLatin1Literal("no");
+    iccCompact = QLatin1String("no");
 #endif
     QString iccVersion;
     if (__INTEL_COMPILER >= 1300)
@@ -88,8 +88,9 @@ QString compilerString()
     {
         return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
     }
+#else
+    return QStringLiteral("<unknown compiler>");
 #endif
-    return QLatin1String("<unknown compiler>");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

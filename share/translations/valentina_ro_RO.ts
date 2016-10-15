@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
 </context>
 <context>
@@ -794,7 +794,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -905,7 +905,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -984,7 +984,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1059,7 +1059,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1134,7 +1134,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1467,7 +1467,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -1534,7 +1534,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2117,7 +2117,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2236,7 +2236,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2533,7 +2533,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2778,7 +2778,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -2857,7 +2857,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -2932,7 +2932,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -2979,7 +2979,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -3018,7 +3018,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -3101,7 +3101,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -3128,7 +3128,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Rută</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -3306,7 +3306,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -3361,7 +3361,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
 </context>
 <context>
@@ -3593,7 +3593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -3680,7 +3680,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Alege o denumire unică</translation>
+        <translation>Alege o denumire unică.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -4123,7 +4123,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Închide fereastra</translation>
+        <translation type="vanished">Închide fereastra</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4455,14 +4455,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save as PDF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save original layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save as tiled PDF</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4771,6 +4763,10 @@ Do you want to save your changes?</source>
         <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4827,15 +4823,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5382,7 +5382,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Rută</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>

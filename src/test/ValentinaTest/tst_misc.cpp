@@ -91,6 +91,58 @@ void TST_Misc::TestAbsoluteFilePath_data()
     QTest::addColumn<QString>("relativeMPath");
     QTest::addColumn<QString>("output");
 
+    #ifdef Q_OS_WIN
+    QTest::newRow("Measurements one level above")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "../measurements/m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/measurements/m.vit");
+
+    QTest::newRow("Measurements one level above")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "../measurements/m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/measurements/m.vit");
+
+    QTest::newRow("Measurements one level under")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "measurements/m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/measurements/m.vit");
+
+    QTest::newRow("Measurements in the same folder")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit");
+
+    QTest::newRow("Path to measurements is empty")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "" << "";
+
+    QTest::newRow("Path to a pattern file is empty. Ablosute measurements path.")
+            << ""
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit");
+
+    QTest::newRow("Path to a pattern file is empty. Relative measurements path.")
+            << ""
+            << "measurements/m.vit"
+            << "measurements/m.vit";
+
+    QTest::newRow("Relative measurements path.")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "../measurements/m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/measurements/m.vit");
+
+    QTest::newRow("Both paths are empty") << "" << "" << "";
+
+    QTest::newRow("Path to measurements is relative")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
+            << "m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit");
+
+    QTest::newRow("Absolute pattern path.")
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns")
+            << "m.vit"
+            << QApplication::applicationDirPath() + QStringLiteral("/home/user/m.vit");
+    #else
     QTest::newRow("Measurements one level above")
             << "/home/user/patterns/pattern.val" << "../measurements/m.vit" << "/home/user/measurements/m.vit";
 
@@ -118,6 +170,7 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << "/home/user/patterns/pattern.val" << "m.vit" << "/home/user/patterns/m.vit";
 
     QTest::newRow("Absolute pattern path.") << "/home/user/patterns" << "m.vit" << "/home/user/m.vit";
+    #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -40,7 +40,7 @@
 using namespace qmu;
 
 //---------------------------------------------------------------------------------------------------------------------
-VTranslateVars::VTranslateVars(bool osSeparator)
+VTranslateVars::VTranslateVars()
     :VTranslateMeasurements(),
       PMSystemNames(QMap<QString, QmuTranslation>()),
       PMSystemAuthors(QMap<QString, QmuTranslation>()),
@@ -48,8 +48,7 @@ VTranslateVars::VTranslateVars(bool osSeparator)
       variables(QMap<QString, QmuTranslation>()),
       functions(QMap<QString, QmuTranslation>()),
       postfixOperators(QMap<QString, QmuTranslation>()),
-      stDescriptions(QMap<QString, QmuTranslation>()),
-      osSeparator(osSeparator)
+      stDescriptions(QMap<QString, QmuTranslation>())
 {
     InitPatternMakingSystems();
     InitVariables();
@@ -803,7 +802,7 @@ QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSepara
  * @param formula expression that need translate
  * @return translated expression
  */
-QString VTranslateVars::FormulaToUser(const QString &formula) const
+QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) const
 {
     if (formula.isEmpty())
     {
@@ -905,7 +904,11 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
 
             loc = QLocale::system();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            dStr.replace(" ", ""); // Remove thousand separator
+            const QChar thSep = loc.groupSeparator();
+            if (thSep.isSpace())
+            {
+                dStr.remove(thSep);// Remove thousand separator
+            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)

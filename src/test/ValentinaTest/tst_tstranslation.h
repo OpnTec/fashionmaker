@@ -41,7 +41,9 @@ public:
     explicit TST_TSTranslation(QObject *parent = 0);
 
 private slots:
+    void CheckEnglishLocalization_data();
     void CheckEnglishLocalization();
+    void CheckEmptyToolButton_data();
     void CheckEmptyToolButton();
     void CheckPlaceMarkerExist_data();
     void CheckPlaceMarkerExist();

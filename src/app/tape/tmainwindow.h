@@ -152,6 +152,7 @@ private:
     QAction *actionDockDiagram;
     bool dockDiagramVisible;
     bool isInitialized;
+    QVector<QObject *> hackedWidgets;
 
     void SetupMenu();
     void InitWindow();
@@ -202,6 +203,9 @@ private:
     void CreateWindowMenu(QMenu *menu);
 
     bool IgnoreLocking(int error, const QString &path);
+
+    template <class T>
+    void HackWidget(T **widget);
 };
 
 #endif // TMAINWINDOW_H

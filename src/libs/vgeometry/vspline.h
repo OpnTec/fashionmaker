@@ -47,10 +47,10 @@ class VSpline :public VAbstractCurve
 public:
     VSpline();
     VSpline (const VSpline &spline );
-    VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
+    VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
-             Draw mode = Draw::Calculation);
+    VSpline (const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, qreal kCurve,
+             quint32 idObject = 0, Draw mode = Draw::Calculation);
     virtual ~VSpline() Q_DECL_OVERRIDE;
     VSpline &operator=(const VSpline &spl);
     VPointF GetP1 () const;

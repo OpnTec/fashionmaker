@@ -40,11 +40,13 @@ class VNodeArc :public VAbstractNode, public QGraphicsPathItem
     Q_OBJECT
 public:
     VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-             const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
+             const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr, 
+             QGraphicsItem * parent = nullptr);
 
     static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
                         quint32 idArc, const Document &parse,
-                        const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
+                        const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0, 
+                        QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

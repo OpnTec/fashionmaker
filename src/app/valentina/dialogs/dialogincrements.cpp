@@ -145,7 +145,7 @@ void DialogIncrements::FillIncrements()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {
@@ -704,6 +704,9 @@ void DialogIncrements::Fx()
 
     if (dialog->exec() == QDialog::Accepted)
     {
+        // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
+        // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
+        const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
         doc->SetIncrementFormula(nameField->text(), dialog->GetFormula());
         FullUpdateTree(Document::LiteParse);
         ui->tableWidgetIncrement->selectRow(row);
@@ -771,7 +774,7 @@ void DialogIncrements::ShowIncrementDetails()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {

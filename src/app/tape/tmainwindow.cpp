@@ -98,7 +98,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelPatternUnit(nullptr),
       actionDockDiagram(nullptr),
       dockDiagramVisible(false),
-      isInitialized(false)
+      isInitialized(false),
+      hackedWidgets()
 {
     ui->setupUi(this);
 
@@ -160,7 +161,6 @@ void TMainWindow::RetranslateTable()
     {
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
-        ShowUnits();
         ui->tableWidget->selectRow(row);
     }
 }
@@ -372,79 +372,57 @@ void TMainWindow::FileNew()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenIndividual()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
-        //Use standard path to individual measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
-        Open(pathTo, filter);
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenIndividual();
-    }
+    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
+    //Use standard path to individual measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+
+    Open(pathTo, filter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenStandard()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
-        //Use standard path to standard measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
-        Open(pathTo, filter);
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenStandard();
-    }
+    const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
+    //Use standard path to standard measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
+
+    Open(pathTo, filter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenTemplate()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
-        //Use standard path to template files
-        const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-        Open(pathTo, filter);
+    const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
+    //Use standard path to template files
+    const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
 
-        if (m != nullptr)
-        {// The file was opened.
-            SetCurrentFile(""); // Force user to to save new file
-            lock.reset();// remove lock from template
-        }
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->OpenTemplate();
+    Open(pathTo, filter);
+
+    if (m != nullptr)
+    {// The file was opened.
+        SetCurrentFile(""); // Force user to to save new file
+        lock.reset();// remove lock from template
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateFromExisting()
 {
-    if (m == nullptr)
-    {
-        const QString filter = tr("Individual measurements (*.vit)");
-        //Use standard path to standard measurements
-        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
-        const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
+    const QString filter = tr("Individual measurements (*.vit)");
+    //Use standard path to standard measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
 
-        if (not mPath.isEmpty())
+    if (not mPath.isEmpty())
+    {
+        if (m == nullptr)
         {
             LoadFromExistingFile(mPath);
         }
-    }
-    else
-    {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->CreateFromExisting();
+        else
+        {
+            qApp->NewMainWindow()->CreateFromExisting();
+        }
     }
 }
 
@@ -647,6 +625,7 @@ void TMainWindow::FileSaveAs()
         }
     }
 
+    ReadOnly(false);
     QString error;
     bool result = SaveMeasurements(fileName, error);
     if (result == false)
@@ -1005,6 +984,9 @@ void TMainWindow::Fx()
 
     if (dialog->exec() == QDialog::Accepted)
     {
+        // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
+        // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
+        const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
         m->SetMValue(nameField->data(Qt::UserRole).toString(), dialog->GetFormula());
 
         MeasurementsWasSaved(false);
@@ -1267,9 +1249,9 @@ void TMainWindow::ShowMData()
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
             ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
 
-            ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
-            ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
-            ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
+            ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
+            ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
+            ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
@@ -1285,7 +1267,7 @@ void TMainWindow::ShowMData()
             QString formula;
             try
             {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
             }
             catch (qmu::QmuParserError &e)
             {
@@ -1471,7 +1453,7 @@ void TMainWindow::SaveMValue()
 
     try
     {
-        const QString formula = qApp->TrVars()->FormulaFromUser(text, true);
+        const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         m->SetMValue(nameField->data(Qt::UserRole).toString(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
@@ -1505,22 +1487,6 @@ void TMainWindow::SaveMBaseValue(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1531,6 +1497,8 @@ void TMainWindow::SaveMBaseValue(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1544,22 +1512,6 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1570,6 +1522,8 @@ void TMainWindow::SaveMSizeIncrease(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1583,22 +1537,6 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1606,7 +1544,11 @@ void TMainWindow::SaveMHeightIncrease(double value)
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1770,39 +1712,23 @@ void TMainWindow::InitWindow()
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
         // Tab Measurements
-        delete ui->horizontalLayoutValue;
-        delete ui->plainTextEditFormula;
-        delete ui->toolButtonExpr;
-
-        delete ui->labelFormula;
-        ui->labelFormula = new QLabel(this);
-
-        delete ui->pushButtonGrow;
-        ui->pushButtonGrow = new QPushButton(this);
+        HackWidget(&ui->horizontalLayoutValue);
+        HackWidget(&ui->plainTextEditFormula);
+        HackWidget(&ui->toolButtonExpr);
+        HackWidget(&ui->labelFormula);
+        HackWidget(&ui->pushButtonGrow);
 
         // Tab Information
-        delete ui->lineEditGivenName;
-        delete ui->lineEditFamilyName;
-        delete ui->comboBoxGender;
-        delete ui->lineEditEmail;
-
-        delete ui->labelGivenName;
-        ui->labelGivenName = new QLabel(this);
-
-        delete ui->labelFamilyName;
-        ui->labelFamilyName = new QLabel(this);
-
-        delete ui->labelBirthDate;
-        ui->labelBirthDate = new QLabel(this);
-
-        delete ui->dateEditBirthDate;
-        ui->dateEditBirthDate = new QDateEdit(this);
-
-        delete ui->labelGender;
-        ui->labelGender = new QLabel(this);
-
-        delete ui->labelEmail;
-        ui->labelEmail = new QLabel(this);
+        HackWidget(&ui->lineEditGivenName);
+        HackWidget(&ui->lineEditFamilyName);
+        HackWidget(&ui->comboBoxGender);
+        HackWidget(&ui->lineEditEmail);
+        HackWidget(&ui->labelGivenName);
+        HackWidget(&ui->labelFamilyName);
+        HackWidget(&ui->labelBirthDate);
+        HackWidget(&ui->dateEditBirthDate);
+        HackWidget(&ui->labelGender);
+        HackWidget(&ui->labelEmail);
 
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
@@ -1842,31 +1768,18 @@ void TMainWindow::InitWindow()
         ui->lineEditEmail->setEnabled(true);
 
         // Tab Measurements
-        delete ui->doubleSpinBoxBaseValue;
-        delete ui->doubleSpinBoxInSizes;
-        delete ui->doubleSpinBoxInHeights;
-
-        delete ui->labelBaseValue;
-        ui->labelBaseValue = new QLabel(this);
-
-        delete ui->labelInSizes;
-        ui->labelInSizes = new QLabel(this);
-
-        delete ui->labelInHeights;
-        ui->labelInHeights = new QLabel(this);
+        HackWidget(&ui->doubleSpinBoxBaseValue);
+        HackWidget(&ui->doubleSpinBoxInSizes);
+        HackWidget(&ui->doubleSpinBoxInHeights);
+        HackWidget(&ui->labelBaseValue);
+        HackWidget(&ui->labelInSizes);
+        HackWidget(&ui->labelInHeights);
 
         // Tab Information
-        delete ui->labelBaseSize;
-        ui->labelBaseSize = new QLabel(this);
-
-        delete ui->labelBaseSizeValue;
-        ui->labelBaseSizeValue = new QLabel(this);
-
-        delete ui->labelBaseHeight;
-        ui->labelBaseHeight = new QLabel(this);
-
-        delete ui->labelBaseHeightValue;
-        ui->labelBaseHeightValue = new QLabel(this);
+        HackWidget(&ui->labelBaseSize);
+        HackWidget(&ui->labelBaseSizeValue);
+        HackWidget(&ui->labelBaseHeight);
+        HackWidget(&ui->labelBaseHeightValue);
 
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
@@ -2176,6 +2089,8 @@ void TMainWindow::RefreshTable()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
+    ShowUnits();
+
     const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
     QMap<int, QSharedPointer<VMeasurement> > orderedTable;
     QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
@@ -2215,7 +2130,7 @@ void TMainWindow::RefreshTable()
             QString formula;
             try
             {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
             }
             catch (qmu::QmuParserError &e)
             {
@@ -2371,7 +2286,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             QString f;
             if (fromUser)
             {
-                f = qApp->TrVars()->FormulaFromUser(formula, true);
+                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             }
             else
             {
@@ -2400,13 +2315,16 @@ void TMainWindow::Open(const QString &pathTo, const QString &filter)
 {
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter);
 
-    if (mPath.isEmpty())
+    if (not mPath.isEmpty())
     {
-        return;
-    }
-    else
-    {
-        LoadFile(mPath);
+        if (m == nullptr)
+        {
+            LoadFile(mPath);
+        }
+        else
+        {
+            qApp->NewMainWindow()->LoadFile(mPath);
+        }
     }
 }
 
@@ -2547,7 +2465,6 @@ void TMainWindow::UpdatePatternUnit()
         return;
     }
 
-    ShowUnits();
     RefreshTable();
 
     search->RefreshList(ui->lineEditFind->text());
@@ -2783,19 +2700,34 @@ void TMainWindow::SetDecimals()
     switch (mUnit)
     {
         case Unit::Cm:
-            ui->doubleSpinBoxBaseValue->setDecimals(1);
-            ui->doubleSpinBoxInSizes->setDecimals(1);
-            ui->doubleSpinBoxInHeights->setDecimals(1);
+            ui->doubleSpinBoxBaseValue->setDecimals(2);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.01);
+
+            ui->doubleSpinBoxInSizes->setDecimals(2);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.01);
+
+            ui->doubleSpinBoxInHeights->setDecimals(2);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.01);
             break;
         case Unit::Mm:
-            ui->doubleSpinBoxBaseValue->setDecimals(0);
-            ui->doubleSpinBoxInSizes->setDecimals(0);
-            ui->doubleSpinBoxInHeights->setDecimals(0);
+            ui->doubleSpinBoxBaseValue->setDecimals(1);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
+
+            ui->doubleSpinBoxInSizes->setDecimals(1);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.1);
+
+            ui->doubleSpinBoxInHeights->setDecimals(1);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInSizes->setDecimals(5);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInHeights->setDecimals(5);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.00001);
             break;
         default:
             break;
@@ -2889,4 +2821,13 @@ void TMainWindow::ShowInGraphicalShell()
     QProcess::startDetached(cmd);
 #endif
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void TMainWindow::HackWidget(T **widget)
+{
+    delete *widget;
+    *widget = new T();
+    hackedWidgets.append(*widget);
 }

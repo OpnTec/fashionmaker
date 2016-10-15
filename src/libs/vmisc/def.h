@@ -33,6 +33,7 @@
 #include <QtGlobal>
 #include <QStringList>
 #include <QSharedPointer>
+#include <QtPrintSupport/QPrinter>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
@@ -44,7 +45,6 @@
 #endif /* Q_CC_MSVC */
 
 class QComboBox;
-class QPrinter;
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
@@ -598,8 +598,25 @@ QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
 QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
 QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
 
-QSharedPointer<QPrinter> DefaultPrinter() Q_REQUIRED_RESULT;
+QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
 
 QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
+
+static inline bool VFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
+static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
+{
+    if(qFuzzyIsNull(p1))
+    {
+        return qFuzzyIsNull(p2);
+    }
+    else if(qFuzzyIsNull(p2))
+    {
+        return false;
+    }
+    else
+    {
+        return qFuzzyCompare(p1, p2);
+    }
+}
 
 #endif // DEF_H

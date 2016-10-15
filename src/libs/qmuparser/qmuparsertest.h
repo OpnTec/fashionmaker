@@ -50,7 +50,7 @@ class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 public:
     typedef int ( QmuParserTester::*testfun_type ) ();
 
-    QmuParserTester(QObject *parent = nullptr);
+    explicit QmuParserTester(QObject *parent = nullptr);
 
 public slots:
     void Run();

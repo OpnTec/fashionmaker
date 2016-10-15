@@ -103,6 +103,7 @@ void TapeConfigurationPage::Apply()
         systemChanged = false;
 
         qApp->LoadTranslation(locale);
+        qApp->processEvents();// force to call changeEvent
 
         // Part about measurments will not be updated automatically
         qApp->RetranslateTables();

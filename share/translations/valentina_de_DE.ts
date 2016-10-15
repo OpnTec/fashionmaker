@@ -572,7 +572,7 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>Erster Winkel</translation>
+        <translation>Erster Winkel:</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -647,7 +647,7 @@
     </message>
     <message>
         <source>Edit the first angle</source>
-        <translation>Ersten Winkel bearbeiten </translation>
+        <translation>Ersten Winkel bearbeiten</translation>
     </message>
     <message>
         <source>Edit the arc length</source>
@@ -683,7 +683,7 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>Erster Winkel</translation>
+        <translation>Erster Winkel:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -889,7 +889,7 @@
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation>Punkt der Schnittachse:</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -1669,7 +1669,7 @@
     </message>
     <message>
         <source>Correction the dart %1_%2_%3</source>
-        <translation>Korrektur des Abnähers %1_%2_%3 </translation>
+        <translation>Korrektur des Abnähers %1_%2_%3</translation>
     </message>
 </context>
 <context>
@@ -1823,7 +1823,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Daten für die Erstellung des Layouts konnten nicht vorbereitet werden.</translation>
+        <translation>Daten für die Erstellung des Layouts konnten nicht vorbereitet werden</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -2024,8 +2024,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>
 ⇥Drei Gruppen: groß, mittel, klein = 0
 ⇥Zwei Gruppen: groß, klein = 1
-⇥Absteigende Fläche = 2
-</translation>
+⇥Absteigende Fläche = 2</translation>
     </message>
     <message>
         <source>Layout options</source>
@@ -2234,15 +2233,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation>Punkt der Schnittachse:</translation>
     </message>
     <message>
         <source>First line point:</source>
-        <translation>Punkt 1 der Linie</translation>
+        <translation>Punkt 1 der Linie:</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation>Punkt 2 der Linie</translation>
+        <translation>Punkt 2 der Linie:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -2397,7 +2396,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Basishöhe</translation>
+        <translation>Basishöhe:</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -2456,7 +2455,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
-        <translation>Eindeutigen Namen für das Schnitteil eingeben. </translation>
+        <translation>Eindeutigen Namen für das Schnitteil eingeben.</translation>
     </message>
     <message>
         <source>New pattern</source>
@@ -3155,7 +3154,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Edit second circle radius</source>
-        <translation>Zweiten Kreisradius bearbeiten </translation>
+        <translation>Zweiten Kreisradius bearbeiten</translation>
     </message>
     <message>
         <source>Error</source>
@@ -3321,7 +3320,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
-        <translation>Der Dateiname enthält unerlaubte Zeichen. </translation>
+        <translation>Der Dateiname enthält unerlaubte Zeichen.</translation>
     </message>
 </context>
 <context>
@@ -3663,7 +3662,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Zweiten Punkt wählen</translation>
+        <translation>Ersten Punkt wählen</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -4257,7 +4256,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Fenster schließen</translation>
+        <translation type="vanished">Fenster schließen</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4451,7 +4450,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
-        <translation>Zuletzt geöffnete Dateien laden?</translation>
+        <translation>Zuletzt geöffnete Dateien laden.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -4563,7 +4562,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
-        <translation>Schnittpunkt Bögen </translation>
+        <translation>Schnittpunkt Bögen</translation>
     </message>
     <message>
         <source>Point of intersection circles</source>
@@ -4591,11 +4590,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Als PDF speichern</translation>
+        <translation type="vanished">Als PDF speichern</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Originales Layout speichern</translation>
+        <translation type="vanished">Originales Layout speichern</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4888,7 +4887,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen)</translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4905,6 +4904,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Report Bug...</source>
         <translation>Programmfehler melden...</translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
+        <translation>Schnittmuster schließen</translation>
     </message>
 </context>
 <context>
@@ -4959,7 +4962,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Daten für die Erstellung des Layouts konnten nicht vorbereitet werden.</translation>
+        <translation>Daten für die Erstellung des Layouts konnten nicht vorbereitet werden</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -4975,7 +4978,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
+        <translation type="vanished">Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -4984,6 +4987,14 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Zum Drucken eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5291,7 +5302,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Unerwarteter Operator &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
+        <translation>Unerwarteter Operator &quot;$TOK$&quot; an Position $POS$ gefunden</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
@@ -5306,22 +5317,22 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Unerwartete Klammer &quot;$TOK$&quot; an Position $POS$.</translation>
+        <translation>Unerwartete Klammer &quot;$TOK$&quot; an Position $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Unerwartete Funktion &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
+        <translation>Unerwartete Funktion &quot;$TOK$&quot; an Position $POS$ gefunden</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Unerwarteter Wert &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
+        <translation>Unerwarteter Wert &quot;$TOK$&quot; an Position $POS$ gefunden</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Unerwartete Variable &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
+        <translation>Unerwartete Variable &quot;$TOK$&quot; an Position $POS$ gefunden</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
@@ -5421,7 +5432,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Unangebrachter Doppelpunkt an Stellung $POS$ </translation>
+        <translation>Unangebrachter Doppelpunkt an Stellung $POS$</translation>
     </message>
 </context>
 <context>
@@ -5557,7 +5568,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Basishöhe</translation>
+        <translation>Basishöhe:</translation>
     </message>
     <message>
         <source>Base height value</source>
@@ -5953,7 +5964,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula.</source>
-        <translation>Name des Maßes in Formel</translation>
+        <translation>Name des Maßes in Formel.</translation>
     </message>
     <message>
         <source>Measurement&apos;s human-readable name.</source>
@@ -5989,7 +6000,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen)</translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -6176,11 +6187,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Fehler Erstellung Sicherungsdatei: %1</translation>
+        <translation>Fehler Erstellung Sicherungsdatei: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation>Fehler Erstellung reservierte Kopie : %1</translation>
+        <translation>Fehler Erstellung reservierte Kopie : %1.</translation>
     </message>
 </context>
 <context>
@@ -6222,7 +6233,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Löschvorgang bestätigen </translation>
+        <translation>Löschvorgang bestätigen</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
@@ -6272,7 +6283,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measure file</source>
-        <translation>Die Maßsatz-Datei.</translation>
+        <translation>Die Maßsatz-Datei</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
@@ -6432,11 +6443,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation>Ungültiges Größen-Gradierungsmaß</translation>
+        <translation>Ungültiges Größen-Gradierungsmaß.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation>Ungültiges Längen-Gradierungsmaß</translation>
+        <translation>Ungültiges Längen-Gradierungsmaß.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -6677,7 +6688,7 @@ Do you want to save your changes?</source>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
-        <translation>Maß &apos;%1&apos; kann nicht gefunden werden.</translation>
+        <translation>Maß &apos;%1&apos; kann nicht gefunden werden</translation>
     </message>
     <message>
         <source>The measurement name is empty!</source>

@@ -29,8 +29,8 @@
 #include "adddetnode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddDetNode::AddDetNode(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent)
+AddDetNode::AddDetNode(const QDomElement &xml, VAbstractPattern *doc, const QString &drawName, QUndoCommand *parent)
+    : VUndoCommand(xml, doc, parent), m_drawName(drawName)
 {
     setText(QObject::tr("add node"));
     nodeId = doc->GetParametrId(xml);
@@ -45,15 +45,15 @@ void AddDetNode::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
+    QDomElement modeling = GetModelingSection();
+    if (not modeling.isNull())
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
-            if (modelingElement.removeChild(domElement).isNull())
+            if (modeling.removeChild(domElement).isNull())
             {
-               qCDebug(vUndo, "Can't delete node.");
+                qCDebug(vUndo, "Can't delete node.");
                 return;
             }
         }
@@ -75,14 +75,29 @@ void AddDetNode::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
+    QDomElement modeling = GetModelingSection();
+    if (not modeling.isNull())
     {
-        modelingElement.appendChild(xml);
+        modeling.appendChild(xml);
     }
     else
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement AddDetNode::GetModelingSection() const
+{
+    QDomElement modeling;
+    if (m_drawName.isEmpty())
+    {
+        doc->GetActivNodeElement(VAbstractPattern::TagModeling, modeling);
+    }
+    else
+    {
+        modeling = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagModeling);
+    }
+    return modeling;
 }

@@ -47,9 +47,9 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
  * @param parent QGraphicsItem parent.
  */
 VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
+                         const Source &typeCreation, const QString &drawName, const quint32 &idTool, QObject *qoParent,
                          QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
+    :VAbstractNode(doc, data, id, idSpline, drawName, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
@@ -71,13 +71,14 @@ VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, qu
  */
 VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
                                  quint32 idSpline, const Document &parse,
-                                 const Source &typeCreation, const quint32 &idTool, QObject *parent)
+                                 const Source &typeCreation, const QString &drawName, const quint32 &idTool, 
+                                 QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
+        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, drawName, idTool, parent);
 
         doc->AddTool(id, spl);
         if (idTool != NULL_ID)

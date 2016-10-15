@@ -44,12 +44,12 @@ class VArc: public VAbstractCurve
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
     VArc ();
-    VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-         QString formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VArc (VPointF center, qreal radius, qreal f1, qreal f2);
-    VArc (qreal length, QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1,
-          QString formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VArc (qreal length, VPointF center, qreal radius, qreal f1);
+    VArc (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
+          qreal f2, const QString &formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc (const VPointF &center, qreal radius, qreal f1, qreal f2);
+    VArc (qreal length, const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius,
+          qreal f1, const QString &formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc (qreal length, const VPointF &center, qreal radius, qreal f1);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
     virtual ~VArc() Q_DECL_OVERRIDE;

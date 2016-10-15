@@ -186,6 +186,11 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     {
         return QPointF();
     }
+    if (VFuzzyComparePossibleNulls(axis.angle(), hypotenuse.angle())
+        || VFuzzyComparePossibleNulls(qAbs(axis.angle() - hypotenuse.angle()), 180))
+    {
+        return QPointF();
+    }
 
     qreal step = 1;
 

@@ -1847,7 +1847,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška: </translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -2593,7 +2593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška: </translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -4024,7 +4024,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Uložit j&amp;ako…</translation>
+        <translation>Uložit j&amp;ako...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -4136,7 +4136,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Zavřít okno</translation>
+        <translation type="vanished">Zavřít okno</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4330,7 +4330,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
-        <translation>Znovu otevřít soubory</translation>
+        <translation>Znovu otevřít soubory.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -4467,14 +4467,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Layout pages</source>
         <translation>Stránky rozvržení</translation>
-    </message>
-    <message>
-        <source>Save as PDF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save original layout</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -4785,6 +4777,10 @@ Chcete uložit své změny?</translation>
         <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4841,15 +4837,19 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

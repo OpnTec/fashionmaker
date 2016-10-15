@@ -33,6 +33,8 @@
 #include <QDomDocument>
 #include <QtTest>
 
+Q_DECLARE_METATYPE(QDomElement) // Need for testing
+
 const QString TST_TSTranslation::TagName           = QStringLiteral("name");
 const QString TST_TSTranslation::TagMessage        = QStringLiteral("message");
 const QString TST_TSTranslation::TagSource         = QStringLiteral("source");
@@ -44,20 +46,24 @@ const QString TST_TSTranslation::AttrValUnfinished = QStringLiteral("unfinished"
 const QString TST_TSTranslation::AttrValObsolete   = QStringLiteral("obsolete");
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_TSTranslation::TST_TSTranslation(QObject *parent) :
-    QObject(parent),
-    tsFile(),
-    tsXML()
+TST_TSTranslation::TST_TSTranslation(QObject *parent)
+    : QObject(parent),
+      tsFile(),
+      tsXML()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_TSTranslation::CheckEnglishLocalization()
+void TST_TSTranslation::CheckEnglishLocalization_data()
 {
-    const QDomNodeList messages = LoadTSFile(QStringLiteral("valentina_en_US.ts"));
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QString>("translation");
+
+    const QString fileName = QStringLiteral("valentina_en_US.ts");
+    const QDomNodeList messages = LoadTSFile(fileName);
     if (messages.isEmpty())
     {
-        QSKIP("Can't begin test.");
+        QFAIL("Can't begin test.");
     }
 
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
@@ -86,7 +92,9 @@ void TST_TSTranslation::CheckEnglishLocalization()
                 continue;
             }
 
-            QCOMPARE(source, translation);
+            const QString message = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
+                    .arg(source);
+            QTest::newRow(qUtf8Printable(message)) << source << translation;
         }
         else
         {
@@ -97,12 +105,25 @@ void TST_TSTranslation::CheckEnglishLocalization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_TSTranslation::CheckEmptyToolButton()
+void TST_TSTranslation::CheckEnglishLocalization()
 {
-    const QDomNodeList messages = LoadTSFile(QStringLiteral("valentina.ts"));
+    QFETCH(QString, source);
+    QFETCH(QString, translation);
+
+    QCOMPARE(source, translation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckEmptyToolButton_data()
+{
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QDomElement>("message");
+
+    const QString fileName = QStringLiteral("valentina.ts");
+    const QDomNodeList messages = LoadTSFile(fileName);
     if (messages.isEmpty())
     {
-        QSKIP("Can't begin test.");
+        QFAIL("Can't begin test.");
     }
 
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
@@ -116,34 +137,45 @@ void TST_TSTranslation::CheckEmptyToolButton()
                 continue;
             }
 
-            if (source == QLatin1Literal("..."))
-            {
-                const QDomElement translationTag = message.firstChildElement(TagTranslation);
-                if (translationTag.hasAttribute(AttrType))
-                {
-                    const QString attrVal = translationTag.attribute(AttrType);
-                    if (attrVal == AttrValVanished || attrVal == AttrValObsolete)
-                    {
-                        continue;
-                    }
-                }
-
-                const QDomNode context = message.parentNode();
-                if (context.isNull())
-                {
-                    QFAIL("Can't get context.");
-                }
-
-                const QString contextName = context.firstChildElement(TagName).text();
-                const QString error = QString("Found '...' in context '%1'").arg(contextName);
-                QFAIL(qUtf8Printable(error));
-            }
+            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
+                    .arg(source);
+            QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else
         {
             const QString message = QString("Message %1 is null.").arg(i);
             QFAIL(qUtf8Printable(message));
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckEmptyToolButton()
+{
+    QFETCH(QString, source);
+    QFETCH(QDomElement, message);
+
+    if (source == QLatin1String("..."))
+    {
+        const QDomElement translationTag = message.firstChildElement(TagTranslation);
+        if (translationTag.hasAttribute(AttrType))
+        {
+            const QString attrVal = translationTag.attribute(AttrType);
+            if (attrVal == AttrValVanished || attrVal == AttrValObsolete)
+            {
+                return;
+            }
+        }
+
+        const QDomNode context = message.parentNode();
+        if (context.isNull())
+        {
+            QFAIL("Can't get context.");
+        }
+
+        const QString contextName = context.firstChildElement(TagName).text();
+        const QString error = QString("Found '...' in context '%1'").arg(contextName);
+        QFAIL(qUtf8Printable(error));
     }
 }
 
@@ -158,99 +190,102 @@ void TST_TSTranslation::CheckPlaceMarkerExist_data()
         QVERIFY2(locales.size() == fileNames.size()-1, "Unexpected count of files.");
     }
 
-    QTest::addColumn<QString>("filename");
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QString>("translation");
 
-    for(int i = 0; i < locales.size(); ++i)
+    for(int j = 0; j < locales.size(); ++j)
     {
-        const QString filename = QString("valentina_%1.ts").arg(locales.at(i));
-        const QString tag = QString("Check localization strings valentina_%1.ts").arg(locales.at(i));
-        QTest::newRow(qUtf8Printable(tag)) << filename;
+        const QString filename = QString("valentina_%1.ts").arg(locales.at(j));
+
+        const QDomNodeList messages = LoadTSFile(filename);
+        if (messages.isEmpty())
+        {
+            QFAIL("Can't begin test.");
+        }
+
+        for (qint32 i = 0, num = messages.size(); i < num; ++i)
+        {
+            const QDomElement message = messages.at(i).toElement();
+            if (message.isNull() == false)
+            {
+                const QString source = message.firstChildElement(TagSource).text();
+                if (source.isEmpty())
+                {
+                    continue;
+                }
+
+                const QDomElement translationTag = message.firstChildElement(TagTranslation);
+                if (translationTag.hasAttribute(AttrType))
+                {
+                    const QString attrVal = translationTag.attribute(AttrType);
+                    if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
+                    {
+                        continue;
+                    }
+                }
+                const QString translation = translationTag.text();
+                if (translation.isEmpty())
+                {
+                    continue;
+                }
+
+                const QString message = QString("File '%1'. Check place holder source message '%2'").arg(filename)
+                        .arg(source);
+                QTest::newRow(qUtf8Printable(message)) << source << translation;
+            }
+            else
+            {
+                const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
+                QFAIL(qUtf8Printable(message));
+            }
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::CheckPlaceMarkerExist()
 {
-    QFETCH(QString, filename);
+    QFETCH(QString, source);
+    QFETCH(QString, translation);
 
-    const QDomNodeList messages = LoadTSFile(filename);
-    if (messages.isEmpty())
-    {
-        QSKIP("Can't begin test.");
-    }
+    int sourceMarkCount = 0;
+    int translationMarkCount = 0;
 
-    for (qint32 i = 0, num = messages.size(); i < num; ++i)
+    for (int i = 1; i <= 99; ++i)
     {
-        const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        const QString marker = QLatin1String("%") + QString().setNum(i);
+        const bool sourceMark = source.indexOf(marker) != -1;
+        if (sourceMark)
         {
-            const QString source = message.firstChildElement(TagSource).text();
-            if (source.isEmpty())
+            ++sourceMarkCount;
+            if (sourceMarkCount != i)
             {
-                continue;
+                const QString message = QString("In source string '%1' was missed place marker ")
+                        .arg(source) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
+                        QLatin1String("'.");
+                QFAIL(qUtf8Printable(message));
             }
-
-            const QDomElement translationTag = message.firstChildElement(TagTranslation);
-            if (translationTag.hasAttribute(AttrType))
-            {
-                const QString attrVal = translationTag.attribute(AttrType);
-                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
-                {
-                    continue;
-                }
-            }
-            const QString translation = translationTag.text();
-            if (translation.isEmpty())
-            {
-                continue;
-            }
-
-            int sourceMarkCount = 0;
-            int translationMarkCount = 0;
-
-            for (int i = 1; i <= 99; ++i)
-            {
-                const QString marker = QLatin1Literal("%") + QString().setNum(i);
-                const bool sourceMark = source.indexOf(marker) != -1;
-                if (sourceMark)
-                {
-                    ++sourceMarkCount;
-                    if (sourceMarkCount != i)
-                    {
-                        const QString message = QString("In source string '%1' was missed place marker ")
-                                .arg(source) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
-                                QLatin1Literal("'.");
-                        QFAIL(qUtf8Printable(message));
-                    }
-                }
-
-                const bool translationMark = translation.indexOf(marker) != -1;
-                if (translationMark)
-                {
-                    ++translationMarkCount;
-                    if (translationMarkCount != i)
-                    {
-                        const QString message = QString("In translation string '%1' was missed place marker ")
-                                .arg(translation) + QLatin1Literal("'%") + QString().setNum(translationMarkCount) +
-                                QLatin1Literal("'.");
-                        QFAIL(qUtf8Printable(message));
-                    }
-                }
-
-                if (sourceMark != translationMark)
-                {
-                    const QString message =
-                        QString("Compare to source string in the translation string '%1' was missed place marker ")
-                            .arg(translation) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
-                            QLatin1Literal("'.");
-                    QFAIL(qUtf8Printable(message));
-                }
-            }
-
         }
-        else
+
+        const bool translationMark = translation.indexOf(marker) != -1;
+        if (translationMark)
         {
-            const QString message = QString("Message %1 is null.").arg(i);
+            ++translationMarkCount;
+            if (translationMarkCount != i)
+            {
+                const QString message = QString("In translation string '%1' was missed place marker ")
+                        .arg(translation) + QLatin1String("'%") + QString().setNum(translationMarkCount) +
+                        QLatin1String("'.");
+                QFAIL(qUtf8Printable(message));
+            }
+        }
+
+        if (sourceMark != translationMark)
+        {
+            const QString message =
+                QString("Compare to source string in the translation string '%1' was missed place marker ")
+                    .arg(translation) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
+                    QLatin1String("'.");
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -282,8 +317,8 @@ QDomNodeList TST_TSTranslation::LoadTSFile(const QString &filename)
     tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
     if (tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn) == false)
     {
-        const QString message = QString("Parsing error file valentina_en_US.ts in line %1 column %2.")
-                .arg(errorLine).arg(errorColumn);
+        const QString message = QString("Parsing error file %1 in line %2 column %3.")
+                .arg(filename).arg(errorLine).arg(errorColumn);
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }

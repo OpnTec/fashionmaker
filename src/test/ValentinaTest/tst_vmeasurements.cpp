@@ -57,10 +57,18 @@ void TST_VMeasurements::CreateEmptyStandardFile()
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
 
     QTemporaryFile file;
+    QString fileName;
+    // In Windows we have problems when we try to open QSaveFile when QTemporaryFile with the same name is already open.
+
     if (file.open())
     {
+        // So, before we try to open file in m->SaveDocument function we need to close it and remove.
+        // Just closing - is not enough, if we just close QTemporaryFile we get "access denied" in Windows.
+        fileName = file.fileName();
+        file.close();
+        file.remove();
         QString error;
-        const bool result = m->SaveDocument(file.fileName(), error);
+        const bool result = m->SaveDocument(fileName, error);
 
         QVERIFY2(result, error.toUtf8().constData());
     }
@@ -71,7 +79,7 @@ void TST_VMeasurements::CreateEmptyStandardFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, file.fileName());
+        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
     }
     catch (VException &e)
     {
@@ -93,10 +101,14 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     QTemporaryFile file;
+    QString fileName;
     if (file.open())
     {
+        fileName = file.fileName();
+        file.close();
+        file.remove();
         QString error;
-        const bool result = m->SaveDocument(file.fileName(), error);
+        const bool result = m->SaveDocument(fileName, error);
 
         QVERIFY2(result, error.toUtf8().constData());
     }
@@ -107,7 +119,7 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, file.fileName());
+        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
     }
     catch (VException &e)
     {
@@ -141,10 +153,14 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
         m->SetPMSystem(code);
 
         QTemporaryFile file;
+        QString fileName;
         if (file.open())
         {
+            fileName = file.fileName();
+            file.close();
+            file.remove();
             QString error;
-            const bool result = m->SaveDocument(file.fileName(), error);
+            const bool result = m->SaveDocument(fileName, error);
 
             const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
@@ -156,7 +172,7 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
 
         try
         {
-            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, file.fileName());
+            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
         }
         catch (VException &e)
         {
@@ -188,10 +204,14 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
         m->SetPMSystem(code);
 
         QTemporaryFile file;
+        QString fileName;
         if (file.open())
         {
+            fileName = file.fileName();
+            file.close();
+            file.remove();
             QString error;
-            const bool result = m->SaveDocument(file.fileName(), error);
+            const bool result = m->SaveDocument(fileName, error);
 
             const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
@@ -203,7 +223,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
 
         try
         {
-            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, file.fileName());
+            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
         }
         catch (VException &e)
         {

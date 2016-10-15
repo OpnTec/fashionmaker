@@ -35,6 +35,8 @@
 #include <QtCore/qmath.h>
 #include <climits>
 
+double VGObject::accuracyPointOnLine = (0.5/*mm*/ / 25.4) * PrintDPI;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
@@ -352,6 +354,12 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
  */
 qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1, QPointF &p2)
 {
+    // Fix for issue #485. https://bitbucket.org/dismine/valentina/issues/485/error-when-drawing-a-curved-path
+    if (qFuzzyIsNull(line.length()))
+    {
+        return 0;
+    }
+
     //coefficient for equation of segment
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
@@ -493,14 +501,16 @@ double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPoi
  * There is the floating-point accuraccy problem, so instead of checking against zero, some epsilon value has to be
  * used. Because the size of the pdp value depends on the length of the vectors, no static value can be used. One
  * approach is to compare the pdp/area value to the fraction of another area which also depends on the length of the
- * line e1=(p1, p2), e.g. the area of the square with side e1 which is computed below
+ * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
+ * is controled by variable accuracyPointOnLine
  */
 double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
 {
-    const double dx1 = p2.x() - p1.x();
-    const double dy1 = p2.y() - p1.y();
-    const double epsilon = 0.03 * (dx1 * dx1 + dy1 * dy1); //-V636
-    return epsilon;
+    QLineF line(p1, p2);
+    line.setAngle(line.angle() + 90);
+    line.setLength(accuracyPointOnLine); // less than accuracy means the same point
+
+    return qAbs(PerpDotProduct(p1, p2, line.p2()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,8 +47,8 @@ const QString VNodeArc::ToolType = QStringLiteral("modeling");
  * @param parent parent object.
  */
 VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-                   const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
+                   const QString &drawName, const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
+    :VAbstractNode(doc, data, id, idArc, drawName, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
@@ -69,12 +69,13 @@ VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 
  * @param parent QObject parent
  */
 void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id, quint32 idArc,
-                      const Document &parse, const Source &typeCreation, const quint32 &idTool, QObject *parent)
+                      const Document &parse, const Source &typeCreation, const QString &drawName, const quint32 &idTool,
+                      QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
+        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, drawName, idTool, parent);
 
         doc->AddTool(id, arc);
         if (idTool != NULL_ID)

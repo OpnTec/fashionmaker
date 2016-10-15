@@ -42,7 +42,10 @@ signals:
 private slots:
     void TestNameRegExp_data();
     void TestNameRegExp();
-
+    void TestOriginalMeasurementNamesRegExp_data();
+    void TestOriginalMeasurementNamesRegExp();
+    void TestCorrectOrderMeasurement_data();
+    void TestCorrectOrderMeasurement();
 };
 
 #endif // TST_NAMEREGEXP_H

@@ -1292,7 +1292,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         }
         data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                             Draw::Modeling));
-        VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, "", idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1922,7 +1922,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
-        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, "", idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1957,7 +1957,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
-        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, "", idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2037,7 +2037,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
-        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, "", idTool);
     }
     catch (const VExceptionBadId &e)
     {

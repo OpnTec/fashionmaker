@@ -8,6 +8,11 @@ syntax: glob
 # Valentina lock files
 *.lock
 
+# Valentina and Tape makes reserve copy of each pattern file before conversion to higher version.
+*(v*).val
+*(v*).vit
+*(v*).vst
+
 # KDE directory preferences
 .directory
 

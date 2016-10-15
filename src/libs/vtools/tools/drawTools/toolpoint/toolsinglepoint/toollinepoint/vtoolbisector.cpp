@@ -183,12 +183,12 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
-        data->AddLine(firstPointId, id);
+        data->AddLine(secondPointId, id);
     }
     else
     {
         data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
-        data->AddLine(firstPointId, id);
+        data->AddLine(secondPointId, id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -308,7 +308,7 @@ void VToolBisector::SetVisualization()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(basePointId);
         visual->setPoint3Id(thirdPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

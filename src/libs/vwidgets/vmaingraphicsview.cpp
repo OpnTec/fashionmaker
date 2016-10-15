@@ -39,6 +39,9 @@
 #include <QMouseEvent>
 #include <qmath.h>
 
+const qreal maxScale = 50.0;  // for zoom in
+const qreal minScale = 0.004; // for zoom out
+
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
   : QObject(view), _view(view), _modifiers(Qt::ControlModifier), _zoom_factor_base(1.0015),
@@ -55,22 +58,29 @@ GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::gentle_zoom(double factor)
 {
-  _view->scale(factor, factor);
-  if (factor < 1)
-  {
-      // Because QGraphicsView centers the picture when it's smaller than the view. And QGraphicsView's scrolls
-      // boundaries don't allow to put any picture point at any viewport position we will provide fictive scene size.
-      // Temporary and bigger than view, scene size will help position an image under cursor.
-      FictiveSceneRect(_view->scene(), _view);
-  }
-  _view->centerOn(target_scene_pos);
-  QPointF delta_viewport_pos = target_viewport_pos - QPointF(_view->viewport()->width() / 2.0,
-                                                             _view->viewport()->height() / 2.0);
-  QPointF viewport_center = _view->mapFromScene(target_scene_pos) - delta_viewport_pos;
-  _view->centerOn(_view->mapToScene(viewport_center.toPoint()));
-  // In the end we just set correct scene size
-  VMainGraphicsView::NewSceneRect(_view->scene(), _view);
-  emit zoomed();
+    // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
+    // See issue #532: Unexpected error occurs when zoom out image.
+    // factor > 1 for zoomIn and factor < 1 for zoomOut.
+    if ((_view->transform().m11() < maxScale && factor > 1) ||
+        (_view->transform().m11() > minScale && factor < 1))
+    {
+        _view->scale(factor, factor);
+        if (factor < 1)
+        {
+            // Because QGraphicsView centers the picture when it's smaller than the view. And QGraphicsView's scrolls
+            // boundaries don't allow to put any picture point at any viewport position we will provide fictive scene
+            // size. Temporary and bigger than view, scene size will help position an image under cursor.
+            FictiveSceneRect(_view->scene(), _view);
+        }
+        _view->centerOn(target_scene_pos);
+        QPointF delta_viewport_pos = target_viewport_pos - QPointF(_view->viewport()->width() / 2.0,
+                                                                   _view->viewport()->height() / 2.0);
+        QPointF viewport_center = _view->mapFromScene(target_scene_pos) - delta_viewport_pos;
+        _view->centerOn(_view->mapToScene(viewport_center.toPoint()));
+        // In the end we just set correct scene size
+        VMainGraphicsView::NewSceneRect(_view->scene(), _view);
+        emit zoomed();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,17 +247,27 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::ZoomIn()
 {
-    scale(1.1, 1.1);
-    VMainGraphicsView::NewSceneRect(this->scene(), this);
-    emit NewFactor(1.1);
+    // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
+    // See issue #532: Unexpected error occurs when zoom out image.
+    if (this->transform().m11() < maxScale)
+    {
+        scale(1.1, 1.1);
+        VMainGraphicsView::NewSceneRect(this->scene(), this);
+        emit NewFactor(1.1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::ZoomOut()
 {
-    scale(1.0/1.1, 1.0/1.1);
-    VMainGraphicsView::NewSceneRect(this->scene(), this);
-    emit NewFactor(1.0/1.1);
+    // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
+    // See issue #532: Unexpected error occurs when zoom out image.
+    if (this->transform().m11() > minScale)
+    {
+        scale(1.0/1.1, 1.0/1.1);
+        VMainGraphicsView::NewSceneRect(this->scene(), this);
+        emit NewFactor(1.0/1.1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

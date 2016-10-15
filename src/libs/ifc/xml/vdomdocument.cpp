@@ -379,7 +379,7 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
     try
     {
         id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
-        if (id <= 0)
+        if (id == 0)
         {
             throw VExceptionWrongId(message, domElement);
         }
@@ -467,6 +467,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
     qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(fileName));
     QFile pattern(fileName);
+    // cppcheck-suppress ConfigurationNotChecked
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
         const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
@@ -474,6 +475,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     }
 
     QFile fileSchema(schema);
+    // cppcheck-suppress ConfigurationNotChecked
     if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
         pattern.close();
@@ -524,6 +526,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 void VDomDocument::setXMLContent(const QString &fileName)
 {
     QFile file(fileName);
+    // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::ReadOnly) == false)
     {
         const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(file.errorString()));
@@ -662,6 +665,7 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
     }
     bool success = false;
     QSaveFile file(fileName);
+    // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::WriteOnly))
     {
         const int indent = 4;
@@ -790,6 +794,7 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 
     QTemporaryFile destFile(destination + QLatin1Literal(".XXXXXX"));
     destFile.setAutoRemove(false);
+    // cppcheck-suppress ConfigurationNotChecked
     if (not destFile.open())
     {
         error = destFile.errorString();
@@ -798,6 +803,7 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     else
     {
         QFile sourceFile(source);
+        // cppcheck-suppress ConfigurationNotChecked
         if (sourceFile.open(QIODevice::ReadOnly))
         {
             result = true;
