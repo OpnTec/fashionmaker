@@ -17,7 +17,8 @@ HEADERS += \
     $$PWD/vbestsquare.h \
     $$PWD/vposition.h \
     $$PWD/vtextmanager.h \
-    vposter.h
+    vposter.h \
+    vgraphicsfillitem.h
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
     $$PWD/vbestsquare.cpp \
     $$PWD/vposition.cpp \
     $$PWD/vtextmanager.cpp \
-    vposter.cpp
+    vposter.cpp \
+    vgraphicsfillitem.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp

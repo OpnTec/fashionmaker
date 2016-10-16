@@ -51,6 +51,7 @@
 #include "vlayoutdef.h"
 #include "vlayoutdetail_p.h"
 #include "vtextmanager.h"
+#include "vgraphicsfillitem.h"
 
 class QGraphicsPathItem;
 class QLineF;
@@ -213,7 +214,32 @@ void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContaine
     pt2.setX(pt1.x() + dLen * qCos(dAng));
     pt2.setY(pt1.y() - dLen * qSin(dAng));
     QVector<QPointF> v;
+    QPointF pt;
+    qreal dArrowLen = ToPixel(0.5, *rPattern.GetPatternUnit());
+    qreal dArrowAng = M_PI/9;
+
+    v << pt1;
+
+    pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
+    pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
+    v << pt;
+    pt.setX(pt1.x() + dArrowLen * qCos(dAng - dArrowAng));
+    pt.setY(pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
+    v << pt;
+
     v << pt1 << pt2;
+
+    dAng += M_PI;
+
+    pt.setX(pt2.x() + dArrowLen * qCos(dAng + dArrowAng));
+    pt.setY(pt2.y() - dArrowLen * qSin(dAng + dArrowAng));
+    v << pt;
+    pt.setX(pt2.x() + dArrowLen * qCos(dAng - dArrowAng));
+    pt.setY(pt2.y() - dArrowLen * qSin(dAng - dArrowAng));
+    v << pt;
+
+    v << pt2;
+
     d->grainlinePoints = RoundPoints(v);
 }
 
@@ -713,11 +739,11 @@ QGraphicsItem *VLayoutDetail::GetItem() const
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
 {
-    if (d->grainlinePoints.count() < 2)
+    if (d->grainlinePoints.count() < 6)
     {
         return 0;
     }
-    QGraphicsPathItem* item = new QGraphicsPathItem();
+    VGraphicsFillItem* item = new VGraphicsFillItem();
     QPainterPath path;
     QVector<QPointF> v = Map(d->grainlinePoints);
     path.moveTo(v.at(0));

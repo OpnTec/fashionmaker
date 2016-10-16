@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vgrainlineitem.h
+ **  @file   vgrainlineitem.cpp
  **  @author Bojan Kverh
  **  @date   September 10, 2016
  **
@@ -38,7 +38,7 @@
 
 #include "vgrainlineitem.h"
 
-#define ARROW_ANGLE                     0.35
+#define ARROW_ANGLE                     M_PI/9
 #define ARROW_LENGTH                    15
 #define RECT_WIDTH                      30
 #define RESIZE_RECT_SIZE                10
