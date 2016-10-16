@@ -42,7 +42,7 @@
 - [#138] New tool: 'Mirror Point' or 'Symmetric Point'.
 - [#573] New tool: 'Move Point'.
 
-# Version 0.4.5
+# Version 0.4.5 October 15, 2016
 - [#435] Valentina doesn't change the cursor.
 - [#473] Tape 'Preferences' cause loss of focus.
 - [#485] Error when drawing a curved path.
