@@ -212,6 +212,8 @@ unix{
             }
         }
 
+        QMAKE_RPATHDIR += @executable_path/../Frameworks
+
         # Path to resources in app bundle
         #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
         FRAMEWORKS_DIR = "Contents/Frameworks"
