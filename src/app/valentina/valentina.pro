@@ -252,7 +252,18 @@ unix{
         # Some macx stuff
         QMAKE_MAC_SDK = macosx
 
-        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+        # Check which minimal OSX version supports current Qt version
+        # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+        } else {
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+            } else {
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+            }
+        }
+
         # Path to resources in app bundle
         #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
         FRAMEWORKS_DIR = "Contents/Frameworks"
