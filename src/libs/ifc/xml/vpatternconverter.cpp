@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.6");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.6.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.7");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.7.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -171,6 +171,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000305):
             return QStringLiteral("://schema/pattern/v0.3.5.xsd");
         case (0x000306):
+            return QStringLiteral("://schema/pattern/v0.3.6.xsd");
+        case (0x000307):
             return CurrentSchema;
         default:
             InvalidVersion(ver);

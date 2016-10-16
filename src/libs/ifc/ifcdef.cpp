@@ -144,13 +144,23 @@ const QString TypeLineDotLine        = QStringLiteral("dotLine");
 const QString TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
-const QString ColorBlack     = QStringLiteral("black");
-const QString ColorGreen     = QStringLiteral("green");
-const QString ColorBlue      = QStringLiteral("blue");
-const QString ColorDarkRed   = QStringLiteral("darkRed");
-const QString ColorDarkGreen = QStringLiteral("darkGreen");
-const QString ColorDarkBlue  = QStringLiteral("darkBlue");
-const QString ColorYellow    = QStringLiteral("yellow");
+const QString ColorBlack            = QStringLiteral("black");
+const QString ColorGreen            = QStringLiteral("green");
+const QString ColorBlue             = QStringLiteral("blue");
+const QString ColorDarkRed          = QStringLiteral("darkRed");
+const QString ColorDarkGreen        = QStringLiteral("darkGreen");
+const QString ColorDarkBlue         = QStringLiteral("darkBlue");
+const QString ColorYellow           = QStringLiteral("yellow");
+const QString ColorLightSalmon      = QStringLiteral("lightsalmon");
+const QString ColorGoldenRod        = QStringLiteral("goldenrod");
+const QString ColorOrange           = QStringLiteral("orange");
+const QString ColorDeepPink         = QStringLiteral("deeppink");
+const QString ColorViolet           = QStringLiteral("violet");
+const QString ColorDarkViolet       = QStringLiteral("darkviolet");
+const QString ColorMediumSeaGreen   = QStringLiteral("mediumseagreen");
+const QString ColorLime             = QStringLiteral("lime");
+const QString ColorDeepSkyBlue      = QStringLiteral("deepskyblue");
+const QString ColorCornFlowerBlue   = QStringLiteral("cornflowerblue");
 
 //variables
 const QString line_           = QStringLiteral("Line_");
