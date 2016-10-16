@@ -201,6 +201,7 @@ unix{
         QMAKE_MAC_SDK = macosx
 
         # Check which minimal OSX version supports current Qt version
+        # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
         equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {
             QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
         } else {
