@@ -36,6 +36,8 @@
 
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
+
 #include "vtextmanager.h"
 
 QT_WARNING_PUSH
@@ -47,45 +49,50 @@ public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
           matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
-          patternInfo(QVector<QPointF>()), detailData(), patternGeom(), m_tmDetail(),
-          m_tmPattern(), m_liPP(QList<QPainterPath>())
+          patternInfo(QVector<QPointF>()), grainlinePoints(QVector<QPointF>()), detailData(), patternGeom(),
+          grainlineGeom(), m_tmDetail(), m_tmPattern(), m_liPP(QList<QPainterPath>())
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix),
           layoutWidth(detail.layoutWidth), mirror(detail.mirror), detailLabel(detail.detailLabel),
-          patternInfo(detail.patternInfo), detailData(detail.detailData), patternGeom(detail.patternGeom),
-          m_tmDetail(detail.m_tmDetail), m_tmPattern(detail.m_tmPattern), m_liPP(detail.m_liPP)
+          patternInfo(detail.patternInfo), grainlinePoints(detail.grainlinePoints), detailData(detail.detailData),
+          patternGeom(detail.patternGeom), grainlineGeom(detail.grainlineGeom), m_tmDetail(detail.m_tmDetail),
+          m_tmPattern(detail.m_tmPattern), m_liPP(detail.m_liPP)
     {}
 
     ~VLayoutDetailData() {}
 
     /** @brief contour list of contour points. */
-    QVector<QPointF> contour;
+    QVector<QPointF>                        contour;
 
     /** @brief seamAllowence list of seam allowence points. */
-    QVector<QPointF> seamAllowence;
+    QVector<QPointF>                        seamAllowence;
 
     /** @brief layoutAllowence list of layout allowence points. */
-    QVector<QPointF> layoutAllowence;
+    QVector<QPointF>                        layoutAllowence;
 
     /** @brief matrix transformation matrix*/
-    QTransform matrix;
+    QTransform                              matrix;
 
     /** @brief layoutWidth value layout allowence width in pixels. */
-    qreal layoutWidth;
+    qreal                                   layoutWidth;
 
-    bool mirror;
+    bool                                    mirror;
 
     /** @brief detailLabel detail label rectangle */
-    QVector<QPointF> detailLabel;
+    QVector<QPointF>                        detailLabel;
     /** @brief patternInfo pattern info rectangle */
-    QVector<QPointF> patternInfo;
+    QVector<QPointF>                        patternInfo;
+    /** @brief grainlineInfo line */
+    QVector<QPointF>                        grainlinePoints;
     /** @brief detailData detail data */
-    VPatternPieceData detailData;
+    VPatternPieceData                       detailData;
     /** @brief patternGeom pattern geometry */
-    VPatternInfoGeometry patternGeom;
+    VPatternInfoGeometry                    patternGeom;
+    /** @brief grainlineGeom grainline geometry */
+    VGrainlineGeometry                      grainlineGeom;
     /** @brief m_tmDetail text manager for laying out detail info */
     VTextManager                            m_tmDetail;
     /** @brief m_tmPattern text manager for laying out pattern info */

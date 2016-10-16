@@ -44,6 +44,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vcontainer.h"
 #include "vabstractdetail.h"
 
 class QFont;
@@ -57,6 +58,7 @@ class VAbstractPattern;
 class VLayoutDetailData;
 class VPatternInfoGeometry;
 class VPatternPieceData;
+class VGrainlineGeometry;
 
 class VLayoutDetail :public VAbstractDetail
 {
@@ -79,6 +81,8 @@ public:
 
     void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font,
                         qreal dSize, qreal dHeight);
+
+    void SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
@@ -110,6 +114,7 @@ public:
     QGraphicsItem* GetTextItem(int i) const Q_REQUIRED_RESULT;
     QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
+    QGraphicsItem* GetGrainlineItem() const Q_REQUIRED_RESULT;
 
 private:
     QSharedDataPointer<VLayoutDetailData>   d;

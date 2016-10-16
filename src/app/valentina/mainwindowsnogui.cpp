@@ -39,6 +39,7 @@
 #include "../vlayout/vposter.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -475,6 +476,11 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
                 date = QDate::currentDate();
             }
             det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
+        }
+        const VGrainlineGeometry& grainlineGeom = d.GetGrainlineGeometry();
+        if (grainlineGeom.IsVisible() == true)
+        {
+            det.SetGrainline(grainlineGeom, *pattern);
         }
         det.setWidth(qApp->toPixel(d.getWidth()));
         det.CreateTextItems();

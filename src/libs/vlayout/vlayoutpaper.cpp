@@ -348,6 +348,12 @@ QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
         {
             list.append(d->details.at(i).GetTextItem(iT));
         }
+
+        QGraphicsItem* pItem = d->details.at(i).GetGrainlineItem();
+        if (pItem != 0)
+        {
+            list.append(pItem);
+        }
     }
     return list;
 }
