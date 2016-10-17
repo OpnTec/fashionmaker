@@ -172,7 +172,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSplinePath::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

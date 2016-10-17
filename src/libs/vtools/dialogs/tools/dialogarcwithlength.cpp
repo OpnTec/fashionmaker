@@ -192,7 +192,7 @@ void DialogArcWithLength::SetLength(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

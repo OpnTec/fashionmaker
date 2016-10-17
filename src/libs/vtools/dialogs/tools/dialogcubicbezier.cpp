@@ -110,7 +110,7 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogCubicBezier::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

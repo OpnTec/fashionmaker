@@ -242,7 +242,7 @@ void DialogNormal::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogNormal::GetLineColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,7 +331,7 @@ void DialogNormal::SetPointName(const QString &value)
  */
 QString DialogNormal::GetTypeLine() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
