@@ -164,7 +164,7 @@ void DialogHeight::SetP2LineId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogHeight::GetLineColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ void DialogHeight::ShowVisualization()
  */
 QString DialogHeight::GetTypeLine() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

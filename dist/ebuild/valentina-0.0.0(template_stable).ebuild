@@ -33,7 +33,7 @@ CDEPEND="
 	dev-qt/qtprintsupport:5
 	dev-qt/qtnetwork:5
 	app-text/poppler"
-RDEPEND="${CDEPEND}
+RDEPEND="${CDEPEND}"
 DEPEND="${CDEPEND}
 	app-arch/unzip"
 	

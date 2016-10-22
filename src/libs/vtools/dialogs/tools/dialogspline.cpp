@@ -614,7 +614,7 @@ void DialogSpline::SetSpline(const VSpline &spline)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSpline::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

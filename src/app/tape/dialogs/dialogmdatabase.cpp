@@ -168,7 +168,7 @@ void DialogMDataBase::RetranslateGroups()
 QString DialogMDataBase::ImgTag(const QString &number)
 {
     QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
-    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(number));
+    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
     if (QFileInfo(filePath).exists())
     {
         // Load your SVG
