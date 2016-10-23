@@ -903,8 +903,7 @@ void DialogDetail::UpdateValues()
     }
     else
     {
-        QIcon icon;
-        ui.tabWidget->setTabIcon(2, icon);
+        ResetWarning();
     }
 }
 
@@ -974,6 +973,7 @@ void DialogDetail::EnableGrainlineRotation()
         ChangeColor(ui.labelEditLen, okColor);
         ChangeColor(ui.labelEditRot, okColor);
         bOk->setEnabled(true);
+        ResetWarning();
     }
 }
 
@@ -1024,3 +1024,11 @@ void DialogDetail::DeployLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ResetWarning()
+{
+    QIcon icon;
+    ui.tabWidget->setTabIcon(2, icon);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
