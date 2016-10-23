@@ -33,6 +33,7 @@
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsettings.h"
+#include <QDebug>
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 

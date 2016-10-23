@@ -40,6 +40,8 @@
 
 #include <QDockWidget>
 #include <QHBoxLayout>
+#include <QDebug>
+#include <QRegularExpression>
 
 using namespace VPE;
 
