@@ -55,6 +55,8 @@
 #include <QMessageBox>
 #include <QUndoStack>
 #include <QtNumeric>
+#include <QDebug>
+#include <QFileInfo>
 
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
 

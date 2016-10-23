@@ -31,6 +31,7 @@
 #include <QDomElement>
 #include <QPointF>
 #include <QUndoCommand>
+#include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"

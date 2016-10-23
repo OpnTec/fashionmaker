@@ -39,6 +39,7 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
 #include "../vmisc/diagnostic.h"
+#include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

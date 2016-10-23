@@ -267,8 +267,28 @@ QRect VPoster::PageRect() const
     // we can't use method pageRect(QPrinter::Point). Our dpi value can be different.
     // We convert value yourself to pixels.
     const QRectF rect = printer->pageRect(QPrinter::Millimeter);
-    const QRect pageRect(0, 0, qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
-    return pageRect;
+
+    if(printer->fullPage())
+    {
+        #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+            QMarginsF pMargins = printer->pageLayout().margins();
+            QRectF newRect = rect.marginsRemoved(pMargins);
+            const QRect pageRectFP(0, 0, qFloor(ToPixel(newRect.width())), qFloor(ToPixel(newRect.height())));
+            return pageRectFP;
+        #else
+            qreal left = 0 , top = 0, right = 0, bottom = 0;
+            printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+            qreal newWidth = rect.width()-left-right;
+            qreal newHeight = rect.height()-top-bottom;
+            const QRect pageRectFP(0, 0, qFloor(ToPixel(newWidth)), qFloor(ToPixel(newHeight)));
+            return pageRectFP;
+        #endif
+    }
+    else
+    {
+        const QRect pageRect(0, 0, qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
+        return pageRect;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
