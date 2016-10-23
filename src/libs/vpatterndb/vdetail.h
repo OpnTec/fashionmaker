@@ -47,6 +47,7 @@ class VDetailData;
 class VNodeDetail;
 class VPatternInfoGeometry;
 class VPatternPieceData;
+class VGrainlineGeometry;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).
@@ -105,6 +106,8 @@ public:
     void                        SetPatternInfo(const VPatternInfoGeometry &info);
     VPatternInfoGeometry&       GetPatternInfo();
     const VPatternInfoGeometry& GetPatternInfo() const;
+    VGrainlineGeometry& GetGrainlineGeometry();
+    const VGrainlineGeometry& GetGrainlineGeometry() const;
 
 private:
     QSharedDataPointer<VDetailData> d;

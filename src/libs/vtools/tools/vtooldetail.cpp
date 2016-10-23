@@ -90,6 +90,7 @@
 #include "../vpatterndb/vdetail.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/calculator.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -147,7 +148,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
       drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)), dataLabel(new VTextGraphicsItem(this)),
-      patternInfo(new VTextGraphicsItem(this))
+      patternInfo(new VTextGraphicsItem(this)), grainLine(new VGrainlineItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -204,9 +205,14 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
 
+    connect(grainLine, &VGrainlineItem::SignalMoved, this, &VToolDetail::SaveMoveGrainline);
+    connect(grainLine, &VGrainlineItem::SignalResized, this, &VToolDetail::SaveResizeGrainline);
+    connect(grainLine, &VGrainlineItem::SignalRotated, this, &VToolDetail::SaveRotateGrainline);
+
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateGrainline);
 
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdateLabel);
     connect(sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolDetail::UpdatePatternInfo);
@@ -214,6 +220,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     UpdateLabel();
     UpdatePatternInfo();
+    UpdateGrainline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -407,11 +414,20 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VToolDetail::paint draws a bounding box around detail, if one of its text items is not idle.
+ * @brief VToolDetail::paint draws a bounding box around detail, if one of its text or grainline items is not idle.
  */
 void VToolDetail::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false)
+    if (scene()->views().count() > 0)
+    {
+        QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
+        QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
+        qreal dScale = qSqrt(QPoint::dotProduct(pt - pt0, pt - pt0));
+        grainLine->SetScale(100/dScale);
+        //qDebug() << "SCALE" << dScale << 10/dScale;
+    }
+
+    if (dataLabel->IsIdle() == false || patternInfo->IsIdle() == false || grainLine->IsIdle() == false)
     {
         painter->save();
         painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
@@ -439,6 +455,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
     doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(detail.getForbidFlipping()));
 
+    // detail data
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
@@ -465,6 +482,7 @@ void VToolDetail::AddToFile()
     }
     domElement.appendChild(domData);
 
+    // pattern info
     domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternInfoGeometry& geom = detail.GetPatternInfo();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
@@ -476,6 +494,16 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
     domElement.appendChild(domData);
 
+    // grainline
+    domData = doc->createElement(VAbstractPattern::TagGrainline);
+    const VGrainlineGeometry& glGeom = detail.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+    doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+    doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+
+    // nodes
     for (int i = 0; i < detail.CountNode(); ++i)
     {
        AddNode(doc, domElement, detail.at(i));
@@ -502,6 +530,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         doc->RemoveAllChildren(domElement);
 
+        // detail data
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
         const VPatternPieceData& data = det.GetPatternPieceData();
         doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
@@ -532,6 +561,7 @@ void VToolDetail::RefreshDataInFile()
         }
         domElement.appendChild(domData);
 
+        // pattern info
         domData = doc->createElement(VAbstractPattern::TagPatternInfo);
         const VPatternInfoGeometry& geom = det.GetPatternInfo();
         doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? trueStr : falseStr);
@@ -542,6 +572,16 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
         doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
 
+        // grainline
+        domData = doc->createElement(VAbstractPattern::TagGrainline);
+        const VGrainlineGeometry& glGeom = det.GetGrainlineGeometry();
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
+        doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+        doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+        doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+        doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+
+        // nodes
         for (int i = 0; i < det.CountNode(); ++i)
         {
            AddNode(doc, domElement, det.at(i));
@@ -869,7 +909,47 @@ void VToolDetail::UpdatePatternInfo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolDetail::UpdateGrainline updates the grain line item
+ */
+void VToolDetail::UpdateGrainline()
+{
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    const VGrainlineGeometry& geom = detail.GetGrainlineGeometry();
 
+    if (geom.IsVisible() == true)
+    {
+        qreal dRotation;
+        qreal dLength;
+        try
+        {
+            QString qsFormula;
+            qsFormula = geom.GetRotation().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal1;
+            dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+
+            qsFormula = geom.GetLength().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal2;
+            dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+        }
+        catch(...)
+        {
+            grainLine->hide();
+            return;
+        }
+
+        grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()));
+        grainLine->show();
+    }
+    else
+    {
+        grainLine->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveMoveDetail saves the move detail operation to the undo stack
  */
@@ -984,6 +1064,49 @@ void VToolDetail::SaveRotationPattern(qreal dRot)
     qApp->getUndoStack()->push(rotateCommand);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveMoveGrainline(const QPointF& ptPos)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    qDebug() << "******* new grainline pos" << ptPos;
+
+    SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    moveCommand->setText(tr("move grainline"));
+    connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveResizeGrainline(qreal dLength)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+
+    dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
+    newDet.GetGrainlineGeometry().SetLength(qApp->LocaleToString(dLength));
+    SaveDetailOptions* resizeCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    resizeCommand->setText(tr("resize grainline"));
+    connect(resizeCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+
+    dRot = qRadiansToDegrees(dRot);
+    newDet.GetGrainlineGeometry().SetRotation(qApp->LocaleToString(dRot));
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    SaveDetailOptions* rotateCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    rotateCommand->setText(tr("rotate grainline"));
+    connect(rotateCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1144,6 +1267,11 @@ void VToolDetail::ResetChildren(QGraphicsItem *pItem)
     if (pVGI != patternInfo)
     {
         patternInfo->Reset();
+    }
+    VGrainlineItem* pGLI = dynamic_cast<VGrainlineItem*>(pItem);
+    if (pGLI != grainLine)
+    {
+        grainLine->Reset();
     }
 }
 

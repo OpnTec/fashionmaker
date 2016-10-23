@@ -159,13 +159,18 @@ const TextLine& VTextManager::GetLine(int i) const
  * @param fW rectangle width
  * @param fH rectangle height
  * @param iFontSize base font size
+ * @param fMinW minimal required rectangle width to fit the text
+ * @param fMinH minimal required rectangle height to fit the text
  * @return true, if rectangle of size (fW, fH)
  */
-bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
+bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH)
 {
     m_liOutput.clear();
     QFont fnt = m_font;
     int iY = 0;
+    fMinW = fW;
+    fMinH = fH;
+
     for (int i = 0; i < m_liLines.count(); ++i)
     {
         const TextLine& tl = m_liLines.at(i);
@@ -180,6 +185,7 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
             // check if every line fits within the label width
             if (fm.width(qslLines[iL]) + iHorSp > fW)
             {
+                fMinW = fm.width(qslLines[iL]) + iHorSp;
                 return false;
             }
             tlOut.m_qsText = qslLines[iL];
@@ -187,7 +193,11 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
             iY += tlOut.m_iHeight + GetSpacing();
         }
     }
-    return iY < fH;
+    if (iY > fH)
+    {
+        fMinH = iY;
+    }
+    return iY <= fH;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -200,11 +210,14 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize)
 void VTextManager::FitFontSize(qreal fW, qreal fH)
 {
     int iFontSize = GetFont().pixelSize();
-    while (IsBigEnough(fW, fH, iFontSize) == true && iFontSize <= MAX_FONT_SIZE)
+    qreal fMinW;
+    qreal fMinH;
+
+    while (IsBigEnough(fW, fH, iFontSize, fMinW, fMinH) == true && iFontSize <= MAX_FONT_SIZE)
     {
         ++iFontSize;
     }
-    while (IsBigEnough(fW, fH, iFontSize) == false && iFontSize >= MIN_FONT_SIZE)
+    while (IsBigEnough(fW, fH, iFontSize, fMinW, fMinH) == false && iFontSize >= MIN_FONT_SIZE)
     {
         --iFontSize;
     }

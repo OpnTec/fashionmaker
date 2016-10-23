@@ -88,6 +88,7 @@ const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagSize             = QStringLiteral("size");
 const QString VAbstractPattern::TagShowDate         = QStringLiteral("showDate");
 const QString VAbstractPattern::TagShowMeasurements = QStringLiteral("showMeasurements");
+const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
 
 const QString VAbstractPattern::AttrName            = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible         = QStringLiteral("visible");

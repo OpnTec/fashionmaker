@@ -65,6 +65,7 @@ private:
     void         SaveDet(QDomElement &domElement, const VDetail &det);
     void         SavePatternPieceData(QDomElement &domElement, const VDetail &det);
     void         SavePatternInfo(QDomElement &domElement, const VDetail &det);
+    void         SaveGrainline(QDomElement &domElement, const VDetail &det);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

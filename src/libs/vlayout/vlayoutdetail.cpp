@@ -46,9 +46,12 @@
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/calculator.h"
 #include "vlayoutdef.h"
 #include "vlayoutdetail_p.h"
 #include "vtextmanager.h"
+#include "vgraphicsfillitem.h"
 
 class QGraphicsPathItem;
 class QLineF;
@@ -178,6 +181,66 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
     // generate lines of text
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
     d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern)
+{
+    d->grainlineGeom = geom;
+    qreal dAng;
+    qreal dLen;
+
+    try
+    {
+        QString qsFormula = geom.GetRotation().replace("\n", " ");
+        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+        Calculator cal1;
+        dAng = cal1.EvalFormula(rPattern.PlainVariables(), qsFormula);
+        dAng = qDegreesToRadians(dAng);
+
+        qsFormula = geom.GetLength().replace("\n", " ");
+        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+        Calculator cal2;
+        dLen = cal2.EvalFormula(rPattern.PlainVariables(), qsFormula);
+        dLen = ToPixel(dLen, *rPattern.GetPatternUnit());
+    }
+    catch(...)
+    {
+        return;
+    }
+
+    QPointF pt1 = geom.GetPos();
+    QPointF pt2;
+    pt2.setX(pt1.x() + dLen * qCos(dAng));
+    pt2.setY(pt1.y() - dLen * qSin(dAng));
+    QVector<QPointF> v;
+    QPointF pt;
+    qreal dArrowLen = ToPixel(0.5, *rPattern.GetPatternUnit());
+    qreal dArrowAng = M_PI/9;
+
+    v << pt1;
+
+    pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
+    pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
+    v << pt;
+    pt.setX(pt1.x() + dArrowLen * qCos(dAng - dArrowAng));
+    pt.setY(pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
+    v << pt;
+
+    v << pt1 << pt2;
+
+    dAng += M_PI;
+
+    pt.setX(pt2.x() + dArrowLen * qCos(dAng + dArrowAng));
+    pt.setY(pt2.y() - dArrowLen * qSin(dAng + dArrowAng));
+    v << pt;
+    pt.setX(pt2.x() + dArrowLen * qCos(dAng - dArrowAng));
+    pt.setY(pt2.y() - dArrowLen * qSin(dAng - dArrowAng));
+    v << pt;
+
+    v << pt2;
+
+    d->grainlinePoints = RoundPoints(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -670,6 +733,25 @@ QGraphicsItem *VLayoutDetail::GetItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
     item->setPath(ContourPath());
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
+{
+    if (d->grainlinePoints.count() < 6)
+    {
+        return 0;
+    }
+    VGraphicsFillItem* item = new VGraphicsFillItem();
+    QPainterPath path;
+    QVector<QPointF> v = Map(d->grainlinePoints);
+    path.moveTo(v.at(0));
+    for (int i = 1; i < v.count(); ++i)
+    {
+        path.lineTo(v.at(i));
+    }
+    item->setPath(path);
     return item;
 }
 

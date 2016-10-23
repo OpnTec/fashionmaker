@@ -33,6 +33,7 @@
 #include "vnodedetail.h"
 #include "vpatternpiecedata.h"
 #include "vpatterninfogeometry.h"
+#include "vgrainlinegeometry.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/diagnostic.h"
 
@@ -52,7 +53,8 @@ public:
 
     VDetailData(const VDetailData &detail)
         :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my),
-          m_ppData(detail.m_ppData), m_piPatternInfo(detail.m_piPatternInfo), inLayout(detail.inLayout)
+          m_ppData(detail.m_ppData), m_piPatternInfo(detail.m_piPatternInfo),
+          m_glGrainline(detail.m_glGrainline), inLayout(detail.inLayout)
     {}
 
     ~VDetailData() {}
@@ -73,6 +75,10 @@ public:
     VPatternPieceData m_ppData;
     /** @brief Pattern info coordinates */
     VPatternInfoGeometry m_piPatternInfo;
+    /**
+     * @brief m_glGrainline grainline geometry object
+     */
+    VGrainlineGeometry m_glGrainline;
 
     bool           inLayout;
 

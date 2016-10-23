@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vtextgraphicsitem.h
+ **  @file   vtextgraphicsitem.cpp
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -55,7 +55,8 @@ class VPatternPieceData;
 #define ROTATE_ARC                  50
 #define MIN_W                       120
 #define MIN_H                       60
-#define TOP_Z                       2
+#define INACTIVE_Z                  2
+#define ACTIVE_Z                    10
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -69,7 +70,7 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     SetSize(MIN_W, m_iMinH);
-    setZValue(TOP_Z);
+    setZValue(INACTIVE_Z);
     setAcceptHoverEvents(true);
 }
 
@@ -173,7 +174,7 @@ void VTextGraphicsItem::Reset()
     m_eMode = mNormal;
     m_bReleased = false;
     Update();
-    setZValue(TOP_Z);
+    setZValue(INACTIVE_Z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,13 +196,21 @@ bool VTextGraphicsItem::IsIdle() const
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
     m_tm.AddLine(tl);
-    while (m_tm.IsBigEnough(MIN_W, m_iMinH, MIN_FONT_SIZE) == false)
+    qreal fW = MIN_W;
+    qreal fH = m_iMinH;
+    qreal fMinW;
+    qreal fMinH;
+    while (m_tm.IsBigEnough(fW, fH, MIN_FONT_SIZE, fMinW, fMinH) == false)
     {
-        m_iMinH += 5;
+        SetSize(fMinW, fMinH);
+        fW = m_rectBoundingBox.width();
+        fH = m_rectBoundingBox.height();
     }
-    if (m_rectBoundingBox.height() < m_iMinH)
+    qreal dX;
+    qreal dY;
+    if (IsContained(m_rectBoundingBox, rotation(), dX, dY) == false)
     {
-        SetSize(m_rectBoundingBox.width(), m_iMinH);
+        setPos(m_rectBoundingBox.left() + dX, m_rectBoundingBox.top() + dY);
     }
 }
 
@@ -258,11 +267,11 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextGraphicsItem::Update sets the correct font size and redraws the label
+ * @brief VTextGraphicsItem::Update sets the correct size and font size and redraws the label
  */
 void VTextGraphicsItem::Update()
 {
-    UpdateFont();
+    CorrectLabel();
     UpdateBox();
 }
 
@@ -399,7 +408,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
         // raise the label and redraw it
-        setZValue(TOP_Z + 1);
+        setZValue(ACTIVE_Z);
         UpdateBox();
     }
 }
@@ -576,19 +585,41 @@ void VTextGraphicsItem::UpdateBox()
  * @brief VTextGraphicsItem::UpdateFont sets the text font size, so that the entire text will
  *  just fit into the label bounding box
  */
-void VTextGraphicsItem::UpdateFont()
+void VTextGraphicsItem::CorrectLabel()
 {
     int iFS = m_tm.GetFont().pixelSize();
+    qreal fMinW;
+    qreal fMinH;
 
     // increase the font size until the bounding rect is not big enough
-    while (iFS < MAX_FONT_SIZE && m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == true)
+    while (
+           iFS < MAX_FONT_SIZE &&
+           m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS, fMinW, fMinH) == true
+           )
     {
         ++iFS;
     }
     // decrease the font size until the bounding rect is big enough
-    while (iFS >= MIN_FONT_SIZE && m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == false)
+    while (m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS, fMinW, fMinH) == false)
     {
-        --iFS;
+        if (iFS > MIN_FONT_SIZE)
+        {
+            --iFS;
+        }
+        else
+        {
+            SetSize(fMinW, fMinH);
+        }
+    }
+    qreal dX;
+    qreal dY;
+    QRectF rectBB;
+    rectBB.setTopLeft(pos());
+    rectBB.setSize(m_rectBoundingBox.size());
+    if (IsContained(rectBB, rotation(), dX, dY) == false)
+    {
+        // put the label inside the pattern
+        setPos(pos().x() + dX, pos().y() + dY);
     }
     m_tm.SetFontSize(iFS);
     UpdateBox();

@@ -51,6 +51,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
 
 #include <QMessageBox>
 #include <QUndoStack>
@@ -717,6 +718,18 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetPatternInfo().SetFontSize(iFS);
                     qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
                     detail.GetPatternInfo().SetRotation(dRot);
+                }
+                else if (element.tagName() == TagGrainline)
+                {
+                    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(element, AttrVisible, falseStr));
+                    QPointF ptPos;
+                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+                    detail.GetGrainlineGeometry().SetPos(ptPos);
+                    QString qsLength = GetParametrString(element, AttrLength, "0");
+                    detail.GetGrainlineGeometry().SetLength(qsLength);
+                    QString qsRot = GetParametrString(element, VToolDetail::AttrRotation, "0");
+                    detail.GetGrainlineGeometry().SetRotation(qsRot);
                 }
             }
         }

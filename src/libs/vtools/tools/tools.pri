@@ -52,6 +52,7 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.h \
     $$PWD/drawTools/operation/vtoolrotation.h \
     $$PWD/vtextgraphicsitem.h \
+    $$PWD/vgrainlineitem.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyline.h \
     $$PWD/drawTools/operation/vabstractoperation.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.h \
@@ -106,6 +107,7 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.cpp \
     $$PWD/drawTools/operation/vtoolrotation.cpp \
     $$PWD/vtextgraphicsitem.cpp \
+    $$PWD/vgrainlineitem.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyline.cpp \
     $$PWD/drawTools/operation/vabstractoperation.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.cpp \

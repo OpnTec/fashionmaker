@@ -377,6 +377,15 @@
                                                                                        <xs:attribute name="rotation" type="xs:double"></xs:attribute>
                                                                                    </xs:complexType>
                                                                                </xs:element>
+                                                                               <xs:element name="grainline" minOccurs="0" maxOccurs="1">
+                                                                                   <xs:complexType>
+                                                                                       <xs:attribute name="visible" type="xs:boolean"></xs:attribute>
+                                                                                       <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                                       <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                                       <xs:attribute name="length" type="xs:string"></xs:attribute>
+                                                                                       <xs:attribute name="rotation" type="xs:string"></xs:attribute>
+                                                                                   </xs:complexType>
+                                                                               </xs:element>
                                                                                <xs:element name="node" maxOccurs="unbounded">
                                                                                        <xs:complexType>
                                                                                              <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
