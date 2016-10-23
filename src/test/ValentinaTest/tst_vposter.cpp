@@ -50,6 +50,15 @@ void TST_VPoster::BigPoster()
     printer.setFullPage(true);
     // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
+    //sets the margins to 0 to perform the test.
+    const qreal left = 0, top = 0, right = 0, bottom = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
+#else
+    printer.setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+
+
     const QRect image(0, 0, 2622, 3178); // Little bit bigger than A1
     VPoster posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0);
