@@ -208,8 +208,11 @@ void SaveDetailOptions::SaveGrainline(QDomElement &domElement, const VDetail &de
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
-    doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
-    doc->SetAttribute(domData, VToolDetail::AttrRotation, glGeom.GetRotation());
+    if (glGeom.IsVisible() == true)
+    {
+        doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+        doc->SetAttribute(domData, VToolDetail::AttrRotation, glGeom.GetRotation());
+    }
 
     domElement.appendChild(domData);
 }

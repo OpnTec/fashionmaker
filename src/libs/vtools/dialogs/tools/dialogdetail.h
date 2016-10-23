@@ -135,6 +135,7 @@ private slots:
     void             EditFormula();
     void             DeployRotation();
     void             DeployLength();
+    void             ResetWarning();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

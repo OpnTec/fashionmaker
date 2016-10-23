@@ -502,6 +502,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+    qDebug() << "XML ROTATION" << glGeom.GetRotation();
 
     // nodes
     for (int i = 0; i < detail.CountNode(); ++i)
@@ -580,6 +581,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
         doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
         doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+        qDebug() << "XML ROTATION2" << glGeom.GetRotation();
 
         // nodes
         for (int i = 0; i < det.CountNode(); ++i)
@@ -926,6 +928,7 @@ void VToolDetail::UpdateGrainline()
             QString qsFormula;
             qsFormula = geom.GetRotation().replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+
             Calculator cal1;
             dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
 
