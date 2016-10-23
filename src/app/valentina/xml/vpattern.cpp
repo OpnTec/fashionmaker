@@ -734,7 +734,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     catch (VExceptionEmptyParameter eep)
                     {
                         Q_UNUSED(eep);
-                        detail.GetGrainlineGeometry().SetLength("");
+                        detail.GetGrainlineGeometry().SetLength("0");
                     }
 
                     try
@@ -745,7 +745,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     catch(VExceptionEmptyParameter eep)
                     {
                         Q_UNUSED(eep);
-                        detail.GetGrainlineGeometry().SetRotation("");
+                        detail.GetGrainlineGeometry().SetRotation("90");
                     }
                 }
             }
