@@ -428,7 +428,7 @@ void VToolDetail::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         const qreal dScale = qSqrt(QPoint::dotProduct(p, p));
 #else
-        const qreal dScale = qSqrt(p.xp * p.xp + p.yp * p.yp);
+        const qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         grainLine->SetScale(100/dScale);
         //qDebug() << "SCALE" << dScale << 10/dScale;
