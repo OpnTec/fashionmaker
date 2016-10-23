@@ -152,6 +152,17 @@ extern const QString ColorDarkRed;
 extern const QString ColorDarkGreen;
 extern const QString ColorDarkBlue;
 extern const QString ColorYellow;
+extern const QString ColorLightSalmon;
+extern const QString ColorGoldenRod;
+extern const QString ColorOrange;
+extern const QString ColorDeepPink;
+extern const QString ColorViolet;
+extern const QString ColorDarkViolet;
+extern const QString ColorMediumSeaGreen;
+extern const QString ColorLime;
+extern const QString ColorDeepSkyBlue;
+extern const QString ColorCornFlowerBlue;
+
 
 // variables name
 // Hacks for avoiding the linker error "undefined reference to"

@@ -223,9 +223,12 @@ QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 //---------------------------------------------------------------------------------------------------------------------
 const QStringList VAbstractTool::Colors()
 {
-    const QStringList colors = QStringList() << ColorBlack    << ColorGreen << ColorBlue
-                                             << ColorDarkRed  << ColorDarkGreen
-                                             << ColorDarkBlue << ColorYellow;
+    const QStringList colors = QStringList() << ColorBlack          << ColorGreen           << ColorBlue
+                                             << ColorDarkRed        << ColorDarkGreen       << ColorDarkBlue
+                                             << ColorYellow         << ColorLightSalmon     << ColorGoldenRod
+                                             << ColorOrange         << ColorDeepPink        << ColorViolet
+                                             << ColorDarkViolet     << ColorMediumSeaGreen  << ColorLime
+                                             << ColorDeepSkyBlue    << ColorCornFlowerBlue;
     return colors;
 }
 
@@ -260,6 +263,36 @@ QMap<QString, QString> VAbstractTool::ColorsList()
                 break;
             case 6: // ColorYellow
                 name = tr("yellow");
+                break;
+            case 7: // ColorLightSalmon
+                name = tr("light salmon");
+                break;
+            case 8: // ColorGoldenRod
+                name = tr("golden rod");
+                break;
+            case 9: // ColorOrange
+                name = tr("orange");
+                break;
+            case 10: // ColorDeepPink
+                name = tr("deep pink");
+                break;
+            case 11: // ColorViolet
+                name = tr("violet");
+                break;
+            case 12: // ColorDarkViolet
+                name = tr("dark violet");
+                break;
+            case 13: // ColorMediumSeaGreen
+                name = tr("medium sea green");
+                break;
+            case 14: // ColorLime
+                name = tr("lime");
+                break;
+            case 15: // ColorDeepSkyBlue
+                name = tr("deep sky blue");
+                break;
+            case 16: // ColorCornFlowerBlue
+                name = tr("corn flower blue");
                 break;
             default:
                 name = tr("black");

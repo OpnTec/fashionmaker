@@ -33,6 +33,8 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QColorDialog>
+#include <QDebug>
+#include <QRegularExpression>
 
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"

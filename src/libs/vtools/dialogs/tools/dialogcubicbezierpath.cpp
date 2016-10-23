@@ -117,7 +117,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogCubicBezierPath::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

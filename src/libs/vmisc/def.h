@@ -51,6 +51,7 @@ template <class T> class QSharedPointer;
 
 class QComboBox;
 class QMarginsF;
+class VTranslateMeasurements;
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
@@ -499,8 +500,8 @@ QStringList ListGroupO();
 QStringList ListGroupP();
 QStringList ListGroupQ();
 
-QStringList ListNumbers(const QStringList & listMeasurements);
-QString MapDiagrams(const QString &number);
+QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList & listMeasurements);
+QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number);
 
 // pattern making systems codes
 extern const QString p0_S;

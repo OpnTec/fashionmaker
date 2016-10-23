@@ -384,7 +384,27 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                 // Render
                 QRectF source;
                 isTiled ? source = poster->at(index).rect : source = paper->rect();
-                QRectF target(0, 0, source.width() * scale, source.height() * scale);
+
+                qreal x,y;
+                if(printer->fullPage())
+                {
+                    #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+                        QMarginsF printerMargins = printer->pageLayout().margins();
+                        x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
+                        y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
+                    #else
+                        qreal left = 0, top = 0, right = 0, bottom = 0;
+                        printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+                        x = qFloor(ToPixel(left,Unit::Mm));
+                        y = qFloor(ToPixel(top,Unit::Mm));
+                    #endif
+                }
+                else
+                {
+                    x = 0; y = 0;
+                }
+
+                QRectF target(x * scale, y * scale, source.width() * scale, source.height() * scale);
 
                 scenes.at(paperIndex)->render(&painter, target, source, Qt::IgnoreAspectRatio);
 

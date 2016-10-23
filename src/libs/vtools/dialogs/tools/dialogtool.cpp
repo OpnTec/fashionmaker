@@ -302,7 +302,7 @@ void DialogTool::FillComboBoxHCrossCurvesPoint(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
+QString DialogTool::GetComboBoxCurrentData(const QComboBox *box, const QString &def) const
 {
     SCASSERT(box != nullptr)
     QString value;
@@ -313,7 +313,7 @@ QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 #endif
     if (value.isEmpty())
     {
-        value = TypeLineLine;
+        value = def;
     }
     return value;
 }

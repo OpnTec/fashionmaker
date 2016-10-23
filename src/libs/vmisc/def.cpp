@@ -1147,20 +1147,22 @@ QStringList ListPMSystems()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListNumbers(const QStringList &listMeasurements)
+QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements)
 {
+    SCASSERT(trM != nullptr);
+
     QStringList numbers;
     for (int i=0; i < listMeasurements.size(); ++i)
     {
-        numbers.append(qApp->TrVars()->MNumber(listMeasurements.at(i)));
+        numbers.append(trM->MNumber(listMeasurements.at(i)));
     }
     return numbers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MapDiagrams(const QString &number)
+QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
 {
-    switch (ListNumbers(ListGroupA()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupA()).indexOf(number))
     {
         // A
         case 0: // A01
@@ -1213,7 +1215,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupB()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupB()).indexOf(number))
     {
         // B
         case 0: // B01
@@ -1230,7 +1232,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupC()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupC()).indexOf(number))
     {
         // C
         case 0: // C01
@@ -1243,7 +1245,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupD()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupD()).indexOf(number))
     {
         // D
         case 0: // D01
@@ -1260,7 +1262,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupE()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupE()).indexOf(number))
     {
         // E
         case 0: // E01
@@ -1275,7 +1277,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupF()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupF()).indexOf(number))
     {
         // F
         case 0: // F01
@@ -1294,7 +1296,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupG()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupG()).indexOf(number))
     {
         // G
         case 0: // G01
@@ -1393,7 +1395,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupH()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupH()).indexOf(number))
     {
         // H
         case 0: // H01
@@ -1484,7 +1486,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupI()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupI()).indexOf(number))
     {
         // I
         case 0: // I01
@@ -1519,7 +1521,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupJ()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupJ()).indexOf(number))
     {
         // J
         case 0: // J01
@@ -1546,7 +1548,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupK()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupK()).indexOf(number))
     {
         // K
         case 0: // K01
@@ -1579,7 +1581,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupL()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupL()).indexOf(number))
     {
         // L
         case 0: // L01
@@ -1630,7 +1632,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupM()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupM()).indexOf(number))
     {
         // M
         case 0: // M01
@@ -1665,7 +1667,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupN()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupN()).indexOf(number))
     {
         // N
         case 0: // N01
@@ -1688,7 +1690,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupO()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupO()).indexOf(number))
     {
         // O
         case 0: // O01
@@ -1723,7 +1725,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupP()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupP()).indexOf(number))
     {
         // P
         case 0: // P01
@@ -1754,7 +1756,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupQ()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupQ()).indexOf(number))
     {
         // Q
         case 0: // Q01

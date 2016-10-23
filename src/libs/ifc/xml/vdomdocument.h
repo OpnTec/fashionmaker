@@ -40,6 +40,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QtGlobal>
+#include <QLocale>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
