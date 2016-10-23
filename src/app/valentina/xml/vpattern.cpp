@@ -726,16 +726,23 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
                     ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
                     detail.GetGrainlineGeometry().SetPos(ptPos);
-                    if (detail.GetGrainlineGeometry().IsVisible() == true)
+                    try
                     {
                         QString qsLength = GetParametrString(element, AttrLength);
                         detail.GetGrainlineGeometry().SetLength(qsLength);
+                    }
+                    catch (...)
+                    {
+                        detail.GetGrainlineGeometry().SetLength("");
+                    }
+
+                    try
+                    {
                         QString qsRot = GetParametrString(element, VToolDetail::AttrRotation);
                         detail.GetGrainlineGeometry().SetRotation(qsRot);
                     }
-                    else
+                    catch(...)
                     {
-                        detail.GetGrainlineGeometry().SetLength("");
                         detail.GetGrainlineGeometry().SetRotation("");
                     }
                 }
