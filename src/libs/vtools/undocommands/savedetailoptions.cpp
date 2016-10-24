@@ -210,6 +210,8 @@ void SaveDetailOptions::SaveGrainline(QDomElement &domElement, const VDetail &de
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VToolDetail::AttrRotation, glGeom.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrFront, glGeom.HasFrontArrow() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrRear, glGeom.HasRearArrow() == true? trueStr : falseStr);
 
     domElement.appendChild(domData);
 }

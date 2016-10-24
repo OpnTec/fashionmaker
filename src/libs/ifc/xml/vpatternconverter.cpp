@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.7");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.7.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.8");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.8.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -173,6 +173,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000306):
             return QStringLiteral("://schema/pattern/v0.3.6.xsd");
         case (0x000307):
+            return QStringLiteral("://schema/pattern/v0.3.7.xsd");
+        case (0x000308):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -268,6 +270,10 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000307), fileName);
                 V_FALLTHROUGH
             case (0x000307):
+                ToV0_3_8();
+                ValidateXML(XSDSchema(0x000308), fileName);
+                V_FALLTHROUGH
+            case (0x000308):
                 break;
             default:
                 break;
@@ -446,6 +452,13 @@ void VPatternConverter::ToV0_3_6()
 void VPatternConverter::ToV0_3_7()
 {
     SetVersion(QStringLiteral("0.3.7"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_3_8()
+{
+    SetVersion(QStringLiteral("0.3.8"));
     Save();
 }
 

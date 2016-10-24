@@ -486,6 +486,11 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
     detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->toPlainText());
     detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->toPlainText());
+    detail.GetGrainlineGeometry().SetFrontArrow(ui.checkBoxFrontArrow->isChecked());
+    detail.GetGrainlineGeometry().SetRearArrow(ui.checkBoxRearArrow->isChecked());
+
+    qDebug() << "DIALOG ARROWS" << detail.GetGrainlineGeometry().HasFrontArrow()
+                << detail.GetGrainlineGeometry().HasRearArrow();
     return detail;
 }
 
@@ -559,6 +564,8 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.checkBoxGrainline->setChecked(detail.GetGrainlineGeometry().IsVisible());
     ui.lineEditRotFormula->setPlainText(detail.GetGrainlineGeometry().GetRotation());
     ui.lineEditLenFormula->setPlainText(detail.GetGrainlineGeometry().GetLength());
+    ui.checkBoxFrontArrow->setChecked(detail.GetGrainlineGeometry().HasFrontArrow());
+    ui.checkBoxRearArrow->setChecked(detail.GetGrainlineGeometry().HasRearArrow());
 
     m_oldData = detail.GetPatternPieceData();
     m_oldGeom = detail.GetPatternInfo();

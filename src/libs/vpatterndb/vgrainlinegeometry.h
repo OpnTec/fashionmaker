@@ -53,6 +53,10 @@ public:
     void                    SetRotation(const QString& qsRot);
     bool                    IsVisible() const;
     void                    SetVisible(bool bVisible);
+    bool                    HasFrontArrow() const;
+    void                    SetFrontArrow(bool bVal);
+    bool                    HasRearArrow() const;
+    void                    SetRearArrow(bool bVal);
 
 private:
     /**
@@ -71,6 +75,14 @@ private:
      * @brief m_bVisible visibility flag
      */
     bool                    m_bVisible;
+    /**
+     * @brief m_bFrontArrow front arrow flag
+     */
+    bool                    m_bFrontArrow;
+    /**
+     * @brief m_bRearArrow back arrow flag
+     */
+    bool                    m_bRearArrow;
 };
 
 #endif // VGRAINLINEGEOMETRY_H

@@ -54,7 +54,7 @@ public:
     virtual ~VGrainlineItem();
 
     void                    paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget);
-    void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength);
+    void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, bool bFA, bool bRA);
 
     QRectF                  boundingRect() const;
     void                    Reset();
@@ -96,6 +96,8 @@ private:
     QPointF                 m_ptCenter;
     QPointF                 m_ptRotCenter;
     qreal                   m_dAngle;
+    bool                    m_bFrontArrow;
+    bool                    m_bRearArrow;
 };
 
 #endif // VGRAINLINEITEM_H

@@ -100,6 +100,8 @@ const QString VAbstractPattern::AttrMaterial        = QStringLiteral("material")
 const QString VAbstractPattern::AttrUserDefined     = QStringLiteral("userDef");
 const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber");
 const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
+const QString VAbstractPattern::AttrFront           = QStringLiteral("front");
+const QString VAbstractPattern::AttrRear            = QStringLiteral("rear");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 

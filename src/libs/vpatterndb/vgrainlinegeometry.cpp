@@ -33,7 +33,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 
 VGrainlineGeometry::VGrainlineGeometry()
-    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false)
+    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false), m_bFrontArrow(true), m_bRearArrow(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,6 +95,34 @@ bool VGrainlineGeometry::IsVisible() const
 void VGrainlineGeometry::SetVisible(bool bVisible)
 {
     m_bVisible = bVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+bool VGrainlineGeometry::HasFrontArrow() const
+{
+    return m_bFrontArrow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+void VGrainlineGeometry::SetFrontArrow(bool bVal)
+{
+    m_bFrontArrow = bVal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+bool VGrainlineGeometry::HasRearArrow() const
+{
+    return m_bRearArrow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+void VGrainlineGeometry::SetRearArrow(bool bVal)
+{
+    m_bRearArrow = bVal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

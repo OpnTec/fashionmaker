@@ -54,7 +54,7 @@
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_bReleased(false), m_dRotation(0), m_dStartRotation(0),
       m_dLength(0), m_rectBoundingBox(), m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize(),
-      m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0)
+      m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0), m_bFrontArrow(false), m_bRearArrow(false)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     setAcceptHoverEvents(true);
@@ -93,29 +93,35 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     // line
     pP->drawLine(pt1, pt2);
 
-    // first arrow
+    pP->setBrush(clr);
     QPolygonF poly;
-    poly << pt1;
     QPointF ptA;
     qreal dArrLen = ARROW_LENGTH*m_dScale;
-    ptA.setX(pt1.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE));
-    ptA.setY(pt1.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
-    poly << ptA;
-    ptA.setX(pt1.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE));
-    ptA.setY(pt1.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
-    poly << ptA;
-    pP->setBrush(clr);
-    pP->drawPolygon(poly);
-    // second arrow
-    poly.clear();
-    poly << pt2;
-    ptA.setX(pt2.x() + dArrLen*cos(M_PI + m_dRotation + ARROW_ANGLE));
-    ptA.setY(pt2.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
-    poly << ptA;
-    ptA.setX(pt2.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE));
-    ptA.setY(pt2.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
-    poly << ptA;
-    pP->drawPolygon(poly);
+    if (m_bFrontArrow == true)
+    {
+        // first arrow
+        poly << pt1;
+        ptA.setX(pt1.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE));
+        ptA.setY(pt1.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
+        poly << ptA;
+        ptA.setX(pt1.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE));
+        ptA.setY(pt1.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
+        poly << ptA;
+        pP->drawPolygon(poly);
+    }
+    if (m_bRearArrow == true)
+    {
+        // second arrow
+        poly.clear();
+        poly << pt2;
+        ptA.setX(pt2.x() + dArrLen*cos(M_PI + m_dRotation + ARROW_ANGLE));
+        ptA.setY(pt2.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
+        poly << ptA;
+        ptA.setX(pt2.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE));
+        ptA.setY(pt2.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
+        poly << ptA;
+        pP->drawPolygon(poly);
+    }
 
     if (m_eMode != mNormal)
     {
@@ -171,7 +177,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
  * @param dRotation rotation of the grainline in [degrees]
  * @param dLength length of the grainline in user's units
  */
-void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength)
+void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, bool bFA, bool bRA)
 {
     m_dRotation = qDegreesToRadians(dRotation);
     m_dLength = dLength;
@@ -185,6 +191,9 @@ void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal
         pt.setY(pt.y() + dY);
     }
     setPos(pt);
+    m_bFrontArrow = bFA;
+    m_bRearArrow = bRA;
+
     UpdateRectangle();
     UpdateBox();
 }
