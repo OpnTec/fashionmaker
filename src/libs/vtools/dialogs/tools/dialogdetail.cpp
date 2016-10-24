@@ -1002,7 +1002,7 @@ void DialogDetail::EditFormula()
     DialogEditWrongFormula dlg(data, NULL_ID, this);
     dlg.SetFormula(pleFormula->toPlainText());
     dlg.setCheckZero(bCheckZero);
-    if (dlg.exec() == true)
+    if (dlg.exec() == QDialog::Accepted)
     {
         QString qsFormula = dlg.GetFormula();
         qsFormula.replace("\n", " ");
