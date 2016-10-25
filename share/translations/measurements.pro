@@ -41,7 +41,8 @@ LANGUAGES += \
     en_IN \
     ro_RO \
     zh_CN \
-    pt_BR
+    pt_BR \
+    el_GR
 
 
 for(sys, PMSYSTEMS) {

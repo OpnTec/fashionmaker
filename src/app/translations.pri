@@ -28,7 +28,8 @@ isEmpty(LOCALES){
         en_IN \
         ro_RO \
         zh_CN \
-        pt_BR
+        pt_BR \
+        el_GR
 } else {
     LANGUAGES = $${LOCALES}
 }
@@ -236,5 +237,13 @@ macx{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_pt_BR.path = "$$RESOURCES_DIR/translations/pt_BR.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_pt_BR
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_el_GR.qm){
+            TRANSLATION_el_GR.files += \
+                $$files($${TRANSLATIONS_PATH}/*_el_GR.qm) \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_el_GR.path = "$$RESOURCES_DIR/translations/el_GR.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_el_GR
         }
 }
