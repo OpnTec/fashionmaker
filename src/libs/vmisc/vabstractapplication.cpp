@@ -150,7 +150,11 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
     else
     {
-        QDir dir(QApplication::applicationDirPath() + trPath);
+        QDir appDir = QDir(qApp->applicationDirPath());
+        appDir.cdUp();
+        appDir.cdUp();
+        appDir.cdUp();
+        QDir dir(appDir.absolutePath() + trPath);
         if (dir.exists())
         {
             return dir.absolutePath();

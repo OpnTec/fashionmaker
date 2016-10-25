@@ -1482,6 +1482,46 @@
         <source>Name can&apos;t be empty</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Formula magica</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Lunghezza:</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -2471,7 +2511,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset lunghezza:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -2865,10 +2905,6 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>Value</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calulation</source>
-        <translation type="obsolete">Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5914,7 +5950,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi pezzo</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
@@ -6083,6 +6119,10 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveDoubleLabel</name>
@@ -6232,7 +6272,7 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all workpieces</source>
+        <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7435,6 +7475,46 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Do you really want to delete?</source>
         <translation>Vuoi veramente cancellare?</translation>
     </message>
+    <message>
+        <source>light salmon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>golden rod</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>deep pink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>violet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark violet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>medium sea green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>deep sky blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>corn flower blue</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VApplication</name>
@@ -7833,6 +7913,10 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Could not load schema file.</source>
+        <translation type="vanished">Impossibile caricare il file di schema</translation>
+    </message>
+    <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7850,7 +7934,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo ID è già esistente.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
@@ -7975,10 +8059,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of lineintersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8137,6 +8217,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Error creating or updating operation of moving</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating point of line intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8211,6 +8295,22 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9629,6 +9729,14 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>select none details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invert selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invert selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

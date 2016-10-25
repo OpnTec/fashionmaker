@@ -29,6 +29,7 @@
 #include <QtTest>
 
 #include "tst_measurementregexp.h"
+#include "tst_buitinregexp.h"
 #include "tst_qmuparsererrormsg.h"
 #include "tst_tstranslation.h"
 
@@ -47,23 +48,24 @@ int main(int argc, char** argv)
 
     ASSERT_TEST(new TST_TSTranslation());
 
+    const QStringList locales = SupportedLocales();
+    for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
     {
-        const QStringList locales = SupportedLocales();
-        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
-        {
-            for(int l = 0, sz = locales.size(); l < sz; ++l)
-            {
-                ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
-            }
-        }
-
         for(int l = 0, sz = locales.size(); l < sz; ++l)
         {
-            ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+            ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
         }
     }
 
+    for(int l = 0, sz = locales.size(); l < sz; ++l)
+    {
+        ASSERT_TEST(new TST_BuitInRegExp(locales.at(l)));
+    }
 
+    for(int l = 0, sz = locales.size(); l < sz; ++l)
+    {
+        ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+    }
 
     return status;
 }

@@ -95,7 +95,11 @@ QString VCommonSettings::StandardTablesPath() const
     }
     else
     {
-        QDir dir(QApplication::applicationDirPath() + stPath);
+        QDir appDir = QDir(qApp->applicationDirPath());
+        appDir.cdUp();
+        appDir.cdUp();
+        appDir.cdUp();
+        QDir dir(appDir.absolutePath() + stPath);
         if (dir.exists())
         {
             return dir.absolutePath();

@@ -29,21 +29,25 @@
 #ifndef TST_MEASUREMENTREGEXP_H
 #define TST_MEASUREMENTREGEXP_H
 
-#include "../vmisc/abstracttest.h"
+#include "tst_abstractregexp.h"
 
 #include <QPointer>
 
 class QTranslator;
 class VTranslateVars;
 
-class TST_MeasurementRegExp : public AbstractTest
+class TST_MeasurementRegExp : public TST_AbstractRegExp
 {
     Q_OBJECT
 public:
     TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_MeasurementRegExp() Q_DECL_OVERRIDE;
+    virtual ~TST_MeasurementRegExp();
 
     static const quint32 systemCounts;
+
+protected:
+    virtual void        PrepareData() Q_DECL_OVERRIDE;
+    virtual QStringList AllNames() Q_DECL_OVERRIDE;
 
 private slots:
     void initTestCase();
@@ -55,32 +59,19 @@ private slots:
     void TestCheckIsNamesUnique();
     void TestCheckNoOriginalNamesInTranslation_data();
     void TestCheckNoOriginalNamesInTranslation();
-    void TestCheckUnderlineExists_data();
-    void TestCheckUnderlineExists();
-    void TestCheckInternalVaribleRegExp_data();
-    void TestCheckInternalVaribleRegExp();
     void cleanupTestCase();
 
 private:
     Q_DISABLE_COPY(TST_MeasurementRegExp)
 
-    quint32 m_systemCode;
-    QString m_system;
-    QString m_locale;
-    QPointer<QTranslator>   pmsTranslator;
-    QPointer<QTranslator>   vTranslator;
-    VTranslateVars *trMs;
+    quint32               m_systemCode;
+    QString               m_system;
+    QPointer<QTranslator> m_pmsTranslator;
 
     void    TestCombinations(int systemCounts, const QStringList &locales) const;
-    void    PrepareMeasurementData();
 
     int     LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale);
-    int     LoadVariables(const QString &checkedLocale);
-
     void    RemoveTrMeasurements(const QString &checkedSystem, const QString &checkedLocale);
-    void    RemoveTrVariables(const QString &checkedLocale);
-
-    void    InitTrMs();
 };
 
 #endif // TST_MEASUREMENTREGEXP_H

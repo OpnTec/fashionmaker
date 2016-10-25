@@ -302,6 +302,7 @@ void TST_TSTranslation::TestPunctuation_data()
         QVERIFY2(locales.size() == fileNames.size()-1, "Unexpected count of files.");
     }
 
+    QTest::addColumn<QString>("locale");
     QTest::addColumn<QString>("source");
     QTest::addColumn<QString>("translation");
 
@@ -342,7 +343,7 @@ void TST_TSTranslation::TestPunctuation_data()
                 }
 
                 const QString message = QString("File '%1'.").arg(filename);
-                QTest::newRow(qUtf8Printable(message)) << source << translation;
+                QTest::newRow(qUtf8Printable(message)) << locales.at(j) << source << translation;
             }
             else
             {
@@ -356,6 +357,7 @@ void TST_TSTranslation::TestPunctuation_data()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::TestPunctuation()
 {
+    QFETCH(QString, locale);
     QFETCH(QString, source);
     QFETCH(QString, translation);
 
@@ -364,21 +366,29 @@ void TST_TSTranslation::TestPunctuation()
                                                          << QLatin1String(" ")
                                                          << QLatin1String("\n")
                                                          << QLatin1String("!")
-                                                         << QLatin1String("?");
+                                                         << QLatin1String("?")
+                                                         << QLatin1String(";");
     bool testFail = false;
-    QChar c = source.at(source.length()-1);
-    if (punctuation.contains(c))
+    const QChar cSource = source.at(source.length()-1);
+    QChar cPunctuation = cSource;
+    const QChar cTranslation = translation.at(translation.length()-1);
+    if (punctuation.contains(cSource))
     {
-        if (not (source.endsWith(c) && translation.endsWith(c)))
+        if (not translation.endsWith(cSource))
         {
             testFail = true;
+
+            if (locale == QLatin1String("el_GR") && cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';'))
+            {
+                testFail = false;
+            }
         }
     }
     else
     {
-        c = translation.at(translation.length()-1);
-        if (punctuation.contains(c))
+        if (punctuation.contains(cTranslation))
         {
+            cPunctuation = cTranslation;
             testFail = true;
         }
     }
@@ -386,7 +396,7 @@ void TST_TSTranslation::TestPunctuation()
     if (testFail)
     {
         const QString message = QString("Translation string does not end with the same punctuation character '%1' or "
-                                        "vice versa. ").arg(c) + QString("Original name:'%1'").arg(source) +
+                                        "vice versa. ").arg(cPunctuation) + QString("Original name:'%1'").arg(source) +
                 QString(", translated name:'%1'").arg(translation);
         QFAIL(qUtf8Printable(message));
     }

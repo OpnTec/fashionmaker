@@ -1028,7 +1028,8 @@ QStringList SupportedLocales()
                                               << QStringLiteral("en_IN")
                                               << QStringLiteral("ro_RO")
                                               << QStringLiteral("zh_CN")
-                                              << QStringLiteral("pt_BR");
+                                              << QStringLiteral("pt_BR")
+                                              << QStringLiteral("el_GR");
 
     return locales;
 }
