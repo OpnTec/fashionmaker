@@ -889,19 +889,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="613"/>
         <source>lowbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>basso_torace_circ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="615"/>
         <source>Lowbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circonferenza basso torace</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="616"/>
         <source>Circumference around LowBust under the breasts, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circonferenza del basso torace sotto il seno, parallela al pavimento</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="620"/>
@@ -937,7 +937,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="636"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>fiancoalto_circ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="638"/>

@@ -1458,6 +1458,46 @@
         <source>Name can&apos;t be empty</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Asistent Formulă</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valoare</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Arată calcul complet în message box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Lungime:</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -2798,10 +2838,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Valoare</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="obsolete">Calcul</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Arată calcul complet în message box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3757,10 +3793,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Valoare</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="obsolete">Calcul</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Arată calcul complet în message box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -4116,10 +4148,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Valoare</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="obsolete">Calcul</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Arată calcul complet în message box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -4233,10 +4261,6 @@ Apply settings anyway?</source>
     <message>
         <source>Value</source>
         <translation type="unfinished">Valoare</translation>
-    </message>
-    <message>
-        <source>Calulation</source>
-        <translation type="obsolete">Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5788,6 +5812,10 @@ Do you want to save your changes?</source>
         <source>Can&apos;t create path</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveDoubleLabel</name>
@@ -5929,7 +5957,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all workpieces</source>
+        <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7072,6 +7100,46 @@ Do you want to save your changes?</source>
         <source>Do you really want to delete?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>light salmon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>golden rod</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>deep pink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>violet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark violet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>medium sea green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>deep sky blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>corn flower blue</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VApplication</name>
@@ -7539,10 +7607,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error creating or updating point of lineintersection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error creating or updating point of contact</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7698,6 +7762,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating operation of moving</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating point of line intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7760,6 +7828,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>rotate pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9151,6 +9235,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>select none details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invert selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invert selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

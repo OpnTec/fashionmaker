@@ -363,7 +363,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="328"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние от линии талии до віступающей точки ягодицы</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="332"/>
@@ -1697,7 +1697,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="946"/>
         <source>From Neck Front down between breasts to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние от основания шеи спереди между грудью до лини талии спереди</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="950"/>
