@@ -1323,7 +1323,7 @@ void VPattern::ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomEleme
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating point of lineintersection"), domElement);
+        VExceptionObjectError excep(tr("Error creating or updating point of line intersection"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
