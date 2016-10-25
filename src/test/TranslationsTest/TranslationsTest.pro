@@ -39,7 +39,9 @@ SOURCES += \
     qttestmainlambda.cpp \
     tst_measurementregexp.cpp \
     tst_qmuparsererrormsg.cpp \
-    tst_tstranslation.cpp
+    tst_tstranslation.cpp \
+    tst_buitinregexp.cpp \
+    tst_abstractregexp.cpp
 
 win32-msvc*:SOURCES += stable.cpp
 
@@ -47,7 +49,9 @@ HEADERS += \
     stable.h \
     tst_measurementregexp.h \
     tst_qmuparsererrormsg.h \
-    tst_tstranslation.h
+    tst_tstranslation.h \
+    tst_buitinregexp.h \
+    tst_abstractregexp.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

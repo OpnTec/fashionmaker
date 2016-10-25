@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   25 10, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,46 +26,42 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_ABSTRACTREGEXP_H
+#define TST_ABSTRACTREGEXP_H
 
-#include "tst_measurementregexp.h"
-#include "tst_buitinregexp.h"
-#include "tst_qmuparsererrormsg.h"
-#include "tst_tstranslation.h"
+#include "../vmisc/abstracttest.h"
 
-#include "../vmisc/def.h"
+#include <QPointer>
 
-int main(int argc, char** argv)
+class QTranslator;
+class VTranslateVars;
+
+class TST_AbstractRegExp : public AbstractTest
 {
-    QApplication app( argc, argv );// For translation
+    Q_OBJECT
+public:
+    TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
+    virtual ~TST_AbstractRegExp();
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+protected:
+    QString m_locale;
+    QPointer<QTranslator> m_vTranslator;
+    VTranslateVars *m_trMs;
 
-    ASSERT_TEST(new TST_TSTranslation());
+    virtual void        PrepareData()=0;
+    virtual QStringList AllNames()=0;
 
-    const QStringList locales = SupportedLocales();
-    for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
-    {
-        for(int l = 0, sz = locales.size(); l < sz; ++l)
-        {
-            ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
-        }
-    }
+    int  LoadVariables(const QString &checkedLocale);
+    void RemoveTrVariables(const QString &checkedLocale);
+    void InitTrMs();
 
-    for(int l = 0, sz = locales.size(); l < sz; ++l)
-    {
-        ASSERT_TEST(new TST_BuitInRegExp(locales.at(l)));
-    }
+    void CallTestCheckNoEndLine();
+    void CallTestCheckRegExpNames();
+    void CallTestCheckIsNamesUnique();
+    void CallTestCheckNoOriginalNamesInTranslation();
 
-    for(int l = 0, sz = locales.size(); l < sz; ++l)
-    {
-        ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
-    }
+private:
+    Q_DISABLE_COPY(TST_AbstractRegExp)
+};
 
-    return status;
-}
+#endif // TST_ABSTRACTREGEXP_H

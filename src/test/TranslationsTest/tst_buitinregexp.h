@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_measurementregexp.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 9, 2015
+ **  @date   25 10, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef TST_MEASUREMENTREGEXP_H
-#define TST_MEASUREMENTREGEXP_H
+#ifndef TST_BUITINREGEXP_H
+#define TST_BUITINREGEXP_H
 
 #include "tst_abstractregexp.h"
 
@@ -36,14 +36,12 @@
 class QTranslator;
 class VTranslateVars;
 
-class TST_MeasurementRegExp : public TST_AbstractRegExp
+class TST_BuitInRegExp : public TST_AbstractRegExp
 {
     Q_OBJECT
 public:
-    TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_MeasurementRegExp();
-
-    static const quint32 systemCounts;
+    explicit TST_BuitInRegExp(const QString &locale, QObject *parent = nullptr);
+    virtual ~TST_BuitInRegExp();
 
 protected:
     virtual void        PrepareData() Q_DECL_OVERRIDE;
@@ -59,19 +57,14 @@ private slots:
     void TestCheckIsNamesUnique();
     void TestCheckNoOriginalNamesInTranslation_data();
     void TestCheckNoOriginalNamesInTranslation();
+    void TestCheckUnderlineExists_data();
+    void TestCheckUnderlineExists();
+    void TestCheckInternalVaribleRegExp_data();
+    void TestCheckInternalVaribleRegExp();
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_MeasurementRegExp)
-
-    quint32               m_systemCode;
-    QString               m_system;
-    QPointer<QTranslator> m_pmsTranslator;
-
-    void    TestCombinations(int systemCounts, const QStringList &locales) const;
-
-    int     LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale);
-    void    RemoveTrMeasurements(const QString &checkedSystem, const QString &checkedLocale);
+    Q_DISABLE_COPY(TST_BuitInRegExp)
 };
 
-#endif // TST_MEASUREMENTREGEXP_H
+#endif // TST_BUITINREGEXP_H
