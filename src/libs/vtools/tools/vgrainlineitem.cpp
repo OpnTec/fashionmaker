@@ -54,7 +54,7 @@
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
     :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_bReleased(false), m_dRotation(0), m_dStartRotation(0),
       m_dLength(0), m_rectBoundingBox(), m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize(),
-      m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0), m_bFrontArrow(false), m_bRearArrow(false)
+      m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0), m_eArrowType(VGrainlineGeometry::atBoth)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     setAcceptHoverEvents(true);
@@ -97,7 +97,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     QPolygonF poly;
     QPointF ptA;
     qreal dArrLen = ARROW_LENGTH*m_dScale;
-    if (m_bFrontArrow == true)
+    if (m_eArrowType != VGrainlineGeometry::atRear)
     {
         // first arrow
         poly << pt1;
@@ -109,7 +109,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         poly << ptA;
         pP->drawPolygon(poly);
     }
-    if (m_bRearArrow == true)
+    if (m_eArrowType != VGrainlineGeometry::atFront)
     {
         // second arrow
         poly.clear();
@@ -177,7 +177,8 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
  * @param dRotation rotation of the grainline in [degrees]
  * @param dLength length of the grainline in user's units
  */
-void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, bool bFA, bool bRA)
+void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
+                                    VGrainlineGeometry::ArrowType eAT)
 {
     m_dRotation = qDegreesToRadians(dRotation);
     m_dLength = dLength;
@@ -191,8 +192,7 @@ void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal
         pt.setY(pt.y() + dY);
     }
     setPos(pt);
-    m_bFrontArrow = bFA;
-    m_bRearArrow = bRA;
+    m_eArrowType = eAT;
 
     UpdateRectangle();
     UpdateBox();

@@ -730,8 +730,9 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetGrainlineGeometry().SetLength(qsLength);
                     QString qsRot = GetParametrString(element, VToolDetail::AttrRotation, "90");
                     detail.GetGrainlineGeometry().SetRotation(qsRot);
-                    detail.GetGrainlineGeometry().SetFrontArrow(GetParametrBool(element, AttrFront, trueStr));
-                    detail.GetGrainlineGeometry().SetRearArrow(GetParametrBool(element, AttrRear, trueStr));
+                    VGrainlineGeometry::ArrowType eAT =
+                            VGrainlineGeometry::ArrowType(GetParametrUInt(element, AttrArrows, "0"));
+                    detail.GetGrainlineGeometry().SetArrowType(eAT);
                 }
             }
         }

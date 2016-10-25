@@ -509,8 +509,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
-    doc->SetAttribute(domData, VAbstractPattern::AttrFront, glGeom.HasFrontArrow() == true? trueStr : falseStr);
-    doc->SetAttribute(domData, VAbstractPattern::AttrRear, glGeom.HasRearArrow() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
     qDebug() << "XML ROTATION" << glGeom.GetRotation();
 
     // nodes
@@ -590,8 +589,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
         doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
         doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
-        doc->SetAttribute(domData, VAbstractPattern::AttrFront, glGeom.HasFrontArrow() == true? trueStr : falseStr);
-        doc->SetAttribute(domData, VAbstractPattern::AttrRear, glGeom.HasRearArrow() == true? trueStr : falseStr);
+        doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
 
         // nodes
         for (int i = 0; i < det.CountNode(); ++i)
@@ -954,8 +952,7 @@ void VToolDetail::UpdateGrainline()
         }
 
         grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
-                                  geom.HasFrontArrow(), geom.HasRearArrow());
-        qDebug() << "ARROWS" << geom.HasFrontArrow() << geom.HasRearArrow();
+                                  geom.GetArrowType());
         grainLine->show();
     }
     else

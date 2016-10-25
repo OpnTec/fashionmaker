@@ -384,9 +384,8 @@
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="length" type="xs:string"></xs:attribute>
                                                                                        <xs:attribute name="rotation" type="xs:string"></xs:attribute>
-                                                                                       <xs:attribute name="front" type="xs:boolean"></xs:attribute>
-                                                                                       <xs:attribute name="rear" type="xs:boolean"></xs:attribute>
-                                                                                   </xs:complexType>
+										       <xs:attribute name="arrows" type="arrowType"></xs:attribute>
+                                                                                    </xs:complexType>
                                                                                </xs:element>
                                                                                <xs:element name="node" maxOccurs="unbounded">
                                                                                        <xs:complexType>
@@ -598,6 +597,13 @@
      <xs:restriction base="xs:unsignedInt">
        <xs:enumeration value="0"/><!--No placement-->
        <xs:enumeration value="1"/><!--Cut on Fold-->
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="arrowType">
+     <xs:restriction base="xs:unsignedInt">
+       <xs:enumeration value="0"/><!--Both-->
+       <xs:enumeration value="1"/><!--Front-->
+       <xs:enumeration value="2"/><!--Rear-->
      </xs:restriction>
    </xs:simpleType>
    </xs:schema>

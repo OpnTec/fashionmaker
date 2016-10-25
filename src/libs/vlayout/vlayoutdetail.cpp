@@ -220,7 +220,7 @@ void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContaine
 
     v << pt1;
 
-    if (geom.HasFrontArrow() == true) {
+    if (geom.GetArrowType() != VGrainlineGeometry::atRear) {
         pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
         pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
         v << pt;
@@ -233,7 +233,7 @@ void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContaine
 
     v << pt2;
 
-    if (geom.HasRearArrow() == true)
+    if (geom.GetArrowType() != VGrainlineGeometry::atFront)
     {
         dAng += M_PI;
 

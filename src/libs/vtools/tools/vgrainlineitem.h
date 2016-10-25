@@ -54,7 +54,8 @@ public:
     virtual ~VGrainlineItem();
 
     void                    paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget);
-    void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, bool bFA, bool bRA);
+    void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
+                                           VGrainlineGeometry::ArrowType eAT);
 
     QRectF                  boundingRect() const;
     void                    Reset();
@@ -79,25 +80,24 @@ signals:
     void                    SignalRotated(qreal dRot, const QPointF& ptNewPos);
 
 private:
-    Mode                    m_eMode;
-    bool                    m_bReleased;
-    qreal                   m_dRotation;
-    qreal                   m_dStartRotation;
-    qreal                   m_dLength;
-    QRectF                  m_rectBoundingBox;
-    QPolygonF               m_polyBound;
-    QPointF                 m_ptStartPos;
-    QPointF                 m_ptStartMove;
-    qreal                   m_dScale;
-    QPolygonF               m_polyResize;
-    qreal                   m_dStartLength;
-    QPointF                 m_ptStart;
-    QPointF                 m_ptFinish;
-    QPointF                 m_ptCenter;
-    QPointF                 m_ptRotCenter;
-    qreal                   m_dAngle;
-    bool                    m_bFrontArrow;
-    bool                    m_bRearArrow;
+    Mode                            m_eMode;
+    bool                            m_bReleased;
+    qreal                           m_dRotation;
+    qreal                           m_dStartRotation;
+    qreal                           m_dLength;
+    QRectF                          m_rectBoundingBox;
+    QPolygonF                       m_polyBound;
+    QPointF                         m_ptStartPos;
+    QPointF                         m_ptStartMove;
+    qreal                           m_dScale;
+    QPolygonF                       m_polyResize;
+    qreal                           m_dStartLength;
+    QPointF                         m_ptStart;
+    QPointF                         m_ptFinish;
+    QPointF                         m_ptCenter;
+    QPointF                         m_ptRotCenter;
+    qreal                           m_dAngle;
+    VGrainlineGeometry::ArrowType   m_eArrowType;
 };
 
 #endif // VGRAINLINEITEM_H
