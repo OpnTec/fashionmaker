@@ -54,8 +54,8 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.2");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.3");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.3.xsd");
 
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -83,6 +83,8 @@ QString VVSTConverter::XSDSchema(int ver) const
         case (0x000401):
             return QStringLiteral("://schema/standard_measurements/v0.4.1.xsd");
         case (0x000402):
+            return QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
+        case (0x000403):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -110,6 +112,10 @@ void VVSTConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000402), fileName);
                 V_FALLTHROUGH
             case (0x000402):
+                ToV0_4_3();
+                ValidateXML(XSDSchema(0x000403), fileName);
+                V_FALLTHROUGH
+            case (0x000403):
                 break;
             default:
                 break;
@@ -311,5 +317,12 @@ void VVSTConverter::ToV0_4_2()
 {
     SetVersion(QStringLiteral("0.4.2"));
     ConvertMeasurementsToV0_4_2();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_4_3()
+{
+    SetVersion(QStringLiteral("0.4.3"));
     Save();
 }

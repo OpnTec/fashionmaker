@@ -209,6 +209,13 @@ public:
 
     static const QString AttrAll;
 
+    static const QString AttrH50;
+    static const QString AttrH56;
+    static const QString AttrH62;
+    static const QString AttrH68;
+    static const QString AttrH74;
+    static const QString AttrH80;
+    static const QString AttrH86;
     static const QString AttrH92;
     static const QString AttrH98;
     static const QString AttrH104;

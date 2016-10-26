@@ -438,6 +438,13 @@ void DialogPatternProperties::GeneralInfoChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SetHeightsChecked(bool enabled)
 {
+    ui->checkBoxH50->setChecked(enabled);
+    ui->checkBoxH56->setChecked(enabled);
+    ui->checkBoxH62->setChecked(enabled);
+    ui->checkBoxH68->setChecked(enabled);
+    ui->checkBoxH74->setChecked(enabled);
+    ui->checkBoxH80->setChecked(enabled);
+    ui->checkBoxH86->setChecked(enabled);
     ui->checkBoxH92->setChecked(enabled);
     ui->checkBoxH98->setChecked(enabled);
     ui->checkBoxH104->setChecked(enabled);
@@ -486,6 +493,13 @@ void DialogPatternProperties::InitHeights()
 {
     Init(ui->checkBoxAllHeights, static_cast<int>(GHeights::ALL), &DialogPatternProperties::SelectAll);
 
+    Init(ui->checkBoxH50, static_cast<int>(GHeights::H50), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH56, static_cast<int>(GHeights::H56), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH62, static_cast<int>(GHeights::H62), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH68, static_cast<int>(GHeights::H68), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH74, static_cast<int>(GHeights::H74), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH80, static_cast<int>(GHeights::H80), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH86, static_cast<int>(GHeights::H86), &DialogPatternProperties::CheckStateHeight);
     Init(ui->checkBoxH92, static_cast<int>(GHeights::H92), &DialogPatternProperties::CheckStateHeight);
     Init(ui->checkBoxH98, static_cast<int>(GHeights::H98), &DialogPatternProperties::CheckStateHeight);
     Init(ui->checkBoxH104, static_cast<int>(GHeights::H104), &DialogPatternProperties::CheckStateHeight);

@@ -51,10 +51,10 @@ public:
 // GCC 4.6 doesn't allow constexpr and const together
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
     static Q_DECL_CONSTEXPR int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
-    static Q_DECL_CONSTEXPR int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 2);
+    static Q_DECL_CONSTEXPR int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 3);
 #else
     static Q_DECL_CONSTEXPR const int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 2);
+    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 3);
 #endif
 
 protected:
@@ -82,6 +82,7 @@ private:
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
+    void ToV0_4_3();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

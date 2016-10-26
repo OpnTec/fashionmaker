@@ -24,6 +24,13 @@
                                              <xs:element name="heights">
                                                    <xs:complexType>
                                                          <xs:attribute name="all" type="xs:boolean" use="required"></xs:attribute>
+                                                         <xs:attribute name="h50" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h56" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h62" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h68" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h74" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h80" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h86" type="xs:boolean"></xs:attribute>
                                                          <xs:attribute name="h92" type="xs:boolean"></xs:attribute>
                                                          <xs:attribute name="h98" type="xs:boolean"></xs:attribute>
                                                          <xs:attribute name="h104" type="xs:boolean"></xs:attribute>
@@ -494,6 +501,13 @@
     </xs:simpleType>
     <xs:simpleType name="baseHeight">
         <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="50"/>
+            <xs:enumeration value="56"/>
+            <xs:enumeration value="62"/>
+            <xs:enumeration value="68"/>
+            <xs:enumeration value="74"/>
+            <xs:enumeration value="80"/>
+            <xs:enumeration value="86"/>
             <xs:enumeration value="92"/>
             <xs:enumeration value="98"/>
             <xs:enumeration value="104"/>

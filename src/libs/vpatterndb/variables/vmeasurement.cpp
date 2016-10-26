@@ -116,7 +116,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
 
     if (list.isEmpty())
     {
-        // from 92 cm to 194 cm
+        // from 50 cm to 194 cm
         list = VMeasurement::WholeListHeights(patternUnit);
     }
     return list;
@@ -159,8 +159,8 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
         qWarning()<<"Standard table doesn't support inches.";
         return list;
     }
-    // from 92 cm to 194 cm
-    for (int i = 92; i<= 194; i = i+6)
+    // from 50 cm to 194 cm
+    for (int i = 50; i<= 194; i = i+6)
     {
         ListValue(list, i, patternUnit);
     }

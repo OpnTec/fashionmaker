@@ -104,6 +104,13 @@ const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
+const QString VAbstractPattern::AttrH50             = QStringLiteral("h50");
+const QString VAbstractPattern::AttrH56             = QStringLiteral("h56");
+const QString VAbstractPattern::AttrH62             = QStringLiteral("h62");
+const QString VAbstractPattern::AttrH68             = QStringLiteral("h68");
+const QString VAbstractPattern::AttrH74             = QStringLiteral("h74");
+const QString VAbstractPattern::AttrH80             = QStringLiteral("h80");
+const QString VAbstractPattern::AttrH86             = QStringLiteral("h86");
 const QString VAbstractPattern::AttrH92             = QStringLiteral("h92");
 const QString VAbstractPattern::AttrH98             = QStringLiteral("h98");
 const QString VAbstractPattern::AttrH104            = QStringLiteral("h104");
@@ -657,7 +664,15 @@ QStringList VAbstractPattern::getPatternPieces() const
 QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
 {
     QMap<GHeights, bool> map;
+
     map.insert(GHeights::ALL, true);
+    map.insert(GHeights::H50, true);
+    map.insert(GHeights::H56, true);
+    map.insert(GHeights::H62, true);
+    map.insert(GHeights::H68, true);
+    map.insert(GHeights::H74, true);
+    map.insert(GHeights::H80, true);
+    map.insert(GHeights::H86, true);
     map.insert(GHeights::H92, true);
     map.insert(GHeights::H98, true);
     map.insert(GHeights::H104, true);
@@ -705,6 +720,13 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
                             map.insert(GHeights::ALL, false);
                         }
 
+                        map.insert(GHeights::H50, GetParametrBool(domElement, AttrH50, defValue));
+                        map.insert(GHeights::H56, GetParametrBool(domElement, AttrH56, defValue));
+                        map.insert(GHeights::H62, GetParametrBool(domElement, AttrH62, defValue));
+                        map.insert(GHeights::H68, GetParametrBool(domElement, AttrH68, defValue));
+                        map.insert(GHeights::H74, GetParametrBool(domElement, AttrH74, defValue));
+                        map.insert(GHeights::H80, GetParametrBool(domElement, AttrH80, defValue));
+                        map.insert(GHeights::H86, GetParametrBool(domElement, AttrH86, defValue));
                         map.insert(GHeights::H92, GetParametrBool(domElement, AttrH92, defValue));
                         map.insert(GHeights::H98, GetParametrBool(domElement, AttrH98, defValue));
                         map.insert(GHeights::H104, GetParametrBool(domElement, AttrH104, defValue));
@@ -763,6 +785,13 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                         SetAttribute(domElement, AttrAll, options.value(GHeights::ALL));
                         if (options.value(GHeights::ALL))
                         {
+                            domElement.removeAttribute(AttrH50);
+                            domElement.removeAttribute(AttrH56);
+                            domElement.removeAttribute(AttrH62);
+                            domElement.removeAttribute(AttrH68);
+                            domElement.removeAttribute(AttrH74);
+                            domElement.removeAttribute(AttrH80);
+                            domElement.removeAttribute(AttrH86);
                             domElement.removeAttribute(AttrH92);
                             domElement.removeAttribute(AttrH98);
                             domElement.removeAttribute(AttrH104);
@@ -784,6 +813,13 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                         }
                         else
                         {
+                            SetAttribute(domElement, AttrH50, options.value(GHeights::H50));
+                            SetAttribute(domElement, AttrH56, options.value(GHeights::H56));
+                            SetAttribute(domElement, AttrH62, options.value(GHeights::H62));
+                            SetAttribute(domElement, AttrH68, options.value(GHeights::H68));
+                            SetAttribute(domElement, AttrH74, options.value(GHeights::H74));
+                            SetAttribute(domElement, AttrH80, options.value(GHeights::H80));
+                            SetAttribute(domElement, AttrH86, options.value(GHeights::H86));
                             SetAttribute(domElement, AttrH92, options.value(GHeights::H92));
                             SetAttribute(domElement, AttrH98, options.value(GHeights::H98));
                             SetAttribute(domElement, AttrH104, options.value(GHeights::H104));
