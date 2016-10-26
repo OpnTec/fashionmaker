@@ -41,6 +41,15 @@ class QPointF;
 class VGrainlineGeometry
 {
 public:
+    // denotes the type of arrow for the grainline
+    enum ArrowType
+    {
+        atBoth,
+        atFront,
+        atRear
+    };
+
+public:
     VGrainlineGeometry();
     ~VGrainlineGeometry();
 
@@ -53,6 +62,8 @@ public:
     void                    SetRotation(const QString& qsRot);
     bool                    IsVisible() const;
     void                    SetVisible(bool bVisible);
+    ArrowType               GetArrowType() const;
+    void                    SetArrowType(ArrowType eAT);
 
 private:
     /**
@@ -71,6 +82,10 @@ private:
      * @brief m_bVisible visibility flag
      */
     bool                    m_bVisible;
+    /**
+     * @brief m_eArrowType type of arrow on the grainline
+     */
+    ArrowType                m_eArrowType;
 };
 
 #endif // VGRAINLINEGEOMETRY_H

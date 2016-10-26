@@ -220,25 +220,32 @@ void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContaine
 
     v << pt1;
 
-    pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
-    pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
-    v << pt;
-    pt.setX(pt1.x() + dArrowLen * qCos(dAng - dArrowAng));
-    pt.setY(pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
-    v << pt;
+    if (geom.GetArrowType() != VGrainlineGeometry::atRear) {
+        pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
+        pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
+        v << pt;
+        pt.setX(pt1.x() + dArrowLen * qCos(dAng - dArrowAng));
+        pt.setY(pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
+        v << pt;
 
-    v << pt1 << pt2;
-
-    dAng += M_PI;
-
-    pt.setX(pt2.x() + dArrowLen * qCos(dAng + dArrowAng));
-    pt.setY(pt2.y() - dArrowLen * qSin(dAng + dArrowAng));
-    v << pt;
-    pt.setX(pt2.x() + dArrowLen * qCos(dAng - dArrowAng));
-    pt.setY(pt2.y() - dArrowLen * qSin(dAng - dArrowAng));
-    v << pt;
+        v << pt1;
+    }
 
     v << pt2;
+
+    if (geom.GetArrowType() != VGrainlineGeometry::atFront)
+    {
+        dAng += M_PI;
+
+        pt.setX(pt2.x() + dArrowLen * qCos(dAng + dArrowAng));
+        pt.setY(pt2.y() - dArrowLen * qSin(dAng + dArrowAng));
+        v << pt;
+        pt.setX(pt2.x() + dArrowLen * qCos(dAng - dArrowAng));
+        pt.setY(pt2.y() - dArrowLen * qSin(dAng - dArrowAng));
+        v << pt;
+
+        v << pt2;
+    }
 
     d->grainlinePoints = RoundPoints(v);
 }
@@ -739,7 +746,7 @@ QGraphicsItem *VLayoutDetail::GetItem() const
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
 {
-    if (d->grainlinePoints.count() < 6)
+    if (d->grainlinePoints.count() < 2)
     {
         return 0;
     }

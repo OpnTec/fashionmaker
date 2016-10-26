@@ -33,7 +33,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 
 VGrainlineGeometry::VGrainlineGeometry()
-    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false)
+    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false), m_eArrowType(atBoth)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,6 +95,20 @@ bool VGrainlineGeometry::IsVisible() const
 void VGrainlineGeometry::SetVisible(bool bVisible)
 {
     m_bVisible = bVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+VGrainlineGeometry::ArrowType VGrainlineGeometry::GetArrowType() const
+{
+    return m_eArrowType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+void VGrainlineGeometry::SetArrowType(ArrowType eAT)
+{
+    m_eArrowType = eAT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

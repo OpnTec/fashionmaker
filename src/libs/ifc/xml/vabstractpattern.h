@@ -205,6 +205,7 @@ public:
     static const QString AttrUserDefined;
     static const QString AttrCutNumber;
     static const QString AttrPlacement;
+    static const QString AttrArrows;
 
     static const QString AttrAll;
 

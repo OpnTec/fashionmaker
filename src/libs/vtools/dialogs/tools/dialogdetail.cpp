@@ -168,6 +168,10 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     SetAddMode();
     EnableGrainlineRotation();
 
+    ui.comboBoxArrow->addItem(tr("Both"));
+    ui.comboBoxArrow->addItem(tr("Just front"));
+    ui.comboBoxArrow->addItem(tr("Just rear"));
+
     ui.tabWidget->setCurrentIndex(0);
 
     m_iRotBaseHeight = ui.lineEditRotFormula->height();
@@ -486,6 +490,9 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetGrainlineGeometry().SetVisible(ui.checkBoxGrainline->isChecked());
     detail.GetGrainlineGeometry().SetRotation(ui.lineEditRotFormula->toPlainText());
     detail.GetGrainlineGeometry().SetLength(ui.lineEditLenFormula->toPlainText());
+    VGrainlineGeometry::ArrowType eAT = VGrainlineGeometry::ArrowType(ui.comboBoxArrow->currentIndex());
+    detail.GetGrainlineGeometry().SetArrowType(eAT);
+
     return detail;
 }
 
@@ -559,6 +566,7 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.checkBoxGrainline->setChecked(detail.GetGrainlineGeometry().IsVisible());
     ui.lineEditRotFormula->setPlainText(detail.GetGrainlineGeometry().GetRotation());
     ui.lineEditLenFormula->setPlainText(detail.GetGrainlineGeometry().GetLength());
+    ui.comboBoxArrow->setCurrentIndex(int(detail.GetGrainlineGeometry().GetArrowType()));
 
     m_oldData = detail.GetPatternPieceData();
     m_oldGeom = detail.GetPatternInfo();
