@@ -526,6 +526,13 @@
             <xs:enumeration value="182"/>
             <xs:enumeration value="188"/>
             <xs:enumeration value="194"/>
+            <xs:enumeration value="500"/>
+            <xs:enumeration value="560"/>
+            <xs:enumeration value="620"/>
+            <xs:enumeration value="680"/>
+            <xs:enumeration value="740"/>
+            <xs:enumeration value="800"/>
+            <xs:enumeration value="860"/>
             <xs:enumeration value="920"/>
             <xs:enumeration value="980"/>
             <xs:enumeration value="1040"/>
