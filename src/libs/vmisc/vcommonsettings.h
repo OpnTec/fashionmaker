@@ -47,10 +47,11 @@ class VCommonSettings : public QSettings
     Q_OBJECT
 public:
     VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-              QObject *parent = 0);
+              QObject *parent = nullptr);
 
-    QString StandardTablesPath() const;
-    QString TemplatesPath() const;
+    static QString SharePath(const QString &shareItem);
+    static QString StandardTablesPath();
+    static QString TemplatesPath();
 
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
@@ -124,6 +125,11 @@ public:
 
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
+
+#if !defined(Q_OS_WIN)
+    static const QString unixStandardSharePath;
+    static const QString valentinaUnixHomeFolder;
+#endif
 
 private:
     Q_DISABLE_COPY(VCommonSettings)

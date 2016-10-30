@@ -149,6 +149,8 @@ private:
     bool               openingPattern;
 
     void ClearTranslation();
+
+    static bool SymlinkCopyDirRecursive(const QString &fromDir, const QString toDir, bool replaceOnConflit);
 };
 
 

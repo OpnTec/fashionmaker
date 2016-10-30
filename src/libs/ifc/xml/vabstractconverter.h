@@ -88,6 +88,7 @@ private:
     static void ValidateVersion(const QString &version);
 
     void ReserveFile() const;
+    void ReplaceSymLink() const;
 };
 
 #endif // VABSTRACTCONVERTER_H

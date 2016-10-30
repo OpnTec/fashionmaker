@@ -75,6 +75,11 @@ const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLitera
 
 static const QString commonIniFilename = QStringLiteral("common");
 
+#if !defined(Q_OS_WIN)
+const QString VCommonSettings::unixStandardSharePath   = QStringLiteral("/usr/share/valentina");
+const QString VCommonSettings::valentinaUnixHomeFolder = QStringLiteral(".valentina");
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization,
                             const QString &application, QObject *parent)
@@ -82,13 +87,12 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::StandardTablesPath() const
+QString VCommonSettings::SharePath(const QString &shareItem)
 {
-    const QString stPath = QStringLiteral("/tables/standard");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + stPath;
+    return QApplication::applicationDirPath() + shareItem;
 #elif defined(Q_OS_MAC)
-    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + shareItem);
     if (dirBundle.exists())
     {
         return dirBundle.absolutePath();
@@ -99,31 +103,59 @@ QString VCommonSettings::StandardTablesPath() const
         appDir.cdUp();
         appDir.cdUp();
         appDir.cdUp();
-        QDir dir(appDir.absolutePath() + stPath);
+        QDir dir(appDir.absolutePath() + shareItem);
         if (dir.exists())
         {
             return dir.absolutePath();
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina/tables/standard");
+            QDir dir(QDir::homePath() + QDir::separator() + VCommonSettings::valentinaUnixHomeFolder + shareItem);
+            if (dir.exists())
+            {
+                return dir.absolutePath();
+            }
+            else
+            {
+                return VCommonSettings::unixStandardSharePath + shareItem;
+            }
         }
     }
 #else // Unix
-    #ifdef QT_DEBUG
-        return QApplication::applicationDirPath() + stPath;
-    #else
-        QDir dir(QApplication::applicationDirPath() + stPath);
+#ifdef QT_DEBUG
+    return QApplication::applicationDirPath() + shareItem;
+#else
+    QDir dir(QApplication::applicationDirPath() + shareItem);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        QDir dir(QDir::homePath() + QDir::separator() + VCommonSettings::valentinaUnixHomeFolder + shareItem);
         if (dir.exists())
         {
             return dir.absolutePath();
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina/tables/standard");
+            return VCommonSettings::unixStandardSharePath + shareItem;
         }
-    #endif
+    }
 #endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::StandardTablesPath()
+{
+    return SharePath(QStringLiteral("/tables/standard"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::TemplatesPath()
+{
+    return SharePath(QStringLiteral("/tables/templates"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,49 +202,6 @@ void VCommonSettings::SetPathTemplate(const QString &value)
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(SettingPathsTemplates, value);
     settings.sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::TemplatesPath() const
-{
-    const QString stPath = QStringLiteral("/tables/templates");
-    const QString unixFullPath = QStringLiteral("/usr/share/valentina/tables/templates");
-#ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + stPath;
-#elif defined(Q_OS_MAC)
-    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
-    if (dirBundle.exists())
-    {
-        return dirBundle.absolutePath();
-    }
-    else
-    {
-        QDir dir(QApplication::applicationDirPath() + stPath);
-        if (dir.exists())
-        {
-            return dir.absolutePath();
-        }
-        else
-        {
-            return unixFullPath;
-        }
-    }
-#else // Unix
-    #ifdef QT_DEBUG
-        Q_UNUSED(unixFullPath);
-        return QApplication::applicationDirPath() + stPath;
-    #else
-        QDir dir(QApplication::applicationDirPath() + stPath);
-        if (dir.exists())
-        {
-            return dir.absolutePath();
-        }
-        else
-        {
-            return unixFullPath;
-        }
-    #endif
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -51,6 +51,12 @@
 VAbstractConverter::VAbstractConverter(const QString &fileName)
     :VDomDocument(), ver(0x0), fileName(fileName)
 {
+    QFileInfo info(fileName);
+    if (info.isSymLink() && not info.isWritable())
+    {
+        ReplaceSymLink();
+    }
+
     this->setXMLContent(fileName);
     const QString version = GetVersionStr();
     ver = GetVersion(version);
@@ -184,6 +190,23 @@ void VAbstractConverter::ReserveFile() const
     {
         const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
         throw VException(errorMsg);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ReplaceSymLink() const
+{
+    // See issue #582. Issue with standard path to shared data on Linux
+    // https://bitbucket.org/dismine/valentina/issues/582/issue-with-standard-path-to-shared-data-on
+    QFileInfo info(fileName);
+    if (info.isSymLink() && not info.isWritable())
+    {
+        QString error;
+        if (not SafeCopy(info.symLinkTarget(), fileName, error))
+        {
+            const QString errorMsg(tr("Error replacing a synlink by real file: %1.").arg(error));
+            throw VException(errorMsg);
+        }
     }
 }
 
