@@ -396,7 +396,7 @@ void VAbstractApplication::ClearTranslation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::SymlinkCopyDirRecursive(const QString &fromDir, const QString toDir, bool replaceOnConflit)
+bool VAbstractApplication::SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
 {
     QDir dir;
     dir.setPath(fromDir);
