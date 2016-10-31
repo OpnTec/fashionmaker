@@ -2,7 +2,7 @@ Format: 3.0 (native)
 Source: valentina
 Binary: valentina
 Architecture: i386 amd64
-Version: 0.4.2
+Version: 0.4.5
 Maintainer: Roman Telezhynskyi <dismine@gmail.com>
 Homepage: http://www.valentina-project.org/
 Standards-Version: 3.9.5
@@ -11,9 +11,9 @@ Build-Depends: debhelper (>= 8.0.0), qtbase5-dev (>= 5.0.0), libqt5svg5-dev (>= 
 Package-List: 
  valentina deb graphics optional
 Files: 
- d09673bcc475067139b88cf875e5dc0c 20954240 valentina_0.4.2.orig.tar.gz
- 2fecf324a32123b08cefc0f047bca5ee 63176 valentina_0.4.2.diff.tar.gz
+ d09673bcc475067139b88cf875e5dc0c 20954240 valentina_0.4.5.orig.tar.gz
+ 2fecf324a32123b08cefc0f047bca5ee 63176 valentina_0.4.5.diff.tar.gz
 
-DEBTRANSFORM-TAR: valentina_0.4.2.orig.tar.gz
+DEBTRANSFORM-TAR: valentina_0.4.5.orig.tar.gz
 DEBTRANSFORM-FILES-TAR: debian.tar.gz
 DEBTRANSFORM-RELEASE: 1
