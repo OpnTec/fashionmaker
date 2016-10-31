@@ -43,6 +43,7 @@ AppCopyright={#MyAppCopyright}
 ChangesAssociations=yes
 ;SignTool=MySign
 ;Uncomment the previous string for code signing
+;The next string is an example of parameter SignTool. Should not be uncommented.
 ;MySign=signtool.exe sign /v /a /n $qSeamly, LLC$q /t http://timestamp.comodoca.com/authenticode /d $qPatternmaking program$q $f
 
 [Languages]
