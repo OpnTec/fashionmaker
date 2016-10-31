@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished"></translation>
+        <translation>El texto aparece bajo el icono (recomendado para principiantes).</translation>
     </message>
 </context>
 <context>
@@ -321,19 +321,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Tela</translation>
+        <translation>Tela</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>Forro</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Entretela</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Entreforro</translation>
     </message>
 </context>
 <context>
@@ -910,7 +910,7 @@
     </message>
     <message>
         <source>Tool cubic bezier</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta bezier cúbico</translation>
     </message>
 </context>
 <context>
@@ -941,7 +941,7 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta ruta bezier cúbica</translation>
     </message>
 </context>
 <context>
@@ -1388,7 +1388,7 @@
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Material/Cortar número/Disposición</translation>
     </message>
     <message>
         <source>Material type:</source>
@@ -1432,16 +1432,32 @@
         <translation type="vanished">Tela</translation>
     </message>
     <message>
+        <source>Lining</source>
+        <translation type="vanished">Forro</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="vanished">Entretela</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="vanished">Entreforro</translation>
+    </message>
+    <message>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar pliegue</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
         <translation>Cortar %1 de %2%3</translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="vanished">sobre pliegue</translation>
     </message>
     <message>
         <source>Update</source>
@@ -1449,66 +1465,82 @@
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="unfinished"></translation>
+        <translation>sobre pliegue</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"></translation>
+        <translation>Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohibir que el trozo sea reproducido en una capa.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohibir girado</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Carta de trozo de estampado</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre no puede estar vacío</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Línea discontinua</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Línea discontinua visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotación:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Método de instalación</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud:</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultado infinito/indefinido</translation>
     </message>
     <message>
         <source>Length should be positive</source>
+        <translation>La longitud debería de ser positiva</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1644,11 +1676,11 @@
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Funciones</translation>
     </message>
     <message>
         <source>Lengths to control points</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitudes para controlar puntos</translation>
     </message>
 </context>
 <context>
@@ -1766,11 +1798,11 @@
     </message>
     <message>
         <source>With header</source>
-        <translation type="unfinished"></translation>
+        <translation>Con cabezera</translation>
     </message>
     <message>
         <source>Codec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Codec:</translation>
     </message>
     <message>
         <source>Separator</source>
@@ -1797,70 +1829,70 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de origen:</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Sufijo:</translation>
+        <translation>Sufijo:</translation>
     </message>
     <message>
         <source>Axis type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de eje:</translation>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar punto de origen</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el punto de origen que no es parte de la lista de objetos</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Eje vertical</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Eje horizontal</translation>
     </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>First line point:</source>
-        <translation type="unfinished">Primer punto de línea:</translation>
+        <translation>Primer punto de línea:</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Sufijo:</translation>
+        <translation>Sufijo:</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished">Segundo punto de línea:</translation>
+        <translation>Segundo punto de línea:</translation>
     </message>
     <message>
         <source>Select first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar primer punto de línea</translation>
     </message>
     <message>
         <source>Select first line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el primer punto de línea que no es parte de la lista de objetos</translation>
     </message>
     <message>
         <source>Select second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar segundo punto de línea</translation>
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el segundo punto de línea que no es parte de una lista de objetos</translation>
     </message>
 </context>
 <context>
@@ -2284,7 +2316,7 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitudes de punto de control de curvas</translation>
     </message>
 </context>
 <context>
@@ -2527,16 +2559,16 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar hojas de gran altura acelerará la creación.</translation>
     </message>
     <message>
         <source>Printer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impresora:</translation>
     </message>
     <message>
         <source>None</source>
         <comment>Printer</comment>
-        <translation type="unfinished">Ninguno</translation>
+        <translation>Ninguno</translation>
     </message>
 </context>
 <context>
@@ -2880,43 +2912,43 @@ Apply settings anyway?</source>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Ángulo:</translation>
+        <translation>Ángulo:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Método de instalación</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud:</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Sufijo:</translation>
+        <translation>Sufijo:</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished">Editar ángulo</translation>
+        <translation>Editar ángulo</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished">Editar largo</translation>
+        <translation>Editar longitud</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
 </context>
 <context>
@@ -3280,15 +3312,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar %1 y %2 para insertar tamaño de patrón y altura</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar información de creación de capa (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar archivo de medidas</translation>
     </message>
 </context>
 <context>
@@ -3430,8 +3462,12 @@ Apply settings anyway?</source>
         <translation>Aplicar inmediatamente</translation>
     </message>
     <message>
+        <source>Type: </source>
+        <translation type="vanished">Tipo:</translation>
+    </message>
+    <message>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation>Tipo:</translation>
     </message>
 </context>
 <context>
@@ -3774,7 +3810,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool point of intersetion arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de herramienta de arcos de intersección</translation>
     </message>
 </context>
 <context>
@@ -3963,15 +3999,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar punto de origen</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el punto de origen que no es parte de la lista de objetos</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
 </context>
 <context>
@@ -4358,7 +4394,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
 </context>
 <context>
@@ -4489,7 +4525,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
 </context>
 <context>
@@ -6249,7 +6285,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohibir girado</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -7386,6 +7422,10 @@ Do you want to save your changes?</source>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation>Versión inesperada &quot;%1&quot;.</translation>
     </message>
+    <message>
+        <source>Error replacing a symlink by real file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
@@ -8241,6 +8281,14 @@ Do you want to save your changes?</source>
 <context>
     <name>VTextManager</name>
     <message>
+        <source> on Fold</source>
+        <translation type="vanished">Sobre pliegue</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="vanished">sobre pliegue</translation>
+    </message>
+    <message>
         <source>cut</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8552,11 +8600,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Eje vertical</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Eje horizontal</translation>
     </message>
     <message>
         <source>Tool move</source>

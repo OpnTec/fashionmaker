@@ -1488,42 +1488,58 @@
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Grainline</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Grainline visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calculation</translation>
+        <translation>Calculation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <translation>Length:</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation>Infinite/undefined result</translation>
     </message>
     <message>
         <source>Length should be positive</source>
+        <translation>Length should be positive</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6129,7 +6145,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot set printer margins</translation>
     </message>
 </context>
 <context>
@@ -6285,7 +6301,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>By default forbid flipping for all new created workpieces</translation>
     </message>
 </context>
 <context>
@@ -7426,6 +7442,10 @@ Do you want to save your changes?</translation>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation>Unexpected version &quot;%1&quot;.</translation>
     </message>
+    <message>
+        <source>Error replacing a symlink by real file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
@@ -7489,43 +7509,43 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>light salmon</source>
-        <translation type="unfinished"></translation>
+        <translation>light salmon</translation>
     </message>
     <message>
         <source>golden rod</source>
-        <translation type="unfinished"></translation>
+        <translation>golden rod</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>orange</translation>
     </message>
     <message>
         <source>deep pink</source>
-        <translation type="unfinished"></translation>
+        <translation>deep pink</translation>
     </message>
     <message>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violet</translation>
     </message>
     <message>
         <source>dark violet</source>
-        <translation type="unfinished"></translation>
+        <translation>dark violet</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation type="unfinished"></translation>
+        <translation>medium sea green</translation>
     </message>
     <message>
         <source>lime</source>
-        <translation type="unfinished"></translation>
+        <translation>lime</translation>
     </message>
     <message>
         <source>deep sky blue</source>
-        <translation type="unfinished"></translation>
+        <translation>deep sky blue</translation>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation type="unfinished"></translation>
+        <translation>corn flower blue</translation>
     </message>
 </context>
 <context>
@@ -8249,7 +8269,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating point of line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating point of line intersection</translation>
     </message>
 </context>
 <context>
@@ -8341,19 +8361,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>In layout</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>move grainline</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>resize grainline</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>rotate grainline</translation>
     </message>
 </context>
 <context>
@@ -9820,11 +9840,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Invert selection</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>invert selection</translation>
     </message>
 </context>
 <context>

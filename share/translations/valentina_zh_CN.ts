@@ -1235,6 +1235,22 @@
         <source>Length should be positive</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -6358,6 +6374,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error replacing a symlink by real file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1464,15 +1464,15 @@
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ισιάδα</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ισιάδας</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιστροφή:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1480,11 +1480,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Υπολογισμός</translation>
+        <translation>Υπολογισμός</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1492,7 +1492,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Μήκος:</translation>
+        <translation>Μήκος:</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
@@ -1500,6 +1500,22 @@
     </message>
     <message>
         <source>Length should be positive</source>
+        <translation>Το μήκος θα πρέπει να έχει θετική τιμή</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2461,6 +2477,10 @@ Apply settings anyway?</source>
         <translation>Κανόνας για την επιλογή του επόμενου κομματιού εργασίας</translation>
     </message>
     <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="vanished">Η ενεργοποίηση των φύλλων μεγάλου ύψους θα επιταχύνει τη δημιουργία.</translation>
+    </message>
+    <message>
         <source>Divide into strips</source>
         <translation>Διαίρεση σε λωρίδες</translation>
     </message>
@@ -3167,7 +3187,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>ανώνυμο</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -3191,15 +3211,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>General info</source>
-        <translation type="unfinished"></translation>
+        <translation>Γενικές πληροφορίες</translation>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα πατρόν:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αριθμός πατρόν:</translation>
     </message>
     <message>
         <source>Company/Designer name:</source>
@@ -3207,15 +3227,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα πελάτη:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος πατρόν:</translation>
     </message>
     <message>
         <source>Show measurements</source>
         <translation type="vanished">Εμφάνιση μετρήσεων</translation>
+    </message>
+    <message>
+        <source>Show date of creation</source>
+        <translation type="vanished">Εμφάνιση ημερομηνίας δημιουργίας</translation>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
@@ -3227,7 +3251,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση αρχείου μετρήσεων</translation>
     </message>
 </context>
 <context>
@@ -6720,7 +6744,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>ανώνυμο</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7188,6 +7212,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation>Απρόσμενη έκδοση &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error replacing a symlink by real file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
