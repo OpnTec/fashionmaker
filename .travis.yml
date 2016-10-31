@@ -1,62 +1,73 @@
 language: cpp
 
-os:
-  - linux
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      compiler: clang
+    - os: osx
+      compiler: clang
 
-compiler:
-  - gcc
-  - clang
-
-sudo: false
-
-install:
-  # g++4.8.1
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"  CC="gcc-4.8"; fi
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - ubuntu-sdk-team
-    packages:
-    - qtbase5-dev 
-    - libqt5svg5-dev 
-    - qt5-default 
-    - qttools5-dev-tools 
-    - libqt5xmlpatterns5-dev
-    - libqt5core5a 
-    - libqt5gui5 
-    - libqt5printsupport5 
-    - libqt5svg5 
-    - libqt5widgets5 
-    - libqt5xml5 
-    - libqt5xmlpatterns5 
-    - xpdf
-    - gcc-4.8
-    - g++-4.8
-    - clang
+before_install:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      sudo apt-get -qq update;
+      sudo apt-get install -y qtbase5-dev;
+      sudo apt-get install -y libqt5svg5-dev;
+      sudo apt-get install -y qt5-default;
+      sudo apt-get install -y qttools5-dev-tools;
+      sudo apt-get install -y libqt5xmlpatterns5-dev;
+      sudo apt-get install -y libqt5core5a;
+      sudo apt-get install -y libqt5gui5;
+      sudo apt-get install -y libqt5printsupport5;
+      sudo apt-get install -y libqt5svg5;
+      sudo apt-get install -y libqt5widgets5;
+      sudo apt-get install -y libqt5xml5;
+      sudo apt-get install -y libqt5xmlpatterns5;
+      sudo apt-get install -y xpdf;
+      sudo apt-get install -y xvfb;
+    else
+      brew update > /dev/null;
+      brew install qt5;
+      chmod -R 755 /usr/local/opt/qt5/*
+    fi
 
 before_script:
-  # QTestLib require GUI support for some tests
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      uname -a;
+      which qmake;
+    else
+      QTDIR="/usr/local/opt/qt5";
+      PATH="$QTDIR/bin:$PATH";
+      LDFLAGS=-L$QTDIR/lib;
+      CPPFLAGS=-I$QTDIR/include;
+      PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig;
+    fi
   - mkdir build
   - cd build
-  - which qmake
-  - uname -a
+  - pwd
   - qmake --version
-  - qmake ../Valentina.pro -r CONFIG+=no_ccache
+  - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
 
 script:
   - $CXX --version
   - make -j$(nproc)
-  - DISPLAY=:99.0 make check
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/home/travis/build/dismine/Valentina/build/src/libs/vpropertyexplorer/bin:/home/travis/build/dismine/Valentina/build/src/libs/qmuparser/bin";
+      xvfb-run -a make --silent check TESTARGS="-silent";
+    else
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/Users/travis/build/dismine/Valentina/build/src/libs/vpropertyexplorer/bin:/Users/travis/build/dismine/Valentina/build/src/libs/qmuparser/bin";
+      make --silent check TESTARGS="-silent";
+    fi  
 
 notifications:
    email:
      recipients:
         - dismine@gmail.com
         - susan.spencer@gmail.com
-        - zhuravska19@gmail.com
      on_success: change
      on_failure: always
+
