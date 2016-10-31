@@ -284,7 +284,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wanalyzer-incompatible-plugin \
     -Wanonymous-pack-parens \
     -Warc \
-    -Warc-abi \
     -Warc-bridge-casts-disallowed-in-nonarc \
     -Warc-maybe-repeated-use-of-weak \
     -Warc-non-pod-memaccess \
@@ -620,7 +619,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wunused-parameter \
     -Wunused-private-field \
     -Wunused-result \
-    -Wunused-sanitize-argument \
     -Wunused-value \
     -Wunused-variable \
     -Wunused-volatile-lvalue \
@@ -641,6 +639,13 @@ CLANG_DEBUG_CXXFLAGS += \
     -Qunused-arguments \
     -fcolor-diagnostics \
     -fms-extensions # Need for pragma message
+
+unix:!macx{
+    #Clang on MAC OS X doesn't support all options
+    CLANG_DEBUG_CXXFLAGS += \
+        -Warc-abi \
+        -Wunused-sanitize-argument
+}
 
 ICC_DEBUG_CXXFLAGS += \
     $$ISYSTEM \ # Ignore warnings Qt headers.
