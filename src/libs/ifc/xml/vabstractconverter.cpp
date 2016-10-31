@@ -204,7 +204,7 @@ void VAbstractConverter::ReplaceSymLink() const
         QString error;
         if (not SafeCopy(info.symLinkTarget(), fileName, error))
         {
-            const QString errorMsg(tr("Error replacing a synlink by real file: %1.").arg(error));
+            const QString errorMsg(tr("Error replacing a symlink by real file: %1.").arg(error));
             throw VException(errorMsg);
         }
     }
