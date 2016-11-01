@@ -83,7 +83,7 @@ VTextManager &VTextManager::operator=(const VTextManager &text)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetSpacing returns the vertical spacing between the lines
- * @return
+ * @return spacing
  */
 int VTextManager::GetSpacing() const
 {

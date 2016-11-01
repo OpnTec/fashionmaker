@@ -175,6 +175,7 @@ static void halfedge_free( halfedge_t* d )
 /*
 * free all delaunay halfedges
 */
+void del_free_halfedges( delaunay_t *del );
 void del_free_halfedges( delaunay_t *del )
 {
     quint32		i;
@@ -979,6 +980,7 @@ static void build_halfedge_face( delaunay_t *del, halfedge_t *d )
 /*
 * build the faces for all the halfedge
 */
+void del_build_faces( delaunay_t *del );
 void del_build_faces( delaunay_t *del )
 {
     quint32	i;
@@ -1035,7 +1037,7 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
         quint32 fbuff_size = 0;
         quint32 j = 0;
 
-        del_divide_and_conquer( &del, 0, num_points - 1 );
+        del_divide_and_conquer( &del, 0, static_cast<int>(num_points - 1) );
         del_build_faces( &del );
 
         for( i = 0; i < del.num_faces; i++ )

@@ -37,7 +37,8 @@ unix {
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \
-            -Wmissing-prototypes
+            -Wmissing-prototypes \
+            -Wundefined-reinterpret-cast
     }
 
     *-icc-*{
