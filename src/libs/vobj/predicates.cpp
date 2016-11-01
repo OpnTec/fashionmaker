@@ -118,6 +118,11 @@ QT_WARNING_DISABLE_GCC("-Wmaybe-uninitialized")
 #else
 QT_WARNING_DISABLE_GCC("-Wuninitialized")
 #endif
+QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
+QT_WARNING_DISABLE_CLANG("-Wmissing-variable-declarations")
+QT_WARNING_DISABLE_CLANG("-Wfloat-equal")
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_CLANG("-Wconditional-uninitialized")
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */

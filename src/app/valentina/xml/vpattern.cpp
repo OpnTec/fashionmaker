@@ -683,7 +683,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetPatternPieceData().SetLabelWidth(dLW);
                     qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
                     detail.GetPatternPieceData().SetLabelHeight(dLH);
-                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
+                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
                     detail.GetPatternPieceData().SetFontSize(iFS);
                     qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
                     detail.GetPatternPieceData().SetRotation(dRot);
@@ -698,7 +698,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         {
                             mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
                         }
-                        mcp.m_iCutNumber = GetParametrUInt(domMCP, AttrCutNumber, 0);
+                        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
                         mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
                         detail.GetPatternPieceData().Append(mcp);
                     }
@@ -714,7 +714,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetPatternInfo().SetLabelWidth(dLW);
                     qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
                     detail.GetPatternInfo().SetLabelHeight(dLH);
-                    int iFS = GetParametrUInt(element, VToolDetail::AttrFont, "0");
+                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
                     detail.GetPatternInfo().SetFontSize(iFS);
                     qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
                     detail.GetPatternInfo().SetRotation(dRot);

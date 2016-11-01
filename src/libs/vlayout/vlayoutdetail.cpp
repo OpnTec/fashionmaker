@@ -589,9 +589,9 @@ void VLayoutDetail::CreateTextItems()
         mat.translate(points.at(0).x(), points.at(0).y());
         mat.rotate(qRadiansToDegrees(dAng));
 
-        for (int i = 0; i < d->m_tmDetail.GetCount(); ++i)
+        for (int i = 0; i < d->m_tmDetail.GetOutputLinesCount(); ++i)
         {
-            const TextLine& tl = d->m_tmDetail.GetLine(i);
+            const TextLine& tl = d->m_tmDetail.GetOutputLine(i);
             QFont fnt = d->m_tmDetail.GetFont();
             fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
@@ -633,9 +633,9 @@ void VLayoutDetail::CreateTextItems()
         mat.translate(points.at(0).x(), points.at(0).y());
         mat.rotate(qRadiansToDegrees(dAng));
 
-        for (int i = 0; i < d->m_tmPattern.GetCount(); ++i)
+        for (int i = 0; i < d->m_tmPattern.GetOutputLinesCount(); ++i)
         {
-            const TextLine& tl = d->m_tmPattern.GetLine(i);
+            const TextLine& tl = d->m_tmPattern.GetOutputLine(i);
             QFont fnt = d->m_tmPattern.GetFont();
             fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
@@ -685,7 +685,7 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
     if (d->mirror == true)
     {
         QVector<QPointF> points;
-        if (i < d->m_tmDetail.GetCount())
+        if (i < d->m_tmDetail.GetOutputLinesCount())
         {
             points = Map(Mirror(d->detailLabel));
         }
@@ -796,7 +796,7 @@ QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, q
 /**
  * @brief VLayoutDetail::Mirror if the detail layout is rotated, this method will flip the
  *  label points over vertical axis, which goes through the center of the label
- * @param list of 4 label vertices
+ * @param points list of 4 label vertices
  * @return list of flipped points
  */
 QVector<QPointF> VLayoutDetail::Mirror(const QVector<QPointF> &points) const

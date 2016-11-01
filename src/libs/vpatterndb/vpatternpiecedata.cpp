@@ -42,10 +42,6 @@ VPatternPieceData::VPatternPieceData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternPieceData::~VPatternPieceData()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPatternPieceData::Append(const MaterialCutPlacement& rMCP)
 {
     m_conMCP.append(rMCP);

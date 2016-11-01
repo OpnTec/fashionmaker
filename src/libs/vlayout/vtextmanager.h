@@ -73,27 +73,37 @@ public:
     VTextManager();
     virtual ~VTextManager();
 
-    virtual int         GetSpacing() const;
-    void                SetFont(const QFont& font);
-    const QFont&        GetFont() const;
-    void                SetFontSize(int iFS);
-    void                AddLine(const TextLine& tl);
-    void                Clear();
-    int                 GetCount() const;
-    int                 GetSourceLineCount() const;
-    const TextLine&     GetLine(int i) const;
-    bool                IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH);
-    void                FitFontSize(qreal fW, qreal fH);
-    void                Update(const QString& qsName, const VPatternPieceData& data);
-    void                Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
+    VTextManager(const VTextManager &text);
+    VTextManager &operator=(const VTextManager &text);
+
+    virtual int GetSpacing() const;
+
+    void         SetFont(const QFont& font);
+    const QFont& GetFont() const;
+    void         SetFontSize(int iFS);
+    void         FitFontSize(qreal fW, qreal fH);
+
+    QList<TextLine> GetAllSourceLines() const;
+    void            AddSourceLine(const TextLine& tl);
+    void            ClearSourceLines();
+    int             GetSourceLinesCount() const;
+
+    int             GetOutputLinesCount() const;
+    QList<TextLine> GetAllOutputLines() const;
+    const TextLine& GetOutputLine(int i) const;
+
+    bool IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH);
+
+    void Update(const QString& qsName, const VPatternPieceData& data);
+    void Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
 
 protected:
-    static QStringList  SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
+    static QStringList SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
 
 private:
-    QFont               m_font;
-    QList<TextLine>     m_liLines;
-    QList<TextLine>     m_liOutput;
+    QFont           m_font;
+    QList<TextLine> m_liLines;
+    QList<TextLine> m_liOutput;
 };
 
 #endif // VTEXTMANAGER_H

@@ -38,11 +38,6 @@ VGrainlineGeometry::VGrainlineGeometry()
 
 //---------------------------------------------------------------------------------------------------------------------
 
-VGrainlineGeometry::~VGrainlineGeometry()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-
 QPointF VGrainlineGeometry::GetPos() const
 {
     return m_ptPos;

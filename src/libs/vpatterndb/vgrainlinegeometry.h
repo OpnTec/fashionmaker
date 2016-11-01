@@ -49,9 +49,7 @@ public:
         atRear
     };
 
-public:
     VGrainlineGeometry();
-    ~VGrainlineGeometry();
 
     // methods, which set and return values of different parameters
     QPointF                 GetPos() const;

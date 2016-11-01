@@ -28,6 +28,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wold-style-cast")
+QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
 QT_WARNING_DISABLE_GCC("-Wcast-qual")
 
 #if PREDICATE == EXACT_PREDICATE
@@ -452,8 +453,8 @@ static int del_init_seg( delaunay_t *del, int start )
     point2d_t		*pt0, *pt1;
 
     /* init delaunay */
-    del->start_point	= start;
-    del->end_point		= start + 1;
+    del->start_point	= static_cast<quint32>(start);
+    del->end_point		= static_cast<quint32>(start + 1);
 
     /* setup pt0 and pt1 */
     pt0			= del->points[start];
@@ -491,8 +492,8 @@ static int del_init_tri( delaunay_t *del, int start )
     point2d_t		*pt0, *pt1, *pt2;
 
     /* initiate delaunay */
-    del->start_point	= start;
-    del->end_point		= start + 2;
+    del->start_point	= static_cast<quint32>(start);
+    del->end_point		= static_cast<quint32>(start + 2);
 
     /* setup the points */
     pt0					= del->points[start];
@@ -916,6 +917,7 @@ static void del_link( delaunay_t *result, delaunay_t *left, delaunay_t *right )
 /*
 * divide and conquer delaunay
 */
+void del_divide_and_conquer( delaunay_t *del, int start, int end );
 void del_divide_and_conquer( delaunay_t *del, int start, int end )
 {
     delaunay_t	left, right;

@@ -66,7 +66,8 @@ public:
 
 public slots:
     void ProcessCMD();
-    void ShowToolTip(const QString &toolTip);
+
+    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
 
 signals:
     void RefreshHistory();

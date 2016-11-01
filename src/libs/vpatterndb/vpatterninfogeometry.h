@@ -43,7 +43,6 @@ class VPatternInfoGeometry
 {
 public:
     VPatternInfoGeometry();
-    ~VPatternInfoGeometry();
 
     // methods, which set up label parameters
     QPointF                     GetPos() const;

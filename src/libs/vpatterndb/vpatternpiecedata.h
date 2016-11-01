@@ -78,7 +78,6 @@ class VPatternPieceData
 {
 public:
     VPatternPieceData();
-    ~VPatternPieceData();
 
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);

@@ -129,11 +129,11 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(iPoint, supportColor2);
+                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, *p, supportColor2);
 
                 ++iPoint;
-                point = GetPoint(iPoint, supportColor);
+                point = GetPoint(static_cast<quint32>(iPoint), supportColor);
 
                 if (object1Id != NULL_ID)
                 {

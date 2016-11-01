@@ -71,11 +71,11 @@ int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &seco
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(i, supportColor2);
+    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
     DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
-    path = GetCurve(i, supportColor);
+    path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));

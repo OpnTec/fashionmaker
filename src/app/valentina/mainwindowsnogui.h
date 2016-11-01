@@ -42,7 +42,7 @@
 
 class QGraphicsScene;
 class QPrinter;
-class PosterData;
+struct PosterData;
 
 class MainWindowsNoGUI : public VAbstractMainWindow
 {

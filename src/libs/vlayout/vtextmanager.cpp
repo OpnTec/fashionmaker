@@ -63,8 +63,26 @@ VTextManager::~VTextManager()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VTextManager::VTextManager(const VTextManager &text)
+    : m_font(text.GetFont()), m_liLines(text.GetAllSourceLines()), m_liOutput(text.GetAllOutputLines())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VTextManager &VTextManager::operator=(const VTextManager &text)
+{
+    if ( &text == this )
+    {
+        return *this;
+    }
+    m_font = text.GetFont();
+    m_liLines = text.GetAllSourceLines();
+    m_liOutput = text.GetAllOutputLines();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetSpacing returns the vertical spacing between the lines
+ * @brief GetSpacing returns the vertical spacing between the lines
  * @return
  */
 int VTextManager::GetSpacing() const
@@ -74,7 +92,7 @@ int VTextManager::GetSpacing() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::SetFont set the text base font
+ * @brief SetFont set the text base font
  * @param font text base font
  */
 void VTextManager::SetFont(const QFont& font)
@@ -84,7 +102,7 @@ void VTextManager::SetFont(const QFont& font)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetFont returns the text base font
+ * @brief GetFont returns the text base font
  * @return text base font
  */
 const QFont& VTextManager::GetFont() const
@@ -94,7 +112,7 @@ const QFont& VTextManager::GetFont() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::SetFontSize sets the font size
+ * @brief SetFontSize sets the font size
  * @param iFS font size in pixels
  */
 void VTextManager::SetFontSize(int iFS)
@@ -103,42 +121,54 @@ void VTextManager::SetFontSize(int iFS)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<TextLine> VTextManager::GetAllSourceLines() const
+{
+    return m_liLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::AddLine add new text line to the list
+ * @brief AddSourceLine add new text line to the list
  * @param tl text line object to be added
  */
-void VTextManager::AddLine(const TextLine& tl)
+void VTextManager::AddSourceLine(const TextLine& tl)
 {
     m_liLines << tl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::Clear deletes the list of texts
+ * @brief ClearSourceLines deletes the list of texts
  */
-void VTextManager::Clear()
+void VTextManager::ClearSourceLines()
 {
     m_liLines.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetCount returns the number of output text lines
+ * @brief VTextManager::GetOutputLinesCount returns the number of output text lines
  * @return number of output text lines
  */
-int VTextManager::GetCount() const
+int VTextManager::GetOutputLinesCount() const
 {
     return m_liOutput.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetSourceLineCount returns the number of input text lines
+ * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
-int VTextManager::GetSourceLineCount() const
+int VTextManager::GetSourceLinesCount() const
 {
     return m_liLines.count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<TextLine> VTextManager::GetAllOutputLines() const
+{
+    return m_liOutput;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +177,7 @@ int VTextManager::GetSourceLineCount() const
  * @param i index of the output text line
  * @return i-th output text line
  */
-const TextLine& VTextManager::GetLine(int i) const
+const TextLine& VTextManager::GetOutputLine(int i) const
 {
     return m_liOutput[i];
 }
@@ -232,7 +262,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
  */
 void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
 {
-    Clear();
+    ClearSourceLines();
     TextLine tl;
     // all text must be centered and normal style!
     tl.m_eAlign = Qt::AlignCenter;
@@ -244,7 +274,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
     {
         tl.m_eFontWeight = QFont::Bold;
         tl.m_iFontSize = 6;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // name
     tl.m_qsText = qsName;
@@ -252,7 +282,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
     {
         tl.m_eFontWeight = QFont::DemiBold;
         tl.m_iFontSize = 2;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // MCP
     QStringList qslMaterials;
@@ -281,7 +311,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
             }
             tl.m_qsText = qsText.arg(qsMat).arg(mcp.m_iCutNumber).
                     arg(qslPlace[int(mcp.m_ePlacement)]);
-            AddLine(tl);
+            AddSourceLine(tl);
         }
     }
 }
@@ -293,7 +323,7 @@ void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
  */
 void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeight)
 {
-    Clear();
+    ClearSourceLines();
     TextLine tl;
     // all information must be centered
     tl.m_eAlign = Qt::AlignCenter;
@@ -305,7 +335,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::DemiBold;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 4;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Pattern name
     tl.m_qsText = pDoc->GetPatternName();
@@ -314,7 +344,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 2;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Pattern number
     tl.m_qsText = pDoc->GetPatternNumber();
@@ -323,7 +353,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Customer name
     tl.m_qsText = pDoc->GetCustomerName();
@@ -332,7 +362,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleItalic;
         tl.m_iFontSize = 0;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Size
     tl.m_qsText = pDoc->GetPatternSize();
@@ -349,7 +379,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Measurements
     tl.m_qsText = QFileInfo(pDoc->MPath()).fileName();
@@ -358,7 +388,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
     // Date
     QDate date;
@@ -372,7 +402,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;
-        AddLine(tl);
+        AddSourceLine(tl);
     }
 
 }

@@ -121,8 +121,8 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param det detail what we union.
  * @param i index node in detail.
  * @param idTool id tool union details.
- * @param children
- * @param drawName
+ * @param children list of children
+ * @param drawName name of pattern piece
  * @param dx bias node x axis.
  * @param dy bias node y axis.
  * @param pRotate point rotation.
@@ -1055,9 +1055,9 @@ quint32 VToolUnionDetails::TakeNextId(QVector<quint32> &children)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         idChild = children.takeFirst();
-#else 
-        idChild = children.first(); 
-        children.remove(0); 
+#else
+        idChild = children.first();
+        children.remove(0);
 #endif
     }
     else

@@ -367,7 +367,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             }
 
             int paperIndex = -1;
-            isTiled ? paperIndex = poster->at(index).index : paperIndex = index;
+            isTiled ? paperIndex = static_cast<int>(poster->at(index).index) : paperIndex = index;
 
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(paperIndex));
             if (paper)

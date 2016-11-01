@@ -50,12 +50,19 @@ public:
     QxtCsvModelPrivate() : csvData(), header(), maxColumn(0), quoteMode(QxtCsvModel::DefaultQuoteMode)
     {}
     QXT_DECLARE_PUBLIC(QxtCsvModel)
+    virtual ~QxtCsvModelPrivate();
 
     QList<QStringList> csvData;
     QStringList header;
     int maxColumn;
     QxtCsvModel::QuoteMode quoteMode;
+
+private:
+    Q_DISABLE_COPY(QxtCsvModelPrivate)
 };
+
+QxtCsvModelPrivate::~QxtCsvModelPrivate()
+{}
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

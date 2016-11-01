@@ -108,9 +108,9 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     QFont fnt = m_tm.GetFont();
     // draw text lines
     int iY = 0;
-    for (int i = 0; i < m_tm.GetCount(); ++i)
+    for (int i = 0; i < m_tm.GetOutputLinesCount(); ++i)
     {
-        const TextLine& tl = m_tm.GetLine(i);
+        const TextLine& tl = m_tm.GetOutputLine(i);
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
@@ -195,7 +195,7 @@ bool VTextGraphicsItem::IsIdle() const
  */
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
-    m_tm.AddLine(tl);
+    m_tm.AddSourceLine(tl);
     qreal fW = MIN_W;
     qreal fH = m_iMinH;
     qreal fMinW;
@@ -220,7 +220,7 @@ void VTextGraphicsItem::AddLine(const TextLine& tl)
  */
 void VTextGraphicsItem::Clear()
 {
-    m_tm.Clear();
+    m_tm.ClearSourceLines();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -346,7 +346,7 @@ void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc, qreal dSize, qr
  */
 int VTextGraphicsItem::GetTextLines() const
 {
-    return m_tm.GetCount();
+    return m_tm.GetOutputLinesCount();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

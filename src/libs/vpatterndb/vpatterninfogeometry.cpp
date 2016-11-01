@@ -43,10 +43,6 @@ VPatternInfoGeometry::VPatternInfoGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternInfoGeometry::~VPatternInfoGeometry()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QPointF VPatternInfoGeometry::GetPos() const
 {
     return m_ptPos;

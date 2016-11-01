@@ -66,9 +66,9 @@ QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page) const
         for (int j=0; j< columns; j++)
         {
             PosterData data = Cut(i, j, imageRect);
-            data.index = page;
-            data.rows = rows;
-            data.columns = columns;
+            data.index = static_cast<quint32>(page);
+            data.rows = static_cast<quint32>(rows);
+            data.columns = static_cast<quint32>(columns);
             poster.append(data);
         }
     }
@@ -253,8 +253,8 @@ PosterData VPoster::Cut(int i, int j, const QRect &imageRect) const
     SCASSERT(y <= imageRect.height());
 
     PosterData data;
-    data.row = i;
-    data.column = j;
+    data.row = static_cast<quint32>(i);
+    data.column = static_cast<quint32>(j);
     data.rect = QRect(x, y, PageRect().width(), PageRect().height());
 
     return data;
