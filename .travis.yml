@@ -11,7 +11,7 @@ matrix:
 
 before_install:
   # Fix error: unable to execute command: posix_spawn failed: Resource temporarily unavailable
-  - ulimit -c unlimited -S
+  - ulimit -u 63785
   - ulimit -a
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
