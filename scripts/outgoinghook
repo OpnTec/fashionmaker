@@ -8,4 +8,6 @@
 # [hooks]
 # outgoing = outgoinghook
 
-hg push -f git+ssh://git@github.com/dismine/Valentina.git
+sh -c "hg push -f git+ssh://git@github.com/dismine/Valentina.git" &
+
+exit 0;
