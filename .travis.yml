@@ -10,9 +10,6 @@ matrix:
       compiler: clang
 
 before_install:
-  # Fix error: unable to execute command: posix_spawn failed: Resource temporarily unavailable
-  - ulimit -u 63785
-  - ulimit -a
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get -qq update;
@@ -56,12 +53,13 @@ before_script:
 
 script:
   - $CXX --version
-  - make -j$(nproc)
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      make -j$(nproc)
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/home/travis/build/dismine/Valentina/build/src/libs/vpropertyexplorer/bin:/home/travis/build/dismine/Valentina/build/src/libs/qmuparser/bin";
       xvfb-run -a make --silent check TESTARGS="-silent";
     else
+      make -j1
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/Users/travis/build/dismine/Valentina/build/src/libs/vpropertyexplorer/bin:/Users/travis/build/dismine/Valentina/build/src/libs/qmuparser/bin";
       make --silent check TESTARGS="-silent";
     fi  
