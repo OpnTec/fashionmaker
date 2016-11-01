@@ -10,6 +10,9 @@ matrix:
       compiler: clang
 
 before_install:
+  # Fix error: unable to execute command: posix_spawn failed: Resource temporarily unavailable
+  - ulimit -c unlimited -S
+  - ulimit -a
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get -qq update;
