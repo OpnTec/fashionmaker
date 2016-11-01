@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Commit hook. Helps update bookmark.
+# Put this file in your path.
+#
+# Edit file .hg/hgrc
+#
+# [hooks]
+# outgoing = outgoinghook
+
+hg push -f git+ssh://git@github.com/dismine/Valentina.git
