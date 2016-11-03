@@ -52,9 +52,25 @@
  * @param pParent pointer to the parent item
  */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
-    :QGraphicsObject(pParent), m_eMode(VGrainlineItem::mNormal), m_bReleased(false), m_dRotation(0), m_dStartRotation(0),
-      m_dLength(0), m_rectBoundingBox(), m_polyBound(), m_ptStartPos(), m_ptStartMove(), m_dScale(1), m_polyResize(),
-      m_ptStart(), m_ptFinish(), m_ptCenter(), m_dAngle(0), m_eArrowType(VGrainlineGeometry::atBoth)
+    : QGraphicsObject(pParent),
+      m_eMode(VGrainlineItem::mNormal),
+      m_bReleased(false),
+      m_dRotation(0),
+      m_dStartRotation(0),
+      m_dLength(0),
+      m_rectBoundingBox(),
+      m_polyBound(),
+      m_ptStartPos(),
+      m_ptStartMove(),
+      m_dScale(1),
+      m_polyResize(),
+      m_dStartLength(0),
+      m_ptStart(),
+      m_ptFinish(),
+      m_ptCenter(),
+      m_ptRotCenter(),
+      m_dAngle(0),
+      m_eArrowType(VGrainlineGeometry::atBoth)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     setAcceptHoverEvents(true);
