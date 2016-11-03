@@ -28,15 +28,21 @@
 
 #include "vpiece.h"
 #include "vpiece_p.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "vcontainer.h"
+
+#include <QSharedPointer>
+#include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece()
-    : d(new VPieceData)
+    : VAbstractPiece(), d(new VPieceData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece(const VPiece &piece)
-    : d (piece.d)
+    : VAbstractPiece(piece), d (piece.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,6 +52,7 @@ VPiece &VPiece::operator=(const VPiece &piece)
     {
         return *this;
     }
+    VAbstractPiece::operator=(piece);
     d = piece.d;
     return *this;
 }
@@ -129,4 +136,114 @@ QVector<VPieceNode> VPiece::GetNodes() const
 void VPiece::SetNodes(const QVector<VPieceNode> &nodes)
 {
     d->nodes = nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
+{
+    QVector<QPointF> points;
+    for (int i = 0; i < CountNode(); ++i)
+    {
+        switch (at(i).GetTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
+                points.append(*point);
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
+                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+
+                points << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
+                break;
+        }
+    }
+
+    points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse) const
+{
+    if (i < 0 && i > CountNode()-1)
+    {
+        return QPointF();
+    }
+
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+    QVector<QPointF> points = curve->GetPoints();
+    if (reverse)
+    {
+        points = VGObject::GetReversePoints(points);
+    }
+
+    QPointF begin = points.first();
+    if (CountNode() > 1)
+    {
+        if (i == 0)
+        {
+            if (at(CountNode()-1).GetTypeTool() == Tool::NodePoint)
+            {
+                begin = *data->GeometricObject<VPointF>(at(CountNode()-1).GetId());
+            }
+        }
+        else
+        {
+            if (at(i-1).GetTypeTool() == Tool::NodePoint)
+            {
+                begin = *data->GeometricObject<VPointF>(at(i-1).GetId());
+            }
+        }
+    }
+    return begin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) const
+{
+    if (i < 0 && i > CountNode()-1)
+    {
+        return QPointF();
+    }
+
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+    QVector<QPointF> points = curve->GetPoints();
+    if (reverse)
+    {
+        points = VGObject::GetReversePoints(points);
+    }
+
+    QPointF end = points.last();
+    if (CountNode() > 2)
+    {
+        if (i == CountNode() - 1)
+        {
+            if (at(0).GetTypeTool() == Tool::NodePoint)
+            {
+                end = *data->GeometricObject<VPointF>(at(0).GetId());
+            }
+        }
+        else
+        {
+            if (at(i+1).GetTypeTool() == Tool::NodePoint)
+            {
+                end = *data->GeometricObject<VPointF>(at(i+1).GetId());
+            }
+        }
+    }
+    return end;
 }

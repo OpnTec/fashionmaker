@@ -26,48 +26,28 @@
  **
  *************************************************************************/
 
-#ifndef VPIECE_H
-#define VPIECE_H
+#ifndef VABSTRACTPIECE_H
+#define VABSTRACTPIECE_H
 
 #include <QtGlobal>
-#include <QSharedDataPointer>
 
-#include "../vlayout/vabstractpiece.h"
-
-class VPieceData;
-class VPieceNode;
-class QPointF;
-class VContainer;
 template <class T> class QVector;
+class QPointF;
 
-class VPiece : public VAbstractPiece
+class VAbstractPiece
 {
 public:
-    VPiece();
-    VPiece(const VPiece &piece);
-    VPiece &operator=(const VPiece &piece);
-    virtual ~VPiece();
+    VAbstractPiece();
+    VAbstractPiece(const VAbstractPiece &piece);
+    VAbstractPiece &operator=(const VAbstractPiece &piece);
+    virtual ~VAbstractPiece();
 
-    void   Append(const VPieceNode &node);
-    void   Clear();
-    void   ClearNodes();
-    qint32 CountNode() const;
+    static qreal            SumTrapezoids(const QVector<QPointF> &points);
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast = true);
 
-    VPieceNode & operator[](int indx);
-    const VPieceNode & at ( int indx ) const;
-
-    QVector<VPieceNode> GetNodes() const;
-    void                SetNodes(const QVector<VPieceNode> &nodes);
-
-    QVector<QPointF> MainPathPoints(const VContainer *data) const;
-
-private:
-    QSharedDataPointer<VPieceData> d;
-
-    QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
-    QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
+protected:
+    static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points, bool removeFirstAndLast = true);
 };
 
-Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);
-
-#endif // VPIECE_H
+#endif // VABSTRACTPIECE_H
