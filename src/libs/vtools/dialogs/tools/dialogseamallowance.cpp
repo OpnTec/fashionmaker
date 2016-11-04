@@ -37,11 +37,13 @@
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogSeamAllowance),
-      m_piece()
+      m_piece(),
+      applyAllowed(false)// By default disabled
 {
     ui->setupUi(this);
 
     InitOkCancelApply(ui);
+    EnableApply(applyAllowed);
 
     flagName = true;//We have default name of piece.
     flagError = MainPathIsValid();
@@ -55,6 +57,14 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 DialogSeamAllowance::~DialogSeamAllowance()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnableApply(bool enable)
+{
+    SCASSERT(bApply != nullptr);
+    bApply->setEnabled(enable);
+    applyAllowed = enable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,7 +138,7 @@ void DialogSeamAllowance::CheckState()
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagName && flagError);
     // In case dialog hasn't apply button
-    if ( bApply != nullptr)
+    if ( bApply != nullptr && applyAllowed)
     {
         bApply->setEnabled(bOk->isEnabled());
     }

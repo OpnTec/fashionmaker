@@ -45,6 +45,8 @@ public:
     DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSeamAllowance();
 
+    void EnableApply(bool enable);
+
     VPiece GetPiece() const;
     void   SetPiece(const VPiece &m_piece);
 
@@ -64,6 +66,7 @@ private:
 
     Ui::DialogSeamAllowance *ui;
     VPiece m_piece;
+    bool   applyAllowed;
 
     VPiece CreatePiece() const;
 
