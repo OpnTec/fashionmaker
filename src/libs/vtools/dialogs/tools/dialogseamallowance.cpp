@@ -31,6 +31,7 @@
 #include "../vpatterndb/vpiecenode.h"
 
 #include <QBuffer>
+#include <QMenu>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
@@ -45,6 +46,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     flagName = true;//We have default name of piece.
     flagError = MainPathIsValid();
     CheckState();
+
+    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +135,45 @@ void DialogSeamAllowance::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
+{
+    const int row = ui->listWidget->currentRow();
+    if (ui->listWidget->count() == 0 || row == -1 || row >= ui->listWidget->count())
+    {
+        return;
+    }
+
+    QMenu *menu = new QMenu(this);
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
+    QListWidgetItem *rowItem = ui->listWidget->item(row);
+    SCASSERT(rowItem != nullptr);
+    VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+    QAction *actionReverse = nullptr;
+    if (rowNode.GetTypeTool() != Tool::NodePoint)
+    {
+        actionReverse = menu->addAction(tr("Reverse"));
+        actionReverse->setCheckable(true);
+        actionReverse->setChecked(rowNode.GetReverse());
+    }
+
+    QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete ui->listWidget->item(row);
+        ValidObjects(MainPathIsValid());
+    }
+    else if (selectedAction == actionReverse)
+    {
+        rowNode.SetReverse(not rowNode.GetReverse());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode));
+        ValidObjects(MainPathIsValid());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
@@ -155,8 +198,7 @@ void DialogSeamAllowance::NewItem(const VPieceNode &node)
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
         {
-            const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
-            name = obj->name();
+            name = GetNodeName(node);
             break;
         }
         default:
@@ -164,10 +206,7 @@ void DialogSeamAllowance::NewItem(const VPieceNode &node)
             return;
     }
 
-    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
-    {
-        name = QLatin1String("- ") + name;
-    }
+
 
     bool canAddNewPoint = false;
 
@@ -291,4 +330,18 @@ bool DialogSeamAllowance::MainPathIsClockwise() const
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetNodeName(const VPieceNode &node) const
+{
+    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
+    QString name = obj->name();
+
+    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
+    {
+        name = QLatin1String("- ") + name;
+    }
+
+    return name;
 }

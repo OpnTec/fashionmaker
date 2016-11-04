@@ -56,6 +56,9 @@ protected:
     virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void CheckState() Q_DECL_OVERRIDE;
 
+private slots:
+    void ShowContextMenu(const QPoint &pos);
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
@@ -70,6 +73,7 @@ private:
     void    ValidObjects(bool value);
     bool    FirstPointEqualLast() const;
     bool    MainPathIsClockwise() const;
+    QString GetNodeName(const VPieceNode &node) const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H
