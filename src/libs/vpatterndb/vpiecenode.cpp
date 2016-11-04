@@ -92,5 +92,8 @@ bool VPieceNode::GetReverse() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetReverse(bool reverse)
 {
-    d->reverse = reverse;
+    if (d->typeTool != Tool::NodePoint)
+    {
+        d->reverse = reverse;
+    }
 }

@@ -49,7 +49,12 @@ public:
       : id(id),
         typeTool(typeTool),
         reverse(reverse)
-  {}
+  {
+      if (typeTool == Tool::NodePoint)
+      {
+          reverse = false;
+      }
+  }
 
   VPieceNodeData (const VPieceNodeData& node)
       : QSharedData(node),
