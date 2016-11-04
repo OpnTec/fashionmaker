@@ -229,12 +229,14 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         select = true;
         qApp->getUndoStack()->beginMacro(tr("select all details"));
         ToggleSectionDetails(select);
+        qApp->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionSelectNone)
     {
         select = false;
         qApp->getUndoStack()->beginMacro(tr("select none details"));
         ToggleSectionDetails(select);
+        qApp->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionInvertSelection)
     {
@@ -253,7 +255,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
                 qApp->getUndoStack()->push(togglePrint);
             }
         }
-    }
 
-    qApp->getUndoStack()->endMacro();
+        qApp->getUndoStack()->endMacro();
+    }
 }

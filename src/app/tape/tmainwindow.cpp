@@ -444,8 +444,16 @@ void TMainWindow::CreateFromExisting()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::Preferences()
 {
-    TapeConfigDialog dlg(this);
-    dlg.exec();
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+    static QPointer<TapeConfigDialog> guard;// Prevent any second run
+    if (guard.isNull())
+    {
+        TapeConfigDialog *config = new TapeConfigDialog(this);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<TapeConfigDialog> dlg(config);
+        guard = config;
+        dlg->exec();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

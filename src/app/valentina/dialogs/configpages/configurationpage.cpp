@@ -337,8 +337,8 @@ QGroupBox *ConfigurationPage::SendGroup()
 
     description = new QLabel(tr("After each crash Valentina collects information that may help us fix the "
                                 "problem. We do not collect any personal information. Find more about what "
-                                "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
-                                "Crash_reports\">kind of information</a> we collect."));
+                                "<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">"
+                                "kind of information</a> we collect."));
     description->setTextFormat(Qt::RichText);
     description->setTextInteractionFlags(Qt::TextBrowserInteraction);
     description->setOpenExternalLinks(true);

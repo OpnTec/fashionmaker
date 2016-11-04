@@ -101,8 +101,20 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     }
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     // Enable support for HiDPI bitmap resources
+    // The attribute is available since Qt 5.1, but by default disabled.
+    // Because on Windows and Mac OS X we always use last version
+    // and Linux users send bug reports probably they related to this attribute
+    // better not enable it before Qt 5.6.
+    //
+    // Related issues:
+    // Issue #584. frequent xcb errors and hangs
+    // https://bitbucket.org/dismine/valentina/issues/584/frequent-xcb-errors-and-hangs
+    // Issue #527. Error: Pasting a wrong formula : every dialog box is "glued" to the screen and can't close file
+    // or Valentina.
+    // https://bitbucket.org/dismine/valentina/issues/527/error-pasting-a-wrong-formula-every-dialog
+
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
