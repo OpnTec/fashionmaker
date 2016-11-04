@@ -81,13 +81,17 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 {
     bool reverse = false;
+    if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+    {
+        reverse = true;
+    }
     switch (type)
     {
         case SceneObject::Arc:
             NewItem(VPieceNode(id, Tool::NodeArc, reverse));
             break;
         case SceneObject::Point:
-            NewItem(VPieceNode(id, Tool::NodePoint, reverse));
+            NewItem(VPieceNode(id, Tool::NodePoint));
             break;
         case SceneObject::Spline:
             NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
@@ -160,7 +164,7 @@ void DialogSeamAllowance::NewItem(const VPieceNode &node)
             return;
     }
 
-    if (node.GetReverse())
+    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
     {
         name = QLatin1String("- ") + name;
     }
