@@ -935,7 +935,7 @@ void MainWindow::ToolPointOfContact(bool checked)
 void MainWindow::ToolDetail(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButton<DialogDetail>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
+    SetToolButton<DialogSeamAllowance>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
                                 tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
 }
 
@@ -946,12 +946,12 @@ void MainWindow::ToolDetail(bool checked)
  */
 void MainWindow::ClosedDialogDetail(int result)
 {
-    if (result == QDialog::Accepted)
-    {
-        VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
-    }
+//    if (result == QDialog::Accepted)
+//    {
+//        VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
+//    }
     ArrowTool();
-    doc->LiteParseTree(Document::LiteParse);
+//    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
