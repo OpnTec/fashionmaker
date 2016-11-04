@@ -4017,13 +4017,21 @@ void MainWindow::ShowPaper(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Preferences()
 {
-    ConfigDialog dlg(this);
-    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
-    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
-    if (dlg.exec() == QDialog::Accepted)
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+    static QPointer<ConfigDialog> guard;// Prevent any second run
+    if (guard.isNull())
     {
-        InitAutoSave();
+        ConfigDialog *config = new ConfigDialog(this);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<ConfigDialog> dlg(config);
+        guard = config;
+        connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+        connect(dlg.data(), &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
+        connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        if (guard->exec() == QDialog::Accepted)
+        {
+            InitAutoSave();
+        }
     }
 }
 
