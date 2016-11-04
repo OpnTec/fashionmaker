@@ -62,38 +62,38 @@ VPieceNode::~VPieceNode()
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VPieceNode::GetId() const
 {
-    return d->id;
+    return d->m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetId(quint32 id)
 {
-    d->id = id;
+    d->m_id = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Tool VPieceNode::GetTypeTool() const
 {
-    return d->typeTool;
+    return d->m_typeTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetTypeTool(Tool value)
 {
-    d->typeTool = value;
+    d->m_typeTool = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VPieceNode::GetReverse() const
 {
-    return d->reverse;
+    return d->m_reverse;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetReverse(bool reverse)
 {
-    if (d->typeTool != Tool::NodePoint)
+    if (d->m_typeTool != Tool::NodePoint)
     {
-        d->reverse = reverse;
+        d->m_reverse = reverse;
     }
 }

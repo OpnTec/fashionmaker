@@ -40,39 +40,39 @@ class VPieceNodeData : public QSharedData
 {
 public:
   VPieceNodeData()
-    : id(NULL_ID),
-      typeTool(Tool::NodePoint),
-      reverse(false)
+    : m_id(NULL_ID),
+      m_typeTool(Tool::NodePoint),
+      m_reverse(false)
   {}
 
   VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
-      : id(id),
-        typeTool(typeTool),
-        reverse(reverse)
+      : m_id(id),
+        m_typeTool(typeTool),
+        m_reverse(reverse)
   {
-      if (typeTool == Tool::NodePoint)
+      if (m_typeTool == Tool::NodePoint)
       {
-          reverse = false;
+          m_reverse = false;
       }
   }
 
   VPieceNodeData (const VPieceNodeData& node)
       : QSharedData(node),
-        id(node.id),
-        typeTool(node.typeTool),
-        reverse(node.reverse)
+        m_id(node.m_id),
+        m_typeTool(node.m_typeTool),
+        m_reverse(node.m_reverse)
   {}
 
   ~VPieceNodeData();
 
   /** @brief id object id. */
-  quint32 id;
+  quint32 m_id;
 
   /** @brief typeTool type of tool */
-  Tool typeTool;
+  Tool m_typeTool;
 
   /** @brief reverse true if need reverse points list for node. */
-  bool reverse;
+  bool m_reverse;
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
