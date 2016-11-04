@@ -46,6 +46,9 @@ public:
     VPieceNode &operator=(const VPieceNode &node);
     ~VPieceNode();
 
+    friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
+    friend QDataStream& operator>>(QDataStream& in, VPieceNode& p);
+
     quint32 GetId() const;
     void    SetId(quint32 id);
 

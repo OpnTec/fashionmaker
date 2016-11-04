@@ -97,3 +97,24 @@ void VPieceNode::SetReverse(bool reverse)
         d->m_reverse = reverse;
     }
 }
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator<<(QDataStream& out, const VPieceNode& p)
+{
+    out << p.d->m_id << static_cast<int>(p.d->m_typeTool) << p.d->m_reverse;
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator>>(QDataStream& in, VPieceNode& p)
+{
+    in >> p.d->m_id;
+
+    int type = 0;
+    in >> type;
+    p.d->m_typeTool = static_cast<Tool>(type);
+
+    in >> p.d->m_reverse;
+    return in;
+}
