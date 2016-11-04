@@ -59,68 +59,52 @@ void TST_TapeCommandLine::initTestCase()
 void TST_TapeCommandLine::OpenMeasurements_data() const
 {
     QTest::addColumn<QString>("file");
-    QTest::addColumn<bool>("result");
     QTest::addColumn<int>("exitCode");
 
     // The file doesn't exist!
     QTest::newRow("Send wrong path to a file")                                     << "wrongPath.vit"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Old individual format to new version")                          << "keiko.vit"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open empty file")                                               << "empty.vit"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VIT file with all know measurements (v0.3.0)")         << "all_measurements_v0.3.0.vit"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VST file with all know measurements (v0.4.0)")         << "all_measurements_v0.4.0.vst"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VST file for man ru GOST (v0.3.0).")                   << "GOST_man_ru_v0.3.0.vst"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VIT file with all know measurements (v0.3.3)")         << "all_measurements_v0.3.3.vit"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VST file with all know measurements (v0.4.2)")         << "all_measurements_v0.4.2.vst"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Open the VST file for man ru GOST (v0.4.2).")                   << "GOST_man_ru_v0.4.2.vst"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Broken file. Not unique name.")                                 << "broken1.vit"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Broken file. Measurement name can't be empty.")                 << "broken1.vit"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Broken file. An empty value shouldn't break a file.")           << "broken3.vit"
-                                                                                   << true
                                                                                    << V_EX_OK;
 
     QTest::newRow("Broken file. Invalid measurement name.")                        << "broken4.vit"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Empty text VIT file.")                                          << "text.vit"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Empty text VST file.")                                          << "text.vst"
-                                                                                   << false
                                                                                    << V_EX_NOINPUT;
 }
 
@@ -128,15 +112,12 @@ void TST_TapeCommandLine::OpenMeasurements_data() const
 void TST_TapeCommandLine::OpenMeasurements()
 {
     QFETCH(QString, file);
-    QFETCH(bool, result);
     QFETCH(int, exitCode);
 
-    int exit;
-    const bool res = Run(result, exitCode, exit, TapePath(), QStringList() << "--test"
-                    << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
+    const int exit = Run(exitCode, TapePath(), QStringList() << "--test"
+                         << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
                          file);
 
-    QCOMPARE(res, result);
     QCOMPARE(exit, exitCode);
 }
 

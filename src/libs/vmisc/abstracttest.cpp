@@ -99,8 +99,7 @@ QString AbstractTest::TranslationsPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &program, const QStringList &arguments,
-                       int msecs)
+int AbstractTest::Run(int exit, const QString &program, const QStringList &arguments, int msecs)
 {
     const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
 
@@ -109,8 +108,7 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
     {
         const QString msg = QString("Can't find binary.\n%1").arg(parameters);
         QWARN(qUtf8Printable(msg));
-        exitCode = TST_EX_BIN;
-        return false;
+        return TST_EX_BIN;
     }
 
     QScopedPointer<QProcess> process(new QProcess());
@@ -121,9 +119,8 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
     {
         const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
         QWARN(qUtf8Printable(msg));
-        exitCode = TST_EX_TIME_OUT;
         process->kill();
-        return false;
+        return TST_EX_TIME_OUT;
     }
 
     if (process->exitStatus() == QProcess::CrashExit)
@@ -131,23 +128,17 @@ bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &pr
         const QString msg = QString("Program crashed.\n%1\n%2").arg(parameters)
                                                                .arg(QString(process->readAllStandardError()));
         QWARN(qUtf8Printable(msg));
-        exitCode = TST_EX_CRASH;
-        return false;
+        return TST_EX_CRASH;
     }
 
-    if (process->exitCode() != V_EX_OK)
+    if (process->exitCode() != exit)
     {
-        if (showWarn || process->exitCode() != exit)
-        {
-            const QString msg = QString("\n%1").arg(QString(process->readAllStandardError()));
-            QWARN(qUtf8Printable(msg));
-        }
-        exitCode = process->exitCode();
-        return false;
+        const QString msg = QString("Unexpected finish.\n%1").arg(QString(process->readAllStandardError()));
+        QWARN(qUtf8Printable(msg));
+        return process->exitCode();
     }
 
-    exitCode = process->exitCode();
-    return true;
+    return process->exitCode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -69,8 +69,7 @@ protected:
     QString TapePath() const;
     QString TranslationsPath() const;
 
-    bool Run(bool showWarn, int exit, int &exitCode, const QString &program, const QStringList &arguments,
-             int msecs = 30000);
+    int Run(int exit, const QString &program, const QStringList &arguments, int msecs = 30000);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 };
 
