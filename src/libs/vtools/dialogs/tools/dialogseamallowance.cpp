@@ -197,6 +197,7 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
 
     QMenu *menu = new QMenu(this);
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    actionDelete->setEnabled(applyAllowed);//Because we can't undo this operation when creating a piece.
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
