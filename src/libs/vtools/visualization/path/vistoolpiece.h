@@ -55,6 +55,8 @@ private:
     VPiece m_piece;
 
     QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
+
+    void HideAllItems();
 };
 
 #endif // VISTOOLPIECE_H

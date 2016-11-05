@@ -52,6 +52,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
+    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
 
     vis = new VisToolPiece(data);
 }
@@ -97,50 +98,53 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
  */
 void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 {
-    bool reverse = false;
-    if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+    if (not prepare)
     {
-        reverse = true;
-    }
-    switch (type)
-    {
-        case SceneObject::Arc:
-            NewItem(VPieceNode(id, Tool::NodeArc, reverse));
-            break;
-        case SceneObject::Point:
-            NewItem(VPieceNode(id, Tool::NodePoint));
-            break;
-        case SceneObject::Spline:
-            NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
-            break;
-        case SceneObject::SplinePath:
-            NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
-            break;
-        case (SceneObject::Line):
-        case (SceneObject::Detail):
-        case (SceneObject::Unknown):
-        default:
-            qDebug() << "Got wrong scene object. Ignore.";
-            break;
-    }
+        bool reverse = false;
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            reverse = true;
+        }
+        switch (type)
+        {
+            case SceneObject::Arc:
+                NewItem(VPieceNode(id, Tool::NodeArc, reverse));
+                break;
+            case SceneObject::Point:
+                NewItem(VPieceNode(id, Tool::NodePoint));
+                break;
+            case SceneObject::Spline:
+                NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
+                break;
+            case SceneObject::SplinePath:
+                NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
+                break;
+            case (SceneObject::Line):
+            case (SceneObject::Detail):
+            case (SceneObject::Unknown):
+            default:
+                qDebug() << "Got wrong scene object. Ignore.";
+                break;
+        }
 
-    ValidObjects(MainPathIsValid());
+        ValidObjects(MainPathIsValid());
 
-    auto visPath = qobject_cast<VisToolPiece *>(vis);
-    SCASSERT(visPath != nullptr);
-    const VPiece p = CreatePiece();
-    visPath->SetPiece(p);
+        auto visPath = qobject_cast<VisToolPiece *>(vis);
+        SCASSERT(visPath != nullptr);
+        const VPiece p = CreatePiece();
+        visPath->SetPiece(p);
 
-    if (p.CountNode() == 1)
-    {
-        emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
-                        "<b>Enter</b> - finish creation"));
+        if (p.CountNode() == 1)
+        {
+            emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
+                            "<b>Enter</b> - finish creation"));
 
-        visPath->VisualMode(NULL_ID);
-    }
-    else
-    {
-        visPath->RefreshGeometry();
+            visPath->VisualMode(NULL_ID);
+        }
+        else
+        {
+            visPath->RefreshGeometry();
+        }
     }
 }
 
@@ -150,7 +154,15 @@ void DialogSeamAllowance::ShowDialog(bool click)
     if (click == false)
     {
         emit ToolTip("");
-        setModal(true);
+        prepare = true;
+
+        auto visPath = qobject_cast<VisToolPiece *>(vis);
+        SCASSERT(visPath != nullptr);
+        visPath->SetMode(Mode::Show);
+        visPath->RefreshGeometry();
+
+        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+        setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
         show();
     }
 }
@@ -211,6 +223,17 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
         rowItem->setText(GetNodeName(rowNode));
         ValidObjects(MainPathIsValid());
     }
+
+    ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ListChanged()
+{
+    auto visPath = qobject_cast<VisToolPiece *>(vis);
+    SCASSERT(visPath != nullptr);
+    visPath->SetPiece(CreatePiece());
+    visPath->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,6 +47,8 @@ VisToolPiece::~VisToolPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPiece::RefreshGeometry()
 {
+    HideAllItems();
+
     if (m_piece.CountNode() > 0)
     {
         DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
@@ -59,12 +61,15 @@ void VisToolPiece::RefreshGeometry()
             DrawPoint(point, nodes.at(i), supportColor);
         }
 
-        const QVector<QPointF> points = m_piece.MainPathPoints(Visualization::data);
-        DrawLine(m_line1, QLineF(points.first(), Visualization::scenePos), supportColor, Qt::DashLine);
-
-        if (points.size() > 1)
+        if (mode == Mode::Creation)
         {
-            DrawLine(m_line2, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+            const QVector<QPointF> points = m_piece.MainPathPoints(Visualization::data);
+            DrawLine(m_line1, QLineF(points.first(), Visualization::scenePos), supportColor, Qt::DashLine);
+
+            if (points.size() > 1)
+            {
+                DrawLine(m_line2, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+            }
         }
     }
 }
@@ -79,4 +84,27 @@ void VisToolPiece::SetPiece(const VPiece &piece)
 QGraphicsEllipseItem *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 {
     return GetPointItem(Visualization::data, factor, m_points, i, color, this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiece::HideAllItems()
+{
+    if (m_line1)
+    {
+        m_line1->setVisible(false);
+    }
+
+    if (m_line2)
+    {
+        m_line2->setVisible(false);
+    }
+
+    QVector<QGraphicsEllipseItem *> m_points;
+    for (int i=0; i < m_points.size(); ++i)
+    {
+        if (QGraphicsEllipseItem *item = m_points.at(i))
+        {
+            item->setVisible(false);
+        }
+    }
 }
