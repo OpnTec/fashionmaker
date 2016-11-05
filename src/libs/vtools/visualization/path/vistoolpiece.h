@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   3 11, 2016
+ **  @date   5 11, 2016
  **
  **  @brief
  **  @copyright
@@ -26,52 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VPIECE_H
-#define VPIECE_H
+#ifndef VISTOOLPIECE_H
+#define VISTOOLPIECE_H
 
+#include <QtCore/QObject>
 #include <QtGlobal>
-#include <QSharedDataPointer>
 
-#include "../vlayout/vabstractpiece.h"
+#include "vispath.h"
+#include "../vpatterndb/vpiece.h"
 
-class QPainterPath;
-class VPieceData;
-class VPieceNode;
-class QPointF;
-class VContainer;
-template <class T> class QVector;
-
-class VPiece : public VAbstractPiece
+class VisToolPiece : public VisPath
 {
+    Q_OBJECT
 public:
-    VPiece();
-    VPiece(const VPiece &piece);
-    VPiece &operator=(const VPiece &piece);
-    virtual ~VPiece();
+    VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPiece();
 
-    void   Append(const VPieceNode &node);
-    void   Clear();
-    void   ClearNodes();
-    qint32 CountNode() const;
-
-    VPieceNode & operator[](int indx);
-    const VPieceNode & at ( int indx ) const;
-
-    QVector<VPieceNode> GetNodes() const;
-    void                SetNodes(const QVector<VPieceNode> &nodes);
-
-    QVector<QPointF> MainPathPoints(const VContainer *data) const;
-    QVector<QPointF> MainPathNodePoints(const VContainer *data) const;
-
-    QPainterPath MainPathPath(const VContainer *data) const;
-
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    void         SetPiece(const VPiece &piece);
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
 private:
-    QSharedDataPointer<VPieceData> d;
+    Q_DISABLE_COPY(VisToolPiece)
+    QVector<QGraphicsEllipseItem *> m_points;
+    VPiece m_piece;
 
-    QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
-    QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
+    QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
 };
 
-Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);
-
-#endif // VPIECE_H
+#endif // VISTOOLPIECE_H

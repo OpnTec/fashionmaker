@@ -158,7 +158,8 @@ enum class Vis : ToolVisHolderType
     ToolRotation,
     ToolFlippingByLine,
     ToolFlippingByAxis,
-    ToolMove
+    ToolMove,
+    ToolPiece
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,

@@ -34,6 +34,7 @@
 
 #include <QSharedPointer>
 #include <QDebug>
+#include <QPainterPath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece()
@@ -172,6 +173,51 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
     return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiece::MainPathNodePoints(const VContainer *data) const
+{
+    QVector<QPointF> points;
+    for (int i = 0; i < CountNode(); ++i)
+    {
+        switch (at(i).GetTypeTool())
+        {
+            case Tool::NodePoint:
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
+                points.append(*point);
+            }
+            break;
+            case Tool::NodeArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
+            default:
+                break;
+        }
+    }
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::MainPathPath(const VContainer *data) const
+{
+    const QVector<QPointF> points = MainPathPoints(data);
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        path.moveTo(points[0]);
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            path.lineTo(points.at(i));
+        }
+        path.lineTo(points.at(0));
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
