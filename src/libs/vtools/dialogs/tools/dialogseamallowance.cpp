@@ -29,6 +29,7 @@
 #include "dialogseamallowance.h"
 #include "ui_dialogseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "visualization/path/vistoolpiece.h"
 
 #include <QBuffer>
 #include <QMenu>
@@ -51,6 +52,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
+
+    vis = new VisToolPiece(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,7 +125,34 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
     }
 
     ValidObjects(MainPathIsValid());
-    show();
+
+    auto visPath = qobject_cast<VisToolPiece *>(vis);
+    SCASSERT(visPath != nullptr);
+    const VPiece p = CreatePiece();
+    visPath->SetPiece(p);
+
+    if (p.CountNode() == 1)
+    {
+        emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
+                        "<b>Enter</b> - finish creation"));
+
+        visPath->VisualMode(NULL_ID);
+    }
+    else
+    {
+        visPath->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowDialog(bool click)
+{
+    if (click == false)
+    {
+        emit ToolTip("");
+        setModal(true);
+        show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

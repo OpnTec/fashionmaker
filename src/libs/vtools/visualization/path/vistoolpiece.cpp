@@ -53,9 +53,6 @@ void VisToolPiece::RefreshGeometry()
             QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
             DrawPoint(point, nodes.at(i), supportColor);
         }
-
-        Visualization::toolTip = tr("Select main path objects, <b>Shift</b> - reverse direction curves, "
-                                    "<b>Enter</b> - finish creation");
     }
 }
 

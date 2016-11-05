@@ -936,7 +936,7 @@ void MainWindow::ToolDetail(bool checked)
 {
     ToolSelectAllDrawObjects();
     SetToolButton<DialogSeamAllowance>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
-                                tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
+                                tr("Select main path objects clockwise."), &MainWindow::ClosedDialogDetail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
