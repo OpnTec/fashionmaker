@@ -32,8 +32,13 @@
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       m_points(),
+      m_line1(nullptr),
+      m_line2(nullptr),
       m_piece()
-{}
+{
+    m_line1 = InitItem<QGraphicsLineItem>(supportColor, this);
+    m_line2 = InitItem<QGraphicsLineItem>(supportColor, this);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::~VisToolPiece()
@@ -52,6 +57,14 @@ void VisToolPiece::RefreshGeometry()
         {
             QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
             DrawPoint(point, nodes.at(i), supportColor);
+        }
+
+        const QVector<QPointF> points = m_piece.MainPathPoints(Visualization::data);
+        DrawLine(m_line1, QLineF(points.first(), Visualization::scenePos), supportColor, Qt::DashLine);
+
+        if (points.size() > 1)
+        {
+            DrawLine(m_line2, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
         }
     }
 }

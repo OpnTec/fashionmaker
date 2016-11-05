@@ -49,6 +49,9 @@ public:
 private:
     Q_DISABLE_COPY(VisToolPiece)
     QVector<QGraphicsEllipseItem *> m_points;
+
+    QGraphicsLineItem *m_line1;
+    QGraphicsLineItem *m_line2;
     VPiece m_piece;
 
     QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
