@@ -288,6 +288,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>The text appears under the icon (recommended for beginners).</translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -1528,19 +1532,19 @@
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrows:</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Both</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>Just front</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Just rear</translation>
     </message>
 </context>
 <context>
@@ -6308,11 +6312,11 @@ Do you want to save your changes?</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation>The path to the measurments is already relative.</translation>
+        <translation type="vanished">The path to the measurments is already relative.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation>The path to the measurments is already absolute.</translation>
+        <translation type="vanished">The path to the measurments is already absolute.</translation>
     </message>
 </context>
 <context>
@@ -7444,7 +7448,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error replacing a symlink by real file: %1.</translation>
     </message>
 </context>
 <context>

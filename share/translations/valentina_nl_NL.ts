@@ -288,6 +288,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>De tekst verschijnt onder het icoon. (Aanbevolen voor beginners).</translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -6303,11 +6307,11 @@ Do you want to save your changes?</source>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation>Het pad naar het meten is al relatief.</translation>
+        <translation type="vanished">Het pad naar het meten is al relatief.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation>Het pad naar het meten is al absoluut.</translation>
+        <translation type="vanished">Het pad naar het meten is al absoluut.</translation>
     </message>
 </context>
 <context>
