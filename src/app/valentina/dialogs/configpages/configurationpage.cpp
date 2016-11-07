@@ -336,9 +336,10 @@ QGroupBox *ConfigurationPage::SendGroup()
     sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
 
     description = new QLabel(tr("After each crash Valentina collects information that may help us fix the "
-                                "problem. We do not collect any personal information. Find more about what "
-                                "<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">"
-                                "kind of information</a> we collect."));
+                                "problem. We do not collect any personal information. Find more about what %1"
+                                "kind of information%2 we collect.")
+                             .arg("<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">")
+                             .arg("</a>"));
     description->setTextFormat(Qt::RichText);
     description->setTextInteractionFlags(Qt::TextBrowserInteraction);
     description->setOpenExternalLinks(true);
