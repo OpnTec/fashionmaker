@@ -636,7 +636,7 @@ void MainWindow::ClosedDialog(int result)
  * @param result result working dialog.
  */
 template <typename DrawTool>
-void MainWindow::ClosedDialogWithApply(int result)
+void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
 {
     SCASSERT(not dialogTool.isNull());
     if (result == QDialog::Accepted)
@@ -644,7 +644,6 @@ void MainWindow::ClosedDialogWithApply(int result)
         // Only create tool if not already created with apply
         if (dialogTool->GetAssociatedTool() == nullptr)
         {
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
             SCASSERT(scene != nullptr);
 
             dialogTool->SetAssociatedTool(
@@ -682,14 +681,13 @@ void MainWindow::ClosedDialogWithApply(int result)
  * @brief ApplyDialog handle apply in dialog
  */
 template <typename DrawTool>
-void MainWindow::ApplyDialog()
+void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
 {
     SCASSERT(not dialogTool.isNull());
 
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
     {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
 
         dialogTool->SetAssociatedTool(
@@ -704,6 +702,34 @@ void MainWindow::ApplyDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ClosedDrawDialogWithApply(int result)
+{
+    ClosedDialogWithApply<DrawTool>(result, sceneDraw);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ApplyDrawDialog()
+{
+    ApplyDialog<DrawTool>(sceneDraw);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ClosedDetailsDialogWithApply(int result)
+{
+    ClosedDialogWithApply<DrawTool>(result, sceneDetails);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ApplyDetailsDialog()
+{
+    ApplyDialog<DrawTool>(sceneDetails);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolEndLine handler tool endLine.
  * @param checked true - button checked.
@@ -712,8 +738,8 @@ void MainWindow::ToolEndLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, ":/cursor/endline_cursor.png", tr("Select point"),
-                                          &MainWindow::ClosedDialogWithApply<VToolEndLine>,
-                                          &MainWindow::ApplyDialog<VToolEndLine>);
+                                          &MainWindow::ClosedDrawDialogWithApply<VToolEndLine>,
+                                          &MainWindow::ApplyDrawDialog<VToolEndLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -725,8 +751,8 @@ void MainWindow::ToolLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLine>(checked, Tool::Line, ":/cursor/line_cursor.png", tr("Select first point"),
-                                       &MainWindow::ClosedDialogWithApply<VToolLine>,
-                                       &MainWindow::ApplyDialog<VToolLine>);
+                                       &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
+                                       &MainWindow::ApplyDrawDialog<VToolLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -738,8 +764,8 @@ void MainWindow::ToolAlongLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, ":/cursor/alongline_cursor.png",
-                                            tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
-                                            &MainWindow::ApplyDialog<VToolAlongLine>);
+                                            tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
+                                            &MainWindow::ApplyDrawDialog<VToolAlongLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -748,8 +774,8 @@ void MainWindow::ToolMidpoint(bool checked)
     ToolSelectPointByRelease();
     // Reuse DialogAlongLine and VToolAlongLine but with different cursor
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::Midpoint, ":/cursor/midpoint_cursor.png",
-                                            tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
-                                            &MainWindow::ApplyDialog<VToolAlongLine>);
+                                            tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
+                                            &MainWindow::ApplyDrawDialog<VToolAlongLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -762,8 +788,8 @@ void MainWindow::ToolShoulderPoint(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPoint, ":/cursor/shoulder_cursor.png",
                                                 tr("Select point"),
-                                                &MainWindow::ClosedDialogWithApply<VToolShoulderPoint>,
-                                                &MainWindow::ApplyDialog<VToolShoulderPoint>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolShoulderPoint>,
+                                                &MainWindow::ApplyDrawDialog<VToolShoulderPoint>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -776,8 +802,8 @@ void MainWindow::ToolNormal(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogNormal>(checked, Tool::Normal, ":/cursor/normal_cursor.png",
                                          tr("Select first point of line"),
-                                         &MainWindow::ClosedDialogWithApply<VToolNormal>,
-                                         &MainWindow::ApplyDialog<VToolNormal>);
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolNormal>,
+                                         &MainWindow::ApplyDrawDialog<VToolNormal>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -790,8 +816,8 @@ void MainWindow::ToolBisector(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogBisector>(checked, Tool::Bisector, ":/cursor/bisector_cursor.png",
                                            tr("Select first point of angle"),
-                                           &MainWindow::ClosedDialogWithApply<VToolBisector>,
-                                           &MainWindow::ApplyDialog<VToolBisector>);
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolBisector>,
+                                           &MainWindow::ApplyDrawDialog<VToolBisector>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -804,8 +830,8 @@ void MainWindow::ToolLineIntersect(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLineIntersect>(checked, Tool::LineIntersect, ":/cursor/intersect_cursor.png",
                                                 tr("Select first point of first line"),
-                                                &MainWindow::ClosedDialogWithApply<VToolLineIntersect>,
-                                                &MainWindow::ApplyDialog<VToolLineIntersect>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>,
+                                                &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -818,8 +844,8 @@ void MainWindow::ToolSpline(bool checked)
     ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSpline>(checked, Tool::Spline, ":/cursor/spline_cursor.png",
                                          tr("Select first point curve"),
-                                         &MainWindow::ClosedDialogWithApply<VToolSpline>,
-                                         &MainWindow::ApplyDialog<VToolSpline>);
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolSpline>,
+                                         &MainWindow::ApplyDrawDialog<VToolSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -828,8 +854,8 @@ void MainWindow::ToolCubicBezier(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogCubicBezier>(checked, Tool::CubicBezier, ":/cursor/cubic_bezier_cursor.png",
                                               tr("Select first curve point"),
-                                              &MainWindow::ClosedDialogWithApply<VToolCubicBezier>,
-                                              &MainWindow::ApplyDialog<VToolCubicBezier>);
+                                              &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezier>,
+                                              &MainWindow::ApplyDrawDialog<VToolCubicBezier>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -842,8 +868,8 @@ void MainWindow::ToolCutSpline(bool checked)
     ToolSelectSpline();
     SetToolButtonWithApply<DialogCutSpline>(checked, Tool::CutSpline, ":/cursor/spline_cut_point_cursor.png",
                                             tr("Select simple curve"),
-                                            &MainWindow::ClosedDialogWithApply<VToolCutSpline>,
-                                            &MainWindow::ApplyDialog<VToolCutSpline>);
+                                            &MainWindow::ClosedDrawDialogWithApply<VToolCutSpline>,
+                                            &MainWindow::ApplyDrawDialog<VToolCutSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -855,8 +881,8 @@ void MainWindow::ToolArc(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArc>(checked, Tool::Arc, ":/cursor/arc_cursor.png",
-                                      tr("Select point of center of arc"), &MainWindow::ClosedDialogWithApply<VToolArc>,
-                                      &MainWindow::ApplyDialog<VToolArc>);
+                                      tr("Select point of center of arc"), &MainWindow::ClosedDrawDialogWithApply<VToolArc>,
+                                      &MainWindow::ApplyDrawDialog<VToolArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -869,8 +895,8 @@ void MainWindow::ToolSplinePath(bool checked)
     ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSplinePath>(checked, Tool::SplinePath, ":/cursor/splinepath_cursor.png",
                                              tr("Select point of curve path"),
-                                             &MainWindow::ClosedDialogWithApply<VToolSplinePath>,
-                                             &MainWindow::ApplyDialog<VToolSplinePath>);
+                                             &MainWindow::ClosedDrawDialogWithApply<VToolSplinePath>,
+                                             &MainWindow::ApplyDrawDialog<VToolSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -880,8 +906,8 @@ void MainWindow::ToolCubicBezierPath(bool checked)
     SetToolButtonWithApply<DialogCubicBezierPath>(checked, Tool::CubicBezierPath,
                                                   ":/cursor/cubic_bezier_path_cursor.png",
                                                   tr("Select point of cubic bezier path"),
-                                                  &MainWindow::ClosedDialogWithApply<VToolCubicBezierPath>,
-                                                  &MainWindow::ApplyDialog<VToolCubicBezierPath>);
+                                                  &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezierPath>,
+                                                  &MainWindow::ApplyDrawDialog<VToolCubicBezierPath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -894,8 +920,8 @@ void MainWindow::ToolCutSplinePath(bool checked)
     ToolSelectSplinePath();
     SetToolButtonWithApply<DialogCutSplinePath>(checked, Tool::CutSplinePath,
                                                 ":/cursor/splinepath_cut_point_cursor.png", tr("Select curve path"),
-                                                &MainWindow::ClosedDialogWithApply<VToolCutSplinePath>,
-                                                &MainWindow::ApplyDialog<VToolCutSplinePath>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>,
+                                                &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -908,8 +934,8 @@ void MainWindow::ToolPointOfContact(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfContact>(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
                                                  tr("Select first point of line"),
-                                                 &MainWindow::ClosedDialogWithApply<VToolPointOfContact>,
-                                                 &MainWindow::ApplyDialog<VToolPointOfContact>);
+                                                 &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>,
+                                                 &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -922,8 +948,8 @@ void MainWindow::ToolDetail(bool checked)
     ToolSelectAllDrawObjects();
     SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece, "://cursor/new_detail_cursor.png",
                                                 tr("Select main path objects clockwise."),
-                                                &MainWindow::ClosedDialogWithApply<VToolSeamAllowance>,
-                                                &MainWindow::ApplyDialog<VToolSeamAllowance>);
+                                                &MainWindow::ClosedDetailsDialogWithApply<VToolSeamAllowance>,
+                                                &MainWindow::ApplyDetailsDialog<VToolSeamAllowance>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -950,8 +976,8 @@ void MainWindow::ToolHeight(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
-                                         &MainWindow::ClosedDialogWithApply<VToolHeight>,
-                                         &MainWindow::ApplyDialog<VToolHeight>);
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolHeight>,
+                                         &MainWindow::ApplyDrawDialog<VToolHeight>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -964,8 +990,8 @@ void MainWindow::ToolTriangle(bool checked)
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
                                            tr("Select first point of axis"),
-                                           &MainWindow::ClosedDialogWithApply<VToolTriangle>,
-                                           &MainWindow::ApplyDialog<VToolTriangle>);
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolTriangle>,
+                                           &MainWindow::ApplyDrawDialog<VToolTriangle>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -979,8 +1005,8 @@ void MainWindow::ToolPointOfIntersection(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
                                                       ":/cursor/pointofintersect_cursor.png",
                                                       tr("Select point for X value (vertical)"),
-                                                      &MainWindow::ClosedDialogWithApply<VToolPointOfIntersection>,
-                                                      &MainWindow::ApplyDialog<VToolPointOfIntersection>);
+                                                      &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersection>,
+                                                      &MainWindow::ApplyDrawDialog<VToolPointOfIntersection>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1022,8 +1048,8 @@ void MainWindow::ToolRotation(bool checked)
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation,
                                            ":/cursor/rotation_cursor.png",
                                            tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                           &MainWindow::ClosedDialogWithApply<VToolRotation>,
-                                           &MainWindow::ApplyDialog<VToolRotation>);
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
+                                           &MainWindow::ApplyDrawDialog<VToolRotation>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1033,8 +1059,8 @@ void MainWindow::ToolFlippingByLine(bool checked)
     SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine,
                                            ":/cursor/flipping_line_cursor.png",
                                            tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                           &MainWindow::ClosedDialogWithApply<VToolFlippingByLine>,
-                                           &MainWindow::ApplyDialog<VToolFlippingByLine>);
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
+                                           &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1044,8 +1070,8 @@ void MainWindow::ToolFlippingByAxis(bool checked)
     SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis,
                                            ":/cursor/flipping_axis_cursor.png",
                                            tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                           &MainWindow::ClosedDialogWithApply<VToolFlippingByAxis>,
-                                                 &MainWindow::ApplyDialog<VToolFlippingByAxis>);
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
+                                                 &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1055,8 +1081,8 @@ void MainWindow::ToolMove(bool checked)
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move,
                                          ":/cursor/move_cursor.png",
                                          tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                         &MainWindow::ClosedDialogWithApply<VToolMove>,
-                                         &MainWindow::ApplyDialog<VToolMove>);
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
+                                         &MainWindow::ApplyDrawDialog<VToolMove>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1087,8 +1113,8 @@ void MainWindow::ToolCutArc(bool checked)
 {
     ToolSelectArc();
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, ":/cursor/arc_cut_cursor.png",
-                                         tr("Select arc"), &MainWindow::ClosedDialogWithApply<VToolCutArc>,
-                                         &MainWindow::ApplyDialog<VToolCutArc>);
+                                         tr("Select arc"), &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
+                                         &MainWindow::ApplyDrawDialog<VToolCutArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1098,8 +1124,8 @@ void MainWindow::ToolLineIntersectAxis(bool checked)
     SetToolButtonWithApply<DialogLineIntersectAxis>(checked, Tool::LineIntersectAxis,
                                                     ":/cursor/line_intersect_axis_cursor.png",
                                                     tr("Select first point of line"),
-                                                    &MainWindow::ClosedDialogWithApply<VToolLineIntersectAxis>,
-                                                    &MainWindow::ApplyDialog<VToolLineIntersectAxis>);
+                                                    &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersectAxis>,
+                                                    &MainWindow::ApplyDrawDialog<VToolLineIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1109,8 +1135,8 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
     SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
                                                      ":/cursor/curve_intersect_axis_cursor.png",
                                                      tr("Select curve"),
-                                                     &MainWindow::ClosedDialogWithApply<VToolCurveIntersectAxis>,
-                                                     &MainWindow::ApplyDialog<VToolCurveIntersectAxis>);
+                                                     &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+                                                     &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1121,8 +1147,8 @@ void MainWindow::ToolArcIntersectAxis(bool checked)
     SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::ArcIntersectAxis,
                                                      ":/cursor/arc_intersect_axis_cursor.png",
                                                      tr("Select arc"),
-                                                     &MainWindow::ClosedDialogWithApply<VToolCurveIntersectAxis>,
-                                                     &MainWindow::ApplyDialog<VToolCurveIntersectAxis>);
+                                                     &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+                                                     &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1132,8 +1158,8 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
                                                           "://cursor/point_of_intersection_arcs.png",
                                                           tr("Select first an arc"),
-                                                       &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionArcs>,
-                                                          &MainWindow::ApplyDialog<VToolPointOfIntersectionArcs>);
+                                                       &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
+                                                          &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1143,8 +1169,8 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(checked, Tool::PointOfIntersectionCircles,
                                                              "://cursor/point_of_intersection_circles.png",
                                                              tr("Select first circle center"),
-                                                    &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionCircles>,
-                                                             &MainWindow::ApplyDialog<VToolPointOfIntersectionCircles>);
+                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
+                                                             &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1154,8 +1180,8 @@ void MainWindow::ToolPointOfIntersectionCurves(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionCurves>(checked, Tool::PointOfIntersectionCurves,
                                                              "://cursor/intersection_curves_cursor.png",
                                                              tr("Select first curve"),
-                                                    &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionCurves>,
-                                                             &MainWindow::ApplyDialog<VToolPointOfIntersectionCurves>);
+                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCurves>,
+                                                             &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCurves>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1165,8 +1191,8 @@ void MainWindow::ToolPointFromCircleAndTangent(bool checked)
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(checked, Tool::PointFromCircleAndTangent,
                                                             "://cursor/point_from_circle_and_tangent_cursor.png",
                                                             tr("Select point on tangent"),
-                                                    &MainWindow::ClosedDialogWithApply<VToolPointFromCircleAndTangent>,
-                                                            &MainWindow::ApplyDialog<VToolPointFromCircleAndTangent>);
+                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointFromCircleAndTangent>,
+                                                            &MainWindow::ApplyDrawDialog<VToolPointFromCircleAndTangent>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1176,8 +1202,8 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
     SetToolButtonWithApply<DialogPointFromArcAndTangent>(checked, Tool::PointFromArcAndTangent,
                                                          "://cursor/point_from_arc_and_tangent_cursor.png",
                                                          tr("Select point on tangent"),
-                                                        &MainWindow::ClosedDialogWithApply<VToolPointFromArcAndTangent>,
-                                                         &MainWindow::ApplyDialog<VToolPointFromArcAndTangent>);
+                                                        &MainWindow::ClosedDrawDialogWithApply<VToolPointFromArcAndTangent>,
+                                                         &MainWindow::ApplyDrawDialog<VToolPointFromArcAndTangent>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1187,8 +1213,8 @@ void MainWindow::ToolArcWithLength(bool checked)
     SetToolButtonWithApply<DialogArcWithLength>(checked, Tool::ArcWithLength,
                                                 "://cursor/arc_with_length_cursor.png",
                                                 tr("Select point of the center of the arc"),
-                                                &MainWindow::ClosedDialogWithApply<VToolArcWithLength>,
-                                                &MainWindow::ApplyDialog<VToolArcWithLength>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolArcWithLength>,
+                                                &MainWindow::ApplyDrawDialog<VToolArcWithLength>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1198,8 +1224,8 @@ void MainWindow::ToolTrueDarts(bool checked)
     SetToolButtonWithApply<DialogTrueDarts>(checked, Tool::TrueDarts,
                                                 "://cursor/true_darts_cursor.png",
                                                 tr("Select the first base line point"),
-                                                &MainWindow::ClosedDialogWithApply<VToolTrueDarts>,
-                                            &MainWindow::ApplyDialog<VToolTrueDarts>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolTrueDarts>,
+                                            &MainWindow::ApplyDrawDialog<VToolTrueDarts>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

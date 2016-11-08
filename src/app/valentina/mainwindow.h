@@ -282,10 +282,20 @@ private:
                                               Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
+
     template <typename DrawTool>
-    void               ClosedDialogWithApply(int result);
+    void ClosedDialogWithApply(int result, VMainGraphicsScene *scene);
     template <typename DrawTool>
-    void               ApplyDialog();
+    void ApplyDialog(VMainGraphicsScene *scene);
+    template <typename DrawTool>
+    void ClosedDrawDialogWithApply(int result);
+    template <typename DrawTool>
+    void ApplyDrawDialog();
+    template <typename DrawTool>
+    void ClosedDetailsDialogWithApply(int result);
+    template <typename DrawTool>
+    void ApplyDetailsDialog();
+
     bool               SavePattern(const QString &curFile, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
