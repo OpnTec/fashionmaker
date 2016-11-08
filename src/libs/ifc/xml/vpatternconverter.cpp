@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.8");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.8.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.0");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.0.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -115,6 +115,20 @@ const QString strPointFromArcAndTangent    = QStringLiteral("pointFromArcAndTang
 const QString strPointOfIntersectionArcs   = QStringLiteral("pointOfIntersectionArcs");
 const QString strFirstArc                  = QStringLiteral("firstArc");
 const QString strSecondArc                 = QStringLiteral("secondArc");
+const QString strDetail                    = QStringLiteral("detail");
+const QString strSupplement                = QStringLiteral("supplement");
+const QString strClosed                    = QStringLiteral("closed");
+const QString strWidth                     = QStringLiteral("width");
+const QString strNode                      = QStringLiteral("node");
+const QString strNodes                     = QStringLiteral("nodes");
+const QString strData                      = QStringLiteral("data");
+const QString strPatternInfo               = QStringLiteral("patternInfo");
+const QString strGrainline                 = QStringLiteral("grainline");
+const QString strReverse                   = QStringLiteral("reverse");
+const QString strMx                        = QStringLiteral("mx");
+const QString strMy                        = QStringLiteral("my");
+const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
+const QString strInLayout                  = QStringLiteral("inLayout");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -175,6 +189,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000307):
             return QStringLiteral("://schema/pattern/v0.3.7.xsd");
         case (0x000308):
+            return QStringLiteral("://schema/pattern/v0.3.8.xsd");
+        case (0x000400):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -274,6 +290,10 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000308), fileName);
                 V_FALLTHROUGH
             case (0x000308):
+                ToV0_4_0();
+                ValidateXML(XSDSchema(0x000400), fileName);
+                V_FALLTHROUGH
+            case (0x000400):
                 break;
             default:
                 break;
@@ -459,6 +479,14 @@ void VPatternConverter::ToV0_3_7()
 void VPatternConverter::ToV0_3_8()
 {
     SetVersion(QStringLiteral("0.3.8"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_4_0()
+{
+    SetVersion(QStringLiteral("0.4.0"));
+    TagDetailToV0_4_0();
     Save();
 }
 
@@ -1464,6 +1492,84 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                     element.setAttribute(strIdObject, baseCurve);
                 }
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::TagDetailToV0_4_0()
+{
+    const QDomNodeList list = elementsByTagName(strDetail);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+
+        if (not dom.isNull())
+        {
+            dom.removeAttribute(strName);
+            dom.removeAttribute(strSupplement);
+            dom.removeAttribute(strClosed);
+            dom.removeAttribute(strWidth);
+            dom.removeAttribute(strMx);
+            dom.removeAttribute(strMy);
+            dom.removeAttribute(strForbidFlipping);
+            dom.removeAttribute(strInLayout);
+
+            dom.setAttribute(strVersion, "1");
+
+            const QStringList tags = QStringList() << strNode << strData << strPatternInfo << strGrainline;
+
+            QDomElement tagData;
+            QDomElement tagPatternInfo;
+            QDomElement tagGrainline;
+            QDomElement tagNodes = createElement(strNodes);
+
+            const QDomNodeList childList = dom.childNodes();
+            for (qint32 i = 0; i < childList.size(); ++i)
+            {
+                const QDomElement element = childList.at(i).toElement();
+                if (not element.isNull())
+                {
+                    switch (tags.indexOf(element.tagName()))
+                    {
+                        case 0://strNode
+                        {
+                            QDomElement tagNode = createElement(strNode);
+
+                            tagNode.setAttribute(strIdObject, element.attribute(strIdObject, NULL_ID_STR));
+
+                            if (element.hasAttribute(strReverse))
+                            {
+                                tagNode.setAttribute(strReverse, element.attribute(strReverse, "0"));
+                            }
+
+                            tagNode.setAttribute(strType, element.attribute(strType, ""));
+
+                            tagNodes.appendChild(tagNode);
+
+                            break;
+                        }
+                        case 1://strData
+                            tagData = element.cloneNode().toElement();
+                            break;
+                        case 2://strPatternInfo
+                            tagPatternInfo = element.cloneNode().toElement();
+                            break;
+                        case 3://strGrainline
+                            tagGrainline = element.cloneNode().toElement();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            RemoveAllChildren(dom);
+
+            dom.appendChild(tagData);
+            dom.appendChild(tagPatternInfo);
+            dom.appendChild(tagGrainline);
+            dom.appendChild(tagNodes);
         }
     }
 }
