@@ -328,6 +328,10 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_1_1()
 {
+    // TODO. Delete if minimal supported version is 0.1.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 1),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.1.1"));
     Save();
 }
@@ -335,6 +339,10 @@ void VPatternConverter::ToV0_1_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_1_2()
 {
+    // TODO. Delete if minimal supported version is 0.1.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 2),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.1.2"));
     Save();
 }
@@ -342,6 +350,10 @@ void VPatternConverter::ToV0_1_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_1_3()
 {
+    // TODO. Delete if minimal supported version is 0.1.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 3),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.1.3"));
     Save();
 }
@@ -349,6 +361,10 @@ void VPatternConverter::ToV0_1_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_1_4()
 {
+    // TODO. Delete if minimal supported version is 0.1.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.1.4"));
     Save();
 }
@@ -356,6 +372,10 @@ void VPatternConverter::ToV0_1_4()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.0"));
     TagUnitToV0_2_0();
     TagIncrementToV0_2_0();
@@ -367,6 +387,10 @@ void VPatternConverter::ToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_1()
 {
+    // TODO. Delete if minimal supported version is 0.2.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.1"));
     ConvertMeasurementsToV0_2_1();
     Save();
@@ -375,6 +399,10 @@ void VPatternConverter::ToV0_2_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_2()
 {
+    // TODO. Delete if minimal supported version is 0.2.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 2),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.2"));
     Save();
 }
@@ -382,6 +410,10 @@ void VPatternConverter::ToV0_2_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_3()
 {
+    // TODO. Delete if minimal supported version is 0.2.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 3),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.3"));
     Save();
 }
@@ -389,6 +421,10 @@ void VPatternConverter::ToV0_2_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_4()
 {
+    // TODO. Delete if minimal supported version is 0.2.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+                      "Time to refactor the code.");
+
     FixToolUnionToV0_2_4();
     SetVersion(QStringLiteral("0.2.4"));
     Save();
@@ -397,6 +433,10 @@ void VPatternConverter::ToV0_2_4()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_5()
 {
+    // TODO. Delete if minimal supported version is 0.2.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 5),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.5"));
     Save();
 }
@@ -404,6 +444,10 @@ void VPatternConverter::ToV0_2_5()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_6()
 {
+    // TODO. Delete if minimal supported version is 0.2.6
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 6),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.6"));
     Save();
 }
@@ -411,6 +455,10 @@ void VPatternConverter::ToV0_2_6()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_7()
 {
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.2.7"));
     Save();
 }
@@ -418,6 +466,10 @@ void VPatternConverter::ToV0_2_7()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_0()
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     //Cutting path do not create anymore subpaths
     FixCutPoint();
     FixCutPoint();
@@ -428,6 +480,10 @@ void VPatternConverter::ToV0_3_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_1()
 {
+    // TODO. Delete if minimal supported version is 0.3.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.1"));
     RemoveColorToolCutV0_3_1();
     Save();
@@ -436,6 +492,10 @@ void VPatternConverter::ToV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_2()
 {
+    // TODO. Delete if minimal supported version is 0.3.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.2"));
     Save();
 }
@@ -443,6 +503,10 @@ void VPatternConverter::ToV0_3_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_3()
 {
+    // TODO. Delete if minimal supported version is 0.3.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 3),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.3"));
     Save();
 }
@@ -450,6 +514,10 @@ void VPatternConverter::ToV0_3_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_4()
 {
+    // TODO. Delete if minimal supported version is 0.3.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 4),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.4"));
     Save();
 }
@@ -457,6 +525,10 @@ void VPatternConverter::ToV0_3_4()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_5()
 {
+    // TODO. Delete if minimal supported version is 0.3.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 5),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.5"));
     Save();
 }
@@ -464,6 +536,10 @@ void VPatternConverter::ToV0_3_5()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_6()
 {
+    // TODO. Delete if minimal supported version is 0.3.6
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 6),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.6"));
     Save();
 }
@@ -471,6 +547,10 @@ void VPatternConverter::ToV0_3_6()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_7()
 {
+    // TODO. Delete if minimal supported version is 0.3.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 7),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.7"));
     Save();
 }
@@ -478,6 +558,10 @@ void VPatternConverter::ToV0_3_7()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_3_8()
 {
+    // TODO. Delete if minimal supported version is 0.3.8
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 8),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.8"));
     Save();
 }
@@ -485,6 +569,10 @@ void VPatternConverter::ToV0_3_8()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.4.0"));
     TagDetailToV0_4_0();
     Save();
@@ -493,6 +581,10 @@ void VPatternConverter::ToV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagUnitToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QDomElement unit = createElement(strUnit);
     QDomText newNodeText = createTextNode(MUnitV0_1_4());
     unit.appendChild(newNodeText);
@@ -504,6 +596,10 @@ void VPatternConverter::TagUnitToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagIncrementToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     const QSet<QString> names = FixIncrementsToV0_2_0();
 
     FixPointExpressionsToV0_2_0(names);
@@ -514,6 +610,10 @@ void VPatternConverter::TagIncrementToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ConvertMeasurementsToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_0();
     ConvertPointExpressionsToV0_2_0(names);
     ConvertArcExpressionsToV0_2_0(names);
@@ -523,6 +623,10 @@ void VPatternConverter::ConvertMeasurementsToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QSet<QString> names;
     const QDomElement incr = TagIncrementsV0_1_4();
     QDomNode domNode = incr.firstChild();
@@ -565,6 +669,10 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
@@ -625,6 +733,10 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strArc);
     for (int i=0; i < list.size(); ++i)
@@ -676,6 +788,10 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
@@ -717,6 +833,10 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
@@ -777,6 +897,10 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strArc);
     for (int i=0; i < list.size(); ++i)
@@ -828,6 +952,10 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QString formula;
     const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
@@ -869,6 +997,10 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     delete cal;
@@ -899,6 +1031,10 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names)
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     delete cal;
@@ -929,6 +1065,10 @@ QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula,
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagMeasurementsToV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     QDomElement ms = TagMeasurementsV0_1_4();
     const QString path = GetParametrString(ms, strPath);
 
@@ -943,6 +1083,10 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ConvertMeasurementsToV0_2_1()
 {
+    // TODO. Delete if minimal supported version is 0.2.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+                      "Time to refactor the code.");
+
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_1();
 
     // Structure did not change. We can use the same code.
@@ -954,6 +1098,10 @@ void VPatternConverter::ConvertMeasurementsToV0_2_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::RemoveColorToolCutV0_3_1()
 {
+    // TODO. Delete if minimal supported version is 0.3.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+                      "Time to refactor the code.");
+
     const QDomNodeList list = elementsByTagName(strPoint);
     for (int i=0; i < list.size(); ++i)
     {
@@ -972,6 +1120,10 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::MUnitV0_1_4() const
 {
+    // TODO. Delete if minimal supported version is 0.1.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+                      "Time to refactor the code.");
+
     const QDomElement element = TagMeasurementsV0_1_4();
     try
     {
@@ -988,6 +1140,10 @@ QString VPatternConverter::MUnitV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 {
+    // TODO. Delete if minimal supported version is 0.1.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+                      "Time to refactor the code.");
+
     const QDomNodeList list = elementsByTagName(strMeasurements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
@@ -1001,6 +1157,10 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 {
+    // TODO. Delete if minimal supported version is 0.1.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+                      "Time to refactor the code.");
+
     const QDomNodeList list = elementsByTagName(strIncrements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
@@ -1014,6 +1174,10 @@ QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 {
+    // TODO. Delete if minimal supported version is 0.1.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+                      "Time to refactor the code.");
+
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(strPathPoint);
     for (int i=0; i < list.size(); ++i)
@@ -1054,6 +1218,10 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixToolUnionToV0_2_4()
 {
+    // TODO. Delete if minimal supported version is 0.2.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+                      "Time to refactor the code.");
+
     QDomElement root = documentElement();
     const QDomNodeList modelings = root.elementsByTagName(strModeling);
     for (int i=0; i<modelings.size(); ++i)
@@ -1065,6 +1233,10 @@ void VPatternConverter::FixToolUnionToV0_2_4()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
 {
+    // TODO. Delete if minimal supported version is 0.2.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+                      "Time to refactor the code.");
+
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
@@ -1100,6 +1272,10 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<quint32> &children)
 {
+    // TODO. Delete if minimal supported version is 0.2.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+                      "Time to refactor the code.");
+
     QDomElement toolUnion = elementById(id);
     if (toolUnion.isNull())
     {
@@ -1121,6 +1297,10 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
 //---------------------------------------------------------------------------------------------------------------------
 QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+                      "Time to refactor the code.");
+
     // old name, new name
     QMap<QString, QString> names;
 
@@ -1297,6 +1477,10 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 //---------------------------------------------------------------------------------------------------------------------
 QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
 {
+    // TODO. Delete if minimal supported version is 0.2.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+                      "Time to refactor the code.");
+
     // old name, new name
     QMap<QString, QString> names;
 
@@ -1499,6 +1683,10 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagDetailToV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     const QDomNodeList list = elementsByTagName(strDetail);
     for (int i=0; i < list.size(); ++i)
     {
