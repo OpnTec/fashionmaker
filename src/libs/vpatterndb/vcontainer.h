@@ -91,6 +91,7 @@ public:
           gObjects(data.gObjects),
           variables(data.variables),
           details(data.details),
+          pieces(data.pieces),
           trVars(data.trVars),
           patternUnit(data.patternUnit)
     {}
