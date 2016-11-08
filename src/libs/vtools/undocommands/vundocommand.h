@@ -65,6 +65,7 @@ enum class UndoCommand: char { AddPatternPiece,
                              };
 
 class VNodeDetail;
+class VPieceNode;
 class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
@@ -87,6 +88,7 @@ protected:
 
     void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
     void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
+    void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vundocommand.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 7, 2014
+ **  @date   6 11, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,79 +26,86 @@
  **
  *************************************************************************/
 
-#include "vundocommand.h"
-
-#include <QDomNode>
-
-#include "../ifc/ifcdef.h"
-#include "../vmisc/def.h"
-#include "../vpatterndb/vnodedetail.h"
+#include "addpiece.h"
 #include "../vpatterndb/vpiecenode.h"
 
-class QDomElement;
-class QDomNode;
-class QUndoCommand;
-
-Q_LOGGING_CATEGORY(vUndo, "v.undo")
-
 //---------------------------------------------------------------------------------------------------------------------
-VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
+AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VPiece &detail, const QString &drawName,
+                   QUndoCommand *parent)
+    : VUndoCommand(xml, doc, parent),
+      m_detail(detail),
+      m_drawName(drawName)
 {
-    SCASSERT(doc != nullptr);
+    setText(tr("add detail"));
+    nodeId = doc->GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VUndoCommand::~VUndoCommand()
+AddPiece::~AddPiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::RedoFullParsing()
+void AddPiece::undo()
 {
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
-}
+    qCDebug(vUndo, "Undo.");
 
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const
-{
-    if (siblingId == NULL_ID)
+    QDomElement details = GetDetailsSection();
+    if (not details.isNull())
     {
-        parentNode.appendChild(xml);
+        QDomElement domElement = doc->elementById(nodeId);
+        if (domElement.isElement())
+        {
+            if (details.removeChild(domElement).isNull())
+            {
+                qCDebug(vUndo, "Can't delete node");
+                return;
+            }
+
+            DecrementReferences(m_detail.GetNodes());
+        }
+        else
+        {
+            qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
+            return;
+        }
     }
     else
     {
-        const QDomElement refElement = doc->NodeById(siblingId);
-        parentNode.insertAfter(xml, refElement);
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
+        return;
     }
+    emit NeedFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
+void AddPiece::redo()
 {
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    qCDebug(vUndo, "Redo.");
+
+    QDomElement details = GetDetailsSection();
+    if (not details.isNull())
     {
-        doc->IncrementReferens(nodes.at(i).getId());
+        details.appendChild(xml);
     }
+    else
+    {
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
+        return;
+    }
+    RedoFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
+QDomElement AddPiece::GetDetailsSection() const
 {
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    QDomElement details;
+    if (m_drawName.isEmpty())
     {
-        doc->DecrementReferens(nodes.at(i).getId());
+        doc->GetActivNodeElement(VAbstractPattern::TagDetails, details);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
-{
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    else
     {
-        doc->DecrementReferens(nodes.at(i).GetId());
+        details = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagDetails);
     }
+    return details;
 }

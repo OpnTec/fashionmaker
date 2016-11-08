@@ -23,7 +23,8 @@ HEADERS += \
     $$PWD/delgroup.h \
     $$PWD/label/moveabstractlabel.h \
     $$PWD/toggledetailinlayout.h \
-    $$PWD/label/operationmovelabel.h
+    $$PWD/label/operationmovelabel.h \
+    $$PWD/addpiece.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -47,4 +48,5 @@ SOURCES += \
     $$PWD/delgroup.cpp \
     $$PWD/label/moveabstractlabel.cpp \
     $$PWD/toggledetailinlayout.cpp \
-    $$PWD/label/operationmovelabel.cpp
+    $$PWD/label/operationmovelabel.cpp \
+    $$PWD/addpiece.cpp
