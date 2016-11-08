@@ -49,7 +49,7 @@ void VisToolPiece::RefreshGeometry()
 {
     HideAllItems();
 
-    if (m_piece.CountNode() > 0)
+    if (m_piece.CountNodes() > 0)
     {
         DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
 

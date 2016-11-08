@@ -82,7 +82,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 {
     m_piece = piece;
     ui->listWidget->clear();
-    for (int i = 0; i < m_piece.CountNode(); ++i)
+    for (int i = 0; i < m_piece.CountNodes(); ++i)
     {
         NewItem(m_piece.at(i));
     }
@@ -134,7 +134,7 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
         const VPiece p = CreatePiece();
         visPath->SetPiece(p);
 
-        if (p.CountNode() == 1)
+        if (p.CountNodes() == 1)
         {
             emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
                             "<b>Enter</b> - finish creation"));
