@@ -52,7 +52,7 @@ public:
     void   Append(const VPieceNode &node);
     void   Clear();
     void   ClearNodes();
-    qint32 CountNode() const;
+    qint32 CountNodes() const;
 
     VPieceNode & operator[](int indx);
     const VPieceNode & at ( int indx ) const;
@@ -64,6 +64,12 @@ public:
     QVector<QPointF> MainPathNodePoints(const VContainer *data) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;
+
+    qreal GetMx() const;
+    void  SetMx(qreal value);
+
+    qreal GetMy() const;
+    void  SetMy(qreal value);
 
 private:
     QSharedDataPointer<VPieceData> d;

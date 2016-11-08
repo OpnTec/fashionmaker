@@ -42,18 +42,25 @@ class VPieceData : public QSharedData
 {
 public:
     VPieceData()
-        : nodes()
+        : m_nodes(),
+          m_mx(0),
+          m_my(0)
     {}
 
     VPieceData(const VPieceData &detail)
         : QSharedData(detail),
-          nodes(detail.nodes)
+          m_nodes(detail.m_nodes),
+          m_mx(detail.m_mx),
+          m_my(detail.m_my)
     {}
 
     ~VPieceData();
 
     /** @brief nodes list detail nodes. */
-    QVector<VPieceNode> nodes;
+    QVector<VPieceNode> m_nodes;
+
+    qreal m_mx;
+    qreal m_my;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

@@ -69,7 +69,7 @@ VPiece::~VPiece()
  */
 void VPiece::Append(const VPieceNode &node)
 {
-    d->nodes.append(node);
+    d->m_nodes.append(node);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ void VPiece::Clear()
 /** @brief ClearNodes clear list of nodes. */
 void VPiece::ClearNodes()
 {
-    d->nodes.clear();
+    d->m_nodes.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,9 +91,9 @@ void VPiece::ClearNodes()
  * @brief CountNode return count nodes.
  * @return count.
  */
-qint32 VPiece::CountNode() const
+qint32 VPiece::CountNodes() const
 {
-    return d->nodes.size();
+    return d->m_nodes.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ qint32 VPiece::CountNode() const
  */
 VPieceNode &VPiece::operator [](int indx)
 {
-    return d->nodes[indx];
+    return d->m_nodes[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ VPieceNode &VPiece::operator [](int indx)
  */
 const VPieceNode &VPiece::at(int indx) const
 {
-    return d->nodes.at(indx);
+    return d->m_nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ const VPieceNode &VPiece::at(int indx) const
  */
 QVector<VPieceNode> VPiece::GetNodes() const
 {
-    return d->nodes;
+    return d->m_nodes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,14 +136,14 @@ QVector<VPieceNode> VPiece::GetNodes() const
 // cppcheck-suppress unusedFunction
 void VPiece::SetNodes(const QVector<VPieceNode> &nodes)
 {
-    d->nodes = nodes;
+    d->m_nodes = nodes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 {
     QVector<QPointF> points;
-    for (int i = 0; i < CountNode(); ++i)
+    for (int i = 0; i < CountNodes(); ++i)
     {
         switch (at(i).GetTypeTool())
         {
@@ -179,7 +179,7 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 QVector<QPointF> VPiece::MainPathNodePoints(const VContainer *data) const
 {
     QVector<QPointF> points;
-    for (int i = 0; i < CountNode(); ++i)
+    for (int i = 0; i < CountNodes(); ++i)
     {
         switch (at(i).GetTypeTool())
         {
@@ -221,9 +221,33 @@ QPainterPath VPiece::MainPathPath(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VPiece::GetMx() const
+{
+    return d->m_mx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetMx(qreal value)
+{
+    d->m_mx = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPiece::GetMy() const
+{
+    return d->m_my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetMy(qreal value)
+{
+    d->m_my = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse) const
 {
-    if (i < 0 && i > CountNode()-1)
+    if (i < 0 && i > CountNodes()-1)
     {
         return QPointF();
     }
@@ -237,13 +261,13 @@ QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse)
     }
 
     QPointF begin = points.first();
-    if (CountNode() > 1)
+    if (CountNodes() > 1)
     {
         if (i == 0)
         {
-            if (at(CountNode()-1).GetTypeTool() == Tool::NodePoint)
+            if (at(CountNodes()-1).GetTypeTool() == Tool::NodePoint)
             {
-                begin = *data->GeometricObject<VPointF>(at(CountNode()-1).GetId());
+                begin = *data->GeometricObject<VPointF>(at(CountNodes()-1).GetId());
             }
         }
         else
@@ -260,7 +284,7 @@ QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse)
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) const
 {
-    if (i < 0 && i > CountNode()-1)
+    if (i < 0 && i > CountNodes()-1)
     {
         return QPointF();
     }
@@ -274,9 +298,9 @@ QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) c
     }
 
     QPointF end = points.last();
-    if (CountNode() > 2)
+    if (CountNodes() > 2)
     {
-        if (i == CountNode() - 1)
+        if (i == CountNodes() - 1)
         {
             if (at(0).GetTypeTool() == Tool::NodePoint)
             {
