@@ -400,7 +400,9 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        m_dialog = new DialogSeamAllowance(getData(), id, qApp->getMainWindow());
+        auto *dialog = new DialogSeamAllowance(getData(), id, qApp->getMainWindow());
+        dialog->EnableApply(true);
+        m_dialog = dialog;
         m_dialog->setModal(true);
         connect(m_dialog, &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
         SetDialog();

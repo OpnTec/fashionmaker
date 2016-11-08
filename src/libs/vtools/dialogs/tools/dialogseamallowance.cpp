@@ -54,7 +54,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
 
-    vis = new VisToolPiece(data);
+    if (not applyAllowed)
+    {
+        vis = new VisToolPiece(data);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -129,21 +132,24 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 
         ValidObjects(MainPathIsValid());
 
-        auto visPath = qobject_cast<VisToolPiece *>(vis);
-        SCASSERT(visPath != nullptr);
-        const VPiece p = CreatePiece();
-        visPath->SetPiece(p);
-
-        if (p.CountNodes() == 1)
+        if (not applyAllowed)
         {
-            emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
-                            "<b>Enter</b> - finish creation"));
+            auto visPath = qobject_cast<VisToolPiece *>(vis);
+            SCASSERT(visPath != nullptr);
+            const VPiece p = CreatePiece();
+            visPath->SetPiece(p);
 
-            visPath->VisualMode(NULL_ID);
-        }
-        else
-        {
-            visPath->RefreshGeometry();
+            if (p.CountNodes() == 1)
+            {
+                emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
+                                "<b>Enter</b> - finish creation"));
+
+                visPath->VisualMode(NULL_ID);
+            }
+            else
+            {
+                visPath->RefreshGeometry();
+            }
         }
     }
 }
@@ -156,10 +162,13 @@ void DialogSeamAllowance::ShowDialog(bool click)
         emit ToolTip("");
         prepare = true;
 
-        auto visPath = qobject_cast<VisToolPiece *>(vis);
-        SCASSERT(visPath != nullptr);
-        visPath->SetMode(Mode::Show);
-        visPath->RefreshGeometry();
+        if (not applyAllowed)
+        {
+            auto visPath = qobject_cast<VisToolPiece *>(vis);
+            SCASSERT(visPath != nullptr);
+            visPath->SetMode(Mode::Show);
+            visPath->RefreshGeometry();
+        }
 
         // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
         setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
@@ -231,10 +240,13 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ListChanged()
 {
-    auto visPath = qobject_cast<VisToolPiece *>(vis);
-    SCASSERT(visPath != nullptr);
-    visPath->SetPiece(CreatePiece());
-    visPath->RefreshGeometry();
+    if (not applyAllowed)
+    {
+        auto visPath = qobject_cast<VisToolPiece *>(vis);
+        SCASSERT(visPath != nullptr);
+        visPath->SetPiece(CreatePiece());
+        visPath->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
