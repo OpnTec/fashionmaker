@@ -288,6 +288,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για τους αρχάριους).</translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -1051,7 +1055,7 @@
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόψιμο τόξου</translation>
     </message>
     <message>
         <source>Selected arc</source>
@@ -1396,11 +1400,11 @@
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1448,11 +1452,11 @@
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιορισμός αντιστροφής</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
@@ -1476,7 +1480,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1504,19 +1508,19 @@
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τόξα:</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Και τα δύο</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>Μόνο μπροστά</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Μόνο πίσω</translation>
     </message>
 </context>
 <context>
@@ -1655,7 +1659,7 @@
     </message>
     <message>
         <source>Lengths to control points</source>
-        <translation type="unfinished"></translation>
+        <translation>Μήκη των σημείων ελέγχου</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1781,7 @@
     </message>
     <message>
         <source>Codec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κωδικοποιητής:</translation>
     </message>
     <message>
         <source>Separator</source>
@@ -1808,7 +1812,7 @@
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Σημείο αρχής:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -1820,7 +1824,7 @@
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή σημείου αρχής</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -1855,7 +1859,7 @@
     </message>
     <message>
         <source>Select first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή πρώτου σημείου γραμμής</translation>
     </message>
     <message>
         <source>Select first line point that is not part of the list of objects</source>
@@ -1863,7 +1867,7 @@
     </message>
     <message>
         <source>Select second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή δεύτερου σημείου γραμμής</translation>
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
@@ -2043,12 +2047,16 @@
         <translation>%1 - σημείο της τομής %2 και %3</translation>
     </message>
     <message>
+        <source>%1 - cut curve %2_%3</source>
+        <translation type="vanished">%1 - κόψιμο καμπύλης %2_%3</translation>
+    </message>
+    <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - σημείο τομής της γραμμής %2_%3 και του άξονα που περνάει απο το σημείο %4</translation>
     </message>
     <message>
         <source>%1 - point of intersection curve and axis through point %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - σημείο τομής της καμπύλης και του άξονα που περνάει απο το σημείο %2</translation>
     </message>
     <message>
         <source>Arc with center in point %1 and length %2</source>
@@ -2076,7 +2084,7 @@
     </message>
     <message>
         <source>%1 - point of curves intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - σημείο τομής καμπυλών</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -2084,7 +2092,7 @@
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>κυβική καμπύλη Bezier</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -2100,7 +2108,7 @@
     </message>
     <message>
         <source>Cubic bezier curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>μονοπάτι κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
         <source>%1 - cut %2</source>
@@ -2247,7 +2255,7 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Αύξηση_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
@@ -2290,7 +2298,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2338,6 +2346,14 @@
     <message>
         <source>Creation options</source>
         <translation type="vanished">Επιλογές δημιουργίας</translation>
+    </message>
+    <message>
+        <source>Shift length:</source>
+        <translation type="vanished">Μήκος μετατόπισης:</translation>
+    </message>
+    <message>
+        <source>Principle of choosing the next workpiece</source>
+        <translation type="vanished">Κριτήριο επιλογής του επόμενου κομματιού</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2748,12 +2764,12 @@ Apply settings anyway?</source>
     <message>
         <source>Direct Height</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Απ&apos;ευθείας ύψος</translation>
     </message>
     <message>
         <source>Direct Width</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Απ&apos;ευθείας φάρδος</translation>
     </message>
     <message>
         <source>Indentation</source>
@@ -2859,7 +2875,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3171,7 +3187,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Image for pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικόνα για το πατρόν</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
@@ -3195,11 +3211,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση στην Εξερεύνηση</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
@@ -3223,11 +3239,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Company/Designer name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα Επιχείρησης/Σχεδιαστή:</translation>
     </message>
     <message>
         <source>Customer name:</source>
         <translation>Όνομα πελάτη:</translation>
+    </message>
+    <message>
+        <source>Created:</source>
+        <translation type="vanished">Δημιουργήθηκε:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
@@ -3247,7 +3267,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ημερομηνίας της δημιουργίας τοποθέτησης (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
@@ -3270,7 +3290,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;No selection&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -3322,7 +3342,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>No changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς αλλαγές</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
@@ -3334,7 +3354,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η αναίρεση της αλλαγής</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
@@ -3739,12 +3759,24 @@ Apply settings anyway?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <source>Radius of the second circle</source>
+        <translation type="vanished">Ακτίνα του δεύτερου κύκλου</translation>
+    </message>
+    <message>
         <source>Point label</source>
         <translation type="vanished">Ετικέτα σημείου</translation>
     </message>
     <message>
+        <source>Center of the first circle</source>
+        <translation type="vanished">Κέντρο του πρώτου κύκλου</translation>
+    </message>
+    <message>
         <source>Select point of center of arc</source>
         <translation type="vanished">Επιλέξτε το κεντρικό σημείο του τόξου</translation>
+    </message>
+    <message>
+        <source>Center of the second circle</source>
+        <translation type="vanished">Κέντρο του δεύτερου κύκλου</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -3843,11 +3875,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάθετη διόρθωση:</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Οριζόντια διόρθωση:</translation>
     </message>
     <message>
         <source>Select second curve</source>
@@ -3894,7 +3926,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή σημείου αρχής</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -3909,7 +3941,7 @@ Apply settings anyway?</source>
     <name>DialogSaveLAyout</name>
     <message>
         <source>Save Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση Τοποθέτησης</translation>
     </message>
     <message>
         <source>File name:</source>
@@ -4134,11 +4166,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Y coordinate</source>
-        <translation type="unfinished"></translation>
+        <translation>συντεταγμένη Υ</translation>
     </message>
     <message>
         <source>X coordinate</source>
-        <translation type="unfinished"></translation>
+        <translation>συντεταγμένη Χ</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -4180,6 +4212,10 @@ Apply settings anyway?</source>
         <translation type="vanished">Η γωνία του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
+        <source>Coefficient of curvature of the curve</source>
+        <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης</translation>
+    </message>
+    <message>
         <source>Select last point of curve</source>
         <translation>Επιλέξτε το τελευταίο σημείο της καμπύλης</translation>
     </message>
@@ -4190,6 +4226,10 @@ Apply settings anyway?</source>
     <message>
         <source>Color</source>
         <translation type="vanished">Χρώμα</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -4265,7 +4305,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -4303,12 +4343,20 @@ Apply settings anyway?</source>
         <translation>Λίστα σημείων</translation>
     </message>
     <message>
+        <source>Coefficient of curvature of the curve</source>
+        <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης</translation>
+    </message>
+    <message>
         <source>Select point of curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
         <translation type="vanished">Χρώμα</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -4384,7 +4432,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -4597,19 +4645,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρώτο σημείο πένσας:</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεύτερο σημείο πένσας:</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τρίτο σημείο πένσας:</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρώτο νέο σημείο πένσας:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -4621,7 +4669,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεύτερο νέο σημείο πένσας:</translation>
     </message>
 </context>
 <context>
@@ -4651,11 +4699,11 @@ Apply settings anyway?</source>
     <name>DialogUnionDetails</name>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλείο ένωσης</translation>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε πρώτο σημείο</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
@@ -4667,7 +4715,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε ένα μοναδικό σημείο</translation>
     </message>
     <message>
         <source>Select a detail</source>
@@ -4986,7 +5034,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Open file with pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα αρχείου με πατρόν</translation>
     </message>
     <message>
         <source>Save</source>
@@ -5238,7 +5286,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κενής παραμέτρου.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -5360,7 +5408,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόψιμο τόξου</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
@@ -5372,7 +5420,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλείο ένωσης</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5928,7 +5976,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -6096,21 +6144,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιορισμός αντιστροφής</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to the measurments is already absolute.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6548,7 +6585,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση στην Εξερεύνηση</translation>
     </message>
     <message>
         <source>Base size:</source>
@@ -6748,7 +6785,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -7280,7 +7317,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>light salmon</source>
-        <translation type="unfinished"></translation>
+        <translation>ανοιχτό σωμόν</translation>
     </message>
     <message>
         <source>golden rod</source>
@@ -7288,31 +7325,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>πορτοκαλί</translation>
     </message>
     <message>
         <source>deep pink</source>
-        <translation type="unfinished"></translation>
+        <translation>βαθύ ροζ</translation>
     </message>
     <message>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>μωβ</translation>
     </message>
     <message>
         <source>dark violet</source>
-        <translation type="unfinished"></translation>
+        <translation>σκούρο μωβ</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation type="unfinished"></translation>
+        <translation>πράσινο θαλλασί</translation>
     </message>
     <message>
         <source>lime</source>
-        <translation type="unfinished"></translation>
+        <translation>πρασινοκίτρινο</translation>
     </message>
     <message>
         <source>deep sky blue</source>
-        <translation type="unfinished"></translation>
+        <translation>βαθύ μπλε του ουρανού</translation>
     </message>
     <message>
         <source>corn flower blue</source>
@@ -7750,7 +7787,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κενής παραμέτρου.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -7922,15 +7959,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα στη δημιουργία ή ενημέρωση της κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα στη δημιουργία ή ενημέρωση της</translation>
     </message>
     <message>
         <source>Error creating or updating operation of rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα στη δημιουργία ή ενημέρωση της λειτουργίας περιστροφής</translation>
     </message>
     <message>
         <source>Unknown operation type &apos;%1&apos;.</source>
@@ -7991,7 +8028,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>στη δίπλωση</translation>
     </message>
 </context>
 <context>
@@ -8006,27 +8043,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>μετακίνηση ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>αλλαγή διαστάσεων ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>περιστροφή ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>μετακίνηση ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>αλλαγή διαστάσεων ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>περιστροφή ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -8034,15 +8071,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>μετακίνηση γραμμής ίσιου</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>αλλαγή διάστασης γραμμής ίσιου</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>περιστροφή γραμμής ίσιου</translation>
     </message>
 </context>
 <context>
@@ -8277,11 +8314,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>κυβική καμπύλη Bezier</translation>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλείο κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
         <source>Tool rotation</source>
@@ -8305,11 +8342,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλείο αντιστροφής με γραμμή</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλείο αντιστροφής με άξονα</translation>
     </message>
     <message>
         <source>Axis type</source>
@@ -9445,11 +9482,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιστροφή επιλογής</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>αντιστροφή επιλογής</translation>
     </message>
 </context>
 <context>

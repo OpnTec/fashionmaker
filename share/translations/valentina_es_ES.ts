@@ -288,6 +288,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>El texto aparece bajo el icono (recomendado para principiantes).</translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -1529,11 +1533,11 @@
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Flechas:</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambos</translation>
     </message>
     <message>
         <source>Just front</source>
@@ -3917,7 +3921,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta punto de círculos de intersección</translation>
     </message>
 </context>
 <context>
@@ -4057,8 +4061,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Nombre base del archivo.</translation>
     </message>
     <message>
+        <source>File base name.</source>
+        <translation type="vanished">Nombre base de archivo.</translation>
+    </message>
+    <message>
         <source>Path to destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Camino a la carpeta de destino</translation>
     </message>
 </context>
 <context>
@@ -4870,11 +4878,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Feed download failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la descarga de entrega: %1.</translation>
     </message>
     <message>
         <source>Feed parsing failed: %1 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la descarga de entrega: %1 %2.</translation>
     </message>
     <message>
         <source>No updates were found.</source>
@@ -4882,7 +4890,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de entrega: &quot;enclosure&quot; inválido con el enlace de descarga</translation>
     </message>
     <message>
         <source>Error</source>
@@ -5621,7 +5629,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir PDF enlosado</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5830,7 +5838,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista previa de PDF enlosado</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -5934,7 +5942,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta curva que utiliza el punto como manejador de control</translation>
     </message>
     <message>
         <source>Select first curve point</source>
@@ -5942,7 +5950,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar punto de camino de bezier cúbico</translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
+        <translation type="vanished">Cursor de barra de herramientas</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -5994,59 +6006,59 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ahora puede utilizar el modo Capa. Por favor, incluya al menos un detalle en la capa.</translation>
     </message>
     <message>
         <source>Original zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom original</translation>
     </message>
     <message>
         <source>Select first circle center</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el primer centro de círculo</translation>
     </message>
     <message>
         <source>Select point on tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar punto en tangente</translation>
     </message>
     <message>
         <source>Pattern Piece:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patrón:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Altura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Talla:</translation>
+        <translation>Tamaño:</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de medidas &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; podría no ser encontrado. ¿Quiere actualizar la ubicación del archivo?</translation>
     </message>
     <message>
         <source>Flipping objects by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Objetos lanzados por línea</translation>
     </message>
     <message>
         <source>Flipping objects by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Objetos lanzados por eje</translation>
     </message>
     <message>
         <source>Move objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover objetos</translation>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Las medidas estaban cambiadas. ¿Quiere sincronizar las medidas ahora?</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
-        <translation type="unfinished"></translation>
+        <translation>La gradación no spoorta pulgadas</translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
-        <translation type="unfinished"></translation>
+        <translation>Las medidas han sido sincronizadas</translation>
     </message>
 </context>
 <context>
@@ -6137,7 +6149,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden introducir márgenes de impresora</translation>
     </message>
 </context>
 <context>
@@ -6296,11 +6308,11 @@ Quiere guardar los cambios?</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation>La ruta a las medidas ya es relativa.</translation>
+        <translation type="vanished">La ruta a las medidas ya es relativa.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation>La ruta a las medidas ya es absoluta.</translation>
+        <translation type="vanished">La ruta a las medidas ya es absoluta.</translation>
     </message>
 </context>
 <context>
@@ -7222,11 +7234,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Altura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Talla:</translation>
+        <translation>Tamaño:</translation>
     </message>
     <message>
         <source>All files</source>

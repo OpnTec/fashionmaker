@@ -288,6 +288,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -6212,11 +6216,11 @@ Do you want to save your changes?</source>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation>Путь к меркам уже относительный.</translation>
+        <translation type="vanished">Путь к меркам уже относительный.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation>Путь к меркам уже абсолютный.</translation>
+        <translation type="vanished">Путь к меркам уже абсолютный.</translation>
     </message>
 </context>
 <context>

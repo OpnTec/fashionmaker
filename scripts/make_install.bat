@@ -32,7 +32,10 @@ rem force qmake create new qm files
 del /Q share\translations\*.qm
 IF exist build ( 
 	echo Build exists. Clearing.
-	rd /s /q build
+	rd /s /q build\package
+	del /s /q /f build\Makefile
+	del /s /q /f build\*.exe
+	del /s /q /f build\*.dll
 ) 
 mkdir build && echo build created
 cd build

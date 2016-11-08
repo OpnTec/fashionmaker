@@ -1794,7 +1794,6 @@ QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
 
     if (QFileInfo(absoluteMPath).isRelative())
     {
-        qWarning() << QApplication::tr("The path to the measurments is already relative.");
         return absoluteMPath;
     }
 
@@ -1811,7 +1810,6 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 
     if (QFileInfo(relativeMPath).isAbsolute())
     {
-        qWarning() << QApplication::tr("The path to the measurments is already absolute.");
         return relativeMPath;
     }
 
