@@ -541,12 +541,27 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         CancelTool();
         emit EnableItemMove(false);
         currentTool = lastUsedTool = t;
-        QPixmap pixmap(cursor);
+        auto cursorResource = cursor;
+        if (qApp->devicePixelRatio() >= 2)
+        {
+            // Try to load HiDPI versions of the cursors if availible
+            auto cursorHidpiResource = QString(cursor).replace(".png", "@2x.png");
+            if (QFileInfo(cursorResource).exists())
+            {
+                cursorResource = cursorHidpiResource;
+            }
+        }
+        QPixmap pixmap(cursorResource);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = new Dialog(pattern, 0, this);
+
+        if (t == Tool::Midpoint)
+        {
+            dialogTool->Build(t);
+        }
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
@@ -555,6 +570,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
         connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(ui->view, &VMainGraphicsView::MouseRelease, [this](){EndVisualization(true);});
         ui->view->itemClicked(nullptr);
     }
     else
@@ -578,45 +594,13 @@ template <typename Dialog, typename Func, typename Func2>
  * @param applyDialogSlot function to handle apply in dialog.
  */
 void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cursor, const QString &toolTip,
-                               Func closeDialogSlot, Func2 applyDialogSlot)
+                                        Func closeDialogSlot, Func2 applyDialogSlot)
 {
     if (checked)
     {
-        CancelTool();
-        emit EnableItemMove(false);
-        currentTool = lastUsedTool = t;
-        auto cursorResource = cursor;
-        if (qApp->devicePixelRatio() >= 2)
-        {
-            // Try to load HiDPI versions of the cursors if availible
-            auto cursorHidpiResource = QString(cursor).replace(".png", "@2x.png");
-            if (QFileInfo(cursorResource).exists())
-            {
-                cursorResource = cursorHidpiResource;
-            }
-        }
-        QPixmap pixmap(cursorResource);
-        QCursor cur(pixmap, 2, 3);
-        ui->view->setCursor(cur);
-        ui->view->setShowToolOptions(false);
-        helpLabel->setText(toolTip);
-        dialogTool = new Dialog(pattern, NULL_ID, this);
+        SetToolButton<Dialog>(checked, t, cursor, toolTip, closeDialogSlot);
 
-        if (t == Tool::Midpoint)
-        {
-            dialogTool->Build(t);
-        }
-
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
-
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
-        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
-        connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::DialogApplied, this, applyDialogSlot);
-        connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(ui->view, &VMainGraphicsView::MouseRelease, [this](){EndVisualization(true);});
-        ui->view->itemClicked(nullptr);
     }
     else
     {
