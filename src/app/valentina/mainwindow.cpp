@@ -2140,7 +2140,7 @@ void MainWindow::ActionDetails(bool checked)
 
         if(not qApp->getOpeningPattern())
         {
-            if (pattern->DataDetails()->count() == 0)
+            if (pattern->DataPieces()->count() == 0)
             {
                 QMessageBox::information(this, tr("Detail mode"), tr("You can't use now the Detail mode. "
                                                                      "Please, create at least one workpiece."),
