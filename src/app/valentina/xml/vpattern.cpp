@@ -608,142 +608,142 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
  */
 void VPattern::ParseDetailElement(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-    try
-    {
-        VDetail detail;
-        const quint32 id = GetParametrId(domElement);
-        detail.setName(GetParametrString(domElement, AttrName, ""));
-        detail.setMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
-        detail.setMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
-        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
-        detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
-        detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
-        detail.setForbidFlipping(GetParametrUInt(domElement, VToolDetail::AttrForbidFlipping,
-                                           QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
-        detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
+//    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+//    try
+//    {
+//        VDetail detail;
+//        const quint32 id = GetParametrId(domElement);
+//        detail.setName(GetParametrString(domElement, AttrName, ""));
+//        detail.setMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
+//        detail.setMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
+//        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
+//        detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
+//        detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
+//        detail.setForbidFlipping(GetParametrUInt(domElement, VToolDetail::AttrForbidFlipping,
+//                                           QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
+//        detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
 
-        QStringList types = QStringList() << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline
-                                          << VToolDetail::NodeSplinePath;
-        const QDomNodeList nodeList = domElement.childNodes();
-        const qint32 num = nodeList.size();
-        for (qint32 i = 0; i < num; ++i)
-        {
-            const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false)
-            {
-                if (element.tagName() == VToolDetail::TagNode)
-                {
-                    const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    const qreal mx = qApp->toPixel(GetParametrDouble(element, AttrMx, "0.0"));
-                    const qreal my = qApp->toPixel(GetParametrDouble(element, AttrMy, "0.0"));
-                    const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
-                    const NodeDetail nodeType = NodeDetail::Contour;
+//        QStringList types = QStringList() << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline
+//                                          << VToolDetail::NodeSplinePath;
+//        const QDomNodeList nodeList = domElement.childNodes();
+//        const qint32 num = nodeList.size();
+//        for (qint32 i = 0; i < num; ++i)
+//        {
+//            const QDomElement element = nodeList.at(i).toElement();
+//            if (element.isNull() == false)
+//            {
+//                if (element.tagName() == VToolDetail::TagNode)
+//                {
+//                    const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+//                    const qreal mx = qApp->toPixel(GetParametrDouble(element, AttrMx, "0.0"));
+//                    const qreal my = qApp->toPixel(GetParametrDouble(element, AttrMy, "0.0"));
+//                    const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
+//                    const NodeDetail nodeType = NodeDetail::Contour;
 
-                    const QString t = GetParametrString(element, AttrType, "NodePoint");
-                    Tool tool;
+//                    const QString t = GetParametrString(element, AttrType, "NodePoint");
+//                    Tool tool;
 
-                    switch (types.indexOf(t))
-                    {
-                        case 0: // VToolDetail::NodePoint
-                            tool = Tool::NodePoint;
-                            break;
-                        case 1: // VToolDetail::NodeArc
-                            tool = Tool::NodeArc;
-                            break;
-                        case 2: // VToolDetail::NodeSpline
-                            tool = Tool::NodeSpline;
-                            break;
-                        case 3: // VToolDetail::NodeSplinePath
-                            tool = Tool::NodeSplinePath;
-                            break;
-                        default:
-                            VException e(tr("Wrong tag name '%1'.").arg(t));
-                            throw e;
-                    }
-                    detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
-                }
-                else if (element.tagName() == TagData)
-                {
-                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
-                    detail.GetPatternPieceData().SetVisible(bVisible);
-                    try
-                    {
-                        QString qsLetter = GetParametrString(element, AttrLetter, "");
-                        detail.GetPatternPieceData().SetLetter(qsLetter);
-                    } catch(...)
-                    {
-                        detail.GetPatternPieceData().SetLetter("");
-                    }
-                    QPointF ptPos;
-                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-                    detail.GetPatternPieceData().SetPos(ptPos);
-                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
-                    detail.GetPatternPieceData().SetLabelWidth(dLW);
-                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
-                    detail.GetPatternPieceData().SetLabelHeight(dLH);
-                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
-                    detail.GetPatternPieceData().SetFontSize(iFS);
-                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
-                    detail.GetPatternPieceData().SetRotation(dRot);
+//                    switch (types.indexOf(t))
+//                    {
+//                        case 0: // VToolDetail::NodePoint
+//                            tool = Tool::NodePoint;
+//                            break;
+//                        case 1: // VToolDetail::NodeArc
+//                            tool = Tool::NodeArc;
+//                            break;
+//                        case 2: // VToolDetail::NodeSpline
+//                            tool = Tool::NodeSpline;
+//                            break;
+//                        case 3: // VToolDetail::NodeSplinePath
+//                            tool = Tool::NodeSplinePath;
+//                            break;
+//                        default:
+//                            VException e(tr("Wrong tag name '%1'.").arg(t));
+//                            throw e;
+//                    }
+//                    detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
+//                }
+//                else if (element.tagName() == TagData)
+//                {
+//                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
+//                    detail.GetPatternPieceData().SetVisible(bVisible);
+//                    try
+//                    {
+//                        QString qsLetter = GetParametrString(element, AttrLetter, "");
+//                        detail.GetPatternPieceData().SetLetter(qsLetter);
+//                    } catch(...)
+//                    {
+//                        detail.GetPatternPieceData().SetLetter("");
+//                    }
+//                    QPointF ptPos;
+//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+//                    detail.GetPatternPieceData().SetPos(ptPos);
+//                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
+//                    detail.GetPatternPieceData().SetLabelWidth(dLW);
+//                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
+//                    detail.GetPatternPieceData().SetLabelHeight(dLH);
+//                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
+//                    detail.GetPatternPieceData().SetFontSize(iFS);
+//                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
+//                    detail.GetPatternPieceData().SetRotation(dRot);
 
-                    QDomNodeList nodeListMCP = element.childNodes();
-                    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
-                    {
-                        MaterialCutPlacement mcp;
-                        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
-                        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
-                        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-                        {
-                            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
-                        }
-                        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
-                        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
-                        detail.GetPatternPieceData().Append(mcp);
-                    }
-                }
-                else if (element.tagName() == TagPatternInfo)
-                {
-                    detail.GetPatternInfo().SetVisible(GetParametrBool(element, AttrVisible, trueStr));
-                    QPointF ptPos;
-                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-                    detail.GetPatternInfo().SetPos(ptPos);
-                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
-                    detail.GetPatternInfo().SetLabelWidth(dLW);
-                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
-                    detail.GetPatternInfo().SetLabelHeight(dLH);
-                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
-                    detail.GetPatternInfo().SetFontSize(iFS);
-                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
-                    detail.GetPatternInfo().SetRotation(dRot);
-                }
-                else if (element.tagName() == TagGrainline)
-                {
-                    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(element, AttrVisible, falseStr));
-                    QPointF ptPos;
-                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-                    detail.GetGrainlineGeometry().SetPos(ptPos);
-                    QString qsLength = GetParametrString(element, AttrLength, "0");
-                    detail.GetGrainlineGeometry().SetLength(qsLength);
-                    QString qsRot = GetParametrString(element, VToolDetail::AttrRotation, "90");
-                    detail.GetGrainlineGeometry().SetRotation(qsRot);
-                    VGrainlineGeometry::ArrowType eAT =
-                            VGrainlineGeometry::ArrowType(GetParametrUInt(element, AttrArrows, "0"));
-                    detail.GetGrainlineGeometry().SetArrowType(eAT);
-                }
-            }
-        }
-        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
-    }
-    catch (const VExceptionBadId &e)
-    {
-        VExceptionObjectError excep(tr("Error creating or updating detail"), domElement);
-        excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
-    }
+//                    QDomNodeList nodeListMCP = element.childNodes();
+//                    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
+//                    {
+//                        MaterialCutPlacement mcp;
+//                        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+//                        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
+//                        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+//                        {
+//                            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+//                        }
+//                        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
+//                        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
+//                        detail.GetPatternPieceData().Append(mcp);
+//                    }
+//                }
+//                else if (element.tagName() == TagPatternInfo)
+//                {
+//                    detail.GetPatternInfo().SetVisible(GetParametrBool(element, AttrVisible, trueStr));
+//                    QPointF ptPos;
+//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+//                    detail.GetPatternInfo().SetPos(ptPos);
+//                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
+//                    detail.GetPatternInfo().SetLabelWidth(dLW);
+//                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
+//                    detail.GetPatternInfo().SetLabelHeight(dLH);
+//                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
+//                    detail.GetPatternInfo().SetFontSize(iFS);
+//                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
+//                    detail.GetPatternInfo().SetRotation(dRot);
+//                }
+//                else if (element.tagName() == TagGrainline)
+//                {
+//                    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(element, AttrVisible, falseStr));
+//                    QPointF ptPos;
+//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
+//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
+//                    detail.GetGrainlineGeometry().SetPos(ptPos);
+//                    QString qsLength = GetParametrString(element, AttrLength, "0");
+//                    detail.GetGrainlineGeometry().SetLength(qsLength);
+//                    QString qsRot = GetParametrString(element, VToolDetail::AttrRotation, "90");
+//                    detail.GetGrainlineGeometry().SetRotation(qsRot);
+//                    VGrainlineGeometry::ArrowType eAT =
+//                            VGrainlineGeometry::ArrowType(GetParametrUInt(element, AttrArrows, "0"));
+//                    detail.GetGrainlineGeometry().SetArrowType(eAT);
+//                }
+//            }
+//        }
+//        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
+//    }
+//    catch (const VExceptionBadId &e)
+//    {
+//        VExceptionObjectError excep(tr("Error creating or updating detail"), domElement);
+//        excep.AddMoreInformation(e.ErrorMessage());
+//        throw excep;
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3442,7 +3442,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3565,6 +3565,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:
+                case Tool::Piece:
                 case Tool::UnionDetails:
                 case Tool::NodeArc:
                 case Tool::NodePoint:

@@ -52,6 +52,7 @@
 #include "tools/drawTools/drawtools.h"
 #include "../vtools/dialogs/tooldialogs.h"
 #include "tools/vtooldetail.h"
+#include "tools/vtoolseamallowance.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
@@ -935,8 +936,10 @@ void MainWindow::ToolPointOfContact(bool checked)
 void MainWindow::ToolDetail(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButton<DialogSeamAllowance>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
-                                tr("Select main path objects clockwise."), &MainWindow::ClosedDialogDetail);
+    SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece, "://cursor/new_detail_cursor.png",
+                                                tr("Select main path objects clockwise."),
+                                                &MainWindow::ClosedDialogWithApply<VToolSeamAllowance>,
+                                                &MainWindow::ApplyDialog<VToolSeamAllowance>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -946,12 +949,12 @@ void MainWindow::ToolDetail(bool checked)
  */
 void MainWindow::ClosedDialogDetail(int result)
 {
-//    if (result == QDialog::Accepted)
-//    {
-//        VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
-//    }
+    if (result == QDialog::Accepted)
+    {
+        VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
+    }
     ArrowTool();
-//    doc->LiteParseTree(Document::LiteParse);
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1773,7 +1776,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1857,6 +1860,9 @@ void MainWindow::CancelTool()
             ui->toolButtonPointOfContact->setChecked(false);
             break;
         case Tool::Detail:
+            ui->toolButtonNewDetail->setChecked(false);
+            break;
+        case Tool::Piece:
             ui->toolButtonNewDetail->setChecked(false);
             break;
         case Tool::Height:
@@ -2971,7 +2977,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3291,7 +3297,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3378,6 +3384,10 @@ void MainWindow::LastUsedTool()
             ToolPointOfContact(true);
             break;
         case Tool::Detail:
+            ui->toolButtonNewDetail->setChecked(true);
+            ToolDetail(true);
+            break;
+        case Tool::Piece:
             ui->toolButtonNewDetail->setChecked(true);
             ToolDetail(true);
             break;

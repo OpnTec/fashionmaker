@@ -92,6 +92,7 @@ enum class Tool : ToolVisHolderType
     CutSplinePath,
     PointOfContact,
     Detail,
+    Piece,
     NodePoint,
     NodeArc,
     NodeSpline,
