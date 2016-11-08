@@ -30,6 +30,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vtools/tools/vdatatool.h"
 #include "../vtools/tools/vtooldetail.h"
+#include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/tools/vtooluniondetails.h"
 #include "../vtools/tools/drawTools/drawtools.h"
 #include "../vtools/tools/nodeDetails/nodedetails.h"
@@ -48,6 +49,7 @@
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../core/vapplication.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
@@ -608,14 +610,14 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
  */
 void VPattern::ParseDetailElement(const QDomElement &domElement, const Document &parse)
 {
-//    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-//    try
-//    {
-//        VDetail detail;
-//        const quint32 id = GetParametrId(domElement);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    try
+    {
+        VPiece detail;
+        const quint32 id = GetParametrId(domElement);
 //        detail.setName(GetParametrString(domElement, AttrName, ""));
-//        detail.setMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
-//        detail.setMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
+        detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
+        detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
 //        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
 //        detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
 //        detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
@@ -623,47 +625,33 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
 //                                           QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
 //        detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
 
-//        QStringList types = QStringList() << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline
-//                                          << VToolDetail::NodeSplinePath;
-//        const QDomNodeList nodeList = domElement.childNodes();
-//        const qint32 num = nodeList.size();
-//        for (qint32 i = 0; i < num; ++i)
-//        {
-//            const QDomElement element = nodeList.at(i).toElement();
-//            if (element.isNull() == false)
-//            {
-//                if (element.tagName() == VToolDetail::TagNode)
-//                {
-//                    const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-//                    const qreal mx = qApp->toPixel(GetParametrDouble(element, AttrMx, "0.0"));
-//                    const qreal my = qApp->toPixel(GetParametrDouble(element, AttrMy, "0.0"));
-//                    const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
-//                    const NodeDetail nodeType = NodeDetail::Contour;
+        const QStringList tags = QStringList() << VToolSeamAllowance::TagNodes
+                                               << TagData
+                                               << TagPatternInfo
+                                               << TagGrainline;
 
-//                    const QString t = GetParametrString(element, AttrType, "NodePoint");
-//                    Tool tool;
-
-//                    switch (types.indexOf(t))
-//                    {
-//                        case 0: // VToolDetail::NodePoint
-//                            tool = Tool::NodePoint;
-//                            break;
-//                        case 1: // VToolDetail::NodeArc
-//                            tool = Tool::NodeArc;
-//                            break;
-//                        case 2: // VToolDetail::NodeSpline
-//                            tool = Tool::NodeSpline;
-//                            break;
-//                        case 3: // VToolDetail::NodeSplinePath
-//                            tool = Tool::NodeSplinePath;
-//                            break;
-//                        default:
-//                            VException e(tr("Wrong tag name '%1'.").arg(t));
-//                            throw e;
-//                    }
-//                    detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
-//                }
-//                else if (element.tagName() == TagData)
+        const QDomNodeList nodeList = domElement.childNodes();
+        for (qint32 i = 0; i < nodeList.size(); ++i)
+        {
+            const QDomElement element = nodeList.at(i).toElement();
+            if (not element.isNull())
+            {
+                switch (tags.indexOf(element.tagName()))
+                {
+                    case 0:// VToolSeamAllowance::TagNodes
+                        ParseDetailNodes(element, detail);
+                        break;
+                    case 1:// TagData
+                        break;
+                    case 2:// TagPatternInfo
+                        break;
+                    case 3:// TagGrainline
+                        break;
+                    default:
+                        break;
+                }
+            }
+//                if (element.tagName() == TagData)
 //                {
 //                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
 //                    detail.GetPatternPieceData().SetVisible(bVisible);
@@ -735,17 +723,59 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
 //                    detail.GetGrainlineGeometry().SetArrowType(eAT);
 //                }
 //            }
-//        }
-//        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
-//    }
-//    catch (const VExceptionBadId &e)
-//    {
-//        VExceptionObjectError excep(tr("Error creating or updating detail"), domElement);
-//        excep.AddMoreInformation(e.ErrorMessage());
-//        throw excep;
-//    }
+        }
+        VToolSeamAllowance::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating detail"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) const
+{
+    const QStringList types = QStringList() << VToolSeamAllowance::NodePoint
+                                            << VToolSeamAllowance::NodeArc
+                                            << VToolSeamAllowance::NodeSpline
+                                            << VToolSeamAllowance::NodeSplinePath;
+
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagNode)
+        {
+            const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+            const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
+
+            const QString t = GetParametrString(element, AttrType, VToolSeamAllowance::NodePoint);
+            Tool tool;
+
+            switch (types.indexOf(t))
+            {
+                case 0: // VToolSeamAllowance::NodePoint
+                    tool = Tool::NodePoint;
+                    break;
+                case 1: // VToolSeamAllowance::NodeArc
+                    tool = Tool::NodeArc;
+                    break;
+                case 2: // VToolSeamAllowance::NodeSpline
+                    tool = Tool::NodeSpline;
+                    break;
+                case 3: // VToolSeamAllowance::NodeSplinePath
+                    tool = Tool::NodeSplinePath;
+                    break;
+                default:
+                    VException e(tr("Wrong tag name '%1'.").arg(t));
+                    throw e;
+            }
+            detail.Append(VPieceNode(id, tool, reverse));
+        }
+    }
+}
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseDetails parse details tag.
