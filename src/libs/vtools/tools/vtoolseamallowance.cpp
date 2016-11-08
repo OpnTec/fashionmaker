@@ -296,8 +296,8 @@ void VToolSeamAllowance::RefreshDataInFile()
     {
         // Refresh only parts that we possibly need to update
         {
-            // TODO. Delete if minimal supported version is 0.5.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 5, 0),
+            // TODO. Delete if minimal supported version is 0.4.0
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                               "Time to refactor the code.");
             doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
         }
