@@ -166,6 +166,8 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, const VPiece &newPiec
         connect(scene, &VMainGraphicsScene::EnableDetailItemSelection, piece, &VToolSeamAllowance::AllowSelecting);
         connect(scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
         doc->AddTool(id, piece);
+
+        return piece;
     }
     return nullptr;
 }
