@@ -167,6 +167,19 @@ const VDetail VContainer::GetDetail(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPiece VContainer::GetPiece(quint32 id) const
+{
+    if (d->pieces->contains(id))
+    {
+        return d->pieces->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object
@@ -190,6 +203,14 @@ quint32 VContainer::AddDetail(const VDetail &detail)
 {
     const quint32 id = getNextId();
     d->details->insert(id, detail);
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddPiece(const VPiece &detail)
+{
+    const quint32 id = getNextId();
+    d->pieces->insert(id, detail);
     return id;
 }
 
@@ -501,6 +522,14 @@ void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdatePiece(quint32 id, const VPiece &detail)
+{
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
+    d->pieces->insert(id, detail);
+    UpdateId(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetTableValue(const QString &name, MeasurementsType patternType) const
 {
     QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
@@ -732,6 +761,12 @@ const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() cons
 const QHash<quint32, VDetail> *VContainer::DataDetails() const
 {
     return d->details.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QHash<quint32, VPiece> *VContainer::DataPieces() const
+{
+    return d->pieces.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

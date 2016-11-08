@@ -54,6 +54,7 @@
 #include "variables.h"
 #include "variables/vinternalvariable.h"
 #include "vdetail.h"
+#include "vpiece.h"
 #include "vtranslatevars.h"
 
 class VAbstractCubicBezierPath;
@@ -81,6 +82,7 @@ public:
         : gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
           details(QSharedPointer<QHash<quint32, VDetail>>(new QHash<quint32, VDetail>())),
+          pieces(QSharedPointer<QHash<quint32, VPiece>>(new QHash<quint32, VPiece>())),
           trVars(trVars), patternUnit(patternUnit)
     {}
 
@@ -108,6 +110,7 @@ public:
      * @brief details container of details
      */
     QSharedPointer<QHash<quint32, VDetail>> details;
+    QSharedPointer<QHash<quint32, VPiece>> pieces;
 
     const VTranslateVars *trVars;
     const Unit *patternUnit;
@@ -135,6 +138,7 @@ public:
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;
     static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
     const VDetail      GetDetail(quint32 id) const;
+    VPiece             GetPiece(quint32 id) const;
     qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
     template <typename T>
     QSharedPointer<T>  GetVariable(QString name) const;
@@ -144,6 +148,7 @@ public:
 
     quint32            AddGObject(VGObject *obj);
     quint32            AddDetail(const VDetail &detail);
+    quint32            AddPiece(const VPiece &detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = NULL_ID);
     void               AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId = NULL_ID);
@@ -156,6 +161,7 @@ public:
 
     void               UpdateGObject(quint32 id, VGObject* obj);
     void               UpdateDetail(quint32 id, const VDetail &detail);
+    void               UpdatePiece(quint32 id, const VPiece &detail);
 
     void               Clear();
     void               ClearForFullParse();
@@ -178,6 +184,7 @@ public:
 
     const QHash<quint32, QSharedPointer<VGObject> >         *DataGObjects() const;
     const QHash<quint32, VDetail>                           *DataDetails() const;
+    const QHash<quint32, VPiece>                            *DataPieces() const;
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 
     const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
