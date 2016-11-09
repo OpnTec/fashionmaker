@@ -41,9 +41,15 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../undocommands/addpiece.h"
+#include "../undocommands/deletepiece.h"
+//#include "../undocommands/movepiece.h"
+//#include "../undocommands/savepieceoptions.h"
+//#include "../undocommands/togglepieceinlayout.h"
 
 #include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
 #include <QMenu>
+#include <QMessageBox>
 
 // Current version of seam allowance tag nned for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
@@ -170,6 +176,20 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, const VPiece &newPiec
         return piece;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::Remove(bool ask)
+{
+    try
+    {
+        DeleteTool(ask);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,8 +414,8 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 //    const VDetail detail = VAbstractTool::data.GetDetail(id);
 //    inLayoutOption->setChecked(detail.IsInLayout());
 
-//    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-//    _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
@@ -415,24 +435,41 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 //        connect(togglePrint, &ToggleDetailInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
 //        qApp->getUndoStack()->push(togglePrint);
 //    }
-//    else if (selectedAction == actionRemove)
-//    {
-//        try
-//        {
-//            DeleteTool();
-//        }
-//        catch(const VExceptionToolWasDeleted &e)
-//        {
-//            Q_UNUSED(e);
-//            return;//Leave this method immediately!!!
-//        }
-//        return; //Leave this method immediately after call!!!
-    //    }
+    else if (selectedAction == actionRemove)
+    {
+        try
+        {
+            DeleteTool();
+        }
+        catch(const VExceptionToolWasDeleted &e)
+        {
+            Q_UNUSED(e);
+            return;//Leave this method immediately!!!
+        }
+        return; //Leave this method immediately after call!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
 {
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            try
+            {
+                DeleteTool();
+            }
+            catch(const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e);
+                return;//Leave this method immediately!!!
+            }
+            break;
+        default:
+            break;
+    }
+
     VNoBrushScalePathItem::keyReleaseEvent ( event );
 }
 
@@ -523,7 +560,21 @@ void VToolSeamAllowance::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteTool(bool ask)
 {
+    DeletePiece *delDet = new DeletePiece(doc, id, VAbstractTool::data.GetPiece(id));
+    if (ask)
+    {
+        if (ConfirmDeletion() == QMessageBox::No)
+        {
+            return;
+        }
+        /* If UnionDetails tool delete detail no need emit FullParsing.*/
+        connect(delDet, &DeletePiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    }
+    qApp->getUndoStack()->push(delDet);
 
+    // Throw exception, this will help prevent case when we forget to immediately quit function.
+    VExceptionToolWasDeleted e("Tool was used after deleting.");
+    throw e;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

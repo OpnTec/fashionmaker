@@ -65,6 +65,8 @@ public:
     static const QString NodeSpline;
     static const QString NodeSplinePath;
 
+    void Remove(bool ask);
+
     static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
@@ -93,6 +95,7 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
+    virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
@@ -116,8 +119,6 @@ private:
 
     template <typename Tool>
     Tool*              InitTool(VMainGraphicsScene *scene, const VPieceNode &node);
-
-    virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
 };
 
 #endif // VTOOLSEAMALLOWANCE_H
