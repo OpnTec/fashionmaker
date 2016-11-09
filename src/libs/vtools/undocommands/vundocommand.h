@@ -62,7 +62,7 @@ enum class UndoCommand: char { AddPatternPiece,
                                MoveLabel,
                                MoveDoubleLabel,
                                RotationMoveLabel,
-                               ToggleDetailInLayout
+                               TogglePieceInLayout
                              };
 
 class VNodeDetail;

@@ -1694,12 +1694,10 @@ void VPatternConverter::TagDetailToV0_4_0()
 
         if (not dom.isNull())
         {
-            dom.removeAttribute(strName);
             dom.removeAttribute(strSupplement);
             dom.removeAttribute(strClosed);
             dom.removeAttribute(strWidth);
             dom.removeAttribute(strForbidFlipping);
-            dom.removeAttribute(strInLayout);
 
             dom.setAttribute(strVersion, "1");
 

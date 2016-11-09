@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vabstractpiece.h"
+#include "vabstractpiece_p.h"
 
 #include <QLineF>
 #include <QSet>
@@ -37,13 +38,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece::VAbstractPiece()
+    : d(new VAbstractPieceData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece::VAbstractPiece(const VAbstractPiece &piece)
-{
-    Q_UNUSED(piece)
-}
+    :d (piece.d)
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece &VAbstractPiece::operator=(const VAbstractPiece &piece)
@@ -52,12 +53,25 @@ VAbstractPiece &VAbstractPiece::operator=(const VAbstractPiece &piece)
     {
         return *this;
     }
+    d = piece.d;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece::~VAbstractPiece()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPiece::GetName() const
+{
+    return d->m_name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetName(const QString &value)
+{
+    d->m_name = value;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points)

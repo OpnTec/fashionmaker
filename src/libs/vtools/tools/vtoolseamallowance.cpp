@@ -44,7 +44,7 @@
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
-//#include "../undocommands/togglepieceinlayout.h"
+#include "../undocommands/togglepieceinlayout.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 #include <QGraphicsSceneMouseEvent>
@@ -247,9 +247,11 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     SCASSERT(doc != nullptr);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrName, piece.GetName());
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
+    doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -518,10 +520,10 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
-//    QAction *inLayoutOption = menu.addAction(tr("In layout"));
-//    inLayoutOption->setCheckable(true);
-//    const VDetail detail = VAbstractTool::data.GetDetail(id);
-//    inLayoutOption->setChecked(detail.IsInLayout());
+    QAction *inLayoutOption = menu.addAction(tr("In layout"));
+    inLayoutOption->setCheckable(true);
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    inLayoutOption->setChecked(detail.IsInLayout());
 
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
@@ -537,13 +539,13 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         SetDialog();
         m_dialog->show();
     }
-//    else if (selectedAction == inLayoutOption)
-//    {
-//        ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, selectedAction->isChecked(),
-//                                                                     &(VAbstractTool::data), doc);
-//        connect(togglePrint, &ToggleDetailInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
-//        qApp->getUndoStack()->push(togglePrint);
-//    }
+    else if (selectedAction == inLayoutOption)
+    {
+        TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, selectedAction->isChecked(),
+                                                                   &(VAbstractTool::data), doc);
+        connect(togglePrint, &TogglePieceInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
+        qApp->getUndoStack()->push(togglePrint);
+    }
     else if (selectedAction == actionRemove)
     {
         try

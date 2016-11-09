@@ -44,14 +44,16 @@ public:
     VPieceData()
         : m_nodes(),
           m_mx(0),
-          m_my(0)
+          m_my(0),
+          m_inLayout(true)
     {}
 
     VPieceData(const VPieceData &detail)
         : QSharedData(detail),
           m_nodes(detail.m_nodes),
           m_mx(detail.m_mx),
-          m_my(detail.m_my)
+          m_my(detail.m_my),
+          m_inLayout(detail.m_inLayout)
     {}
 
     ~VPieceData();
@@ -61,6 +63,8 @@ public:
 
     qreal m_mx;
     qreal m_my;
+
+    bool m_inLayout;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

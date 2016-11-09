@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   toggledetailinlayout.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 6, 2016
+ **  @date   9 11, 2016
  **
  **  @brief
  **  @copyright
@@ -26,44 +26,41 @@
  **
  *************************************************************************/
 
-#ifndef TOGGLEDETAILINLAYOUT_H
-#define TOGGLEDETAILINLAYOUT_H
+#ifndef VABSTRACTPIECE_P_H
+#define VABSTRACTPIECE_P_H
 
-#include <qcompilerdetection.h>
-#include <QMetaObject>
-#include <QObject>
+#include <QSharedData>
 #include <QString>
-#include <QtGlobal>
 
-#include "vundocommand.h"
+#include "../vmisc/diagnostic.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-class VContainer;
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
-class ToggleDetailInLayout : public VUndoCommand
+class VAbstractPieceData : public QSharedData
 {
-    Q_OBJECT
 public:
-    ToggleDetailInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                         QUndoCommand *parent = nullptr);
-    virtual ~ToggleDetailInLayout();
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
-    quint32      getDetId() const;
-    bool         getNewState() const;
+    VAbstractPieceData()
+        : m_name()
+    {}
 
-signals:
-    void UpdateList();
+    VAbstractPieceData(const VAbstractPieceData &piece)
+        : QSharedData(piece),
+          m_name(piece.m_name)
+    {}
+
+    ~VAbstractPieceData();
+
+    QString m_name;
+
 private:
-    Q_DISABLE_COPY(ToggleDetailInLayout)
-    quint32     m_id;
-    VContainer *m_data;
-    bool        m_oldState;
-    bool        m_newState;
-
-    void Do(bool state);
+    VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;
 };
 
-#endif // TOGGLEDETAILINLAYOUT_H
+VAbstractPieceData::~VAbstractPieceData()
+{}
+
+QT_WARNING_POP
+
+#endif // VABSTRACTPIECE_P_H
+

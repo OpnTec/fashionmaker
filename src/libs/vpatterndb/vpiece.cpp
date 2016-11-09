@@ -245,6 +245,18 @@ void VPiece::SetMy(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPiece::IsInLayout() const
+{
+    return d->m_inLayout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetInLayout(bool inLayout)
+{
+    d->m_inLayout = inLayout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.

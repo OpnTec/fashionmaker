@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "toggledetailinlayout.h"
+#include "togglepieceinlayout.h"
 
 #include <QDomElement>
 #include <QHash>
@@ -38,30 +38,30 @@
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vdetail.h"
+#include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
 class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
-ToggleDetailInLayout::ToggleDetailInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                                            QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_id(id),
       m_data(data),
-      m_oldState(m_data->DataDetails()->value(m_id).IsInLayout()),
+      m_oldState(m_data->DataPieces()->value(m_id).IsInLayout()),
       m_newState(state)
 {
     setText(tr("detail in layout list"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ToggleDetailInLayout::~ToggleDetailInLayout()
+TogglePieceInLayout::~TogglePieceInLayout()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ToggleDetailInLayout::undo()
+void TogglePieceInLayout::undo()
 {
     qCDebug(vUndo, "ToggleDetailInLayout::undo().");
 
@@ -72,7 +72,7 @@ void ToggleDetailInLayout::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ToggleDetailInLayout::redo()
+void TogglePieceInLayout::redo()
 {
     qCDebug(vUndo, "ToggleDetailInLayout::redo().");
 
@@ -83,25 +83,25 @@ void ToggleDetailInLayout::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int ToggleDetailInLayout::id() const
+int TogglePieceInLayout::id() const
 {
-    return static_cast<int>(UndoCommand::ToggleDetailInLayout);
+    return static_cast<int>(UndoCommand::TogglePieceInLayout);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 ToggleDetailInLayout::getDetId() const
+quint32 TogglePieceInLayout::getDetId() const
 {
     return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool ToggleDetailInLayout::getNewState() const
+bool TogglePieceInLayout::getNewState() const
 {
     return m_newState;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ToggleDetailInLayout::Do(bool state)
+void TogglePieceInLayout::Do(bool state)
 {
     QDomElement detail = doc->elementById(m_id);
     if (detail.isElement())
@@ -115,9 +115,9 @@ void ToggleDetailInLayout::Do(bool state)
             detail.removeAttribute(AttrInLayout);
         }
 
-        VDetail det = m_data->DataDetails()->value(m_id);
+        VPiece det = m_data->DataPieces()->value(m_id);
         det.SetInLayout(state);
-        m_data->UpdateDetail(m_id, det);
+        m_data->UpdatePiece(m_id, det);
         emit UpdateList();
     }
     else

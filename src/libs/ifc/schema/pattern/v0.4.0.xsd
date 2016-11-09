@@ -412,6 +412,8 @@
                                                                            <xs:attribute name="version" type="pieceVersion"></xs:attribute>
                                                                            <xs:attribute name="mx" type="xs:double"></xs:attribute>
                                                                            <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="inLayout" type="xs:boolean"></xs:attribute>
                                                                      </xs:complexType>
                                                                </xs:element>
                                                          </xs:sequence>

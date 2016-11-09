@@ -71,6 +71,9 @@ public:
     qreal GetMy() const;
     void  SetMy(qreal value);
 
+    bool IsInLayout() const;
+    void SetInLayout(bool inLayout);
+
     QVector<VPieceNode> Missing(const VPiece &det) const;
 
     int indexOfNode(const quint32 &id) const;

@@ -76,7 +76,7 @@
 #include "../undocommands/deletedetail.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savedetailoptions.h"
-#include "../undocommands/toggledetailinlayout.h"
+#include "../undocommands/togglepieceinlayout.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -805,9 +805,9 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     else if (selectedAction == inLayoutOption)
     {
-        ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, selectedAction->isChecked(),
+        TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, selectedAction->isChecked(),
                                                                      &(VAbstractTool::data), doc);
-        connect(togglePrint, &ToggleDetailInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
+        connect(togglePrint, &TogglePieceInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
         qApp->getUndoStack()->push(togglePrint);
     }
     else if (selectedAction == actionRemove)

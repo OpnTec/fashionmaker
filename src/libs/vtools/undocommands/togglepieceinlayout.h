@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file
+ **  @file   toggledetailinlayout.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   3 11, 2016
+ **  @date   25 6, 2016
  **
  **  @brief
  **  @copyright
@@ -26,36 +26,44 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTPIECE_H
-#define VABSTRACTPIECE_H
+#ifndef TOGGLEDETAILINLAYOUT_H
+#define TOGGLEDETAILINLAYOUT_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
 #include <QtGlobal>
-#include <QSharedDataPointer>
 
-template <class T> class QVector;
-class QPointF;
-class VAbstractPieceData;
+#include "vundocommand.h"
 
-class VAbstractPiece
+class QUndoCommand;
+class VAbstractPattern;
+class VContainer;
+
+class TogglePieceInLayout : public VUndoCommand
 {
+    Q_OBJECT
 public:
-    VAbstractPiece();
-    VAbstractPiece(const VAbstractPiece &piece);
-    VAbstractPiece &operator=(const VAbstractPiece &piece);
-    virtual ~VAbstractPiece();
+    TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                        QUndoCommand *parent = nullptr);
+    virtual ~TogglePieceInLayout();
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+    quint32      getDetId() const;
+    bool         getNewState() const;
 
-    QString GetName() const;
-    void    SetName(const QString &value);
-
-    static qreal            SumTrapezoids(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
-    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast = true);
-
-protected:
-    static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points, bool removeFirstAndLast = true);
-
+signals:
+    void UpdateList();
 private:
-    QSharedDataPointer<VAbstractPieceData> d;
+    Q_DISABLE_COPY(TogglePieceInLayout)
+    quint32     m_id;
+    VContainer *m_data;
+    bool        m_oldState;
+    bool        m_newState;
+
+    void Do(bool state);
 };
 
-#endif // VABSTRACTPIECE_H
+#endif // TOGGLEDETAILINLAYOUT_H

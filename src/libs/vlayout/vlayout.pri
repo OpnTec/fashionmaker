@@ -19,7 +19,8 @@ HEADERS += \
     $$PWD/vtextmanager.h \
     $$PWD/vposter.h \
     $$PWD/vgraphicsfillitem.h \
-    $$PWD/vabstractpiece.h
+    $$PWD/vabstractpiece.h \
+    $$PWD/vabstractpiece_p.h
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \
