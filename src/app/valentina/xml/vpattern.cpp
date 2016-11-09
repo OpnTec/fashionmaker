@@ -615,7 +615,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
     {
         VPiece detail;
         const quint32 id = GetParametrId(domElement);
-        detail.SetName(GetParametrString(domElement, AttrName, ""));
+        detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
         detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
         detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
 //        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
