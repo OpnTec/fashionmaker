@@ -245,6 +245,57 @@ void VPiece::SetMy(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
+ * understand, what nodes need make invisible.
+ * @param det changed detail.
+ * @return  list with missing nodes.
+ */
+QVector<VPieceNode> VPiece::Missing(const VPiece &det) const
+{
+    if (d->m_nodes.size() == det.CountNodes()) //-V807
+    {
+        return QVector<VPieceNode>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d->m_nodes.size(); ++i)
+    {
+        set1.insert(d->m_nodes.at(i).GetId());
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < det.CountNodes(); ++j)
+    {
+        set2.insert(det.at(j).GetId());
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<VPieceNode> nodes;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        const int index = indexOfNode(d->m_nodes, set3.at(i));
+        if (index != -1)
+        {
+            nodes.append(d->m_nodes.at(index));
+        }
+    }
+
+    return nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
+int VPiece::indexOfNode(const quint32 &id) const
+{
+    return indexOfNode(d->m_nodes, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse) const
 {
     if (i < 0 && i > CountNodes()-1)
@@ -316,4 +367,24 @@ QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) c
         }
     }
     return end;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param list list nodes detail.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
+int VPiece::indexOfNode(const QVector<VPieceNode> &list, quint32 id)
+{
+    for (int i = 0; i < list.size(); ++i)
+    {
+        if (list.at(i).GetId() == id)
+        {
+            return i;
+        }
+    }
+    qDebug()<<"Can't find node.";
+    return -1;
 }

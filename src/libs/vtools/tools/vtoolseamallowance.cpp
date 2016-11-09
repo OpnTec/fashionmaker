@@ -43,7 +43,7 @@
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
-//#include "../undocommands/savepieceoptions.h"
+#include "../undocommands/savepieceoptions.h"
 //#include "../undocommands/togglepieceinlayout.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
@@ -242,6 +242,35 @@ void VToolSeamAllowance::AddNodes(VAbstractPattern *doc, QDomElement &domElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece)
+{
+    SCASSERT(doc != nullptr);
+
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VToolSeamAllowance::getTagName() const
 {
     return VAbstractPattern::TagDetail;
@@ -268,7 +297,21 @@ void VToolSeamAllowance::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromGuiOk(int result)
-{}
+{
+    if (result == QDialog::Accepted)
+    {
+        SCASSERT(not m_dialog.isNull());
+        DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
+        SCASSERT(dialogTool != nullptr);
+        const VPiece newDet = dialogTool->GetPiece();
+        const VPiece oldDet = VAbstractTool::data.GetPiece(id);
+
+        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id, this->scene());
+        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveCommand);
+    }
+    delete m_dialog;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::EnableToolMove(bool move)
@@ -301,10 +344,10 @@ void VToolSeamAllowance::AddToFile()
 
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
+    AddAttributes(doc, domElement, id, piece);
+    AddPatternPieceData(doc, domElement, piece);
+    AddPatternInfo(doc, domElement, piece);
+    AddGrainline(doc, domElement, piece);
 
     // nodes
     AddNodes(doc, domElement, piece);
@@ -490,7 +533,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         dialog->EnableApply(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
-        connect(m_dialog, &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
         SetDialog();
         m_dialog->show();
     }
@@ -542,7 +585,7 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SetDialog()
 {
-    SCASSERT(m_dialog != nullptr);
+    SCASSERT(not m_dialog.isNull());
     DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog);
     SCASSERT(dialogTool != nullptr);
     dialogTool->SetPiece(VAbstractTool::data.GetPiece(id));
@@ -555,7 +598,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
                                        const QString &drawName, QGraphicsItem *parent)
     : VAbstractTool(doc, data, id),
       VNoBrushScalePathItem(parent),
-      m_dialog(nullptr),
+      m_dialog(),
       m_sceneDetails(scene),
       m_drawName(drawName)
 {

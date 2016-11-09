@@ -71,11 +71,17 @@ public:
     qreal GetMy() const;
     void  SetMy(qreal value);
 
+    QVector<VPieceNode> Missing(const VPiece &det) const;
+
+    int indexOfNode(const quint32 &id) const;
+
 private:
     QSharedDataPointer<VPieceData> d;
 
     QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
     QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
+
+    static int indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);

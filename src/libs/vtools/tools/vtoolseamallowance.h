@@ -69,6 +69,10 @@ public:
 
     static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
+    static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};
@@ -101,7 +105,7 @@ private:
     Q_DISABLE_COPY(VToolSeamAllowance)
 
     /** @brief dialog dialog options. */
-    DialogTool         *m_dialog;
+    QPointer<DialogTool> m_dialog;
 
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *m_sceneDetails;

@@ -54,6 +54,7 @@ enum class UndoCommand: char { AddPatternPiece,
                                MoveSPoint,
                                SaveToolOptions,
                                SaveDetailOptions,
+                               SavePieceOptions,
                                MovePiece,
                                DeleteTool,
                                DeletePatternPiece,
@@ -88,6 +89,7 @@ protected:
 
     void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
     void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
+    void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
     void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)

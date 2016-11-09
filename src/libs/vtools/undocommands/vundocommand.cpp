@@ -95,6 +95,15 @@ void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
+{
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        doc->IncrementReferens(nodes.at(i).GetId());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)

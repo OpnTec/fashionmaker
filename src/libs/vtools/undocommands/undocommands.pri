@@ -25,7 +25,8 @@ HEADERS += \
     $$PWD/label/operationmovelabel.h \
     $$PWD/addpiece.h \
     $$PWD/deletepiece.h \
-    $$PWD/movepiece.h
+    $$PWD/movepiece.h \
+    $$PWD/savepieceoptions.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -51,4 +52,5 @@ SOURCES += \
     $$PWD/label/operationmovelabel.cpp \
     $$PWD/addpiece.cpp \
     $$PWD/deletepiece.cpp \
-    $$PWD/movepiece.cpp
+    $$PWD/movepiece.cpp \
+    $$PWD/savepieceoptions.cpp
