@@ -42,13 +42,14 @@ class QGraphicsScene;
 class QUndoCommand;
 class VAbstractPattern;
 
-class MoveDetail : public VUndoCommand
+class MovePiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-               QUndoCommand *parent = 0);
-    virtual ~MoveDetail() Q_DECL_OVERRIDE;
+    MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+               QUndoCommand *parent = nullptr);
+    virtual ~MovePiece();
+
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
@@ -58,31 +59,33 @@ public:
     double       getNewX() const;
     double       getNewY() const;
 private:
-    Q_DISABLE_COPY(MoveDetail)
-    double   oldX;
-    double   oldY;
-    double   newX;
-    double   newY;
-    QGraphicsScene *scene;
-    void         SaveCoordinates(QDomElement &domElement, double x, double y);
+    Q_DISABLE_COPY(MovePiece)
+
+    double          m_oldX;
+    double          m_oldY;
+    double          m_newX;
+    double          m_newY;
+    QGraphicsScene *m_scene;
+
+    void SaveCoordinates(QDomElement &domElement, double x, double y);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveDetail::getDetId() const
+inline quint32 MovePiece::getDetId() const
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveDetail::getNewX() const
+inline double MovePiece::getNewX() const
 {
-    return newX;
+    return m_newX;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveDetail::getNewY() const
+inline double MovePiece::getNewY() const
 {
-    return newY;
+    return m_newY;
 }
 
 #endif // MOVEDETAIL_H

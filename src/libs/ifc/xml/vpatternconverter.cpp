@@ -1698,8 +1698,6 @@ void VPatternConverter::TagDetailToV0_4_0()
             dom.removeAttribute(strSupplement);
             dom.removeAttribute(strClosed);
             dom.removeAttribute(strWidth);
-            dom.removeAttribute(strMx);
-            dom.removeAttribute(strMy);
             dom.removeAttribute(strForbidFlipping);
             dom.removeAttribute(strInLayout);
 

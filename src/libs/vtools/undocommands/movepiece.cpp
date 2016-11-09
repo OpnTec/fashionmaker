@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "movedetail.h"
+#include "movepiece.h"
 
 #include <QDomElement>
 
@@ -42,9 +42,14 @@ class QDomElement;
 class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
-                       QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
+MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
+                     QGraphicsScene *scene, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      m_oldX(0.0),
+      m_oldY(0.0),
+      m_newX(x),
+      m_newY(y),
+      m_scene(scene)
 {
     setText(QObject::tr("move detail"));
     nodeId = id;
@@ -53,8 +58,8 @@ MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, 
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
-        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
     }
     else
     {
@@ -64,18 +69,18 @@ MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveDetail::~MoveDetail()
+MovePiece::~MovePiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveDetail::undo()
+void MovePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        SaveCoordinates(domElement, oldX, oldY);
+        SaveCoordinates(domElement, m_oldX, m_oldY);
 
         emit NeedLiteParsing(Document::LiteParse);
     }
@@ -87,14 +92,14 @@ void MoveDetail::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveDetail::redo()
+void MovePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        SaveCoordinates(domElement, newX, newY);
+        SaveCoordinates(domElement, m_newX, m_newY);
 
         if (redoFlag)
         {
@@ -102,7 +107,7 @@ void MoveDetail::redo()
         }
         else
         {
-            VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
+            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
         }
         redoFlag = true;
     }
@@ -115,9 +120,9 @@ void MoveDetail::redo()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-bool MoveDetail::mergeWith(const QUndoCommand *command)
+bool MovePiece::mergeWith(const QUndoCommand *command)
 {
-    const MoveDetail *moveCommand = static_cast<const MoveDetail *>(command);
+    const MovePiece *moveCommand = static_cast<const MovePiece *>(command);
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getDetId();
 
@@ -126,19 +131,19 @@ bool MoveDetail::mergeWith(const QUndoCommand *command)
         return false;
     }
 
-    newX = moveCommand->getNewX();
-    newY = moveCommand->getNewY();
+    m_newX = moveCommand->getNewX();
+    m_newY = moveCommand->getNewY();
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveDetail::id() const
+int MovePiece::id() const
 {
-    return static_cast<int>(UndoCommand::MoveDetail);
+    return static_cast<int>(UndoCommand::MovePiece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveDetail::SaveCoordinates(QDomElement &domElement, double x, double y)
+void MovePiece::SaveCoordinates(QDomElement &domElement, double x, double y)
 {
     doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(x)));
     doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(y)));

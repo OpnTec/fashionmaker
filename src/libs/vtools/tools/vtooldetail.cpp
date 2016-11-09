@@ -74,7 +74,7 @@
 #include "../ifc/ifcdef.h"
 #include "../undocommands/adddet.h"
 #include "../undocommands/deletedetail.h"
-#include "../undocommands/movedetail.h"
+#include "../undocommands/movepiece.h"
 #include "../undocommands/savedetailoptions.h"
 #include "../undocommands/toggledetailinlayout.h"
 #include "../vgeometry/varc.h"
@@ -620,8 +620,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
                // value - this is new position.
                const QPointF newPos = value.toPointF();
 
-               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
-               connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+               MovePiece *moveDet = new MovePiece(doc, newPos.x(), newPos.y(), id, scene());
+               connect(moveDet, &MovePiece::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
                qApp->getUndoStack()->push(moveDet);
 
                const QList<QGraphicsView *> viewList = scene()->views();

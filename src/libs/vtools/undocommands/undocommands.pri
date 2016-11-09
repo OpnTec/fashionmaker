@@ -9,7 +9,6 @@ HEADERS += \
     $$PWD/movesplinepath.h \
     $$PWD/savetooloptions.h \
     $$PWD/savedetailoptions.h \
-    $$PWD/movedetail.h \
     $$PWD/deltool.h \
     $$PWD/deletepatternpiece.h \
     $$PWD/adddetnode.h \
@@ -25,7 +24,8 @@ HEADERS += \
     $$PWD/toggledetailinlayout.h \
     $$PWD/label/operationmovelabel.h \
     $$PWD/addpiece.h \
-    $$PWD/deletepiece.h
+    $$PWD/deletepiece.h \
+    $$PWD/movepiece.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -35,7 +35,6 @@ SOURCES += \
     $$PWD/movesplinepath.cpp \
     $$PWD/savetooloptions.cpp \
     $$PWD/savedetailoptions.cpp \
-    $$PWD/movedetail.cpp \
     $$PWD/deltool.cpp \
     $$PWD/deletepatternpiece.cpp \
     $$PWD/adddetnode.cpp \
@@ -51,4 +50,5 @@ SOURCES += \
     $$PWD/toggledetailinlayout.cpp \
     $$PWD/label/operationmovelabel.cpp \
     $$PWD/addpiece.cpp \
-    $$PWD/deletepiece.cpp
+    $$PWD/deletepiece.cpp \
+    $$PWD/movepiece.cpp
