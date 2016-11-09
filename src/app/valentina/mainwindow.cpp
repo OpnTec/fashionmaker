@@ -4332,7 +4332,7 @@ void MainWindow::ZoomFirstShow()
      * pattern will be moved. Looks very ugly. It is best solution that i have now.
      */
 
-    if (pattern->DataDetails()->size() > 0)
+    if (pattern->DataPieces()->size() > 0)
     {
         ActionDetails(true);
         ui->view->ZoomFitBest();
