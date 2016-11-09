@@ -83,6 +83,7 @@ public:
 public slots:
     virtual void       FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void       FullUpdateFromGuiOk(int result);
+    void               FullUpdateFromGuiApply();
     void               EnableToolMove(bool move);
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
@@ -119,7 +120,8 @@ private:
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                        VMainGraphicsScene *scene, const QString &m_drawName, QGraphicsItem * parent = nullptr);
 
-    void               RefreshGeometry ();
+    void RefreshGeometry();
+    void SaveDialogChange();
 
     template <typename Tool>
     Tool*              InitTool(VMainGraphicsScene *scene, const VPieceNode &node);

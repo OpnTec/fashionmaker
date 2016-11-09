@@ -302,17 +302,15 @@ void VToolSeamAllowance::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        SCASSERT(not m_dialog.isNull());
-        DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
-        SCASSERT(dialogTool != nullptr);
-        const VPiece newDet = dialogTool->GetPiece();
-        const VPiece oldDet = VAbstractTool::data.GetPiece(id);
-
-        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id, this->scene());
-        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveCommand);
+        SaveDialogChange();
     }
     delete m_dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::FullUpdateFromGuiApply()
+{
+    SaveDialogChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -536,6 +534,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         m_dialog = dialog;
         m_dialog->setModal(true);
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VToolSeamAllowance::FullUpdateFromGuiApply);
         SetDialog();
         m_dialog->show();
     }
@@ -666,6 +665,20 @@ void VToolSeamAllowance::RefreshGeometry()
     this->setPos(detail.GetMx(), detail.GetMy());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SaveDialogChange()
+{
+    SCASSERT(not m_dialog.isNull());
+    DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
+    SCASSERT(dialogTool != nullptr);
+    const VPiece newDet = dialogTool->GetPiece();
+    const VPiece oldDet = VAbstractTool::data.GetPiece(id);
+
+    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id, this->scene());
+    connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(saveCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
