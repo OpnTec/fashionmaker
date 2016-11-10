@@ -561,16 +561,33 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
 {
     ui->tableWidget->blockSignals(true);
 
-    // hide all rows
-    for (auto i = 0; i < ui->tableWidget->rowCount(); i++)
+    // If filter is empty findItems() for unknown reason returns nullptr items.
+    // See issue #586. https://bitbucket.org/dismine/valentina/issues/586/valentina-crashes-if-clear-input-filter
+    if (filter.isEmpty())
     {
-        ui->tableWidget->hideRow(i);
+        // show all rows
+        for (auto i = 0; i < ui->tableWidget->rowCount(); ++i)
+        {
+            ui->tableWidget->showRow(i);
+        }
     }
-
-    // show rows with matched filter
-    for (auto item : ui->tableWidget->findItems(filter, Qt::MatchContains))
+    else
     {
-        ui->tableWidget->showRow(item->row());
+        // hide all rows
+        for (auto i = 0; i < ui->tableWidget->rowCount(); i++)
+        {
+            ui->tableWidget->hideRow(i);
+        }
+
+        // show rows with matched filter
+        for (auto item : ui->tableWidget->findItems(filter, Qt::MatchContains))
+        {
+            // If filter is empty findItems() for unknown reason returns nullptr items.
+            if (item)
+            {
+                ui->tableWidget->showRow(item->row());
+            }
+        }
     }
 
     ui->tableWidget->blockSignals(false);
