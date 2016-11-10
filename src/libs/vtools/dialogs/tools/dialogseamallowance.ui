@@ -80,6 +80,11 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabSeamAllowance">
+      <attribute name="title">
+       <string>Seam allowance</string>
+      </attribute>
+     </widget>
     </widget>
    </item>
    <item>

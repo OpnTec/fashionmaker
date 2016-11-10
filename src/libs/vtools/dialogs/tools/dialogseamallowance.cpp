@@ -72,6 +72,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     SCASSERT(bApply != nullptr);
     bApply->setEnabled(enable);
     applyAllowed = enable;
+    ui->tabSeamAllowance->setEnabled(applyAllowed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
