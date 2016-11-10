@@ -95,6 +95,19 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
 
+    // clear text filter every time when new radio button selected
+    auto clearFilterFormulaInputs = [=] () { ui->filterFormulaInputs->clear(); };
+
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonCLength, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+    connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, clearFilterFormulaInputs);
+
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
     if (QApplication::overrideCursor() != nullptr)
@@ -528,4 +541,19 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void DialogEditWrongFormula::on_filterFormulaInputs_textEdited(const QString &filter)
+{
+    ui->tableWidget->blockSignals(true);
+
+    // hide all rows
+    for (auto i = 0; i < ui->tableWidget->rowCount(); i++)
+        ui->tableWidget->hideRow(i);
+
+    // show rows with matched filter
+    for (auto item : ui->tableWidget->findItems(filter, Qt::MatchContains))
+        ui->tableWidget->showRow(item->row());
+
+    ui->tableWidget->blockSignals(false);
 }

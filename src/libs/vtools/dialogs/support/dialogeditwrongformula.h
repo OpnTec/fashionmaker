@@ -96,6 +96,8 @@ protected:
     virtual void CheckState() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+private slots:
+    void on_filterFormulaInputs_textEdited(const QString &filter);
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;
