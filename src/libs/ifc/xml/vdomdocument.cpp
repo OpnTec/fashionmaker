@@ -246,13 +246,22 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     {
         parametr = GetParametrString(domElement, name, defValue);
 
-        QStringList bools = QStringList() << QLatin1String("true") << QLatin1String("false");
+        const QStringList bools = QStringList() << QLatin1String("true")
+                                                << QLatin1String("false")
+                                                << QLatin1String("1")
+                                                << QLatin1String("0");
         switch (bools.indexOf(parametr))
         {
             case 0: // true
                 val = true;
                 break;
             case 1: // false
+                val = false;
+                break;
+            case 2: // 1
+                val = true;
+                break;
+            case 3: // 0
                 val = false;
                 break;
             default:// others
