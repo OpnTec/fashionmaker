@@ -63,7 +63,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
-    connect(ui->checkBoxSeams, &QCheckBox::clicked, this, &DialogSeamAllowance::EnableSeamAllowance);
+    connect(ui->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
     if (not applyAllowed)
     {
@@ -104,8 +104,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     ui->checkBoxForbidFlipping->setChecked(m_piece.IsForbidFlipping());
     ui->doubleSpinBoxSeams->setValue(m_piece.GetSAWidth());
-
-    EnableSeamAllowance(m_piece.IsSeamAllowance());
+    ui->checkBoxSeams->setChecked(m_piece.IsSeamAllowance());
 
     ValidObjects(MainPathIsValid());
 }
@@ -283,6 +282,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
 
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
+    piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
     piece.SetSAWidth(ui->doubleSpinBoxSeams->value());
 
     return piece;
