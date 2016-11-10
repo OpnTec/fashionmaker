@@ -62,8 +62,10 @@ public:
 
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
     QVector<QPointF> MainPathNodePoints(const VContainer *data) const;
+    QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;
+    QPainterPath SeamAllowancePath(const VContainer *data) const;
 
     qreal GetMx() const;
     void  SetMx(qreal value);

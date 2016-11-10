@@ -115,6 +115,8 @@ private:
     VMainGraphicsScene *m_sceneDetails;
     QString             m_drawName;
 
+    VNoBrushScalePathItem *m_seamAllowance;
+
     void SetDialog();
 
     template<typename T>

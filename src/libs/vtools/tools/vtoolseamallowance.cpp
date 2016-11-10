@@ -607,7 +607,8 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
       VNoBrushScalePathItem(parent),
       m_dialog(),
       m_sceneDetails(scene),
-      m_drawName(drawName)
+      m_drawName(drawName),
+      m_seamAllowance(new VNoBrushScalePathItem(this))
 {
     VPiece detail = data->GetPiece(id);
     for (int i = 0; i< detail.CountNodes(); ++i)
@@ -639,6 +640,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     RefreshGeometry();
 
     this->setBrush(QBrush(Qt::Dense7Pattern));
+    m_seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
@@ -669,6 +671,17 @@ void VToolSeamAllowance::RefreshGeometry()
     QPainterPath mainPath = detail.MainPathPath(this->getData());
     this->setPath(mainPath);
     this->setPos(detail.GetMx(), detail.GetMy());
+
+    if (detail.IsSeamAllowance())
+    {
+        mainPath.addPath(detail.SeamAllowancePath(this->getData()));
+        mainPath.setFillRule(Qt::OddEvenFill);
+        m_seamAllowance->setPath(mainPath);
+    }
+    else
+    {
+        m_seamAllowance->setPath(QPainterPath());
+    }
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }

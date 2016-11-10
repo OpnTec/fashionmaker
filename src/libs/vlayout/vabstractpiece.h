@@ -35,6 +35,7 @@
 template <class T> class QVector;
 class QPointF;
 class VAbstractPieceData;
+class QLineF;
 
 class VAbstractPiece
 {
@@ -56,6 +57,7 @@ public:
     qreal GetSAWidth() const;
     void  SetSAWidth(qreal value);
 
+    static QVector<QPointF> Equidistant(const QVector<QPointF> &points, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast = true);
@@ -65,6 +67,11 @@ protected:
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
+
+    static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, qreal width);
+    static QLineF           ParallelLine(const QLineF &line, qreal width);
+    static QPointF          SingleParallelPoint(const QLineF &line, qreal angle, qreal width);
+    static int              BisectorAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3);
 };
 
 #endif // VABSTRACTPIECE_H

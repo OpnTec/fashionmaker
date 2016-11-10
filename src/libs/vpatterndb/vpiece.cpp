@@ -201,6 +201,50 @@ QVector<QPointF> VPiece::MainPathNodePoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
+{
+    SCASSERT(data != nullptr);
+
+    QVector<QPointF> pointsEkv;
+    if (not IsSeamAllowance())
+    {
+        return pointsEkv;
+    }
+
+    for (int i = 0; i< CountNodes(); ++i)
+    {
+        switch (at(i).GetTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
+                pointsEkv.append(*point);
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
+                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+
+                pointsEkv << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
+                break;
+        }
+    }
+
+    pointsEkv = CheckLoops(CorrectEquidistantPoints(pointsEkv));//A path can contains loops
+    pointsEkv = Equidistant(pointsEkv, ToPixel(GetSAWidth(), *data->GetPatternUnit()));
+    return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
     const QVector<QPointF> points = MainPathPoints(data);
@@ -218,6 +262,30 @@ QPainterPath VPiece::MainPathPath(const VContainer *data) const
     }
 
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
+{
+    const QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+    QPainterPath ekv;
+
+    // seam allowence
+    if (IsSeamAllowance())
+    {
+        if (not pointsEkv.isEmpty())
+        {
+            ekv.moveTo(pointsEkv.at(0));
+            for (qint32 i = 1; i < pointsEkv.count(); ++i)
+            {
+                ekv.lineTo(pointsEkv.at(i));
+            }
+
+            ekv.setFillRule(Qt::WindingFill);
+        }
+    }
+
+    return ekv;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
