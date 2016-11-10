@@ -50,6 +50,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     flagError = MainPathIsValid();
     CheckState();
 
+    ui->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
@@ -90,6 +92,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     {
         NewItem(m_piece.at(i));
     }
+
+    ui->checkBoxForbidFlipping->setChecked(m_piece.IsForbidFlipping());
 
     ValidObjects(MainPathIsValid());
 }
@@ -259,6 +263,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
         QListWidgetItem *item = ui->listWidget->item(i);
         piece.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
+
+    piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
 
     return piece;
 }

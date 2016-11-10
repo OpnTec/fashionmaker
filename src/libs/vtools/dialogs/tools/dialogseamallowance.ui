@@ -59,6 +59,16 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBoxForbidFlipping">
+         <property name="toolTip">
+          <string>Forbid piece be mirrored in a layout.</string>
+         </property>
+         <property name="text">
+          <string>Forbid flipping</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QListWidget" name="listWidget">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>

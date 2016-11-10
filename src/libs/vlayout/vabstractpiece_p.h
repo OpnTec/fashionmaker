@@ -41,17 +41,21 @@ class VAbstractPieceData : public QSharedData
 {
 public:
     VAbstractPieceData()
-        : m_name()
+        : m_name(),
+          m_forbidFlipping(false)
     {}
 
     VAbstractPieceData(const VAbstractPieceData &piece)
         : QSharedData(piece),
-          m_name(piece.m_name)
+          m_name(piece.m_name),
+          m_forbidFlipping(piece.m_forbidFlipping)
     {}
 
     ~VAbstractPieceData();
 
     QString m_name;
+    /** @brief forbidFlipping forbid piece be mirrored in a layout. */
+    bool    m_forbidFlipping;
 
 private:
     VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;

@@ -47,6 +47,9 @@ public:
     QString GetName() const;
     void    SetName(const QString &value);
 
+    bool IsForbidFlipping() const;
+    void SetForbidFlipping(bool value);
+
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast = true);

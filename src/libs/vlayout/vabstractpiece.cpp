@@ -74,6 +74,18 @@ void VAbstractPiece::SetName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsForbidFlipping() const
+{
+    return d->m_forbidFlipping;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetForbidFlipping(bool value)
+{
+    d->m_forbidFlipping = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points)
 {
     // Calculation a polygon area through the sum of the areas of trapezoids
