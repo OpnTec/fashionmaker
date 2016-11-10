@@ -42,13 +42,17 @@ class VAbstractPieceData : public QSharedData
 public:
     VAbstractPieceData()
         : m_name(),
-          m_forbidFlipping(false)
+          m_forbidFlipping(false),
+          m_seamAllowance(false),
+          m_width(0)
     {}
 
     VAbstractPieceData(const VAbstractPieceData &piece)
         : QSharedData(piece),
           m_name(piece.m_name),
-          m_forbidFlipping(piece.m_forbidFlipping)
+          m_forbidFlipping(piece.m_forbidFlipping),
+          m_seamAllowance(piece.m_seamAllowance),
+          m_width(piece.m_width)
     {}
 
     ~VAbstractPieceData();
@@ -56,6 +60,8 @@ public:
     QString m_name;
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
     bool    m_forbidFlipping;
+    bool    m_seamAllowance;
+    qreal   m_width;
 
 private:
     VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;

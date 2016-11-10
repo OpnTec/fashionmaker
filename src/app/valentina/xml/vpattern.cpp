@@ -618,10 +618,9 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
         detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
         detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
-//        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
-//        detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
-//        detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
-        detail.SetForbidFlipping(GetParametrUInt(domElement, VToolSeamAllowance::AttrForbidFlipping,
+        detail.SetSeamAllowance(GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowance, falseStr));
+        detail.SetSAWidth(GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0.0"));
+        detail.SetForbidFlipping(GetParametrBool(domElement, VToolSeamAllowance::AttrForbidFlipping,
                                            QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
 

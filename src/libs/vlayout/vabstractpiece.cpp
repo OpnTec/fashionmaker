@@ -86,6 +86,30 @@ void VAbstractPiece::SetForbidFlipping(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsSeamAllowance() const
+{
+    return d->m_seamAllowance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetSeamAllowance(bool value)
+{
+    d->m_seamAllowance = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractPiece::GetSAWidth() const
+{
+    return d->m_width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetSAWidth(qreal value)
+{
+    value >= 0 ? d->m_width = value : d->m_width = 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points)
 {
     // Calculation a polygon area through the sum of the areas of trapezoids

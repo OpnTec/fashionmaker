@@ -51,10 +51,19 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     CheckState();
 
     ui->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+    ui->labelUnit->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+
+    if(qApp->patternUnit() == Unit::Inch)
+    {
+        ui->doubleSpinBoxSeams->setDecimals(5);
+    }
+    // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
+    ui->doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
+    connect(ui->checkBoxSeams, &QCheckBox::clicked, this, &DialogSeamAllowance::EnableSeamAllowance);
 
     if (not applyAllowed)
     {
@@ -94,6 +103,9 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     }
 
     ui->checkBoxForbidFlipping->setChecked(m_piece.IsForbidFlipping());
+    ui->doubleSpinBoxSeams->setValue(m_piece.GetSAWidth());
+
+    EnableSeamAllowance(m_piece.IsSeamAllowance());
 
     ValidObjects(MainPathIsValid());
 }
@@ -255,6 +267,12 @@ void DialogSeamAllowance::ListChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnableSeamAllowance(bool enable)
+{
+    ui->groupBoxAutomatic->setEnabled(enable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
@@ -265,6 +283,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
 
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
+    piece.SetSAWidth(ui->doubleSpinBoxSeams->value());
 
     return piece;
 }

@@ -129,6 +129,7 @@ const QString strMx                        = QStringLiteral("mx");
 const QString strMy                        = QStringLiteral("my");
 const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
 const QString strInLayout                  = QStringLiteral("inLayout");
+const QString strSeamAllowance             = QStringLiteral("seamAllowance");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -1694,9 +1695,10 @@ void VPatternConverter::TagDetailToV0_4_0()
 
         if (not dom.isNull())
         {
+            dom.setAttribute(strSeamAllowance, dom.attribute(strSupplement, "0"));
             dom.removeAttribute(strSupplement);
+
             dom.removeAttribute(strClosed);
-            dom.removeAttribute(strWidth);
 
             dom.setAttribute(strVersion, "1");
 

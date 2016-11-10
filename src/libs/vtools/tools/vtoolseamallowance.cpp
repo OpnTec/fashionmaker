@@ -62,6 +62,8 @@ const QString VToolSeamAllowance::TagNode     = QStringLiteral("node");
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrNodeReverse    = QStringLiteral("reverse");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
+const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
+const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 
 const QString VToolSeamAllowance::NodeArc        = QStringLiteral("NodeArc");
 const QString VToolSeamAllowance::NodePoint      = QStringLiteral("NodePoint");
@@ -253,7 +255,9 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
-    doc->SetAttribute(domElement, AttrForbidFlipping, static_cast<quint8>(piece.IsForbidFlipping()));
+    doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
+    doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
+    doc->SetAttribute(domElement, AttrWidth, piece.GetSAWidth());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

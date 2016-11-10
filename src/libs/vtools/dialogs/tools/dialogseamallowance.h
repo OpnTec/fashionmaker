@@ -62,6 +62,7 @@ protected:
 private slots:
     void ShowContextMenu(const QPoint &pos);
     void ListChanged();
+    void EnableSeamAllowance(bool enable);
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)

@@ -50,6 +50,12 @@ public:
     bool IsForbidFlipping() const;
     void SetForbidFlipping(bool value);
 
+    bool IsSeamAllowance() const;
+    void SetSeamAllowance(bool value);
+
+    qreal GetSAWidth() const;
+    void  SetSAWidth(qreal value);
+
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast = true);
