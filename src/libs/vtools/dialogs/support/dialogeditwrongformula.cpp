@@ -85,6 +85,11 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->filterFormulaInputs->setClearButtonEnabled(true);
+#endif
+    connect(ui->filterFormulaInputs, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FilterVariablesEdited);
+
     InitOkCancel(ui);
     flagFormula = false;
     CheckState();
@@ -398,16 +403,37 @@ void DialogEditWrongFormula::InitVariables()
     ui->radioButtonStandardTable->setChecked(true);
     Measurements();
 
+    // clear text filter every time when new radio button selected
+    auto ClearFilterFormulaInputs = [=] () { ui->filterFormulaInputs->clear(); };
+
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEditWrongFormula::Increments);
+    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthLines);
+    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthCurves);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::AngleLines);
-    connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
+    connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
+    connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
+    connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, &DialogEditWrongFormula::CurvesCLength);
+    connect(ui->radioButtonCLength, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
+    connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
+    connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -528,4 +554,41 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
+{
+    ui->tableWidget->blockSignals(true);
+
+    // If filter is empty findItems() for unknown reason returns nullptr items.
+    // See issue #586. https://bitbucket.org/dismine/valentina/issues/586/valentina-crashes-if-clear-input-filter
+    if (filter.isEmpty())
+    {
+        // show all rows
+        for (auto i = 0; i < ui->tableWidget->rowCount(); ++i)
+        {
+            ui->tableWidget->showRow(i);
+        }
+    }
+    else
+    {
+        // hide all rows
+        for (auto i = 0; i < ui->tableWidget->rowCount(); i++)
+        {
+            ui->tableWidget->hideRow(i);
+        }
+
+        // show rows with matched filter
+        for (auto item : ui->tableWidget->findItems(filter, Qt::MatchContains))
+        {
+            // If filter is empty findItems() for unknown reason returns nullptr items.
+            if (item)
+            {
+                ui->tableWidget->showRow(item->row());
+            }
+        }
+    }
+
+    ui->tableWidget->blockSignals(false);
 }

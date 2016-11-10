@@ -159,3 +159,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Understand IDE file
+*.udb
