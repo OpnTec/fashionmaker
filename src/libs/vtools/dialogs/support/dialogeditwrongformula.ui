@@ -356,6 +356,13 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
+        <widget class="QLineEdit" name="filterFormulaInputs">
+         <property name="placeholderText">
+          <string>Filter list by keyword</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="checkBoxHideEmpty">
          <property name="text">
           <string>Hide empty measurements</string>
