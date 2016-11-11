@@ -79,13 +79,14 @@ public:
     QString                  GetColor() const;
     void                     SetColor(const QString &color);
 
+    static qreal             PathLength(const QVector<QPointF> &path);
+
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
     virtual void             CreateName() =0;
-    static qreal             PathLength(const QVector<QPointF> &path);
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 

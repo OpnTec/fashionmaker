@@ -321,6 +321,11 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
 {
+    if (path.size() < 2)
+    {
+        return 0;
+    }
+
     QPainterPath splinePath;
     splinePath.moveTo(path.at(0));
     for (qint32 i = 1; i < path.count(); ++i)
