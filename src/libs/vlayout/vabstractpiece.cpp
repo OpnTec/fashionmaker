@@ -28,6 +28,7 @@
 
 #include "vabstractpiece.h"
 #include "vabstractpiece_p.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QLineF>
 #include <QSet>
@@ -420,13 +421,13 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width)
 {
-    qreal w1 = p1.GetSAAfter();
+    qreal w1 = qApp->toPixel(p1.GetSAAfter());
     if (w1 < 0)
     {
         w1 = width;
     }
 
-    qreal w2 = p2.GetSABefore();
+    qreal w2 = qApp->toPixel(p2.GetSABefore());
     if (w2 < 0)
     {
         w2 = width;
