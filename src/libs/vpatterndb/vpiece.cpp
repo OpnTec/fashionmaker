@@ -374,19 +374,77 @@ int VPiece::indexOfNode(const quint32 &id) const
 void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
                                        const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const
 {
-    const QPointF begin = StartSegment(data, i, reverse);
-    const QPointF end = EndSegment(data, i, reverse);
+    const VSAPoint begin = StartSegment(data, i, reverse);
+    const VSAPoint end = EndSegment(data, i, reverse);
 
     const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
-
-    for(int i = 0; i < points.size(); ++i)
+    if (points.isEmpty())
     {
-        pointsEkv.append(VSAPoint(points.at(i)));
+        return;
+    }
+
+    qreal w1 = begin.GetSAAfter();
+    qreal w2 = end.GetSABefore();
+    if (w1 < 0 && w2 < 0)
+    {// no local widths
+        for(int i = 0; i < points.size(); ++i)
+        {
+            pointsEkv.append(VSAPoint(points.at(i)));
+        }
+    }
+    else
+    {
+        const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
+
+        w1 = ToPixel(w1, *data->GetPatternUnit());
+        if (w1 < 0)
+        {
+            w1 = width;
+        }
+
+        w2 = ToPixel(w1, *data->GetPatternUnit());
+        if (w2 < 0)
+        {
+            w2 = width;
+        }
+
+        const qreal wDiff = w2 - w1;// Difference between to local widths
+        const qreal fullLength = VAbstractCurve::PathLength(points);
+
+        VSAPoint p(points.at(0));//First point in the list
+        p.SetSAAfter(begin.GetSAAfter());
+        p.SetSABefore(begin.GetSABefore());
+        pointsEkv.append(p);
+
+        qreal length = 0; // how much we handle
+
+        for(int i = 1; i < points.size(); ++i)
+        {
+            p = VSAPoint(points.at(i));
+
+            if (i == points.size() - 1)
+            {// last point
+                p.SetSAAfter(end.GetSAAfter());
+                p.SetSABefore(end.GetSABefore());
+            }
+            else
+            {
+                length += QLineF(points.at(i-1), points.at(i)).length();
+
+                qreal localWidth = w1 + wDiff*(length/fullLength);
+                localWidth = FromPixel(localWidth, *data->GetPatternUnit());
+
+                p.SetSAAfter(localWidth);
+                p.SetSABefore(localWidth);
+            }
+
+            pointsEkv.append(p);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse) const
+VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
 {
     if (i < 0 && i > CountNodes()-1)
     {
@@ -401,21 +459,23 @@ QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse)
         points = VGObject::GetReversePoints(points);
     }
 
-    QPointF begin = points.first();
+    VSAPoint begin = points.first();
     if (CountNodes() > 1)
     {
         if (i == 0)
         {
             if (at(CountNodes()-1).GetTypeTool() == Tool::NodePoint)
             {
-                begin = *data->GeometricObject<VPointF>(at(CountNodes()-1).GetId());
+                const VPieceNode node = at(CountNodes()-1);
+                begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
             }
         }
         else
         {
             if (at(i-1).GetTypeTool() == Tool::NodePoint)
             {
-                begin = *data->GeometricObject<VPointF>(at(i-1).GetId());
+                const VPieceNode node = at(i-1);
+                begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
             }
         }
     }
@@ -423,7 +483,7 @@ QPointF VPiece::StartSegment(const VContainer *data, const int &i, bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) const
+VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
 {
     if (i < 0 && i > CountNodes()-1)
     {
@@ -438,21 +498,23 @@ QPointF VPiece::EndSegment(const VContainer *data, const int &i, bool reverse) c
         points = VGObject::GetReversePoints(points);
     }
 
-    QPointF end = points.last();
+    VSAPoint end = points.last();
     if (CountNodes() > 2)
     {
         if (i == CountNodes() - 1)
         {
             if (at(0).GetTypeTool() == Tool::NodePoint)
             {
-                end = *data->GeometricObject<VPointF>(at(0).GetId());
+                const VPieceNode node = at(0);
+                end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
             }
         }
         else
         {
             if (at(i+1).GetTypeTool() == Tool::NodePoint)
             {
-                end = *data->GeometricObject<VPointF>(at(i+1).GetId());
+                const VPieceNode node = at(i+1);
+                end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
             }
         }
     }

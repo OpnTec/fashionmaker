@@ -87,8 +87,8 @@ private:
 
     void CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
                                    const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const;
-    QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
-    QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
+    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
+    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
 
     static int indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };
