@@ -31,11 +31,79 @@
 
 #include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QPointF>
+
+#include "../vmisc/diagnostic.h"
 
 template <class T> class QVector;
-class QPointF;
+
 class VAbstractPieceData;
 class QLineF;
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+/**
+ * @brief The VSAPoint class seam allowance point
+ */
+class VSAPoint : public QPointF
+{
+public:
+    Q_DECL_CONSTEXPR VSAPoint();
+    Q_DECL_CONSTEXPR VSAPoint(const QPointF &p);
+
+    Q_DECL_CONSTEXPR qreal GetSABefore() const;
+                     void  SetSABefore(qreal value);
+
+    Q_DECL_CONSTEXPR qreal GetSAAfter() const;
+                     void  SetSAAfter(qreal value);
+
+private:
+    qreal m_before;
+    qreal m_after;
+};
+
+Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
+    : QPointF(),
+      m_before(-1),
+      m_after(-1)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const QPointF &p)
+    : QPointF(p),
+      m_before(-1),
+      m_after(-1)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline qreal VSAPoint::GetSABefore() const
+{
+    return m_before;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VSAPoint::SetSABefore(qreal value)
+{
+    value < 0 ? m_before = -1 : m_before = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline qreal VSAPoint::GetSAAfter() const
+{
+    return m_after;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VSAPoint::SetSAAfter(qreal value)
+{
+    value < 0 ? m_after = -1 : m_after = value;
+}
+
+QT_WARNING_POP
 
 class VAbstractPiece
 {
