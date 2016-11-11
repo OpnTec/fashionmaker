@@ -420,8 +420,20 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width)
 {
-    const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, width),
-                                  SingleParallelPoint(p2, p1, -90, width));
+    qreal w1 = p1.GetSAAfter();
+    if (w1 < 0)
+    {
+        w1 = width;
+    }
+
+    qreal w2 = p2.GetSABefore();
+    if (w2 < 0)
+    {
+        w2 = width;
+    }
+
+    const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, w1),
+                                  SingleParallelPoint(p2, p1, -90, w2));
     return paralel;
 }
 
