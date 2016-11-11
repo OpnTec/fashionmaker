@@ -205,12 +205,13 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 {
     SCASSERT(data != nullptr);
 
-    QVector<QPointF> pointsEkv;
+
     if (not IsSeamAllowance())
     {
-        return pointsEkv;
+        return QVector<QPointF>();
     }
 
+    QVector<VSAPoint> pointsEkv;
     for (int i = 0; i< CountNodes(); ++i)
     {
         switch (at(i).GetTypeTool())
@@ -218,7 +219,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                pointsEkv.append(*point);
+                pointsEkv.append(VSAPoint(point->toQPointF()));
             }
             break;
             case (Tool::NodeArc):
@@ -226,11 +227,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
             case (Tool::NodeSplinePath):
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
-
-                pointsEkv << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
+                CurveSeamAllowanceSegment(pointsEkv, data, curve, i, at(i).GetReverse());
             }
             break;
             default:
@@ -239,9 +236,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
         }
     }
 
-    pointsEkv = CheckLoops(CorrectEquidistantPoints(pointsEkv));//A path can contains loops
-    pointsEkv = Equidistant(pointsEkv, ToPixel(GetSAWidth(), *data->GetPatternUnit()));
-    return pointsEkv;
+    return Equidistant(pointsEkv, ToPixel(GetSAWidth(), *data->GetPatternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,6 +368,21 @@ QVector<VPieceNode> VPiece::Missing(const VPiece &det) const
 int VPiece::indexOfNode(const quint32 &id) const
 {
     return indexOfNode(d->m_nodes, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
+                                       const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const
+{
+    const QPointF begin = StartSegment(data, i, reverse);
+    const QPointF end = EndSegment(data, i, reverse);
+
+    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
+
+    for(int i = 0; i < points.size(); ++i)
+    {
+        pointsEkv.append(VSAPoint(points.at(i)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

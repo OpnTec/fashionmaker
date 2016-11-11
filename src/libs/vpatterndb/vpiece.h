@@ -40,6 +40,8 @@ class VPieceNode;
 class QPointF;
 class VContainer;
 template <class T> class QVector;
+template <class T>class QSharedPointer;
+class VAbstractCurve;
 
 class VPiece : public VAbstractPiece
 {
@@ -83,6 +85,8 @@ public:
 private:
     QSharedDataPointer<VPieceData> d;
 
+    void CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
+                                   const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const;
     QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
     QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
 

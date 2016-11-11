@@ -32,9 +32,6 @@
 #include <QLineF>
 #include <QSet>
 #include <QVector>
-#include <QDebug>
-
-#include "../vgeometry/vgobject.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece::VAbstractPiece()
@@ -110,17 +107,15 @@ void VAbstractPiece::SetSAWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::Equidistant(const QVector<QPointF> &points, qreal width)
+QVector<QPointF> VAbstractPiece::Equidistant(const QVector<VSAPoint> &points, qreal width)
 {
-    QVector<QPointF> ekvPoints;
-
-    if (width <= 0)
+    if (width < 0)
     {
-        qDebug()<<"Width <= 0.";
+        qDebug()<<"Width < 0.";
         return QVector<QPointF>();
     }
 
-    QVector<QPointF> p = CorrectEquidistantPoints(points);
+    QVector<VSAPoint> p = CorrectEquidistantPoints(points);
     if ( p.size() < 3 )
     {
         qDebug()<<"Not enough points for building the equidistant.";
@@ -132,6 +127,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(const QVector<QPointF> &points, qre
         p.append(p.at(0));// Should be always closed
     }
 
+    QVector<QPointF> ekvPoints;
     for (qint32 i = 0; i < p.size(); ++i )
     {
         if ( i == 0)
@@ -328,88 +324,14 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.
- * @param points list of points equdistant.
- * @return corrected list.
- */
-QVector<QPointF> VAbstractPiece::CorrectEquidistantPoints(const QVector<QPointF> &points, bool removeFirstAndLast)
-{
-    if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
-    {
-        qDebug()<<"Only three points.";
-        return points;
-    }
-
-    //Clear equivalent points
-    QVector<QPointF> correctPoints = RemoveDublicates(points, removeFirstAndLast);
-
-    if (correctPoints.size()<3)
-    {
-        return correctPoints;
-    }
-
-    //Remove point on line
-    for (qint32 i = 1; i <correctPoints.size()-1; ++i)
-    {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
-     // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
-        if (VGObject::IsPointOnLineviaPDP(correctPoints.at(i), correctPoints.at(i-1), correctPoints.at(i+1)))
-        {
-            correctPoints.remove(i);
-        }
-    }
-
-    return correctPoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::RemoveDublicates(const QVector<QPointF> &points, bool removeFirstAndLast)
-{
-    QVector<QPointF> p = points;
-
-    if (removeFirstAndLast)
-    {
-        if (not p.isEmpty() && p.size() > 1)
-        {
-            // Path can't be closed
-            if (p.first() == p.last())
-            {
-            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                p.remove(p.size() - 1);
-            #else
-                p.removeLast();
-            #endif
-            }
-        }
-    }
-
-    for (int i = 0; i < p.size()-1; ++i)
-    {
-        if (p.at(i) == p.at(i+1))
-        {
-            if (not removeFirstAndLast && (i == p.size()-1))
-            {
-                continue;
-            }
-
-            p.erase(p.begin() + i + 1);
-            --i;
-            continue;
-        }
-    }
-
-    return p;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
  * @param width width of equidistant.
  * @return vector of points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(const QPointF &p1Line1, const QPointF &p2Line1,
-                                          const QPointF &p1Line2, const QPointF &p2Line2, qreal width)
+QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+                                          const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width)
 {
-    if (width <= 0)
+    if (width < 0)
     {
         return QVector<QPointF>();
     }
@@ -496,7 +418,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const QPointF &p1Line1, const QPointF 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VAbstractPiece::ParallelLine(const QPointF &p1, const QPointF &p2, qreal width)
+QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width)
 {
     const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, width),
                                   SingleParallelPoint(p2, p1, -90, width));
