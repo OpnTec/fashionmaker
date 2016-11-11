@@ -136,7 +136,8 @@ QVector<QPointF> VAbstractPiece::Equidistant(const QVector<QPointF> &points, qre
     {
         if ( i == 0)
         {//first point
-            ekvPoints << EkvPoint(QLineF(p.at(p.size()-2), p.at(p.size()-1)), QLineF(p.at(1), p.at(0)), width);
+            ekvPoints << EkvPoint(p.at(p.size()-2), p.at(p.size()-1),
+                                  p.at(1), p.at(0), width);
             continue;
         }
 
@@ -149,7 +150,8 @@ QVector<QPointF> VAbstractPiece::Equidistant(const QVector<QPointF> &points, qre
             continue;
         }
         //points in the middle of polyline
-        ekvPoints << EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
+        ekvPoints << EkvPoint(p.at(i-1), p.at(i),
+                              p.at(i+1), p.at(i), width);
     }
 
     const bool removeFirstAndLast = false;
@@ -401,12 +403,11 @@ QVector<QPointF> VAbstractPiece::RemoveDublicates(const QVector<QPointF> &points
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
- * @param line1 first line.
- * @param line2 second line.
  * @param width width of equidistant.
  * @return vector of points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(const QLineF &line1, const QLineF &line2, qreal width)
+QVector<QPointF> VAbstractPiece::EkvPoint(const QPointF &p1Line1, const QPointF &p2Line1,
+                                          const QPointF &p1Line2, const QPointF &p2Line2, qreal width)
 {
     if (width <= 0)
     {
@@ -414,15 +415,15 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const QLineF &line1, const QLineF &lin
     }
 
     QVector<QPointF> points;
-    if (line1.p2() != line2.p2())
+    if (p2Line1 != p2Line2)
     {
         qDebug()<<"Last points of two lines must be equal.";
         return QVector<QPointF>();
     }
 
     QPointF CrosPoint;
-    const QLineF bigLine1 = ParallelLine(line1, width );
-    const QLineF bigLine2 = ParallelLine(QLineF(line2.p2(), line2.p1()), width );
+    const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
+    const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width );
     QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
     switch (type)
     {
@@ -432,9 +433,9 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const QLineF &line1, const QLineF &lin
             break;
         case (QLineF::UnboundedIntersection):
         {
-            QLineF line( line1.p2(), CrosPoint );
+            QLineF line( p2Line1, CrosPoint );
 
-            const int angle1 = BisectorAngle(line1.p1(), line1.p2(), line2.p1());
+            const int angle1 = BisectorAngle(p1Line1, p2Line1, p1Line2);
             const int angle2 = BisectorAngle(bigLine1.p1(), CrosPoint, bigLine2.p2());
 
             if (angle1 == angle2)
@@ -472,7 +473,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const QLineF &line1, const QLineF &lin
             }
             else
             {// Dart. Ignore if going outside of equdistant
-                const QLineF bigEdge = ParallelLine(QLineF(line1.p1(), line2.p1()), width );
+                const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, width );
                 QPointF px;
                 const QLineF::IntersectType type = bigEdge.intersect(line, &px);
                 if (type != QLineF::BoundedIntersection)
@@ -495,17 +496,17 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const QLineF &line1, const QLineF &lin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VAbstractPiece::ParallelLine(const QLineF &line, qreal width)
+QLineF VAbstractPiece::ParallelLine(const QPointF &p1, const QPointF &p2, qreal width)
 {
-    const QLineF paralel = QLineF(SingleParallelPoint(line, 90, width),
-                                  SingleParallelPoint(QLineF(line.p2(), line.p1()), -90, width));
+    const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, width),
+                                  SingleParallelPoint(p2, p1, -90, width));
     return paralel;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VAbstractPiece::SingleParallelPoint(const QLineF &line, qreal angle, qreal width)
+QPointF VAbstractPiece::SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width)
 {
-    QLineF pLine = line;
+    QLineF pLine(p1, p2);
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
