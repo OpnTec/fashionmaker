@@ -62,6 +62,8 @@ public:
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrWidth;
+    static const QString AttrSABefore;
+    static const QString AttrSAAfter;
 
     static const QString NodeArc;
     static const QString NodePoint;

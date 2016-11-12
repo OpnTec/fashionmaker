@@ -399,9 +399,11 @@
 																						<xs:sequence>
 																						   <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
 																								   <xs:complexType>
-																										 <xs:attribute name="type" type="xs:string"></xs:attribute>
-																										 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+																										 <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+																										 <xs:attribute name="idObject" type="xs:unsignedInt" use="required"></xs:attribute>
 																										 <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
+																										 <xs:attribute name="before" type="xs:double"></xs:attribute>
+																										 <xs:attribute name="after" type="xs:double"></xs:attribute>
 																								   </xs:complexType>
 																							 </xs:element>
 																						 </xs:sequence>

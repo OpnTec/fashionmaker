@@ -748,7 +748,9 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
         if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagNode)
         {
             const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-            const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
+            const bool reverse = GetParametrUInt(element, VToolSeamAllowance::AttrNodeReverse, "0");
+            const qreal saBefore = GetParametrDouble(element, VToolSeamAllowance::AttrSABefore, "-1");
+            const qreal saAfter = GetParametrDouble(element, VToolSeamAllowance::AttrSAAfter, "-1");
 
             const QString t = GetParametrString(element, AttrType, VToolSeamAllowance::NodePoint);
             Tool tool;
@@ -771,7 +773,10 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
                     VException e(tr("Wrong tag name '%1'.").arg(t));
                     throw e;
             }
-            detail.Append(VPieceNode(id, tool, reverse));
+            VPieceNode node(id, tool, reverse);
+            node.SetSABefore(saBefore);
+            node.SetSAAfter(saAfter);
+            detail.Append(node);
         }
     }
 }

@@ -64,6 +64,8 @@ const QString VToolSeamAllowance::AttrNodeReverse    = QStringLiteral("reverse")
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
+const QString VToolSeamAllowance::AttrSABefore       = QStringLiteral("before");
+const QString VToolSeamAllowance::AttrSAAfter        = QStringLiteral("after");
 
 const QString VToolSeamAllowance::NodeArc        = QStringLiteral("NodeArc");
 const QString VToolSeamAllowance::NodePoint      = QStringLiteral("NodePoint");
@@ -204,12 +206,21 @@ void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement,
 
     doc->SetAttribute(nod, AttrIdObject, node.GetId());
 
-    if (node.GetTypeTool() != Tool::NodePoint)
+    const Tool type = node.GetTypeTool();
+    if (type != Tool::NodePoint)
     {
         doc->SetAttribute(nod, AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
     }
+    else
+    {
+        const qreal w1 = node.GetSABefore();
+        w1 < 0 ? domElement.removeAttribute(AttrSABefore) : doc->SetAttribute(nod, AttrSABefore, w1);
 
-    switch (node.GetTypeTool())
+        const qreal w2 = node.GetSAAfter();
+        w2 < 0 ? domElement.removeAttribute(AttrSAAfter) : doc->SetAttribute(nod, AttrSAAfter, w2);
+    }
+
+    switch (type)
     {
         case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, NodeArc);
