@@ -73,8 +73,9 @@ private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
     Ui::DialogSeamAllowance *ui;
-    VPiece m_piece;
     bool   applyAllowed;
+    qreal  m_mx;
+    qreal  m_my;
 
     VPiece CreatePiece() const;
 

@@ -437,6 +437,11 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                 }
             }
             // Don't forget to update geometry, because first change never call full parse
+            VPiece detail = VAbstractTool::data.GetPiece(id);
+            detail.SetMx(newPos.x());
+            detail.SetMy(newPos.y());
+            VAbstractTool::data.UpdatePiece(id, detail);
+
             RefreshGeometry();
             changeFinished = true;
         }

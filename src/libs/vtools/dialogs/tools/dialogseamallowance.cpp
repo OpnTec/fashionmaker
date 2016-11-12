@@ -38,8 +38,9 @@
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogSeamAllowance),
-      m_piece(),
-      applyAllowed(false)// By default disabled
+      applyAllowed(false),// By default disabled
+      m_mx(0),
+      m_my(0)
 {
     ui->setupUi(this);
 
@@ -110,22 +111,24 @@ void DialogSeamAllowance::EnableApply(bool enable)
 //---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::GetPiece() const
 {
-    return m_piece;
+    return CreatePiece();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetPiece(const VPiece &piece)
 {
-    m_piece = piece;
     ui->listWidget->clear();
-    for (int i = 0; i < m_piece.CountNodes(); ++i)
+    for (int i = 0; i < piece.CountNodes(); ++i)
     {
-        NewItem(m_piece.at(i));
+        NewItem(piece.at(i));
     }
 
-    ui->checkBoxForbidFlipping->setChecked(m_piece.IsForbidFlipping());
-    ui->doubleSpinBoxSeams->setValue(m_piece.GetSAWidth());
-    ui->checkBoxSeams->setChecked(m_piece.IsSeamAllowance());
+    ui->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
+    ui->doubleSpinBoxSeams->setValue(piece.GetSAWidth());
+    ui->checkBoxSeams->setChecked(piece.IsSeamAllowance());
+
+    m_mx = piece.GetMx();
+    m_my = piece.GetMy();
 
     ValidObjects(MainPathIsValid());
 
@@ -217,10 +220,7 @@ void DialogSeamAllowance::ShowDialog(bool click)
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SaveData()
-{
-    m_piece.Clear();
-    m_piece = CreatePiece();
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CheckState()
@@ -397,6 +397,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
     piece.SetSAWidth(ui->doubleSpinBoxSeams->value());
+    piece.SetMx(m_mx);
+    piece.SetMy(m_my);
 
     return piece;
 }
