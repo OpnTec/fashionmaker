@@ -214,24 +214,28 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
     QVector<VSAPoint> pointsEkv;
     for (int i = 0; i< CountNodes(); ++i)
     {
-        switch (at(i).GetTypeTool())
+        const VPieceNode node = at(i);
+        switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
             {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                pointsEkv.append(VSAPoint(point->toQPointF()));
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
+                VSAPoint p(point->toQPointF());
+                p.SetSAAfter(node.GetSAAfter());
+                p.SetSABefore(node.GetSABefore());
+                pointsEkv.append(p);
             }
             break;
             case (Tool::NodeArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
-                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-                CurveSeamAllowanceSegment(pointsEkv, data, curve, i, at(i).GetReverse());
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+                CurveSeamAllowanceSegment(pointsEkv, data, curve, i, node.GetReverse());
             }
             break;
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
                 break;
         }
     }
@@ -402,7 +406,7 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             w1 = width;
         }
 
-        w2 = ToPixel(w1, *data->GetPatternUnit());
+        w2 = ToPixel(w2, *data->GetPatternUnit());
         if (w2 < 0)
         {
             w2 = width;
@@ -468,6 +472,8 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
             {
                 const VPieceNode node = at(CountNodes()-1);
                 begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
+                begin.SetSAAfter(node.GetSAAfter());
+                begin.SetSABefore(node.GetSABefore());
             }
         }
         else
@@ -476,6 +482,8 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
             {
                 const VPieceNode node = at(i-1);
                 begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
+                begin.SetSAAfter(node.GetSAAfter());
+                begin.SetSABefore(node.GetSABefore());
             }
         }
     }
@@ -507,6 +515,8 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
             {
                 const VPieceNode node = at(0);
                 end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
+                end.SetSAAfter(node.GetSAAfter());
+                end.SetSABefore(node.GetSABefore());
             }
         }
         else
@@ -515,6 +525,8 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
             {
                 const VPieceNode node = at(i+1);
                 end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
+                end.SetSAAfter(node.GetSAAfter());
+                end.SetSABefore(node.GetSABefore());
             }
         }
     }
