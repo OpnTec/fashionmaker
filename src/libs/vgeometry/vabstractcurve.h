@@ -70,6 +70,8 @@ public:
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
     virtual bool             IsIntersectLine(const QLineF &line) const;
 
+    bool                     IsPointOnCurve(const QPointF &p) const;
+
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
 

@@ -471,9 +471,13 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
             if (at(CountNodes()-1).GetTypeTool() == Tool::NodePoint)
             {
                 const VPieceNode node = at(CountNodes()-1);
-                begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
-                begin.SetSAAfter(node.GetSAAfter());
-                begin.SetSABefore(node.GetSABefore());
+                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+                if (curve->IsPointOnCurve(p))
+                {
+                    begin = VSAPoint(p);
+                    begin.SetSAAfter(node.GetSAAfter());
+                    begin.SetSABefore(node.GetSABefore());
+                }
             }
         }
         else
@@ -481,9 +485,13 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
             if (at(i-1).GetTypeTool() == Tool::NodePoint)
             {
                 const VPieceNode node = at(i-1);
-                begin = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
-                begin.SetSAAfter(node.GetSAAfter());
-                begin.SetSABefore(node.GetSABefore());
+                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+                if (curve->IsPointOnCurve(p))
+                {
+                    begin = VSAPoint(p);
+                    begin.SetSAAfter(node.GetSAAfter());
+                    begin.SetSABefore(node.GetSABefore());
+                }
             }
         }
     }
@@ -514,9 +522,13 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
             if (at(0).GetTypeTool() == Tool::NodePoint)
             {
                 const VPieceNode node = at(0);
-                end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
-                end.SetSAAfter(node.GetSAAfter());
-                end.SetSABefore(node.GetSABefore());
+                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+                if (curve->IsPointOnCurve(p))
+                {
+                    end = VSAPoint(p);
+                    end.SetSAAfter(node.GetSAAfter());
+                    end.SetSABefore(node.GetSABefore());
+                }
             }
         }
         else
@@ -524,9 +536,13 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
             if (at(i+1).GetTypeTool() == Tool::NodePoint)
             {
                 const VPieceNode node = at(i+1);
-                end = VSAPoint(*data->GeometricObject<VPointF>(node.GetId()));
-                end.SetSAAfter(node.GetSAAfter());
-                end.SetSABefore(node.GetSABefore());
+                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+                if (curve->IsPointOnCurve(p))
+                {
+                    end = VSAPoint(p);
+                    end.SetSAAfter(node.GetSAAfter());
+                    end.SetSABefore(node.GetSABefore());
+                }
             }
         }
     }

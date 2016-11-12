@@ -237,6 +237,33 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+{
+    const QVector<QPointF> points = GetPoints();
+
+    if (points.isEmpty())
+    {
+        return false;
+    }
+    else if (points.size() < 2)
+    {
+        return points.at(0) == p;
+    }
+    else
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VAbstractCurve::GetDuplicate() const
 {
     return d->duplicate;
