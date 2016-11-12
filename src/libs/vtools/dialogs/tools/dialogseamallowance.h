@@ -63,6 +63,11 @@ private slots:
     void ShowContextMenu(const QPoint &pos);
     void ListChanged();
     void EnableSeamAllowance(bool enable);
+    void NodeChanged(int index);
+    void ReturnDefBefore();
+    void ReturnDefAfter();
+    void ChangedSABefore(double d);
+    void ChangedSAAfter(double d);
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
@@ -80,6 +85,12 @@ private:
     bool    FirstPointEqualLast() const;
     bool    MainPathIsClockwise() const;
     QString GetNodeName(const VPieceNode &node) const;
+    void    InitNodesList();
+
+    QListWidgetItem *GetItemById(quint32 id);
+
+    void SetCurrentSABefore(qreal value);
+    void SetCurrentSAAfter(qreal value);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

@@ -57,6 +57,12 @@ public:
 
     bool GetReverse() const;
     void SetReverse(bool reverse);
+
+    qreal GetSABefore() const;
+    void  SetSABefore(qreal value);
+
+    qreal GetSAAfter() const;
+    void  SetSAAfter(qreal value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

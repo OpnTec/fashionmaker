@@ -39,40 +39,49 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 class VPieceNodeData : public QSharedData
 {
 public:
-  VPieceNodeData()
-    : m_id(NULL_ID),
-      m_typeTool(Tool::NodePoint),
-      m_reverse(false)
-  {}
+    VPieceNodeData()
+        : m_id(NULL_ID),
+          m_typeTool(Tool::NodePoint),
+          m_reverse(false),
+          m_saBefore(-1),
+          m_saAfter(-1)
+    {}
 
-  VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
-      : m_id(id),
-        m_typeTool(typeTool),
-        m_reverse(reverse)
-  {
-      if (m_typeTool == Tool::NodePoint)
-      {
-          m_reverse = false;
-      }
-  }
+    VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
+        : m_id(id),
+          m_typeTool(typeTool),
+          m_reverse(reverse),
+          m_saBefore(-1),
+          m_saAfter(-1)
+    {
+        if (m_typeTool == Tool::NodePoint)
+        {
+            m_reverse = false;
+        }
+    }
 
-  VPieceNodeData (const VPieceNodeData& node)
-      : QSharedData(node),
-        m_id(node.m_id),
-        m_typeTool(node.m_typeTool),
-        m_reverse(node.m_reverse)
-  {}
+    VPieceNodeData (const VPieceNodeData& node)
+        : QSharedData(node),
+          m_id(node.m_id),
+          m_typeTool(node.m_typeTool),
+          m_reverse(node.m_reverse),
+          m_saBefore(node.m_saBefore),
+          m_saAfter(node.m_saAfter)
+    {}
 
-  ~VPieceNodeData();
+    ~VPieceNodeData();
 
-  /** @brief id object id. */
-  quint32 m_id;
+    /** @brief id object id. */
+    quint32 m_id;
 
-  /** @brief typeTool type of tool */
-  Tool m_typeTool;
+    /** @brief typeTool type of tool */
+    Tool m_typeTool;
 
-  /** @brief reverse true if need reverse points list for node. */
-  bool m_reverse;
+    /** @brief reverse true if need reverse points list for node. */
+    bool m_reverse;
+
+    qreal m_saBefore;
+    qreal m_saAfter;
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;

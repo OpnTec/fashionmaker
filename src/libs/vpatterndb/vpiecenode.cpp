@@ -98,6 +98,36 @@ void VPieceNode::SetReverse(bool reverse)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::GetSABefore() const
+{
+    return d->m_saBefore;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetSABefore(qreal value)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        value < 0 ? d->m_saBefore = -1: d->m_saBefore = value;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::GetSAAfter() const
+{
+    return d->m_saAfter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetSAAfter(qreal value)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        value < 0 ? d->m_saAfter = -1: d->m_saAfter = value;
+    }
+}
+
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream& operator<<(QDataStream& out, const VPieceNode& p)

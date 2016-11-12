@@ -52,13 +52,36 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 
     ui->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
     ui->labelUnit->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui->labelUnitBefore->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui->labelUnitAfter->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
 
     if(qApp->patternUnit() == Unit::Inch)
     {
         ui->doubleSpinBoxSeams->setDecimals(5);
+        ui->doubleSpinBoxSABefore->setDecimals(5);
+        ui->doubleSpinBoxSAAfter->setDecimals(5);
     }
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
     ui->doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
+
+    InitNodesList();
+    connect(ui->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::NodeChanged);
+    if (ui->comboBoxNodes->count() > 0)
+    {
+        NodeChanged(0);
+    }
+
+    connect(ui->pushButtonDefBefore, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefBefore);
+    connect(ui->pushButtonDefAfter, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefAfter);
+
+    connect(ui->doubleSpinBoxSeams, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            [this](){NodeChanged(ui->comboBoxNodes->currentIndex());});
+
+    connect(ui->doubleSpinBoxSABefore, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSeamAllowance::ChangedSABefore);
+    connect(ui->doubleSpinBoxSAAfter, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSeamAllowance::ChangedSAAfter);
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
@@ -107,6 +130,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ui->checkBoxSeams->setChecked(m_piece.IsSeamAllowance());
 
     ValidObjects(MainPathIsValid());
+
+    ListChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,12 +288,102 @@ void DialogSeamAllowance::ListChanged()
         visPath->SetPiece(CreatePiece());
         visPath->RefreshGeometry();
     }
+    InitNodesList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EnableSeamAllowance(bool enable)
 {
     ui->groupBoxAutomatic->setEnabled(enable);
+
+    if (enable)
+    {
+        InitNodesList();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::NodeChanged(int index)
+{
+    ui->doubleSpinBoxSABefore->setDisabled(true);
+    ui->doubleSpinBoxSAAfter->setDisabled(true);
+    ui->pushButtonDefBefore->setDisabled(true);
+    ui->pushButtonDefAfter->setDisabled(true);
+
+    ui->doubleSpinBoxSABefore->blockSignals(true);
+    ui->doubleSpinBoxSAAfter->blockSignals(true);
+
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+        const VPiece piece = CreatePiece();
+        const int nodeIndex = piece.indexOfNode(id);
+        if (nodeIndex != -1)
+        {
+            const VPieceNode node = piece.at(nodeIndex);
+
+            ui->doubleSpinBoxSABefore->setEnabled(true);
+            ui->doubleSpinBoxSAAfter->setEnabled(true);
+
+            qreal w1 = node.GetSABefore();
+            if (w1 < 0)
+            {
+                w1 = piece.GetSAWidth();
+            }
+            else
+            {
+                ui->pushButtonDefBefore->setEnabled(true);
+            }
+            ui->doubleSpinBoxSABefore->setValue(w1);
+
+            qreal w2 = node.GetSAAfter();
+            if (w2 < 0)
+            {
+                w2 = piece.GetSAWidth();
+            }
+            else
+            {
+                ui->pushButtonDefAfter->setEnabled(true);
+            }
+            ui->doubleSpinBoxSAAfter->setValue(w2);
+        }
+    }
+    else
+    {
+        ui->doubleSpinBoxSABefore->setValue(0);
+        ui->doubleSpinBoxSAAfter->setValue(0);
+    }
+
+    ui->doubleSpinBoxSABefore->blockSignals(false);
+    ui->doubleSpinBoxSAAfter->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ReturnDefBefore()
+{
+    SetCurrentSABefore(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ReturnDefAfter()
+{
+    SetCurrentSAAfter(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ChangedSABefore(double d)
+{
+    SetCurrentSABefore(d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ChangedSAAfter(double d)
+{
+    SetCurrentSAAfter(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -446,4 +561,109 @@ QString DialogSeamAllowance::GetNodeName(const VPieceNode &node) const
     }
 
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitNodesList()
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const quint32 id = ui->comboBoxNodes->itemData(ui->comboBoxNodes->currentIndex()).toUInt();
+#else
+    const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+#endif
+
+    ui->comboBoxNodes->blockSignals(true);
+    ui->comboBoxNodes->clear();
+
+    const VPiece piece = CreatePiece();
+
+    for (int i = 0; i < piece.CountNodes(); ++i)
+    {
+        const VPieceNode node = piece.at(i);
+        if (node.GetTypeTool() == Tool::NodePoint)
+        {
+            const QString name = GetNodeName(node);
+
+            ui->comboBoxNodes->addItem(name, node.GetId());
+        }
+    }
+    ui->comboBoxNodes->blockSignals(false);
+
+    const int index = ui->comboBoxNodes->findData(id);
+    if (index != -1)
+    {
+        ui->comboBoxNodes->setCurrentIndex(index);
+        NodeChanged(index);// Need in case combox index was not changed
+    }
+    else
+    {
+        if (ui->comboBoxNodes->count() > 0)
+        {
+            NodeChanged(0);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QListWidgetItem *DialogSeamAllowance::GetItemById(quint32 id)
+{
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidget->item(i);
+        const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+
+        if (node.GetId() == id)
+        {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetCurrentSABefore(qreal value)
+{
+    const int index = ui->comboBoxNodes->currentIndex();
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetSABefore(value);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetCurrentSAAfter(qreal value)
+{
+    const int index = ui->comboBoxNodes->currentIndex();
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetSAAfter(value);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
 }
