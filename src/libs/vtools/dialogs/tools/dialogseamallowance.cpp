@@ -69,10 +69,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitNodesList();
     connect(ui->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::NodeChanged);
-    if (ui->comboBoxNodes->count() > 0)
-    {
-        NodeChanged(0);
-    }
 
     connect(ui->pushButtonDefBefore, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefBefore);
     connect(ui->pushButtonDefAfter, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefAfter);
@@ -599,10 +595,7 @@ void DialogSeamAllowance::InitNodesList()
     }
     else
     {
-        if (ui->comboBoxNodes->count() > 0)
-        {
-            NodeChanged(0);
-        }
+        ui->comboBoxNodes->count() > 0 ? NodeChanged(0) : NodeChanged(-1);
     }
 }
 
