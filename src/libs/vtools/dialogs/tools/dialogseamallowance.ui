@@ -155,19 +155,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="labelUnit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>cm</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -224,13 +211,6 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="labelUnitBefore">
-                 <property name="text">
-                  <string>cm</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="pushButtonDefBefore">
                  <property name="toolTip">
                   <string>Return to default width</string>
@@ -261,13 +241,6 @@
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="labelUnitAfter">
-                 <property name="text">
-                  <string>cm</string>
                  </property>
                 </widget>
                </item>

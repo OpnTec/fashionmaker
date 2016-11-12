@@ -51,9 +51,11 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     CheckState();
 
     ui->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
-    ui->labelUnit->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-    ui->labelUnitBefore->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-    ui->labelUnitAfter->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+
+    const QString suffix = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ui->doubleSpinBoxSeams->setSuffix(suffix);
+    ui->doubleSpinBoxSABefore->setSuffix(suffix);
+    ui->doubleSpinBoxSAAfter->setSuffix(suffix);
 
     if(qApp->patternUnit() == Unit::Inch)
     {
