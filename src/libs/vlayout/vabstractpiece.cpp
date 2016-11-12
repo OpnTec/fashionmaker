@@ -361,7 +361,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             const int angle1 = BisectorAngle(p1Line1, p2Line1, p1Line2);
             const int angle2 = BisectorAngle(bigLine1.p1(), CrosPoint, bigLine2.p2());
 
-            if (angle1 == angle2)
+            if (qAbs(angle1 - angle2) < 180)// Go in a same direction
             {//Regular equdistant case
                 const qreal length = line.length();
                 if (length > width*2.4)
