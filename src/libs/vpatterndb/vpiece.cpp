@@ -393,7 +393,18 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
     {// no local widths
         for(int i = 0; i < points.size(); ++i)
         {
-            pointsEkv.append(VSAPoint(points.at(i)));
+            VSAPoint p(points.at(i));
+            if (i == 0)
+            { // first point
+                p.SetSAAfter(begin.GetSAAfter());
+                p.SetSABefore(begin.GetSABefore());
+            }
+            else if (i == points.size() - 1)
+            { // last point
+                p.SetSAAfter(end.GetSAAfter());
+                p.SetSABefore(end.GetSABefore());
+            }
+            pointsEkv.append(p);
         }
     }
     else
