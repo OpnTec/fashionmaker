@@ -148,7 +148,8 @@ private:
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
     static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
-    static int              BisectorAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3);
+    static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
+    static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

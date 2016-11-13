@@ -384,10 +384,12 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             const qreal localWidth = MaxLocalSA(p2Line1, width);
             QLineF line( p2Line1, CrosPoint );
 
-            const int angle1 = BisectorAngle(p1Line1, p2Line1, p1Line2);
-            const int angle2 = BisectorAngle(bigLine1.p1(), CrosPoint, bigLine2.p2());
+            const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
+            const QLineF b2 = BisectorLine(bigLine1.p1(), CrosPoint, bigLine2.p2());
 
-            if (qAbs(angle1 - angle2) < 90)// Go in a same direction
+            const qreal angle = AngleBetweenBisectors(b1, b2);
+
+            if (angle <= 90)// Go in a same direction
             {//Regular equdistant case
                 const qreal length = line.length();
                 if (length > localWidth*2.4)
@@ -423,7 +425,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             else
             {
                 QLineF bisector(p2Line1, p1Line1);
-                bisector.setAngle(angle1);
+                bisector.setAngle(b1.angle());
 
                 const qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
                 const qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
@@ -499,7 +501,7 @@ QPointF VAbstractPiece::SingleParallelPoint(const QPointF &p1, const QPointF &p2
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractPiece::BisectorAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3)
+QLineF VAbstractPiece::BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3)
 {
     QLineF line1(p2, p1);
     QLineF line2(p2, p3);
@@ -519,5 +521,32 @@ int VAbstractPiece::BisectorAngle(const QPointF &p1, const QPointF &p2, const QP
         bLine.setAngle(bLine.angle() + angle2/2.0);
     }
 
-    return qRound(bLine.angle());
+    return bLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractPiece::AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
+{
+    const QLineF newB2 = b2.translated(-(b2.p1().x() - b1.p1().x()), -(b2.p1().y() - b1.p1().y()));
+
+    qreal angle1 = newB2.angleTo(b1);
+    if (VFuzzyComparePossibleNulls(angle1, 360))
+    {
+        angle1 = 0;
+    }
+
+    qreal angle2 = b1.angleTo(newB2);
+    if (VFuzzyComparePossibleNulls(angle2, 360))
+    {
+        angle2 = 0;
+    }
+
+    if (angle1 <= angle2)
+    {
+        return angle1;
+    }
+    else
+    {
+        return angle2;
+    }
 }
