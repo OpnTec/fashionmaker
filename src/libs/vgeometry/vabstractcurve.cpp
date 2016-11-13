@@ -253,7 +253,7 @@ bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
     {
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            if (IsPointOnLineSegment(p.toPoint(), points.at(i).toPoint(), points.at(i+1).toPoint()))
             {
                 return true;
             }
