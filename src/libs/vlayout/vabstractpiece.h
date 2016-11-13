@@ -141,9 +141,12 @@ protected:
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 
+    static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
+    static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
     static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
+    static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
     static int              BisectorAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3);
 };
