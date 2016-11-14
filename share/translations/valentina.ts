@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</translation>
     </message>
 </context>
 <context>
@@ -1684,6 +1684,10 @@
     <message>
         <source>Lengths to control points</source>
         <translation>Lengths to control points</translation>
+    </message>
+    <message>
+        <source>Filter list by keyword</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

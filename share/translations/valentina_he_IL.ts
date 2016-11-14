@@ -1386,6 +1386,10 @@
         <source>Lengths to control points</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Filter list by keyword</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
