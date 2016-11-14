@@ -83,12 +83,141 @@ Name: "fileassoc1"; Description: "{cm:CreateFileAssocVal}"; GroupDescription: "{
 Name: "fileassoc2"; Description: "{cm:CreateFileAssocVit}"; GroupDescription: "{cm:FileAssoc}"
 Name: "fileassoc3"; Description: "{cm:CreateFileAssocVst}"; GroupDescription: "{cm:FileAssoc}"
 
+[Types]
+Name: "full_english"; Description: "System language"; Languages: english;
+;Name: "full_armenian"; Description: "System language"; Languages: armenian;
+Name: "full_brazilianportuguese"; Description: "System language"; Languages: brazilianportuguese;
+;Name: "full_catalan"; Description: "System language"; Languages: catalan; 
+;Name: "full_corsican"; Description: "System language"; Languages: corsican;
+Name: "full_czech"; Description: "System language"; Languages: czech;
+;Name: "full_danish"; Description: "System language"; Languages: danish;
+Name: "full_dutch"; Description: "System language"; Languages: dutch;
+Name: "full_finnish"; Description: "System language"; Languages: finnish;
+Name: "full_french"; Description: "System language"; Languages: french;
+Name: "full_german"; Description: "System language"; Languages: german;
+Name: "full_greek"; Description: "System language"; Languages: greek;
+Name: "full_hebrew"; Description: "System language"; Languages: hebrew;
+;Name: "full_hungarian"; Description: "System language"; Languages: hungarian;
+Name: "full_italian"; Description: "System language"; Languages: italian;
+;Name: "full_japanese"; Description: "System language"; Languages: japanese;
+;Name: "full_nepali"; Description: "System language"; Languages: nepali;
+;Name: "full_norwegian"; Description: "System language"; Languages: norwegian;
+;Name: "full_polish"; Description: "System language"; Languages: polish;
+Name: "full_portuguese"; Description: "System language"; Languages: portuguese;
+Name: "full_russian"; Description: "System language"; Languages: russian;
+;Name: "full_scottishgaelic"; Description: "System language"; Languages: scottishgaelic;
+;Name: "full_serbiancyrillic"; Description: "System language"; Languages: serbiancyrillic;
+;Name: "full_serbianlatin"; Description: "System language"; Languages: serbianlatin;
+;Name: "full_slovenian"; Description: "System language"; Languages: slovenian;
+Name: "full_spanish"; Description: "System language"; Languages: spanish;
+;Name: "full_turkish"; Description: "System language"; Languages: turkish;
+Name: "full_ukrainian"; Description: "System language"; Languages: ukrainian;
+Name: "full"; Description: "Full installation"
+Name: "custom"; Description: "Custom installation"; Flags: iscustom
+
+[Components]
+Name: "lang_files"; Description: "Language Component"; Types: full custom; Flags: fixed
+Name: "lang_files\english"; Description: "English"; Types: full full_english custom;
+Name: "lang_files\english\us"; Description: "English (United States)"; Types: full full_english custom;
+Name: "lang_files\english\in"; Description: "English (India)"; Types: full full_english custom;
+Name: "lang_files\english\ca"; Description: "English (Canada)"; Types: full full_english custom;
+;Name: "lang_files\armenian"; Description: "Armenian"; Types: full full_armenian custom;
+Name: "lang_files\brazilianportuguese"; Description: "Brazilian portuguese"; Types: full full_brazilianportuguese custom;
+;Name: "lang_files\catalan"; Description: "Catalan"; Types: full full_catalan custom; 
+;Name: "lang_files\corsican"; Description: "Corsican"; Types: full full_orsican custom;
+Name: "lang_files\czech"; Description: "Czech"; Types: full full_czech custom;
+;Name: "lang_files\danish"; Description: "Danish"; Types: full full_danish custom;
+Name: "lang_files\dutch"; Description: "Dutch"; Types: full full_dutch custom;
+Name: "lang_files\finnish"; Description: "Finnish"; Types: full full_finnish custom;
+Name: "lang_files\french"; Description: "French"; Types: full full_french custom;
+Name: "lang_files\german"; Description: "German"; Types: full full_german custom;
+Name: "lang_files\greek"; Description: "Greek"; Types: full full_greek custom;
+Name: "lang_files\hebrew"; Description: "Hebrew"; Types: full full_hebrew custom;
+;Name: "lang_files\hungarian"; Description: "Hungarian"; Types: full full_hungarian custom;
+Name: "lang_files\italian"; Description: "Italian"; Types: full full_italian custom;
+;Name: "lang_files\japanese"; Description: "Japanese"; Types: full full_japanese custom;
+;Name: "lang_files\nepali"; Description: "Nepali"; Types: full full_nepali custom;
+;Name: "lang_files\norwegian"; Description: "Norwegian"; Types: full full_norwegian custom;
+;Name: "lang_files\polish"; Description: "Polish"; Types: full full_polish custom;
+;Name: "lang_files\portuguese"; Description: "Portuguese"; Types: full full_portuguese custom;
+Name: "lang_files\russian"; Description: "Russian"; Types: full full_russian custom;
+;Name: "lang_files\scottishgaelic"; Description: "Scottish gaelic"; Types: full full_scottishgaelic custom;
+;Name: "lang_files\serbiancyrillic"; Description: "Serbian cyrillic"; Types: full full_serbiancyrillic custom;
+;Name: "lang_files\serbianlatin"; Description: "Serbian latin"; Types: full full_serbianlatin custom;
+;Name: "lang_files\slovenian"; Description: "Slovenian"; Types: full full_slovenian custom;
+Name: "lang_files\spanish"; Description: "Spanish"; Types: full full_spanish custom;
+;Name: "lang_files\turkish"; Description: "Turkish"; Types: full full_turkish custom;
+Name: "lang_files\ukrainian"; Description: "Ukrainian"; Types: full full_ukrainian custom;
+Name: "lang_files\indonesian"; Description: "Indonesian"; Types: full custom;
+Name: "lang_files\romanian"; Description: "Romanian"; Types: full custom;
+Name: "lang_files\chinese"; Description: "Chinese (China)"; Types: full custom;
+
 [Files]
+; Signing
 Source: ".\valentina\valentina.exe"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\tape.exe"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\vpropertyexplorer.dll"; DestDir: "{app}"; Flags: ignoreversion sign
 Source: ".\valentina\qmuparser2.dll"; DestDir: "{app}"; Flags: ignoreversion sign
-Source: ".\valentina\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Localizations
+Source: ".\valentina\translations\*_en_US.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\us
+Source: ".\valentina\translations\*_en_IN.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\in
+Source: ".\valentina\translations\*_en_CA.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\ca
+Source: ".\valentina\translations\*_ru_RU.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\russian
+Source: ".\valentina\translations\*_ru.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\russian
+Source: ".\valentina\translations\*_uk_UA.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\ukrainian
+Source: ".\valentina\translations\*_uk.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\ukrainian
+Source: ".\valentina\translations\*_de_DE.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\german
+Source: ".\valentina\translations\*_de.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\german
+Source: ".\valentina\translations\*_cs_CZ.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\czech
+Source: ".\valentina\translations\*_cs.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\czech
+Source: ".\valentina\translations\*_he_IL.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\hebrew
+Source: ".\valentina\translations\*_he.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\hebrew
+Source: ".\valentina\translations\*_fr_FR.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\french
+Source: ".\valentina\translations\*_fr.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\french
+Source: ".\valentina\translations\*_it_IT.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\italian
+Source: ".\valentina\translations\*_it.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\italian
+Source: ".\valentina\translations\*_nl_NL.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\dutch
+Source: ".\valentina\translations\*_id_ID.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\indonesian
+Source: ".\valentina\translations\*_es_ES.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\spanish
+Source: ".\valentina\translations\*_fi_FI.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\finnish
+Source: ".\valentina\translations\*_fi.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\finnish        
+Source: ".\valentina\translations\*_ro_RO.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\romanian         
+Source: ".\valentina\translations\*_zh_CN.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\chinese         
+Source: ".\valentina\translations\*_pt_BR.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\brazilianportuguese         
+Source: ".\valentina\translations\*_el_GR.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\greek
+; Additional languages provided by Qt
+Source: ".\valentina\translations\*_sk.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_pl.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_ar.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_pt.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_sl.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_sv.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_zh_TW.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\qtxmlpatterns_ca.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\qtbase_ca.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\qt_ca.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_da.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_en.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_fa.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_gl.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_he.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_hu.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_ja.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_ko.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: ".\valentina\translations\*_lt.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+; Other files
+Source: ".\valentina\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs createallsubdirs
+Source: ".\valentina\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs createallsubdirs
+Source: ".\valentina\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs createallsubdirs
+Source: ".\valentina\printsupport\*"; DestDir: "{app}\printsupport"; Flags: recursesubdirs createallsubdirs
+Source: ".\valentina\tables\*"; DestDir: "{app}\tables"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: ".\valentina\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\valentina\*.dll"; DestDir: "{app}"
+Source: ".\valentina\*.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: ".\valentina\*.rcc"; DestDir: "{app}"; Flags: ignoreversion 
+Source: ".\valentina\*.ico"; DestDir: "{app}"; Flags: ignoreversion 
+Source: ".\valentina\*.dbg"; DestDir: "{app}"; Flags: ignoreversion 
+Source: ".\valentina\*.yes"; DestDir: "{app}"; Flags: ignoreversion 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
 

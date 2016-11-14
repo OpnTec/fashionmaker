@@ -115,7 +115,7 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
     process->setWorkingDirectory(info.absoluteDir().absolutePath());
     process->start(program, arguments);
 
-    if (not process->waitForFinished(msecs) && process->state() != QProcess::NotRunning)
+    if (not process->waitForFinished(msecs))
     {
         const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
         QWARN(qUtf8Printable(msg));

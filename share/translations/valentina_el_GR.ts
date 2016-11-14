@@ -1661,6 +1661,10 @@
         <source>Lengths to control points</source>
         <translation>Μήκη των σημείων ελέγχου</translation>
     </message>
+    <message>
+        <source>Filter list by keyword</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -1988,7 +1992,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η δημιουργία καταγραφής.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -2848,11 +2852,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Collapse All</source>
-        <translation type="unfinished"></translation>
+        <translation>Σύμπτηξη Όλων</translation>
     </message>
     <message>
         <source>Expand All</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανάπτυξη Όλων</translation>
     </message>
     <message>
         <source>Check all</source>
@@ -3366,7 +3370,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε μπορεί να γίνει διαγραφή της ιδιότητας που δημιουργήθηκε προηγουμένως</translation>
     </message>
     <message>
         <source>Node Name</source>
@@ -4316,7 +4320,7 @@ Apply settings anyway?</source>
     <name>DialogSplinePath</name>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished"></translation>
+        <translation>Καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Point of curve</source>
@@ -4348,7 +4352,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε σημείο σε καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Color</source>
@@ -4707,7 +4711,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Το κομμάτι εργασίας θα πρέπει να έχει τουλάχιστον δυο σημεία και τρία αντικείμενα</translation>
     </message>
     <message>
         <source>Select a second point</source>
@@ -4723,7 +4727,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε ένα σημείο σην άκρη</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4839,19 +4843,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The measurement file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το αρχείο μετρήσεων.</translation>
     </message>
     <message>
         <source>The base height</source>
-        <translation type="unfinished"></translation>
+        <translation>Το βασικό ύψος</translation>
     </message>
     <message>
         <source>The base size</source>
-        <translation type="unfinished"></translation>
+        <translation>Το βασικό μέγεθος</translation>
     </message>
     <message>
         <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός μονάδων για το αρχείο πατρόν: εκ, χιλ, ίντσες.</translation>
     </message>
     <message>
         <source>The pattern unit</source>
@@ -4867,7 +4871,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η δοκιμαστική λειτουργία δεν υποστηρίζει το άνοιγμα πολλών αρχείων.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -5142,7 +5146,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσαρμογή zoom</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -5210,7 +5214,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε σημείο σε καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Select curve path</source>
@@ -5320,7 +5324,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ακύρωση αναίρεσης</translation>
     </message>
     <message>
         <source>Pattern piece:</source>
@@ -5336,7 +5340,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Λανθασμένες μονάδες.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
@@ -5348,7 +5352,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Το αρχείο φορτώθηκε</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -5392,7 +5396,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished"></translation>
+        <translation>Καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -5412,7 +5416,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Σημείο σε τομή τόξου και άξονα</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -5423,24 +5427,28 @@ Do you want to save your changes?</source>
         <translation>Εργαλείο ένωσης</translation>
     </message>
     <message>
+        <source>toolBar</source>
+        <translation type="vanished">μπάρα εργαλείων</translation>
+    </message>
+    <message>
         <source>Last Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Τελευταίο Εργαλείο</translation>
     </message>
     <message>
         <source>Activate last used tool again</source>
-        <translation type="unfinished"></translation>
+        <translation>Επανενεργοποίηση τελευταίου εργαλείου</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε σημείο για τιμή Χ (κάθετα)</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία</translation>
     </message>
     <message>
         <source>Pointer</source>
-        <translation type="unfinished"></translation>
+        <translation>Δείκτης</translation>
     </message>
     <message>
         <source>Config pattern piece</source>
@@ -5448,7 +5456,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Τοποθέτηση</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -5464,11 +5472,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point of intersection arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Σημείο σε τομή τόξων</translation>
     </message>
     <message>
         <source>Point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Σημείο σε τομή κύκλων</translation>
     </message>
     <message>
         <source>Point from circle and tangent</source>
@@ -5504,7 +5512,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχωρισμός και αποθήκευση της τοποθέτησης σε μικρότερες σελίδες</translation>
     </message>
     <message>
         <source>Print</source>
@@ -5524,7 +5532,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπιση εκτύπωσης της αρχικής τοποθέτησης</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -5556,19 +5564,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία λεπτομερειών</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία λεπτομερειών. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
         <source>Layout mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία τοποθέτησης</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία τοποθέτησης. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -5935,6 +5943,18 @@ Do you want to save your changes?</source>
 <context>
     <name>MainWindowsNoGUI</name>
     <message>
+        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="vanished">Για την αποθήκευση εγγράφου πολλαπλών σελίδων, όλα τα φύλλα θα πρέπει να έχουν ίδιο μέγεθος. Αντί αυτού χρησιμοποιήστε τη λειτουργία εξαγωγής.</translation>
+    </message>
+    <message>
+        <source>For previewing multypage document all sheet should have the same size.</source>
+        <translation type="vanished">Για την προεπισκόπιση εγγράφου πολλαπλών σελίδων, όλα τα φύλλα θα πρέπει να έχουν ίδιο μέγεθος.</translation>
+    </message>
+    <message>
+        <source>For printing multypages document all sheet should have the same size.</source>
+        <translation type="vanished">Για την εκτύπωση εγγράφου πολλαπλών σελίδων, όλα τα φύλλα θα πρέπει να έχουν ίδιο μέγεθος.</translation>
+    </message>
+    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Η δημιουργία αρχείου &apos;%1&apos; απέτυχε! %2</translation>
     </message>
@@ -5968,7 +5988,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Η τοποθέτηση δέν ενημερώθηκε μετά απο την τελευταία αλλαγή πατρόν. Θέλετε να συνεχίσετε;</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -5985,6 +6005,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Export error.</source>
         <translation type="vanished">Σφάλμα εξαγωγής.</translation>
+    </message>
+    <message>
+        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="vanished">Για την αποθήκευση εγγράφου πολλαπλών σελίδων, όλα τα φύλλα θα πρέπει να έχουν ίδιο μέγεθος. Αντί αυτού χρησιμοποιήστε τη λειτουργία εξαγωγής.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -6036,14 +6060,14 @@ Do you want to save your changes?</source>
     <name>MoveSpline</name>
     <message>
         <source>move spline</source>
-        <translation type="unfinished"></translation>
+        <translation>μετακίνηση καμπύλης spline</translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
         <source>move spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>μετακίνηση μονοπατιού καμπύλης spline</translation>
     </message>
 </context>
 <context>
@@ -6057,7 +6081,7 @@ Do you want to save your changes?</source>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -6093,18 +6117,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Τοποθέτηση</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρότυπα</translation>
     </message>
 </context>
 <context>
     <name>PatternPage</name>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήστης</translation>
+    </message>
+    <message>
+        <source>User name</source>
+        <translation type="vanished">Όνομα χρήστη</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -6159,7 +6187,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση της βοήθειας.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
@@ -6217,12 +6245,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>inch</source>
-        <translation type="unfinished"></translation>
+        <translation>ίντσες</translation>
     </message>
     <message>
         <source>Property</source>
         <extracomment>The text that appears in the first column header</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ιδιοκτησία</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6243,7 +6271,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
 </context>
 <context>
@@ -6364,7 +6392,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Λείπει παρένθεση</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
@@ -6593,7 +6621,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Base size value</source>
-        <translation type="unfinished"></translation>
+        <translation>Τιμή βασικού μεγέθους</translation>
     </message>
     <message>
         <source>Base height:</source>
@@ -6601,7 +6629,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Base height value</source>
-        <translation type="unfinished"></translation>
+        <translation>Τιμή βασικού ύψους</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -6614,6 +6642,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Birth date:</source>
         <translation>Ημερομηνία γέννησης:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="vanished">χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <source>Email:</source>
@@ -6709,7 +6741,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ανώνυμο %1</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -6835,11 +6867,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Ευρεση Επόμενου</translation>
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+G</translation>
+    </message>
+    <message>
+        <source>Measurements (*.vst *.vit);;All files (*.*)</source>
+        <translation type="vanished">Μετρήσεις (*.vst *.vit);;Όλα τα αρχεία (*.*)</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -7140,14 +7176,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξ&apos;ορισμού μέγεθος:</translation>
     </message>
 </context>
 <context>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -7179,7 +7215,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρότυπα</translation>
     </message>
 </context>
 <context>
@@ -7197,7 +7233,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μη γίνει &amp;ερώτηση ξανά</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
@@ -7208,7 +7244,7 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε βρέθηκαν οι πληροφορίες της έκδοσης.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
@@ -7236,7 +7272,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η αλλαγή έκδοσης.</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
@@ -7266,7 +7302,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η εύρεση του εργαλείου στον πίνακα.</translation>
     </message>
     <message>
         <source>Error creating or updating group</source>
@@ -7439,7 +7475,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Grouping type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος ομαδοποίησης</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
@@ -7455,7 +7491,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέχθηκε άγνωστο πρότυπο σελίδας.</translation>
     </message>
     <message>
         <source>Unsupported paper units.</source>
@@ -7649,11 +7685,11 @@ Do you want to save your changes?</source>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχουν αρκετά σημεία για τη δημιουργία της καμπύλης spline.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτή η καμπύλη spline δεν υπάρχει.</translation>
     </message>
 </context>
 <context>
@@ -7705,6 +7741,10 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Could not copy temp file to document file</source>
+        <translation type="vanished">Δεν ήταν δυνατή η αντιγραφή του προσωρινού αρχείου στο αρχείο εγγράφου</translation>
+    </message>
+    <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7746,7 +7786,7 @@ Do you want to save your changes?</source>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η εύρεση της μέτρησης &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The measurement name is empty!</source>
@@ -7761,7 +7801,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>False</source>
-        <translation type="unfinished"></translation>
+        <translation>Ψευδές</translation>
     </message>
 </context>
 <context>
@@ -8005,11 +8045,15 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχουν αρκετά σημεία για τη δημιουργία της καμπύλης spline.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτή η καμπύλη spline δεν υπάρχει.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t cut spline path with one point</source>
+        <translation type="vanished">Δεν είναι δυνατό το σπάσιμο της καμπύλης spline με ένα σημείο.</translation>
     </message>
 </context>
 <context>

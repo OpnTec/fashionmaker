@@ -144,12 +144,20 @@ QGroupBox *TapeConfigurationPage::LangGroup()
         fileNames.append(it.fileName());
     }
 
+    bool englishUS = false;
+    const QString en_US = QStringLiteral("en_US");
+
     for (int i = 0; i < fileNames.size(); ++i)
     {
         // get locale extracted by filename
         QString locale = fileNames.at(i);                         // "valentina_de_De.qm"
         locale.truncate(locale.lastIndexOf(QLatin1String(".")));  // "valentina_de_De"
         locale.remove(0, locale.indexOf(QLatin1String("_")) + 1); // "de_De"
+
+        if (not englishUS)
+        {
+            englishUS = (en_US == locale);
+        }
 
         const QLocale loc(locale);
         const QString lang = loc.nativeLanguageName();
@@ -158,12 +166,12 @@ QGroupBox *TapeConfigurationPage::LangGroup()
         langCombo->addItem(ico, lang, locale);
     }
 
-    if (langCombo->count() == 0)
+    if (langCombo->count() == 0 || not englishUS)
     {
         // English language is internal and doens't have own *.qm file.
         QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
-        const QString lang = QLocale("en_US").nativeLanguageName();
-        langCombo->addItem(ico, lang, "en_US");
+        const QString lang = QLocale(en_US).nativeLanguageName();
+        langCombo->addItem(ico, lang, en_US);
     }
 
     // set default translators and language checked

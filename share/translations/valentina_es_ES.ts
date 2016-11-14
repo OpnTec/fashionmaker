@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tras cada cuelgue Valentina recolecta información que puede ayudarnos a resolver el problema. No recolectamos ninguna información personal. Encuentre más sobre qué %1tipo de información%2 recolectamos.</translation>
     </message>
 </context>
 <context>
@@ -1541,11 +1541,11 @@
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>Justo delante</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Justo detrás</translation>
     </message>
 </context>
 <context>
@@ -1685,6 +1685,10 @@
     <message>
         <source>Lengths to control points</source>
         <translation>Longitudes para controlar puntos</translation>
+    </message>
+    <message>
+        <source>Filter list by keyword</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6195,7 +6199,7 @@ Quiere guardar los cambios?</translation>
     <name>OperationMoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation type="unfinished">mover etiqueta del punto</translation>
+        <translation>mover etiqueta de punto</translation>
     </message>
 </context>
 <context>
@@ -6281,27 +6285,31 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Todos los materiales definidos de usuario han sido eliminados!</translation>
     </message>
     <message>
         <source>User defined materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiales definidos de usuario</translation>
     </message>
     <message>
         <source>Delete all</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar todo</translation>
     </message>
     <message>
         <source>Workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte de trabajo</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
         <translation>Prohibir girado</translation>
     </message>
     <message>
+        <source>By default forbid flipping for all workpieces</source>
+        <translation type="vanished">Por defecto prohibe el lanzado para todas las partes de trabajo</translation>
+    </message>
+    <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto olvidar voltear todos los nuevos trabajos</translation>
     </message>
 </context>
 <context>
@@ -6626,6 +6634,13 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>rename pattern piece</source>
         <translation>renombrar pieza del patrón</translation>
+    </message>
+</context>
+<context>
+    <name>RotationMoveLabel</name>
+    <message>
+        <source>move point label</source>
+        <translation type="vanished">Mover etiqueta de punto</translation>
     </message>
 </context>
 <context>
@@ -7218,19 +7233,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Valores separados por coma</translation>
     </message>
     <message>
         <source>Customer&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del cliente</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la familia del cliente</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección de email del cliente</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -7242,7 +7257,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos los archivos</translation>
     </message>
 </context>
 <context>
@@ -7370,7 +7385,7 @@ Do you want to save your changes?</source>
     <name>ToggleDetailInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation type="unfinished"></translation>
+        <translation>detalle en lista de capa</translation>
     </message>
 </context>
 <context>
@@ -7436,14 +7451,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al reemplazar un symlink por la vida real: %1.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
     <message>
         <source>Can&apos;t cut this spline</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede cortar esta tira</translation>
     </message>
 </context>
 <context>
