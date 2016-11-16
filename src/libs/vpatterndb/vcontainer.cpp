@@ -294,6 +294,7 @@ void VContainer::ClearForFullParse()
     _id = NULL_ID;
 
     d->details->clear();
+    d->pieces->clear();
     ClearVariables(VarType::Increment);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
