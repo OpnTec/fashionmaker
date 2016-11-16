@@ -438,8 +438,11 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                     const QLineF::IntersectType type = bigEdge.intersect(line, &px);
                     if (type != QLineF::BoundedIntersection)
                     {
-                        points.append(CrosPoint);
-                        return points;
+                        if (line.length() < QLineF(p2Line1, px).length())
+                        {
+                            points.append(CrosPoint);
+                            return points;
+                        }
                     }
                 }
                 else
