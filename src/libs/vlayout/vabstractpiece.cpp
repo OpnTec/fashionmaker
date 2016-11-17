@@ -447,10 +447,30 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                 }
                 else
                 {
-                    const QLineF bigEdge = ParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth );
-                    points.append(bigEdge.p1());
-                    points.append(bigEdge.p2());
-                    return points;
+                    const qreal result1 = PointPosition(CrosPoint, QLineF(p1Line1, p2Line1));
+                    const qreal result2 = PointPosition(CrosPoint, QLineF(p2Line2, p1Line2));
+
+                    if (result1 <=0 && result2 <= 0)
+                    {
+                        if (line.length() >= localWidth)
+                        {
+                            points.append(CrosPoint);
+                            return points;
+                        }
+                        else
+                        {
+                            line.setLength(localWidth);
+                            points.append(line.p2());
+                            return points;
+                        }
+                    }
+                    else
+                    {
+                        const QLineF bigEdge = ParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth );
+                        points.append(bigEdge.p1());
+                        points.append(bigEdge.p2());
+                        return points;
+                    }
                 }
             }
             break;
