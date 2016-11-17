@@ -350,15 +350,16 @@ qreal VAbstractPiece::MaxLocalSA(const VSAPoint &p, qreal width)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
- * @param width width of equidistant.
- * @return vector of points.
+ * @brief EkvPoint return seam aloowance points in place of intersection two edges. Last points of two edges should be
+ * equal.
+ * @param width global seam allowance width.
+ * @return seam aloowance points.
  */
 QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                           const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width)
 {
     if (width < 0)
-    {
+    { // width can't be < 0
         return QVector<QPointF>();
     }
 
@@ -366,35 +367,38 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
     if (p2Line1 != p2Line2)
     {
         qDebug()<<"Last points of two lines must be equal.";
-        return QVector<QPointF>();
+        return QVector<QPointF>(); // Wrong edges
     }
 
-    QPointF CrosPoint;
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
     const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width );
-    QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
+    QPointF CrosPoint;
+    const QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
     switch (type)
-    {
+    {// There are at least three big cases
         case (QLineF::BoundedIntersection):
+            // The easiest, real intersection
             points.append(CrosPoint);
             return points;
             break;
         case (QLineF::UnboundedIntersection):
-        {
+        { // Most common case
             const qreal localWidth = MaxLocalSA(p2Line1, width);
             QLineF line( p2Line1, CrosPoint );
 
+            // Checking two subcases
             const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
             const QLineF b2 = BisectorLine(bigLine1.p1(), CrosPoint, bigLine2.p2());
 
             const qreal angle = AngleBetweenBisectors(b1, b2);
 
+            // Comparison bisector angles helps to find direction
             if (angle <= 90)// Go in a same direction
             {//Regular equdistant case
                 const qreal length = line.length();
                 if (length > localWidth*2.4)
                 { // Cutting too long a cut angle
-                    line.setLength(localWidth); // Not sure about width value here
+                    line.setLength(localWidth);
                     QLineF cutLine(line.p2(), CrosPoint); // Cut line is a perpendicular
                     cutLine.setLength(length); // Decided take this length
 
@@ -417,13 +421,13 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                     points.append(px);
                 }
                 else
-                {
+                { // The point just fine
                     points.append(CrosPoint);
                     return points;
                 }
             }
             else
-            {
+            { // Different directions
                 QLineF bisector(p2Line1, p1Line1);
                 bisector.setAngle(b1.angle());
 
@@ -431,8 +435,8 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                 const qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
 
                 if (result1 <=0 && result2 <= 0)
-                {
-                    // Dart. Ignore if going outside of equdistant
+                {// Dart case. A bisector watch outside. In some cases a point still valid, but ignore if going
+                 // outside of an equdistant.
                     const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth );
                     QPointF px;
                     const QLineF::IntersectType type = bigEdge.intersect(line, &px);
@@ -446,26 +450,26 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                     }
                 }
                 else
-                {
+                { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
                     const qreal result1 = PointPosition(CrosPoint, QLineF(p1Line1, p2Line1));
                     const qreal result2 = PointPosition(CrosPoint, QLineF(p2Line2, p1Line2));
 
                     if (result1 <=0 && result2 <= 0)
-                    {
+                    {// The cross point is still outside of a piece
                         if (line.length() >= localWidth)
                         {
                             points.append(CrosPoint);
                             return points;
                         }
                         else
-                        {
+                        {// but not enough far, fix it
                             line.setLength(localWidth);
                             points.append(line.p2());
                             return points;
                         }
                     }
                     else
-                    {
+                    {// Wrong cross point, probably inside of a piece. Manually creating correct seam allowance
                         const QLineF bigEdge = ParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth );
                         points.append(bigEdge.p1());
                         points.append(bigEdge.p2());
