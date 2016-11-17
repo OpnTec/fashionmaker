@@ -59,9 +59,11 @@ public:
     void SetReverse(bool reverse);
 
     qreal GetSABefore() const;
+    qreal GetSABefore(Unit unit) const;
     void  SetSABefore(qreal value);
 
     qreal GetSAAfter() const;
+    qreal GetSAAfter(Unit unit) const;
     void  SetSAAfter(qreal value);
 private:
     QSharedDataPointer<VPieceNodeData> d;

@@ -221,8 +221,9 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
                 VSAPoint p(point->toQPointF());
-                p.SetSAAfter(node.GetSAAfter());
-                p.SetSABefore(node.GetSABefore());
+
+                p.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+                p.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
                 pointsEkv.append(p);
             }
             break;
@@ -411,13 +412,11 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
     {
         const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
 
-        w1 = ToPixel(w1, *data->GetPatternUnit());
         if (w1 < 0)
         {
             w1 = width;
         }
 
-        w2 = ToPixel(w2, *data->GetPatternUnit());
         if (w2 < 0)
         {
             w2 = width;
@@ -445,9 +444,7 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             else
             {
                 length += QLineF(points.at(i-1), points.at(i)).length();
-
-                qreal localWidth = w1 + wDiff*(length/fullLength);
-                localWidth = FromPixel(localWidth, *data->GetPatternUnit());
+                const qreal localWidth = w1 + wDiff*(length/fullLength);
 
                 p.SetSAAfter(localWidth);
                 p.SetSABefore(localWidth);
@@ -486,8 +483,8 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
                 if (curve->IsPointOnCurve(p))
                 {
                     begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter());
-                    begin.SetSABefore(node.GetSABefore());
+                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
                 }
             }
         }
@@ -500,8 +497,8 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
                 if (curve->IsPointOnCurve(p))
                 {
                     begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter());
-                    begin.SetSABefore(node.GetSABefore());
+                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
                 }
             }
         }
@@ -537,8 +534,8 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
                 if (curve->IsPointOnCurve(p))
                 {
                     end = VSAPoint(p);
-                    end.SetSAAfter(node.GetSAAfter());
-                    end.SetSABefore(node.GetSABefore());
+                    end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+                    end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
                 }
             }
         }
@@ -551,8 +548,8 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
                 if (curve->IsPointOnCurve(p))
                 {
                     end = VSAPoint(p);
-                    end.SetSAAfter(node.GetSAAfter());
-                    end.SetSABefore(node.GetSABefore());
+                    end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+                    end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
                 }
             }
         }

@@ -105,6 +105,17 @@ qreal VPieceNode::GetSABefore() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::GetSABefore(Unit unit) const
+{
+    qreal value = d->m_saBefore;
+    if (value >= 0)
+    {
+        value = ToPixel(value, unit);
+    }
+    return value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetSABefore(qreal value)
 {
     if (d->m_typeTool == Tool::NodePoint)
@@ -117,6 +128,17 @@ void VPieceNode::SetSABefore(qreal value)
 qreal VPieceNode::GetSAAfter() const
 {
     return d->m_saAfter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::GetSAAfter(Unit unit) const
+{
+    qreal value = d->m_saAfter;
+    if (value >= 0)
+    {
+        value = ToPixel(value, unit);
+    }
+    return value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
