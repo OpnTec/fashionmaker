@@ -52,6 +52,7 @@ class VSAPoint : public QPointF
 {
 public:
     Q_DECL_CONSTEXPR VSAPoint();
+    Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR VSAPoint(const QPointF &p);
 
     Q_DECL_CONSTEXPR qreal GetSABefore() const;
@@ -65,11 +66,19 @@ private:
     qreal m_after;
 };
 
+Q_DECLARE_METATYPE(VSAPoint)
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
     : QPointF(),
+      m_before(-1),
+      m_after(-1)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
+    : QPointF(xpos, ypos),
       m_before(-1),
       m_after(-1)
 {}
