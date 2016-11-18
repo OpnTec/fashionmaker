@@ -53,7 +53,7 @@ class VSAPoint : public QPointF
 public:
     Q_DECL_CONSTEXPR VSAPoint();
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR VSAPoint(const QPointF &p);
+    Q_DECL_CONSTEXPR explicit VSAPoint(const QPointF &p);
 
     Q_DECL_CONSTEXPR qreal GetSABefore() const;
                      void  SetSABefore(qreal value);

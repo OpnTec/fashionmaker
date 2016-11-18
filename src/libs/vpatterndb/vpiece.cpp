@@ -214,7 +214,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
     QVector<VSAPoint> pointsEkv;
     for (int i = 0; i< CountNodes(); ++i)
     {
-        const VPieceNode node = at(i);
+        const VPieceNode &node = at(i);
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -460,7 +460,7 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
 {
     if (i < 0 && i > CountNodes()-1)
     {
-        return QPointF();
+        return VSAPoint();
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
@@ -471,14 +471,14 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
         points = VGObject::GetReversePoints(points);
     }
 
-    VSAPoint begin = points.first();
+    VSAPoint begin = VSAPoint(points.first());
     if (CountNodes() > 1)
     {
         if (i == 0)
         {
             if (at(CountNodes()-1).GetTypeTool() == Tool::NodePoint)
             {
-                const VPieceNode node = at(CountNodes()-1);
+                const VPieceNode &node = at(CountNodes()-1);
                 const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
                 if (curve->IsPointOnCurve(p))
                 {
@@ -492,7 +492,7 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
         {
             if (at(i-1).GetTypeTool() == Tool::NodePoint)
             {
-                const VPieceNode node = at(i-1);
+                const VPieceNode &node = at(i-1);
                 const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
                 if (curve->IsPointOnCurve(p))
                 {
@@ -511,7 +511,7 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
 {
     if (i < 0 && i > CountNodes()-1)
     {
-        return QPointF();
+        return VSAPoint();
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
@@ -522,14 +522,14 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
         points = VGObject::GetReversePoints(points);
     }
 
-    VSAPoint end = points.last();
+    VSAPoint end = VSAPoint(points.last());
     if (CountNodes() > 2)
     {
         if (i == CountNodes() - 1)
         {
             if (at(0).GetTypeTool() == Tool::NodePoint)
             {
-                const VPieceNode node = at(0);
+                const VPieceNode &node = at(0);
                 const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
                 if (curve->IsPointOnCurve(p))
                 {
@@ -543,7 +543,7 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
         {
             if (at(i+1).GetTypeTool() == Tool::NodePoint)
             {
-                const VPieceNode node = at(i+1);
+                const VPieceNode &node = at(i+1);
                 const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
                 if (curve->IsPointOnCurve(p))
                 {
