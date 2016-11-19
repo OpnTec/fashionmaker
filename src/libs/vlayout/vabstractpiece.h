@@ -35,6 +35,7 @@
 #include <QDebug>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/def.h"
 #include "../vgeometry/vgobject.h"
 
 template <class T> class QVector;
@@ -61,9 +62,13 @@ public:
     Q_DECL_CONSTEXPR qreal GetSAAfter() const;
                      void  SetSAAfter(qreal value);
 
+    Q_DECL_CONSTEXPR PieceNodeAngle GetAngleType() const;
+                     void           SetAngleType(PieceNodeAngle value);
+
 private:
-    qreal m_before;
-    qreal m_after;
+    qreal          m_before;
+    qreal          m_after;
+    PieceNodeAngle m_angle;
 };
 
 Q_DECLARE_METATYPE(VSAPoint)
@@ -73,21 +78,24 @@ Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
     : QPointF(),
       m_before(-1),
-      m_after(-1)
+      m_after(-1),
+      m_angle(PieceNodeAngle::ByLength)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
     : QPointF(xpos, ypos),
       m_before(-1),
-      m_after(-1)
+      m_after(-1),
+      m_angle(PieceNodeAngle::ByLength)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const QPointF &p)
     : QPointF(p),
       m_before(-1),
-      m_after(-1)
+      m_after(-1),
+      m_angle(PieceNodeAngle::ByLength)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,6 +120,18 @@ Q_DECL_CONSTEXPR inline qreal VSAPoint::GetSAAfter() const
 inline void VSAPoint::SetSAAfter(qreal value)
 {
     value < 0 ? m_after = -1 : m_after = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline PieceNodeAngle VSAPoint::GetAngleType() const
+{
+    return m_angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VSAPoint::SetAngleType(PieceNodeAngle value)
+{
+    m_angle = value;
 }
 
 QT_WARNING_POP
@@ -154,6 +174,8 @@ private:
     static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
     static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
+    static QVector<QPointF> AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
+                                          qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
     static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);

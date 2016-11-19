@@ -395,36 +395,20 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             // Comparison bisector angles helps to find direction
             if (angle <= 90)// Go in a same direction
             {//Regular equdistant case
-                const qreal length = line.length();
-                if (length > localWidth*2.4)
-                { // Cutting too long a cut angle
-                    line.setLength(localWidth);
-                    QLineF cutLine(line.p2(), CrosPoint); // Cut line is a perpendicular
-                    cutLine.setLength(length); // Decided take this length
-
-                    // We do not check intersection type because intersection must alwayse exist
-                    QPointF px;
-                    cutLine.setAngle(cutLine.angle()+90);
-                    QLineF::IntersectType type = bigLine1.intersect( cutLine, &px );
-                    if (type == QLineF::NoIntersection)
-                    {
-                        qDebug()<<"Couldn't find intersection with cut line.";
-                    }
-                    points.append(px);
-
-                    cutLine.setAngle(cutLine.angle()-180);
-                    type = bigLine2.intersect( cutLine, &px );
-                    if (type == QLineF::NoIntersection)
-                    {
-                        qDebug()<<"Couldn't find intersection with cut line.";
-                    }
-                    points.append(px);
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
+                switch (p2Line1.GetAngleType())
+                {
+                    case PieceNodeAngle::ByLength:
+                        return AngleByLength(p2Line1, bigLine1.p1(), CrosPoint, bigLine2.p2(), localWidth);
+                    case PieceNodeAngle::ByPointsIntersection:
+                    case PieceNodeAngle::ByFirstEdgeSymmetry:
+                    case PieceNodeAngle::BySecondEdgeSymmetry:
+                    case PieceNodeAngle::ByFirstEdgeRightAngle:
+                    case PieceNodeAngle::BySecondEdgeRightAngle:
+                        break;
                 }
-                else
-                { // The point just fine
-                    points.append(CrosPoint);
-                    return points;
-                }
+QT_WARNING_POP
             }
             else
             { // Different directions
@@ -437,6 +421,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
                 if (result1 <=0 && result2 <= 0)
                 {// Dart case. A bisector watch outside. In some cases a point still valid, but ignore if going
                  // outside of an equdistant.
+
                     const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth );
                     QPointF px;
                     const QLineF::IntersectType type = bigEdge.intersect(line, &px);
@@ -486,6 +471,45 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             break;
         default:
             break;
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractPiece::AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2,
+                                               const QPointF &sp3, qreal width)
+{
+    QVector<QPointF> points;
+
+    QLineF line(p2, sp2);
+    const qreal length = line.length();
+    if (length > width*2.4)
+    { // Cutting too long a cut angle
+        line.setLength(width);
+        QLineF cutLine(line.p2(), sp2); // Cut line is a perpendicular
+        cutLine.setLength(length); // Decided take this length
+
+        // We do not check intersection type because intersection must alwayse exist
+        QPointF px;
+        cutLine.setAngle(cutLine.angle()+90);
+        QLineF::IntersectType type = QLineF(sp1, sp2).intersect(cutLine, &px);
+        if (type == QLineF::NoIntersection)
+        {
+            qDebug()<<"Couldn't find intersection with cut line.";
+        }
+        points.append(px);
+
+        cutLine.setAngle(cutLine.angle()-180);
+        type = QLineF(sp2, sp3).intersect(cutLine, &px);
+        if (type == QLineF::NoIntersection)
+        {
+            qDebug()<<"Couldn't find intersection with cut line.";
+        }
+        points.append(px);
+    }
+    else
+    { // The point just fine
+        points.append(sp2);
     }
     return points;
 }

@@ -224,6 +224,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 
                 p.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
                 p.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+                p.SetAngleType(node.GetAngleType());
                 pointsEkv.append(p);
             }
             break;
@@ -399,11 +400,13 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
                 p.SetSABefore(begin.GetSABefore());
+                p.SetAngleType(begin.GetAngleType());
             }
             else if (i == points.size() - 1)
             { // last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
+                p.SetAngleType(end.GetAngleType());
             }
             pointsEkv.append(p);
         }
@@ -428,6 +431,7 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
         VSAPoint p(points.at(0));//First point in the list
         p.SetSAAfter(begin.GetSAAfter());
         p.SetSABefore(begin.GetSABefore());
+        p.SetAngleType(begin.GetAngleType());
         pointsEkv.append(p);
 
         qreal length = 0; // how much we handle
@@ -440,6 +444,7 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             {// last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
+                p.SetAngleType(end.GetAngleType());
             }
             else
             {
@@ -448,6 +453,7 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
 
                 p.SetSAAfter(localWidth);
                 p.SetSABefore(localWidth);
+                // curve points have angle type by default
             }
 
             pointsEkv.append(p);
@@ -485,6 +491,7 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
                     begin = VSAPoint(p);
                     begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
                     begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+                    begin.SetAngleType(node.GetAngleType());
                 }
             }
         }
@@ -499,6 +506,7 @@ VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
                     begin = VSAPoint(p);
                     begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
                     begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+                    begin.SetAngleType(node.GetAngleType());
                 }
             }
         }
@@ -536,6 +544,7 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
                     end = VSAPoint(p);
                     end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
                     end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+                    end.SetAngleType(node.GetAngleType());
                 }
             }
         }
@@ -550,6 +559,7 @@ VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
                     end = VSAPoint(p);
                     end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
                     end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+                    end.SetAngleType(node.GetAngleType());
                 }
             }
         }
