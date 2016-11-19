@@ -159,7 +159,10 @@ PieceNodeAngle VPieceNode::GetAngleType() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceNode::SetAngleType(PieceNodeAngle type)
 {
-    d->m_angleType = type;
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_angleType = type;
+    }
 }
 
 // Friend functions
