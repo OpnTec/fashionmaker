@@ -64,6 +64,7 @@ private slots:
     void ListChanged();
     void EnableSeamAllowance(bool enable);
     void NodeChanged(int index);
+    void NodeAngleChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
     void ChangedSABefore(double d);
@@ -87,6 +88,7 @@ private:
     bool    MainPathIsClockwise() const;
     QString GetNodeName(const VPieceNode &node) const;
     void    InitNodesList();
+    void    InitNodeAngles();
 
     QListWidgetItem *GetItemById(quint32 id);
 

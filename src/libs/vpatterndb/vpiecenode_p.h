@@ -44,7 +44,8 @@ public:
           m_typeTool(Tool::NodePoint),
           m_reverse(false),
           m_saBefore(-1),
-          m_saAfter(-1)
+          m_saAfter(-1),
+          m_angleType(PieceNodeAngle::ByLength)
     {}
 
     VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
@@ -52,7 +53,8 @@ public:
           m_typeTool(typeTool),
           m_reverse(reverse),
           m_saBefore(-1),
-          m_saAfter(-1)
+          m_saAfter(-1),
+          m_angleType(PieceNodeAngle::ByLength)
     {
         if (m_typeTool == Tool::NodePoint)
         {
@@ -66,7 +68,8 @@ public:
           m_typeTool(node.m_typeTool),
           m_reverse(node.m_reverse),
           m_saBefore(node.m_saBefore),
-          m_saAfter(node.m_saAfter)
+          m_saAfter(node.m_saAfter),
+          m_angleType(node.m_angleType)
     {}
 
     ~VPieceNodeData();
@@ -82,6 +85,8 @@ public:
 
     qreal m_saBefore;
     qreal m_saAfter;
+
+    PieceNodeAngle m_angleType;
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;

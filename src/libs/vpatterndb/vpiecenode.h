@@ -65,6 +65,9 @@ public:
     qreal GetSAAfter() const;
     qreal GetSAAfter(Unit unit) const;
     void  SetSAAfter(qreal value);
+
+    PieceNodeAngle GetAngleType() const;
+    void           SetAngleType(PieceNodeAngle type);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

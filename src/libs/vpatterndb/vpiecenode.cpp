@@ -150,6 +150,18 @@ void VPieceNode::SetSAAfter(qreal value)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+PieceNodeAngle VPieceNode::GetAngleType() const
+{
+    return d->m_angleType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetAngleType(PieceNodeAngle type)
+{
+    d->m_angleType = type;
+}
+
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream& operator<<(QDataStream& out, const VPieceNode& p)

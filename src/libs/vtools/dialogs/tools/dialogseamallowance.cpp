@@ -87,10 +87,16 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
     connect(ui->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
+    InitNodeAngles();
+    connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::NodeAngleChanged);
+
     if (not applyAllowed)
     {
         vis = new VisToolPiece(data);
     }
+
+    ui->tabWidget->setCurrentIndex(1);// Show always first tab active on start.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,9 +313,11 @@ void DialogSeamAllowance::NodeChanged(int index)
     ui->doubleSpinBoxSAAfter->setDisabled(true);
     ui->pushButtonDefBefore->setDisabled(true);
     ui->pushButtonDefAfter->setDisabled(true);
+    ui->comboBoxAngle->setDisabled(true);
 
     ui->doubleSpinBoxSABefore->blockSignals(true);
     ui->doubleSpinBoxSAAfter->blockSignals(true);
+    ui->comboBoxAngle->blockSignals(true);
 
     if (index != -1)
     {
@@ -322,10 +330,11 @@ void DialogSeamAllowance::NodeChanged(int index)
         const int nodeIndex = piece.indexOfNode(id);
         if (nodeIndex != -1)
         {
-            const VPieceNode node = piece.at(nodeIndex);
+            const VPieceNode &node = piece.at(nodeIndex);
 
             ui->doubleSpinBoxSABefore->setEnabled(true);
             ui->doubleSpinBoxSAAfter->setEnabled(true);
+            ui->comboBoxAngle->setEnabled(true);
 
             qreal w1 = node.GetSABefore();
             if (w1 < 0)
@@ -348,16 +357,54 @@ void DialogSeamAllowance::NodeChanged(int index)
                 ui->pushButtonDefAfter->setEnabled(true);
             }
             ui->doubleSpinBoxSAAfter->setValue(w2);
+
+            const int index = ui->comboBoxAngle->findData(static_cast<unsigned char>(node.GetAngleType()));
+            if (index != -1)
+            {
+                ui->comboBoxAngle->setCurrentIndex(index);
+            }
         }
     }
     else
     {
         ui->doubleSpinBoxSABefore->setValue(0);
         ui->doubleSpinBoxSAAfter->setValue(0);
+        ui->comboBoxAngle->setCurrentIndex(-1);
     }
 
     ui->doubleSpinBoxSABefore->blockSignals(false);
     ui->doubleSpinBoxSAAfter->blockSignals(false);
+    ui->comboBoxAngle->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::NodeAngleChanged(int index)
+{
+    const int i = ui->comboBoxNodes->currentIndex();
+    if (i != -1 && index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(i).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+        #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->itemData(index).toUInt());
+        #else
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
+        #endif
+
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetAngleType(angle);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -599,6 +646,24 @@ void DialogSeamAllowance::InitNodesList()
     {
         ui->comboBoxNodes->count() > 0 ? NodeChanged(0) : NodeChanged(-1);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitNodeAngles()
+{
+    ui->comboBoxAngle->clear();
+
+    ui->comboBoxAngle->addItem(tr("by length"), static_cast<unsigned char>(PieceNodeAngle::ByLength));
+    ui->comboBoxAngle->addItem(tr("by points intersetions"),
+                               static_cast<unsigned char>(PieceNodeAngle::ByPointsIntersection));
+    ui->comboBoxAngle->addItem(tr("by second edge symmetry"),
+                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
+    ui->comboBoxAngle->addItem(tr("by first edge symmetry"),
+                               static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeSymmetry));
+    ui->comboBoxAngle->addItem(tr("by first edge right angle"),
+                               static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeRightAngle));
+    ui->comboBoxAngle->addItem(tr("by second edge right angle"),
+                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeRightAngle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

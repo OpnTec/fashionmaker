@@ -238,6 +238,14 @@ void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement,
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
+
+    const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
+
+    if (angleType > 0)
+    {
+        doc->SetAttribute(nod, AttrAngle, angleType);
+    }
+
     domElement.appendChild(nod);
 }
 

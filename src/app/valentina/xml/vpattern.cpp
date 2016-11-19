@@ -751,6 +751,7 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
             const bool reverse = GetParametrUInt(element, VToolSeamAllowance::AttrNodeReverse, "0");
             const qreal saBefore = GetParametrDouble(element, VToolSeamAllowance::AttrSABefore, "-1");
             const qreal saAfter = GetParametrDouble(element, VToolSeamAllowance::AttrSAAfter, "-1");
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(GetParametrUInt(element, AttrAngle, "0"));
 
             const QString t = GetParametrString(element, AttrType, VToolSeamAllowance::NodePoint);
             Tool tool;
@@ -776,6 +777,7 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
             VPieceNode node(id, tool, reverse);
             node.SetSABefore(saBefore);
             node.SetSAAfter(saAfter);
+            node.SetAngleType(angle);
             detail.Append(node);
         }
     }
