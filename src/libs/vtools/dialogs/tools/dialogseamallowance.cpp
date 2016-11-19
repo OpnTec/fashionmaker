@@ -656,10 +656,10 @@ void DialogSeamAllowance::InitNodeAngles()
     ui->comboBoxAngle->addItem(tr("by length"), static_cast<unsigned char>(PieceNodeAngle::ByLength));
     ui->comboBoxAngle->addItem(tr("by points intersetions"),
                                static_cast<unsigned char>(PieceNodeAngle::ByPointsIntersection));
-    ui->comboBoxAngle->addItem(tr("by second edge symmetry"),
-                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
     ui->comboBoxAngle->addItem(tr("by first edge symmetry"),
                                static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeSymmetry));
+    ui->comboBoxAngle->addItem(tr("by second edge symmetry"),
+                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
     ui->comboBoxAngle->addItem(tr("by first edge right angle"),
                                static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeRightAngle));
     ui->comboBoxAngle->addItem(tr("by second edge right angle"),
