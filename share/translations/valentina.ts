@@ -1687,7 +1687,7 @@
     </message>
     <message>
         <source>Filter list by keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter list by keyword</translation>
     </message>
 </context>
 <context>

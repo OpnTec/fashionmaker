@@ -3031,19 +3031,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1504"/>
         <source>neck_side_to_armfold_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>encolure_cote_au_pli_coude_d</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1506"/>
         <source>Neck Side to Armfold Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Encolure côté au Bas de l&apos;Aisselle Dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1507"/>
         <source>From Neck Side diagonal to Armfold Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Diagonale partant de l&apos;Encolure Côté au Bas de l&apos;Aisselle Dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1511"/>
@@ -3181,7 +3181,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1575"/>
         <source>Arm: Shoulder Tip to Elbow</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bras: Pointe épaule au Coude</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1576"/>
@@ -3355,37 +3355,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1641"/>
         <source>arm_shoulder_tip_to_armfold_line</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bras_pointe_epaule_a_ligne_basse_aisselle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1643"/>
         <source>Arm: Shoulder Tip to Armfold line</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bras: Pointe d&apos;Épaule à la ligne basse de l&apos;Aisselle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1644"/>
         <source>From Shoulder Tip down to Armpit level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Partir de la Pointe d&apos;Épaule et descendre jusqu&apos;au niveau d&apos;Aisselle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1647"/>
         <source>arm_neck_side_to_wrist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bras_encolure_cote_au_poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1649"/>
         <source>Arm: Neck Side to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bras: Encolure Côté au Poignet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1650"/>
         <source>From Neck Side to Wrist. (&apos;Shoulder Length&apos; + &apos;Arm: Shoulder Tip to Wrist&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>De l&apos;Encolure Côté jusqu&apos;au Poignet. (&apos;Longueur Épaule&apos; + &apos;Bras: Pointe d&apos;Épaule au Poignet&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1655"/>

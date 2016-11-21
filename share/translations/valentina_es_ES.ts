@@ -1688,7 +1688,7 @@
     </message>
     <message>
         <source>Filter list by keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de filtros por palabra clave</translation>
     </message>
 </context>
 <context>
@@ -7516,43 +7516,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>light salmon</source>
-        <translation type="unfinished"></translation>
+        <translation>salmón claro</translation>
     </message>
     <message>
         <source>golden rod</source>
-        <translation type="unfinished"></translation>
+        <translation>barra dorada</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>naranja</translation>
     </message>
     <message>
         <source>deep pink</source>
-        <translation type="unfinished"></translation>
+        <translation>rosa produndo</translation>
     </message>
     <message>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violeta</translation>
     </message>
     <message>
         <source>dark violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violeta oscuro</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation type="unfinished"></translation>
+        <translation>verde mar medio</translation>
     </message>
     <message>
         <source>lime</source>
-        <translation type="unfinished"></translation>
+        <translation>limón</translation>
     </message>
     <message>
         <source>deep sky blue</source>
-        <translation type="unfinished"></translation>
+        <translation>azul cielo profundo</translation>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation type="unfinished"></translation>
+        <translation>azul flor de maíz</translation>
     </message>
 </context>
 <context>
@@ -7886,11 +7886,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
+        <translation>Número correspondiente a formato de producción (por defecto = 0, modo de exportación):</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
+        <translation>Número correspondiente a plantilla de página (por defecto = 0, modo de esportación):</translation>
     </message>
 </context>
 <context>
@@ -7909,11 +7909,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number of free id exhausted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de ID gratuita agotado.</translation>
     </message>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No puede crear una curva con el tipo &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -8236,47 +8236,47 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto de curvas de intersección</translation>
     </message>
     <message>
         <source>Error creating or updating simple interactive spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar una tira interactiva simple</translation>
     </message>
     <message>
         <source>Error creating or updating interactive spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar camino de tira interactiva</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar curva bezier cúbica</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar camino de curva bezier cúbica</translation>
     </message>
     <message>
         <source>Error creating or updating operation of rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar operación de rotación</translation>
     </message>
     <message>
         <source>Unknown operation type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de operación desconocida &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar la oparación de dar la vuelta por línea</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar la oparación de dar la vuelta por eje</translation>
     </message>
     <message>
         <source>Error creating or updating operation of moving</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar la oparación de mover</translation>
     </message>
     <message>
         <source>Error creating or updating point of line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar intersección de punto de línea</translation>
     </message>
 </context>
 <context>
@@ -8308,6 +8308,10 @@ Do you want to save your changes?</source>
 <context>
     <name>VTextManager</name>
     <message>
+        <source>Cut %1 on %2%3</source>
+        <translation type="vanished">Cortar %1 en %2%3</translation>
+    </message>
+    <message>
         <source> on Fold</source>
         <translation type="vanished">Sobre pliegue</translation>
     </message>
@@ -8316,12 +8320,16 @@ Do you want to save your changes?</source>
         <translation type="vanished">sobre pliegue</translation>
     </message>
     <message>
+        <source>Cut</source>
+        <translation type="vanished">Cortar</translation>
+    </message>
+    <message>
         <source>cut</source>
-        <translation type="unfinished"></translation>
+        <translation>cortar</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>en pliegue</translation>
     </message>
 </context>
 <context>
@@ -8336,43 +8344,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>mover marca de estampado</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>escalar marca de estampado</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar marca de estampado</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>mover marca de información de estampado</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>escalar marca de información de estampado</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar marca de información de estampado</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>En diseño</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>mover línea discontinua</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>escalar línea discontinua</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar línea discontinua</translation>
     </message>
 </context>
 <context>
@@ -8579,7 +8587,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para crear punto desde dos curvas de intersección</translation>
     </message>
     <message>
         <source>Vertical correction</source>
@@ -8615,7 +8623,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta curva bezier cúbica</translation>
     </message>
     <message>
         <source>Tool rotation</source>
@@ -8635,19 +8643,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool move</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta mover</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta girar por línea</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta girar por eje</translation>
     </message>
     <message>
         <source>Axis type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de eje</translation>
     </message>
 </context>
 <context>
@@ -8658,7 +8666,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalle unido</translation>
     </message>
 </context>
 <context>
@@ -9746,7 +9754,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Seg_</source>
         <comment>Segment. Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Seg_</translation>
     </message>
     <message>
         <source>CurrentLength</source>
@@ -9756,37 +9764,37 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>tamaño</translation>
     </message>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengthSpl_</translation>
     </message>
     <message>
         <source>C2LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengthSpl_</translation>
     </message>
     <message>
         <source>C1LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengthSplPath</translation>
     </message>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengthSplPath</translation>
     </message>
 </context>
 <context>
@@ -9815,7 +9823,7 @@ Do you want to save your changes?</source>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario</translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -9823,31 +9831,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar todo</translation>
     </message>
     <message>
         <source>Select none</source>
-        <translation type="unfinished"></translation>
+        <translation>No seleccionar ninguno</translation>
     </message>
     <message>
         <source>select all details</source>
-        <translation type="unfinished"></translation>
+        <translation>seleccionar todos los detalles</translation>
     </message>
     <message>
         <source>select none details</source>
-        <translation type="unfinished"></translation>
+        <translation>no seleccionar ningún detalle</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertir selección</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>invertir selección</translation>
     </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
+    <message>
+        <source>Form</source>
+        <translation type="vanished">Form</translation>
+    </message>
     <message>
         <source>Rename</source>
         <translation>Renombrar</translation>
@@ -9869,7 +9881,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Camino curvado&lt;/b&gt;: selecciona más puntos para completar el segmento</translation>
     </message>
 </context>
 <context>
@@ -9887,7 +9899,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sleccionar en distancia y ángulo&lt;/b&gt;: ángulo = %1°, longitud = %2%3; &lt;b&gt;Shift&lt;/b&gt; - crear ángulo, &lt;b&gt;Intro&lt;/b&gt; - terminar creación</translation>
     </message>
 </context>
 <context>
@@ -9901,21 +9913,21 @@ Do you want to save your changes?</source>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud = %1%2, ángulo = %3°, &lt;b&gt;Shift&lt;/b&gt; - crear ángulo, &lt;b&gt;Click de ratón&lt;/b&gt; - terminar creación</translation>
     </message>
 </context>
 <context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotar ángulo = %1°, &lt;b&gt;Shift&lt;/b&gt; - crear ángulo, &lt;b&gt;Click de ratón&lt;/b&gt; - terminar creación</translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Usar &lt;b&gt;Shift&lt;/b&gt; para crear ángulo!</translation>
     </message>
 </context>
 <context>
@@ -9930,7 +9942,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Usar &lt;b&gt;Shift&lt;/b&gt; para crear ángulo!</translation>
     </message>
 </context>
 <context>
@@ -9977,11 +9989,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error crítico</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fatal</translation>
     </message>
     <message>
         <source>Information</source>
