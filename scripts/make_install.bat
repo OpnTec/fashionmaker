@@ -36,6 +36,8 @@ IF exist build (
 	del /s /q /f build\Makefile
 	del /s /q /f build\*.exe
 	del /s /q /f build\*.dll
+	del /q /f build\src\app\tape\obj\dialogabouttape.o
+	del /q /f build\src\app\valentina\obj\dialogaboutapp.o
 ) 
 mkdir build && echo build created
 cd build
