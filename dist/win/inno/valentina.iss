@@ -117,40 +117,40 @@ Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Components]
 Name: "lang_files"; Description: "Language Component"; Types: full custom; Flags: fixed
-Name: "lang_files\english"; Description: "English"; Types: full full_english custom;
-Name: "lang_files\english\us"; Description: "English (United States)"; Types: full full_english custom;
-Name: "lang_files\english\in"; Description: "English (India)"; Types: full full_english custom;
-Name: "lang_files\english\ca"; Description: "English (Canada)"; Types: full full_english custom;
-;Name: "lang_files\armenian"; Description: "Armenian"; Types: full full_armenian custom;
-Name: "lang_files\brazilianportuguese"; Description: "Brazilian portuguese"; Types: full full_brazilianportuguese custom;
-;Name: "lang_files\catalan"; Description: "Catalan"; Types: full full_catalan custom; 
-;Name: "lang_files\corsican"; Description: "Corsican"; Types: full full_orsican custom;
-Name: "lang_files\czech"; Description: "Czech"; Types: full full_czech custom;
-;Name: "lang_files\danish"; Description: "Danish"; Types: full full_danish custom;
-Name: "lang_files\dutch"; Description: "Dutch"; Types: full full_dutch custom;
-Name: "lang_files\finnish"; Description: "Finnish"; Types: full full_finnish custom;
-Name: "lang_files\french"; Description: "French"; Types: full full_french custom;
-Name: "lang_files\german"; Description: "German"; Types: full full_german custom;
-Name: "lang_files\greek"; Description: "Greek"; Types: full full_greek custom;
-Name: "lang_files\hebrew"; Description: "Hebrew"; Types: full full_hebrew custom;
-;Name: "lang_files\hungarian"; Description: "Hungarian"; Types: full full_hungarian custom;
-Name: "lang_files\italian"; Description: "Italian"; Types: full full_italian custom;
-;Name: "lang_files\japanese"; Description: "Japanese"; Types: full full_japanese custom;
-;Name: "lang_files\nepali"; Description: "Nepali"; Types: full full_nepali custom;
-;Name: "lang_files\norwegian"; Description: "Norwegian"; Types: full full_norwegian custom;
-;Name: "lang_files\polish"; Description: "Polish"; Types: full full_polish custom;
-;Name: "lang_files\portuguese"; Description: "Portuguese"; Types: full full_portuguese custom;
-Name: "lang_files\russian"; Description: "Russian"; Types: full full_russian custom;
-;Name: "lang_files\scottishgaelic"; Description: "Scottish gaelic"; Types: full full_scottishgaelic custom;
-;Name: "lang_files\serbiancyrillic"; Description: "Serbian cyrillic"; Types: full full_serbiancyrillic custom;
-;Name: "lang_files\serbianlatin"; Description: "Serbian latin"; Types: full full_serbianlatin custom;
-;Name: "lang_files\slovenian"; Description: "Slovenian"; Types: full full_slovenian custom;
-Name: "lang_files\spanish"; Description: "Spanish"; Types: full full_spanish custom;
-;Name: "lang_files\turkish"; Description: "Turkish"; Types: full full_turkish custom;
-Name: "lang_files\ukrainian"; Description: "Ukrainian"; Types: full full_ukrainian custom;
-Name: "lang_files\indonesian"; Description: "Indonesian"; Types: full custom;
-Name: "lang_files\romanian"; Description: "Romanian"; Types: full custom;
-Name: "lang_files\chinese"; Description: "Chinese (China)"; Types: full custom;
+Name: "lang_files\english"; Description: "English"; Types: full full_english custom; Flags: disablenouninstallwarning
+Name: "lang_files\english\us"; Description: "English (United States)"; Types: full full_english custom; Flags: disablenouninstallwarning
+Name: "lang_files\english\in"; Description: "English (India)"; Types: full full_english custom; Flags: disablenouninstallwarning
+Name: "lang_files\english\ca"; Description: "English (Canada)"; Types: full full_english custom; Flags: disablenouninstallwarning
+;Name: "lang_files\armenian"; Description: "Armenian"; Types: full full_armenian custom; Flags: disablenouninstallwarning
+Name: "lang_files\brazilianportuguese"; Description: "Brazilian portuguese"; Types: full full_brazilianportuguese custom; Flags: disablenouninstallwarning
+;Name: "lang_files\catalan"; Description: "Catalan"; Types: full full_catalan custom; Flags: disablenouninstallwarning 
+;Name: "lang_files\corsican"; Description: "Corsican"; Types: full full_orsican custom; Flags: disablenouninstallwarning
+Name: "lang_files\czech"; Description: "Czech"; Types: full full_czech custom; Flags: disablenouninstallwarning
+;Name: "lang_files\danish"; Description: "Danish"; Types: full full_danish custom; Flags: disablenouninstallwarning
+Name: "lang_files\dutch"; Description: "Dutch"; Types: full full_dutch custom; Flags: disablenouninstallwarning
+Name: "lang_files\finnish"; Description: "Finnish"; Types: full full_finnish custom; Flags: disablenouninstallwarning
+Name: "lang_files\french"; Description: "French"; Types: full full_french custom; Flags: disablenouninstallwarning
+Name: "lang_files\german"; Description: "German"; Types: full full_german custom; Flags: disablenouninstallwarning
+Name: "lang_files\greek"; Description: "Greek"; Types: full full_greek custom; Flags: disablenouninstallwarning
+Name: "lang_files\hebrew"; Description: "Hebrew"; Types: full full_hebrew custom; Flags: disablenouninstallwarning
+;Name: "lang_files\hungarian"; Description: "Hungarian"; Types: full full_hungarian custom; Flags: disablenouninstallwarning
+Name: "lang_files\italian"; Description: "Italian"; Types: full full_italian custom; Flags: disablenouninstallwarning
+;Name: "lang_files\japanese"; Description: "Japanese"; Types: full full_japanese custom; Flags: disablenouninstallwarning
+;Name: "lang_files\nepali"; Description: "Nepali"; Types: full full_nepali custom; Flags: disablenouninstallwarning
+;Name: "lang_files\norwegian"; Description: "Norwegian"; Types: full full_norwegian custom; Flags: disablenouninstallwarning
+;Name: "lang_files\polish"; Description: "Polish"; Types: full full_polish custom; Flags: disablenouninstallwarning
+;Name: "lang_files\portuguese"; Description: "Portuguese"; Types: full full_portuguese custom; Flags: disablenouninstallwarning
+Name: "lang_files\russian"; Description: "Russian"; Types: full full_russian custom; Flags: disablenouninstallwarning
+;Name: "lang_files\scottishgaelic"; Description: "Scottish gaelic"; Types: full full_scottishgaelic custom; Flags: disablenouninstallwarning
+;Name: "lang_files\serbiancyrillic"; Description: "Serbian cyrillic"; Types: full full_serbiancyrillic custom; Flags: disablenouninstallwarning
+;Name: "lang_files\serbianlatin"; Description: "Serbian latin"; Types: full full_serbianlatin custom; Flags: disablenouninstallwarning
+;Name: "lang_files\slovenian"; Description: "Slovenian"; Types: full full_slovenian custom; Flags: disablenouninstallwarning
+Name: "lang_files\spanish"; Description: "Spanish"; Types: full full_spanish custom; Flags: disablenouninstallwarning
+;Name: "lang_files\turkish"; Description: "Turkish"; Types: full full_turkish custom; Flags: disablenouninstallwarning
+Name: "lang_files\ukrainian"; Description: "Ukrainian"; Types: full full_ukrainian custom; Flags: disablenouninstallwarning
+Name: "lang_files\indonesian"; Description: "Indonesian"; Types: full custom; Flags: disablenouninstallwarning
+Name: "lang_files\romanian"; Description: "Romanian"; Types: full custom; Flags: disablenouninstallwarning
+Name: "lang_files\chinese"; Description: "Chinese (China)"; Types: full custom; Flags: disablenouninstallwarning
 
 [Files]
 ; Signing
@@ -220,6 +220,9 @@ Source: ".\valentina\*.dbg"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\valentina\*.yes"; DestDir: "{app}"; Flags: ignoreversion 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
+
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\translations"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
