@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogseamallowance.h
+ **  @file   dialogpiecepath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   3 11, 2016
+ **  @date   22 11, 2016
  **
  **  @brief
  **  @copyright
@@ -26,29 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGSEAMALLOWANCE_H
-#define DIALOGSEAMALLOWANCE_H
+#ifndef DIALOGPIECEPATH_H
+#define DIALOGPIECEPATH_H
 
 #include "dialogtool.h"
-#include "../vpatterndb/vpiece.h"
 
 namespace Ui
 {
-    class DialogSeamAllowance;
+    class DialogPiecePath;
 }
 
-class DialogSeamAllowance : public DialogTool
+class DialogPiecePath : public DialogTool
 {
     Q_OBJECT
-
 public:
-    DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSeamAllowance();
+    explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    virtual ~DialogPiecePath();
 
-    void EnableApply(bool enable);
+    void DisableShowMode(bool disable);
 
-    VPiece GetPiece() const;
-    void   SetPiece(const VPiece &m_piece);
+//    VPiecePath GetPiecePath() const;
+//    void       SetPiecePath(const VPiecePath &path);
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
@@ -62,35 +60,18 @@ protected:
 private slots:
     void ShowContextMenu(const QPoint &pos);
     void ListChanged();
-    void EnableSeamAllowance(bool enable);
-    void NodeChanged(int index);
-    void NodeAngleChanged(int index);
-    void ReturnDefBefore();
-    void ReturnDefAfter();
-    void ChangedSABefore(double d);
-    void ChangedSAAfter(double d);
+    void NameChanged();
 
 private:
-    Q_DISABLE_COPY(DialogSeamAllowance)
+    Q_DISABLE_COPY(DialogPiecePath)
+    Ui::DialogPiecePath *ui;
+    bool m_showMode;
 
-    Ui::DialogSeamAllowance *ui;
-    bool   applyAllowed;
-    qreal  m_mx;
-    qreal  m_my;
+//    VPiecePath CreatePath() const;
 
-    VPiece CreatePiece() const;
-
-    void    NewItem(const VPieceNode &node);
-    bool    MainPathIsValid() const;
-    void    ValidObjects(bool value);
-    bool    MainPathIsClockwise() const;
-    void    InitNodesList();
-    void    InitNodeAngles();
-
-    QListWidgetItem *GetItemById(quint32 id);
-
-    void SetCurrentSABefore(qreal value);
-    void SetCurrentSAAfter(qreal value);
+    bool PathIsValid() const;
+    void ValidObjects(bool value);
+    void NewItem(const VPieceNode &node);
 };
 
-#endif // DIALOGSEAMALLOWANCE_H
+#endif // DIALOGPIECEPATH_H

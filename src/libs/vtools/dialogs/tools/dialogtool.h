@@ -274,6 +274,14 @@ protected:
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
     virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
     quint32          DNumber(const QString &baseName) const;
+
+    static quint32   RowId(QListWidget *listWidget, int i);
+    static bool      FirstPointEqualLast(QListWidget *listWidget);
+    static bool      DoublePoints(QListWidget *listWidget);
+    static QString   DialogWarningIcon();
+
+    QString          GetNodeName(const VPieceNode &node) const;
+    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 

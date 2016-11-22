@@ -31,7 +31,6 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "visualization/path/vistoolpiece.h"
 
-#include <QBuffer>
 #include <QMenu>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -453,69 +452,13 @@ VPiece DialogSeamAllowance::CreatePiece() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NewItem(const VPieceNode &node)
 {
-    SCASSERT(node.GetId() > NULL_ID);
-    QString name;
-    switch (node.GetTypeTool())
-    {
-        case (Tool::NodePoint):
-        case (Tool::NodeArc):
-        case (Tool::NodeSpline):
-        case (Tool::NodeSplinePath):
-        {
-            name = GetNodeName(node);
-            break;
-        }
-        default:
-            qDebug()<<"Got wrong tools. Ignore.";
-            return;
-    }
-
-
-
-    bool canAddNewPoint = false;
-
-    if(ui->listWidget->count() == 0)
-    {
-        canAddNewPoint = true;
-    }
-    else
-    {
-        if(RowId(ui->listWidget->count()-1) != node.GetId())
-        {
-            canAddNewPoint = true;
-        }
-    }
-
-    if(canAddNewPoint)
-    {
-        QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, QVariant::fromValue(node));
-        ui->listWidget->addItem(item);
-        ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 DialogSeamAllowance::RowId(int i) const
-{
-    const QListWidgetItem *rowItem = ui->listWidget->item(i);
-    SCASSERT(rowItem != nullptr);
-    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-    return rowNode.GetId();
+    NewNodeItem(ui->listWidget, node);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogSeamAllowance::MainPathIsValid() const
 {
-    const QIcon icon = QIcon::fromTheme("dialog-warning",
-                                  QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
-
-    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    pixmap.save(&buffer, "PNG");
-    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
+    QString url = DialogWarningIcon();
 
     if(CreatePiece().MainPathPoints(data).count() < 3)
     {
@@ -531,23 +474,17 @@ bool DialogSeamAllowance::MainPathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
-        if (FirstPointEqualLast())
+        if (FirstPointEqualLast(ui->listWidget))
         {
             url += tr("First point cannot be equal to the last point!");
             ui->helpLabel->setText(url);
             return false;
         }
-        else
+        else if (DoublePoints(ui->listWidget))
         {
-            for (int i=0, sz = ui->listWidget->count()-1; i<sz; ++i)
-            {
-                if (RowId(i) == RowId(i+1))
-                {
-                    url += tr("You have double points!");
-                    ui->helpLabel->setText(url);
-                    return false;
-                }
-            }
+            url += tr("You have double points!");
+            ui->helpLabel->setText(url);
+            return false;
         }
     }
     ui->helpLabel->setText(tr("Ready!"));
@@ -559,23 +496,6 @@ void DialogSeamAllowance::ValidObjects(bool value)
 {
     flagError = value;
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool DialogSeamAllowance::FirstPointEqualLast() const
-{
-    if (ui->listWidget->count() > 1)
-    {
-        if (RowId(0) == RowId(ui->listWidget->count()-1))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -594,20 +514,6 @@ bool DialogSeamAllowance::MainPathIsClockwise() const
         return true;
     }
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSeamAllowance::GetNodeName(const VPieceNode &node) const
-{
-    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
-    QString name = obj->name();
-
-    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
-    {
-        name = QLatin1String("- ") + name;
-    }
-
-    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

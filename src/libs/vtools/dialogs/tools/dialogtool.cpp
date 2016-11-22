@@ -58,6 +58,7 @@
 #include <Qt>
 #include <QtDebug>
 #include <new>
+#include <QBuffer>
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
@@ -66,6 +67,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vabstractcurve.h"
@@ -390,6 +392,114 @@ quint32 DialogTool::DNumber(const QString &baseName) const
     } while (not data->IsUnique(name));
 
     return num;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 DialogTool::RowId(QListWidget *listWidget, int i)
+{
+    SCASSERT(listWidget != nullptr);
+    const QListWidgetItem *rowItem = listWidget->item(i);
+    SCASSERT(rowItem != nullptr);
+    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+    return rowNode.GetId();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::FirstPointEqualLast(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    if (listWidget->count() > 1)
+    {
+        return RowId(listWidget, 0) == RowId(listWidget, listWidget->count()-1);
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::DoublePoints(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    {
+        if (RowId(listWidget, i) == RowId(listWidget, i+1))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::DialogWarningIcon()
+{
+    const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                  QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+
+    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    pixmap.save(&buffer, "PNG");
+    const QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
+    return url;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::GetNodeName(const VPieceNode &node) const
+{
+    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
+    QString name = obj->name();
+
+    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
+    {
+        name = QLatin1String("- ") + name;
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
+{
+    SCASSERT(listWidget != nullptr);
+    SCASSERT(node.GetId() > NULL_ID);
+    QString name;
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
+        case (Tool::NodeArc):
+        case (Tool::NodeSpline):
+        case (Tool::NodeSplinePath):
+        {
+            name = GetNodeName(node);
+            break;
+        }
+        default:
+            qDebug()<<"Got wrong tools. Ignore.";
+            return;
+    }
+
+    bool canAddNewPoint = false;
+
+    if(listWidget->count() == 0)
+    {
+        canAddNewPoint = true;
+    }
+    else
+    {
+        if(RowId(listWidget, listWidget->count()-1) != node.GetId())
+        {
+            canAddNewPoint = true;
+        }
+    }
+
+    if(canAddNewPoint)
+    {
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, QVariant::fromValue(node));
+        listWidget->addItem(item);
+        listWidget->setCurrentRow(listWidget->count()-1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
