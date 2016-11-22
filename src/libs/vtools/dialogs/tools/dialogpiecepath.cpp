@@ -56,6 +56,8 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
         ui->comboBoxType->setDisabled(true);
         ui->comboBoxPiece->setDisabled(true);
     }
+
+    show();//temporary
 }
 
 //---------------------------------------------------------------------------------------------------------------------

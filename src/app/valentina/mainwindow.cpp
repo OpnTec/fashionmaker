@@ -953,6 +953,14 @@ void MainWindow::ToolDetail(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolPiecePath(bool checked)
+{
+    ToolSelectAllDrawObjects();
+    SetToolButton<DialogPiecePath>(checked, Tool::PiecePath, "://cursor/path_cursor.png", tr("Select path objects."),
+                                   &MainWindow::ClosedDialogPiecePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ClosedDialogDetail actions after closing DialogDetail.
  * @param result result of dialog working.
@@ -1100,6 +1108,19 @@ void MainWindow::ClosedDialogGroup(int result)
             connect(addGroup, &AddGroup::UpdateGroups, groupsWidget, &VWidgetGroups::UpdateGroups);
             qApp->getUndoStack()->push(addGroup);
         }
+    }
+    ArrowTool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClosedDialogPiecePath(int result)
+{
+    SCASSERT(dialogTool != nullptr);
+    if (result == QDialog::Accepted)
+    {
+        DialogPiecePath *dialog = qobject_cast<DialogPiecePath*>(dialogTool);
+        SCASSERT(dialog != nullptr);
+
     }
     ArrowTool();
 }
@@ -1671,6 +1692,7 @@ void MainWindow::ToolBarDraws()
     });
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarTools()
 {
     /*First we will try use Standard Shortcuts from Qt, but because keypad "-" and "+" not the same keys like in main
@@ -1717,6 +1739,9 @@ void MainWindow::InitToolButtons()
         connect(pointer, &QToolButton::clicked, this, &MainWindow::ArrowTool);
     }
 
+    // This check helps to find missed tools
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Check if all tools were connected.");
+
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
     connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
@@ -1731,6 +1756,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCubicBezierPath, &QToolButton::clicked, this, &MainWindow::ToolCubicBezierPath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
+    connect(ui->toolButtonPiecePath, &QToolButton::clicked, this, &MainWindow::ToolPiecePath);
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
     connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
     connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
@@ -1786,7 +1812,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1874,6 +1900,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::Piece:
             ui->toolButtonNewDetail->setChecked(false);
+            break;
+        case Tool::PiecePath:
+            ui->toolButtonPiecePath->setChecked(false);
             break;
         case Tool::Height:
             ui->toolButtonHeight->setChecked(false);
@@ -2987,7 +3016,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3004,6 +3033,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCubicBezierPath->setEnabled(drawTools);
     ui->toolButtonPointOfContact->setEnabled(drawTools);
     ui->toolButtonNewDetail->setEnabled(drawTools);
+    ui->toolButtonPiecePath->setEnabled(drawTools);
     ui->toolButtonHeight->setEnabled(drawTools);
     ui->toolButtonTriangle->setEnabled(drawTools);
     ui->toolButtonPointOfIntersection->setEnabled(drawTools);
@@ -3307,7 +3337,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3400,6 +3430,10 @@ void MainWindow::LastUsedTool()
         case Tool::Piece:
             ui->toolButtonNewDetail->setChecked(true);
             ToolDetail(true);
+            break;
+        case Tool::PiecePath:
+            ui->toolButtonPiecePath->setChecked(true);
+            ToolPiecePath(true);
             break;
         case Tool::Height:
             ui->toolButtonHeight->setChecked(true);

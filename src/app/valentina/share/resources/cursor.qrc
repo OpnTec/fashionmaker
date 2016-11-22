@@ -76,5 +76,7 @@
         <file>cursor/flipping_axis_cursor@2x.png</file>
         <file>cursor/move_cursor.png</file>
         <file>cursor/move_cursor@2x.png</file>
+        <file>cursor/path_cursor.png</file>
+        <file>cursor/path_cursor@2x.png</file>
     </qresource>
 </RCC>

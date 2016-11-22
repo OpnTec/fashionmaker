@@ -103,6 +103,7 @@ enum class Tool : ToolVisHolderType
     PointOfContact,
     Detail,
     Piece,
+    PiecePath,
     NodePoint,
     NodeArc,
     NodeSpline,
@@ -170,7 +171,8 @@ enum class Vis : ToolVisHolderType
     ToolFlippingByLine,
     ToolFlippingByAxis,
     ToolMove,
-    ToolPiece
+    ToolPiece,
+    ToolPiecePath
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,
