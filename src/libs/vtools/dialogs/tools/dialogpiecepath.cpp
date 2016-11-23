@@ -29,6 +29,7 @@
 #include "dialogpiecepath.h"
 #include "ui_dialogpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "visualization/path/vistoolpiecepath.h"
 
 #include <QMenu>
 
@@ -36,7 +37,7 @@
 DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
     ui(new Ui::DialogPiecePath),
-    m_showMode(true)
+    m_showMode(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -49,15 +50,13 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 
     if (not m_showMode)
     {
-        //vis = new VisToolPiecePath(data);
+        vis = new VisToolPiecePath(data);
     }
     else
     {
         ui->comboBoxType->setDisabled(true);
         ui->comboBoxPiece->setDisabled(true);
     }
-
-    show();//temporary
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,22 +107,22 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 
         if (not m_showMode)
         {
-//        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
-//        SCASSERT(visPath != nullptr);
-//        const VPiecePath p = CreatePath();
-//        visPath->SetPath(p);
+            auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+            SCASSERT(visPath != nullptr);
+            const VPiecePath p = CreatePath();
+            visPath->SetPath(p);
 
-//        if (p.CountNodes() == 1)
-//        {
-//            emit ToolTip(tr("Select main path objects, <b>Shift</b> - reverse direction curve, "
-//                            "<b>Enter</b> - finish creation"));
+            if (p.CountNodes() == 1)
+            {
+                emit ToolTip(tr("Select main path objects, <b>Shift</b> - reverse direction curve, "
+                                "<b>Enter</b> - finish creation"));
 
-//            visPath->VisualMode(NULL_ID);
-//        }
-//        else
-//        {
-//            visPath->RefreshGeometry();
-//        }
+                visPath->VisualMode(NULL_ID);
+            }
+            else
+            {
+                visPath->RefreshGeometry();
+            }
         }
     }
 }
@@ -138,10 +137,10 @@ void DialogPiecePath::ShowDialog(bool click)
 
         if (not m_showMode)
         {
-//            auto visPath = qobject_cast<VisToolPiecePath *>(vis);
-//            SCASSERT(visPath != nullptr);
-//            visPath->SetMode(Mode::Show);
-//            visPath->RefreshGeometry();
+            auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+            SCASSERT(visPath != nullptr);
+            visPath->SetMode(Mode::Show);
+            visPath->RefreshGeometry();
         }
         setModal(true);
         show();
@@ -206,10 +205,10 @@ void DialogPiecePath::ListChanged()
 {
     if (not m_showMode)
     {
-//        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
-//        SCASSERT(visPath != nullptr);
-//        visPath->SetPiece(CreatePath());
-//        visPath->RefreshGeometry();
+        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+        SCASSERT(visPath != nullptr);
+        visPath->SetPath(CreatePath());
+        visPath->RefreshGeometry();
     }
 }
 
@@ -230,49 +229,64 @@ void DialogPiecePath::NameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-//VPiecePath DialogPiecePath::GetPiecePath() const
-//{
-
-//}
-
-//---------------------------------------------------------------------------------------------------------------------
-//void DialogPiecePath::SetPiecePath(const VPiecePath &path)
-//{
-
-//}
+VPiecePath DialogPiecePath::GetPiecePath() const
+{
+    return CreatePath();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-//VPiecePath DialogPiecePath::CreatePath() const
-//{
+void DialogPiecePath::SetPiecePath(const VPiecePath &path)
+{
+    ui->listWidget->clear();
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        NewItem(path.at(i));
+    }
 
-//}
+    ValidObjects(PathIsValid());
+
+    ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath DialogPiecePath::CreatePath() const
+{
+    VPiecePath path;
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidget->item(i);
+        path.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
+    }
+
+    return path;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogPiecePath::PathIsValid() const
 {
-//    QString url = DialogWarningIcon();
+    QString url = DialogWarningIcon();
 
-//    if(CreatePath().Points(data).count() < 2)
-//    {
-//        url += tr("You need more points!");
-//        ui->helpLabel->setText(url);
-//        return false;
-//    }
-//    else
-//    {
-//        if (FirstPointEqualLast(ui->listWidget))
-//        {
-//            url += tr("First point cannot be equal to the last point!");
-//            ui->helpLabel->setText(url);
-//            return false;
-//        }
-//        else if (DoublePoints(ui->listWidget))
-//        {
-//            url += tr("You have double points!");
-//            ui->helpLabel->setText(url);
-//            return false;
-//        }
-//    }
+    if(CreatePath().PathPoints(data).count() < 2)
+    {
+        url += tr("You need more points!");
+        ui->helpLabel->setText(url);
+        return false;
+    }
+    else
+    {
+        if (FirstPointEqualLast(ui->listWidget))
+        {
+            url += tr("First point cannot be equal to the last point!");
+            ui->helpLabel->setText(url);
+            return false;
+        }
+        else if (DoublePoints(ui->listWidget))
+        {
+            url += tr("You have double points!");
+            ui->helpLabel->setText(url);
+            return false;
+        }
+    }
     ui->helpLabel->setText(tr("Ready!"));
     return true;
 }

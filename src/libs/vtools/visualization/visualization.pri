@@ -38,7 +38,8 @@ HEADERS += \
     $$PWD/line/operation/visoperation.h \
     $$PWD/line/operation/vistoolflippingbyaxis.h \
     $$PWD/line/operation/vistoolmove.h \
-    $$PWD/path/vistoolpiece.h
+    $$PWD/path/vistoolpiece.h \
+    $$PWD/path/vistoolpiecepath.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -77,4 +78,5 @@ SOURCES += \
     $$PWD/line/operation/visoperation.cpp \
     $$PWD/line/operation/vistoolflippingbyaxis.cpp \
     $$PWD/line/operation/vistoolmove.cpp \
-    $$PWD/path/vistoolpiece.cpp
+    $$PWD/path/vistoolpiece.cpp \
+    $$PWD/path/vistoolpiecepath.cpp

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   dialogpiecepath.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   22 11, 2016
  **
@@ -26,52 +26,38 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGPIECEPATH_H
-#define DIALOGPIECEPATH_H
+#ifndef VISTOOLPIECEPATH_H
+#define VISTOOLPIECEPATH_H
 
-#include "dialogtool.h"
+#include <QtCore/QObject>
+#include <QtGlobal>
 
-namespace Ui
-{
-    class DialogPiecePath;
-}
+#include "vispath.h"
+#include "../vpatterndb/vpiecepath.h"
 
-class DialogPiecePath : public DialogTool
+class VisToolPiecePath : public VisPath
 {
     Q_OBJECT
 public:
-    explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPiecePath();
+    VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPiecePath();
 
-    void DisableShowMode(bool disable);
-
-    VPiecePath GetPiecePath() const;
-    void       SetPiecePath(const VPiecePath &path);
-
-public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
-
-protected:
-    /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void CheckState() Q_DECL_OVERRIDE;
-
-private slots:
-    void ShowContextMenu(const QPoint &pos);
-    void ListChanged();
-    void NameChanged();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    void         SetPath(const VPiecePath &piece);
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
 
 private:
-    Q_DISABLE_COPY(DialogPiecePath)
-    Ui::DialogPiecePath *ui;
-    bool m_showMode;
+    Q_DISABLE_COPY(VisToolPiecePath)
+    QVector<QGraphicsEllipseItem *> m_points;
 
-    VPiecePath CreatePath() const;
+    QGraphicsLineItem *m_line;
 
-    bool PathIsValid() const;
-    void ValidObjects(bool value);
-    void NewItem(const VPieceNode &node);
+    VPiecePath m_path;
+
+    QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
+
+    void HideAllItems();
 };
 
-#endif // DIALOGPIECEPATH_H
+#endif // VISTOOLPIECEPATH_H
