@@ -77,7 +77,6 @@ public:
     bool           ChangeNamePP(const QString& oldName, const QString &newName);
     bool           appendPP(const QString& name);
 
-    bool           GetActivDrawElement(QDomElement &element) const;
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
 
     quint32        getCursor() const;
@@ -342,7 +341,8 @@ protected:
 
     void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
 
-    int GetIndexActivPP() const;
+    int  GetIndexActivPP() const;
+    bool GetActivDrawElement(QDomElement &element) const;
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 
@@ -360,6 +360,7 @@ private:
     bool IsFunction(const QString& token) const;
 
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
+
 };
 
 //---------------------------------------------------------------------------------------------------------------------
