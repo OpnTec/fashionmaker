@@ -42,6 +42,10 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     ui->setupUi(this);
     InitOkCancel(ui);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditName->setClearButtonEnabled(true);
+#endif
+
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
