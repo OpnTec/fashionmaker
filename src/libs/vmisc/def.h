@@ -74,6 +74,8 @@ enum class PieceNodeAngle : unsigned char
     BySecondEdgeRightAngle
 };
 
+enum class PiecePathType :  unsigned char {CutomSeamAllowance, InternalPath};
+
 typedef unsigned char ToolVisHolderType;
 enum class Tool : ToolVisHolderType
 {

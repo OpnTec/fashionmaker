@@ -42,11 +42,15 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     ui->setupUi(this);
     InitOkCancel(ui);
 
+    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
+
+    InitPathTypes();
+    connect(ui->comboBoxType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            [this](){ValidObjects(PathIsValid());});
+
     flagName = true;//We have default name of piece.
     flagError = PathIsValid();
     CheckState();
-
-    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     if (not m_showMode)
     {
@@ -155,7 +159,7 @@ void DialogPiecePath::SaveData()
 void DialogPiecePath::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && ui->comboBoxPiece->count() > 0);
+    bOk->setEnabled(flagName && flagError);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -229,6 +233,13 @@ void DialogPiecePath::NameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPathTypes()
+{
+    ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CutomSeamAllowance));
+    //ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiecePath DialogPiecePath::GetPiecePath() const
 {
     return CreatePath();
@@ -246,6 +257,29 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     ValidObjects(PathIsValid());
 
     ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PiecePathType DialogPiecePath::GetType() const
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const PiecePathType type =
+            static_cast<PiecePathType>(ui->comboBoxType->itemData(ui->comboBoxType->currentIndex()).toInt());
+#else
+    const PiecePathType type = static_cast<PiecePathType>(ui->comboBoxType->currentData().toInt());
+#endif
+
+    return type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetType(PiecePathType type)
+{
+    const qint32 index = ui->comboBoxType->findData(static_cast<int>(type));
+    if (index != -1)
+    {
+        ui->comboBoxType->setCurrentIndex(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +308,7 @@ bool DialogPiecePath::PathIsValid() const
     }
     else
     {
-        if (FirstPointEqualLast(ui->listWidget))
+        if (GetType() == PiecePathType::CutomSeamAllowance && FirstPointEqualLast(ui->listWidget))
         {
             url += tr("First point cannot be equal to the last point!");
             ui->helpLabel->setText(url);
@@ -287,6 +321,14 @@ bool DialogPiecePath::PathIsValid() const
             return false;
         }
     }
+
+    if (m_showMode && ui->comboBoxPiece->count() <= 0)
+    {
+        url += tr("List of pieces is empty!");
+        ui->helpLabel->setText(url);
+        return false;
+    }
+
     ui->helpLabel->setText(tr("Ready!"));
     return true;
 }

@@ -48,6 +48,9 @@ public:
     VPiecePath GetPiecePath() const;
     void       SetPiecePath(const VPiecePath &path);
 
+    PiecePathType GetType() const;
+    void          SetType(PiecePathType type);
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
@@ -66,6 +69,8 @@ private:
     Q_DISABLE_COPY(DialogPiecePath)
     Ui::DialogPiecePath *ui;
     bool m_showMode;
+
+    void InitPathTypes();
 
     VPiecePath CreatePath() const;
 
