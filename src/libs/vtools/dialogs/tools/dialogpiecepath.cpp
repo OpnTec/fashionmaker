@@ -140,18 +140,21 @@ void DialogPiecePath::ShowDialog(bool click)
 {
     if (click == false)
     {
-        emit ToolTip("");
-        prepare = true;
-
-        if (not m_showMode)
+        if (CreatePath().CountNodes() > 0)
         {
-            auto visPath = qobject_cast<VisToolPiecePath *>(vis);
-            SCASSERT(visPath != nullptr);
-            visPath->SetMode(Mode::Show);
-            visPath->RefreshGeometry();
+            emit ToolTip("");
+            prepare = true;
+
+            if (not m_showMode)
+            {
+                auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+                SCASSERT(visPath != nullptr);
+                visPath->SetMode(Mode::Show);
+                visPath->RefreshGeometry();
+            }
+            setModal(true);
+            show();
         }
-        setModal(true);
-        show();
     }
 }
 

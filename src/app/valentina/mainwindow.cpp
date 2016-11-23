@@ -964,7 +964,8 @@ void MainWindow::ToolDetail(bool checked)
 void MainWindow::ToolPiecePath(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButton<DialogPiecePath>(checked, Tool::PiecePath, "://cursor/path_cursor.png", tr("Select path objects."),
+    SetToolButton<DialogPiecePath>(checked, Tool::PiecePath, "://cursor/path_cursor.png",
+                                   tr("Select path objects, <b>Shift</b> - reverse direction curve"),
                                    &MainWindow::ClosedDialogPiecePath);
 }
 
