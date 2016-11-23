@@ -46,7 +46,8 @@ public:
         : m_path(),
           m_mx(0),
           m_my(0),
-          m_inLayout(true)
+          m_inLayout(true),
+          m_united(false)
     {}
 
     VPieceData(const VPieceData &detail)
@@ -54,7 +55,8 @@ public:
           m_path(detail.m_path),
           m_mx(detail.m_mx),
           m_my(detail.m_my),
-          m_inLayout(detail.m_inLayout)
+          m_inLayout(detail.m_inLayout),
+          m_united(detail.m_united)
     {}
 
     ~VPieceData();
@@ -66,6 +68,7 @@ public:
     qreal m_my;
 
     bool m_inLayout;
+    bool m_united;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

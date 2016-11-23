@@ -220,6 +220,18 @@ void VPiece::SetInLayout(bool inLayout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPiece::IsUnited() const
+{
+    return d->m_united;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetUnited(bool united)
+{
+    d->m_united = united;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.

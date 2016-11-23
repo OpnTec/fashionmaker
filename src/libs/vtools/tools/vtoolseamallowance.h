@@ -64,6 +64,7 @@ public:
     static const QString AttrWidth;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
+    static const QString AttrUnited;
 
     static const QString NodeArc;
     static const QString NodePoint;

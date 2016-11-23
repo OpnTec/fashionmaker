@@ -624,6 +624,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetForbidFlipping(GetParametrBool(domElement, VToolSeamAllowance::AttrForbidFlipping,
                                            QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
+        detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
         const QStringList tags = QStringList() << VToolSeamAllowance::TagNodes
                                                << TagData

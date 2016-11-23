@@ -420,6 +420,7 @@
                                                                            <xs:attribute name="forbidFlipping" type="xs:boolean"></xs:attribute>
                                                                            <xs:attribute name="width" type="xs:double"></xs:attribute>
                                                                            <xs:attribute name="seamAllowance" type="xs:boolean"></xs:attribute>
+                                                                           <xs:attribute name="united" type="xs:boolean"></xs:attribute>
                                                                      </xs:complexType>
                                                                </xs:element>
                                                          </xs:sequence>

@@ -72,6 +72,9 @@ public:
     bool IsInLayout() const;
     void SetInLayout(bool inLayout);
 
+    bool IsUnited() const;
+    void SetUnited(bool united);
+
     QVector<VPieceNode> Missing(const VPiece &det) const;
 
     int indexOfNode(const quint32 &id) const;

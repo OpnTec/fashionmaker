@@ -67,6 +67,7 @@ const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllow
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 const QString VToolSeamAllowance::AttrSABefore       = QStringLiteral("before");
 const QString VToolSeamAllowance::AttrSAAfter        = QStringLiteral("after");
+const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 
 const QString VToolSeamAllowance::NodeArc        = QStringLiteral("NodeArc");
 const QString VToolSeamAllowance::NodePoint      = QStringLiteral("NodePoint");
@@ -278,6 +279,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
     doc->SetAttribute(domElement, AttrWidth, piece.GetSAWidth());
+    doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
