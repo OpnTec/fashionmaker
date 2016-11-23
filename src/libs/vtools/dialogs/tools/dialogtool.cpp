@@ -1074,6 +1074,12 @@ void DialogTool::Build(const Tool &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetPiecesList(const QVector<quint32> &list)
+{
+    Q_UNUSED(list);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
     if (tool != nullptr)

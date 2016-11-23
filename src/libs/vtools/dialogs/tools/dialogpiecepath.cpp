@@ -283,6 +283,52 @@ void DialogPiecePath::SetType(PiecePathType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogPiecePath::GetPieceId() const
+{
+    quint32 id = NULL_ID;
+
+    if (ui->comboBoxPiece->count() > 0)
+    {
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    id = ui->comboBoxPiece->itemData(ui->comboBoxPiece->currentIndex()).toUInt();
+#else
+    id = ui->comboBoxPiece->currentData().toUInt();
+#endif
+    }
+
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetPieceId(quint32 id)
+{
+    if (ui->comboBoxPiece->count() <= 0)
+    {
+        const VPiece piece = data->GetPiece(id);
+        ui->comboBoxPiece->addItem(piece.GetName(), id);
+    }
+    else
+    {
+        const qint32 index = ui->comboBoxPiece->findData(id);
+        if (index != -1)
+        {
+            ui->comboBoxType->setCurrentIndex(index);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetPiecesList(const QVector<quint32> &list)
+{
+    for (int i=0; i < list.size(); ++i)
+    {
+        const VPiece piece = data->GetPiece(list.at(i));
+        ui->comboBoxPiece->addItem(piece.GetName(), list.at(i));
+    }
+    ValidObjects(PathIsValid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiecePath DialogPiecePath::CreatePath() const
 {
     VPiecePath path;

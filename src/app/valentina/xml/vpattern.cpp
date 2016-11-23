@@ -351,6 +351,31 @@ quint32 VPattern::SPointActiveDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPattern::GetActivePPPieces() const
+{
+    QVector<quint32> pieces;
+    QDomElement drawElement;
+    if (GetActivDrawElement(drawElement))
+    {
+        const QDomElement details = drawElement.firstChildElement(TagDetails);
+        if (not details.isNull())
+        {
+            QDomElement detail = details.firstChildElement(TagDetail);
+            while(not detail.isNull())
+            {
+                bool united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr);
+                if (not united)
+                {
+                    pieces.append(GetParametrId(detail));
+                }
+                detail = detail.nextSiblingElement(TagDetail);
+            }
+        }
+    }
+    return pieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::SaveDocument(const QString &fileName, QString &error) const
 {
     try

@@ -58,6 +58,7 @@
 #include "dialogs/vwidgetgroups.h"
 #include "../vtools/undocommands/addgroup.h"
 #include "dialogs/vwidgetdetails.h"
+#include "../vpatterndb/vpiecepath.h"
 
 #include <QInputDialog>
 #include <QtDebug>
@@ -558,9 +559,16 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         ui->view->setShowToolOptions(false);
         dialogTool = new Dialog(pattern, 0, this);
 
-        if (t == Tool::Midpoint)
+        switch(t)
         {
-            dialogTool->Build(t);
+            case Tool::Midpoint:
+                dialogTool->Build(t);
+                break;
+            case Tool::PiecePath:
+                dialogTool->SetPiecesList(doc->GetActivePPPieces());
+                break;
+            default:
+                break;
         }
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
@@ -1121,8 +1129,12 @@ void MainWindow::ClosedDialogPiecePath(int result)
         DialogPiecePath *dialog = qobject_cast<DialogPiecePath*>(dialogTool);
         SCASSERT(dialog != nullptr);
 
+        const PiecePathType type = dialog->GetType();
+        const VPiecePath path = dialog->GetPiecePath();
+        //VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
     }
     ArrowTool();
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -51,6 +51,11 @@ public:
     PiecePathType GetType() const;
     void          SetType(PiecePathType type);
 
+    quint32 GetPieceId() const;
+    void    SetPieceId(quint32 id);
+
+    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
@@ -71,6 +76,7 @@ private:
     bool m_showMode;
 
     void InitPathTypes();
+    void InitListPieces();
 
     VPiecePath CreatePath() const;
 
