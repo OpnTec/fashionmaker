@@ -322,7 +322,7 @@ bool DialogPiecePath::PathIsValid() const
         }
     }
 
-    if (m_showMode && ui->comboBoxPiece->count() <= 0)
+    if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
         url += tr("List of pieces is empty!");
         ui->helpLabel->setText(url);
