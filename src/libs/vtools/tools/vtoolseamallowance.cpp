@@ -29,6 +29,7 @@
 #include "vtoolseamallowance.h"
 #include "../dialogs/tools/dialogseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
@@ -88,10 +89,10 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
     VPiece detail = dialogTool->GetPiece();
     QVector<VPieceNode> nodes;
     qApp->getUndoStack()->beginMacro("add detail");
-    for (int i = 0; i< detail.CountNodes(); ++i)
+    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
         quint32 id = 0;
-        VPieceNode nodeD = detail.at(i);
+        VPieceNode nodeD = detail.GetPath().at(i);
         switch (nodeD.GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -142,7 +143,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
         nodes.append(nodeD);
     }
 
-    detail.SetNodes(nodes);
+    detail.GetPath().SetNodes(nodes);
     VToolSeamAllowance *piece = Create(0, detail, scene, doc, data, Document::FullParse, Source::FromGui);
 
     if (piece != nullptr)
@@ -252,12 +253,12 @@ void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement,
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
-    if (piece.CountNodes() > 0)
+    if (piece.GetPath().CountNodes() > 0)
     {
         QDomElement nodesElement = doc->createElement(TagNodes);
-        for (int i = 0; i < piece.CountNodes(); ++i)
+        for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
         {
-            AddNode(doc, nodesElement, piece.at(i));
+            AddNode(doc, nodesElement, piece.GetPath().at(i));
         }
         domElement.appendChild(nodesElement);
     }
@@ -635,24 +636,24 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
       m_seamAllowance(new VNoBrushScalePathItem(this))
 {
     VPiece detail = data->GetPiece(id);
-    for (int i = 0; i< detail.CountNodes(); ++i)
+    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
-        switch (detail.at(i).GetTypeTool())
+        switch (detail.GetPath().at(i).GetTypeTool())
         {
             case (Tool::NodePoint):
             {
-                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.at(i));
+                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i));
                 connect(tool, &VNodePoint::ShowContextMenu, this, &VToolSeamAllowance::contextMenuEvent);
                 break;
             }
             case (Tool::NodeArc):
-                doc->IncrementReferens(detail.at(i).GetId());
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
                 break;
             case (Tool::NodeSpline):
-                doc->IncrementReferens(detail.at(i).GetId());
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
                 break;
             case (Tool::NodeSplinePath):
-                doc->IncrementReferens(detail.at(i).GetId());
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
                 break;
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";

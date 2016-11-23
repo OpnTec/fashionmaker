@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   3 11, 2016
+ **  @date   22 11, 2016
  **
  **  @brief
  **  @copyright
@@ -26,55 +26,49 @@
  **
  *************************************************************************/
 
-#ifndef VPIECE_P_H
-#define VPIECE_P_H
+#ifndef VPIECEPATH_H
+#define VPIECEPATH_H
 
-#include <QSharedData>
-#include <QVector>
+#include <QtGlobal>
+#include <QSharedDataPointer>
 
-#include "../vmisc/diagnostic.h"
-#include "vpiecenode.h"
-#include "vpiecepath.h"
+class VPiecePathData;
+class VPieceNode;
+class QPointF;
+class VContainer;
+class VSAPoint;
+class QPainterPath;
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Weffc++")
-
-class VPieceData : public QSharedData
+class VPiecePath
 {
 public:
-    VPieceData()
-        : m_path(),
-          m_mx(0),
-          m_my(0),
-          m_inLayout(true)
-    {}
+    VPiecePath();
+    VPiecePath(const VPiecePath &path);
+    VPiecePath &operator=(const VPiecePath &path);
+    ~VPiecePath();
 
-    VPieceData(const VPieceData &detail)
-        : QSharedData(detail),
-          m_path(detail.m_path),
-          m_mx(detail.m_mx),
-          m_my(detail.m_my),
-          m_inLayout(detail.m_inLayout)
-    {}
+    void   Append(const VPieceNode &node);
+    void   Clear();
+    qint32 CountNodes() const;
 
-    ~VPieceData();
+    VPieceNode & operator[](int indx);
+    const VPieceNode & at ( int indx ) const;
 
-    /** @brief nodes list detail nodes. */
-    VPiecePath m_path;
+    QVector<VPieceNode> GetNodes() const;
+    void                SetNodes(const QVector<VPieceNode> &nodes);
 
-    qreal m_mx;
-    qreal m_my;
+    QVector<QPointF> PathPoints(const VContainer *data) const;
+    QVector<QPointF> PathNodePoints(const VContainer *data) const;
 
-    bool m_inLayout;
+    QPainterPath PainterPath(const VContainer *data) const;
+
+    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
+    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
 
 private:
-    VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;
+    QSharedDataPointer<VPiecePathData> d;
 };
 
-VPieceData::~VPieceData()
-{}
+Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);
 
-QT_WARNING_POP
-
-#endif // VPIECE_P_H
-
+#endif // VPIECEPATH_H

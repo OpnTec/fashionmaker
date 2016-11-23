@@ -23,7 +23,8 @@ SOURCES += \
     $$PWD/vgrainlinegeometry.cpp \
     $$PWD/variables/vcurveclength.cpp \
     $$PWD/vpiece.cpp \
-    $$PWD/vpiecenode.cpp
+    $$PWD/vpiecenode.cpp \
+    $$PWD/vpiecepath.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -63,4 +64,6 @@ HEADERS += \
     $$PWD/vpiece.h \
     $$PWD/vpiece_p.h \
     $$PWD/vpiecenode.h \
-    $$PWD/vpiecenode_p.h
+    $$PWD/vpiecenode_p.h \
+    $$PWD/vpiecepath.h \
+    $$PWD/vpiecepath_p.h

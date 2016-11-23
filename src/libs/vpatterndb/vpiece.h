@@ -42,6 +42,7 @@ class VContainer;
 template <class T> class QVector;
 template <class T>class QSharedPointer;
 class VAbstractCurve;
+class VPiecePath;
 
 class VPiece : public VAbstractPiece
 {
@@ -51,16 +52,9 @@ public:
     VPiece &operator=(const VPiece &piece);
     virtual ~VPiece();
 
-    void   Append(const VPieceNode &node);
-    void   Clear();
-    void   ClearNodes();
-    qint32 CountNodes() const;
-
-    VPieceNode & operator[](int indx);
-    const VPieceNode & at ( int indx ) const;
-
-    QVector<VPieceNode> GetNodes() const;
-    void                SetNodes(const QVector<VPieceNode> &nodes);
+    VPiecePath GetPath() const;
+    VPiecePath &GetPath();
+    void       SetPath(const VPiecePath &path);
 
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
     QVector<QPointF> MainPathNodePoints(const VContainer *data) const;
@@ -87,8 +81,6 @@ private:
 
     void CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
                                    const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const;
-    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
-    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
 
     static int indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };

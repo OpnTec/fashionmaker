@@ -54,6 +54,7 @@
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vpiecepath.h"
 
 #include <QMessageBox>
 #include <QUndoStack>
@@ -778,7 +779,7 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
             node.SetSABefore(saBefore);
             node.SetSAAfter(saAfter);
             node.SetAngleType(angle);
-            detail.Append(node);
+            detail.GetPath().Append(node);
         }
     }
 }

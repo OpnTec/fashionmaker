@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   3 11, 2016
+ **  @date   22 11, 2016
  **
  **  @brief
  **  @copyright
@@ -26,55 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef VPIECE_P_H
-#define VPIECE_P_H
+#ifndef VPIECEPATH_P_H
+#define VPIECEPATH_P_H
 
 #include <QSharedData>
 #include <QVector>
 
 #include "../vmisc/diagnostic.h"
 #include "vpiecenode.h"
-#include "vpiecepath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-class VPieceData : public QSharedData
+class VPiecePathData : public QSharedData
 {
 public:
-    VPieceData()
-        : m_path(),
-          m_mx(0),
-          m_my(0),
-          m_inLayout(true)
+    VPiecePathData()
+        : m_nodes()
     {}
 
-    VPieceData(const VPieceData &detail)
-        : QSharedData(detail),
-          m_path(detail.m_path),
-          m_mx(detail.m_mx),
-          m_my(detail.m_my),
-          m_inLayout(detail.m_inLayout)
+    VPiecePathData(const VPiecePathData &path)
+        : QSharedData(path),
+          m_nodes(path.m_nodes)
     {}
 
-    ~VPieceData();
+    ~VPiecePathData();
 
-    /** @brief nodes list detail nodes. */
-    VPiecePath m_path;
-
-    qreal m_mx;
-    qreal m_my;
-
-    bool m_inLayout;
+    QVector<VPieceNode> m_nodes;
 
 private:
-    VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;
+    VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;
 };
 
-VPieceData::~VPieceData()
+VPiecePathData::~VPiecePathData()
 {}
 
 QT_WARNING_POP
 
-#endif // VPIECE_P_H
+#endif // VPIECEPATH_P_H
 

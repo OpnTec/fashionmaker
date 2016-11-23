@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpiece.h"
+#include "../vpatterndb/vpiecepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
@@ -49,7 +50,7 @@ void VisToolPiece::RefreshGeometry()
 {
     HideAllItems();
 
-    if (m_piece.CountNodes() > 0)
+    if (m_piece.GetPath().CountNodes() > 0)
     {
         DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
 
@@ -99,7 +100,6 @@ void VisToolPiece::HideAllItems()
         m_line2->setVisible(false);
     }
 
-    QVector<QGraphicsEllipseItem *> m_points;
     for (int i=0; i < m_points.size(); ++i)
     {
         if (QGraphicsEllipseItem *item = m_points.at(i))

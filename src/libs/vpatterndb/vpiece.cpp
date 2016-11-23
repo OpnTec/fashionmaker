@@ -63,114 +63,27 @@ VPiece::~VPiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief append append in the end of list node.
- * @param node new node.
- */
-void VPiece::Append(const VPieceNode &node)
+VPiecePath VPiece::GetPath() const
 {
-    d->m_nodes.append(node);
+    return d->m_path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/** @brief Clear detail full clear. */
-void VPiece::Clear()
+VPiecePath &VPiece::GetPath()
 {
-    ClearNodes();
+    return d->m_path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/** @brief ClearNodes clear list of nodes. */
-void VPiece::ClearNodes()
+void VPiece::SetPath(const VPiecePath &path)
 {
-    d->m_nodes.clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CountNode return count nodes.
- * @return count.
- */
-qint32 VPiece::CountNodes() const
-{
-    return d->m_nodes.size();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief operator [] find node by index in list.
- * @param indx index node in list.
- * @return node
- */
-VPieceNode &VPiece::operator [](int indx)
-{
-    return d->m_nodes[indx];
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief at find node by index in list.
- * @param indx index node in list.
- * @return const node.
- */
-const VPieceNode &VPiece::at(int indx) const
-{
-    return d->m_nodes.at(indx);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getNodes return list of nodes.
- * @return list of nodes.
- */
-QVector<VPieceNode> VPiece::GetNodes() const
-{
-    return d->m_nodes;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setNodes set list of nodes
- * @param value list of nodes
- */
-// cppcheck-suppress unusedFunction
-void VPiece::SetNodes(const QVector<VPieceNode> &nodes)
-{
-    d->m_nodes = nodes;
+    d->m_path = path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 {
-    QVector<QPointF> points;
-    for (int i = 0; i < CountNodes(); ++i)
-    {
-        switch (at(i).GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(*point);
-            }
-            break;
-            case (Tool::NodeArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-            {
-                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
-
-                points << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
-            }
-            break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
-                break;
-        }
-    }
-
+    QVector<QPointF> points = GetPath().PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
     return points;
 }
@@ -178,26 +91,7 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::MainPathNodePoints(const VContainer *data) const
 {
-    QVector<QPointF> points;
-    for (int i = 0; i < CountNodes(); ++i)
-    {
-        switch (at(i).GetTypeTool())
-        {
-            case Tool::NodePoint:
-            {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(*point);
-            }
-            break;
-            case Tool::NodeArc:
-            case Tool::NodeSpline:
-            case Tool::NodeSplinePath:
-            default:
-                break;
-        }
-    }
-
-    return points;
+    return GetPath().PathNodePoints(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,9 +106,9 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
     }
 
     QVector<VSAPoint> pointsEkv;
-    for (int i = 0; i< CountNodes(); ++i)
+    for (int i = 0; i< d->m_path.CountNodes(); ++i)
     {
-        const VPieceNode &node = at(i);
+        const VPieceNode &node = d->m_path.at(i);
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -334,31 +228,32 @@ void VPiece::SetInLayout(bool inLayout)
  */
 QVector<VPieceNode> VPiece::Missing(const VPiece &det) const
 {
-    if (d->m_nodes.size() == det.CountNodes()) //-V807
+    const QVector<VPieceNode> pNodes = d->m_path.GetNodes();
+    if (pNodes.size() == det.GetPath().CountNodes()) //-V807
     {
         return QVector<VPieceNode>();
     }
 
     QSet<quint32> set1;
-    for (qint32 i = 0; i < d->m_nodes.size(); ++i)
+    for (qint32 i = 0; i < pNodes.size(); ++i)
     {
-        set1.insert(d->m_nodes.at(i).GetId());
+        set1.insert(pNodes.at(i).GetId());
     }
 
     QSet<quint32> set2;
-    for (qint32 j = 0; j < det.CountNodes(); ++j)
+    for (qint32 j = 0; j < det.GetPath().CountNodes(); ++j)
     {
-        set2.insert(det.at(j).GetId());
+        set2.insert(det.GetPath().at(j).GetId());
     }
 
     const QList<quint32> set3 = set1.subtract(set2).toList();
     QVector<VPieceNode> nodes;
     for (qint32 i = 0; i < set3.size(); ++i)
     {
-        const int index = indexOfNode(d->m_nodes, set3.at(i));
+        const int index = indexOfNode(pNodes, set3.at(i));
         if (index != -1)
         {
-            nodes.append(d->m_nodes.at(index));
+            nodes.append(pNodes.at(index));
         }
     }
 
@@ -373,15 +268,15 @@ QVector<VPieceNode> VPiece::Missing(const VPiece &det) const
  */
 int VPiece::indexOfNode(const quint32 &id) const
 {
-    return indexOfNode(d->m_nodes, id);
+    return indexOfNode(d->m_path.GetNodes(), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
                                        const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const
 {
-    const VSAPoint begin = StartSegment(data, i, reverse);
-    const VSAPoint end = EndSegment(data, i, reverse);
+    const VSAPoint begin = d->m_path.StartSegment(data, i, reverse);
+    const VSAPoint end = d->m_path.EndSegment(data, i, reverse);
 
     const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
     if (points.isEmpty())
@@ -459,112 +354,6 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             pointsEkv.append(p);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiece::StartSegment(const VContainer *data, int i, bool reverse) const
-{
-    if (i < 0 && i > CountNodes()-1)
-    {
-        return VSAPoint();
-    }
-
-    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-
-    QVector<QPointF> points = curve->GetPoints();
-    if (reverse)
-    {
-        points = VGObject::GetReversePoints(points);
-    }
-
-    VSAPoint begin = VSAPoint(points.first());
-    if (CountNodes() > 1)
-    {
-        if (i == 0)
-        {
-            if (at(CountNodes()-1).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = at(CountNodes()-1);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    begin.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
-        else
-        {
-            if (at(i-1).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = at(i-1);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    begin.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
-    }
-    return begin;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiece::EndSegment(const VContainer *data, int i, bool reverse) const
-{
-    if (i < 0 && i > CountNodes()-1)
-    {
-        return VSAPoint();
-    }
-
-    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-
-    QVector<QPointF> points = curve->GetPoints();
-    if (reverse)
-    {
-        points = VGObject::GetReversePoints(points);
-    }
-
-    VSAPoint end = VSAPoint(points.last());
-    if (CountNodes() > 2)
-    {
-        if (i == CountNodes() - 1)
-        {
-            if (at(0).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = at(0);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    end = VSAPoint(p);
-                    end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    end.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
-        else
-        {
-            if (at(i+1).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = at(i+1);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    end = VSAPoint(p);
-                    end.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    end.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    end.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
-    }
-    return end;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

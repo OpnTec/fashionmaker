@@ -29,6 +29,7 @@
 #include "dialogseamallowance.h"
 #include "ui_dialogseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "visualization/path/vistoolpiece.h"
 
 #include <QMenu>
@@ -123,9 +124,9 @@ VPiece DialogSeamAllowance::GetPiece() const
 void DialogSeamAllowance::SetPiece(const VPiece &piece)
 {
     ui->listWidget->clear();
-    for (int i = 0; i < piece.CountNodes(); ++i)
+    for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
     {
-        NewItem(piece.at(i));
+        NewItem(piece.GetPath().at(i));
     }
 
     ui->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
@@ -186,7 +187,7 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
             const VPiece p = CreatePiece();
             visPath->SetPiece(p);
 
-            if (p.CountNodes() == 1)
+            if (p.GetPath().CountNodes() == 1)
             {
                 emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
                                 "<b>Enter</b> - finish creation"));
@@ -329,7 +330,7 @@ void DialogSeamAllowance::NodeChanged(int index)
         const int nodeIndex = piece.indexOfNode(id);
         if (nodeIndex != -1)
         {
-            const VPieceNode &node = piece.at(nodeIndex);
+            const VPieceNode &node = piece.GetPath().at(nodeIndex);
 
             ui->doubleSpinBoxSABefore->setEnabled(true);
             ui->doubleSpinBoxSAAfter->setEnabled(true);
@@ -437,7 +438,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
         QListWidgetItem *item = ui->listWidget->item(i);
-        piece.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
+        piece.GetPath().Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
 
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
@@ -530,9 +531,9 @@ void DialogSeamAllowance::InitNodesList()
 
     const VPiece piece = CreatePiece();
 
-    for (int i = 0; i < piece.CountNodes(); ++i)
+    for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
     {
-        const VPieceNode node = piece.at(i);
+        const VPieceNode node = piece.GetPath().at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
             const QString name = GetNodeName(node);

@@ -28,6 +28,7 @@
 
 #include "addpiece.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VPiece &detail, const QString &drawName,
@@ -61,7 +62,7 @@ void AddPiece::undo()
                 return;
             }
 
-            DecrementReferences(m_detail.GetNodes());
+            DecrementReferences(m_detail.GetPath().GetNodes());
         }
         else
         {

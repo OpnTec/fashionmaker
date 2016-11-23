@@ -39,6 +39,7 @@
 #include "../tools/vdatatool.h"
 #include "vundocommand.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 
 class QUndoCommand;
 
@@ -105,7 +106,7 @@ void DeletePiece::redo()
         SCASSERT(toolDet != nullptr);
         toolDet->hide();
 
-        DecrementReferences(m_detail.GetNodes());
+        DecrementReferences(m_detail.GetPath().GetNodes());
         emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
     }
     else
