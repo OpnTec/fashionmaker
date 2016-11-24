@@ -132,6 +132,10 @@ private:
                                      const Document &parse, const QString& type);
     void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
                                          const QString& type);
+
+    void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void           ParsePathNodes(const QDomElement &domElement, VPiecePath &path) const;
+
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);

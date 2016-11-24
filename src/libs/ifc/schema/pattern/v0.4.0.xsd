@@ -307,6 +307,29 @@
                                                                                  <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element>
+                                                                     <xs:element name="path" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+																			   <xs:sequence>
+																				<xs:element name="nodes" minOccurs="1" maxOccurs="1">
+																					<xs:complexType>
+																						<xs:sequence>
+																						   <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
+																								   <xs:complexType>
+																										 <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+																										 <xs:attribute name="idObject" type="xs:unsignedInt" use="required"></xs:attribute>
+																										 <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
+																								   </xs:complexType>
+																							 </xs:element>
+																						 </xs:sequence>
+																					 </xs:complexType>
+																				</xs:element>
+																				</xs:sequence>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="piecePathType"></xs:attribute>
+                                                                                 <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
                                                                      <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
                                                                        <xs:complexType>
                                                                              <xs:sequence>
@@ -648,6 +671,12 @@
        <xs:enumeration value="3"/><!--by first edge symmetry-->
        <xs:enumeration value="4"/><!--by first edge right angle-->
        <xs:enumeration value="5"/><!--by first edge right angle-->
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="piecePathType">
+     <xs:restriction base="xs:unsignedInt">
+       <xs:enumeration value="1"/><!--custom seam allowance-->
+       <xs:enumeration value="2"/><!--internal path-->
      </xs:restriction>
    </xs:simpleType>
    </xs:schema>

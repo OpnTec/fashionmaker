@@ -586,7 +586,13 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
     {
         scene = sceneDetail;
     }
-    const QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools << TagOperation;
+    const QStringList tags = QStringList() << TagPoint
+                                           << TagLine
+                                           << TagSpline
+                                           << TagArc
+                                           << TagTools
+                                           << TagOperation
+                                           << TagPath;
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -619,6 +625,10 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                 case 5: // TagOperation
                     qCDebug(vXML, "Tag operation.");
                     ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 6: // TagPath
+                    qCDebug(vXML, "Tag path.");
+                    ParsePathElement(scene, domElement, parse);
                     break;
                 default:
                     VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
@@ -3002,6 +3012,81 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
         default:
             VException e(tr("Unknown operation type '%1'.").arg(type));
             throw e;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    try
+    {
+        quint32 id = 0;
+        ToolsCommonAttributes(domElement, id);
+        const QString defType = QString().setNum(static_cast<int>(PiecePathType::CustomSeamAllowance));
+        const PiecePathType type = static_cast<PiecePathType>(GetParametrUInt(domElement, AttrType, defType));
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+
+        VPiecePath path;
+        const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
+        if (not element.isNull())
+        {
+            ParsePathNodes(element, path);
+        }
+
+        path.SetType(type);
+
+        VToolPiecePath::Create(id, path, 0, scene, this, data, parse, Source::FromFile, "", idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating a piece path"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePathNodes(const QDomElement &domElement, VPiecePath &path) const
+{
+    const QStringList types = QStringList() << VAbstractPattern::NodePoint
+                                            << VAbstractPattern::NodeArc
+                                            << VAbstractPattern::NodeSpline
+                                            << VAbstractPattern::NodeSplinePath;
+
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        {
+            const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+            const bool reverse = GetParametrUInt(element, VAbstractPattern::AttrNodeReverse, "0");
+
+            const QString t = GetParametrString(element, AttrType, VAbstractPattern::NodePoint);
+            Tool tool;
+
+            switch (types.indexOf(t))
+            {
+                case 0: // VAbstractPattern::NodePoint
+                    tool = Tool::NodePoint;
+                    break;
+                case 1: // VAbstractPattern::NodeArc
+                    tool = Tool::NodeArc;
+                    break;
+                case 2: // VAbstractPattern::NodeSpline
+                    tool = Tool::NodeSpline;
+                    break;
+                case 3: // VAbstractPattern::NodeSplinePath
+                    tool = Tool::NodeSplinePath;
+                    break;
+                default:
+                    VException e(tr("Wrong tag name '%1'.").arg(t));
+                    throw e;
+            }
+            path.Append(VPieceNode(id, tool, reverse));
+        }
     }
 }
 
