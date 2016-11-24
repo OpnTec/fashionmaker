@@ -89,6 +89,9 @@ const QString VAbstractPattern::TagSize             = QStringLiteral("size");
 const QString VAbstractPattern::TagShowDate         = QStringLiteral("showDate");
 const QString VAbstractPattern::TagShowMeasurements = QStringLiteral("showMeasurements");
 const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
+const QString VAbstractPattern::TagPath             = QStringLiteral("path");
+const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
+const QString VAbstractPattern::TagNode             = QStringLiteral("node");
 
 const QString VAbstractPattern::AttrName            = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible         = QStringLiteral("visible");
@@ -101,6 +104,7 @@ const QString VAbstractPattern::AttrUserDefined     = QStringLiteral("userDef");
 const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber");
 const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
 const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
+const QString VAbstractPattern::AttrNodeReverse     = QStringLiteral("reverse");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -157,6 +161,11 @@ const QString VAbstractPattern::AttrExtension       = QStringLiteral("extension"
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
 const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
 const QString VAbstractPattern::IncrementDescription = QStringLiteral("description");
+
+const QString VAbstractPattern::NodeArc        = QStringLiteral("NodeArc");
+const QString VAbstractPattern::NodePoint      = QStringLiteral("NodePoint");
+const QString VAbstractPattern::NodeSpline     = QStringLiteral("NodeSpline");
+const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)

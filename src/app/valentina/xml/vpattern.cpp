@@ -651,7 +651,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
-        const QStringList tags = QStringList() << VToolSeamAllowance::TagNodes
+        const QStringList tags = QStringList() << VAbstractPattern::TagNodes
                                                << TagData
                                                << TagPatternInfo
                                                << TagGrainline;
@@ -664,7 +664,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
             {
                 switch (tags.indexOf(element.tagName()))
                 {
-                    case 0:// VToolSeamAllowance::TagNodes
+                    case 0:// VAbstractPattern::TagNodes
                         ParseDetailNodes(element, detail);
                         break;
                     case 1:// TagData
@@ -763,24 +763,24 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) const
 {
-    const QStringList types = QStringList() << VToolSeamAllowance::NodePoint
-                                            << VToolSeamAllowance::NodeArc
-                                            << VToolSeamAllowance::NodeSpline
-                                            << VToolSeamAllowance::NodeSplinePath;
+    const QStringList types = QStringList() << VAbstractPattern::NodePoint
+                                            << VAbstractPattern::NodeArc
+                                            << VAbstractPattern::NodeSpline
+                                            << VAbstractPattern::NodeSplinePath;
 
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagNode)
+        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
         {
             const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-            const bool reverse = GetParametrUInt(element, VToolSeamAllowance::AttrNodeReverse, "0");
+            const bool reverse = GetParametrUInt(element, VAbstractPattern::AttrNodeReverse, "0");
             const qreal saBefore = GetParametrDouble(element, VToolSeamAllowance::AttrSABefore, "-1");
             const qreal saAfter = GetParametrDouble(element, VToolSeamAllowance::AttrSAAfter, "-1");
             const PieceNodeAngle angle = static_cast<PieceNodeAngle>(GetParametrUInt(element, AttrAngle, "0"));
 
-            const QString t = GetParametrString(element, AttrType, VToolSeamAllowance::NodePoint);
+            const QString t = GetParametrString(element, AttrType, VAbstractPattern::NodePoint);
             Tool tool;
 
             switch (types.indexOf(t))

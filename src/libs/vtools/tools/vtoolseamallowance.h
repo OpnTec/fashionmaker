@@ -54,22 +54,13 @@ public:
 
     static const quint8 pieceVersion;
 
-    static const QString TagNodes;
-    static const QString TagNode;
-
     static const QString AttrVersion;
-    static const QString AttrNodeReverse;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrWidth;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
     static const QString AttrUnited;
-
-    static const QString NodeArc;
-    static const QString NodePoint;
-    static const QString NodeSpline;
-    static const QString NodeSplinePath;
 
     void Remove(bool ask);
 

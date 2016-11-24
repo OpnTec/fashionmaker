@@ -57,22 +57,13 @@
 // Current version of seam allowance tag nned for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
-const QString VToolSeamAllowance::TagNodes    = QStringLiteral("nodes");
-const QString VToolSeamAllowance::TagNode     = QStringLiteral("node");
-
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
-const QString VToolSeamAllowance::AttrNodeReverse    = QStringLiteral("reverse");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 const QString VToolSeamAllowance::AttrSABefore       = QStringLiteral("before");
 const QString VToolSeamAllowance::AttrSAAfter        = QStringLiteral("after");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
-
-const QString VToolSeamAllowance::NodeArc        = QStringLiteral("NodeArc");
-const QString VToolSeamAllowance::NodePoint      = QStringLiteral("NodePoint");
-const QString VToolSeamAllowance::NodeSpline     = QStringLiteral("NodeSpline");
-const QString VToolSeamAllowance::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -204,14 +195,14 @@ void VToolSeamAllowance::Remove(bool ask)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
 {
-    QDomElement nod = doc->createElement(TagNode);
+    QDomElement nod = doc->createElement(VAbstractPattern::TagNode);
 
     doc->SetAttribute(nod, AttrIdObject, node.GetId());
 
     const Tool type = node.GetTypeTool();
     if (type != Tool::NodePoint)
     {
-        doc->SetAttribute(nod, AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
+        doc->SetAttribute(nod, VAbstractPattern::AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
     }
     else
     {
@@ -225,16 +216,16 @@ void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement,
     switch (type)
     {
         case (Tool::NodeArc):
-            doc->SetAttribute(nod, AttrType, NodeArc);
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
             break;
         case (Tool::NodePoint):
-            doc->SetAttribute(nod, AttrType, NodePoint);
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
             break;
         case (Tool::NodeSpline):
-            doc->SetAttribute(nod, AttrType, NodeSpline);
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
             break;
         case (Tool::NodeSplinePath):
-            doc->SetAttribute(nod, AttrType, NodeSplinePath);
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
             break;
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
@@ -256,7 +247,7 @@ void VToolSeamAllowance::AddNodes(VAbstractPattern *doc, QDomElement &domElement
 {
     if (piece.GetPath().CountNodes() > 0)
     {
-        QDomElement nodesElement = doc->createElement(TagNodes);
+        QDomElement nodesElement = doc->createElement(VAbstractPattern::TagNodes);
         for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
         {
             AddNode(doc, nodesElement, piece.GetPath().at(i));
@@ -722,7 +713,7 @@ void VToolSeamAllowance::SaveDialogChange()
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(id);
 
-    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id, this->scene());
+    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(saveCommand);
 }

@@ -193,6 +193,9 @@ public:
     static const QString TagShowDate;
     static const QString TagShowMeasurements;
     static const QString TagGrainline;
+    static const QString TagPath;
+    static const QString TagNodes;
+    static const QString TagNode;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -205,6 +208,7 @@ public:
     static const QString AttrCutNumber;
     static const QString AttrPlacement;
     static const QString AttrArrows;
+    static const QString AttrNodeReverse;
 
     static const QString AttrAll;
 
@@ -261,6 +265,11 @@ public:
     static const QString IncrementName;
     static const QString IncrementFormula;
     static const QString IncrementDescription;
+
+    static const QString NodeArc;
+    static const QString NodePoint;
+    static const QString NodeSpline;
+    static const QString NodeSplinePath;
 
 signals:
     /**
