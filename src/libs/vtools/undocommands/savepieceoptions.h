@@ -43,7 +43,7 @@ class SavePieceOptions : public VUndoCommand
 {
 public:
     SavePieceOptions(const VPiece &m_oldDet, const VPiece &m_newDet, VAbstractPattern *doc, quint32 id,
-                     QGraphicsScene *m_scene, QUndoCommand *parent = nullptr);
+                     QUndoCommand *parent = nullptr);
     virtual ~SavePieceOptions();
 
     virtual void undo() Q_DECL_OVERRIDE;
@@ -57,7 +57,6 @@ private:
 
     const VPiece    m_oldDet;
     VPiece          m_newDet;
-    QGraphicsScene *m_scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
