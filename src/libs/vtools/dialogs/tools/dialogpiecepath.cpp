@@ -242,7 +242,7 @@ void DialogPiecePath::NameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTypes()
 {
-    ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CutomSeamAllowance));
+    ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
     //ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
 }
 
@@ -365,7 +365,7 @@ bool DialogPiecePath::PathIsValid() const
     }
     else
     {
-        if (GetType() == PiecePathType::CutomSeamAllowance && FirstPointEqualLast(ui->listWidget))
+        if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget))
         {
             url += tr("First point cannot be equal to the last point!");
             ui->helpLabel->setText(url);
