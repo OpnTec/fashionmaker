@@ -180,6 +180,19 @@ VPiece VContainer::GetPiece(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPiecePath VContainer::GetPiecePath(quint32 id) const
+{
+    if (d->piecePaths->contains(id))
+    {
+        return d->piecePaths->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object
@@ -211,6 +224,14 @@ quint32 VContainer::AddPiece(const VPiece &detail)
 {
     const quint32 id = getNextId();
     d->pieces->insert(id, detail);
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddPiecePath(const VPiecePath &path)
+{
+    const quint32 id = getNextId();
+    d->piecePaths->insert(id, path);
     return id;
 }
 
@@ -295,6 +316,7 @@ void VContainer::ClearForFullParse()
 
     d->details->clear();
     d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables(VarType::Increment);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
@@ -527,6 +549,14 @@ void VContainer::UpdatePiece(quint32 id, const VPiece &detail)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     d->pieces->insert(id, detail);
+    UpdateId(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
+{
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
+    d->piecePaths->insert(id, path);
     UpdateId(id);
 }
 
