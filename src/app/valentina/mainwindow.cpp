@@ -1129,9 +1129,6 @@ void MainWindow::ClosedDialogPiecePath(int result)
     {
         DialogPiecePath *dialog = qobject_cast<DialogPiecePath*>(dialogTool);
         SCASSERT(dialog != nullptr);
-
-        const PiecePathType type = dialog->GetType();
-        const VPiecePath path = dialog->GetPiecePath();
         //VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
     }
     ArrowTool();

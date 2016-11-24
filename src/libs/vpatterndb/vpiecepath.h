@@ -32,6 +32,8 @@
 #include <QtGlobal>
 #include <QSharedDataPointer>
 
+#include "../vmisc/def.h"
+
 class VPiecePathData;
 class VPieceNode;
 class QPointF;
@@ -43,6 +45,7 @@ class VPiecePath
 {
 public:
     VPiecePath();
+    VPiecePath(PiecePathType type);
     VPiecePath(const VPiecePath &path);
     VPiecePath &operator=(const VPiecePath &path);
     ~VPiecePath();
@@ -56,6 +59,9 @@ public:
 
     QVector<VPieceNode> GetNodes() const;
     void                SetNodes(const QVector<VPieceNode> &nodes);
+
+    PiecePathType GetType() const;
+    void          SetType(PiecePathType type);
 
     QVector<QPointF> PathPoints(const VContainer *data) const;
     QVector<QPointF> PathNodePoints(const VContainer *data) const;

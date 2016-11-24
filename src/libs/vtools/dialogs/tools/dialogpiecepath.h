@@ -48,9 +48,6 @@ public:
     VPiecePath GetPiecePath() const;
     void       SetPiecePath(const VPiecePath &path);
 
-    PiecePathType GetType() const;
-    void          SetType(PiecePathType type);
-
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
@@ -83,6 +80,9 @@ private:
     bool PathIsValid() const;
     void ValidObjects(bool value);
     void NewItem(const VPieceNode &node);
+
+    PiecePathType GetType() const;
+    void          SetType(PiecePathType type);
 };
 
 #endif // DIALOGPIECEPATH_H

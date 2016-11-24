@@ -261,6 +261,8 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
         NewItem(path.at(i));
     }
 
+    SetType(path.GetType());
+
     ValidObjects(PathIsValid());
 
     ListChanged();
@@ -344,6 +346,8 @@ VPiecePath DialogPiecePath::CreatePath() const
         QListWidgetItem *item = ui->listWidget->item(i);
         path.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
+
+    path.SetType(GetType());
 
     return path;
 }

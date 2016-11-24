@@ -40,6 +40,11 @@ VPiecePath::VPiecePath()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VPiecePath::VPiecePath(PiecePathType type)
+    : d(new VPiecePathData(type))
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiecePath::VPiecePath(const VPiecePath &path)
     : d (path.d)
 {}
@@ -99,6 +104,18 @@ QVector<VPieceNode> VPiecePath::GetNodes() const
 void VPiecePath::SetNodes(const QVector<VPieceNode> &nodes)
 {
     d->m_nodes = nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PiecePathType VPiecePath::GetType() const
+{
+    return d->m_type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetType(PiecePathType type)
+{
+    d->m_type = type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
