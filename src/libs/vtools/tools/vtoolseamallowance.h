@@ -134,7 +134,7 @@ private:
     void InitCSAPaths(const VPiece &detail);
 
     template <typename Tool>
-    Tool*              InitTool(VMainGraphicsScene *scene, const VPieceNode &node);
+    Tool*              InitTool(VMainGraphicsScene *scene, quint32 toolId);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

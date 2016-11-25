@@ -741,7 +741,7 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
         {
             case (Tool::NodePoint):
             {
-                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i));
+                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i).GetId());
                 connect(tool, &VNodePoint::ShowContextMenu, this, &VToolSeamAllowance::contextMenuEvent);
                 break;
             }
@@ -812,17 +812,17 @@ template <typename Tool>
 /**
  * @brief InitTool initial node item on scene
  * @param scene pointer to scene.
- * @param node node of detail.
+ * @param toolId if of tool object.
  */
-Tool *VToolSeamAllowance::InitTool(VMainGraphicsScene *scene, const VPieceNode &node)
+Tool *VToolSeamAllowance::InitTool(VMainGraphicsScene *scene, quint32 toolId)
 {
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
-    Tool *tool = qobject_cast<Tool*>(tools->value(node.GetId()));
+    Tool *tool = qobject_cast<Tool*>(tools->value(toolId));
     SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
     tool->SetParentType(ParentType::Item);
-    doc->IncrementReferens(node.GetId());
+    doc->IncrementReferens(toolId);
     return tool;
 }
