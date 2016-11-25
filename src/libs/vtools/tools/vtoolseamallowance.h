@@ -130,6 +130,9 @@ private:
     void RefreshGeometry();
     void SaveDialogChange();
 
+    void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
+    void InitCSAPaths(const VPiece &detail);
+
     template <typename Tool>
     Tool*              InitTool(VMainGraphicsScene *scene, const VPieceNode &node);
 };

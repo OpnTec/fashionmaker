@@ -665,30 +665,8 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
       m_seamAllowance(new VNoBrushScalePathItem(this))
 {
     VPiece detail = data->GetPiece(id);
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
-    {
-        switch (detail.GetPath().at(i).GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i));
-                connect(tool, &VNodePoint::ShowContextMenu, this, &VToolSeamAllowance::contextMenuEvent);
-                break;
-            }
-            case (Tool::NodeArc):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
-                break;
-            case (Tool::NodeSpline):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
-                break;
-            case (Tool::NodeSplinePath):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
-                break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore.";
-                break;
-        }
-    }
+    InitNodes(detail, scene);
+    InitCSAPaths(detail);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
@@ -752,6 +730,45 @@ void VToolSeamAllowance::SaveDialogChange()
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(saveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *scene)
+{
+    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    {
+        switch (detail.GetPath().at(i).GetTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i));
+                connect(tool, &VNodePoint::ShowContextMenu, this, &VToolSeamAllowance::contextMenuEvent);
+                break;
+            }
+            case (Tool::NodeArc):
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
+                break;
+            case (Tool::NodeSpline):
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
+                break;
+            case (Tool::NodeSplinePath):
+                doc->IncrementReferens(detail.GetPath().at(i).GetId());
+                break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore.";
+                break;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitCSAPaths(const VPiece &detail)
+{
+    QVector<CustomSARecord> records = detail.GetCustomSARecords();
+    for (int i = 0; i < records.size(); ++i)
+    {
+        doc->IncrementReferens(records.at(i).path);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
