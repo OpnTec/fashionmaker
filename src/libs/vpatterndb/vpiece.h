@@ -75,6 +75,9 @@ public:
     bool IsUnited() const;
     void SetUnited(bool united);
 
+    QVector<CustomSARecord> GetCustomSARecords() const;
+    void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
+
     QVector<VPieceNode> Missing(const VPiece &det) const;
 
     int indexOfNode(const quint32 &id) const;

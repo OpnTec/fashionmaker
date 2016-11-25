@@ -75,6 +75,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddNodes(doc, domElement, m_oldDet);
+        VToolSeamAllowance::AddCSARecords(doc, domElement, m_oldDet.GetCustomSARecords());
 
         IncrementReferences(m_oldDet.Missing(m_newDet));
         emit NeedLiteParsing(Document::LiteParse);
@@ -100,6 +101,7 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
         VToolSeamAllowance::AddNodes(doc, domElement, m_newDet);
+        VToolSeamAllowance::AddCSARecords(doc, domElement, m_newDet.GetCustomSARecords());
 
         DecrementReferences(m_oldDet.Missing(m_newDet));
         emit NeedLiteParsing(Document::LiteParse);

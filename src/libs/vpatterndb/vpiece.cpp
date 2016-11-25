@@ -232,6 +232,18 @@ void VPiece::SetUnited(bool united)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<CustomSARecord> VPiece::GetCustomSARecords() const
+{
+    return d->m_customSARecords;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
+{
+    d->m_customSARecords = records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.

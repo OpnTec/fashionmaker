@@ -57,6 +57,9 @@
 // Current version of seam allowance tag nned for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
+const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
+const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
+
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
@@ -64,6 +67,9 @@ const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 const QString VToolSeamAllowance::AttrSABefore       = QStringLiteral("before");
 const QString VToolSeamAllowance::AttrSAAfter        = QStringLiteral("after");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
+const QString VToolSeamAllowance::AttrStart          = QStringLiteral("start");
+const QString VToolSeamAllowance::AttrPath           = QStringLiteral("path");
+const QString VToolSeamAllowance::AttrEnd            = QStringLiteral("end");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -274,6 +280,34 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record)
+{
+    QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
+
+    doc->SetAttribute(recordNode, AttrStart, record.startPoint);
+    doc->SetAttribute(recordNode, AttrPath, record.path);
+    doc->SetAttribute(recordNode, AttrEnd, record.endPoint);
+    doc->SetAttribute(recordNode, VAbstractPattern::AttrNodeReverse, record.reverse);
+
+    domElement.appendChild(recordNode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domElement,
+                                       const QVector<CustomSARecord> &records)
+{
+    if (records.size() > 0)
+    {
+        QDomElement csaRecordsElement = doc->createElement(VToolSeamAllowance::TagCSA);
+        for (int i = 0; i < records.size(); ++i)
+        {
+            AddCSARecord(doc, csaRecordsElement, records.at(i));
+        }
+        domElement.appendChild(csaRecordsElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
 
@@ -370,6 +404,8 @@ void VToolSeamAllowance::AddToFile()
 
     // nodes
     AddNodes(doc, domElement, piece);
+    //custom seam allowance
+    AddCSARecords(doc, domElement, piece.GetCustomSARecords());
 
     AddPiece *addDet = new AddPiece(domElement, doc, piece, m_drawName);
     connect(addDet, &AddPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);

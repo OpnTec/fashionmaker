@@ -661,10 +661,11 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
-        const QStringList tags = QStringList() << VAbstractPattern::TagNodes
+        const QStringList tags = QStringList() << TagNodes
                                                << TagData
                                                << TagPatternInfo
-                                               << TagGrainline;
+                                               << TagGrainline
+                                               << VToolSeamAllowance::TagCSA;
 
         const QDomNodeList nodeList = domElement.childNodes();
         for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -674,7 +675,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
             {
                 switch (tags.indexOf(element.tagName()))
                 {
-                    case 0:// VAbstractPattern::TagNodes
+                    case 0:// TagNodes
                         ParseDetailNodes(element, detail);
                         break;
                     case 1:// TagData
@@ -682,6 +683,9 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     case 2:// TagPatternInfo
                         break;
                     case 3:// TagGrainline
+                        break;
+                    case 4:// VToolSeamAllowance::TagCSA
+                        ParseDetailCSARecords(element, detail);
                         break;
                     default:
                         break;
@@ -819,6 +823,28 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) c
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &detail) const
+{
+    QVector<CustomSARecord> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagRecord)
+        {
+            CustomSARecord record;
+            record.startPoint = GetParametrUInt(element, VToolSeamAllowance::AttrStart, NULL_ID_STR);
+            record.path = GetParametrUInt(element, VToolSeamAllowance::AttrPath, NULL_ID_STR);
+            record.endPoint = GetParametrUInt(element, VToolSeamAllowance::AttrEnd, NULL_ID_STR);
+            record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
+            records.append(record);
+        }
+    }
+    detail.SetCustomSARecords(records);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseDetails parse details tag.

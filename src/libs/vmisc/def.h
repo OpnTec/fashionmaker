@@ -677,6 +677,26 @@ static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
     }
 }
 
+/**
+ * @brief The CustomSA struct contains record about custom seam allowanse (SA).
+ */
+struct CustomSARecord
+{
+    CustomSARecord()
+        : startPoint(0),
+          path(0),
+          endPoint(0),
+          reverse(false)
+    {}
+
+    quint32 startPoint;
+    quint32 path;
+    quint32 endPoint;
+    bool reverse;
+};
+
+Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
+
 /****************************************************************************
 ** This file is derived from code bearing the following notice:
 ** The sole author of this file, Adam Higerd, has explicitly disclaimed all

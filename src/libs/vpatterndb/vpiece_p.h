@@ -33,6 +33,7 @@
 #include <QVector>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/def.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
 
@@ -47,7 +48,8 @@ public:
           m_mx(0),
           m_my(0),
           m_inLayout(true),
-          m_united(false)
+          m_united(false),
+          m_customSARecords()
     {}
 
     VPieceData(const VPieceData &detail)
@@ -56,7 +58,8 @@ public:
           m_mx(detail.m_mx),
           m_my(detail.m_my),
           m_inLayout(detail.m_inLayout),
-          m_united(detail.m_united)
+          m_united(detail.m_united),
+          m_customSARecords(detail.m_customSARecords)
     {}
 
     ~VPieceData();
@@ -69,6 +72,8 @@ public:
 
     bool m_inLayout;
     bool m_united;
+
+    QVector<CustomSARecord> m_customSARecords;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

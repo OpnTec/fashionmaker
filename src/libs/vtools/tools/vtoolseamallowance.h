@@ -54,6 +54,9 @@ public:
 
     static const quint8 pieceVersion;
 
+    static const QString TagCSA;
+    static const QString TagRecord;
+
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
@@ -61,12 +64,17 @@ public:
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
     static const QString AttrUnited;
+    static const QString AttrStart;
+    static const QString AttrPath;
+    static const QString AttrEnd;
 
     void Remove(bool ask);
 
     static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
+    static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
+    static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);

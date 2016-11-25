@@ -201,7 +201,12 @@ void VToolPiecePath::AddToFile()
     }
     else if (path.GetType() == PiecePathType::CustomSeamAllowance)
     {
+        CustomSARecord record;
+        record.path = m_pieceId;
 
+        QVector<CustomSARecord> records = newDet.GetCustomSARecords();
+        records.append(record);
+        newDet.SetCustomSARecords(records);
     }
 
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
