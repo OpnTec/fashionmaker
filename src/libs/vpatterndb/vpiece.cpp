@@ -245,12 +245,12 @@ void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
+ * @brief MissingNodes find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.
  * @param det changed detail.
  * @return  list with missing nodes.
  */
-QVector<VPieceNode> VPiece::Missing(const VPiece &det) const
+QVector<VPieceNode> VPiece::MissingNodes(const VPiece &det) const
 {
     const QVector<VPieceNode> pNodes = d->m_path.GetNodes();
     if (pNodes.size() == det.GetPath().CountNodes()) //-V807
