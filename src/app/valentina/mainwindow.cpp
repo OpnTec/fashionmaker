@@ -53,6 +53,7 @@
 #include "../vtools/dialogs/tooldialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/vtoolseamallowance.h"
+#include "tools/nodeDetails/vtoolpiecepath.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
@@ -1129,7 +1130,7 @@ void MainWindow::ClosedDialogPiecePath(int result)
     {
         DialogPiecePath *dialog = qobject_cast<DialogPiecePath*>(dialogTool);
         SCASSERT(dialog != nullptr);
-        //VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
+        VToolPiecePath::Create(dialogTool, sceneDetails, doc, pattern);
     }
     ArrowTool();
     doc->LiteParseTree(Document::LiteParse);
