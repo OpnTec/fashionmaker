@@ -280,7 +280,6 @@
                                                                                  <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                                  <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="mx" type="xs:double"></xs:attribute>
-                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                                  <xs:attribute name="type" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
@@ -291,7 +290,6 @@
                                                                            <xs:complexType>
                                                                                  <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                                  <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
-                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="type" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
@@ -301,7 +299,6 @@
                                                                            <xs:complexType>
                                                                                  <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                                  <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
-                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="type" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>

@@ -134,6 +134,7 @@ private:
     void FixCutPoint();
     void FixSubPaths(int i, quint32 id, quint32 baseCurve);
 
+    void TagRemoveAttributeTypeObjectInV0_4_0();
     void TagDetailToV0_4_0();
 };
 

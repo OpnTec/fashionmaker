@@ -130,6 +130,7 @@ const QString strMy                        = QStringLiteral("my");
 const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
 const QString strInLayout                  = QStringLiteral("inLayout");
 const QString strSeamAllowance             = QStringLiteral("seamAllowance");
+const QString strTypeObject                = QStringLiteral("typeObject");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -575,6 +576,7 @@ void VPatternConverter::ToV0_4_0()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.0"));
+    TagRemoveAttributeTypeObjectInV0_4_0();
     TagDetailToV0_4_0();
     Save();
 }
@@ -1676,6 +1678,36 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 {
                     element.setAttribute(strIdObject, baseCurve);
                 }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
+{
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(strModeling);
+    for (int i = 0; i < list.size(); ++i)
+    {
+        QDomElement modeling = list.at(i).toElement();
+        if (not modeling.isNull())
+        {
+            QDomNode domNode = modeling.firstChild();
+            while (not domNode.isNull())
+            {
+                QDomElement domElement = domNode.toElement();
+                if (not domElement.isNull())
+                {
+                    if (domElement.hasAttribute(strTypeObject))
+                    {
+                        domElement.removeAttribute(strTypeObject);
+                    }
+                }
+                domNode = domNode.nextSibling();
             }
         }
     }
