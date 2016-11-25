@@ -78,6 +78,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_oldDet.GetCustomSARecords());
 
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
+        IncrementReferences(m_oldDet.MissingCSAPath(m_newDet));
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
@@ -104,6 +105,8 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_newDet.GetCustomSARecords());
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
+        DecrementReferences(m_oldDet.MissingCSAPath(m_newDet));
+
         emit NeedLiteParsing(Document::LiteParse);
     }
     else

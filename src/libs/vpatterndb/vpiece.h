@@ -78,7 +78,8 @@ public:
     QVector<CustomSARecord> GetCustomSARecords() const;
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
 
-    QVector<VPieceNode> MissingNodes(const VPiece &det) const;
+    QVector<quint32> MissingNodes(const VPiece &det) const;
+    QVector<quint32> MissingCSAPath(const VPiece &det) const;
 
     int indexOfNode(const quint32 &id) const;
 

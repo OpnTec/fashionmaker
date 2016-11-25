@@ -63,6 +63,7 @@ void AddPiece::undo()
             }
 
             DecrementReferences(m_detail.GetPath().GetNodes());
+            DecrementReferences(m_detail.GetCustomSARecords());
         }
         else
         {

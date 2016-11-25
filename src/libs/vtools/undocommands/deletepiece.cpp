@@ -107,6 +107,7 @@ void DeletePiece::redo()
         toolDet->hide();
 
         DecrementReferences(m_detail.GetPath().GetNodes());
+        DecrementReferences(m_detail.GetCustomSARecords());
         emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
     }
     else

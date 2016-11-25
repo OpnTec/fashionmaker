@@ -250,12 +250,12 @@ void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
  * @param det changed detail.
  * @return  list with missing nodes.
  */
-QVector<VPieceNode> VPiece::MissingNodes(const VPiece &det) const
+QVector<quint32> VPiece::MissingNodes(const VPiece &det) const
 {
     const QVector<VPieceNode> pNodes = d->m_path.GetNodes();
     if (pNodes.size() == det.GetPath().CountNodes()) //-V807
     {
-        return QVector<VPieceNode>();
+        return QVector<quint32>();
     }
 
     QSet<quint32> set1;
@@ -271,17 +271,48 @@ QVector<VPieceNode> VPiece::MissingNodes(const VPiece &det) const
     }
 
     const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<VPieceNode> nodes;
+    QVector<quint32> nodes;
     for (qint32 i = 0; i < set3.size(); ++i)
     {
         const int index = indexOfNode(pNodes, set3.at(i));
         if (index != -1)
         {
-            nodes.append(pNodes.at(index));
+            nodes.append(pNodes.at(index).GetId());
         }
     }
 
     return nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
+{
+    const QVector<CustomSARecord> detRecords = det.GetCustomSARecords();
+    if (d->m_customSARecords.size() == detRecords.size()) //-V807
+    {
+        return QVector<quint32>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d->m_customSARecords.size(); ++i)
+    {
+        set1.insert(d->m_customSARecords.at(i).path);
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < detRecords.size(); ++j)
+    {
+        set2.insert(detRecords.at(j).path);
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<quint32> r;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        r.append(set3.at(i));
+    }
+
+    return r;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
