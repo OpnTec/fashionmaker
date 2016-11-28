@@ -34,8 +34,6 @@
 #include "vpiece.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QGraphicsScene;
 class QUndoCommand;
 class VAbstractPattern;
 
