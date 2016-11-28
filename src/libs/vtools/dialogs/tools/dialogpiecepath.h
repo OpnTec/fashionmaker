@@ -51,6 +51,8 @@ public:
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
+    void SetSAWidth(qreal width);
+
     virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
 
 public slots:
@@ -66,14 +68,22 @@ private slots:
     void ShowContextMenu(const QPoint &pos);
     void ListChanged();
     void NameChanged();
+    void NodeChanged(int index);
+    void ReturnDefBefore();
+    void ReturnDefAfter();
+    void ChangedSABefore(double d);
+    void ChangedSAAfter(double d);
 
 private:
     Q_DISABLE_COPY(DialogPiecePath)
     Ui::DialogPiecePath *ui;
     bool m_showMode;
+    qreal m_saWidth;
 
     void InitPathTypes();
     void InitListPieces();
+    void InitNodesList();
+    void NodeAngleChanged(int index);
 
     VPiecePath CreatePath() const;
 
@@ -83,6 +93,11 @@ private:
 
     PiecePathType GetType() const;
     void          SetType(PiecePathType type);
+
+    QListWidgetItem *GetItemById(quint32 id);
+
+    void SetCurrentSABefore(qreal value);
+    void SetCurrentSAAfter(qreal value);
 };
 
 #endif // DIALOGPIECEPATH_H

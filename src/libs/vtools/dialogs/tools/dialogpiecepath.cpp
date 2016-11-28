@@ -37,7 +37,8 @@
 DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
     ui(new Ui::DialogPiecePath),
-    m_showMode(false)
+    m_showMode(false),
+    m_saWidth(0)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -56,6 +57,37 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     flagError = PathIsValid();
     CheckState();
 
+    const QString suffix = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ui->doubleSpinBoxSeams->setSuffix(suffix);
+    ui->doubleSpinBoxSABefore->setSuffix(suffix);
+    ui->doubleSpinBoxSAAfter->setSuffix(suffix);
+
+    if(qApp->patternUnit() == Unit::Inch)
+    {
+        ui->doubleSpinBoxSeams->setDecimals(5);
+        ui->doubleSpinBoxSABefore->setDecimals(5);
+        ui->doubleSpinBoxSAAfter->setDecimals(5);
+    }
+
+    InitNodesList();
+    connect(ui->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogPiecePath::NodeChanged);
+
+    connect(ui->pushButtonDefBefore, &QPushButton::clicked, this, &DialogPiecePath::ReturnDefBefore);
+    connect(ui->pushButtonDefAfter, &QPushButton::clicked, this, &DialogPiecePath::ReturnDefAfter);
+
+    connect(ui->doubleSpinBoxSeams, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            [this](){NodeChanged(ui->comboBoxNodes->currentIndex());});
+
+    connect(ui->doubleSpinBoxSABefore, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogPiecePath::ChangedSABefore);
+    connect(ui->doubleSpinBoxSAAfter, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogPiecePath::ChangedSAAfter);
+
+    InitNodeAngles(ui->comboBoxAngle);
+    connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogPiecePath::NodeAngleChanged);
+
     if (not m_showMode)
     {
         vis = new VisToolPiecePath(data);
@@ -65,6 +97,8 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
         ui->comboBoxType->setDisabled(true);
         ui->comboBoxPiece->setDisabled(true);
     }
+
+    ui->tabWidget->removeTab(1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,6 +255,8 @@ void DialogPiecePath::ListChanged()
         visPath->SetPath(CreatePath());
         visPath->RefreshGeometry();
     }
+
+    InitNodesList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,10 +276,173 @@ void DialogPiecePath::NameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::NodeChanged(int index)
+{
+    ui->doubleSpinBoxSABefore->setDisabled(true);
+    ui->doubleSpinBoxSAAfter->setDisabled(true);
+    ui->pushButtonDefBefore->setDisabled(true);
+    ui->pushButtonDefAfter->setDisabled(true);
+    ui->comboBoxAngle->setDisabled(true);
+
+    ui->doubleSpinBoxSABefore->blockSignals(true);
+    ui->doubleSpinBoxSAAfter->blockSignals(true);
+    ui->comboBoxAngle->blockSignals(true);
+
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+        const VPiecePath path = CreatePath();
+        const int nodeIndex = path.indexOfNode(id);
+        if (nodeIndex != -1)
+        {
+            const VPieceNode &node = path.at(nodeIndex);
+
+            ui->doubleSpinBoxSABefore->setEnabled(true);
+            ui->doubleSpinBoxSAAfter->setEnabled(true);
+            ui->comboBoxAngle->setEnabled(true);
+
+            qreal w1 = node.GetSABefore();
+            if (w1 < 0)
+            {
+                w1 = m_saWidth;
+            }
+            else
+            {
+                ui->pushButtonDefBefore->setEnabled(true);
+            }
+            ui->doubleSpinBoxSABefore->setValue(w1);
+
+            qreal w2 = node.GetSAAfter();
+            if (w2 < 0)
+            {
+                w2 = m_saWidth;
+            }
+            else
+            {
+                ui->pushButtonDefAfter->setEnabled(true);
+            }
+            ui->doubleSpinBoxSAAfter->setValue(w2);
+
+            const int index = ui->comboBoxAngle->findData(static_cast<unsigned char>(node.GetAngleType()));
+            if (index != -1)
+            {
+                ui->comboBoxAngle->setCurrentIndex(index);
+            }
+        }
+    }
+    else
+    {
+        ui->doubleSpinBoxSABefore->setValue(0);
+        ui->doubleSpinBoxSAAfter->setValue(0);
+        ui->comboBoxAngle->setCurrentIndex(-1);
+    }
+
+    ui->doubleSpinBoxSABefore->blockSignals(false);
+    ui->doubleSpinBoxSAAfter->blockSignals(false);
+    ui->comboBoxAngle->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::ReturnDefBefore()
+{
+    SetCurrentSABefore(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::ReturnDefAfter()
+{
+    SetCurrentSAAfter(-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::ChangedSABefore(double d)
+{
+    SetCurrentSABefore(d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::ChangedSAAfter(double d)
+{
+    SetCurrentSAAfter(d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTypes()
 {
     ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
     //ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitNodesList()
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const quint32 id = ui->comboBoxNodes->itemData(ui->comboBoxNodes->currentIndex()).toUInt();
+#else
+    const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+#endif
+
+    ui->comboBoxNodes->blockSignals(true);
+    ui->comboBoxNodes->clear();
+
+    const VPiecePath path = CreatePath();
+
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode node = path.at(i);
+        if (node.GetTypeTool() == Tool::NodePoint)
+        {
+            const QString name = GetNodeName(node);
+
+            ui->comboBoxNodes->addItem(name, node.GetId());
+        }
+    }
+    ui->comboBoxNodes->blockSignals(false);
+
+    const int index = ui->comboBoxNodes->findData(id);
+    if (index != -1)
+    {
+        ui->comboBoxNodes->setCurrentIndex(index);
+        NodeChanged(index);// Need in case combox index was not changed
+    }
+    else
+    {
+        ui->comboBoxNodes->count() > 0 ? NodeChanged(0) : NodeChanged(-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::NodeAngleChanged(int index)
+{
+    const int i = ui->comboBoxNodes->currentIndex();
+    if (i != -1 && index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(i).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+        #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->itemData(index).toUInt());
+        #else
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
+        #endif
+
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetAngleType(angle);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,6 +492,70 @@ void DialogPiecePath::SetType(PiecePathType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QListWidgetItem *DialogPiecePath::GetItemById(quint32 id)
+{
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidget->item(i);
+        const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+
+        if (node.GetId() == id)
+        {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetCurrentSABefore(qreal value)
+{
+    const int index = ui->comboBoxNodes->currentIndex();
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetSABefore(value);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetCurrentSAAfter(qreal value)
+{
+    const int index = ui->comboBoxNodes->currentIndex();
+    if (index != -1)
+    {
+    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
+    #else
+        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
+    #endif
+
+        QListWidgetItem *rowItem = GetItemById(id);
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetSAAfter(value);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 DialogPiecePath::GetPieceId() const
 {
     quint32 id = NULL_ID;
@@ -324,6 +587,20 @@ void DialogPiecePath::SetPieceId(quint32 id)
         {
             ui->comboBoxType->setCurrentIndex(index);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetSAWidth(qreal width)
+{
+    if (width >=0)
+    {
+        m_saWidth = width;
+        ui->tabWidget->addTab(ui->tabSeamAllowance, QString());
+    }
+    else
+    {
+        ui->tabWidget->removeTab(1);
     }
 }
 

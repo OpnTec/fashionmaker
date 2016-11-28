@@ -94,7 +94,6 @@ private:
     void    ValidObjects(bool value);
     bool    MainPathIsClockwise() const;
     void    InitNodesList();
-    void    InitNodeAngles();
     void    InitCSAPoint(QComboBox *box);
 
     QListWidgetItem *GetItemById(quint32 id);

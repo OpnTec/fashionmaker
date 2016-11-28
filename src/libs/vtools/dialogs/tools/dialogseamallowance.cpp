@@ -91,7 +91,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     connect(ui->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
     connect(ui->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
-    InitNodeAngles();
+    InitNodeAngles(ui->comboBoxAngle);
     connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::NodeAngleChanged);
 
@@ -109,7 +109,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
         vis = new VisToolPiece(data);
     }
 
-    ui->tabWidget->setCurrentIndex(1);// Show always first tab active on start.
+    ui->tabWidget->setCurrentIndex(0);// Show always first tab active on start.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -768,24 +768,6 @@ void DialogSeamAllowance::InitNodesList()
     {
         ui->comboBoxNodes->count() > 0 ? NodeChanged(0) : NodeChanged(-1);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::InitNodeAngles()
-{
-    ui->comboBoxAngle->clear();
-
-    ui->comboBoxAngle->addItem(tr("by length"), static_cast<unsigned char>(PieceNodeAngle::ByLength));
-    ui->comboBoxAngle->addItem(tr("by points intersetions"),
-                               static_cast<unsigned char>(PieceNodeAngle::ByPointsIntersection));
-    ui->comboBoxAngle->addItem(tr("by first edge symmetry"),
-                               static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeSymmetry));
-    ui->comboBoxAngle->addItem(tr("by second edge symmetry"),
-                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
-    ui->comboBoxAngle->addItem(tr("by first edge right angle"),
-                               static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeRightAngle));
-    ui->comboBoxAngle->addItem(tr("by second edge right angle"),
-                               static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeRightAngle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

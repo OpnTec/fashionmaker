@@ -283,6 +283,8 @@ protected:
 
     QString          GetNodeName(const VPieceNode &node) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
+
+    void             InitNodeAngles(QComboBox *box);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 

@@ -503,6 +503,20 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::InitNodeAngles(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+    box->clear();
+
+    box->addItem(tr("by length"), static_cast<unsigned char>(PieceNodeAngle::ByLength));
+    box->addItem(tr("by points intersetions"), static_cast<unsigned char>(PieceNodeAngle::ByPointsIntersection));
+    box->addItem(tr("by first edge symmetry"), static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeSymmetry));
+    box->addItem(tr("by second edge symmetry"), static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
+    box->addItem(tr("by first edge right angle"), static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeRightAngle));
+    box->addItem(tr("by second edge right angle"), static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeRightAngle));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
 {
     return (obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath) &&
