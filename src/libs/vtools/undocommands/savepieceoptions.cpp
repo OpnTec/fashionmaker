@@ -48,7 +48,8 @@ class QDomElement;
 class QUndoCommand;
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
+                                   QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_oldDet(oldDet),
       m_newDet(newDet)
