@@ -105,6 +105,8 @@ const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber"
 const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
 const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
 const QString VAbstractPattern::AttrNodeReverse     = QStringLiteral("reverse");
+const QString VAbstractPattern::AttrSABefore        = QStringLiteral("before");
+const QString VAbstractPattern::AttrSAAfter         = QStringLiteral("after");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 

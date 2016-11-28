@@ -209,6 +209,8 @@ public:
     static const QString AttrPlacement;
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
+    static const QString AttrSABefore;
+    static const QString AttrSAAfter;
 
     static const QString AttrAll;
 

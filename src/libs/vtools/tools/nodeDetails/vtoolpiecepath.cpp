@@ -105,36 +105,7 @@ QString VToolPiecePath::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
 {
-    QDomElement nod = doc->createElement(VAbstractPattern::TagNode);
-
-    doc->SetAttribute(nod, AttrIdObject, node.GetId());
-
-    const Tool type = node.GetTypeTool();
-    if (type != Tool::NodePoint)
-    {
-        doc->SetAttribute(nod, VAbstractPattern::AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
-    }
-
-    switch (type)
-    {
-        case (Tool::NodeArc):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
-            break;
-        case (Tool::NodePoint):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
-            break;
-        case (Tool::NodeSpline):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
-            break;
-        case (Tool::NodeSplinePath):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
-            break;
-        default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-            break;
-    }
-
-    domElement.appendChild(nod);
+    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

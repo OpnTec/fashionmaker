@@ -114,6 +114,8 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
+    VPieceNode     ParseSANode(const QDomElement &domElement) const;
+
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(const QDomElement &domElement, const Document &parse);

@@ -64,8 +64,6 @@ const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version")
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
-const QString VToolSeamAllowance::AttrSABefore       = QStringLiteral("before");
-const QString VToolSeamAllowance::AttrSAAfter        = QStringLiteral("after");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrStart          = QStringLiteral("start");
 const QString VToolSeamAllowance::AttrPath           = QStringLiteral("path");
@@ -201,51 +199,7 @@ void VToolSeamAllowance::Remove(bool ask)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
 {
-    QDomElement nod = doc->createElement(VAbstractPattern::TagNode);
-
-    doc->SetAttribute(nod, AttrIdObject, node.GetId());
-
-    const Tool type = node.GetTypeTool();
-    if (type != Tool::NodePoint)
-    {
-        doc->SetAttribute(nod, VAbstractPattern::AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
-    }
-    else
-    {
-        const qreal w1 = node.GetSABefore();
-        w1 < 0 ? domElement.removeAttribute(AttrSABefore) : doc->SetAttribute(nod, AttrSABefore, w1);
-
-        const qreal w2 = node.GetSAAfter();
-        w2 < 0 ? domElement.removeAttribute(AttrSAAfter) : doc->SetAttribute(nod, AttrSAAfter, w2);
-    }
-
-    switch (type)
-    {
-        case (Tool::NodeArc):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
-            break;
-        case (Tool::NodePoint):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
-            break;
-        case (Tool::NodeSpline):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
-            break;
-        case (Tool::NodeSplinePath):
-            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
-            break;
-        default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-            break;
-    }
-
-    const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
-
-    if (angleType > 0)
-    {
-        doc->SetAttribute(nod, AttrAngle, angleType);
-    }
-
-    domElement.appendChild(nod);
+    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

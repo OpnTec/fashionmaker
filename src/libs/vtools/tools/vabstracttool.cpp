@@ -65,6 +65,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "vdatatool.h"
 
@@ -430,4 +431,60 @@ void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleText
     {
         lineName->setVisible(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node)
+{
+    QDomElement nod = doc->createElement(tagName);
+
+    doc->SetAttribute(nod, AttrIdObject, node.GetId());
+
+    const Tool type = node.GetTypeTool();
+    if (type != Tool::NodePoint)
+    {
+        doc->SetAttribute(nod, VAbstractPattern::AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
+    }
+    else
+    {
+        const qreal w1 = node.GetSABefore();
+        if (w1 >= 0)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrSABefore, w1);
+        }
+
+        const qreal w2 = node.GetSAAfter();
+        if (w2 >= 0)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrSAAfter, w2);
+        }
+    }
+
+    switch (type)
+    {
+        case (Tool::NodeArc):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
+            break;
+        case (Tool::NodePoint):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
+            break;
+        case (Tool::NodeSpline):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
+            break;
+        case (Tool::NodeSplinePath):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
+            break;
+        default:
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            break;
+    }
+
+    const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
+
+    if (angleType > 0)
+    {
+        doc->SetAttribute(nod, AttrAngle, angleType);
+    }
+
+    return nod;
 }

@@ -146,8 +146,10 @@ protected:
     virtual void SetVisualization()=0;
     void ToolCreation(const Source &typeCreation);
 
-    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                            const qreal radius);
+    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
+                            QGraphicsLineItem *lineName, const qreal radius);
+
+    static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
