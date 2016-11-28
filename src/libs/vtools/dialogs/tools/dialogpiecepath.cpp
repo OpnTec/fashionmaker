@@ -74,7 +74,7 @@ DialogPiecePath::~DialogPiecePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::DisableShowMode(bool disable)
+void DialogPiecePath::EnbleShowMode(bool disable)
 {
     m_showMode = disable;
 }

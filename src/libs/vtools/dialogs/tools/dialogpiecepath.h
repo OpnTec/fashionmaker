@@ -43,7 +43,7 @@ public:
     explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPiecePath();
 
-    void DisableShowMode(bool disable);
+    void EnbleShowMode(bool disable);
 
     VPiecePath GetPiecePath() const;
     void       SetPiecePath(const VPiecePath &path);
