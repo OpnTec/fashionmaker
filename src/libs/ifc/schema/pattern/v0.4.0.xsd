@@ -430,6 +430,20 @@
 																						 </xs:sequence>
 																					 </xs:complexType>
 																				</xs:element>
+																				<xs:element name="csa" minOccurs="0" maxOccurs="1">
+																					<xs:complexType>
+																						<xs:sequence>
+																						   <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+																								   <xs:complexType>
+																										 <xs:attribute name="start" type="xs:unsignedInt"></xs:attribute>
+																										 <xs:attribute name="path" type="xs:unsignedInt" use="required"></xs:attribute>
+																										 <xs:attribute name="end" type="xs:unsignedInt"></xs:attribute>
+																										 <xs:attribute name="reverse" type="xs:boolean"></xs:attribute>
+																								   </xs:complexType>
+																							 </xs:element>
+																						 </xs:sequence>
+																					 </xs:complexType>
+																				</xs:element>
                                                                            </xs:sequence>
                                                                            <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                            <xs:attribute name="version" type="pieceVersion"></xs:attribute>
