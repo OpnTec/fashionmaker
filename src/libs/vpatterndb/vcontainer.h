@@ -95,6 +95,7 @@ public:
           variables(data.variables),
           details(data.details),
           pieces(data.pieces),
+          piecePaths(data.piecePaths),
           trVars(data.trVars),
           patternUnit(data.patternUnit)
     {}
