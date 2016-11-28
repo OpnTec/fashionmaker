@@ -74,6 +74,12 @@ enum class PieceNodeAngle : unsigned char
     BySecondEdgeRightAngle
 };
 
+enum class PiecePathIncludeType : unsigned char
+{
+    AsMainPath = 0,
+    AsCustomSA
+};
+
 enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
 
 typedef unsigned char ToolVisHolderType;
@@ -686,13 +692,15 @@ struct CustomSARecord
         : startPoint(0),
           path(0),
           endPoint(0),
-          reverse(false)
+          reverse(false),
+          includeType(PiecePathIncludeType::AsCustomSA)
     {}
 
     quint32 startPoint;
     quint32 path;
     quint32 endPoint;
     bool reverse;
+    PiecePathIncludeType includeType;
 };
 
 Q_DECLARE_METATYPE(CustomSARecord)

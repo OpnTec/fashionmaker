@@ -65,6 +65,7 @@ public:
     static const QString AttrStart;
     static const QString AttrPath;
     static const QString AttrEnd;
+    static const QString AttrIncludeAs;
 
     void Remove(bool ask);
 

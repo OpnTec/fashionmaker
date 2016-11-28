@@ -67,6 +67,7 @@ private slots:
     void NodeChanged(int index);
     void CSAStartPointChanged(int index);
     void CSAEndPointChanged(int index);
+    void CSAIncludeTypeChanged(int index);
     void NodeAngleChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
@@ -95,6 +96,7 @@ private:
     bool    MainPathIsClockwise() const;
     void    InitNodesList();
     void    InitCSAPoint(QComboBox *box);
+    void    InitSAIncludeType();
 
     QListWidgetItem *GetItemById(quint32 id);
 

@@ -68,6 +68,7 @@ const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrStart          = QStringLiteral("start");
 const QString VToolSeamAllowance::AttrPath           = QStringLiteral("path");
 const QString VToolSeamAllowance::AttrEnd            = QStringLiteral("end");
+const QString VToolSeamAllowance::AttrIncludeAs      = QStringLiteral("includeAs");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -242,6 +243,7 @@ void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(recordNode, AttrPath, record.path);
     doc->SetAttribute(recordNode, AttrEnd, record.endPoint);
     doc->SetAttribute(recordNode, VAbstractPattern::AttrNodeReverse, record.reverse);
+    doc->SetAttribute(recordNode, AttrIncludeAs, static_cast<unsigned int>(record.includeType));
 
     domElement.appendChild(recordNode);
 }

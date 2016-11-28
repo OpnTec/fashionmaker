@@ -846,6 +846,9 @@ void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &deta
             record.path = GetParametrUInt(element, VToolSeamAllowance::AttrPath, NULL_ID_STR);
             record.endPoint = GetParametrUInt(element, VToolSeamAllowance::AttrEnd, NULL_ID_STR);
             record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
+            record.includeType = static_cast<PiecePathIncludeType>(GetParametrUInt(element,
+                                                                                   VToolSeamAllowance::AttrIncludeAs,
+                                                                                   "1"));
             records.append(record);
         }
     }

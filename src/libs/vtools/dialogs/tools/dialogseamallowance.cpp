@@ -103,6 +103,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
             &DialogSeamAllowance::CSAStartPointChanged);
     connect(ui->comboBoxEndPoint, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::CSAEndPointChanged);
+    connect(ui->comboBoxIncludeType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::CSAIncludeTypeChanged);
 
     if (not applyAllowed)
     {
@@ -352,6 +354,10 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         auto *dialog = new DialogPiecePath(data, record.path, this);
         dialog->SetPiecePath(data->GetPiecePath(record.path));
         dialog->SetPieceId(toolId);
+        if (record.includeType == PiecePathIncludeType::AsMainPath)
+        {
+            dialog->SetSAWidth(ui->doubleSpinBoxSeams->value());
+        }
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
@@ -503,6 +509,29 @@ void DialogSeamAllowance::CSAEndPointChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
+{
+    const int row = ui->listWidgetCustomSA->currentRow();
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
+    {
+        return;
+    }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const PiecePathIncludeType type = static_cast<PiecePathIncludeType>(ui->comboBoxEndPoint->itemData(index).toUInt());
+#else
+    Q_UNUSED(index);
+    const PiecePathIncludeType type = static_cast<PiecePathIncludeType>(ui->comboBoxEndPoint->currentData().toUInt());
+#endif
+
+    QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
+    SCASSERT(rowItem != nullptr);
+    CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
+    record.includeType = type;
+    rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NodeAngleChanged(int index)
 {
     const int i = ui->comboBoxNodes->currentIndex();
@@ -564,16 +593,12 @@ void DialogSeamAllowance::CustomSAChanged(int row)
         return;
     }
 
-    ui->comboBoxStartPoint->blockSignals(true);
-    ui->comboBoxEndPoint->blockSignals(true);
-
-    InitCSAPoint(ui->comboBoxStartPoint);
-    InitCSAPoint(ui->comboBoxEndPoint);
-
     const QListWidgetItem *item = ui->listWidgetCustomSA->item( row );
     SCASSERT(item != nullptr);
     const CustomSARecord record = qvariant_cast<CustomSARecord>(item->data(Qt::UserRole));
 
+    ui->comboBoxStartPoint->blockSignals(true);
+    InitCSAPoint(ui->comboBoxStartPoint);
     {
         const int index = ui->comboBoxStartPoint->findData(record.startPoint);
         if (index != -1)
@@ -581,7 +606,10 @@ void DialogSeamAllowance::CustomSAChanged(int row)
             ui->comboBoxStartPoint->setCurrentIndex(index);
         }
     }
+    ui->comboBoxStartPoint->blockSignals(false);
 
+    ui->comboBoxEndPoint->blockSignals(true);
+    InitCSAPoint(ui->comboBoxEndPoint);
     {
         const int index = ui->comboBoxEndPoint->findData(record.endPoint);
         if (index != -1)
@@ -589,9 +617,18 @@ void DialogSeamAllowance::CustomSAChanged(int row)
             ui->comboBoxEndPoint->setCurrentIndex(index);
         }
     }
-
-    ui->comboBoxStartPoint->blockSignals(false);
     ui->comboBoxEndPoint->blockSignals(false);
+
+    ui->comboBoxIncludeType->blockSignals(true);
+    InitSAIncludeType();
+    {
+        const int index = ui->comboBoxIncludeType->findData(static_cast<unsigned char>(record.includeType));
+        if (index != -1)
+        {
+            ui->comboBoxIncludeType->setCurrentIndex(index);
+        }
+    }
+    ui->comboBoxIncludeType->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -852,4 +889,14 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
             box->addItem(name, node.GetId());
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitSAIncludeType()
+{
+    ui->comboBoxIncludeType->clear();
+
+    ui->comboBoxIncludeType->addItem(tr("main path"), static_cast<unsigned char>(PiecePathIncludeType::AsMainPath));
+    ui->comboBoxIncludeType->addItem(tr("custom seam allowance"),
+                                     static_cast<unsigned char>(PiecePathIncludeType::AsCustomSA));
 }

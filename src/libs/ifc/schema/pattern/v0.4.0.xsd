@@ -414,7 +414,7 @@
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="length" type="xs:string"></xs:attribute>
                                                                                        <xs:attribute name="rotation" type="xs:string"></xs:attribute>
-										       <xs:attribute name="arrows" type="arrowType"></xs:attribute>
+                                                                                       <xs:attribute name="arrows" type="arrowType"></xs:attribute>
                                                                                     </xs:complexType>
                                                                                </xs:element>
                                                                                <xs:element name="nodes" minOccurs="1" maxOccurs="1">
@@ -442,6 +442,7 @@
 																										 <xs:attribute name="path" type="xs:unsignedInt" use="required"></xs:attribute>
 																										 <xs:attribute name="end" type="xs:unsignedInt"></xs:attribute>
 																										 <xs:attribute name="reverse" type="xs:boolean"></xs:attribute>
+																										 <xs:attribute name="includeAs" type="piecePathIncludeType"></xs:attribute>
 																								   </xs:complexType>
 																							 </xs:element>
 																						 </xs:sequence>
@@ -691,6 +692,12 @@
      <xs:restriction base="xs:unsignedInt">
        <xs:enumeration value="1"/><!--custom seam allowance-->
        <xs:enumeration value="2"/><!--internal path-->
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="piecePathIncludeType">
+     <xs:restriction base="xs:unsignedInt">
+       <xs:enumeration value="0"/><!--as main path-->
+       <xs:enumeration value="1"/><!--as custom seam allowance-->
      </xs:restriction>
    </xs:simpleType>
    </xs:schema>
