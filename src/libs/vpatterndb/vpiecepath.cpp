@@ -314,3 +314,51 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, int i, bool reverse) con
     }
     return end;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
+{
+    if (d->m_nodes.size() == path.CountNodes()) //-V807
+    {
+        return QVector<quint32>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d->m_nodes.size(); ++i)
+    {
+        set1.insert(d->m_nodes.at(i).GetId());
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < path.CountNodes(); ++j)
+    {
+        set2.insert(path.at(j).GetId());
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<quint32> nodes;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        const int index = indexOfNode(set3.at(i));
+        if (index != -1)
+        {
+            nodes.append(d->m_nodes.at(index).GetId());
+        }
+    }
+
+    return nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPiecePath::indexOfNode(quint32 id) const
+{
+    for (int i = 0; i < d->m_nodes.size(); ++i)
+    {
+        if (d->m_nodes.at(i).GetId() == id)
+        {
+            return i;
+        }
+    }
+    qDebug()<<"Can't find node.";
+    return -1;
+}

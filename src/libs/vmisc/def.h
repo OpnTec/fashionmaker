@@ -695,6 +695,7 @@ struct CustomSARecord
     bool reverse;
 };
 
+Q_DECLARE_METATYPE(CustomSARecord)
 Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
 
 /****************************************************************************

@@ -152,6 +152,14 @@ void VToolPiecePath::AddNodes(VAbstractPattern *doc, QDomElement &domElement, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path)
+{
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrName, path.GetName());
+    doc->SetAttribute(domElement, AttrType, static_cast<int>(path.GetType()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::FullUpdateFromFile()
 {
     RefreshGeometry();
@@ -175,11 +183,9 @@ void VToolPiecePath::AllowSelecting(bool enabled)
 void VToolPiecePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-
     const VPiecePath path = VAbstractTool::data.GetPiecePath(id);
-    doc->SetAttribute(domElement, AttrType, static_cast<int>(path.GetType()));
+
+    AddAttributes(doc, domElement, id, path);
 
     if (idTool != NULL_ID)
     {

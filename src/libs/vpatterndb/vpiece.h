@@ -81,15 +81,11 @@ public:
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
 
-    int indexOfNode(const quint32 &id) const;
-
 private:
     QSharedDataPointer<VPieceData> d;
 
     void CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
                                    const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const;
-
-    static int indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);

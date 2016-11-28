@@ -74,6 +74,10 @@ public:
     VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
     VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
 
+    QVector<quint32> MissingNodes(const VPiecePath &path) const;
+
+    int indexOfNode(quint32 id) const;
+
 private:
     QSharedDataPointer<VPiecePathData> d;
 };

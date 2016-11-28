@@ -252,36 +252,7 @@ void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
  */
 QVector<quint32> VPiece::MissingNodes(const VPiece &det) const
 {
-    const QVector<VPieceNode> pNodes = d->m_path.GetNodes();
-    if (pNodes.size() == det.GetPath().CountNodes()) //-V807
-    {
-        return QVector<quint32>();
-    }
-
-    QSet<quint32> set1;
-    for (qint32 i = 0; i < pNodes.size(); ++i)
-    {
-        set1.insert(pNodes.at(i).GetId());
-    }
-
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < det.GetPath().CountNodes(); ++j)
-    {
-        set2.insert(det.GetPath().at(j).GetId());
-    }
-
-    const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<quint32> nodes;
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        const int index = indexOfNode(pNodes, set3.at(i));
-        if (index != -1)
-        {
-            nodes.append(pNodes.at(index).GetId());
-        }
-    }
-
-    return nodes;
+    return d->m_path.MissingNodes(det.GetPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -313,17 +284,6 @@ QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
     }
 
     return r;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief indexOfNode return index in list node using id object.
- * @param id object (arc, point, spline, splinePath) id.
- * @return index in list or -1 id can't find.
- */
-int VPiece::indexOfNode(const quint32 &id) const
-{
-    return indexOfNode(d->m_path.GetNodes(), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -409,24 +369,4 @@ void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VCont
             pointsEkv.append(p);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief indexOfNode return index in list node using id object.
- * @param list list nodes detail.
- * @param id object (arc, point, spline, splinePath) id.
- * @return index in list or -1 id can't find.
- */
-int VPiece::indexOfNode(const QVector<VPieceNode> &list, quint32 id)
-{
-    for (int i = 0; i < list.size(); ++i)
-    {
-        if (list.at(i).GetId() == id)
-        {
-            return i;
-        }
-    }
-    qDebug()<<"Can't find node.";
-    return -1;
 }

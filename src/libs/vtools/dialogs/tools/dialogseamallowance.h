@@ -60,15 +60,20 @@ protected:
     virtual void CheckState() Q_DECL_OVERRIDE;
 
 private slots:
-    void ShowContextMenu(const QPoint &pos);
+    void ShowMainPathContextMenu(const QPoint &pos);
+    void ShowCustomSAContextMenu(const QPoint &pos);
     void ListChanged();
     void EnableSeamAllowance(bool enable);
     void NodeChanged(int index);
+    void CSAStartPointChanged(int index);
+    void CSAEndPointChanged(int index);
     void NodeAngleChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
     void ChangedSABefore(double d);
     void ChangedSAAfter(double d);
+    void CustomSAChanged(int row);
+    void PathDialogClosed(int result);
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
@@ -78,14 +83,19 @@ private:
     qreal  m_mx;
     qreal  m_my;
 
+    QPointer<DialogTool> m_dialog;
+
     VPiece CreatePiece() const;
 
-    void    NewItem(const VPieceNode &node);
+    void    NewMainPathItem(const VPieceNode &node);
+    void    NewCustomSA(const CustomSARecord &record);
+    QString GetCustomSARecordName(const CustomSARecord &record) const;
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
     bool    MainPathIsClockwise() const;
     void    InitNodesList();
     void    InitNodeAngles();
+    void    InitCSAPoint(QComboBox *box);
 
     QListWidgetItem *GetItemById(quint32 id);
 

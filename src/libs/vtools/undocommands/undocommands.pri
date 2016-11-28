@@ -26,7 +26,8 @@ HEADERS += \
     $$PWD/deletepiece.h \
     $$PWD/movepiece.h \
     $$PWD/savepieceoptions.h \
-    $$PWD/togglepieceinlayout.h
+    $$PWD/togglepieceinlayout.h \
+    $$PWD/savepiecepathoptions.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -53,4 +54,5 @@ SOURCES += \
     $$PWD/deletepiece.cpp \
     $$PWD/movepiece.cpp \
     $$PWD/savepieceoptions.cpp \
-    $$PWD/togglepieceinlayout.cpp
+    $$PWD/togglepieceinlayout.cpp \
+    $$PWD/savepiecepathoptions.cpp

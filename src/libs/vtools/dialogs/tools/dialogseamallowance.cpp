@@ -31,6 +31,8 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "visualization/path/vistoolpiece.h"
+#include "dialogpiecepath.h"
+#include "../../undocommands/savepiecepathoptions.h"
 
 #include <QMenu>
 
@@ -40,7 +42,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       ui(new Ui::DialogSeamAllowance),
       applyAllowed(false),// By default disabled
       m_mx(0),
-      m_my(0)
+      m_my(0),
+      m_dialog()
 {
     ui->setupUi(this);
 
@@ -82,14 +85,24 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     connect(ui->doubleSpinBoxSAAfter, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSeamAllowance::ChangedSAAfter);
 
-    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogSeamAllowance::ShowContextMenu);
-    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
+    ui->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowMainPathContextMenu);
+    connect(ui->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this, &DialogSeamAllowance::ListChanged);
     connect(ui->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
     InitNodeAngles();
     connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::NodeAngleChanged);
+
+    ui->listWidgetCustomSA->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidgetCustomSA, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowCustomSAContextMenu);
+    connect(ui->listWidgetCustomSA, &QListWidget::currentRowChanged, this, &DialogSeamAllowance::CustomSAChanged);
+    connect(ui->comboBoxStartPoint, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::CSAStartPointChanged);
+    connect(ui->comboBoxEndPoint, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::CSAEndPointChanged);
 
     if (not applyAllowed)
     {
@@ -123,11 +136,30 @@ VPiece DialogSeamAllowance::GetPiece() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetPiece(const VPiece &piece)
 {
-    ui->listWidget->clear();
+    ui->listWidgetMainPath->clear();
     for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
     {
-        NewItem(piece.GetPath().at(i));
+        NewMainPathItem(piece.GetPath().at(i));
     }
+
+    ui->listWidgetCustomSA->blockSignals(true);
+    ui->listWidgetCustomSA->clear();
+    const QVector<CustomSARecord> records = piece.GetCustomSARecords();
+    for (int i = 0; i < records.size(); ++i)
+    {
+        NewCustomSA(records.at(i));
+    }
+    ui->listWidgetCustomSA->blockSignals(false);
+
+    ui->comboBoxStartPoint->blockSignals(true);
+    ui->comboBoxStartPoint->clear();
+    ui->comboBoxStartPoint->blockSignals(false);
+
+    ui->comboBoxEndPoint->blockSignals(true);
+    ui->comboBoxEndPoint->clear();
+    ui->comboBoxEndPoint->blockSignals(false);
+
+    CustomSAChanged(0);
 
     ui->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
     ui->doubleSpinBoxSeams->setValue(piece.GetSAWidth());
@@ -159,16 +191,16 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
         switch (type)
         {
             case SceneObject::Arc:
-                NewItem(VPieceNode(id, Tool::NodeArc, reverse));
+                NewMainPathItem(VPieceNode(id, Tool::NodeArc, reverse));
                 break;
             case SceneObject::Point:
-                NewItem(VPieceNode(id, Tool::NodePoint));
+                NewMainPathItem(VPieceNode(id, Tool::NodePoint));
                 break;
             case SceneObject::Spline:
-                NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
+                NewMainPathItem(VPieceNode(id, Tool::NodeSpline, reverse));
                 break;
             case SceneObject::SplinePath:
-                NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
+                NewMainPathItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
                 break;
             case (SceneObject::Line):
             case (SceneObject::Detail):
@@ -241,10 +273,10 @@ void DialogSeamAllowance::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
+void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
 {
-    const int row = ui->listWidget->currentRow();
-    if (ui->listWidget->count() == 0 || row == -1 || row >= ui->listWidget->count())
+    const int row = ui->listWidgetMainPath->currentRow();
+    if (ui->listWidgetMainPath->count() == 0 || row == -1 || row >= ui->listWidgetMainPath->count())
     {
         return;
     }
@@ -253,7 +285,7 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     actionDelete->setEnabled(applyAllowed);//Because we can't undo this operation when creating a piece.
 
-    QListWidgetItem *rowItem = ui->listWidget->item(row);
+    QListWidgetItem *rowItem = ui->listWidgetMainPath->item(row);
     SCASSERT(rowItem != nullptr);
     VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
@@ -265,10 +297,10 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
         actionReverse->setChecked(rowNode.GetReverse());
     }
 
-    QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
+    QAction *selectedAction = menu->exec(ui->listWidgetMainPath->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
-        delete ui->listWidget->item(row);
+        delete ui->listWidgetMainPath->item(row);
         ValidObjects(MainPathIsValid());
     }
     else if (selectedAction == actionReverse)
@@ -280,6 +312,52 @@ void DialogSeamAllowance::ShowContextMenu(const QPoint &pos)
     }
 
     ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
+{
+    const int row = ui->listWidgetCustomSA->currentRow();
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
+    {
+        return;
+    }
+
+    QMenu *menu = new QMenu(this);
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
+    QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
+    SCASSERT(rowItem != nullptr);
+    CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
+
+    QAction *actionReverse = menu->addAction(tr("Reverse"));
+    actionReverse->setCheckable(true);
+    actionReverse->setChecked(record.reverse);
+
+    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+    QAction *selectedAction = menu->exec(ui->listWidgetCustomSA->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete ui->listWidgetCustomSA->item(row);
+    }
+    else if (selectedAction == actionReverse)
+    {
+        record.reverse = not record.reverse;
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
+        rowItem->setText(GetCustomSARecordName(record));
+    }
+    else if (selectedAction == actionOption)
+    {
+        auto *dialog = new DialogPiecePath(data, record.path, this);
+        dialog->SetPiecePath(data->GetPiecePath(record.path));
+        dialog->SetPieceId(toolId);
+        dialog->EnbleShowMode(true);
+        m_dialog = dialog;
+        m_dialog->setModal(true);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PathDialogClosed);
+        m_dialog->show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -299,6 +377,7 @@ void DialogSeamAllowance::ListChanged()
 void DialogSeamAllowance::EnableSeamAllowance(bool enable)
 {
     ui->groupBoxAutomatic->setEnabled(enable);
+    ui->groupBoxCustom->setEnabled(enable);
 
     if (enable)
     {
@@ -327,7 +406,7 @@ void DialogSeamAllowance::NodeChanged(int index)
         const quint32 id = ui->comboBoxNodes->currentData().toUInt();
     #endif
         const VPiece piece = CreatePiece();
-        const int nodeIndex = piece.indexOfNode(id);
+        const int nodeIndex = piece.GetPath().indexOfNode(id);
         if (nodeIndex != -1)
         {
             const VPieceNode &node = piece.GetPath().at(nodeIndex);
@@ -375,6 +454,52 @@ void DialogSeamAllowance::NodeChanged(int index)
     ui->doubleSpinBoxSABefore->blockSignals(false);
     ui->doubleSpinBoxSAAfter->blockSignals(false);
     ui->comboBoxAngle->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CSAStartPointChanged(int index)
+{
+    const int row = ui->listWidgetCustomSA->currentRow();
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
+    {
+        return;
+    }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const quint32 startPoint = ui->comboBoxStartPoint->itemData(index).toUInt();
+#else
+    Q_UNUSED(index);
+    const quint32 startPoint = ui->comboBoxStartPoint->currentData().toUInt();
+#endif
+
+    QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
+    SCASSERT(rowItem != nullptr);
+    CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
+    record.startPoint = startPoint;
+    rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CSAEndPointChanged(int index)
+{
+    const int row = ui->listWidgetCustomSA->currentRow();
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
+    {
+        return;
+    }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    const quint32 endPoint = ui->comboBoxEndPoint->itemData(index).toUInt();
+#else
+    Q_UNUSED(index);
+    const quint32 endPoint = ui->comboBoxEndPoint->currentData().toUInt();
+#endif
+
+    QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
+    SCASSERT(rowItem != nullptr);
+    CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
+    record.endPoint = endPoint;
+    rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -432,12 +557,68 @@ void DialogSeamAllowance::ChangedSAAfter(double d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CustomSAChanged(int row)
+{
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
+    {
+        return;
+    }
+
+    ui->comboBoxStartPoint->blockSignals(true);
+    ui->comboBoxEndPoint->blockSignals(true);
+
+    InitCSAPoint(ui->comboBoxStartPoint);
+    InitCSAPoint(ui->comboBoxEndPoint);
+
+    const QListWidgetItem *item = ui->listWidgetCustomSA->item( row );
+    SCASSERT(item != nullptr);
+    const CustomSARecord record = qvariant_cast<CustomSARecord>(item->data(Qt::UserRole));
+
+    {
+        const int index = ui->comboBoxStartPoint->findData(record.startPoint);
+        if (index != -1)
+        {
+            ui->comboBoxStartPoint->setCurrentIndex(index);
+        }
+    }
+
+    {
+        const int index = ui->comboBoxEndPoint->findData(record.endPoint);
+        if (index != -1)
+        {
+            ui->comboBoxEndPoint->setCurrentIndex(index);
+        }
+    }
+
+    ui->comboBoxStartPoint->blockSignals(false);
+    ui->comboBoxEndPoint->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PathDialogClosed(int result)
+{
+    if (result == QDialog::Accepted)
+    {
+        SCASSERT(not m_dialog.isNull());
+        DialogPiecePath *dialogTool = qobject_cast<DialogPiecePath*>(m_dialog.data());
+        SCASSERT(dialogTool != nullptr);
+        const VPiecePath newPath = dialogTool->GetPiecePath();
+        const VPiecePath oldPath = data->GetPiecePath(dialogTool->GetPieceId());
+
+        SavePiecePathOptions *saveCommand = new SavePiecePathOptions(newPath, oldPath, qApp->getCurrentDocument(),
+                                                                     const_cast<VContainer *>(data), toolId);
+        qApp->getUndoStack()->push(saveCommand);
+    }
+    delete m_dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
-    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    for (qint32 i = 0; i < ui->listWidgetMainPath->count(); ++i)
     {
-        QListWidgetItem *item = ui->listWidget->item(i);
+        QListWidgetItem *item = ui->listWidgetMainPath->item(i);
         piece.GetPath().Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
 
@@ -451,9 +632,43 @@ VPiece DialogSeamAllowance::CreatePiece() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::NewItem(const VPieceNode &node)
+void DialogSeamAllowance::NewMainPathItem(const VPieceNode &node)
 {
-    NewNodeItem(ui->listWidget, node);
+    NewNodeItem(ui->listWidgetMainPath, node);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::NewCustomSA(const CustomSARecord &record)
+{
+    if (record.path > NULL_ID)
+    {
+        const QString name = GetCustomSARecordName(record);
+
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, QVariant::fromValue(record));
+        ui->listWidgetCustomSA->addItem(item);
+        ui->listWidgetCustomSA->setCurrentRow(ui->listWidgetCustomSA->count()-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetCustomSARecordName(const CustomSARecord &record) const
+{
+    QString name;
+
+    if (record.path > NULL_ID)
+    {
+        const VPiecePath path = data->GetPiecePath(record.path);
+        name = path.GetName();
+
+        if (record.reverse)
+        {
+            name = QLatin1String("- ") + name;
+        }
+    }
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -475,13 +690,13 @@ bool DialogSeamAllowance::MainPathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
-        if (FirstPointEqualLast(ui->listWidget))
+        if (FirstPointEqualLast(ui->listWidgetMainPath))
         {
             url += tr("First point cannot be equal to the last point!");
             ui->helpLabel->setText(url);
             return false;
         }
-        else if (DoublePoints(ui->listWidget))
+        else if (DoublePoints(ui->listWidgetMainPath))
         {
             url += tr("You have double points!");
             ui->helpLabel->setText(url);
@@ -576,9 +791,9 @@ void DialogSeamAllowance::InitNodeAngles()
 //---------------------------------------------------------------------------------------------------------------------
 QListWidgetItem *DialogSeamAllowance::GetItemById(quint32 id)
 {
-    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    for (qint32 i = 0; i < ui->listWidgetMainPath->count(); ++i)
     {
-        QListWidgetItem *item = ui->listWidget->item(i);
+        QListWidgetItem *item = ui->listWidgetMainPath->item(i);
         const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
 
         if (node.GetId() == id)
@@ -633,6 +848,26 @@ void DialogSeamAllowance::SetCurrentSAAfter(qreal value)
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+    box->clear();
+    box->addItem(tr("Empty"), NULL_ID);
+
+    const VPiece piece = CreatePiece();
+
+    for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
+    {
+        const VPieceNode &node = piece.GetPath().at(i);
+        if (node.GetTypeTool() == Tool::NodePoint)
+        {
+            const QString name = GetNodeName(node);
+            box->addItem(name, node.GetId());
         }
     }
 }

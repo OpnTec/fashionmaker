@@ -7,21 +7,21 @@
     <x>0</x>
     <y>0</y>
     <width>559</width>
-    <height>423</height>
+    <height>476</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabMainPath">
       <attribute name="title">
@@ -42,7 +42,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/icon/32x32/clockwise.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/32x32/clockwise.png</pixmap>
            </property>
           </widget>
          </item>
@@ -69,7 +69,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidget">
+        <widget class="QListWidget" name="listWidgetMainPath">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>
          </property>
@@ -94,7 +94,7 @@
       <attribute name="title">
        <string>Seam allowance</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <widget class="QCheckBox" name="checkBoxSeams">
          <property name="text">
@@ -113,10 +113,19 @@
          <property name="title">
           <string>Automatic</string>
          </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
          <property name="checkable">
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="topMargin">
+           <number>9</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
@@ -269,21 +278,74 @@
             </layout>
            </widget>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxCustom">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Custom</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
-           <spacer name="verticalSpacer">
+           <widget class="QSplitter" name="splitter">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>219</height>
-             </size>
-            </property>
-           </spacer>
+            <widget class="QWidget" name="layoutWidget">
+             <layout class="QFormLayout" name="formLayout_2">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelStartPoint">
+                <property name="text">
+                 <string>Start point:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBoxStartPoint"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelEndPoint">
+                <property name="text">
+                 <string>End point:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBoxEndPoint"/>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QListWidget" name="listWidgetCustomSA"/>
+           </widget>
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -301,7 +363,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../vmisc/share/resources/icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
