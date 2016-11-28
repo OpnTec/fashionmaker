@@ -119,6 +119,18 @@ void VPiecePath::SetType(PiecePathType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPiecePath::GetName() const
+{
+    return d->m_name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetName(const QString &name)
+{
+    d->m_name = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
 {
     QVector<QPointF> points;

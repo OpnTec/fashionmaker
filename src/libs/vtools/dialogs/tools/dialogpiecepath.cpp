@@ -262,6 +262,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     }
 
     SetType(path.GetType());
+    ui->lineEditName->setText(path.GetName());
 
     ValidObjects(PathIsValid());
 
@@ -348,6 +349,7 @@ VPiecePath DialogPiecePath::CreatePath() const
     }
 
     path.SetType(GetType());
+    path.SetName(ui->lineEditName->text());
 
     return path;
 }

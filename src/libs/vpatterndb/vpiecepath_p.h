@@ -43,24 +43,28 @@ class VPiecePathData : public QSharedData
 public:
     VPiecePathData()
         : m_nodes(),
-          m_type(PiecePathType::Unknown)
+          m_type(PiecePathType::Unknown),
+          m_name()
     {}
 
     VPiecePathData(PiecePathType type)
         : m_nodes(),
-          m_type(type)
+          m_type(type),
+          m_name()
     {}
 
     VPiecePathData(const VPiecePathData &path)
         : QSharedData(path),
           m_nodes(path.m_nodes),
-          m_type(path.m_type)
+          m_type(path.m_type),
+          m_name(path.m_name)
     {}
 
     ~VPiecePathData();
 
     QVector<VPieceNode> m_nodes;
     PiecePathType m_type;
+    QString m_name;
 
 private:
     VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;

@@ -3050,6 +3050,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
     {
         quint32 id = 0;
         ToolsCommonAttributes(domElement, id);
+        const QString name = GetParametrString(domElement, AttrName, tr("Unnamed path"));
         const QString defType = QString().setNum(static_cast<int>(PiecePathType::CustomSeamAllowance));
         const PiecePathType type = static_cast<PiecePathType>(GetParametrUInt(domElement, AttrType, defType));
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
@@ -3062,6 +3063,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         }
 
         path.SetType(type);
+        path.SetName(name);
 
         VToolPiecePath::Create(id, path, 0, scene, this, data, parse, Source::FromFile, "", idTool);
     }

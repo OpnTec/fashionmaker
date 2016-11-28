@@ -63,6 +63,9 @@ public:
     PiecePathType GetType() const;
     void          SetType(PiecePathType type);
 
+    QString GetName() const;
+    void    SetName(const QString &name);
+
     QVector<QPointF> PathPoints(const VContainer *data) const;
     QVector<QPointF> PathNodePoints(const VContainer *data) const;
 
