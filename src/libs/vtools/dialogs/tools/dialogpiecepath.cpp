@@ -37,8 +37,7 @@
 DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
     ui(new Ui::DialogPiecePath),
-    m_showMode(false),
-    m_saWidth(0)
+    m_showMode(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -88,15 +87,7 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogPiecePath::NodeAngleChanged);
 
-    if (not m_showMode)
-    {
-        vis = new VisToolPiecePath(data);
-    }
-    else
-    {
-        ui->comboBoxType->setDisabled(true);
-        ui->comboBoxPiece->setDisabled(true);
-    }
+    vis = new VisToolPiecePath(data);
 
     ui->tabWidget->removeTab(1);
 }
@@ -111,6 +102,8 @@ DialogPiecePath::~DialogPiecePath()
 void DialogPiecePath::EnbleShowMode(bool disable)
 {
     m_showMode = disable;
+    ui->comboBoxType->setDisabled(m_showMode);
+    ui->comboBoxPiece->setDisabled(m_showMode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,7 +301,7 @@ void DialogPiecePath::NodeChanged(int index)
             qreal w1 = node.GetSABefore();
             if (w1 < 0)
             {
-                w1 = m_saWidth;
+                w1 = ui->doubleSpinBoxSeams->value();
             }
             else
             {
@@ -319,7 +312,7 @@ void DialogPiecePath::NodeChanged(int index)
             qreal w2 = node.GetSAAfter();
             if (w2 < 0)
             {
-                w2 = m_saWidth;
+                w2 = ui->doubleSpinBoxSeams->value();
             }
             else
             {
@@ -588,6 +581,8 @@ void DialogPiecePath::SetPieceId(quint32 id)
             ui->comboBoxType->setCurrentIndex(index);
         }
     }
+
+    ValidObjects(PathIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,8 +590,8 @@ void DialogPiecePath::SetSAWidth(qreal width)
 {
     if (width >=0)
     {
-        m_saWidth = width;
-        ui->tabWidget->addTab(ui->tabSeamAllowance, QString());
+        ui->tabWidget->addTab(ui->tabSeamAllowance, tr("Seam allowance"));
+        ui->doubleSpinBoxSeams->setValue(width);
     }
     else
     {

@@ -641,12 +641,21 @@ void DialogSeamAllowance::PathDialogClosed(int result)
         SCASSERT(not m_dialog.isNull());
         DialogPiecePath *dialogTool = qobject_cast<DialogPiecePath*>(m_dialog.data());
         SCASSERT(dialogTool != nullptr);
-        const VPiecePath newPath = dialogTool->GetPiecePath();
-        const VPiecePath oldPath = data->GetPiecePath(dialogTool->GetPieceId());
+        try
+        {
+            const VPiecePath newPath = dialogTool->GetPiecePath();
+            const VPiecePath oldPath = data->GetPiecePath(dialogTool->GetToolId());
 
-        SavePiecePathOptions *saveCommand = new SavePiecePathOptions(newPath, oldPath, qApp->getCurrentDocument(),
-                                                                     const_cast<VContainer *>(data), toolId);
-        qApp->getUndoStack()->push(saveCommand);
+            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(oldPath, newPath, qApp->getCurrentDocument(),
+                                                                         const_cast<VContainer *>(data),
+                                                                         dialogTool->GetToolId());
+            qApp->getUndoStack()->push(saveCommand);
+        }
+        catch (const VExceptionBadId &e)
+        {
+            qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Error. Can't save piece path.")),
+                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        }
     }
     delete m_dialog;
 }

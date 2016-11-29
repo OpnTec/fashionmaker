@@ -78,7 +78,6 @@ private:
     Q_DISABLE_COPY(DialogPiecePath)
     Ui::DialogPiecePath *ui;
     bool m_showMode;
-    qreal m_saWidth;
 
     void InitPathTypes();
     void InitListPieces();
