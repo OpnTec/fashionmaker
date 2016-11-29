@@ -77,7 +77,7 @@ enum class PieceNodeAngle : unsigned char
 enum class PiecePathIncludeType : unsigned char
 {
     AsMainPath = 0,
-    AsCustomSA
+    AsCustomSA = 1
 };
 
 enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
