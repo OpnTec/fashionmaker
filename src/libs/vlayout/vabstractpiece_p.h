@@ -31,6 +31,7 @@
 
 #include <QSharedData>
 #include <QString>
+#include <QCoreApplication>
 
 #include "../vmisc/diagnostic.h"
 
@@ -39,9 +40,10 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VAbstractPieceData : public QSharedData
 {
+    Q_DECLARE_TR_FUNCTIONS(VAbstractPieceData)
 public:
     VAbstractPieceData()
-        : m_name(),
+        : m_name(tr("Detail")),
           m_forbidFlipping(false),
           m_seamAllowance(false),
           m_width(0)
