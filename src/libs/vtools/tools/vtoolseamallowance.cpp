@@ -702,11 +702,7 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
                 break;
             }
             case (Tool::NodeArc):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
-                break;
             case (Tool::NodeSpline):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
-                break;
             case (Tool::NodeSplinePath):
                 doc->IncrementReferens(detail.GetPath().at(i).GetId());
                 break;
