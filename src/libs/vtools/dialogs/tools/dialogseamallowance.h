@@ -97,6 +97,7 @@ private:
     void    InitNodesList();
     void    InitCSAPoint(QComboBox *box);
     void    InitSAIncludeType();
+    void    UpdateCurrentRecord();
 
     QListWidgetItem *GetItemById(quint32 id);
 

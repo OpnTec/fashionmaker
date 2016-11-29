@@ -662,6 +662,7 @@ void DialogSeamAllowance::PathDialogClosed(int result)
                                                                          const_cast<VContainer *>(data),
                                                                          dialogTool->GetToolId());
             qApp->getUndoStack()->push(saveCommand);
+            UpdateCurrentRecord();
         }
         catch (const VExceptionBadId &e)
         {
@@ -930,4 +931,19 @@ void DialogSeamAllowance::InitSAIncludeType()
     ui->comboBoxIncludeType->addItem(tr("main path"), static_cast<unsigned char>(PiecePathIncludeType::AsMainPath));
     ui->comboBoxIncludeType->addItem(tr("custom seam allowance"),
                                      static_cast<unsigned char>(PiecePathIncludeType::AsCustomSA));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateCurrentRecord()
+{
+    const int row = ui->listWidgetCustomSA->currentRow();
+    if (ui->listWidgetCustomSA->count() == 0 || row == -1)
+    {
+        return;
+    }
+
+    QListWidgetItem *item = ui->listWidgetCustomSA->item(row);
+    SCASSERT(item != nullptr);
+    const CustomSARecord record = qvariant_cast<CustomSARecord>(item->data(Qt::UserRole));
+    item->setText(GetCustomSARecordName(record));
 }

@@ -95,7 +95,7 @@ void SavePiecePathOptions::redo()
         DecrementReferences(m_oldPath.MissingNodes(m_newPath));
 
         SCASSERT(m_data);
-        m_data->UpdatePiecePath(nodeId, m_oldPath);
+        m_data->UpdatePiecePath(nodeId, m_newPath);
     }
     else
     {
