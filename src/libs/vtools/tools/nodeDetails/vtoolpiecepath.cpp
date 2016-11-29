@@ -89,10 +89,6 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
         }
         return pathTool;
     }
-    else
-    {
-        doc->UpdateToolData(id, data);
-    }
     return nullptr;
 }
 
@@ -179,7 +175,7 @@ void VToolPiecePath::AddToFile()
     else if (path.GetType() == PiecePathType::CustomSeamAllowance)
     {
         CustomSARecord record;
-        record.path = m_pieceId;
+        record.path = id;
 
         QVector<CustomSARecord> records = newDet.GetCustomSARecords();
         records.append(record);
@@ -187,8 +183,9 @@ void VToolPiecePath::AddToFile()
     }
 
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
+    qApp->getUndoStack()->push(saveCommand);// First push then make a connect
+    VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(saveCommand);
 
     qApp->getUndoStack()->endMacro();
 }
