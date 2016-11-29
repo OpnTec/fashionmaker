@@ -518,10 +518,12 @@ void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
     }
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const PiecePathIncludeType type = static_cast<PiecePathIncludeType>(ui->comboBoxEndPoint->itemData(index).toUInt());
+    const PiecePathIncludeType type =
+            static_cast<PiecePathIncludeType>(ui->comboBoxIncludeType->itemData(index).toUInt());
 #else
     Q_UNUSED(index);
-    const PiecePathIncludeType type = static_cast<PiecePathIncludeType>(ui->comboBoxEndPoint->currentData().toUInt());
+    const PiecePathIncludeType type =
+            static_cast<PiecePathIncludeType>(ui->comboBoxIncludeType->currentData().toUInt());
 #endif
 
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
@@ -658,6 +660,14 @@ VPiece DialogSeamAllowance::CreatePiece() const
         QListWidgetItem *item = ui->listWidgetMainPath->item(i);
         piece.GetPath().Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
+
+    QVector<CustomSARecord> records;
+    for (qint32 i = 0; i < ui->listWidgetCustomSA->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidgetCustomSA->item(i);
+        records.append(qvariant_cast<CustomSARecord>(item->data(Qt::UserRole)));
+    }
+    piece.SetCustomSARecords(records);
 
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
