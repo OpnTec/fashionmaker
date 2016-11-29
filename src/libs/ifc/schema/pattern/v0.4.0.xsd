@@ -328,6 +328,7 @@
                                                                                  <xs:attribute name="type" type="piecePathType"></xs:attribute>
                                                                                  <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                                 <xs:attribute name="name" type="xs:string"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element>
                                                                      <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
