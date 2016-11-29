@@ -377,6 +377,7 @@ void DialogSeamAllowance::ListChanged()
         visPath->RefreshGeometry();
     }
     InitNodesList();
+    CustomSAChanged(ui->listWidgetCustomSA->currentRow());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
