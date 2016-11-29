@@ -87,6 +87,9 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogPiecePath::NodeAngleChanged);
 
+    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogPiecePath::ShowContextMenu);
+
     vis = new VisToolPiecePath(data);
 
     ui->tabWidget->removeTab(1);
