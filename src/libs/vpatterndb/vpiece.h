@@ -84,8 +84,9 @@ public:
 private:
     QSharedDataPointer<VPieceData> d;
 
-    void CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
-                                   const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const;
+    QVector<CustomSARecord> GetValidRecords() const;
+
+    static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);

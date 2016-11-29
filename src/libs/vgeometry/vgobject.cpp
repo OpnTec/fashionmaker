@@ -536,28 +536,6 @@ int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radiu
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetReversePoint return revers container of points.
- * @param points container with points.
- * @return reverced points.
- */
-QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
-{
-    if (points.isEmpty())
-    {
-        return points;
-    }
-    QVector<QPointF> reversePoints(points.size());
-    qint32 j = 0;
-    for (qint32 i = points.size() - 1; i >= 0; --i)
-    {
-        reversePoints.replace(j, points.at(i));
-        ++j;
-    }
-    return reversePoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetLengthContour return length of contour.
  * @param contour container with points of contour.
  * @param newPoints point whos we try to add to contour.

@@ -105,6 +105,11 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
         return QVector<QPointF>();
     }
 
+    const QVector<CustomSARecord> records = GetValidRecords();
+    int recordIndex = -1;
+    bool insertingCSA = false;
+    const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
+
     QVector<VSAPoint> pointsEkv;
     for (int i = 0; i< d->m_path.CountNodes(); ++i)
     {
@@ -113,21 +118,54 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
         {
             case (Tool::NodePoint):
             {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
-                VSAPoint p(point->toQPointF());
+                if (not insertingCSA)
+                {
+                    pointsEkv.append(VPiecePath::PreparePointEkv(node, data));
 
-                p.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                p.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                p.SetAngleType(node.GetAngleType());
-                pointsEkv.append(p);
+                    recordIndex = IsCSAStart(records, node.GetId());
+                    if (recordIndex != -1)
+                    {
+                        insertingCSA = true;
+
+                        const VPiecePath path = data->GetPiecePath(records.at(recordIndex).path);
+                        QVector<VSAPoint> r = path.SeamAllowancePoints(data, width, records.at(recordIndex).reverse);
+
+                        if (records.at(recordIndex).includeType == PiecePathIncludeType::AsCustomSA)
+                        {
+                            for (int j = 0; j < r.size(); ++j)
+                            {
+                                r[i].SetAngleType(PieceNodeAngle::ByLength);
+                                r[i].SetSABefore(0);
+                                r[i].SetSABefore(0);
+                            }
+                        }
+
+                        pointsEkv += r;
+                    }
+                }
+                else
+                {
+                    if (records.at(recordIndex).endPoint == node.GetId())
+                    {
+                        insertingCSA = false;
+                        recordIndex = -1;
+
+                        pointsEkv.append(VPiecePath::PreparePointEkv(node, data));
+                    }
+                }
             }
             break;
             case (Tool::NodeArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
-                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-                CurveSeamAllowanceSegment(pointsEkv, data, curve, i, node.GetReverse());
+                if (not insertingCSA)
+                {
+                    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+                    pointsEkv += VPiecePath::CurveSeamAllowanceSegment(data, d->m_path.GetNodes(), curve, i,
+                                                                       node.GetReverse(), width);
+                }
             }
             break;
             default:
@@ -136,7 +174,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
         }
     }
 
-    return Equidistant(pointsEkv, ToPixel(GetSAWidth(), *data->GetPatternUnit()));
+    return Equidistant(pointsEkv, width);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,86 +325,31 @@ QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::CurveSeamAllowanceSegment(QVector<VSAPoint> &pointsEkv, const VContainer *data,
-                                       const QSharedPointer<VAbstractCurve> &curve, int i, bool reverse) const
+QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
-    const VSAPoint begin = d->m_path.StartSegment(data, i, reverse);
-    const VSAPoint end = d->m_path.EndSegment(data, i, reverse);
-
-    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
-    if (points.isEmpty())
+    QVector<CustomSARecord> records;
+    for (int i = 0; i < d->m_customSARecords.size(); ++i)
     {
-        return;
-    }
+        const CustomSARecord &record = d->m_customSARecords.at(i);
 
-    qreal w1 = begin.GetSAAfter();
-    qreal w2 = end.GetSABefore();
-    if (w1 < 0 && w2 < 0)
-    {// no local widths
-        for(int i = 0; i < points.size(); ++i)
+        if (record.startPoint > NULL_ID && record.path > NULL_ID && record.endPoint > NULL_ID)
         {
-            VSAPoint p(points.at(i));
-            if (i == 0)
-            { // first point
-                p.SetSAAfter(begin.GetSAAfter());
-                p.SetSABefore(begin.GetSABefore());
-                p.SetAngleType(begin.GetAngleType());
-            }
-            else if (i == points.size() - 1)
-            { // last point
-                p.SetSAAfter(end.GetSAAfter());
-                p.SetSABefore(end.GetSABefore());
-                p.SetAngleType(end.GetAngleType());
-            }
-            pointsEkv.append(p);
+            records.append(record);
         }
     }
-    else
+    return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPiece::IsCSAStart(const QVector<CustomSARecord> &records, quint32 id)
+{
+    for (int i = 0; i < records.size(); ++i)
     {
-        const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-
-        if (w1 < 0)
+        if (records.at(i).startPoint == id)
         {
-            w1 = width;
-        }
-
-        if (w2 < 0)
-        {
-            w2 = width;
-        }
-
-        const qreal wDiff = w2 - w1;// Difference between to local widths
-        const qreal fullLength = VAbstractCurve::PathLength(points);
-
-        VSAPoint p(points.at(0));//First point in the list
-        p.SetSAAfter(begin.GetSAAfter());
-        p.SetSABefore(begin.GetSABefore());
-        p.SetAngleType(begin.GetAngleType());
-        pointsEkv.append(p);
-
-        qreal length = 0; // how much we handle
-
-        for(int i = 1; i < points.size(); ++i)
-        {
-            p = VSAPoint(points.at(i));
-
-            if (i == points.size() - 1)
-            {// last point
-                p.SetSAAfter(end.GetSAAfter());
-                p.SetSABefore(end.GetSABefore());
-                p.SetAngleType(end.GetAngleType());
-            }
-            else
-            {
-                length += QLineF(points.at(i-1), points.at(i)).length();
-                const qreal localWidth = w1 + wDiff*(length/fullLength);
-
-                p.SetSAAfter(localWidth);
-                p.SetSABefore(localWidth);
-                // curve points have angle type by default
-            }
-
-            pointsEkv.append(p);
+            return i;
         }
     }
+
+    return -1;
 }

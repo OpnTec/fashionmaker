@@ -40,6 +40,7 @@ class QPointF;
 class VContainer;
 class VSAPoint;
 class QPainterPath;
+class VAbstractCurve;
 
 class VPiecePath
 {
@@ -66,17 +67,27 @@ public:
     QString GetName() const;
     void    SetName(const QString &name);
 
-    QVector<QPointF> PathPoints(const VContainer *data) const;
-    QVector<QPointF> PathNodePoints(const VContainer *data) const;
+    QVector<QPointF>  PathPoints(const VContainer *data) const;
+    QVector<QPointF>  PathNodePoints(const VContainer *data) const;
+    QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
 
     QPainterPath PainterPath(const VContainer *data) const;
-
-    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
-    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
 
     QVector<quint32> MissingNodes(const VPiecePath &path) const;
 
     int indexOfNode(quint32 id) const;
+
+    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
+    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
+
+    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
+    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
+
+    static VSAPoint PreparePointEkv(const VPieceNode &node, const VContainer *data);
+
+    static QVector<VSAPoint> CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                                       const QSharedPointer<VAbstractCurve> &curve,
+                                                       int i, bool reverse, qreal width);
 
 private:
     QSharedDataPointer<VPiecePathData> d;
