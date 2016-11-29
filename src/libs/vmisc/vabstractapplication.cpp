@@ -290,12 +290,12 @@ VCommonSettings *VAbstractApplication::Settings()
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsScene *VAbstractApplication::getCurrentScene() const
 {
-    SCASSERT(currentScene != nullptr);
-    return currentScene;
+    SCASSERT(*currentScene != nullptr);
+    return *currentScene;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setCurrentScene(QGraphicsScene *value)
+void VAbstractApplication::setCurrentScene(QGraphicsScene **value)
 {
     currentScene = value;
 }

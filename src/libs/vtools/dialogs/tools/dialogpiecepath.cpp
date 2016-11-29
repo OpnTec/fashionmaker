@@ -200,6 +200,12 @@ void DialogPiecePath::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::ShowVisualization()
+{
+    AddVisualization<VisToolPiecePath>();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ShowContextMenu(const QPoint &pos)
 {
     const int row = ui->listWidget->currentRow();
@@ -458,6 +464,10 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 
     SetType(path.GetType());
     ui->lineEditName->setText(path.GetName());
+
+    VisToolPiecePath *visPath = qobject_cast<VisToolPiecePath *>(vis);
+    SCASSERT(visPath != nullptr);
+    visPath->SetPath(path);
 
     ValidObjects(PathIsValid());
 

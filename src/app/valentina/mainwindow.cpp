@@ -309,9 +309,9 @@ QPointF MainWindow::StartPositionNewPP() const
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitScenes()
 {
-    sceneDraw = new VMainGraphicsScene();
+    sceneDraw = new VMainGraphicsScene(this);
     currentScene = sceneDraw;
-    qApp->setCurrentScene(currentScene);
+    qApp->setCurrentScene(&currentScene);
     connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
     connect(this, &MainWindow::ItemsSelection, sceneDraw, &VMainGraphicsScene::ItemsSelection);
 
@@ -331,7 +331,7 @@ void MainWindow::InitScenes()
 
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
 
-    sceneDetails = new VMainGraphicsScene();
+    sceneDetails = new VMainGraphicsScene(this);
     connect(this, &MainWindow::EnableItemMove, sceneDetails, &VMainGraphicsScene::EnableItemMove);
 
     connect(this, &MainWindow::EnableNodeLabelSelection, sceneDetails, &VMainGraphicsScene::ToggleNodeLabelSelection);
@@ -3830,8 +3830,6 @@ MainWindow::~MainWindow()
     CleanLayout();
 
     delete doc;
-    delete sceneDetails;
-    delete sceneDraw;
     delete ui;
 }
 

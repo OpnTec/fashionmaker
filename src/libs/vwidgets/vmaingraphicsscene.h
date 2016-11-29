@@ -54,7 +54,7 @@ class VMainGraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    VMainGraphicsScene();
+    explicit VMainGraphicsScene(QObject *parent = nullptr);
     explicit VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
     qint32        getHorScrollBar() const;
     void          setHorScrollBar(const qint32 &value);

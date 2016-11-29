@@ -63,6 +63,7 @@ protected:
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization() Q_DECL_OVERRIDE;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);

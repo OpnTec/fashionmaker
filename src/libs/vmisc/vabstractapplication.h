@@ -88,7 +88,7 @@ public:
     QString          LocaleToString(const T &value);
 
     QGraphicsScene  *getCurrentScene() const;
-    void             setCurrentScene(QGraphicsScene *value);
+    void             setCurrentScene(QGraphicsScene **value);
 
     VMainGraphicsView *getSceneView() const;
     void               setSceneView(VMainGraphicsView *value);
@@ -137,7 +137,7 @@ private:
     MeasurementsType   _patternType;
 
 
-    QGraphicsScene     *currentScene;
+    QGraphicsScene     **currentScene;
     VMainGraphicsView  *sceneView;
 
     VAbstractPattern   *doc;
