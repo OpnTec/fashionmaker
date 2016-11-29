@@ -592,6 +592,17 @@ void DialogSeamAllowance::CustomSAChanged(int row)
 {
     if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
     {
+        ui->comboBoxStartPoint->blockSignals(true);
+        ui->comboBoxStartPoint->clear();
+        ui->comboBoxStartPoint->blockSignals(false);
+
+        ui->comboBoxEndPoint->blockSignals(true);
+        ui->comboBoxEndPoint->clear();
+        ui->comboBoxEndPoint->blockSignals(false);
+
+        ui->comboBoxIncludeType->blockSignals(true);
+        ui->comboBoxIncludeType->clear();
+        ui->comboBoxIncludeType->blockSignals(false);
         return;
     }
 
