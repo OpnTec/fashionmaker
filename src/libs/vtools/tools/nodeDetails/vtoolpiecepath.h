@@ -50,6 +50,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
+    virtual void incrementReferens() Q_DECL_OVERRIDE;
+    virtual void decrementReferens() Q_DECL_OVERRIDE;
+
     static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
@@ -72,6 +75,9 @@ private:
                    QGraphicsItem * parent = nullptr );
 
     void RefreshGeometry();
+
+    void IncrementNodes(const VPiecePath &path) const;
+    void DecrementNodes(const VPiecePath &path) const;
 };
 
 #endif // VTOOLPIECEPATH_H

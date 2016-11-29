@@ -99,6 +99,55 @@ QString VToolPiecePath::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::incrementReferens()
+{
+    ++_referens;
+    if (_referens == 1)
+    {
+        if (idTool != NULL_ID)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            IncrementNodes(VAbstractTool::data.GetPiecePath(id));
+        }
+        ShowNode();
+        QDomElement domElement = doc->elementById(id);
+        if (domElement.isElement())
+        {
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::decrementReferens()
+{
+    if (_referens > 0)
+    {
+        --_referens;
+    }
+    if (_referens == 0)
+    {
+        if (idTool != NULL_ID)
+        {
+            doc->DecrementReferens(idTool);
+        }
+        else
+        {
+            DecrementNodes(VAbstractTool::data.GetPiecePath(id));
+        }
+        HideNode();
+        QDomElement domElement = doc->elementById(id);
+        if (domElement.isElement())
+        {
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
 {
     domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
@@ -239,5 +288,25 @@ void VToolPiecePath::RefreshGeometry()
         QPainterPath p = path.PainterPath(this->getData());
         p.setFillRule(Qt::OddEvenFill);
         this->setPath(p);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::IncrementNodes(const VPiecePath &path) const
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(path.at(i).GetId());
+        doc->IncrementReferens(node->getIdTool());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::DecrementNodes(const VPiecePath &path) const
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(path.at(i).GetId());
+        doc->DecrementReferens(node->getIdTool());
     }
 }
