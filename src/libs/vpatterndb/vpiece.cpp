@@ -332,7 +332,11 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
     {
         const CustomSARecord &record = d->m_customSARecords.at(i);
 
-        if (record.startPoint > NULL_ID && record.path > NULL_ID && record.endPoint > NULL_ID)
+        if (record.startPoint > NULL_ID
+                && record.path > NULL_ID
+                && record.endPoint > NULL_ID
+                && d->m_path.indexOfNode(record.startPoint) != -1
+                && d->m_path.indexOfNode(record.endPoint) != -1)
         {
             records.append(record);
         }
