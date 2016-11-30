@@ -62,6 +62,11 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
+    void SetOnlyPoint(bool value);
+    bool IsOnlyPoint() const;
+
+    void SetPointHighlight(bool value);
+
     void RefreshLine();
     void RefreshGeometry(const VPointF &point);
     virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
@@ -104,6 +109,9 @@ private:
 
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
+
+    bool m_onlyPoint;
+    bool m_isHighlight;
 };
 
 #endif // VSIMPLEPOINT_H

@@ -35,6 +35,8 @@
 #include "vispath.h"
 #include "../vpatterndb/vpiecepath.h"
 
+class VSimplePoint;
+
 class VisToolPiecePath : public VisPath
 {
     Q_OBJECT
@@ -49,13 +51,13 @@ public:
 
 private:
     Q_DISABLE_COPY(VisToolPiecePath)
-    QVector<QGraphicsEllipseItem *> m_points;
+    QVector<VSimplePoint *> m_points;
 
     QGraphicsLineItem *m_line;
 
     VPiecePath m_path;
 
-    QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
+    VSimplePoint *GetPoint(quint32 i, const QColor &color);
 
     void HideAllItems();
 };

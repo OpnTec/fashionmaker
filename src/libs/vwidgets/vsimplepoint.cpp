@@ -53,8 +53,13 @@ class QKeyEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr)
+    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
+      QGraphicsEllipseItem(),
+      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
+      namePoint(nullptr),
+      lineName(nullptr),
+      m_onlyPoint(false),
+      m_isHighlight(false)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
@@ -64,7 +69,7 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 }
@@ -72,6 +77,26 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::~VSimplePoint()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetOnlyPoint(bool value)
+{
+    m_onlyPoint = value;
+    namePoint->setVisible(not m_onlyPoint);
+    lineName->setVisible(not m_onlyPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSimplePoint::IsOnlyPoint() const
+{
+    return m_onlyPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetPointHighlight(bool value)
+{
+    m_isHighlight = value;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::RefreshLine()
@@ -106,7 +131,7 @@ void VSimplePoint::RefreshLine()
 void VSimplePoint::RefreshGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -127,7 +152,7 @@ void VSimplePoint::RefreshGeometry(const VPointF &point)
 void VSimplePoint::SetEnabled(bool enabled)
 {
     VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
     namePoint->setEnabled(enabled);
 }

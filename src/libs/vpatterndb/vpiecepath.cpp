@@ -166,9 +166,9 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::PathNodePoints(const VContainer *data) const
+QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data) const
 {
-    QVector<QPointF> points;
+    QVector<VPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
     {
         switch (at(i).GetTypeTool())

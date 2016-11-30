@@ -28,6 +28,7 @@
 
 #include "vistoolpiece.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
@@ -54,12 +55,12 @@ void VisToolPiece::RefreshGeometry()
     {
         DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
 
-        const QVector<QPointF> nodes = m_piece.MainPathNodePoints(Visualization::data);
+        const QVector<VPointF> nodes = m_piece.MainPathNodePoints(Visualization::data);
 
         for (int i = 0; i < nodes.size(); ++i)
         {
             QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, nodes.at(i), supportColor);
+            DrawPoint(point, nodes.at(i).toQPointF(), supportColor);
         }
 
         if (mode == Mode::Creation)

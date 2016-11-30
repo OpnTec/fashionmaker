@@ -89,7 +89,7 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiece::MainPathNodePoints(const VContainer *data) const
+QVector<VPointF> VPiece::MainPathNodePoints(const VContainer *data) const
 {
     return GetPath().PathNodePoints(data);
 }

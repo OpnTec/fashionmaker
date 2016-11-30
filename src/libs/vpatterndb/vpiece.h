@@ -38,6 +38,7 @@ class QPainterPath;
 class VPieceData;
 class VPieceNode;
 class QPointF;
+class VPointF;
 class VContainer;
 template <class T> class QVector;
 template <class T>class QSharedPointer;
@@ -57,7 +58,7 @@ public:
     void       SetPath(const VPiecePath &path);
 
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
-    QVector<QPointF> MainPathNodePoints(const VContainer *data) const;
+    QVector<VPointF> MainPathNodePoints(const VContainer *data) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;

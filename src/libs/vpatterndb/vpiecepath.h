@@ -37,6 +37,7 @@
 class VPiecePathData;
 class VPieceNode;
 class QPointF;
+class VPointF;
 class VContainer;
 class VSAPoint;
 class QPainterPath;
@@ -68,7 +69,7 @@ public:
     void    SetName(const QString &name);
 
     QVector<QPointF>  PathPoints(const VContainer *data) const;
-    QVector<QPointF>  PathNodePoints(const VContainer *data) const;
+    QVector<VPointF>  PathNodePoints(const VContainer *data) const;
     QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
 
     QPainterPath PainterPath(const VContainer *data) const;

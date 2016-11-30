@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vistoolpiecepath.h"
+#include "../vwidgets/vsimplepoint.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent)
@@ -51,12 +53,14 @@ void VisToolPiecePath::RefreshGeometry()
     {
         DrawPath(this, m_path.PainterPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
 
-        const QVector<QPointF> nodes = m_path.PathNodePoints(Visualization::data);
+        const QVector<VPointF> nodes = m_path.PathNodePoints(Visualization::data);
 
         for (int i = 0; i < nodes.size(); ++i)
         {
-            QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, nodes.at(i), supportColor);
+            VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+            point->SetOnlyPoint(mode == Mode::Creation);
+            point->RefreshGeometry(nodes.at(i));
+            point->setVisible(true);
         }
 
         if (mode == Mode::Creation)
@@ -77,9 +81,22 @@ void VisToolPiecePath::SetPath(const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
+VSimplePoint *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
 {
-    return GetPointItem(Visualization::data, factor, m_points, i, color, this);
+    if (not m_points.isEmpty() && static_cast<quint32>(m_points.size() - 1) >= i)
+    {
+        return m_points.at(static_cast<int>(i));
+    }
+    else
+    {
+        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
+        point->SetPointHighlight(true);
+        point->setParentItem(this);
+        m_points.append(point);
+
+        return point;
+    }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
