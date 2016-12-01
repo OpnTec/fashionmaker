@@ -379,7 +379,21 @@ void VToolSeamAllowance::RefreshDataInFile()
             // TODO. Delete if minimal supported version is 0.4.0
             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                               "Time to refactor the code.");
-            doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
+
+            const uint version = doc->GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
+            if (version == 1)
+            {
+                const VPiece piece = VAbstractTool::data.GetPiece(id);
+
+                doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
+
+                doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+                AddPatternPieceData(doc, domElement, piece);
+                AddPatternInfo(doc, domElement, piece);
+                AddGrainline(doc, domElement, piece);
+                AddNodes(doc, domElement, piece);
+                AddCSARecords(doc, domElement, piece.GetCustomSARecords());
+            }
         }
     }
 }

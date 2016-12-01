@@ -1730,8 +1730,6 @@ void VPatternConverter::TagDetailToV0_4_0()
             dom.setAttribute(strSeamAllowance, dom.attribute(strSupplement, "0"));
             dom.removeAttribute(strSupplement);
 
-            dom.removeAttribute(strClosed);
-
             dom.setAttribute(strVersion, "1");
 
             const QStringList tags = QStringList() << strNode << strData << strPatternInfo << strGrainline;
@@ -1758,6 +1756,16 @@ void VPatternConverter::TagDetailToV0_4_0()
                             if (element.hasAttribute(strReverse))
                             {
                                 tagNode.setAttribute(strReverse, element.attribute(strReverse, "0"));
+                            }
+
+                            if (element.hasAttribute(strMx))
+                            {
+                                tagNode.setAttribute(strMx, element.attribute(strMx, "0"));
+                            }
+
+                            if (element.hasAttribute(strMy))
+                            {
+                                tagNode.setAttribute(strMy, element.attribute(strMy, "0"));
                             }
 
                             tagNode.setAttribute(strType, element.attribute(strType, ""));

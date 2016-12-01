@@ -28,6 +28,13 @@
 
 #include "vnodedetail.h"
 #include "vnodedetail_p.h"
+#include "vpiecenode.h"
+#include "vpiecepath.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+
+#include <QLineF>
+#include <QVector>
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
@@ -145,4 +152,155 @@ void VNodeDetail::setReverse(bool reverse)
     {
         d->reverse = reverse;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
+                                         bool closed)
+{
+    if (width < 0)
+    {
+        width = 0;
+    }
+
+    VPiecePath path;
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VNodeDetail &node = nodes.at(i);
+        path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
+    }
+
+    auto LocalWidth = [width](qreal move) noexcept
+    {
+        qreal value = width + move;
+        if (value < 0)
+        {
+            value = 0;
+        }
+        return value;
+    };
+
+    if (path.PathPoints(data).size() > 2)
+    {
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            const VNodeDetail &node = nodes.at(i);
+            if (node.getTypeTool() == Tool::NodePoint)
+            {
+                if (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy()))
+                {
+                    const QPointF previosPoint = path.NodePreviousPoint(data, i);
+                    const QPointF nextPoint = path.NodeNextPoint(data, i);
+
+                    const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
+
+                    const QPointF xPoint(point.x()+node.getMx(), point.y());
+                    const QPointF yPoint(point.x(), point.y()+node.getMy());
+
+                    if (IsSABefore(QLineF(point, previosPoint), QLineF(point, xPoint)))
+                    {
+                        path[i].SetSABefore(LocalWidth(node.getMx()));
+
+                        if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, yPoint)))
+                        {
+                            path[i].SetSAAfter(LocalWidth(node.getMy()));
+                        }
+                    }
+                    else if (IsSABefore(QLineF(point, previosPoint), QLineF(point, yPoint)))
+                    {
+                        path[i].SetSABefore(LocalWidth(node.getMy()));
+
+                        if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, xPoint)))
+                        {
+                            path[i].SetSAAfter(LocalWidth(node.getMx()));
+                        }
+                    }
+                    else if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, xPoint)))
+                    {
+                        path[i].SetSAAfter(LocalWidth(node.getMx()));
+                    }
+                    else if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, yPoint)))
+                    {
+                        path[i].SetSAAfter(LocalWidth(node.getMy()));
+                    }
+                }
+            }
+        }
+    }
+
+    if (not closed && path.CountNodes() > 1)
+    {
+        path[0].SetSABefore(0);
+        path[path.CountNodes()-1].SetSAAfter(0);
+    }
+
+    return path.GetNodes();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VNodeDetail::IsSABefore(const QLineF &saBaseLine, const QLineF &mLine)
+{
+    if (qFuzzyIsNull(mLine.length()))
+    {
+        return false;
+    }
+
+    QLineF saLine = saBaseLine;
+    saLine.setAngle(saLine.angle() - 90);
+
+    int saAngle = qRound(saLine.angle());
+    if (saAngle >= 360)
+    {
+        saAngle = 0;
+    }
+
+    int mTest1 = qRound(mLine.angle());
+    if (mTest1 >= 360)
+    {
+        mTest1 = 0;
+    }
+
+    QLineF mrLine = mLine;
+    mrLine.setAngle(mrLine.angle()+180);
+    int mTest2 = qRound(mrLine.angle());
+    if (mTest2 >=360)
+    {
+        mTest2 = 0;
+    }
+
+    return (saAngle == mTest1 || saAngle == mTest2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VNodeDetail::IsSAAfter(const QLineF &saBaseLine, const QLineF &mLine)
+{
+    if (qFuzzyIsNull(mLine.length()))
+    {
+        return false;
+    }
+
+    QLineF saLine = saBaseLine;
+    saLine.setAngle(saLine.angle() + 90);
+
+    int saAngle = qRound(saLine.angle());
+    if (saAngle >= 360)
+    {
+        saAngle = 0;
+    }
+
+    int mTest1 = qRound(mLine.angle());
+    if (mTest1 >= 360)
+    {
+        mTest1 = 0;
+    }
+
+    QLineF mrLine = mLine;
+    mrLine.setAngle(mrLine.angle()+180);
+    int mTest2 = qRound(mrLine.angle());
+    if (mTest2 >=360)
+    {
+        mTest2 = 0;
+    }
+
+    return (saAngle == mTest1 || saAngle == mTest2);
 }

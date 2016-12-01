@@ -114,12 +114,14 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
+    VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
     VPieceNode     ParseSANode(const QDomElement &domElement) const;
 
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(const QDomElement &domElement, const Document &parse);
-    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail) const;
+    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, bool closed) const;
+    void           ParsePieceNodes(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetailCSARecords(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 

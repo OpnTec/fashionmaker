@@ -521,6 +521,43 @@ void VPattern::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
+{
+    const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+    const qreal mx = GetParametrDouble(domElement, AttrMx, "0.0");
+    const qreal my = GetParametrDouble(domElement, AttrMy, "0.0");
+    const bool reverse = GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
+    const NodeDetail nodeType = NodeDetail::Contour;
+
+    const QString t = GetParametrString(domElement, AttrType, "NodePoint");
+    Tool tool;
+
+    QStringList types = QStringList() << VAbstractPattern::NodePoint
+                                      << VAbstractPattern::NodeArc
+                                      << VAbstractPattern::NodeSpline
+                                      << VAbstractPattern::NodeSplinePath;
+    switch (types.indexOf(t))
+    {
+        case 0: // NodePoint
+            tool = Tool::NodePoint;
+            break;
+        case 1: // NodeArc
+            tool = Tool::NodeArc;
+            break;
+        case 2: // NodeSpline
+            tool = Tool::NodeSpline;
+            break;
+        case 3: // NodeSplinePath
+            tool = Tool::NodeSplinePath;
+            break;
+        default:
+            VException e(tr("Wrong tag name '%1'.").arg(t));
+            throw e;
+    }
+    return VNodeDetail(id, tool, nodeType, mx, my, reverse);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceNode VPattern::ParseSANode(const QDomElement &domElement) const
 {
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
@@ -704,6 +741,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
+        const uint version = GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
+
         const QStringList tags = QStringList() << TagNodes
                                                << TagData
                                                << TagPatternInfo
@@ -719,7 +758,18 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 switch (tags.indexOf(element.tagName()))
                 {
                     case 0:// TagNodes
-                        ParseDetailNodes(element, detail);
+                        if (version == 1)
+                        {
+                            // TODO. Delete if minimal supported version is 0.4.0
+                            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                                              "Time to refactor the code.");
+                            const bool closed = GetParametrUInt(domElement, AttrClosed, "1");
+                            ParseDetailNodes(element, detail, closed);
+                        }
+                        else
+                        {
+                            ParsePieceNodes(element, detail);
+                        }
                         break;
                     case 1:// TagData
                         break;
@@ -818,7 +868,24 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail) const
+void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, bool closed) const
+{
+    QVector<VNodeDetail> oldNodes;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        {
+            oldNodes.append(ParseDetailNode(element));
+        }
+    }
+
+    detail.GetPath().SetNodes(VNodeDetail::Convert(data, oldNodes, detail.GetSAWidth(), closed));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePieceNodes(const QDomElement &domElement, VPiece &detail) const
 {
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)

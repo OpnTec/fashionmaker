@@ -136,6 +136,7 @@ const QString AttrArc         = QStringLiteral("arc");
 const QString AttrSuffix      = QStringLiteral("suffix");
 const QString AttrIdObject    = QStringLiteral("idObject");
 const QString AttrInLayout    = QStringLiteral("inLayout");
+const QString AttrClosed      = QStringLiteral("closed");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

@@ -429,6 +429,8 @@
 																										 <xs:attribute name="before" type="xs:double"></xs:attribute>
 																										 <xs:attribute name="after" type="xs:double"></xs:attribute>
 																										 <xs:attribute name="angle" type="nodeAngle"></xs:attribute>
+																										 <xs:attribute name="mx" type="xs:double"></xs:attribute>
+																										 <xs:attribute name="my" type="xs:double"></xs:attribute>
 																								   </xs:complexType>
 																							 </xs:element>
 																						 </xs:sequence>
@@ -460,6 +462,7 @@
                                                                            <xs:attribute name="width" type="xs:double"></xs:attribute>
                                                                            <xs:attribute name="seamAllowance" type="xs:boolean"></xs:attribute>
                                                                            <xs:attribute name="united" type="xs:boolean"></xs:attribute>
+                                                                           <xs:attribute name="closed" type="xs:unsignedInt"></xs:attribute>
                                                                      </xs:complexType>
                                                                </xs:element>
                                                          </xs:sequence>
