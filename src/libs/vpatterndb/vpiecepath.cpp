@@ -250,7 +250,7 @@ QPainterPath VPiecePath::PainterPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
 {
-    if (i < 0 && i > nodes.size()-1)
+    if (i < 0 || i > nodes.size()-1)
     {
         return VSAPoint();
     }
@@ -266,36 +266,10 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
     VSAPoint begin = VSAPoint(points.first());
     if (nodes.size() > 1)
     {
-        if (i == 0)
-        {
-            if (nodes.at(nodes.size()-1).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = nodes.at(nodes.size()-1);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    begin.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
-        else
-        {
-            if (nodes.at(i-1).GetTypeTool() == Tool::NodePoint)
-            {
-                const VPieceNode &node = nodes.at(i-1);
-                const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-                if (curve->IsPointOnCurve(p))
-                {
-                    begin = VSAPoint(p);
-                    begin.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-                    begin.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
-                    begin.SetAngleType(node.GetAngleType());
-                }
-            }
-        }
+        int index = 0;
+        i == 0 ? index = nodes.size()-1 : index = i-1;
+
+        begin = CurvePoint(begin, data, nodes.at(index), curve);
     }
     return begin;
 }
@@ -303,7 +277,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 //---------------------------------------------------------------------------------------------------------------------
 VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
 {
-    if (i < 0 && i > nodes.size()-1)
+    if (i < 0 || i > nodes.size()-1)
     {
         return VSAPoint();
     }
@@ -512,4 +486,23 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
     }
 
     return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSAPoint VPiecePath::CurvePoint(const VSAPoint &candidate, const VContainer *data, const VPieceNode &node,
+                                const QSharedPointer<VAbstractCurve> &curve)
+{
+    VSAPoint point = candidate;
+    if (node.GetTypeTool() == Tool::NodePoint)
+    {
+        const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+        if (curve->IsPointOnCurve(p))
+        {
+            point = VSAPoint(p);
+            point.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
+            point.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+            point.SetAngleType(node.GetAngleType());
+        }
+    }
+    return point;
 }
