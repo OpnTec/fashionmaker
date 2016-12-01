@@ -232,6 +232,7 @@ void VTextGraphicsItem::Clear()
  */
 void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
+    qDebug() << "Setting size to" << fW << parentItem()->boundingRect().width();
     // don't allow resize under specific size
     if (fW < MIN_W || fH < m_iMinH)
     {
@@ -255,6 +256,7 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
         fH = m_iMinH;
     }
 
+    qDebug() << "Actual size set to" << fW;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
@@ -599,6 +601,7 @@ void VTextGraphicsItem::CorrectLabel()
     {
         ++iFS;
     }
+
     // decrease the font size until the bounding rect is big enough
     while (m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS, fMinW, fMinH) == false)
     {
@@ -610,6 +613,8 @@ void VTextGraphicsItem::CorrectLabel()
         {
             SetSize(fMinW, fMinH);
         }
+
+        qDebug() << "DEC FONT" << iFS << m_rectBoundingBox.width() << fMinW;
     }
     qreal dX;
     qreal dY;

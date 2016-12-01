@@ -445,6 +445,21 @@ QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMe
         }
     }
     qslLines << qsCurrent;
+
+    int i = 0;
+    int iHorSp = fm.width(" ");
+    while (i < qslLines.count()) {
+        if (fm.width(qslLines[i]) + iHorSp > fW) {
+            int iPos = qslLines[i].length() >> 1;
+            QString qs1 = qslLines[i].left(iPos);
+            QString qs2 = qslLines[i].mid(iPos);
+            qslLines[i] = qs1;
+            qslLines.insert(i + 1, qs2);
+        }   else {
+            ++i;
+        }
+    }
+
     return qslLines;
 }
 
