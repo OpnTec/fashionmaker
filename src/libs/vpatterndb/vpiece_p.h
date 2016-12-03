@@ -43,7 +43,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 class VPieceData : public QSharedData
 {
 public:
-    VPieceData(PiecePathType type)
+    explicit VPieceData(PiecePathType type)
         : m_path(type),
           m_mx(0),
           m_my(0),

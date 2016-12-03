@@ -47,7 +47,7 @@ public:
           m_name()
     {}
 
-    VPiecePathData(PiecePathType type)
+    explicit VPiecePathData(PiecePathType type)
         : m_nodes(),
           m_type(type),
           m_name()

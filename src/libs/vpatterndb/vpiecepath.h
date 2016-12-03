@@ -47,7 +47,7 @@ class VPiecePath
 {
 public:
     VPiecePath();
-    VPiecePath(PiecePathType type);
+    explicit VPiecePath(PiecePathType type);
     VPiecePath(const VPiecePath &path);
     VPiecePath &operator=(const VPiecePath &path);
     ~VPiecePath();
