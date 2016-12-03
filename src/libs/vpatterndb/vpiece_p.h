@@ -49,7 +49,8 @@ public:
           m_my(0),
           m_inLayout(true),
           m_united(false),
-          m_customSARecords()
+          m_customSARecords(),
+          m_internalPaths()
     {}
 
     VPieceData(const VPieceData &detail)
@@ -59,7 +60,8 @@ public:
           m_my(detail.m_my),
           m_inLayout(detail.m_inLayout),
           m_united(detail.m_united),
-          m_customSARecords(detail.m_customSARecords)
+          m_customSARecords(detail.m_customSARecords),
+          m_internalPaths(detail.m_internalPaths)
     {}
 
     ~VPieceData();
@@ -74,6 +76,7 @@ public:
     bool m_united;
 
     QVector<CustomSARecord> m_customSARecords;
+    QVector<quint32>        m_internalPaths;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

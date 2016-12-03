@@ -34,6 +34,7 @@
 #include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
+#include "nodeDetails/vtoolpiecepath.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -59,6 +60,7 @@ const quint8 VToolSeamAllowance::pieceVersion = 2;
 
 const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
 const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
+const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
 
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
@@ -264,6 +266,22 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domEl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths)
+{
+    if (paths.size() > 0)
+    {
+        QDomElement iPathsElement = doc->createElement(VToolSeamAllowance::TagIPaths);
+        for (int i = 0; i < paths.size(); ++i)
+        {
+            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
+            doc->SetAttribute(recordNode, AttrPath, paths.at(i));
+            iPathsElement.appendChild(recordNode);
+        }
+        domElement.appendChild(iPathsElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
 
@@ -362,6 +380,7 @@ void VToolSeamAllowance::AddToFile()
     AddNodes(doc, domElement, piece);
     //custom seam allowance
     AddCSARecords(doc, domElement, piece.GetCustomSARecords());
+    AddInternalPaths(doc, domElement, piece.GetInternalPaths());
 
     AddPiece *addDet = new AddPiece(domElement, doc, piece, m_drawName);
     connect(addDet, &AddPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
@@ -393,6 +412,7 @@ void VToolSeamAllowance::RefreshDataInFile()
                 AddGrainline(doc, domElement, piece);
                 AddNodes(doc, domElement, piece);
                 AddCSARecords(doc, domElement, piece.GetCustomSARecords());
+                AddInternalPaths(doc, domElement, piece.GetInternalPaths());
             }
         }
     }
@@ -637,6 +657,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     VPiece detail = data->GetPiece(id);
     InitNodes(detail, scene);
     InitCSAPaths(detail);
+    InitInternalPaths(detail);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
@@ -734,6 +755,22 @@ void VToolSeamAllowance::InitCSAPaths(const VPiece &detail)
     for (int i = 0; i < records.size(); ++i)
     {
         doc->IncrementReferens(records.at(i).path);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
+{
+    QVector<quint32> records = detail.GetInternalPaths();
+    for (int i = 0; i < records.size(); ++i)
+    {
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
+        SCASSERT(tools != nullptr);
+        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(tools->value(records.at(i)));
+        SCASSERT(tool != nullptr);
+        tool->setParentItem(this);
+        tool->SetParentType(ParentType::Item);
+        doc->IncrementReferens(records.at(i));
     }
 }
 

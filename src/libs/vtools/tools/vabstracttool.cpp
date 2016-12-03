@@ -198,6 +198,35 @@ Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractTool::PenStyleToLineStyle(Qt::PenStyle penStyle)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
+    switch (penStyle)
+    {
+        case Qt::NoPen:
+            return TypeLineNone;
+        case Qt::DashLine:
+            return TypeLineDashLine;
+        case Qt::DotLine:
+            return TypeLineDotLine;
+        case Qt::DashDotLine:
+            return TypeLineDashDotLine;
+        case Qt::DashDotDotLine:
+            return TypeLineDashDotDotLine;
+        case Qt::SolidLine:
+        case Qt::CustomDashLine:
+        default:
+            break;
+    }
+
+    QT_WARNING_POP
+
+    return TypeLineLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 {
     QMap<QString, QIcon> map;

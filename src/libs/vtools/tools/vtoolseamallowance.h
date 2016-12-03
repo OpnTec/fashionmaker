@@ -56,6 +56,7 @@ public:
 
     static const QString TagCSA;
     static const QString TagRecord;
+    static const QString TagIPaths;
 
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
@@ -74,6 +75,7 @@ public:
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
+    static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
@@ -131,6 +133,7 @@ private:
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     void InitCSAPaths(const VPiece &detail);
+    void InitInternalPaths(const VPiece &detail);
 
     template <typename Tool>
     Tool*              InitTool(VMainGraphicsScene *scene, quint32 toolId);

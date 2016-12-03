@@ -62,6 +62,8 @@ protected:
 private slots:
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
+    void ShowInternalPathsContextMenu(const QPoint &pos);
+
     void ListChanged();
     void EnableSeamAllowance(bool enable);
     void NodeChanged(int index);
@@ -90,14 +92,16 @@ private:
 
     void    NewMainPathItem(const VPieceNode &node);
     void    NewCustomSA(const CustomSARecord &record);
-    QString GetCustomSARecordName(const CustomSARecord &record) const;
+    void    NewInternalPath(quint32 path);
+    QString GetPathName(quint32 path, bool reverse = false) const;
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
     bool    MainPathIsClockwise() const;
     void    InitNodesList();
     void    InitCSAPoint(QComboBox *box);
     void    InitSAIncludeType();
-    void    UpdateCurrentRecord();
+    void    UpdateCurrentCustomSARecord();
+    void    UpdateCurrentInternalPathRecord();
 
     QListWidgetItem *GetItemById(quint32 id);
 

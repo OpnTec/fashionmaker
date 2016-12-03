@@ -329,6 +329,7 @@
                                                                                  <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
                                                                                  <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element>
                                                                      <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
@@ -446,6 +447,17 @@
 																										 <xs:attribute name="end" type="xs:unsignedInt"></xs:attribute>
 																										 <xs:attribute name="reverse" type="xs:boolean"></xs:attribute>
 																										 <xs:attribute name="includeAs" type="piecePathIncludeType"></xs:attribute>
+																								   </xs:complexType>
+																							 </xs:element>
+																						 </xs:sequence>
+																					 </xs:complexType>
+																				</xs:element>
+																				<xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+																					<xs:complexType>
+																						<xs:sequence>
+																						   <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+																								   <xs:complexType>
+																										 <xs:attribute name="path" type="xs:unsignedInt" use="required"></xs:attribute>
 																								   </xs:complexType>
 																							 </xs:element>
 																						 </xs:sequence>

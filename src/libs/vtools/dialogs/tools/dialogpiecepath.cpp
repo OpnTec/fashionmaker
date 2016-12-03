@@ -30,6 +30,7 @@
 #include "ui_dialogpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "visualization/path/vistoolpiecepath.h"
+#include "../../tools/vabstracttool.h"
 
 #include <QMenu>
 
@@ -46,11 +47,17 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     ui->lineEditName->setClearButtonEnabled(true);
 #endif
 
+    FillComboBoxTypeLine(ui->comboBoxPenType, VAbstractTool::LineStylesPics());
+
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
     connect(ui->comboBoxType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            [this](){ValidObjects(PathIsValid());});
+            [this]()
+    {
+        ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
+        ValidObjects(PathIsValid());
+    });
 
     flagName = true;//We have default name of piece.
     flagError = PathIsValid();
@@ -376,7 +383,9 @@ void DialogPiecePath::ChangedSAAfter(double d)
 void DialogPiecePath::InitPathTypes()
 {
     ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
-    //ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
+    ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
+
+    ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -468,6 +477,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     VisToolPiecePath *visPath = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->SetPath(path);
+    SetPenType(path.GetPenType());
 
     ValidObjects(PathIsValid());
 
@@ -495,6 +505,21 @@ void DialogPiecePath::SetType(PiecePathType type)
     {
         ui->comboBoxType->setCurrentIndex(index);
     }
+
+    ui->comboBoxPenType->setEnabled(type == PiecePathType::InternalPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Qt::PenStyle DialogPiecePath::GetPenType() const
+{
+    return VAbstractTool::LineStyleToPenStyle(GetComboBoxCurrentData(ui->comboBoxPenType, TypeLineLine));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetPenType(const Qt::PenStyle &type)
+{
+    ChangeCurrentData(ui->comboBoxPenType, VAbstractTool::PenStyleToLineStyle(type));
+    vis->setLineStyle(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -635,6 +660,7 @@ VPiecePath DialogPiecePath::CreatePath() const
 
     path.SetType(GetType());
     path.SetName(ui->lineEditName->text());
+    path.SetPenType(GetType() == PiecePathType::InternalPath ? GetPenType() : Qt::SolidLine);
 
     return path;
 }

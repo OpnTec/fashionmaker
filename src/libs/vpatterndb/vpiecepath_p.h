@@ -44,20 +44,23 @@ public:
     VPiecePathData()
         : m_nodes(),
           m_type(PiecePathType::Unknown),
-          m_name()
+          m_name(),
+          m_penType(Qt::SolidLine)
     {}
 
     explicit VPiecePathData(PiecePathType type)
         : m_nodes(),
           m_type(type),
-          m_name()
+          m_name(),
+          m_penType(Qt::SolidLine)
     {}
 
     VPiecePathData(const VPiecePathData &path)
         : QSharedData(path),
           m_nodes(path.m_nodes),
           m_type(path.m_type),
-          m_name(path.m_name)
+          m_name(path.m_name),
+          m_penType(path.m_penType)
     {}
 
     ~VPiecePathData();
@@ -65,6 +68,7 @@ public:
     QVector<VPieceNode> m_nodes;
     PiecePathType m_type;
     QString m_name;
+    Qt::PenStyle m_penType;
 
 private:
     VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;

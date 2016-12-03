@@ -131,6 +131,18 @@ void VPiecePath::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+Qt::PenStyle VPiecePath::GetPenType() const
+{
+    return d->m_penType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetPenType(const Qt::PenStyle &type)
+{
+    d->m_penType = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
 {
     QVector<QPointF> points;

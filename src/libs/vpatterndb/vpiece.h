@@ -76,11 +76,15 @@ public:
     bool IsUnited() const;
     void SetUnited(bool united);
 
+    QVector<quint32> GetInternalPaths() const;
+    void             SetInternalPaths(const QVector<quint32> &iPaths);
+
     QVector<CustomSARecord> GetCustomSARecords() const;
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
 
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
+    QVector<quint32> MissingInternalPaths(const VPiece &det) const;
 
 private:
     QSharedDataPointer<VPieceData> d;

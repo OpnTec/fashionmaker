@@ -747,7 +747,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                                                << TagData
                                                << TagPatternInfo
                                                << TagGrainline
-                                               << VToolSeamAllowance::TagCSA;
+                                               << VToolSeamAllowance::TagCSA
+                                               << VToolSeamAllowance::TagIPaths;
 
         const QDomNodeList nodeList = domElement.childNodes();
         for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -780,6 +781,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     case 4:// VToolSeamAllowance::TagCSA
                         ParseDetailCSARecords(element, detail);
                         break;
+                    case 5:// VToolSeamAllowance::TagIPaths
+                        ParseDetailInternalPaths(element, detail);
                     default:
                         break;
                 }
@@ -875,7 +878,8 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, b
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        if (not element.isNull()
+                && element.tagName() == VAbstractPattern::TagNode) // Old detail version need this check!
         {
             oldNodes.append(ParseDetailNode(element));
         }
@@ -891,7 +895,7 @@ void VPattern::ParsePieceNodes(const QDomElement &domElement, VPiece &detail) co
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        if (not element.isNull())
         {
             detail.GetPath().Append(ParseSANode(element));
         }
@@ -906,7 +910,7 @@ void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &deta
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagRecord)
+        if (not element.isNull())
         {
             CustomSARecord record;
             record.startPoint = GetParametrUInt(element, VToolSeamAllowance::AttrStart, NULL_ID_STR);
@@ -920,6 +924,26 @@ void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &deta
         }
     }
     detail.SetCustomSARecords(records);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseDetailInternalPaths(const QDomElement &domElement, VPiece &detail) const
+{
+    QVector<quint32> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            const quint32 path = GetParametrUInt(element, VToolSeamAllowance::AttrPath, NULL_ID_STR);
+            if (path > NULL_ID)
+            {
+                records.append(path);
+            }
+        }
+    }
+    detail.SetInternalPaths(records);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3131,6 +3155,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         const QString defType = QString().setNum(static_cast<int>(PiecePathType::CustomSeamAllowance));
         const PiecePathType type = static_cast<PiecePathType>(GetParametrUInt(domElement, AttrType, defType));
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        const QString penType = GetParametrString(domElement, AttrTypeLine, TypeLineLine);
 
         VPiecePath path;
         const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
@@ -3141,6 +3166,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
 
         path.SetType(type);
         path.SetName(name);
+        path.SetPenType(VAbstractTool::LineStyleToPenStyle(penType));
 
         VToolPiecePath::Create(id, path, 0, scene, this, data, parse, Source::FromFile, "", idTool);
     }

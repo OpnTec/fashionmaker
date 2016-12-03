@@ -385,6 +385,20 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabInternalPaths">
+      <attribute name="title">
+       <string>Internal paths</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QListWidget" name="listWidgetInternalPaths">
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::InternalMove</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>

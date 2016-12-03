@@ -270,6 +270,18 @@ void VPiece::SetUnited(bool united)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::GetInternalPaths() const
+{
+    return d->m_internalPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetInternalPaths(const QVector<quint32> &iPaths)
+{
+    d->m_internalPaths = iPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<CustomSARecord> VPiece::GetCustomSARecords() const
 {
     return d->m_customSARecords;
@@ -312,6 +324,37 @@ QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
     for (qint32 j = 0; j < detRecords.size(); ++j)
     {
         set2.insert(detRecords.at(j).path);
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<quint32> r;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        r.append(set3.at(i));
+    }
+
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
+{
+    const QVector<quint32> detRecords = det.GetInternalPaths();
+    if (d->m_internalPaths.size() == detRecords.size()) //-V807
+    {
+        return QVector<quint32>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d->m_internalPaths.size(); ++i)
+    {
+        set1.insert(d->m_internalPaths.at(i));
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < detRecords.size(); ++j)
+    {
+        set2.insert(detRecords.at(j));
     }
 
     const QList<quint32> set3 = set1.subtract(set2).toList();

@@ -68,6 +68,9 @@ public:
     QString GetName() const;
     void    SetName(const QString &name);
 
+    Qt::PenStyle GetPenType() const;
+    void         SetPenType(const Qt::PenStyle &type);
+
     QVector<QPointF>  PathPoints(const VContainer *data) const;
     QVector<VPointF>  PathNodePoints(const VContainer *data) const;
     QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;

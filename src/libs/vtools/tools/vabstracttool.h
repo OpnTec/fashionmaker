@@ -75,6 +75,7 @@ public:
 
     static const QStringList    StylesList();
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+    static QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
     static QMap<QString, QIcon> LineStylesPics();
 
     static const QStringList      Colors();

@@ -106,6 +106,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     connect(ui->comboBoxIncludeType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::CSAIncludeTypeChanged);
 
+    ui->listWidgetInternalPaths->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidgetInternalPaths, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowInternalPathsContextMenu);
+
     if (not applyAllowed)
     {
         vis = new VisToolPiece(data);
@@ -127,6 +131,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     bApply->setEnabled(enable);
     applyAllowed = enable;
     ui->tabSeamAllowance->setEnabled(applyAllowed);
+    ui->tabInternalPaths->setEnabled(applyAllowed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +157,13 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
         NewCustomSA(records.at(i));
     }
     ui->listWidgetCustomSA->blockSignals(false);
+
+    ui->listWidgetInternalPaths->clear();
+    const QVector<quint32> iPaths = piece.GetInternalPaths();
+    for (int i = 0; i < iPaths.size(); ++i)
+    {
+        NewInternalPath(iPaths.at(i));
+    }
 
     ui->comboBoxStartPoint->blockSignals(true);
     ui->comboBoxStartPoint->clear();
@@ -347,7 +359,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     {
         record.reverse = not record.reverse;
         rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
-        rowItem->setText(GetCustomSARecordName(record));
+        rowItem->setText(GetPathName(record.path, record.reverse));
     }
     else if (selectedAction == actionOption)
     {
@@ -358,6 +370,42 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         {
             dialog->SetSAWidth(ui->doubleSpinBoxSeams->value());
         }
+        dialog->EnbleShowMode(true);
+        m_dialog = dialog;
+        m_dialog->setModal(true);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PathDialogClosed);
+        m_dialog->show();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
+{
+    const int row = ui->listWidgetInternalPaths->currentRow();
+    if (ui->listWidgetInternalPaths->count() == 0 || row == -1 || row >= ui->listWidgetInternalPaths->count())
+    {
+        return;
+    }
+
+    QMenu *menu = new QMenu(this);
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
+    QListWidgetItem *rowItem = ui->listWidgetInternalPaths->item(row);
+    SCASSERT(rowItem != nullptr);
+    const quint32 pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
+
+    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+    QAction *selectedAction = menu->exec(ui->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete ui->listWidgetInternalPaths->item(row);
+    }
+    else if (selectedAction == actionOption)
+    {
+        auto *dialog = new DialogPiecePath(data, pathId, this);
+        dialog->SetPiecePath(data->GetPiecePath(pathId));
+        dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
@@ -662,7 +710,8 @@ void DialogSeamAllowance::PathDialogClosed(int result)
                                                                          const_cast<VContainer *>(data),
                                                                          dialogTool->GetToolId());
             qApp->getUndoStack()->push(saveCommand);
-            UpdateCurrentRecord();
+            UpdateCurrentCustomSARecord();
+            UpdateCurrentInternalPathRecord();
         }
         catch (const VExceptionBadId &e)
         {
@@ -691,6 +740,14 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
     piece.SetCustomSARecords(records);
 
+    QVector<quint32> iPaths;
+    for (qint32 i = 0; i < ui->listWidgetInternalPaths->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidgetInternalPaths->item(i);
+        iPaths.append(qvariant_cast<quint32>(item->data(Qt::UserRole)));
+    }
+    piece.SetInternalPaths(iPaths);
+
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
     piece.SetSAWidth(ui->doubleSpinBoxSeams->value());
@@ -711,7 +768,7 @@ void DialogSeamAllowance::NewCustomSA(const CustomSARecord &record)
 {
     if (record.path > NULL_ID)
     {
-        const QString name = GetCustomSARecordName(record);
+        const QString name = GetPathName(record.path, record.reverse);
 
         QListWidgetItem *item = new QListWidgetItem(name);
         item->setFont(QFont("Times", 12, QFont::Bold));
@@ -722,16 +779,30 @@ void DialogSeamAllowance::NewCustomSA(const CustomSARecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSeamAllowance::GetCustomSARecordName(const CustomSARecord &record) const
+void DialogSeamAllowance::NewInternalPath(quint32 path)
+{
+    if (path > NULL_ID)
+    {
+        const QString name = GetPathName(path);
+
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, QVariant::fromValue(path));
+        ui->listWidgetInternalPaths->addItem(item);
+        ui->listWidgetInternalPaths->setCurrentRow(ui->listWidgetInternalPaths->count()-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 {
     QString name;
 
-    if (record.path > NULL_ID)
+    if (path > NULL_ID)
     {
-        const VPiecePath path = data->GetPiecePath(record.path);
-        name = path.GetName();
+        name = data->GetPiecePath(path).GetName();
 
-        if (record.reverse)
+        if (reverse)
         {
             name = QLatin1String("- ") + name;
         }
@@ -934,7 +1005,7 @@ void DialogSeamAllowance::InitSAIncludeType()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::UpdateCurrentRecord()
+void DialogSeamAllowance::UpdateCurrentCustomSARecord()
 {
     const int row = ui->listWidgetCustomSA->currentRow();
     if (ui->listWidgetCustomSA->count() == 0 || row == -1)
@@ -945,5 +1016,20 @@ void DialogSeamAllowance::UpdateCurrentRecord()
     QListWidgetItem *item = ui->listWidgetCustomSA->item(row);
     SCASSERT(item != nullptr);
     const CustomSARecord record = qvariant_cast<CustomSARecord>(item->data(Qt::UserRole));
-    item->setText(GetCustomSARecordName(record));
+    item->setText(GetPathName(record.path, record.reverse));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateCurrentInternalPathRecord()
+{
+    const int row = ui->listWidgetInternalPaths->currentRow();
+    if (ui->listWidgetInternalPaths->count() == 0 || row == -1)
+    {
+        return;
+    }
+
+    QListWidgetItem *item = ui->listWidgetInternalPaths->item(row);
+    SCASSERT(item != nullptr);
+    const quint32 path = qvariant_cast<quint32>(item->data(Qt::UserRole));
+    item->setText(GetPathName(path));
 }

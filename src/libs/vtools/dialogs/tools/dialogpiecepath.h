@@ -94,6 +94,9 @@ private:
     PiecePathType GetType() const;
     void          SetType(PiecePathType type);
 
+    Qt::PenStyle GetPenType() const;
+    void         SetPenType(const Qt::PenStyle &type);
+
     QListWidgetItem *GetItemById(quint32 id);
 
     void SetCurrentSABefore(qreal value);

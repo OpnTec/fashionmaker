@@ -173,6 +173,7 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, path.GetName());
     doc->SetAttribute(domElement, AttrType, static_cast<int>(path.GetType()));
+    doc->SetAttribute(domElement, AttrTypeLine, PenStyleToLineStyle(path.GetPenType()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +220,9 @@ void VToolPiecePath::AddToFile()
 
     if (path.GetType() == PiecePathType::InternalPath)
     {
-
+        QVector<quint32> iPaths = newDet.GetInternalPaths();
+        iPaths.append(id);
+        newDet.SetInternalPaths(iPaths);
     }
     else if (path.GetType() == PiecePathType::CustomSeamAllowance)
     {
@@ -287,7 +290,11 @@ void VToolPiecePath::RefreshGeometry()
     {
         QPainterPath p = path.PainterPath(this->getData());
         p.setFillRule(Qt::OddEvenFill);
+
         this->setPath(p);
+        QPen pen = this->pen();
+        pen.setStyle(path.GetPenType());
+        this->setPen(pen);
     }
 }
 
