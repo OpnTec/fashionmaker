@@ -127,26 +127,36 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
         {
             reverse = true;
         }
-        switch (type)
+        if (id != GetLastId())
         {
-            case SceneObject::Arc:
-                NewItem(VPieceNode(id, Tool::NodeArc, reverse));
-                break;
-            case SceneObject::Point:
-                NewItem(VPieceNode(id, Tool::NodePoint));
-                break;
-            case SceneObject::Spline:
-                NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
-                break;
-            case SceneObject::SplinePath:
-                NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
-                break;
-            case (SceneObject::Line):
-            case (SceneObject::Detail):
-            case (SceneObject::Unknown):
-            default:
-                qDebug() << "Got wrong scene object. Ignore.";
-                break;
+            switch (type)
+            {
+                case SceneObject::Arc:
+                    NewItem(VPieceNode(id, Tool::NodeArc, reverse));
+                    break;
+                case SceneObject::Point:
+                    NewItem(VPieceNode(id, Tool::NodePoint));
+                    break;
+                case SceneObject::Spline:
+                    NewItem(VPieceNode(id, Tool::NodeSpline, reverse));
+                    break;
+                case SceneObject::SplinePath:
+                    NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
+                    break;
+                case (SceneObject::Line):
+                case (SceneObject::Detail):
+                case (SceneObject::Unknown):
+                default:
+                    qDebug() << "Got wrong scene object. Ignore.";
+                    break;
+            }
+        }
+        else
+        {
+            if (ui->listWidget->count() > 1)
+            {
+                delete GetItemById(id);
+            }
         }
 
         ValidObjects(PathIsValid());
@@ -163,7 +173,14 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
                 emit ToolTip(tr("Select main path objects, <b>Shift</b> - reverse direction curve, "
                                 "<b>Enter</b> - finish creation"));
 
-                visPath->VisualMode(NULL_ID);
+                if (not qApp->getCurrentScene()->items().contains(visPath))
+                {
+                    visPath->VisualMode(NULL_ID);
+                }
+                else
+                {
+                    visPath->RefreshGeometry();
+                }
             }
             else
             {
@@ -543,6 +560,22 @@ QListWidgetItem *DialogPiecePath::GetItemById(quint32 id)
         }
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 DialogPiecePath::GetLastId() const
+{
+    const int count = ui->listWidget->count();
+    if (count > 0)
+    {
+        QListWidgetItem *item = ui->listWidget->item(count-1);
+        const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+        return node.GetId();
+    }
+    else
+    {
+        return NULL_ID;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

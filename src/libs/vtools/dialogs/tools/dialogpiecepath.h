@@ -99,6 +99,8 @@ private:
 
     QListWidgetItem *GetItemById(quint32 id);
 
+    quint32 GetLastId() const;
+
     void SetCurrentSABefore(qreal value);
     void SetCurrentSAAfter(qreal value);
 };
