@@ -246,7 +246,6 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
 
     QMenu *menu = new QMenu(this);
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
@@ -260,13 +259,15 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         actionReverse->setChecked(rowNode.GetReverse());
     }
 
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
     QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete ui->listWidget->item(row);
         ValidObjects(PathIsValid());
     }
-    else if (selectedAction == actionReverse)
+    else if (rowNode.GetTypeTool() != Tool::NodePoint && selectedAction == actionReverse)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));

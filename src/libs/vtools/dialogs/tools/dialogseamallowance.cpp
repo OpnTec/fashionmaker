@@ -334,7 +334,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         delete ui->listWidgetMainPath->item(row);
         ValidObjects(MainPathIsValid());
     }
-    else if (selectedAction == actionReverse)
+    else if (rowNode.GetTypeTool() != Tool::NodePoint && selectedAction == actionReverse)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
