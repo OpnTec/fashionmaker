@@ -1239,9 +1239,7 @@ template <typename Tool>
 //cppcheck-suppress unusedFunction
 Tool* VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
-    QHash<quint32, VDataTool*>* tools = doc->getTools();
-    SCASSERT(tools != nullptr);
-    Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
+    Tool *tool = qobject_cast<Tool*>(doc->getTool(node.getId()));
     SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);

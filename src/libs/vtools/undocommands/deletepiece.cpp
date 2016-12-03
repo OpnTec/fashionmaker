@@ -100,9 +100,7 @@ void DeletePiece::redo()
 
         // UnionDetails delete two old details and create one new.
         // So when UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        SCASSERT(tools != nullptr);
-        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(tools->value(nodeId));
+        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(doc->getTool(nodeId));
         SCASSERT(toolDet != nullptr);
         toolDet->hide();
 

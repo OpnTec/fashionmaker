@@ -90,9 +90,8 @@ public:
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
-    QHash<quint32, VDataTool *> *getTools();
-    VDataTool     *getTool(const quint32 &id);
-    void           AddTool(const quint32 &id, VDataTool *tool);
+    static VDataTool* getTool(const quint32 &id);
+    static void       AddTool(const quint32 &id, VDataTool *tool);
 
     void           AddToolOnRemove(VDataTool *tool);
 
@@ -329,9 +328,6 @@ protected:
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
     quint32        cursor;
 
-    /** @brief tools list with pointer on tools. */
-    QHash<quint32, VDataTool*> tools;
-
     QVector<VDataTool*> toolsOnRemove;
 
     /** @brief history history records. */
@@ -343,7 +339,10 @@ protected:
     /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
     mutable bool   modified;
 
-    void           ToolExists(const quint32 &id) const;
+    /** @brief tools list with pointer on tools. */
+    static QHash<quint32, VDataTool*> tools;
+
+    static void    ToolExists(const quint32 &id);
 
     void           SetActivPP(const QString& name);
 
@@ -373,15 +372,5 @@ private:
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
 
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTools return list of tools pointers.
- * @return list.
- */
-inline QHash<quint32, VDataTool *> *VAbstractPattern::getTools()
-{
-    return &tools;
-}
 
 #endif // VABSTRACTPATTERN_H

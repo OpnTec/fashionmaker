@@ -31,6 +31,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "visualization/path/vistoolpiecepath.h"
 #include "../../tools/vabstracttool.h"
+#include "../../tools/vtoolseamallowance.h"
 
 #include <QMenu>
 
@@ -210,6 +211,12 @@ void DialogPiecePath::CheckState()
 void DialogPiecePath::ShowVisualization()
 {
     AddVisualization<VisToolPiecePath>();
+
+    VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
+    SCASSERT(tool != nullptr);
+    auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+    SCASSERT(visPath != nullptr);
+    visPath->setParentItem(tool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

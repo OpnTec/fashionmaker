@@ -169,10 +169,17 @@ const QString VAbstractPattern::NodePoint      = QStringLiteral("NodePoint");
 const QString VAbstractPattern::NodeSpline     = QStringLiteral("NodeSpline");
 const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
+QHash<quint32, VDataTool*> VAbstractPattern::tools = QHash<quint32, VDataTool*>();
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
-    : QObject(parent), VDomDocument(), nameActivPP(QString()), cursor(0), tools(QHash<quint32, VDataTool*>()),
-      toolsOnRemove(QVector<VDataTool*>()), history(QVector<VToolRecord>()), patternPieces(QStringList()),
+    : QObject(parent),
+      VDomDocument(),
+      nameActivPP(QString()),
+      cursor(0),
+      toolsOnRemove(QVector<VDataTool*>()),
+      history(QVector<VToolRecord>()),
+      patternPieces(QStringList()),
       modified(false)
 {}
 
@@ -1264,7 +1271,7 @@ void VAbstractPattern::SelectedDetail(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::ToolExists(const quint32 &id) const
+void VAbstractPattern::ToolExists(const quint32 &id)
 {
     if (tools.contains(id) == false)
     {

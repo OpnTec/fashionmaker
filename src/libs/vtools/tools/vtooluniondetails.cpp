@@ -647,24 +647,19 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         newDetail.setMx(d1.getMx());
         newDetail.setMy(d1.getMy());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        SCASSERT(tools != nullptr);
+
+        auto RemoveDetail = [doc](quint32 id)
+        {
+            VToolDetail *toolDet = qobject_cast<VToolDetail*>(doc->getTool(id));
+            SCASSERT(toolDet != nullptr);
+            bool ask = false;
+            toolDet->Remove(ask);
+        };
 
         if (not retainPieces)
         {
-            {
-                VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
-                SCASSERT(toolDet != nullptr);
-                bool ask = false;
-                toolDet->Remove(ask);
-            }
-
-            {
-                VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
-                SCASSERT(toolDet != nullptr);
-                const bool ask = false;
-                toolDet->Remove(ask);
-            }
+            RemoveDetail(d1id);
+            RemoveDetail(d2id);
         }
 
         SCASSERT(not children.isEmpty())

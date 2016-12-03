@@ -764,9 +764,7 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
     QVector<quint32> records = detail.GetInternalPaths();
     for (int i = 0; i < records.size(); ++i)
     {
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        SCASSERT(tools != nullptr);
-        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(tools->value(records.at(i)));
+        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(records.at(i)));
         SCASSERT(tool != nullptr);
         tool->setParentItem(this);
         tool->SetParentType(ParentType::Item);
@@ -819,9 +817,7 @@ template <typename Tool>
  */
 Tool *VToolSeamAllowance::InitTool(VMainGraphicsScene *scene, quint32 toolId)
 {
-    QHash<quint32, VDataTool*>* tools = doc->getTools();
-    SCASSERT(tools != nullptr);
-    Tool *tool = qobject_cast<Tool*>(tools->value(toolId));
+    Tool *tool = qobject_cast<Tool*>(doc->getTool(toolId));
     SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
