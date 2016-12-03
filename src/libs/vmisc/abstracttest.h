@@ -49,8 +49,9 @@ template <class T> class QVector;
 
 // Return codes for testing run application
 static const auto V_UNUSED TST_EX_BIN = -1;      // Can't find binary.
-static const auto V_UNUSED TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
-static const auto V_UNUSED TST_EX_CRASH = -3;    // Program crashed.
+static const auto V_UNUSED TST_EX_FINISH_TIME_OUT = -2; // The operation timed out or an error occurred.
+static const auto V_UNUSED TST_EX_START_TIME_OUT = -3; // The operation timed out or an error occurred.
+static const auto V_UNUSED TST_EX_CRASH = -4;    // Program crashed.
 
 #undef V_UNUSED
 
@@ -69,7 +70,7 @@ protected:
     QString TapePath() const;
     QString TranslationsPath() const;
 
-    int Run(int exit, const QString &program, const QStringList &arguments, int msecs = 120000);
+    int Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs = 120000);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 };
 

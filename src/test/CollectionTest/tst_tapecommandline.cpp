@@ -28,6 +28,7 @@
 
 #include "tst_tapecommandline.h"
 #include "../vmisc/vsysexits.h"
+#include "logging.h"
 
 #include <QtTest>
 
@@ -114,11 +115,12 @@ void TST_TapeCommandLine::OpenMeasurements()
     QFETCH(QString, file);
     QFETCH(int, exitCode);
 
+    QString error;
     const int exit = Run(exitCode, TapePath(), QStringList() << "--test"
                          << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
-                         file);
+                         file, error);
 
-    QCOMPARE(exit, exitCode);
+    QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

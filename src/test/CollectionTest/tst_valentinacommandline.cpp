@@ -28,6 +28,7 @@
 
 #include "tst_valentinacommandline.h"
 #include "../vmisc/vsysexits.h"
+#include "logging.h"
 
 #include <QtTest>
 
@@ -102,11 +103,12 @@ void TST_ValentinaCommandLine::OpenPatterns()
     QFETCH(QString, file);
     QFETCH(int, exitCode);
 
+    QString error;
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const int exit = Run(exitCode, ValentinaPath(), QStringList() << "--test"
-                         << tmp + QDir::separator() + file);
+                         << tmp + QDir::separator() + file, error);
 
-    QCOMPARE(exit, exitCode);
+    QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,12 +154,13 @@ void TST_ValentinaCommandLine::ExportMode()
     QFETCH(QString, arguments);
     QFETCH(int, exitCode);
 
+    QString error;
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
-    const int exit = Run(exitCode, ValentinaPath(), arg);
+    const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QCOMPARE(exit, exitCode);
+    QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,12 +212,13 @@ void TST_ValentinaCommandLine::TestMode()
     QFETCH(QString, arguments);
     QFETCH(int, exitCode);
 
+    QString error;
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
-    const int exit = Run(exitCode, ValentinaPath(), arg);
+    const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QCOMPARE(exit, exitCode);
+    QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,12 +273,13 @@ void TST_ValentinaCommandLine::TestOpenCollection()
     QFETCH(QString, arguments);
     QFETCH(int, exitCode);
 
+    QString error;
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
-    const int exit = Run(exitCode, ValentinaPath(), arg);
+    const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QCOMPARE(exit, exitCode);
+    QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
