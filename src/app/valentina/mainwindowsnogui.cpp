@@ -740,7 +740,10 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
 #endif
     QProcess proc;
     proc.start(PDFTOPS, params);
-    proc.waitForFinished(15000);
+    if (proc.waitForStarted(15000))
+    {
+        proc.waitForFinished(15000);
+    }
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
