@@ -488,14 +488,14 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
         }
     }
 
-    return VNoBrushScalePathItem::itemChange(change, value);
+    return QGraphicsPathItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
-    VNoBrushScalePathItem::mousePressEvent(event);
+    QGraphicsPathItem::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
     if (not (flags() & ItemIsSelectable) && scene())
@@ -528,7 +528,7 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         //Disable cursor-arrow-closehand
         RestoreOverrideCursor(cursorArrowCloseHand);
     }
-    VNoBrushScalePathItem::mouseReleaseEvent(event);
+    QGraphicsPathItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -630,7 +630,7 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
             break;
     }
 
-    VNoBrushScalePathItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -648,7 +648,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
                                        const Source &typeCreation, VMainGraphicsScene *scene,
                                        const QString &drawName, QGraphicsItem *parent)
     : VAbstractTool(doc, data, id),
-      VNoBrushScalePathItem(parent),
+      QGraphicsPathItem(parent),
       m_dialog(),
       m_sceneDetails(scene),
       m_drawName(drawName),
@@ -662,7 +662,6 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
 
-    this->setBrush(QBrush(Qt::Dense7Pattern));
     m_seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);

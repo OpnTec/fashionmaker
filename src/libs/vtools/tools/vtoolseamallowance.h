@@ -32,6 +32,7 @@
 #include <QtGlobal>
 #include <qcompilerdetection.h>
 #include <QObject>
+#include <QGraphicsPathItem>
 
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "vabstracttool.h"
@@ -40,7 +41,7 @@ class VMainGraphicsScene;
 class DialogTool;
 class VPiece;
 
-class VToolSeamAllowance : public VAbstractTool, public VNoBrushScalePathItem
+class VToolSeamAllowance : public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
