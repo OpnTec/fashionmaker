@@ -296,7 +296,6 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     }
 
     QMenu *menu = new QMenu(this);
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QListWidgetItem *rowItem = ui->listWidgetMainPath->item(row);
     SCASSERT(rowItem != nullptr);
@@ -309,6 +308,8 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
     }
+
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidgetMainPath->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -337,7 +338,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
 
     QMenu *menu = new QMenu(this);
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
@@ -347,7 +348,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     actionReverse->setCheckable(true);
     actionReverse->setChecked(record.reverse);
 
-    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidgetCustomSA->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -387,13 +388,8 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     }
 
     QMenu *menu = new QMenu(this);
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-
-    QListWidgetItem *rowItem = ui->listWidgetInternalPaths->item(row);
-    SCASSERT(rowItem != nullptr);
-    const quint32 pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
-
     QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -402,6 +398,10 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     }
     else if (selectedAction == actionOption)
     {
+        QListWidgetItem *rowItem = ui->listWidgetInternalPaths->item(row);
+        SCASSERT(rowItem != nullptr);
+        const quint32 pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
+
         auto *dialog = new DialogPiecePath(data, pathId, this);
         dialog->SetPiecePath(data->GetPiecePath(pathId));
         dialog->SetPieceId(toolId);
