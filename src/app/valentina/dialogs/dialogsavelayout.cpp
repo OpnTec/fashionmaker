@@ -292,7 +292,7 @@ bool DialogSaveLayout::TestPdf()
 #else
     proc.start(PDFTOPS); // Seek pdftops in standard path
 #endif
-    if (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning)
+    if (proc.waitForStarted(15000) && (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning))
     {
         res = true;
     }
