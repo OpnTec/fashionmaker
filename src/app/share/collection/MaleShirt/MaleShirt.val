@@ -197,54 +197,54 @@ Delete layouts which are not needed.</description>
             <point type="modeling" inUse="true" id="440" idObject="55" mx="0.132292" my="0.264583"/>
         </modeling>
         <details>
-            <detail closed="1" id="174" name="Yoke" seamAllowance="1" mx="-8.05221" width="1" my="3.27846" version="1">
+            <detail closed="1" id="174" name="Yoke" seamAllowance="1" mx="-8.05221" width="1" my="3.27846" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="167" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="168" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="169" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="170" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="171" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="172" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="173" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="167"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="168"/>
+                    <node type="NodePoint" idObject="169"/>
+                    <node type="NodePoint" idObject="170"/>
+                    <node type="NodeSpline" reverse="0" idObject="171"/>
+                    <node type="NodePoint" idObject="172"/>
+                    <node type="NodePoint" idObject="173"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="401" name="FrontPanel" seamAllowance="1" mx="-11.0934" width="1" my="6.43098" version="1">
+            <detail closed="1" id="401" name="FrontPanel" seamAllowance="1" mx="-11.0934" width="1" my="6.43098" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="389" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="390" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="391" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="392" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="393" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="394" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="395" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="396" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="397" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="398" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="399" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="400" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="389"/>
+                    <node type="NodePoint" idObject="390"/>
+                    <node type="NodePoint" idObject="391"/>
+                    <node type="NodeSpline" reverse="0" idObject="392"/>
+                    <node type="NodePoint" idObject="393"/>
+                    <node type="NodePoint" idObject="394"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="395"/>
+                    <node type="NodePoint" idObject="396"/>
+                    <node type="NodePoint" idObject="397"/>
+                    <node type="NodePoint" idObject="398"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="399"/>
+                    <node type="NodePoint" idObject="400"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="441" name="BackPanel" seamAllowance="1" mx="-7.55641" width="1" my="6.27021" version="1">
+            <detail closed="1" id="441" name="BackPanel" seamAllowance="1" mx="-7.55641" width="1" my="6.27021" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="422" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="423" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="424" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="425" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="426" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="427" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="428" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="429" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="430" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="431" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="432" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="433" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="434" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="435" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="436" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="437" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="438" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="439" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="440" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="422"/>
+                    <node type="NodePoint" idObject="423"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="424"/>
+                    <node type="NodePoint" idObject="425"/>
+                    <node type="NodePoint" idObject="426"/>
+                    <node type="NodePoint" idObject="427"/>
+                    <node type="NodePoint" idObject="428"/>
+                    <node type="NodePoint" idObject="429"/>
+                    <node type="NodePoint" idObject="430"/>
+                    <node type="NodePoint" idObject="431"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="432"/>
+                    <node type="NodePoint" idObject="433"/>
+                    <node type="NodePoint" idObject="434"/>
+                    <node type="NodePoint" idObject="435"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="436"/>
+                    <node type="NodePoint" idObject="437"/>
+                    <node type="NodeSpline" reverse="0" idObject="438"/>
+                    <node type="NodePoint" idObject="439"/>
+                    <node type="NodePoint" idObject="440"/>
                 </nodes>
             </detail>
         </details>
@@ -316,43 +316,43 @@ Delete layouts which are not needed.</description>
             <spline type="modelingPath" inUse="true" id="331" idObject="312"/>
         </modeling>
         <details>
-            <detail closed="1" id="182" name="Pocket" seamAllowance="1" mx="68.0595" width="1" my="45.4124" version="1">
+            <detail closed="1" id="182" name="Pocket" seamAllowance="1" mx="68.0595" width="1" my="45.4124" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="175" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="176" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="177" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="178" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="179" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="180" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="181" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="175"/>
+                    <node type="NodePoint" idObject="176"/>
+                    <node type="NodePoint" idObject="177"/>
+                    <node type="NodePoint" idObject="178"/>
+                    <node type="NodePoint" idObject="179"/>
+                    <node type="NodePoint" idObject="180"/>
+                    <node type="NodePoint" idObject="181"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="320" name="PocketRound" seamAllowance="1" mx="81.7244" width="1" my="45.8357" version="1">
+            <detail closed="1" id="320" name="PocketRound" seamAllowance="1" mx="81.7244" width="1" my="45.8357" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="314" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="315" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="316" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="317" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="318" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="319" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="314"/>
+                    <node type="NodePoint" idObject="315"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="316"/>
+                    <node type="NodePoint" idObject="317"/>
+                    <node type="NodePoint" idObject="318"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="319"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="326" name="PocketFlap" seamAllowance="1" mx="67.876" width="1" my="32.9628" version="1">
+            <detail closed="1" id="326" name="PocketFlap" seamAllowance="1" mx="67.876" width="1" my="32.9628" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="321" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="322" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="323" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="324" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="325" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="321"/>
+                    <node type="NodePoint" idObject="322"/>
+                    <node type="NodePoint" idObject="323"/>
+                    <node type="NodePoint" idObject="324"/>
+                    <node type="NodePoint" idObject="325"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="332" name="PocketFlapRound" seamAllowance="1" mx="81.7244" width="1" my="32.9627" version="1">
+            <detail closed="1" id="332" name="PocketFlapRound" seamAllowance="1" mx="81.7244" width="1" my="32.9627" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="327" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="328" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="329" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="330" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="331" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="327"/>
+                    <node type="NodePoint" idObject="328"/>
+                    <node type="NodePoint" idObject="329"/>
+                    <node type="NodePoint" idObject="330"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="331"/>
                 </nodes>
             </detail>
         </details>
@@ -407,7 +407,7 @@ Delete layouts which are not needed.</description>
             <line typeLine="hair" id="107" firstPoint="99" secondPoint="96" lineColor="black"/>
             <line typeLine="hair" id="108" firstPoint="98" secondPoint="94" lineColor="black"/>
             <line typeLine="hair" id="109" firstPoint="100" secondPoint="93" lineColor="black"/>
-            <spline type="simpleInteractive" point4="89" angle1="12.2644" angle2="338.776" id="110" color="black" length1="4.83467" length2="0.851297" point1="104"/>
+            <spline type="simpleInteractive" point4="89" angle1="12.2644" angle2="208.953" id="110" color="black" length1="4.83467" length2="0.750071" point1="104"/>
             <spline type="simpleInteractive" point4="100" angle1="164.47" angle2="0" id="111" color="black" length1="2.91869" length2="0" point1="106"/>
             <line typeLine="hair" id="112" firstPoint="96" secondPoint="95" lineColor="black"/>
             <line typeLine="hair" id="113" firstPoint="94" secondPoint="92" lineColor="black"/>
@@ -461,52 +461,52 @@ Delete layouts which are not needed.</description>
             <point type="modeling" inUse="true" id="299" idObject="97" mx="-0.222289" my="0.696084"/>
         </modeling>
         <details>
-            <detail closed="1" id="204" name="Collar" seamAllowance="1" mx="27.4551" width="1" my="0.587081" version="1">
+            <detail closed="1" id="204" name="Collar" seamAllowance="1" mx="27.4551" width="1" my="0.587081" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="200" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="201" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="202" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="203" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="200"/>
+                    <node type="NodePoint" idObject="201"/>
+                    <node type="NodePoint" idObject="202"/>
+                    <node type="NodePoint" idObject="203"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="209" name="CuffInterface" seamAllowance="0" mx="26.9909" width="1" my="-8.22145" version="1">
+            <detail closed="1" id="209" name="CuffInterface" seamAllowance="0" mx="26.9909" width="1" my="-8.22145" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="205" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="206" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="207" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="208" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="205"/>
+                    <node type="NodePoint" idObject="206"/>
+                    <node type="NodePoint" idObject="207"/>
+                    <node type="NodePoint" idObject="208"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="217" name="ShortSleeve" seamAllowance="1" mx="-16.9664" width="1" my="-23.4126" version="1">
+            <detail closed="1" id="217" name="ShortSleeve" seamAllowance="1" mx="-16.9664" width="1" my="-23.4126" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="210" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="211" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="212" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="213" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="214" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="215" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="216" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="210"/>
+                    <node type="NodePoint" idObject="211"/>
+                    <node type="NodePoint" idObject="212"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="213"/>
+                    <node type="NodePoint" idObject="214"/>
+                    <node type="NodePoint" idObject="215"/>
+                    <node type="NodePoint" idObject="216"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="300" name="FullSleeve" seamAllowance="1" mx="-16.0896" width="1" my="15.2013" version="1">
+            <detail closed="1" id="300" name="FullSleeve" seamAllowance="1" mx="-16.0896" width="1" my="15.2013" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="283" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="1" idObject="284" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="285" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="286" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="0" idObject="287" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="288" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="289" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="290" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="291" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="292" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="293" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="294" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="295" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="296" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="297" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="298" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="299" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="283"/>
+                    <node type="NodeSpline" reverse="1" idObject="284"/>
+                    <node type="NodePoint" idObject="285"/>
+                    <node type="NodePoint" idObject="286"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="287"/>
+                    <node type="NodePoint" idObject="288"/>
+                    <node type="NodePoint" idObject="289"/>
+                    <node type="NodeSpline" reverse="0" idObject="290"/>
+                    <node type="NodePoint" idObject="291"/>
+                    <node type="NodePoint" idObject="292"/>
+                    <node type="NodePoint" idObject="293"/>
+                    <node type="NodePoint" idObject="294"/>
+                    <node type="NodePoint" idObject="295"/>
+                    <node type="NodePoint" idObject="296"/>
+                    <node type="NodePoint" idObject="297"/>
+                    <node type="NodePoint" idObject="298"/>
+                    <node type="NodePoint" idObject="299"/>
                 </nodes>
             </detail>
         </details>
@@ -565,44 +565,44 @@ Delete layouts which are not needed.</description>
             <spline type="modelingSpline" inUse="true" id="254" idObject="248"/>
         </modeling>
         <details>
-            <detail closed="1" id="224" name="CollarBase" seamAllowance="1" mx="28.4767" width="1" my="21.6501" version="1">
+            <detail closed="1" id="224" name="CollarBase" seamAllowance="1" mx="28.4767" width="1" my="21.6501" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="218" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="219" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="220" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="221" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="1" idObject="222" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="223" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="218"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="219"/>
+                    <node type="NodePoint" idObject="220"/>
+                    <node type="NodePoint" idObject="221"/>
+                    <node type="NodeSpline" reverse="1" idObject="222"/>
+                    <node type="NodePoint" idObject="223"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="231" name="CollarBaseInterface" seamAllowance="0" mx="28.6569" width="1" my="15.2047" version="1">
+            <detail closed="1" id="231" name="CollarBaseInterface" seamAllowance="0" mx="28.6569" width="1" my="15.2047" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="225" mx="0" my="0"/>
-                    <node type="NodeSplinePath" reverse="1" idObject="226" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="227" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="228" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="1" idObject="229" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="230" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="225"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="226"/>
+                    <node type="NodePoint" idObject="227"/>
+                    <node type="NodePoint" idObject="228"/>
+                    <node type="NodeSpline" reverse="1" idObject="229"/>
+                    <node type="NodePoint" idObject="230"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="238" name="CollarTop" seamAllowance="1" mx="28.0866" width="1" my="9.53729" version="1">
+            <detail closed="1" id="238" name="CollarTop" seamAllowance="1" mx="28.0866" width="1" my="9.53729" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="232" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="233" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="234" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="235" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="236" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="237" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="232"/>
+                    <node type="NodeSpline" reverse="0" idObject="233"/>
+                    <node type="NodePoint" idObject="234"/>
+                    <node type="NodePoint" idObject="235"/>
+                    <node type="NodeSpline" reverse="0" idObject="236"/>
+                    <node type="NodePoint" idObject="237"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="255" name="CollarTopInterface" seamAllowance="0" mx="27.8619" width="1" my="-1.37137" version="1">
+            <detail closed="1" id="255" name="CollarTopInterface" seamAllowance="0" mx="27.8619" width="1" my="-1.37137" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="249" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="250" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="251" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="252" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="253" mx="0" my="0"/>
-                    <node type="NodeSpline" reverse="0" idObject="254" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="249"/>
+                    <node type="NodePoint" idObject="250"/>
+                    <node type="NodeSpline" reverse="0" idObject="251"/>
+                    <node type="NodePoint" idObject="252"/>
+                    <node type="NodePoint" idObject="253"/>
+                    <node type="NodeSpline" reverse="0" idObject="254"/>
                 </nodes>
             </detail>
         </details>
@@ -639,23 +639,23 @@ Delete layouts which are not needed.</description>
             <point type="modeling" inUse="true" id="281" idObject="260" mx="0.132292" my="0.264583"/>
         </modeling>
         <details>
-            <detail closed="1" id="274" name="PlacketUnder" seamAllowance="1" mx="27.725" width="1" my="-0.179464" version="1">
+            <detail closed="1" id="274" name="PlacketUnder" seamAllowance="1" mx="27.725" width="1" my="-0.179464" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="270" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="271" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="272" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="273" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="270"/>
+                    <node type="NodePoint" idObject="271"/>
+                    <node type="NodePoint" idObject="272"/>
+                    <node type="NodePoint" idObject="273"/>
                 </nodes>
             </detail>
-            <detail closed="1" id="282" name="PlacketTop" seamAllowance="1" mx="46.1968" width="1" my="-5.58778" version="1">
+            <detail closed="1" id="282" name="PlacketTop" seamAllowance="1" mx="46.1968" width="1" my="-5.58778" version="2">
                 <nodes>
-                    <node type="NodePoint" idObject="275" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="276" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="277" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="278" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="279" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="280" mx="0" my="0"/>
-                    <node type="NodePoint" idObject="281" mx="0" my="0"/>
+                    <node type="NodePoint" idObject="275"/>
+                    <node type="NodePoint" idObject="276"/>
+                    <node type="NodePoint" idObject="277"/>
+                    <node type="NodePoint" idObject="278"/>
+                    <node type="NodePoint" idObject="279"/>
+                    <node type="NodePoint" idObject="280"/>
+                    <node type="NodePoint" idObject="281"/>
                 </nodes>
             </detail>
         </details>
