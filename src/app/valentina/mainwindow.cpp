@@ -2634,6 +2634,7 @@ void MainWindow::FullParseFile()
     SetEnableTool(comboBoxDraws->count() > 0);
     patternReadOnly = doc->IsReadOnly();
     SetEnableWidgets(true);
+    detailsWidget->UpdateList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
