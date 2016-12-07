@@ -306,24 +306,49 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
     }
 
     //Clear equivalent points
-    QVector<QPointF> correctPoints = RemoveDublicates(points, removeFirstAndLast);
+    QVector<QPointF> buf1 = RemoveDublicates(points, removeFirstAndLast);
 
-    if (correctPoints.size()<3)
+    if (buf1.size()<3)
     {
-        return correctPoints;
+        return buf1;
     }
 
+    QVector<QPointF> buf2;
     //Remove point on line
-    for (qint32 i = 1; i <correctPoints.size()-1; ++i)
+    for (qint32 i = 0; i < buf1.size(); ++i)
     {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
      // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
-        if (VGObject::IsPointOnLineviaPDP(correctPoints.at(i), correctPoints.at(i-1), correctPoints.at(i+1)))
+        int prev = i-1;
+        int next = i+1;
+        if (i == 0)
         {
-            correctPoints.remove(i);
+            prev = buf1.size() - 1;
+        }
+        else if (i == buf1.size() - 1)
+        {
+            next = 0;
+        }
+
+        const QPointF &iPoint = buf1.at(i);
+        const QPointF &prevPoint = buf1.at(prev);
+        const QPointF &nextPoint = buf1.at(next);
+
+        if (not VGObject::IsPointOnLineviaPDP(buf1.at(i), buf1.at(prev), buf1.at(next))
+                && prevPoint != nextPoint) // not zigzag
+        {
+            buf2.append(buf1.at(i));
+        }
+        else if ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint))
+        {
+            // If RemoveDublicates does not remove these points it is a valid case.
+            // Case where last point equal first point
+            buf2.append(buf1.at(i));
         }
     }
 
-    return correctPoints;
+    buf2 = RemoveDublicates(buf2, false);
+
+    return buf2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -409,7 +434,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
                     const QLineF::IntersectType tmpIntrs2 = tmpLine1.intersect(tmpLine2, &tmpCrosPoint);
 
                     if (tmpIntrs1 == QLineF::BoundedIntersection || tmpIntrs2 == QLineF::BoundedIntersection)
-                    { // Now we really sure that lines are on the same lines and have real intersections.
+                    { // Now we really sure that lines are on the same line and have real intersections.
                         status = ParallelIntersection;
                         break;
                     }

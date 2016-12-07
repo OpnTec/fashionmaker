@@ -80,7 +80,25 @@ void TST_VAbstractCurve::GetSegmentPoints_issue458()
     const QVector<QPointF> points = VAbstractCurve::GetSegmentPoints(curve, begin, end, true);
 
     QVector<QPointF> origPoints;
-    origPoints.append(QPointF(541.621890489816, -610.374541985993));
+    origPoints.append(QPointF(899.4017385826772, -697.5307086614174));
+    origPoints.append(QPointF(892.6995351796473, -693.3935519951781));
+    origPoints.append(QPointF(875.8174743129977, -681.8104925021551));
+    origPoints.append(QPointF(859.0234977192879, -671.2802377557932));
+    origPoints.append(QPointF(845.5978493182879, -663.8126689425358));
+    origPoints.append(QPointF(829.9730588952673, -656.1637631875356));
+    origPoints.append(QPointF(811.8803251004954, -648.5221918643786));
+    origPoints.append(QPointF(791.0508465842408, -641.0766263466508));
+    origPoints.append(QPointF(767.2158219967725, -634.0157380079388));
+    origPoints.append(QPointF(740.1064499883596, -627.5281982218287));
+    origPoints.append(QPointF(717.3469062443893, -623.1805361010756));
+    origPoints.append(QPointF(701.0844584091014, -620.543657035209));
+    origPoints.append(QPointF(683.8522229593539, -618.1562427551349));
+    origPoints.append(QPointF(665.6165997264297, -616.0418771825518));
+    origPoints.append(QPointF(646.343988541613, -614.224144239158));
+    origPoints.append(QPointF(626.0007892361873, -612.7266278466516));
+    origPoints.append(QPointF(604.5534016414362, -611.572911926731));
+    origPoints.append(QPointF(581.9682255886432, -610.7865804010944));
+    origPoints.append(QPointF(558.2116609090922, -610.3912171914401));
     origPoints.append(QPointF(533.2501074340664, -610.4104062194663));
     origPoints.append(QPointF(520.2546519685039, -610.6015748031497));
     origPoints.append(QPointF(520.2546519685039, -610.6015748031497));

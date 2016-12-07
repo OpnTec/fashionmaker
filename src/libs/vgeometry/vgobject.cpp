@@ -40,7 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 
-double VGObject::accuracyPointOnLine = (0.5/*mm*/ / 25.4) * PrintDPI;
+double VGObject::accuracyPointOnLine = (0.026/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -454,28 +454,21 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
  */
 bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    // Round points. 1 mm now more than 3 pixels (96 dpi). So, no big reasons to work with float values.
-    // See bug issue #458 Issue with segment of curve.
-    // https://bitbucket.org/dismine/valentina/issues/458/issue-with-segment-of-curve
-    const QPoint tR = t.toPoint();
-    const QPoint p1R = p1.toPoint();
-    const QPoint p2R = p2.toPoint();
-
     // The test point must lie inside the bounding box spanned by the two line points.
-    if (not ( (p1R.x() <= tR.x() && tR.x() <= p2R.x()) || (p2R.x() <= tR.x() && tR.x() <= p1R.x()) ))
+    if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
     {
         // test point not in x-range
         return false;
     }
 
-    if (not ( (p1R.y() <= tR.y() && tR.y() <= p2R.y()) || (p2R.y() <= tR.y() && tR.y() <= p1R.y()) ))
+    if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
     {
         // test point not in y-range
         return false;
     }
 
     // Test via the perp dot product (PDP)
-    return IsPointOnLineviaPDP(tR, p1R, p2R);
+    return IsPointOnLineviaPDP(t, p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
