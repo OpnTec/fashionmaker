@@ -93,14 +93,14 @@ public:
     static QVector<QPointF> GetReversePoints(const QVector<QPointF> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
 
-    static double accuracyPointOnLine;
+    static const double accuracyPointOnLine;
 protected:
     static QTransform FlippingMatrix(const QLineF &axis);
 private:
     QSharedDataPointer<VGObjectData> d;
 
-    static double  PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
-    static double  GetEpsilon(const QPointF &p1, const QPointF &p2);
+    static long double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
+    static long double GetEpsilon(const QPointF &p1, const QPointF &p2);
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };

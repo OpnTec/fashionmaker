@@ -40,7 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 
-double VGObject::accuracyPointOnLine = (0.026/*mm*/ / 25.4) * PrintDPI;
+const double VGObject::accuracyPointOnLine = (0.026/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -476,10 +476,13 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
  * @brief IsPointOnLineviaPDP use the perp dot product (PDP) way.
  *
  *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
+ * @return true if point is on line
  */
 bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    return ( qAbs(PerpDotProduct(p1, p2, t)) < GetEpsilon(p1, p2) );
+    const auto p = qAbs(PerpDotProduct(p1, p2, t));
+    const auto e = GetEpsilon(p1, p2);
+    return p <= e;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -488,9 +491,18 @@ bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QP
  * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
  * @return 2 * triangleArea(a,b,c)
  */
-double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
+long double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
 {
-    return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
+    const auto p1x = static_cast<long double>(p1.x());
+    const auto p1y = static_cast<long double>(p1.y());
+
+    const auto p2x = static_cast<long double>(p2.x());
+    const auto p2y = static_cast<long double>(p2.y());
+
+    const auto tx = static_cast<long double>(t.x());
+    const auto ty = static_cast<long double>(t.y());
+
+    return (p1x - tx) * (p2y - ty) - (p1y - ty) * (p2x - tx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -503,7 +515,7 @@ double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPoi
  * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
  * is controled by variable accuracyPointOnLine
  */
-double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
+long double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
 {
     QLineF line(p1, p2);
     line.setAngle(line.angle() + 90);
