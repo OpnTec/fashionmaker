@@ -87,7 +87,7 @@ VLayoutDetail::~VLayoutDetail()
 // cppcheck-suppress unusedFunction
 QVector<QPointF> VLayoutDetail::GetContourPoints() const
 {
-    return d->contour;
+    return Map(d->contour);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
 // cppcheck-suppress unusedFunction
 QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 {
-    return d->seamAllowence;
+    return Map(d->seamAllowence);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,67 +326,39 @@ void VLayoutDetail::Mirror(const QLineF &edge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::EdgesCount() const
+int VLayoutDetail::DetailEdgesCount() const
+{
+    return DetailPath().count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::LayoutEdgesCount() const
 {
     return d->layoutAllowence.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutDetail::Edge(int i) const
+QLineF VLayoutDetail::DetailEdge(int i) const
 {
-    if (i < 1 || i > EdgesCount())
-    { // Doesn't exist such edge
-        return QLineF();
-    }
-
-    int i1, i2;
-    if (i < EdgesCount())
-    {
-        i1 = i-1;
-        i2 = i;
-    }
-    else
-    {
-        i1 = EdgesCount()-1;
-        i2 = 0;
-    }
-
-    if (d->mirror)
-    {
-        const int oldI1 = i1;
-        const int size = d->layoutAllowence.size()-1; //-V807
-        i1 = size - i2;
-        i2 = size - oldI1;
-        return QLineF(d->matrix.map(d->layoutAllowence.at(i2)), d->matrix.map(d->layoutAllowence.at(i1)));
-    }
-    else
-    {
-        return QLineF(d->matrix.map(d->layoutAllowence.at(i1)), d->matrix.map(d->layoutAllowence.at(i2)));
-    }
+    return Edge(DetailPath(), i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::EdgeByPoint(const QPointF &p1) const
+QLineF VLayoutDetail::LayoutEdge(int i) const
 {
-    if (p1.isNull())
-    {
-        return 0;
-    }
+    return Edge(d->layoutAllowence, i);
+}
 
-    if (EdgesCount() < 3)
-    {
-        return 0;
-    }
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::DetailEdgeByPoint(const QPointF &p1) const
+{
+    return EdgeByPoint(DetailPath(), p1);
+}
 
-    const QVector<QPointF> points = GetLayoutAllowencePoints();
-    for (int i=0; i< points.size(); i++)
-    {
-        if (points.at(i) == p1)
-        {
-            return i+1;
-        }
-    }
-    return 0; // Did not find edge
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::LayoutEdgeByPoint(const QPointF &p1) const
+{
+    return EdgeByPoint(d->layoutAllowence, p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,7 +434,8 @@ void VLayoutDetail::SetLayoutAllowencePoints()
     {
         if (getSeamAllowance())
         {
-            d->layoutAllowence = Equidistant(d->seamAllowence, EquidistantType::CloseEquidistant, d->layoutWidth);
+            d->layoutAllowence = Equidistant(GetSeamAllowencePoints(), EquidistantType::CloseEquidistant,
+                                             d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
                 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -474,7 +447,7 @@ void VLayoutDetail::SetLayoutAllowencePoints()
         }
         else
         {
-            d->layoutAllowence = Equidistant(d->contour, EquidistantType::CloseEquidistant, d->layoutWidth);
+            d->layoutAllowence = Equidistant(GetContourPoints(), EquidistantType::CloseEquidistant, d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
             #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -529,7 +502,7 @@ QPainterPath VLayoutDetail::ContourPath() const
     QPainterPath path;
 
     // contour
-    QVector<QPointF> points = Map(d->contour);
+    QVector<QPointF> points = GetContourPoints();
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
@@ -540,7 +513,7 @@ QPainterPath VLayoutDetail::ContourPath() const
     // seam allowence
     if (getSeamAllowance() == true)
     {
-        points = Map(d->seamAllowence);
+        points = GetSeamAllowencePoints();
 
         if (getClosed() == true)
         {
@@ -763,6 +736,19 @@ QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutDetail::DetailPath() const
+{
+    if (getSeamAllowance())
+    {
+        return d->seamAllowence;
+    }
+    else
+    {
+        return d->contour;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutDetail::IsMirror() const
 {
     return d->mirror;
@@ -830,4 +816,62 @@ qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2)
     const qreal dY = pt1.y() - pt2.y();
 
     return qSqrt(dX*dX + dY*dY);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VLayoutDetail::Edge(const QVector<QPointF> &path, int i) const
+{
+    if (i < 1 || i > path.count())
+    { // Doesn't exist such edge
+        return QLineF();
+    }
+
+    int i1, i2;
+    if (i < path.count())
+    {
+        i1 = i-1;
+        i2 = i;
+    }
+    else
+    {
+        i1 = path.count()-1;
+        i2 = 0;
+    }
+
+    if (d->mirror)
+    {
+        const int oldI1 = i1;
+        const int size = path.size()-1; //-V807
+        i1 = size - i2;
+        i2 = size - oldI1;
+        return QLineF(d->matrix.map(path.at(i2)), d->matrix.map(path.at(i1)));
+    }
+    else
+    {
+        return QLineF(d->matrix.map(path.at(i1)), d->matrix.map(path.at(i2)));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
+{
+    if (p1.isNull())
+    {
+        return 0;
+    }
+
+    if (path.count() < 3)
+    {
+        return 0;
+    }
+
+    const QVector<QPointF> points = Map(path);
+    for (int i=0; i < points.size(); i++)
+    {
+        if (points.at(i) == p1)
+        {
+            return i+1;
+        }
+    }
+    return 0; // Did not find edge
 }

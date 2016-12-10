@@ -46,6 +46,7 @@
 - [#570] Tiled PDF : Margin values correctly taken into account
 - [#580] Extend the list of heights.
 - [#582] Issue with standard path to shared data on Linux.
+- [#595] GapWidth affecting to the margins.
 
 # Version 0.4.5 October 15, 2016
 - [#435] Valentina doesn't change the cursor.
