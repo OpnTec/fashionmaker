@@ -739,7 +739,13 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
     QProcess proc;
+#if defined(Q_OS_MAC)
+    // Fix issue #594. Broken export on Mac.
+    proc.setWorkingDirectory(qApp->applicationDirPath());
+    proc.start(QLatin1String("./") + PDFTOPS, params);
+#else
     proc.start(PDFTOPS, params);
+#endif
     if (proc.waitForStarted(15000))
     {
         proc.waitForFinished(15000);
