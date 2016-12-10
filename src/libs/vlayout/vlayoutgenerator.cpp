@@ -279,7 +279,13 @@ void VLayoutGenerator::GatherPages()
 
     for (int i = 0; i < papers.size(); ++i)
     {
-        const int paperHeight = qRound(papers.at(i).BoundingRect().height());
+        int paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
+
+        if (i != papers.size()-1)
+        {
+            paperHeight += qRound(bank->GetLayoutWidth()*2);
+        }
+
         if (length + paperHeight <= PageHeight())
         {
             UniteDetails(j, nDetails, length, i);
@@ -331,14 +337,17 @@ void VLayoutGenerator::UnitePages()
         int paperHeight = 0;
         if (autoCrop)
         {
-            paperHeight = qRound(papers.at(i).BoundingRect().height());
+            paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
         }
         else
         {
             paperHeight = papers.at(i).GetHeight();
         }
 
-        paperHeight = qRound(paperHeight + bank->GetLayoutWidth());
+        if (i != papers.size()-1)
+        {
+            paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
+        }
 
         if (length + paperHeight <= QIMAGE_MAX)
         {

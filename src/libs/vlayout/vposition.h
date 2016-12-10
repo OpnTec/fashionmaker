@@ -116,14 +116,9 @@ private:
     void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge);
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
-    QPolygonF GlobalPolygon() const;
-
     static QPainterPath ShowDirection(const QLineF &edge);
     static QPainterPath DrawContour(const QVector<QPointF> &points);
     static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
-
-    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift);
-    static QVector<QPointF> CutEdge(const QLineF &edge, quint32 shift);
 
     void Rotate(int increase);
 };

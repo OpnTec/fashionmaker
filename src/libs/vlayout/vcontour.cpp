@@ -130,7 +130,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int glo
     QVector<QPointF> newContour;
     if (d->globalContour.isEmpty()) //-V807
     {
-        AppendWhole(newContour, detail, detJ);
+        AppendWhole(newContour, detail, 0);
     }
     else
     {
@@ -139,7 +139,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int glo
             return QVector<QPointF>();
         }
 
-        if (detJ <= 0 || detJ > detail.EdgesCount())
+        if (detJ <= 0 || detJ > detail.LayoutEdgesCount())
         {
             return QVector<QPointF>();
         }
@@ -166,7 +166,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int glo
                 else
                 {
                     int processedEdges = 0;
-                    const int nD = detail.EdgesCount();
+                    const int nD = detail.LayoutEdgesCount();
                     int j = detJ+1;
                     do
                     {
@@ -176,7 +176,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int glo
                         }
                         if (j != detJ)
                         {
-                            const QVector<QPointF> points = CutEdge(detail.Edge(j));
+                            const QVector<QPointF> points = CutEdge(detail.LayoutEdge(j));
                             for (int i = 0; i < points.size()-1; ++i)
                             {
                                 newContour.append(points.at(i));
@@ -336,7 +336,7 @@ QPainterPath VContour::ContourPath() const
 void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const
 {
     int processedEdges = 0;
-    const int nD = detail.EdgesCount();
+    const int nD = detail.LayoutEdgesCount();
     int j = detJ+1;
     do
     {
@@ -344,7 +344,7 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detai
         {
             j=1;
         }
-        const QVector<QPointF> points = CutEdge(detail.Edge(j));
+        const QVector<QPointF> points = CutEdge(detail.LayoutEdge(j));
         for (int i = 0; i < points.size()-1; ++i)
         {
             contour.append(points.at(i));

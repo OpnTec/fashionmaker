@@ -85,7 +85,7 @@ public:
     QVector<VLayoutDetail> GetDetails() const;
     void                   SetDetails(const QList<VLayoutDetail>& details);
 
-    QRectF BoundingRect() const;
+    QRectF DetailsBoundingRect() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;

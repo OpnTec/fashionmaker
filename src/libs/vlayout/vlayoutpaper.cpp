@@ -193,7 +193,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &sto
         return false;
     }
 
-    if (detail.EdgesCount() < 3)
+    if (detail.LayoutEdgesCount() < 3 || detail.DetailEdgesCount() < 3)
     {
         return false;//Not enough edges
     }
@@ -228,9 +228,20 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
+    int detailEdgesCount = 0;
+
+    if (d->globalContour.GetContour().isEmpty())
+    {
+        detailEdgesCount = detail.DetailEdgesCount();
+    }
+    else
+    {
+        detailEdgesCount = detail.LayoutEdgesCount();
+    }
+
     for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
-        for (int i=1; i<= detail.EdgesCount(); ++i)
+        for (int i=1; i<= detailEdgesCount; ++i)
         {
             VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
                                               d->localRotationIncrease,
@@ -311,14 +322,13 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
     QGraphicsRectItem *paper;
     if (autoCrop)
     {
-        QGraphicsScene *scene = new QGraphicsScene();
+        QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
         QList<QGraphicsItem *> list = GetItemDetails();
         for (int i=0; i < list.size(); ++i)
         {
             scene->addItem(list.at(i));
         }
-        const int height = scene->itemsBoundingRect().toRect().height() + static_cast<int>(d->layoutWidth)*2;
-        delete scene;
+        const int height = scene->itemsBoundingRect().toRect().height();
         if (d->globalContour.GetHeight() > height) //-V807
         {
             paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
@@ -371,12 +381,12 @@ void VLayoutPaper::SetDetails(const QList<VLayoutDetail> &details)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPaper::BoundingRect() const
+QRectF VLayoutPaper::DetailsBoundingRect() const
 {
     QRectF rec;
     for (int i=0; i < d->details.count(); ++i)
     {
-        rec = rec.united(d->details.at(i).LayoutBoundingRect());
+        rec = rec.united(d->details.at(i).DetailBoundingRect());
     }
 
     return rec;
