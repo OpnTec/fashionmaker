@@ -94,7 +94,7 @@ QT_WARNING_DISABLE_GCC("-Wattributes")
 inline QString NameRegExp()
 {
     //Same regexp in pattern.xsd shema file. Don't forget synchronize.
-    return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`'\"]){0,}$");
+    return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`\"]){0,}$");
 }
 
 QT_WARNING_POP
