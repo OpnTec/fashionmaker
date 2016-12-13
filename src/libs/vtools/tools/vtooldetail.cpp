@@ -837,7 +837,12 @@ void VToolDetail::UpdateLabel()
     if (data.IsVisible() == true)
     {
         QFont fnt = qApp->font();
-        fnt.setPixelSize(data.GetFontSize());
+        int iFS = data.GetFontSize();
+        if (iFS < MIN_FONT_SIZE)
+        {
+            iFS = MIN_FONT_SIZE;
+        }
+        fnt.setPixelSize(iFS);
         dataLabel->SetFont(fnt);
         dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
         dataLabel->UpdateData(detail.getName(), data);

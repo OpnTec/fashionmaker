@@ -106,16 +106,30 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     painter->setPen(Qt::black);
     QFont fnt = m_tm.GetFont();
+    int iW = qFloor(boundingRect().width());
     // draw text lines
     int iY = 0;
-    for (int i = 0; i < m_tm.GetOutputLinesCount(); ++i)
+    for (int i = 0; i < m_tm.GetSourceLinesCount(); ++i)
     {
-        const TextLine& tl = m_tm.GetOutputLine(i);
+        const TextLine& tl = m_tm.GetSourceLine(i);
+        // check if the next line will go out of bounds
+        if (iY + tl.m_iHeight > boundingRect().height())
+        {
+            break;
+        }
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
+
+        QString qsText = tl.m_qsText;
+        QFontMetrics fm(fnt);
+        if (fm.width(qsText) > iW)
+        {
+            qsText = fm.elidedText(qsText, Qt::ElideRight, iW);
+        }
+
         painter->setFont(fnt);
-        painter->drawText(0, iY, qRound(boundingRect().width()), tl.m_iHeight, tl.m_eAlign, tl.m_qsText);
+        painter->drawText(0, iY, iW, tl.m_iHeight, tl.m_eAlign, qsText);
         iY += tl.m_iHeight + m_tm.GetSpacing();
     }
 
@@ -189,13 +203,13 @@ bool VTextGraphicsItem::IsIdle() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextGraphicsItem::AddLine adds a line of text to the label list. If necessary, it also resizes the
- * label bounding box until it is big enough to contain all the text
+ * @brief VTextGraphicsItem::AddLine adds a line of text to the label list.
  * @param tl line of text to add
  */
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
     m_tm.AddSourceLine(tl);
+    /*
     qreal fW = MIN_W;
     qreal fH = m_iMinH;
     qreal fMinW;
@@ -212,6 +226,7 @@ void VTextGraphicsItem::AddLine(const TextLine& tl)
     {
         setPos(m_rectBoundingBox.left() + dX, m_rectBoundingBox.top() + dY);
     }
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,7 +363,7 @@ void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc, qreal dSize, qr
  */
 int VTextGraphicsItem::GetTextLines() const
 {
-    return m_tm.GetOutputLinesCount();
+    return m_tm.GetSourceLinesCount();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -589,33 +604,6 @@ void VTextGraphicsItem::UpdateBox()
  */
 void VTextGraphicsItem::CorrectLabel()
 {
-    int iFS = m_tm.GetFont().pixelSize();
-    qreal fMinW;
-    qreal fMinH;
-
-    // increase the font size until the bounding rect is not big enough
-    while (
-           iFS < MAX_FONT_SIZE &&
-           m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS, fMinW, fMinH) == true
-           )
-    {
-        ++iFS;
-    }
-
-    // decrease the font size until the bounding rect is big enough
-    while (m_tm.IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS, fMinW, fMinH) == false)
-    {
-        if (iFS > MIN_FONT_SIZE)
-        {
-            --iFS;
-        }
-        else
-        {
-            SetSize(fMinW, fMinH);
-        }
-
-        qDebug() << "DEC FONT" << iFS << m_rectBoundingBox.width() << fMinW;
-    }
     qreal dX;
     qreal dY;
     QRectF rectBB;
@@ -626,7 +614,7 @@ void VTextGraphicsItem::CorrectLabel()
         // put the label inside the pattern
         setPos(pos().x() + dX, pos().y() + dY);
     }
-    m_tm.SetFontSize(iFS);
+    m_tm.FitFontSize(m_rectBoundingBox.width(), m_rectBoundingBox.height());
     UpdateBox();
 }
 

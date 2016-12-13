@@ -29,8 +29,6 @@
 #ifndef VPATTERNPIECEDATA_H
 #define VPATTERNPIECEDATA_H
 
-#define MIN_FONT_SIZE           12
-
 #include <QList>
 #include <QPointF>
 #include <QSet>
