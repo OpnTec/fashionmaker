@@ -1,17 +1,7 @@
 rem script helps create installer
 
-rem detect windows version
-ver | find "6.1" > nul
-
-IF ERRORLEVEL = 1 GOTO ARCHITECTURE
-IF ERRORLEVEL = 0 GOTO WIN7
-
-:WIN7
-chcp 65001
-
-:ARCHITECTURE
 rem find target architecture
-reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set ARCHITECTURE=32BIT || set ARCHITECTURE=64BIT
+IF "%PROCESSOR_ARCHITECTURE%"=="x86" (set ARCHITECTURE=32BIT) else (ARCHITECTURE=64BIT)
 
 rem Path to Inno Setup according to architecture
 if %ARCHITECTURE%==32BIT set nsis_path="C:/Program Files/Inno Setup 5/iscc.exe"
@@ -20,10 +10,20 @@ if %ARCHITECTURE%==64BIT set nsis_path="C:/Program Files (x86)/Inno Setup 5/iscc
 if not exist %nsis_path% (
 	SET package_error="Package was not created!"
 	SET /P promt="Coudn't find Inno Setup. Do you want to continue?[Y\N]"
-	IF "%promt%" == "Y" GOTO PREPARE
-	IF "%promt%" == "y" GOTO PREPARE
+	IF "%promt%" == "Y" GOTO CONTINUE
+	IF "%promt%" == "y" GOTO CONTINUE
 	ELSE GOTO ONEXIT
-) 
+)
+
+:CONTINUE
+rem detect windows version
+ver | find "6.1" > nul
+
+IF ERRORLEVEL = 1 GOTO PREPARE
+IF ERRORLEVEL = 0 GOTO WIN7
+
+:WIN7
+chcp 65001 
 
 :PREPARE
 cd ..
@@ -76,4 +76,5 @@ exit /b 1
 :ONEXIT
 echo Done! %package_error%
 @pause
+
 

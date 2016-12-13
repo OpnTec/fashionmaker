@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Après chaque plantage, Valentina collecte des informations qui peuvent nous servir à régler le problème. Nous ne collectons aucune information personnelle. Pour en savoir plus : %1 le genre d&apos;information%2 que nous collectons.</translation>
     </message>
 </context>
 <context>
@@ -1476,11 +1476,11 @@
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forbid piece be mirrored in a layout.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation interdite</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
@@ -1500,7 +1500,7 @@
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1508,7 +1508,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1520,7 +1520,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Longueur:</translation>
+        <translation>Longueur:</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
@@ -1528,11 +1528,11 @@
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="unfinished"></translation>
+        <translation>La longueur doit être positive</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fleches:</translation>
     </message>
     <message>
         <source>Both</source>
@@ -1840,7 +1840,7 @@
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point d&apos;origine:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -1852,7 +1852,7 @@
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner le second point</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -1860,11 +1860,11 @@
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Axes verticaux</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Axes horizontaux</translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1875,7 @@
     </message>
     <message>
         <source>First line point:</source>
-        <translation type="unfinished">Point de la première ligne:</translation>
+        <translation>Point de la première ligne:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -1887,7 +1887,7 @@
     </message>
     <message>
         <source>Select first line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner le premier point de la ligne</translation>
     </message>
     <message>
         <source>Select first line point that is not part of the list of objects</source>
@@ -2536,7 +2536,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Longueur de décalage :</translation>
+        <translation>Longueur de décalage:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -2929,7 +2929,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2937,7 +2937,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Longueur:</translation>
+        <translation>Longueur:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -4004,7 +4004,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Select origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner le second point</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
@@ -6298,7 +6298,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation interdite</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -8294,7 +8294,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper</translation>
     </message>
     <message>
         <source>on fold</source>
@@ -8604,23 +8604,23 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Axes verticaux</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Axes horizontaux</translation>
     </message>
     <message>
         <source>Tool move</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil main</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil rotation autour d&apos;une ligne</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil rotation autour d&apos;un axe</translation>
     </message>
     <message>
         <source>Axis type</source>
@@ -9800,7 +9800,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout selectionner</translation>
     </message>
     <message>
         <source>Select none</source>
@@ -9808,7 +9808,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>select all details</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner tout les détails</translation>
     </message>
     <message>
         <source>select none details</source>
