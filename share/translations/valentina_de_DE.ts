@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, welche %1 Information %2 übertragen werden.</translation>
     </message>
 </context>
 <context>
@@ -6120,11 +6120,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten werden zugeschnitten, da sie nicht mit der Papiergröße des Drucker übereinstimmen.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateipfad kann nicht erstellt werden</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>

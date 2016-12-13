@@ -129,6 +129,9 @@ public:
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     static QRectF SceneVisibleArea(QGraphicsView *view);
 
+    static qreal MinScale();
+    static qreal MaxScale();
+
 signals:
     /**
      * @brief NewFactor send new scale factor.

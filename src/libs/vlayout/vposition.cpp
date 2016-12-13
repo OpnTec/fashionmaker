@@ -267,7 +267,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.LayoutBoundingRect()))
+    if (SheetContains(detail.DetailBoundingRect()))
     {
         if (not gContour.GetContour().isEmpty())
         {
@@ -302,14 +302,22 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             #endif
         #endif
 
-        dEdge = detail.EdgeByPoint(globalEdge.p2());
+        if (gContour.GetContour().isEmpty())
+        {
+            dEdge = detail.DetailEdgeByPoint(globalEdge.p2());
+        }
+        else
+        {
+            dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
+        }
+
         if (dEdge <= 0)
         {
             return false;
         }
 
         CrossingType type = CrossingType::Intersection;
-        if (SheetContains(detail.LayoutBoundingRect()))
+        if (SheetContains(detail.DetailBoundingRect()))
         {
             type = Crossing(detail);
         }
@@ -346,7 +354,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.LayoutBoundingRect()))
+    if (SheetContains(detail.DetailBoundingRect()))
     {
         type = Crossing(detail);
     }
@@ -398,7 +406,15 @@ bool VPosition::SheetContains(const QRectF &rect) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge)
 {
-    QLineF detailEdge = detail.Edge(dEdge);
+    QLineF detailEdge;
+    if (gContour.GetContour().isEmpty())
+    {
+        detailEdge = detail.DetailEdge(dEdge);
+    }
+    else
+    {
+        detailEdge = detail.LayoutEdge(dEdge);
+    }
 
     // Find distance between two edges for two begin vertex.
     const qreal dx = globalEdge.x2() - detailEdge.x2();
@@ -419,7 +435,15 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const
 {
-    QLineF detailEdge = detail.Edge(dEdge);
+    QLineF detailEdge;
+    if (gContour.GetContour().isEmpty())
+    {
+        detailEdge = detail.DetailEdge(dEdge);
+    }
+    else
+    {
+        detailEdge = detail.LayoutEdge(dEdge);
+    }
 
     // Find distance between two edges for two begin vertex.
     const qreal dx = globalEdge.x2() - detailEdge.x2();
@@ -430,69 +454,6 @@ void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
     detail.Rotate(globalEdge.p2(), angle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift)
-{
-    int processedEdges = 0;
-    const int nD = detail.EdgesCount();
-    int j = detJ+1;
-    do
-    {
-        if (j > nD)
-        {
-            j=1;
-        }
-        const QVector<QPointF> points = CutEdge(detail.Edge(j), shift);
-        for (int i = 0; i < points.size()-1; ++i)
-        {
-            contour.append(points.at(i));
-        }
-        ++processedEdges;
-        ++j;
-    }while (processedEdges < nD);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QPolygonF VPosition::GlobalPolygon() const
-{
-    QVector<QPointF> points = gContour.GetContour();
-    points.append(points.first());
-    return QPolygonF(points);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::CutEdge(const QLineF &edge, quint32 shift)
-{
-    QVector<QPointF> points;
-    if (shift == 0)
-    {
-        points.append(edge.p1());
-        points.append(edge.p2());
-    }
-    else
-    {
-        const int n = qFloor(edge.length()/shift);
-
-        if (n <= 0)
-        {
-            points.append(edge.p1());
-            points.append(edge.p2());
-        }
-        else
-        {
-            const qreal nShift = edge.length()/n;
-            for (int i = 1; i <= n+1; ++i)
-            {
-                QLineF l1 = edge;
-                l1.setLength(nShift*(i-1));
-                points.append(l1.p2());
-            }
-        }
-    }
-    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

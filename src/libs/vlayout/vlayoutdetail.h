@@ -97,9 +97,14 @@ public:
     void Rotate(const QPointF &originPoint, qreal degrees);
     void Mirror(const QLineF &edge);
 
-    int    EdgesCount() const;
-    QLineF Edge(int i) const;
-    int    EdgeByPoint(const QPointF &p1) const;
+    int    DetailEdgesCount() const;
+    int    LayoutEdgesCount() const;
+
+    QLineF DetailEdge(int i) const;
+    QLineF LayoutEdge(int i) const;
+
+    int    DetailEdgeByPoint(const QPointF &p1) const;
+    int    LayoutEdgeByPoint(const QPointF &p1) const;
 
     QRectF DetailBoundingRect() const;
     QRectF LayoutBoundingRect() const;
@@ -119,12 +124,17 @@ public:
 private:
     QSharedDataPointer<VLayoutDetailData>   d;
 
+    QVector<QPointF> DetailPath() const;
+
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 
     static QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
     QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
     static qreal GetDistance(const QPointF& pt1, const QPointF& pt2);
+
+    QLineF Edge(const QVector<QPointF> &path, int i) const;
+    int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;
 };
 
 Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);

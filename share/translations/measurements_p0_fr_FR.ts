@@ -3391,19 +3391,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1655"/>
         <source>arm_neck_side_to_finger_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bras_encolure_cote_au_extremite_doigt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1657"/>
         <source>Arm: Neck Side to Finger Tip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bras: Encolure Côté à l&apos;Extrémité Doigt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1658"/>
         <source>From Neck Side down arm to tip of middle finger. (&apos;Shoulder Length&apos; + &apos;Arm: Shoulder Tip to Wrist&apos; + &apos;Hand: Length&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>De l&apos;Encolure côté descendre par le bras jusqu&apos;à l&apos;extrémité du majeur. (&apos;Longueur Épaule&apos; + &apos;Bras: Pointe Épaule au poignet&apos; + &apos;Main: Longueur&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1664"/>
