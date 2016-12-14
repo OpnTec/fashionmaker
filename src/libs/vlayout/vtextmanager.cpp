@@ -32,11 +32,11 @@
 #include <QLatin1String>
 #include <QRegularExpression>
 #include <QApplication>
-#include <QtMath>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,14 +117,7 @@ const QFont& VTextManager::GetFont() const
  */
 void VTextManager::SetFontSize(int iFS)
 {
-    if (iFS < MIN_FONT_SIZE)
-    {
-        m_font.setPixelSize(MIN_FONT_SIZE);
-    }
-    else
-    {
-        m_font.setPixelSize(iFS);
-    }
+    iFS < MIN_FONT_SIZE ? m_font.setPixelSize(MIN_FONT_SIZE) : m_font.setPixelSize(iFS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,7 +165,7 @@ const TextLine& VTextManager::GetSourceLine(int i) const
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());
-    return m_liLines[i];
+    return m_liLines.at(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

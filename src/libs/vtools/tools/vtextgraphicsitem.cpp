@@ -125,7 +125,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         QFontMetrics fm(fnt);
         if (fm.width(qsText) > iW)
         {
-            qsText = fm.elidedText(qsText, Qt::ElideRight, iW);
+            qsText = fm.elidedText(qsText, Qt::ElideMiddle, iW);
         }
 
         painter->setFont(fnt);
@@ -209,24 +209,6 @@ bool VTextGraphicsItem::IsIdle() const
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
     m_tm.AddSourceLine(tl);
-    /*
-    qreal fW = MIN_W;
-    qreal fH = m_iMinH;
-    qreal fMinW;
-    qreal fMinH;
-    while (m_tm.IsBigEnough(fW, fH, MIN_FONT_SIZE, fMinW, fMinH) == false)
-    {
-        SetSize(fMinW, fMinH);
-        fW = m_rectBoundingBox.width();
-        fH = m_rectBoundingBox.height();
-    }
-    qreal dX;
-    qreal dY;
-    if (IsContained(m_rectBoundingBox, rotation(), dX, dY) == false)
-    {
-        setPos(m_rectBoundingBox.left() + dX, m_rectBoundingBox.top() + dY);
-    }
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
