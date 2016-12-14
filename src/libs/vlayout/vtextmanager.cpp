@@ -193,7 +193,6 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     // get ratio between char width and height
 
     int iMaxLen = 0;
-    int iTW;
     QFont fnt;
     for (int i = 0; i < GetSourceLinesCount(); ++i)
     {
@@ -203,7 +202,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
         QFontMetrics fm(fnt);
-        iTW = fm.width(GetSourceLine(i).m_qsText);
+        const int iTW = fm.width(GetSourceLine(i).m_qsText);
         if (iTW > iMaxLen)
         {
             iMaxLen = iTW;
