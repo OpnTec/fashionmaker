@@ -32,6 +32,7 @@
 #include <QLatin1String>
 #include <QRegularExpression>
 #include <QApplication>
+#include <QtMath>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
@@ -52,7 +53,7 @@ TextLine::TextLine()
  * @brief VTextManager::VTextManager constructor
  */
 VTextManager::VTextManager()
-     :m_font(), m_liLines(), m_liOutput()
+     :m_font(), m_liLines()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ VTextManager::~VTextManager()
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextManager::VTextManager(const VTextManager &text)
-    : m_font(text.GetFont()), m_liLines(text.GetAllSourceLines()), m_liOutput(text.GetAllOutputLines())
+    : m_font(text.GetFont()), m_liLines(text.GetAllSourceLines())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,7 +77,6 @@ VTextManager &VTextManager::operator=(const VTextManager &text)
     }
     m_font = text.GetFont();
     m_liLines = text.GetAllSourceLines();
-    m_liOutput = text.GetAllOutputLines();
     return *this;
 }
 
@@ -87,7 +87,7 @@ VTextManager &VTextManager::operator=(const VTextManager &text)
  */
 int VTextManager::GetSpacing() const
 {
-    return 2;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,14 @@ const QFont& VTextManager::GetFont() const
  */
 void VTextManager::SetFontSize(int iFS)
 {
-    m_font.setPixelSize(iFS);
+    if (iFS < MIN_FONT_SIZE)
+    {
+        m_font.setPixelSize(MIN_FONT_SIZE);
+    }
+    else
+    {
+        m_font.setPixelSize(iFS);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,16 +154,6 @@ void VTextManager::ClearSourceLines()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetOutputLinesCount returns the number of output text lines
- * @return number of output text lines
- */
-int VTextManager::GetOutputLinesCount() const
-{
-    return m_liOutput.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
@@ -166,68 +163,16 @@ int VTextManager::GetSourceLinesCount() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TextLine> VTextManager::GetAllOutputLines() const
-{
-    return m_liOutput;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextManager::GetLine returns the i-th output text line
- * @param i index of the output text line
- * @return i-th output text line
+ * @brief VTextManager::GetSourceLine returns the reference to i-th text line
+ * @param i index of the requested line
+ * @return reference to the requested TextLine object
  */
-const TextLine& VTextManager::GetOutputLine(int i) const
+const TextLine& VTextManager::GetSourceLine(int i) const
 {
-    return m_liOutput[i];
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::IsBigEnough Checks if rectangle of size (fW, fH) is big enough to hold the text with base font
- * size iFontSize
- * @param fW rectangle width
- * @param fH rectangle height
- * @param iFontSize base font size
- * @param fMinW minimal required rectangle width to fit the text
- * @param fMinH minimal required rectangle height to fit the text
- * @return true, if rectangle of size (fW, fH)
- */
-bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH)
-{
-    m_liOutput.clear();
-    QFont fnt = m_font;
-    int iY = 0;
-    fMinW = fW;
-    fMinH = fH;
-
-    for (int i = 0; i < m_liLines.count(); ++i)
-    {
-        const TextLine& tl = m_liLines.at(i);
-        TextLine tlOut = tl;
-        fnt.setPixelSize(iFontSize + tl.m_iFontSize);
-        QFontMetrics fm(fnt);
-        int iHorSp = fm.width(" ");
-        tlOut.m_iHeight = fm.height();
-        QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
-        for (int iL = 0; iL < qslLines.count(); ++iL)
-        {
-            // check if every line fits within the label width
-            if (fm.width(qslLines[iL]) + iHorSp > fW)
-            {
-                fMinW = fm.width(qslLines[iL]) + iHorSp;
-                return false;
-            }
-            tlOut.m_qsText = qslLines[iL];
-            m_liOutput << tlOut;
-            iY += tlOut.m_iHeight + GetSpacing();
-        }
-    }
-    if (iY > fH)
-    {
-        fMinH = iY;
-    }
-    return iY <= fH;
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i < m_liLines.count());
+    return m_liLines[i];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,19 +184,43 @@ bool VTextManager::IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, 
  */
 void VTextManager::FitFontSize(qreal fW, qreal fH)
 {
-    int iFontSize = GetFont().pixelSize();
-    qreal fMinW;
-    qreal fMinH;
+    int iFS = 3*qFloor(fH/GetSourceLinesCount())/4;
+    if (iFS < MIN_FONT_SIZE)
+    {
+        iFS = MIN_FONT_SIZE;
+    }
 
-    while (IsBigEnough(fW, fH, iFontSize, fMinW, fMinH) == true && iFontSize <= MAX_FONT_SIZE)
+    // get ratio between char width and height
+
+    int iMaxLen = 0;
+    int iTW;
+    QFont fnt;
+    for (int i = 0; i < GetSourceLinesCount(); ++i)
     {
-        ++iFontSize;
+        const TextLine& tl = GetSourceLine(i);
+        fnt = m_font;
+        fnt.setPixelSize(iFS + tl.m_iFontSize);
+        fnt.setWeight(tl.m_eFontWeight);
+        fnt.setStyle(tl.m_eStyle);
+        QFontMetrics fm(fnt);
+        iTW = fm.width(GetSourceLine(i).m_qsText);
+        if (iTW > iMaxLen)
+        {
+            iMaxLen = iTW;
+        }
     }
-    while (IsBigEnough(fW, fH, iFontSize, fMinW, fMinH) == false && iFontSize >= MIN_FONT_SIZE)
+    if (iMaxLen > fW)
     {
-        --iFontSize;
+        iFS = qFloor(iFS*fW/iMaxLen);
     }
-    SetFontSize(iFontSize);
+    iFS = qMax(MIN_FONT_SIZE, iFS);
+    int iH = 4*iFS/3;
+    SetFontSize(iFS);
+    for (int i = 0; i < GetSourceLinesCount(); ++i)
+    {
+        m_liLines[i].m_iHeight = iH;
+    }
+    qDebug() << "Font size" << GetSourceLinesCount() << iFS;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -404,49 +373,5 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
         tl.m_iFontSize = 0;
         AddSourceLine(tl);
     }
-
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::SplitString splits the string into several lines, which all fit into width fW
- * @param qs string to split
- * @param fW required width of every output string
- * @param fm font metrics of the font used
- * @return list of strings, each of which is not wider than fW using the font metrics fm
- */
-QStringList VTextManager::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
-{
-    QRegularExpression reg("\\s+");
-    // split the string into words
-    QStringList qslWords = qs.split(reg);
-    QStringList qslLines;
-    QString qsCurrent;
-    for (int i = 0; i < qslWords.count(); ++i)
-    {
-        if (qsCurrent.length() > 0)
-        {
-            qsCurrent += QLatin1String(" ");
-        }
-        // check if another word can be added into current line
-        if (fm.width(qsCurrent + qslWords[i]) > fW)
-        {
-            // if not, add the current line into the list of text lines
-            if (qsCurrent.isEmpty() == false)
-            {
-                qslLines << qsCurrent;
-            }
-            // and set the current line to contain the current word
-            qsCurrent = qslWords[i];
-        }
-        else
-        {
-            qsCurrent += qslWords[i];
-        }
-    }
-    qslLines << qsCurrent;
-    return qslLines;
-}
-
-
 

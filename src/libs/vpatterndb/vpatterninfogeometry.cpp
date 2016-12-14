@@ -32,15 +32,9 @@ class QPointF;
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternInfoGeometry::VPatternInfoGeometry()
-    :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(MIN_FONT_SIZE),
+    :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(0),
       m_dRotation(0), m_bVisible(true)
-{
-    m_iFontSize = MIN_FONT_SIZE;
-    // 0 means unknown width
-    m_dLabelWidth = 0;
-    m_dLabelHeight = 0;
-    m_dRotation = 0;
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VPatternInfoGeometry::GetPos() const
@@ -87,14 +81,7 @@ int VPatternInfoGeometry::GetFontSize() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternInfoGeometry::SetFontSize(int iSize)
 {
-    if (iSize >= MIN_FONT_SIZE)
-    {
-        m_iFontSize = iSize;
-    }
-    else
-    {
-        m_iFontSize = MIN_FONT_SIZE;
-    }
+    m_iFontSize = iSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

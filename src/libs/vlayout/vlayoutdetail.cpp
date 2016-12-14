@@ -148,10 +148,15 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
 
     // generate text
     d->m_tmDetail.SetFont(font);
-    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    int iFS = data.GetFontSize();
+    if (iFS < MIN_FONT_SIZE)
+    {
+        iFS = MIN_FONT_SIZE;
+    }
+    d->m_tmDetail.SetFontSize(iFS);
     d->m_tmDetail.Update(qsName, data);
     // this will generate the lines of text
-    d->m_tmDetail.SetFontSize(data.GetFontSize());
+    d->m_tmDetail.SetFontSize(iFS);
     d->m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
 }
 
@@ -175,11 +180,17 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
 
     // Generate text
     d->m_tmPattern.SetFont(font);
-    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+    int iFS = geom.GetFontSize();
+    if (iFS < MIN_FONT_SIZE)
+    {
+        iFS = MIN_FONT_SIZE;
+    }
+    d->m_tmPattern.SetFontSize(iFS);
 
     d->m_tmPattern.Update(pDoc, dSize, dHeight);
+
     // generate lines of text
-    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+    d->m_tmPattern.SetFontSize(iFS);
     d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
 }
 
@@ -553,8 +564,9 @@ void VLayoutDetail::CreateTextItems()
         points.push_back(points.at(0));
         // calculate the angle of rotation
         qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
-        // calculate the label width
+        // calculate the label width and height
         qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dH = GetDistance(points.at(1), points.at(2));
         qreal dY = 0;
         qreal dX;
         // set up the rotation around top-left corner matrix
@@ -562,16 +574,26 @@ void VLayoutDetail::CreateTextItems()
         mat.translate(points.at(0).x(), points.at(0).y());
         mat.rotate(qRadiansToDegrees(dAng));
 
-        for (int i = 0; i < d->m_tmDetail.GetOutputLinesCount(); ++i)
+        for (int i = 0; i < d->m_tmDetail.GetSourceLinesCount(); ++i)
         {
-            const TextLine& tl = d->m_tmDetail.GetOutputLine(i);
+            const TextLine& tl = d->m_tmDetail.GetSourceLine(i);
             QFont fnt = d->m_tmDetail.GetFont();
             fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
             dY += tl.m_iHeight;
+            // check if the next line will go out of bounds
+            if (dY > dH)
+            {
+                break;
+            }
 
             QFontMetrics fm(fnt);
+            QString qsText = tl.m_qsText;
+            if (fm.width(qsText) > dW)
+            {
+                qsText = fm.elidedText(qsText, Qt::ElideRight, dW);
+            }
             // find the correct horizontal offset, depending on the alignment flag
             if ((tl.m_eAlign & Qt::AlignLeft) > 0)
             {
@@ -579,15 +601,15 @@ void VLayoutDetail::CreateTextItems()
             }
             else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
             {
-                dX = (dW - fm.width(tl.m_qsText))/2;
+                dX = (dW - fm.width(qsText))/2;
             }
             else
             {
-                dX = dW - fm.width(tl.m_qsText);
+                dX = dW - fm.width(qsText);
             }
             // create text path and add it to the list
             QPainterPath path;
-            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, qsText);
             d->m_liPP << mat.map(path);
             dY += d->m_tmDetail.GetSpacing();
         }
@@ -600,36 +622,46 @@ void VLayoutDetail::CreateTextItems()
         points.push_back(points.at(0));
         qreal dAng = qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x());
         qreal dW = GetDistance(points.at(0), points.at(1));
+        qreal dH = GetDistance(points.at(1), points.at(2));
         qreal dY = 0;
         qreal dX;
         QMatrix mat;
         mat.translate(points.at(0).x(), points.at(0).y());
         mat.rotate(qRadiansToDegrees(dAng));
 
-        for (int i = 0; i < d->m_tmPattern.GetOutputLinesCount(); ++i)
+        for (int i = 0; i < d->m_tmPattern.GetSourceLinesCount(); ++i)
         {
-            const TextLine& tl = d->m_tmPattern.GetOutputLine(i);
+            const TextLine& tl = d->m_tmPattern.GetSourceLine(i);
             QFont fnt = d->m_tmPattern.GetFont();
             fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
             dY += tl.m_iHeight;
+            if (dY > dH)
+            {
+                break;
+            }
 
             QFontMetrics fm(fnt);
+            QString qsText = tl.m_qsText;
+            if (fm.width(qsText) > dW)
+            {
+                qsText = fm.elidedText(qsText, Qt::ElideRight, dW);
+            }
             if ((tl.m_eAlign & Qt::AlignLeft) > 0)
             {
                 dX = 0;
             }
             else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
             {
-                dX = (dW - fm.width(tl.m_qsText))/2;
+                dX = (dW - fm.width(qsText))/2;
             }
             else
             {
-                dX = dW - fm.width(tl.m_qsText);
+                dX = dW - fm.width(qsText);
             }
             QPainterPath path;
-            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, tl.m_qsText);
+            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, qsText);
             d->m_liPP << mat.map(path);
             dY += d->m_tmPattern.GetSpacing();
         }
@@ -658,7 +690,7 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
     if (d->mirror == true)
     {
         QVector<QPointF> points;
-        if (i < d->m_tmDetail.GetOutputLinesCount())
+        if (i < d->m_tmDetail.GetSourceLinesCount())
         {
             points = Map(Mirror(d->detailLabel));
         }
