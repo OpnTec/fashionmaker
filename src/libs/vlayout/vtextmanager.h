@@ -44,7 +44,7 @@ class QFontMetrics;
 class VAbstractPattern;
 class VPatternPieceData;
 
-#define MIN_FONT_SIZE               12
+#define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128
 
 /**
