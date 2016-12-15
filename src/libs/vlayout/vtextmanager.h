@@ -44,7 +44,7 @@ class QFontMetrics;
 class VAbstractPattern;
 class VPatternPieceData;
 
-#define MIN_FONT_SIZE               12
+#define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128
 
 /**
@@ -57,7 +57,6 @@ struct TextLine
     QFont::Weight       m_eFontWeight;
     QFont::Style        m_eStyle;
     Qt::Alignment       m_eAlign;
-    int                 m_iHeight;
 
     TextLine();
 };
@@ -87,23 +86,14 @@ public:
     void            AddSourceLine(const TextLine& tl);
     void            ClearSourceLines();
     int             GetSourceLinesCount() const;
-
-    int             GetOutputLinesCount() const;
-    QList<TextLine> GetAllOutputLines() const;
-    const TextLine& GetOutputLine(int i) const;
-
-    bool IsBigEnough(qreal fW, qreal fH, int iFontSize, qreal& fMinW, qreal& fMinH);
+    const TextLine& GetSourceLine(int i) const;
 
     void Update(const QString& qsName, const VPatternPieceData& data);
     void Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
 
-protected:
-    static QStringList SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
-
 private:
     QFont           m_font;
     QList<TextLine> m_liLines;
-    QList<TextLine> m_liOutput;
 };
 
 #endif // VTEXTMANAGER_H

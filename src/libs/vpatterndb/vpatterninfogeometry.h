@@ -29,8 +29,6 @@
 #ifndef VPATTERNINFOGEOMETRY_H
 #define VPATTERNINFOGEOMETRY_H
 
-#define MIN_FONT_SIZE               12
-
 #include <QPointF>
 #include <QtGlobal>
 
