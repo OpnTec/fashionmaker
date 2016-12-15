@@ -44,8 +44,11 @@
  * @brief TextLine::TextLine default constructor
  */
 TextLine::TextLine()
-    :m_qsText(), m_iFontSize(MIN_FONT_SIZE), m_eFontWeight(QFont::Normal), m_eStyle(QFont::StyleNormal),
-      m_eAlign(Qt::AlignCenter), m_iHeight(0)
+    : m_qsText(),
+      m_iFontSize(MIN_FONT_SIZE),
+      m_eFontWeight(QFont::Normal),
+      m_eStyle(QFont::StyleNormal),
+      m_eAlign(Qt::AlignCenter)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,7 +56,7 @@ TextLine::TextLine()
  * @brief VTextManager::VTextManager constructor
  */
 VTextManager::VTextManager()
-     :m_font(), m_liLines()
+     : m_font(), m_liLines()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -205,13 +208,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     {
         iFS = qFloor(iFS*fW/iMaxLen);
     }
-    iFS = qMax(MIN_FONT_SIZE, iFS);
-    int iH = 4*iFS/3;
     SetFontSize(iFS);
-    for (int i = 0; i < GetSourceLinesCount(); ++i)
-    {
-        m_liLines[i].m_iHeight = iH;
-    }
     qDebug() << "Font size" << GetSourceLinesCount() << iFS;
 }
 

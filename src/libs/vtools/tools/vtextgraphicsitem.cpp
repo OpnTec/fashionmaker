@@ -112,25 +112,28 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     for (int i = 0; i < m_tm.GetSourceLinesCount(); ++i)
     {
         const TextLine& tl = m_tm.GetSourceLine(i);
-        // check if the next line will go out of bounds
-        if (iY + tl.m_iHeight > boundingRect().height())
-        {
-            break;
-        }
+
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
 
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);
+
+        // check if the next line will go out of bounds
+        if (iY + fm.height() > boundingRect().height())
+        {
+            break;
+        }
+
         if (fm.width(qsText) > iW)
         {
             qsText = fm.elidedText(qsText, Qt::ElideMiddle, iW);
         }
 
         painter->setFont(fnt);
-        painter->drawText(0, iY, iW, tl.m_iHeight, tl.m_eAlign, qsText);
-        iY += tl.m_iHeight + m_tm.GetSpacing();
+        painter->drawText(0, iY, iW, fm.height(), tl.m_eAlign, qsText);
+        iY += fm.height() + m_tm.GetSpacing();
     }
 
     // now draw the features specific to non-normal modes

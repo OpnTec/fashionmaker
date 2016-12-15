@@ -571,14 +571,16 @@ void VLayoutDetail::CreateTextItems()
             fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
-            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+
+            dY += fm.height();
             // check if the next line will go out of bounds
             if (dY > dH)
             {
                 break;
             }
 
-            QFontMetrics fm(fnt);
             QString qsText = tl.m_qsText;
             if (fm.width(qsText) > dW)
             {
@@ -626,13 +628,15 @@ void VLayoutDetail::CreateTextItems()
             fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
-            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+
+            dY += fm.height();
             if (dY > dH)
             {
                 break;
             }
 
-            QFontMetrics fm(fnt);
             QString qsText = tl.m_qsText;
             if (fm.width(qsText) > dW)
             {
