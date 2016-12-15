@@ -101,7 +101,8 @@ void VTextGraphicsItem::SetFont(const QFont& fnt)
 void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
-    painter->fillRect(option->rect, QColor(251, 251, 175));
+    Q_UNUSED(option);
+    painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175));
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     painter->setPen(Qt::black);
@@ -148,13 +149,13 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             // draw the resize square
             painter->setPen(Qt::black);
             painter->setBrush(Qt::black);
-            painter->drawRect(m_rectResize);
+            painter->drawRect(m_rectResize.adjusted(-1, -1, -1, -1));
 
             if (m_eMode == mResize)
             {
                 // draw the resize diagonal lines
-                painter->drawLine(0, 0, qRound(m_rectBoundingBox.width()), qRound(m_rectBoundingBox.height()));
-                painter->drawLine(0, qRound(m_rectBoundingBox.height()), qRound(m_rectBoundingBox.width()), 0);
+                painter->drawLine(1, 1, qFloor(m_rectBoundingBox.width())-1, qFloor(m_rectBoundingBox.height())-1);
+                painter->drawLine(1, qFloor(m_rectBoundingBox.height())-1, qFloor(m_rectBoundingBox.width())-1, 1);
             }
         }
         else
@@ -256,6 +257,7 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
         fH = m_iMinH;
     }
 
+    prepareGeometryChange();
     qDebug() << "Actual size set to" << fW;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
@@ -264,7 +266,6 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
     m_rectResize.setWidth(RESIZE_SQUARE);
     m_rectResize.setHeight(RESIZE_SQUARE);
     setTransformOriginPoint(m_rectBoundingBox.center());
-    prepareGeometryChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
