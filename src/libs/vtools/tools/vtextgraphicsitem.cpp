@@ -433,7 +433,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     qreal dX;
     qreal dY;
     QRectF rectBB;
-    QPointF ptDiff = pME->scenePos() - m_ptStart;
+    const QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
         // in move mode move the label along the mouse move from the origin
@@ -458,12 +458,14 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
         rectBB.setSize(sz);
         // before resizing the label to a new size, check if it will still be inside the parent item
-        if (IsContained(rectBB, rotation(), dX, dY) == true)
+        if (IsContained(rectBB, rotation(), dX, dY) == false)
         {
-            SetSize(sz.width(), sz.height());
-            Update();
-            emit SignalShrink();
+            sz = QSizeF(sz.width()+dX, sz.height()+dY);
         }
+
+        SetSize(sz.width(), sz.height());
+        Update();
+        emit SignalShrink();
     }
     else if (m_eMode == mRotate)
     {
@@ -651,7 +653,7 @@ QRectF VTextGraphicsItem::GetBoundingRect(QRectF rectBB, qreal dRot) const
     qreal dY1 = 0;
     qreal dY2 = 0;
 
-     double dAng = qDegreesToRadians(dRot);
+    double dAng = qDegreesToRadians(dRot);
     for (int i = 0; i < 4; ++i)
     {
         QPointF pt = apt[i] - ptCenter;
