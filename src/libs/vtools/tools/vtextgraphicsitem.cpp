@@ -49,12 +49,12 @@ class QWidget;
 class VAbstractPattern;
 class VPatternPieceData;
 
-#define RESIZE_SQUARE               30
-#define ROTATE_CIRCLE               20
+const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;
+const qreal rotateCircle = (2./*mm*/ / 25.4) * PrintDPI;
 #define ROTATE_RECT                 60
 #define ROTATE_ARC                  50
-#define MIN_W                       120
-#define MIN_H                       60
+const qreal minW = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
+const qreal minH = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
 #define INACTIVE_Z                  2
 #define ACTIVE_Z                    10
 
@@ -64,12 +64,21 @@ class VPatternPieceData;
  * @param pParent pointer to the parent item
  */
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
-    :QGraphicsObject(pParent), m_eMode(VTextGraphicsItem::mNormal), m_bReleased(false),
-      m_ptStartPos(), m_ptStart(), m_ptRotCenter(), m_szStart(), m_dRotation(0), m_dAngle(0),
-      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_tm()
+    : QGraphicsObject(pParent),
+      m_eMode(VTextGraphicsItem::mNormal),
+      m_bReleased(false),
+      m_ptStartPos(),
+      m_ptStart(),
+      m_ptRotCenter(),
+      m_szStart(),
+      m_dRotation(0),
+      m_dAngle(0),
+      m_rectResize(),
+      m_rectBoundingBox(),
+      m_tm()
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
-    SetSize(MIN_W, m_iMinH);
+    SetSize(minW, minH);
     setZValue(INACTIVE_Z);
     setAcceptHoverEvents(true);
 }
@@ -165,20 +174,23 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             painter->setBrush(Qt::black);
             painter->drawEllipse(
                         QPointF(m_rectBoundingBox.width()/2, m_rectBoundingBox.height()/2),
-                        ROTATE_CIRCLE,
-                        ROTATE_CIRCLE
+                        rotateCircle,
+                        rotateCircle
                         );
-            painter->setPen(QPen(Qt::black, 3));
-            painter->setBrush(Qt::NoBrush);
-            // and then draw the arc in each of the corners
-            int iTop = ROTATE_RECT - ROTATE_ARC;
-            int iLeft = ROTATE_RECT - ROTATE_ARC;
-            int iRight = qRound(m_rectBoundingBox.width()) - ROTATE_RECT;
-            int iBottom = qRound(m_rectBoundingBox.height()) - ROTATE_RECT;
-            painter->drawArc(iLeft, iTop, ROTATE_ARC, ROTATE_ARC, 180*16, -90*16);
-            painter->drawArc(iRight, iTop, ROTATE_ARC, ROTATE_ARC, 90*16, -90*16);
-            painter->drawArc(iLeft, iBottom, ROTATE_ARC, ROTATE_ARC, 270*16, -90*16);
-            painter->drawArc(iRight, iBottom, ROTATE_ARC, ROTATE_ARC, 0*16, -90*16);
+            if (m_rectBoundingBox.width() > minW*3 && m_rectBoundingBox.height() > minH*3)
+            {
+                painter->setPen(QPen(Qt::black, 3));
+                painter->setBrush(Qt::NoBrush);
+                // and then draw the arc in each of the corners
+                int iTop = ROTATE_RECT - ROTATE_ARC;
+                int iLeft = ROTATE_RECT - ROTATE_ARC;
+                int iRight = qRound(m_rectBoundingBox.width()) - ROTATE_RECT;
+                int iBottom = qRound(m_rectBoundingBox.height()) - ROTATE_RECT;
+                painter->drawArc(iLeft, iTop, ROTATE_ARC, ROTATE_ARC, 180*16, -90*16);
+                painter->drawArc(iRight, iTop, ROTATE_ARC, ROTATE_ARC, 90*16, -90*16);
+                painter->drawArc(iLeft, iBottom, ROTATE_ARC, ROTATE_ARC, 270*16, -90*16);
+                painter->drawArc(iRight, iBottom, ROTATE_ARC, ROTATE_ARC, 0*16, -90*16);
+            }
         }
     }
 }
@@ -235,26 +247,21 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
     qDebug() << "Setting size to" << fW << parentItem()->boundingRect().width();
     // don't allow resize under specific size
-    if (fW < MIN_W || fH < m_iMinH)
-    {
-        return;
-    }
-
     if (fW > parentItem()->boundingRect().width())
     {
         fW = parentItem()->boundingRect().width();
     }
-    if (fW < MIN_W)
+    if (fW < minW)
     {
-        fW = MIN_W;
+        fW = minW;
     }
     if (fH > parentItem()->boundingRect().height())
     {
         fH = parentItem()->boundingRect().height();
     }
-    if (fH < m_iMinH)
+    if (fH < minH)
     {
-        fH = m_iMinH;
+        fH = minH;
     }
 
     prepareGeometryChange();
@@ -262,9 +269,9 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
-    m_rectResize.setTopLeft(QPointF(fW - RESIZE_SQUARE, fH - RESIZE_SQUARE));
-    m_rectResize.setWidth(RESIZE_SQUARE);
-    m_rectResize.setHeight(RESIZE_SQUARE);
+    m_rectResize.setTopLeft(QPointF(fW - resizeSquare, fH - resizeSquare));
+    m_rectResize.setWidth(resizeSquare);
+    m_rectResize.setHeight(resizeSquare);
     setTransformOriginPoint(m_rectBoundingBox.center());
 }
 

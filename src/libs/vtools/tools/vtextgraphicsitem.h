@@ -75,13 +75,14 @@ public:
     virtual ~VTextGraphicsItem();
 
     void                SetFont(const QFont& fnt);
-    void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    virtual void        paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                              QWidget *widget) Q_DECL_OVERRIDE;
 
     void                Reset();
     bool                IsIdle() const;
 
     int                 GetFontSize() const;
-    QRectF              boundingRect() const;
+    virtual QRectF      boundingRect() const Q_DECL_OVERRIDE;
     void                AddLine(const TextLine& tl);
     void                Clear();
     void                SetSize(qreal fW, qreal fH);
@@ -92,11 +93,11 @@ public:
     int                 GetTextLines() const;
 
 protected:
-    void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
-    void                mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
-    void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
-    void                hoverMoveEvent(QGraphicsSceneHoverEvent* pHE);
-    void                hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE);
+    virtual void        mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void        mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void        mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void        hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
+    virtual void        hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
     void                UpdateBox();
     void                CorrectLabel();
 
@@ -118,7 +119,6 @@ private:
     double              m_dRotation;
     double              m_dAngle;
     QRectF              m_rectResize;
-    int                 m_iMinH;
     QRectF              m_rectBoundingBox;
     VTextManager        m_tm;
 
