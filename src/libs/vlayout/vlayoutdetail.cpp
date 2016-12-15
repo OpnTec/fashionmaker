@@ -148,15 +148,10 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
 
     // generate text
     d->m_tmDetail.SetFont(font);
-    int iFS = data.GetFontSize();
-    if (iFS < MIN_FONT_SIZE)
-    {
-        iFS = MIN_FONT_SIZE;
-    }
-    d->m_tmDetail.SetFontSize(iFS);
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
     d->m_tmDetail.Update(qsName, data);
     // this will generate the lines of text
-    d->m_tmDetail.SetFontSize(iFS);
+    d->m_tmDetail.SetFontSize(data.GetFontSize());
     d->m_tmDetail.FitFontSize(data.GetLabelWidth(), data.GetLabelHeight());
 }
 
@@ -180,17 +175,12 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
 
     // Generate text
     d->m_tmPattern.SetFont(font);
-    int iFS = geom.GetFontSize();
-    if (iFS < MIN_FONT_SIZE)
-    {
-        iFS = MIN_FONT_SIZE;
-    }
-    d->m_tmPattern.SetFontSize(iFS);
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
     d->m_tmPattern.Update(pDoc, dSize, dHeight);
 
     // generate lines of text
-    d->m_tmPattern.SetFontSize(iFS);
+    d->m_tmPattern.SetFontSize(geom.GetFontSize());
     d->m_tmPattern.FitFontSize(geom.GetLabelWidth(), geom.GetLabelHeight());
 }
 
@@ -581,18 +571,20 @@ void VLayoutDetail::CreateTextItems()
             fnt.setPixelSize(d->m_tmDetail.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
-            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+
+            dY += fm.height();
             // check if the next line will go out of bounds
             if (dY > dH)
             {
                 break;
             }
 
-            QFontMetrics fm(fnt);
             QString qsText = tl.m_qsText;
             if (fm.width(qsText) > dW)
             {
-                qsText = fm.elidedText(qsText, Qt::ElideRight, dW);
+                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
             }
             // find the correct horizontal offset, depending on the alignment flag
             if ((tl.m_eAlign & Qt::AlignLeft) > 0)
@@ -636,17 +628,19 @@ void VLayoutDetail::CreateTextItems()
             fnt.setPixelSize(d->m_tmPattern.GetFont().pixelSize() + tl.m_iFontSize);
             fnt.setWeight(tl.m_eFontWeight);
             fnt.setStyle(tl.m_eStyle);
-            dY += tl.m_iHeight;
+
+            QFontMetrics fm(fnt);
+
+            dY += fm.height();
             if (dY > dH)
             {
                 break;
             }
 
-            QFontMetrics fm(fnt);
             QString qsText = tl.m_qsText;
             if (fm.width(qsText) > dW)
             {
-                qsText = fm.elidedText(qsText, Qt::ElideRight, dW);
+                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
             }
             if ((tl.m_eAlign & Qt::AlignLeft) > 0)
             {

@@ -32,11 +32,11 @@
 #include <QLatin1String>
 #include <QRegularExpression>
 #include <QApplication>
-#include <QtMath>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,8 +44,11 @@
  * @brief TextLine::TextLine default constructor
  */
 TextLine::TextLine()
-    :m_qsText(), m_iFontSize(MIN_FONT_SIZE), m_eFontWeight(QFont::Normal), m_eStyle(QFont::StyleNormal),
-      m_eAlign(Qt::AlignCenter), m_iHeight(0)
+    : m_qsText(),
+      m_iFontSize(MIN_FONT_SIZE),
+      m_eFontWeight(QFont::Normal),
+      m_eStyle(QFont::StyleNormal),
+      m_eAlign(Qt::AlignCenter)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,7 +56,7 @@ TextLine::TextLine()
  * @brief VTextManager::VTextManager constructor
  */
 VTextManager::VTextManager()
-     :m_font(), m_liLines()
+     : m_font(), m_liLines()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,14 +120,7 @@ const QFont& VTextManager::GetFont() const
  */
 void VTextManager::SetFontSize(int iFS)
 {
-    if (iFS < MIN_FONT_SIZE)
-    {
-        m_font.setPixelSize(MIN_FONT_SIZE);
-    }
-    else
-    {
-        m_font.setPixelSize(iFS);
-    }
+    iFS < MIN_FONT_SIZE ? m_font.setPixelSize(MIN_FONT_SIZE) : m_font.setPixelSize(iFS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,7 +168,7 @@ const TextLine& VTextManager::GetSourceLine(int i) const
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());
-    return m_liLines[i];
+    return m_liLines.at(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,7 +189,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     // get ratio between char width and height
 
     int iMaxLen = 0;
-    int iTW;
+    TextLine maxLine;
     QFont fnt;
     for (int i = 0; i < GetSourceLinesCount(); ++i)
     {
@@ -203,23 +199,30 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
         QFontMetrics fm(fnt);
-        iTW = fm.width(GetSourceLine(i).m_qsText);
+        const int iTW = fm.width(tl.m_qsText);
         if (iTW > iMaxLen)
         {
             iMaxLen = iTW;
+            maxLine = tl;
         }
     }
     if (iMaxLen > fW)
     {
-        iFS = qFloor(iFS*fW/iMaxLen);
+        QFont fnt = m_font;
+        fnt.setWeight(maxLine.m_eFontWeight);
+        fnt.setStyle(maxLine.m_eStyle);
+
+        int lineLength = 0;
+        do
+        {
+            --iFS;
+            fnt.setPixelSize(iFS + maxLine.m_iFontSize);
+            QFontMetrics fm(fnt);
+            lineLength = fm.width(maxLine.m_qsText);
+        }
+        while (lineLength > fW && iFS > MIN_FONT_SIZE);
     }
-    iFS = qMax(MIN_FONT_SIZE, iFS);
-    int iH = 4*iFS/3;
     SetFontSize(iFS);
-    for (int i = 0; i < GetSourceLinesCount(); ++i)
-    {
-        m_liLines[i].m_iHeight = iH;
-    }
     qDebug() << "Font size" << GetSourceLinesCount() << iFS;
 }
 

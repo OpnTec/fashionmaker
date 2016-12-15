@@ -44,7 +44,7 @@ class QFontMetrics;
 class VAbstractPattern;
 class VPatternPieceData;
 
-#define MIN_FONT_SIZE               12
+#define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128
 
 /**
@@ -57,7 +57,6 @@ struct TextLine
     QFont::Weight       m_eFontWeight;
     QFont::Style        m_eStyle;
     Qt::Alignment       m_eAlign;
-    int                 m_iHeight;
 
     TextLine();
 };

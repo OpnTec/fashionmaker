@@ -47,6 +47,7 @@
 - [#580] Extend the list of heights.
 - [#582] Issue with standard path to shared data on Linux.
 - [#595] GapWidth affecting to the margins.
+- [#589] Valentina lock up if not enough space for label.
 
 # Version 0.4.6
 - [#594] Broken export on Mac.
