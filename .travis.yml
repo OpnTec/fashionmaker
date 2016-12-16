@@ -6,6 +6,7 @@ matrix:
     sudo: required
     compiler: clang
     env: DEPLOY=false
+    cache: ccache
   - os: osx
     compiler: clang
     env: DEPLOY=true
@@ -48,7 +49,12 @@ before_script:
 - cd build
 - pwd
 - qmake --version
-- qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+  else
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
+  fi
 script:
 - $CXX --version
 - |
