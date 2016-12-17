@@ -129,6 +129,7 @@ private slots:
     void ToolCubicBezier(bool checked);
     void ToolCutSpline(bool checked);
     void ToolArc(bool checked);
+    void ToolEllipticalArc(bool checked);
     void ToolSplinePath(bool checked);
     void ToolCubicBezierPath(bool checked);
     void ToolCutSplinePath(bool checked);

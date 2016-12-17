@@ -876,6 +876,20 @@ void MainWindow::ToolArc(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief ToolEllipticalArc handler tool arc.
+ * @param checked true - button checked.
+ */
+void MainWindow::ToolEllipticalArc(bool checked)
+{
+    ToolSelectPointByRelease();
+    SetToolButtonWithApply<DialogEllipticalArc>(checked, Tool::EllipticalArc, ":/cursor/el_arc_cursor.png",
+                                      tr("Select point of center of elliptical arc"),
+                                      &MainWindow::ClosedDialogWithApply<VToolEllipticalArc>,
+                                      &MainWindow::ApplyDialog<VToolEllipticalArc>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief ToolSplinePath handler tool splinePath.
  * @param checked true - button checked.
  */
@@ -1698,6 +1712,7 @@ void MainWindow::InitToolButtons()
     toolButtonPointerList.append(ui->toolButtonPointerArc);
     toolButtonPointerList.append(ui->toolButtonPointerDetail);
     toolButtonPointerList.append(ui->toolButtonPointerOperations);
+    toolButtonPointerList.append(ui->toolButtonPointerEllipticalArc);
 
     for (auto pointer : toolButtonPointerList)
     {
@@ -1746,6 +1761,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
+    connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1773,7 +1789,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1921,6 +1937,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::Move:
             ui->toolButtonMove->setChecked(false);
+            break;
+        case Tool::EllipticalArc:
+            ui->toolButtonEllipticalArc->setChecked(false);
             break;
     }
 
@@ -2972,7 +2991,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3011,6 +3030,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonFlippingByAxis->setEnabled(drawTools);
     ui->toolButtonMove->setEnabled(drawTools);
     ui->toolButtonMidpoint->setEnabled(drawTools);
+    ui->toolButtonEllipticalArc->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3292,7 +3312,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3469,6 +3489,10 @@ void MainWindow::LastUsedTool()
         case Tool::Move:
             ui->toolButtonMove->setChecked(true);
             ToolMove(true);
+            break;
+        case Tool::EllipticalArc:
+            ui->toolButtonEllipticalArc->setChecked(true);
+            ToolEllipticalArc(true);
             break;
     }
 }
