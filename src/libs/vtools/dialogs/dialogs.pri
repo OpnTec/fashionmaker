@@ -41,7 +41,8 @@ HEADERS += \
     $$PWD/tools/dialogrotation.h \
     $$PWD/tools/dialogflippingbyline.h \
     $$PWD/tools/dialogflippingbyaxis.h \
-    $$PWD/tools/dialogmove.h
+    $$PWD/tools/dialogmove.h \
+    $$PWD/tools/dialogellipticalarc.h
 
 
 SOURCES += \
@@ -83,7 +84,8 @@ SOURCES += \
     $$PWD/tools/dialogrotation.cpp \
     $$PWD/tools/dialogflippingbyline.cpp \
     $$PWD/tools/dialogflippingbyaxis.cpp \
-    $$PWD/tools/dialogmove.cpp
+    $$PWD/tools/dialogmove.cpp \
+    $$PWD/tools/dialogellipticalarc.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -123,4 +125,5 @@ FORMS += \
     $$PWD/tools/dialogrotation.ui \
     $$PWD/tools/dialogflippingbyline.ui \
     $$PWD/tools/dialogflippingbyaxis.ui \
-    $$PWD/tools/dialogmove.ui
+    $$PWD/tools/dialogmove.ui \
+    $$PWD/tools/dialogellipticalarc.ui
