@@ -37,7 +37,8 @@ HEADERS += \
     $$PWD/path/vistoolcubicbezierpath.h \
     $$PWD/line/operation/visoperation.h \
     $$PWD/line/operation/vistoolflippingbyaxis.h \
-    $$PWD/line/operation/vistoolmove.h
+    $$PWD/line/operation/vistoolmove.h \
+    $$PWD/path/vistoolellipticalarc.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -75,4 +76,5 @@ SOURCES += \
     $$PWD/path/vistoolcubicbezierpath.cpp \
     $$PWD/line/operation/visoperation.cpp \
     $$PWD/line/operation/vistoolflippingbyaxis.cpp \
-    $$PWD/line/operation/vistoolmove.cpp
+    $$PWD/line/operation/vistoolmove.cpp \
+    $$PWD/path/vistoolellipticalarc.cpp
