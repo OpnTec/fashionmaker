@@ -57,7 +57,8 @@ HEADERS += \
     $$PWD/drawTools/operation/vabstractoperation.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.h \
     $$PWD/drawTools/operation/flipping/vabstractflipping.h \
-    $$PWD/drawTools/operation/vtoolmove.h
+    $$PWD/drawTools/operation/vtoolmove.h \
+    $$PWD/drawTools/toolcurve/vtoolellipticalarc.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -112,4 +113,5 @@ SOURCES += \
     $$PWD/drawTools/operation/vabstractoperation.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.cpp \
     $$PWD/drawTools/operation/flipping/vabstractflipping.cpp \
-    $$PWD/drawTools/operation/vtoolmove.cpp
+    $$PWD/drawTools/operation/vtoolmove.cpp \
+    $$PWD/drawTools/toolcurve/vtoolellipticalarc.cpp
