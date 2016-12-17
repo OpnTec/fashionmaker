@@ -29,6 +29,7 @@
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -208,7 +209,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -378,6 +379,12 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(AttrUInt(domElem, AttrDartP1)))
                         .arg(PointName(AttrUInt(domElem, AttrDartP2)))
                         .arg(PointName(AttrUInt(domElem, AttrDartP2)));
+            case Tool::EllipticalArc:
+            {
+                const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
+                SCASSERT(elArc != nullptr);
+                return elArc->NameForHistory(tr("Elliptical arc"));
+            }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Detail:
