@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.8");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.8.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.9");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.9.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!

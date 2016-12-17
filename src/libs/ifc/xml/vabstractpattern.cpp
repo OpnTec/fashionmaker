@@ -72,6 +72,7 @@ const QString VAbstractPattern::TagPoint            = QStringLiteral("point");
 const QString VAbstractPattern::TagLine             = QStringLiteral("line");
 const QString VAbstractPattern::TagSpline           = QStringLiteral("spline");
 const QString VAbstractPattern::TagArc              = QStringLiteral("arc");
+const QString VAbstractPattern::TagElArc            = QStringLiteral("elArc");
 const QString VAbstractPattern::TagTools            = QStringLiteral("tools");
 const QString VAbstractPattern::TagOperation        = QStringLiteral("operation");
 const QString VAbstractPattern::TagGradation        = QStringLiteral("gradation");

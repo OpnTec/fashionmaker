@@ -177,6 +177,7 @@ public:
     static const QString TagLine;
     static const QString TagSpline;
     static const QString TagArc;
+    static const QString TagElArc;
     static const QString TagTools;
     static const QString TagOperation;
     static const QString TagGradation;

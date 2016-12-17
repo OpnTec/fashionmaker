@@ -558,7 +558,8 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
     {
         scene = sceneDetail;
     }
-    const QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools << TagOperation;
+    const QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools << TagOperation
+                                           << TagElArc;
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -591,6 +592,10 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                 case 5: // TagOperation
                     qCDebug(vXML, "Tag operation.");
                     ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 6: // TagElArc
+                    qCDebug(vXML, "Tag elliptical arc.");
+                    ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 default:
                     VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
@@ -2439,6 +2444,58 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+        const QString radius1 = GetParametrString(domElement, AttrRadius1, "10");
+        const QString radius2 = GetParametrString(domElement, AttrRadius2, "10");
+        QString r1 = radius1;//need for saving fixed formula;
+        QString r2 = radius2;//need for saving fixed formula;
+        const QString f1 = GetParametrString(domElement, AttrAngle1, "180");
+        QString f1Fix = f1;//need for saving fixed formula;
+        const QString f2 = GetParametrString(domElement, AttrAngle2, "270");
+        QString f2Fix = f2;//need for saving fixed formula;
+        const QString frotation = GetParametrString(domElement, AttrRotationAngle, "0");
+        QString frotationFix = frotation;//need for saving fixed formula;
+        const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+
+        VToolEllipticalArc::Create(id, center, r1, r2, f1Fix, f2Fix, frotationFix, color, scene, this, data, parse,
+                                   Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (r1 != radius1 || r2 != radius2 || f1Fix != f1 || f2Fix != f2 || frotationFix != frotation)
+        {
+            SetAttribute(domElement, AttrRadius1, r1);
+            SetAttribute(domElement, AttrRadius2, r2);
+            SetAttribute(domElement, AttrAngle1, f1Fix);
+            SetAttribute(domElement, AttrAngle2, f2Fix);
+            SetAttribute(domElement, AttrRotationAngle, frotationFix);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple elliptical arc"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple elliptical arc"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2861,6 +2918,34 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             break;
         default:
             VException e(tr("Unknown arc type '%1'.").arg(type));
+            throw e;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseEllipticalArcElement parse elliptical arc tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ * @param type type of spline.
+ */
+void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                               const QString &type)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of elliptical arc is empty");
+
+    QStringList arcs = QStringList() << VToolEllipticalArc::ToolType;            /*0*/
+
+    switch (arcs.indexOf(type))
+    {
+        case 0: //VToolArc::ToolType
+            ParseToolEllipticalArc(scene, domElement, parse);
+            break;
+        default:
+            VException e(tr("Unknown elliptical arc type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3442,7 +3527,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3563,6 +3648,8 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Move:
                     rec = ToolBoundingRect<VToolMove>(rec, tool.getId());
                     break;
+                case Tool::EllipticalArc:
+                    rec = ToolBoundingRect<VToolEllipticalArc>(rec, tool.getId());
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:
                 case Tool::UnionDetails:
