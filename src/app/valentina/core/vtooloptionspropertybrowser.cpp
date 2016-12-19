@@ -77,7 +77,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used in switch.");
 
     switch (item->type())
     {
@@ -196,6 +196,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolMove::Type:
             ShowOptionsToolMove(item);
             break;
+        case VToolEllipticalArc::Type:
+            ShowOptionsToolEllipticalArc(item);
+            break;
         default:
             break;
     }
@@ -210,7 +213,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -354,7 +357,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 48, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -2149,6 +2152,21 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *item)
+{
+    VToolEllipticalArc *i = qgraphicsitem_cast<VToolEllipticalArc *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Elliptical arc"));
+
+    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius1(), AttrRadius1);
+    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius2(), AttrRadius2);
+    AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
+    AddPropertyFormula(tr("Second angle"), i->GetFormulaF2(), AttrAngle2);
+    AddPropertyFormula(tr("Rotation angle"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
@@ -2680,6 +2698,9 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrLength1                        /* 36 */
                                      << AttrLength2                        /* 37 */
                                      << AttrSuffix                         /* 38 */
-                                     << AttrAxisType;                      /* 39 */
+                                     << AttrAxisType                       /* 39 */
+                                     << AttrRadius1                        /* 40 */
+                                     << AttrRadius2                        /* 41 */
+                                     << AttrRotationAngle;                 /* 42 */
     return attr;
 }

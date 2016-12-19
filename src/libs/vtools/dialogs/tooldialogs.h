@@ -65,6 +65,7 @@
 #include "tools/dialogflippingbyline.h"
 #include "tools/dialogflippingbyaxis.h"
 #include "tools/dialogmove.h"
+#include "tools/dialogellipticalarc.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

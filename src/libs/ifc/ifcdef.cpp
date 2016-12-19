@@ -90,6 +90,8 @@ const QString AttrSecondPoint = QStringLiteral("secondPoint");
 const QString AttrThirdPoint  = QStringLiteral("thirdPoint");
 const QString AttrCenter      = QStringLiteral("center");
 const QString AttrRadius      = QStringLiteral("radius");
+const QString AttrRadius1     = QStringLiteral("radius1");
+const QString AttrRadius2     = QStringLiteral("radius2");
 const QString AttrAngle       = QStringLiteral("angle");
 const QString AttrAngle1      = QStringLiteral("angle1");
 const QString AttrAngle2      = QStringLiteral("angle2");
@@ -136,6 +138,7 @@ const QString AttrArc         = QStringLiteral("arc");
 const QString AttrSuffix      = QStringLiteral("suffix");
 const QString AttrIdObject    = QStringLiteral("idObject");
 const QString AttrInLayout    = QStringLiteral("inLayout");
+const QString AttrRotationAngle      = QStringLiteral("rotationAngle");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

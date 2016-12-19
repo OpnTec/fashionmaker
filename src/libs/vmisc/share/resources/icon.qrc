@@ -64,5 +64,7 @@
         <file>icon/16x16/allow_detail@2x.png</file>
         <file>icon/16x16/forbid_detail.png</file>
         <file>icon/16x16/forbid_detail@2x.png</file>
+        <file>icon/16x16/toolsectionelarc.png</file>
+        <file>icon/16x16/toolsectionelarc@2x.png</file>
     </qresource>
 </RCC>

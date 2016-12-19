@@ -125,6 +125,8 @@ private:
                                       const Document &parse, const QString& type);
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document &parse, const QString& type);
+    void           ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                   const QString &type);
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document &parse, const QString& type);
     void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
@@ -192,6 +194,8 @@ private:
     void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodeArc(const QDomElement &domElement, const Document &parse);
     void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
+    void ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     void ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);

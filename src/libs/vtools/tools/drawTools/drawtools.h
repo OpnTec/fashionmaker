@@ -38,6 +38,7 @@
 #include "toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
 #include "toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
 #include "toolcurve/vtoolarc.h"
+#include "toolcurve/vtoolellipticalarc.h"
 #include "toolcurve/vtoolarcwithlength.h"
 #include "toolcurve/vtoolspline.h"
 #include "toolcurve/vtoolcubicbezier.h"

@@ -59,6 +59,7 @@
 class VAbstractCubicBezierPath;
 class VAbstractCurve;
 class VArc;
+class VEllipticalArc;
 class VArcRadius;
 class VCurveAngle;
 class VCurveLength;
@@ -146,6 +147,8 @@ public:
     quint32            AddDetail(const VDetail &detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = NULL_ID);
+    void               AddEllipticalArc(const QSharedPointer<VEllipticalArc> &arc, const quint32 &arcId,
+                                            const quint32 &parentId = NULL_ID);
     void               AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId = NULL_ID);
     void               AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
                                             quint32 parentId = NULL_ID);

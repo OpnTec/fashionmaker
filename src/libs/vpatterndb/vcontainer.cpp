@@ -40,10 +40,12 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "variables/varcradius.h"
+#include "variables/vellipticalarcradius.h"
 #include "variables/vcurveangle.h"
 #include "variables/vcurvelength.h"
 #include "variables/vcurveclength.h"
@@ -389,12 +391,24 @@ void VContainer::AddArc(const QSharedPointer<VArc> &arc, const quint32 &id, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddEllipticalArc(const QSharedPointer<VEllipticalArc> &arc, const quint32 &id, const quint32 &parentId)
+{
+    AddCurve(arc, id, parentId);
+
+    VEllipticalArcRadius *radius1 = new VEllipticalArcRadius(id, parentId, arc.data(), 1, *GetPatternUnit());
+    AddVariable(radius1->GetName(), radius1);
+
+    VEllipticalArcRadius *radius2 = new VEllipticalArcRadius(id, parentId, arc.data(), 2, *GetPatternUnit());
+    AddVariable(radius2->GetName(), radius2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId)
 {
     const GOType curveType = curve->getType();
     if (curveType != GOType::Spline      && curveType != GOType::SplinePath &&
         curveType != GOType::CubicBezier && curveType != GOType::CubicBezierPath &&
-        curveType != GOType::Arc)
+        curveType != GOType::Arc         && curveType != GOType::EllipticalArc)
     {
         throw VException(tr("Can't create a curve with type '%1'").arg(static_cast<int>(curveType)));
     }

@@ -195,6 +195,7 @@ private:
     void ShowOptionsToolMove(QGraphicsItem *item);
     void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
     void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
+    void ShowOptionsToolEllipticalArc(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
