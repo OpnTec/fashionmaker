@@ -6,7 +6,10 @@ matrix:
     sudo: required
     compiler: clang
     env: DEPLOY=false
-    cache: ccache
+    cache:
+    - ccache
+    directories:
+      - '$HOME/.sonar/cache'
   - os: osx
     compiler: clang
     env: DEPLOY=true
@@ -59,9 +62,11 @@ script:
 - $CXX --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    make -j$(nproc);
+    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
     xvfb-run -a make --silent check TESTARGS="-silent";
+    cd ..;
+    sonar-scanner;
   else
     make -j1;
   fi  
@@ -88,3 +93,7 @@ deploy:
   on:
     all_branches: true
     condition: $DEPLOY = true
+addons:
+  sonarqube:
+    token:
+      secure: oH/mO3ocMzMRXi4krBKMbskzfR5r5DwyL9d+qr3AxKqlFLojvZDXBRogn/jnceDIuajol/OI/8uMxR5k+N241jj5/iEYun9t1Lejh+VOhgIEEuzPkeAFzlLoK91LWigqNuf0vTI2laaYxO9oRUIEKoTgBkkwMeMWu/8raIvUhyKyqHMofWp/9htuqHcSav3AN/Plu6wiC3Sg6wSalu4YNbL1hQBIKuZeRVmSMkh8f9llGPy33sljYDDCZ4RcyJlvLq+Ffh95tCnp88f8cSnxju1bEOEF/5iYQXoOwtCltRMy2XbkCm4lmdPwSU4EQdZ+2b4ka/Ptb3g5zQJ/RGSf6qYjR541XntvlqS5mDa254HbENnmP27X9eopbKTdYgyjBj63XAsOY5NaKFQSKdICxTFuC8/TrYD9xWxOqgzhkO/MNJYQqkR0vubgng6OninoFKZGPo/fFAU6CQS0b+8nRGsnD7g00MfWGPoS8YCLYehVSSORMic+Oo58c6lIgxkzCLoWvzmZONqF6RQ89gdQ5fiyHvq8rhzw6EBagBIRn/S8YCfRgJce5jQ5RgK66AiJpOYGKHfRp3CLlD3pO1hz6VTGMnqn1TplFbK6CgrM4oTTBZ7fqD9+BHOWk15tsj+Pcl8Vi9SjiK+XU2tVCePuNQNYF4x2QGD2Ftmul49pF0I=
