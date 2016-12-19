@@ -175,6 +175,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000307):
             return QStringLiteral("://schema/pattern/v0.3.7.xsd");
         case (0x000308):
+            return QStringLiteral("://schema/pattern/v0.3.8.xsd");
+        case (0x000309):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -274,6 +276,10 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000308), fileName);
                 V_FALLTHROUGH
             case (0x000308):
+                ToV0_3_9();
+                ValidateXML(XSDSchema(0x000309), fileName);
+                V_FALLTHROUGH
+            case (0x000309):
                 break;
             default:
                 break;
@@ -459,6 +465,13 @@ void VPatternConverter::ToV0_3_7()
 void VPatternConverter::ToV0_3_8()
 {
     SetVersion(QStringLiteral("0.3.8"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_3_9()
+{
+    SetVersion(QStringLiteral("0.3.9"));
     Save();
 }
 

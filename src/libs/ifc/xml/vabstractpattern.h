@@ -351,6 +351,7 @@ private:
     QStringList ListExpressions() const;
     QStringList ListPointExpressions() const;
     QStringList ListArcExpressions() const;
+    QStringList ListElArcExpressions() const;
     QStringList ListSplineExpressions() const;
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;

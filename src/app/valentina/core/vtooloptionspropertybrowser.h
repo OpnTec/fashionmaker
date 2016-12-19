@@ -161,6 +161,7 @@ private:
     void ChangeDataToolMove(VPE::VProperty *property);
     void ChangeDataToolFlippingByLine(VPE::VProperty *property);
     void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
+    void ChangeDataToolEllipticalArc(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -230,6 +231,7 @@ private:
     void UpdateOptionsToolMove();
     void UpdateOptionsToolFlippingByLine();
     void UpdateOptionsToolFlippingByAxis();
+    void UpdateOptionsToolEllipticalArc();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

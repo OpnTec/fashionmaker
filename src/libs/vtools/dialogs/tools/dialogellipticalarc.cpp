@@ -58,7 +58,31 @@ class VContainer;
  * @param parent parent widget
  */
 DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-:DialogTool(data, toolId, parent), ui(new Ui::DialogEllipticalArc)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogEllipticalArc),
+      flagRadius1(false),
+      flagRadius2(false),
+      flagF1(false),
+      flagF2(false),
+      flagRotationAngle(false),
+      timerRadius1(nullptr),
+      timerRadius2(nullptr),
+      timerF1(nullptr),
+      timerF2(nullptr),
+      timerRotationAngle(nullptr),
+      radius1(),
+      radius2(),
+      f1(),
+      f2(),
+      rotationAngle(),
+      formulaBaseHeightRadius1(0),
+      formulaBaseHeightRadius2(0),
+      formulaBaseHeightF1(0),
+      formulaBaseHeightF2(0),
+      formulaBaseHeightRotationAngle(0),
+      angleF1(INT_MIN),
+      angleF2(INT_MIN),
+      angleRotation(INT_MIN)
 {
     ui->setupUi(this);
 
@@ -372,7 +396,7 @@ void DialogEllipticalArc::EvalAngles()
     angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
 
     labelEditFormula = ui->labelEditRotationAngle;
-    rotationAngle = Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle,
+    angleRotation = Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle,
                          ui->labelResultRotationAngle, degreeSymbol, false);
 
     CheckAngles();

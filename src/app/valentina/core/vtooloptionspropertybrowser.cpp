@@ -322,6 +322,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolMove::Type:
             UpdateOptionsToolMove();
             break;
+        case VToolEllipticalArc::Type:
+            UpdateOptionsToolEllipticalArc();
+            break;
         default:
             break;
     }
@@ -459,6 +462,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolMove::Type:
             ChangeDataToolMove(prop);
+            break;
+        case VToolEllipticalArc::Type:
+            ChangeDataToolEllipticalArc(prop);
             break;
         default:
             break;
@@ -1729,6 +1735,42 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VProperty *proper
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolEllipticalArc *i = qgraphicsitem_cast<VToolEllipticalArc *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 40://AttrRadius1
+            i->SetFormulaRadius1(value.value<VFormula>());
+            break;
+        case 41://AttrRadius2
+            i->SetFormulaRadius2(value.value<VFormula>());
+            break;
+        case 9://AttrAngle1
+            i->SetFormulaF1(value.value<VFormula>());
+            break;
+        case 10://AttrAngle2
+            i->SetFormulaF2(value.value<VFormula>());
+            break;
+        case 42://AttrRotationAngle
+            i->SetFormulaRotationAngle(value.value<VFormula>());
+            break;
+        case 27://AttrColor
+            i->SetLineColor(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -2654,6 +2696,35 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByAxis()
     VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(currentItem);
     idToProperty[AttrAxisType]->setValue(static_cast<int>(i->GetAxisType())-1);
     idToProperty[AttrSuffix]->setValue(i->Suffix());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
+{
+    VToolEllipticalArc *i = qgraphicsitem_cast<VToolEllipticalArc *>(currentItem);
+
+    QVariant valueFormulaRadius1;
+    valueFormulaRadius1.setValue(i->GetFormulaRadius1());
+    idToProperty[AttrRadius1]->setValue(valueFormulaRadius1);
+
+    QVariant valueFormulaRadius2;
+    valueFormulaRadius2.setValue(i->GetFormulaRadius2());
+    idToProperty[AttrRadius2]->setValue(valueFormulaRadius2);
+
+    QVariant valueFormulaF1;
+    valueFormulaF1.setValue(i->GetFormulaF1());
+    idToProperty[AttrAngle1]->setValue(valueFormulaF1);
+
+    QVariant valueFormulaF2;
+    valueFormulaF2.setValue(i->GetFormulaF2());
+    idToProperty[AttrAngle2]->setValue(valueFormulaF2);
+
+    QVariant valueFormulaRotationAngle;
+    valueFormulaRotationAngle.setValue(i->GetFormulaRotationAngle());
+    idToProperty[AttrRotationAngle]->setValue(valueFormulaRotationAngle);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
