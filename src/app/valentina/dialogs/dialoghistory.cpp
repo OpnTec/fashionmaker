@@ -382,8 +382,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::EllipticalArc:
             {
                 const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
-                SCASSERT(elArc != nullptr);
-                return elArc->NameForHistory(tr("Elliptical arc"));
+                SCASSERT(not elArc.isNull());
+                return tr("%1 with length %2")
+                        .arg(elArc->NameForHistory(tr("Elliptical arc")))
+                        .arg(elArc->GetLength());
             }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
