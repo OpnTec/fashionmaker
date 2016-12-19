@@ -1409,8 +1409,10 @@ QStringList VAbstractPattern::ListExpressions() const
 {
     QStringList list;
 
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     list << ListPointExpressions();
     list << ListArcExpressions();
+    list << ListElArcExpressions();
     list << ListSplineExpressions();
     list << ListIncrementExpressions();
     list << ListOperationExpressions();
@@ -1422,7 +1424,8 @@ QStringList VAbstractPattern::ListExpressions() const
 QStringList VAbstractPattern::ListPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
+    // If no just increment a number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49);
 
     QStringList expressions;
@@ -1493,7 +1496,8 @@ QStringList VAbstractPattern::ListPointExpressions() const
 QStringList VAbstractPattern::ListArcExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49);
 
     QStringList expressions;
@@ -1543,6 +1547,69 @@ QStringList VAbstractPattern::ListArcExpressions() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListElArcExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagElArc);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRotationAngle));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListSplineExpressions() const
 {
     QStringList expressions;
@@ -1554,7 +1621,8 @@ QStringList VAbstractPattern::ListSplineExpressions() const
 QStringList VAbstractPattern::ListPathPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49);
 
     QStringList expressions;
@@ -1620,7 +1688,8 @@ QStringList VAbstractPattern::ListIncrementExpressions() const
 QStringList VAbstractPattern::ListOperationExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49);
 
     QStringList expressions;
