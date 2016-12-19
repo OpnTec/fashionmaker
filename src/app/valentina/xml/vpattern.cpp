@@ -3650,6 +3650,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 case Tool::EllipticalArc:
                     rec = ToolBoundingRect<VToolEllipticalArc>(rec, tool.getId());
+                    break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:
                 case Tool::UnionDetails:
