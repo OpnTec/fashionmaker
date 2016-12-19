@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -1064,7 +1064,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>56</height>
+         <height>58</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1078,7 +1078,7 @@
        </property>
        <attribute name="icon">
         <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
-         <normaloff>:/icon/16x16/toolsectionelarc@2x.png</normaloff>:/icon/16x16/toolsectionelarc@2x.png</iconset>
+         <normaloff>:/icon/16x16/toolsectionelarc.png</normaloff>:/icon/16x16/toolsectionelarc.png</iconset>
        </attribute>
        <attribute name="label">
         <string>Elliptical Arc</string>
@@ -1116,7 +1116,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Arc</string>
+           <string>Elliptical Arc</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -1144,7 +1144,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>356</height>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>104</height>
         </rect>
        </property>
@@ -1431,7 +1431,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>356</height>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
