@@ -214,7 +214,7 @@ deploy:
   api_key:
     secure: dTA+b2ZVGYA7RY4ZNZwOrApyKSej12fVgRTIw557yn0gVmCSukMxjMFLCIq7Qvyq
   subject: dismine
-  repo: valentina
+  repo: Valentina
   package: valentina-win_auto-upload
   publish: true
   override: true
