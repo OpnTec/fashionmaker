@@ -61,7 +61,7 @@ void VisToolArc::RefreshGeometry()
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(arcCenter, *first, supportColor);
 
-        if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0 && not VFuzzyComparePossibleNulls(f1, f2))
+        if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0)
         {
             VArc arc = VArc (*first, radius, f1, f2);
             DrawPath(this, arc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
