@@ -149,7 +149,7 @@ void ConfigDialog::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     // remember the size for the next time this dialog is opened, but only
     // if widget was already initialized, which rules out the resize at
     // dialog creating, which would

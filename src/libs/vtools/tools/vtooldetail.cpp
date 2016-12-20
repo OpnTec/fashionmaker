@@ -379,7 +379,7 @@ void VToolDetail::Remove(bool ask)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -695,7 +695,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -752,7 +752,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
@@ -762,7 +762,7 @@ void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
@@ -772,7 +772,7 @@ void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     //Disable cursor-arrow-openhand
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -824,7 +824,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
         catch(const VExceptionToolWasDeleted &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;//Leave this method immediately!!!
         }
         return; //Leave this method immediately after call!!!
@@ -1195,8 +1195,8 @@ void VToolDetail::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
-    Q_UNUSED(visible);
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

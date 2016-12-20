@@ -105,8 +105,8 @@ inline qint64  MessageHandler::column() const
 void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
                                    const QSourceLocation &sourceLocation)
 {
-    Q_UNUSED(type);
-    Q_UNUSED(identifier);
+    Q_UNUSED(type)
+    Q_UNUSED(identifier)
 
     m_messageType = type;
     m_description = description;

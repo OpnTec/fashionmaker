@@ -747,16 +747,16 @@ void DialogTool::CheckState()
  */
 void DialogTool::ChosenObject(quint32 id, const SceneObject &type)
 {
-    Q_UNUSED(id);
-    Q_UNUSED(type);
+    Q_UNUSED(id)
+    Q_UNUSED(type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SelectedObject(bool selected, quint32 object, quint32 tool)
 {
-    Q_UNUSED(selected);
-    Q_UNUSED(object);
-    Q_UNUSED(tool);
+    Q_UNUSED(selected)
+    Q_UNUSED(object)
+    Q_UNUSED(tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -957,13 +957,13 @@ QString DialogTool::getPointName() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ShowDialog(bool click)
 {
-    Q_UNUSED(click);
+    Q_UNUSED(click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::Build(const Tool &type)
 {
-    Q_UNUSED(type);
+    Q_UNUSED(type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

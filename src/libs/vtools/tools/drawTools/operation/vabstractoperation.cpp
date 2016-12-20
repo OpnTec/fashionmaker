@@ -90,9 +90,9 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
+    Q_UNUSED(painter)
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,7 +370,7 @@ void VAbstractOperation::DeleteFromLabel()
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

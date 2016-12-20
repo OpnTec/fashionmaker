@@ -105,10 +105,10 @@ bool VProperty::setData(const QVariant &data, int role)
 bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
                       const QAbstractItemDelegate *delegate) const
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(option);
-    Q_UNUSED(index);
-    Q_UNUSED(delegate);
+    Q_UNUSED(painter)
+    Q_UNUSED(option)
+    Q_UNUSED(index)
+    Q_UNUSED(delegate)
 
     return false;
 }
@@ -117,8 +117,8 @@ bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, con
 QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                  const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QItemEditorFactory *factory = new QItemEditorFactory;
     QItemEditorCreatorBase *lineCreator = new QStandardItemEditorCreator<QLineEdit>();
@@ -419,7 +419,7 @@ void VProperty::setPropertyType(const Property &type)
 
 void VProperty::UpdateParent(const QVariant &value)
 {
-    Q_UNUSED(value);
+    Q_UNUSED(value)
 }
 
 void VProperty::ValueChildChanged(const QVariant &value, int typeForParent)

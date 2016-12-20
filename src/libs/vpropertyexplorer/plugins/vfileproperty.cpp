@@ -84,7 +84,7 @@ QVariant VFileProperty::data (int column, int role) const
 QWidget* VFileProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                      const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
+    Q_UNUSED(options)
 
     VFileEditWidget* tmpWidget = new VFileEditWidget(parent);
     if (delegate)

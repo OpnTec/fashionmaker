@@ -58,7 +58,7 @@ QVariant VShortcutProperty::data (int column, int role) const
 QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                          const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
+    Q_UNUSED(options)
 
     VShortcutEditWidget* tmpWidget = new VShortcutEditWidget(parent);
     if (delegate)

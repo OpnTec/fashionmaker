@@ -400,7 +400,7 @@ void VPattern::LiteParseTree(const Document &parse)
     }
     catch (const VExceptionUndo &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
         QApplication::postEvent(this, new UndoEvent());
@@ -1409,7 +1409,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;// Just ignore
         }
         data->UpdateGObject(id, new VPointF(*point, point->name(), mx, my, idObject, Draw::Modeling));
@@ -2346,7 +2346,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;// Just ignore
         }
 
@@ -2392,7 +2392,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;// Just ignore
         }
         VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, "", idTool);
@@ -2521,7 +2521,7 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;// Just ignore
         }
         arc->setIdObject(idObject);
@@ -2556,7 +2556,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;// Just ignore
         }
         arc->setIdObject(idObject);

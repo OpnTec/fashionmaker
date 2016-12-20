@@ -198,7 +198,7 @@ void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

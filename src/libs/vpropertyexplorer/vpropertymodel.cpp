@@ -251,7 +251,7 @@ int VPropertyModel::rowCount ( const QModelIndex & parent ) const
 //! Returns the number of columns
 int VPropertyModel::columnCount ( const QModelIndex & parent) const
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
     return 2;
 }
 

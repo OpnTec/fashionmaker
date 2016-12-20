@@ -88,8 +88,8 @@ VDrawTool::~VDrawTool()
  */
 void VDrawTool::ShowTool(quint32 id, bool enable)
 {
-    Q_UNUSED(id);
-    Q_UNUSED(enable);
+    Q_UNUSED(id)
+    Q_UNUSED(enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

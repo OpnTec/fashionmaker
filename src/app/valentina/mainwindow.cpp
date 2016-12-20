@@ -2558,7 +2558,7 @@ void MainWindow::FullParseFile()
     }
     catch (const VExceptionUndo &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
         QApplication::postEvent(this, new UndoEvent());
@@ -4704,8 +4704,8 @@ bool MainWindow::IgnoreLocking(int error, const QString &path)
     }
     return true;
 #else
-    Q_UNUSED(error);
-    Q_UNUSED(path);
+    Q_UNUSED(error)
+    Q_UNUSED(path)
     return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }

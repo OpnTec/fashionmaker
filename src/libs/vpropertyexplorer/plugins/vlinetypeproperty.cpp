@@ -82,8 +82,8 @@ QVariant VLineTypeProperty::data(int column, int role) const
 QWidget *VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                          const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());

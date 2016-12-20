@@ -277,7 +277,7 @@ void VToolSpline::ShowVisualization(bool show)
 void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos)
 {
-    Q_UNUSED(indexSpline);
+    Q_UNUSED(indexSpline)
     const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
     const VSpline spl = CorrectedSpline(*spline, position, pos);
 
@@ -305,7 +305,7 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

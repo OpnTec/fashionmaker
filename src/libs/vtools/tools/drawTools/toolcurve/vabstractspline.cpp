@@ -150,7 +150,7 @@ void VAbstractSpline::SetFactor(qreal factor)
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     this->setPen(QPen(CorrectColor(curve->GetColor()),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
@@ -168,7 +168,7 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     this->setPen(QPen(CorrectColor(curve->GetColor()),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
@@ -217,7 +217,7 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -400,6 +400,6 @@ QString VAbstractSpline::name() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
+    Q_UNUSED(object)
     setVisible(visible);
 }

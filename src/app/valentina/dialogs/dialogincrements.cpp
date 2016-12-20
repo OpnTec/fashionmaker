@@ -168,7 +168,7 @@ void DialogIncrements::FillIncrements()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 
@@ -797,7 +797,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch(const VExceptionBadId &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             EnableDetails(false);
             return;
         }
@@ -820,7 +820,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 

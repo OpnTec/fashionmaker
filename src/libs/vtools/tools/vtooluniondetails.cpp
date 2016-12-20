@@ -176,7 +176,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             QLineF l2(*center, p2);
             center->setMode(Draw::Modeling);
             quint32 idCenter = data->AddGObject(center);
-            Q_UNUSED(idCenter);
+            Q_UNUSED(idCenter)
             VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                   QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
             arc1->setMode(Draw::Modeling);
@@ -210,7 +210,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             QLineF l2(*center, p2);
             center->setMode(Draw::Modeling);
             quint32 idCenter = data->AddGObject(center);
-            Q_UNUSED(idCenter);
+            Q_UNUSED(idCenter)
             VEllipticalArc *arc1 = new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
                                                        arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
                                                        l1.angle(), QString().setNum(l1.angle()), l2.angle(),
@@ -561,8 +561,8 @@ void VToolUnionDetails::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
-    Q_UNUSED(visible);
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -643,7 +643,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     VNodeDetail det1p1;
     VNodeDetail det1p2;
     d1.NodeOnEdge(indexD1, det1p1, det1p2);
-    Q_UNUSED(det1p2);
+    Q_UNUSED(det1p2)
 
     VPointF point1;
     VPointF point2;

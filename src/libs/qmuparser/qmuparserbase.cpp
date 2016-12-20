@@ -218,9 +218,9 @@ void QmuParserBase::ReInit() const
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-    Q_UNUSED(pExpr);
-    Q_UNUSED(nStart);
-    Q_UNUSED(nEnd);
+    Q_UNUSED(pExpr)
+    Q_UNUSED(nStart)
+    Q_UNUSED(nEnd)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

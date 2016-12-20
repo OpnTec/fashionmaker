@@ -130,7 +130,7 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::VerticalScrollingTime(qreal x)
 {
-    Q_UNUSED(x);
+    Q_UNUSED(x)
     // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
     // Value of _numScheduledScrollings is too short, so we scale the value
 
@@ -151,7 +151,7 @@ void GraphicsViewZoom::VerticalScrollingTime(qreal x)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::HorizontalScrollingTime(qreal x)
 {
-    Q_UNUSED(x);
+    Q_UNUSED(x)
     // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
     // Value of _numScheduledScrollings is too short, so we scale the value
 

@@ -243,7 +243,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 
@@ -254,7 +254,7 @@ void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 

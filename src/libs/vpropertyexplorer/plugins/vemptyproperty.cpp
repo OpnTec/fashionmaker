@@ -77,9 +77,9 @@ QVariant VEmptyProperty::data (int column, int role) const
 QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                       const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(parent);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(parent)
+    Q_UNUSED(delegate)
 
     return NULL;
 }
@@ -88,7 +88,7 @@ QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewIt
 //! Gets the data from the widget
 QVariant VEmptyProperty::getEditorData(const QWidget *editor) const
 {
-    Q_UNUSED(editor);
+    Q_UNUSED(editor)
 
     return QVariant();
 }
@@ -96,7 +96,7 @@ QVariant VEmptyProperty::getEditorData(const QWidget *editor) const
 //! Returns item flags
 Qt::ItemFlags VEmptyProperty::flags(int column) const
 {
-    Q_UNUSED(column);
+    Q_UNUSED(column)
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }

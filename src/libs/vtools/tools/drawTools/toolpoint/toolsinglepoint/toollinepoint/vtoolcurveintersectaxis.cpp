@@ -271,7 +271,7 @@ void VToolCurveIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *e
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

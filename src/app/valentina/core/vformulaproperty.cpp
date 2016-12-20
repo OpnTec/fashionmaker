@@ -94,8 +94,8 @@ Qt::ItemFlags VFormulaProperty::flags(int column) const
 QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
                                         const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
     VFormulaPropertyEditor* tmpEditor = new VFormulaPropertyEditor(parent);

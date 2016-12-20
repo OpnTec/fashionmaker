@@ -186,7 +186,7 @@ void VToolCubicBezierPath::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

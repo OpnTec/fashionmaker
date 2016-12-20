@@ -1344,7 +1344,7 @@ void TMainWindow::ShowMData()
         }
         catch(const VExceptionBadId &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             MFields(false);
             return;
         }
@@ -1403,7 +1403,7 @@ void TMainWindow::ShowMData()
             }
             catch (qmu::QmuParserError &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 formula = meash->GetFormula();
             }
 
@@ -2309,7 +2309,7 @@ void TMainWindow::RefreshTable()
             }
             catch (qmu::QmuParserError &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 formula = meash->GetFormula();
             }
 
@@ -2919,8 +2919,8 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
     }
     return true;
 #else
-    Q_UNUSED(error);
-    Q_UNUSED(path);
+    Q_UNUSED(error)
+    Q_UNUSED(path)
     return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }

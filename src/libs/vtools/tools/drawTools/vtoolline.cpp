@@ -263,7 +263,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -305,7 +305,7 @@ void VToolLine::RefreshDataInFile()
  */
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
@@ -318,7 +318,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (vis.isNull())
     {
         this->setPen(QPen(CorrectColor(lineColor),
@@ -373,7 +373,7 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -503,7 +503,7 @@ void VToolLine::SetLineColor(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
+    Q_UNUSED(object)
     setVisible(visible);
 }
 

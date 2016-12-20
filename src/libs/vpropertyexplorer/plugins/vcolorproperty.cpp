@@ -62,8 +62,8 @@ QVariant VColorProperty::data (int column, int role) const
 QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
                                       const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     VColorPropertyEditor* tmpWidget = new VColorPropertyEditor(parent);
     tmpWidget->setLocale(parent->locale());

@@ -56,8 +56,8 @@ VPE::VStringProperty::VStringProperty(const QString &name)
 QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                             const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QLineEdit* tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());

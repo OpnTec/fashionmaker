@@ -426,7 +426,7 @@ void QCommandLineParser::process(const QStringList &arguments)
 void QCommandLineParser::process(const QCoreApplication &app)
 {
     // QCoreApplication::arguments() is static, but the app instance must exist so we require it as parameter
-    Q_UNUSED(app);
+    Q_UNUSED(app)
     process(QCoreApplication::arguments());
 }
 

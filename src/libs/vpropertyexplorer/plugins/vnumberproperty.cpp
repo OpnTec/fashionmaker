@@ -58,8 +58,8 @@ VIntegerProperty::VIntegerProperty(const QString &name)
 QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                         const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QSpinBox* tmpEditor = new QSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
@@ -166,8 +166,8 @@ VDoubleProperty::VDoubleProperty(const QString &name)
 QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                        const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QDoubleSpinBox* tmpEditor = new QDoubleSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(minValue);

@@ -3846,7 +3846,7 @@ void DL_Dxf::writeHatch2(DL_WriterA& dw,
                          const DL_Attributes& attrib) const
 {
 
-    Q_UNUSED(attrib);
+    Q_UNUSED(attrib)
 
     dw.dxfInt(75, 0);                // odd parity
     dw.dxfInt(76, 1);                // pattern type
@@ -3904,7 +3904,7 @@ void DL_Dxf::writeHatchLoop1(DL_WriterA& dw,
 void DL_Dxf::writeHatchLoop2(DL_WriterA& dw,
                              const DL_HatchLoopData& data)
 {
-    Q_UNUSED(data);
+    Q_UNUSED(data)
     dw.dxfInt(97, 0);
 }
 

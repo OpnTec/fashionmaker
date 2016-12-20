@@ -85,8 +85,8 @@ QVariant VLineColorProperty::data(int column, int role) const
 QWidget *VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                           const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QComboBox* tmpEditor = new QComboBox(parent);
 
     int size = tmpEditor->iconSize().height();

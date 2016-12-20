@@ -151,7 +151,7 @@ VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ShowVisualization(bool show)
 {
-    Q_UNUSED(show); //don't have any visualization for base point yet
+    Q_UNUSED(show) //don't have any visualization for base point yet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -371,7 +371,7 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 {
-    Q_UNUSED(domElement);
+    Q_UNUSED(domElement)
     // This tool doesn't need read attributes from file.
 }
 
@@ -404,7 +404,7 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
     catch(const VExceptionToolWasDeleted &e)
     {
         qCDebug(vTool, "Tool was deleted. Immediately leave method.");
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
     qCDebug(vTool, "Context menu closed. Tool was not deleted.");

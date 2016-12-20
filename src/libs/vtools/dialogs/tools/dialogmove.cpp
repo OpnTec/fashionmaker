@@ -243,8 +243,8 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    Q_UNUSED(id);
-    Q_UNUSED(type);
+    Q_UNUSED(id)
+    Q_UNUSED(type)
     // do nothing
 }
 

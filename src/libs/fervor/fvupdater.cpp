@@ -291,8 +291,8 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
     });
     connect(m_reply, &QNetworkReply::downloadProgress, [this](qint64 bytesRead, qint64 totalBytes)
     {
-        Q_UNUSED(bytesRead);
-        Q_UNUSED(totalBytes);
+        Q_UNUSED(bytesRead)
+        Q_UNUSED(totalBytes)
 
         if (m_httpRequestAborted)
         {
