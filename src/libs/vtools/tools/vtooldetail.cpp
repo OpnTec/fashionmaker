@@ -78,6 +78,7 @@
 #include "../undocommands/savedetailoptions.h"
 #include "../undocommands/toggledetailinlayout.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vgeometrydef.h"
@@ -99,6 +100,7 @@
 #include "vabstracttool.h"
 #include "nodeDetails/vabstractnode.h"
 #include "nodeDetails/vnodearc.h"
+#include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
@@ -130,6 +132,7 @@ const QString VToolDetail::NodeTypeContour    = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling   = QStringLiteral("Modeling");
 
 const QString VToolDetail::NodeArc            = QStringLiteral("NodeArc");
+const QString VToolDetail::NodeElArc          = QStringLiteral("NodeElArc");
 const QString VToolDetail::NodePoint          = QStringLiteral("NodePoint");
 const QString VToolDetail::NodeSpline         = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath     = QStringLiteral("NodeSplinePath");
@@ -162,11 +165,8 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                 break;
             }
             case (Tool::NodeArc):
-                doc->IncrementReferens(detail.at(i).getId());
-                break;
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
-                doc->IncrementReferens(detail.at(i).getId());
-                break;
             case (Tool::NodeSplinePath):
                 doc->IncrementReferens(detail.at(i).getId());
                 break;
@@ -273,6 +273,12 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             {
                 id = CreateNode<VArc>(data, nodeD.getId());
                 VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+            }
+            break;
+            case (Tool::NodeElArc):
+            {
+                id = CreateNode<VEllipticalArc>(data, nodeD.getId());
+                VNodeEllipticalArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSpline):
@@ -1154,6 +1160,9 @@ void VToolDetail::AddNode(VAbstractPattern *doc, QDomElement &domElement, const 
     {
         case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, NodeArc);
+            break;
+        case (Tool::NodeElArc):
+            doc->SetAttribute(nod, AttrType, NodeElArc);
             break;
         case (Tool::NodePoint):
             doc->SetAttribute(nod, AttrType, NodePoint);

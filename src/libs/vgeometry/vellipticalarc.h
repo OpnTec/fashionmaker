@@ -57,7 +57,8 @@ public:
     VEllipticalArc (const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal f2, qreal rotationAngle);
     VEllipticalArc (qreal length, const QString &formulaLength, const VPointF &center, qreal radius1, qreal radius2,
                     const QString &formulaRadius1, const QString &formulaRadius2, qreal f1, const QString &formulaF1,
-                    qreal rotationAngle, const QString &formulaRotationAngle, quint32 idObject = 0, Draw mode = Draw::Calculation);
+                    qreal rotationAngle, const QString &formulaRotationAngle, quint32 idObject = 0,
+                    Draw mode = Draw::Calculation);
     VEllipticalArc (qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
 
     VEllipticalArc(const VEllipticalArc &arc);

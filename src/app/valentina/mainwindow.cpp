@@ -1791,7 +1791,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1824,6 +1824,7 @@ void MainWindow::CancelTool()
         case Tool::LAST_ONE_DO_NOT_USE:
         case Tool::NodePoint:
         case Tool::NodeArc:
+        case Tool::NodeElArc:
         case Tool::NodeSpline:
         case Tool::NodeSplinePath:
             Q_UNREACHABLE(); //-V501
@@ -2995,7 +2996,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3316,7 +3317,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 49, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3341,6 +3342,7 @@ void MainWindow::LastUsedTool()
         case Tool::LAST_ONE_DO_NOT_USE:
         case Tool::NodePoint:
         case Tool::NodeArc:
+        case Tool::NodeElArc:
         case Tool::NodeSpline:
         case Tool::NodeSplinePath:
             Q_UNREACHABLE(); //-V501
