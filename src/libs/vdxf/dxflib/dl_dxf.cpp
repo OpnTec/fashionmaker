@@ -49,6 +49,7 @@
 #include "dl_creationinterface.h"
 #include "dl_entities.h"
 #include "iostream"
+#include "strlcpy.h"
 
 /**
  * Default constructor.
@@ -2554,10 +2555,7 @@ void DL_Dxf::endSequence(DL_CreationInterface* creationInterface)
 DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
     char* f = new char[strlen(file)+1];
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_MSVC(4996)
-    strcpy(f, file);
-QT_WARNING_POP
+    strlcpy(f, file, sizeof(f));
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);
@@ -5864,7 +5862,7 @@ int DL_Dxf::getLibVersion(const std::string& str)
 //        double ret;
 //        if (strchr(value, ',') != NULL) {
 //            char* tmp = new char[strlen(value)+1];
-//            strcpy(tmp, value);
+//            strlcpy(tmp, value, sizeof(tmp));
 //            DL_WriterA::strReplace(tmp, ',', '.');
 //            ret = atof(tmp);
 //            delete[] tmp;
@@ -5891,15 +5889,12 @@ void DL_Dxf::test()
     char* buf5 = new char[10];
     char* buf6 = new char[10];
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_MSVC(4996)
-    strcpy(buf1, "  10\n");
-    strcpy(buf2, "10");
-    strcpy(buf3, "10\n");
-    strcpy(buf4, "  10 \n");
-    strcpy(buf5, "  10 \r");
-    strcpy(buf6, "\t10 \n");
-QT_WARNING_POP
+    strlcpy(buf1, "  10\n", sizeof(buf1));
+    strlcpy(buf2, "10", sizeof(buf2));
+    strlcpy(buf3, "10\n", sizeof(buf3));
+    strlcpy(buf4, "  10 \n", sizeof(buf4));
+    strlcpy(buf5, "  10 \r", sizeof(buf5));
+    strlcpy(buf6, "\t10 \n", sizeof(buf6));
 
     // Try to avoid deleting array from an offset
     char* buf1Copy = buf1;
