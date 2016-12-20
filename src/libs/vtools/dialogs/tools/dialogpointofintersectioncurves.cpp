@@ -166,7 +166,10 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
 {
     if (prepare == false)// After first choose we ignore all objects
     {
-        if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::SplinePath)
+        if (type == SceneObject::Spline
+                || type == SceneObject::Arc
+                || type == SceneObject::ElArc
+                || type == SceneObject::SplinePath)
         {
             auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
             SCASSERT(point != nullptr);

@@ -229,7 +229,10 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
         switch (number)
         {
             case (0):
-                if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::SplinePath)
+                if (type == SceneObject::Spline
+                        || type == SceneObject::Arc
+                        || type == SceneObject::ElArc
+                        || type == SceneObject::SplinePath)
                 {
                     if (SetObject(id, ui->comboBoxCurve, tr("Select axis point")))
                     {

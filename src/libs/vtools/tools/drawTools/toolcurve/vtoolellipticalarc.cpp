@@ -74,7 +74,7 @@ VToolEllipticalArc::VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, 
                                        QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
-    sceneType = SceneObject::Arc;
+    sceneType = SceneObject::ElArc;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
