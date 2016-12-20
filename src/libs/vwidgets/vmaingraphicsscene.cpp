@@ -334,6 +334,12 @@ void VMainGraphicsScene::ToggleArcSelection(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleElArcSelection(bool enabled)
+{
+    emit EnableElArcItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::ToggleSplineSelection(bool enabled)
 {
     emit EnableSplineItemSelection(enabled);
@@ -385,6 +391,12 @@ void VMainGraphicsScene::ToggleLineHover(bool enabled)
 void VMainGraphicsScene::ToggleArcHover(bool enabled)
 {
     emit EnableArcItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleElArcHover(bool enabled)
+{
+    emit EnableElArcItemHover(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

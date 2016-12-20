@@ -222,9 +222,12 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
         if (i.key() != toolId)
         {
             QSharedPointer<VGObject> obj = i.value();
-            if ((obj->getType() == GOType::Arc || obj->getType() == GOType::Spline ||
-                 obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezier ||
-                 obj->getType() == GOType::CubicBezierPath) && obj->getMode() == Draw::Calculation)
+            if ((obj->getType() == GOType::Arc
+                 || obj->getType() == GOType::EllipticalArc
+                 || obj->getType() == GOType::Spline
+                 || obj->getType() == GOType::SplinePath
+                 || obj->getType() == GOType::CubicBezier
+                 || obj->getType() == GOType::CubicBezierPath) && obj->getMode() == Draw::Calculation)
             {
                 PrepareList<VAbstractCurve>(list, i.key());
             }

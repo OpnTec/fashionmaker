@@ -78,6 +78,7 @@ signals:
     void EnablePointSelection(bool enable) const;
     void EnableLineSelection(bool enable) const;
     void EnableArcSelection(bool enable) const;
+    void EnableElArcSelection(bool enable) const;
     void EnableSplineSelection(bool enable) const;
     void EnableSplinePathSelection(bool enable) const;
     void EnableNodeLabelSelection(bool enable) const;
@@ -88,6 +89,7 @@ signals:
     void EnablePointHover(bool enable) const;
     void EnableLineHover(bool enable) const;
     void EnableArcHover(bool enable) const;
+    void EnableElArcHover(bool enable) const;
     void EnableSplineHover(bool enable) const;
     void EnableSplinePathHover(bool enable) const;
     void EnableNodeLabelHover(bool enable) const;
@@ -346,6 +348,7 @@ private:
     void ToolSelectSpline() const;
     void ToolSelectSplinePath() const;
     void ToolSelectArc() const;
+    void ToolSelectElArc() const;
     void ToolSelectPointArc() const;
     void ToolSelectCurve() const;
     void ToolSelectAllDrawObjects() const;

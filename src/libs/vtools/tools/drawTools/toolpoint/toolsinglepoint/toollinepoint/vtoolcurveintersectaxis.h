@@ -98,6 +98,8 @@ private:
                             const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
                             const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
+    template <class Item>
+    static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
     static void InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
                              VContainer *data);
 };

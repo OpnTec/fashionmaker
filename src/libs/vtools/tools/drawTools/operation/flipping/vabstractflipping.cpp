@@ -29,6 +29,7 @@
 #include "vabstractflipping.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vgobject.h"
@@ -77,10 +78,10 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                     dest.append(CreatePoint(id, idObject, fPoint, sPoint, suffix, data));
                     break;
                 case GOType::Arc:
-                    dest.append(CreateArc(id, idObject, fPoint, sPoint, suffix, data));
+                    dest.append(CreateArc<VArc>(id, idObject, fPoint, sPoint, suffix, data));
                     break;
                 case GOType::EllipticalArc:
-                    //dest.append(CreateItem<VEllipticalArc>(id, idObject, fPoint, sPoint, suffix));
+                    dest.append(CreateArc<VEllipticalArc>(id, idObject, fPoint, sPoint, suffix, data));
                     break;
                 case GOType::Spline:
                     dest.append(CreateCurve<VSpline>(id, idObject, fPoint, sPoint, suffix, data));
@@ -119,10 +120,10 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                 dest.at(i).my);
                     break;
                 case GOType::Arc:
-                    UpdateArc(id, idObject, fPoint, sPoint, suffix, data, dest.at(i).id);
+                    UpdateArc<VArc>(id, idObject, fPoint, sPoint, suffix, data, dest.at(i).id);
                     break;
                 case GOType::EllipticalArc:
-                    //dest.append(UpdateItem<VEllipticalArc>(id, idObject, fPoint, sPoint, suffix, data));
+                    UpdateArc<VEllipticalArc>(id, idObject, fPoint, sPoint, suffix, data, dest.at(i).id);
                     break;
                 case GOType::Spline:
                     UpdateCurve<VSpline>(id, idObject, fPoint, sPoint, suffix, data, dest.at(i).id);
@@ -165,11 +166,12 @@ DestinationItem VAbstractFlipping::CreatePoint(quint32 idTool, quint32 idItem, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class Item>
 DestinationItem VAbstractFlipping::CreateArc(quint32 idTool, quint32 idItem, const QPointF &firstPoint,
                                              const QPointF &secondPoint, const QString &suffix, VContainer *data)
 {
-    const DestinationItem item = CreateItem<VArc>(idTool, idItem, firstPoint, secondPoint, suffix, data);
-    data->AddArc(data->GeometricObject<VArc>(item.id), item.id);
+    const DestinationItem item = CreateItem<Item>(idTool, idItem, firstPoint, secondPoint, suffix, data);
+    data->AddArc(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
@@ -187,9 +189,10 @@ void VAbstractFlipping::UpdatePoint(quint32 idTool, quint32 idItem, const QPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class Item>
 void VAbstractFlipping::UpdateArc(quint32 idTool, quint32 idItem, const QPointF &firstPoint, const QPointF &secondPoint,
                                   const QString &suffix, VContainer *data, quint32 id)
 {
-    UpdateItem<VArc>(idTool, idItem, firstPoint, secondPoint, suffix, data, id);
-    data->AddArc(data->GeometricObject<VArc>(id), id);
+    UpdateItem<Item>(idTool, idItem, firstPoint, secondPoint, suffix, data, id);
+    data->AddArc(data->GeometricObject<Item>(id), id);
 }

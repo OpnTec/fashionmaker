@@ -316,6 +316,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnablePointSelection, sceneDraw, &VMainGraphicsScene::TogglePointSelection);
     connect(this, &MainWindow::EnableLineSelection, sceneDraw, &VMainGraphicsScene::ToggleLineSelection);
     connect(this, &MainWindow::EnableArcSelection, sceneDraw, &VMainGraphicsScene::ToggleArcSelection);
+    connect(this, &MainWindow::EnableElArcSelection, sceneDraw, &VMainGraphicsScene::ToggleElArcSelection);
     connect(this, &MainWindow::EnableSplineSelection, sceneDraw, &VMainGraphicsScene::ToggleSplineSelection);
     connect(this, &MainWindow::EnableSplinePathSelection, sceneDraw, &VMainGraphicsScene::ToggleSplinePathSelection);
 
@@ -323,6 +324,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnablePointHover, sceneDraw, &VMainGraphicsScene::TogglePointHover);
     connect(this, &MainWindow::EnableLineHover, sceneDraw, &VMainGraphicsScene::ToggleLineHover);
     connect(this, &MainWindow::EnableArcHover, sceneDraw, &VMainGraphicsScene::ToggleArcHover);
+    connect(this, &MainWindow::EnableElArcHover, sceneDraw, &VMainGraphicsScene::ToggleElArcHover);
     connect(this, &MainWindow::EnableSplineHover, sceneDraw, &VMainGraphicsScene::ToggleSplineHover);
     connect(this, &MainWindow::EnableSplinePathHover, sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
@@ -1973,6 +1975,7 @@ void  MainWindow::ArrowTool()
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
     emit EnableNodeLabelSelection(true);
@@ -1984,6 +1987,7 @@ void  MainWindow::ArrowTool()
     emit EnablePointHover(true);
     emit EnableLineHover(true);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
     emit EnableNodeLabelHover(true);
@@ -4712,6 +4716,7 @@ void MainWindow::ToolSelectPoint() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4720,6 +4725,7 @@ void MainWindow::ToolSelectPoint() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4748,6 +4754,7 @@ void MainWindow::ToolSelectSpline() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4756,6 +4763,7 @@ void MainWindow::ToolSelectSpline() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(false);
 
@@ -4772,6 +4780,7 @@ void MainWindow::ToolSelectSplinePath() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4780,6 +4789,7 @@ void MainWindow::ToolSelectSplinePath() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
 
@@ -4796,6 +4806,7 @@ void MainWindow::ToolSelectArc() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4804,6 +4815,33 @@ void MainWindow::ToolSelectArc() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(false);
+    emit EnableSplineHover(false);
+    emit EnableSplinePathHover(false);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectElArc() const
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+
+    // Hovering
+    emit EnableLabelHover(false);
+    emit EnablePointHover(false);
+    emit EnableLineHover(false);
+    emit EnableArcHover(false);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4820,6 +4858,7 @@ void MainWindow::ToolSelectPointArc() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4828,6 +4867,7 @@ void MainWindow::ToolSelectPointArc() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4844,6 +4884,7 @@ void MainWindow::ToolSelectCurve() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4852,6 +4893,7 @@ void MainWindow::ToolSelectCurve() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 
@@ -4868,6 +4910,7 @@ void MainWindow::ToolSelectAllDrawObjects() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4876,6 +4919,7 @@ void MainWindow::ToolSelectAllDrawObjects() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 
@@ -4892,6 +4936,7 @@ void MainWindow::ToolSelectOperationObjects() const
     emit EnablePointSelection(true);
     emit EnableLineSelection(false);
     emit EnableArcSelection(true);
+    emit EnableElArcSelection(true);
     emit EnableSplineSelection(true);
     emit EnableSplinePathSelection(true);
 
@@ -4900,6 +4945,7 @@ void MainWindow::ToolSelectOperationObjects() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 

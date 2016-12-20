@@ -173,12 +173,12 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(elArc);
-        data->AddEllipticalArc(data->GeometricObject<VEllipticalArc>(id), id);
+        data->AddArc(data->GeometricObject<VEllipticalArc>(id), id);
     }
     else
     {
         data->UpdateGObject(id, elArc);
-        data->AddEllipticalArc(data->GeometricObject<VEllipticalArc>(id), id);
+        data->AddArc(data->GeometricObject<VEllipticalArc>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -189,7 +189,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 
     {
         VToolEllipticalArc *toolEllipticalArc = new VToolEllipticalArc(doc, data, id, typeCreation);
         scene->addItem(toolEllipticalArc);
-        InitArcToolConnections(scene, toolEllipticalArc);
+        InitElArcToolConnections(scene, toolEllipticalArc);
         doc->AddTool(id, toolEllipticalArc);
         doc->IncrementReferens(c.getIdTool());
         return toolEllipticalArc;

@@ -382,24 +382,27 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddArc(const QSharedPointer<VArc> &arc, const quint32 &id, const quint32 &parentId)
+void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32 &id, const quint32 &parentId)
 {
     AddCurve(arc, id, parentId);
 
-    VArcRadius *radius = new VArcRadius(id, parentId, arc.data(), *GetPatternUnit());
-    AddVariable(radius->GetName(), radius);
-}
+    if (arc->getType() == GOType::Arc)
+    {
+        const QSharedPointer<VArc> casted = arc.staticCast<VArc>();
 
-//---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddEllipticalArc(const QSharedPointer<VEllipticalArc> &arc, const quint32 &id, const quint32 &parentId)
-{
-    AddCurve(arc, id, parentId);
+        VArcRadius *radius = new VArcRadius(id, parentId, casted.data(), *GetPatternUnit());
+        AddVariable(radius->GetName(), radius);
+    }
+    else if (arc->getType() == GOType::EllipticalArc)
+    {
+        const QSharedPointer<VEllipticalArc> casted = arc.staticCast<VEllipticalArc>();
 
-    VEllipticalArcRadius *radius1 = new VEllipticalArcRadius(id, parentId, arc.data(), 1, *GetPatternUnit());
-    AddVariable(radius1->GetName(), radius1);
+        VEllipticalArcRadius *radius1 = new VEllipticalArcRadius(id, parentId, casted.data(), 1, *GetPatternUnit());
+        AddVariable(radius1->GetName(), radius1);
 
-    VEllipticalArcRadius *radius2 = new VEllipticalArcRadius(id, parentId, arc.data(), 2, *GetPatternUnit());
-    AddVariable(radius2->GetName(), radius2);
+        VEllipticalArcRadius *radius2 = new VEllipticalArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
+        AddVariable(radius2->GetName(), radius2);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

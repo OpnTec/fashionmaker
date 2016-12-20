@@ -133,6 +133,9 @@ protected:
     template <typename T>
     static void InitArcToolConnections(VMainGraphicsScene *scene, T *tool);
 
+    template <typename T>
+    static void InitElArcToolConnections(VMainGraphicsScene *scene, T *tool);
+
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 };
@@ -210,6 +213,18 @@ void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnableArcItemHover, tool, &T::AllowHover);
     QObject::connect(scene, &VMainGraphicsScene::EnableArcItemSelection, tool, &T::AllowSelecting);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr);
+    SCASSERT(tool != nullptr);
+
+    InitDrawToolConnections(scene, tool);
+    QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemHover, tool, &T::AllowHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemSelection, tool, &T::AllowSelecting);
 }
 
 #endif // VABSTRACTSPLINE_H

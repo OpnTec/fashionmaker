@@ -108,6 +108,9 @@ public slots:
     void         AllowArcHover(bool enabled);
     void         AllowArcSelecting(bool enabled);
 
+    void         AllowElArcHover(bool enabled);
+    void         AllowElArcSelecting(bool enabled);
+
     virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void         ObjectSelected(bool selected, quint32 objId);
     void         DeleteFromLabel();
@@ -197,6 +200,9 @@ void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene,
 
     QObject::connect(scene, &VMainGraphicsScene::EnableArcItemHover, tool, &T::AllowArcHover);
     QObject::connect(scene, &VMainGraphicsScene::EnableArcItemSelection, tool, &T::AllowArcSelecting);
+
+    QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemHover, tool, &T::AllowElArcHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemSelection, tool, &T::AllowElArcSelecting);
 }
 
 #endif // VABSTRACTOPERATION_H

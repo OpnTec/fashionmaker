@@ -101,6 +101,7 @@ private:
     template <class Item>
     static DestinationItem CreateItem(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                                       VContainer *data);
+    template <class Item>
     static DestinationItem CreateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                                      VContainer *data);
     template <class Item>
@@ -115,6 +116,7 @@ private:
     template <class Item>
     static void UpdateItem(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                            VContainer *data, quint32 id);
+    template <class Item>
     static void UpdateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                           VContainer *data, quint32 id);
     template <class Item>

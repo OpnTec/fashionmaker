@@ -81,6 +81,7 @@ public slots:
     void          TogglePointSelection(bool enabled);
     void          ToggleLineSelection(bool enabled);
     void          ToggleArcSelection(bool enabled);
+    void          ToggleElArcSelection(bool enabled);
     void          ToggleSplineSelection(bool enabled);
     void          ToggleSplinePathSelection(bool enabled);
     void          ToggleNodeLabelSelection(bool enabled);
@@ -91,6 +92,7 @@ public slots:
     void          TogglePointHover(bool enabled);
     void          ToggleLineHover(bool enabled);
     void          ToggleArcHover(bool enabled);
+    void          ToggleElArcHover(bool enabled);
     void          ToggleSplineHover(bool enabled);
     void          ToggleSplinePathHover(bool enabled);
     void          ToggleNodeLabelHover(bool enabled);
@@ -133,6 +135,7 @@ signals:
     void          EnablePointItemSelection(bool enable);
     void          EnableLineItemSelection(bool enable);
     void          EnableArcItemSelection(bool enable);
+    void          EnableElArcItemSelection(bool enable);
     void          EnableSplineItemSelection(bool enable);
     void          EnableSplinePathItemSelection(bool enable);
     void          EnableNodeLabelItemSelection(bool enabled);
@@ -142,6 +145,7 @@ signals:
     void          EnableLabelItemHover(bool enable);
     void          EnablePointItemHover(bool enable);
     void          EnableArcItemHover(bool enable);
+    void          EnableElArcItemHover(bool enable);
     void          EnableSplineItemHover(bool enable);
     void          EnableSplinePathItemHover(bool enable);
     void          EnableNodeLabelItemHover(bool enabled);
