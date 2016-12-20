@@ -107,9 +107,9 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id);
@@ -127,9 +127,9 @@ void VToolTrueDarts::setDialog()
 VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     const QString point1Name = dialogTool->GetFirstNewDartPointName();
     const QString point2Name = dialogTool->GetSecondNewDartPointName();
@@ -337,9 +337,9 @@ void VToolTrueDarts::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrName1, dialogTool->GetFirstNewDartPointName());
     doc->SetAttribute(domElement, AttrName2, dialogTool->GetSecondNewDartPointName());
@@ -379,7 +379,7 @@ void VToolTrueDarts::SetVisualization()
     if (not vis.isNull())
     {
         VisToolTrueDarts *visual = qobject_cast<VisToolTrueDarts *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseLineP1Id);
         visual->setObject2Id(baseLineP2Id);

@@ -130,7 +130,7 @@ bool DialogPatternXmlEdit::ApplyNodeChange(QDomNode domElement, QString name, QS
 bool DialogPatternXmlEdit::ApplyNodeAdd(QDomNode domElement, VXMLTreeElement* treeElement, QString name, QString value)
 {
     QDomElement newnode = domElement.ownerDocument().createElement(name);
-    //SCASSERT(newnode != nullptr);
+    //SCASSERT(newnode != nullptr)
     newnode.setNodeValue(value);
     domElement.appendChild(newnode);
     treeElement->SetDocNode(newnode);
@@ -285,7 +285,7 @@ bool DialogPatternXmlEdit::DeleteNodeAndSons(VXMLTreeElement * currentNode, bool
        }
        if (index < 0)
        {
-           SCASSERT(index==0);
+           SCASSERT(index==0)
            return false;
        }
        parent->removeRow(index);
@@ -321,7 +321,7 @@ DialogPatternXmlEdit::ChangesStackElement* DialogPatternXmlEdit::CreateStackElem
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogPatternXmlEdit::UndoChange(DialogPatternXmlEdit::ChangesStackElement* current)
 {
-    SCASSERT(current != nullptr);
+    SCASSERT(current != nullptr)
 
     VXMLTreeElement * currentNode = current->element;
 
@@ -374,7 +374,7 @@ bool DialogPatternXmlEdit::UndoChange(DialogPatternXmlEdit::ChangesStackElement*
             }
             if (index < 0)
             {
-                SCASSERT(index==0);
+                SCASSERT(index==0)
                 return false;
             }
             parent->removeRow(index);
@@ -612,7 +612,7 @@ void DialogPatternXmlEdit::RemoveChangeStackElement(ChangesStackElement* elmt)
     }
     if (index->next == nullptr)
     {
-        SCASSERT(index->next != nullptr);
+        SCASSERT(index->next != nullptr)
         return;
     }
     delete index->next->newText;
@@ -813,7 +813,7 @@ void DialogPatternXmlEdit::ButtonSetClicked()
         { // If node was created or edited previously, rewrite
             if (this->currentNodeEditedStatus == DialogPatternXmlEdit::ChangeTypeDelete)
             {   // You shouldn't be able to edit a deleted node...
-                SCASSERT(this->currentNodeEditedStatus != DialogPatternXmlEdit::ChangeTypeDelete);
+                SCASSERT(this->currentNodeEditedStatus != DialogPatternXmlEdit::ChangeTypeDelete)
                 ClearEditData();
                 return;
             }
@@ -933,7 +933,7 @@ void DialogPatternXmlEdit::BaseSelectionChanged(int value)
     ui->pushButton_Apply_Changes->setEnabled(false);
 
     index = ui->comboBox_Base_Selection->itemData(value).toInt();  //.convert(QVariant::Int);
-    SCASSERT(value < rootBasesNum);
+    SCASSERT(value < rootBasesNum)
     // QMessageBox::information(this, "test", QString("%1:%2").arg(value).arg(index));
 
     // Clear all tree info and nodes

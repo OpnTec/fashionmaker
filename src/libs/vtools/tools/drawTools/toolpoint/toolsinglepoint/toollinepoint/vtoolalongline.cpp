@@ -129,9 +129,9 @@ void VToolAlongLine::RemoveReferens()
  */
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -208,7 +208,7 @@ void VToolAlongLine::setDialog()
 {
     SCASSERT(dialog != nullptr);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -229,9 +229,9 @@ void VToolAlongLine::setDialog()
 VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();

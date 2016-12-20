@@ -155,7 +155,7 @@ void VisLine::AddOnScene()
 void VisLine::DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
                       Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr);
+    SCASSERT (lineItem != nullptr)
 
     const qreal angle = QLineF(p, pTangent).angle();
     const QPointF endRay = Ray(p, angle);

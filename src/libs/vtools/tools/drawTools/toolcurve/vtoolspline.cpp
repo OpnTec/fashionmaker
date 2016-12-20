@@ -141,9 +141,9 @@ VToolSpline::~VToolSpline()
  */
 void VToolSpline::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     dialogTool->SetSpline(*spl);
     dialogTool->SetColor(spl->GetColor());
@@ -160,9 +160,9 @@ void VToolSpline::setDialog()
  */
 VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     VSpline *spline = new VSpline(dialogTool->GetSpline());
 
@@ -327,9 +327,9 @@ void VToolSpline::RemoveReferens()
  */
 void VToolSpline::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     const VSpline spl = dialogTool->GetSpline();
 
@@ -352,7 +352,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     VAbstractSpline::SaveOptions(tag, obj);
 
     auto spl = qSharedPointerDynamicCast<VSpline>(obj);
-    SCASSERT(spl.isNull() == false);
+    SCASSERT(spl.isNull() == false)
     SetSplineAttributes(tag, *spl);
 }
 
@@ -458,7 +458,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                if (QGraphicsView *view = viewList.at(0))
                {
                    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                   SCASSERT(currentScene);
+                   SCASSERT(currentScene)
                    const QPointF cursorPosition = currentScene->getScenePos();
                    view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                }
@@ -503,7 +503,7 @@ void VToolSpline::SetVisualization()
     if (not vis.isNull())
     {
         VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
         visual->setObject1Id(spl->GetP1().id());
@@ -589,7 +589,7 @@ void VToolSpline::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &spl)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 
     doc->SetAttribute(domElement, AttrType,    ToolType);
     doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());

@@ -69,7 +69,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->lineEditAuthor->setClearButtonEnabled(true);
 #endif
 
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
@@ -108,7 +108,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
             &DialogPatternProperties::Apply);
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
@@ -689,7 +689,7 @@ void DialogPatternProperties::SetOptions(const QMap<GVal, bool> &option)
 template<typename GVal>
 void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool> &option)
 {
-    SCASSERT(box != nullptr);
+    SCASSERT(box != nullptr)
 
     box->clear();
 

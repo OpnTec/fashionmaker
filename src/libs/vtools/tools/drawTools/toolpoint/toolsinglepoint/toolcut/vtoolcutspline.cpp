@@ -86,9 +86,9 @@ VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const qu
  */
 void VToolCutSpline::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplineId(curveCutId);
@@ -106,9 +106,9 @@ void VToolCutSpline::setDialog()
 VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                             VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 splineId = dialogTool->getSplineId();
@@ -213,9 +213,9 @@ void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutSpline::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
@@ -244,7 +244,7 @@ void VToolCutSpline::SetVisualization()
     if (not vis.isNull())
     {
         VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));

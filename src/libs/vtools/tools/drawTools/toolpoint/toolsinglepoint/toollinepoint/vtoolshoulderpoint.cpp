@@ -92,9 +92,9 @@ VToolShoulderPoint::VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolShoulderPoint::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -154,9 +154,9 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
 VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool);
+    SCASSERT(dialogTool)
     QString formula = dialogTool->GetFormula();
     const quint32 p1Line = dialogTool->GetP1Line();
     const quint32 p2Line = dialogTool->GetP2Line();
@@ -288,9 +288,9 @@ void VToolShoulderPoint::RemoveReferens()
  */
 void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -329,7 +329,7 @@ void VToolShoulderPoint::SetVisualization()
     if (not vis.isNull())
     {
         VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(pShoulder);
         visual->setLineP1Id(basePointId);

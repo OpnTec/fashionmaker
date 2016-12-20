@@ -96,7 +96,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
 void VisToolPointOfIntersectionCircles::VisualMode(const quint32 &id)
 {
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     this->object1Id = id;
     Visualization::scenePos = scene->getScenePos();

@@ -91,10 +91,10 @@ VToolEndLine::~VToolEndLine()
  */
 void VToolEndLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     dialog->setModal(true);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -116,9 +116,9 @@ void VToolEndLine::setDialog()
 VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                    VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool);
+    SCASSERT(dialogTool)
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -219,9 +219,9 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -257,7 +257,7 @@ void VToolEndLine::SetVisualization()
     if (not vis.isNull())
     {
         VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));

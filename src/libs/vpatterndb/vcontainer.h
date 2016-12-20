@@ -251,7 +251,7 @@ const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
     try
     {
         QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
-        SCASSERT(obj.isNull() == false);
+        SCASSERT(obj.isNull() == false)
         return obj;
      }
      catch (const std::bad_alloc &)
@@ -270,13 +270,13 @@ const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
 template <typename T>
 QSharedPointer<T> VContainer::GetVariable(QString name) const
 {
-    SCASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false)
     if (d->variables.contains(name))
     {
         try
         {
             QSharedPointer<T> value = qSharedPointerDynamicCast<T>(d->variables.value(name));
-            SCASSERT(value.isNull() == false);
+            SCASSERT(value.isNull() == false)
             return value;
         }
         catch (const std::bad_alloc &)

@@ -184,7 +184,7 @@ void DialogIncrements::FillIncrements()
 template <typename T>
 void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     qint32 currentRow = -1;
     QMapIterator<QString, T> i(varTable);
@@ -270,7 +270,7 @@ void DialogIncrements::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
     const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
@@ -280,7 +280,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
@@ -664,8 +664,8 @@ void DialogIncrements::SaveIncrFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::DeployFormula()
 {
-    SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr);
+    SCASSERT(ui->plainTextEditFormula != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr)
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 

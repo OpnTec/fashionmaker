@@ -168,7 +168,7 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -208,7 +208,7 @@ void DialogNormal::SaveData()
     angle = ui->doubleSpinBoxAngle->value();
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetFirstPointId());
     line->setObject2Id(GetSecondPointId());
@@ -235,7 +235,7 @@ void DialogNormal::SetSecondPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject2Id(value);
 }
 
@@ -261,7 +261,7 @@ void DialogNormal::SetFirstPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
@@ -276,7 +276,7 @@ void DialogNormal::SetAngle(const qreal &value)
     ui->doubleSpinBoxAngle->setValue(angle);
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->SetAngle(angle);
 }
 
@@ -296,7 +296,7 @@ void DialogNormal::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);

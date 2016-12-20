@@ -136,7 +136,7 @@ void DialogArcWithLength::SetRadius(const QString &value)
     ui->plainTextEditRadius->setPlainText(radius);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditRadius);
@@ -159,7 +159,7 @@ void DialogArcWithLength::SetF1(const QString &value)
     ui->plainTextEditF1->setPlainText(f1);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
@@ -183,7 +183,7 @@ void DialogArcWithLength::SetLength(const QString &value)
     ui->plainTextEditLength->setPlainText(length);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setLength(radius);
 
     MoveCursorToEnd(ui->plainTextEditLength);
@@ -308,7 +308,7 @@ void DialogArcWithLength::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagRadius && flagF1 && flagLength);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
@@ -336,7 +336,7 @@ void DialogArcWithLength::SaveData()
     length.replace("\n", " ");
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(GetCenter());
     path->setRadius(radius);

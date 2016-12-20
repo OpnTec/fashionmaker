@@ -93,7 +93,7 @@ void SaveToolOptions::redo()
 bool SaveToolOptions::mergeWith(const QUndoCommand *command)
 {
     const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
+    SCASSERT(saveCommand != nullptr)
     const quint32 id = saveCommand->getToolId();
 
     if (id != nodeId)

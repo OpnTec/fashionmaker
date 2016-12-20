@@ -91,7 +91,7 @@ MoveDoubleLabel::~MoveDoubleLabel()
 bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
 {
     const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetPointId() != nodeId ||
         moveCommand->GetPointType() != m_type ||

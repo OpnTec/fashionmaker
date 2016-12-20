@@ -154,8 +154,8 @@ template <typename Dialog, typename Tool>
 void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, const RemoveOption &showRemove,
                             const Referens &ref)
 {
-    SCASSERT(tool != nullptr);
-    SCASSERT(event != nullptr);
+    SCASSERT(tool != nullptr)
+    SCASSERT(event != nullptr)
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
@@ -221,7 +221,7 @@ template <typename Item>
  */
 void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     if (id == item->id)
     {
         ShowVisualization(enable);
@@ -253,8 +253,8 @@ QString VDrawTool::ObjectName(quint32 id) const
 template <typename T>
 void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     QObject::connect(tool, &T::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);

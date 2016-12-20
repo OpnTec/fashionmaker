@@ -105,9 +105,9 @@ private:
 template <typename Item>
 inline void Visualization::AddItem(Item *item)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     scene->addItem(item);
     connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);

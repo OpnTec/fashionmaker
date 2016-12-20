@@ -146,7 +146,7 @@ void VisToolTriangle::setHypotenuseP2Id(const quint32 &value)
 void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
                                     Qt::PenStyle style)
 {
-    SCASSERT (item != nullptr);
+    SCASSERT (item != nullptr)
 
     item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
 

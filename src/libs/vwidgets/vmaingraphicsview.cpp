@@ -213,7 +213,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     else if (event->type() == QEvent::Wheel)
     {
         QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
-        SCASSERT(wheel_event != nullptr);
+        SCASSERT(wheel_event != nullptr)
         if (QApplication::keyboardModifiers() == _modifiers)
         {
             if (wheel_event->orientation() == Qt::Vertical)
@@ -243,8 +243,8 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
-    SCASSERT(sc != nullptr);
-    SCASSERT(view != nullptr);
+    SCASSERT(sc != nullptr)
+    SCASSERT(view != nullptr)
 
     //Calculate view rect
     //to receive the currently visible area, map the widgets bounds to the scene
@@ -273,7 +273,7 @@ void GraphicsViewZoom::FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 //---------------------------------------------------------------------------------------------------------------------
 bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 {
-    SCASSERT(wheel_event != nullptr);
+    SCASSERT(wheel_event != nullptr)
 
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
@@ -308,7 +308,7 @@ bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 //---------------------------------------------------------------------------------------------------------------------
 bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
 {
-    SCASSERT(wheel_event != nullptr);
+    SCASSERT(wheel_event != nullptr)
 
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
@@ -396,7 +396,7 @@ void VMainGraphicsView::ZoomOriginal()
 void VMainGraphicsView::ZoomFitBest()
 {
     VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-    SCASSERT(currentScene);
+    SCASSERT(currentScene)
     currentScene->SetOriginsVisible(false);
     const QRectF rect = currentScene->VisibleItemsBoundingRect();
     currentScene->SetOriginsVisible(true);
@@ -531,15 +531,15 @@ void VMainGraphicsView::AllowRubberBand(bool value)
  */
 void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
-    SCASSERT(sc != nullptr);
-    SCASSERT(view != nullptr);
+    SCASSERT(sc != nullptr)
+    SCASSERT(view != nullptr)
 
     //Calculate view rect
     const QRectF viewRect = SceneVisibleArea(view);
 
     //Calculate scene rect
     VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(sc);
-    SCASSERT(currentScene);
+    SCASSERT(currentScene)
     const QRectF itemsRect = currentScene->VisibleItemsBoundingRect();
 
     //Unite two rects
@@ -549,7 +549,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VMainGraphicsView::SceneVisibleArea(QGraphicsView *view)
 {
-    SCASSERT(view != nullptr);
+    SCASSERT(view != nullptr)
     //to receive the currently visible area, map the widgets bounds to the scene
     return QRectF(view->mapToScene(0, 0), view->mapToScene(view->width(), view->height()));
 }

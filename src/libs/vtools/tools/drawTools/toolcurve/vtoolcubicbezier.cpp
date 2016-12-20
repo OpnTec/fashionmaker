@@ -81,9 +81,9 @@ VToolCubicBezier::~VToolCubicBezier()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
     dialogTool->SetSpline(*spl);
     dialogTool->SetColor(spl->GetColor());
@@ -93,9 +93,9 @@ void VToolCubicBezier::setDialog()
 VToolCubicBezier *VToolCubicBezier::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                            VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     auto spl = Create(0, new VCubicBezier(dialogTool->GetSpline()), dialogTool->GetColor(), scene, doc, data,
                       Document::FullParse, Source::FromGui);
@@ -193,9 +193,9 @@ void VToolCubicBezier::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     const VCubicBezier spl = dialogTool->GetSpline();
 
@@ -209,7 +209,7 @@ void VToolCubicBezier::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     VAbstractSpline::SaveOptions(tag, obj);
 
     auto spl = qSharedPointerDynamicCast<VCubicBezier>(obj);
-    SCASSERT(spl.isNull() == false);
+    SCASSERT(spl.isNull() == false)
     SetSplineAttributes(tag, *spl);
 }
 
@@ -219,7 +219,7 @@ void VToolCubicBezier::SetVisualization()
     if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolCubicBezier *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         const QSharedPointer<VCubicBezier> spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
         visual->setObject1Id(spl->GetP1().id());
@@ -252,7 +252,7 @@ void VToolCubicBezier::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 
     doc->SetAttribute(domElement, AttrType,    ToolType);
     doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());

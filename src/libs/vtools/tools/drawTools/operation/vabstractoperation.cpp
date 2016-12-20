@@ -75,13 +75,13 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
         if (obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setVisible(visible);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setVisible(visible);
         }
     }
@@ -149,13 +149,13 @@ void VAbstractOperation::FullUpdateFromFile()
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
         }
     }
@@ -173,13 +173,13 @@ void VAbstractOperation::SetFactor(qreal factor)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
         }
     }
@@ -195,13 +195,13 @@ void VAbstractOperation::AllowHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
     }
@@ -217,13 +217,13 @@ void VAbstractOperation::AllowSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
     }
@@ -239,7 +239,7 @@ void VAbstractOperation::AllowPointHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
     }
@@ -255,7 +255,7 @@ void VAbstractOperation::AllowPointSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
     }
@@ -271,7 +271,7 @@ void VAbstractOperation::AllowPointLabelHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->AllowLabelHover(enabled);
         }
     }
@@ -287,7 +287,7 @@ void VAbstractOperation::AllowPointLabelSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->AllowLabelSelecting(enabled);
         }
     }
@@ -384,7 +384,7 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
         if (obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             ChangePosition(item, labelId, pos);
         }
     }
@@ -496,7 +496,7 @@ void VAbstractOperation::DoChangePosition(quint32 id, qreal mx, qreal my)
         VAbstractTool::data.UpdateGObject(id, point);
 
         VSimplePoint *item = qobject_cast<VSimplePoint *>(operatedObjects.value(id));
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
 
         item->RefreshGeometry(*point);
     }
@@ -512,7 +512,7 @@ void VAbstractOperation::AllowCurveHover(bool enabled, GOType type)
         if (i.value()->GetType() != GOType::Point)
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             if (item->GetType() == type)
             {
                 item->setAcceptHoverEvents(enabled);
@@ -531,7 +531,7 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
         if (i.value()->GetType() != GOType::Point)
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             if (item->GetType() == type)
             {
                 item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);

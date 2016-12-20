@@ -103,7 +103,7 @@ void Visualization::setScenePos(const QPointF &value)
 void Visualization::VisualMode(const quint32 &pointId)
 {
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     this->object1Id = pointId;
     this->scenePos = scene->getScenePos();
@@ -207,7 +207,7 @@ qreal Visualization::FindVal(const QString &expression, const QHash<QString, qre
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
 {
-    SCASSERT (point != nullptr);
+    SCASSERT (point != nullptr)
 
     point->setPos(pos);
     point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
@@ -217,7 +217,7 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr);
+    SCASSERT (lineItem != nullptr)
 
     lineItem->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
     lineItem->setLine(line);
@@ -228,7 +228,7 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
 {
-    SCASSERT (pathItem != nullptr);
+    SCASSERT (pathItem != nullptr)
 
     pathItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style,
                           cap));

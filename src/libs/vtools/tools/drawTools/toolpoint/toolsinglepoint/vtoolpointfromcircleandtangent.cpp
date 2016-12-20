@@ -73,9 +73,9 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(VAbstractPattern 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
@@ -88,9 +88,9 @@ void VToolPointFromCircleAndTangent::setDialog()
 VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 circleCenterId = dialogTool->GetCircleCenterId();
     QString circleRadius = dialogTool->GetCircleRadius();
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
@@ -288,9 +288,9 @@ void VToolPointFromCircleAndTangent::contextMenuEvent(QGraphicsSceneContextMenuE
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));
@@ -326,7 +326,7 @@ void VToolPointFromCircleAndTangent::SetVisualization()
     if (not vis.isNull())
     {
         VisToolPointFromCircleAndTangent *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(tangentPointId);
         visual->setObject2Id(circleCenterId);

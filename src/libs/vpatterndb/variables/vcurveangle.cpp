@@ -49,7 +49,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     :VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveAngle);
-    SCASSERT(curve != nullptr);
+    SCASSERT(curve != nullptr)
     if (angle == CurveAngle::StartAngle)
     {
         SetValue(curve->GetStartAngle());

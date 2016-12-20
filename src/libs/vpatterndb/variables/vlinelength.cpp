@@ -50,8 +50,8 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
                          Unit patternUnit)
     :VInternalVariable(), d(new VLengthLineData(p1Id, p2Id, patternUnit))
 {
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
+    SCASSERT(p1 != nullptr)
+    SCASSERT(p2 != nullptr)
 
     SetType(VarType::LineLength);
     SetName(QString(line_+"%1_%2").arg(p1->name(), p2->name()));
@@ -88,8 +88,8 @@ bool VLengthLine::Filter(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
 {
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
+    SCASSERT(p1 != nullptr)
+    SCASSERT(p2 != nullptr)
 
     VInternalVariable::SetValue(FromPixel(QLineF(*p1, *p2).length(), d->patternUnit));
 }

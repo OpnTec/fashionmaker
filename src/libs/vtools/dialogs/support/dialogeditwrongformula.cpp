@@ -154,8 +154,8 @@ void DialogEditWrongFormula::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
 {
-    SCASSERT(plainTextEditFormula != nullptr);
-    SCASSERT(labelResultCalculation != nullptr);
+    SCASSERT(plainTextEditFormula != nullptr)
+    SCASSERT(labelResultCalculation != nullptr)
     Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero);
 }
 
@@ -252,7 +252,7 @@ void DialogEditWrongFormula::PutHere()
  */
 void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
     ui->plainTextEditFormula->setTextCursor(cursor);
@@ -339,7 +339,7 @@ void DialogEditWrongFormula::Functions()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula);
 }
 

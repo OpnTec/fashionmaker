@@ -101,7 +101,7 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
       data(data),
       type(MeasurementsType::Individual)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 
     CreateEmptyIndividualFile(unit);
 }
@@ -112,7 +112,7 @@ VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer
       data(data),
       type(MeasurementsType::Standard)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 
     CreateEmptyStandardFile(unit, baseSize, baseHeight);
 }

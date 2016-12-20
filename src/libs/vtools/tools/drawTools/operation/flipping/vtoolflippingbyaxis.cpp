@@ -79,9 +79,9 @@ VToolFlippingByAxis::~VToolFlippingByAxis()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetSuffix(suffix);
@@ -91,9 +91,9 @@ void VToolFlippingByAxis::setDialog()
 VToolFlippingByAxis *VToolFlippingByAxis::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                  VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 originPointId = dialogTool->GetOriginPointId();
     const AxisType axisType = dialogTool->GetAxisType();
     const QString suffix = dialogTool->GetSuffix();
@@ -177,7 +177,7 @@ void VToolFlippingByAxis::SetVisualization()
     if (not vis.isNull())
     {
         VisToolFlippingByAxis *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->SetObjects(source);
         visual->SetOriginPointId(m_originPointId);
@@ -189,9 +189,9 @@ void VToolFlippingByAxis::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));

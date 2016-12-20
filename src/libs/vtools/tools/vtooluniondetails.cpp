@@ -435,7 +435,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             path->setMode(Draw::Modeling);
             const QSharedPointer<VAbstractCubicBezierPath> splinePath =
                     data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
-            SCASSERT(splinePath != nullptr);
+            SCASSERT(splinePath != nullptr)
             for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
             {
                 const VSpline spline = splinePath->GetSpline(i);
@@ -575,9 +575,9 @@ void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
 VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                              VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     VDetail d1 = data->GetDetail(dialogTool->getD1());
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
@@ -619,7 +619,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     {
         id = data->getNextId();
         drawName = DrawName(doc, d1id, d2id);
-        SCASSERT(not drawName.isEmpty());
+        SCASSERT(not drawName.isEmpty())
     }
     else
     {
@@ -704,20 +704,20 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         newDetail.setMy(d1.getMy());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
-        SCASSERT(tools != nullptr);
+        SCASSERT(tools != nullptr)
 
         if (not retainPieces)
         {
             {
                 VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
-                SCASSERT(toolDet != nullptr);
+                SCASSERT(toolDet != nullptr)
                 bool ask = false;
                 toolDet->Remove(ask);
             }
 
             {
                 VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
-                SCASSERT(toolDet != nullptr);
+                SCASSERT(toolDet != nullptr)
                 const bool ask = false;
                 toolDet->Remove(ask);
             }

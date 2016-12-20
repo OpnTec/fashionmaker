@@ -1153,7 +1153,7 @@ bool MainWindowsNoGUI::IsPagesFit(const QSizeF &printPaper) const
     // On previous stage already was checked if pages have uniform size
     // Enough will be to check only one page
     QGraphicsRectItem *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
-    SCASSERT(p != nullptr);
+    SCASSERT(p != nullptr)
     const QSizeF pSize = p->rect().size();
     if (pSize.height() <= printPaper.height() && pSize.width() <= printPaper.width())
     {
@@ -1182,7 +1182,7 @@ int MainWindowsNoGUI::ContinueIfLayoutStale()
     msgBox.setDefaultButton(QMessageBox::No);
     QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
-    SCASSERT(layout != nullptr);
+    SCASSERT(layout != nullptr)
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
     return msgBox.result();

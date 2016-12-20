@@ -90,7 +90,7 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetPopup::PopupMessage(QWidget *w, const QString &msg)
 {
-    SCASSERT(w != nullptr);
+    SCASSERT(w != nullptr)
 
     VWidgetPopup *popup = new VWidgetPopup();
     QLabel *label = new QLabel(msg);

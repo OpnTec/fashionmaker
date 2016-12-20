@@ -50,7 +50,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveCLength);
-    SCASSERT(curve != nullptr);
+    SCASSERT(curve != nullptr)
     if (cType == CurveCLength::C1)
     {
         SetValue(FromPixel(curve->GetC1Length(), patternUnit));

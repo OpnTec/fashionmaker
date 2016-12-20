@@ -283,7 +283,7 @@ void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
  */
 VCommonSettings *VAbstractApplication::Settings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return settings;
 }
 

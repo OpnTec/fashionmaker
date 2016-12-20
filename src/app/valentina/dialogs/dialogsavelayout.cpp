@@ -59,7 +59,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
 #if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
@@ -229,7 +229,7 @@ void DialogSaveLayout::Save()
 void DialogSaveLayout::PathChanged(const QString &text)
 {
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
 
     QPalette palette = ui->lineEditPath->palette();
 

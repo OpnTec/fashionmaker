@@ -53,8 +53,8 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
 {
     SetType(VarType::LineAngle);
 
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
+    SCASSERT(p1 != nullptr)
+    SCASSERT(p2 != nullptr)
 
     SetName(QString(angleLine_+"%1_%2").arg(p1->name(), p2->name()));
     SetValue(p1, p2);
@@ -90,8 +90,8 @@ bool VLineAngle::Filter(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 {
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
+    SCASSERT(p1 != nullptr)
+    SCASSERT(p2 != nullptr)
     //Correct angle. Try avoid results like 6,7563e-15.
     const qreal angle = qFloor(QLineF(*p1, *p2).angle() * 100000.) / 100000.;
     VInternalVariable::SetValue(angle);

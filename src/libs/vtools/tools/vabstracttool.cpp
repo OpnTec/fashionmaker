@@ -86,7 +86,7 @@ VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
     connect(this->doc, &VAbstractPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VAbstractPattern::LiteParseTree);
@@ -402,9 +402,9 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
                                 QGraphicsLineItem *lineName, const qreal radius)
 {
-    SCASSERT(point != nullptr);
-    SCASSERT(namePoint != nullptr);
-    SCASSERT(lineName != nullptr);
+    SCASSERT(point != nullptr)
+    SCASSERT(namePoint != nullptr)
+    SCASSERT(lineName != nullptr)
 
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- point->scenePos());

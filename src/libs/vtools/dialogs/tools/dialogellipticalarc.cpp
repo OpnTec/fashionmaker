@@ -196,7 +196,7 @@ void DialogEllipticalArc::SetRadius1(const QString &value)
     ui->plainTextEditRadius1->setPlainText(radius1);
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius1(radius1);
 
     MoveCursorToEnd(ui->plainTextEditRadius1);
@@ -228,7 +228,7 @@ void DialogEllipticalArc::SetRadius2(const QString &value)
     ui->plainTextEditRadius2->setPlainText(radius2);
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius2(radius2);
 
     MoveCursorToEnd(ui->plainTextEditRadius2);
@@ -260,7 +260,7 @@ void DialogEllipticalArc::SetF1(const QString &value)
     ui->plainTextEditF1->setPlainText(f1);
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
@@ -292,7 +292,7 @@ void DialogEllipticalArc::SetF2(const QString &value)
     ui->plainTextEditF2->setPlainText(f2);
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF2(f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
@@ -324,7 +324,7 @@ void DialogEllipticalArc::SetRotationAngle(const QString &value)
     ui->plainTextEditRotationAngle->setPlainText(rotationAngle);
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRotationAngle(rotationAngle);
 
     MoveCursorToEnd(ui->plainTextEditRotationAngle);
@@ -612,9 +612,9 @@ void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
  */
 void DialogEllipticalArc::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle);
 }
 
@@ -639,7 +639,7 @@ void DialogEllipticalArc::SaveData()
     rotationAngle.replace("\n", " ");
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(GetCenter());
     path->setRadius1(radius1);

@@ -53,7 +53,7 @@ MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpli
     setText(tr("move spline"));
     nodeId = id;
 
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ void MoveSpline::redo()
 bool MoveSpline::mergeWith(const QUndoCommand *command)
 {
     const MoveSpline *moveCommand = static_cast<const MoveSpline *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSplineId();
 
     if (id != nodeId)

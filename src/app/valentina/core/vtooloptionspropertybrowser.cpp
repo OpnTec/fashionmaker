@@ -873,7 +873,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEndLine(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -906,7 +906,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolAlongLine(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -936,7 +936,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolArc *i = qgraphicsitem_cast<VToolArc *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 8: // AttrRadius
@@ -966,7 +966,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VProperty *propert
     const QString id = propertyToId[property];
 
     VToolArcWithLength *i = qgraphicsitem_cast<VToolArcWithLength *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 8: // AttrRadius
@@ -996,7 +996,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolBisector(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolBisector *i = qgraphicsitem_cast<VToolBisector *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1048,7 +1048,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1072,7 +1072,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolCutSpline *i = qgraphicsitem_cast<VToolCutSpline *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1096,7 +1096,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VProperty *propert
     const QString id = propertyToId[property];
 
     VToolCutSplinePath *i = qgraphicsitem_cast<VToolCutSplinePath *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1120,7 +1120,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolHeight(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolHeight *i = qgraphicsitem_cast<VToolHeight *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1147,7 +1147,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLine(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolLine *i = qgraphicsitem_cast<VToolLine *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 3: // AttrTypeLine
@@ -1190,7 +1190,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolNormal *i = qgraphicsitem_cast<VToolNormal *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 4: // AttrLength
@@ -1223,7 +1223,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfContact(VProperty *proper
     const QString id = propertyToId[property];
 
     VToolPointOfContact *i = qgraphicsitem_cast<VToolPointOfContact *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 8: // AttrRadius
@@ -1291,7 +1291,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VProp
     const QString id = propertyToId[property];
 
     VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1355,7 +1355,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VPrope
     const QString id = propertyToId[property];
 
     VToolPointFromCircleAndTangent *i = qgraphicsitem_cast<VToolPointFromCircleAndTangent *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1410,7 +1410,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VProperty *propert
     const QString id = propertyToId[property];
 
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 4: // AttrLength
@@ -1440,7 +1440,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
     const QString id = propertyToId[property];
 
     auto i = qgraphicsitem_cast<VToolSpline *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
 
     VSpline spl = i->getSpline();
     const VFormula f = value.value<VFormula>();
@@ -1496,7 +1496,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezier(VProperty *property)
     const QString id = propertyToId[property];
 
     auto i = qgraphicsitem_cast<VToolCubicBezier *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
 
     switch (PropertiesList().indexOf(id))
     {
@@ -1521,7 +1521,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolSplinePath *i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1545,7 +1545,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezierPath(VProperty *prope
     const QString id = propertyToId[property];
 
     VToolCubicBezierPath *i = qgraphicsitem_cast<VToolCubicBezierPath *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1588,7 +1588,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersectAxis(VProperty *pro
     const QString id = propertyToId[property];
 
     VToolLineIntersectAxis *i = qgraphicsitem_cast<VToolLineIntersectAxis *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1618,7 +1618,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VProperty *pr
     const QString id = propertyToId[property];
 
     VToolCurveIntersectAxis *i = qgraphicsitem_cast<VToolCurveIntersectAxis *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
@@ -1648,7 +1648,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolRotation *i = qgraphicsitem_cast<VToolRotation *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 38: // AttrSuffix
@@ -1672,7 +1672,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolMove(VProperty *property)
     const QString id = propertyToId[property];
 
     VToolMove *i = qgraphicsitem_cast<VToolMove *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 38: // AttrSuffix
@@ -1743,7 +1743,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VProperty *propert
     const QString id = propertyToId[property];
 
     VToolEllipticalArc *i = qgraphicsitem_cast<VToolEllipticalArc *>(currentItem);
-    SCASSERT(i != nullptr);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 40://AttrRadius1

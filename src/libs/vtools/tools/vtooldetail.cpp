@@ -235,9 +235,9 @@ VToolDetail::~VToolDetail()
  */
 void VToolDetail::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->setDetail(VAbstractTool::data.GetDetail(id));
 }
 
@@ -251,9 +251,9 @@ void VToolDetail::setDialog()
  */
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     VDetail detail = dialogTool->getDetail();
     VDetail det;
     qApp->getUndoStack()->beginMacro("add detail");
@@ -402,9 +402,9 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        SCASSERT(dialog != nullptr);
+        SCASSERT(dialog != nullptr)
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-        SCASSERT(dialogTool != nullptr);
+        SCASSERT(dialogTool != nullptr)
         const VDetail newDet = dialogTool->getDetail();
         const VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
@@ -651,7 +651,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
                        {
                            // Ensure visible only small rect around a cursor
                            VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                           SCASSERT(currentScene);
+                           SCASSERT(currentScene)
                            const QPointF cursorPosition = currentScene->getScenePos();
                            view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                        }
@@ -1252,9 +1252,9 @@ template <typename Tool>
 Tool* VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     QHash<quint32, VDataTool*>* tools = doc->getTools();
-    SCASSERT(tools != nullptr);
+    SCASSERT(tools != nullptr)
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
-    SCASSERT(tool != nullptr);
+    SCASSERT(tool != nullptr)
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
     tool->SetParentType(ParentType::Item);

@@ -1071,7 +1071,7 @@ void InitPMSystems(QComboBox *systemCombo)
 // * The default option (blank field or 'None') should appear at the top of the list.
 // * The list should be sorted alphabetically so users can find their system easily.
 
-    SCASSERT(systemCombo != nullptr);
+    SCASSERT(systemCombo != nullptr)
     systemCombo->addItem(qApp->TrVars()->PMSystemName(listSystems.at(listSystems.size()-1)),
                          listSystems.at(listSystems.size()-1));
 
@@ -1150,7 +1150,7 @@ QStringList ListPMSystems()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements)
 {
-    SCASSERT(trM != nullptr);
+    SCASSERT(trM != nullptr)
 
     QStringList numbers;
     for (int i=0; i < listMeasurements.size(); ++i)

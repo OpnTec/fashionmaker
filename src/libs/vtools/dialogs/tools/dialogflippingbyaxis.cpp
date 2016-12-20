@@ -101,7 +101,7 @@ void DialogFlippingByAxis::SetOriginPointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxOriginPoint, value);
     VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetOriginPointId(value);
 }
 
@@ -120,7 +120,7 @@ void DialogFlippingByAxis::SetAxisType(AxisType type)
         ui->comboBoxAxisType->setCurrentIndex(index);
 
         auto operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
         operation->SetAxisType(type);
     }
 }
@@ -157,11 +157,11 @@ void DialogFlippingByAxis::ShowDialog(bool click)
         stage1 = false;
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
         scene->clearSelection();
 
         VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
 
@@ -201,7 +201,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
             if (SetObject(id, ui->comboBoxOriginPoint, ""))
             {
                 VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-                SCASSERT(operation != nullptr);
+                SCASSERT(operation != nullptr)
                 operation->SetOriginPointId(id);
                 operation->RefreshGeometry();
 
@@ -274,9 +274,9 @@ void DialogFlippingByAxis::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagError && flagName);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(bOk->isEnabled());
 }
 
@@ -292,7 +292,7 @@ void DialogFlippingByAxis::SaveData()
     m_suffix = ui->lineEditSuffix->text();
 
     VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
 
     operation->SetObjects(objects.toVector());
     operation->SetOriginPointId(GetOriginPointId());
@@ -321,7 +321,7 @@ void DialogFlippingByAxis::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::FillComboBoxAxisType(QComboBox *box)
 {
-    SCASSERT(box != nullptr);
+    SCASSERT(box != nullptr)
 
     box->addItem(tr("Vertical axis"), QVariant(static_cast<int>(AxisType::VerticalAxis)));
     box->addItem(tr("Horizontal axis"), QVariant(static_cast<int>(AxisType::HorizontalAxis)));

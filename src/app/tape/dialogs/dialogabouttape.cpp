@@ -112,7 +112,7 @@ void DialogAboutTape::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::FontPointSize(QWidget *w, int pointSize)
 {
-    SCASSERT(w != nullptr);
+    SCASSERT(w != nullptr)
 
     QFont font = w->font();
     font.setPointSize(pointSize);

@@ -48,7 +48,7 @@ VTableSearch::VTableSearch(QTableWidget *table, QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::Clear()
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     for(int i = 0; i < table->rowCount(); ++i)
     {
@@ -96,7 +96,7 @@ void VTableSearch::ShowNext(int newIndex)
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::Find(const QString &term)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     Clear();
 
@@ -194,7 +194,7 @@ void VTableSearch::AddRow(int row)
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::RefreshList(const QString &term)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     if (term.isEmpty())
     {

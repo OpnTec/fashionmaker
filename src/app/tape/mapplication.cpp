@@ -479,7 +479,7 @@ void MApplication::OpenSettings()
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings *MApplication::TapeSettings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return qobject_cast<VTapeSettings *>(settings);
 }
 

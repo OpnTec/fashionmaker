@@ -67,7 +67,7 @@ void VisOperation::VisualMode(const quint32 &pointId)
 {
     Q_UNUSED(pointId);
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     Visualization::scenePos = scene->getScenePos();
     RefreshGeometry();

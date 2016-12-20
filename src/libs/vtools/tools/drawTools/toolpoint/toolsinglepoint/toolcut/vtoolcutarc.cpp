@@ -83,9 +83,9 @@ VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolCutArc::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
@@ -102,9 +102,9 @@ void VToolCutArc::setDialog()
  */
 VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
@@ -213,9 +213,9 @@ void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
@@ -244,7 +244,7 @@ void VToolCutArc::SetVisualization()
     if (not vis.isNull())
     {
         VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));

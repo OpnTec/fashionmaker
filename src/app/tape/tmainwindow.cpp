@@ -1446,8 +1446,8 @@ void TMainWindow::ShowMDiagram(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::DeployFormula()
 {
-    SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr);
+    SCASSERT(ui->plainTextEditFormula != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr)
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
@@ -1844,7 +1844,7 @@ void TMainWindow::SetupMenu()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitWindow()
 {
-    SCASSERT(m != nullptr);
+    SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
     ui->dockWidgetDiagram->setVisible(dockDiagramVisible);
@@ -2052,7 +2052,7 @@ void TMainWindow::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     QString header = table->horizontalHeaderItem(column)->text();
     const int index = header.indexOf(QLatin1String("("));
@@ -2819,7 +2819,7 @@ void TMainWindow::UpdateRecentFileActions()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateWindowMenu(QMenu *menu)
 {
-    SCASSERT(menu != nullptr);
+    SCASSERT(menu != nullptr)
 
     QAction *action = menu->addAction(tr("&New Window"));
     connect(action, &QAction::triggered, [this]()
@@ -2990,7 +2990,7 @@ void TMainWindow::InitUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitComboBoxUnits()
 {
-    SCASSERT(comboBoxUnits != nullptr);
+    SCASSERT(comboBoxUnits != nullptr)
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
@@ -2999,7 +2999,7 @@ void TMainWindow::InitComboBoxUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitGender(QComboBox *gender)
 {
-    SCASSERT(gender != nullptr);
+    SCASSERT(gender != nullptr)
     gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
     gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
     gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));

@@ -362,7 +362,7 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     VDrawTool::SaveOptions(tag, obj);
 
     QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));

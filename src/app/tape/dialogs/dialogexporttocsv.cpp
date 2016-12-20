@@ -56,7 +56,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     SetSeparator(qApp->TapeSettings()->GetCSVSeparator());
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
-    SCASSERT(bDefaults != nullptr);
+    SCASSERT(bDefaults != nullptr)
     connect(bDefaults, &QPushButton::clicked, [this]()
     {
         ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetDefCSVWithHeader());

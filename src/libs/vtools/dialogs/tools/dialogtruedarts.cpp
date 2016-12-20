@@ -145,7 +145,7 @@ void DialogTrueDarts::SetFirstBasePointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstBasePoint, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
     points->setObject1Id(value);
 }
 
@@ -161,7 +161,7 @@ void DialogTrueDarts::SetSecondBasePointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondBasePoint, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
     points->setObject2Id(value);
 }
 
@@ -177,7 +177,7 @@ void DialogTrueDarts::SetFirstDartPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstDartPoint, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
     points->setD1PointId(value);
 }
 
@@ -193,7 +193,7 @@ void DialogTrueDarts::SetSecondDartPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondDartPoint, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
     points->setD2PointId(value);
 }
 
@@ -209,7 +209,7 @@ void DialogTrueDarts::SetThirdDartPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxThirdDartPoint, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
     points->setD3PointId(value);
 }
 
@@ -229,7 +229,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-            SCASSERT(points != nullptr);
+            SCASSERT(points != nullptr)
 
             switch (number)
             {
@@ -370,7 +370,7 @@ void DialogTrueDarts::SaveData()
     d2PointName = ui->lineEditSecondNewDartPoint->text();
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
-    SCASSERT(points != nullptr);
+    SCASSERT(points != nullptr)
 
     points->setObject1Id(GetFirstBasePointId());
     points->setObject2Id(GetSecondBasePointId());
@@ -383,7 +383,7 @@ void DialogTrueDarts::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTrueDarts::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagName1 && flagName2 && flagError);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
@@ -396,8 +396,8 @@ void DialogTrueDarts::CheckState()
 void DialogTrueDarts::NameChanged(QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                                   QLineEdit* secondPointName, bool &flagName)
 {
-    SCASSERT(labelEditNamePoint != nullptr);
-    SCASSERT(secondPointName != nullptr);
+    SCASSERT(labelEditNamePoint != nullptr)
+    SCASSERT(secondPointName != nullptr)
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
@@ -420,9 +420,9 @@ void DialogTrueDarts::FillComboBoxs(const quint32 &ch1, const quint32 &ch2)
 void DialogTrueDarts::CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointD1Name,
                                 const QString &pointD2Name, QLineEdit *secondPointName, bool &flagName)
 {
-    SCASSERT(labelEditNamePoint != nullptr);
-    SCASSERT(secondPointName != nullptr);
-    SCASSERT(edit != nullptr);
+    SCASSERT(labelEditNamePoint != nullptr)
+    SCASSERT(secondPointName != nullptr)
+    SCASSERT(edit != nullptr)
 
     const QString name = edit->text();
     const QString secondName = secondPointName->text();

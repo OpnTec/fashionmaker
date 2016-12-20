@@ -92,9 +92,9 @@ VToolPointOfContact::VToolPointOfContact(VAbstractPattern *doc, VContainer *data
  */
 void VToolPointOfContact::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center);
@@ -173,9 +173,9 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                  VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     QString radius = dialogTool->getRadius();
     const quint32 center = dialogTool->getCenter();
     const quint32 firstPointId = dialogTool->GetFirstPoint();
@@ -305,9 +305,9 @@ void VToolPointOfContact::RemoveReferens()
  */
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
@@ -342,7 +342,7 @@ void VToolPointOfContact::SetVisualization()
     if (not vis.isNull())
     {
         VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);
         visual->setLineP2Id(secondPointId);

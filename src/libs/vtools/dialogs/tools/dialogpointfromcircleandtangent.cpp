@@ -126,7 +126,7 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
     setCurrentPointId(ui->comboBoxCircleCenter, value);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setObject2Id(value);
 }
 
@@ -149,7 +149,7 @@ void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
     ui->plainTextEditRadius->setPlainText(formula);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setCRadius(formula);
 
     MoveCursorToEnd(ui->plainTextEditRadius);
@@ -167,7 +167,7 @@ void DialogPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxTangentPoint, value);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setObject1Id(value);
 }
 
@@ -186,7 +186,7 @@ void DialogPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoi
         ui->comboBoxResult->setCurrentIndex(index);
 
         VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setCrossPoint(p);
     }
 }
@@ -199,7 +199,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
         if (type == SceneObject::Point)
         {
             VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-            SCASSERT(point != nullptr);
+            SCASSERT(point != nullptr)
 
             switch (number)
             {
@@ -313,7 +313,7 @@ void DialogPointFromCircleAndTangent::SaveData()
     radius.replace("\n", " ");
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
 
     point->setObject1Id(GetTangentPointId());
     point->setObject2Id(GetCircleCenterId());
@@ -332,7 +332,7 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula && flagName && flagError && flagCircleRadius);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)

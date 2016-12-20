@@ -54,7 +54,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     movie->start ();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, [this](){emit Abort();});
     setModal(true);
 

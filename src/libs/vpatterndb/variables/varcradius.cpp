@@ -46,7 +46,7 @@ VArcRadius::VArcRadius()
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit)
     :VCurveVariable(id, parentId)
 {
-    SCASSERT(arc != nullptr);
+    SCASSERT(arc != nullptr)
 
     SetType(VarType::ArcRadius);
     SetName(QString(radius_V+"%1").arg(arc->name()));

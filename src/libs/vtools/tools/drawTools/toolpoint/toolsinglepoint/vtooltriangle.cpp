@@ -86,9 +86,9 @@ VToolTriangle::VToolTriangle(VAbstractPattern *doc, VContainer *data, const quin
  */
 void VToolTriangle::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetAxisP1Id(axisP1Id);
     dialogTool->SetAxisP2Id(axisP2Id);
@@ -109,9 +109,9 @@ void VToolTriangle::setDialog()
 VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                      VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 axisP1Id = dialogTool->GetAxisP1Id();
     const quint32 axisP2Id = dialogTool->GetAxisP2Id();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
@@ -273,9 +273,9 @@ void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
@@ -310,7 +310,7 @@ void VToolTriangle::SetVisualization()
     if (not vis.isNull())
     {
         VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(axisP1Id);
         visual->setObject2Id(axisP2Id);

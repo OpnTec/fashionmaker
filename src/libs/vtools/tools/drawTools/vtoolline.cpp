@@ -97,9 +97,9 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
  */
 void VToolLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(typeLine);
@@ -116,9 +116,9 @@ void VToolLine::setDialog()
  */
 VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 firstPoint = dialogTool->GetFirstPoint();
     const quint32 secondPoint = dialogTool->GetSecondPoint();
     const QString typeLine = dialogTool->GetTypeLine();
@@ -151,9 +151,9 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
                               VAbstractPattern *doc, VContainer *data, const Document &parse,
                               const Source &typeCreation)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(doc != nullptr);
-    SCASSERT(data != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(doc != nullptr)
+    SCASSERT(data != nullptr)
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -389,9 +389,9 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
  */
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -424,7 +424,7 @@ void VToolLine::SetVisualization()
     if (not vis.isNull())
     {
         VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPoint);
         visual->setPoint2Id(secondPoint);

@@ -127,7 +127,7 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            SCASSERT(tool != nullptr);
+            SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }
         else

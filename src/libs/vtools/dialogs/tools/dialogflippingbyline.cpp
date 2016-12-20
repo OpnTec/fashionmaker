@@ -105,7 +105,7 @@ void DialogFlippingByLine::SetFirstLinePointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxFirstLinePoint, value);
     VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetFirstLinePointId(value);
 }
 
@@ -156,11 +156,11 @@ void DialogFlippingByLine::ShowDialog(bool click)
         stage1 = false;
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
         scene->clearSelection();
 
         VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
 
@@ -204,7 +204,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                        SCASSERT(operation != nullptr);
+                        SCASSERT(operation != nullptr)
                         operation->SetFirstLinePointId(id);
                         operation->RefreshGeometry();
                     }
@@ -226,7 +226,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                                 prepare = true;
 
                                 VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                                SCASSERT(operation != nullptr);
+                                SCASSERT(operation != nullptr)
                                 operation->SetSecondLinePointId(id);
                                 operation->RefreshGeometry();
                             }
@@ -303,9 +303,9 @@ void DialogFlippingByLine::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagError && flagName);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(bOk->isEnabled());
 }
 
@@ -321,7 +321,7 @@ void DialogFlippingByLine::SaveData()
     m_suffix = ui->lineEditSuffix->text();
 
     VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
 
     operation->SetObjects(objects.toVector());
     operation->SetFirstLinePointId(GetFirstLinePointId());

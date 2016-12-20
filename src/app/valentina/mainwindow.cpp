@@ -550,7 +550,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         dialogTool = new Dialog(pattern, 0, this);
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
@@ -609,7 +609,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         }
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
@@ -635,11 +635,11 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
-    SCASSERT(not dialogTool.isNull());
+    SCASSERT(not dialogTool.isNull())
     if (result == QDialog::Accepted)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
         ui->view->itemClicked(tool);
@@ -655,14 +655,14 @@ void MainWindow::ClosedDialog(int result)
 template <typename DrawTool>
 void MainWindow::ClosedDialogWithApply(int result)
 {
-    SCASSERT(not dialogTool.isNull());
+    SCASSERT(not dialogTool.isNull())
     if (result == QDialog::Accepted)
     {
         // Only create tool if not already created with apply
         if (dialogTool->GetAssociatedTool() == nullptr)
         {
             VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-            SCASSERT(scene != nullptr);
+            SCASSERT(scene != nullptr)
 
             dialogTool->SetAssociatedTool(
                     dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
@@ -673,7 +673,7 @@ void MainWindow::ClosedDialogWithApply(int result)
             vtool->FullUpdateFromGuiApply();
         }
     }
-    SCASSERT(not dialogTool.isNull());
+    SCASSERT(not dialogTool.isNull())
     QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
     ui->view->itemClicked(tool);
     if (dialogTool->GetAssociatedTool() != nullptr)
@@ -701,13 +701,13 @@ void MainWindow::ClosedDialogWithApply(int result)
 template <typename DrawTool>
 void MainWindow::ApplyDialog()
 {
-    SCASSERT(not dialogTool.isNull());
+    SCASSERT(not dialogTool.isNull())
 
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         dialogTool->SetAssociatedTool(
                 static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
@@ -715,7 +715,7 @@ void MainWindow::ApplyDialog()
     else
     { // Or update associated tool with data
         VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
-        SCASSERT(vtool != nullptr);
+        SCASSERT(vtool != nullptr)
         vtool->FullUpdateFromGuiApply();
     }
 }
@@ -1091,11 +1091,11 @@ void MainWindow::ToolMove(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogGroup(int result)
 {
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     if (result == QDialog::Accepted)
     {
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
-        SCASSERT(dialog != nullptr);
+        SCASSERT(dialog != nullptr)
         const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
         if (not group.isNull())
         {
@@ -2039,7 +2039,7 @@ void MainWindow::SaveCurrentScene()
     if (mode == Draw::Calculation || mode == Draw::Modeling)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         /*Save transform*/
         scene->setTransform(ui->view->transform());
@@ -2058,7 +2058,7 @@ void MainWindow::SaveCurrentScene()
 void MainWindow::RestoreCurrentScene()
 {
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     /*Set transform for current scene*/
     ui->view->setTransform(scene->transform());

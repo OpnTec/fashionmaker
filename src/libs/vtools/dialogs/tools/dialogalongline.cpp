@@ -180,7 +180,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             const QString toolTip = tr("Select second point of line");
             switch (number)
@@ -229,7 +229,7 @@ void DialogAlongLine::SaveData()
     formula.replace("\n", " ");
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetFirstPointId());
     line->setObject2Id(GetSecondPointId());
@@ -269,7 +269,7 @@ void DialogAlongLine::SetSecondPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject2Id(value);
 }
 
@@ -292,7 +292,7 @@ void DialogAlongLine::SetFirstPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
@@ -312,7 +312,7 @@ void DialogAlongLine::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);

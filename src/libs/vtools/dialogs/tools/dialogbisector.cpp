@@ -175,7 +175,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -262,7 +262,7 @@ void DialogBisector::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -278,7 +278,7 @@ void DialogBisector::SetFirstPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
@@ -292,7 +292,7 @@ void DialogBisector::SetSecondPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject2Id(value);
 }
 
@@ -306,7 +306,7 @@ void DialogBisector::SetThirdPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxThirdPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject3Id(value);
 }
 
@@ -331,7 +331,7 @@ void DialogBisector::SaveData()
     formula.replace("\n", " ");
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetFirstPointId());
     line->setObject2Id(GetSecondPointId());

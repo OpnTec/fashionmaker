@@ -183,8 +183,8 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
 template <typename T>
 void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnableSplineItemHover, tool, &T::AllowHover);
@@ -195,8 +195,8 @@ void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *to
 template <typename T>
 void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnableSplinePathItemHover, tool, &T::AllowHover);
@@ -207,8 +207,8 @@ void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T
 template <typename T>
 void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnableArcItemHover, tool, &T::AllowHover);
@@ -219,8 +219,8 @@ void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
 template <typename T>
 void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemHover, tool, &T::AllowHover);

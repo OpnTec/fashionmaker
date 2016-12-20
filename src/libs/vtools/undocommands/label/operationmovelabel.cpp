@@ -77,7 +77,7 @@ OperationMoveLabel::~OperationMoveLabel()
 bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
 {
     const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
     {

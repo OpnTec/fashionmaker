@@ -132,10 +132,10 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
 
     vis = new VisToolSpline(data);
     auto path = qobject_cast<VisToolSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSpline::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSpline::MouseLeftReleased);
 }
@@ -159,7 +159,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             auto *path = qobject_cast<VisToolSpline *>(vis);
-            SCASSERT(path != nullptr);
+            SCASSERT(path != nullptr)
 
             switch (number)
             {
@@ -201,7 +201,7 @@ void DialogSpline::SaveData()
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto path = qobject_cast<VisToolSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(GetP1()->id());
     path->setObject4Id(GetP4()->id());
@@ -523,7 +523,7 @@ void DialogSpline::ShowDialog(bool click)
     if (prepare && click)
     {
         auto *path = qobject_cast<VisToolSpline *>(vis);
-        SCASSERT(path != nullptr);
+        SCASSERT(path != nullptr)
 
         spl = VSpline(*GetP1(), path->GetP2(), path->GetP3(), *GetP4());
 
@@ -553,7 +553,7 @@ void DialogSpline::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
@@ -600,7 +600,7 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->lineEditSplineName->setText(spl.name());
 
     auto path = qobject_cast<VisToolSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(spl.GetP1().id());
     path->setObject4Id(spl.GetP4().id());

@@ -683,7 +683,7 @@ void VApplication::OpenSettings()
 //---------------------------------------------------------------------------------------------------------------------
 VSettings *VApplication::ValentinaSettings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return qobject_cast<VSettings *>(settings);
 }
 
