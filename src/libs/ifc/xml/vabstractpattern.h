@@ -269,6 +269,7 @@ public:
     static const QString IncrementDescription;
 
     static const QString NodeArc;
+    static const QString NodeElArc;
     static const QString NodePoint;
     static const QString NodeSpline;
     static const QString NodeSplinePath;

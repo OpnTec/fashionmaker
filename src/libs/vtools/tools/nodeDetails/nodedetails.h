@@ -30,6 +30,7 @@
 #define NODEDETAILS_H
 
 #include "vnodearc.h"
+#include "vnodeellipticalarc.h"
 #include "vnodepoint.h"
 #include "vnodespline.h"
 #include "vnodesplinepath.h"

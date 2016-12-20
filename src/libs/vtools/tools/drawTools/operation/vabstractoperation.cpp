@@ -585,12 +585,20 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 break;
             }
             case GOType::Arc:
-            case GOType::EllipticalArc:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
                 connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Arc);
+                });
+                break;
+            }
+            case GOType::EllipticalArc:
+            {
+                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
+                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                {
+                    emit ChoosedTool(id, SceneObject::ElArc);
                 });
                 break;
             }

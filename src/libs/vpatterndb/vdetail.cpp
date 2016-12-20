@@ -404,6 +404,7 @@ QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
             }
             break;
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
@@ -448,6 +449,7 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
             }
             break;
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {

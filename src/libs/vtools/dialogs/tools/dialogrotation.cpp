@@ -190,10 +190,12 @@ void DialogRotation::ShowDialog(bool click)
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
+        scene->ToggleElArcSelection(false);
         scene->ToggleSplineSelection(false);
         scene->ToggleSplinePathSelection(false);
 
         scene->ToggleArcHover(false);
+        scene->ToggleElArcHover(false);
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 

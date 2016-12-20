@@ -46,6 +46,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -59,6 +60,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "nodeDetails/vnodearc.h"
+#include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
@@ -188,24 +190,60 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
         }
         break;
-        case (Tool::NodeSpline):
+        case (Tool::NodeElArc):
         {
-            const QSharedPointer<VAbstractCubicBezier> spline =
-                    data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
-
-            VPointF *p1 = new VPointF(spline->GetP1());
-            VPointF p2 = VPointF(spline->GetP2());
-            VPointF p3 = VPointF(spline->GetP3());
-            VPointF *p4 = new VPointF(spline->GetP4());
+            const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(det.at(i).getId());
+            VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
+            VPointF p2 = VPointF(arc->GetP2(), "A", 0, 0);
+            VPointF *center = new VPointF(arc->GetCenter());
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
 
-                BiasRotatePoint(p1, dx, dy, p, angle);
+                BiasRotatePoint(&p1, dx, dy, p, angle);
+                BiasRotatePoint(&p2, dx, dy, p, angle);
+                BiasRotatePoint(center, dx, dy, p, angle);
+            }
+
+            QLineF l1(*center, p1);
+            QLineF l2(*center, p2);
+            center->setMode(Draw::Modeling);
+            quint32 idCenter = data->AddGObject(center);
+            Q_UNUSED(idCenter);
+            VEllipticalArc *arc1 = new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
+                                                       arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
+                                                       l1.angle(), QString().setNum(l1.angle()), l2.angle(),
+                                                       QString().setNum(l2.angle()), 0, "0");
+            arc1->setMode(Draw::Modeling);
+            idObject = data->AddGObject(arc1);
+            children.append(idObject);
+
+            VEllipticalArc *arc2 = new VEllipticalArc(*arc1);
+            arc2->setMode(Draw::Modeling);
+            id = data->AddGObject(arc2);
+
+            VNodeEllipticalArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
+        }
+        break;
+        case (Tool::NodeSpline):
+        {
+            const QSharedPointer<VAbstractCubicBezier> spline =
+                    data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
+
+            QScopedPointer<VPointF> p1(new VPointF(spline->GetP1()));
+            VPointF p2 = VPointF(spline->GetP2());
+            VPointF p3 = VPointF(spline->GetP3());
+            QScopedPointer<VPointF> p4(new VPointF(spline->GetP4()));
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
+            {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
+                BiasRotatePoint(p1.data(), dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(&p3, dx, dy, p, angle);
-                BiasRotatePoint(p4, dx, dy, p, angle);
+                BiasRotatePoint(p4.data(), dx, dy, p, angle);
             }
 
             VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
@@ -216,9 +254,6 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             spl1->setMode(Draw::Modeling);
             id = data->AddGObject(spl1);
             VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
-
-            delete p4;
-            delete p1;
         }
         break;
         case (Tool::NodeSplinePath):
@@ -323,7 +358,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
             VPointF p1 = VPointF(arc->GetP1());
             VPointF p2 = VPointF(arc->GetP2());
-            VPointF *center = new VPointF(arc->GetCenter());
+            QScopedPointer<VPointF> center(new VPointF(arc->GetCenter()));
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
@@ -331,7 +366,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
 
                 BiasRotatePoint(&p1, dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
-                BiasRotatePoint(center, dx, dy, p, angle);
+                BiasRotatePoint(center.data(), dx, dy, p, angle);
             }
 
             QLineF l1(*center, p1);
@@ -341,7 +376,33 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                                   QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
             arc1->setMode(Draw::Modeling);
             data->UpdateGObject(TakeNextId(children), arc1);
-            delete center;
+        }
+        break;
+        case (Tool::NodeElArc):
+        {
+            const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(det.at(i).getId());
+            VPointF p1 = VPointF(arc->GetP1());
+            VPointF p2 = VPointF(arc->GetP2());
+            QScopedPointer<VPointF> center(new VPointF(arc->GetCenter()));
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
+            {
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+
+                BiasRotatePoint(&p1, dx, dy, p, angle);
+                BiasRotatePoint(&p2, dx, dy, p, angle);
+                BiasRotatePoint(center.data(), dx, dy, p, angle);
+            }
+
+            QLineF l1(*center, p1);
+            QLineF l2(*center, p2);
+
+            VEllipticalArc *arc1 = new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
+                                                       arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
+                                                       l1.angle(), QString().setNum(l1.angle()), l2.angle(),
+                                                       QString().setNum(l2.angle()), 0, "0");
+            arc1->setMode(Draw::Modeling);
+            data->UpdateGObject(TakeNextId(children), arc1);
         }
         break;
         case (Tool::NodeSpline):
@@ -349,25 +410,23 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             const QSharedPointer<VAbstractCubicBezier> spline =
                     data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
-            VPointF *p1 = new VPointF(spline->GetP1());
+            QScopedPointer<VPointF> p1(new VPointF(spline->GetP1()));
             VPointF p2 = VPointF(spline->GetP2());
             VPointF p3 = VPointF(spline->GetP3());
-            VPointF *p4 = new VPointF(spline->GetP4());
+            QScopedPointer<VPointF> p4(new VPointF(spline->GetP4()));
 
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
 
-                BiasRotatePoint(p1, dx, dy, p, angle);
+                BiasRotatePoint(p1.data(), dx, dy, p, angle);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
                 BiasRotatePoint(&p3, dx, dy, p, angle);
-                BiasRotatePoint(p4, dx, dy, p, angle);
+                BiasRotatePoint(p4.data(), dx, dy, p, angle);
             }
 
             VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
             data->UpdateGObject(TakeNextId(children), spl);
-            delete p1;
-            delete p4;
         }
         break;
         case (Tool::NodeSplinePath):
@@ -381,19 +440,19 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 const VSpline spline = splinePath->GetSpline(i);
 
-                VPointF *p1 = new VPointF(spline.GetP1());
+                QScopedPointer<VPointF> p1(new VPointF(spline.GetP1()));
                 VPointF p2 = VPointF(spline.GetP2());
                 VPointF p3 = VPointF(spline.GetP3());
-                VPointF *p4 = new VPointF(spline.GetP4());
+                QScopedPointer<VPointF> p4(new VPointF(spline.GetP4()));
 
                 if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
                 {
                     const QPointF p = *data->GeometricObject<VPointF>(pRotate);
 
-                    BiasRotatePoint(p1, dx, dy, p, angle);
+                    BiasRotatePoint(p1.data(), dx, dy, p, angle);
                     BiasRotatePoint(&p2, dx, dy, p, angle);
                     BiasRotatePoint(&p3, dx, dy, p, angle);
-                    BiasRotatePoint(p4, dx, dy, p, angle);
+                    BiasRotatePoint(p4.data(), dx, dy, p, angle);
                 }
 
                 VSpline spl = VSpline(*p1, p2, p3, *p4);
@@ -420,9 +479,6 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
 
                 path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
                                           spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
-
-                delete p1;
-                delete p4;
             }
             data->UpdateGObject(TakeNextId(children), path);
         }
@@ -798,19 +854,23 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VAbstractPattern *doc, con
                             Tool tool = Tool::NodePoint;
                             NodeDetail nodeType = NodeDetail::Contour;
                             QString t = doc->GetParametrString(element, "type", "NodePoint");
-                            if (t == "NodePoint")
+                            if (t == QLatin1String("NodePoint"))
                             {
                                 tool = Tool::NodePoint;
                             }
-                            else if (t == "NodeArc")
+                            else if (t == QLatin1String("NodeArc"))
                             {
                                 tool = Tool::NodeArc;
                             }
-                            else if (t == "NodeSpline")
+                            else if (t == QLatin1String("NodeElArc"))
+                            {
+                                tool = Tool::NodeElArc;
+                            }
+                            else if (t == QLatin1String("NodeSpline"))
                             {
                                 tool = Tool::NodeSpline;
                             }
-                            else if (t == "NodeSplinePath")
+                            else if (t == QLatin1String("NodeSplinePath"))
                             {
                                 tool = Tool::NodeSplinePath;
                             }
@@ -957,6 +1017,7 @@ void VToolUnionDetails::IncrementReferences(const VDetail &d) const
                 break;
             }
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
                 doc->IncrementReferens(d.at(i).getId());
@@ -982,6 +1043,7 @@ void VToolUnionDetails::DecrementReferences(const VDetail &d) const
                 break;
             }
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
                 doc->DecrementReferens(d.at(i).getId());

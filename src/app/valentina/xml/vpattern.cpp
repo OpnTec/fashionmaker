@@ -45,6 +45,7 @@
 #include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -535,7 +536,8 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
     QStringList types = QStringList() << VAbstractPattern::NodePoint
                                       << VAbstractPattern::NodeArc
                                       << VAbstractPattern::NodeSpline
-                                      << VAbstractPattern::NodeSplinePath;
+                                      << VAbstractPattern::NodeSplinePath
+                                      << VAbstractPattern::NodeElArc;
     switch (types.indexOf(t))
     {
         case 0: // NodePoint
@@ -549,6 +551,9 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
             break;
         case 3: // NodeSplinePath
             tool = Tool::NodeSplinePath;
+            break;
+        case 4: // NodeElArc
+            tool = Tool::NodeElArc;
             break;
         default:
             VException e(tr("Wrong tag name '%1'.").arg(t));
@@ -2695,6 +2700,41 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Document &parse)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        VEllipticalArc *arc = nullptr;
+        try
+        {
+            arc = new VEllipticalArc(*data->GeometricObject<VEllipticalArc>(idObject));
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
+        arc->setIdObject(idObject);
+        arc->setMode(Draw::Modeling);
+        data->UpdateGObject(id, arc);
+        VNodeEllipticalArc::Create(this, data, id, idObject, parse, Source::FromFile, "", idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating modeling elliptical arc"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -3136,12 +3176,16 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of elliptical arc is empty");
 
-    QStringList arcs = QStringList() << VToolEllipticalArc::ToolType;            /*0*/
+    const QStringList arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
+                                           << VNodeEllipticalArc::ToolType; /*1*/
 
     switch (arcs.indexOf(type))
     {
         case 0: //VToolArc::ToolType
             ParseToolEllipticalArc(scene, domElement, parse);
+            break;
+        case 1: //VNodeEllipticalArc::ToolType
+            ParseNodeEllipticalArc(domElement, parse);
             break;
         default:
             VException e(tr("Unknown elliptical arc type '%1'.").arg(type));
@@ -3776,7 +3820,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were used.");
 
     QRectF rec;
 
@@ -3905,6 +3949,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Piece:
                 case Tool::UnionDetails:
                 case Tool::NodeArc:
+                case Tool::NodeElArc:
                 case Tool::NodePoint:
                 case Tool::NodeSpline:
                 case Tool::NodeSplinePath:

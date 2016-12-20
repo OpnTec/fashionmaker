@@ -57,7 +57,7 @@ class VTranslateMeasurements;
 #define DefPointRadius 1.5//mm
 
 enum class NodeDetail : char { Contour, Modeling };
-enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
+enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
 enum class MeasurementsType : char { Standard, Individual , Unknown};
 enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : char { FromGui, FromFile, FromTool };
@@ -114,6 +114,7 @@ enum class Tool : ToolVisHolderType
     PiecePath,
     NodePoint,
     NodeArc,
+    NodeElArc,
     NodeSpline,
     NodeSplinePath,
     Height,

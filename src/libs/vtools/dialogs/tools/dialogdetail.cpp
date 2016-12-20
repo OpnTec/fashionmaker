@@ -193,6 +193,9 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
             case (SceneObject::Arc):
                 NewItem(id, Tool::NodeArc, NodeDetail::Contour);
                 break;
+            case (SceneObject::ElArc):
+                NewItem(id, Tool::NodeElArc, NodeDetail::Contour);
+                break;
             case (SceneObject::Point):
                 NewItem(id, Tool::NodePoint, NodeDetail::Contour);
                 break;
@@ -394,6 +397,7 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     {
         case (Tool::NodePoint):
         case (Tool::NodeArc):
+        case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
         {

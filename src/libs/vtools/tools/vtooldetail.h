@@ -83,6 +83,7 @@ public:
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static const QString NodeArc;
+    static const QString NodeElArc;
     static const QString NodePoint;
     static const QString NodeSpline;
     static const QString NodeSplinePath;
