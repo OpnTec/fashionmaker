@@ -31,11 +31,13 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "nodeDetails/vnodearc.h"
+#include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
 #include "nodeDetails/vtoolpiecepath.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vpointf.h"
@@ -104,6 +106,12 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
             {
                 id = CreateNode<VArc>(data, nodeD.GetId());
                 VNodeArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+            }
+            break;
+            case (Tool::NodeElArc):
+            {
+                id = CreateNode<VEllipticalArc>(data, nodeD.GetId());
+                VNodeEllipticalArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSpline):
@@ -736,6 +744,7 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
                 break;
             }
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
                 doc->IncrementReferens(detail.GetPath().at(i).GetId());

@@ -577,7 +577,8 @@ VPieceNode VPattern::ParseSANode(const QDomElement &domElement) const
     const QStringList types = QStringList() << VAbstractPattern::NodePoint
                                             << VAbstractPattern::NodeArc
                                             << VAbstractPattern::NodeSpline
-                                            << VAbstractPattern::NodeSplinePath;
+                                            << VAbstractPattern::NodeSplinePath
+                                            << VAbstractPattern::NodeElArc;
 
     switch (types.indexOf(t))
     {
@@ -592,6 +593,9 @@ VPieceNode VPattern::ParseSANode(const QDomElement &domElement) const
             break;
         case 3: // VAbstractPattern::NodeSplinePath
             tool = Tool::NodeSplinePath;
+            break;
+        case 4: // NodeElArc
+            tool = Tool::NodeElArc;
             break;
         default:
             VException e(tr("Wrong tag name '%1'.").arg(t));
