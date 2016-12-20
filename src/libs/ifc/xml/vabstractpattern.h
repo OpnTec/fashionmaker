@@ -175,6 +175,7 @@ public:
     static const QString TagLine;
     static const QString TagSpline;
     static const QString TagArc;
+    static const QString TagElArc;
     static const QString TagTools;
     static const QString TagOperation;
     static const QString TagGradation;
@@ -360,6 +361,7 @@ private:
     QStringList ListExpressions() const;
     QStringList ListPointExpressions() const;
     QStringList ListArcExpressions() const;
+    QStringList ListElArcExpressions() const;
     QStringList ListSplineExpressions() const;
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;

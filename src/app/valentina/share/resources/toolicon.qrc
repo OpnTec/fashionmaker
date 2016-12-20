@@ -74,6 +74,8 @@
         <file>toolicon/32x32/flipping_axis@2x.png</file>
         <file>toolicon/32x32/move.png</file>
         <file>toolicon/32x32/move@2x.png</file>
+        <file>toolicon/32x32/el_arc.png</file>
+        <file>toolicon/32x32/el_arc@2x.png</file>
         <file>toolicon/32x32/path.png</file>
         <file>toolicon/32x32/path@2x.png</file>
     </qresource>

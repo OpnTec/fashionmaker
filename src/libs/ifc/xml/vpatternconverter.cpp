@@ -192,6 +192,8 @@ QString VPatternConverter::XSDSchema(int ver) const
             return QStringLiteral("://schema/pattern/v0.3.7.xsd");
         case (0x000308):
             return QStringLiteral("://schema/pattern/v0.3.8.xsd");
+        case (0x000309):
+            return QStringLiteral("://schema/pattern/v0.3.9.xsd");
         case (0x000400):
             return CurrentSchema;
         default:
@@ -292,9 +294,12 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000308), fileName);
                 V_FALLTHROUGH
             case (0x000308):
+                ToV0_3_9();
+                ValidateXML(XSDSchema(0x000309), fileName);
+                V_FALLTHROUGH
+            case (0x000309):
                 ToV0_4_0();
                 ValidateXML(XSDSchema(0x000400), fileName);
-                V_FALLTHROUGH
             case (0x000400):
                 break;
             default:
@@ -565,6 +570,13 @@ void VPatternConverter::ToV0_3_8()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.8"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_3_9()
+{
+    SetVersion(QStringLiteral("0.3.9"));
     Save();
 }
 

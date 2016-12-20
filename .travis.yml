@@ -1,72 +1,99 @@
 language: cpp
-
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      compiler: clang
-    - os: osx
-      compiler: clang
-
+  - os: linux
+    dist: trusty
+    sudo: required
+    compiler: clang
+    env: DEPLOY=false
+    cache:
+    - ccache
+    directories:
+      - '$HOME/.sonar/cache'
+  - os: osx
+    compiler: clang
+    env: DEPLOY=true
 before_install:
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-get -qq update;
-      sudo apt-get install -y qtbase5-dev;
-      sudo apt-get install -y libqt5svg5-dev;
-      sudo apt-get install -y qt5-default;
-      sudo apt-get install -y qttools5-dev-tools;
-      sudo apt-get install -y libqt5xmlpatterns5-dev;
-      sudo apt-get install -y libqt5core5a;
-      sudo apt-get install -y libqt5gui5;
-      sudo apt-get install -y libqt5printsupport5;
-      sudo apt-get install -y libqt5svg5;
-      sudo apt-get install -y libqt5widgets5;
-      sudo apt-get install -y libqt5xml5;
-      sudo apt-get install -y libqt5xmlpatterns5;
-      sudo apt-get install -y xpdf;
-      sudo apt-get install -y xvfb;
-    else
-      brew update > /dev/null;
-      brew install qt5;
-      chmod -R 755 /usr/local/opt/qt5/*
-    fi
-
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    sudo apt-get -qq update;
+    sudo apt-get install -y qtbase5-dev;
+    sudo apt-get install -y libqt5svg5-dev;
+    sudo apt-get install -y qt5-default;
+    sudo apt-get install -y qttools5-dev-tools;
+    sudo apt-get install -y libqt5xmlpatterns5-dev;
+    sudo apt-get install -y libqt5core5a;
+    sudo apt-get install -y libqt5gui5;
+    sudo apt-get install -y libqt5printsupport5;
+    sudo apt-get install -y libqt5svg5;
+    sudo apt-get install -y libqt5widgets5;
+    sudo apt-get install -y libqt5xml5;
+    sudo apt-get install -y libqt5xmlpatterns5;
+    sudo apt-get install -y xpdf;
+    sudo apt-get install -y xvfb;
+  else
+    brew update > /dev/null;
+    brew install qt5;
+    chmod -R 755 /usr/local/opt/qt5/*
+  fi
 before_script:
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      uname -a;
-      which qmake;
-    else
-      QTDIR="/usr/local/opt/qt5";
-      PATH="$QTDIR/bin:$PATH";
-      LDFLAGS=-L$QTDIR/lib;
-      CPPFLAGS=-I$QTDIR/include;
-      PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig;
-    fi
-  - mkdir build
-  - cd build
-  - pwd
-  - qmake --version
-  - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
-
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    uname -a;
+    which qmake;
+  else
+    QTDIR="/usr/local/opt/qt5";
+    PATH="$QTDIR/bin:$PATH";
+    LDFLAGS=-L$QTDIR/lib;
+    CPPFLAGS=-I$QTDIR/include;
+    PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig;
+  fi
+- mkdir build
+- cd build
+- pwd
+- qmake --version
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+  else
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
+  fi
 script:
-  - $CXX --version
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      make -j$(nproc)
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/home/travis/build/dismine/Valentina/build/src/libs/vpropertyexplorer/bin:/home/travis/build/dismine/Valentina/build/src/libs/qmuparser/bin";
-      xvfb-run -a make --silent check TESTARGS="-silent";
-    else
-      make -j1
-    fi  
-
+- $CXX --version
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
+    xvfb-run -a make --silent check TESTARGS="-silent";
+    cd ..;
+    sonar-scanner;
+  else
+    make -j1;
+  fi  
 notifications:
-   email:
-     recipients:
-        - dismine@gmail.com
-        - susan.spencer@gmail.com
-     on_success: change
-     on_failure: always
-
+  email:
+    recipients:
+    - dismine@gmail.com
+    - susan.spencer@gmail.com
+    on_success: change
+    on_failure: always
+before_deploy:
+- |
+  if [[ "$DEPLOY" == "true" ]]; then
+    zip -r valentina-osx-${TRAVIS_COMMIT}.zip $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app/ -x "*.DS_Store";
+  fi
+deploy:
+  provider: bintray
+  skip_cleanup: true
+  file: ../share/bintray.json
+  user: dismine
+  key:
+    secure: xVM/jvRAnn/eCpFwYGzP5x5kGKw90PhRG6cLwUIuXy1fg95OM9z8QZh/HRH/sRo4Dw3JRhjpImeXyMFC0FDtILDZa+G1qr5I5cfv87ZUmBzRGwZ6X3pXErsRbhOHNahPmtJet0OJothMP/iApbZizyO1fbsKTPcIum0SZjRCUJPE+rHay5OIJwaeVexAjyX36Y9ekjClHd3H+EP9mn45avzAYm30tHjiMLhmVUlv2d/PhuvijiYoamOSZUkCE6Q2SH/yBfJJeAixOgfyCAXXZVysCo6oCBfFswzw9Ic9X15YyQGmzYuLv8/g/1+leISVJvlMUW3BymWc3NKnpfYa2v0lHnZvNRkDFa7koxlIyNeVcdaISM5PUXW5db3K+fq7Ra854ga2PIoV7VsB5+cJg0BjDMedy4ZoxP8JMQhWgTWb29YSTPm43TO+/zSLO0Eruc6YQGYqorXGBOCWi6oxvC0ESI0mT+0iji/P96Rfz5yHdVxSh/bNj8+lSXhLYnSgDx2SMhV5+Xlwrg1iHf6VJ350dgWr8RVohHkyDD9dVcQipMarH4EhIPD5LZ5cfzAIu9NFVk77jtoFB1nC9CBYuQpv9mJ9Yafnxz8isfOgdzrcT/6NfgYvlbalDF4chWs3PhnhrZu3bVZ274gqvJiMEvnkHjdZvu62kSv5k8EDcpU=
+  dry-run: false
+  on:
+    all_branches: true
+    condition: $DEPLOY = true
+addons:
+  sonarqube:
+    token:
+      secure: oH/mO3ocMzMRXi4krBKMbskzfR5r5DwyL9d+qr3AxKqlFLojvZDXBRogn/jnceDIuajol/OI/8uMxR5k+N241jj5/iEYun9t1Lejh+VOhgIEEuzPkeAFzlLoK91LWigqNuf0vTI2laaYxO9oRUIEKoTgBkkwMeMWu/8raIvUhyKyqHMofWp/9htuqHcSav3AN/Plu6wiC3Sg6wSalu4YNbL1hQBIKuZeRVmSMkh8f9llGPy33sljYDDCZ4RcyJlvLq+Ffh95tCnp88f8cSnxju1bEOEF/5iYQXoOwtCltRMy2XbkCm4lmdPwSU4EQdZ+2b4ka/Ptb3g5zQJ/RGSf6qYjR541XntvlqS5mDa254HbENnmP27X9eopbKTdYgyjBj63XAsOY5NaKFQSKdICxTFuC8/TrYD9xWxOqgzhkO/MNJYQqkR0vubgng6OninoFKZGPo/fFAU6CQS0b+8nRGsnD7g00MfWGPoS8YCLYehVSSORMic+Oo58c6lIgxkzCLoWvzmZONqF6RQ89gdQ5fiyHvq8rhzw6EBagBIRn/S8YCfRgJce5jQ5RgK66AiJpOYGKHfRp3CLlD3pO1hz6VTGMnqn1TplFbK6CgrM4oTTBZ7fqD9+BHOWk15tsj+Pcl8Vi9SjiK+XU2tVCePuNQNYF4x2QGD2Ftmul49pF0I=

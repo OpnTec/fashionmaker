@@ -142,6 +142,7 @@
                                                                                  <xs:attribute name="axisP1" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="axisP2" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="arc" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="elArc" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="curve" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="curve1" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="curve2" type="xs:unsignedInt"></xs:attribute>
@@ -234,6 +235,20 @@
                                                                                  <xs:attribute name="length" type="xs:string"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element>
+                                                                     <xs:element name="elArc" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="angle1" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="angle2" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="rotationAngle" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="radius1" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="radius2" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="color" type="colors"></xs:attribute>
+                                                                                 <xs:attribute name="length" type="xs:string"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
                                                                      <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
                                                                            <xs:complexType>
                                                                                  <xs:sequence>
@@ -287,6 +302,15 @@
                                                                            </xs:complexType>
                                                                      </xs:element>
                                                                      <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                                     <xs:element name="elArc" minOccurs="0" maxOccurs="unbounded">
                                                                            <xs:complexType>
                                                                                  <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
                                                                                  <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>

@@ -48,6 +48,7 @@
 #include "../../../visualization/visualization.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vgobject.h"
@@ -152,10 +153,10 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                     dest.append(CreatePoint(id, idObject, calcAngle, calcLength, suffix, data));
                     break;
                 case GOType::Arc:
-                    dest.append(CreateArc(id, idObject, calcAngle, calcLength, suffix, data));
+                    dest.append(CreateArc<VArc>(id, idObject, calcAngle, calcLength, suffix, data));
                     break;
                 case GOType::EllipticalArc:
-                    //dest.append(CreateItem<VEllipticalArc>(id, idObject, angle, suffix));
+                    dest.append(CreateArc<VEllipticalArc>(id, idObject, calcAngle, calcLength, suffix, data));
                     break;
                 case GOType::Spline:
                     dest.append(CreateCurve<VSpline>(id, idObject, calcAngle, calcLength, suffix, data));
@@ -196,10 +197,10 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                 dest.at(i).my);
                     break;
                 case GOType::Arc:
-                    UpdateArc(id, idObject, calcAngle, calcLength, suffix, data, dest.at(i).id);
+                    UpdateArc<VArc>(id, idObject, calcAngle, calcLength, suffix, data, dest.at(i).id);
                     break;
                 case GOType::EllipticalArc:
-                    //dest.append(UpdateItem<VEllipticalArc>(id, idObject, oPoint, angle, suffix, data));
+                    UpdateArc<VEllipticalArc>(id, idObject, calcAngle, calcLength, suffix, data, dest.at(i).id);
                     break;
                 case GOType::Spline:
                     UpdateCurve<VSpline>(id, idObject, calcAngle, calcLength, suffix, data, dest.at(i).id);
@@ -385,11 +386,12 @@ DestinationItem VToolMove::CreatePoint(quint32 idTool, quint32 idItem, qreal ang
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class Item>
 DestinationItem VToolMove::CreateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                                        VContainer *data)
 {
-    const DestinationItem item = CreateItem<VArc>(idTool, idItem, angle, length, suffix, data);
-    data->AddArc(data->GeometricObject<VArc>(item.id), item.id);
+    const DestinationItem item = CreateItem<Item>(idTool, idItem, angle, length, suffix, data);
+    data->AddArc(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
@@ -406,11 +408,12 @@ void VToolMove::UpdatePoint(quint32 idTool, quint32 idItem, qreal angle, qreal l
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class Item>
 void VToolMove::UpdateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
                             VContainer *data, quint32 id)
 {
-    UpdateItem<VArc>(idTool, idItem, angle, length, suffix, data, id);
-    data->AddArc(data->GeometricObject<VArc>(id), id);
+    UpdateItem<Item>(idTool, idItem, angle, length, suffix, data, id);
+    data->AddArc(data->GeometricObject<Item>(id), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

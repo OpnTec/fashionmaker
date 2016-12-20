@@ -1655,6 +1655,97 @@
     </message>
 </context>
 <context>
+    <name>DialogEllipticalArc</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>Radius1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Asistent Formulă</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valoare</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Arată calcul complet în message box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Radius2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished">Primul unghi:</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished">Al doilea unghi:</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished">Punct central:</translation>
+    </message>
+    <message>
+        <source>Select center point of the arc</source>
+        <translation type="unfinished">Selectează punctul de centru pentru curbură</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Culoare:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Eroare</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Raza nu poate fii negativă</translation>
+    </message>
+    <message>
+        <source>Angles equal</source>
+        <translation type="unfinished">Unghiuri egale</translation>
+    </message>
+    <message>
+        <source>Edit radius1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished">Editează primul unghi</translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished">Editează al doilea unghi</translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogEndLine</name>
     <message>
         <source>Length</source>
@@ -2120,6 +2211,10 @@
     </message>
     <message>
         <source>curve path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5769,6 +5864,18 @@ Do you want to save your changes?</source>
         <source>Measurements have been synced</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tools for creating elliptical arcs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elliptical Arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of elliptical arc</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7783,6 +7890,14 @@ Do you want to save your changes?</source>
         <source>Error creating or updating point of line intersection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating simple elliptical arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown elliptical arc type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8132,6 +8247,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Axis type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

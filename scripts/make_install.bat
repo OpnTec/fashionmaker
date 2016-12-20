@@ -8,11 +8,7 @@ if %ARCHITECTURE%==32BIT set nsis_path="C:/Program Files/Inno Setup 5/iscc.exe"
 if %ARCHITECTURE%==64BIT set nsis_path="C:/Program Files (x86)/Inno Setup 5/iscc.exe"
 
 if not exist %nsis_path% (
-	SET package_error="Package was not created!"
-	SET /P promt="Coudn't find Inno Setup. Do you want to continue?[Y\N]"
-	IF "%promt%" == "Y" GOTO CONTINUE
-	IF "%promt%" == "y" GOTO CONTINUE
-	ELSE GOTO ONEXIT
+  echo Coudn't find Inno Setup. Package will not be created.
 )
 
 :CONTINUE
@@ -74,7 +70,6 @@ echo Failed to make the first run qmake!
 @pause
 exit /b 1 
 :ONEXIT
-echo Done! %package_error%
+echo Done!
 @pause
-
 

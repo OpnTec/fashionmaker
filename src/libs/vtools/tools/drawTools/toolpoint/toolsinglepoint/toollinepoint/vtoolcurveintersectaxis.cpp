@@ -49,6 +49,7 @@
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
@@ -327,6 +328,49 @@ void VToolCurveIntersectAxis::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class Item>
+void VToolCurveIntersectAxis::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId)
+{
+    QSharedPointer<Item> a1;
+    QSharedPointer<Item> a2;
+
+    const QSharedPointer<Item> arc = data->GeometricObject<Item>(curveId);
+    Item arc1;
+    Item arc2;
+
+    if (not VFuzzyComparePossibleNulls(segLength, -1))
+    {
+        arc->CutArc(segLength, arc1, arc2);
+    }
+    else
+    {
+        arc->CutArc(0, arc1, arc2);
+    }
+
+    // Arc highly depend on id. Need for creating the name.
+    arc1.setId(p->id() + 1);
+    arc2.setId(p->id() + 2);
+
+    if (not VFuzzyComparePossibleNulls(segLength, -1))
+    {
+        a1 = QSharedPointer<Item>(new Item(arc1));
+        a2 = QSharedPointer<Item>(new Item(arc2));
+    }
+    else
+    {
+        a1 = QSharedPointer<Item>(new Item());
+        a2 = QSharedPointer<Item>(new Item());
+
+        // Take names for empty arcs from donors.
+        a1->setName(arc1.name());
+        a2->setName(arc2.name());
+    }
+
+    data->AddArc(a1, arc1.id(), p->id());
+    data->AddArc(a2, arc2.id(), p->id());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
@@ -334,47 +378,12 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
 {
     switch(curveType)
     {
-        case GOType::Arc:
-        {
-            QSharedPointer<VArc> a1;
-            QSharedPointer<VArc> a2;
-
-            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(curveId);
-            VArc arc1;
-            VArc arc2;
-
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                arc->CutArc(segLength, arc1, arc2);
-            }
-            else
-            {
-                arc->CutArc(0, arc1, arc2);
-            }
-
-            // Arc highly depend on id. Need for creating the name.
-            arc1.setId(p->id() + 1);
-            arc2.setId(p->id() + 2);
-
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                a1 = QSharedPointer<VArc>(new VArc(arc1));
-                a2 = QSharedPointer<VArc>(new VArc(arc2));
-            }
-            else
-            {
-                a1 = QSharedPointer<VArc>(new VArc());
-                a2 = QSharedPointer<VArc>(new VArc());
-
-                // Take names for empty arcs from donors.
-                a1->setName(arc1.name());
-                a2->setName(arc2.name());
-            }
-
-            data->AddArc(a1, arc1.id(), p->id());
-            data->AddArc(a2, arc2.id(), p->id());
+        case GOType::EllipticalArc:
+            InitArc<VEllipticalArc>(data, segLength, p, curveId);
             break;
-        }
+        case GOType::Arc:
+            InitArc<VArc>(data, segLength, p, curveId);
+            break;
         case GOType::CubicBezier:
         case GOType::Spline:
         {
@@ -462,7 +471,6 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
             data->AddSpline(splP2, NULL_ID, p->id());
             break;
         }
-        case GOType::EllipticalArc:
         case GOType::Point:
         case GOType::Unknown:
             Q_UNREACHABLE();

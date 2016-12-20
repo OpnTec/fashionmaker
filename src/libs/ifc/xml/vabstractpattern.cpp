@@ -72,6 +72,7 @@ const QString VAbstractPattern::TagPoint            = QStringLiteral("point");
 const QString VAbstractPattern::TagLine             = QStringLiteral("line");
 const QString VAbstractPattern::TagSpline           = QStringLiteral("spline");
 const QString VAbstractPattern::TagArc              = QStringLiteral("arc");
+const QString VAbstractPattern::TagElArc            = QStringLiteral("elArc");
 const QString VAbstractPattern::TagTools            = QStringLiteral("tools");
 const QString VAbstractPattern::TagOperation        = QStringLiteral("operation");
 const QString VAbstractPattern::TagGradation        = QStringLiteral("gradation");
@@ -1426,8 +1427,10 @@ QStringList VAbstractPattern::ListExpressions() const
 {
     QStringList list;
 
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     list << ListPointExpressions();
     list << ListArcExpressions();
+    list << ListElArcExpressions();
     list << ListSplineExpressions();
     list << ListIncrementExpressions();
     list << ListOperationExpressions();
@@ -1439,8 +1442,9 @@ QStringList VAbstractPattern::ListExpressions() const
 QStringList VAbstractPattern::ListPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    // If no just increment a number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1510,8 +1514,9 @@ QStringList VAbstractPattern::ListPointExpressions() const
 QStringList VAbstractPattern::ListArcExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1560,6 +1565,69 @@ QStringList VAbstractPattern::ListArcExpressions() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListElArcExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagElArc);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRotationAngle));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListSplineExpressions() const
 {
     QStringList expressions;
@@ -1571,8 +1639,9 @@ QStringList VAbstractPattern::ListSplineExpressions() const
 QStringList VAbstractPattern::ListPathPointExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1637,8 +1706,9 @@ QStringList VAbstractPattern::ListIncrementExpressions() const
 QStringList VAbstractPattern::ListOperationExpressions() const
 {
     // Check if new tool doesn't bring new attribute with a formula.
-    // If no just increment number
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);

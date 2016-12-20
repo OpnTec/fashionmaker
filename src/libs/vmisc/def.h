@@ -135,6 +135,7 @@ enum class Tool : ToolVisHolderType
     FlippingByAxis,
     Move,
     Midpoint,
+    EllipticalArc,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -179,6 +180,7 @@ enum class Vis : ToolVisHolderType
     ToolFlippingByLine,
     ToolFlippingByAxis,
     ToolMove,
+    ToolEllipticalArc,
     ToolPiece,
     ToolPiecePath
 };

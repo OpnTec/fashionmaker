@@ -43,78 +43,97 @@ environment:
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
+    DEPLOY: true
   - QT5: Qt\5.7\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.7\msvc2015
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.7\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.7\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.6\mingw49_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.6\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.6\msvc2015
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.6\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.6\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.5\mingw492_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.5\msvc2013_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.5\msvc2013
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.4\mingw491_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.4\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.4\msvc2013_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.3\mingw482_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
     PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.3\msvc2013_64_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x64
+    DEPLOY: false
   - QT5: Qt\5.3\msvc2013_opengl
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 12
     PLATFORM: x86
+    DEPLOY: false
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -122,10 +141,6 @@ init:
   - path
   - set QTDIR=C:\%QT5%
   - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Mercurial\
-  # Installing various utilities
-  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" choco install -y InnoSetup
-  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "x86" set PATH="C:\Program Files\Inno Setup 5";%PATH%
-  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" if "%PLATFORM%" == "x64" set PATH="C:\Program Files (x86)\Inno Setup 5";%PATH%
   - ps: $env:VSCOMNTOOLS=(Get-Content ("env:VS" + "$env:VSVER" + "0COMNTOOLS"))
   - if NOT "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using Visual Studio %VSVER%.0 at %VSCOMNTOOLS%"
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using MinGW"
@@ -156,10 +171,6 @@ build_script:
   - qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
   - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
 
-# scripts to run after build
-after_build:
-  #- if "%QMAKE_GENERATOR%" == "MinGW Makefiles" mingw32-make install
-
 # to run your custom scripts instead of automatic tests
 test_script:
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" (mingw32-make -s check TESTARGS="-silent")
@@ -184,3 +195,30 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
+
+#---------------------------------#
+#         deployment              #
+#---------------------------------#
+
+# prepare to deploy
+after_test:
+  - if "%DEPLOY%" == "true" (mingw32-make install)
+
+artifacts:
+  - path: build/package/valentina
+    name: valentina-win-$(APPVEYOR_REPO_COMMIT)
+
+deploy:
+- provider: BinTray
+  username: dismine
+  api_key:
+    secure: dTA+b2ZVGYA7RY4ZNZwOrApyKSej12fVgRTIw557yn0gVmCSukMxjMFLCIq7Qvyq
+  subject: dismine
+  repo: Valentina
+  package: valentina-win_auto-upload
+  publish: true
+  override: true
+  version: 0.5
+  on:
+    DEPLOY: true
+  artifact: valentina-win-$(APPVEYOR_REPO_COMMIT)

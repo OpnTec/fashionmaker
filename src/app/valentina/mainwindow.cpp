@@ -319,6 +319,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnablePointSelection, sceneDraw, &VMainGraphicsScene::TogglePointSelection);
     connect(this, &MainWindow::EnableLineSelection, sceneDraw, &VMainGraphicsScene::ToggleLineSelection);
     connect(this, &MainWindow::EnableArcSelection, sceneDraw, &VMainGraphicsScene::ToggleArcSelection);
+    connect(this, &MainWindow::EnableElArcSelection, sceneDraw, &VMainGraphicsScene::ToggleElArcSelection);
     connect(this, &MainWindow::EnableSplineSelection, sceneDraw, &VMainGraphicsScene::ToggleSplineSelection);
     connect(this, &MainWindow::EnableSplinePathSelection, sceneDraw, &VMainGraphicsScene::ToggleSplinePathSelection);
 
@@ -326,6 +327,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnablePointHover, sceneDraw, &VMainGraphicsScene::TogglePointHover);
     connect(this, &MainWindow::EnableLineHover, sceneDraw, &VMainGraphicsScene::ToggleLineHover);
     connect(this, &MainWindow::EnableArcHover, sceneDraw, &VMainGraphicsScene::ToggleArcHover);
+    connect(this, &MainWindow::EnableElArcHover, sceneDraw, &VMainGraphicsScene::ToggleElArcHover);
     connect(this, &MainWindow::EnableSplineHover, sceneDraw, &VMainGraphicsScene::ToggleSplineHover);
     connect(this, &MainWindow::EnableSplinePathHover, sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
@@ -890,8 +892,23 @@ void MainWindow::ToolArc(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArc>(checked, Tool::Arc, ":/cursor/arc_cursor.png",
-                                      tr("Select point of center of arc"), &MainWindow::ClosedDrawDialogWithApply<VToolArc>,
+                                      tr("Select point of center of arc"),
+                                      &MainWindow::ClosedDrawDialogWithApply<VToolArc>,
                                       &MainWindow::ApplyDrawDialog<VToolArc>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolEllipticalArc handler tool arc.
+ * @param checked true - button checked.
+ */
+void MainWindow::ToolEllipticalArc(bool checked)
+{
+    ToolSelectPointByRelease();
+    SetToolButtonWithApply<DialogEllipticalArc>(checked, Tool::EllipticalArc, ":/cursor/el_arc_cursor.png",
+                                                tr("Select point of center of elliptical arc"),
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
+                                                &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1744,6 +1761,7 @@ void MainWindow::InitToolButtons()
     toolButtonPointerList.append(ui->toolButtonPointerArc);
     toolButtonPointerList.append(ui->toolButtonPointerDetail);
     toolButtonPointerList.append(ui->toolButtonPointerOperations);
+    toolButtonPointerList.append(ui->toolButtonPointerEllipticalArc);
 
     for (auto pointer : toolButtonPointerList)
     {
@@ -1751,7 +1769,7 @@ void MainWindow::InitToolButtons()
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Check if all tools were connected.");
 
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -1796,6 +1814,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
+    connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1823,7 +1842,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1978,6 +1997,9 @@ void MainWindow::CancelTool()
         case Tool::Move:
             ui->toolButtonMove->setChecked(false);
             break;
+        case Tool::EllipticalArc:
+            ui->toolButtonEllipticalArc->setChecked(false);
+            break;
     }
 
     // Crash: using CRTL+Z while using line tool.
@@ -2010,6 +2032,7 @@ void  MainWindow::ArrowTool()
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
     emit EnableNodeLabelSelection(true);
@@ -2021,6 +2044,7 @@ void  MainWindow::ArrowTool()
     emit EnablePointHover(true);
     emit EnableLineHover(true);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
     emit EnableNodeLabelHover(true);
@@ -3028,7 +3052,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3068,6 +3092,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonFlippingByAxis->setEnabled(drawTools);
     ui->toolButtonMove->setEnabled(drawTools);
     ui->toolButtonMidpoint->setEnabled(drawTools);
+    ui->toolButtonEllipticalArc->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3349,7 +3374,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3534,6 +3559,10 @@ void MainWindow::LastUsedTool()
         case Tool::Move:
             ui->toolButtonMove->setChecked(true);
             ToolMove(true);
+            break;
+        case Tool::EllipticalArc:
+            ui->toolButtonEllipticalArc->setChecked(true);
+            ToolEllipticalArc(true);
             break;
     }
 }
@@ -4751,6 +4780,7 @@ void MainWindow::ToolSelectPoint() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4759,6 +4789,7 @@ void MainWindow::ToolSelectPoint() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4787,6 +4818,7 @@ void MainWindow::ToolSelectSpline() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4795,6 +4827,7 @@ void MainWindow::ToolSelectSpline() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(false);
 
@@ -4811,6 +4844,7 @@ void MainWindow::ToolSelectSplinePath() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4819,6 +4853,7 @@ void MainWindow::ToolSelectSplinePath() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(false);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
 
@@ -4835,6 +4870,7 @@ void MainWindow::ToolSelectArc() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4843,6 +4879,33 @@ void MainWindow::ToolSelectArc() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(false);
+    emit EnableSplineHover(false);
+    emit EnableSplinePathHover(false);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectElArc() const
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+
+    // Hovering
+    emit EnableLabelHover(false);
+    emit EnablePointHover(false);
+    emit EnableLineHover(false);
+    emit EnableArcHover(false);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4859,6 +4922,7 @@ void MainWindow::ToolSelectPointArc() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4867,6 +4931,7 @@ void MainWindow::ToolSelectPointArc() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(false);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
@@ -4883,6 +4948,7 @@ void MainWindow::ToolSelectCurve() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4891,6 +4957,7 @@ void MainWindow::ToolSelectCurve() const
     emit EnablePointHover(false);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 
@@ -4907,6 +4974,7 @@ void MainWindow::ToolSelectAllDrawObjects() const
     emit EnablePointSelection(false);
     emit EnableLineSelection(false);
     emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
 
@@ -4915,6 +4983,7 @@ void MainWindow::ToolSelectAllDrawObjects() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 
@@ -4931,6 +5000,7 @@ void MainWindow::ToolSelectOperationObjects() const
     emit EnablePointSelection(true);
     emit EnableLineSelection(false);
     emit EnableArcSelection(true);
+    emit EnableElArcSelection(true);
     emit EnableSplineSelection(true);
     emit EnableSplinePathSelection(true);
 
@@ -4939,6 +5009,7 @@ void MainWindow::ToolSelectOperationObjects() const
     emit EnablePointHover(true);
     emit EnableLineHover(false);
     emit EnableArcHover(true);
+    emit EnableElArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 

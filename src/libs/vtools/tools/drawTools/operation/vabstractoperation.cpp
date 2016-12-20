@@ -330,6 +330,18 @@ void VAbstractOperation::AllowArcSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::AllowElArcHover(bool enabled)
+{
+    AllowCurveHover(enabled, GOType::EllipticalArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::AllowElArcSelecting(bool enabled)
+{
+    AllowCurveSelecting(enabled, GOType::EllipticalArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
@@ -575,7 +587,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::Arc:
             case GOType::EllipticalArc:
             {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), GOType::Arc);
+                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
                 connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Arc);
@@ -585,7 +597,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::Spline:
             case GOType::CubicBezier:
             {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), GOType::Spline);
+                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
                 connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Spline);
@@ -595,7 +607,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::SplinePath:
             case GOType::CubicBezierPath:
             {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), GOType::SplinePath);
+                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
                 connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::SplinePath);
