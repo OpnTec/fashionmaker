@@ -475,7 +475,7 @@ VSimpleCurve *VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType
     curve->setParentItem(this);
     curve->SetType(curveType);
     connect(curve, &VSimpleCurve::Selected, this, &VAbstractOperation::ObjectSelected);
-    connect(curve, &VSimpleCurve::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent * event)
+    connect(curve, &VSimpleCurve::ShowContextMenu, RECEIVER(this)[this](QGraphicsSceneContextMenuEvent * event)
     {
         contextMenuEvent(event);
     });
@@ -569,12 +569,13 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                                        *VAbstractTool::data.GetPatternUnit(), &factor);
                 point->setParentItem(this);
                 point->SetType(GOType::Point);
-                connect(point, &VSimplePoint::Choosed, [this](quint32 id)
+                connect(point, &VSimplePoint::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Point);
                 });
                 connect(point, &VSimplePoint::Selected, this, &VAbstractOperation::ObjectSelected);
-                connect(point, &VSimplePoint::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent * event)
+                connect(point, &VSimplePoint::ShowContextMenu,
+                        RECEIVER(this)[this](QGraphicsSceneContextMenuEvent * event)
                 {
                     contextMenuEvent(event);
                 });
@@ -587,7 +588,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::Arc:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Arc);
                 });
@@ -596,7 +597,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::EllipticalArc:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::ElArc);
                 });
@@ -606,7 +607,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::CubicBezier:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Spline);
                 });
@@ -616,7 +617,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::CubicBezierPath:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::SplinePath);
                 });

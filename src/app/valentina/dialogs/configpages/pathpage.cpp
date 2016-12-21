@@ -233,7 +233,7 @@ void PathPage::InitTable()
     pathTable->resizeRowsToContents();
     pathTable->horizontalHeader()->setStretchLastSection(true);
 
-    connect(pathTable, &QTableWidget::itemSelectionChanged, [this]()
+    connect(pathTable, &QTableWidget::itemSelectionChanged, RECEIVER(this)[this]()
     {
         defaultButton->setEnabled(true);
         defaultButton->setDefault(false);

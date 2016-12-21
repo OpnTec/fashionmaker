@@ -168,7 +168,7 @@ void ConfigDialog::createIcons()
     createIcon("://icon/path_config.png", tr("Paths"));
 
     connect(contentsWidget, &QListWidget::currentItemChanged,
-            [this](QListWidgetItem *current, QListWidgetItem *previous)
+            RECEIVER(this)[this](QListWidgetItem *current, QListWidgetItem *previous)
     {
         if (current == nullptr)
         {

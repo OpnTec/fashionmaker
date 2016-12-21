@@ -50,7 +50,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this]()
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
     {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {
@@ -58,7 +58,8 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
         }
     });
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutTape::close);
-    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, [](){
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
+    {
         FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
     });
 

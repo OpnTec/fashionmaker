@@ -71,7 +71,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
 
     createIcons();
     connect(contentsWidget, &QListWidget::currentItemChanged,
-            [this](QListWidgetItem *current, QListWidgetItem *previous)
+            RECEIVER(this)[this](QListWidgetItem *current, QListWidgetItem *previous)
     {
         if (current == nullptr)
         {

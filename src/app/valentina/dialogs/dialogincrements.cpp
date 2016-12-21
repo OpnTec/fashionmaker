@@ -110,15 +110,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited,  [this](const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this](){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [this](){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textEdited, RECEIVER(this)[this](const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, RECEIVER(this)[this](){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, RECEIVER(this)[this](){search->FindNext();});
 
-    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
     {
         ui->toolButtonFindPrevious->setEnabled(state);
     });
-    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
     {
         ui->toolButtonFindNext->setEnabled(state);
     });

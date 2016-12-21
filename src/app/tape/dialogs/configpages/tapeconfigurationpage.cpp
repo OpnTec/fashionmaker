@@ -181,7 +181,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     {
         langCombo->setCurrentIndex(index);
     }
-    connect(langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this]()
+    connect(langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), RECEIVER(this)[this]()
     {
         langChanged = true;
     });
@@ -231,7 +231,7 @@ QGroupBox *TapeConfigurationPage::PMSystemGroup()
 
     pmSystemLayout->addRow(systemBookLabel, systemBookValueLabel);
 
-    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this]()
+    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), RECEIVER(this)[this]()
     {
         systemChanged = true;
     #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
@@ -285,7 +285,7 @@ QGroupBox *TapeConfigurationPage::GradationGroup()
         defGradationChanged = true;
     };
 
-    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), RECEIVER(this)
             DefGradationChanged);
     gradationLayout->addRow(defHeightLabel, defHeightCombo);
 
@@ -298,7 +298,7 @@ QGroupBox *TapeConfigurationPage::GradationGroup()
     {
         defSizeCombo->setCurrentIndex(index);
     }
-    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), RECEIVER(this)
             DefGradationChanged);
     gradationLayout->addRow(defSizeLabel, defSizeCombo);
 

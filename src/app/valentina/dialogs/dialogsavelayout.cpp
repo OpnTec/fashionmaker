@@ -97,9 +97,10 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + Format());
     };
 
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, ShowExample);
-    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, [this]()
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, RECEIVER(this)ShowExample);
+    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            RECEIVER(this)ShowExample);
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, RECEIVER(this)[this]()
     {
         const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"),
                                                               qApp->ValentinaSettings()->GetPathLayout(),

@@ -84,7 +84,9 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent *event) {
+    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
+            RECEIVER(this)[this](QGraphicsSceneContextMenuEvent *event)
+    {
         emit ShowContextMenu(event);
     });
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
