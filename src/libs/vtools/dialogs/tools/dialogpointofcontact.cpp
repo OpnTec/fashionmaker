@@ -347,7 +347,7 @@ quint32 DialogPointOfContact::getCenter() const
  */
 quint32 DialogPointOfContact::GetFirstPoint() const
 {
-    return getCurrentObjectId(ui->comboBoxFirstPoint);;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1006,7 +1006,7 @@ void DialogPatternXmlEdit::ElementClicked ( const QModelIndex & index )
     }
     if (item2->GetelementType() == VXMLTreeElement::TypeRoot)
     {
-        ui->label_type_value->setText(tr("Root node"));;
+        ui->label_type_value->setText(tr("Root node"));
         ui->pushButton_Add_son->setEnabled(true);
     }
     else if (item2->GetelementType() == VXMLTreeElement::TypeNode)
