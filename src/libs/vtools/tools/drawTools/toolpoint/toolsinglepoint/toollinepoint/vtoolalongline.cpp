@@ -206,7 +206,7 @@ void VToolAlongLine::ShowVisualization(bool show)
  */
 void VToolAlongLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);

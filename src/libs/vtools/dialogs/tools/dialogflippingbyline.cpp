@@ -120,7 +120,7 @@ void DialogFlippingByLine::SetSecondLinePointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxSecondLinePoint, value);
     VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetSecondLinePointId(value);
 }
 
