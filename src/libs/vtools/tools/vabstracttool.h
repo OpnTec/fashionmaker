@@ -182,7 +182,7 @@ inline void VAbstractTool::AddVisualization()
     connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
     scene->addItem(visual);
 
-    connect(visual, &Visualization::ToolTip, [=] (const QString &toolTip) {emit ToolTip(toolTip);});
+    connect(visual, &Visualization::ToolTip, [this] (const QString &toolTip) {emit ToolTip(toolTip);});
     vis = visual;
 }
 

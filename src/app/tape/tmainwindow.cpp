@@ -1969,9 +1969,9 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textChanged, [=] (const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textChanged, [this] (const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this] (){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, [this] (){search->FindNext();});
 
     connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
     {

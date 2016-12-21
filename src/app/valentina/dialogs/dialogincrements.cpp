@@ -110,9 +110,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited,  [=](const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=](){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=](){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textEdited,  [this](const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this](){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, [this](){search->FindNext();});
 
     connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
     {

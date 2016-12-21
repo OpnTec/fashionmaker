@@ -404,7 +404,7 @@ void DialogEditWrongFormula::InitVariables()
     Measurements();
 
     // clear text filter every time when new radio button selected
-    auto ClearFilterFormulaInputs = [=] () { ui->filterFormulaInputs->clear(); };
+    auto ClearFilterFormulaInputs = [this] () { ui->filterFormulaInputs->clear(); };
 
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, ClearFilterFormulaInputs);
