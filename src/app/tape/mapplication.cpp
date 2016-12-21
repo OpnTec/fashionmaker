@@ -436,18 +436,15 @@ bool MApplication::event(QEvent *e)
         case QEvent::FileOpen:
         {
             QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            if(fileOpenEvent)
+            const QString macFileOpen = fileOpenEvent->file();
+            if(not macFileOpen.isEmpty())
             {
-                const QString macFileOpen = fileOpenEvent->file();
-                if(not macFileOpen.isEmpty())
+                TMainWindow *mw = MainWindow();
+                if (mw)
                 {
-                    TMainWindow *mw = MainWindow();
-                    if (mw)
-                    {
-                        mw->LoadFile(macFileOpen);  // open file in existing window
-                    }
-                    return true;
+                    mw->LoadFile(macFileOpen);  // open file in existing window
                 }
+                return true;
             }
             break;
         }
