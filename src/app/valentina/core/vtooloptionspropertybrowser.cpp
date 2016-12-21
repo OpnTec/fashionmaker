@@ -153,10 +153,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             ShowOptionsToolTriangle(item);
             break;
         case VGraphicsSimpleTextItem::Type:
-            currentItem = item->parentItem();
-            ShowItemOptions(currentItem);
-            break;
         case VControlPointSpline::Type:
+        case VSimplePoint::Type:
+        case VSimpleCurve::Type:
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
             break;
@@ -171,14 +170,6 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             break;
         case VToolPointFromArcAndTangent::Type:
             ShowOptionsToolPointFromArcAndTangent(item);
-            break;
-        case VSimplePoint::Type:
-            currentItem = item->parentItem();
-            ShowItemOptions(currentItem);
-            break;
-        case VSimpleCurve::Type:
-            currentItem = item->parentItem();
-            ShowItemOptions(currentItem);
             break;
         case VToolTrueDarts::Type:
             ShowOptionsToolTrueDarts(item);
@@ -289,8 +280,6 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             UpdateOptionsToolTriangle();
             break;
         case VGraphicsSimpleTextItem::Type:
-            ShowItemOptions(currentItem->parentItem());
-            break;
         case VControlPointSpline::Type:
             ShowItemOptions(currentItem->parentItem());
             break;
