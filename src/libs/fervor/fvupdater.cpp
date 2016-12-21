@@ -555,18 +555,21 @@ bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
         case 0: // Q_OS_LINUX
 #ifdef Q_OS_LINUX // Defined on Linux.
             return true;
+#else
+            return false;
 #endif
-            break;
         case 1: // Q_OS_MAC
 #ifdef Q_OS_MAC // Defined on MAC OS (synonym for Darwin).
             return true;
+#else
+            return false;
 #endif
-            break;
         case 2: // Q_OS_WIN32
 #ifdef Q_OS_WIN32 // Defined on all supported versions of Windows.
             return true;
+#else
+            return false;
 #endif
-            break;
         default:
             break;
     }
