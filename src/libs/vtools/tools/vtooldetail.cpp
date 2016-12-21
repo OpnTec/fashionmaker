@@ -1229,7 +1229,7 @@ void VToolDetail::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::DeleteTool(bool ask)
 {
-    DeleteDetail *delDet = new DeleteDetail(doc, id, VAbstractTool::data.GetDetail(id));
+    QScopedPointer<DeleteDetail> delDet(new DeleteDetail(doc, id, VAbstractTool::data.GetDetail(id)));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)
@@ -1237,9 +1237,9 @@ void VToolDetail::DeleteTool(bool ask)
             return;
         }
         /* If UnionDetails tool delete detail no need emit FullParsing.*/
-        connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+        connect(delDet.data(), &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
-    qApp->getUndoStack()->push(delDet);
+    qApp->getUndoStack()->push(delDet.take());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
     VExceptionToolWasDeleted e("Tool was used after deleting.");
