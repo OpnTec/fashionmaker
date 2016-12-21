@@ -20,8 +20,6 @@
 
 #include "vpointfproperty.h"
 
-using namespace VPE;
-
 #include <QFlags>
 #include <QForeachContainer>
 #include <QList>
@@ -49,7 +47,7 @@ VPE::VPointFProperty::VPointFProperty(const QString &name)
     setValue(QPointF());
 }
 
-QVariant VPointFProperty::data(int column, int role) const
+QVariant VPE::VPointFProperty::data(int column, int role) const
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
@@ -59,7 +57,7 @@ QVariant VPointFProperty::data(int column, int role) const
         return VProperty::data(column, role);
 }
 
-Qt::ItemFlags VPointFProperty::flags(int column) const
+Qt::ItemFlags VPE::VPointFProperty::flags(int column) const
 {
     if (column == DPC_Name || column == DPC_Data)
     {
@@ -69,7 +67,7 @@ Qt::ItemFlags VPointFProperty::flags(int column) const
         return Qt::NoItemFlags;
 }
 
-QPointF VPointFProperty::getPointF() const
+QPointF VPE::VPointFProperty::getPointF() const
 {
     QPointF tmpValue;
 
@@ -84,12 +82,12 @@ QPointF VPointFProperty::getPointF() const
     return tmpValue;
 }
 
-void VPointFProperty::setPointF(const QPointF &point)
+void VPE::VPointFProperty::setPointF(const QPointF &point)
 {
     setPointF(point.x(), point.y());
 }
 
-void VPointFProperty::setPointF(qreal x, qreal y)
+void VPE::VPointFProperty::setPointF(qreal x, qreal y)
 {
     if (d_ptr->Children.count() < 2)
     {
@@ -106,12 +104,12 @@ void VPointFProperty::setPointF(qreal x, qreal y)
     d_ptr->Children.at(1)->setValue(tmpY);
 }
 
-QString VPointFProperty::type() const
+QString VPE::VPointFProperty::type() const
 {
     return "pointF";
 }
 
-VProperty *VPointFProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *container) const
 {
     if (!container)
     {
@@ -131,13 +129,13 @@ VProperty *VPointFProperty::clone(bool include_children, VProperty *container) c
     return VProperty::clone(false, container);  // Child
 }
 
-void VPointFProperty::setValue(const QVariant &value)
+void VPE::VPointFProperty::setValue(const QVariant &value)
 {
     QPointF tmpPoint = value.toPointF();
     setPointF(tmpPoint);
 }
 
-QVariant VPointFProperty::getValue() const
+QVariant VPE::VPointFProperty::getValue() const
 {
     QPointF tmpValue = getPointF();
     return QString("%1,%2").arg(QString::number(tmpValue.x()), QString::number(tmpValue.y()));

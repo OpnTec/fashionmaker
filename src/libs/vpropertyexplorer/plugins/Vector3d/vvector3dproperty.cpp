@@ -20,8 +20,6 @@
 
 #include "vvector3dproperty.h"
 
-using namespace VPE;
-
 #include <QFlags>
 #include <QForeachContainer>
 #include <QList>
@@ -30,7 +28,7 @@ using namespace VPE;
 #include "../../vproperty_p.h"
 #include "../vnumberproperty.h"
 
-QVector3DProperty::QVector3DProperty(const QString& name)
+VPE::QVector3DProperty::QVector3DProperty(const QString& name)
     : VProperty(name, QVariant::String) // todo: QVariant::Vector3D??
 {
     QVariant tmpFloat(0); tmpFloat.convert(QVariant::Double);
@@ -42,7 +40,7 @@ QVector3DProperty::QVector3DProperty(const QString& name)
 
 
 //! Get the data how it should be displayed
-QVariant QVector3DProperty::data (int column, int role) const
+QVariant VPE::QVector3DProperty::data (int column, int role) const
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
@@ -56,7 +54,7 @@ QVariant QVector3DProperty::data (int column, int role) const
 }
 
 //! Returns item flags
-Qt::ItemFlags QVector3DProperty::flags(int column) const
+Qt::ItemFlags VPE::QVector3DProperty::flags(int column) const
 {
     if (column == DPC_Name || column == DPC_Data)
     {
@@ -68,7 +66,7 @@ Qt::ItemFlags QVector3DProperty::flags(int column) const
 
 
 //! Returns the Vector3d
-Vector3D QVector3DProperty::getVector() const
+VPE::Vector3D VPE::QVector3DProperty::getVector() const
 {
     Vector3D tmpVect;
 
@@ -85,12 +83,12 @@ Vector3D QVector3DProperty::getVector() const
 }
 
 //! Sets the Vector3d
-void QVector3DProperty::setVector(const Vector3D &vect)
+void VPE::QVector3DProperty::setVector(const Vector3D &vect)
 {
     setVector(vect.X, vect.Y, vect.Z);
 }
 
-void QVector3DProperty::setVector(double x, double y, double z)
+void VPE::QVector3DProperty::setVector(double x, double y, double z)
 {
     if (d_ptr->Children.count() < 3)
     {
@@ -105,12 +103,12 @@ void QVector3DProperty::setVector(double x, double y, double z)
     d_ptr->Children.at(2)->setValue(tmpZ);
 }
 
-QString QVector3DProperty::type() const
+QString VPE::QVector3DProperty::type() const
 {
     return "vector3d";
 }
 
-VProperty* QVector3DProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* container) const
 {
     if (!container)
     {
@@ -130,7 +128,7 @@ VProperty* QVector3DProperty::clone(bool include_children, VProperty* container)
     return VProperty::clone(false, container);  // Child
 }
 
-void QVector3DProperty::setValue(const QVariant &value)
+void VPE::QVector3DProperty::setValue(const QVariant &value)
 {
     QStringList tmpStrings = value.toString().split(",");
     if (tmpStrings.count() == 3)
@@ -140,7 +138,7 @@ void QVector3DProperty::setValue(const QVariant &value)
 
 }
 
-QVariant QVector3DProperty::getValue() const
+QVariant VPE::QVector3DProperty::getValue() const
 {
     Vector3D tmpVect = getVector();
     return QString("%1,%2,%3").arg(QString::number(tmpVect.X), QString::number(tmpVect.Y), QString::number(tmpVect.Z));

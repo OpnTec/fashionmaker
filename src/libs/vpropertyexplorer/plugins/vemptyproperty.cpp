@@ -35,27 +35,25 @@ namespace VPE {
 class VPropertyPrivate;
 }  // namespace VPE
 
-using namespace VPE;
-
-VEmptyProperty::VEmptyProperty(const QString& name)
+VPE::VEmptyProperty::VEmptyProperty(const QString& name)
     : VProperty(name, QVariant::Invalid)
 {
 }
 
 
-VEmptyProperty::VEmptyProperty(VPropertyPrivate *d)
+VPE::VEmptyProperty::VEmptyProperty(VPropertyPrivate *d)
     : VProperty(d)
 {
 }
 
 
-VEmptyProperty::~VEmptyProperty()
+VPE::VEmptyProperty::~VEmptyProperty()
 {
     //
 }
 
 //! Get the data how it should be displayed
-QVariant VEmptyProperty::data (int column, int role) const
+QVariant VPE::VEmptyProperty::data (int column, int role) const
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
@@ -74,8 +72,8 @@ QVariant VEmptyProperty::data (int column, int role) const
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                      const QAbstractItemDelegate* delegate)
+QWidget* VPE::VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                           const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options)
     Q_UNUSED(parent)
@@ -86,7 +84,7 @@ QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewIt
 
 
 //! Gets the data from the widget
-QVariant VEmptyProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VEmptyProperty::getEditorData(const QWidget *editor) const
 {
     Q_UNUSED(editor)
 
@@ -94,19 +92,19 @@ QVariant VEmptyProperty::getEditorData(const QWidget *editor) const
 }
 
 //! Returns item flags
-Qt::ItemFlags VEmptyProperty::flags(int column) const
+Qt::ItemFlags VPE::VEmptyProperty::flags(int column) const
 {
     Q_UNUSED(column)
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-QString VEmptyProperty::type() const
+QString VPE::VEmptyProperty::type() const
 {
     return "empty";
 }
 
-VProperty* VEmptyProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VEmptyProperty::clone(bool include_children, VProperty* container) const
 {
     return VProperty::clone(include_children, container ? container : new VEmptyProperty(getName()));
 }

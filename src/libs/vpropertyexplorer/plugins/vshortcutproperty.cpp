@@ -30,21 +30,18 @@
 
 class QStyleOptionViewItem;
 
-
-using namespace VPE;
-
-VShortcutProperty::VShortcutProperty(const QString& name)
+VPE::VShortcutProperty::VShortcutProperty(const QString& name)
     : VProperty(name, QVariant::String)
 {
 
 }
 
-VShortcutProperty::~VShortcutProperty()
+VPE::VShortcutProperty::~VShortcutProperty()
 {
     //
 }
 
-QVariant VShortcutProperty::data (int column, int role) const
+QVariant VPE::VShortcutProperty::data (int column, int role) const
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
@@ -55,8 +52,8 @@ QVariant VShortcutProperty::data (int column, int role) const
 }
 
 
-QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                         const QAbstractItemDelegate* delegate)
+QWidget* VPE::VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                              const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options)
 
@@ -70,7 +67,7 @@ QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionVie
 }
 
 
-bool VShortcutProperty::setEditorData(QWidget* editor)
+bool VPE::VShortcutProperty::setEditorData(QWidget* editor)
 {
     VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
     if (tmpWidget)
@@ -84,7 +81,7 @@ bool VShortcutProperty::setEditorData(QWidget* editor)
 }
 
 
-QVariant VShortcutProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VShortcutProperty::getEditorData(const QWidget *editor) const
 {
     const VShortcutEditWidget* tmpWidget = qobject_cast<const VShortcutEditWidget*>(editor);
     if (tmpWidget)
@@ -96,17 +93,17 @@ QVariant VShortcutProperty::getEditorData(const QWidget *editor) const
 }
 
 
-QString VShortcutProperty::type() const
+QString VPE::VShortcutProperty::type() const
 {
     return "shortcut";
 }
 
-VProperty* VShortcutProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VShortcutProperty::clone(bool include_children, VProperty* container) const
 {
     return VProperty::clone(include_children, container ? container : new VShortcutProperty(getName()));
 }
 
-void VShortcutProperty::setValue(const QVariant &value)
+void VPE::VShortcutProperty::setValue(const QVariant &value)
 {
     VProperty::setValue(QKeySequence::fromString(value.toString()).toString());
 }

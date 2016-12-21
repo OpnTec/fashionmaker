@@ -31,13 +31,11 @@
 #include "../qmuparser/qmutranslation.h"
 #include "../vmisc/def.h"
 
-using namespace qmu;
-
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateMeasurements::VTranslateMeasurements()
-    :measurements(QMap<QString, QmuTranslation>()),
-      guiTexts(QMap<QString, QmuTranslation>()),
-      descriptions(QMap<QString, QmuTranslation>()),
+    :measurements(QMap<QString, qmu::QmuTranslation>()),
+      guiTexts(QMap<QString, qmu::QmuTranslation>()),
+      descriptions(QMap<QString, qmu::QmuTranslation>()),
       numbers(QMap<QString, QString>()),
       formulas(QMap<QString, QString>())
 {
@@ -60,7 +58,7 @@ VTranslateMeasurements::~VTranslateMeasurements()
 bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int position, const QString &token,
                                                   int &bias) const
 {
-    QMap<QString, QmuTranslation>::const_iterator i = measurements.constBegin();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
         if (token == i.value().translate())
@@ -166,8 +164,9 @@ void VTranslateMeasurements::InitMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateMeasurements::InitMeasurement(const QString &name, const QmuTranslation &m, const QmuTranslation &g,
-                                             const QmuTranslation &d, const QString &number, const QString &formula)
+void VTranslateMeasurements::InitMeasurement(const QString &name, const qmu::QmuTranslation &m,
+                                             const qmu::QmuTranslation &g, const qmu::QmuTranslation &d,
+                                             const QString &number, const QString &formula)
 {
     measurements.insert(name, m);
     guiTexts.insert(name, g);
@@ -176,16 +175,16 @@ void VTranslateMeasurements::InitMeasurement(const QString &name, const QmuTrans
     formulas.insert(name, formula);
 }
 
-#define translate(context, source, disambiguation) QmuTranslation::translate((context), (source), (disambiguation))
+#define translate(context, source, disambiguation) qmu::QmuTranslation::translate((context), (source), (disambiguation))
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateMeasurements::InitGroupA()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "height",
@@ -357,9 +356,9 @@ void VTranslateMeasurements::InitGroupB()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "width_shoulder",
@@ -404,9 +403,9 @@ void VTranslateMeasurements::InitGroupC()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "indent_neck_back",
@@ -437,9 +436,9 @@ void VTranslateMeasurements::InitGroupD()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "hand_palm_length",
@@ -482,9 +481,9 @@ void VTranslateMeasurements::InitGroupE()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "foot_width",
@@ -521,9 +520,9 @@ void VTranslateMeasurements::InitGroupF()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "head_circ",
@@ -576,9 +575,9 @@ void VTranslateMeasurements::InitGroupG()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "neck_mid_circ",
@@ -928,9 +927,9 @@ void VTranslateMeasurements::InitGroupH()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "neck_front_to_waist_f",
@@ -1233,9 +1232,9 @@ void VTranslateMeasurements::InitGroupI()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "shoulder_length",
@@ -1344,9 +1343,9 @@ void VTranslateMeasurements::InitGroupJ()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "bustpoint_to_bustpoint",
@@ -1425,9 +1424,9 @@ void VTranslateMeasurements::InitGroupK()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "shoulder_tip_to_waist_front",
@@ -1529,9 +1528,9 @@ void VTranslateMeasurements::InitGroupL()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "arm_shoulder_tip_to_wrist_bent",
@@ -1697,9 +1696,9 @@ void VTranslateMeasurements::InitGroupM()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "leg_crotch_to_floor",
@@ -1808,9 +1807,9 @@ void VTranslateMeasurements::InitGroupN()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "crotch_length",
@@ -1880,9 +1879,9 @@ void VTranslateMeasurements::InitGroupO()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "neck_back_to_waist_front",
@@ -1996,9 +1995,9 @@ void VTranslateMeasurements::InitGroupP()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "neck_back_to_bust_front",
@@ -2098,9 +2097,9 @@ void VTranslateMeasurements::InitGroupQ()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    qmu::QmuTranslation m;
+    qmu::QmuTranslation g;
+    qmu::QmuTranslation d;
 
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "dart_width_shoulder",

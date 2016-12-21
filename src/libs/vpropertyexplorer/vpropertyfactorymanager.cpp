@@ -30,18 +30,15 @@
 #include "vpropertyfactorymanager_p.h"
 #include "vstandardpropertyfactory.h"
 
-using namespace VPE;
+VPE::VPropertyFactoryManager* VPE::VPropertyFactoryManager::DefaultManager = NULL;
 
-
-VPropertyFactoryManager* VPropertyFactoryManager::DefaultManager = NULL;
-
-VPropertyFactoryManager::VPropertyFactoryManager(QObject *parent)
+VPE::VPropertyFactoryManager::VPropertyFactoryManager(QObject *parent)
     : QObject(parent), d_ptr(new VPropertyFactoryManagerPrivate())
 {
 
 }
 
-VPropertyFactoryManager::~VPropertyFactoryManager()
+VPE::VPropertyFactoryManager::~VPropertyFactoryManager()
 {
     // Delete all factories
     QList<VAbstractPropertyFactory*> tmpFactories = d_ptr->Factories.values();
@@ -60,7 +57,7 @@ VPropertyFactoryManager::~VPropertyFactoryManager()
     }
 }
 
-void VPropertyFactoryManager::registerFactory(const QString& type, VAbstractPropertyFactory* factory)
+void VPE::VPropertyFactoryManager::registerFactory(const QString& type, VAbstractPropertyFactory* factory)
 {
     if (type.isEmpty())
     {
@@ -73,7 +70,7 @@ void VPropertyFactoryManager::registerFactory(const QString& type, VAbstractProp
     d_ptr->Factories[type] = factory;
 }
 
-void VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* factory, const QString& type,
+void VPE::VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* factory, const QString& type,
                                                 bool delete_if_unused)
 {
     if (!factory)
@@ -109,19 +106,19 @@ void VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* factor
     }
 }
 
-bool VPropertyFactoryManager::isRegistered(VAbstractPropertyFactory* factory)
+bool VPE::VPropertyFactoryManager::isRegistered(VAbstractPropertyFactory* factory)
 {
     return (!d_ptr->Factories.key(factory, QString()).isEmpty());
 }
 
-VAbstractPropertyFactory* VPropertyFactoryManager::getFactory(const QString& type)
+VPE::VAbstractPropertyFactory* VPE::VPropertyFactoryManager::getFactory(const QString& type)
 {
     return d_ptr->Factories.value(type, NULL);
 }
 
 
-VProperty* VPropertyFactoryManager::createProperty(const QString& type, const QString& name, const QString& description,
-                                                   const QString &default_value)
+VPE::VProperty* VPE::VPropertyFactoryManager::createProperty(const QString& type, const QString& name,
+                                                             const QString& description, const QString &default_value)
 {
     VAbstractPropertyFactory* tmpFactory = getFactory(type);
     VProperty* tmpResult = NULL;
@@ -144,7 +141,7 @@ VProperty* VPropertyFactoryManager::createProperty(const QString& type, const QS
 }
 
 // cppcheck-suppress unusedFunction
-VPropertyFactoryManager *VPropertyFactoryManager::getDefaultManager()
+VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::getDefaultManager()
 {
     if (!DefaultManager)
     {
@@ -156,7 +153,7 @@ VPropertyFactoryManager *VPropertyFactoryManager::getDefaultManager()
 }
 
 // cppcheck-suppress unusedFunction
-QStringList VPropertyFactoryManager::getSupportedTypes()
+QStringList VPE::VPropertyFactoryManager::getSupportedTypes()
 {
     return d_ptr->Factories.keys();
 }

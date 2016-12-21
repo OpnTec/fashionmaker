@@ -38,9 +38,7 @@
 
 class QKeyEvent;
 
-using namespace VPE;
-
-VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QString &description,
+VPE::VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QString &description,
                                          const QList<VProperty*>& properties, QWidget *parent)
     : QGroupBox(title, parent), d_ptr(new VPropertyFormWidgetPrivate(properties))
 {
@@ -49,7 +47,7 @@ VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QString &de
     setWhatsThis(description);
 }
 
-VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidget *parent)
+VPE::VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidget *parent)
     : QGroupBox(parent), d_ptr(new VPropertyFormWidgetPrivate())
 {
     if (parent_property)
@@ -62,8 +60,8 @@ VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidget *pa
     }
 }
 
-VPropertyFormWidget::VPropertyFormWidget(VPropertyFormWidgetPrivate *d_pointer, QWidget *parent, const QString &title,
-                                         const QString &description)
+VPE::VPropertyFormWidget::VPropertyFormWidget(VPropertyFormWidgetPrivate *d_pointer, QWidget *parent,
+                                              const QString &title, const QString &description)
     : QGroupBox(title, parent), d_ptr(d_pointer)
 {
     build();
@@ -71,13 +69,13 @@ VPropertyFormWidget::VPropertyFormWidget(VPropertyFormWidgetPrivate *d_pointer, 
     setWhatsThis(description);
 }
 
-VPropertyFormWidget::~VPropertyFormWidget()
+VPE::VPropertyFormWidget::~VPropertyFormWidget()
 {
     delete d_ptr;
 }
 
 
-void VPropertyFormWidget::build()
+void VPE::VPropertyFormWidget::build()
 {
     // Clear the old content, delete old widgets
     d_ptr->EditorWidgets.clear();
@@ -160,7 +158,7 @@ void VPropertyFormWidget::build()
     }
 }
 
-void VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* formLayout, Property type)
+void VPE::VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* formLayout, Property type)
 {
     // Add property (no child properties)
     // Create the editor (if it doesn't work, create empty widget)
@@ -194,7 +192,7 @@ void VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* formLayo
     d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpEditor));
 }
 
-void VPropertyFormWidget::commitData()
+void VPE::VPropertyFormWidget::commitData()
 {
     for (int i = 0; i < d_ptr->Properties.count(); ++i)
     {
@@ -202,7 +200,7 @@ void VPropertyFormWidget::commitData()
     }
 }
 
-void VPropertyFormWidget::loadData()
+void VPE::VPropertyFormWidget::loadData()
 {
     for (int i = 0; i < d_ptr->Properties.count(); ++i)
     {
@@ -210,7 +208,7 @@ void VPropertyFormWidget::loadData()
     }
 }
 
-void VPropertyFormWidget::commitData(int row)
+void VPE::VPropertyFormWidget::commitData(int row)
 {
     if (row < 0 || row >= d_ptr->EditorWidgets.count() || row >= d_ptr->Properties.count())
     {
@@ -249,7 +247,7 @@ void VPropertyFormWidget::commitData(int row)
     }
 }
 
-void VPropertyFormWidget::loadData(int row)
+void VPE::VPropertyFormWidget::loadData(int row)
 {
     if (row < 0 || row >= d_ptr->EditorWidgets.count() || row >= d_ptr->Properties.count())
     {
@@ -268,7 +266,7 @@ void VPropertyFormWidget::loadData(int row)
     }
 }
 
-void VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
+void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 {
     d_ptr->UpdateEditors = auto_commit;
 
@@ -282,7 +280,7 @@ void VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
     }
 }
 
-QList<VPropertyFormWidget *> VPropertyFormWidget::getChildPropertyFormWidgets() const
+QList<VPE::VPropertyFormWidget *> VPE::VPropertyFormWidget::getChildPropertyFormWidgets() const
 {
     QList<VPropertyFormWidget *> tmpResult;
     foreach(const VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget, d_ptr->EditorWidgets)
@@ -296,7 +294,7 @@ QList<VPropertyFormWidget *> VPropertyFormWidget::getChildPropertyFormWidgets() 
     return tmpResult;
 }
 
-bool VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
+bool VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
 {
     if (!d_ptr->UpdateEditors)
     {
@@ -354,7 +352,7 @@ bool VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
-void VPropertyFormWidget::commitData(const QWidget *editor)
+void VPE::VPropertyFormWidget::commitData(const QWidget *editor)
 {
     if (!editor)
     {

@@ -26,16 +26,14 @@
 #include "vproperty.h"
 #include "vpropertyset.h"
 
-using namespace VPE;
-
-VSerializedProperty::VSerializedProperty()
+VPE::VSerializedProperty::VSerializedProperty()
     : ID(), Type(), Value(), Children()
 {}
 
 /*! Creates a new VSerializedProperty from an existing property
 
 */
-VSerializedProperty::VSerializedProperty(const VProperty* property, const VPropertySet* set)
+VPE::VSerializedProperty::VSerializedProperty(const VProperty* property, const VPropertySet* set)
     : ID(), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant()),
       Children()
 {
@@ -47,19 +45,19 @@ VSerializedProperty::VSerializedProperty(const VProperty* property, const VPrope
     }
 }
 
-VSerializedProperty::VSerializedProperty(const VProperty *property, const QString &id, const VPropertySet *set)
+VPE::VSerializedProperty::VSerializedProperty(const VProperty *property, const QString &id, const VPropertySet *set)
     : ID(id), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant()),
       Children()
 {
     initChildren(property, set);
 }
 
-VSerializedProperty::VSerializedProperty(const QString &id, const QString &type, const QVariant &value)
+VPE::VSerializedProperty::VSerializedProperty(const QString &id, const QString &type, const QVariant &value)
     : ID(id), Type(type), Value(value), Children()
 {
 }
 
-void VSerializedProperty::initChildren(const VProperty *property, const VPropertySet *set)
+void VPE::VSerializedProperty::initChildren(const VProperty *property, const VPropertySet *set)
 {
     if (property && set)
     {

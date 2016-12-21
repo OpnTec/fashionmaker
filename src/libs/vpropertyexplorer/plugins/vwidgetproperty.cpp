@@ -28,24 +28,22 @@
 #include "vemptyproperty.h"
 #include "../vproperty.h"
 
-using namespace VPE;
-
-VWidgetProperty::VWidgetProperty(const QString& name, QWidget* widget)
+VPE::VWidgetProperty::VWidgetProperty(const QString& name, QWidget* widget)
     : VEmptyProperty(new VWidgetPropertyPrivate(name, QVariant::Invalid, widget))
 {
 }
 
-VWidgetProperty::~VWidgetProperty()
+VPE::VWidgetProperty::~VWidgetProperty()
 {
     //
 }
 
-QWidget *VWidgetProperty::getWidget() const
+QWidget *VPE::VWidgetProperty::getWidget() const
 {
     return static_cast<VWidgetPropertyPrivate*>(d_ptr)->Widget.data();
 }
 
-void VWidgetProperty::setWidget(QWidget* widget)
+void VPE::VWidgetProperty::setWidget(QWidget* widget)
 {
     VWidgetPropertyPrivate* tmpDPtr = static_cast<VWidgetPropertyPrivate*>(d_ptr);
     QWidget* tmpOldWidget = tmpDPtr->Widget.data();
@@ -58,12 +56,12 @@ void VWidgetProperty::setWidget(QWidget* widget)
 }
 
 
-QString VWidgetProperty::type() const
+QString VPE::VWidgetProperty::type() const
 {
     return "widget";
 }
 
-VProperty* VWidgetProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VWidgetProperty::clone(bool include_children, VProperty* container) const
 {
     /* todo: This is a tricky one to clone... don't know what would be the best way to do so... Maybe serialize the
      * widget somehow?

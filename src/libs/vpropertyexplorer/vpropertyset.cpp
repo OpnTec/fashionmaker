@@ -25,19 +25,17 @@
 #include <QList>
 #include <QMap>
 
-using namespace VPE;
-
 #include "vproperty.h"
 #include "vpropertyset_p.h"
 
 
-VPropertySet::VPropertySet()
+VPE::VPropertySet::VPropertySet()
     : d_ptr(new VPropertySetPrivate())
 {
 }
 
 
-VPropertySet::~VPropertySet()
+VPE::VPropertySet::~VPropertySet()
 {
     // Delete all the properties
     clear(true);
@@ -45,7 +43,7 @@ VPropertySet::~VPropertySet()
     delete d_ptr;
 }
 
-bool VPropertySet::addProperty(VProperty *property, const QString &id, const QString &parentid)
+bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, const QString &parentid)
 {
     // Check if the property to add is not a null pointer
     if (!property)
@@ -57,7 +55,7 @@ bool VPropertySet::addProperty(VProperty *property, const QString &id, const QSt
     return addProperty(property, id, tmpParent);
 }
 
-bool VPropertySet::addProperty(VProperty *property, const QString &id, VProperty *parent_property)
+bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, VProperty *parent_property)
 {
     // Check if the property to add is not a null pointer
     if (!property)
@@ -92,7 +90,7 @@ bool VPropertySet::addProperty(VProperty *property, const QString &id, VProperty
     return true;
 }
 
-bool VPropertySet::hasProperty(VProperty *property) const
+bool VPE::VPropertySet::hasProperty(VProperty *property) const
 {
     if (!property)
     {
@@ -102,12 +100,12 @@ bool VPropertySet::hasProperty(VProperty *property) const
     return hasProperty(property, NULL);
 }
 
-VProperty *VPropertySet::getProperty(const QString &id) const
+VPE::VProperty *VPE::VPropertySet::getProperty(const QString &id) const
 {
     return d_ptr->Properties.value(id, NULL);
 }
 
-VProperty *VPropertySet::takeProperty(const QString &id)
+VPE::VProperty *VPE::VPropertySet::takeProperty(const QString &id)
 {
     VProperty* tmpProp = getProperty(id);
     removeProperty(tmpProp, false);
@@ -116,13 +114,13 @@ VProperty *VPropertySet::takeProperty(const QString &id)
     return tmpProp;
 }
 
-void VPropertySet::removeProperty(const QString &id)
+void VPE::VPropertySet::removeProperty(const QString &id)
 {
     VProperty* tmpProp = takeProperty(id);
     delete tmpProp;
 }
 
-void VPropertySet::removeProperty(VProperty* prop, bool delete_property)
+void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
 {
     // Remove all the children
     removePropertyFromSet(prop);
@@ -139,12 +137,12 @@ void VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     }
 }
 
-int VPropertySet::count() const
+int VPE::VPropertySet::count() const
 {
     return d_ptr->Properties.count();
 }
 
-void VPropertySet::clear(bool delete_properties)
+void VPE::VPropertySet::clear(bool delete_properties)
 {
     d_ptr->Properties.clear();
     while (!d_ptr->RootProperties.isEmpty())
@@ -157,7 +155,7 @@ void VPropertySet::clear(bool delete_properties)
     }
 }
 
-QString VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const
+QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const
 {
     QString tmpResult;
     const VProperty* tmpCurrentProp = prop;
@@ -185,27 +183,27 @@ QString VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_
 }
 
 // cppcheck-suppress unusedFunction
-const QMap<QString, VProperty *> &VPropertySet::getPropertiesMap() const
+const QMap<QString, VPE::VProperty *> &VPE::VPropertySet::getPropertiesMap() const
 {
     return d_ptr->Properties;
 }
 
-const QList<VProperty *> &VPropertySet::getRootProperties() const
+const QList<VPE::VProperty *> &VPE::VPropertySet::getRootProperties() const
 {
     return d_ptr->RootProperties;
 }
 
-VProperty *VPropertySet::getRootProperty(int row) const
+VPE::VProperty *VPE::VPropertySet::getRootProperty(int row) const
 {
     return d_ptr->RootProperties.value(row, NULL);
 }
 
-int VPropertySet::getRootPropertyCount() const
+int VPE::VPropertySet::getRootPropertyCount() const
 {
     return d_ptr->RootProperties.count();
 }
 
-VPropertySet* VPropertySet::clone() const
+VPE::VPropertySet* VPE::VPropertySet::clone() const
 {
     VPropertySet* tmpResult = new VPropertySet();
 
@@ -216,7 +214,7 @@ VPropertySet* VPropertySet::clone() const
     return tmpResult;
 }
 
-bool VPropertySet::hasProperty(VProperty *property, VProperty *parent) const
+bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) const
 {
     if (!property)
     {
@@ -239,8 +237,8 @@ bool VPropertySet::hasProperty(VProperty *property, VProperty *parent) const
     return false;
 }
 
-void VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *parent_property,
-                                 VPropertySet *output_set) const
+void VPE::VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *parent_property,
+                                      VPropertySet *output_set) const
 {
     if (!output_set || !property_to_clone || !hasProperty(property_to_clone))
     {
@@ -259,7 +257,7 @@ void VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *parent
     }
 }
 
-void VPropertySet::removePropertyFromSet(VProperty *prop)
+void VPE::VPropertySet::removePropertyFromSet(VProperty *prop)
 {
     // Remove all the children
     foreach(VProperty* tmpChild, prop->getChildren())

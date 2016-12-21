@@ -33,8 +33,6 @@
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
 
-using namespace std;
-
 /**
  * @file
  * @brief Implementation of the standard floating point QmuParser.

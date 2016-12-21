@@ -30,9 +30,7 @@
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
 
-using namespace VPE;
-
-VEnumProperty::VEnumProperty(const QString& name)
+VPE::VEnumProperty::VEnumProperty(const QString& name)
     : VProperty(name, QVariant::Int), EnumerationLiterals()
 {
     VProperty::d_ptr->VariantValue = 0;
@@ -41,7 +39,7 @@ VEnumProperty::VEnumProperty(const QString& name)
 
 
 //! Get the data how it should be displayed
-QVariant VEnumProperty::data (int column, int role) const
+QVariant VPE::VEnumProperty::data (int column, int role) const
 {
     if (EnumerationLiterals.empty())
     {
@@ -69,8 +67,8 @@ QVariant VEnumProperty::data (int column, int role) const
 
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                     const QAbstractItemDelegate* delegate)
+QWidget* VPE::VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                          const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -87,7 +85,7 @@ QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
 }
 
 //! Gets the data from the widget
-QVariant VEnumProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VEnumProperty::getEditorData(const QWidget *editor) const
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -99,19 +97,19 @@ QVariant VEnumProperty::getEditorData(const QWidget *editor) const
 }
 
 //! Sets the enumeration literals
-void VEnumProperty::setLiterals(const QStringList& literals)
+void VPE::VEnumProperty::setLiterals(const QStringList& literals)
 {
     EnumerationLiterals = literals;
 }
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-QStringList VEnumProperty::getLiterals() const
+QStringList VPE::VEnumProperty::getLiterals() const
 {
     return EnumerationLiterals;
 }
 
 //! Sets the value of the property
-void VEnumProperty::setValue(const QVariant& value)
+void VPE::VEnumProperty::setValue(const QVariant& value)
 {
     int tmpIndex = value.toInt();
 
@@ -129,17 +127,17 @@ void VEnumProperty::setValue(const QVariant& value)
     }
 }
 
-QString VEnumProperty::type() const
+QString VPE::VEnumProperty::type() const
 {
     return "enum";
 }
 
-VProperty* VEnumProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VEnumProperty::clone(bool include_children, VProperty* container) const
 {
     return VProperty::clone(include_children, container ? container : new VEnumProperty(getName()));
 }
 
-void VEnumProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VEnumProperty::setSetting(const QString& key, const QVariant& value)
 {
     if (key == "literals")
     {
@@ -147,7 +145,7 @@ void VEnumProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VEnumProperty::getSetting(const QString& key) const
+QVariant VPE::VEnumProperty::getSetting(const QString& key) const
 {
     if (key == "literals")
     {
@@ -157,12 +155,12 @@ QVariant VEnumProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VEnumProperty::getSettingKeys() const
+QStringList VPE::VEnumProperty::getSettingKeys() const
 {
     return QStringList("literals");
 }
 
-void VEnumProperty::currentIndexChanged(int index)
+void VPE::VEnumProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     UserChangeEvent *event = new UserChangeEvent();
