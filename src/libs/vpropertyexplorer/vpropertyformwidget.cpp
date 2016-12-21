@@ -228,7 +228,7 @@ void VPE::VPropertyFormWidget::commitData(int row)
         if (oldValue != newValue)
         {
             VProperty *parent = tmpProperty->getParent();
-            if (parent == nullptr)
+            if (parent == nullptr || parent->propertyType() != Property::Complex)
             {
                 tmpProperty->setValue(newValue);
                 emit propertyDataSubmitted(tmpProperty);
@@ -237,11 +237,6 @@ void VPE::VPropertyFormWidget::commitData(int row)
             {
                 tmpProperty->UpdateParent(newValue);
                 emit propertyDataSubmitted(parent);
-            }
-            else
-            {
-                tmpProperty->setValue(newValue);
-                emit propertyDataSubmitted(tmpProperty);
             }
         }
     }

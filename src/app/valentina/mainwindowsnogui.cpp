@@ -174,11 +174,10 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
         case LayoutErrors::PrepareLayoutError:
             qCritical() << tr("Couldn't prepare data for creation layout");
             break;
-        case LayoutErrors::ProcessStoped:
-            break;
         case LayoutErrors::EmptyPaperError:
             qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
             break;
+        case LayoutErrors::ProcessStoped:
         default:
             break;
     }

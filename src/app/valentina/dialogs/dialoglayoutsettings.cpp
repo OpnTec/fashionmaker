@@ -224,8 +224,6 @@ void DialogLayoutSettings::SetGroup(const Cases &value)
             ui->radioButtonTwoGroups->setChecked(true);
             break;
         case Cases::CaseDesc:
-            ui->radioButtonDescendingArea->setChecked(true);
-            break;
         default:
             ui->radioButtonDescendingArea->setChecked(true);
             break;

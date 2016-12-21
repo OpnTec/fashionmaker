@@ -147,18 +147,15 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
             return engine->getSize().width();
         case QPaintDevice::PdmHeight:
             return engine->getSize().height();
-        case QPaintDevice::PdmDpiX:
-            return engine->getResolution();
-        case QPaintDevice::PdmDpiY:
-            return engine->getResolution();
         case QPaintDevice::PdmHeightMM:
             return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmWidthMM:
             return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
+        case QPaintDevice::PdmDpiX:
+        case QPaintDevice::PdmDpiY:
         case QPaintDevice::PdmPhysicalDpiX:
-            return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:
             return engine->getResolution();
 #if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)

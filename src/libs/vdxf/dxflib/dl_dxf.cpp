@@ -1578,12 +1578,7 @@ bool DL_Dxf::handleXData(DL_CreationInterface* creationInterface)
         creationInterface->addXDataReal(static_cast<int>(groupCode), toReal(groupValue));
         return true;
     }
-    else if (groupCode>=1060 && groupCode<=1070)
-    {
-        creationInterface->addXDataInt(static_cast<int>(groupCode), toInt(groupValue));
-        return true;
-    }
-    else if (groupCode==1071)
+    else if (groupCode>=1060 && groupCode<=1071)
     {
         creationInterface->addXDataInt(static_cast<int>(groupCode), toInt(groupValue));
         return true;
@@ -2600,7 +2595,6 @@ void DL_Dxf::writeHeader(DL_WriterA& dw) const
             break;
         case DL_Codes::AC1009_MIN:
             // minimalistic DXF version is unidentified in file:
-            break;
         default:
             break;
     }
@@ -4231,14 +4225,7 @@ void DL_Dxf::writeLinetype(DL_WriterA& dw,
     dw.dxfString(2, data.name);
     dw.dxfInt(70, data.flags);
 
-    if (nameUpper=="BYBLOCK")
-    {
-        dw.dxfString(3, "");
-        dw.dxfInt(72, 65);
-        dw.dxfInt(73, 0);
-        dw.dxfReal(40, 0.0);
-    }
-    else if (nameUpper=="BYLAYER")
+    if (nameUpper=="BYBLOCK" || nameUpper=="BYLAYER")
     {
         dw.dxfString(3, "");
         dw.dxfInt(72, 65);

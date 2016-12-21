@@ -174,25 +174,17 @@ Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
     {
         case 0: // TypeLineNone
             return Qt::NoPen;
-            break;
-        case 1: // TypeLineLine
-            return Qt::SolidLine;
-            break;
         case 2: // TypeLineDashLine
             return Qt::DashLine;
-            break;
         case 3: // TypeLineDotLine
             return Qt::DotLine;
-            break;
         case 4: // TypeLineDashDotLine
             return Qt::DashDotLine;
-            break;
         case 5: // TypeLineDashDotDotLine
             return Qt::DashDotDotLine;
-            break;
+        case 1: // TypeLineLine
         default:
             return Qt::SolidLine;
-            break;
     }
 }
 
@@ -243,9 +235,6 @@ QMap<QString, QString> VAbstractTool::ColorsList()
         QString name;
         switch (i)
         {
-            case 0: // ColorBlack
-                name = tr("black");
-                break;
             case 1: // ColorGreen
                 name = tr("green");
                 break;
@@ -294,6 +283,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
             case 16: // ColorCornFlowerBlue
                 name = tr("corn flower blue");
                 break;
+            case 0: // ColorBlack
             default:
                 name = tr("black");
                 break;
