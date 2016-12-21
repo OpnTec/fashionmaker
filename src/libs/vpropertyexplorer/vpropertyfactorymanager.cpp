@@ -141,16 +141,16 @@ VPE::VProperty* VPE::VPropertyFactoryManager::createProperty(const QString& type
 }
 
 // cppcheck-suppress unusedFunction
-VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::getDefaultManager()
-{
-    if (!DefaultManager)
-    {
-        DefaultManager = new VPropertyFactoryManager();
-        /*VStandardPropertyFactory* tmpStandardProp = */new VStandardPropertyFactory(DefaultManager);
-    }
+//VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::getDefaultManager()
+//{
+//    if (!DefaultManager)
+//    {
+//        DefaultManager = new VPropertyFactoryManager();
+//        /*VStandardPropertyFactory* tmpStandardProp = */new VStandardPropertyFactory(DefaultManager);
+//    }
 
-    return DefaultManager;
-}
+//    return DefaultManager;
+//}
 
 // cppcheck-suppress unusedFunction
 QStringList VPE::VPropertyFactoryManager::getSupportedTypes()

@@ -80,7 +80,7 @@ public:
                               const QString& default_value = QString());
 
     //! Returns the default manager.
-    static VPropertyFactoryManager* getDefaultManager();
+    //static VPropertyFactoryManager* getDefaultManager();
 
     //! Returns a list of all supported property types
     QStringList getSupportedTypes();
