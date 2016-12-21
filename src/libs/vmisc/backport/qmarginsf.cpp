@@ -355,7 +355,7 @@ QDataStream &operator<<(QDataStream &s, const QMarginsF &m)
 
 QDataStream &operator>>(QDataStream &s, QMarginsF &m)
 {
-    double left, top, right, bottom;
+    double left = 0, top = 0, right = 0, bottom = 0;
     s >> left;
     s >> top;
     s >> right;
