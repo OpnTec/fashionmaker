@@ -637,18 +637,15 @@ bool VApplication::event(QEvent *e)
         case QEvent::FileOpen:
         {
             QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            if(fileOpenEvent)
+            const QString macFileOpen = fileOpenEvent->file();
+            if(not macFileOpen.isEmpty())
             {
-                const QString macFileOpen = fileOpenEvent->file();
-                if(not macFileOpen.isEmpty())
+                MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
+                if (window)
                 {
-                    MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
-                    if (window)
-                    {
-                        window->LoadPattern(macFileOpen);  // open file in existing window
-                    }
-                    return true;
+                    window->LoadPattern(macFileOpen);  // open file in existing window
                 }
+                return true;
             }
             break;
         }
