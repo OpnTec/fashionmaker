@@ -3723,7 +3723,6 @@ void MainWindow::CreateActions()
         recentFileActs[i] = action;
         connect(recentFileActs[i], &QAction::triggered, RECEIVER(this)[action, this]()
         {
-            // cppcheck-suppress nullPointerRedundantCheck
             if (action != nullptr)
             {
                 const QString filePath = action->data().toString();
