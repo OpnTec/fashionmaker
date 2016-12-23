@@ -99,7 +99,7 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     ui->lineEditSplineName->setText(spl.name());
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(spl.GetP1().id());
     path->setObject2Id(spl.GetP2().id());
@@ -127,7 +127,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             auto *path = qobject_cast<VisToolCubicBezier *>(vis);
-            SCASSERT(path != nullptr);
+            SCASSERT(path != nullptr)
 
             switch (number)
             {
@@ -239,7 +239,7 @@ void DialogCubicBezier::SaveData()
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(p1->id());
     path->setObject2Id(p2->id());

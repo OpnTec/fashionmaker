@@ -62,7 +62,10 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     FillTable();
     InitialTable();
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &DialogHistory::cellClicked);
-    connect(this, &DialogHistory::ShowHistoryTool, [doc](quint32 id, bool enable){emit doc->ShowTool(id, enable);});
+    connect(this, &DialogHistory::ShowHistoryTool, RECEIVER(doc)[doc](quint32 id, bool enable)
+    {
+        emit doc->ShowTool(id, enable);
+    });
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
     ShowPoint();
@@ -190,7 +193,7 @@ void DialogHistory::FillTable()
     {
         cursorRow = CursorRow();
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
     }
     ui->tableWidget->resizeColumnsToContents();
@@ -270,25 +273,25 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::Spline:
             {
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
-                SCASSERT(not spl.isNull());
+                SCASSERT(not spl.isNull())
                 return spl->NameForHistory(tr("Curve"));
             }
             case Tool::CubicBezier:
             {
                 const QSharedPointer<VCubicBezier> spl = data->GeometricObject<VCubicBezier>(tool.getId());
-                SCASSERT(not spl.isNull());
+                SCASSERT(not spl.isNull())
                 return spl->NameForHistory(tr("Cubic bezier curve"));
             }
             case Tool::Arc:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
-                SCASSERT(not arc.isNull());
+                SCASSERT(not arc.isNull())
                 return arc->NameForHistory(tr("Arc"));
             }
             case Tool::ArcWithLength:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
-                SCASSERT(not arc.isNull());
+                SCASSERT(not arc.isNull())
                 return tr("%1 with length %2")
                         .arg(arc->NameForHistory(tr("Arc")))
                         .arg(arc->GetLength());
@@ -296,13 +299,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::SplinePath:
             {
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
-                SCASSERT(not splPath.isNull());
+                SCASSERT(not splPath.isNull())
                 return splPath->NameForHistory(tr("Spline path"));
             }
             case Tool::CubicBezierPath:
             {
                 const QSharedPointer<VCubicBezierPath> splPath = data->GeometricObject<VCubicBezierPath>(tool.getId());
-                SCASSERT(not splPath.isNull());
+                SCASSERT(not splPath.isNull())
                 return splPath->NameForHistory(tr("Cubic bezier curve path"));
             }
             case Tool::PointOfContact:
@@ -330,7 +333,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::CutArc:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
-                SCASSERT(not arc.isNull());
+                SCASSERT(not arc.isNull())
                 return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(arc->NameForHistory(tr("arc")));
@@ -339,7 +342,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
                 const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
-                SCASSERT(not spl.isNull());
+                SCASSERT(not spl.isNull())
                 return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(spl->NameForHistory(tr("curve")));
@@ -349,7 +352,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
                 const QSharedPointer<VAbstractCubicBezierPath> splPath =
                         data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
-                SCASSERT(not splPath.isNull());
+                SCASSERT(not splPath.isNull())
                 return tr("%1 - cut %2")
                         .arg(PointName(tool.getId()))
                         .arg(splPath->NameForHistory(tr("curve path")));
@@ -382,7 +385,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::EllipticalArc:
             {
                 const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
-                SCASSERT(not elArc.isNull());
+                SCASSERT(not elArc.isNull())
                 return tr("%1 with length %2")
                         .arg(elArc->NameForHistory(tr("Elliptical arc")))
                         .arg(elArc->GetLength());
@@ -499,7 +502,7 @@ void DialogHistory::RetranslateUi()
     UpdateHistory();
 
     QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     item->setIcon(QIcon(""));
 
     cursorRow = currentRow;

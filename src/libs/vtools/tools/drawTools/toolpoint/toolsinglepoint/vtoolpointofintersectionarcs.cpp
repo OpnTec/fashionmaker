@@ -69,9 +69,9 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(VAbstractPattern *doc
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfIntersectionArcs *dialogTool = qobject_cast<DialogPointOfIntersectionArcs*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFirstArcId(firstArcId);
     dialogTool->SetSecondArcId(secondArcId);
@@ -83,9 +83,9 @@ void VToolPointOfIntersectionArcs::setDialog()
 VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                                                                    VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfIntersectionArcs *dialogTool = qobject_cast<DialogPointOfIntersectionArcs*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 firstArcId = dialogTool->GetFirstArcId();
     const quint32 secondArcId = dialogTool->GetSecondArcId();
     const CrossCirclesPoint pType = dialogTool->GetCrossArcPoint();
@@ -302,7 +302,7 @@ void VToolPointOfIntersectionArcs::contextMenuEvent(QGraphicsSceneContextMenuEve
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -310,9 +310,9 @@ void VToolPointOfIntersectionArcs::contextMenuEvent(QGraphicsSceneContextMenuEve
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogPointOfIntersectionArcs *dialogTool = qobject_cast<DialogPointOfIntersectionArcs*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrFirstArc, QString().setNum(dialogTool->GetFirstArcId()));
     doc->SetAttribute(domElement, AttrSecondArc, QString().setNum(dialogTool->GetSecondArcId()));
@@ -344,7 +344,7 @@ void VToolPointOfIntersectionArcs::SetVisualization()
     if (not vis.isNull())
     {
         VisToolPointOfIntersectionArcs *visual = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setArc1Id(firstArcId);
         visual->setArc2Id(secondArcId);

@@ -39,8 +39,6 @@
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
-using namespace VPE;
-
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
@@ -100,7 +98,7 @@ void VFormulaPropertyEditor::onToolButtonClicked()
         TextLabel->setText(formula.getStringValue());
         delete tmpWidget;
         emit dataChangedByUser(formula, this);
-        UserChangeEvent *event = new UserChangeEvent();
+        VPE::UserChangeEvent *event = new VPE::UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
     }
 }

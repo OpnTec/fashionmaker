@@ -151,9 +151,9 @@ VToolSplinePath::~VToolSplinePath()
  */
 void VToolSplinePath::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
@@ -170,9 +170,9 @@ void VToolSplinePath::setDialog()
 VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                          VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
@@ -377,7 +377,7 @@ void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -390,7 +390,7 @@ void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
     QDomElement pathPoint = doc->createElement(AttrPathPoint);
 
     doc->SetAttribute(pathPoint, AttrPSpline, splPoint.P().id());
@@ -436,9 +436,9 @@ void VToolSplinePath::RemoveReferens()
  */
 void VToolSplinePath::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     const VSplinePath splPath = dialogTool->GetPath();
     for (qint32 i = 1; i <= splPath.CountSubSpl(); ++i)
@@ -466,7 +466,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     VAbstractSpline::SaveOptions(tag, obj);
 
     QSharedPointer<VSplinePath> splPath = qSharedPointerDynamicCast<VSplinePath>(obj);
-    SCASSERT(splPath.isNull() == false);
+    SCASSERT(splPath.isNull() == false)
 
     SetSplinePathAttributes(tag, *splPath);
 }
@@ -578,7 +578,7 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                if (QGraphicsView *view = viewList.at(0))
                {
                    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                   SCASSERT(currentScene);
+                   SCASSERT(currentScene)
                    const QPointF cursorPosition = currentScene->getScenePos();
                    view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                }
@@ -624,7 +624,7 @@ void VToolSplinePath::SetVisualization()
     if (not vis.isNull())
     {
         VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
         visual->setPath(*splPath.data());

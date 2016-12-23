@@ -307,7 +307,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
             }
             catch(const VException &exp)
             { // Nope, we can't.
-                Q_UNUSED(exp);
+                Q_UNUSED(exp)
                 throw e;
             }
         }

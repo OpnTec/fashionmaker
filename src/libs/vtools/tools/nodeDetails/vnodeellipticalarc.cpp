@@ -56,7 +56,7 @@ void VNodeEllipticalArc::Create(VAbstractPattern *doc, VContainer *data, quint32
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            SCASSERT(tool != nullptr);
+            SCASSERT(tool != nullptr)
             arc->setParent(tool);// Adopted by a tool
         }
         else

@@ -36,8 +36,6 @@
 #include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
 
-using namespace qmu;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Calculator class wraper for QMuParser. Make easy initialization math parser.
@@ -142,7 +140,7 @@ void Calculator::InitVariables(const QHash<QString, qreal *> &vars, const QMap<i
 
         if (found == false)
         {
-            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
+            throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
         }
         ++i;
     }

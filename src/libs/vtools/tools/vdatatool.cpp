@@ -41,7 +41,7 @@ Q_LOGGING_CATEGORY(vTool, "v.tool")
 VDataTool::VDataTool(VContainer *data, QObject *parent)
     : QObject(parent), data(*data), _referens(1)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -127,10 +127,10 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
 
     vis = new VisToolSplinePath(data);
     auto path = qobject_cast<VisToolSplinePath *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSplinePath::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSplinePath::MouseLeftReleased);
 }
@@ -164,7 +164,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->lineEditSplPathName->setText(path.name());
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
-    SCASSERT(visPath != nullptr);
+    SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
 }
@@ -205,14 +205,14 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         SavePath();
 
         auto visPath = qobject_cast<VisToolSplinePath *>(vis);
-        SCASSERT(visPath != nullptr);
+        SCASSERT(visPath != nullptr)
         visPath->setPath(path);
 
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
             VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-            SCASSERT(window != nullptr);
+            SCASSERT(window != nullptr)
             connect(visPath, &VisToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
             connect(visPath, &VisToolSplinePath::PathChanged, this, &DialogSplinePath::PathUpdated);
@@ -235,7 +235,7 @@ void DialogSplinePath::SaveData()
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
-    SCASSERT(visPath != nullptr);
+    SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     visPath->SetMode(Mode::Show);
     visPath->RefreshGeometry();
@@ -244,7 +244,7 @@ void DialogSplinePath::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
 
     bool fAngle1 = true, fAngle2 = true, fLength1 = true, fLength2 = true;
 
@@ -310,7 +310,7 @@ void DialogSplinePath::Angle1Changed()
     if (row != 0)
     {
         QListWidgetItem *item = ui->listWidget->item(row);
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
@@ -353,7 +353,7 @@ void DialogSplinePath::Angle2Changed()
     if (row != ui->listWidget->count()-1)
     {
         QListWidgetItem *item = ui->listWidget->item(row);
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
@@ -396,7 +396,7 @@ void DialogSplinePath::Length1Changed()
     if (row != 0)
     {
         QListWidgetItem *item = ui->listWidget->item(row);
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
@@ -430,7 +430,7 @@ void DialogSplinePath::Length2Changed()
     if (row != ui->listWidget->count()-1)
     {
         QListWidgetItem *item = ui->listWidget->item(row);
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
@@ -565,7 +565,7 @@ void DialogSplinePath::EvalAngle1()
     Eval(ui->plainTextEditAngle1F->toPlainText(), flagAngle1[row], ui->labelResultAngle1, degreeSymbol, false);
 
     QListWidgetItem *item = ui->listWidget->item(row);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
@@ -584,7 +584,7 @@ void DialogSplinePath::EvalAngle2()
     Eval(ui->plainTextEditAngle2F->toPlainText(), flagAngle2[row], ui->labelResultAngle2, degreeSymbol, false);
 
     QListWidgetItem *item = ui->listWidget->item(row);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
@@ -615,7 +615,7 @@ void DialogSplinePath::EvalLength1()
     }
 
     QListWidgetItem *item = ui->listWidget->item(row);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
@@ -646,7 +646,7 @@ void DialogSplinePath::EvalLength2()
     }
 
     QListWidgetItem *item = ui->listWidget->item(row);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
@@ -959,7 +959,7 @@ void DialogSplinePath::ShowPointIssue(const QString &pName)
     }
 
     QListWidgetItem *item = ui->listWidget->item(row);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
 
     if (flagAngle1.at(row) && flagAngle2.at(row) && flagLength1.at(row) && flagLength2.at(row))
     {

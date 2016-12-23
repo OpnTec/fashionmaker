@@ -104,7 +104,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ui->lineEditSplPathName->setText(path.name());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
-    SCASSERT(visPath != nullptr);
+    SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
 
@@ -142,14 +142,14 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         SavePath();
 
         auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
-        SCASSERT(visPath != nullptr);
+        SCASSERT(visPath != nullptr)
         visPath->setPath(path);
 
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
             VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-            SCASSERT(window != nullptr);
+            SCASSERT(window != nullptr)
             connect(visPath, &VisToolCubicBezierPath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
         else
@@ -196,7 +196,7 @@ void DialogCubicBezierPath::SaveData()
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
-    SCASSERT(visPath != nullptr);
+    SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     visPath->SetMode(Mode::Show);
     visPath->RefreshGeometry();

@@ -109,8 +109,8 @@ void VTextGraphicsItem::SetFont(const QFont& fnt)
  */
 void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED(widget);
-    Q_UNUSED(option);
+    Q_UNUSED(widget)
+    Q_UNUSED(option)
     painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175));
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
@@ -579,7 +579,7 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
  */
 void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    Q_UNUSED(pHE);
+    Q_UNUSED(pHE)
     RestoreOverrideCursor(Qt::SizeFDiagCursor);
 }
 

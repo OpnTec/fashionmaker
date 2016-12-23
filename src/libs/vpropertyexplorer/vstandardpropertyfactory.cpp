@@ -31,15 +31,12 @@
 #include "plugins/vshortcutproperty.h"
 #include "vpropertyfactorymanager.h"
 
-
-using namespace VPE;
-
-VStandardPropertyFactory::VStandardPropertyFactory()
+VPE::VStandardPropertyFactory::VStandardPropertyFactory()
     : VAbstractPropertyFactory()
 {
 }
 
-VStandardPropertyFactory::VStandardPropertyFactory(VPropertyFactoryManager *manager)
+VPE::VStandardPropertyFactory::VStandardPropertyFactory(VPropertyFactoryManager *manager)
     : VAbstractPropertyFactory()
 {
     if (manager)
@@ -57,7 +54,7 @@ VStandardPropertyFactory::VStandardPropertyFactory(VPropertyFactoryManager *mana
     }
 }
 
-VProperty *VStandardPropertyFactory::createProperty(const QString &type, const QString &name)
+VPE::VProperty *VPE::VStandardPropertyFactory::createProperty(const QString &type, const QString &name)
 {
     if (type == QString("string"))
     {

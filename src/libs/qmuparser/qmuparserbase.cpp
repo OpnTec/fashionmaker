@@ -36,8 +36,6 @@
 #include "qmudef.h"
 #include "../vmisc/vmath.h"
 
-using namespace std;
-
 /**
  * @file
  * @brief This file contains the basic implementation of the muparser engine.
@@ -218,9 +216,9 @@ void QmuParserBase::ReInit() const
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-    Q_UNUSED(pExpr);
-    Q_UNUSED(nStart);
-    Q_UNUSED(nEnd);
+    Q_UNUSED(pExpr)
+    Q_UNUSED(nStart)
+    Q_UNUSED(nEnd)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,7 +394,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
     std::locale loc;
-    if (m_pTokenReader->GetArgSep()==std::use_facet<numpunct<char_type> >(loc).decimal_point())
+    if (m_pTokenReader->GetArgSep()==std::use_facet<std::numpunct<char_type> >(loc).decimal_point())
     {
         Error(ecLOCALE);
     }

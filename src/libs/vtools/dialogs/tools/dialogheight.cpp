@@ -129,7 +129,7 @@ void DialogHeight::SetBasePointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxBasePoint, value);
 
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
@@ -143,7 +143,7 @@ void DialogHeight::SetP1LineId(const quint32 &value)
     setCurrentPointId(ui->comboBoxP1Line, value);
 
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLineP1Id(value);
 }
 
@@ -157,7 +157,7 @@ void DialogHeight::SetP2LineId(const quint32 &value)
     setCurrentPointId(ui->comboBoxP2Line, value);
 
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLineP2Id(value);
 }
 
@@ -186,7 +186,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -240,7 +240,7 @@ void DialogHeight::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetBasePointId());
     line->setLineP1Id(GetP1LineId());

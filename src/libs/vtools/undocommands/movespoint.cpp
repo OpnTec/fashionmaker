@@ -51,7 +51,7 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     qCDebug(vUndo, "SPoint newX %f", newX);
     qCDebug(vUndo, "SPoint newY %f", newY);
 
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
@@ -92,7 +92,7 @@ void MoveSPoint::redo()
 bool MoveSPoint::mergeWith(const QUndoCommand *command)
 {
     const MoveSPoint *moveCommand = static_cast<const MoveSPoint *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSPointId();
 
     qCDebug(vUndo, "Mergin.");

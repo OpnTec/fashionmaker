@@ -202,7 +202,7 @@ VPiecePath VContainer::GetPiecePath(quint32 id) const
  */
 quint32 VContainer::AddGObject(VGObject *obj)
 {
-    SCASSERT(obj != nullptr);
+    SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
     uniqueNames.insert(obj->name());
     return AddObject(d->gObjects, pointer);
@@ -285,7 +285,7 @@ template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    SCASSERT(point.isNull() == false);
+    SCASSERT(point.isNull() == false)
     point->setId(id);
     if (d->gObjects.contains(id))
     {
@@ -527,7 +527,7 @@ void VContainer::RemoveVariable(const QString &name)
 template <typename key, typename val>
 quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
-    SCASSERT(value != nullptr);
+    SCASSERT(value != nullptr)
     const quint32 id = getNextId();
     value->setId(id);
     obj[id] = value;
@@ -542,7 +542,7 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
  */
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
-    SCASSERT(obj != nullptr);
+    SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
     UpdateObject(d->gObjects, id, pointer);
     uniqueNames.insert(obj->name());

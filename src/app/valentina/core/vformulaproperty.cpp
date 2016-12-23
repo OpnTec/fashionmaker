@@ -37,22 +37,20 @@
 
 enum class ChildType : char {Invalid = 0, Value = 1, Formula = 2};
 
-using namespace VPE;
-
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaProperty::VFormulaProperty(const QString &name)
     : VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
 {
-    d_ptr->type = Property::Complex;
+    d_ptr->type = VPE::Property::Complex;
 
-    VStringProperty* tmpValue = new VStringProperty(tr("Value"));
+    VPE::VStringProperty* tmpValue = new VPE::VStringProperty(tr("Value"));
     addChild(tmpValue);
     tmpValue->setUpdateBehaviour(true, false);
     tmpValue->setReadOnly(true);
     tmpValue->setOsSeparator(qApp->Settings()->GetOsSeparator());
     tmpValue->setTypeForParent(static_cast<int>(ChildType::Value));
 
-    VStringProperty* tmpFormula = new VStringProperty(tr("Formula"));
+    VPE::VStringProperty* tmpFormula = new VPE::VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
@@ -94,8 +92,8 @@ Qt::ItemFlags VFormulaProperty::flags(int column) const
 QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
                                         const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
     VFormulaPropertyEditor* tmpEditor = new VFormulaPropertyEditor(parent);
@@ -143,7 +141,7 @@ QString VFormulaProperty::type() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VProperty *VFormulaProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *container) const
 {
     if (!container)
     {

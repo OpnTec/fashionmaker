@@ -51,7 +51,7 @@ PathPage::PathPage(QWidget *parent)
     : QWidget(parent), defaultButton(nullptr), editButton(nullptr), pathTable(nullptr), pathGroup(nullptr)
 {
     QGroupBox *pathGroup = PathGroup();
-    SCASSERT(pathGroup != nullptr);
+    SCASSERT(pathGroup != nullptr)
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(pathGroup);
@@ -75,7 +75,7 @@ void PathPage::DefaultPath()
 {
     const int row = pathTable->currentRow();
     QTableWidgetItem *item = pathTable->item(row, 1);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
 
     switch (row)
     {
@@ -103,7 +103,7 @@ void PathPage::EditPath()
 {
     const int row = pathTable->currentRow();
     QTableWidgetItem *item = pathTable->item(row, 1);
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
 
     QString path;
     switch (row)
@@ -233,7 +233,7 @@ void PathPage::InitTable()
     pathTable->resizeRowsToContents();
     pathTable->horizontalHeader()->setStretchLastSection(true);
 
-    connect(pathTable, &QTableWidget::itemSelectionChanged, [this]()
+    connect(pathTable, &QTableWidget::itemSelectionChanged, RECEIVER(this)[this]()
     {
         defaultButton->setEnabled(true);
         defaultButton->setDefault(false);

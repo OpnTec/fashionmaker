@@ -31,9 +31,6 @@
 #include <QtGlobal>
 #include "../qmuparser/qmuparsertest.h"
 
-using namespace qmu;
-using namespace Test;
-
 //---------------------------------------------------------------------------------------------------------------------
 void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -64,7 +61,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     qInstallMessageHandler(testMessageOutput);
-    QmuParserTester pt;
+    qmu::Test::QmuParserTester pt;
     QTimer::singleShot(0, &pt, SLOT(Run()));
     return a.exec();
 }

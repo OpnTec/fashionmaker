@@ -90,9 +90,9 @@ VToolNormal::VToolNormal(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolNormal::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetFormula(formulaLength);
@@ -112,9 +112,9 @@ void VToolNormal::setDialog()
  */
 VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -235,7 +235,7 @@ void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -257,9 +257,9 @@ void VToolNormal::RemoveReferens()
  */
 void VToolNormal::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -298,7 +298,7 @@ void VToolNormal::SetVisualization()
     if (not vis.isNull())
     {
         VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);

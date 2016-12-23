@@ -41,8 +41,6 @@
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
 
-using namespace std;
-
 /**
  * @file
  * @brief This file contains the implementation of parser test cases.

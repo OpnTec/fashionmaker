@@ -127,9 +127,9 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
  */
 void VToolBisector::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -151,9 +151,9 @@ void VToolBisector::setDialog()
 VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                            VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -257,7 +257,7 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -282,9 +282,9 @@ void VToolBisector::RemoveReferens()
  */
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -323,7 +323,7 @@ void VToolBisector::SetVisualization()
     if (not vis.isNull())
     {
         VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);
         visual->setObject2Id(basePointId);

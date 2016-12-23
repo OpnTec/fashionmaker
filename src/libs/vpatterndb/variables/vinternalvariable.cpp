@@ -57,7 +57,7 @@ VInternalVariable::~VInternalVariable()
 //---------------------------------------------------------------------------------------------------------------------
 bool VInternalVariable::Filter(quint32 id)
 {
-    Q_UNUSED(id);
+    Q_UNUSED(id)
     return false;
 }
 

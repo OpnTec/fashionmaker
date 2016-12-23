@@ -155,7 +155,7 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                         {
                             // Ensure visible only small rect around a cursor
                             VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                            SCASSERT(currentScene);
+                            SCASSERT(currentScene)
                             const QPointF cursorPosition = currentScene->getScenePos();
                             view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                         }
@@ -194,7 +194,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         //Disable cursor-arrow-openhand

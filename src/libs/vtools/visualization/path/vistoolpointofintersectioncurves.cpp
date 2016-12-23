@@ -81,7 +81,7 @@ void VisToolPointOfIntersectionCurves::RefreshGeometry()
 void VisToolPointOfIntersectionCurves::VisualMode(const quint32 &id)
 {
     auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     this->object1Id = id;
     Visualization::scenePos = scene->getScenePos();

@@ -109,7 +109,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -194,7 +194,7 @@ void DialogLineIntersect::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetP1Line1());
     line->setLine1P2Id(GetP2Line1());
@@ -267,7 +267,7 @@ void DialogLineIntersect::ShowVisualization()
  */
 void DialogLineIntersect::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagName && flagPoint);
 }
 
@@ -307,7 +307,7 @@ void DialogLineIntersect::SetP2Line2(const quint32 &value)
     setCurrentPointId(ui->comboBoxP2Line2, value);
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLine2P2Id(value);
 }
 
@@ -321,7 +321,7 @@ void DialogLineIntersect::SetP1Line2(const quint32 &value)
     setCurrentPointId(ui->comboBoxP1Line2, value);
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLine2P1Id(value);
 }
 
@@ -335,7 +335,7 @@ void DialogLineIntersect::SetP2Line1(const quint32 &value)
     setCurrentPointId(ui->comboBoxP2Line1, value);
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLine1P2Id(value);
 }
 
@@ -349,7 +349,7 @@ void DialogLineIntersect::SetP1Line1(const quint32 &value)
     setCurrentPointId(ui->comboBoxP1Line1, value);
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 

@@ -75,9 +75,9 @@ VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(VAbstractPattern 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     auto p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFirstCurveId(firstCurveId);
     dialogTool->SetSecondCurveId(secondCurveId);
@@ -90,9 +90,9 @@ void VToolPointOfIntersectionCurves::setDialog()
 VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 firstCurveId = dialogTool->GetFirstCurveId();
     const quint32 secondCurveId = dialogTool->GetSecondCurveId();
     const VCrossCurvesPoint vCrossPoint = dialogTool->GetVCrossPoint();
@@ -362,7 +362,7 @@ void VToolPointOfIntersectionCurves::contextMenuEvent(QGraphicsSceneContextMenuE
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -370,9 +370,9 @@ void VToolPointOfIntersectionCurves::contextMenuEvent(QGraphicsSceneContextMenuE
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCurve1, QString().setNum(dialogTool->GetFirstCurveId()));
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));
@@ -407,7 +407,7 @@ void VToolPointOfIntersectionCurves::SetVisualization()
     if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstCurveId);
         visual->setObject2Id(secondCurveId);

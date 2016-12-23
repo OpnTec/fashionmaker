@@ -106,7 +106,7 @@ void ConfigurationPage::Apply()
     settings->SetAutosaveTime(autoTime->value());
 
     QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
-    SCASSERT(autoSaveTimer);
+    SCASSERT(autoSaveTimer)
 
     autoSaveCheck->isChecked() ? autoSaveTimer->start(autoTime->value()*60000) : autoSaveTimer->stop();
 

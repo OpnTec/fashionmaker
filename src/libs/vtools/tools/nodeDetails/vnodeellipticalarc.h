@@ -40,8 +40,6 @@
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
 
-class VContainer;
-
 class VNodeEllipticalArc :public VAbstractNode
 {
     Q_OBJECT

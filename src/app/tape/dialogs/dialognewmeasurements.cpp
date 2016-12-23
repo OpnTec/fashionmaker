@@ -172,7 +172,7 @@ void DialogNewMeasurements::CurrentTypeChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::CurrentUnitChanged(int index)
 {
-    Q_UNUSED(index);
+    Q_UNUSED(index)
 
     if (MUnit() != Unit::Inch)
     {

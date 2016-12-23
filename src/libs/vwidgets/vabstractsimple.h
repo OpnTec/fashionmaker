@@ -101,7 +101,7 @@ private:
 template <class T>
 void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
 {
-    SCASSERT(item);
+    SCASSERT(item)
     item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
 }
 

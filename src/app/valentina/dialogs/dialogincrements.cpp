@@ -110,15 +110,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited,  [=](const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=](){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=](){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textEdited, RECEIVER(this)[this](const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, RECEIVER(this)[this](){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, RECEIVER(this)[this](){search->FindNext();});
 
-    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
     {
         ui->toolButtonFindPrevious->setEnabled(state);
     });
-    connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
     {
         ui->toolButtonFindNext->setEnabled(state);
     });
@@ -168,7 +168,7 @@ void DialogIncrements::FillIncrements()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 
@@ -184,7 +184,7 @@ void DialogIncrements::FillIncrements()
 template <typename T>
 void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     qint32 currentRow = -1;
     QMapIterator<QString, T> i(varTable);
@@ -270,7 +270,7 @@ void DialogIncrements::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
     const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
@@ -280,7 +280,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
@@ -664,8 +664,8 @@ void DialogIncrements::SaveIncrFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::DeployFormula()
 {
-    SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr);
+    SCASSERT(ui->plainTextEditFormula != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr)
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
@@ -797,7 +797,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch(const VExceptionBadId &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             EnableDetails(false);
             return;
         }
@@ -820,7 +820,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 

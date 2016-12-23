@@ -120,7 +120,7 @@ void SaveDetailOptions::redo()
 bool SaveDetailOptions::mergeWith(const QUndoCommand *command)
 {
     const SaveDetailOptions *saveCommand = static_cast<const SaveDetailOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
+    SCASSERT(saveCommand != nullptr)
     const quint32 id = saveCommand->getDetId();
 
     if (id != nodeId || text() != command->text())

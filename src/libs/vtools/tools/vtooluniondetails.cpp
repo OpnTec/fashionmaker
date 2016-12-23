@@ -176,7 +176,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             QLineF l2(*center, p2);
             center->setMode(Draw::Modeling);
             quint32 idCenter = data->AddGObject(center);
-            Q_UNUSED(idCenter);
+            Q_UNUSED(idCenter)
             VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                   QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
             arc1->setMode(Draw::Modeling);
@@ -210,7 +210,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             QLineF l2(*center, p2);
             center->setMode(Draw::Modeling);
             quint32 idCenter = data->AddGObject(center);
-            Q_UNUSED(idCenter);
+            Q_UNUSED(idCenter)
             VEllipticalArc *arc1 = new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
                                                        arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
                                                        l1.angle(), QString().setNum(l1.angle()), l2.angle(),
@@ -435,7 +435,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             path->setMode(Draw::Modeling);
             const QSharedPointer<VAbstractCubicBezierPath> splinePath =
                     data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
-            SCASSERT(splinePath != nullptr);
+            SCASSERT(splinePath != nullptr)
             for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
             {
                 const VSpline spline = splinePath->GetSpline(i);
@@ -561,8 +561,8 @@ void VToolUnionDetails::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
-    Q_UNUSED(visible);
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -575,9 +575,9 @@ void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
 VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                              VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     VDetail d1 = data->GetDetail(dialogTool->getD1());
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
@@ -619,7 +619,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     {
         id = data->getNextId();
         drawName = DrawName(doc, d1id, d2id);
-        SCASSERT(not drawName.isEmpty());
+        SCASSERT(not drawName.isEmpty())
     }
     else
     {
@@ -643,7 +643,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     VNodeDetail det1p1;
     VNodeDetail det1p2;
     d1.NodeOnEdge(indexD1, det1p1, det1p2);
-    Q_UNUSED(det1p2);
+    Q_UNUSED(det1p2)
 
     VPointF point1;
     VPointF point2;

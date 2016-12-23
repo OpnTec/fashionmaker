@@ -154,8 +154,8 @@ void DialogEditWrongFormula::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
 {
-    SCASSERT(plainTextEditFormula != nullptr);
-    SCASSERT(labelResultCalculation != nullptr);
+    SCASSERT(plainTextEditFormula != nullptr)
+    SCASSERT(labelResultCalculation != nullptr)
     Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero);
 }
 
@@ -252,7 +252,7 @@ void DialogEditWrongFormula::PutHere()
  */
 void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
     ui->plainTextEditFormula->setTextCursor(cursor);
@@ -339,7 +339,7 @@ void DialogEditWrongFormula::Functions()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula);
 }
 
@@ -404,34 +404,34 @@ void DialogEditWrongFormula::InitVariables()
     Measurements();
 
     // clear text filter every time when new radio button selected
-    auto ClearFilterFormulaInputs = [=] () { ui->filterFormulaInputs->clear(); };
+    auto ClearFilterFormulaInputs = [this] () { ui->filterFormulaInputs->clear(); };
 
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEditWrongFormula::Increments);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonIncrements, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthLines);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthCurves);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::AngleLines);
-    connect(ui->radioButtonAngleLine, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonAngleLine, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
-    connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
-    connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, &DialogEditWrongFormula::CurvesCLength);
-    connect(ui->radioButtonCLength, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonCLength, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
-    connect(ui->radioButtonFunctions, &QRadioButton::clicked, ClearFilterFormulaInputs);
+    connect(ui->radioButtonFunctions, &QRadioButton::clicked, RECEIVER(this)ClearFilterFormulaInputs);
 
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
 }

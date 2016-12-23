@@ -54,7 +54,7 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     setText(QObject::tr("move detail"));
     nodeId = id;
 
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
@@ -123,7 +123,7 @@ void MovePiece::redo()
 bool MovePiece::mergeWith(const QUndoCommand *command)
 {
     const MovePiece *moveCommand = static_cast<const MovePiece *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getDetId();
 
     if (id != nodeId)

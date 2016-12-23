@@ -235,9 +235,9 @@ VToolDetail::~VToolDetail()
  */
 void VToolDetail::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->setDetail(VAbstractTool::data.GetDetail(id));
 }
 
@@ -251,9 +251,9 @@ void VToolDetail::setDialog()
  */
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     VDetail detail = dialogTool->getDetail();
     VDetail det;
     qApp->getUndoStack()->beginMacro("add detail");
@@ -379,7 +379,7 @@ void VToolDetail::Remove(bool ask)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -402,9 +402,9 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        SCASSERT(dialog != nullptr);
+        SCASSERT(dialog != nullptr)
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-        SCASSERT(dialogTool != nullptr);
+        SCASSERT(dialogTool != nullptr)
         const VDetail newDet = dialogTool->getDetail();
         const VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
@@ -651,7 +651,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
                        {
                            // Ensure visible only small rect around a cursor
                            VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                           SCASSERT(currentScene);
+                           SCASSERT(currentScene)
                            const QPointF cursorPosition = currentScene->getScenePos();
                            view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                        }
@@ -695,7 +695,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -752,7 +752,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
@@ -762,7 +762,7 @@ void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
@@ -772,7 +772,7 @@ void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     //Disable cursor-arrow-openhand
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -824,7 +824,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
         catch(const VExceptionToolWasDeleted &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             return;//Leave this method immediately!!!
         }
         return; //Leave this method immediately after call!!!
@@ -1195,8 +1195,8 @@ void VToolDetail::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
-    Q_UNUSED(visible);
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1229,7 +1229,7 @@ void VToolDetail::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::DeleteTool(bool ask)
 {
-    DeleteDetail *delDet = new DeleteDetail(doc, id, VAbstractTool::data.GetDetail(id));
+    QScopedPointer<DeleteDetail> delDet(new DeleteDetail(doc, id, VAbstractTool::data.GetDetail(id)));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)
@@ -1237,9 +1237,9 @@ void VToolDetail::DeleteTool(bool ask)
             return;
         }
         /* If UnionDetails tool delete detail no need emit FullParsing.*/
-        connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+        connect(delDet.data(), &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
-    qApp->getUndoStack()->push(delDet);
+    qApp->getUndoStack()->push(delDet.take());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
     VExceptionToolWasDeleted e("Tool was used after deleting.");
@@ -1252,7 +1252,7 @@ template <typename Tool>
 Tool* VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     Tool *tool = qobject_cast<Tool*>(doc->getTool(node.getId()));
-    SCASSERT(tool != nullptr);
+    SCASSERT(tool != nullptr)
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
     tool->SetParentType(ParentType::Item);

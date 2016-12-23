@@ -554,14 +554,14 @@ VDataTool *VAbstractPattern::getTool(const quint32 &id)
 void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
-    SCASSERT(tool != nullptr);
+    SCASSERT(tool != nullptr)
     tools.insert(id, tool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::AddToolOnRemove(VDataTool *tool)
 {
-    SCASSERT(tool != nullptr);
+    SCASSERT(tool != nullptr)
     toolsOnRemove.append(tool);
 }
 

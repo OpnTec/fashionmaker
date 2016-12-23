@@ -124,7 +124,7 @@ void VToolSinglePoint::SetEnabled(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
+    Q_UNUSED(object)
     setVisible(visible);
 }
 
@@ -247,7 +247,7 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(CorrectColor(baseColor),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     QGraphicsEllipseItem::hoverEnterEvent(event);
@@ -260,7 +260,7 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(CorrectColor(baseColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     QGraphicsEllipseItem::hoverLeaveEvent(event);
@@ -340,7 +340,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -362,7 +362,7 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     VDrawTool::SaveOptions(tag, obj);
 
     QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));

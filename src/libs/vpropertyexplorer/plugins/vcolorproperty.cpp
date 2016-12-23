@@ -31,16 +31,14 @@
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
 
-using namespace VPE;
-
-VColorProperty::VColorProperty(const QString &name) :
+VPE::VColorProperty::VColorProperty(const QString &name) :
     VProperty(name, QVariant::Color)
 {
 }
 
 
 //! Get the data how it should be displayed
-QVariant VColorProperty::data (int column, int role) const
+QVariant VPE::VColorProperty::data (int column, int role) const
 {
     if (column == DPC_Data && (Qt::DisplayRole == role))
     {
@@ -59,11 +57,11 @@ QVariant VColorProperty::data (int column, int role) const
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                      const QAbstractItemDelegate* delegate)
+QWidget* VPE::VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                                           const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     VColorPropertyEditor* tmpWidget = new VColorPropertyEditor(parent);
     tmpWidget->setLocale(parent->locale());
@@ -72,7 +70,7 @@ QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewIte
 }
 
 //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-bool VColorProperty::setEditorData(QWidget* editor)
+bool VPE::VColorProperty::setEditorData(QWidget* editor)
 {
     VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
     if (tmpWidget)
@@ -86,7 +84,7 @@ bool VColorProperty::setEditorData(QWidget* editor)
 }
 
 //! Gets the data from the widget
-QVariant VColorProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VColorProperty::getEditorData(const QWidget *editor) const
 {
     const VColorPropertyEditor* tmpWidget = qobject_cast<const VColorPropertyEditor*>(editor);
     if (tmpWidget)
@@ -97,12 +95,12 @@ QVariant VColorProperty::getEditorData(const QWidget *editor) const
     return QVariant();
 }
 
-QString VColorProperty::type() const
+QString VPE::VColorProperty::type() const
 {
     return "color";
 }
 
-VProperty *VColorProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VPE::VColorProperty::clone(bool include_children, VProperty *container) const
 {
     return VProperty::clone(include_children, container ? container : new VColorProperty(getName()));
 }

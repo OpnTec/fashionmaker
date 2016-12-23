@@ -42,16 +42,14 @@
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
 
-using namespace VPE;
-
-VLineTypeProperty::VLineTypeProperty(const QString &name)
+VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
     : VProperty(name, QVariant::Int), styles(), indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
-QVariant VLineTypeProperty::data(int column, int role) const
+QVariant VPE::VLineTypeProperty::data(int column, int role) const
 {
     if (styles.empty())
     {
@@ -79,11 +77,11 @@ QVariant VLineTypeProperty::data(int column, int role) const
     }
 }
 
-QWidget *VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                          const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
@@ -106,7 +104,7 @@ QWidget *VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionView
     return VProperty::d_ptr->editor;
 }
 
-QVariant VLineTypeProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VLineTypeProperty::getEditorData(const QWidget *editor) const
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -117,7 +115,7 @@ QVariant VLineTypeProperty::getEditorData(const QWidget *editor) const
     return QVariant(0);
 }
 
-void VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
+void VPE::VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
 {
     this->styles = styles;
     indexList.clear();
@@ -130,12 +128,12 @@ void VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
 }
 
 // cppcheck-suppress unusedFunction
-QMap<QString, QIcon> VLineTypeProperty::getStyles() const
+QMap<QString, QIcon> VPE::VLineTypeProperty::getStyles() const
 {
     return styles;
 }
 
-void VLineTypeProperty::setValue(const QVariant &value)
+void VPE::VLineTypeProperty::setValue(const QVariant &value)
 {
     int tmpIndex = value.toInt();
 
@@ -153,17 +151,17 @@ void VLineTypeProperty::setValue(const QVariant &value)
     }
 }
 
-QString VLineTypeProperty::type() const
+QString VPE::VLineTypeProperty::type() const
 {
     return QStringLiteral("lineType");
 }
 
-VProperty *VLineTypeProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VPE::VLineTypeProperty::clone(bool include_children, VProperty *container) const
 {
     return VProperty::clone(include_children, container ? container : new VLineTypeProperty(getName()));
 }
 
-int VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
+int VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
 {
     QVector<QString> indexList;
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();
@@ -175,7 +173,7 @@ int VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QS
     return indexList.indexOf(style);
 }
 
-void VLineTypeProperty::currentIndexChanged(int index)
+void VPE::VLineTypeProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     UserChangeEvent *event = new UserChangeEvent();

@@ -143,8 +143,8 @@ void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
 template <typename T>
 void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
     QObject::connect(scene, &VMainGraphicsScene::EnablePointItemHover, tool, &T::AllowHover);

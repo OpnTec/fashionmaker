@@ -80,7 +80,7 @@ void VisToolLine::setPoint2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr);
+    SCASSERT (lineItem != nullptr)
 
     lineItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
     lineItem->setLine(line);

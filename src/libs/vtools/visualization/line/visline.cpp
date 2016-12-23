@@ -64,8 +64,6 @@ qreal VisLine::CorrectAngle(const qreal &angle)
 
     switch (qFloor((qAbs(ang)+22.5)/45))
     {
-        case 0: // <22.5
-            return 0;
         case 1: // <67.5
             return 45;
         case 2: // <112.5
@@ -80,6 +78,7 @@ qreal VisLine::CorrectAngle(const qreal &angle)
             return 270;
         case 7: // <337.5
             return 315;
+        case 0: // <22.5
         default: // <360
             return 0;
     }
@@ -155,7 +154,7 @@ void VisLine::AddOnScene()
 void VisLine::DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
                       Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr);
+    SCASSERT (lineItem != nullptr)
 
     const qreal angle = QLineF(p, pTangent).angle();
     const QPointF endRay = Ray(p, angle);

@@ -72,7 +72,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
   */
 QxtCsvModel::QxtCsvModel(QObject *parent) : QAbstractTableModel(parent)
 {
-    QXT_INIT_PRIVATE(QxtCsvModel);
+    QXT_INIT_PRIVATE(QxtCsvModel)
 }
 
 /*!
@@ -86,7 +86,7 @@ QxtCsvModel::QxtCsvModel(QObject *parent) : QAbstractTableModel(parent)
 QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QChar separator)
     : QAbstractTableModel(parent)
 {
-    QXT_INIT_PRIVATE(QxtCsvModel);
+    QXT_INIT_PRIVATE(QxtCsvModel)
     setSource(file, withHeader, separator);
 }
 
@@ -103,7 +103,7 @@ QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QCha
 QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator)
     : QAbstractTableModel(parent)
 {
-    QXT_INIT_PRIVATE(QxtCsvModel);
+    QXT_INIT_PRIVATE(QxtCsvModel)
     QFile src(filename);
     setSource(&src, withHeader, separator);
 }

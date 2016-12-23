@@ -118,7 +118,7 @@ void DialogCutSpline::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -134,7 +134,7 @@ void DialogCutSpline::setSplineId(const quint32 &value)
     setCurrentSplineId(ui->comboBoxSpline, value);
 
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setObject1Id(value);
 }
 
@@ -169,7 +169,7 @@ void DialogCutSpline::SaveData()
     formula.replace("\n", " ");
 
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(getSplineId());
     path->setLength(formula);

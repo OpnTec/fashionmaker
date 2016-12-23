@@ -84,9 +84,9 @@ VToolHeight::VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolHeight::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -107,9 +107,9 @@ void VToolHeight::setDialog()
  */
 VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -215,7 +215,7 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -226,9 +226,9 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolHeight::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -264,7 +264,7 @@ void VToolHeight::SetVisualization()
     if (not vis.isNull())
     {
         VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);
         visual->setLineP1Id(p1LineId);

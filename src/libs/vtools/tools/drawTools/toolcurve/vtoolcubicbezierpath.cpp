@@ -83,9 +83,9 @@ VToolCubicBezierPath::~VToolCubicBezierPath()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogCubicBezierPath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
@@ -95,9 +95,9 @@ void VToolCubicBezierPath::setDialog()
 VToolCubicBezierPath *VToolCubicBezierPath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                    VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     auto dialogTool = qobject_cast<DialogCubicBezierPath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     auto path = new VCubicBezierPath(dialogTool->GetPath());
     const QString color = dialogTool->GetColor();
     for (qint32 i = 0; i < path->CountPoints(); ++i)
@@ -186,7 +186,7 @@ void VToolCubicBezierPath::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -204,9 +204,9 @@ void VToolCubicBezierPath::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     const auto dialogTool = qobject_cast<DialogCubicBezierPath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     SetSplinePathAttributes(domElement, dialogTool->GetPath());
@@ -218,7 +218,7 @@ void VToolCubicBezierPath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject
     VAbstractSpline::SaveOptions(tag, obj);
 
     QSharedPointer<VCubicBezierPath> splPath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
-    SCASSERT(splPath.isNull() == false);
+    SCASSERT(splPath.isNull() == false)
 
     SetSplinePathAttributes(tag, *splPath);
 }
@@ -229,7 +229,7 @@ void VToolCubicBezierPath::SetVisualization()
     if (not vis.isNull())
     {
         auto visual = qobject_cast<VisToolCubicBezierPath *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
         visual->setPath(*splPath.data());
@@ -253,7 +253,7 @@ void VToolCubicBezierPath::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
     QDomElement pathPoint = doc->createElement(AttrPathPoint);
     doc->SetAttribute(pathPoint, AttrPSpline, splPoint.id());
     domElement.appendChild(pathPoint);

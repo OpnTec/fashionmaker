@@ -33,13 +33,10 @@
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
 
-using namespace VPE;
+const int VPE::VIntegerProperty::StandardMin = -1000000;
+const int VPE::VIntegerProperty::StandardMax = 1000000;
 
-
-const int VIntegerProperty::StandardMin = -1000000;
-const int VIntegerProperty::StandardMax = 1000000;
-
-VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
+VPE::VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
     : VProperty(name, QVariant::Int), minValue(StandardMin), maxValue(StandardMax), singleStep(1.0)
 {
     VProperty::setSettings(settings);
@@ -47,7 +44,7 @@ VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVar
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
-VIntegerProperty::VIntegerProperty(const QString &name)
+VPE::VIntegerProperty::VIntegerProperty(const QString &name)
     : VProperty(name), minValue(StandardMin), maxValue(StandardMax), singleStep(1.0)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -55,11 +52,11 @@ VIntegerProperty::VIntegerProperty(const QString &name)
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                        const QAbstractItemDelegate* delegate)
+QWidget* VPE::VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                             const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QSpinBox* tmpEditor = new QSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
@@ -76,7 +73,7 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
 }
 
 //! Gets the data from the widget
-QVariant VIntegerProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VIntegerProperty::getEditorData(const QWidget *editor) const
 {
     const QSpinBox* tmpEditor = qobject_cast<const QSpinBox*>(editor);
     if (tmpEditor)
@@ -87,7 +84,7 @@ QVariant VIntegerProperty::getEditorData(const QWidget *editor) const
     return QVariant(0);
 }
 
-void VIntegerProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VIntegerProperty::setSetting(const QString& key, const QVariant& value)
 {
     if (key == QLatin1String("Min"))
     {
@@ -103,7 +100,7 @@ void VIntegerProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VIntegerProperty::getSetting(const QString& key) const
+QVariant VPE::VIntegerProperty::getSetting(const QString& key) const
 {
     if (key == QLatin1String("Min"))
     {
@@ -121,31 +118,31 @@ QVariant VIntegerProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VIntegerProperty::getSettingKeys() const
+QStringList VPE::VIntegerProperty::getSettingKeys() const
 {
     return (QStringList("Min") << "Max" << "Step");
 }
 
-QString VIntegerProperty::type() const
+QString VPE::VIntegerProperty::type() const
 {
     return "integer";
 }
 
-VProperty* VIntegerProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VIntegerProperty::clone(bool include_children, VProperty* container) const
 {
     return VProperty::clone(include_children, container ? container : new VIntegerProperty(getName()));
 }
 
-void VIntegerProperty::valueChanged(int i)
+void VPE::VIntegerProperty::valueChanged(int i)
 {
     Q_UNUSED(i)
     UserChangeEvent *event = new UserChangeEvent();
     QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }
 
-const double VDoubleProperty::StandardPrecision = 5;
+const double VPE::VDoubleProperty::StandardPrecision = 5;
 
-VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
+VPE::VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
     : VIntegerProperty(name), Precision(static_cast<int>(StandardPrecision))
 {
     VProperty::setSettings(settings);
@@ -154,7 +151,7 @@ VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVaria
     VProperty::d_ptr->PropertyVariantType = QVariant::Double;
 }
 
-VDoubleProperty::VDoubleProperty(const QString &name)
+VPE::VDoubleProperty::VDoubleProperty(const QString &name)
     : VIntegerProperty(name), Precision(static_cast<int>(StandardPrecision))
 {
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -163,11 +160,11 @@ VDoubleProperty::VDoubleProperty(const QString &name)
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                       const QAbstractItemDelegate* delegate)
+QWidget* VPE::VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                            const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QDoubleSpinBox* tmpEditor = new QDoubleSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(minValue);
@@ -184,7 +181,7 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
 }
 
 //! Gets the data from the widget
-QVariant VDoubleProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VDoubleProperty::getEditorData(const QWidget *editor) const
 {
     const QDoubleSpinBox* tmpEditor = qobject_cast<const QDoubleSpinBox*>(editor);
     if (tmpEditor)
@@ -195,7 +192,7 @@ QVariant VDoubleProperty::getEditorData(const QWidget *editor) const
     return QVariant(0);
 }
 
-void VDoubleProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VDoubleProperty::setSetting(const QString& key, const QVariant& value)
 {
     if (key == QLatin1String("Min"))
     {
@@ -215,7 +212,7 @@ void VDoubleProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VDoubleProperty::getSetting(const QString& key) const
+QVariant VPE::VDoubleProperty::getSetting(const QString& key) const
 {
     if (key == QLatin1String("Min"))
     {
@@ -237,17 +234,17 @@ QVariant VDoubleProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VDoubleProperty::getSettingKeys() const
+QStringList VPE::VDoubleProperty::getSettingKeys() const
 {
     return (QStringList("Min") << "Max" << "Step" << "Precision");
 }
 
-QString VDoubleProperty::type() const
+QString VPE::VDoubleProperty::type() const
 {
     return "double";
 }
 
-VProperty* VDoubleProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VDoubleProperty::clone(bool include_children, VProperty* container) const
 {
     return VIntegerProperty::clone(include_children, container ? container : new VDoubleProperty(getName()));
 }

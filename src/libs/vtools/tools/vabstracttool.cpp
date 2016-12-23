@@ -87,7 +87,7 @@ VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
     connect(this->doc, &VAbstractPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VAbstractPattern::LiteParseTree);
@@ -175,25 +175,17 @@ Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
     {
         case 0: // TypeLineNone
             return Qt::NoPen;
-            break;
-        case 1: // TypeLineLine
-            return Qt::SolidLine;
-            break;
         case 2: // TypeLineDashLine
             return Qt::DashLine;
-            break;
         case 3: // TypeLineDotLine
             return Qt::DotLine;
-            break;
         case 4: // TypeLineDashDotLine
             return Qt::DashDotLine;
-            break;
         case 5: // TypeLineDashDotDotLine
             return Qt::DashDotDotLine;
-            break;
+        case 1: // TypeLineLine
         default:
             return Qt::SolidLine;
-            break;
     }
 }
 
@@ -273,9 +265,6 @@ QMap<QString, QString> VAbstractTool::ColorsList()
         QString name;
         switch (i)
         {
-            case 0: // ColorBlack
-                name = tr("black");
-                break;
             case 1: // ColorGreen
                 name = tr("green");
                 break;
@@ -324,6 +313,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
             case 16: // ColorCornFlowerBlue
                 name = tr("corn flower blue");
                 break;
+            case 0: // ColorBlack
             default:
                 name = tr("black");
                 break;
@@ -432,9 +422,9 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
                                 QGraphicsLineItem *lineName, const qreal radius)
 {
-    SCASSERT(point != nullptr);
-    SCASSERT(namePoint != nullptr);
-    SCASSERT(lineName != nullptr);
+    SCASSERT(point != nullptr)
+    SCASSERT(namePoint != nullptr)
+    SCASSERT(lineName != nullptr)
 
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- point->scenePos());

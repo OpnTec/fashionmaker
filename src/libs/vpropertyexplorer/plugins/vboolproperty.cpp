@@ -25,12 +25,11 @@
 
 #include "../vproperty_p.h"
 
-using namespace VPE;
 
-QVariant VBoolProperty::TrueText;
-QVariant VBoolProperty::FalseText;
+QVariant VPE::VBoolProperty::TrueText;
+QVariant VPE::VBoolProperty::FalseText;
 
-VBoolProperty::VBoolProperty(const QString& name) :
+VPE::VBoolProperty::VBoolProperty(const QString& name) :
     VProperty(name, QVariant::Bool)
 {
     d_ptr->VariantValue.setValue(false);
@@ -49,7 +48,7 @@ VBoolProperty::VBoolProperty(const QString& name) :
 
 
 //! Get the data how it should be displayed
-QVariant VBoolProperty::data (int column, int role) const
+QVariant VPE::VBoolProperty::data (int column, int role) const
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
@@ -63,7 +62,7 @@ QVariant VBoolProperty::data (int column, int role) const
         return VProperty::data(column, role);
 }
 
-bool VBoolProperty::setData(const QVariant &data, int role)
+bool VPE::VBoolProperty::setData(const QVariant &data, int role)
 {
     if (Qt::CheckStateRole == role)
     {
@@ -75,7 +74,7 @@ bool VBoolProperty::setData(const QVariant &data, int role)
 }
 
 //! Returns item flags
-Qt::ItemFlags VBoolProperty::flags(int column) const
+Qt::ItemFlags VPE::VBoolProperty::flags(int column) const
 {
     if (column == DPC_Data)
     {
@@ -85,12 +84,12 @@ Qt::ItemFlags VBoolProperty::flags(int column) const
         return VProperty::flags(column);
 }
 
-QString VBoolProperty::type() const
+QString VPE::VBoolProperty::type() const
 {
     return "bool";
 }
 
-VProperty *VBoolProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VPE::VBoolProperty::clone(bool include_children, VProperty *container) const
 {
     return VProperty::clone(include_children, container ? container : new VBoolProperty(getName()));
 }

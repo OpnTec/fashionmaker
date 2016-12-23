@@ -137,7 +137,7 @@ void DialogMove::SetAngle(const QString &value)
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetAngle(formulaAngle);
 
     MoveCursorToEnd(ui->plainTextEditAngle);
@@ -161,7 +161,7 @@ void DialogMove::SetLength(const QString &value)
     ui->plainTextEditLength->setPlainText(formulaLength);
 
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetLength(formulaLength);
 
     MoveCursorToEnd(ui->plainTextEditLength);
@@ -200,16 +200,16 @@ void DialogMove::ShowDialog(bool click)
         prepare = true;
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
         scene->clearSelection();
 
         VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
 
         VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-        SCASSERT(window != nullptr);
+        SCASSERT(window != nullptr)
         connect(operation, &VisToolMove::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
         scene->ToggleArcSelection(false);
@@ -225,7 +225,7 @@ void DialogMove::ShowDialog(bool click)
     else if (not stage1 && prepare && click)
     {
         VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
 
         if (operation->LengthValue() > 0)
         {
@@ -243,8 +243,8 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    Q_UNUSED(id);
-    Q_UNUSED(type);
+    Q_UNUSED(id)
+    Q_UNUSED(type)
     // do nothing
 }
 
@@ -367,9 +367,9 @@ void DialogMove::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagAngle && flagLength && flagName);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(bOk->isEnabled());
 }
 
@@ -391,7 +391,7 @@ void DialogMove::SaveData()
     formulaLength.replace("\n", " ");
 
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
 
     operation->SetObjects(objects.toVector());
     operation->SetAngle(formulaAngle);

@@ -87,9 +87,9 @@ VToolMove::~VToolMove()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetLength(formulaLength);
     dialogTool->SetSuffix(suffix);
@@ -99,9 +99,9 @@ void VToolMove::setDialog()
 VToolMove *VToolMove::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     QString angle = dialogTool->GetAngle();
     QString length = dialogTool->GetLength();
     const QString suffix = dialogTool->GetSuffix();
@@ -300,7 +300,7 @@ void VToolMove::SetVisualization()
     if (not vis.isNull())
     {
         VisToolMove *visual = qobject_cast<VisToolMove *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->SetObjects(source);
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
@@ -312,9 +312,9 @@ void VToolMove::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     QString length = dialogTool->GetLength();
@@ -352,7 +352,7 @@ void VToolMove::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

@@ -104,10 +104,10 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     ui.doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
     QPushButton *bCancel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagName = true;//We have default name of detail.
@@ -235,7 +235,7 @@ void DialogDetail::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula && flagName && flagError && flagWidth);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
@@ -321,7 +321,7 @@ void DialogDetail::AddUpdate()
     else
     {
         int iR = ui.listWidgetMCP->currentRow();
-        SCASSERT(iR >= 0);
+        SCASSERT(iR >= 0)
         m_conMCP[iR] = mcp;
         SetAddMode();
     }
@@ -340,7 +340,7 @@ void DialogDetail::Cancel()
 void DialogDetail::Remove()
 {
     int iR = ui.listWidgetMCP->currentRow();
-    SCASSERT(iR >= 0);
+    SCASSERT(iR >= 0)
     m_conMCP.removeAt(iR);
     UpdateList();
     ClearFields();
@@ -350,7 +350,7 @@ void DialogDetail::Remove()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::NameDetailChanged()
 {
-    SCASSERT(labelEditNamePoint != nullptr);
+    SCASSERT(labelEditNamePoint != nullptr)
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
@@ -391,7 +391,7 @@ void DialogDetail::MaterialChanged()
 void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                            qreal mx, qreal my, bool reverse)
 {
-    SCASSERT(id > NULL_ID);
+    SCASSERT(id > NULL_ID)
     QString name;
     switch (typeTool)
     {
@@ -524,7 +524,7 @@ void DialogDetail::EnableObjectGUI(bool value)
 quint32 DialogDetail::RowId(int i) const
 {
     const QListWidgetItem *rowItem = ui.listWidget->item(i);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     const VNodeDetail rowNode = qvariant_cast<VNodeDetail>(rowItem->data(Qt::UserRole));
     return rowNode.getId();
 }
@@ -589,7 +589,7 @@ void DialogDetail::BiasXChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMx(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
@@ -604,7 +604,7 @@ void DialogDetail::BiasYChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMy(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
@@ -668,7 +668,7 @@ void DialogDetail::ClickedReverse(bool checked)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setReverse(checked);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
@@ -687,7 +687,7 @@ void DialogDetail::ObjectChanged(int row)
         return;
     }
     const QListWidgetItem *item = ui.listWidget->item( row );
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     const VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));

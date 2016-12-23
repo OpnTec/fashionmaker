@@ -94,8 +94,8 @@ VGrainlineItem::~VGrainlineItem()
  */
 void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget)
 {
-    Q_UNUSED(pOption);
-    Q_UNUSED(pWidget);
+    Q_UNUSED(pOption)
+    Q_UNUSED(pWidget)
     pP->save();
     QColor clr = Qt::black;
     pP->setPen(QPen(clr, 3));

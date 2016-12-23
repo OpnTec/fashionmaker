@@ -330,7 +330,7 @@ void VToolDoublePoint::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -354,7 +354,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     if (obj->id() == p1id)
     {
         QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-        SCASSERT(point.isNull() == false);
+        SCASSERT(point.isNull() == false)
 
         doc->SetAttribute(tag, AttrName1, point->name());
         doc->SetAttribute(tag, AttrMx1, qApp->fromPixel(point->mx()));
@@ -363,7 +363,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     else if (obj->id() == p2id)
     {
         QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-        SCASSERT(point.isNull() == false);
+        SCASSERT(point.isNull() == false)
 
         doc->SetAttribute(tag, AttrName2, point->name());
         doc->SetAttribute(tag, AttrMx2, qApp->fromPixel(point->mx()));

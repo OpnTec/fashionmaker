@@ -33,8 +33,6 @@
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
 
-using namespace std;
-
 /**
  * @file
  * @brief Implementation of the standard floating point QmuParser.
@@ -348,9 +346,9 @@ void QmuParser::InitOprt()
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-    Q_UNUSED(pExpr);
-    Q_UNUSED(nStart);
-    Q_UNUSED(nEnd);
+    Q_UNUSED(pExpr)
+    Q_UNUSED(nStart)
+    Q_UNUSED(nEnd)
     // this is just sample code to illustrate modifying variable names on the fly.
     // I'm not sure anyone really needs such a feature...
     /*

@@ -35,9 +35,6 @@
 class QAbstractItemDelegate;
 class QStyleOptionViewItem;
 
-using namespace VPE;
-
-
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
     : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
@@ -56,8 +53,8 @@ VPE::VStringProperty::VStringProperty(const QString &name)
 QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                             const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QLineEdit* tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
@@ -89,12 +86,12 @@ void VPE::VStringProperty::setReadOnly(bool readOnly)
     this->readOnly = readOnly;
 }
 
-void VStringProperty::setOsSeparator(bool separator)
+void VPE::VStringProperty::setOsSeparator(bool separator)
 {
     m_osSeparator = separator;
 }
 
-void VStringProperty::setClearButtonEnable(bool value)
+void VPE::VStringProperty::setClearButtonEnable(bool value)
 {
     this->clearButton = value;
 }
@@ -142,23 +139,23 @@ VPE::VProperty *VPE::VStringProperty::clone(bool include_children, VPE::VPropert
     return VProperty::clone(include_children, container ? container : new VStringProperty(getName(), getSettings()));
 }
 
-void VStringProperty::UpdateParent(const QVariant &value)
+void VPE::VStringProperty::UpdateParent(const QVariant &value)
 {
     emit childChanged(value, typeForParent);
 }
 
 // cppcheck-suppress unusedFunction
-int VStringProperty::getTypeForParent() const
+int VPE::VStringProperty::getTypeForParent() const
 {
     return typeForParent;
 }
 
-void VStringProperty::setTypeForParent(int value)
+void VPE::VStringProperty::setTypeForParent(int value)
 {
     typeForParent = value;
 }
 
-bool VStringProperty::eventFilter(QObject *object, QEvent *event)
+bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
 {
     if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
     {

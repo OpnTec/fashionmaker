@@ -121,7 +121,7 @@ void DialogRotation::SetOrigPointId(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxOriginPoint, value);
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetOriginPointId(value);
 }
 
@@ -143,7 +143,7 @@ void DialogRotation::SetAngle(const QString &value)
     ui->plainTextEditFormula->setPlainText(formulaAngle);
 
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
     operation->SetAngle(formulaAngle);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -181,11 +181,11 @@ void DialogRotation::ShowDialog(bool click)
         stage1 = false;
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
         scene->clearSelection();
 
         VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
 
@@ -205,7 +205,7 @@ void DialogRotation::ShowDialog(bool click)
     {
         /*We will ignore click if pointer is in point circle*/
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetOrigPointId());
         const QLineF line = QLineF(*point, scene->getScenePos());
 
@@ -217,7 +217,7 @@ void DialogRotation::ShowDialog(bool click)
         }
 
         VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-        SCASSERT(operation != nullptr);
+        SCASSERT(operation != nullptr)
 
         SetAngle(operation->Angle());//Show in dialog angle that a user choose
         setModal(true);
@@ -243,9 +243,9 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
             if (SetObject(id, ui->comboBoxOriginPoint, ""))
             {
                 VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-                SCASSERT(operation != nullptr);
+                SCASSERT(operation != nullptr)
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-                SCASSERT(window != nullptr);
+                SCASSERT(window != nullptr)
                 connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
                 operation->SetOriginPointId(id);
@@ -348,9 +348,9 @@ void DialogRotation::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagAngle && flagName && flagError);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(bOk->isEnabled());
 }
 
@@ -369,7 +369,7 @@ void DialogRotation::SaveData()
     formulaAngle.replace("\n", " ");
 
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-    SCASSERT(operation != nullptr);
+    SCASSERT(operation != nullptr)
 
     operation->SetObjects(objects.toVector());
     operation->SetOriginPointId(GetOrigPointId());

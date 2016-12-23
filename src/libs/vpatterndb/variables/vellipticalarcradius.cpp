@@ -45,7 +45,7 @@ VEllipticalArcRadius::VEllipticalArcRadius()
 VEllipticalArcRadius::VEllipticalArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc,
                                            const int numberRadius, Unit patternUnit) : VCurveVariable(id, parentId)
 {
-    SCASSERT(elArc != nullptr);
+    SCASSERT(elArc != nullptr)
 
     SetType(VarType::ArcRadius);
     SetName(QString(radius_V+"%1"+"%2").arg(numberRadius).arg(elArc->name()));

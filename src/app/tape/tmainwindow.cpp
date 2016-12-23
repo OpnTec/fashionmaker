@@ -1344,7 +1344,7 @@ void TMainWindow::ShowMData()
         }
         catch(const VExceptionBadId &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             MFields(false);
             return;
         }
@@ -1403,7 +1403,7 @@ void TMainWindow::ShowMData()
             }
             catch (qmu::QmuParserError &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 formula = meash->GetFormula();
             }
 
@@ -1446,8 +1446,8 @@ void TMainWindow::ShowMDiagram(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::DeployFormula()
 {
-    SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr);
+    SCASSERT(ui->plainTextEditFormula != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr)
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
@@ -1787,7 +1787,7 @@ void TMainWindow::SetupMenu()
     {
         QAction *action = new QAction(this);
         recentFileActs[i] = action;
-        connect(action, &QAction::triggered, [action, this]()
+        connect(action, &QAction::triggered, RECEIVER(this)[action, this]()
         {
             if (action != nullptr)
             {
@@ -1828,8 +1828,11 @@ void TMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
-    connect(ui->actionAboutQt, &QAction::triggered, [this](){QMessageBox::aboutQt(this, tr("About Qt"));});
-    connect(ui->actionAboutTape, &QAction::triggered, [this]()
+    connect(ui->actionAboutQt, &QAction::triggered, RECEIVER(this)[this]()
+    {
+        QMessageBox::aboutQt(this, tr("About Qt"));
+    });
+    connect(ui->actionAboutTape, &QAction::triggered, RECEIVER(this)[this]()
     {
         DialogAboutTape *aboutDialog = new DialogAboutTape(this);
         aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -1844,7 +1847,7 @@ void TMainWindow::SetupMenu()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitWindow()
 {
-    SCASSERT(m != nullptr);
+    SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
     ui->dockWidgetDiagram->setVisible(dockDiagramVisible);
@@ -1969,9 +1972,9 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textChanged, [=] (const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textChanged, [this] (const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this] (){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, [this] (){search->FindNext();});
 
     connect(search.data(), &VTableSearch::HasResult, [this] (bool state)
     {
@@ -2007,7 +2010,10 @@ void TMainWindow::InitWindow()
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, [this](){ShowInGraphicalShell(curFile);});
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        ShowInGraphicalShell(curFile);
+    });
 
     InitUnits();
 
@@ -2052,7 +2058,7 @@ void TMainWindow::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     QString header = table->horizontalHeaderItem(column)->text();
     const int index = header.indexOf(QLatin1String("("));
@@ -2309,7 +2315,7 @@ void TMainWindow::RefreshTable()
             }
             catch (qmu::QmuParserError &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 formula = meash->GetFormula();
             }
 
@@ -2819,10 +2825,10 @@ void TMainWindow::UpdateRecentFileActions()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateWindowMenu(QMenu *menu)
 {
-    SCASSERT(menu != nullptr);
+    SCASSERT(menu != nullptr)
 
     QAction *action = menu->addAction(tr("&New Window"));
-    connect(action, &QAction::triggered, [this]()
+    connect(action, &QAction::triggered, RECEIVER(this)[this]()
     {
         qApp->NewMainWindow();
         qApp->MainWindow()->activateWindow();
@@ -2919,8 +2925,8 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
     }
     return true;
 #else
-    Q_UNUSED(error);
-    Q_UNUSED(path);
+    Q_UNUSED(error)
+    Q_UNUSED(path)
     return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
@@ -2990,7 +2996,7 @@ void TMainWindow::InitUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitComboBoxUnits()
 {
-    SCASSERT(comboBoxUnits != nullptr);
+    SCASSERT(comboBoxUnits != nullptr)
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
     comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
@@ -2999,7 +3005,7 @@ void TMainWindow::InitComboBoxUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitGender(QComboBox *gender)
 {
-    SCASSERT(gender != nullptr);
+    SCASSERT(gender != nullptr)
     gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
     gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
     gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));

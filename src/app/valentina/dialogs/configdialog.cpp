@@ -149,7 +149,7 @@ void ConfigDialog::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     // remember the size for the next time this dialog is opened, but only
     // if widget was already initialized, which rules out the resize at
     // dialog creating, which would
@@ -168,7 +168,7 @@ void ConfigDialog::createIcons()
     createIcon("://icon/path_config.png", tr("Paths"));
 
     connect(contentsWidget, &QListWidget::currentItemChanged,
-            [this](QListWidgetItem *current, QListWidgetItem *previous)
+            RECEIVER(this)[this](QListWidgetItem *current, QListWidgetItem *previous)
     {
         if (current == nullptr)
         {

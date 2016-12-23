@@ -99,9 +99,9 @@ VToolRotation::~VToolRotation()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
@@ -111,9 +111,9 @@ void VToolRotation::setDialog()
 VToolRotation *VToolRotation::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                      VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 originPointId = dialogTool->GetOrigPointId();
     QString angle = dialogTool->GetAngle();
     const QString suffix = dialogTool->GetSuffix();
@@ -289,7 +289,7 @@ void VToolRotation::SetVisualization()
     if (not vis.isNull())
     {
         VisToolRotation *visual = qobject_cast<VisToolRotation *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->SetObjects(source);
         visual->SetOriginPointId(origPointId);
@@ -301,9 +301,9 @@ void VToolRotation::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
@@ -340,7 +340,7 @@ void VToolRotation::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

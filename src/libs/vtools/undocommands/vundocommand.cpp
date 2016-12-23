@@ -45,7 +45,7 @@ Q_LOGGING_CATEGORY(vUndo, "v.undo")
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

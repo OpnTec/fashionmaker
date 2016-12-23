@@ -479,24 +479,17 @@ std::string VDxfEngine::getPenStyle()
 {
     switch (state->pen().style())
     {
-        case Qt::SolidLine:
-            return "BYLAYER";
-            break;
         case Qt::DashLine:
             return "DASHED";
-            break;
         case Qt::DotLine:
             return "DOT";
-            break;
         case Qt::DashDotLine:
             return "DASHDOT";
-            break;
         case Qt::DashDotDotLine:
             return "DIVIDE";
-            break;
+        case Qt::SolidLine:
         default:
             return "BYLAYER";
-            break;
     }
 }
 

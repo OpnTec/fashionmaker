@@ -118,7 +118,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    connect(this, &QApplication::aboutToQuit, [this]()
+    connect(this, &QApplication::aboutToQuit, RECEIVER(this)[this]()
     {
         // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
         // instance. Solution is to call sync() before quit.
@@ -283,14 +283,14 @@ void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
  */
 VCommonSettings *VAbstractApplication::Settings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return settings;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsScene *VAbstractApplication::getCurrentScene() const
 {
-    SCASSERT(*currentScene != nullptr);
+    SCASSERT(*currentScene != nullptr)
     return *currentScene;
 }
 

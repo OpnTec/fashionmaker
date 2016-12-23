@@ -84,7 +84,9 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent *event) {
+    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
+            RECEIVER(this)[this](QGraphicsSceneContextMenuEvent *event)
+    {
         emit ShowContextMenu(event);
     });
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
@@ -127,7 +129,7 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            SCASSERT(tool != nullptr);
+            SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }
         else
@@ -243,7 +245,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 
@@ -254,7 +256,7 @@ void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 

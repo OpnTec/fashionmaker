@@ -55,13 +55,13 @@ DialogUndo::DialogUndo(QWidget *parent)
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, [this]()
+        connect(ui->pushButtonUndo, &QPushButton::clicked, RECEIVER(this)[this]()
         {
             result = UndoButton::Undo;
             accept();
         });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, [this]()
+    connect(ui->pushButtonFix, &QPushButton::clicked, RECEIVER(this)[this]()
     {
         result = UndoButton::Fix;
         accept();

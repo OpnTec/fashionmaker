@@ -189,9 +189,9 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 #endif
     }
 #else
-    Q_UNUSED(lockName);
-    Q_UNUSED(stale);
-    Q_UNUSED(timeout);
+    Q_UNUSED(lockName)
+    Q_UNUSED(stale)
+    Q_UNUSED(timeout)
 #endif
     return res;
 }

@@ -75,13 +75,13 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
         if (obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setVisible(visible);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setVisible(visible);
         }
     }
@@ -90,9 +90,9 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
+    Q_UNUSED(painter)
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,13 +149,13 @@ void VAbstractOperation::FullUpdateFromFile()
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
         }
     }
@@ -173,13 +173,13 @@ void VAbstractOperation::SetFactor(qreal factor)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
         }
     }
@@ -195,13 +195,13 @@ void VAbstractOperation::AllowHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
     }
@@ -217,13 +217,13 @@ void VAbstractOperation::AllowSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
     }
@@ -239,7 +239,7 @@ void VAbstractOperation::AllowPointHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setAcceptHoverEvents(enabled);
         }
     }
@@ -255,7 +255,7 @@ void VAbstractOperation::AllowPointSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
         }
     }
@@ -271,7 +271,7 @@ void VAbstractOperation::AllowPointLabelHover(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->AllowLabelHover(enabled);
         }
     }
@@ -287,7 +287,7 @@ void VAbstractOperation::AllowPointLabelSelecting(bool enabled)
         if (i.value()->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             item->AllowLabelSelecting(enabled);
         }
     }
@@ -370,7 +370,7 @@ void VAbstractOperation::DeleteFromLabel()
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -384,7 +384,7 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
         if (obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             ChangePosition(item, labelId, pos);
         }
     }
@@ -475,7 +475,7 @@ VSimpleCurve *VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType
     curve->setParentItem(this);
     curve->SetType(curveType);
     connect(curve, &VSimpleCurve::Selected, this, &VAbstractOperation::ObjectSelected);
-    connect(curve, &VSimpleCurve::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent * event)
+    connect(curve, &VSimpleCurve::ShowContextMenu, RECEIVER(this)[this](QGraphicsSceneContextMenuEvent * event)
     {
         contextMenuEvent(event);
     });
@@ -496,7 +496,7 @@ void VAbstractOperation::DoChangePosition(quint32 id, qreal mx, qreal my)
         VAbstractTool::data.UpdateGObject(id, point);
 
         VSimplePoint *item = qobject_cast<VSimplePoint *>(operatedObjects.value(id));
-        SCASSERT(item != nullptr);
+        SCASSERT(item != nullptr)
 
         item->RefreshGeometry(*point);
     }
@@ -512,7 +512,7 @@ void VAbstractOperation::AllowCurveHover(bool enabled, GOType type)
         if (i.value()->GetType() != GOType::Point)
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             if (item->GetType() == type)
             {
                 item->setAcceptHoverEvents(enabled);
@@ -531,7 +531,7 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
         if (i.value()->GetType() != GOType::Point)
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
-            SCASSERT(item != nullptr);
+            SCASSERT(item != nullptr)
             if (item->GetType() == type)
             {
                 item->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
@@ -569,12 +569,13 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                                        *VAbstractTool::data.GetPatternUnit(), &factor);
                 point->setParentItem(this);
                 point->SetType(GOType::Point);
-                connect(point, &VSimplePoint::Choosed, [this](quint32 id)
+                connect(point, &VSimplePoint::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Point);
                 });
                 connect(point, &VSimplePoint::Selected, this, &VAbstractOperation::ObjectSelected);
-                connect(point, &VSimplePoint::ShowContextMenu, [this](QGraphicsSceneContextMenuEvent * event)
+                connect(point, &VSimplePoint::ShowContextMenu,
+                        RECEIVER(this)[this](QGraphicsSceneContextMenuEvent * event)
                 {
                     contextMenuEvent(event);
                 });
@@ -587,7 +588,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::Arc:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Arc);
                 });
@@ -596,7 +597,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::EllipticalArc:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::ElArc);
                 });
@@ -606,7 +607,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::CubicBezier:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Spline);
                 });
@@ -616,7 +617,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case GOType::CubicBezierPath:
             {
                 VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, [this](quint32 id)
+                connect(curve, &VSimpleCurve::Choosed, RECEIVER(this)[this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::SplinePath);
                 });

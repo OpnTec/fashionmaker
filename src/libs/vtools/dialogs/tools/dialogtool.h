@@ -311,7 +311,7 @@ inline VAbstractTool *DialogTool::GetAssociatedTool()
 template <typename T>
 inline void DialogTool::InitArrow(T *ui)
 {
-    SCASSERT(ui != nullptr);
+    SCASSERT(ui != nullptr)
     spinBoxAngle = ui->doubleSpinBoxAngle;
     connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
     connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
@@ -333,7 +333,7 @@ inline void DialogTool::InitOkCancelApply(T *ui)
 {
     InitOkCancel(ui);
     bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
 }
 
@@ -346,11 +346,11 @@ template <typename T>
 inline void DialogTool::InitOkCancel(T *ui)
 {
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
@@ -376,10 +376,10 @@ inline void DialogTool::AddVisualization()
     if (prepare == false)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         T *toolVis = qobject_cast<T *>(vis);
-        SCASSERT(toolVis != nullptr);
+        SCASSERT(toolVis != nullptr)
 
         if (not scene->items().contains(toolVis))
         {

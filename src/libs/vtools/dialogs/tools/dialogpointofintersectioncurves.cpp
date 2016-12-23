@@ -101,7 +101,7 @@ void DialogPointOfIntersectionCurves::SetFirstCurveId(const quint32 &value)
     setCurrentCurveId(ui->comboBoxCurve1, value);
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setObject1Id(value);
 }
 
@@ -117,7 +117,7 @@ void DialogPointOfIntersectionCurves::SetSecondCurveId(const quint32 &value)
     setCurrentCurveId(ui->comboBoxCurve2, value);
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setObject2Id(value);
 }
 
@@ -136,7 +136,7 @@ void DialogPointOfIntersectionCurves::SetVCrossPoint(const VCrossCurvesPoint &vP
         ui->comboBoxVCorrection->setCurrentIndex(index);
 
         auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setVCrossPoint(vP);
     }
 }
@@ -156,7 +156,7 @@ void DialogPointOfIntersectionCurves::SetHCrossPoint(const HCrossCurvesPoint &hP
         ui->comboBoxHCorrection->setCurrentIndex(index);
 
         auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setHCrossPoint(hP);
     }
 }
@@ -172,7 +172,7 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
                 || type == SceneObject::SplinePath)
         {
             auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-            SCASSERT(point != nullptr);
+            SCASSERT(point != nullptr)
 
             switch (number)
             {
@@ -215,7 +215,7 @@ void DialogPointOfIntersectionCurves::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
 
     point->setObject1Id(GetFirstCurveId());
     point->setObject2Id(GetSecondCurveId());
@@ -227,7 +227,7 @@ void DialogPointOfIntersectionCurves::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagName && flagError);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)

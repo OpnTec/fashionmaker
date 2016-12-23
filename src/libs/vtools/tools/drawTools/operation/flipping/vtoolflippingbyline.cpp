@@ -79,9 +79,9 @@ VToolFlippingByLine::~VToolFlippingByLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     dialogTool->SetFirstLinePointId(m_firstLinePointId);
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
     dialogTool->SetSuffix(suffix);
@@ -91,9 +91,9 @@ void VToolFlippingByLine::setDialog()
 VToolFlippingByLine *VToolFlippingByLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                  VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const quint32 firstLinePointId = dialogTool->GetFirstLinePointId();
     const quint32 secondLinePointId = dialogTool->GetSecondLinePointId();
     const QString suffix = dialogTool->GetSuffix();
@@ -157,7 +157,7 @@ void VToolFlippingByLine::SetVisualization()
     if (not vis.isNull())
     {
         VisToolFlippingByLine *visual = qobject_cast<VisToolFlippingByLine *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->SetObjects(source);
         visual->SetFirstLinePointId(m_firstLinePointId);
@@ -169,9 +169,9 @@ void VToolFlippingByLine::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));
@@ -208,7 +208,7 @@ void VToolFlippingByLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }

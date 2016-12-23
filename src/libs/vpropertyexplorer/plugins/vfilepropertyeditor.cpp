@@ -45,9 +45,7 @@ class QDragMoveEvent;
 class QDropEvent;
 class QHBoxLayout;
 
-using namespace VPE;
-
-VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
+VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     : QWidget(parent), CurrentFilePath(), ToolButton(nullptr), FileLineEdit(nullptr), FileDialogFilter(), FilterList(),
       Directory(is_directory)
 {
@@ -79,13 +77,13 @@ VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
 }
 
 
-VFileEditWidget::~VFileEditWidget()
+VPE::VFileEditWidget::~VFileEditWidget()
 {
     // nothing needs to be done here
 }
 
 
-void VFileEditWidget::setFile(const QString &value, bool emit_signal)
+void VPE::VFileEditWidget::setFile(const QString &value, bool emit_signal)
 {
     if (CurrentFilePath != value)
     {
@@ -101,24 +99,24 @@ void VFileEditWidget::setFile(const QString &value, bool emit_signal)
 }
 
 
-void VFileEditWidget::setFilter(const QString &dialog_filter, const QStringList& filter_list)
+void VPE::VFileEditWidget::setFilter(const QString &dialog_filter, const QStringList& filter_list)
 {
     FileDialogFilter = dialog_filter;
     FilterList = filter_list;
 }
 
-void VFileEditWidget::setDirectory(bool dir)
+void VPE::VFileEditWidget::setDirectory(bool dir)
 {
     Directory = dir;
 }
 
-QString VFileEditWidget::getFile() const
+QString VPE::VFileEditWidget::getFile() const
 {
     return CurrentFilePath;
 }
 
 
-void VFileEditWidget::onToolButtonClicked()
+void VPE::VFileEditWidget::onToolButtonClicked()
 {
     QString filepath = (Directory ? QFileDialog::getExistingDirectory(0, tr("Directory"), CurrentFilePath)
                                   : QFileDialog::getOpenFileName(0, tr("Open File"), CurrentFilePath,
@@ -130,7 +128,7 @@ void VFileEditWidget::onToolButtonClicked()
 }
 
 
-bool VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
+bool VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
 {
     if (ev->type() == QEvent::DragEnter || ev->type() == QEvent::Drop)
     {
@@ -170,13 +168,13 @@ bool VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
     return QWidget::eventFilter(obj, ev);
 }
 
-bool VFileEditWidget::isDirectory()
+bool VPE::VFileEditWidget::isDirectory()
 {
     return Directory;
 }
 
 
-void VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
+void VPE::VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
 {
     QString tmpFileName;
     if (checkMimeData(event->mimeData(), tmpFileName))
@@ -187,18 +185,18 @@ void VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
 }
 
 // cppcheck-suppress unusedFunction
-void VFileEditWidget::dragMoveEvent(QDragMoveEvent* event)
+void VPE::VFileEditWidget::dragMoveEvent(QDragMoveEvent* event)
 {
     event->acceptProposedAction();
 }
 
 // cppcheck-suppress unusedFunction
-void VFileEditWidget::dragLeaveEvent(QDragLeaveEvent* event)
+void VPE::VFileEditWidget::dragLeaveEvent(QDragLeaveEvent* event)
 {
     event->accept();
 }
 
-void VFileEditWidget::dropEvent(QDropEvent* event)
+void VPE::VFileEditWidget::dropEvent(QDropEvent* event)
 {
     QString tmpFileName;
     if (checkMimeData(event->mimeData(), tmpFileName))
@@ -212,7 +210,7 @@ void VFileEditWidget::dropEvent(QDropEvent* event)
 }
 
 
-bool VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
+bool VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
 {
     if (data->hasUrls())
     {
@@ -235,7 +233,7 @@ bool VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
     return false;
 }
 
-bool VFileEditWidget::checkFileFilter(const QString& file) const
+bool VPE::VFileEditWidget::checkFileFilter(const QString& file) const
 {
     if (FilterList.isEmpty())
     {

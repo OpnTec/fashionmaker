@@ -176,7 +176,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -233,7 +233,7 @@ void DialogShoulderPoint::SaveData()
     formula.replace("\n", " ");
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
     line->setObject1Id(GetP3());
     line->setLineP1Id(GetP1Line());
@@ -260,7 +260,7 @@ void DialogShoulderPoint::SetP3(const quint32 &value)
     setCurrentPointId(ui->comboBoxP3, value);
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
@@ -286,7 +286,7 @@ void DialogShoulderPoint::SetP2Line(const quint32 &value)
     setCurrentPointId(ui->comboBoxP2Line, value);
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLineP2Id(value);
 }
 
@@ -300,7 +300,7 @@ void DialogShoulderPoint::SetP1Line(const quint32 &value)
     setCurrentPointId(ui->comboBoxP1Line, value);
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLineP1Id(value);
 }
 
@@ -320,7 +320,7 @@ void DialogShoulderPoint::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formula);
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

@@ -61,7 +61,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 
 
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, [this]()
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
     {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {
@@ -110,7 +110,7 @@ void DialogAboutApp::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutApp::FontPointSize(QWidget *w, int pointSize)
 {
-    SCASSERT(w != nullptr);
+    SCASSERT(w != nullptr)
 
     QFont font = w->font();
     font.setPointSize(pointSize);

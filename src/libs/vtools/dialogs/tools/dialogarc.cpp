@@ -155,7 +155,7 @@ void DialogArc::SetF2(const QString &value)
     ui->plainTextEditF2->setPlainText(f2);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF2(f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
@@ -189,7 +189,7 @@ void DialogArc::SetF1(const QString &value)
     ui->plainTextEditF1->setPlainText(f1);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
@@ -211,7 +211,7 @@ void DialogArc::SetRadius(const QString &value)
     ui->plainTextEditFormula->setPlainText(radius);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -257,7 +257,7 @@ void DialogArc::SaveData()
     f2.replace("\n", " ");
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
     path->setObject1Id(GetCenter());
     path->setRadius(radius);
@@ -357,9 +357,9 @@ void DialogArc::FXF2()
  */
 void DialogArc::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(flagRadius && flagF1 && flagF2);
 }
 

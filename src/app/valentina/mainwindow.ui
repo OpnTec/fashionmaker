@@ -1451,7 +1451,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_6">
+      <widget class="QWidget" name="layoutPage">
        <property name="geometry">
         <rect>
          <x>0</x>

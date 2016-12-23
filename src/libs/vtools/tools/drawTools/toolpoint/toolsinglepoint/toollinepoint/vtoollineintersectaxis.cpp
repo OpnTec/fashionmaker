@@ -77,10 +77,10 @@ VToolLineIntersectAxis::~VToolLineIntersectAxis()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::setDialog()
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     dialog->setModal(true);
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -96,9 +96,9 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(DialogTool *dialog, VMain
                                                        VAbstractPattern *doc,
                                                        VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool);
+    SCASSERT(dialogTool)
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -267,7 +267,7 @@ void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -275,9 +275,9 @@ void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
+    SCASSERT(dialog != nullptr)
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(dialogTool != nullptr)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -316,7 +316,7 @@ void VToolLineIntersectAxis::SetVisualization()
     if (not vis.isNull())
     {
         VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);

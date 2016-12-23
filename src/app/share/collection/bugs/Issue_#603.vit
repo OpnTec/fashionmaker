@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m value="17.5" name="neck_arc_f"/>
+        <m value="42" name="highbust_arc_f"/>
+        <m value="46" name="bust_arc_f"/>
+        <m value="44" name="lowbust_arc_f"/>
+        <m value="36" name="waist_arc_f"/>
+        <m value="48" name="hip_with_abdomen_arc_f"/>
+        <m value="40" name="neck_back_to_waist_b"/>
+        <m value="20" name="neck_back_to_highbust_b"/>
+        <m value="12.5" name="shoulder_length"/>
+        <m value="14" name="armfold_to_armfold_f"/>
+        <m value="17" name="armfold_to_armfold_b"/>
+        <m value="8.5" name="bustpoint_to_bustpoint"/>
+        <m value="26" name="bustpoint_to_neck_side"/>
+        <m value="43" name="shoulder_tip_to_waist_back"/>
+        <m value="27" name="arm_upper_circ"/>
+        <m full_name="Длина изделия" value="80" description="Измеряется от высшей точки плечевого шва до желаемого уровня длины" name="@Ди"/>
+        <m full_name="Длина переда до талии" value="43" description="Измеряется от высшей точки плечевого шва до линии талии через выступающую точку грудных желез, одновременно отмечая ее положение" name="@Дтп"/>
+        <m full_name="Длина рукава" value="55" description="Измеряем от конечной плечевой точки по наружной поверхности руки до уровня желаемой длины рукава&#xa;" name="@Др"/>
+    </body-measurements>
+</vit>

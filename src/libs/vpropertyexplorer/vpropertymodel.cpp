@@ -25,29 +25,27 @@
 #include "vproperty.h"
 #include "vpropertyset.h"
 
-using namespace VPE;
-
 #include "vpropertymodel_p.h"
 
-VPropertyModel::VPropertyModel(VPropertyModelPrivate *d, QObject *parent)
+VPE::VPropertyModel::VPropertyModel(VPropertyModelPrivate *d, QObject *parent)
     : QAbstractItemModel(parent), d_ptr(d)
 {
 }
 
 
-VPropertyModel::VPropertyModel(QObject * parent) :
+VPE::VPropertyModel::VPropertyModel(QObject * parent) :
     QAbstractItemModel(parent), d_ptr(new VPropertyModelPrivate())
 {
 }
 
-VPropertyModel::~VPropertyModel()
+VPE::VPropertyModel::~VPropertyModel()
 {
     delete d_ptr->Properties;
     delete d_ptr;
 }
 
 //! Adds the property to the model and attaches it to the parentid
-bool VPropertyModel::addProperty(VProperty* property, const QString& id, const QString &parentid, bool emitsignals)
+bool VPE::VPropertyModel::addProperty(VProperty* property, const QString& id, const QString &parentid, bool emitsignals)
 {
     if (!property)
     {
@@ -78,8 +76,8 @@ bool VPropertyModel::addProperty(VProperty* property, const QString& id, const Q
 }
 
 //! Creates a property and adds it to the model
-VProperty* VPropertyModel::createProperty(const QString& id, const QString& name, const QString& parentid,
-                                          const QVariant& data)
+VPE::VProperty* VPE::VPropertyModel::createProperty(const QString& id, const QString& name, const QString& parentid,
+                                                    const QVariant& data)
 {
     VProperty* tmpProp = new VProperty(name);
     tmpProp->setValue(data);
@@ -92,13 +90,13 @@ VProperty* VPropertyModel::createProperty(const QString& id, const QString& name
 }
 
 //! Gets a property by it's ID
-VProperty* VPropertyModel::getProperty(const QString& id)
+VPE::VProperty* VPE::VPropertyModel::getProperty(const QString& id)
 {
     return d_ptr->Properties != nullptr ? d_ptr->Properties->getProperty(id) : nullptr;
 }
 
 //! Returns the model index at row/column
-QModelIndex VPropertyModel::index(int row, int column, const QModelIndex& parent) const
+QModelIndex VPE::VPropertyModel::index(int row, int column, const QModelIndex& parent) const
 {
     if (d_ptr->Properties == nullptr || (parent.isValid() && parent.column() > 1))
     {
@@ -127,7 +125,7 @@ QModelIndex VPropertyModel::index(int row, int column, const QModelIndex& parent
 }
 
 //! Returns the parent of one model index
-QModelIndex VPropertyModel::parent ( const QModelIndex & index ) const
+QModelIndex VPE::VPropertyModel::parent ( const QModelIndex & index ) const
 {
     if (!index.isValid())
     {
@@ -155,7 +153,7 @@ QModelIndex VPropertyModel::parent ( const QModelIndex & index ) const
 }
 
 //! Returns the item flags for the given index
-Qt::ItemFlags VPropertyModel::flags (const QModelIndex& index) const
+Qt::ItemFlags VPE::VPropertyModel::flags (const QModelIndex& index) const
 {
     VProperty* tmpProperty = getProperty(index);
     if (!tmpProperty)
@@ -167,7 +165,7 @@ Qt::ItemFlags VPropertyModel::flags (const QModelIndex& index) const
 }
 
 //! Sets the role data for the item at index to value
-bool VPropertyModel::setData (const QModelIndex& index, const QVariant& value, int role)
+bool VPE::VPropertyModel::setData (const QModelIndex& index, const QVariant& value, int role)
 {
     VProperty* tmpProperty = getProperty(index);
     if (index.column() == 1 && tmpProperty)
@@ -191,7 +189,7 @@ bool VPropertyModel::setData (const QModelIndex& index, const QVariant& value, i
 
 
 //! Returns the data of an model index
-QVariant VPropertyModel::data ( const QModelIndex & index, int role ) const
+QVariant VPE::VPropertyModel::data ( const QModelIndex & index, int role ) const
 {
     VProperty* tmpProperty = getProperty(index);
     if (!tmpProperty)
@@ -203,7 +201,7 @@ QVariant VPropertyModel::data ( const QModelIndex & index, int role ) const
 }
 
 
-QVariant VPropertyModel::headerData (int section, Qt::Orientation orientation, int role) const
+QVariant VPE::VPropertyModel::headerData (int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
     {
@@ -227,7 +225,7 @@ QVariant VPropertyModel::headerData (int section, Qt::Orientation orientation, i
 
 
 //! Returns the number of rows
-int VPropertyModel::rowCount ( const QModelIndex & parent ) const
+int VPE::VPropertyModel::rowCount ( const QModelIndex & parent ) const
 {
     if (parent.isValid())
     {
@@ -249,15 +247,15 @@ int VPropertyModel::rowCount ( const QModelIndex & parent ) const
 
 
 //! Returns the number of columns
-int VPropertyModel::columnCount ( const QModelIndex & parent) const
+int VPE::VPropertyModel::columnCount ( const QModelIndex & parent) const
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
     return 2;
 }
 
 
 //! Gets a property by its ModelIndex
-VProperty* VPropertyModel::getProperty(const QModelIndex &index) const
+VPE::VProperty* VPE::VPropertyModel::getProperty(const QModelIndex &index) const
 {
     if (index.isValid())
     {
@@ -271,12 +269,12 @@ VProperty* VPropertyModel::getProperty(const QModelIndex &index) const
     return nullptr;
 }
 
-QString VPropertyModel::getPropertyID(const VProperty *prop) const
+QString VPE::VPropertyModel::getPropertyID(const VProperty *prop) const
 {
     return d_ptr->Properties != nullptr ? d_ptr->Properties->getPropertyID(prop) : QString();
 }
 
-QModelIndex VPropertyModel::getIndexFromProperty(VProperty* property, int column) const
+QModelIndex VPE::VPropertyModel::getIndexFromProperty(VProperty* property, int column) const
 {
     if (!property || column > columnCount() || column < 0)
     {
@@ -295,7 +293,7 @@ QModelIndex VPropertyModel::getIndexFromProperty(VProperty* property, int column
 }
 
 
-void VPropertyModel::onDataChangedByModel(VProperty* property)
+void VPE::VPropertyModel::onDataChangedByModel(VProperty* property)
 {
     QModelIndex tmpIndex = getIndexFromProperty(property, 1);
     if (tmpIndex.isValid())
@@ -305,17 +303,17 @@ void VPropertyModel::onDataChangedByModel(VProperty* property)
     }
 }
 
-const VPropertySet *VPropertyModel::getPropertySet() const
+const VPE::VPropertySet *VPE::VPropertyModel::getPropertySet() const
 {
     return d_ptr->Properties;
 }
 
-void VPropertyModel::clear(bool emit_signals)
+void VPE::VPropertyModel::clear(bool emit_signals)
 {
     setPropertySet(nullptr, emit_signals);
 }
 
-VPropertySet *VPropertyModel::takePropertySet(VPropertySet *new_property_set, bool emit_signals)
+VPE::VPropertySet *VPE::VPropertyModel::takePropertySet(VPropertySet *new_property_set, bool emit_signals)
 {
     VPropertySet* tmpOldPropertySet = d_ptr->Properties;
 
@@ -332,13 +330,13 @@ VPropertySet *VPropertyModel::takePropertySet(VPropertySet *new_property_set, bo
     return tmpOldPropertySet;
 }
 
-void VPropertyModel::setPropertySet(VPropertySet *property_set, bool emit_signals)
+void VPE::VPropertyModel::setPropertySet(VPropertySet *property_set, bool emit_signals)
 {
     VPropertySet* tmpOldPropertySet = takePropertySet(property_set, emit_signals);
     delete tmpOldPropertySet;
 }
 
-VProperty *VPropertyModel::takeProperty(const QString &id)
+VPE::VProperty *VPE::VPropertyModel::takeProperty(const QString &id)
 {
     QModelIndex tmpIndex = getIndexFromProperty(getProperty(id));
     if (d_ptr->Properties && tmpIndex.isValid())
@@ -352,7 +350,7 @@ VProperty *VPropertyModel::takeProperty(const QString &id)
     return nullptr;
 }
 
-void VPropertyModel::removeProperty(const QString &id)
+void VPE::VPropertyModel::removeProperty(const QString &id)
 {
     QModelIndex tmpIndex = getIndexFromProperty(getProperty(id));
     if (d_ptr->Properties && tmpIndex.isValid())

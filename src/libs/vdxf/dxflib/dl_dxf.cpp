@@ -49,6 +49,7 @@
 #include "dl_creationinterface.h"
 #include "dl_entities.h"
 #include "iostream"
+#include "strlcpy.h"
 
 /**
  * Default constructor.
@@ -1577,12 +1578,7 @@ bool DL_Dxf::handleXData(DL_CreationInterface* creationInterface)
         creationInterface->addXDataReal(static_cast<int>(groupCode), toReal(groupValue));
         return true;
     }
-    else if (groupCode>=1060 && groupCode<=1070)
-    {
-        creationInterface->addXDataInt(static_cast<int>(groupCode), toInt(groupValue));
-        return true;
-    }
-    else if (groupCode==1071)
+    else if (groupCode>=1060 && groupCode<=1071)
     {
         creationInterface->addXDataInt(static_cast<int>(groupCode), toInt(groupValue));
         return true;
@@ -2554,10 +2550,7 @@ void DL_Dxf::endSequence(DL_CreationInterface* creationInterface)
 DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
     char* f = new char[strlen(file)+1];
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_MSVC(4996)
-    strcpy(f, file);
-QT_WARNING_POP
+    strlcpy(f, file, sizeof(f));
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);
@@ -2602,7 +2595,6 @@ void DL_Dxf::writeHeader(DL_WriterA& dw) const
             break;
         case DL_Codes::AC1009_MIN:
             // minimalistic DXF version is unidentified in file:
-            break;
         default:
             break;
     }
@@ -3848,7 +3840,7 @@ void DL_Dxf::writeHatch2(DL_WriterA& dw,
                          const DL_Attributes& attrib) const
 {
 
-    Q_UNUSED(attrib);
+    Q_UNUSED(attrib)
 
     dw.dxfInt(75, 0);                // odd parity
     dw.dxfInt(76, 1);                // pattern type
@@ -3906,7 +3898,7 @@ void DL_Dxf::writeHatchLoop1(DL_WriterA& dw,
 void DL_Dxf::writeHatchLoop2(DL_WriterA& dw,
                              const DL_HatchLoopData& data)
 {
-    Q_UNUSED(data);
+    Q_UNUSED(data)
     dw.dxfInt(97, 0);
 }
 
@@ -4233,14 +4225,7 @@ void DL_Dxf::writeLinetype(DL_WriterA& dw,
     dw.dxfString(2, data.name);
     dw.dxfInt(70, data.flags);
 
-    if (nameUpper=="BYBLOCK")
-    {
-        dw.dxfString(3, "");
-        dw.dxfInt(72, 65);
-        dw.dxfInt(73, 0);
-        dw.dxfReal(40, 0.0);
-    }
-    else if (nameUpper=="BYLAYER")
+    if (nameUpper=="BYBLOCK" || nameUpper=="BYLAYER")
     {
         dw.dxfString(3, "");
         dw.dxfInt(72, 65);
@@ -5864,7 +5849,7 @@ int DL_Dxf::getLibVersion(const std::string& str)
 //        double ret;
 //        if (strchr(value, ',') != NULL) {
 //            char* tmp = new char[strlen(value)+1];
-//            strcpy(tmp, value);
+//            strlcpy(tmp, value, sizeof(tmp));
 //            DL_WriterA::strReplace(tmp, ',', '.');
 //            ret = atof(tmp);
 //            delete[] tmp;
@@ -5891,15 +5876,12 @@ void DL_Dxf::test()
     char* buf5 = new char[10];
     char* buf6 = new char[10];
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_MSVC(4996)
-    strcpy(buf1, "  10\n");
-    strcpy(buf2, "10");
-    strcpy(buf3, "10\n");
-    strcpy(buf4, "  10 \n");
-    strcpy(buf5, "  10 \r");
-    strcpy(buf6, "\t10 \n");
-QT_WARNING_POP
+    strlcpy(buf1, "  10\n", sizeof(buf1));
+    strlcpy(buf2, "10", sizeof(buf2));
+    strlcpy(buf3, "10\n", sizeof(buf3));
+    strlcpy(buf4, "  10 \n", sizeof(buf4));
+    strlcpy(buf5, "  10 \r", sizeof(buf5));
+    strlcpy(buf6, "\t10 \n", sizeof(buf6));
 
     // Try to avoid deleting array from an offset
     char* buf1Copy = buf1;

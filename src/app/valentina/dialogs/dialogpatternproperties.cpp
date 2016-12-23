@@ -69,7 +69,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->lineEditAuthor->setClearButtonEnabled(true);
 #endif
 
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
 
@@ -87,7 +87,10 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, [this](){ShowInGraphicalShell(m_filePath);});
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        ShowInGraphicalShell(m_filePath);
+    });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 #endif //defined(Q_OS_MAC)
@@ -108,7 +111,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
             &DialogPatternProperties::Apply);
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
@@ -135,7 +138,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     const QString size = QString().setNum(doc->GetDefCustomSize());
     SetDefaultSize(size);
 
-    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, [this]()
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, RECEIVER(this)[this]()
     {
         ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
         ui->comboBoxSize->setEnabled(ui->radioButtonDefFromP->isChecked());
@@ -143,19 +146,20 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
 
     auto DefValueChanged = [this](){defaultChanged = true;};
 
-    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, DefValueChanged);
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, RECEIVER(this)DefValueChanged);
 
     ui->radioButtonDefFromP->setChecked(doc->IsDefCustom());
 
     connect(ui->comboBoxHeight, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            DefValueChanged);
-    connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), DefValueChanged);
+            RECEIVER(this)DefValueChanged);
+    connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            RECEIVER(this)DefValueChanged);
 
     const bool readOnly = doc->IsReadOnly();
     ui->checkBoxPatternReadOnly->setChecked(readOnly);
     if (not readOnly)
     {
-        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, [this](){securityChanged = true;});
+        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, RECEIVER(this)[this](){securityChanged = true;});
     }
     else
     {
@@ -689,7 +693,7 @@ void DialogPatternProperties::SetOptions(const QMap<GVal, bool> &option)
 template<typename GVal>
 void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool> &option)
 {
-    SCASSERT(box != nullptr);
+    SCASSERT(box != nullptr)
 
     box->clear();
 
@@ -725,7 +729,7 @@ void DialogPatternProperties::InitImage()
 {
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
-    connect(ui->imageLabel, &QWidget::customContextMenuRequested, [this]()
+    connect(ui->imageLabel, &QWidget::customContextMenuRequested, RECEIVER(this)[this]()
     {
         QMenu menu(this);
         menu.addAction(deleteAction);
@@ -741,7 +745,7 @@ void DialogPatternProperties::InitImage()
     saveImageAction   = new QAction(tr("Save image to file"), this);
     showImageAction   = new QAction(tr("Show image"), this);
 
-    connect(deleteAction, &QAction::triggered, [this]()
+    connect(deleteAction, &QAction::triggered, RECEIVER(this)[this]()
     {
         doc->DeleteImage();
         ui->imageLabel->setText(tr("Change image"));
@@ -752,7 +756,7 @@ void DialogPatternProperties::InitImage()
 
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
-    connect(showImageAction, &QAction::triggered, [this]()
+    connect(showImageAction, &QAction::triggered, RECEIVER(this)[this]()
     {
         QLabel *label = new QLabel(this, Qt::Window);
         const QImage image = GetImage();

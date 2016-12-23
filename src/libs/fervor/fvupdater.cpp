@@ -281,7 +281,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply, &QNetworkReply::readyRead, [this]()
+    connect(m_reply, &QNetworkReply::readyRead, RECEIVER(this)[this]()
     {
         // this slot gets called every time the QNetworkReply has new data.
         // We read all of its new data and write it into the file.
@@ -289,10 +289,10 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
         // signal of the QNetworkReply
         m_xml.addData(m_reply->readAll());
     });
-    connect(m_reply, &QNetworkReply::downloadProgress, [this](qint64 bytesRead, qint64 totalBytes)
+    connect(m_reply, &QNetworkReply::downloadProgress, RECEIVER(this)[this](qint64 bytesRead, qint64 totalBytes)
     {
-        Q_UNUSED(bytesRead);
-        Q_UNUSED(totalBytes);
+        Q_UNUSED(bytesRead)
+        Q_UNUSED(totalBytes)
 
         if (m_httpRequestAborted)
         {
@@ -555,18 +555,21 @@ bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
         case 0: // Q_OS_LINUX
 #ifdef Q_OS_LINUX // Defined on Linux.
             return true;
+#else
+            return false;
 #endif
-            break;
         case 1: // Q_OS_MAC
 #ifdef Q_OS_MAC // Defined on MAC OS (synonym for Darwin).
             return true;
+#else
+            return false;
 #endif
-            break;
         case 2: // Q_OS_WIN32
 #ifdef Q_OS_WIN32 // Defined on all supported versions of Windows.
             return true;
+#else
+            return false;
 #endif
-            break;
         default:
             break;
     }

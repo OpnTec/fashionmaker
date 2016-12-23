@@ -141,8 +141,8 @@ void VAbstractNode::SetParentType(const ParentType &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::GroupVisibility(quint32 object, bool visible)
 {
-    Q_UNUSED(object);
-    Q_UNUSED(visible);
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

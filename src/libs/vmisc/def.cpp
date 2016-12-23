@@ -454,9 +454,9 @@ void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
         QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
     }
 #else
-    Q_UNUSED(pixmapPath);
-    Q_UNUSED(hotX);
-    Q_UNUSED(hotY);
+    Q_UNUSED(pixmapPath)
+    Q_UNUSED(hotX)
+    Q_UNUSED(hotY)
 #endif
 }
 
@@ -478,7 +478,7 @@ void SetOverrideCursor(Qt::CursorShape shape)
     }
 
 #else
-    Q_UNUSED(shape);
+    Q_UNUSED(shape)
 #endif
 }
 
@@ -501,7 +501,7 @@ void RestoreOverrideCursor(const QString &pixmapPath)
         QApplication::restoreOverrideCursor();
     }
 #else
-    Q_UNUSED(pixmapPath);
+    Q_UNUSED(pixmapPath)
 #endif
 }
 
@@ -523,7 +523,7 @@ void RestoreOverrideCursor(Qt::CursorShape shape)
     }
 
 #else
-    Q_UNUSED(shape);
+    Q_UNUSED(shape)
 #endif
 }
 
@@ -1071,7 +1071,7 @@ void InitPMSystems(QComboBox *systemCombo)
 // * The default option (blank field or 'None') should appear at the top of the list.
 // * The list should be sorted alphabetically so users can find their system easily.
 
-    SCASSERT(systemCombo != nullptr);
+    SCASSERT(systemCombo != nullptr)
     systemCombo->addItem(qApp->TrVars()->PMSystemName(listSystems.at(listSystems.size()-1)),
                          listSystems.at(listSystems.size()-1));
 
@@ -1150,7 +1150,7 @@ QStringList ListPMSystems()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements)
 {
-    SCASSERT(trM != nullptr);
+    SCASSERT(trM != nullptr)
 
     QStringList numbers;
     for (int i=0; i < listMeasurements.size(); ++i)

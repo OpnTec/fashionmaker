@@ -24,4 +24,5 @@ HEADERS += \
     $$PWD/dxflib/dl_writer_ascii.h \
     $$PWD/vdxfengine.h \
     $$PWD/vdxfpaintdevice.h \
-    $$PWD/dxfdef.h
+    $$PWD/dxfdef.h \
+    $$PWD/dxflib/strlcpy.h

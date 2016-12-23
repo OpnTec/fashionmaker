@@ -182,8 +182,8 @@ void VAbstractOperation::ShowToolVisualization(bool show)
 template <typename T>
 void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene, T *tool)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(tool != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
 
     InitDrawToolConnections(scene, tool);
 
