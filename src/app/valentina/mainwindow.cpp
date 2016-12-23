@@ -2276,7 +2276,7 @@ void MainWindow::ActionLayout(bool checked)
         mode = Draw::Layout;
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(6);
+        ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
 
         mouseCoordinate->setText("");
 
