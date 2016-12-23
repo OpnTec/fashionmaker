@@ -45,7 +45,7 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 
 Requires:   poppler-utils
 
-Version:	0.4.5
+Version:	0.4.999
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
