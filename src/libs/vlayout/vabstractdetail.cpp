@@ -359,7 +359,7 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
  */
 QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
 {
-    const int count = points.size();
+    int count = points.size();
     /*If we got less than 4 points no need seek loops.*/
     if (count < 4)
     {
@@ -458,13 +458,32 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         switch (status)
         {
             case ParallelIntersection:
+            {
                 /*We have found a loop.*/
-                // Theoretically there is no big difference which point j or jNext to select.
-                // In the end we will draw a line in any case.
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(points.at(jNext));
-                i = j;
+                // Very tricky case
+                // See the file "collection/bugs/Issue_#603.val"
+                const QLineF line1(points.at(i+1), points.at(j));
+                const QLineF line2(points.at(i), points.at(jNext));
+
+                if (line1.length() <= line2.length())
+                {
+                    // In this case we did not check a loop edges and can just skip them
+                    ekvPoints.append(points.at(i));
+                    ekvPoints.append(points.at(jNext));
+
+                    i = j; // Skip a loo
+                }
+                else
+                {
+                    // In this case a loop edges probably was also chacked and added to the list
+                    ekvPoints.clear();// Previous data is wrong and belong to loop.
+                    ekvPoints.append(points.at(j));
+                    ekvPoints.append(points.at(i+1));
+
+                    count = j+1;// All beyond this belong to loop.
+                }
                 break;
+            }
             case BoundedIntersection:
                 /*We have found a loop.*/
                 ekvPoints.append(points.at(i));
