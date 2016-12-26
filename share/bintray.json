@@ -24,7 +24,7 @@
 
     "files":
         [
-        {"includePattern": "./(valentina-osx-.*\\.zip)", "uploadPattern": "$1",
+        {"includePattern": "./(valentina-osx-.*\\.tar.gz)", "uploadPattern": "$1",
         "matrixParams": {
            "override": 1 }
         }
