@@ -1695,91 +1695,91 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Radius1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcance1:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Asistente de Fórmula</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcance2:</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Primer ángulo:</translation>
+        <translation>Primer ángulo:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Segundo ángulo:</translation>
+        <translation>Segundo ángulo:</translation>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ángulo de rotación:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished">Punto central:</translation>
+        <translation>Punto central:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished">Seleccionar punto central del arco</translation>
+        <translation>Seleccionar punto central del arco</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Radio no puede ser negativo</translation>
+        <translation>El radio no puede ser negativo</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="unfinished">Ángulos iguales</translation>
+        <translation>Ángulos iguales</translation>
     </message>
     <message>
         <source>Edit radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar radio1</translation>
     </message>
     <message>
         <source>Edit radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar radio2</translation>
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation type="unfinished">Editar primer ángulo</translation>
+        <translation>Editar el primer ángulo</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation type="unfinished">Editar segundo ángulo</translation>
+        <translation>Editar el segundo ángulo</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar ángulo de rotación</translation>
     </message>
 </context>
 <context>
@@ -2256,7 +2256,7 @@
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arco elíptico</translation>
     </message>
 </context>
 <context>
@@ -6161,15 +6161,15 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Tools for creating elliptical arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramientas para crear arcos elípticos.</translation>
     </message>
     <message>
         <source>Elliptical Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arco Elíptico</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el punto del centro del arco elíptico</translation>
     </message>
 </context>
 <context>
@@ -8387,10 +8387,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating simple elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar el arco elíptico simple</translation>
     </message>
     <message>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
+        <translation>Tipo de arco elíptico &apos;%1&apos; desconocido.</translation>
+    </message>
+    <message>
+        <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8774,11 +8778,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arco elíptico</translation>
     </message>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ángulo de rotación</translation>
     </message>
 </context>
 <context>
