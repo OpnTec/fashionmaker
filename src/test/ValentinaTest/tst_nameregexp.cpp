@@ -52,6 +52,7 @@ void TST_NameRegExp::TestNameRegExp_data()
     for(int i = 0; i < allLocales.size(); ++i)
     {
         INIT_LOCALE_VARIABLES(allLocales.at(i));
+        Q_UNUSED(positiveSign)
         Q_UNUSED(expUpper)
         Q_UNUSED(expLower)
 
