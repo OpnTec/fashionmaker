@@ -35,6 +35,5 @@
 #include "dialogpatternproperties.h"
 #include "dialognewpattern.h"
 #include "dialogaboutapp.h"
-#include "dialogpatternxmledit.h"
 
 #endif // DIALOGS_H

@@ -55,7 +55,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>100</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>248</height>
         </rect>
        </property>
@@ -1063,7 +1063,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -1143,8 +1143,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>326</height>
+         <width>100</width>
+         <height>196</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -1585,7 +1585,6 @@
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionPattern_properties"/>
-    <addaction name="actionEdit_pattern_code"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2204,17 +2203,6 @@
    </property>
    <property name="toolTip">
     <string>Zoom out</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionEdit_pattern_code">
-   <property name="text">
-    <string>Edit pattern XML code</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
