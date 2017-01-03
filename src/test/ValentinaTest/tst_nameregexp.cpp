@@ -52,6 +52,8 @@ void TST_NameRegExp::TestNameRegExp_data()
     for(int i = 0; i < allLocales.size(); ++i)
     {
         INIT_LOCALE_VARIABLES(allLocales.at(i));
+        Q_UNUSED(expUpper)
+        Q_UNUSED(expLower)
 
         const QString localeName = allLocales.at(i).name();
         QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
