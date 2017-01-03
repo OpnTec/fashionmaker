@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_qmutokenparser.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 10, 2015
+ **  @date   2 1, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,29 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef TST_QMUTOKENPARSER_H
-#define TST_QMUTOKENPARSER_H
+#ifndef TST_VTRANSLATEVARS_H
+#define TST_VTRANSLATEVARS_H
 
+#include <QtCore/qglobal.h>
 #include <QLocale>
 #include <QObject>
 
-class TST_QmuTokenParser : public QObject
+class VTranslateVars;
+
+class TST_VTranslateVars : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_QmuTokenParser(QObject *parent = nullptr);
+    explicit TST_VTranslateVars(QObject *parent = nullptr);
 private slots:
-    void IsSingle_data();
-    void IsSingle();
-    void TokenFromUser_data();
-    void TokenFromUser();
+    void initTestCase();
+    void TestFormulaFromUser_data();
+    void TestFormulaFromUser();
+    void TestFormulaToUser_data();
+    void TestFormulaToUser();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_QmuTokenParser)
+    Q_DISABLE_COPY(TST_VTranslateVars)
+    VTranslateVars *m_trMs;
     QLocale m_systemLocale;
 
-    void PrepareVal(qreal val, const QLocale &locale);
-    bool IsSingleFromUser(const QString &formula);
+    void PrepareValFromUser(double d, const QLocale &locale);
+    void PrepareValToUser(double d, const QLocale &locale);
+    void PrepareVal(const QString &inputFormula, const QString &outputFormula, const QLocale &locale);
 };
 
-#endif // TST_QMUTOKENPARSER_H
+#endif // TST_VTRANSLATEVARS_H

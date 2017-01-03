@@ -47,8 +47,11 @@
 #include "tst_vgobject.h"
 #include "tst_vsplinepath.h"
 #include "tst_vpointf.h"
+#include "tst_readval.h"
+#include "tst_vtranslatevars.h"
 
 #include "../vmisc/def.h"
+#include "../qmuparser/qmudef.h"
 
 int main(int argc, char** argv)
 {
@@ -82,6 +85,8 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VCubicBezierPath());
     ASSERT_TEST(new TST_VGObject());
     ASSERT_TEST(new TST_VPointF());
+    ASSERT_TEST(new TST_ReadVal());
+    ASSERT_TEST(new TST_VTranslateVars());
 
     return status;
 }

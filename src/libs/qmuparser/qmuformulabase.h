@@ -41,14 +41,14 @@ public:
     QmuFormulaBase();
     virtual ~QmuFormulaBase() Q_DECL_OVERRIDE;
 
+    virtual void InitCharSets() Q_DECL_OVERRIDE;
+
+    static void RemoveAll(QMap<int, QString> &map, const QString &val);
+
 protected:
-    void          InitCharacterSets();
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
     void          SetSepForTr(bool osSeparator, bool fromUser);
     void          SetSepForEval();
-
-    static void   RemoveAll(QMap<int, QString> &map, const QString &val);
-
 private:
     Q_DISABLE_COPY(QmuFormulaBase)
 };

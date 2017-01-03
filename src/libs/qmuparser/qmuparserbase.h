@@ -31,11 +31,10 @@
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
-#include <locale>
 #include <memory>
 #include <string>
+#include <QLocale>
 
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser_global.h"
 #include "qmuparserbytecode.h"
 #include "qmuparsercallback.h"
@@ -81,8 +80,6 @@ public:
     int                GetNumResults() const;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
-    void               SetDecSep(char_type cDecSep);
-    void               SetThousandsSep(char_type cThousandsSep = 0);
     void               ResetLocale();
     void               EnableOptimizer(bool a_bIsOn=true);
     void               EnableBuiltInOprt(bool a_bIsOn=true);
@@ -128,12 +125,20 @@ public:
 
     void setAllowSubexpressions(bool value);
 
-    std::locale getLocale() const;
-    void setLocale(const std::locale &value);
+    QLocale getLocale() const;
+    void    setLocale(const QLocale &value);
+
+    QChar getDecimalPoint() const;
+    void  setDecimalPoint(const QChar &c);
+
+    QChar getThousandsSeparator() const;
+    void  setThousandsSeparator(const QChar &c);
 
 protected:
     static const QStringList c_DefaultOprt;
-    std::locale s_locale;  ///< The locale used by the parser
+    QLocale m_locale;///< The locale used by the parser
+    QChar m_decimalPoint;
+    QChar m_thousandsSeparator;
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
     void Init();

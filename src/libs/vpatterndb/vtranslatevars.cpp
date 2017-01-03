@@ -780,6 +780,11 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
             }
             continue;
         }
+
+        if (tValues.at(i) == QLocale().negativeSign())
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, '-');
+        }
     }
 
     QLocale loc = QLocale(); // User locale
@@ -916,6 +921,11 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
             }
             continue;
         }
+
+        if (tValues.at(i) == QChar('-'))
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, QLocale().negativeSign());
+        }
     }
 
     QLocale loc = QLocale();// User locale
@@ -936,11 +946,6 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 
             loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            const QChar thSep = loc.groupSeparator();
-            if (thSep.isSpace())
-            {
-                dStr.remove(thSep);// Remove thousand separator
-            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)

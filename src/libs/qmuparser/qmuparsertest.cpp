@@ -74,9 +74,12 @@ QmuParserTester::QmuParserTester(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale )
+int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+                                const QChar &decimal, const QChar &thousand )
 {
-    Q_UNUSED(s_locale)
+    Q_UNUSED(locale)
+    Q_UNUSED(decimal)
+    Q_UNUSED(thousand)
     if ( a_szExpr.data()[1] == 0 || ( a_szExpr.data()[0] != '0' || a_szExpr.data()[1] != 'x' ) )
     {
         return 0;

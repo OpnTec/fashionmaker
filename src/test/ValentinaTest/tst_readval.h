@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_qmutokenparser.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 10, 2015
+ **  @date   30 12, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,29 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef TST_QMUTOKENPARSER_H
-#define TST_QMUTOKENPARSER_H
+#ifndef TST_READVAL_H
+#define TST_READVAL_H
 
-#include <QLocale>
+#include <QtCore/qglobal.h>
+
 #include <QObject>
+#include <QLocale>
 
-class TST_QmuTokenParser : public QObject
+class TST_ReadVal : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_QmuTokenParser(QObject *parent = nullptr);
+    explicit TST_ReadVal(QObject *parent = nullptr);
 private slots:
-    void IsSingle_data();
-    void IsSingle();
-    void TokenFromUser_data();
-    void TokenFromUser();
+    void TestReadVal_data();
+    void TestReadVal();
+    void TestInvalidData_data();
+    void TestInvalidData();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_QmuTokenParser)
+    Q_DISABLE_COPY(TST_ReadVal)
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);
-    bool IsSingleFromUser(const QString &formula);
+    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, int count=-1);
+
+    void TestVal();
 };
 
-#endif // TST_QMUTOKENPARSER_H
+#endif // TST_READVAL_H

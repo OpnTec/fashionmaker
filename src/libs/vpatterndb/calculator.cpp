@@ -53,7 +53,7 @@
 Calculator::Calculator()
     :QmuFormulaBase()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
 
     SetSepForEval();

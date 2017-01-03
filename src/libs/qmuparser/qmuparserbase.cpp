@@ -62,11 +62,31 @@ const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" <<
  * @brief Constructor.
  */
 QmuParserBase::QmuParserBase()
-    :s_locale(std::locale(std::locale::classic(), new change_dec_sep<char_type>('.'))),
-      m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
-      m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
-      m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
+    : m_locale(QLocale::c()),
+      m_decimalPoint(QLocale::c().decimalPoint()),
+      m_thousandsSeparator(QLocale::c().groupSeparator()),
+      m_pParseFormula(&QmuParserBase::ParseString),
+      m_vRPN(),
+      m_vStringBuf(),
+      m_vStringVarBuf(),
+      m_pTokenReader(),
+      m_FunDef(),
+      m_PostOprtDef(),
+      m_InfixOprtDef(),
+      m_OprtDef(),
+      m_ConstDef(),
+      m_StrVarDef(),
+      m_VarDef(),
+      m_bBuiltInOp(true),
+      m_sNameChars(),
+      m_sOprtChars(),
+      m_sInfixOprtChars(),
+      m_nIfElseCounter(0),
+      m_vStackBuffer(),
+      m_nFinalResultIdx(0),
+      m_Tokens(QMap<int, QString>()),
+      m_Numbers(QMap<int, QString>()),
+      allowSubexpressions(true)
 {
     InitTokenReader();
 }
@@ -78,11 +98,31 @@ QmuParserBase::QmuParserBase()
  * Tha parser can be safely copy constructed but the bytecode is reset during copy construction.
  */
 QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
-    :s_locale(a_Parser.getLocale()), m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(),
-      m_vStringVarBuf(), m_pTokenReader(), m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(),
-      m_StrVarDef(), m_VarDef(), m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(),
-      m_nIfElseCounter(0), m_vStackBuffer(), m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
+    : m_locale(a_Parser.getLocale()),
+      m_decimalPoint(a_Parser.getDecimalPoint()),
+      m_thousandsSeparator(a_Parser.getThousandsSeparator()),
+      m_pParseFormula(&QmuParserBase::ParseString),
+      m_vRPN(),
+      m_vStringBuf(),
+      m_vStringVarBuf(),
+      m_pTokenReader(),
+      m_FunDef(),
+      m_PostOprtDef(),
+      m_InfixOprtDef(),
+      m_OprtDef(),
+      m_ConstDef(),
+      m_StrVarDef(),
+      m_VarDef(),
+      m_bBuiltInOp(true),
+      m_sNameChars(),
+      m_sOprtChars(),
+      m_sInfixOprtChars(),
+      m_nIfElseCounter(0),
+      m_vStackBuffer(),
+      m_nFinalResultIdx(0),
+      m_Tokens(QMap<int, QString>()),
+      m_Numbers(QMap<int, QString>()),
+      allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -152,38 +192,6 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Set the decimal separator.
- * @param cDecSep Decimal separator as a character value.
- * @sa SetThousandsSep
- *
- * By default muparser uses the "C" locale. The decimal separator of this
- * locale is overwritten by the one provided here.
- */
-// cppcheck-suppress unusedFunction
-void QmuParserBase::SetDecSep(char_type cDecSep)
-{
-    char_type cThousandsSep = std::use_facet< change_dec_sep<char_type> >(s_locale).thousands_sep();
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Sets the thousands operator.
- * @param cThousandsSep The thousands separator as a character
- * @sa SetDecSep
- *
- * By default muparser uses the "C" locale. The thousands separator of this
- * locale is overwritten by the one provided here.
- */
-// cppcheck-suppress unusedFunction
-void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
-{
-    char_type cDecSep = std::use_facet< change_dec_sep<char_type> >(s_locale).decimal_point();
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Resets the locale.
  *
  * The default locale used "." as decimal separator, no thousands separator and "," as function argument separator.
@@ -191,8 +199,10 @@ void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ResetLocale()
 {
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>('.'));
-    SetArgSep(',');
+    setLocale(QLocale::c());
+    m_decimalPoint = m_locale.decimalPoint();
+    m_thousandsSeparator = m_locale.groupSeparator();
+    SetArgSep(';');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -228,15 +238,41 @@ void QmuParserBase::setAllowSubexpressions(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-std::locale QmuParserBase::getLocale() const
+QLocale QmuParserBase::getLocale() const
 {
-    return s_locale;
+    return m_locale;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::setLocale(const std::locale &value)
+void QmuParserBase::setLocale(const QLocale &value)
 {
-    s_locale = value;
+    m_locale = value;
+    InitCharSets();
+    InitOprt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar QmuParserBase::getDecimalPoint() const
+{
+    return m_decimalPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setDecimalPoint(const QChar &c)
+{
+    m_decimalPoint = c;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar QmuParserBase::getThousandsSeparator() const
+{
+    return m_thousandsSeparator;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setThousandsSeparator(const QChar &c)
+{
+    m_thousandsSeparator = c;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1319,7 +1355,7 @@ void QmuParserBase::CreateRPN() const
 
     for (;;)
     {
-        opt = m_pTokenReader->ReadNextToken(s_locale);
+        opt = m_pTokenReader->ReadNextToken(m_locale, m_decimalPoint, m_thousandsSeparator);
 
         switch (opt.GetCode())
         {

@@ -34,7 +34,7 @@ namespace qmu
 //---------------------------------------------------------------------------------------------------------------------
 QmuTokenParser::QmuTokenParser()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
 }
 
@@ -57,7 +57,7 @@ QmuTokenParser::QmuTokenParser()
 QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser)
     :QmuFormulaBase()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
     SetVarFactory(AddVariable, this);
 

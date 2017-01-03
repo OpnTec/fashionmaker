@@ -48,6 +48,7 @@
 - [#582] Issue with standard path to shared data on Linux.
 - [#595] GapWidth affecting to the margins.
 - [#589] Valentina lock up if not enough space for label.
+- [#606] Mac OS X. Can’t type in measurements due to digit count limitation.
 
 # Version 0.4.6
 - [#594] Broken export on Mac.
