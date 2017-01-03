@@ -854,9 +854,9 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names)
 {
-    qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-    delete cal;
+    delete cal.take();
 
     QList<int> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
