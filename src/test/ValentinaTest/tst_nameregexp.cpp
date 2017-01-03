@@ -46,53 +46,87 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::addColumn<QString>("name");
     QTest::addColumn<bool>("result");
 
-    QTest::newRow("First character can't be 0") << "0a" << false;
-    QTest::newRow("First character can't be 1") << "1a" << false;
-    QTest::newRow("First character can't be 2") << "2a" << false;
-    QTest::newRow("First character can't be 3") << "3a" << false;
-    QTest::newRow("First character can't be 4") << "4a" << false;
-    QTest::newRow("First character can't be 5") << "5a" << false;
-    QTest::newRow("First character can't be 6") << "6a" << false;
-    QTest::newRow("First character can't be 7") << "7a" << false;
-    QTest::newRow("First character can't be 8") << "8a" << false;
-    QTest::newRow("First character can't be 9") << "9a" << false;
+    const QList<QLocale> allLocales =
+            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+
+    for(int i = 0; i < allLocales.size(); ++i)
+    {
+        INIT_LOCALE_VARIABLES(allLocales.at(i));
+
+        const QString localeName = allLocales.at(i).name();
+        QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
+        QTest::newRow(qUtf8Printable(tag)) << sign0+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign1;
+        QTest::newRow(qUtf8Printable(tag)) << sign1+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign2;
+        QTest::newRow(qUtf8Printable(tag)) << sign2+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign3;
+        QTest::newRow(qUtf8Printable(tag)) << sign3+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign4;
+        QTest::newRow(qUtf8Printable(tag)) << sign4+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign5;
+        QTest::newRow(qUtf8Printable(tag)) << sign5+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign6;
+        QTest::newRow(qUtf8Printable(tag)) << sign6+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign7;
+        QTest::newRow(qUtf8Printable(tag)) << sign7+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign8;
+        QTest::newRow(qUtf8Printable(tag)) << sign8+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be ")+sign9;
+        QTest::newRow(qUtf8Printable(tag)) << sign9+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be \"")+negativeSign+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << negativeSign+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". Any next character can't be \"")+negativeSign+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+negativeSign << false;
+    }
+
+    QTest::newRow("First character can't be \"+\"") << "+a" << false;
     QTest::newRow("First character can't be \"*\"") << "*a" << false;
     QTest::newRow("First character can't be \"/\"") << "/a" << false;
     QTest::newRow("First character can't be \"^\"") << "^a" << false;
-    QTest::newRow("First character can't be \"+\"") << "+a" << false;
     QTest::newRow("First character can't be \"=\"") << "=a" << false;
-    QTest::newRow("First character can't be \"-\"") << "-a" << false;
     QTest::newRow("First character can't be whitespace") << " a" << false;
     QTest::newRow("First character can't be \"(\"") << "(a" << false;
     QTest::newRow("First character can't be \")\"") << ")a" << false;
     QTest::newRow("First character can't be \"?\"") << "?a" << false;
-    QTest::newRow("First character can't be \"%\"") << "%a" << false;
     QTest::newRow("First character can't be \":\"") << ":a" << false;
     QTest::newRow("First character can't be \";\"") << ";a" << false;
-    QTest::newRow("First character can't be \"!\"") << "!a" << false;
-    QTest::newRow("First character can't be \".\"") << ".a" << false;
-    QTest::newRow("First character can't be \",\"") << ",a" << false;
-    QTest::newRow("First character can't be \"`\"") << "`a" << false;
+    QTest::newRow("First character can't be \"'\"") << "'a" << false;
     QTest::newRow("First character can't be \"\"\"") << "\"a" << false;
+    QTest::newRow("First character can't be \"&\"") << "&a" << false;
+    QTest::newRow("First character can't be \"|\"") << "|a" << false;
+    QTest::newRow("First character can't be \"!\"") << "!a" << false;
+    QTest::newRow("First character can't be \"<\"") << "<a" << false;
+    QTest::newRow("First character can't be \">\"") << ">a" << false;
 
-    QTest::newRow("Any next character can't be \"-\"") << "a-" << false;
+    QTest::newRow("Any next character can't be \"+\"") << "a+" << false;
     QTest::newRow("Any next character can't be \"*\"") << "a*" << false;
     QTest::newRow("Any next character can't be \"/\"") << "a/" << false;
     QTest::newRow("Any next character can't be \"^\"") << "a^" << false;
-    QTest::newRow("Any next character can't be \"+\"") << "a+" << false;
     QTest::newRow("Any next character can't be \"=\"") << "a=" << false;
     QTest::newRow("Any next character can't be whitespace") << "L bust" << false;
     QTest::newRow("Any next character can't be \"(\"") << "a(" << false;
     QTest::newRow("Any next character can't be \")\"") << "a)" << false;
     QTest::newRow("Any next character can't be \"?\"") << "a?" << false;
-    QTest::newRow("Any next character can't be \"%\"") << "a%" << false;
     QTest::newRow("Any next character can't be \":\"") << "a:" << false;
-    QTest::newRow("Any next character can't be \";\"") << "a:" << false;
-    QTest::newRow("Any next character can't be \"!\"") << "a!" << false;
-    QTest::newRow("Any next character can't be \".\"") << "a." << false;
-    QTest::newRow("Any next character can't be \",\"") << "a," << false;
-    QTest::newRow("Any next character can't be \"`\"") << "a`" << false;
+    QTest::newRow("Any next character can't be \";\"") << "a;" << false;
     QTest::newRow("Any next character can't be \"\"\"") << "a\"" << false;
+    QTest::newRow("Any next character can't be \"&\"") << "a&" << false;
+    QTest::newRow("Any next character can't be \"|\"") << "a|" << false;
+    QTest::newRow("Any next character can't be \"!\"") << "a!" << false;
+    QTest::newRow("Any next character can't be \"<\"") << "a<" << false;
+    QTest::newRow("Any next character can't be \">\"") << "a>" << false;
 
     QTest::newRow("Good name \"p12\"") << "p12" << true;
     QTest::newRow("Good name \"height\"") << "height" << true;
