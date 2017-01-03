@@ -42,7 +42,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     ui->progressBar->setMaximum(maxCount);
     ui->progressBar->setValue(0);

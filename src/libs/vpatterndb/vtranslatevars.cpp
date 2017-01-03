@@ -782,14 +782,14 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
         }
     }
 
-    QLocale loc = QLocale::system(); // User locale
+    QLocale loc = QLocale(); // User locale
     if (loc != QLocale::c() && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale::system();// From system locale
+            loc = QLocale();// From system locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
@@ -919,7 +919,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
         }
     }
 
-    QLocale loc = QLocale::system();// User locale
+    QLocale loc = QLocale();// User locale
     if (loc != QLocale::C && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
@@ -935,7 +935,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
                 continue;//Leave with out translation
             }
 
-            loc = QLocale::system();// To user locale
+            loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
             const QChar thSep = loc.groupSeparator();
             if (thSep.isSpace())

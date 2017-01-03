@@ -166,7 +166,7 @@ bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
             {
                 if (m_osSeparator)
                 {
-                    textEdit->insert(QLocale::system().decimalPoint());
+                    textEdit->insert(QLocale().decimalPoint());
                 }
                 else
                 {

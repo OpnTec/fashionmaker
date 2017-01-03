@@ -263,7 +263,7 @@ void VCommonSettings::SetSendReportState(const bool &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLocale() const
 {
-    return value(SettingConfigurationLocale, QLocale::system().name()).toString();
+    return value(SettingConfigurationLocale, QLocale().name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

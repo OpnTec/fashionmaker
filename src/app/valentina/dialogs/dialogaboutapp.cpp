@@ -45,7 +45,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));

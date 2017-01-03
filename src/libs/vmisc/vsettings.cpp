@@ -90,7 +90,7 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetLabelLanguage() const
 {
-    return value(SettingConfigurationLabelLanguage, QLocale::system().bcp47Name()).toString();
+    return value(SettingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -250,7 +250,7 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     //-------------------- Decimal separator setup
     separatorLabel = new QLabel(tr("Decimal separator parts:"));
-    osOptionCheck  = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    osOptionCheck  = new QCheckBox(tr("With OS options (%1)").arg(QLocale().decimalPoint()));
     osOptionCheck->setChecked(settings->GetOsSeparator());
     langLayout->addRow(separatorLabel, osOptionCheck);
 
@@ -448,7 +448,7 @@ void ConfigurationPage::RetranslateUi()
     guiLabel->setText(tr("GUI language:"));
 
     separatorLabel->setText(tr("Decimal separator parts:"));
-    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale().decimalPoint()));
 
     unitLabel->setText(tr("Default unit:"));
     this->unitCombo->setItemText(0, tr("Centimeters"));

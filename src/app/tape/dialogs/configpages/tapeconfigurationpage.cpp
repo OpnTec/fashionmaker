@@ -193,7 +193,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     //-------------------- Decimal separator setup
     separatorLabel = new QLabel(tr("Decimal separator parts:"));
 
-    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale().decimalPoint()));
     osOptionCheck->setChecked(settings->GetOsSeparator());
 
     langLayout->addRow(separatorLabel, osOptionCheck);
@@ -322,7 +322,7 @@ void TapeConfigurationPage::RetranslateUi()
     langGroup->setTitle(tr("Language"));
     guiLabel->setText(tr("GUI language:"));
     separatorLabel->setText(tr("Decimal separator parts:"));
-    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale().decimalPoint()));
 
     pmSystemGroup->setTitle(tr("Pattern making system"));
     systemLabel->setText(tr("Pattern making system:"));
