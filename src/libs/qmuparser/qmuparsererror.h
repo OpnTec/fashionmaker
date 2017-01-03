@@ -50,7 +50,7 @@ enum EErrorCodes
     ecUNEXPECTED_OPERATOR    = 0,  ///< Unexpected binary operator found
     ecUNASSIGNABLE_TOKEN     = 1,  ///< Token cant be identified.
     ecUNEXPECTED_EOF         = 2,  ///< Unexpected end of formula. (Example: "2+sin(")
-    ecUNEXPECTED_ARG_SEP     = 3,  ///< An unexpected comma has been found. (Example: "1,23")
+    ecUNEXPECTED_ARG_SEP     = 3,  ///< An unexpected semicolon has been found. (Example: "1;23")
     ecUNEXPECTED_ARG         = 4,  ///< An unexpected argument has been found
     ecUNEXPECTED_VAL         = 5,  ///< An unexpected value token has been found
     ecUNEXPECTED_VAR         = 6,  ///< An unexpected variable token has been found
@@ -62,7 +62,7 @@ enum EErrorCodes
     ecUNEXPECTED_FUN         = 12, ///< Unexpected function found. (Example: "sin(8)cos(9)")
     ecUNTERMINATED_STRING    = 13, ///< unterminated string constant. (Example: "3*valueof("hello)")
     ecTOO_MANY_PARAMS        = 14, ///< Too many function parameters
-    ecTOO_FEW_PARAMS         = 15, ///< Too few function parameters. (Example: "ite(1<2,2)")
+    ecTOO_FEW_PARAMS         = 15, ///< Too few function parameters. (Example: "ite(1<2;2)")
     ecOPRT_TYPE_CONFLICT     = 16, ///< binary operators may only be applied to value items of the same type
     ecSTR_RESULT             = 17, ///< result is a string
 

@@ -162,8 +162,8 @@ int QmuParserTester::TestStrArg()
     iStat += EqnTest ( "a-(atof(\"10\")*b)", -19, true );
     // string + numeric arguments
     iStat += EqnTest ( "strfun1(\"100\")", 100, true );
-    iStat += EqnTest ( "strfun2(\"100\",1)", 101, true );
-    iStat += EqnTest ( "strfun3(\"99\",1,2)", 102, true );
+    iStat += EqnTest ( "strfun2(\"100\";1)", 101, true );
+    iStat += EqnTest ( "strfun3(\"99\";1;2)", 102, true );
 
     if ( iStat == 0 )
     {
@@ -197,8 +197,8 @@ int QmuParserTester::TestBulkMode()
     EQN_TEST_BULK("a",   1, 1, 1, 1, false)
     EQN_TEST_BULK("a",   1, 2, 3, 4, true)
     EQN_TEST_BULK("b=a", 1, 2, 3, 4, true)
-    EQN_TEST_BULK("b=a, b*10", 10, 20, 30, 40, true)
-    EQN_TEST_BULK("b=a, b*10, a", 1, 2, 3, 4, true)
+    EQN_TEST_BULK("b=a; b*10", 10, 20, 30, 40, true)
+    EQN_TEST_BULK("b=a; b*10; a", 1, 2, 3, 4, true)
     EQN_TEST_BULK("a+b", 3, 4, 5, 6, true)
     EQN_TEST_BULK("c*(a+b)", 9, 12, 15, 18, true)
 #undef EQN_TEST_BULK
@@ -262,7 +262,7 @@ int QmuParserTester::TestBinOprt()
     iStat += EqnTest ( "2*(a=b)", 4, true );
     iStat += EqnTest ( "2*(a=b+1)", 6, true );
     iStat += EqnTest ( "(a=b+1)*2", 6, true );
-    iStat += EqnTest ( "a=c, a*10", 30, true);
+    iStat += EqnTest ( "a=c; a*10", 30, true);
 
     iStat += EqnTest ( "2^2^3", 256, true );
     iStat += EqnTest ( "1/2/3", 1.0 / 6.0, true );
@@ -401,11 +401,11 @@ int QmuParserTester::TestSyntax()
     int iStat = 0;
     qWarning() << "testing syntax engine...";
 
-    iStat += ThrowTest ( "1,", ecUNEXPECTED_EOF ); // incomplete hex definition
-    iStat += ThrowTest ( "a,", ecUNEXPECTED_EOF ); // incomplete hex definition
-    iStat += ThrowTest ( "sin(8),", ecUNEXPECTED_EOF ); // incomplete hex definition
-    iStat += ThrowTest ( "(sin(8)),", ecUNEXPECTED_EOF ); // incomplete hex definition
-    iStat += ThrowTest ( "a{m},", ecUNEXPECTED_EOF ); // incomplete hex definition
+    iStat += ThrowTest ( "1;", ecUNEXPECTED_EOF ); // incomplete hex definition
+    iStat += ThrowTest ( "a;", ecUNEXPECTED_EOF ); // incomplete hex definition
+    iStat += ThrowTest ( "sin(8);", ecUNEXPECTED_EOF ); // incomplete hex definition
+    iStat += ThrowTest ( "(sin(8));", ecUNEXPECTED_EOF ); // incomplete hex definition
+    iStat += ThrowTest ( "a{m};", ecUNEXPECTED_EOF ); // incomplete hex definition
 
     iStat += EqnTest ( "(1+ 2*a)", 3, true ); // Spaces within formula
     iStat += EqnTest ( "sqrt((4))", 2, true ); // Multiple brackets
@@ -413,7 +413,7 @@ int QmuParserTester::TestSyntax()
     iStat += EqnTest ( "sqrt(2+(2))", 2, true ); // Multiple brackets
     iStat += EqnTest ( "sqrt(a+(3))", 2, true ); // Multiple brackets
     iStat += EqnTest ( "sqrt((3)+a)", 2, true ); // Multiple brackets
-    iStat += EqnTest ( "order(1,2)", 1, true ); // May not cause name collision with operator "or"
+    iStat += EqnTest ( "order(1;2)", 1, true ); // May not cause name collision with operator "or"
     iStat += EqnTest ( "(2+", 0, false );    // missing closing bracket
     iStat += EqnTest ( "2++4", 0, false );   // unexpected operator
     iStat += EqnTest ( "2+-4", 0, false );   // unexpected operator
@@ -426,9 +426,9 @@ int QmuParserTester::TestSyntax()
     iStat += EqnTest ( "5t6", 0, false );    // unknown token
     iStat += EqnTest ( "5 t 6", 0, false );  // unknown token
     iStat += EqnTest ( "8*", 0, false );     // unexpected end of formula
-    iStat += EqnTest ( ",3", 0, false );     // unexpected comma
-    iStat += EqnTest ( "3,5", 0, false );    // unexpected comma
-    iStat += EqnTest ( "sin(8,8)", 0, false ); // too many function args
+    iStat += EqnTest ( ";3", 0, false );     // unexpected semicolon
+    iStat += EqnTest ( "3;5", 0, false );    // unexpected semicolon
+    iStat += EqnTest ( "sin(8;8)", 0, false ); // too many function args
     iStat += EqnTest ( "(7,8)", 0, false );  // too many function args
     iStat += EqnTest ( "sin)", 0, false );   // unexpected closing bracket
     iStat += EqnTest ( "a)", 0, false );     // unexpected closing bracket
@@ -588,84 +588,84 @@ int QmuParserTester::TestMultiArg()
     qWarning() << "testing multiarg functions...";
 
     // Compound expressions
-    iStat += EqnTest ( "1,2,3", 3, true );
-    iStat += EqnTest ( "a,b,c", 3, true );
-    iStat += EqnTest ( "a=10,b=20,c=a*b", 200, true );
-    iStat += EqnTest ( "1,\n2,\n3", 3, true );
-    iStat += EqnTest ( "a,\nb,\nc", 3, true );
-    iStat += EqnTest ( "a=10,\nb=20,\nc=a*b", 200, true );
-    iStat += EqnTest ( "1,\r\n2,\r\n3", 3, true );
-    iStat += EqnTest ( "a,\r\nb,\r\nc", 3, true );
-    iStat += EqnTest ( "a=10,\r\nb=20,\r\nc=a*b", 200, true );
+    iStat += EqnTest ( "1;2;3", 3, true );
+    iStat += EqnTest ( "a;b;c", 3, true );
+    iStat += EqnTest ( "a=10;b=20;c=a*b", 200, true );
+    iStat += EqnTest ( "1;\n2;\n3", 3, true );
+    iStat += EqnTest ( "a;\nb;\nc", 3, true );
+    iStat += EqnTest ( "a=10;\nb=20;\nc=a*b", 200, true );
+    iStat += EqnTest ( "1;\r\n2;\r\n3", 3, true );
+    iStat += EqnTest ( "a;\r\nb;\r\nc", 3, true );
+    iStat += EqnTest ( "a=10;\r\nb=20;\r\nc=a*b", 200, true );
 
     // picking the right argument
     iStat += EqnTest ( "f1of1(1)", 1, true );
-    iStat += EqnTest ( "f1of2(1, 2)", 1, true );
-    iStat += EqnTest ( "f2of2(1, 2)", 2, true );
-    iStat += EqnTest ( "f1of3(1, 2, 3)", 1, true );
-    iStat += EqnTest ( "f2of3(1, 2, 3)", 2, true );
-    iStat += EqnTest ( "f3of3(1, 2, 3)", 3, true );
-    iStat += EqnTest ( "f1of4(1, 2, 3, 4)", 1, true );
-    iStat += EqnTest ( "f2of4(1, 2, 3, 4)", 2, true );
-    iStat += EqnTest ( "f3of4(1, 2, 3, 4)", 3, true );
-    iStat += EqnTest ( "f4of4(1, 2, 3, 4)", 4, true );
-    iStat += EqnTest ( "f1of5(1, 2, 3, 4, 5)", 1, true );
-    iStat += EqnTest ( "f2of5(1, 2, 3, 4, 5)", 2, true );
-    iStat += EqnTest ( "f3of5(1, 2, 3, 4, 5)", 3, true );
-    iStat += EqnTest ( "f4of5(1, 2, 3, 4, 5)", 4, true );
-    iStat += EqnTest ( "f5of5(1, 2, 3, 4, 5)", 5, true );
+    iStat += EqnTest ( "f1of2(1; 2)", 1, true );
+    iStat += EqnTest ( "f2of2(1; 2)", 2, true );
+    iStat += EqnTest ( "f1of3(1; 2; 3)", 1, true );
+    iStat += EqnTest ( "f2of3(1; 2; 3)", 2, true );
+    iStat += EqnTest ( "f3of3(1; 2; 3)", 3, true );
+    iStat += EqnTest ( "f1of4(1; 2; 3; 4)", 1, true );
+    iStat += EqnTest ( "f2of4(1; 2; 3; 4)", 2, true );
+    iStat += EqnTest ( "f3of4(1; 2; 3; 4)", 3, true );
+    iStat += EqnTest ( "f4of4(1; 2; 3; 4)", 4, true );
+    iStat += EqnTest ( "f1of5(1; 2; 3; 4; 5)", 1, true );
+    iStat += EqnTest ( "f2of5(1; 2; 3; 4; 5)", 2, true );
+    iStat += EqnTest ( "f3of5(1; 2; 3; 4; 5)", 3, true );
+    iStat += EqnTest ( "f4of5(1; 2; 3; 4; 5)", 4, true );
+    iStat += EqnTest ( "f5of5(1; 2; 3; 4; 5)", 5, true );
     // Too few arguments / Too many arguments
     iStat += EqnTest ( "1+ping()", 11, true );
     iStat += EqnTest ( "ping()+1", 11, true );
     iStat += EqnTest ( "2*ping()", 20, true );
     iStat += EqnTest ( "ping()*2", 20, true );
-    iStat += EqnTest ( "ping(1,2)", 0, false );
-    iStat += EqnTest ( "1+ping(1,2)", 0, false );
-    iStat += EqnTest ( "f1of1(1,2)", 0, false );
+    iStat += EqnTest ( "ping(1;2)", 0, false );
+    iStat += EqnTest ( "1+ping(1;2)", 0, false );
+    iStat += EqnTest ( "f1of1(1;2)", 0, false );
     iStat += EqnTest ( "f1of1()", 0, false );
-    iStat += EqnTest ( "f1of2(1, 2, 3)", 0, false );
+    iStat += EqnTest ( "f1of2(1; 2; 3)", 0, false );
     iStat += EqnTest ( "f1of2(1)", 0, false );
-    iStat += EqnTest ( "f1of3(1, 2, 3, 4)", 0, false );
+    iStat += EqnTest ( "f1of3(1; 2; 3; 4)", 0, false );
     iStat += EqnTest ( "f1of3(1)", 0, false );
-    iStat += EqnTest ( "f1of4(1, 2, 3, 4, 5)", 0, false );
+    iStat += EqnTest ( "f1of4(1; 2; 3; 4; 5)", 0, false );
     iStat += EqnTest ( "f1of4(1)", 0, false );
-    iStat += EqnTest ( "(1,2,3)", 0, false );
-    iStat += EqnTest ( "1,2,3", 0, false );
-    iStat += EqnTest ( "(1*a,2,3)", 0, false );
-    iStat += EqnTest ( "1,2*a,3", 0, false );
+    iStat += EqnTest ( "(1;2;3)", 0, false );
+    iStat += EqnTest ( "1;2;3", 0, false );
+    iStat += EqnTest ( "(1*a;2;3)", 0, false );
+    iStat += EqnTest ( "1;2*a;3", 0, false );
 
     // correct calculation of arguments
-    iStat += EqnTest ( "min(a, 1)",  1, true );
-    iStat += EqnTest ( "min(3*2, 1)",  1, true );
-    iStat += EqnTest ( "min(3*2, 1)",  6, false );
-    iStat += EqnTest ( "firstArg(2,3,4)", 2, true );
-    iStat += EqnTest ( "lastArg(2,3,4)", 4, true );
-    iStat += EqnTest ( "min(3*a+1, 1)",  1, true );
-    iStat += EqnTest ( "max(3*a+1, 1)",  4, true );
-    iStat += EqnTest ( "max(3*a+1, 1)*2",  8, true );
-    iStat += EqnTest ( "2*max(3*a+1, 1)+2",  10, true );
+    iStat += EqnTest ( "min(a; 1)",  1, true );
+    iStat += EqnTest ( "min(3*2; 1)",  1, true );
+    iStat += EqnTest ( "min(3*2; 1)",  6, false );
+    iStat += EqnTest ( "firstArg(2;3;4)", 2, true );
+    iStat += EqnTest ( "lastArg(2;3;4)", 4, true );
+    iStat += EqnTest ( "min(3*a+1; 1)",  1, true );
+    iStat += EqnTest ( "max(3*a+1; 1)",  4, true );
+    iStat += EqnTest ( "max(3*a+1; 1)*2",  8, true );
+    iStat += EqnTest ( "2*max(3*a+1; 1)+2",  10, true );
 
     // functions with Variable argument count
     iStat += EqnTest ( "sum(a)", 1, true );
-    iStat += EqnTest ( "sum(1,2,3)",  6, true );
-    iStat += EqnTest ( "sum(a,b,c)",  6, true );
-    iStat += EqnTest ( "sum(1,-max(1,2),3)*2",  4, true );
-    iStat += EqnTest ( "2*sum(1,2,3)",  12, true );
-    iStat += EqnTest ( "2*sum(1,2,3)+2",  14, true );
-    iStat += EqnTest ( "2*sum(-1,2,3)+2",  10, true );
-    iStat += EqnTest ( "2*sum(-1,2,-(-a))+2",  6, true );
-    iStat += EqnTest ( "2*sum(-1,10,-a)+2",  18, true );
-    iStat += EqnTest ( "2*sum(1,2,3)*2",  24, true );
-    iStat += EqnTest ( "sum(1,-max(1,2),3)*2",  4, true );
-    iStat += EqnTest ( "sum(1*3, 4, a+2)",  10, true );
-    iStat += EqnTest ( "sum(1*3, 2*sum(1,2,2), a+2)",  16, true );
-    iStat += EqnTest ( "sum(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2)", 24, true );
+    iStat += EqnTest ( "sum(1;2;3)",  6, true );
+    iStat += EqnTest ( "sum(a;b;c)",  6, true );
+    iStat += EqnTest ( "sum(1;-max(1;2);3)*2",  4, true );
+    iStat += EqnTest ( "2*sum(1;2;3)",  12, true );
+    iStat += EqnTest ( "2*sum(1;2;3)+2",  14, true );
+    iStat += EqnTest ( "2*sum(-1;2;3)+2",  10, true );
+    iStat += EqnTest ( "2*sum(-1;2;-(-a))+2",  6, true );
+    iStat += EqnTest ( "2*sum(-1;10;-a)+2",  18, true );
+    iStat += EqnTest ( "2*sum(1;2;3)*2",  24, true );
+    iStat += EqnTest ( "sum(1;-max(1;2);3)*2",  4, true );
+    iStat += EqnTest ( "sum(1*3; 4; a+2)",  10, true );
+    iStat += EqnTest ( "sum(1*3; 2*sum(1;2;2); a+2)",  16, true );
+    iStat += EqnTest ( "sum(1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;2)", 24, true );
 
     // some failures
     iStat += EqnTest ( "sum()",  0, false );
-    iStat += EqnTest ( "sum(,)",  0, false );
-    iStat += EqnTest ( "sum(1,2,)",  0, false );
-    iStat += EqnTest ( "sum(,1,2)",  0, false );
+    iStat += EqnTest ( "sum(;)",  0, false );
+    iStat += EqnTest ( "sum(1;2;)",  0, false );
+    iStat += EqnTest ( "sum(;1;2)",  0, false );
 
     if ( iStat == 0 )
     {
@@ -768,7 +768,7 @@ int QmuParserTester::TestPostFix()
     iStat += EqnTest ( "f1of1(1000){m}", 1, true );
     iStat += EqnTest ( "-f1of1(1000){m}", -1, true );
     iStat += EqnTest ( "-f1of1(-1000){m}", 1, true );
-    iStat += EqnTest ( "f4of4(0,0,0,1000){m}", 1, true );
+    iStat += EqnTest ( "f4of4(0;0;0;1000){m}", 1, true );
     iStat += EqnTest ( "2+(a*1000){m}", 3, true );
 
     // can postfix operators "m" und "meg" be told apart properly?
@@ -818,6 +818,9 @@ int QmuParserTester::TestExpression()
     iStat += EqnTest ( "2*a/3", 2.0 / 3.0, true );
 
     // Addition auf cmVARMUL
+    iStat += EqnTest ( "b--3", b - (-3), true );
+    iStat += EqnTest ( "b-3", b - 3, true );
+    iStat += EqnTest ( "3-b", 3 - b, true );
     iStat += EqnTest ( "3+b", b + 3, true );
     iStat += EqnTest ( "b+3", b + 3, true );
     iStat += EqnTest ( "b*3+2", b * 3 + 2, true );
@@ -931,19 +934,19 @@ int QmuParserTester::TestIfThenElse()
 
     iStat += EqnTest ( "sum((a>b) ? 1 : 2)", 2, true );
     iStat += EqnTest ( "sum((1) ? 1 : 2)", 1, true );
-    iStat += EqnTest ( "sum((a>b) ? 1 : 2, 100)", 102, true );
-    iStat += EqnTest ( "sum((1) ? 1 : 2, 100)", 101, true );
-    iStat += EqnTest ( "sum(3, (a>b) ? 3 : 10)", 13, true );
-    iStat += EqnTest ( "sum(3, (a<b) ? 3 : 10)", 6, true );
-    iStat += EqnTest ( "10*sum(3, (a>b) ? 3 : 10)", 130, true );
-    iStat += EqnTest ( "10*sum(3, (a<b) ? 3 : 10)", 60, true );
-    iStat += EqnTest ( "sum(3, (a>b) ? 3 : 10)*10", 130, true );
-    iStat += EqnTest ( "sum(3, (a<b) ? 3 : 10)*10", 60, true );
-    iStat += EqnTest ( "(a<b) ? sum(3, (a<b) ? 3 : 10)*10 : 99", 60, true );
-    iStat += EqnTest ( "(a>b) ? sum(3, (a<b) ? 3 : 10)*10 : 99", 99, true );
-    iStat += EqnTest ( "(a<b) ? sum(3, (a<b) ? 3 : 10,10,20)*10 : 99", 360, true );
-    iStat += EqnTest ( "(a>b) ? sum(3, (a<b) ? 3 : 10,10,20)*10 : 99", 99, true );
-    iStat += EqnTest ( "(a>b) ? sum(3, (a<b) ? 3 : 10,10,20)*10 : sum(3, (a<b) ? 3 : 10)*10", 60, true );
+    iStat += EqnTest ( "sum((a>b) ? 1 : 2; 100)", 102, true );
+    iStat += EqnTest ( "sum((1) ? 1 : 2; 100)", 101, true );
+    iStat += EqnTest ( "sum(3; (a>b) ? 3 : 10)", 13, true );
+    iStat += EqnTest ( "sum(3; (a<b) ? 3 : 10)", 6, true );
+    iStat += EqnTest ( "10*sum(3; (a>b) ? 3 : 10)", 130, true );
+    iStat += EqnTest ( "10*sum(3; (a<b) ? 3 : 10)", 60, true );
+    iStat += EqnTest ( "sum(3; (a>b) ? 3 : 10)*10", 130, true );
+    iStat += EqnTest ( "sum(3; (a<b) ? 3 : 10)*10", 60, true );
+    iStat += EqnTest ( "(a<b) ? sum(3; (a<b) ? 3 : 10)*10 : 99", 60, true );
+    iStat += EqnTest ( "(a>b) ? sum(3; (a<b) ? 3 : 10)*10 : 99", 99, true );
+    iStat += EqnTest ( "(a<b) ? sum(3; (a<b) ? 3 : 10;10;20)*10 : 99", 360, true );
+    iStat += EqnTest ( "(a>b) ? sum(3; (a<b) ? 3 : 10;10;20)*10 : 99", 99, true );
+    iStat += EqnTest ( "(a>b) ? sum(3; (a<b) ? 3 : 10;10;20)*10 : sum(3; (a<b) ? 3 : 10)*10", 60, true );
 
     // todo: auch fr muParserX hinzufgen!
     iStat += EqnTest ( "(a<b)&&(a<b) ? 128 : 255", 128, true );
@@ -971,23 +974,23 @@ int QmuParserTester::TestIfThenElse()
     iStat += EqnTest ( "1 ? 0 ? 128 : 255 : 1 ? 32 : 64", 255, true );
 
     // assignment operators
-    iStat += EqnTest ( "a= 0 ? 128 : 255, a", 255, true );
-    iStat += EqnTest ( "a=((a>b)&&(a<b)) ? 128 : 255, a", 255, true );
-    iStat += EqnTest ( "c=(a<b)&&(a<b) ? 128 : 255, c", 128, true );
-    iStat += EqnTest ( "0 ? a=a+1 : 666, a", 1, true );
-    iStat += EqnTest ( "1?a=10:a=20, a", 10, true );
-    iStat += EqnTest ( "0?a=10:a=20, a", 20, true );
-    iStat += EqnTest ( "0?a=sum(3,4):10, a", 1, true ); // a should not change its value due to lazy calculation
+    iStat += EqnTest ( "a= 0 ? 128 : 255; a", 255, true );
+    iStat += EqnTest ( "a=((a>b)&&(a<b)) ? 128 : 255; a", 255, true );
+    iStat += EqnTest ( "c=(a<b)&&(a<b) ? 128 : 255; c", 128, true );
+    iStat += EqnTest ( "0 ? a=a+1 : 666; a", 1, true );
+    iStat += EqnTest ( "1?a=10:a=20; a", 10, true );
+    iStat += EqnTest ( "0?a=10:a=20; a", 20, true );
+    iStat += EqnTest ( "0?a=sum(3;4):10; a", 1, true ); // a should not change its value due to lazy calculation
 
-    iStat += EqnTest ( "a=1?b=1?3:4:5, a", 3, true );
-    iStat += EqnTest ( "a=1?b=1?3:4:5, b", 3, true );
-    iStat += EqnTest ( "a=0?b=1?3:4:5, a", 5, true );
-    iStat += EqnTest ( "a=0?b=1?3:4:5, b", 2, true );
+    iStat += EqnTest ( "a=1?b=1?3:4:5; a", 3, true );
+    iStat += EqnTest ( "a=1?b=1?3:4:5; b", 3, true );
+    iStat += EqnTest ( "a=0?b=1?3:4:5; a", 5, true );
+    iStat += EqnTest ( "a=0?b=1?3:4:5; b", 2, true );
 
-    iStat += EqnTest ( "a=1?5:b=1?3:4, a", 5, true );
-    iStat += EqnTest ( "a=1?5:b=1?3:4, b", 2, true );
-    iStat += EqnTest ( "a=0?5:b=1?3:4, a", 3, true );
-    iStat += EqnTest ( "a=0?5:b=1?3:4, b", 3, true );
+    iStat += EqnTest ( "a=1?5:b=1?3:4; a", 5, true );
+    iStat += EqnTest ( "a=1?5:b=1?3:4; b", 2, true );
+    iStat += EqnTest ( "a=0?5:b=1?3:4; a", 3, true );
+    iStat += EqnTest ( "a=0?5:b=1?3:4; b", 3, true );
 
     if ( iStat == 0 )
     {
@@ -1011,7 +1014,7 @@ int QmuParserTester::TestException()
     iStat += ThrowTest ( "3+)",          ecUNEXPECTED_PARENS );
     iStat += ThrowTest ( "()",           ecUNEXPECTED_PARENS );
     iStat += ThrowTest ( "3+()",         ecUNEXPECTED_PARENS );
-    iStat += ThrowTest ( "sin(3,4)",     ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "sin(3;4)",     ecTOO_MANY_PARAMS );
     iStat += ThrowTest ( "sin()",        ecTOO_FEW_PARAMS );
     iStat += ThrowTest ( "(1+2",         ecMISSING_PARENS );
     iStat += ThrowTest ( "sin(3)3",      ecUNEXPECTED_VAL );
@@ -1049,7 +1052,7 @@ int QmuParserTester::TestException()
     iStat += ThrowTest ( "1+valueof(\"abc\"",  ecMISSING_PARENS );
     iStat += ThrowTest ( "valueof(\"abc\"",    ecMISSING_PARENS );
     iStat += ThrowTest ( "valueof(\"abc",      ecUNTERMINATED_STRING );
-    iStat += ThrowTest ( "valueof(\"abc\",3)", ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "valueof(\"abc\";3)", ecTOO_MANY_PARAMS );
     iStat += ThrowTest ( "valueof(3)",         ecSTRING_EXPECTED );
     iStat += ThrowTest ( "sin(\"abc\")",       ecVAL_EXPECTED );
     iStat += ThrowTest ( "valueof(\"\\\"abc\\\"\")",  999, false );
@@ -1057,20 +1060,20 @@ int QmuParserTester::TestException()
     iStat += ThrowTest ( "(\"hello world\")",  ecSTR_RESULT );
     iStat += ThrowTest ( "\"abcd\"+100",       ecOPRT_TYPE_CONFLICT );
     iStat += ThrowTest ( "\"a\"+\"b\"",        ecOPRT_TYPE_CONFLICT );
-    iStat += ThrowTest ( "strfun1(\"100\",3)",     ecTOO_MANY_PARAMS );
-    iStat += ThrowTest ( "strfun2(\"100\",3,5)",   ecTOO_MANY_PARAMS );
-    iStat += ThrowTest ( "strfun3(\"100\",3,5,6)", ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun1(\"100\";3)",     ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun2(\"100\";3;5)",   ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun3(\"100\";3;5;6)", ecTOO_MANY_PARAMS );
     iStat += ThrowTest ( "strfun2(\"100\")",       ecTOO_FEW_PARAMS );
-    iStat += ThrowTest ( "strfun3(\"100\",6)",   ecTOO_FEW_PARAMS );
-    iStat += ThrowTest ( "strfun2(1,1)",         ecSTRING_EXPECTED );
-    iStat += ThrowTest ( "strfun2(a,1)",         ecSTRING_EXPECTED );
-    iStat += ThrowTest ( "strfun2(1,1,1)",       ecTOO_MANY_PARAMS );
-    iStat += ThrowTest ( "strfun2(a,1,1)",       ecTOO_MANY_PARAMS );
-    iStat += ThrowTest ( "strfun3(1,2,3)",         ecSTRING_EXPECTED );
-    iStat += ThrowTest ( "strfun3(1, \"100\",3)",  ecSTRING_EXPECTED );
-    iStat += ThrowTest ( "strfun3(\"1\", \"100\",3)",  ecVAL_EXPECTED );
-    iStat += ThrowTest ( "strfun3(\"1\", 3, \"100\")",  ecVAL_EXPECTED );
-    iStat += ThrowTest ( "strfun3(\"1\", \"100\", \"100\", \"100\")",  ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun3(\"100\";6)",   ecTOO_FEW_PARAMS );
+    iStat += ThrowTest ( "strfun2(1;1)",         ecSTRING_EXPECTED );
+    iStat += ThrowTest ( "strfun2(a;1)",         ecSTRING_EXPECTED );
+    iStat += ThrowTest ( "strfun2(1;1;1)",       ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun2(a;1;1)",       ecTOO_MANY_PARAMS );
+    iStat += ThrowTest ( "strfun3(1;2;3)",         ecSTRING_EXPECTED );
+    iStat += ThrowTest ( "strfun3(1; \"100\";3)",  ecSTRING_EXPECTED );
+    iStat += ThrowTest ( "strfun3(\"1\"; \"100\";3)",  ecVAL_EXPECTED );
+    iStat += ThrowTest ( "strfun3(\"1\"; 3; \"100\")",  ecVAL_EXPECTED );
+    iStat += ThrowTest ( "strfun3(\"1\"; \"100\"; \"100\"; \"100\")",  ecTOO_MANY_PARAMS );
 
     // assignement operator
     iStat += ThrowTest ( "3=4", ecUNEXPECTED_OPERATOR );
