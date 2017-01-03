@@ -727,10 +727,10 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
     QString newFormula = formula;// Local copy for making changes
 
-    qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, osSeparator);// Eval formula
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator));// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
-    delete cal;
+    delete cal.take();
 
     QList<int> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
@@ -780,16 +780,21 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
             }
             continue;
         }
+
+        if (tValues.at(i) == QLocale().negativeSign())
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, '-');
+        }
     }
 
-    QLocale loc = QLocale::system(); // User locale
+    QLocale loc = QLocale(); // User locale
     if (loc != QLocale::c() && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale::system();// From system locale
+            loc = QLocale();// From system locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
@@ -848,10 +853,9 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
     QMap<int, QString> numbers;
     try
     {
-        qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false);// Eval formula
+        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
         tokens = cal->GetTokens();// Tokens (variables, measurements)
         numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
-        delete cal;
     }
     catch (qmu::QmuParserError &e)
     {
@@ -917,9 +921,14 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
             }
             continue;
         }
+
+        if (tValues.at(i) == QChar('-'))
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, QLocale().negativeSign());
+        }
     }
 
-    QLocale loc = QLocale::system();// User locale
+    QLocale loc = QLocale();// User locale
     if (loc != QLocale::C && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
@@ -935,13 +944,8 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
                 continue;//Leave with out translation
             }
 
-            loc = QLocale::system();// To user locale
+            loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            const QChar thSep = loc.groupSeparator();
-            if (thSep.isSpace())
-            {
-                dStr.remove(thSep);// Remove thousand separator
-            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)

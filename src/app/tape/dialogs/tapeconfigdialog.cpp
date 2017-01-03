@@ -105,7 +105,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
 
     setWindowTitle(tr("Config Dialog"));
 
-    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ void TapeConfigDialog::Apply()
     configurationPage->Apply();
     pathPage->Apply();
 
-    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

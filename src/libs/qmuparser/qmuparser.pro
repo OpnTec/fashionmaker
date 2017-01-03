@@ -39,7 +39,7 @@ OBJECTS_DIR = obj
 
 include(qmuparser.pri)
 
-VERSION = 2.4.1
+VERSION = 2.5.0
 
 # Allow MAC OS X to find library inside a bundle
 macx:QMAKE_SONAME_PREFIX = @rpath

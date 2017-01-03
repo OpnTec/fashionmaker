@@ -130,7 +130,7 @@ QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
       m_pFunDef ( nullptr ), m_pPostOprtDef ( nullptr ), m_pInfixOprtDef ( nullptr ), m_pOprtDef ( nullptr ),
       m_pConstDef ( nullptr ), m_pStrVarDef ( nullptr ), m_pVarDef ( nullptr ), m_pFactory ( nullptr ),
       m_pFactoryData ( nullptr ), m_vIdentFun(), m_UsedVar(), m_fZero ( 0 ), m_iBrackets ( 0 ), m_lastTok(),
-      m_cArgSep ( ',' )
+      m_cArgSep ( ';' )
 {
     assert ( m_pParser );
     SetParent ( m_pParser );
@@ -213,7 +213,8 @@ void QmuParserTokenReader::ReInit()
 /**
  * @brief Read the next token from the string.
  */
-QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const std::locale &s_locale)
+QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLocale &locale, const QChar &decimal,
+                                                                     const QChar &thousand)
 {
     assert ( m_pParser );
 
@@ -245,7 +246,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const std::
     {
         return SaveBeforeReturn ( tok ); // Check for function argument separators
     }
-    if ( IsValTok ( tok, s_locale ) )
+    if ( IsValTok ( tok, locale, decimal, thousand ) )
     {
         return SaveBeforeReturn ( tok ); // Check for values / constant tokens
     }
@@ -779,7 +780,8 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
  * @param a_Tok [out] If a value token is found it will be placed here.
  * @return true if a value token has been found.
  */
-bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const std::locale &s_locale )
+bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, const QChar &decimal,
+                                      const QChar &thousand )
 {
     assert ( m_pConstDef );
     assert ( m_pParser );
@@ -815,7 +817,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const std::locale &s_lo
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
         int iStart = m_iPos;
-        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, s_locale ) == 1 )
+        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, decimal, thousand ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
             strTok = m_strFormula.mid ( iStart, m_iPos-iStart );

@@ -1016,9 +1016,9 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
                       "Time to refactor the code.");
 
-    qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-    delete cal;
+    delete cal.take();
 
     QList<int> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();

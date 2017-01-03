@@ -80,7 +80,8 @@ notifications:
 before_deploy:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
-    zip -r valentina-osx-${TRAVIS_COMMIT}.zip $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app/ -x "*.DS_Store";
+    ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
+    tar --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app/;
   fi
 deploy:
   provider: bintray

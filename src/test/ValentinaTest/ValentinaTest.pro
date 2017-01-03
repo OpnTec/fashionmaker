@@ -54,6 +54,8 @@ SOURCES += \
     tst_vgobject.cpp \
     tst_vsplinepath.cpp \
     tst_vpointf.cpp \
+    tst_readval.cpp \
+    tst_vtranslatevars.cpp \
     tst_vabstractpiece.cpp
 
 win32-msvc*:SOURCES += stable.cpp
@@ -79,6 +81,8 @@ HEADERS += \
     tst_vgobject.h \
     tst_vsplinepath.h \
     tst_vpointf.h \
+    tst_readval.h \
+    tst_vtranslatevars.h \
     tst_vabstractpiece.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.

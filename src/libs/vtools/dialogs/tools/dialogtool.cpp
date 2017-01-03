@@ -365,7 +365,7 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
-                    plainTextEdit->insertPlainText(QLocale::system().decimalPoint());
+                    plainTextEdit->insertPlainText(QLocale().decimalPoint());
                 }
                 else
                 {

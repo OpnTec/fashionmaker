@@ -204,9 +204,9 @@ QStringList VAbstractPattern::ListMeasurements() const
     const QStringList expressions = ListExpressions();
     for (int i=0; i < expressions.size(); ++i)
     {
-        qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(expressions.at(i), false, false);// Eval formula
+        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i), false, false));// Eval formula
         const QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-        delete cal;
+        delete cal.take();
 
         const QList<QString> tValues = tokens.values();
         for (int j = 0; j < tValues.size(); ++j)

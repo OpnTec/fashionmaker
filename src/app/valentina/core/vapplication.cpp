@@ -274,7 +274,7 @@ VApplication::VApplication(int &argc, char **argv)
 
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    LoadTranslation(QLocale::system().name());// By default the console version uses system locale
+    LoadTranslation(QLocale().name());// By default the console version uses system locale
     VCommandLine::Get(*this);
     undoStack = new QUndoStack(this);
 }

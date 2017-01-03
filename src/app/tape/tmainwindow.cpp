@@ -101,7 +101,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFind->setClearButtonEnabled(true);
@@ -476,7 +476,7 @@ void TMainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
@@ -570,7 +570,7 @@ bool TMainWindow::eventFilter(QObject *object, QEvent *event)
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
-                    plainTextEdit->insertPlainText(QLocale::system().decimalPoint());
+                    plainTextEdit->insertPlainText(QLocale().decimalPoint());
                 }
                 else
                 {
@@ -589,7 +589,7 @@ bool TMainWindow::eventFilter(QObject *object, QEvent *event)
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
-                    textEdit->insert(QLocale::system().decimalPoint());
+                    textEdit->insert(QLocale().decimalPoint());
                 }
                 else
                 {
@@ -1945,7 +1945,7 @@ void TMainWindow::InitWindow()
         const qint32 index = ui->comboBoxGender->findData(static_cast<int>(m->Gender()));
         ui->comboBoxGender->setCurrentIndex(index);
 
-        ui->dateEditBirthDate->setDisplayFormat(QLocale::system().dateFormat());
+        ui->dateEditBirthDate->setDisplayFormat(QLocale().dateFormat());
         ui->dateEditBirthDate->setDate(m->BirthDate());
         ui->lineEditEmail->setText(m->Email());
 

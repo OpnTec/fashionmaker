@@ -75,7 +75,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale::c());
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
@@ -762,7 +762,7 @@ bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
-                    textEdit->insert(QLocale::system().decimalPoint());
+                    textEdit->insert(QLocale().decimalPoint());
                 }
                 else
                 {

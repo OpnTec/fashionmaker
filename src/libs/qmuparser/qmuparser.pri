@@ -11,7 +11,8 @@ SOURCES += \
     $$PWD/qmuparsertest.cpp \
     $$PWD/qmutranslation.cpp \
     $$PWD/qmuformulabase.cpp \
-    $$PWD/qmutokenparser.cpp
+    $$PWD/qmutokenparser.cpp \
+    $$PWD/qmudef.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 

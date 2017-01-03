@@ -1,7 +1,7 @@
 rem script helps create installer
 
 rem find target architecture
-IF "%PROCESSOR_ARCHITECTURE%"=="x86" (set ARCHITECTURE=32BIT) else (ARCHITECTURE=64BIT)
+IF "%PROCESSOR_ARCHITECTURE%"=="x86" (set ARCHITECTURE=32BIT) else (set ARCHITECTURE=64BIT)
 
 rem Path to Inno Setup according to architecture
 if %ARCHITECTURE%==32BIT set nsis_path="C:/Program Files/Inno Setup 5/iscc.exe"
