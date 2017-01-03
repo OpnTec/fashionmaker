@@ -43,7 +43,7 @@
 	  </xs:element>
 	<xs:simpleType name="shortName">
 		<xs:restriction base="xs:string">   
-			<xs:pattern value="^([^0-9*/^+\-=\s()?%:;!.,`'\&quot;]){1,1}([^*/^+\-=\s()?%:;!.,`'\&quot;]){0,}$"/>
+			<xs:pattern value="^([^\p{Nd}\p{Zs}*/&amp;|!&lt;&gt;^\-()–+−=?:;'\&quot;]){1,1}([^\p{Zs}*/&amp;|!&lt;&gt;^\-()–+−=?:;\&quot;]){0,}$"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="units">

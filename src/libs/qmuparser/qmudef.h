@@ -93,8 +93,11 @@ QT_WARNING_DISABLE_GCC("-Wattributes")
 //---------------------------------------------------------------------------------------------------------------------
 inline QString NameRegExp()
 {
-    //Same regexp in pattern.xsd shema file. Don't forget synchronize.
-    return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`\"]){0,}$");
+    //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+    // \p{Nd} - \p{Decimal_Digit_Number}
+    // \p{Zs} - \p{Space_Separator}
+    // Note. All three minus characters are different!
+    return QStringLiteral("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\-()–+−=?:;'\"]){1,1}([^\\p{Zs}*/&|!<>^\\-()–+−=?:;\"]){0,}$");
 }
 
 QT_WARNING_POP
