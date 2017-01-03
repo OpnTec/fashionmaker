@@ -214,7 +214,6 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
     };
 
     int state = State::Init;	// parse state
-    int input;					// input token
     QString buf;
 
     int index = 0; // start position
@@ -222,7 +221,7 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
 
     while ( true )
     {
-        input = CheckChar(c, locale, decimal, thousand);
+        const int input = CheckChar(c, locale, decimal, thousand);// input token
 
         state = table[state][input];
 
