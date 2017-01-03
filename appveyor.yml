@@ -168,7 +168,7 @@ before_build:
 # to run your custom scripts instead of automatic MSBuild
 build_script:
   - cd build
-  - qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings
+  - if %DEPLOY% == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
   - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
 
 # to run your custom scripts instead of automatic tests
