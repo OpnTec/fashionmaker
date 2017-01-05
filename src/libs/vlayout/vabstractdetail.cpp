@@ -614,7 +614,8 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
         return QPointF();
     }
 
-    if (not (line.p2() == helpLine.p2() || line.p1() == helpLine.p1()))
+    const bool firstPoint = line.p1() == helpLine.p1();
+    if (not (line.p2() == helpLine.p2() || firstPoint))
     {
         qDebug()<<"Two points of two lines must be equal.";
         return QPointF();
@@ -634,9 +635,10 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
             // User can create very wrong path that will create crospoint far from main path.
             // Such an annomaly we try to catch and fix.
             // If don't do this the program will crash.
-            QLineF test( line.p2(), CrosPoint );
+            QLineF test;
+            firstPoint ? test = QLineF(line.p1(), CrosPoint) : test = QLineF(line.p2(), CrosPoint);
             const qreal length = test.length();
-            if (length > width*50) // Why 50? Try to avoid cutting correct cases.
+            if (length > width*2.4)
             {
                 test.setLength(width);
                 return test.p2();
@@ -649,7 +651,14 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
         }
         case (QLineF::NoIntersection):
             /*If we have correct lines this means lines lie on a line.*/
-            return bigLine.p2();
+            if (firstPoint)
+            {
+                return bigLine.p1();
+            }
+            else
+            {
+                return bigLine.p2();
+            }
             break;
         default:
             break;

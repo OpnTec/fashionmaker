@@ -570,37 +570,80 @@ void TST_VAbstractDetail::PathRemoveLoop() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VAbstractDetail::BrokenDetailEquidistant() const
+void TST_VAbstractDetail::BrokenDetailEquidistant_data() const
 {
+    QTest::addColumn<QVector<QPointF>>("points");
+    QTest::addColumn<int>("eqv");
+    QTest::addColumn<qreal>("width");
+    QTest::addColumn<QVector<QPointF>>("ekvOrig");
+
     // For more details see the file "collection/bugs/GAVAUDAN Laure - corsage - figure 4.val".
     // We will test only one detail. The second require too accurate data that we cannot get from debuger.
     // The test check an open equdistant of correct detail.
     QVector<QPointF> points;// Input points.
     points.append(QPointF(787.5835464566929, 1701.3138897637796));
     points.append(QPointF(938.7646488188976, 1701.3138897637796));
+    points.append(QPointF(928.6149958683911, 1732.4440719866434));
     points.append(QPointF(910.0209091217698, 1792.3369853889722));
+    points.append(QPointF(893.3643262819251, 1849.7845131987456));
     points.append(QPointF(878.5244039283091, 1905.2261617043234));
-    points.append(QPointF(863.9159293830619, 1968.2534932384856));
+    points.append(QPointF(865.3802986403739, 1959.101437194065));
+    points.append(QPointF(863.9366982685195, 1965.6834024491068));
     points.append(QPointF(852.8936778444679, 1919.6965437838999));
+    points.append(QPointF(837.0628180560684, 1860.2846653184251));
     points.append(QPointF(819.0677656132684, 1798.6758641921479));
+    points.append(QPointF(798.7585839758027, 1734.54810216256));
     points.append(QPointF(787.5835464566929, 1701.3138897637796));
-    points.append(QPointF(797.0323653543306, 2608.4005039370077));
 
-    const EquidistantType eqv = EquidistantType::OpenEquidistant; // Open path
-    const qreal width = 37.795275590551185; // seam allowance width
-
-    const QVector<QPointF> ekv = VAbstractDetail::Equidistant(points, eqv, width);// Take result
+    EquidistantType eqv = EquidistantType::OpenEquidistant; // Open path
+    qreal width = 37.795275590551185; // seam allowance width
 
     QVector<QPointF> ekvOrig;
-    ekvOrig.append(QPointF(938.7646488188976, 1663.5186141732283));
-    ekvOrig.append(QPointF(990.3348131440238, 1663.5186141732283));
-    ekvOrig.append(QPointF(946.2541789190154, 1803.1092111713983));
-    ekvOrig.append(QPointF(915.1544461790318, 1914.5762831871607));
-    ekvOrig.append(QPointF(893.9371203604946, 2006.1170819537472));
-    ekvOrig.append(QPointF(833.7229784629903, 2005.9802605640884));
-    ekvOrig.append(QPointF(816.2424908106893, 1928.9724774988724));
-    ekvOrig.append(QPointF(782.8721775719547, 1809.5818175001634));
-    ekvOrig.append(QPointF(751.6217900811182, 1712.9429454154488));
+    ekvOrig.append(QPointF(774.8748468280837, 1663.5186141732283));
+    ekvOrig.append(QPointF(990.8407795072413, 1663.5186141732283));
+    ekvOrig.append(QPointF(964.6314912875667, 1743.9055911653147));
+    ekvOrig.append(QPointF(946.2221157804494, 1803.203536155223));
+    ekvOrig.append(QPointF(929.7733291125676, 1859.9343877726233));
+    ekvOrig.append(QPointF(915.1430746962241, 1914.5927211230298));
+    ekvOrig.append(QPointF(902.2033544443959, 1967.630259856634));
+    ekvOrig.append(QPointF(894.4064781634931, 2003.1794116713015));
+    ekvOrig.append(QPointF(834.213891302752, 2003.7742535883901));
+    ekvOrig.append(QPointF(816.2523103379473, 1928.9761772004185));
+    ekvOrig.append(QPointF(800.6574884611877, 1870.4501290629887));
+    ekvOrig.append(QPointF(782.9077417718742, 1809.6811695225983));
+    ekvOrig.append(QPointF(786.7126382487066, 1698.723835966227));
+
+    QTest::newRow("GAVAUDAN Laure.") << points << static_cast<int>(eqv) << width << ekvOrig;
+
+    points.clear();
+    points.append(QPointF(97.33089106412862, -223.03306117556497));
+    points.append(QPointF(990.7494050554426, 2.819093995045));
+    points.append(QPointF(908.3966357321774, 379.5839357215547));
+    points.append(QPointF(-135.41154226686143, 697.6417881399819));
+
+    eqv = EquidistantType::OpenEquidistant;
+    width = 11.338582677165354;
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
+    ekvOrig.append(QPointF(1004.1704360325447, -5.483401649771952));
+    ekvOrig.append(QPointF(918.0553412376563, 388.4941212347381));
+    ekvOrig.append(QPointF(-138.65807550610091, 710.4843173601864));
+
+    // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
+    QTest::newRow("Issue #604.") << points << static_cast<int>(eqv) << width << ekvOrig;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::BrokenDetailEquidistant() const
+{
+    QFETCH(QVector<QPointF>, points);
+    QFETCH(int, eqv);
+    QFETCH(qreal, width);
+    QFETCH(QVector<QPointF>, ekvOrig);
+
+    const QVector<QPointF> ekv = VAbstractDetail::Equidistant(points, static_cast<EquidistantType>(eqv),
+                                                              width);// Take result
 
     // Begin comparison
     Comparison(ekv, ekvOrig);
