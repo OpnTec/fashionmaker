@@ -180,7 +180,12 @@ const TextLine& VTextManager::GetSourceLine(int i) const
  */
 void VTextManager::FitFontSize(qreal fW, qreal fH)
 {
-    int iFS = 3*qFloor(fH/GetSourceLinesCount())/4;
+    int iFS = 0;
+    if (GetSourceLinesCount() > 0)
+    {//division by zero
+        iFS = 3*qFloor(fH/GetSourceLinesCount())/4;
+    }
+
     if (iFS < MIN_FONT_SIZE)
     {
         iFS = MIN_FONT_SIZE;
