@@ -149,15 +149,15 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 20);
-    path << QPointF(10, 10);
     path << QPointF(20, 20);
+    path << QPointF(10, 10);
+    path << QPointF(10, 20);
     path << QPointF(20, 10);
 
     QVector<QPointF> res;
     res << QPointF(20, 10);
-    res << QPointF(15, 15);
     res << QPointF(20, 20);
+    res << QPointF(15, 15);
     res << QPointF(20, 10);
     QTest::newRow("One loop, closed a path (four unique points)") << path << res;
 
@@ -172,17 +172,17 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 20);
-    path << QPointF(0, 10);
-    path << QPointF(0, 20);
-    path << QPointF(10, 10);
     path << QPointF(20, 20);
+    path << QPointF(10, 10);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+    path << QPointF(10, 20);
     path << QPointF(20, 10);
 
     res.clear();
     res << QPointF(20, 10);
-    res << QPointF(15, 15);
     res << QPointF(20, 20);
+    res << QPointF(15, 15);
     res << QPointF(20, 10);
     QTest::newRow("Two loops, closed a path (six unique points)") << path << res;
 
@@ -197,17 +197,17 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 20);
-    path << QPointF(0, 20);
-    path << QPointF(0, 10);
-    path << QPointF(10, 10);
     path << QPointF(20, 20);
+    path << QPointF(10, 10);
+    path << QPointF(0, 10);
+    path << QPointF(0, 20);
+    path << QPointF(10, 20);
     path << QPointF(20, 10);
 
     res.clear();
     res << QPointF(20, 10);
-    res << QPointF(15, 15);
     res << QPointF(20, 20);
+    res << QPointF(15, 15);
     res << QPointF(20, 10);
     QTest::newRow("One loop, the first loop, closed a path (six unique points)") << path << res;
 
@@ -222,19 +222,19 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 10);
-    path << QPointF(0, 20);
-    path << QPointF(0, 10);
-    path << QPointF(10, 20);
     path << QPointF(20, 20);
+    path << QPointF(10, 20);
+    path << QPointF(0, 10);
+    path << QPointF(0, 20);
+    path << QPointF(10, 10);
     path << QPointF(20, 10);
 
     res.clear();
     res << QPointF(20, 10);
-    res << QPointF(10, 10);
-    res << QPointF(5, 15);
-    res << QPointF(10, 20);
     res << QPointF(20, 20);
+    res << QPointF(10, 20);
+    res << QPointF(5, 15);
+    res << QPointF(10, 10);
     res << QPointF(20, 10);
     QTest::newRow("One loop, the second loop, closed a path (six unique points)") << path << res;
 
@@ -249,10 +249,10 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 10);
-    path << QPointF(20, 15);
-    path << QPointF(10, 20);
     path << QPointF(20, 20);
+    path << QPointF(10, 20);
+    path << QPointF(20, 15);
+    path << QPointF(10, 10);
     path << QPointF(20, 10);
     QTest::newRow("Correct closed a path, point on line (four unique points)") << path << path;
 
@@ -265,14 +265,15 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
 
     path.clear();
     path << QPointF(20, 10);
-    path << QPointF(10, 10);
-    path << QPointF(0, 10);
     path << QPointF(10, 15);
-    path << QPointF(0, 20);
-    path << QPointF(10, 20);
     path << QPointF(20, 20);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
     path << QPointF(10, 15);
+    path << QPointF(0, 10);
+    path << QPointF(10, 10);
     path << QPointF(20, 10);
+
     QTest::newRow("Correct closed a path, point on line (six unique points)") << path << path;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -312,7 +313,6 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
     res << QPointF(364.5960626489172, 1822.0507669842166);
     res << QPointF(400.66867742260206, 1822.488188976378);
     res << QPointF(1001.3385826771654, 1822.488188976378);
-    res << QPointF(1001.3385826771654, 1822.488188976378);
     res << QPointF(1001.3385826771654, 2680.44094488189);
     res << QPointF(-22.11646613738226, 2680.44094488189);
     res << QPointF(100.96979100571033, 1797.6153764073072);
@@ -321,107 +321,50 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
     QTest::newRow("Test case issue #493") << path << res;
 
     path.clear();
-    path << QPointF(-656.9465284876832, -3606.6183279948636);
-    path << QPointF(-656.5996104603414, -3606.6000783462687);
-    path << QPointF(-655.7439133016985, -3607.1236310612317);
-    path << QPointF(-654.129780081666, -3609.0558393168476);
-    path << QPointF(-651.3154902471701, -3613.939306009108);
-    path << QPointF(-647.8207651830382, -3621.2084054506768);
-    path << QPointF(-641.4701586077349, -3636.0289997859454);
-    path << QPointF(-630.9244502073004, -3663.23035747934);
-    path << QPointF(-618.4465305467888, -3697.4982896415795);
-    path << QPointF(-604.3873016966293, -3737.732371148936);
-    path << QPointF(-581.1891087215608, -3806.460957656939);
-    path << QPointF(-547.7936207285052, -3909.520915257629);
-    path << QPointF(-514.3891332445846, -4016.6378180116963);
-    path << QPointF(-491.17181635142833, -4093.9874129706236);
-    path << QPointF(-477.094588519539, -4142.335384784734);
-    path << QPointF(-464.5941701318652, -4186.745679830414);
-    path << QPointF(-454.0214632588362, -4226.117872983938);
-    path << QPointF(-449.6699112298347, -4243.2921010175705);
-    path << QPointF(-576.966638263205, -3606.6183279948636);
+    path << QPointF(-685.2149804319953, -3568.7982439212556);
+    path << QPointF(-700.7415523087261, -3623.900571239949);
+    path << QPointF(-675.4694480627154, -3639.3631430823175);
+    path << QPointF(-684.7497934439581, -3631.3546395862268);
+    path << QPointF(-683.1356602239256, -3633.2868478418427);
+    path << QPointF(-686.8764821039574, -3627.927414863926);
+    path << QPointF(-684.7670104817863, -3631.587853202178);
+    path << QPointF(-682.2386030572435, -3636.8469922361573);
+    path << QPointF(-676.4708011186385, -3650.307478525872);
+    path << QPointF(-666.3050989871189, -3676.5286567894937);
+    path << QPointF(-654.0449409043066, -3710.198553447806);
+    path << QPointF(-640.1333287371614, -3750.0101920374505);
+    path << QPointF(-617.0729873733014, -3818.3303697354913);
+    path << QPointF(-583.8128392515604, -3920.9726624886944);
+    path << QPointF(-550.5307668482033, -4027.6970214479597);
+    path << QPointF(-527.4164674104215, -4104.7034088569535);
+    path << QPointF(-513.4302533332675, -4152.73879565781);
+    path << QPointF(-501.0373006826446, -4196.767296675345);
+    path << QPointF(-490.59311078227046, -4235.660899517831);
+    path << QPointF(-477.25724163384456, -4288.293444470835);
+    path << QPointF(-405.3839593893572, -4272.013803282615);
+    path << QPointF(-545.9786893428341, -3568.830152982464);
+    path << QPointF(-685.2149804319953, -3568.7982439212556);
 
     res.clear();
-    res << QPointF(-656.9465284876832, -3606.6183279948636);
-    res << QPointF(-656.5996104603414, -3606.6000783462687);
-    res << QPointF(-656.5697831440032, -3606.6183279948636);
-
-    // See the file "collection/bugs/Issue_#515.val"
-    // Check a countur path.
-    // The curve that causes the issue is the first in the list.
-    QTest::newRow("Test case issue #515. Big loop in countur path.") << path << res;
-
-    path.clear();
-    path << QPointF(-449.6699112298347, -4243.2921010175705);
-    path << QPointF(-576.966638263205, -3606.6183279948636);
-    path << QPointF(-656.9465284876832, -3606.6183279948636);
-    path << QPointF(-656.5996104603414, -3606.6000783462687);
-    path << QPointF(-655.7439133016985, -3607.1236310612317);
-    path << QPointF(-654.129780081666, -3609.0558393168476);
-    path << QPointF(-651.3154902471701, -3613.939306009108);
-    path << QPointF(-647.8207651830382, -3621.2084054506768);
-    path << QPointF(-641.4701586077349, -3636.0289997859454);
-    path << QPointF(-630.9244502073004, -3663.23035747934);
-    path << QPointF(-618.4465305467888, -3697.4982896415795);
-    path << QPointF(-604.3873016966293, -3737.732371148936);
-    path << QPointF(-581.1891087215608, -3806.460957656939);
-    path << QPointF(-547.7936207285052, -3909.520915257629);
-    path << QPointF(-514.3891332445846, -4016.6378180116963);
-    path << QPointF(-491.17181635142833, -4093.9874129706236);
-    path << QPointF(-477.094588519539, -4142.335384784734);
-    path << QPointF(-464.5941701318652, -4186.745679830414);
-    path << QPointF(-454.0214632588362, -4226.117872983938);
-
-    res.clear();
-    res << QPointF(-449.6699112298347, -4243.2921010175705);
-    res << QPointF(-576.966638263205, -3606.6183279948636);
-    res << QPointF(-656.5697831440032, -3606.6183279948636);
-    res << QPointF(-655.7439133016985, -3607.1236310612317);
-    res << QPointF(-654.129780081666, -3609.0558393168476);
-    res << QPointF(-651.3154902471701, -3613.939306009108);
-    res << QPointF(-647.8207651830382, -3621.2084054506768);
-    res << QPointF(-641.4701586077349, -3636.0289997859454);
-    res << QPointF(-630.9244502073004, -3663.23035747934);
-    res << QPointF(-618.4465305467888, -3697.4982896415795);
-    res << QPointF(-604.3873016966293, -3737.732371148936);
-    res << QPointF(-581.1891087215608, -3806.460957656939);
-    res << QPointF(-547.7936207285052, -3909.520915257629);
-    res << QPointF(-514.3891332445846, -4016.6378180116963);
-    res << QPointF(-491.17181635142833, -4093.9874129706236);
-    res << QPointF(-477.094588519539, -4142.335384784734);
-    res << QPointF(-464.5941701318652, -4186.745679830414);
-    res << QPointF(-454.0214632588362, -4226.117872983938);
-
-    // See the file "collection/bugs/Issue_#515.val"
-    // Check a countur path.
-    // The curve that causes the issue is the last in the list.
-    QTest::newRow("Test case issue #515. Small loop in countur path.") << path << res;
-
-    path.clear();
-    path << QPointF(-656.9465284876832, -3606.6183279948636);
-    path << QPointF(-656.5996104603414, -3606.6000783462687);
-    path << QPointF(-655.7439133016985, -3607.1236310612317);
-    path << QPointF(-654.129780081666, -3609.0558393168476);
-    path << QPointF(-651.3154902471701, -3613.939306009108);
-    path << QPointF(-647.8207651830382, -3621.2084054506768);
-    path << QPointF(-641.4701586077349, -3636.0289997859454);
-    path << QPointF(-630.9244502073004, -3663.23035747934);
-    path << QPointF(-618.4465305467888, -3697.4982896415795);
-    path << QPointF(-604.3873016966293, -3737.732371148936);
-    path << QPointF(-581.1891087215608, -3806.460957656939);
-    path << QPointF(-547.7936207285052, -3909.520915257629);
-    path << QPointF(-514.3891332445846, -4016.6378180116963);
-    path << QPointF(-491.17181635142833, -4093.9874129706236);
-    path << QPointF(-477.094588519539, -4142.335384784734);
-    path << QPointF(-464.5941701318652, -4186.745679830414);
-    path << QPointF(-454.0214632588362, -4226.117872983938);
-    path << QPointF(-449.6699112298347, -4243.2921010175705);
-    path << QPointF(-576.966638263205, -3606.6183279948636);
-
-    res.clear();
-    res << QPointF(-656.9465284876832, -3606.6183279948636);
-    res << QPointF(-656.5996104603414, -3606.6000783462687);
-    res << QPointF(-656.5697831440032, -3606.6183279948636);
+    res << QPointF(-685.2149804319953, -3568.7982439212556);
+    res << QPointF(-700.7415523087261, -3623.900571239949);
+    res << QPointF(-683.3457668881176, -3634.5440688767967);
+    res << QPointF(-682.2386030572435, -3636.8469922361573);
+    res << QPointF(-676.4708011186385, -3650.307478525872);
+    res << QPointF(-666.3050989871189, -3676.5286567894937);
+    res << QPointF(-654.0449409043066, -3710.198553447806);
+    res << QPointF(-640.1333287371614, -3750.0101920374505);
+    res << QPointF(-617.0729873733014, -3818.3303697354913);
+    res << QPointF(-583.8128392515604, -3920.9726624886944);
+    res << QPointF(-550.5307668482033, -4027.6970214479597);
+    res << QPointF(-527.4164674104215, -4104.7034088569535);
+    res << QPointF(-513.4302533332675, -4152.73879565781);
+    res << QPointF(-501.0373006826446, -4196.767296675345);
+    res << QPointF(-490.59311078227046, -4235.660899517831);
+    res << QPointF(-477.25724163384456, -4288.293444470835);
+    res << QPointF(-405.3839593893572, -4272.013803282615);
+    res << QPointF(-545.9786893428341, -3568.830152982464);
+    res << QPointF(-685.2149804319953, -3568.7982439212556);
 
     // See the file "collection/bugs/Issue_#515.val"
     // Check a seam allowance path.
@@ -496,67 +439,10 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
     res << QPointF(459.7677349767702, -2166.704563141019);
     res << QPointF(1229.6503937007876, -1990.077167189857);
     res << QPointF(1229.6503937007876, 937.6667716535435);
-    res << QPointF(1229.6503937007876, 937.6667716535435);
 
     // See the file "collection/bugs/Issue_#603.val"
     // Point H1 is first in the list
-    QTest::newRow("Test issue 603. Case 1.") << path << res;
-
-    path.clear();
-    path << QPointF(1229.6503937007876, -630.8371653543306);
-    path << QPointF(1229.6503937007876, 937.6667716535435);
-    path << QPointF(203.08931117793543, 937.6667716535435);
-    path << QPointF(459.7677349767702, -2166.704563141019);
-    path << QPointF(1229.6503937007876, -1990.077167189857);
-    path << QPointF(1229.6503937007876, -555.2466141732282);
-    path << QPointF(920.1053824527112, -555.2466141732282);
-    path << QPointF(887.034516310979, -63.90803149606281);
-    path << QPointF(816.3607592795726, -63.908031496062826);
-    path << QPointF(780.7580397937137, -592.8627210002539);
-    path << QPointF(816.0241340748559, -1202.917917917055);
-    path << QPointF(887.3711415156957, -1202.917917917055);
-    path << QPointF(920.4420076574283, -630.8371653543306);
-    path << QPointF(1229.6503937007876, -630.8371653543306);
-
-    res.clear();
-    res << QPointF(1229.6503937007876, -1990.077167189857);
-    res << QPointF(1229.6503937007876, 937.6667716535435);
-    res << QPointF(1229.6503937007876, 937.6667716535435);
-    res << QPointF(203.08931117793543, 937.6667716535435);
-    res << QPointF(459.7677349767702, -2166.704563141019);
-    res << QPointF(1229.6503937007876, -1990.077167189857);
-
-    // See the file "collection/bugs/Issue_#603.val"
-    // Point T1 is first in the list
-    QTest::newRow("Test issue 603. Case 2.") << path << res;
-
-    path.clear();
-    path << QPointF(920.4420076574283, -630.8371653543306);
-    path << QPointF(1229.6503937007876, -630.8371653543306);
-    path << QPointF(1229.6503937007876, 937.6667716535435);
-    path << QPointF(203.08931117793543, 937.6667716535435);
-    path << QPointF(459.7677349767702, -2166.704563141019);
-    path << QPointF(1229.6503937007876, -1990.077167189857);
-    path << QPointF(1229.6503937007876, -555.2466141732282);
-    path << QPointF(920.1053824527112, -555.2466141732282);
-    path << QPointF(887.034516310979, -63.90803149606281);
-    path << QPointF(816.3607592795726, -63.908031496062826);
-    path << QPointF(780.7580397937137, -592.8627210002539);
-    path << QPointF(816.0241340748559, -1202.917917917055);
-    path << QPointF(887.3711415156957, -1202.917917917055);
-    path << QPointF(920.4420076574283, -630.8371653543306);
-
-    res.clear();
-    res << QPointF(1229.6503937007876, -1990.077167189857);
-    res << QPointF(1229.6503937007876, 937.6667716535435);
-    res << QPointF(1229.6503937007876, 937.6667716535435);
-    res << QPointF(203.08931117793543, 937.6667716535435);
-    res << QPointF(459.7677349767702, -2166.704563141019);
-    res << QPointF(1229.6503937007876, -1990.077167189857);
-
-    // See the file "collection/bugs/Issue_#603.val"
-    // Point T62 is first in the list
-    QTest::newRow("Test issue 603. Case 3.") << path << res;
+    QTest::newRow("Test issue 603.") << path << res;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -566,6 +452,218 @@ void TST_VAbstractDetail::PathRemoveLoop() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractDetail::CheckLoops(path);
+    Comparison(res, expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::PathLoopsCase_data() const
+{
+    QTest::addColumn<QVector<QPointF>>("path");
+    QTest::addColumn<QVector<QPointF>>("expect");
+
+    QVector<QPointF> path;
+    path << QPointF(61.86670866141733, 446.92270866141735);
+    path << QPointF(650.6504606788366, 473.2192016666484);
+    path << QPointF(649.4426552757304, 480.5376973511262);
+    path << QPointF(646.5769170924987, 501.9977838630714);
+    path << QPointF(644.6382908004568, 523.6358081043691);
+    path << QPointF(643.4592698551749, 551.9888717674471);
+    path << QPointF(642.9134698671897, 584.1776423714557);
+    path << QPointF(643.1914832622404, 613.2382010061506);
+    path << QPointF(644.2199668178571, 639.3780275889782);
+    path << QPointF(645.9255773115714, 662.8046020373845);
+    path << QPointF(648.2349715209137, 683.7254042688159);
+    path << QPointF(651.0748062234152, 702.3479142007185);
+    path << QPointF(654.3717381966065, 718.8796117505387);
+    path << QPointF(658.0524242180187, 733.5279768357226);
+    path << QPointF(662.0435210651824, 746.5004893737165);
+    path << QPointF(666.2716855156286, 758.0046292819667);
+    path << QPointF(670.6635743468883, 768.2478764779191);
+    path << QPointF(677.400406718071, 781.7952098705392);
+    path << QPointF(691.6740007010135, 806.2608114022295);
+    path << QPointF(694.5877745571677, 810.2150054671212);
+    path << QPointF(699.9560352035193, 816.1706553153153);
+    path << QPointF(708.9007628091615, 824.0594196166176);
+    path << QPointF(719.3794725391945, 831.7499791040799);
+    path << QPointF(730.9568541500198, 839.0942359684872);
+    path << QPointF(743.1975973980386, 845.9440924006244);
+    path << QPointF(755.6663920396528, 852.1514505912763);
+    path << QPointF(767.9279278312633, 857.568212731228);
+    path << QPointF(779.5468945292718, 862.046281011264);
+    path << QPointF(790.0879818900794, 865.4375576221694);
+    path << QPointF(799.115879670088, 867.5939447547289);
+    path << QPointF(804.5608128209333, 868.2650594004886);
+    path << QPointF(807.5317661719646, 868.2782441618697);
+    path << QPointF(809.8795601157717, 867.8994015359809);
+    path << QPointF(811.5497808719051, 867.1100192966705);
+    path << QPointF(812.4880146599148, 865.8915852177861);
+    path << QPointF(812.6398476993509, 864.2255870731761);
+    path << QPointF(811.9508662097637, 862.0935126366886);
+    path << QPointF(810.3666564107034, 859.4768496821717);
+    path << QPointF(806.3216663321919, 854.66911491981);
+    path << QPointF(802.0871811023624, 850.6707401574804);
+    path << QPointF(799.4598981526765, 850.6707401574804);
+    path << QPointF(802.0871811023624, 1653.9337322834645);
+    path << QPointF(61.86670866141733, 1653.9337322834645);
+
+    QVector<QPointF> res;
+    res << QPointF(61.86670866141733, 446.92270866141735);
+    res << QPointF(650.6504606788366, 473.2192016666484);
+    res << QPointF(649.4426552757304, 480.5376973511262);
+    res << QPointF(646.5769170924987, 501.9977838630714);
+    res << QPointF(644.6382908004568, 523.6358081043691);
+    res << QPointF(643.4592698551749, 551.9888717674471);
+    res << QPointF(642.9134698671897, 584.1776423714557);
+    res << QPointF(643.1914832622404, 613.2382010061506);
+    res << QPointF(644.2199668178571, 639.3780275889782);
+    res << QPointF(645.9255773115714, 662.8046020373845);
+    res << QPointF(648.2349715209137, 683.7254042688159);
+    res << QPointF(651.0748062234152, 702.3479142007185);
+    res << QPointF(654.3717381966065, 718.8796117505387);
+    res << QPointF(658.0524242180187, 733.5279768357226);
+    res << QPointF(662.0435210651824, 746.5004893737165);
+    res << QPointF(666.2716855156286, 758.0046292819667);
+    res << QPointF(670.6635743468883, 768.2478764779191);
+    res << QPointF(677.400406718071, 781.7952098705392);
+    res << QPointF(691.6740007010135, 806.2608114022295);
+    res << QPointF(694.5877745571677, 810.2150054671212);
+    res << QPointF(699.9560352035193, 816.1706553153153);
+    res << QPointF(708.9007628091615, 824.0594196166176);
+    res << QPointF(719.3794725391945, 831.7499791040799);
+    res << QPointF(730.9568541500198, 839.0942359684872);
+    res << QPointF(743.1975973980386, 845.9440924006244);
+    res << QPointF(755.6663920396528, 852.1514505912763);
+    res << QPointF(767.9279278312633, 857.568212731228);
+    res << QPointF(779.5468945292718, 862.046281011264);
+    res << QPointF(790.0879818900794, 865.4375576221694);
+    res << QPointF(799.115879670088, 867.5939447547289);
+    res << QPointF(799.5154110117976, 867.6431889469776);
+    res << QPointF(802.0871811023624, 1653.9337322834645);
+    res << QPointF(61.86670866141733, 1653.9337322834645);
+
+    // See file "collection/bugs/Issue_#609_case1.val"
+    // Clear a main path. Bound intersection. External loop. Outside a loop. Start point Ф1.
+    QTest::newRow("Issue 609. Case1a") << path << res;
+
+    path.clear();
+    path << QPointF(-365.68188649000314, -2143.126579528016);
+    path << QPointF(-195.75487873249062, -2116.7935769656237);
+    path << QPointF(-195.75487873249062, -1836.0319480765759);
+    path << QPointF(-233.39027086052477, -1838.4849618976993);
+    path << QPointF(-231.15080237392075, -1855.5915146519483);
+    path << QPointF(-225.84473077299972, -1889.4811404382626);
+    path << QPointF(-219.39861487985402, -1922.986407729537);
+    path << QPointF(-211.6695159016421, -1955.9990283342697);
+    path << QPointF(-204.87723909172885, -1980.439660924953);
+    path << QPointF(-199.87970909142098, -1996.6270828437923);
+    path << QPointF(-194.48099536000245, -2012.6451713592935);
+    path << QPointF(-188.65032933731845, -2028.5246588116781);
+    path << QPointF(-182.36812965707693, -2044.2602109802488);
+    path << QPointF(-175.61499879935675, -2059.8462252736344);
+    path << QPointF(-168.3717693169516, -2075.2768492268588);
+    path << QPointF(-160.6424572210866, -2090.5008865466684);
+    path << QPointF(-150.22847685877994, -2109.7385074212525);
+    path << QPointF(194.23861004296444, -2056.3576305273214);
+    path << QPointF(302.4787663409577, -1301.003761061316);
+    path << QPointF(279.86810151275455, -1288.330749878147);
+    path << QPointF(-641.7062267185897, -2051.118466118487);
+    path << QPointF(-365.68188649000314, -2143.126579528016);
+
+    res.clear();
+    res << QPointF(-365.68188649000314, -2143.126579528016);
+    res << QPointF(-195.75487873249062, -2116.7935769656237);
+    res << QPointF(-195.75487873249062, -2008.8655346469059);
+    res << QPointF(-194.48099536000245, -2012.6451713592935);
+    res << QPointF(-188.65032933731845, -2028.5246588116781);
+    res << QPointF(-182.36812965707693, -2044.2602109802488);
+    res << QPointF(-175.61499879935675, -2059.8462252736344);
+    res << QPointF(-168.3717693169516, -2075.2768492268588);
+    res << QPointF(-160.6424572210866, -2090.5008865466684);
+    res << QPointF(-150.22847685877994, -2109.7385074212525);
+    res << QPointF(194.23861004296444, -2056.3576305273214);
+    res << QPointF(302.4787663409577, -1301.003761061316);
+    res << QPointF(279.86810151275455, -1288.330749878147);
+    res << QPointF(-641.7062267185897, -2051.118466118487);
+    res << QPointF(-365.68188649000314, -2143.126579528016);
+
+    // See file "collection/bugs/Issue_#609_case2.val"
+    // Clear an equdistant. Bound intersection. Internal loop. Outside a loop. Start point А2.
+    QTest::newRow("Issue 609. Case2b") << path << res;
+
+    path.clear();
+    path << QPointF(0, 10);
+    path << QPointF(5, 10);
+    path << QPointF(2.5, 15);
+    path << QPointF(7.5, 15);
+    path << QPointF(5, 10);
+    path << QPointF(10, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+
+    QTest::newRow("Internal loop. Valid case.") << path << path;
+
+    path.clear();
+    path << QPointF(0, 10);
+    path << QPointF(5, 10);
+    path << QPointF(7.5, 15);
+    path << QPointF(2.5, 15);
+    path << QPointF(5, 10);
+    path << QPointF(10, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+
+    res.clear();
+    res << QPointF(0, 10);
+    res << QPointF(10, 10);
+    res << QPointF(10, 20);
+    res << QPointF(0, 20);
+    res << QPointF(0, 10);
+
+    QTest::newRow("Internal loop. Invalid case.") << path << res;
+
+    path.clear();
+    path << QPointF(0, 10);
+    path << QPointF(5, 10);
+    path << QPointF(0, 0);
+    path << QPointF(10, 0);
+    path << QPointF(5, 10);
+    path << QPointF(10, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+
+    QTest::newRow("External loop. Valid case.") << path << path;
+
+    path.clear();
+    path << QPointF(0, 10);
+    path << QPointF(5, 10);
+    path << QPointF(10, 0);
+    path << QPointF(0, 0);
+    path << QPointF(5, 10);
+    path << QPointF(10, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+
+    res.clear();
+    res << QPointF(0, 10);
+    res << QPointF(10, 10);
+    res << QPointF(10, 20);
+    res << QPointF(0, 20);
+    res << QPointF(0, 10);
+
+    QTest::newRow("External loop. Invalid case.") << path << res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::PathLoopsCase() const
+{
+    QFETCH(QVector<QPointF>, path);
+    QFETCH(QVector<QPointF>, expect);
+
+    const QVector<QPointF> res = VAbstractDetail::CheckLoops(path);
     Comparison(res, expect);
 }
 
@@ -1050,13 +1148,12 @@ QVector<QPointF> TST_VAbstractDetail::OutputPointsIssue548Case1() const
 QVector<QPointF> TST_VAbstractDetail::InputPointsIssue548Case2() const
 {
     QVector<QPointF> points;
-
-    points += QPointF(236.97989607468364, 65.89325192030674);
-    points += QPointF(198.93409106041895, 172.04876297154925);
-    points += QPointF(260.32251114299453, 75.38027418944861);
-    points += QPointF(324.54110236213444, 101.48031496062993);
-    points += QPointF(29.858267716535437, 300.85039370078744);
-    points += QPointF(99.86433649395013, 10.166060970128015);
+    points << QPointF(99.86433649395013, 10.166060970128015);
+    points << QPointF(236.97989607468364, 65.89325192030674);
+    points << QPointF(198.93409106041895, 172.04876297154925);
+    points << QPointF(260.32251114299453, 75.38027418944861);
+    points << QPointF(324.54110236213444, 101.48031496062993);
+    points << QPointF(29.858267716535437, 300.85039370078744);
 
     return points;
 }
@@ -1065,13 +1162,13 @@ QVector<QPointF> TST_VAbstractDetail::InputPointsIssue548Case2() const
 QVector<QPointF> TST_VAbstractDetail::OutputPointsIssue548Case2() const
 {
     QVector<QPointF> points;
-
-    points += QPointF(284.78726172969823, 44.52579327927505);
-    points += QPointF(404.3486874792147, 93.11854543221973);
-    points += QPointF(29.598648843228922, 346.6587450186291);
-    points += QPointF(-12.946885351826726, 317.1657644661815);
-    points += QPointF(73.40376616581447, -41.38574336196901);
-    points += QPointF(284.78726172969823, 44.52579327927505);
+    points << QPointF(73.40376616581447, -41.38574336196901);
+    points << QPointF(245.32830125796568, 28.488685370970344);
+    points << QPointF(245.32830125796573, 28.488685370970277);
+    points << QPointF(404.3486874792147, 93.11854543221973);
+    points << QPointF(29.598648843228922, 346.6587450186291);
+    points << QPointF(-12.946885351826726, 317.1657644661815);
+    points << QPointF(73.40376616581447, -41.38574336196901);
 
     return points;
 }
@@ -1081,12 +1178,12 @@ QVector<QPointF> TST_VAbstractDetail::InputPointsIssue548Case3() const
 {
     QVector<QPointF> points;
 
+    points += QPointF(99.86433649395013, 10.166060970128015);
     points += QPointF(236.97989607468364, 65.89325192030674);
     points += QPointF(198.93409106041895, 172.04876297154925);
     points += QPointF(260.32251114299453, 75.38027418944861);
     points += QPointF(324.54110236213444, 101.48031496062993);
     points += QPointF(29.858267716535437, 300.85039370078744);
-    points += QPointF(99.86433649395013, 10.166060970128015);
 
     return points;
 }
@@ -1096,12 +1193,12 @@ QVector<QPointF> TST_VAbstractDetail::OutputPointsIssue548Case3() const
 {
     QVector<QPointF> points;
 
-    points += QPointF(332.5946273847129, 23.158334638243502);
+    points += QPointF(46.94319583767885, -92.9375476940661);
+    points += QPointF(234.2633962639462, -16.805935717278903);
     points += QPointF(484.15627259629446, 84.75677590380938);
     points += QPointF(29.339029969922702, 392.46709633647066);
     points += QPointF(-55.75203842018885, 333.48113523157537);
     points += QPointF(46.94319583767885, -92.9375476940661);
-    points += QPointF(332.5946273847129, 23.158334638243502);
 
     return points;
 }

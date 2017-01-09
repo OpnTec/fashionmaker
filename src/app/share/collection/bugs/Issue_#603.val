@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.2.4</version>
+    <version>0.3.9</version>
     <unit>cm</unit>
     <author/>
     <description/>
@@ -57,7 +57,7 @@
             <point type="alongLine" typeLine="none" id="18" name="А2" firstPoint="1" secondPoint="4" mx="-0.412864" lineColor="black" my="-2.09776" length="neck_arc_f/3+#Пшгор"/>
             <point type="normal" typeLine="hair" id="19" name="А1" firstPoint="18" secondPoint="1" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="Line_А_А2/3"/>
             <point type="endLine" typeLine="hair" id="20" name="А0" basePoint="19" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="Line_А_А2"/>
-            <spline point4="18" type="simple" kAsm1="1.20481" kAsm2="0.848476" angle1="358.627" angle2="254.057" id="21" kCurve="1" color="black" point1="20"/>
+            <spline point4="18" type="simpleInteractive" angle1="358.627" angle2="254.057" id="21" color="black" length1="3.14107" length2="2.21207" point1="20"/>
             <arc type="simple" angle1="320" angle2="20" id="22" radius="shoulder_length+#Рплвыт" center="18" color="black"/>
             <arc type="simple" angle1="45" angle2="75" id="23" radius="shoulder_tip_to_waist_back+#Пдтс" center="6" color="black"/>
             <point type="pointOfIntersectionArcs" crossPoint="1" firstArc="22" id="24" name="П1" secondArc="23" mx="0.617183" my="-1.38405"/>
@@ -65,16 +65,16 @@
             <point type="alongLine" typeLine="none" id="26" name="И" firstPoint="18" secondPoint="24" mx="0.132292" lineColor="black" my="0.264583" length="#И"/>
             <point type="alongLine" typeLine="none" id="27" name="И1" firstPoint="26" secondPoint="24" mx="0.132292" lineColor="black" my="0.264583" length="#Рплвыт"/>
             <point type="endLine" typeLine="hair" id="28" name="И2" basePoint="26" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="#Дплвыт"/>
-            <spline point4="27" type="simple" kAsm1="0.882463" kAsm2="0.860247" angle1="82.8015" angle2="241.265" id="29" kCurve="1" color="black" point1="28"/>
+            <spline point4="27" type="simpleInteractive" angle1="82.8015" angle2="241.265" id="29" color="black" length1="2.40527" length2="2.34471" point1="28"/>
             <point type="height" typeLine="hair" id="30" name="П2" basePoint="24" p2Line="14" mx="0.132292" lineColor="black" my="0.264583" p1Line="4"/>
             <point type="alongLine" typeLine="none" id="31" name="П3" firstPoint="14" secondPoint="30" mx="-1.29916" lineColor="black" my="-0.175863" length="Line_Г3_П2/3+2"/>
             <point type="bisector" typeLine="hair" id="32" thirdPoint="15" name="в" firstPoint="31" secondPoint="14" mx="0.132292" lineColor="black" my="0.264583" length="0.2*Line_Г4_Г3+0.5"/>
             <point type="alongLine" typeLine="none" id="33" name="Г2" firstPoint="14" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="Line_Г4_Г3/2"/>
-            <spline type="path" id="34" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="0.906322" pSpline="24" angle="248.035"/>
-                <pathPoint kAsm1="0.774397" kAsm2="1" pSpline="31" angle="269.056"/>
-                <pathPoint kAsm1="0.631376" kAsm2="0.902245" pSpline="32" angle="312.322"/>
-                <pathPoint kAsm1="1.03287" kAsm2="1" pSpline="33" angle="359.273"/>
+            <spline type="pathInteractive" id="34" color="black">
+                <pathPoint angle1="68.035" pSpline="24" angle2="248.035" length1="0" length2="3.98184"/>
+                <pathPoint angle1="89.056" pSpline="31" angle2="269.056" length1="3.40224" length2="2.63544"/>
+                <pathPoint angle1="132.322" pSpline="32" angle2="312.322" length1="1.66396" length2="1.49368"/>
+                <pathPoint angle1="179.273" pSpline="33" angle2="359.273" length1="1.70993" length2="0"/>
             </spline>
             <point type="endLine" typeLine="hair" id="35" name="Т2" basePoint="33" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="Line_Т_Г"/>
             <point type="endLine" typeLine="hair" id="36" name="Б2" basePoint="35" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="Line_Т_Б"/>
@@ -111,12 +111,12 @@
             <line typeLine="hair" id="67" firstPoint="57" secondPoint="53" lineColor="black"/>
             <point type="alongLine" typeLine="none" id="68" name="д" firstPoint="53" secondPoint="57" mx="0.132292" lineColor="black" my="0.264583" length="Line_П5_П6/2"/>
             <point type="normal" typeLine="hair" id="69" name="е" firstPoint="68" secondPoint="53" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1"/>
-            <spline type="path" id="70" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="0.845899" pSpline="57" angle="316.587"/>
-                <pathPoint kAsm1="1.03197" kAsm2="0.263439" pSpline="69" angle="312.153"/>
-                <pathPoint kAsm1="0.927185" kAsm2="1" pSpline="53" angle="272.146"/>
-                <pathPoint kAsm1="0.548043" kAsm2="0.54785" pSpline="66" angle="224.298"/>
-                <pathPoint kAsm1="1.62264" kAsm2="1" pSpline="33" angle="179.888"/>
+            <spline type="pathInteractive" id="70" color="black">
+                <pathPoint angle1="136.587" pSpline="57" angle2="316.587" length1="0" length2="2.03977"/>
+                <pathPoint angle1="132.153" pSpline="69" angle2="312.153" length1="2.48845" length2="0.635247"/>
+                <pathPoint angle1="92.146" pSpline="53" angle2="272.146" length1="2.23578" length2="1.85808"/>
+                <pathPoint angle1="44.298" pSpline="66" angle2="224.298" length1="1.01831" length2="0.944264"/>
+                <pathPoint angle1="359.888" pSpline="33" angle2="179.888" length1="2.79675" length2="0"/>
             </spline>
             <point type="alongLine" typeLine="none" id="71" name="Т3" firstPoint="35" secondPoint="6" mx="0.132292" lineColor="black" my="0.264583" length="1/4*#Срв"/>
             <point type="alongLine" typeLine="none" id="72" name="Т4" firstPoint="35" secondPoint="46" mx="0.132292" lineColor="black" my="0.264583" length="1/4*#Срв"/>
@@ -124,17 +124,17 @@
             <point type="alongLine" typeLine="none" id="74" name="Б4" firstPoint="36" secondPoint="11" mx="-1.23954" lineColor="black" my="0.425975" length="#Пбс"/>
             <point type="alongLine" typeLine="none" id="75" name="Н3" firstPoint="8" secondPoint="37" mx="0.616467" lineColor="black" my="-2.15629" length="Line_Б3_Б"/>
             <point type="alongLine" typeLine="none" id="76" name="Н4" firstPoint="12" secondPoint="37" mx="-1.15884" lineColor="black" my="-1.9142" length="Line_Б4_Б1"/>
-            <spline type="path" id="77" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="1.04671" pSpline="33" angle="263.309"/>
-                <pathPoint kAsm1="0.652538" kAsm2="0.662841" pSpline="71" angle="274.092"/>
-                <pathPoint kAsm1="0.970052" kAsm2="0.999998" pSpline="73" angle="269.229"/>
-                <pathPoint kAsm1="1.05183" kAsm2="1" pSpline="75" angle="269.806"/>
+            <spline type="pathInteractive" id="77" color="black">
+                <pathPoint angle1="83.309" pSpline="33" angle2="263.309" length1="0" length2="7.84032"/>
+                <pathPoint angle1="94.092" pSpline="71" angle2="274.092" length1="4.8878" length2="4.75295"/>
+                <pathPoint angle1="89.229" pSpline="73" angle2="269.229" length1="6.95582" length2="8.39626"/>
+                <pathPoint angle1="89.806" pSpline="75" angle2="269.806" length1="8.83145" length2="0"/>
             </spline>
-            <spline type="path" id="78" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="1" pSpline="33" angle="280.747"/>
-                <pathPoint kAsm1="0.492088" kAsm2="0.706189" pSpline="72" angle="267.444"/>
-                <pathPoint kAsm1="0.901032" kAsm2="0.999651" pSpline="74" angle="269.912"/>
-                <pathPoint kAsm1="0.552851" kAsm2="1" pSpline="76" angle="270.112"/>
+            <spline type="pathInteractive" id="78" color="black">
+                <pathPoint angle1="100.747" pSpline="33" angle2="280.747" length1="0" length2="7.49044"/>
+                <pathPoint angle1="87.444" pSpline="72" angle2="267.444" length1="3.68596" length2="5.06378"/>
+                <pathPoint angle1="89.912" pSpline="74" angle2="269.912" length1="6.46091" length2="8.39334"/>
+                <pathPoint angle1="90.112" pSpline="76" angle2="270.112" length1="4.64189" length2="0"/>
             </spline>
             <point type="alongLine" typeLine="none" id="79" name="Т5" firstPoint="6" secondPoint="35" mx="0.132292" lineColor="black" my="0.264583" length="0.4*Line_А_а"/>
             <point type="alongLine" typeLine="none" id="80" name="ж" firstPoint="3" secondPoint="14" mx="0.132292" lineColor="black" my="0.264583" length="Line_Т_Т5"/>
@@ -177,8 +177,10 @@
             <point type="modeling" inUse="true" id="208" idObject="94" mx="0.367513" my="-1.5231"/>
         </modeling>
         <details>
-            <detail closed="1" id="209" name="Полочка" supplement="1" width="1" mx="-205.772" my="-98.2618">
-                <node type="NodePoint" nodeType="Contour" idObject="190" mx="0" my="0"/>
+            <detail closed="1" id="209" name="Полочка" forbidFlipping="1" supplement="1" width="1" mx="-205.772" my="-98.2618">
+                <data rotation="0" letter="" fontSize="0" visible="true" mx="0" width="0" my="0" height="0"/>
+                <patternInfo rotation="0" fontSize="0" visible="true" mx="0" width="0" my="0" height="0"/>
+                <grainline arrows="0" rotation="90" visible="false" mx="0" my="0" length="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="191" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="192" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="197" mx="0" my="0"/>
@@ -189,8 +191,10 @@
                 <node type="NodePoint" nodeType="Contour" idObject="206" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="207" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="208" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="190" mx="0" my="0"/>
             </detail>
         </details>
+        <groups/>
     </draw>
     <draw name="Рукав">
         <calculation>
@@ -225,12 +229,12 @@
             <point type="alongLine" typeLine="none" id="133" name="м" firstPoint="131" secondPoint="123" mx="0.132292" lineColor="black" my="0.264583" length="Line_Г21_Р32/2"/>
             <point type="normal" typeLine="hair" id="134" name="н" firstPoint="133" secondPoint="123" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#лн"/>
             <point type="bisector" typeLine="hair" id="135" thirdPoint="119" name="п" firstPoint="131" secondPoint="108" mx="0.132292" lineColor="black" my="0.264583" length="Line_Г4_с"/>
-            <spline type="path" id="136" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="1" pSpline="123" angle="302.974"/>
-                <pathPoint kAsm1="1" kAsm2="0.983788" pSpline="134" angle="309.501"/>
-                <pathPoint kAsm1="0.693247" kAsm2="1" pSpline="131" angle="349.475"/>
-                <pathPoint kAsm1="0.8342" kAsm2="0.948548" pSpline="135" angle="53.2671"/>
-                <pathPoint kAsm1="0.852814" kAsm2="1" pSpline="121" angle="81.6825"/>
+            <spline type="pathInteractive" id="136" color="black">
+                <pathPoint angle1="122.974" pSpline="123" angle2="302.974" length1="0" length2="2.33892"/>
+                <pathPoint angle1="129.501" pSpline="134" angle2="309.501" length1="2.33892" length2="2.301"/>
+                <pathPoint angle1="169.475" pSpline="131" angle2="349.475" length1="1.62145" length2="1.90657"/>
+                <pathPoint angle1="233.267" pSpline="135" angle2="53.2671" length1="1.59046" length2="1.70834"/>
+                <pathPoint angle1="261.683" pSpline="121" angle2="81.6825" length1="1.53593" length2="0"/>
             </spline>
             <point type="alongLine" typeLine="none" id="137" name="Л1" firstPoint="111" secondPoint="110" mx="-1.47771" lineColor="black" my="-1.71133" length="#ЛпЛ1"/>
             <line typeLine="hair" id="138" firstPoint="108" secondPoint="137" lineColor="black"/>
@@ -247,16 +251,16 @@
             <line typeLine="hair" id="149" firstPoint="146" secondPoint="124" lineColor="black"/>
             <point type="alongLine" typeLine="none" id="150" name="р" firstPoint="146" secondPoint="124" mx="0.132292" lineColor="black" my="0.264583" length="Line_Р2_Р31/2"/>
             <point type="normal" typeLine="hair" id="151" name="р1" firstPoint="150" secondPoint="146" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#рр1"/>
-            <spline type="path" id="152" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="1.13548" pSpline="146" angle="26.5279"/>
-                <pathPoint kAsm1="1.17687" kAsm2="0.70559" pSpline="151" angle="54.1318"/>
-                <pathPoint kAsm1="0.800729" kAsm2="0.772466" pSpline="124" angle="54.2353"/>
-                <pathPoint kAsm1="0.995064" kAsm2="1.14755" pSpline="130" angle="35.2552"/>
-                <pathPoint kAsm1="0.79757" kAsm2="0.863337" pSpline="106" angle="358.318"/>
-                <pathPoint kAsm1="0.964404" kAsm2="1" pSpline="129" angle="309.447"/>
-                <pathPoint kAsm1="1.19399" kAsm2="0.959102" pSpline="120" angle="282.638"/>
-                <pathPoint kAsm1="1.00911" kAsm2="0.689472" pSpline="148" angle="303.385"/>
-                <pathPoint kAsm1="1.01569" kAsm2="1" pSpline="147" angle="357.7"/>
+            <spline type="pathInteractive" id="152" color="black">
+                <pathPoint angle1="206.528" pSpline="146" angle2="26.5279" length1="0" length2="2.46899"/>
+                <pathPoint angle1="234.132" pSpline="151" angle2="54.1318" length1="2.55898" length2="1.53423"/>
+                <pathPoint angle1="234.235" pSpline="124" angle2="54.2353" length1="1.7411" length2="2.28964"/>
+                <pathPoint angle1="215.255" pSpline="130" angle2="35.2552" length1="2.94944" length2="1.5148"/>
+                <pathPoint angle1="178.318" pSpline="106" angle2="358.318" length1="1.05281" length2="1.61255"/>
+                <pathPoint angle1="129.447" pSpline="129" angle2="309.447" length1="1.80132" length2="3.25273"/>
+                <pathPoint angle1="102.638" pSpline="120" angle2="282.638" length1="3.88372" length2="1.72735"/>
+                <pathPoint angle1="123.385" pSpline="148" angle2="303.385" length1="1.81742" length2="1.64235"/>
+                <pathPoint angle1="177.7" pSpline="147" angle2="357.7" length1="2.41941" length2="0"/>
             </spline>
             <point type="endLine" typeLine="hair" id="153" name="М22" basePoint="114" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="Line_М3_М1/2"/>
             <point type="endLine" typeLine="hair" id="154" name="М11" basePoint="113" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="Line_М3_М1/2"/>
@@ -266,15 +270,16 @@
             <point type="normal" typeLine="hair" id="158" name="т1" firstPoint="157" secondPoint="114" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#тт1"/>
             <point type="alongLine" typeLine="none" id="159" name="у" firstPoint="154" secondPoint="107" mx="-0.76365" lineColor="black" my="0.221919" length="Line_М_т"/>
             <point type="normal" typeLine="hair" id="160" name="у1" firstPoint="159" secondPoint="113" mx="-1.19029" lineColor="black" angle="0" my="-1.39931" length="#тт1"/>
-            <spline type="path" id="161" kCurve="1" color="black">
-                <pathPoint kAsm1="1" kAsm2="1.08198" pSpline="153" angle="352.844"/>
-                <pathPoint kAsm1="0.995423" kAsm2="1" pSpline="158" angle="1.15441"/>
-                <pathPoint kAsm1="1" kAsm2="0.863427" pSpline="107" angle="6.15599"/>
-                <pathPoint kAsm1="1" kAsm2="0.835679" pSpline="160" angle="359.234"/>
-                <pathPoint kAsm1="1.21505" kAsm2="1" pSpline="154" angle="351.945"/>
+            <spline type="pathInteractive" id="161" color="black">
+                <pathPoint angle1="172.844" pSpline="153" angle2="352.844" length1="0" length2="2.9744"/>
+                <pathPoint angle1="181.154" pSpline="158" angle2="1.15441" length1="2.73645" length2="2.74903"/>
+                <pathPoint angle1="186.156" pSpline="107" angle2="6.15599" length1="2.74903" length2="2.37359"/>
+                <pathPoint angle1="179.234" pSpline="160" angle2="359.234" length1="2.74903" length2="2.29731"/>
+                <pathPoint angle1="171.945" pSpline="154" angle2="351.945" length1="3.34021" length2="0"/>
             </spline>
         </calculation>
         <modeling/>
         <details/>
+        <groups/>
     </draw>
 </pattern>

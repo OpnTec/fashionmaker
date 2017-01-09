@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.3.4</version>
+    <version>0.3.9</version>
     <unit>cm</unit>
     <author>S.L.Spencer</author>
     <description>Men's Trousers circa 1830-1870</description>
@@ -209,12 +209,13 @@
             <detail closed="1" id="213" name="Back" forbidFlipping="1" supplement="1" width="2" mx="0" my="0">
                 <data rotation="0" letter="" fontSize="102" visible="false" mx="-20.0743" width="285.613" my="468.066" height="138.624"/>
                 <patternInfo rotation="0" fontSize="24" visible="false" mx="70.2595" width="247.137" my="255.613" height="167.063"/>
+                <grainline arrows="0" rotation="90" visible="false" mx="0" my="0" length="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="198" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="199" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="200" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="201" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="202" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="212" mx="0" my="0"/>
-                <node type="NodePoint" nodeType="Contour" idObject="198" mx="0" my="0"/>
             </detail>
         </details>
         <groups/>
