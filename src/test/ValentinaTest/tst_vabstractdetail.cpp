@@ -1194,7 +1194,11 @@ QVector<QPointF> TST_VAbstractDetail::OutputPointsIssue548Case3() const
     QVector<QPointF> points;
 
     points += QPointF(46.94319583767885, -92.9375476940661);
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
     points += QPointF(234.2633962639462, -16.805935717278903);
+#else
+    points += QPointF(238.798634936, -14.9627013515);
+#endif
     points += QPointF(484.15627259629446, 84.75677590380938);
     points += QPointF(29.339029969922702, 392.46709633647066);
     points += QPointF(-55.75203842018885, 333.48113523157537);
