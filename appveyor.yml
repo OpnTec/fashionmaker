@@ -179,7 +179,7 @@ test_script:
 #test: off
 
 matrix:
-  fast_finish: true
+  fast_finish: false
 
 #---------------------------------#
 #         notifications           #
