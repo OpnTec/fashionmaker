@@ -969,6 +969,7 @@ void TST_VAbstractDetail::PossibleInfiniteClearLoops_data() const
     expect << QPointF(-670.6449010946802, 2024.3149606299214);
     expect << QPointF(-670.6449010946802, 2024.3149606299214);
 
+    // See the file "collection/bugs/possible_inf_loop.val"
     QTest::newRow("Possible infinite loop") << path << expect;
 }
 
