@@ -65,8 +65,11 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
     QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
     for (int i=0; i < ekv.size(); i++)
     {
-        // Check each point
-        QCOMPARE(ekv.at(i).toPoint(), ekvOrig.at(i).toPoint()); // Don't use comparison float values
+        const QPoint p1 = ekv.at(i).toPoint();
+        const QPoint p2 = ekvOrig.at(i).toPoint();
+        const QString msg = QString("Got '%1;%2', Exprected '%3;%4'.").arg(p1.x(), p1.y()).arg(p2.x(), p2.y());
+        // Check each point. Don't use comparison float values
+        QVERIFY2(p1 == p2, qUtf8Printable(msg));
     }
 }
 

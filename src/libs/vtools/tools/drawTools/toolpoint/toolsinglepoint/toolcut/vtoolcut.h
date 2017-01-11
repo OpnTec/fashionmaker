@@ -106,16 +106,11 @@ inline void VToolCut::ShowToolVisualization(bool show)
     {
         delete vis;
     }
-    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+
+    VDataTool *parent = doc->getTool(VAbstractTool::data.GetGObject(curveCutId)->getIdTool());
+    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(parent))
     {
-        if (detailsMode)
-        {
-            parentCurve->ShowHandles(detailsMode);
-        }
-        else
-        {
-            parentCurve->ShowHandles(show);
-        }
+        detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);
     }
 }
 

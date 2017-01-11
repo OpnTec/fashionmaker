@@ -2556,7 +2556,6 @@ void MainWindow::Clear()
     ui->actionZoomOriginal->setEnabled(false);
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
-    ui->actionEdit_pattern_code->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
@@ -2792,7 +2791,6 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionSave->setEnabled(enable && not patternReadOnly);
     ui->actionSaveAs->setEnabled(enable);
     ui->actionPattern_properties->setEnabled(enable && designStage);
-    ui->actionEdit_pattern_code->setEnabled(enable && designStage);
     ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
     ui->actionArrowTool->setEnabled(enable && designStage);
@@ -3740,13 +3738,6 @@ void MainWindow::CreateActions()
     });
 
     ui->actionPattern_properties->setEnabled(false);
-    connect(ui->actionEdit_pattern_code, &QAction::triggered, RECEIVER(this)[this]()
-    {
-        DialogPatternXmlEdit *pattern = new DialogPatternXmlEdit (this, doc);
-        pattern->setAttribute(Qt::WA_DeleteOnClose, true);
-        pattern->show();
-    });
-
     connect(ui->actionClosePattern, &QAction::triggered, RECEIVER(this)[this]()
     {
         if (MaybeSave())
@@ -3779,7 +3770,6 @@ void MainWindow::CreateActions()
     connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
     connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
     connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);
-    ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)

@@ -1281,19 +1281,29 @@ void VToolDetail::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::ResetChildren(QGraphicsItem *pItem)
 {
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
     VTextGraphicsItem* pVGI = dynamic_cast<VTextGraphicsItem*>(pItem);
     if (pVGI != dataLabel)
     {
-        dataLabel->Reset();
+        if (detail.GetPatternPieceData().IsVisible())
+        {
+            dataLabel->Reset();
+        }
     }
     if (pVGI != patternInfo)
     {
-        patternInfo->Reset();
+        if (detail.GetPatternInfo().IsVisible())
+        {
+            patternInfo->Reset();
+        }
     }
     VGrainlineItem* pGLI = dynamic_cast<VGrainlineItem*>(pItem);
     if (pGLI != grainLine)
     {
-        grainLine->Reset();
+        if (detail.GetGrainlineGeometry().IsVisible())
+        {
+            grainLine->Reset();
+        }
     }
 }
 

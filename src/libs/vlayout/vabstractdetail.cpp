@@ -31,6 +31,7 @@
 #include <QLine>
 #include <QLineF>
 #include <QMessageLogger>
+#include <QPainterPath>
 #include <QPoint>
 #include <QPointF>
 #include <QString>
@@ -292,6 +293,131 @@ QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &point
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractDetail::CheckIntersection(const QVector<QPointF> &points, int i, int iNext, int j, int jNext,
+                                        const QPointF &crossPoint)
+{
+    QVector<QPointF> sub1 = SubPath(points, iNext, j);
+    sub1.append(crossPoint);
+    sub1 = CheckLoops(CorrectEquidistantPoints(sub1, false));
+    const qreal sub1Sum = SumTrapezoids(sub1);
+
+    QVector<QPointF> sub2 = SubPath(points, jNext, i);
+    sub2.append(crossPoint);
+    sub2 = CheckLoops(CorrectEquidistantPoints(sub2, false));
+    const qreal sub2Sum = SumTrapezoids(sub2);
+
+    if (sub1Sum < 0 && sub2Sum < 0)
+    {
+        if (Crossing(sub1, sub2))
+        {
+            return true;
+        }
+    }
+    else
+    {
+        if (not Crossing(sub1, sub2))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractDetail::ParallelCrossPoint(const QLineF &line1, const QLineF &line2, QPointF &point)
+{
+    const bool l1p1el2p1 = (line1.p1() == line2.p1());
+    const bool l1p2el2p2 = (line1.p2() == line2.p2());
+    const bool l1p1el2p2 = (line1.p1() == line2.p2());
+    const bool l1p2el2p1 = (line1.p2() == line2.p1());
+
+    if (l1p2el2p2 || l1p2el2p1)
+    {
+        point = line1.p2();
+        return true;
+    }
+    else if (l1p1el2p1 || l1p1el2p2)
+    {
+        point = line1.p1();
+        return true;
+    }
+    else
+    {
+        point = QPointF();
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractDetail::Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2)
+{
+    if (sub1.isEmpty() || sub2.isEmpty())
+    {
+        return false;
+    }
+
+    const QRectF sub1Rect = QPolygonF(sub1).boundingRect();
+    const QRectF sub2Rect = QPolygonF(sub2).boundingRect();
+    if (not sub1Rect.intersects(sub2Rect))
+    {
+        return false;
+    }
+
+    QPainterPath sub1Path;
+    sub1Path.setFillRule(Qt::WindingFill);
+    sub1Path.moveTo(sub1.at(0));
+    for (qint32 i = 1; i < sub1.count(); ++i)
+    {
+        sub1Path.lineTo(sub1.at(i));
+    }
+    sub1Path.lineTo(sub1.at(0));
+
+    QPainterPath sub2Path;
+    sub2Path.setFillRule(Qt::WindingFill);
+    sub2Path.moveTo(sub2.at(0));
+    for (qint32 i = 1; i < sub2.count(); ++i)
+    {
+        sub2Path.lineTo(sub2.at(i));
+    }
+    sub2Path.lineTo(sub2.at(0));
+
+    if (not sub1Path.intersects(sub2Path))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractDetail::SubPath(const QVector<QPointF> &path, int startIndex, int endIndex)
+{
+    if (path.isEmpty()
+       || startIndex < 0 || startIndex >= path.size()
+       || endIndex < 0 || endIndex >= path.size()
+       || startIndex == endIndex)
+    {
+        return path;
+    }
+
+    QVector<QPointF> subPath;
+    int i = startIndex - 1;
+    do
+    {
+        ++i;
+        if (i >= path.size())
+        {
+            i = 0;
+        }
+        subPath.append(path.at(i));
+    } while (i != endIndex);
+
+    return subPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.
  * @param points list of points equdistant.
@@ -363,7 +489,6 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
     /*If we got less than 4 points no need seek loops.*/
     if (count < 4)
     {
-        qDebug()<<"Less then 4 points. Doesn't need check for loops.";
         return points;
     }
 
@@ -391,7 +516,6 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         // That's why we parse from the end
         for (j = count-1; j >= i+2; --j)
         {
-
             j == count-1 ? jNext = 0 : jNext = j+1;
             QLineF line2(points.at(j), points.at(jNext));
 
@@ -413,11 +537,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
               // Method IsPointOnLineviaPDP will check it.
                 if (VGObject::IsPointOnLineviaPDP(points.at(j), points.at(i), points.at(i+1))
                     // Lines are not neighbors
-                    && uniqueVertices.size() == 4
-                    && line1.p2() != line2.p2()
-                    && line1.p1() != line2.p1()
-                    && line1.p2() != line2.p1()
-                    && line1.p1() != line2.p2())
+                    && uniqueVertices.size() == 4)
                 {
                     // Left to catch case where segments are on the same line, but do not have real intersections.
                     QLineF tmpLine1 = line1;
@@ -435,21 +555,28 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
 
                     if (tmpIntrs1 == QLineF::BoundedIntersection || tmpIntrs2 == QLineF::BoundedIntersection)
                     { // Now we really sure that lines are on the same line and have real intersections.
-                        status = ParallelIntersection;
-                        break;
+                        QPointF cPoint;
+                        const bool caseFlag = ParallelCrossPoint(line1, line2, cPoint);
+                        if (not caseFlag || CheckIntersection(points, i, i+1, j, jNext, cPoint))
+                        {
+                            status = ParallelIntersection;
+                            break;
+                        }
                     }
                 }
             }
             else if (intersect == QLineF::BoundedIntersection)
             {
-                if (uniqueVertices.size() == 4
-                    && line1.p1() != crosPoint
-                    && line1.p2() != crosPoint
-                    && line2.p1() != crosPoint
-                    && line2.p2() != crosPoint)
+                if (uniqueVertices.size() == 4)
                 { // Break, but not if lines are neighbors
-                    status = BoundedIntersection;
-                    break;
+                    if ((line1.p1() != crosPoint
+                        && line1.p2() != crosPoint
+                        && line2.p1() != crosPoint
+                        && line2.p2() != crosPoint) || CheckIntersection(points, i, i+1, j, jNext, crosPoint))
+                    {
+                        status = BoundedIntersection;
+                        break;
+                    }
                 }
             }
             status = NoIntersection;
@@ -458,34 +585,12 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         switch (status)
         {
             case ParallelIntersection:
-            {
                 /*We have found a loop.*/
-                // Very tricky case
-                // See the file "collection/bugs/Issue_#603.val"
-                const QLineF line1(points.at(i+1), points.at(j));
-                const QLineF line2(points.at(i), points.at(jNext));
-
-                if (line1.length() <= line2.length())
-                {
-                    // In this case we did not check a loop edges and can just skip them
-                    ekvPoints.append(points.at(i));
-                    ekvPoints.append(points.at(jNext));
-
-                    i = j; // Skip a loo
-                }
-                else
-                {
-                    // In this case a loop edges probably was also chacked and added to the list
-                    ekvPoints.clear();// Previous data is wrong and belong to loop.
-                    ekvPoints.append(points.at(j));
-                    ekvPoints.append(points.at(i+1));
-
-                    count = j+1;// All beyond this belong to loop.
-                }
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(points.at(jNext));
+                jNext > j ? i = jNext : i = j; // Skip a loop
                 break;
-            }
             case BoundedIntersection:
-                /*We have found a loop.*/
                 ekvPoints.append(points.at(i));
                 ekvPoints.append(crosPoint);
                 i = j;
@@ -572,15 +677,10 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
                 }
             }
             else
-            {// Dart. Ignore if going outside of equdistant
-                const QLineF bigEdge = ParallelLine(QLineF(line1.p1(), line2.p1()), width );
-                QPointF px;
-                const QLineF::IntersectType type = bigEdge.intersect(line, &px);
-                if (type != QLineF::BoundedIntersection)
-                {
-                    points.append(CrosPoint);
-                    return points;
-                }
+            {// Dart. Create a loop.
+                points.append(bigLine1.p2());
+                points.append(bigLine2.p1());
+                return points;
             }
             break;
         }
@@ -614,7 +714,8 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
         return QPointF();
     }
 
-    if (not (line.p2() == helpLine.p2() || line.p1() == helpLine.p1()))
+    const bool firstPoint = line.p1() == helpLine.p1();
+    if (not (line.p2() == helpLine.p2() || firstPoint))
     {
         qDebug()<<"Two points of two lines must be equal.";
         return QPointF();
@@ -634,9 +735,10 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
             // User can create very wrong path that will create crospoint far from main path.
             // Such an annomaly we try to catch and fix.
             // If don't do this the program will crash.
-            QLineF test( line.p2(), CrosPoint );
+            QLineF test;
+            firstPoint ? test = QLineF(line.p1(), CrosPoint) : test = QLineF(line.p2(), CrosPoint);
             const qreal length = test.length();
-            if (length > width*50) // Why 50? Try to avoid cutting correct cases.
+            if (length > width*2.4)
             {
                 test.setLength(width);
                 return test.p2();
@@ -649,7 +751,14 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
         }
         case (QLineF::NoIntersection):
             /*If we have correct lines this means lines lie on a line.*/
-            return bigLine.p2();
+            if (firstPoint)
+            {
+                return bigLine.p1();
+            }
+            else
+            {
+                return bigLine.p2();
+            }
             break;
         default:
             break;

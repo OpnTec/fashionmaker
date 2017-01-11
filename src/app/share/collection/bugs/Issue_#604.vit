@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="LONGUEUR TAILLE DOS" value="43.5+1" name="@A"/>
+        <m full_name="HAUTEUR SLIP DVT" value="18+0.5" description="0.5" name="@HSD"/>
+        <m value="11" description="0" name="@HCRO"/>
+        <m full_name="LARGEUR SLIP DVT" value="16.4+0.6" description="0,6" name="@LSD"/>
+        <m full_name="LONGUEUR TAILLE DEVANT" value="39.5+1" name="@B"/>
+        <m full_name="TOUR DE POITRINE" value="108+8" name="@C"/>
+        <m full_name="HAUTEUR POITRINE (TETON -  COU)" value="37+1" name="@D"/>
+        <m full_name="1/2 ECART POITRINE" value="10.5+0.5" name="@E"/>
+        <m full_name="TOUR DE TAILLE" value="88+8" name="@F"/>
+        <m full_name="TOUR PETITES HANCHES" value="97+8+8" name="@G"/>
+        <m full_name="TOUR DE HANCHES" value="106+8+8" name="@H"/>
+        <m full_name="DEMI TOUR ENCOLURE" value="19.5+1+1" name="@I"/>
+        <m full_name="DEMI CARRURE DOS" value="18.25+0.5+0.5" name="@J"/>
+        <m full_name="DEMI CARRURE DVT" value="17.25+0.5+0.5" name="@K"/>
+        <m full_name="LONGUEUR EPAULE" value="13.2+0.8+0.8" name="@L"/>
+        <m full_name="TOUR EMMANCHURE" value="42.5+2+2" name="@M"/>
+        <m full_name="HAUTEUR DESSOUS DE BRAS" value="22.25+0.5+0.5" name="@N"/>
+        <m full_name="LONGUEUR BRAS" value="60" name="@O"/>
+        <m full_name="TOUR DE BICEPS" value="29+2+2" name="@P"/>
+        <m full_name="EPAULE À COUDE" value="35" name="@Q"/>
+        <m full_name="TOUR DE POIGNET" value="16.75+0.5+0.5" name="@R"/>
+        <m full_name="HAUTEUR TAILLE-HANCHES" value="22" name="@S"/>
+        <m full_name="HAUTEUR MONTANT DEVANT" value="28 +1+1" name="@T"/>
+        <m full_name="ENFOURCHURE TOTALE" value="66+4+4" name="@U"/>
+        <m full_name="HAUTEUR TAILLE GENOU" value="61+2+2" name="@V"/>
+        <m full_name="HAUTEUR TAILLE SOL" value="107+1+1" name="@W"/>
+        <m full_name="HAUTEUR COTE TAILLE AU SOL" value="107.5+1+1" name="@X"/>
+        <m full_name="TOUR DESSOUS DE POITRINE" value="87+8+8" description="+4" name="@TSP"/>
+        <m full_name="TOUR DE CUISSE" value="63+6+6" description="+3" name="@TCU"/>
+        <m full_name="TOUR DE GENOU" value="39.2+2.8+2.8" description="+1,4" name="@TG"/>
+        <m full_name="TOUR DE CHEVILLE" value="24.8+1.2+1.2" description="+0,6" name="@TCH"/>
+        <m full_name="HAUTEUR COU TAILLE" value="42.5+1+1" description="+0,5" name="@HCT"/>
+        <m full_name="HAUTEUR EMMANCHURE DOS" value="22+0.4+0.4" description="+0.2" name="@HED"/>
+        <m full_name="HAUTEUR FOURCHE COTÉ" value="30.4+1.6+1.6 " description="+0.8" name="@FC"/>
+        <m full_name="HAUTEUR TAILLE GENOU" value="60.8+0.8+0.8+0.8+0.8 " description="0,8" name="@HG"/>
+    </body-measurements>
+</vit>

@@ -138,6 +138,7 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
     }
 }
 
-int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal, const QChar &thousand);
+QMUPARSERSHARED_EXPORT int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
+                                   const QChar &thousand);
 
 #endif // QMUDEF_H

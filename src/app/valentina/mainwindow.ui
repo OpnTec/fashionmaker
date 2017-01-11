@@ -1611,7 +1611,6 @@
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionPattern_properties"/>
-    <addaction name="actionEdit_pattern_code"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2230,17 +2229,6 @@
    </property>
    <property name="toolTip">
     <string>Zoom out</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionEdit_pattern_code">
-   <property name="text">
-    <string>Edit pattern XML code</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
