@@ -841,6 +841,7 @@ void TST_VAbstractDetail::TestCorrectEquidistantPoints() const
     Comparison(after, expect);
 }
 
+#ifndef Q_OS_WIN
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::PossibleInfiniteClearLoops_data() const
 {
@@ -982,6 +983,7 @@ void TST_VAbstractDetail::PossibleInfiniteClearLoops() const
     QVector<QPointF> res = VAbstractDetail::CheckLoops(path);
     Comparison(res, expect);
 }
+#endif //#ifndef Q_OS_WIN
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::Case3() const
