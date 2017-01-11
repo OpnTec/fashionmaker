@@ -29,6 +29,8 @@
 #include "vpiecenode.h"
 #include "vpiecenode_p.h"
 
+#include <QDataStream>
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
     : d(new VPieceNodeData)
