@@ -170,6 +170,11 @@ protected:
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 
+    static bool             CheckIntersection(const QVector<QPointF> &points, int i, int iNext, int j, int jNext,
+                                              const QPointF &crossPoint);
+    static bool             ParallelCrossPoint(const QLineF &line1, const QLineF &line2, QPointF &point);
+    static bool             Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2);
+    static QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex);
     static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
     static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
     static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
