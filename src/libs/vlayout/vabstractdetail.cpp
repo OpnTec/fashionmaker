@@ -588,7 +588,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
                 /*We have found a loop.*/
                 ekvPoints.append(points.at(i));
                 ekvPoints.append(points.at(jNext));
-                i = jNext; // Skip a loop
+                jNext > j ? i = jNext : i = j; // Skip a loop
                 break;
             case BoundedIntersection:
                 ekvPoints.append(points.at(i));

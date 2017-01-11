@@ -53,6 +53,8 @@ private slots:
     void CorrectEquidistantPoints() const;
     void TestCorrectEquidistantPoints_data();
     void TestCorrectEquidistantPoints() const;
+    void PossibleInfiniteClearLoops_data() const;
+    void PossibleInfiniteClearLoops() const;
 
 private:
     void Case3() const;
