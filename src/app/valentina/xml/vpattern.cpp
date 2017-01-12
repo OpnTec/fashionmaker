@@ -786,10 +786,13 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         }
                         break;
                     case 1:// TagData
+                        ParsePieceDataTag(element, detail);
                         break;
                     case 2:// TagPatternInfo
+                        ParsePiecePatternInfo(element, detail);
                         break;
                     case 3:// TagGrainline
+                        ParsePieceGrainline(element, detail);
                         break;
                     case 4:// VToolSeamAllowance::TagCSA
                         ParsePieceCSARecords(element, detail);
@@ -800,78 +803,6 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         break;
                 }
             }
-//                if (element.tagName() == TagData)
-//                {
-//                    bool bVisible = GetParametrBool(element, AttrVisible, trueStr);
-//                    detail.GetPatternPieceData().SetVisible(bVisible);
-//                    try
-//                    {
-//                        QString qsLetter = GetParametrString(element, AttrLetter, "");
-//                        detail.GetPatternPieceData().SetLetter(qsLetter);
-//                    } catch(...)
-//                    {
-//                        detail.GetPatternPieceData().SetLetter("");
-//                    }
-//                    QPointF ptPos;
-//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-//                    detail.GetPatternPieceData().SetPos(ptPos);
-//                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
-//                    detail.GetPatternPieceData().SetLabelWidth(dLW);
-//                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
-//                    detail.GetPatternPieceData().SetLabelHeight(dLH);
-//                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
-//                    detail.GetPatternPieceData().SetFontSize(iFS);
-//                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
-//                    detail.GetPatternPieceData().SetRotation(dRot);
-
-//                    QDomNodeList nodeListMCP = element.childNodes();
-//                    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
-//                    {
-//                        MaterialCutPlacement mcp;
-//                        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
-//                        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
-//                        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-//                        {
-//                            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
-//                        }
-//                        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
-//                        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
-//                        detail.GetPatternPieceData().Append(mcp);
-//                    }
-//                }
-//                else if (element.tagName() == TagPatternInfo)
-//                {
-//                    detail.GetPatternInfo().SetVisible(GetParametrBool(element, AttrVisible, trueStr));
-//                    QPointF ptPos;
-//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-//                    detail.GetPatternInfo().SetPos(ptPos);
-//                    qreal dLW = GetParametrDouble(element, VToolDetail::AttrWidth, "0");
-//                    detail.GetPatternInfo().SetLabelWidth(dLW);
-//                    qreal dLH = GetParametrDouble(element, VToolDetail::AttrHeight, "0");
-//                    detail.GetPatternInfo().SetLabelHeight(dLH);
-//                    int iFS = static_cast<int>(GetParametrUInt(element, VToolDetail::AttrFont, "0"));
-//                    detail.GetPatternInfo().SetFontSize(iFS);
-//                    qreal dRot = GetParametrDouble(element, VToolDetail::AttrRotation, "0");
-//                    detail.GetPatternInfo().SetRotation(dRot);
-//                }
-//                else if (element.tagName() == TagGrainline)
-//                {
-//                    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(element, AttrVisible, falseStr));
-//                    QPointF ptPos;
-//                    ptPos.setX(GetParametrDouble(element, AttrMx, "0"));
-//                    ptPos.setY(GetParametrDouble(element, AttrMy, "0"));
-//                    detail.GetGrainlineGeometry().SetPos(ptPos);
-//                    QString qsLength = GetParametrString(element, AttrLength, "0");
-//                    detail.GetGrainlineGeometry().SetLength(qsLength);
-//                    QString qsRot = GetParametrString(element, VToolDetail::AttrRotation, "90");
-//                    detail.GetGrainlineGeometry().SetRotation(qsRot);
-//                    VGrainlineGeometry::ArrowType eAT =
-//                            VGrainlineGeometry::ArrowType(GetParametrUInt(element, AttrArrows, "0"));
-//                    detail.GetGrainlineGeometry().SetArrowType(eAT);
-//                }
-//            }
         }
         VToolSeamAllowance::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
     }
@@ -957,6 +888,84 @@ void VPattern::ParsePieceInternalPaths(const QDomElement &domElement, VPiece &de
         }
     }
     detail.SetInternalPaths(records);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const
+{
+    detail.GetPatternPieceData().SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    try
+    {
+        QString qsLetter = GetParametrString(domElement, AttrLetter, "");
+        detail.GetPatternPieceData().SetLetter(qsLetter);
+    }
+    catch(const VExceptionEmptyParameter &e)
+    {
+        Q_UNUSED(e)
+        detail.GetPatternPieceData().SetLetter("");
+    }
+    QPointF ptPos;
+    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
+    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
+    detail.GetPatternPieceData().SetPos(ptPos);
+    qreal dLW = GetParametrDouble(domElement, VToolDetail::AttrWidth, "0");
+    detail.GetPatternPieceData().SetLabelWidth(dLW);
+    qreal dLH = GetParametrDouble(domElement, VToolDetail::AttrHeight, "0");
+    detail.GetPatternPieceData().SetLabelHeight(dLH);
+    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolDetail::AttrFont, "0"));
+    detail.GetPatternPieceData().SetFontSize(iFS);
+    qreal dRot = GetParametrDouble(domElement, VToolDetail::AttrRotation, "0");
+    detail.GetPatternPieceData().SetRotation(dRot);
+
+    QDomNodeList nodeListMCP = domElement.childNodes();
+    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
+    {
+        MaterialCutPlacement mcp;
+        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
+        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+        {
+            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+        }
+        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
+        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
+        detail.GetPatternPieceData().Append(mcp);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const
+{
+    detail.GetPatternInfo().SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    QPointF ptPos;
+    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
+    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
+    detail.GetPatternInfo().SetPos(ptPos);
+    qreal dLW = GetParametrDouble(domElement, VToolDetail::AttrWidth, "0");
+    detail.GetPatternInfo().SetLabelWidth(dLW);
+    qreal dLH = GetParametrDouble(domElement, VToolDetail::AttrHeight, "0");
+    detail.GetPatternInfo().SetLabelHeight(dLH);
+    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolDetail::AttrFont, "0"));
+    detail.GetPatternInfo().SetFontSize(iFS);
+    qreal dRot = GetParametrDouble(domElement, VToolDetail::AttrRotation, "0");
+    detail.GetPatternInfo().SetRotation(dRot);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const
+{
+    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
+    QPointF ptPos;
+    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
+    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
+    detail.GetGrainlineGeometry().SetPos(ptPos);
+    QString qsLength = GetParametrString(domElement, AttrLength, "0");
+    detail.GetGrainlineGeometry().SetLength(qsLength);
+    QString qsRot = GetParametrString(domElement, VToolDetail::AttrRotation, "90");
+    detail.GetGrainlineGeometry().SetRotation(qsRot);
+    VGrainlineGeometry::ArrowType eAT =
+            VGrainlineGeometry::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
+    detail.GetGrainlineGeometry().SetArrowType(eAT);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -124,6 +124,9 @@ private:
     void           ParsePieceNodes(const QDomElement &domElement, VPiece &detail) const;
     void           ParsePieceCSARecords(const QDomElement &domElement, VPiece &detail) const;
     void           ParsePieceInternalPaths(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
