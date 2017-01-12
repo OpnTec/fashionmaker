@@ -792,10 +792,10 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     case 3:// TagGrainline
                         break;
                     case 4:// VToolSeamAllowance::TagCSA
-                        ParseDetailCSARecords(element, detail);
+                        ParsePieceCSARecords(element, detail);
                         break;
                     case 5:// VToolSeamAllowance::TagIPaths
-                        ParseDetailInternalPaths(element, detail);
+                        ParsePieceInternalPaths(element, detail);
                     default:
                         break;
                 }
@@ -916,7 +916,7 @@ void VPattern::ParsePieceNodes(const QDomElement &domElement, VPiece &detail) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &detail) const
+void VPattern::ParsePieceCSARecords(const QDomElement &domElement, VPiece &detail) const
 {
     QVector<CustomSARecord> records;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -940,7 +940,7 @@ void VPattern::ParseDetailCSARecords(const QDomElement &domElement, VPiece &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseDetailInternalPaths(const QDomElement &domElement, VPiece &detail) const
+void VPattern::ParsePieceInternalPaths(const QDomElement &domElement, VPiece &detail) const
 {
     QVector<quint32> records;
     const QDomNodeList nodeList = domElement.childNodes();

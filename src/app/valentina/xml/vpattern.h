@@ -122,8 +122,8 @@ private:
     void           ParseDetailElement(const QDomElement &domElement, const Document &parse);
     void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, bool closed) const;
     void           ParsePieceNodes(const QDomElement &domElement, VPiece &detail) const;
-    void           ParseDetailCSARecords(const QDomElement &domElement, VPiece &detail) const;
-    void           ParseDetailInternalPaths(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceCSARecords(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceInternalPaths(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
