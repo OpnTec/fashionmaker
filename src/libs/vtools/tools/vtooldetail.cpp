@@ -66,7 +66,6 @@
 #include <QtDebug>
 #include <new>
 
-#include "../dialogs/tools/dialogdetail.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -236,9 +235,9 @@ VToolDetail::~VToolDetail()
 void VToolDetail::setDialog()
 {
     SCASSERT(dialog != nullptr)
-    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr)
-    dialogTool->setDetail(VAbstractTool::data.GetDetail(id));
+//    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+//    SCASSERT(dialogTool != nullptr)
+//    dialogTool->setDetail(VAbstractTool::data.GetDetail(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -252,79 +251,79 @@ void VToolDetail::setDialog()
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr)
-    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    SCASSERT(dialogTool != nullptr)
-    VDetail detail = dialogTool->getDetail();
-    VDetail det;
-    qApp->getUndoStack()->beginMacro("add detail");
-    for (int i = 0; i< detail.CountNode(); ++i)
-    {
-        quint32 id = 0;
-        const VNodeDetail &nodeD = detail.at(i);
-        switch (nodeD.getTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                id = CreateNode<VPointF>(data, nodeD.getId());
-                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeArc):
-            {
-                id = CreateNode<VArc>(data, nodeD.getId());
-                VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeElArc):
-            {
-                id = CreateNode<VEllipticalArc>(data, nodeD.getId());
-                VNodeEllipticalArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeSpline):
-            {
-                const auto obj = data->GetGObject(nodeD.getId());
-                if (obj->getType() == GOType::Spline)
-                {
-                    id = CreateNode<VSpline>(data, nodeD.getId());
-                }
-                else
-                {
-                    id = CreateNode<VCubicBezier>(data, nodeD.getId());
-                }
-                VNodeSpline::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeSplinePath):
-            {
-                const auto obj = data->GetGObject(nodeD.getId());
-                if (obj->getType() == GOType::SplinePath)
-                {
-                    id = CreateNode<VSplinePath>(data, nodeD.getId());
-                }
-                else
-                {
-                    id = CreateNode<VCubicBezierPath>(data, nodeD.getId());
-                }
-                VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            default:
-                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-                break;
-        }
-        VNodeDetail node(id, nodeD.getTypeTool(), NodeDetail::Contour, nodeD.getMx(), nodeD.getMy(),
-                         nodeD.getReverse());
-        det.append(node);
-    }
-    det.setName(detail.getName());
-    det.setWidth(detail.getWidth());
-    det.setClosed(detail.getClosed());
-    det.setSeamAllowance(detail.getSeamAllowance());
-    det.setForbidFlipping(detail.getForbidFlipping());
-    det.SetPatternPieceData(detail.GetPatternPieceData());
-    det.SetPatternInfo(detail.GetPatternInfo());
-    Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
+//    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+//    SCASSERT(dialogTool != nullptr)
+//    VDetail detail = dialogTool->getDetail();
+//    VDetail det;
+//    qApp->getUndoStack()->beginMacro("add detail");
+//    for (int i = 0; i< detail.CountNode(); ++i)
+//    {
+//        quint32 id = 0;
+//        const VNodeDetail &nodeD = detail.at(i);
+//        switch (nodeD.getTypeTool())
+//        {
+//            case (Tool::NodePoint):
+//            {
+//                id = CreateNode<VPointF>(data, nodeD.getId());
+//                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+//            }
+//            break;
+//            case (Tool::NodeArc):
+//            {
+//                id = CreateNode<VArc>(data, nodeD.getId());
+//                VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+//            }
+//            break;
+//            case (Tool::NodeElArc):
+//            {
+//                id = CreateNode<VEllipticalArc>(data, nodeD.getId());
+//                VNodeEllipticalArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+//            }
+//            break;
+//            case (Tool::NodeSpline):
+//            {
+//                const auto obj = data->GetGObject(nodeD.getId());
+//                if (obj->getType() == GOType::Spline)
+//                {
+//                    id = CreateNode<VSpline>(data, nodeD.getId());
+//                }
+//                else
+//                {
+//                    id = CreateNode<VCubicBezier>(data, nodeD.getId());
+//                }
+//                VNodeSpline::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+//            }
+//            break;
+//            case (Tool::NodeSplinePath):
+//            {
+//                const auto obj = data->GetGObject(nodeD.getId());
+//                if (obj->getType() == GOType::SplinePath)
+//                {
+//                    id = CreateNode<VSplinePath>(data, nodeD.getId());
+//                }
+//                else
+//                {
+//                    id = CreateNode<VCubicBezierPath>(data, nodeD.getId());
+//                }
+//                VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+//            }
+//            break;
+//            default:
+//                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+//                break;
+//        }
+//        VNodeDetail node(id, nodeD.getTypeTool(), NodeDetail::Contour, nodeD.getMx(), nodeD.getMy(),
+//                         nodeD.getReverse());
+//        det.append(node);
+//    }
+//    det.setName(detail.getName());
+//    det.setWidth(detail.getWidth());
+//    det.setClosed(detail.getClosed());
+//    det.setSeamAllowance(detail.getSeamAllowance());
+//    det.setForbidFlipping(detail.getForbidFlipping());
+//    det.SetPatternPieceData(detail.GetPatternPieceData());
+//    det.SetPatternInfo(detail.GetPatternInfo());
+//    Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,16 +402,16 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
     if (result == QDialog::Accepted)
     {
         SCASSERT(dialog != nullptr)
-        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-        SCASSERT(dialogTool != nullptr)
-        const VDetail newDet = dialogTool->getDetail();
-        const VDetail oldDet = VAbstractTool::data.GetDetail(id);
+//        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+//        SCASSERT(dialogTool != nullptr)
+//        const VDetail newDet = dialogTool->getDetail();
+//        const VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
-        qDebug() << "VToolDetail Position" << newDet.GetPatternPieceData().GetPos();
-        SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
-        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveCommand);
-        UpdateLabel();
+//        qDebug() << "VToolDetail Position" << newDet.GetPatternPieceData().GetPos();
+//        SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+//        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+//        qApp->getUndoStack()->push(saveCommand);
+//        UpdateLabel();
     }
     delete dialog;
     dialog = nullptr;
@@ -801,13 +800,13 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        dialog = new DialogDetail(getData(), id, qApp->getMainWindow());
-        dialog->setModal(true);
-        connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                dialog, &DialogTool::ChosenObject);
-        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
-        setDialog();
-        dialog->show();
+//        dialog = new DialogDetail(getData(), id, qApp->getMainWindow());
+//        dialog->setModal(true);
+//        connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
+//                dialog, &DialogTool::ChosenObject);
+//        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
+//        setDialog();
+//        dialog->show();
     }
     else if (selectedAction == inLayoutOption)
     {

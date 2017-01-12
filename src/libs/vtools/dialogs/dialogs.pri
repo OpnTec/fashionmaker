@@ -11,7 +11,6 @@ HEADERS += \
     $$PWD/tools/dialogcutarc.h \
     $$PWD/tools/dialogcutspline.h \
     $$PWD/tools/dialogcutsplinepath.h \
-    $$PWD/tools/dialogdetail.h \
     $$PWD/tools/dialogendline.h \
     $$PWD/tools/dialogheight.h \
     $$PWD/tools/dialogline.h \
@@ -55,7 +54,6 @@ SOURCES += \
     $$PWD/tools/dialogcutarc.cpp \
     $$PWD/tools/dialogcutspline.cpp \
     $$PWD/tools/dialogcutsplinepath.cpp \
-    $$PWD/tools/dialogdetail.cpp \
     $$PWD/tools/dialogendline.cpp \
     $$PWD/tools/dialogheight.cpp \
     $$PWD/tools/dialogline.cpp \
@@ -99,7 +97,6 @@ FORMS += \
     $$PWD/tools/dialogcutarc.ui \
     $$PWD/tools/dialogcutspline.ui \
     $$PWD/tools/dialogcutsplinepath.ui \
-    $$PWD/tools/dialogdetail.ui \
     $$PWD/tools/dialogendline.ui \
     $$PWD/tools/dialogheight.ui \
     $$PWD/tools/dialogline.ui \
