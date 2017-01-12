@@ -31,6 +31,9 @@
 
 #include "dialogtool.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vgrainlinegeometry.h"
 
 namespace Ui
 {
@@ -59,7 +62,15 @@ protected:
     virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void CheckState() Q_DECL_OVERRIDE;
 
+protected slots:
+    void UpdateList();
+    void AddUpdate();
+    void Cancel();
+    void Remove();
+
 private slots:
+    void NameDetailChanged();
+    void MaterialChanged();
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
@@ -78,15 +89,36 @@ private slots:
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
 
+    void UpdateValues();
+    void SetAddMode();
+    void SetEditMode();
+    void EnableGrainlineRotation();
+    void EditFormula();
+    void DeployRotation();
+    void DeployLength();
+    void ResetWarning();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
     Ui::DialogSeamAllowance *ui;
     bool   applyAllowed;
+    bool   m_bAddMode;
     qreal  m_mx;
     qreal  m_my;
 
     QPointer<DialogTool> m_dialog;
+
+    QStringList      m_qslMaterials;
+    QStringList      m_qslPlacements;
+    // temporary container for Material/Cut/Placement 3-tuples
+    MCPContainer m_conMCP;
+
+    VPatternPieceData    m_oldData;
+    VPatternInfoGeometry m_oldGeom;
+    VGrainlineGeometry   m_oldGrainline;
+    int                  m_iRotBaseHeight;
+    int                  m_iLenBaseHeight;
 
     VPiece CreatePiece() const;
 
@@ -97,11 +129,9 @@ private:
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
     bool    MainPathIsClockwise() const;
-    void    InitNodesList();
-    void    InitCSAPoint(QComboBox *box);
-    void    InitSAIncludeType();
     void    UpdateCurrentCustomSARecord();
     void    UpdateCurrentInternalPathRecord();
+    void    ClearFields();
 
     QListWidgetItem *GetItemById(quint32 id);
 
@@ -109,6 +139,15 @@ private:
 
     void SetCurrentSABefore(qreal value);
     void SetCurrentSAAfter(qreal value);
+
+    void InitMainPathTab();
+    void InitSeamAllowanceTab();
+    void InitNodesList();
+    void InitCSAPoint(QComboBox *box);
+    void InitSAIncludeType();
+    void InitInternalPathsTab();
+    void InitPatternPieceDataTab();
+    void InitGrainlineTab();
 };
 
 #endif // DIALOGSEAMALLOWANCE_H
