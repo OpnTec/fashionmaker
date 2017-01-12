@@ -36,6 +36,8 @@
 
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "vabstracttool.h"
+#include "vtextgraphicsitem.h"
+#include "vgrainlineitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
@@ -63,11 +65,14 @@ public:
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrWidth;
+    static const QString AttrHeight;
     static const QString AttrUnited;
     static const QString AttrStart;
     static const QString AttrPath;
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
+    static const QString AttrFont;
+    static const QString AttrRotation;
 
     void Remove(bool ask);
 
@@ -88,14 +93,32 @@ public:
     virtual void       ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void       GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
-    virtual void       FullUpdateFromFile () Q_DECL_OVERRIDE;
-    virtual void       FullUpdateFromGuiOk(int result);
-    void               FullUpdateFromGuiApply();
-    void               EnableToolMove(bool move);
-    virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    void               Highlight(quint32 id);
+    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromGuiOk(int result);
+    void         FullUpdateFromGuiApply();
+    void         EnableToolMove(bool move);
+    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void ResetChildren(QGraphicsItem* pItem);
+    virtual void UpdateAll();
+    virtual void retranslateUi();
+    void         Highlight(quint32 id);
+protected slots:
+    virtual void UpdateLabel();
+    virtual void UpdatePatternInfo();
+    virtual void UpdateGrainline();
+    virtual void SaveMoveDetail(const QPointF &ptPos);
+    virtual void SaveResizeDetail(qreal dLabelW, int iFontSize);
+    virtual void SaveRotationDetail(qreal dRot);
+    virtual void SaveMovePattern(const QPointF& ptPos);
+    virtual void SaveResizePattern(qreal dLabelW, int iFontSize);
+    virtual void SaveRotationPattern(qreal dRot);
+    virtual void SaveMoveGrainline(const QPointF& ptPos);
+    virtual void SaveResizeGrainline(qreal dLength);
+    virtual void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
 protected:
+    virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                             QWidget *widget) Q_DECL_OVERRIDE;
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
@@ -120,6 +143,9 @@ private:
     QString             m_drawName;
 
     VNoBrushScalePathItem *m_seamAllowance;
+    VTextGraphicsItem     *m_dataLabel;
+    VTextGraphicsItem     *m_patternInfo;
+    VGrainlineItem        *m_grainLine;
 
     void SetDialog();
 

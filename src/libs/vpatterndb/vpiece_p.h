@@ -36,6 +36,9 @@
 #include "../vmisc/def.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
+#include "vpatternpiecedata.h"
+#include "vpatterninfogeometry.h"
+#include "vgrainlinegeometry.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -50,7 +53,10 @@ public:
           m_inLayout(true),
           m_united(false),
           m_customSARecords(),
-          m_internalPaths()
+          m_internalPaths(),
+          m_ppData(),
+          m_piPatternInfo(),
+          m_glGrainline()
     {}
 
     VPieceData(const VPieceData &detail)
@@ -61,7 +67,10 @@ public:
           m_inLayout(detail.m_inLayout),
           m_united(detail.m_united),
           m_customSARecords(detail.m_customSARecords),
-          m_internalPaths(detail.m_internalPaths)
+          m_internalPaths(detail.m_internalPaths),
+          m_ppData(detail.m_ppData),
+          m_piPatternInfo(detail.m_piPatternInfo),
+          m_glGrainline(detail.m_glGrainline)
     {}
 
     ~VPieceData();
@@ -77,6 +86,15 @@ public:
 
     QVector<CustomSARecord> m_customSARecords;
     QVector<quint32>        m_internalPaths;
+
+    /** @brief Pattern piece data */
+    VPatternPieceData m_ppData;
+
+    /** @brief Pattern info coordinates */
+    VPatternInfoGeometry m_piPatternInfo;
+
+    /** @brief m_glGrainline grainline geometry object*/
+    VGrainlineGeometry m_glGrainline;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

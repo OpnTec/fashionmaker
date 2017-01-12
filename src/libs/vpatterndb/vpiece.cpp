@@ -368,6 +368,78 @@ QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPatternPieceData(const VPatternPieceData &data)
+{
+    d->m_ppData = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns full access to the pattern piece data object
+ * @return pattern piece data object
+ */
+VPatternPieceData &VPiece::GetPatternPieceData()
+{
+    return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern piece data object
+ * @return pattern piece data object
+ */
+const VPatternPieceData &VPiece::GetPatternPieceData() const
+{
+    return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPatternInfo(const VPatternInfoGeometry &info)
+{
+    d->m_piPatternInfo = info;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns full access to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+VPatternInfoGeometry &VPiece::GetPatternInfo()
+{
+    return d->m_piPatternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+const VPatternInfoGeometry &VPiece::GetPatternInfo() const
+{
+    return d->m_piPatternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
+ * @return reference to grainline geometry object
+ */
+VGrainlineGeometry &VPiece::GetGrainlineGeometry()
+{
+    return d->m_glGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDetail::GetGrainlineGeometry returns the read-only reference to the grainline geometry object
+ * @return reference to grainline geometry object
+ */
+const VGrainlineGeometry &VPiece::GetGrainlineGeometry() const
+{
+    return d->m_glGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
     QVector<CustomSARecord> records;

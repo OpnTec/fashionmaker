@@ -30,6 +30,9 @@
 #include "../dialogs/tools/dialogseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternpiecedata.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
@@ -68,11 +71,14 @@ const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version")
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
+const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrStart          = QStringLiteral("start");
 const QString VToolSeamAllowance::AttrPath           = QStringLiteral("path");
 const QString VToolSeamAllowance::AttrEnd            = QStringLiteral("end");
 const QString VToolSeamAllowance::AttrIncludeAs      = QStringLiteral("includeAs");
+const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
+const QString VToolSeamAllowance::AttrRotation       = QStringLiteral("rotation");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -151,6 +157,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
     }
 
     detail.GetPath().SetNodes(nodes);
+
     VToolSeamAllowance *piece = Create(0, detail, scene, doc, data, Document::FullParse, Source::FromGui);
 
     if (piece != nullptr)
@@ -292,19 +299,61 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
+    QDomElement domData = doc->createElement(VAbstractPattern::TagData);
+    const VPatternPieceData& data = piece.GetPatternPieceData();
+    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, data.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, data.GetPos().y());
+    doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
+    doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+    doc->SetAttribute(domData, AttrRotation, data.GetRotation());
 
+    for (int i = 0; i < data.GetMCPCount(); ++i)
+    {
+        const MaterialCutPlacement mcp = data.GetMCP(i);
+        QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
+        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
+        {
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        }
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
+        domData.appendChild(domMCP);
+    }
+    domElement.appendChild(domData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
-
+    QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
+    const VPatternInfoGeometry& geom = piece.GetPatternInfo();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true ? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
+    doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
+    doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
+    doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
+    doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
+    domElement.appendChild(domData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
-
+    // grainline
+    QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
+    const VGrainlineGeometry& glGeom = piece.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true ? trueStr : falseStr);
+    doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
+    doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
+    doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
+    domElement.appendChild(domData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -367,9 +416,373 @@ void VToolSeamAllowance::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    VTextGraphicsItem* pVGI = dynamic_cast<VTextGraphicsItem*>(pItem);
+    if (pVGI != m_dataLabel)
+    {
+        if (detail.GetPatternPieceData().IsVisible())
+        {
+            m_dataLabel->Reset();
+        }
+    }
+    if (pVGI != m_patternInfo)
+    {
+        if (detail.GetPatternInfo().IsVisible())
+        {
+            m_patternInfo->Reset();
+        }
+    }
+    VGrainlineItem* pGLI = dynamic_cast<VGrainlineItem*>(pItem);
+    if (pGLI != m_grainLine)
+    {
+        if (detail.GetGrainlineGeometry().IsVisible())
+        {
+            m_grainLine->Reset();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::UpdateAll()
+{
+    m_sceneDetails->update();
+    update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::retranslateUi()
+{
+    UpdateLabel();
+    UpdatePatternInfo();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::Highlight(quint32 id)
 {
     setSelected(this->id == id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateLabel updates the text label, making it just big enough for the text to fit it
+ */
+void VToolSeamAllowance::UpdateLabel()
+{
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    const VPatternPieceData& data = detail.GetPatternPieceData();
+
+    if (data.IsVisible() == true)
+    {
+        QFont fnt = qApp->font();
+        {
+            const int iFS = data.GetFontSize();
+            iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
+        }
+        m_dataLabel->SetFont(fnt);
+        m_dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
+        m_dataLabel->UpdateData(detail.getName(), data);
+        QPointF pt = data.GetPos();
+        QRectF rectBB;
+        rectBB.setTopLeft(pt);
+        rectBB.setWidth(m_dataLabel->boundingRect().width());
+        rectBB.setHeight(m_dataLabel->boundingRect().height());
+        qreal dX;
+        qreal dY;
+        if (m_dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
+        {
+            pt.setX(pt.x() + dX);
+            pt.setY(pt.y() + dY);
+        }
+
+        m_dataLabel->setPos(pt);
+        m_dataLabel->setRotation(data.GetRotation());
+        m_dataLabel->Update();
+        m_dataLabel->show();
+    }
+    else
+    {
+        m_dataLabel->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdatePatternInfo updates the pattern info label
+ */
+void VToolSeamAllowance::UpdatePatternInfo()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    const VPatternInfoGeometry& geom = detail.GetPatternInfo();
+
+    if (geom.IsVisible() == true)
+    {
+        QFont fnt = qApp->font();
+        int iFS = geom.GetFontSize();
+        if (iFS < MIN_FONT_SIZE)
+        {
+            iFS = MIN_FONT_SIZE;
+        }
+        fnt.setPixelSize(iFS);
+        m_patternInfo->SetFont(fnt);
+        m_patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+        m_patternInfo->UpdateData(doc, getData()->size(), getData()->height());
+
+        QPointF pt = geom.GetPos();
+        QRectF rectBB;
+        rectBB.setTopLeft(pt);
+        rectBB.setWidth(m_patternInfo->boundingRect().width());
+        rectBB.setHeight(m_patternInfo->boundingRect().height());
+        qreal dX;
+        qreal dY;
+        if (m_patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
+        {
+            pt.setX(pt.x() + dX);
+            pt.setY(pt.y() + dY);
+        }
+
+        m_patternInfo->setPos(pt);
+        m_patternInfo->setRotation(geom.GetRotation());
+        m_patternInfo->Update();
+        m_patternInfo->GetTextLines() > 0 ? m_patternInfo->show() : m_patternInfo->hide();
+    }
+    else
+    {
+        m_patternInfo->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolDetail::UpdateGrainline updates the grain line item
+ */
+void VToolSeamAllowance::UpdateGrainline()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    const VGrainlineGeometry& geom = detail.GetGrainlineGeometry();
+
+    if (geom.IsVisible() == true)
+    {
+        qreal dRotation;
+        qreal dLength;
+        try
+        {
+            QString qsFormula;
+            qsFormula = geom.GetRotation().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+
+            Calculator cal1;
+            dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+
+            qsFormula = geom.GetLength().replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal2;
+            dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
+        }
+        catch(...)
+        {
+            m_grainLine->hide();
+            return;
+        }
+
+        m_grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
+                                    geom.GetArrowType());
+        m_grainLine->show();
+    }
+    else
+    {
+        m_grainLine->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveMoveDetail saves the move detail operation to the undo stack
+ */
+void VToolSeamAllowance::SaveMoveDetail(const QPointF& ptPos)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternPieceData().SetPos(ptPos);
+    newDet.GetPatternPieceData().SetLabelWidth(m_dataLabel->boundingRect().width());
+    newDet.GetPatternPieceData().SetLabelHeight(m_dataLabel->boundingRect().height());
+    newDet.GetPatternPieceData().SetFontSize(m_dataLabel->GetFontSize());
+    newDet.GetPatternPieceData().SetRotation(m_dataLabel->rotation());
+
+    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    moveCommand->setText(tr("move pattern piece label"));
+    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveResizeDetail saves the resize detail label operation to the undo stack
+ */
+void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternPieceData().SetLabelWidth(dLabelW);
+    newDet.GetPatternPieceData().SetLabelHeight(m_dataLabel->boundingRect().height());
+    newDet.GetPatternPieceData().SetFontSize(iFontSize);
+    newDet.GetPatternPieceData().SetRotation(m_dataLabel->rotation());
+    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    resizeCommand->setText(tr("resize pattern piece label"));
+    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveRotationDetail saves the rotation detail label operation to the undo stack
+ */
+void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternPieceData().SetPos(m_dataLabel->pos());
+    newDet.GetPatternPieceData().SetLabelWidth(m_dataLabel->boundingRect().width());
+    newDet.GetPatternPieceData().SetLabelHeight(m_dataLabel->boundingRect().height());
+    newDet.GetPatternPieceData().SetFontSize(m_dataLabel->GetFontSize());
+    newDet.GetPatternPieceData().SetRotation(dRot);
+
+    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    rotateCommand->setText(tr("rotate pattern piece label"));
+    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveMovePattern saves the pattern label position
+ */
+void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternInfo().SetPos(ptPos);
+    newDet.GetPatternInfo().SetLabelWidth(m_patternInfo->boundingRect().width());
+    newDet.GetPatternInfo().SetLabelHeight(m_patternInfo->boundingRect().height());
+    newDet.GetPatternInfo().SetFontSize(m_patternInfo->GetFontSize());
+    newDet.GetPatternInfo().SetRotation(m_patternInfo->rotation());
+
+    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    moveCommand->setText(tr("move pattern info label"));
+    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief: SaveResizePattern saves the pattern label width and font size
+ */
+void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternInfo().SetLabelWidth(dLabelW);
+    newDet.GetPatternInfo().SetLabelHeight(m_patternInfo->boundingRect().height());
+    newDet.GetPatternInfo().SetFontSize(iFontSize);
+    newDet.GetPatternInfo().SetRotation(m_patternInfo->rotation());
+    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    resizeCommand->setText(tr("resize pattern info label"));
+    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetPatternInfo().SetPos(m_patternInfo->pos());
+    newDet.GetPatternInfo().SetLabelWidth(m_patternInfo->boundingRect().width());
+    newDet.GetPatternInfo().SetLabelHeight(m_patternInfo->boundingRect().height());
+    newDet.GetPatternInfo().SetFontSize(m_patternInfo->GetFontSize());
+    newDet.GetPatternInfo().SetRotation(dRot);
+
+    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    rotateCommand->setText(tr("rotate pattern info label"));
+    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SaveMoveGrainline(const QPointF& ptPos)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    qDebug() << "******* new grainline pos" << ptPos;
+
+    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    moveCommand->setText(tr("move grainline"));
+    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+
+    dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
+    newDet.GetGrainlineGeometry().SetLength(qApp->LocaleToString(dLength));
+    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    resizeCommand->setText(tr("resize grainline"));
+    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
+{
+    VPiece oldDet = VAbstractTool::data.GetPiece(id);
+    VPiece newDet = oldDet;
+
+    dRot = qRadiansToDegrees(dRot);
+    newDet.GetGrainlineGeometry().SetRotation(qApp->LocaleToString(dRot));
+    newDet.GetGrainlineGeometry().SetPos(ptPos);
+    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
+    rotateCommand->setText(tr("rotate grainline"));
+    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolDetail::paint draws a bounding box around detail, if one of its text or grainline items is not idle.
+ */
+void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    if (scene()->views().count() > 0)
+    {
+        const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
+        const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
+
+        const QPoint p = pt - pt0;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+        const qreal dScale = qSqrt(QPoint::dotProduct(p, p));
+#else
+        const qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+        m_grainLine->SetScale(100/dScale);
+    }
+
+    if (m_dataLabel->IsIdle() == false || m_patternInfo->IsIdle() == false || m_grainLine->IsIdle() == false)
+    {
+        painter->save();
+        painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
+        painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
+        painter->restore();
+    }
+    QGraphicsPathItem::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -660,7 +1073,10 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
       m_dialog(),
       m_sceneDetails(scene),
       m_drawName(drawName),
-      m_seamAllowance(new VNoBrushScalePathItem(this))
+      m_seamAllowance(new VNoBrushScalePathItem(this)),
+      m_dataLabel(new VTextGraphicsItem(this)),
+      m_patternInfo(new VTextGraphicsItem(this)),
+      m_grainLine(new VGrainlineItem(this))
 {
     VPiece detail = data->GetPiece(id);
     InitNodes(detail, scene);
@@ -690,6 +1106,31 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
         RefreshDataInFile();
     }
     setAcceptHoverEvents(true);
+
+    connect(m_dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveDetail);
+    connect(m_dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizeDetail);
+    connect(m_dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationDetail);
+
+    connect(m_patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMovePattern);
+    connect(m_patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizePattern);
+    connect(m_patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationPattern);
+
+    connect(m_grainLine, &VGrainlineItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveGrainline);
+    connect(m_grainLine, &VGrainlineItem::SignalResized, this, &VToolSeamAllowance::SaveResizeGrainline);
+    connect(m_grainLine, &VGrainlineItem::SignalRotated, this, &VToolSeamAllowance::SaveRotateGrainline);
+
+    connect(doc, &VAbstractPattern::patternChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateLabel);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
+
+    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateLabel);
+    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);
+
+    UpdateLabel();
+    UpdatePatternInfo();
+    UpdateGrainline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -728,6 +1169,7 @@ void VToolSeamAllowance::SaveDialogChange()
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(saveCommand);
+    UpdateLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

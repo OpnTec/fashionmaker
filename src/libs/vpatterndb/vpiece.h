@@ -44,6 +44,9 @@ template <class T> class QVector;
 template <class T>class QSharedPointer;
 class VAbstractCurve;
 class VPiecePath;
+class VPatternInfoGeometry;
+class VPatternPieceData;
+class VGrainlineGeometry;
 
 class VPiece : public VAbstractPiece
 {
@@ -85,6 +88,17 @@ public:
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
     QVector<quint32> MissingInternalPaths(const VPiece &det) const;
+
+    void                     SetPatternPieceData(const VPatternPieceData &data);
+    VPatternPieceData&       GetPatternPieceData();
+    const VPatternPieceData& GetPatternPieceData() const;
+
+    void                        SetPatternInfo(const VPatternInfoGeometry &info);
+    VPatternInfoGeometry&       GetPatternInfo();
+    const VPatternInfoGeometry& GetPatternInfo() const;
+
+    VGrainlineGeometry&         GetGrainlineGeometry();
+    const VGrainlineGeometry&   GetGrainlineGeometry() const;
 
 private:
     QSharedDataPointer<VPieceData> d;
