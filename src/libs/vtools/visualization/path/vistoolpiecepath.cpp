@@ -30,6 +30,8 @@
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 
+#include <QGraphicsSceneMouseEvent>
+
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
@@ -78,6 +80,12 @@ void VisToolPiecePath::RefreshGeometry()
 void VisToolPiecePath::SetPath(const VPiecePath &path)
 {
     m_path = path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->ignore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

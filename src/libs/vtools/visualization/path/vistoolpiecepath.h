@@ -49,6 +49,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
 
+protected:
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(VisToolPiecePath)
     QVector<VSimplePoint *> m_points;
