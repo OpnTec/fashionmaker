@@ -229,11 +229,14 @@ void DialogPiecePath::ShowVisualization()
 {
     AddVisualization<VisToolPiecePath>();
 
-    VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
-    SCASSERT(tool != nullptr);
-    auto visPath = qobject_cast<VisToolPiecePath *>(vis);
-    SCASSERT(visPath != nullptr);
-    visPath->setParentItem(tool);
+    if (m_showMode)
+    {
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
+        SCASSERT(tool != nullptr);
+        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+        SCASSERT(visPath != nullptr);
+        visPath->setParentItem(tool);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
