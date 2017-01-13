@@ -723,7 +723,7 @@ bool DialogPiecePath::PathIsValid() const
     {
         if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget))
         {
-            url += tr("First point cannot be equal to the last point!");
+            url += tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!");
             ui->helpLabel->setText(url);
             return false;
         }
@@ -737,7 +737,7 @@ bool DialogPiecePath::PathIsValid() const
 
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
-        url += tr("List of pieces is empty!");
+        url += tr("List of objects is empty!");
         ui->helpLabel->setText(url);
         return false;
     }
