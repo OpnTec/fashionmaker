@@ -470,7 +470,7 @@ void VToolSeamAllowance::Highlight(quint32 id)
  */
 void VToolSeamAllowance::UpdateLabel()
 {
-    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
     const VPatternPieceData& data = detail.GetPatternPieceData();
 
     if (data.IsVisible() == true)
@@ -482,7 +482,7 @@ void VToolSeamAllowance::UpdateLabel()
         }
         m_dataLabel->SetFont(fnt);
         m_dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
-        m_dataLabel->UpdateData(detail.getName(), data);
+        m_dataLabel->UpdateData(detail.GetName(), data);
         QPointF pt = data.GetPos();
         QRectF rectBB;
         rectBB.setTopLeft(pt);
