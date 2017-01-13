@@ -31,6 +31,7 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../../undocommands/savepieceoptions.h"
+#include "../vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath *VToolPiecePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -82,10 +83,22 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
         }
         else
         {
-            // Try to prevent memory leak
-            scene->addItem(pathTool);// First adopted by scene
-            pathTool->hide();// If no one will use node, it will stay hidden
-            pathTool->SetParentType(ParentType::Scene);
+            if (typeCreation == Source::FromGui && path.GetType() == PiecePathType::InternalPath)
+            { // Seam allowance tool already initializated and can't init the path
+                SCASSERT(pieceId > NULL_ID);
+                VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(doc->getTool(pieceId));
+                SCASSERT(saTool != nullptr);
+                pathTool->setParentItem(saTool);
+                pathTool->SetParentType(ParentType::Item);
+                doc->IncrementReferens(id);
+            }
+            else
+            {
+                // Try to prevent memory leak
+                scene->addItem(pathTool);// First adopted by scene
+                pathTool->hide();// If no one will use node, it will stay hidden
+                pathTool->SetParentType(ParentType::Scene);
+            }
         }
         return pathTool;
     }
