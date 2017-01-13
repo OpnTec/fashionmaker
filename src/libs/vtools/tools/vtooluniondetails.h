@@ -73,8 +73,6 @@ public:
                                      const Document &parse,
                                      const Source &typeCreation,
                                      bool retainPieces = false);
-    static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
-    static void  FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     static QVector<VDetail> GetDetailFromFile(VAbstractPattern *doc, const QDomElement &domElement);
 
     static const QString ToolType;
@@ -88,15 +86,7 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
-    static void  AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
-                                QVector<quint32> &children, const QString &drawName, const qreal &dx = 0,
-                                const qreal &dy = 0, const quint32 &pRotate = NULL_ID, const qreal &angle = 0);
-    static void  UpdatePoints(VContainer *data, const VDetail &det, const int &i,
-                              QVector<quint32> &children, const qreal &dx = 0, const qreal &dy = 0,
-                              const quint32 &pRotate = NULL_ID, const qreal &angle = 0);
-    static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                 const qreal &angle);
+
     virtual QString getTagName() const Q_DECL_OVERRIDE;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;
@@ -144,6 +134,19 @@ private:
     static QVector<quint32> AllChildren(VAbstractPattern *doc, quint32 id);
     static quint32          TakeNextId(QVector<quint32> &children);
     static QString          DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id);
+    static void             PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2,
+                                         VContainer *data);
+    static void             FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
+    static void             AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                           VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
+                                           QVector<quint32> &children, const QString &drawName, const qreal &dx = 0,
+                                           const qreal &dy = 0, const quint32 &pRotate = NULL_ID,
+                                           const qreal &angle = 0);
+    static void             UpdatePoints(VContainer *data, const VDetail &det, const int &i, QVector<quint32> &children,
+                                         const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = NULL_ID,
+                                         const qreal &angle = 0);
+    static void             BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
+                                            const qreal &angle);
 };
 
 #endif // VTOOLUNIONDETAILS_H
