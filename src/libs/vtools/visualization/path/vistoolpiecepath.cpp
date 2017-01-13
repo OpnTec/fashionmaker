@@ -92,6 +92,7 @@ VSimplePoint *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
         VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
         point->SetPointHighlight(true);
         point->setParentItem(this);
+        point->SetVisualizationMode(true);
         m_points.append(point);
 
         return point;

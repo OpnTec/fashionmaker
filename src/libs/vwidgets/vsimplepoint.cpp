@@ -59,7 +59,8 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
       namePoint(nullptr),
       lineName(nullptr),
       m_onlyPoint(false),
-      m_isHighlight(false)
+      m_isHighlight(false),
+      m_visualizationMode(false)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
@@ -90,6 +91,19 @@ void VSimplePoint::SetOnlyPoint(bool value)
 bool VSimplePoint::IsOnlyPoint() const
 {
     return m_onlyPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetVisualizationMode(bool value)
+{
+    m_visualizationMode = value;
+    this->setFlag(QGraphicsItem::ItemIsFocusable, not m_visualizationMode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSimplePoint::IsVisualizationMode() const
+{
+    return m_visualizationMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,24 +223,31 @@ void VSimplePoint::ChangedPosition(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    // Special for not selectable item first need to call standard mousePressEvent then accept event
-    QGraphicsEllipseItem::mousePressEvent(event);
-
-    // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (m_visualizationMode)
     {
-        scene()->clearSelection();
-    }
-
-    if (selectionType == SelectionType::ByMouseRelease)
-    {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event->ignore();
     }
     else
     {
-        if (event->button() == Qt::LeftButton)
+        // Special for not selectable item first need to call standard mousePressEvent then accept event
+        QGraphicsEllipseItem::mousePressEvent(event);
+
+        // Somehow clicking on notselectable object do not clean previous selections.
+        if (not (flags() & ItemIsSelectable) && scene())
         {
-            emit Choosed(id);
+            scene()->clearSelection();
+        }
+
+        if (selectionType == SelectionType::ByMouseRelease)
+        {// Special for not selectable item first need to call standard mousePressEvent then accept event
+            event->accept();
+        }
+        else
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
         }
     }
 }
@@ -234,14 +255,17 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (not m_visualizationMode)
     {
-        if (event->button() == Qt::LeftButton)
+        if (selectionType == SelectionType::ByMouseRelease)
         {
-            emit Choosed(id);
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
         }
+        QGraphicsEllipseItem::mouseReleaseEvent(event);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

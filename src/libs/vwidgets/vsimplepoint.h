@@ -65,6 +65,9 @@ public:
     void SetOnlyPoint(bool value);
     bool IsOnlyPoint() const;
 
+    void SetVisualizationMode(bool value);
+    bool IsVisualizationMode() const;
+
     void SetPointHighlight(bool value);
 
     void RefreshLine();
@@ -112,6 +115,7 @@ private:
 
     bool m_onlyPoint;
     bool m_isHighlight;
+    bool m_visualizationMode;
 };
 
 #endif // VSIMPLEPOINT_H
