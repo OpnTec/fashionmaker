@@ -409,8 +409,8 @@ void DialogPiecePath::ChangedSAAfter(double d)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTypes()
 {
-    ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
     ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
+    ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
 
     ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
 }
