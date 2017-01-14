@@ -2713,6 +2713,9 @@ void MainWindow::FullParseFile()
     patternReadOnly = doc->IsReadOnly();
     SetEnableWidgets(true);
     detailsWidget->UpdateList();
+
+    VMainGraphicsView::NewSceneRect(sceneDraw, qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDetails, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
