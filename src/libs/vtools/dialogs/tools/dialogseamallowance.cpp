@@ -69,6 +69,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitGrainlineTab();
 
     flagName = true;//We have default name of piece.
+    ChangeColor(ui->labelEditName, okColor);
     flagError = MainPathIsValid();
     CheckState();
 
@@ -396,21 +397,20 @@ void DialogSeamAllowance::Remove()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NameDetailChanged()
 {
-    SCASSERT(labelEditNamePoint != nullptr)
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
         if (edit->text().isEmpty())
         {
             flagName = false;
-            ChangeColor(labelEditNamePoint, Qt::red);
+            ChangeColor(ui->labelEditName, Qt::red);
             QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
             ui->tabWidget->setTabIcon(1, icon);
         }
         else
         {
             flagName = true;
-            ChangeColor(labelEditNamePoint, okColor);
+            ChangeColor(ui->labelEditName, okColor);
             QIcon icon;
             ui->tabWidget->setTabIcon(1, icon);
         }
