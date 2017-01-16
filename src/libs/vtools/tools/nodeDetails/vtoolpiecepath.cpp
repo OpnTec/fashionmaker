@@ -114,7 +114,7 @@ QString VToolPiecePath::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::incrementReferens()
 {
-    ++_referens;
+    VAbstractTool::incrementReferens();
     if (_referens == 1)
     {
         if (idTool != NULL_ID)
@@ -137,10 +137,7 @@ void VToolPiecePath::incrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::decrementReferens()
 {
-    if (_referens > 0)
-    {
-        --_referens;
-    }
+    VAbstractTool::decrementReferens();
     if (_referens == 0)
     {
         if (idTool != NULL_ID)
