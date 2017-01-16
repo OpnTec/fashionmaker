@@ -158,26 +158,6 @@ void VToolPiecePath::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPiecePath::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
-{
-    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPiecePath::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path)
-{
-    if (path.CountNodes() > 0)
-    {
-        QDomElement nodesElement = doc->createElement(VAbstractPattern::TagNodes);
-        for (int i = 0; i < path.CountNodes(); ++i)
-        {
-            AddNode(doc, nodesElement, path.at(i));
-        }
-        domElement.appendChild(nodesElement);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path)
 {
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -225,31 +205,34 @@ void VToolPiecePath::AddToFile()
 
     AddToModeling(domElement);
 
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
-    VPiece newDet = oldDet;
-
-    if (path.GetType() == PiecePathType::InternalPath)
+    if (m_pieceId > NULL_ID)
     {
-        QVector<quint32> iPaths = newDet.GetInternalPaths();
-        iPaths.append(id);
-        newDet.SetInternalPaths(iPaths);
+        const VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
+        VPiece newDet = oldDet;
+
+        if (path.GetType() == PiecePathType::InternalPath)
+        {
+            QVector<quint32> iPaths = newDet.GetInternalPaths();
+            iPaths.append(id);
+            newDet.SetInternalPaths(iPaths);
+        }
+        else if (path.GetType() == PiecePathType::CustomSeamAllowance)
+        {
+            CustomSARecord record;
+            record.path = id;
+
+            QVector<CustomSARecord> records = newDet.GetCustomSARecords();
+            records.append(record);
+            newDet.SetCustomSARecords(records);
+        }
+
+        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
+        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
+        VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
+        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+
+        qApp->getUndoStack()->endMacro();
     }
-    else if (path.GetType() == PiecePathType::CustomSeamAllowance)
-    {
-        CustomSARecord record;
-        record.path = id;
-
-        QVector<CustomSARecord> records = newDet.GetCustomSARecords();
-        records.append(record);
-        newDet.SetCustomSARecords(records);
-    }
-
-    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
-    qApp->getUndoStack()->push(saveCommand);// First push then make a connect
-    VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
-    connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-
-    qApp->getUndoStack()->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -73,10 +73,6 @@ const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllow
 const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
-const QString VToolSeamAllowance::AttrStart          = QStringLiteral("start");
-const QString VToolSeamAllowance::AttrPath           = QStringLiteral("path");
-const QString VToolSeamAllowance::AttrEnd            = QStringLiteral("end");
-const QString VToolSeamAllowance::AttrIncludeAs      = QStringLiteral("includeAs");
 const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
 const QString VToolSeamAllowance::AttrRotation       = QStringLiteral("rotation");
 
@@ -215,26 +211,6 @@ void VToolSeamAllowance::Remove(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
-{
-    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
-{
-    if (piece.GetPath().CountNodes() > 0)
-    {
-        QDomElement nodesElement = doc->createElement(VAbstractPattern::TagNodes);
-        for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
-        {
-            AddNode(doc, nodesElement, piece.GetPath().at(i));
-        }
-        domElement.appendChild(nodesElement);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece)
 {
     SCASSERT(doc != nullptr);
@@ -256,11 +232,11 @@ void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domEle
 {
     QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
 
-    doc->SetAttribute(recordNode, AttrStart, record.startPoint);
-    doc->SetAttribute(recordNode, AttrPath, record.path);
-    doc->SetAttribute(recordNode, AttrEnd, record.endPoint);
+    doc->SetAttribute(recordNode, VAbstractPattern::AttrStart, record.startPoint);
+    doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, record.path);
+    doc->SetAttribute(recordNode, VAbstractPattern::AttrEnd, record.endPoint);
     doc->SetAttribute(recordNode, VAbstractPattern::AttrNodeReverse, record.reverse);
-    doc->SetAttribute(recordNode, AttrIncludeAs, static_cast<unsigned int>(record.includeType));
+    doc->SetAttribute(recordNode, VAbstractPattern::AttrIncludeAs, static_cast<unsigned int>(record.includeType));
 
     domElement.appendChild(recordNode);
 }
@@ -289,7 +265,7 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
         for (int i = 0; i < paths.size(); ++i)
         {
             QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            doc->SetAttribute(recordNode, AttrPath, paths.at(i));
+            doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, paths.at(i));
             iPathsElement.appendChild(recordNode);
         }
         domElement.appendChild(iPathsElement);

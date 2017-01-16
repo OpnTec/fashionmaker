@@ -748,10 +748,10 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         ParsePieceGrainline(element, detail);
                         break;
                     case 4:// VToolSeamAllowance::TagCSA
-                        ParsePieceCSARecords(element, detail);
+                        detail.SetCustomSARecords(ParsePieceCSARecords(element));
                         break;
                     case 5:// VToolSeamAllowance::TagIPaths
-                        ParsePieceInternalPaths(element, detail);
+                        detail.SetInternalPaths(ParsePieceInternalPaths(element));
                     default:
                         break;
                 }
@@ -783,50 +783,6 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, b
     }
 
     detail.GetPath().SetNodes(VNodeDetail::Convert(data, oldNodes, detail.GetSAWidth(), closed));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePieceCSARecords(const QDomElement &domElement, VPiece &detail) const
-{
-    QVector<CustomSARecord> records;
-    const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
-    {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull())
-        {
-            CustomSARecord record;
-            record.startPoint = GetParametrUInt(element, VToolSeamAllowance::AttrStart, NULL_ID_STR);
-            record.path = GetParametrUInt(element, VToolSeamAllowance::AttrPath, NULL_ID_STR);
-            record.endPoint = GetParametrUInt(element, VToolSeamAllowance::AttrEnd, NULL_ID_STR);
-            record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
-            record.includeType = static_cast<PiecePathIncludeType>(GetParametrUInt(element,
-                                                                                   VToolSeamAllowance::AttrIncludeAs,
-                                                                                   "1"));
-            records.append(record);
-        }
-    }
-    detail.SetCustomSARecords(records);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePieceInternalPaths(const QDomElement &domElement, VPiece &detail) const
-{
-    QVector<quint32> records;
-    const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
-    {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull())
-        {
-            const quint32 path = GetParametrUInt(element, VToolSeamAllowance::AttrPath, NULL_ID_STR);
-            if (path > NULL_ID)
-            {
-                records.append(path);
-            }
-        }
-    }
-    detail.SetInternalPaths(records);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -109,6 +109,10 @@ const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
 const QString VAbstractPattern::AttrNodeReverse     = QStringLiteral("reverse");
 const QString VAbstractPattern::AttrSABefore        = QStringLiteral("before");
 const QString VAbstractPattern::AttrSAAfter         = QStringLiteral("after");
+const QString VAbstractPattern::AttrStart           = QStringLiteral("start");
+const QString VAbstractPattern::AttrPath            = QStringLiteral("path");
+const QString VAbstractPattern::AttrEnd             = QStringLiteral("end");
+const QString VAbstractPattern::AttrIncludeAs       = QStringLiteral("includeAs");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -573,6 +577,50 @@ VPiecePath VAbstractPattern::ParsePieceNodes(const QDomElement &domElement)
         }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<CustomSARecord> VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement)
+{
+    QVector<CustomSARecord> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            CustomSARecord record;
+            record.startPoint = GetParametrUInt(element, VAbstractPattern::AttrStart, NULL_ID_STR);
+            record.path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
+            record.endPoint = GetParametrUInt(element, VAbstractPattern::AttrEnd, NULL_ID_STR);
+            record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
+            record.includeType = static_cast<PiecePathIncludeType>(GetParametrUInt(element,
+                                                                                   VAbstractPattern::AttrIncludeAs,
+                                                                                   "1"));
+            records.append(record);
+        }
+    }
+    return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement)
+{
+    QVector<quint32> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            const quint32 path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
+            if (path > NULL_ID)
+            {
+                records.append(path);
+            }
+        }
+    }
+    return records;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -416,6 +416,26 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path)
+{
+    if (path.CountNodes() > 0)
+    {
+        QDomElement nodesElement = doc->createElement(VAbstractPattern::TagNodes);
+        for (int i = 0; i < path.CountNodes(); ++i)
+        {
+            AddNode(doc, nodesElement, path.at(i));
+        }
+        domElement.appendChild(nodesElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+    AddNodes(doc, domElement, piece.GetPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshLine refresh line to label on scene.
  */
@@ -506,4 +526,10 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
     }
 
     return nod;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
+{
+    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
 }

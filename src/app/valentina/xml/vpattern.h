@@ -120,8 +120,6 @@ private:
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(const QDomElement &domElement, const Document &parse);
     void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, bool closed) const;
-    void           ParsePieceCSARecords(const QDomElement &domElement, VPiece &detail) const;
-    void           ParsePieceInternalPaths(const QDomElement &domElement, VPiece &detail) const;
     void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
     void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
     void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;

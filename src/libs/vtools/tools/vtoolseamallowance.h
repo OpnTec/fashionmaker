@@ -67,17 +67,11 @@ public:
     static const QString AttrWidth;
     static const QString AttrHeight;
     static const QString AttrUnited;
-    static const QString AttrStart;
-    static const QString AttrPath;
-    static const QString AttrEnd;
-    static const QString AttrIncludeAs;
     static const QString AttrFont;
     static const QString AttrRotation;
 
     void Remove(bool ask);
 
-    static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
-    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);

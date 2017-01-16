@@ -81,7 +81,9 @@ public:
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
-    static void             AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     const VContainer        *getData() const;
 
@@ -151,6 +153,7 @@ protected:
                             QGraphicsLineItem *lineName, const qreal radius);
 
     static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
+    static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

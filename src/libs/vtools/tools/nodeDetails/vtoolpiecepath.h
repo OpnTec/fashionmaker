@@ -53,8 +53,6 @@ public:
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
 
-    static void AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
-    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;

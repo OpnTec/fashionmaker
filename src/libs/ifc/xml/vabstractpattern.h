@@ -95,7 +95,9 @@ public:
     static VDataTool* getTool(const quint32 &id);
     static void       AddTool(const quint32 &id, VDataTool *tool);
 
-    static VPiecePath ParsePieceNodes(const QDomElement &domElement);
+    static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
+    static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
+    static QVector<quint32>        ParsePieceInternalPaths(const QDomElement &domElement);
 
     void           AddToolOnRemove(VDataTool *tool);
 
@@ -215,6 +217,10 @@ public:
     static const QString AttrNodeReverse;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
+    static const QString AttrStart;
+    static const QString AttrPath;
+    static const QString AttrEnd;
+    static const QString AttrIncludeAs;
 
     static const QString AttrAll;
 
