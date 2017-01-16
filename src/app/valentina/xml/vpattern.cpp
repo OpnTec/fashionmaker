@@ -563,53 +563,6 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode VPattern::ParseSANode(const QDomElement &domElement) const
-{
-    const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
-    const bool reverse = GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
-    const qreal saBefore = GetParametrDouble(domElement, VAbstractPattern::AttrSABefore, "-1");
-    const qreal saAfter = GetParametrDouble(domElement, VAbstractPattern::AttrSAAfter, "-1");
-    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(GetParametrUInt(domElement, AttrAngle, "0"));
-
-    const QString t = GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
-    Tool tool;
-
-    const QStringList types = QStringList() << VAbstractPattern::NodePoint
-                                            << VAbstractPattern::NodeArc
-                                            << VAbstractPattern::NodeSpline
-                                            << VAbstractPattern::NodeSplinePath
-                                            << VAbstractPattern::NodeElArc;
-
-    switch (types.indexOf(t))
-    {
-        case 0: // VAbstractPattern::NodePoint
-            tool = Tool::NodePoint;
-            break;
-        case 1: // VAbstractPattern::NodeArc
-            tool = Tool::NodeArc;
-            break;
-        case 2: // VAbstractPattern::NodeSpline
-            tool = Tool::NodeSpline;
-            break;
-        case 3: // VAbstractPattern::NodeSplinePath
-            tool = Tool::NodeSplinePath;
-            break;
-        case 4: // NodeElArc
-            tool = Tool::NodeElArc;
-            break;
-        default:
-            VException e(tr("Wrong tag name '%1'.").arg(t));
-            throw e;
-    }
-    VPieceNode node(id, tool, reverse);
-    node.SetSABefore(saBefore);
-    node.SetSAAfter(saAfter);
-    node.SetAngleType(angle);
-
-    return node;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseDrawElement parse draw tag.
  * @param node node.
@@ -782,7 +735,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         }
                         else
                         {
-                            ParsePieceNodes(element, detail);
+                            detail.SetPath(ParsePieceNodes(element));
                         }
                         break;
                     case 1:// TagData
@@ -830,20 +783,6 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, b
     }
 
     detail.GetPath().SetNodes(VNodeDetail::Convert(data, oldNodes, detail.GetSAWidth(), closed));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePieceNodes(const QDomElement &domElement, VPiece &detail) const
-{
-    const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
-    {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull())
-        {
-            detail.GetPath().Append(ParseSANode(element));
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -45,6 +45,7 @@
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vtools/tools/vdatatool.h"
 #include "vpatternconverter.h"
 #include "vdomdocument.h"
@@ -555,7 +556,70 @@ void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr)
-    tools.insert(id, tool);
+            tools.insert(id, tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath VAbstractPattern::ParsePieceNodes(const QDomElement &domElement)
+{
+    VPiecePath path;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            path.Append(ParseSANode(element));
+        }
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
+{
+    const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+    const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
+    const qreal saBefore = VDomDocument::GetParametrDouble(domElement, VAbstractPattern::AttrSABefore, "-1");
+    const qreal saAfter = VDomDocument::GetParametrDouble(domElement, VAbstractPattern::AttrSAAfter, "-1");
+    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, "0"));
+
+    const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
+    Tool tool;
+
+    const QStringList types = QStringList() << VAbstractPattern::NodePoint
+                                            << VAbstractPattern::NodeArc
+                                            << VAbstractPattern::NodeSpline
+                                            << VAbstractPattern::NodeSplinePath
+                                            << VAbstractPattern::NodeElArc;
+
+    switch (types.indexOf(t))
+    {
+        case 0: // VAbstractPattern::NodePoint
+            tool = Tool::NodePoint;
+            break;
+        case 1: // VAbstractPattern::NodeArc
+            tool = Tool::NodeArc;
+            break;
+        case 2: // VAbstractPattern::NodeSpline
+            tool = Tool::NodeSpline;
+            break;
+        case 3: // VAbstractPattern::NodeSplinePath
+            tool = Tool::NodeSplinePath;
+            break;
+        case 4: // NodeElArc
+            tool = Tool::NodeElArc;
+            break;
+        default:
+            VException e(QObject::tr("Wrong tag name '%1'.").arg(t));
+            throw e;
+    }
+    VPieceNode node(id, tool, reverse);
+    node.SetSABefore(saBefore);
+    node.SetSAAfter(saAfter);
+    node.SetAngleType(angle);
+
+    return node;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

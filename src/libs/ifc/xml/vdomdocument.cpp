@@ -203,7 +203,7 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
  * @param name attribute name
  * @return long long value
  */
-quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
+quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
@@ -212,7 +212,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
     QString parametr;
     quint32 id = 0;
 
-    QString message = tr("Can't convert toUInt parameter");
+    const QString message = QObject::tr("Can't convert toUInt parameter");
     try
     {
         parametr = GetParametrString(domElement, name, defValue);
@@ -233,7 +233,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) const
+bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -241,7 +241,7 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     QString parametr;
     bool val = true;
 
-    QString message = tr("Can't convert toBool parameter");
+    const QString message = QObject::tr("Can't convert toBool parameter");
     try
     {
         parametr = GetParametrString(domElement, name, defValue);
@@ -280,7 +280,7 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) const
+NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name)
 {
     const bool value = GetParametrBool(domElement, name, trueStr);
     if (value)
@@ -315,7 +315,7 @@ void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name
  * @throw VExceptionEmptyParameter when attribute is empty
  */
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
-                                        const QString &defValue) const
+                                        const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -324,7 +324,7 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
     {
         if (defValue.isEmpty())
         {
-            throw VExceptionEmptyParameter(tr("Got empty parameter"), name, domElement);
+            throw VExceptionEmptyParameter(QObject::tr("Got empty parameter"), name, domElement);
         }
         else
         {
@@ -341,7 +341,7 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
  * @param name attribute name
  * @return double value
  */
-qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
+qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -349,7 +349,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     bool ok = false;
     qreal param = 0;
 
-    QString message = tr("Can't convert toDouble parameter");
+    const QString message = QObject::tr("Can't convert toDouble parameter");
     try
     {
         QString parametr = GetParametrString(domElement, name, defValue);
@@ -374,13 +374,13 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
  * @param domElement tag in xml tree.
  * @return id value.
  */
-quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
+quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     quint32 id = NULL_ID;
 
-    const QString message = tr("Got wrong parameter id. Need only id > 0.");
+    const QString message = QObject::tr("Got wrong parameter id. Need only id > 0.");
     try
     {
         id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);

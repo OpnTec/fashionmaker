@@ -45,6 +45,8 @@
 #include "vtoolrecord.h"
 
 class QDomElement;
+class VPiecePath;
+class VPieceNode;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
@@ -92,6 +94,8 @@ public:
 
     static VDataTool* getTool(const quint32 &id);
     static void       AddTool(const quint32 &id, VDataTool *tool);
+
+    static VPiecePath ParsePieceNodes(const QDomElement &domElement);
 
     void           AddToolOnRemove(VDataTool *tool);
 
@@ -344,7 +348,8 @@ protected:
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool*> tools;
 
-    static void    ToolExists(const quint32 &id);
+    static void       ToolExists(const quint32 &id);
+    static VPieceNode ParseSANode(const QDomElement &domElement);
 
     void           SetActivPP(const QString& name);
 
