@@ -3164,13 +3164,17 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             {
                 quint32 id = 0;
                 ToolsCommonAttributes(domElement, id);
-                const quint32 indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
-                const quint32 indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
 
-                const QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
+                VToolUnionDetailsInitData initData;
+                initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
+                initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
+                initData.scene = scene;
+                initData.doc = this;
+                initData.data = data;
+                initData.parse = parse;
+                initData.typeCreation = Source::FromFile;
 
-                VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
-                                          Source::FromFile);
+                VToolUnionDetails::Create(id, initData);
             }
             catch (const VExceptionBadId &e)
             {

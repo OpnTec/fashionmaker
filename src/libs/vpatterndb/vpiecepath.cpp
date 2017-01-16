@@ -362,6 +362,92 @@ int VPiecePath::indexOfNode(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NodeOnEdge return nodes located on edge with index.
+ * @param index index of edge.
+ * @param p1 first node.
+ * @param p2 second node.
+ */
+void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
+{
+    const QVector<VPieceNode> list = ListNodePoint();
+    if (index > static_cast<quint32>(list.size()))
+    {
+        qDebug()<<"Wrong edge index index ="<<index;
+        return;
+    }
+    p1 = list.at(static_cast<int>(index));
+    if (index + 1 > static_cast<quint32>(list.size()) - 1)
+    {
+        p2 = list.at(0);
+    }
+    else
+    {
+        p2 = list.at(static_cast<int>(index+1));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief listNodePoint return list nodes only with points.
+ * @return list points node.
+ */
+QVector<VPieceNode> VPiecePath::ListNodePoint() const
+{
+    QVector<VPieceNode> list;
+    for (int i = 0; i < d->m_nodes.size(); ++i) //-V807
+    {
+        if (d->m_nodes.at(i).GetTypeTool() == Tool::NodePoint)
+        {
+            list.append(d->m_nodes.at(i));
+        }
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveEdge return path without edge with index.
+ * @param index idex of edge.
+ * @return path without edge with index.
+ */
+VPiecePath VPiecePath::RemoveEdge(quint32 index) const
+{
+    VPiecePath path(*this);
+    path.Clear();
+
+    // Edge can be only segment. We ignore all curves inside segments.
+    const quint32 edges = static_cast<quint32>(ListNodePoint().size());
+    quint32 k = 0;
+    for (quint32 i=0; i<edges; ++i)
+    {
+        if (i == index)
+        {
+            path.Append(this->at(static_cast<int>(k)));
+            ++k;
+        }
+        else
+        {
+            VPieceNode p1;
+            VPieceNode p2;
+            this->NodeOnEdge(i, p1, p2);
+            const int j1 = this->indexOfNode(p1.GetId());
+            int j2 = this->indexOfNode(p2.GetId());
+            if (j2 == 0)
+            {
+                j2 = this->CountNodes();
+            }
+            for (int j=j1; j<j2; ++j)
+            {// Add "segment" except last point. Inside can be curves too.
+                path.Append(this->at(j));
+                ++k;
+            }
+        }
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSAPoint VPiecePath::StartSegment(const VContainer *data, int i, bool reverse) const
 {
     return StartSegment(data, d->m_nodes, i, reverse);

@@ -43,7 +43,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vabstracttool.h"
-#include "vdetail.h"
+#include "../vpatterndb/vpiece.h"
 
 class DialogTool;
 class QDomElement;
@@ -53,6 +53,33 @@ class VContainer;
 class VMainGraphicsScene;
 class VNodeDetail;
 class VPointF;
+
+struct VToolUnionDetailsInitData
+{
+    VToolUnionDetailsInitData()
+        : d1id(NULL_ID),
+          d2id(NULL_ID),
+          indexD1(NULL_ID),
+          indexD2(NULL_ID),
+          scene(nullptr),
+          doc(nullptr),
+          data(nullptr),
+          parse(Document::FullParse),
+          typeCreation(Source::FromFile),
+          retainPieces(false)
+    {}
+
+    quint32 d1id;
+    quint32 d2id;
+    quint32 indexD1;
+    quint32 indexD2;
+    VMainGraphicsScene *scene;
+    VAbstractPattern *doc;
+    VContainer *data;
+    Document parse;
+    Source typeCreation;
+    bool retainPieces;
+};
 
 /**
  * @brief The VToolUnionDetails class tool union details.
@@ -67,13 +94,7 @@ public:
     virtual void setDialog() {}
     static VToolUnionDetails *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                      VContainer *data);
-    static VToolUnionDetails *Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id,
-                                     const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
-                                     VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                     const Document &parse,
-                                     const Source &typeCreation,
-                                     bool retainPieces = false);
-    static QVector<VDetail> GetDetailFromFile(VAbstractPattern *doc, const QDomElement &domElement);
+    static VToolUnionDetails *Create(const quint32 _id, const VToolUnionDetailsInitData &initData);
 
     static const QString ToolType;
     static const QString TagDetail;
@@ -105,48 +126,24 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
-    /** @brief d1 first detail. */
-    VDetail      d1;
+    /** @brief d1 first detail id. */
+    quint32 d1id;
 
-    /** @brief d2 second detail. */
-    VDetail      d2;
+    /** @brief d2 second detail id. */
+    quint32 d2id;
 
     /** @brief indexD1 index edge in first detail. */
-    quint32      indexD1;
+    quint32 indexD1;
 
     /** @brief indexD2 index edge in second detail. */
-    quint32      indexD2;
+    quint32 indexD2;
 
-    QString      drawName;
+    VToolUnionDetails(quint32 id, const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
-    VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
-                      const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
-                      const QString &drawName, QObject *parent = nullptr);
-
-    void         AddDetail(QDomElement &domElement, VDetail &d);
-    void         AddNode(QDomElement &domElement, const VNodeDetail &node);
-    QDomNode     UpdateDetail(const QDomNode &domNode, const VDetail &d);
-    void         AddToModeling(const QDomElement &domElement);
-    void         IncrementReferences(const VDetail &d) const;
-    void         DecrementReferences(const VDetail &d) const;
-
-    static void             SaveChildren(VAbstractPattern *doc, quint32 id, const QVector<quint32> &children);
-    static QVector<quint32> AllChildren(VAbstractPattern *doc, quint32 id);
-    static quint32          TakeNextId(QVector<quint32> &children);
-    static QString          DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id);
-    static void             PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2,
-                                         VContainer *data);
-    static void             FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
-    static void             AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                           VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
-                                           QVector<quint32> &children, const QString &drawName, const qreal &dx = 0,
-                                           const qreal &dy = 0, const quint32 &pRotate = NULL_ID,
-                                           const qreal &angle = 0);
-    static void             UpdatePoints(VContainer *data, const VDetail &det, const int &i, QVector<quint32> &children,
-                                         const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = NULL_ID,
-                                         const qreal &angle = 0);
-    static void             BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                            const qreal &angle);
+    void             AddDetail(QDomElement &domElement, const VPiece &d) const;
+    void             AddToModeling(const QDomElement &domElement);
+    QVector<quint32> GetReferenceObjects() const;
+    QVector<quint32> NodesReferenceObjects(const QDomElement &nodes) const;
 };
 
 #endif // VTOOLUNIONDETAILS_H

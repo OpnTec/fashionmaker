@@ -79,7 +79,12 @@ public:
 
     QVector<quint32> MissingNodes(const VPiecePath &path) const;
 
-    int indexOfNode(quint32 id) const;
+    int  indexOfNode(quint32 id) const;
+    void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
+
+    QVector<VPieceNode> ListNodePoint() const;
+
+    VPiecePath RemoveEdge(quint32 index) const;
 
     VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
     VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
