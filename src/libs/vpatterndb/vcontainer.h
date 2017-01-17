@@ -256,9 +256,9 @@ template <typename T>
 const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
 {
     QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
-   if (d->gObjects.contains(id))
-   {
-       gObj = d->gObjects.value(id);
+    if (d->gObjects.contains(id))
+    {
+        gObj = d->gObjects.value(id);
     }
     else
     {
@@ -269,11 +269,11 @@ const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
         QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
         SCASSERT(obj.isNull() == false)
         return obj;
-     }
-     catch (const std::bad_alloc &)
-     {
+    }
+    catch (const std::bad_alloc &)
+    {
         throw VExceptionBadId(tr("Can't cast object"), id);
-     }
+    }
 }
 
 
