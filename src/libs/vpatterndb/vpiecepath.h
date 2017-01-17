@@ -81,6 +81,9 @@ public:
 
     int  indexOfNode(quint32 id) const;
     void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
+    bool Contains(quint32 id) const;
+    bool OnEdge(quint32 p1, quint32 p2) const;
+    int  Edge(quint32 p1, quint32 p2) const;
 
     QVector<VPieceNode> ListNodePoint() const;
 
@@ -106,6 +109,7 @@ private:
 
     static VSAPoint CurvePoint(const VSAPoint &candidate, const VContainer *data, const VPieceNode &node,
                                const QSharedPointer<VAbstractCurve> &curve);
+    static int      indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };
 
 Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);

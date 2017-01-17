@@ -388,6 +388,96 @@ void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPiecePath::Contains(quint32 id) const
+{
+    for (int i = 0; i < d->m_nodes.size(); ++i)
+    {
+        if (d->m_nodes.at(i).GetId() == id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief OnEdge checks if two poins located on the edge. Edge is line between two points. If between two points
+ * located arcs or splines ignore this.
+ * @param p1 id first point.
+ * @param p2 id second point.
+ * @return true - on edge, false - no.
+ */
+bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
+{
+    const QVector<VPieceNode> list = ListNodePoint();
+    if (list.size() < 2)
+    {
+        qDebug()<<"Not enough points.";
+        return false;
+    }
+    int i = indexOfNode(list, p1);
+    int j1 = 0, j2 = 0;
+
+    if (i == list.size() - 1)
+    {
+        j1 = i-1;
+        j2 = 0;
+    }
+    else if (i == 0)
+    {
+        j1 = list.size() - 1;
+        j2 = i + 1;
+    }
+    else
+    {
+        j1 = i - 1;
+        j2 = i + 1;
+    }
+
+    if (list.at(j1).GetId() == p2 || list.at(j2).GetId() == p2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Edge return edge index in detail. Edge is line between two points. If between two points
+ * located arcs or splines ignore this.
+ * @param p1 id first point.
+ * @param p2 id second point.
+ * @return edge index or -1 if points don't located on edge
+ */
+int VPiecePath::Edge(quint32 p1, quint32 p2) const
+{
+    if (OnEdge(p1, p2) == false)
+    {
+        qDebug()<<"Points don't on edge.";
+        return -1;
+    }
+
+    const QVector<VPieceNode> list = ListNodePoint();
+    int i = indexOfNode(list, p1);
+    int j = indexOfNode(list, p2);
+
+    int min = qMin(i, j);
+
+    if (min == 0 && (i == list.size() - 1 || j == list.size() - 1))
+    {
+        return list.size() - 1;
+    }
+    else
+    {
+        return min;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief listNodePoint return list nodes only with points.
  * @return list points node.
@@ -678,4 +768,24 @@ VSAPoint VPiecePath::CurvePoint(const VSAPoint &candidate, const VContainer *dat
         }
     }
     return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param list list nodes detail.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
+int VPiecePath::indexOfNode(const QVector<VPieceNode> &list, quint32 id)
+{
+    for (int i = 0; i < list.size(); ++i)
+    {
+        if (list.at(i).GetId() == id)
+        {
+            return i;
+        }
+    }
+    qDebug()<<"Can't find node.";
+    return -1;
 }
