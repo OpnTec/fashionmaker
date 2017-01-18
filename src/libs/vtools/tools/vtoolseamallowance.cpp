@@ -1140,6 +1140,23 @@ void VToolSeamAllowance::DeleteTool(bool ask)
         /* If UnionDetails tool delete detail no need emit FullParsing.*/
         connect(delDet, &DeletePiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
+
+    // If UnionDetails tool delete the detail this object will be deleted only after full parse.
+    // Deleting inside UnionDetails cause crash.
+    // Because this object should be inactive from no one we disconnect all signals that may cause a crash
+    // KEEP THIS LIST ACTUALL!!!
+    disconnect(doc, 0, this, 0);
+    if (QGraphicsScene *toolScene = scene())
+    {
+        disconnect(toolScene, 0, this, 0);
+    }
+    disconnect(m_dataLabel, 0, this, 0);
+    disconnect(m_patternInfo, 0, this, 0);
+    disconnect(m_grainLine, 0, this, 0);
+    disconnect(m_sceneDetails, 0, this, 0);
+
+    hide();// User shouldn't see this object
+
     qApp->getUndoStack()->push(delDet);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.

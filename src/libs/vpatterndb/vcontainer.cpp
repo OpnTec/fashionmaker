@@ -520,6 +520,12 @@ void VContainer::RemoveVariable(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemovePiece(quint32 id)
+{
+    d->pieces->remove(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddObject add object to container
  * @param obj container

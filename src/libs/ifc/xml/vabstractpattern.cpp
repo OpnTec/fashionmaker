@@ -544,7 +544,7 @@ void VAbstractPattern::setCursor(const quint32 &value)
  * @param id tool id.
  * @return tool.
  */
-VDataTool *VAbstractPattern::getTool(const quint32 &id)
+VDataTool *VAbstractPattern::getTool(quint32 id)
 {
     ToolExists(id);
     return tools.value(id);
@@ -556,11 +556,17 @@ VDataTool *VAbstractPattern::getTool(const quint32 &id)
  * @param id tool id.
  * @param tool tool.
  */
-void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
+void VAbstractPattern::AddTool(quint32 id, VDataTool *tool)
 {
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr)
             tools.insert(id, tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::RemoveTool(quint32 id)
+{
+    tools.remove(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

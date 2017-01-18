@@ -92,8 +92,9 @@ public:
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
-    static VDataTool* getTool(const quint32 &id);
-    static void       AddTool(const quint32 &id, VDataTool *tool);
+    static VDataTool* getTool(quint32 id);
+    static void       AddTool(quint32 id, VDataTool *tool);
+    static void       RemoveTool(quint32 id);
 
     static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
     static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
