@@ -137,6 +137,9 @@ private:
 
     void TagRemoveAttributeTypeObjectInV0_4_0();
     void TagDetailToV0_4_0();
+    void TagUnionDetailsToV0_4_0();
+    QDomElement GetUnionDetailNodesV0_4_0(const QDomElement &detail);
+    QDomElement GetUnionChildrenNodesV0_4_0(const QDomElement &detail);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

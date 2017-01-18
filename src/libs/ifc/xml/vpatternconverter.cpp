@@ -130,7 +130,8 @@ const QString strMy                        = QStringLiteral("my");
 const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
 const QString strInLayout                  = QStringLiteral("inLayout");
 const QString strSeamAllowance             = QStringLiteral("seamAllowance");
-const QString strTypeObject                = QStringLiteral("typeObject");
+const QString strNodeType                  = QStringLiteral("nodeType");
+const QString strDet                       = QStringLiteral("det");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -590,6 +591,7 @@ void VPatternConverter::ToV0_4_0()
     SetVersion(QStringLiteral("0.4.0"));
     TagRemoveAttributeTypeObjectInV0_4_0();
     TagDetailToV0_4_0();
+    TagUnionDetailsToV0_4_0();
     Save();
 }
 
@@ -1714,9 +1716,9 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
                 QDomElement domElement = domNode.toElement();
                 if (not domElement.isNull())
                 {
-                    if (domElement.hasAttribute(strTypeObject))
+                    if (domElement.hasAttribute(strNodeType))
                     {
-                        domElement.removeAttribute(strTypeObject);
+                        domElement.removeAttribute(strNodeType);
                     }
                 }
                 domNode = domNode.nextSibling();
@@ -1807,6 +1809,112 @@ void VPatternConverter::TagDetailToV0_4_0()
             dom.appendChild(tagPatternInfo);
             dom.appendChild(tagGrainline);
             dom.appendChild(tagNodes);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail)
+{
+    QDomElement tagNodes = createElement(strNodes);
+
+    if (not detail.isNull())
+    {
+        const QDomNodeList childList = detail.childNodes();
+        for (qint32 i = 0; i < childList.size(); ++i)
+        {
+            const QDomElement node = childList.at(i).toElement();
+            if (not node.isNull())
+            {
+                QDomElement tagNode = createElement(strNode);
+
+                tagNode.setAttribute(strIdObject, node.attribute(strIdObject, NULL_ID_STR));
+
+                if (node.hasAttribute(strReverse))
+                {
+                    tagNode.setAttribute(strReverse, node.attribute(strReverse, "0"));
+                }
+
+                tagNode.setAttribute(strType, node.attribute(strType, ""));
+
+                tagNodes.appendChild(tagNode);
+            }
+        }
+    }
+
+    return tagNodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail)
+{
+    QDomElement tagNodes = createElement(strNodes);
+
+    if (not detail.isNull())
+    {
+        const QDomNodeList childList = detail.childNodes();
+        for (qint32 i = 0; i < childList.size(); ++i)
+        {
+            const QDomElement node = childList.at(i).toElement();
+            if (not node.isNull())
+            {
+                QDomElement tagNode = node.cloneNode().toElement();
+                tagNodes.appendChild(tagNode);
+            }
+        }
+    }
+
+    return tagNodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::TagUnionDetailsToV0_4_0()
+{
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(strTools);
+    for (int i=0; i < list.size(); ++i)
+    {
+        // Tag 'tools' used only for union details, so no need to check any additional attributes
+        QDomElement toolDOM = list.at(i).toElement();
+        if (not toolDOM.isNull())
+        {
+            const QStringList tags = QStringList() << strDet << strChildren;
+
+            QVector<QDomElement> nodes;
+            QDomElement tagChildrenNodes = createElement(strChildren);
+
+            const QDomNodeList childList = toolDOM.childNodes();
+            for (qint32 i = 0; i < childList.size(); ++i)
+            {
+                const QDomElement element = childList.at(i).toElement();
+                if (not element.isNull())
+                {
+                    switch (tags.indexOf(element.tagName()))
+                    {
+                        case 0://strDet
+                            nodes.append(GetUnionDetailNodesV0_4_0(element));
+                            break;
+                        case 1://strChildren
+                            tagChildrenNodes.appendChild(GetUnionChildrenNodesV0_4_0(element));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            RemoveAllChildren(toolDOM);
+
+            for (int i = 0; i < nodes.size(); ++i)
+            {
+                QDomElement tagDet = createElement(strDet);
+                tagDet.appendChild(nodes.at(i));
+                toolDOM.appendChild(tagDet);
+            }
+            toolDOM.appendChild(tagChildrenNodes);
         }
     }
 }

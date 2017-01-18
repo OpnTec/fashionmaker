@@ -362,23 +362,75 @@
                                                                                    <xs:element name="det" minOccurs="2" maxOccurs="2">
                                                                                          <xs:complexType>
                                                                                                <xs:sequence>
-                                                                                                     <xs:element name="node" maxOccurs="unbounded">
-                                                                                                           <xs:complexType>
-                                                                                                                 <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
-                                                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
-                                                                                                                 <xs:attribute name="mx" type="xs:double"></xs:attribute>
-                                                                                                                 <xs:attribute name="my" type="xs:double"></xs:attribute>
-                                                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
-                                                                                                                 <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
-                                                                                                           </xs:complexType>
-                                                                                                     </xs:element>
+																								     <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																												   <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
+																														   <xs:complexType>
+																																 <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+																																 <xs:attribute name="idObject" type="xs:unsignedInt" use="required"></xs:attribute>
+																																 <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
+																																 <xs:attribute name="before" type="xs:double"></xs:attribute>
+																																 <xs:attribute name="after" type="xs:double"></xs:attribute>
+																																 <xs:attribute name="angle" type="nodeAngle"></xs:attribute>
+																														   </xs:complexType>
+																													 </xs:element>
+																												 </xs:sequence>
+																											 </xs:complexType>
+																										</xs:element>
+																										<xs:element name="csa" minOccurs="0" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																												   <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+																														   <xs:complexType>
+																																 <xs:attribute name="start" type="xs:unsignedInt"></xs:attribute>
+																																 <xs:attribute name="path" type="xs:unsignedInt" use="required"></xs:attribute>
+																																 <xs:attribute name="end" type="xs:unsignedInt"></xs:attribute>
+																																 <xs:attribute name="reverse" type="xs:boolean"></xs:attribute>
+																																 <xs:attribute name="includeAs" type="piecePathIncludeType"></xs:attribute>
+																														   </xs:complexType>
+																													 </xs:element>
+																												 </xs:sequence>
+																											 </xs:complexType>
+																										</xs:element>
+																										<xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																												   <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+																														   <xs:complexType>
+																																 <xs:attribute name="path" type="xs:unsignedInt" use="required"></xs:attribute>
+																														   </xs:complexType>
+																													 </xs:element>
+																												 </xs:sequence>
+																											 </xs:complexType>
+																										</xs:element>
                                                                                                </xs:sequence>
                                                                                          </xs:complexType>
                                                                                    </xs:element>
-                                                                                   <xs:element name="children" minOccurs="0" maxOccurs="1">
+                                                                                   <xs:element name="children" minOccurs="1" maxOccurs="1">
                                                                                          <xs:complexType>
                                                                                                <xs:sequence>
-                                                                                                     <xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"></xs:element>
+																								     <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																													<xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                                                                                                                </xs:sequence>
+																											 </xs:complexType>
+																									 </xs:element>
+																									 <xs:element name="csa" minOccurs="0" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																													<xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                                                                                                                </xs:sequence>
+																											 </xs:complexType>
+																									 </xs:element>
+																									 <xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+																											<xs:complexType>
+																												<xs:sequence>
+																													<xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                                                                                                                </xs:sequence>
+																											 </xs:complexType>
+																									 </xs:element>
                                                                                                </xs:sequence>
                                                                                          </xs:complexType>
                                                                                    </xs:element>
