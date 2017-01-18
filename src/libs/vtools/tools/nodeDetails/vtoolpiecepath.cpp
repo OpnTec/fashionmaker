@@ -40,8 +40,10 @@ VToolPiecePath *VToolPiecePath::Create(DialogTool *dialog, VMainGraphicsScene *s
     SCASSERT(dialog != nullptr);
     DialogPiecePath *dialogTool = qobject_cast<DialogPiecePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPiecePath path = dialogTool->GetPiecePath();
+    VPiecePath path = dialogTool->GetPiecePath();
     const quint32 pieceId = dialogTool->GetPieceId();
+    qApp->getUndoStack()->beginMacro("add path");
+    path.SetNodes(PrepareNodes(path, scene, doc, data));
 
     VToolPiecePath *pathTool = Create(0, path, pieceId, scene, doc, data, Document::FullParse, Source::FromGui);
     return pathTool;
@@ -90,7 +92,6 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
                 SCASSERT(saTool != nullptr);
                 pathTool->setParentItem(saTool);
                 pathTool->SetParentType(ParentType::Item);
-                doc->IncrementReferens(id);
             }
             else
             {
@@ -201,8 +202,6 @@ void VToolPiecePath::AddToFile()
 
     AddNodes(doc, domElement, path);
 
-    qApp->getUndoStack()->beginMacro(tr("new path"));
-
     AddToModeling(domElement);
 
     if (m_pieceId > NULL_ID)
@@ -230,8 +229,6 @@ void VToolPiecePath::AddToFile()
         qApp->getUndoStack()->push(saveCommand);// First push then make a connect
         VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
         connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-
-        qApp->getUndoStack()->endMacro();
     }
 }
 
@@ -264,6 +261,23 @@ void VToolPiecePath::HideNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::ToolCreation(const Source &typeCreation)
+{
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
+    {
+        AddToFile();
+        if (typeCreation != Source::FromTool)
+        {
+            qApp->getUndoStack()->endMacro();
+        }
+    }
+    else
+    {
+        RefreshDataInFile();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath::VToolPiecePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pieceId,
                                const Source &typeCreation, const QString &drawName, const quint32 &idTool,
                                QObject *qoParent, QGraphicsItem *parent)
@@ -271,6 +285,7 @@ VToolPiecePath::VToolPiecePath(VAbstractPattern *doc, VContainer *data, quint32 
       QGraphicsPathItem(parent),
       m_pieceId(pieceId)
 {
+    IncrementNodes(VAbstractTool::data.GetPiecePath(id));
     RefreshGeometry();
     ToolCreation(typeCreation);
 }
@@ -296,8 +311,7 @@ void VToolPiecePath::IncrementNodes(const VPiecePath &path) const
 {
     for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(path.at(i).GetId());
-        doc->IncrementReferens(node->getIdTool());
+        doc->IncrementReferens(VAbstractTool::data.GetGObject(path.at(i).GetId())->getIdTool());
     }
 }
 
@@ -306,7 +320,6 @@ void VToolPiecePath::DecrementNodes(const VPiecePath &path) const
 {
     for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(path.at(i).GetId());
-        doc->DecrementReferens(node->getIdTool());
+        doc->DecrementReferens(VAbstractTool::data.GetGObject(path.at(i).GetId())->getIdTool());
     }
 }

@@ -62,18 +62,68 @@
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
-#include "vdatatool.h"
+#include "nodeDetails/nodedetails.h"
 
 class QGraphicsEllipseItem;
 class QGraphicsLineItem;
 template <class T> class QSharedPointer;
 
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+/**
+ * @brief CreateNode create new node for detail.
+ * @param data container.
+ * @param id id parent object.
+ * @return id for new object.
+ */
+quint32 CreateNode(VContainer *data, quint32 id)
+{
+    //We can't use exist object. Need create new.
+    T *node = new T(*data->GeometricObject<T>(id).data());
+    node->setMode(Draw::Modeling);
+    return data->AddGObject(node);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 CreateNodeSpline(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::Spline)
+    {
+        return CreateNode<VSpline>(data, id);
+    }
+    else
+    {
+        return CreateNode<VCubicBezier>(data, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::SplinePath)
+    {
+        return CreateNode<VSplinePath>(data, id);
+    }
+    else
+    {
+        return CreateNode<VCubicBezierPath>(data, id);
+    }
+}
+}//static functions
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -532,4 +582,45 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
 void VAbstractTool::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
 {
     domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene,
+                                                VAbstractPattern *doc, VContainer *data)
+{
+    QVector<VPieceNode> nodes;
+    for (int i = 0; i< path.CountNodes(); ++i)
+    {
+        quint32 id = 0;
+        VPieceNode nodeD = path.at(i);
+        switch (nodeD.GetTypeTool())
+        {
+            case (Tool::NodePoint):
+                id = CreateNode<VPointF>(data, nodeD.GetId());
+                VNodePoint::Create(doc, data, scene, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeArc):
+                id = CreateNode<VArc>(data, nodeD.GetId());
+                VNodeArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeElArc):
+                id = CreateNode<VEllipticalArc>(data, nodeD.GetId());
+                VNodeEllipticalArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeSpline):
+                id = CreateNodeSpline(data, nodeD.GetId());
+                VNodeSpline::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeSplinePath):
+                id = CreateNodeSplinePath(data, nodeD.GetId());
+                VNodeSplinePath::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            default:
+                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+                break;
+        }
+        nodeD.SetId(id);
+        nodes.append(nodeD);
+    }
+    return nodes;
 }

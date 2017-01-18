@@ -63,6 +63,7 @@ protected:
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void ShowNode() Q_DECL_OVERRIDE;
     virtual void HideNode() Q_DECL_OVERRIDE;
+    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPiecePath)
 

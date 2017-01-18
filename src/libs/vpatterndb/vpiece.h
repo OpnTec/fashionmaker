@@ -81,9 +81,11 @@ public:
 
     QVector<quint32> GetInternalPaths() const;
     void             SetInternalPaths(const QVector<quint32> &iPaths);
+    void             AppendInternalPath(quint32 path);
 
     QVector<CustomSARecord> GetCustomSARecords() const;
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
+    void                    AppendCustomSARecord(const CustomSARecord &record);
 
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;

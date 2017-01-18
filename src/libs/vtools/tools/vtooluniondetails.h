@@ -143,7 +143,7 @@ private:
     void             AddDetail(QDomElement &domElement, const VPiece &d) const;
     void             AddToModeling(const QDomElement &domElement);
     QVector<quint32> GetReferenceObjects() const;
-    QVector<quint32> NodesReferenceObjects(const QDomElement &nodes) const;
+    QVector<quint32> ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute) const;
 };
 
 #endif // VTOOLUNIONDETAILS_H

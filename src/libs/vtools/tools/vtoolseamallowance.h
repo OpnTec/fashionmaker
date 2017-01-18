@@ -125,6 +125,7 @@ protected:
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
     virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
+    virtual void       ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
@@ -142,9 +143,6 @@ private:
     VGrainlineItem        *m_grainLine;
 
     void SetDialog();
-
-    template<typename T>
-    static quint32 CreateNode(VContainer *data, const quint32 &id);
 
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                        VMainGraphicsScene *scene, const QString &m_drawName, QGraphicsItem * parent = nullptr);

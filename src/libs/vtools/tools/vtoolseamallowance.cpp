@@ -90,69 +90,8 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
     DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(dialog);
     SCASSERT(dialogTool != nullptr);
     VPiece detail = dialogTool->GetPiece();
-    QVector<VPieceNode> nodes;
     qApp->getUndoStack()->beginMacro("add detail");
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
-    {
-        quint32 id = 0;
-        VPieceNode nodeD = detail.GetPath().at(i);
-        switch (nodeD.GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                id = CreateNode<VPointF>(data, nodeD.GetId());
-                VNodePoint::Create(doc, data, scene, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeArc):
-            {
-                id = CreateNode<VArc>(data, nodeD.GetId());
-                VNodeArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeElArc):
-            {
-                id = CreateNode<VEllipticalArc>(data, nodeD.GetId());
-                VNodeEllipticalArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeSpline):
-            {
-                const auto obj = data->GetGObject(nodeD.GetId());
-                if (obj->getType() == GOType::Spline)
-                {
-                    id = CreateNode<VSpline>(data, nodeD.GetId());
-                }
-                else
-                {
-                    id = CreateNode<VCubicBezier>(data, nodeD.GetId());
-                }
-                VNodeSpline::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            case (Tool::NodeSplinePath):
-            {
-                const auto obj = data->GetGObject(nodeD.GetId());
-                if (obj->getType() == GOType::SplinePath)
-                {
-                    id = CreateNode<VSplinePath>(data, nodeD.GetId());
-                }
-                else
-                {
-                    id = CreateNode<VCubicBezierPath>(data, nodeD.GetId());
-                }
-                VNodeSplinePath::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-            }
-            break;
-            default:
-                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-                break;
-        }
-        nodeD.SetId(id);
-        nodes.append(nodeD);
-    }
-
-    detail.GetPath().SetNodes(nodes);
+    detail.GetPath().SetNodes(PrepareNodes(detail.GetPath(), scene, doc, data));
 
     VToolSeamAllowance *piece = Create(0, detail, scene, doc, data, Document::FullParse, Source::FromGui);
 
@@ -1068,19 +1007,8 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
-    //connect(scene, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
-    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
-    {
-        AddToFile();
-        if (typeCreation != Source::FromTool)
-        {
-            qApp->getUndoStack()->endMacro();
-        }
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    connect(scene, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
+    ToolCreation(typeCreation);
     setAcceptHoverEvents(true);
 
     connect(m_dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveDetail);
@@ -1165,7 +1093,7 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
             case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
-                doc->IncrementReferens(detail.GetPath().at(i).GetId());
+                doc->IncrementReferens(VAbstractTool::data.GetGObject(detail.GetPath().at(i).GetId())->getIdTool());
                 break;
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
@@ -1194,6 +1122,7 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
         SCASSERT(tool != nullptr);
         tool->setParentItem(this);
         tool->SetParentType(ParentType::Item);
+        tool->show();
         doc->IncrementReferens(records.at(i));
     }
 }
@@ -1219,19 +1148,20 @@ void VToolSeamAllowance::DeleteTool(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-/**
- * @brief CreateNode create new node for detail.
- * @param data container.
- * @param id id parent object.
- * @return id for new object.
- */
-quint32 VToolSeamAllowance::CreateNode(VContainer *data, const quint32 &id)
+void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
 {
-    //We can't use exist object. Need create new.
-    T *node = new T(*data->GeometricObject<T>(id).data());
-    node->setMode(Draw::Modeling);
-    return data->AddGObject(node);
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
+    {
+        AddToFile();
+        if (typeCreation != Source::FromTool)
+        {
+            qApp->getUndoStack()->endMacro();
+        }
+    }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -111,13 +111,13 @@ VPiecePath GetPiecePath(int piece, VAbstractPattern *doc, quint32 id)
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
         const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail)
+        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i+1 == piece)
         {
             const QDomNodeList detList = element.childNodes();
             for (qint32 j = 0; j < detList.size(); ++j)
             {
                 const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VAbstractPattern::TagNodes && j+1 == piece)
+                if (not element.isNull() && element.tagName() == VAbstractPattern::TagNodes)
                 {
                     return VAbstractPattern::ParsePieceNodes(element);
                 }
@@ -141,7 +141,7 @@ VPiecePath GetPiece2MainPath(VAbstractPattern *doc, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> GetPieceCSAList(int piece, VAbstractPattern *doc, quint32 id)
+QVector<CustomSARecord> GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id)
 {
     const QDomElement tool = doc->elementById(id);
     if (tool.isNull())
@@ -154,13 +154,13 @@ QVector<CustomSARecord> GetPieceCSAList(int piece, VAbstractPattern *doc, quint3
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
         const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail)
+        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i+1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
             for (qint32 j = 0; j < detList.size(); ++j)
             {
                 const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagCSA && j+1 == piece)
+                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagCSA)
                 {
                     return VAbstractPattern::ParsePieceCSARecords(element);
                 }
@@ -172,19 +172,7 @@ QVector<CustomSARecord> GetPieceCSAList(int piece, VAbstractPattern *doc, quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> GetPiece1CSAPaths(VAbstractPattern *doc, quint32 id)
-{
-    return GetPieceCSAList(1, doc, id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id)
-{
-    return GetPieceCSAList(2, doc, id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> GetPieceInternalPathList(int piece, VAbstractPattern *doc, quint32 id)
+QVector<quint32> GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id)
 {
     const QDomElement tool = doc->elementById(id);
     if (tool.isNull())
@@ -197,13 +185,13 @@ QVector<quint32> GetPieceInternalPathList(int piece, VAbstractPattern *doc, quin
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
         const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail)
+        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i+1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
             for (qint32 j = 0; j < detList.size(); ++j)
             {
                 const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagIPaths && j+1 == piece)
+                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagIPaths)
                 {
                     return VAbstractPattern::ParsePieceInternalPaths(element);
                 }
@@ -212,18 +200,6 @@ QVector<quint32> GetPieceInternalPathList(int piece, VAbstractPattern *doc, quin
     }
 
     return QVector<quint32>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> GetPiece1InternalPaths(VAbstractPattern *doc, quint32 id)
-{
-    return GetPieceInternalPathList(1, doc, id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id)
-{
-    return GetPieceInternalPathList(2, doc, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,32 +290,30 @@ void BiasRotatePoint(VPointF *point, qreal dx, qreal dy, const QPointF &pRotate,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PointsOnEdge(const VPiece &d, quint32 index, VPointF &p1, VPointF &p2, VContainer *data)
+void PointsOnEdge(const VPiecePath &path, quint32 index, VPointF &p1, VPointF &p2, VContainer *data)
 {
     VPieceNode det2p1;
     VPieceNode det2p2;
-    d.GetPath().NodeOnEdge(index, det2p1, det2p2);
+    path.NodeOnEdge(index, det2p1, det2p2);
     p1 = VPointF(*data->GeometricObject<VPointF>(det2p1.GetId()));
     p2 = VPointF(*data->GeometricObject<VPointF>(det2p2.GetId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void UnionInitParameters(const VToolUnionDetailsInitData &initData, VPieceNode &det1p1, qreal &dx, qreal &dy,
-                         qreal &angle)
+void UnionInitParameters(const VToolUnionDetailsInitData &initData, const VPiecePath &d1Path, const VPiecePath &d2Path,
+                         VPieceNode &det1p1, qreal &dx, qreal &dy, qreal &angle)
 {
-    const VPiece d1 = initData.data->GetPiece(initData.d1id);
     VPieceNode det1p2;
-    d1.GetPath().NodeOnEdge(initData.indexD1, det1p1, det1p2);
+    d1Path.NodeOnEdge(initData.indexD1, det1p1, det1p2);
     Q_UNUSED(det1p2)
 
     VPointF point1;
     VPointF point2;
-    PointsOnEdge(d1, initData.indexD1, point1, point2, initData.data);
+    PointsOnEdge(d1Path, initData.indexD1, point1, point2, initData.data);
 
     VPointF point3;
     VPointF point4;
-    const VPiece d2 = initData.data->GetPiece(initData.d2id);
-    PointsOnEdge(d2, initData.indexD2, point3, point4, initData.data);
+    PointsOnEdge(d2Path, initData.indexD2, point3, point4, initData.data);
 
     dx = point1.x() - point4.x();
     dy = point1.y() - point4.y();
@@ -987,6 +961,7 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
 {
     QVector<CustomSARecord> newList = newDetail.GetCustomSARecords();
     const QVector<CustomSARecord> oldList = d.GetCustomSARecords();
+    QVector<quint32> nodeChildren;
     for(int i=0; i < oldList.size(); ++i)
     {
         CustomSARecord record = oldList.at(i);
@@ -995,14 +970,16 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
         newPath.Clear();//Clear nodes
         for (int i=0; i < path.CountNodes(); ++i)
         {
-            AddNodeToNewPath(initData, newPath, path.at(i), id, children, drawName, dx, dy, pRotate, angle);
+            AddNodeToNewPath(initData, newPath, path.at(i), id, nodeChildren, drawName, dx, dy, pRotate, angle);
         }
-        VToolPiecePath *pathTool = VToolPiecePath::Create(0, newPath, NULL_ID, initData.scene, initData.doc,
-                                                          initData.data, initData.parse, Source::FromTool, drawName,
-                                                          id);
-        record.path = pathTool->getId();
+        const quint32 idPath = initData.data->AddPiecePath(newPath);
+        VToolPiecePath::Create(idPath, newPath, NULL_ID, initData.scene, initData.doc, initData.data, initData.parse,
+                               Source::FromTool, drawName, id);
+        record.path = idPath;
         newList.append(record);
+        nodeChildren.prepend(idPath);
     }
+    children += nodeChildren;
     newDetail.SetCustomSARecords(newList);
 }
 
@@ -1010,8 +987,13 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
 void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, quint32 id, const QString &drawName,
                      const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate, qreal angle)
 {
+    const QVector<CustomSARecord> d1Records = d1.GetCustomSARecords();
+    for (int i = 0; i < d1Records.size(); ++i)
+    {
+        newDetail.AppendCustomSARecord(d1Records.at(i));
+    }
+
     QVector<quint32> children;
-    CreateUnitedDetailCSA(newDetail, d1, children, id, drawName, initData, dx, dy, pRotate, angle);
     CreateUnitedDetailCSA(newDetail, d2, children, id, drawName, initData, dx, dy, pRotate, angle);
 
     SCASSERT(not children.isEmpty())
@@ -1025,6 +1007,7 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
 {
     QVector<quint32> newList = newDetail.GetInternalPaths();
     const QVector<quint32> oldList = d.GetInternalPaths();
+    QVector<quint32> nodeChildren;
     for(int i=0; i < oldList.size(); ++i)
     {
         const VPiecePath path = initData.data->GetPiecePath(oldList.at(i));
@@ -1033,13 +1016,15 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
 
         for (int i=0; i < path.CountNodes(); ++i)
         {
-            AddNodeToNewPath(initData, newPath, path.at(i), id, children, drawName, dx, dy, pRotate, angle);
+            AddNodeToNewPath(initData, newPath, path.at(i), id, nodeChildren, drawName, dx, dy, pRotate, angle);
         }
-        VToolPiecePath *pathTool = VToolPiecePath::Create(0, newPath, NULL_ID, initData.scene, initData.doc,
-                                                          initData.data, initData.parse, Source::FromTool, drawName,
-                                                          id);
-        newList.append(pathTool->getId());
+        const quint32 idPath = initData.data->AddPiecePath(newPath);
+        VToolPiecePath::Create(idPath, newPath, NULL_ID, initData.scene, initData.doc, initData.data, initData.parse,
+                               Source::FromTool, drawName, id);
+        newList.append(idPath);
+        nodeChildren.prepend(idPath);
     }
+    children += nodeChildren;
     newDetail.SetInternalPaths(newList);
 }
 
@@ -1048,8 +1033,13 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
                                const QString &drawName, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy,
                                quint32 pRotate, qreal angle)
 {
+    const QVector<quint32> d1Internal = d1.GetInternalPaths();
+    for (int i = 0; i < d1Internal.size(); ++i)
+    {
+        newDetail.AppendInternalPath(d1Internal.at(i));
+    }
+
     QVector<quint32> children;
-    CreateUnitedDetailInternalPaths(newDetail, d1, children, id, drawName, initData, dx, dy, pRotate, angle);
     CreateUnitedDetailInternalPaths(newDetail, d2, children, id, drawName, initData, dx, dy, pRotate, angle);
 
     SCASSERT(not children.isEmpty())
@@ -1060,10 +1050,10 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
 void UpdateUnitedNodes(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                        qreal angle)
 {
-    const VPiecePath d1Path = GetPiece1MainPath(initData.doc, initData.d1id);
+    const VPiecePath d1Path = GetPiece1MainPath(initData.doc, id);
     const VPiecePath d1REPath = d1Path.RemoveEdge(initData.indexD1);
 
-    const VPiecePath d2Path = GetPiece2MainPath(initData.doc, initData.d2id);
+    const VPiecePath d2Path = GetPiece2MainPath(initData.doc, id);
     const VPiecePath d2REPath = d2Path.RemoveEdge(initData.indexD2);
 
     const qint32 countNodeD1 = d1REPath.CountNodes();
@@ -1133,43 +1123,46 @@ void UpdateUnitedNodes(quint32 id, const VToolUnionDetailsInitData &initData, qr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void UpdateUnitedDetailCSA(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
-                           qreal angle, const QVector<CustomSARecord> &records)
+void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
+                             qreal angle, const QVector<quint32> &records, QVector<quint32> children)
 {
-    QVector<quint32> children = GetCSAChildren(initData.doc, id);
     for (int i=0; i < records.size(); ++i)
     {
-        VPiecePath path = initData.data->GetPiecePath(records.at(i).path);
-        UpdatePathNode(initData.data, path.at(i), children, dx, dy, pRotate, angle);
+        const VPiecePath path = initData.data->GetPiecePath(records.at(i));
+        const quint32 updatedId = TakeNextId(children);
+
+        VPiecePath updatedPath(path);
+        updatedPath.Clear();
+
+        for (int j=0; j < path.CountNodes(); ++j)
+        {
+            const VPieceNode &node = path.at(j);
+            const quint32 id = TakeNextId(children);
+            updatedPath.Append(VPieceNode(id, node.GetTypeTool(), node.GetReverse()));
+            QVector<quint32> nodeChildren = {id};
+            UpdatePathNode(initData.data, path.at(j), nodeChildren, dx, dy, pRotate, angle);
+        }
+        initData.data->UpdatePiecePath(updatedId, updatedPath);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void UpdateUnitedCSA(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
-                     qreal angle)
+void UpdateUnitedDetailCSA(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
+                           qreal angle, const QVector<CustomSARecord> &records)
 {
-    UpdateUnitedDetailCSA(id, initData, dx, dy, pRotate, angle, GetPiece1CSAPaths(initData.doc, id));
-    UpdateUnitedDetailCSA(id, initData, dx, dy, pRotate, angle, GetPiece2CSAPaths(initData.doc, id));
+    QVector<quint32> idRecords;
+    for (int i = 0; i < records.size(); ++i)
+    {
+        idRecords.append(records.at(i).path);
+    }
+    UpdateUnitedDetailPaths(initData, dx, dy, pRotate, angle, idRecords, GetCSAChildren(initData.doc, id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void UpdateUnitedDetailInternalPaths(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy,
                                      quint32 pRotate, qreal angle, const QVector<quint32> &records)
 {
-    QVector<quint32> children = GetInternalPathsChildren(initData.doc, id);
-    for (int i=0; i < records.size(); ++i)
-    {
-        VPiecePath path = initData.data->GetPiecePath(records.at(i));
-        UpdatePathNode(initData.data, path.at(i), children, dx, dy, pRotate, angle);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void UpdateUnitedInternalPaths(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy,
-                               quint32 pRotate, qreal angle)
-{
-    UpdateUnitedDetailInternalPaths(id, initData, dx, dy, pRotate, angle, GetPiece1InternalPaths(initData.doc, id));
-    UpdateUnitedDetailInternalPaths(id, initData, dx, dy, pRotate, angle, GetPiece2InternalPaths(initData.doc, id));
+    UpdateUnitedDetailPaths(initData, dx, dy, pRotate, angle, records, GetInternalPathsChildren(initData.doc, id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1215,8 +1208,8 @@ void UpdateUnitedDetail(quint32 id, const VToolUnionDetailsInitData &initData, q
                         qreal angle)
 {
     UpdateUnitedNodes(id, initData, dx, dy, pRotate, angle);
-    UpdateUnitedCSA(id, initData, dx, dy, pRotate, angle);
-    UpdateUnitedInternalPaths(id, initData, dx, dy, pRotate, angle);
+    UpdateUnitedDetailCSA(id, initData, dx, dy, pRotate, angle, GetPiece2CSAPaths(initData.doc, id));
+    UpdateUnitedDetailInternalPaths(id, initData, dx, dy, pRotate, angle, GetPiece2InternalPaths(initData.doc, id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1226,14 +1219,19 @@ void UniteDetails(quint32 id, const VToolUnionDetailsInitData &initData)
     qreal dx = 0;
     qreal dy = 0;
     qreal angle = 0;
-    UnionInitParameters(initData, det1p1, dx, dy, angle);
 
     if (initData.typeCreation == Source::FromGui)
     {
-        CreateUnitedDetail(id, initData,  dx, dy, det1p1.GetId(), angle);
+        const VPiece d1 = initData.data->GetPiece(initData.d1id);
+        const VPiece d2 = initData.data->GetPiece(initData.d2id);
+        UnionInitParameters(initData, d1.GetPath(), d2.GetPath(), det1p1, dx, dy, angle);
+        CreateUnitedDetail(id, initData, dx, dy, det1p1.GetId(), angle);
     }
     else
     {
+        const VPiecePath d1Path = GetPiece1MainPath(initData.doc, id);
+        const VPiecePath d2Path = GetPiece2MainPath(initData.doc, id);
+        UnionInitParameters(initData, d1Path, d2Path, det1p1, dx, dy, angle);
         UpdateUnitedDetail(id, initData, dx, dy, det1p1.GetId(), angle);
     }
 }
@@ -1493,18 +1491,13 @@ QVector<quint32> VToolUnionDetails::GetReferenceObjects() const
                     switch (parts.indexOf(element.tagName()))
                     {
                         case 0://VAbstractPattern::TagNodes
-                            list += NodesReferenceObjects(element);
+                            list += ReferenceObjects(element, TagNode, AttrIdObject);
                             break;
                         case 1://VToolSeamAllowance::TagCSA
                         case 2://VToolSeamAllowance::TagIPaths
-                        {
-                            const quint32 id = doc->GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
-                            if (id > NULL_ID)
-                            {
-                                list.append(id);
-                            }
+                            list += ReferenceObjects(element, VToolSeamAllowance::TagRecord,
+                                                     VAbstractPattern::AttrPath);
                             break;
-                        }
                         default:
                             break;
                     }
@@ -1516,23 +1509,24 @@ QVector<quint32> VToolUnionDetails::GetReferenceObjects() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VToolUnionDetails::NodesReferenceObjects(const QDomElement &nodes) const
+QVector<quint32> VToolUnionDetails::ReferenceObjects(const QDomElement &root, const QString &tag,
+                                                     const QString &attribute) const
 {
-    QVector<quint32> list;
+    QVector<quint32> objects;
 
-    const QDomNodeList nodeList = nodes.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    const QDomNodeList list = root.childNodes();
+    for (qint32 i = 0; i < list.size(); ++i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagNode)
+        const QDomElement element = list.at(i).toElement();
+        if (not element.isNull() && element.tagName() == tag)
         {
-            const quint32 id = doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+            const quint32 id = doc->GetParametrUInt(element, attribute, NULL_ID_STR);
             if (id > NULL_ID)
             {
-                list.append(id);
+                objects.append(id);
             }
         }
     }
 
-    return list;
+    return objects;
 }

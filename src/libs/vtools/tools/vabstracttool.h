@@ -147,13 +147,16 @@ protected:
     void AddVisualization();
 
     virtual void SetVisualization()=0;
-    void ToolCreation(const Source &typeCreation);
+    virtual void ToolCreation(const Source &typeCreation);
 
     static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
                             QGraphicsLineItem *lineName, const qreal radius);
 
     static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
     static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
+
+    static QVector<VPieceNode> PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                            VContainer *data);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

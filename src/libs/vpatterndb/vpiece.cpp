@@ -282,6 +282,12 @@ void VPiece::SetInternalPaths(const QVector<quint32> &iPaths)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::AppendInternalPath(quint32 path)
+{
+    d->m_internalPaths.append(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<CustomSARecord> VPiece::GetCustomSARecords() const
 {
     return d->m_customSARecords;
@@ -291,6 +297,12 @@ QVector<CustomSARecord> VPiece::GetCustomSARecords() const
 void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
 {
     d->m_customSARecords = records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::AppendCustomSARecord(const CustomSARecord &record)
+{
+    d->m_customSARecords.append(record);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
