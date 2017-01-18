@@ -32,6 +32,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
+#include <QGraphicsScene>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -230,6 +231,10 @@ QRectF VGrainlineItem::boundingRect() const
  */
 void VGrainlineItem::Reset()
 {
+    if (QGraphicsScene *toolScene = scene())
+    {
+        toolScene->clearSelection();
+    }
     m_bReleased = false;
     m_eMode = mNormal;
     setZValue(INACTIVE_Z);

@@ -334,7 +334,7 @@ void VToolSeamAllowance::AllowSelecting(bool enabled)
 void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    VTextGraphicsItem* pVGI = dynamic_cast<VTextGraphicsItem*>(pItem);
+    VTextGraphicsItem* pVGI = qgraphicsitem_cast<VTextGraphicsItem*>(pItem);
     if (pVGI != m_dataLabel)
     {
         if (detail.GetPatternPieceData().IsVisible())
@@ -349,7 +349,7 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
             m_patternInfo->Reset();
         }
     }
-    VGrainlineItem* pGLI = dynamic_cast<VGrainlineItem*>(pItem);
+    VGrainlineItem* pGLI = qgraphicsitem_cast<VGrainlineItem*>(pItem);
     if (pGLI != m_grainLine)
     {
         if (detail.GetGrainlineGeometry().IsVisible())
@@ -357,6 +357,8 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
             m_grainLine->Reset();
         }
     }
+
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

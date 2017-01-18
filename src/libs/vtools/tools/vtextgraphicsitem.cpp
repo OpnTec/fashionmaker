@@ -37,6 +37,7 @@
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
 #include <Qt>
+#include <QGraphicsScene>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -201,6 +202,10 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
  */
 void VTextGraphicsItem::Reset()
 {
+    if (QGraphicsScene *toolScene = scene())
+    {
+        toolScene->clearSelection();
+    }
     m_eMode = mNormal;
     m_bReleased = false;
     Update();
