@@ -305,6 +305,8 @@ void VContainer::Clear()
     _id = NULL_ID;
 
     d->details->clear();
+    d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables();
     ClearGObjects();
     ClearUniqueNames();
