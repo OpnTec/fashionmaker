@@ -53,6 +53,7 @@
 #include "../undocommands/savepieceoptions.h"
 #include "../undocommands/togglepieceinlayout.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vnobrushscalepathitem.h"
 
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>

@@ -34,14 +34,14 @@
 #include <QObject>
 #include <QGraphicsPathItem>
 
-#include "../vwidgets/vnobrushscalepathitem.h"
 #include "vabstracttool.h"
-#include "vtextgraphicsitem.h"
-#include "vgrainlineitem.h"
+#include "../vwidgets/vtextgraphicsitem.h"
+#include "../vwidgets/vgrainlineitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
 class VPiece;
+class VNoBrushScalePathItem;
 
 class VToolSeamAllowance : public VAbstractTool, public QGraphicsPathItem
 {

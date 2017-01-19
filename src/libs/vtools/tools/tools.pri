@@ -51,8 +51,6 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezier.h \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.h \
     $$PWD/drawTools/operation/vtoolrotation.h \
-    $$PWD/vtextgraphicsitem.h \
-    $$PWD/vgrainlineitem.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyline.h \
     $$PWD/drawTools/operation/vabstractoperation.h \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.h \
@@ -61,8 +59,7 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolellipticalarc.h \
     $$PWD/nodeDetails/vnodeellipticalarc.h \
     $$PWD/vtoolseamallowance.h \
-    $$PWD/nodeDetails/vtoolpiecepath.h \
-    $$PWD/vpieceitem.h
+    $$PWD/nodeDetails/vtoolpiecepath.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -111,8 +108,6 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolcubicbezier.cpp \
     $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.cpp \
     $$PWD/drawTools/operation/vtoolrotation.cpp \
-    $$PWD/vtextgraphicsitem.cpp \
-    $$PWD/vgrainlineitem.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyline.cpp \
     $$PWD/drawTools/operation/vabstractoperation.cpp \
     $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.cpp \
@@ -121,5 +116,4 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolellipticalarc.cpp \
     $$PWD/nodeDetails/vnodeellipticalarc.cpp \
     $$PWD/vtoolseamallowance.cpp \
-    $$PWD/nodeDetails/vtoolpiecepath.cpp \
-    $$PWD/vpieceitem.cpp
+    $$PWD/nodeDetails/vtoolpiecepath.cpp
