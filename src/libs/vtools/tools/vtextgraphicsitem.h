@@ -40,6 +40,7 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "vpieceitem.h"
 #include "../vlayout/vtextmanager.h"
 
 class QFont;
@@ -59,70 +60,50 @@ class VPatternPieceData;
  * which can be dragged around, resized and rotated within the parent item. The text font
  * size will be automatically updated, so that the entire text will fit into the item.
  */
-class VTextGraphicsItem : public QGraphicsObject
+class VTextGraphicsItem : public VPieceItem
 {
     Q_OBJECT
-
-    enum Mode {
-        mNormal,
-        mMove,
-        mResize,
-        mRotate
-    };
-
 public:
     explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
     virtual ~VTextGraphicsItem();
 
-    void                SetFont(const QFont& fnt);
-    virtual void        paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                              QWidget *widget) Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
+    virtual void Update() Q_DECL_OVERRIDE;
 
-    void                Reset();
-    bool                IsIdle() const;
-
-    int                 GetFontSize() const;
-    virtual QRectF      boundingRect() const Q_DECL_OVERRIDE;
-    void                AddLine(const TextLine& tl);
-    void                Clear();
-    void                SetSize(qreal fW, qreal fH);
-    void                Update();
-    bool                IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
-    void                UpdateData(const QString& qsName, const VPatternPieceData& data);
-    void                UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
-    int                 GetTextLines() const;
+    void SetFont(const QFont& fnt);
+    int  GetFontSize() const;
+    void AddLine(const TextLine& tl);
+    void Clear();
+    void SetSize(qreal fW, qreal fH);
+    bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
+    void UpdateData(const QString& qsName, const VPatternPieceData& data);
+    void UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
+    int  GetTextLines() const;
 
 protected:
-    virtual void        mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void        mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void        mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void        hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
-    virtual void        hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
-    void                UpdateBox();
-    void                CorrectLabel();
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
 
-    double              GetAngle(QPointF pt) const;
+    void UpdateBox();
+    void CorrectLabel();
 
 signals:
-    void                SignalMoved(const QPointF& ptPos);
-    void                SignalResized(qreal iTW, int iFontSize);
-    void                SignalRotated(qreal dAng);
-    void                SignalShrink();
+    void SignalResized(qreal iTW, int iFontSize);
+    void SignalRotated(qreal dAng);
+    void SignalShrink();
 
 private:
-    Mode                m_eMode;
-    bool                m_bReleased;
-    QPointF             m_ptStartPos;
-    QPointF             m_ptStart;
-    QPointF             m_ptRotCenter;
-    QSizeF              m_szStart;
-    double              m_dRotation;
-    double              m_dAngle;
-    QRectF              m_rectResize;
-    QRectF              m_rectBoundingBox;
-    VTextManager        m_tm;
-
-    QRectF              GetBoundingRect(QRectF rectBB, qreal dRot) const;
+    Q_DISABLE_COPY(VTextGraphicsItem)
+    QPointF      m_ptStartPos;
+    QPointF      m_ptStart;
+    QSizeF       m_szStart;
+    double       m_dRotation;
+    double       m_dAngle;
+    QRectF       m_rectResize;
+    VTextManager m_tm;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

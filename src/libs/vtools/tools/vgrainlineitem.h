@@ -29,8 +29,7 @@
 #ifndef VGRAINLINEITEM_H
 #define VGRAINLINEITEM_H
 
-#include <QGraphicsObject>
-
+#include "vpieceitem.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 
 class QGraphicsObject;
@@ -38,66 +37,50 @@ class QPainter;
 class QStyleOptionGraphicsItem;
 class QWidget;
 
-class VGrainlineItem : public QGraphicsObject
+class VGrainlineItem : public VPieceItem
 {
     Q_OBJECT
-
-    enum Mode {
-        mNormal,
-        mMove,
-        mResize,
-        mRotate
-    };
-
 public:
     explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
     virtual ~VGrainlineItem();
 
-    void                    paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget);
-    void                    UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
-                                           VGrainlineGeometry::ArrowType eAT);
+    virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
+    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
+                                VGrainlineGeometry::ArrowType eAT);
 
-    QRectF                  boundingRect() const;
-    void                    Reset();
-    bool                    IsIdle() const;
-    bool                    IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
-    void                    SetScale(qreal dScale);
-
-protected:
-    void                    mousePressEvent(QGraphicsSceneMouseEvent* pME);
-    void                    mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
-    void                    mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
-    void                    UpdateBox();
-    void                    UpdateRectangle();
-
-    qreal                   GetAngle(const QPointF& pt) const;
-    QPointF                 Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
-    QPointF                 GetInsideCorner(int i, qreal dDist) const;
+    bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
+    void SetScale(qreal dScale);
 
 signals:
-    void                    SignalMoved(const QPointF& ptPos);
-    void                    SignalResized(qreal dLength);
-    void                    SignalRotated(qreal dRot, const QPointF& ptNewPos);
+    void SignalResized(qreal dLength);
+    void SignalRotated(qreal dRot, const QPointF& ptNewPos);
+
+protected:
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void Update() Q_DECL_OVERRIDE;
+    void         UpdateRectangle();
+
+    QPointF Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
+    QPointF GetInsideCorner(int i, qreal dDist) const;
 
 private:
-    Mode                            m_eMode;
-    bool                            m_bReleased;
-    qreal                           m_dRotation;
-    qreal                           m_dStartRotation;
-    qreal                           m_dLength;
-    QRectF                          m_rectBoundingBox;
-    QPolygonF                       m_polyBound;
-    QPointF                         m_ptStartPos;
-    QPointF                         m_ptStartMove;
-    qreal                           m_dScale;
-    QPolygonF                       m_polyResize;
-    qreal                           m_dStartLength;
-    QPointF                         m_ptStart;
-    QPointF                         m_ptFinish;
-    QPointF                         m_ptCenter;
-    QPointF                         m_ptRotCenter;
-    qreal                           m_dAngle;
-    VGrainlineGeometry::ArrowType   m_eArrowType;
+    Q_DISABLE_COPY(VGrainlineItem)
+    qreal                         m_dRotation;
+    qreal                         m_dStartRotation;
+    qreal                         m_dLength;
+    QPolygonF                     m_polyBound;
+    QPointF                       m_ptStartPos;
+    QPointF                       m_ptStartMove;
+    qreal                         m_dScale;
+    QPolygonF                     m_polyResize;
+    qreal                         m_dStartLength;
+    QPointF                       m_ptStart;
+    QPointF                       m_ptFinish;
+    QPointF                       m_ptCenter;
+    qreal                         m_dAngle;
+    VGrainlineGeometry::ArrowType m_eArrowType;
 };
 
 #endif // VGRAINLINEITEM_H

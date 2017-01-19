@@ -32,7 +32,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
-#include <QGraphicsScene>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -45,7 +44,6 @@
 #define RESIZE_RECT_SIZE                10
 #define ROTATE_CIRC_R                   7
 #define ACTIVE_Z                        10
-#define INACTIVE_Z                      5
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -53,13 +51,10 @@
  * @param pParent pointer to the parent item
  */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
-    : QGraphicsObject(pParent),
-      m_eMode(VGrainlineItem::mNormal),
-      m_bReleased(false),
+    : VPieceItem(pParent),
       m_dRotation(0),
       m_dStartRotation(0),
       m_dLength(0),
-      m_rectBoundingBox(),
       m_polyBound(),
       m_ptStartPos(),
       m_ptStartMove(),
@@ -69,12 +64,10 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptStart(),
       m_ptFinish(),
       m_ptCenter(),
-      m_ptRotCenter(),
       m_dAngle(0),
       m_eArrowType(VGrainlineGeometry::atBoth)
 {
-    m_rectBoundingBox.setTopLeft(QPointF(0, 0));
-    setAcceptHoverEvents(true);
+    m_inactiveZ = 5;
     Reset();
     UpdateRectangle();
 }
@@ -212,43 +205,7 @@ void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal
     m_eArrowType = eAT;
 
     UpdateRectangle();
-    UpdateBox();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::boundingRect returns the bounding rect around the grainline
- * @return bounding rect
- */
-QRectF VGrainlineItem::boundingRect() const
-{
-    return m_rectBoundingBox;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::Reset resets the item parameters.
- */
-void VGrainlineItem::Reset()
-{
-    if (QGraphicsScene *toolScene = scene())
-    {
-        toolScene->clearSelection();
-    }
-    m_bReleased = false;
-    m_eMode = mNormal;
-    setZValue(INACTIVE_Z);
-    UpdateBox();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::IsIdle returns the idle flag.
- * @return true, if item mode is normal and false otherwise.
- */
-bool VGrainlineItem::IsIdle() const
-{
-    return m_eMode == mNormal;
+    Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,7 +280,7 @@ void VGrainlineItem::SetScale(qreal dScale)
 {
     m_dScale = dScale;
     UpdateRectangle();
-    UpdateBox();
+    Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,7 +317,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
         setZValue(ACTIVE_Z);
-        UpdateBox();
+        Update();
     }
 }
 
@@ -383,7 +340,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             pt.setY(pt.y() + dY);
         }
         setPos(pt);
-        UpdateBox();
+        Update();
     }
     else if (m_eMode == mResize)
     {
@@ -400,7 +357,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             m_dLength = dPrevLen;
         }
         UpdateRectangle();
-        UpdateBox();
+        Update();
     }
     else if (m_eMode == mRotate)
     {
@@ -424,7 +381,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             setPos(ptNewPos);
             m_dRotation = m_dStartRotation + dAng;
             UpdateRectangle();
-            UpdateBox();
+            Update();
         }
     }
 }
@@ -459,7 +416,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
                 if (m_bReleased == true)
                 {
                     m_eMode = mRotate;
-                    UpdateBox();
+                    Update();
                 }
             }
             else
@@ -472,7 +429,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
                 {
                     emit SignalResized(m_dLength);
                 }
-                UpdateBox();
+                Update();
             }
         }
         else
@@ -485,7 +442,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             {
                 emit SignalRotated(m_dRotation, m_ptStart);
             }
-            UpdateBox();
+            Update();
         }
         m_bReleased = true;
     }
@@ -495,7 +452,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 /**
  * @brief VGrainlineItem::UpdateBox updates the item
  */
-void VGrainlineItem::UpdateBox()
+void VGrainlineItem::Update()
 {
     update(m_rectBoundingBox);
 }
@@ -552,28 +509,6 @@ void VGrainlineItem::UpdateRectangle()
     m_polyResize << ptA;
 
     prepareGeometryChange();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::GetAngle calculates the angle between the line, which goes from
- * rotation center to pt and x axis
- * @param pt point of interest
- * @return the angle between line from rotation center and point of interest and x axis
- */
-qreal VGrainlineItem::GetAngle(const QPointF& pt) const
-{
-    double dX = pt.x() - m_ptRotCenter.x();
-    double dY = pt.y() - m_ptRotCenter.y();
-
-    if (fabs(dX) < 1 && fabs(dY) < 1)
-    {
-        return 0;
-    }
-    else
-    {
-        return qAtan2(-dY, dX);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

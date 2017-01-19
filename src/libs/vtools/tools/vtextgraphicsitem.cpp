@@ -37,7 +37,6 @@
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
 #include <Qt>
-#include <QGraphicsScene>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -56,8 +55,66 @@ const qreal rotateCircle = (2./*mm*/ / 25.4) * PrintDPI;
 #define ROTATE_ARC                  50
 const qreal minW = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
 const qreal minH = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
-#define INACTIVE_Z                  2
 #define ACTIVE_Z                    10
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBoundingRect calculates the bounding box around rectBB rectangle, rotated around its center by dRot degrees
+ * @param rectBB rectangle of interest
+ * @param dRot rectangle rotation
+ * @return bounding box around rectBB rotated by dRot
+ */
+QRectF GetBoundingRect(QRectF rectBB, qreal dRot)
+{
+    QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
+    QPointF ptCenter = rectBB.center();
+
+    qreal dX1 = 0;
+    qreal dX2 = 0;
+    qreal dY1 = 0;
+    qreal dY2 = 0;
+
+    double dAng = qDegreesToRadians(dRot);
+    for (int i = 0; i < 4; ++i)
+    {
+        QPointF pt = apt[i] - ptCenter;
+        qreal dX = pt.x()*cos(dAng) + pt.y()*sin(dAng);
+        qreal dY = -pt.x()*sin(dAng) + pt.y()*cos(dAng);
+
+        if (i == 0)
+        {
+            dX1 = dX2 = dX;
+            dY1 = dY2 = dY;
+        }
+        else
+        {
+            if (dX < dX1)
+            {
+                dX1 = dX;
+            }
+            else if (dX > dX2)
+            {
+                dX2 = dX;
+            }
+            if (dY < dY1)
+            {
+                dY1 = dY;
+            }
+            else if (dY > dY2)
+            {
+                dY2 = dY;
+            }
+        }
+    }
+    QRectF rect;
+    rect.setTopLeft(ptCenter + QPointF(dX1, dY1));
+    rect.setWidth(dX2 - dX1);
+    rect.setHeight(dY2 - dY1);
+    return rect;
+}
+}//static functions
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -65,23 +122,18 @@ const qreal minH = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
  * @param pParent pointer to the parent item
  */
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
-    : QGraphicsObject(pParent),
-      m_eMode(VTextGraphicsItem::mNormal),
-      m_bReleased(false),
+    : VPieceItem(pParent),
       m_ptStartPos(),
       m_ptStart(),
-      m_ptRotCenter(),
       m_szStart(),
       m_dRotation(0),
       m_dAngle(0),
       m_rectResize(),
-      m_rectBoundingBox(),
       m_tm()
 {
-    m_rectBoundingBox.setTopLeft(QPointF(0, 0));
+    m_inactiveZ = 2;
     SetSize(minW, minH);
-    setZValue(INACTIVE_Z);
-    setAcceptHoverEvents(true);
+    setZValue(m_inactiveZ);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,32 +246,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::Reset resets the item, putting the mode and z coordinate to normal and redraws it
- */
-void VTextGraphicsItem::Reset()
-{
-    if (QGraphicsScene *toolScene = scene())
-    {
-        toolScene->clearSelection();
-    }
-    m_eMode = mNormal;
-    m_bReleased = false;
-    Update();
-    setZValue(INACTIVE_Z);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::IsIdle checks if the item is in normal mode.
- * @return true, if item is in normal mode and false otherwise.
- */
-bool VTextGraphicsItem::IsIdle() const
-{
-    return m_eMode == mNormal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,16 +398,6 @@ int VTextGraphicsItem::GetTextLines() const
 int VTextGraphicsItem::GetFontSize() const
 {
     return m_tm.GetFont().pixelSize();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::boundingRect returns the label bounding box
- * @return label bounding box
- */
-QRectF VTextGraphicsItem::boundingRect() const
-{
-    return m_rectBoundingBox;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -616,83 +632,4 @@ void VTextGraphicsItem::CorrectLabel()
     }
     m_tm.FitFontSize(m_rectBoundingBox.width(), m_rectBoundingBox.height());
     UpdateBox();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::GetAngle calculates the angle between the line, which goes from
- * rotation center to pt and x axis
- * @param pt point of interest
- * @return the angle between line from rotation center and point of interest and x axis
- */
-double VTextGraphicsItem::GetAngle(QPointF pt) const
-{
-    double dX = pt.x() - m_ptRotCenter.x();
-    double dY = pt.y() - m_ptRotCenter.y();
-
-    if (fabs(dX) < 1 && fabs(dY) < 1)
-    {
-        return 0;
-    }
-    else
-    {
-        return qAtan2(dY, dX);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::GetBoundingRect calculates the bounding box
- *  around rectBB rectangle, rotated around its center by dRot degrees
- * @param rectBB rectangle of interest
- * @param dRot rectangle rotation
- * @return bounding box around rectBB rotated by dRot
- */
-QRectF VTextGraphicsItem::GetBoundingRect(QRectF rectBB, qreal dRot) const
-{
-    QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
-    QPointF ptCenter = rectBB.center();
-
-    qreal dX1 = 0;
-    qreal dX2 = 0;
-    qreal dY1 = 0;
-    qreal dY2 = 0;
-
-    double dAng = qDegreesToRadians(dRot);
-    for (int i = 0; i < 4; ++i)
-    {
-        QPointF pt = apt[i] - ptCenter;
-        qreal dX = pt.x()*cos(dAng) + pt.y()*sin(dAng);
-        qreal dY = -pt.x()*sin(dAng) + pt.y()*cos(dAng);
-
-        if (i == 0)
-        {
-            dX1 = dX2 = dX;
-            dY1 = dY2 = dY;
-        }
-        else
-        {
-            if (dX < dX1)
-            {
-                dX1 = dX;
-            }
-            else if (dX > dX2)
-            {
-                dX2 = dX;
-            }
-            if (dY < dY1)
-            {
-                dY1 = dY;
-            }
-            else if (dY > dY2)
-            {
-                dY2 = dY;
-            }
-        }
-    }
-    QRectF rect;
-    rect.setTopLeft(ptCenter + QPointF(dX1, dY1));
-    rect.setWidth(dX2 - dX1);
-    rect.setHeight(dY2 - dY1);
-    return rect;
 }
