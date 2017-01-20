@@ -167,29 +167,30 @@ const QString ColorDeepSkyBlue      = QStringLiteral("deepskyblue");
 const QString ColorCornFlowerBlue   = QStringLiteral("cornflowerblue");
 
 //variables
-const QString line_           = QStringLiteral("Line_");
-const QString angleLine_      = QStringLiteral("AngleLine_");
-const QString spl_            = QStringLiteral(SPL_);
-const QString arc_            = QStringLiteral(ARC_);
-const QString splPath         = QStringLiteral("SplPath");
-const QString radius_V        = QStringLiteral("Radius");
-const QString radiusArc_      = radius_V + arc_;
-const QString angle1_V        = QStringLiteral("Angle1");
-const QString angle2_V        = QStringLiteral("Angle2");
-const QString c1Length_V      = QStringLiteral("C1Length");
-const QString c2Length_V      = QStringLiteral("C2Length");
-const QString c1LengthSpl_    = c1Length_V + spl_;
-const QString c2LengthSpl_    = c2Length_V + spl_;
-const QString c1LengthSplPath = c1Length_V + splPath;
-const QString c2LengthSplPath = c2Length_V + splPath;
-const QString angle1Arc_      = angle1_V + arc_;
-const QString angle2Arc_      = angle2_V + arc_;
-const QString angle1Spl_      = angle1_V + spl_;
-const QString angle2Spl_      = angle2_V + spl_;
-const QString angle1SplPath   = angle1_V + splPath;
-const QString angle2SplPath   = angle2_V + splPath;
-const QString seg_            = QStringLiteral("Seg_");
-const QString currentLength   = QStringLiteral("CurrentLength");
+const QString line_                = QStringLiteral("Line_");
+const QString angleLine_           = QStringLiteral("AngleLine_");
+const QString spl_                 = QStringLiteral(SPL_);
+const QString arc_                 = QStringLiteral(ARC_);
+const QString splPath              = QStringLiteral("SplPath");
+const QString radius_V             = QStringLiteral("Radius");
+const QString radiusArc_           = radius_V + arc_;
+const QString angle1_V             = QStringLiteral("Angle1");
+const QString angle2_V             = QStringLiteral("Angle2");
+const QString c1Length_V           = QStringLiteral("C1Length");
+const QString c2Length_V           = QStringLiteral("C2Length");
+const QString c1LengthSpl_         = c1Length_V + spl_;
+const QString c2LengthSpl_         = c2Length_V + spl_;
+const QString c1LengthSplPath      = c1Length_V + splPath;
+const QString c2LengthSplPath      = c2Length_V + splPath;
+const QString angle1Arc_           = angle1_V + arc_;
+const QString angle2Arc_           = angle2_V + arc_;
+const QString angle1Spl_           = angle1_V + spl_;
+const QString angle2Spl_           = angle2_V + spl_;
+const QString angle1SplPath        = angle1_V + splPath;
+const QString angle2SplPath        = angle2_V + splPath;
+const QString seg_                 = QStringLiteral("Seg_");
+const QString currentLength        = QStringLiteral("CurrentLength");
+const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
 
 const QStringList builInVariables = QStringList() << line_
                                                   << angleLine_
@@ -205,6 +206,7 @@ const QStringList builInVariables = QStringList() << line_
                                                   << angle2SplPath
                                                   << seg_
                                                   << currentLength
+                                                  << currentSeamAllowance
                                                   << c1LengthSpl_
                                                   << c2LengthSpl_
                                                   << c1LengthSplPath

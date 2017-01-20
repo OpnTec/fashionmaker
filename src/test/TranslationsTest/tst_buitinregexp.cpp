@@ -138,6 +138,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(angle2SplPath, false);
     data.insert(seg_, true);
     data.insert(currentLength, false);
+    data.insert(currentSeamAllowance, false);
     data.insert(c1LengthSpl_, true);
     data.insert(c2LengthSpl_, true);
     data.insert(c1LengthSplPath, false);
