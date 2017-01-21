@@ -36,6 +36,7 @@
 
 class VDataTool;
 class VMainGraphicsScene;
+class VNodeDetail;
 
 /**
  * @brief The VPattern class working with pattern file.

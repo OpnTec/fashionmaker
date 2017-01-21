@@ -463,7 +463,7 @@ void MainWindowsNoGUI::PrintTiled()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
+void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *details)
 {
     listDetails.clear();
     SCASSERT(details != nullptr)
@@ -472,18 +472,18 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         return;
     }
 
-    QHash<quint32, VDetail>::const_iterator i = details->constBegin();
+    QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
         VLayoutDetail det = VLayoutDetail();
-        const VDetail d = i.value();
-        det.SetCountourPoints(d.ContourPoints(pattern));
-        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
-        det.setName(d.getName());
+        const VPiece d = i.value();
+        det.SetCountourPoints(d.MainPathPoints(pattern));
+        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.IsSeamAllowance(), false);
+        det.setName(d.GetName());
         const VPatternPieceData& data = d.GetPatternPieceData();
         if (data.IsVisible() == true)
         {
-            det.SetDetail(d.getName(), data, qApp->font());
+            det.SetDetail(d.GetName(), data, qApp->font());
         }
         const VPatternInfoGeometry& geom = d.GetPatternInfo();
         if (geom.IsVisible() == true)
@@ -501,9 +501,9 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         {
             det.SetGrainline(grainlineGeom, *pattern);
         }
-        det.setWidth(qApp->toPixel(d.getWidth()));
+        det.setWidth(qApp->toPixel(d.GetSAWidth()));
         det.CreateTextItems();
-        det.setForbidFlipping(d.getForbidFlipping());
+        det.setForbidFlipping(d.IsForbidFlipping());
 
         listDetails.append(det);
         ++i;

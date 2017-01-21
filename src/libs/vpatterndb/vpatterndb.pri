@@ -4,7 +4,6 @@
 SOURCES += \
     $$PWD/vcontainer.cpp \
     $$PWD/calculator.cpp \
-    $$PWD/vdetail.cpp \
     $$PWD/vnodedetail.cpp \
     $$PWD/vtranslatevars.cpp \
     $$PWD/variables/varcradius.cpp \
@@ -34,8 +33,6 @@ HEADERS += \
     $$PWD/stable.h \
     $$PWD/calculator.h \
     $$PWD/variables.h \
-    $$PWD/vdetail.h \
-    $$PWD/vdetail_p.h \
     $$PWD/vnodedetail.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vtranslatevars.h \

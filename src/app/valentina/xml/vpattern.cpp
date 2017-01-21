@@ -55,6 +55,7 @@
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vpatterndb/vnodedetail.h"
 
 #include <QMessageBox>
 #include <QUndoStack>

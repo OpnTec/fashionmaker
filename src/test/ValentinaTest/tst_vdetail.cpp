@@ -28,6 +28,9 @@
 
 #include "tst_vdetail.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vsplinepath.h"
 
 #include <QtTest>
@@ -86,15 +89,17 @@ void TST_VDetail::ClearLoop()
     data->UpdateGObject(310, new VPointF(802.08718110236236, 1653.9337322834645, "Н5", 5.0000125984251973,
                                          9.9999874015748045));
 
-    VDetail detail;
-    detail.setSeamAllowance(true);
-    detail.setWidth(7);
-    detail.setClosed(false);
-    detail.append(VNodeDetail(304, Tool::NodePoint, NodeDetail::Contour));
-    detail.append(VNodeDetail(307, Tool::NodePoint, NodeDetail::Contour));
-    detail.append(VNodeDetail(308, Tool::NodeSplinePath, NodeDetail::Contour));
-    detail.append(VNodeDetail(309, Tool::NodePoint, NodeDetail::Contour));
-    detail.append(VNodeDetail(310, Tool::NodePoint, NodeDetail::Contour));
+    VPiece detail;
+    detail.SetSeamAllowance(true);
+    detail.SetSAWidth(7);
+    detail.GetPath().Append(VPieceNode(304, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(307, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(308, Tool::NodeSplinePath));
+    detail.GetPath().Append(VPieceNode(309, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(310, Tool::NodePoint));
+    // Closed
+    detail.GetPath()[0].SetFormulaSABefore("0");
+    detail.GetPath()[detail.GetPath().CountNodes()-1].SetFormulaSAAfter("0");
 
     const QVector<QPointF> pointsEkv = detail.SeamAllowancePoints(data);
 

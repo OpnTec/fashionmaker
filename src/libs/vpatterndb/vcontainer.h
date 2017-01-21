@@ -53,7 +53,6 @@
 #include "../vmisc/diagnostic.h"
 #include "variables.h"
 #include "variables/vinternalvariable.h"
-#include "vdetail.h"
 #include "vpiece.h"
 #include "vpiecepath.h"
 #include "vtranslatevars.h"
@@ -83,7 +82,6 @@ public:
     VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
         : gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
-          details(QSharedPointer<QHash<quint32, VDetail>>(new QHash<quint32, VDetail>())),
           pieces(QSharedPointer<QHash<quint32, VPiece>>(new QHash<quint32, VPiece>())),
           piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>(new QHash<quint32, VPiecePath>())),
           trVars(trVars),
@@ -94,7 +92,6 @@ public:
         : QSharedData(data),
           gObjects(data.gObjects),
           variables(data.variables),
-          details(data.details),
           pieces(data.pieces),
           piecePaths(data.piecePaths),
           trVars(data.trVars),
@@ -112,10 +109,7 @@ public:
      * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
      */
     QHash<QString, QSharedPointer<VInternalVariable>> variables;
-    /**
-     * @brief details container of details
-     */
-    QSharedPointer<QHash<quint32, VDetail>> details;
+
     QSharedPointer<QHash<quint32, VPiece>> pieces;
     QSharedPointer<QHash<quint32, VPiecePath>> piecePaths;
 
@@ -144,7 +138,6 @@ public:
     const QSharedPointer<T> GeometricObject(const quint32 &id) const;
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;
     static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
-    const VDetail      GetDetail(quint32 id) const;
     VPiece             GetPiece(quint32 id) const;
     VPiecePath         GetPiecePath(quint32 id) const;
     qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
@@ -155,7 +148,6 @@ public:
     static void        UpdateId(quint32 newId);
 
     quint32            AddGObject(VGObject *obj);
-    quint32            AddDetail(const VDetail &detail);
     quint32            AddPiece(const VPiece &detail);
     quint32            AddPiecePath(const VPiecePath &path);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
@@ -171,7 +163,6 @@ public:
     void               RemovePiece(quint32 id);
 
     void               UpdateGObject(quint32 id, VGObject* obj);
-    void               UpdateDetail(quint32 id, const VDetail &detail);
     void               UpdatePiece(quint32 id, const VPiece &detail);
     void               UpdatePiecePath(quint32 id, const VPiecePath &path);
 
@@ -180,7 +171,6 @@ public:
     void               ClearGObjects();
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
-    void               ClearDetails();
     static void        ClearUniqueNames();
 
     static void        SetSize(qreal size);
@@ -195,7 +185,6 @@ public:
     void               RemoveIncrement(const QString& name);
 
     const QHash<quint32, QSharedPointer<VGObject> >         *DataGObjects() const;
-    const QHash<quint32, VDetail>                           *DataDetails() const;
     const QHash<quint32, VPiece>                            *DataPieces() const;
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 

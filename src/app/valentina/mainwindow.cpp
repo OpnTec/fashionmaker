@@ -2268,10 +2268,10 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(true);
 
-        QHash<quint32, VDetail> details;
+        QHash<quint32, VPiece> details;
         if(not qApp->getOpeningPattern())
         {
-            const QHash<quint32, VDetail> *allDetails = pattern->DataDetails();
+            const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
             if (allDetails->count() == 0)
             {
                 QMessageBox::information(this, tr("Layout mode"), tr("You can't use now the Layout mode. "
@@ -2282,7 +2282,7 @@ void MainWindow::ActionLayout(bool checked)
             }
             else
             {
-                QHash<quint32, VDetail>::const_iterator i = allDetails->constBegin();
+                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
                 while (i != allDetails->constEnd())
                 {
                     if (i.value().IsInLayout())
@@ -4388,7 +4388,7 @@ void MainWindow::ZoomFirstShow()
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
-    if (pattern->DataDetails()->size() > 0)
+    if (pattern->DataPieces()->size() > 0)
     {
         ActionDetails(true);
         ui->view->ZoomFitBest();
@@ -4405,7 +4405,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
     auto settings = expParams->DefaultGenerator();
 
-    const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    const QHash<quint32, VPiece> *details = pattern->DataPieces();
     if(not qApp->getOpeningPattern())
     {
         if (details->count() == 0)
