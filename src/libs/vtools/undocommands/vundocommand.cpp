@@ -77,24 +77,6 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
-{
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        doc->IncrementReferens(nodes.at(i).getId());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
-{
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        doc->DecrementReferens(nodes.at(i).getId());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)

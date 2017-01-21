@@ -66,7 +66,6 @@ enum class UndoCommand: char { AddPatternPiece,
                                TogglePieceInLayout
                              };
 
-class VNodeDetail;
 class VPieceNode;
 class VPattern;
 
@@ -87,9 +86,6 @@ protected:
     bool         redoFlag;
     virtual void RedoFullParsing();
     void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
-
-    void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
-    void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
 
     void         IncrementReferences(const QVector<quint32> &nodes) const;
     void         DecrementReferences(const QVector<quint32> &nodes) const;

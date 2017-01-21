@@ -51,7 +51,6 @@ class QDomNode;
 class QPointF;
 class VContainer;
 class VMainGraphicsScene;
-class VNodeDetail;
 class VPointF;
 
 struct VToolUnionDetailsInitData
