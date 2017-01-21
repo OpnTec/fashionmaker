@@ -222,6 +222,8 @@ public:
     static const QString AttrPath;
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
+    static const QString AttrWidth;
+    static const QString AttrRotation;
 
     static const QString AttrAll;
 
@@ -356,6 +358,7 @@ protected:
     static QHash<quint32, VDataTool*> tools;
 
     static void       ToolExists(const quint32 &id);
+    static VPiecePath ParsePathNodes(const QDomElement &domElement);
     static VPieceNode ParseSANode(const QDomElement &domElement);
 
     void           SetActivPP(const QString& name);
@@ -379,6 +382,10 @@ private:
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;
     QStringList ListOperationExpressions() const;
+    QStringList ListNodesExpressions(const QDomElement &nodes) const;
+    QStringList ListPathExpressions() const;
+    QStringList ListGrainlineExpressions(const QDomElement &element) const;
+    QStringList ListPieceExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;

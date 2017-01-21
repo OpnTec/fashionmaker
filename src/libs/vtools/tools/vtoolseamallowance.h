@@ -64,11 +64,9 @@ public:
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
-    static const QString AttrWidth;
     static const QString AttrHeight;
     static const QString AttrUnited;
     static const QString AttrFont;
-    static const QString AttrRotation;
 
     void Remove(bool ask);
 

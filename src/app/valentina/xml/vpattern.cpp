@@ -706,7 +706,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
-        const QString width = GetParametrString(domElement, VToolSeamAllowance::AttrWidth, "0.0");
+        const QString width = GetParametrString(domElement, AttrWidth, "0.0");
         QString w = width;//need for saving fixed formula;
         const uint version = GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
 
@@ -762,7 +762,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (w != width)
         {
-            SetAttribute(domElement, VToolSeamAllowance::AttrWidth, w);
+            SetAttribute(domElement, AttrWidth, w);
             modified = true;
             haveLiteChange();
         }
@@ -811,13 +811,13 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
     ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
     detail.GetPatternPieceData().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0");
+    qreal dLW = GetParametrDouble(domElement, AttrWidth, "0");
     detail.GetPatternPieceData().SetLabelWidth(dLW);
     qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
     detail.GetPatternPieceData().SetLabelHeight(dLH);
     int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
     detail.GetPatternPieceData().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, VToolSeamAllowance::AttrRotation, "0");
+    qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternPieceData().SetRotation(dRot);
 
     QDomNodeList nodeListMCP = domElement.childNodes();
@@ -844,13 +844,13 @@ void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &deta
     ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
     ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
     detail.GetPatternInfo().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0");
+    qreal dLW = GetParametrDouble(domElement, AttrWidth, "0");
     detail.GetPatternInfo().SetLabelWidth(dLW);
     qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
     detail.GetPatternInfo().SetLabelHeight(dLH);
     int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
     detail.GetPatternInfo().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, VToolSeamAllowance::AttrRotation, "0");
+    qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternInfo().SetRotation(dRot);
 }
 
@@ -864,7 +864,7 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetPos(ptPos);
     QString qsLength = GetParametrString(domElement, AttrLength, "0");
     detail.GetGrainlineGeometry().SetLength(qsLength);
-    QString qsRot = GetParametrString(domElement, VToolSeamAllowance::AttrRotation, "90");
+    QString qsRot = GetParametrString(domElement, AttrRotation, "90");
     detail.GetGrainlineGeometry().SetRotation(qsRot);
     VGrainlineGeometry::ArrowType eAT =
             VGrainlineGeometry::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
@@ -3205,7 +3205,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
         if (not element.isNull())
         {
-            ParsePathNodes(element, path);
+            path = ParsePathNodes(element);
         }
 
         path.SetType(type);
@@ -3219,20 +3219,6 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         VExceptionObjectError excep(tr("Error creating or updating a piece path"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePathNodes(const QDomElement &domElement, VPiecePath &path) const
-{
-    const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
-    {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
-        {
-            path.Append(ParseSANode(element));
-        }
     }
 }
 

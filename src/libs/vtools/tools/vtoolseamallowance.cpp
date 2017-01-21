@@ -71,11 +71,9 @@ const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
-const QString VToolSeamAllowance::AttrWidth          = QStringLiteral("width");
 const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
-const QString VToolSeamAllowance::AttrRotation       = QStringLiteral("rotation");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -173,7 +171,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
-    doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
+    doc->SetAttribute(domElement, VAbstractPattern::AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }
 
@@ -231,10 +229,10 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
-    doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, VAbstractPattern::AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
-    doc->SetAttribute(domData, AttrRotation, data.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
 
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
@@ -260,10 +258,10 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true ? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
-    doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
+    doc->SetAttribute(domData, VAbstractPattern::AttrWidth, geom.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
-    doc->SetAttribute(domData, AttrRotation, geom.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
     domElement.appendChild(domData);
 }
 
@@ -277,7 +275,7 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
-    doc->SetAttribute(domData, AttrRotation, glGeom.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
     domElement.appendChild(domData);
 }

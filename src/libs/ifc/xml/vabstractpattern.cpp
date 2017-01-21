@@ -113,6 +113,8 @@ const QString VAbstractPattern::AttrStart           = QStringLiteral("start");
 const QString VAbstractPattern::AttrPath            = QStringLiteral("path");
 const QString VAbstractPattern::AttrEnd             = QStringLiteral("end");
 const QString VAbstractPattern::AttrIncludeAs       = QStringLiteral("includeAs");
+const QString VAbstractPattern::AttrWidth           = QStringLiteral("width");
+const QString VAbstractPattern::AttrRotation        = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -1403,6 +1405,22 @@ void VAbstractPattern::ToolExists(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPiecePath VAbstractPattern::ParsePathNodes(const QDomElement &domElement)
+{
+    VPiecePath path;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        {
+            path.Append(ParseSANode(element));
+        }
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetActivPP set current pattern piece.
  * @param name pattern peace name.
@@ -1550,12 +1568,16 @@ QStringList VAbstractPattern::ListExpressions() const
     QStringList list;
 
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    // Note. Tool Union Details also contains formulas, but we don't use them for union and keep only to simplifying
+    // working with nodes. Same code for saving reading.
     list << ListPointExpressions();
     list << ListArcExpressions();
     list << ListElArcExpressions();
     list << ListSplineExpressions();
     list << ListIncrementExpressions();
     list << ListOperationExpressions();
+    list << ListPathExpressions();
+    list << ListPieceExpressions();
 
     return list;
 }
@@ -1856,6 +1878,112 @@ QStringList VAbstractPattern::ListOperationExpressions() const
         {
             Q_UNUSED(e)
         }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListNodesExpressions(const QDomElement &nodes) const
+{
+    QStringList expressions;
+    VPiecePath path;
+    if (not nodes.isNull())
+    {
+        path = ParsePathNodes(nodes);
+    }
+
+    for(int i = 0; i < path.CountNodes(); ++i)
+    {
+        expressions.append(path.at(i).GetFormulaSABefore());
+        expressions.append(path.at(i).GetFormulaSAAfter());
+    }
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPathExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagPath);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        if (dom.isNull())
+        {
+            continue;
+        }
+
+        expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListGrainlineExpressions(const QDomElement &element) const
+{
+    QStringList expressions;
+    if (not element.isNull())
+    {
+        // Each tag can contains several attributes.
+        try
+        {
+            expressions.append(GetParametrString(element, AttrRotation));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(element, AttrLength));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPieceExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagDetail);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        if (dom.isNull())
+        {
+            continue;
+        }
+
+        // Each tag can contains several attributes.
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrWidth));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
+        expressions << ListGrainlineExpressions(dom.firstChildElement(TagGrainline));
     }
 
     return expressions;
