@@ -400,19 +400,7 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
             throw e;
         }
 
-        const QSet<QString> match = doc->ListMeasurements().toSet().subtract(m->ListAll().toSet());
-        if (not match.isEmpty())
-        {
-            QList<QString> list = match.toList();
-            for (int i = 0; i < list.size(); ++i)
-            {
-                list[i] = qApp->TrVars()->MToUser(list.at(i));
-            }
-
-            VException e(tr("Measurement file doesn't include all required measurements."));
-            e.AddMoreInformation(tr("Please, additionaly provide: %1").arg(QStringList(list).join(", ")));
-            throw e;
-        }
+        CheckRequiredMeasurements(m.data());
 
         if (m->Type() == MeasurementsType::Standard)
         {
@@ -527,6 +515,24 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
         return false;
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CheckRequiredMeasurements(const VMeasurements *m)
+{
+    const QSet<QString> match = doc->ListMeasurements().toSet().subtract(m->ListAll().toSet());
+    if (not match.isEmpty())
+    {
+        QList<QString> list = match.toList();
+        for (int i = 0; i < list.size(); ++i)
+        {
+            list[i] = qApp->TrVars()->MToUser(list.at(i));
+        }
+
+        VException e(tr("Measurement file doesn't include all required measurements."));
+        e.AddMoreInformation(tr("Please, additionaly provide: %1").arg(QStringList(list).join(", ")));
+        throw e;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4279,7 +4285,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 }
                 else
                 {
-                    VMeasurements *m = new VMeasurements(pattern);
+                    QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
                     m->setXMLContent(mPath);
 
                     patternType = m->Type();
@@ -4313,19 +4319,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                         throw e;
                     }
 
-                    const QStringList mList = m->ListAll();
-                    const QStringList pList = doc->ListMeasurements();
-
-                    delete m;
-
-                    const QSet<QString> match = pList.toSet().subtract(mList.toSet());
-                    if (not match.isEmpty())
-                    {
-                        VException e(tr("Measurement file doesn't include all required measurements."));
-                        e.AddMoreInformation(tr("Please, additionaly provide: %1")
-                                             .arg(QStringList(match.toList()).join(", ")));
-                        throw e;
-                    }
+                    CheckRequiredMeasurements(m.data());
 
                     doc->SetPath(RelativeMPath(patternPath, mPath));
                     PatternChangesWereSaved(false);
