@@ -774,7 +774,7 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                     const VToolRecord tool = history.at(j-1);
                     switch ( tool.getTypeTool() )
                     {
-                        case Tool::Detail:
+                        case Tool::Piece:
                         case Tool::UnionDetails:
                         case Tool::NodeArc:
                         case Tool::NodeElArc:
@@ -1566,7 +1566,7 @@ QStringList VAbstractPattern::ListPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment a number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1638,7 +1638,7 @@ QStringList VAbstractPattern::ListArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1692,7 +1692,7 @@ QStringList VAbstractPattern::ListElArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagElArc);
@@ -1763,7 +1763,7 @@ QStringList VAbstractPattern::ListPathPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1830,7 +1830,7 @@ QStringList VAbstractPattern::ListOperationExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);

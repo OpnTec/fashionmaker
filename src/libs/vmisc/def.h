@@ -120,7 +120,6 @@ enum class Tool : ToolVisHolderType
     CubicBezierPath,
     CutSplinePath,
     PointOfContact,
-    Detail,
     Piece,
     PiecePath,
     NodePoint,

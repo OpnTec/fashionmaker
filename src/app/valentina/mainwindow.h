@@ -168,7 +168,6 @@ private slots:
     bool Save();
     void Open();
 
-    void ClosedDialogDetail(int result);
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);

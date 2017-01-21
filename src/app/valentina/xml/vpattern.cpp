@@ -29,7 +29,6 @@
 #include "vpattern.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vtools/tools/vdatatool.h"
-#include "../vtools/tools/vtooldetail.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/tools/vtooluniondetails.h"
 #include "../vtools/tools/drawTools/drawtools.h"
@@ -812,13 +811,13 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
     ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
     detail.GetPatternPieceData().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, VToolDetail::AttrWidth, "0");
+    qreal dLW = GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0");
     detail.GetPatternPieceData().SetLabelWidth(dLW);
-    qreal dLH = GetParametrDouble(domElement, VToolDetail::AttrHeight, "0");
+    qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
     detail.GetPatternPieceData().SetLabelHeight(dLH);
-    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolDetail::AttrFont, "0"));
+    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
     detail.GetPatternPieceData().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, VToolDetail::AttrRotation, "0");
+    qreal dRot = GetParametrDouble(domElement, VToolSeamAllowance::AttrRotation, "0");
     detail.GetPatternPieceData().SetRotation(dRot);
 
     QDomNodeList nodeListMCP = domElement.childNodes();
@@ -845,13 +844,13 @@ void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &deta
     ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
     ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
     detail.GetPatternInfo().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, VToolDetail::AttrWidth, "0");
+    qreal dLW = GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0");
     detail.GetPatternInfo().SetLabelWidth(dLW);
-    qreal dLH = GetParametrDouble(domElement, VToolDetail::AttrHeight, "0");
+    qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
     detail.GetPatternInfo().SetLabelHeight(dLH);
-    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolDetail::AttrFont, "0"));
+    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
     detail.GetPatternInfo().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, VToolDetail::AttrRotation, "0");
+    qreal dRot = GetParametrDouble(domElement, VToolSeamAllowance::AttrRotation, "0");
     detail.GetPatternInfo().SetRotation(dRot);
 }
 
@@ -865,7 +864,7 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetPos(ptPos);
     QString qsLength = GetParametrString(domElement, AttrLength, "0");
     detail.GetGrainlineGeometry().SetLength(qsLength);
-    QString qsRot = GetParametrString(domElement, VToolDetail::AttrRotation, "90");
+    QString qsRot = GetParametrString(domElement, VToolSeamAllowance::AttrRotation, "90");
     detail.GetGrainlineGeometry().SetRotation(qsRot);
     VGrainlineGeometry::ArrowType eAT =
             VGrainlineGeometry::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
@@ -3737,7 +3736,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were used.");
 
     QRectF rec;
 
@@ -3862,7 +3861,6 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     rec = ToolBoundingRect<VToolEllipticalArc>(rec, tool.getId());
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
-                case Tool::Detail:
                 case Tool::Piece:
                 case Tool::UnionDetails:
                 case Tool::NodeArc:
