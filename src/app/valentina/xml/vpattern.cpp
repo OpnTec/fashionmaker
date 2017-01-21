@@ -296,8 +296,9 @@ void VPattern::setCurrentData()
 
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
-                //Delete special variable if exist
+                //Delete special variables if exist
                 data->RemoveVariable(currentLength);
+                data->RemoveVariable(currentSeamAllowance);
                 qCDebug(vXML, "Data successfully updated.");
             }
             else
@@ -690,7 +691,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
  * @param domElement tag in xml tree.
  * @param parse parser file mode.
  */
-void VPattern::ParseDetailElement(const QDomElement &domElement, const Document &parse)
+void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
@@ -701,12 +702,13 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
         detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
         detail.SetSeamAllowance(GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowance, falseStr));
-        detail.SetSAWidth(GetParametrDouble(domElement, VToolSeamAllowance::AttrWidth, "0.0"));
         detail.SetForbidFlipping(GetParametrBool(domElement, VToolSeamAllowance::AttrForbidFlipping,
                                            QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
         detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 
+        const QString width = GetParametrString(domElement, VToolSeamAllowance::AttrWidth, "0.0");
+        QString w = width;//need for saving fixed formula;
         const uint version = GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
 
         const QStringList tags = QStringList() << TagNodes
@@ -757,7 +759,14 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
             }
         }
-        VToolSeamAllowance::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
+        VToolSeamAllowance::Create(id, detail, w, sceneDetail, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (w != width)
+        {
+            SetAttribute(domElement, VToolSeamAllowance::AttrWidth, w);
+            modified = true;
+            haveLiteChange();
+        }
     }
     catch (const VExceptionBadId &e)
     {
@@ -877,7 +886,7 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
     {
         if (domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
+            QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
                 if (domElement.tagName() == TagDetail)

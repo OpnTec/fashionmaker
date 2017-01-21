@@ -37,6 +37,7 @@
 #include "../support/dialogeditwrongformula.h"
 
 #include <QMenu>
+#include <QTimer>
 #include <QtNumeric>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,7 +56,14 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_oldGeom(),
       m_oldGrainline(),
       m_iRotBaseHeight(0),
-      m_iLenBaseHeight(0)
+      m_iLenBaseHeight(0),
+      m_formulaBaseWidth(0),
+      m_formulaBaseWidthBefore(0),
+      m_formulaBaseWidthAfter(0),
+      m_timerWidth(nullptr),
+      m_timerWidthBefore(nullptr),
+      m_timerWidthAfter(nullptr),
+      m_saWidth(0)
 {
     ui->setupUi(this);
 
@@ -84,6 +92,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::~DialogSeamAllowance()
 {
+    VContainer *locData = const_cast<VContainer *> (data);
+    locData->RemoveVariable(currentSeamAllowance);
+
     delete ui;
 }
 
@@ -141,9 +152,11 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     CustomSAChanged(0);
 
     ui->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
-    ui->doubleSpinBoxSeams->setValue(piece.GetSAWidth());
     ui->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     ui->lineEditName->setText(piece.GetName());
+
+    ui->plainTextEditFormulaWidth->setPlainText(piece.GetFormulaSAWidth());
+    m_saWidth = piece.GetSAWidth();
 
     m_mx = piece.GetMx();
     m_my = piece.GetMy();
@@ -283,7 +296,7 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError);
+    bOk->setEnabled(flagName && flagError && flagFormula);
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -506,7 +519,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         dialog->SetPieceId(toolId);
         if (record.includeType == PiecePathIncludeType::AsMainPath)
         {
-            dialog->SetSAWidth(ui->doubleSpinBoxSeams->value());
+            dialog->SetFormulaSAWidth(GetFormulaSAWidth());
         }
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
@@ -580,14 +593,18 @@ void DialogSeamAllowance::EnableSeamAllowance(bool enable)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NodeChanged(int index)
 {
-    ui->doubleSpinBoxSABefore->setDisabled(true);
-    ui->doubleSpinBoxSAAfter->setDisabled(true);
+    ui->plainTextEditFormulaWidthBefore->setDisabled(true);
+    ui->toolButtonExprBefore->setDisabled(true);
     ui->pushButtonDefBefore->setDisabled(true);
+
+    ui->plainTextEditFormulaWidthAfter->setDisabled(true);
+    ui->toolButtonExprAfter->setDisabled(true);
     ui->pushButtonDefAfter->setDisabled(true);
+
     ui->comboBoxAngle->setDisabled(true);
 
-    ui->doubleSpinBoxSABefore->blockSignals(true);
-    ui->doubleSpinBoxSAAfter->blockSignals(true);
+    ui->plainTextEditFormulaWidthBefore->blockSignals(true);
+    ui->plainTextEditFormulaWidthAfter->blockSignals(true);
     ui->comboBoxAngle->blockSignals(true);
 
     if (index != -1)
@@ -603,32 +620,42 @@ void DialogSeamAllowance::NodeChanged(int index)
         {
             const VPieceNode &node = piece.GetPath().at(nodeIndex);
 
-            ui->doubleSpinBoxSABefore->setEnabled(true);
-            ui->doubleSpinBoxSAAfter->setEnabled(true);
-            ui->comboBoxAngle->setEnabled(true);
+            // Seam alowance before
+            ui->plainTextEditFormulaWidthBefore->setEnabled(true);
+            ui->toolButtonExprBefore->setEnabled(true);
 
-            qreal w1 = node.GetSABefore();
-            if (w1 < 0)
-            {
-                w1 = piece.GetSAWidth();
-            }
-            else
+            QString w1Formula = node.GetFormulaSABefore();
+            if (w1Formula != currentSeamAllowance)
             {
                 ui->pushButtonDefBefore->setEnabled(true);
             }
-            ui->doubleSpinBoxSABefore->setValue(w1);
-
-            qreal w2 = node.GetSAAfter();
-            if (w2 < 0)
+            if (w1Formula.length() > 80)// increase height if needed.
             {
-                w2 = piece.GetSAWidth();
+                this->DeployWidthBeforeFormulaTextEdit();
             }
-            else
+            w1Formula = qApp->TrVars()->FormulaToUser(w1Formula, qApp->Settings()->GetOsSeparator());
+            ui->plainTextEditFormulaWidthBefore->setPlainText(w1Formula);
+            MoveCursorToEnd(ui->plainTextEditFormulaWidthBefore);
+
+            // Seam alowance after
+            ui->plainTextEditFormulaWidthAfter->setEnabled(true);
+            ui->toolButtonExprAfter->setEnabled(true);
+
+            QString w2Formula = node.GetFormulaSAAfter();
+            if (w2Formula != currentSeamAllowance)
             {
                 ui->pushButtonDefAfter->setEnabled(true);
             }
-            ui->doubleSpinBoxSAAfter->setValue(w2);
+            if (w2Formula.length() > 80)// increase height if needed.
+            {
+                this->DeployWidthAfterFormulaTextEdit();
+            }
+            w2Formula = qApp->TrVars()->FormulaToUser(w2Formula, qApp->Settings()->GetOsSeparator());
+            ui->plainTextEditFormulaWidthAfter->setPlainText(w2Formula);
+            MoveCursorToEnd(ui->plainTextEditFormulaWidthAfter);
 
+            // Angle type
+            ui->comboBoxAngle->setEnabled(true);
             const int index = ui->comboBoxAngle->findData(static_cast<unsigned char>(node.GetAngleType()));
             if (index != -1)
             {
@@ -638,13 +665,13 @@ void DialogSeamAllowance::NodeChanged(int index)
     }
     else
     {
-        ui->doubleSpinBoxSABefore->setValue(0);
-        ui->doubleSpinBoxSAAfter->setValue(0);
+        ui->plainTextEditFormulaWidthBefore->setPlainText("");
+        ui->plainTextEditFormulaWidthAfter->setPlainText("");
         ui->comboBoxAngle->setCurrentIndex(-1);
     }
 
-    ui->doubleSpinBoxSABefore->blockSignals(false);
-    ui->doubleSpinBoxSAAfter->blockSignals(false);
+    ui->plainTextEditFormulaWidthBefore->blockSignals(false);
+    ui->plainTextEditFormulaWidthAfter->blockSignals(false);
     ui->comboBoxAngle->blockSignals(false);
 }
 
@@ -752,25 +779,13 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefBefore()
 {
-    SetCurrentSABefore(-1);
+    ui->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefAfter()
 {
-    SetCurrentSAAfter(-1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ChangedSABefore(double d)
-{
-    SetCurrentSABefore(d);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ChangedSAAfter(double d)
-{
-    SetCurrentSAAfter(d);
+    ui->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1062,6 +1077,142 @@ void DialogSeamAllowance::ResetWarning()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalWidth()
+{
+    labelEditFormula = ui->labelEditWidth;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString formula = ui->plainTextEditFormulaWidth->toPlainText();
+    m_saWidth = Eval(formula, flagFormula, ui->labelResultWidth, postfix, true, true);
+
+    if (m_saWidth >= 0)
+    {
+        VContainer *locData = const_cast<VContainer *> (data);
+        locData->AddVariable(currentSeamAllowance, new VIncrement(locData, currentSeamAllowance, 0, m_saWidth,
+                                                                  QString().setNum(m_saWidth), true,
+                                                                  tr("Current seam allowance")));
+
+        EvalWidthBefore();
+        EvalWidthAfter();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalWidthBefore()
+{
+    labelEditFormula = ui->labelEditBefore;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
+    bool flagFormula = false; // fake flag
+    Eval(formula, flagFormula, ui->labelResultBefore, postfix, true, true);
+
+    UpdateNodeSABefore(GetFormulaSAWidthBefore());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalWidthAfter()
+{
+    labelEditFormula = ui->labelEditAfter;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
+    bool flagFormula = false; // fake flag
+    Eval(formula, flagFormula, ui->labelResultAfter, postfix, true, true);
+
+    UpdateNodeSAAfter(GetFormulaSAWidthAfter());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXWidth()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit seam allowance width"));
+    dialog->SetFormula(GetFormulaSAWidth());
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaSAWidth(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXWidthBefore()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit seam allowance width before"));
+    dialog->SetFormula(GetFormulaSAWidthBefore());
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetCurrentSABefore(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXWidthAfter()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit seam allowance width after"));
+    dialog->SetFormula(GetFormulaSAWidthAfter());
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetCurrentSAAfter(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::WidthChanged()
+{
+    labelEditFormula = ui->labelEditWidth;
+    labelResultCalculation = ui->labelResultWidth;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidth, m_timerWidth, postfix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::WidthBeforeChanged()
+{
+    labelEditFormula = ui->labelEditBefore;
+    labelResultCalculation = ui->labelResultBefore;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    bool flagFormula = false;
+    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::WidthAfterChanged()
+{
+    labelEditFormula = ui->labelEditAfter;
+    labelResultCalculation = ui->labelResultAfter;
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    bool flagFormula = false;
+    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployWidthFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployWidthBeforeFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormulaWidthBefore, ui->pushButtonGrowWidthBefore, m_formulaBaseWidthBefore);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployWidthAfterFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormulaWidthAfter, ui->pushButtonGrowWidthAfter, m_formulaBaseWidthAfter);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
@@ -1089,10 +1240,13 @@ VPiece DialogSeamAllowance::CreatePiece() const
 
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
-    piece.SetSAWidth(ui->doubleSpinBoxSeams->value());
     piece.SetName(ui->lineEditName->text());
     piece.SetMx(m_mx);
     piece.SetMy(m_my);
+
+    QString width = ui->plainTextEditFormulaWidth->toPlainText();
+    width.replace("\n", " ");
+    piece.SetFormulaSAWidth(width, m_saWidth);
 
     piece.GetPatternPieceData().SetLetter(ui->lineEditLetter->text());
 
@@ -1306,7 +1460,21 @@ quint32 DialogSeamAllowance::GetLastId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetCurrentSABefore(qreal value)
+void DialogSeamAllowance::SetCurrentSABefore(const QString &formula)
+{
+    UpdateNodeSABefore(formula);
+    ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetCurrentSAAfter(const QString &formula)
+{
+    UpdateNodeSAAfter(formula);
+    ListChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
 {
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
@@ -1321,16 +1489,14 @@ void DialogSeamAllowance::SetCurrentSABefore(qreal value)
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-            rowNode.SetSABefore(value);
+            rowNode.SetFormulaSABefore(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-
-            ListChanged();
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetCurrentSAAfter(qreal value)
+void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 {
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
@@ -1345,10 +1511,8 @@ void DialogSeamAllowance::SetCurrentSAAfter(qreal value)
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-            rowNode.SetSAAfter(value);
+            rowNode.SetFormulaSAAfter(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-
-            ListChanged();
         }
     }
 }
@@ -1367,21 +1531,29 @@ void DialogSeamAllowance::InitMainPathTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitSeamAllowanceTab()
 {
+    plainTextEditFormula = ui->plainTextEditFormulaWidth;
+    this->m_formulaBaseWidth = ui->plainTextEditFormulaWidth->height();
+    this->m_formulaBaseWidthBefore = ui->plainTextEditFormulaWidthBefore->height();
+    this->m_formulaBaseWidthAfter = ui->plainTextEditFormulaWidthAfter->height();
+
+    ui->plainTextEditFormulaWidth->installEventFilter(this);
+    ui->plainTextEditFormulaWidthBefore->installEventFilter(this);
+    ui->plainTextEditFormulaWidthAfter->installEventFilter(this);
+
+    m_timerWidth = new QTimer(this);
+    connect(m_timerWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidth);
+
+    m_timerWidthBefore = new QTimer(this);
+    connect(m_timerWidthBefore, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthBefore);
+
+    m_timerWidthAfter = new QTimer(this);
+    connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthAfter);
+
     connect(ui->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
-    const QString suffix = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    ui->doubleSpinBoxSeams->setSuffix(suffix);
-    ui->doubleSpinBoxSABefore->setSuffix(suffix);
-    ui->doubleSpinBoxSAAfter->setSuffix(suffix);
-
-    if(qApp->patternUnit() == Unit::Inch)
-    {
-        ui->doubleSpinBoxSeams->setDecimals(5);
-        ui->doubleSpinBoxSABefore->setDecimals(5);
-        ui->doubleSpinBoxSAAfter->setDecimals(5);
-    }
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    ui->doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
+    m_saWidth = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+    ui->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 
     InitNodesList();
     connect(ui->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
@@ -1389,14 +1561,6 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
 
     connect(ui->pushButtonDefBefore, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefBefore);
     connect(ui->pushButtonDefAfter, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefAfter);
-
-    connect(ui->doubleSpinBoxSeams, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            [this](){NodeChanged(ui->comboBoxNodes->currentIndex());});
-
-    connect(ui->doubleSpinBoxSABefore, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSeamAllowance::ChangedSABefore);
-    connect(ui->doubleSpinBoxSAAfter, static_cast<void(QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSeamAllowance::ChangedSAAfter);
 
     InitNodeAngles(ui->comboBoxAngle);
     connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
@@ -1412,6 +1576,22 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
             &DialogSeamAllowance::CSAEndPointChanged);
     connect(ui->comboBoxIncludeType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::CSAIncludeTypeChanged);
+
+    connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidth);
+    connect(ui->toolButtonExprBefore, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthBefore);
+    connect(ui->toolButtonExprAfter, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthAfter);
+
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::WidthChanged);
+    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::WidthBeforeChanged);
+    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::WidthAfterChanged);
+
+    connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployWidthFormulaTextEdit);
+    connect(ui->pushButtonGrowWidthBefore, &QPushButton::clicked,
+            this, &DialogSeamAllowance::DeployWidthBeforeFormulaTextEdit);
+    connect(ui->pushButtonGrowWidthAfter, &QPushButton::clicked, this,
+            &DialogSeamAllowance::DeployWidthAfterFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1511,6 +1691,49 @@ void DialogSeamAllowance::InitGrainlineTab()
 
     m_iRotBaseHeight = ui->lineEditRotFormula->height();
     m_iLenBaseHeight = ui->lineEditLenFormula->height();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetFormulaSAWidth() const
+{
+    QString width = ui->plainTextEditFormulaWidth->toPlainText();
+    width.replace("\n", " ");
+    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
+{
+    const QString width = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (width.length() > 80)
+    {
+        this->DeployWidthFormulaTextEdit();
+    }
+    ui->plainTextEditFormulaWidth->setPlainText(width);
+
+    VisToolPiece *path = qobject_cast<VisToolPiece *>(vis);
+    SCASSERT(path != nullptr)
+    const VPiece p = CreatePiece();
+    path->SetPiece(p);
+
+    MoveCursorToEnd(ui->plainTextEditFormulaWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetFormulaSAWidthBefore() const
+{
+    QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
+    width.replace("\n", " ");
+    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetFormulaSAWidthAfter() const
+{
+    QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
+    width.replace("\n", " ");
+    return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

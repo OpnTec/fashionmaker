@@ -56,7 +56,8 @@ public:
           m_internalPaths(),
           m_ppData(),
           m_piPatternInfo(),
-          m_glGrainline()
+          m_glGrainline(),
+          m_formulaWidth("0")
     {}
 
     VPieceData(const VPieceData &detail)
@@ -70,7 +71,8 @@ public:
           m_internalPaths(detail.m_internalPaths),
           m_ppData(detail.m_ppData),
           m_piPatternInfo(detail.m_piPatternInfo),
-          m_glGrainline(detail.m_glGrainline)
+          m_glGrainline(detail.m_glGrainline),
+          m_formulaWidth(detail.m_formulaWidth)
     {}
 
     ~VPieceData();
@@ -95,6 +97,8 @@ public:
 
     /** @brief m_glGrainline grainline geometry object*/
     VGrainlineGeometry m_glGrainline;
+
+    QString m_formulaWidth;
 
 private:
     VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;

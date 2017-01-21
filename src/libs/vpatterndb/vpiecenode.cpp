@@ -28,8 +28,11 @@
 
 #include "vpiecenode.h"
 #include "vpiecenode_p.h"
+#include "vcontainer.h"
+#include "calculator.h"
 
 #include <QDataStream>
+#include <QtNumeric>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
@@ -101,15 +104,15 @@ void VPieceNode::SetReverse(bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore() const
+qreal VPieceNode::GetSABefore(const VContainer *data) const
 {
-    return d->m_saBefore;
+    return EvalFormula(data, d->m_formulaWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore(Unit unit) const
+qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 {
-    qreal value = d->m_saBefore;
+    qreal value = EvalFormula(data, d->m_formulaWidthBefore);
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -118,24 +121,30 @@ qreal VPieceNode::GetSABefore(Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceNode::SetSABefore(qreal value)
+QString VPieceNode::GetFormulaSABefore() const
+{
+    return d->m_formulaWidthBefore;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaSABefore(const QString &formula)
 {
     if (d->m_typeTool == Tool::NodePoint)
     {
-        value < 0 ? d->m_saBefore = -1: d->m_saBefore = value;
+        d->m_formulaWidthBefore = formula;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter() const
+qreal VPieceNode::GetSAAfter(const VContainer *data) const
 {
-    return d->m_saAfter;
+    return EvalFormula(data, d->m_formulaWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter(Unit unit) const
+qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 {
-    qreal value = d->m_saAfter;
+    qreal value = EvalFormula(data, d->m_formulaWidthAfter);
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -144,11 +153,17 @@ qreal VPieceNode::GetSAAfter(Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceNode::SetSAAfter(qreal value)
+QString VPieceNode::GetFormulaSAAfter() const
+{
+    return d->m_formulaWidthAfter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaSAAfter(const QString &formula)
 {
     if (d->m_typeTool == Tool::NodePoint)
     {
-        value < 0 ? d->m_saAfter = -1: d->m_saAfter = value;
+        d->m_formulaWidthAfter = formula;
     }
 }
 
@@ -164,6 +179,36 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
     if (d->m_typeTool == Tool::NodePoint)
     {
         d->m_angleType = type;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::EvalFormula(const VContainer *data, QString formula) const
+{
+    if (formula.isEmpty())
+    {
+        return -1;
+    }
+    else
+    {
+        try
+        {
+            // Replace line return character with spaces for calc if exist
+            formula.replace("\n", " ");
+            QScopedPointer<Calculator> cal(new Calculator());
+            const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                return -1;
+            }
+            return result;
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            Q_UNUSED(e)
+            return -1;
+        }
     }
 }
 

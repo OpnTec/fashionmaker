@@ -1182,11 +1182,12 @@ void CreateUnitedDetail(quint32 id, const VToolUnionDetailsInitData &initData, q
     CreateUnitedInternalPaths(newDetail, d1, d2, id, drawName, initData, dx, dy, pRotate, angle);
 
     newDetail.SetName(QObject::tr("United detail"));
-    newDetail.SetSAWidth(d1.GetSAWidth());
+    QString formulaSAWidth = d1.GetFormulaSAWidth();
+    newDetail.SetFormulaSAWidth(formulaSAWidth, d1.GetSAWidth());
     newDetail.SetMx(d1.GetMx());
     newDetail.SetMy(d1.GetMy());
-    VToolSeamAllowance::Create(0, newDetail, initData.scene, initData.doc, initData.data, initData.parse,
-                               Source::FromTool, drawName);
+    VToolSeamAllowance::Create(0, newDetail, formulaSAWidth, initData.scene, initData.doc, initData.data,
+                               initData.parse, Source::FromTool, drawName);
 
     auto RemoveDetail = [initData](quint32 id)
     {

@@ -37,6 +37,7 @@
 
 class VPieceNodeData;
 class QDataStream;
+class VContainer;
 
 class VPieceNode
 {
@@ -59,18 +60,24 @@ public:
     bool GetReverse() const;
     void SetReverse(bool reverse);
 
-    qreal GetSABefore() const;
-    qreal GetSABefore(Unit unit) const;
-    void  SetSABefore(qreal value);
+    qreal GetSABefore(const VContainer *data) const;
+    qreal GetSABefore(const VContainer *data, Unit unit) const;
 
-    qreal GetSAAfter() const;
-    qreal GetSAAfter(Unit unit) const;
-    void  SetSAAfter(qreal value);
+    QString GetFormulaSABefore() const;
+    void    SetFormulaSABefore(const QString &formula);
+
+    qreal GetSAAfter(const VContainer *data) const;
+    qreal GetSAAfter(const VContainer *data, Unit unit) const;
+
+    QString GetFormulaSAAfter() const;
+    void    SetFormulaSAAfter(const QString &formula);
 
     PieceNodeAngle GetAngleType() const;
     void           SetAngleType(PieceNodeAngle type);
 private:
     QSharedDataPointer<VPieceNodeData> d;
+
+    qreal EvalFormula(const VContainer *data, QString formula) const;
 };
 
 Q_DECLARE_METATYPE(VPieceNode)

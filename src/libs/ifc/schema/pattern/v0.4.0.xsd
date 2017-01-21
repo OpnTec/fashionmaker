@@ -370,8 +370,8 @@
                                             <xs:attribute name="type" type="xs:string" use="required"/>
                                             <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                             <xs:attribute name="reverse" type="xs:unsignedInt"/>
-                                            <xs:attribute name="before" type="xs:double"/>
-                                            <xs:attribute name="after" type="xs:double"/>
+                                            <xs:attribute name="before" type="xs:string"/>
+                                            <xs:attribute name="after" type="xs:string"/>
                                             <xs:attribute name="angle" type="nodeAngle"/>
                                           </xs:complexType>
                                         </xs:element>
@@ -503,8 +503,8 @@
                                     <xs:attribute name="type" type="xs:string" use="required"/>
                                     <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                     <xs:attribute name="reverse" type="xs:unsignedInt"/>
-                                    <xs:attribute name="before" type="xs:double"/>
-                                    <xs:attribute name="after" type="xs:double"/>
+                                    <xs:attribute name="before" type="xs:string"/>
+                                    <xs:attribute name="after" type="xs:string"/>
                                     <xs:attribute name="angle" type="nodeAngle"/>
                                     <xs:attribute name="mx" type="xs:double"/>
                                     <xs:attribute name="my" type="xs:double"/>
@@ -547,7 +547,7 @@
                         <xs:attribute name="name" type="xs:string"/>
                         <xs:attribute name="inLayout" type="xs:boolean"/>
                         <xs:attribute name="forbidFlipping" type="xs:boolean"/>
-                        <xs:attribute name="width" type="xs:double"/>
+                        <xs:attribute name="width" type="xs:string"/>
                         <xs:attribute name="seamAllowance" type="xs:boolean"/>
                         <xs:attribute name="united" type="xs:boolean"/>
                         <xs:attribute name="closed" type="xs:unsignedInt"/>

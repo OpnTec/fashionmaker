@@ -91,10 +91,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
     DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(dialog);
     SCASSERT(dialogTool != nullptr);
     VPiece detail = dialogTool->GetPiece();
+    QString width = detail.GetFormulaSAWidth();
     qApp->getUndoStack()->beginMacro("add detail");
     detail.GetPath().SetNodes(PrepareNodes(detail.GetPath(), scene, doc, data));
 
-    VToolSeamAllowance *piece = Create(0, detail, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolSeamAllowance *piece = Create(0, detail, width, scene, doc, data, Document::FullParse, Source::FromGui);
 
     if (piece != nullptr)
     {
@@ -104,16 +105,24 @@ VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, const VPiece &newPiece, VMainGraphicsScene *scene,
+VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                const Source &typeCreation, const QString &drawName)
 {
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
+        data->AddVariable(currentSeamAllowance, new VIncrement(data, currentSeamAllowance, 0, newPiece.GetSAWidth(),
+                                                               width, true, tr("Current seam allowance")));
         id = data->AddPiece(newPiece);
     }
     else
     {
+        const qreal calcWidth = CheckFormula(id, width, data);
+        newPiece.SetFormulaSAWidth(width, calcWidth);
+
+        data->AddVariable(currentSeamAllowance, new VIncrement(data, currentSeamAllowance, 0, calcWidth,
+                                                               width, true, tr("Current seam allowance")));
+
         data->UpdatePiece(id, newPiece);
         if (parse != Document::FullParse)
         {
@@ -121,19 +130,20 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, const VPiece &newPiec
         }
     }
     VAbstractTool::AddRecord(id, Tool::Piece, doc);
+    VToolSeamAllowance *piece = nullptr;
     if (parse == Document::FullParse)
     {
-        VToolSeamAllowance *piece = new VToolSeamAllowance(doc, data, id, typeCreation, scene, drawName);
+        piece = new VToolSeamAllowance(doc, data, id, typeCreation, scene, drawName);
         scene->addItem(piece);
         connect(piece, &VToolSeamAllowance::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::EnableDetailItemHover, piece, &VToolSeamAllowance::AllowHover);
         connect(scene, &VMainGraphicsScene::EnableDetailItemSelection, piece, &VToolSeamAllowance::AllowSelecting);
         connect(scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
         doc->AddTool(id, piece);
-
-        return piece;
     }
-    return nullptr;
+    //Very important to delete it. Only this tool need this special variable.
+    data->RemoveVariable(currentLength);
+    return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +173,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
-    doc->SetAttribute(domElement, AttrWidth, piece.GetSAWidth());
+    doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }
 

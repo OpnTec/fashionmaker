@@ -51,7 +51,7 @@ public:
 
     static VToolSeamAllowance* Create(DialogTool *m_dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                       VContainer *data);
-    static VToolSeamAllowance* Create(quint32 id, const VPiece &newPiece, VMainGraphicsScene *scene,
+    static VToolSeamAllowance* Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
                                       const Source &typeCreation, const QString &m_drawName = QString());
 

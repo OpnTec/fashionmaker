@@ -634,8 +634,10 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
 {
     const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
-    const qreal saBefore = VDomDocument::GetParametrDouble(domElement, VAbstractPattern::AttrSABefore, "-1");
-    const qreal saAfter = VDomDocument::GetParametrDouble(domElement, VAbstractPattern::AttrSAAfter, "-1");
+    const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
+                                                             currentSeamAllowance);
+    const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,
+                                                            currentSeamAllowance);
     const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, "0"));
 
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
@@ -669,8 +671,8 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
             throw e;
     }
     VPieceNode node(id, tool, reverse);
-    node.SetSABefore(saBefore);
-    node.SetSAAfter(saAfter);
+    node.SetFormulaSABefore(saBefore);
+    node.SetFormulaSAAfter(saAfter);
     node.SetAngleType(angle);
 
     return node;

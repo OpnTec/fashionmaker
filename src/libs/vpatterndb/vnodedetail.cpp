@@ -199,29 +199,29 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
 
                     if (IsSABefore(QLineF(point, previosPoint), QLineF(point, xPoint)))
                     {
-                        path[i].SetSABefore(LocalWidth(node.getMx()));
+                        path[i].SetFormulaSABefore(QString().setNum(LocalWidth(node.getMx())));
 
                         if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, yPoint)))
                         {
-                            path[i].SetSAAfter(LocalWidth(node.getMy()));
+                            path[i].SetFormulaSAAfter(QString().setNum(LocalWidth(node.getMy())));
                         }
                     }
                     else if (IsSABefore(QLineF(point, previosPoint), QLineF(point, yPoint)))
                     {
-                        path[i].SetSABefore(LocalWidth(node.getMy()));
+                        path[i].SetFormulaSABefore(QString().setNum(LocalWidth(node.getMy())));
 
                         if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, xPoint)))
                         {
-                            path[i].SetSAAfter(LocalWidth(node.getMx()));
+                            path[i].SetFormulaSAAfter(QString().setNum(LocalWidth(node.getMx())));
                         }
                     }
                     else if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, xPoint)))
                     {
-                        path[i].SetSAAfter(LocalWidth(node.getMx()));
+                        path[i].SetFormulaSAAfter(QString().setNum(LocalWidth(node.getMx())));
                     }
                     else if (IsSAAfter(QLineF(point, nextPoint), QLineF(point, yPoint)))
                     {
-                        path[i].SetSAAfter(LocalWidth(node.getMy()));
+                        path[i].SetFormulaSAAfter(QString().setNum(LocalWidth(node.getMy())));
                     }
                 }
             }
@@ -230,8 +230,8 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
 
     if (not closed && path.CountNodes() > 1)
     {
-        path[0].SetSABefore(0);
-        path[path.CountNodes()-1].SetSAAfter(0);
+        path[0].SetFormulaSABefore("0");
+        path[path.CountNodes()-1].SetFormulaSAAfter("0");
     }
 
     return path.GetNodes();

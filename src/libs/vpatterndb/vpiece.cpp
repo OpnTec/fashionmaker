@@ -270,6 +270,20 @@ void VPiece::SetUnited(bool united)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPiece::GetFormulaSAWidth() const
+{
+    return d->m_formulaWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaSAWidth(const QString &formula, qreal value)
+{
+    SetSAWidth(value);
+    const qreal width = GetSAWidth();
+    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1String("0");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiece::GetInternalPaths() const
 {
     return d->m_internalPaths;

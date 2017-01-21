@@ -75,7 +75,6 @@ public:
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
-    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
 
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);

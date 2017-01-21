@@ -582,7 +582,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         return;
     }
     timer->setSingleShot(true);
-    timer->start(1000);
+    timer->start(300);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -594,13 +594,11 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
+qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero,
+                       bool checkLessThanZero)
 {
-    qDebug() << "Eval started";
     SCASSERT(label != nullptr)
-    qDebug() << "Label ok";
     SCASSERT(labelEditFormula != nullptr)
-    qDebug() << "lef ok";
 
     qreal result = INT_MIN;//Value can be 0, so use max imposible value
 
@@ -639,6 +637,13 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                     ChangeColor(labelEditFormula, Qt::red);
                     label->setText(tr("Error") + " (" + postfix + ")");
                     label->setToolTip(tr("Value can't be 0"));
+                }
+                else if (checkLessThanZero && result < 0)
+                {
+                    flag = false;
+                    ChangeColor(labelEditFormula, Qt::red);
+                    label->setText(tr("Error") + " (" + postfix + ")");
+                    label->setToolTip(tr("Value can't be lass than 0"));
                 }
                 else
                 {

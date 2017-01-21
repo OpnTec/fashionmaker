@@ -53,6 +53,8 @@ public:
     VPiece GetPiece() const;
     void   SetPiece(const VPiece &m_piece);
 
+    QString GetFormulaSAWidth() const;
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
@@ -84,8 +86,6 @@ private slots:
     void NodeAngleChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
-    void ChangedSABefore(double d);
-    void ChangedSAAfter(double d);
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
 
@@ -97,6 +97,22 @@ private slots:
     void DeployRotation();
     void DeployLength();
     void ResetWarning();
+
+    void EvalWidth();
+    void EvalWidthBefore();
+    void EvalWidthAfter();
+
+    void FXWidth();
+    void FXWidthBefore();
+    void FXWidthAfter();
+
+    void WidthChanged();
+    void WidthBeforeChanged();
+    void WidthAfterChanged();
+
+    void DeployWidthFormulaTextEdit();
+    void DeployWidthBeforeFormulaTextEdit();
+    void DeployWidthAfterFormulaTextEdit();
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
@@ -119,6 +135,14 @@ private:
     VGrainlineGeometry   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
+    int                  m_formulaBaseWidth;
+    int                  m_formulaBaseWidthBefore;
+    int                  m_formulaBaseWidthAfter;
+
+    QTimer *m_timerWidth;
+    QTimer *m_timerWidthBefore;
+    QTimer *m_timerWidthAfter;
+    qreal   m_saWidth;
 
     VPiece CreatePiece() const;
 
@@ -137,8 +161,11 @@ private:
 
     quint32 GetLastId() const;
 
-    void SetCurrentSABefore(qreal value);
-    void SetCurrentSAAfter(qreal value);
+    void SetCurrentSABefore(const QString &formula);
+    void SetCurrentSAAfter(const QString &formula);
+
+    void UpdateNodeSABefore(const QString &formula);
+    void UpdateNodeSAAfter(const QString &formula);
 
     void InitMainPathTab();
     void InitSeamAllowanceTab();
@@ -148,6 +175,11 @@ private:
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
     void InitGrainlineTab();
+
+    void SetFormulaSAWidth(const QString &formula);
+
+    QString GetFormulaSAWidthBefore() const;
+    QString GetFormulaSAWidthAfter() const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

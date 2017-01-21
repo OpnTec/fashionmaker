@@ -28,7 +28,6 @@
 
 #include "vdrawtool.h"
 
-#include <qnumeric.h>
 #include <QDialog>
 #include <QDomNode>
 #include <QMessageLogger>
@@ -41,10 +40,6 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/exception/vexceptionundo.h"
-#include "../vpatterndb/calculator.h"
-#include "../../dialogs/support/dialogeditwrongformula.h"
-#include "../../dialogs/support/dialogundo.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
 #include "../qmuparser/qmuparsererror.h"
@@ -290,96 +285,6 @@ void VDrawTool::DetailsMode(bool mode)
 {
     Q_UNUSED(mode)
     // Do nothing.
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckFormula check formula.
- *
- * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
- * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
- *
- * @param toolId [in] tool's id.
- * @param formula [in|out] string with formula.
- * @param data [in] container with variables. Need for math parser.
- * @throw QmuParserError.
- * @return result of calculation formula.
- */
-qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data)
-{
-    SCASSERT(data != nullptr)
-    qreal result = 0;
-    try
-    {
-        QScopedPointer<Calculator> cal(new Calculator());
-        result = cal->EvalFormula(data->PlainVariables(), formula);
-
-        if (qIsInf(result) || qIsNaN(result))
-        {
-            qDebug() << "Invalid the formula value";
-            return 0;
-        }
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        qDebug() << "\nMath parser error:\n"
-                 << "--------------------------------------\n"
-                 << "Message:     " << e.GetMsg()  << "\n"
-                 << "Expression:  " << e.GetExpr() << "\n"
-                 << "--------------------------------------";
-
-        if (qApp->IsAppInGUIMode())
-        {
-            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(qApp->getMainWindow()));
-            forever
-            {
-                if (dialogUndo->exec() == QDialog::Accepted)
-                {
-                    const UndoButton resultUndo = dialogUndo->Result();
-                    if (resultUndo == UndoButton::Fix)
-                    {
-                        auto *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
-                        dialog->setWindowTitle(tr("Edit wrong formula"));
-                        dialog->SetFormula(formula);
-                        if (dialog->exec() == QDialog::Accepted)
-                        {
-                            formula = dialog->GetFormula();
-                            /* Need delete dialog here because parser in dialog don't allow use correct separator for
-                             * parsing here. */
-                            delete dialog;
-                            QScopedPointer<Calculator> cal1(new Calculator());
-                            result = cal1->EvalFormula(data->PlainVariables(), formula);
-
-                            if (qIsInf(result) || qIsNaN(result))
-                            {
-                                qDebug() << "Invalid the formula value";
-                                return 0;
-                            }
-
-                            break;
-                        }
-                        else
-                        {
-                            delete dialog;
-                        }
-                    }
-                    else
-                    {
-                        throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
-                    }
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-        else
-        {
-            throw;
-        }
-    }
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

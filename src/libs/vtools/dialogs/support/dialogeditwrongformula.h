@@ -70,6 +70,7 @@ public:
     QString      GetFormula() const;
     void         SetFormula(const QString &value);
     void         setCheckZero(bool value);
+    void         setCheckLessThanZero(bool value);
     void         setPostfix(const QString &value);
 public slots:
     virtual void DialogAccepted() Q_DECL_OVERRIDE;
@@ -109,6 +110,7 @@ private:
     int formulaBaseHeight;
 
     bool checkZero;
+    bool checkLessThanZero;
     QString postfix;
     bool restoreCursor;
 

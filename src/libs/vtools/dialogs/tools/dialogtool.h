@@ -231,7 +231,7 @@ protected:
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer,
                                        const QString &postfix = QString());
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
-                          bool checkZero = true);
+                          bool checkZero = true, bool checkLessThanZero = false);
 
     void             setCurrentPointId(QComboBox *box, const quint32 &value,
                                        FillComboBox rule = FillComboBox::NoChildren,

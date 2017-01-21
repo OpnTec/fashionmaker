@@ -51,7 +51,8 @@ public:
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
-    void SetSAWidth(qreal width);
+    QString GetFormulaSAWidth() const;
+    void    SetFormulaSAWidth(const QString &formula);
 
     virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
 
@@ -72,14 +73,39 @@ private slots:
     void NodeChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
-    void ChangedSABefore(double d);
-    void ChangedSAAfter(double d);
+
+    void EvalWidth();
+    void EvalWidthBefore();
+    void EvalWidthAfter();
+
+    void FXWidth();
+    void FXWidthBefore();
+    void FXWidthAfter();
+
+    void WidthChanged();
+    void WidthBeforeChanged();
+    void WidthAfterChanged();
+
+    void DeployWidthFormulaTextEdit();
+    void DeployWidthBeforeFormulaTextEdit();
+    void DeployWidthAfterFormulaTextEdit();
 
 private:
     Q_DISABLE_COPY(DialogPiecePath)
     Ui::DialogPiecePath *ui;
-    bool m_showMode;
+    bool  m_showMode;
+    qreal m_saWidth;
 
+    QTimer *m_timerWidth;
+    QTimer *m_timerWidthBefore;
+    QTimer *m_timerWidthAfter;
+
+    int m_formulaBaseWidth;
+    int m_formulaBaseWidthBefore;
+    int m_formulaBaseWidthAfter;
+
+    void InitPathTab();
+    void InitSeamAllowanceTab();
     void InitPathTypes();
     void InitListPieces();
     void InitNodesList();
@@ -101,8 +127,14 @@ private:
 
     quint32 GetLastId() const;
 
-    void SetCurrentSABefore(qreal value);
-    void SetCurrentSAAfter(qreal value);
+    void SetCurrentSABefore(const QString &formula);
+    void SetCurrentSAAfter(const QString &formula);
+
+    void UpdateNodeSABefore(const QString &formula);
+    void UpdateNodeSAAfter(const QString &formula);
+
+    QString GetFormulaSAWidthBefore() const;
+    QString GetFormulaSAWidthAfter() const;
 };
 
 #endif // DIALOGPIECEPATH_H

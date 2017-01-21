@@ -656,8 +656,8 @@ VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *d
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
     VSAPoint p(point->toQPointF());
 
-    p.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-    p.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+    p.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
+    p.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
     p.SetAngleType(node.GetAngleType());
 
     return p;
@@ -762,8 +762,8 @@ VSAPoint VPiecePath::CurvePoint(const VSAPoint &candidate, const VContainer *dat
         if (curve->IsPointOnCurve(p))
         {
             point = VSAPoint(p);
-            point.SetSAAfter(node.GetSAAfter(*data->GetPatternUnit()));
-            point.SetSABefore(node.GetSABefore(*data->GetPatternUnit()));
+            point.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
+            point.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
             point.SetAngleType(node.GetAngleType());
         }
     }

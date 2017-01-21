@@ -79,6 +79,9 @@ public:
     bool IsUnited() const;
     void SetUnited(bool united);
 
+    QString GetFormulaSAWidth() const;
+    void    SetFormulaSAWidth(const QString &formula, qreal value);
+
     QVector<quint32> GetInternalPaths() const;
     void             SetInternalPaths(const QVector<quint32> &iPaths);
     void             AppendInternalPath(quint32 path);
