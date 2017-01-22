@@ -84,6 +84,41 @@ VLayoutDetail::~VLayoutDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VLayoutDetail VLayoutDetail::Create(const VPiece &piece, const VContainer *pattern)
+{
+    VLayoutDetail det = VLayoutDetail();
+    det.SetCountourPoints(piece.MainPathPoints(pattern));
+    det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(), false);
+    det.setName(piece.GetName());
+    const VPatternPieceData& data = piece.GetPatternPieceData();
+    if (data.IsVisible() == true)
+    {
+        det.SetDetail(piece.GetName(), data, qApp->font());
+    }
+    const VPatternInfoGeometry& geom = piece.GetPatternInfo();
+    if (geom.IsVisible() == true)
+    {
+        VAbstractPattern* pDoc = qApp->getCurrentDocument();
+        QDate date;
+        if (pDoc->IsDateVisible() == true)
+        {
+            date = QDate::currentDate();
+        }
+        det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
+    }
+    const VGrainlineGeometry& grainlineGeom = piece.GetGrainlineGeometry();
+    if (grainlineGeom.IsVisible() == true)
+    {
+        det.SetGrainline(grainlineGeom, *pattern);
+    }
+    det.setWidth(qApp->toPixel(piece.GetSAWidth()));
+    det.CreateTextItems();
+    det.setForbidFlipping(piece.IsForbidFlipping());
+
+    return det;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 QVector<QPointF> VLayoutDetail::GetContourPoints() const
 {

@@ -475,37 +475,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *det
     QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        VLayoutDetail det = VLayoutDetail();
-        const VPiece d = i.value();
-        det.SetCountourPoints(d.MainPathPoints(pattern));
-        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.IsSeamAllowance(), false);
-        det.setName(d.GetName());
-        const VPatternPieceData& data = d.GetPatternPieceData();
-        if (data.IsVisible() == true)
-        {
-            det.SetDetail(d.GetName(), data, qApp->font());
-        }
-        const VPatternInfoGeometry& geom = d.GetPatternInfo();
-        if (geom.IsVisible() == true)
-        {
-            VAbstractPattern* pDoc = qApp->getCurrentDocument();
-            QDate date;
-            if (pDoc->IsDateVisible() == true)
-            {
-                date = QDate::currentDate();
-            }
-            det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
-        }
-        const VGrainlineGeometry& grainlineGeom = d.GetGrainlineGeometry();
-        if (grainlineGeom.IsVisible() == true)
-        {
-            det.SetGrainline(grainlineGeom, *pattern);
-        }
-        det.setWidth(qApp->toPixel(d.GetSAWidth()));
-        det.CreateTextItems();
-        det.setForbidFlipping(d.IsForbidFlipping());
-
-        listDetails.append(det);
+        listDetails.append(VLayoutDetail::Create(i.value(), pattern));
         ++i;
     }
 }
