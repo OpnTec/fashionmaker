@@ -891,8 +891,7 @@ void DialogSeamAllowance::UpdateValues()
         {
             plbVal = ui->labelRot;
             plbText = ui->labelEditRot;
-            QChar ch(0x00b0);
-            qsUnit = ch;
+            qsUnit = degreeSymbol;
         }
         else
         {
