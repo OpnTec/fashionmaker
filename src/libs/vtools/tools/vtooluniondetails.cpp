@@ -1186,6 +1186,7 @@ void CreateUnitedDetail(quint32 id, const VToolUnionDetailsInitData &initData, q
     newDetail.SetFormulaSAWidth(formulaSAWidth, d1.GetSAWidth());
     newDetail.SetMx(d1.GetMx());
     newDetail.SetMy(d1.GetMy());
+    newDetail.SetUnited(true);
     VToolSeamAllowance::Create(0, newDetail, formulaSAWidth, initData.scene, initData.doc, initData.data,
                                initData.parse, Source::FromTool, drawName);
 
