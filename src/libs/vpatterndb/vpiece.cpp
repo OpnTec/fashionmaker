@@ -178,6 +178,21 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<QPointF>> VPiece::GetInternalPathsPoints(const VContainer *data) const
+{
+    QVector<QVector<QPointF>> pathsPoints;
+    for (int i = 0; i < d->m_internalPaths.size(); ++i)
+    {
+        const VPiecePath path = data->GetPiecePath(d->m_internalPaths.at(i));
+        if (path.GetType() == PiecePathType::InternalPath)
+        {
+            pathsPoints.append(path.PathPoints(data));
+        }
+    }
+    return pathsPoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
     const QVector<QPointF> points = MainPathPoints(data);

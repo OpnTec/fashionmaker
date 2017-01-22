@@ -354,16 +354,6 @@ QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
     for (int i=0; i < d->details.count(); ++i)
     {
         list.append(d->details.at(i).GetItem());
-        for (int iT = 0; iT < d->details.at(i).GetTextItemsCount(); ++iT)
-        {
-            list.append(d->details.at(i).GetTextItem(iT));
-        }
-
-        QGraphicsItem* pItem = d->details.at(i).GetGrainlineItem();
-        if (pItem != 0)
-        {
-            list.append(pItem);
-        }
     }
     return list;
 }

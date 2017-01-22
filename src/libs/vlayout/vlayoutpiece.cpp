@@ -86,9 +86,10 @@ VLayoutPiece::~VLayoutPiece()
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
-    VLayoutPiece det = VLayoutPiece();
+    VLayoutPiece det;
     det.SetCountourPoints(piece.MainPathPoints(pattern));
     det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
+    det.SetInternlaPathsPoints(piece.GetInternalPathsPoints(pattern));
     det.SetName(piece.GetName());
     const VPatternPieceData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
@@ -499,6 +500,18 @@ void VLayoutPiece::SetLayoutAllowencePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<QPointF>> VLayoutPiece::GetInternlaPathsPoints() const
+{
+    return d->m_internalPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetInternlaPathsPoints(const QVector<QVector<QPointF>> &internalPathsPoints)
+{
+    d->m_internalPaths = internalPathsPoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VLayoutPiece::Map(const QVector<QPointF> &points) const
 {
     QVector<QPointF> p;
@@ -696,20 +709,16 @@ void VLayoutPiece::CreateTextItems()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPiece::GetTextItemsCount() const
-{
-    return d->m_liPP.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VLayoutDetail::GetTextItem Creates and returns the i-th text item
+ * @brief CreateTextItem Creates the i-th text item
  * @param i index of the requested item
- * @return pointer to the newly created item. The caller is responsible to delete it.
+ * @param parent parent of this text item. Can't be null.
  */
-QGraphicsItem* VLayoutPiece::GetTextItem(int i) const
+void VLayoutPiece::CreateTextItem(int i, QGraphicsItem *parent) const
 {
-    QGraphicsPathItem* item = new QGraphicsPathItem();
+    SCASSERT(parent != nullptr)
+
+    QGraphicsPathItem* item = new QGraphicsPathItem(parent);
     QTransform transform = d->matrix;
 
     QPainterPath path = transform.map(d->m_liPP[i]);
@@ -747,7 +756,6 @@ QGraphicsItem* VLayoutPiece::GetTextItem(int i) const
 
     item->setPath(path);
     item->setBrush(QBrush(Qt::black));
-    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -771,18 +779,30 @@ QPainterPath VLayoutPiece::LayoutAllowencePath() const
 QGraphicsItem *VLayoutPiece::GetItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
-    item->setPath(ContourPath());
+    QPainterPath contour = ContourPath();
+    contour.addPath(InternalPathsPath());
+    item->setPath(contour);
+
+    for (int i = 0; i < d->m_liPP.count(); ++i)
+    {
+        CreateTextItem(i, item);
+    }
+
+    CreateGrainlineItem(item);
+
     return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem* VLayoutPiece::GetGrainlineItem() const
+void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 {
+    SCASSERT(parent != nullptr)
+
     if (d->grainlinePoints.count() < 2)
     {
-        return 0;
+        return;
     }
-    VGraphicsFillItem* item = new VGraphicsFillItem();
+    VGraphicsFillItem* item = new VGraphicsFillItem(parent);
     QPainterPath path;
     QVector<QPointF> v = Map(d->grainlinePoints);
     path.moveTo(v.at(0));
@@ -791,7 +811,29 @@ QGraphicsItem* VLayoutPiece::GetGrainlineItem() const
         path.lineTo(v.at(i));
     }
     item->setPath(path);
-    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPiece::InternalPathsPath() const
+{
+    QPainterPath allPaths;
+    allPaths.setFillRule(Qt::WindingFill);
+
+    for (qint32 i = 0; i < d->m_internalPaths.count(); ++i)
+    {
+        const QVector<QPointF> points = Map(d->m_internalPaths.at(i));
+        QPainterPath path;
+        path.setFillRule(Qt::WindingFill);
+        path.moveTo(points.at(0));
+        for (qint32 j = 1; j < points.count(); ++j)
+        {
+            path.lineTo(points.at(j));
+        }
+        path.lineTo(points.at(0));
+        allPaths.addPath(path);
+    }
+
+    return allPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

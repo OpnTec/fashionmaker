@@ -79,6 +79,9 @@ public:
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
 
+    QVector<QVector<QPointF>> GetInternlaPathsPoints() const;
+    void SetInternlaPathsPoints(const QVector<QVector<QPointF>> &internalPathsPoints);
+
     void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
 
     void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font,
@@ -115,18 +118,22 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
-    void ClearTextItems();
-    void CreateTextItems();
-    int GetTextItemsCount() const Q_REQUIRED_RESULT;
-    QGraphicsItem* GetTextItem(int i) const Q_REQUIRED_RESULT;
+
     QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
-    QGraphicsItem* GetGrainlineItem() const Q_REQUIRED_RESULT;
 
 private:
     QSharedDataPointer<VLayoutPieceData>   d;
 
     QVector<QPointF> DetailPath() const;
+
+    void ClearTextItems();
+    void CreateTextItems();
+
+    void CreateTextItem(int i, QGraphicsItem *parent) const;
+    void CreateGrainlineItem(QGraphicsItem *parent) const;
+
+    QPainterPath InternalPathsPath() const;
 
     static QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points);
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
