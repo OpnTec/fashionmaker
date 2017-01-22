@@ -4,8 +4,6 @@
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/vlayoutgenerator.h \
-    $$PWD/vabstractdetail.h \
-    $$PWD/vabstractdetail_p.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
     $$PWD/vlayoutpaper_p.h \
@@ -24,7 +22,6 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \
-    $$PWD/vabstractdetail.cpp \
     $$PWD/vlayoutpaper.cpp \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \

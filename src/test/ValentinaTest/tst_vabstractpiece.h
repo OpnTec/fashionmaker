@@ -42,6 +42,22 @@ public:
 private slots:
     void EquidistantRemoveLoop_data();
     void EquidistantRemoveLoop() const;
+    void SumTrapezoids() const;
+    void PathRemoveLoop_data() const;
+    void PathRemoveLoop() const;
+    void PathLoopsCase_data() const;
+    void PathLoopsCase() const;
+    void BrokenDetailEquidistant_data() const;
+    void BrokenDetailEquidistant() const;
+    void CorrectEquidistantPoints_data() const;
+    void CorrectEquidistantPoints() const;
+    void TestCorrectEquidistantPoints_data();
+    void TestCorrectEquidistantPoints() const;
+#ifndef Q_OS_WIN
+    void PossibleInfiniteClearLoops_data() const;
+    void PossibleInfiniteClearLoops() const;
+#endif
+
 private:
     QVector<VSAPoint> InputPointsCase1() const;
     QVector<QPointF>  OutputPointsCase1() const;
@@ -51,6 +67,29 @@ private:
 
     QVector<VSAPoint> InputPointsCase3() const;
     QVector<QPointF>  OutputPointsCase3() const;
+
+    void Case3() const;
+    void Case4() const;
+    void Case5() const;
+
+    QVector<QPointF> InputPointsIssue298Case1() const;
+    QVector<QPointF> OutputPointsIssue298Case1() const;
+
+    QVector<QPointF> InputPointsIssue298Case2() const;
+    QVector<QPointF> OutputPointsIssue298Case2() const;
+
+    QVector<QPointF> InputPointsIssue548Case1() const;
+    QVector<QPointF> OutputPointsIssue548Case1() const;
+
+    QVector<QPointF> InputPointsIssue548Case2() const;
+    QVector<QPointF> OutputPointsIssue548Case2() const;
+
+    QVector<QPointF> InputPointsIssue548Case3() const;
+    QVector<QPointF> OutputPointsIssue548Case3() const;
+
+    QVector<QPointF> InputPointsCase3a() const;
+    QVector<QPointF> InputPointsCase4a() const;
+    QVector<QPointF> InputPointsCase5a() const;
 };
 
 #endif // TST_VABSTRACTPIECE_H

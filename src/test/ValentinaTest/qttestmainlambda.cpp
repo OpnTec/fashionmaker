@@ -29,7 +29,6 @@
 #include <QtTest>
 
 #include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
 #include "tst_vabstractpiece.h"
 #include "tst_vspline.h"
 #include "tst_nameregexp.h"
@@ -70,7 +69,6 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_FindPoint());
     ASSERT_TEST(new TST_VDetail());
     ASSERT_TEST(new TST_VPoster());
-    //ASSERT_TEST(new TST_VAbstractDetail());
     ASSERT_TEST(new TST_VAbstractPiece());
     ASSERT_TEST(new TST_VSpline());
     ASSERT_TEST(new TST_VSplinePath());
