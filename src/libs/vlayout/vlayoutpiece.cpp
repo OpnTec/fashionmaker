@@ -811,7 +811,7 @@ QVector<QPointF> VLayoutPiece::DetailPath() const
 QVector<VSAPoint> VLayoutPiece::PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
-    for(int i = 0; i < points.size(); +i)
+    for(int i = 0; i < points.size(); ++i)
     {
         allowancePoints.append(VSAPoint(points.at(i)));
     }
