@@ -55,20 +55,20 @@ class QPointF;
 class QRectF;
 class QTransform;
 class VAbstractPattern;
-class VLayoutDetailData;
+class VLayoutPieceData;
 class VPatternInfoGeometry;
 class VPatternPieceData;
 class VGrainlineGeometry;
 
-class VLayoutDetail :public VAbstractPiece
+class VLayoutPiece :public VAbstractPiece
 {
 public:
-    VLayoutDetail();
-    VLayoutDetail(const VLayoutDetail &detail);
-    VLayoutDetail &operator=(const VLayoutDetail &detail);
-    virtual ~VLayoutDetail() Q_DECL_OVERRIDE;
+    VLayoutPiece();
+    VLayoutPiece(const VLayoutPiece &detail);
+    VLayoutPiece &operator=(const VLayoutPiece &detail);
+    virtual ~VLayoutPiece() Q_DECL_OVERRIDE;
 
-    static VLayoutDetail Create(const VPiece &piece, const VContainer *pattern);
+    static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
 
     QVector<QPointF> GetContourPoints() const;
     void SetCountourPoints(const QVector<QPointF> &points);
@@ -124,7 +124,7 @@ public:
     QGraphicsItem* GetGrainlineItem() const Q_REQUIRED_RESULT;
 
 private:
-    QSharedDataPointer<VLayoutDetailData>   d;
+    QSharedDataPointer<VLayoutPieceData>   d;
 
     QVector<QPointF> DetailPath() const;
 
@@ -140,6 +140,6 @@ private:
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;
 };
 
-Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE);
 
 #endif // VLAYOUTDETAIL_H

@@ -33,7 +33,7 @@
 #include <QVector>
 #include <QPointF>
 
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 #include "vcontour.h"
 
 QT_WARNING_PUSH
@@ -43,7 +43,7 @@ class VLayoutPaperData : public QSharedData
 {
 public:
     VLayoutPaperData()
-        : details(QVector<VLayoutDetail>()),
+        : details(QVector<VLayoutPiece>()),
           globalContour(VContour()),
           paperIndex(0),
           frame(0),
@@ -57,7 +57,7 @@ public:
 
     VLayoutPaperData(int height,
                      int width)
-        : details(QVector<VLayoutDetail>()),
+        : details(QVector<VLayoutPiece>()),
           globalContour(VContour(height, width)),
           paperIndex(0),
           frame(0),
@@ -86,7 +86,7 @@ public:
     ~VLayoutPaperData() {}
 
     /** @brief details list of arranged details. */
-    QVector<VLayoutDetail> details;
+    QVector<VLayoutPiece> details;
 
     /** @brief globalContour list of global points contour. */
     VContour globalContour;

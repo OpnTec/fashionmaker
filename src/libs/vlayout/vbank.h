@@ -43,7 +43,7 @@
 #endif
 
 class QPointF;
-class VLayoutDetail;
+class VLayoutPiece;
 
 enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
 
@@ -55,9 +55,9 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(const qreal &value);
 
-    void SetDetails(const QVector<VLayoutDetail> &details);
+    void SetDetails(const QVector<VLayoutPiece> &details);
     int  GetTiket();
-    VLayoutDetail GetDetail(int i) const;
+    VLayoutPiece GetDetail(int i) const;
 
     void Arranged(int i);
     void NotArranged(int i);
@@ -74,7 +74,7 @@ public:
 
 private:
     Q_DISABLE_COPY(VBank)
-    QVector<VLayoutDetail> details;
+    QVector<VLayoutPiece> details;
     QHash<int, qint64> unsorted;
 
     QHash<int, qint64> big;

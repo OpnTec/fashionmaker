@@ -50,7 +50,7 @@ class QMarginsF;
 #endif
 
 class QGraphicsItem;
-class VLayoutDetail;
+class VLayoutPiece;
 class VLayoutPaper;
 
 class VLayoutGenerator :public QObject
@@ -60,7 +60,7 @@ public:
     explicit VLayoutGenerator(QObject *parent = nullptr);
     virtual ~VLayoutGenerator() Q_DECL_OVERRIDE;
 
-    void SetDetails(const QVector<VLayoutDetail> &details);
+    void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
     void SetCaseType(Cases caseType);
     int DetailsCount();
@@ -140,9 +140,9 @@ private:
 
     void GatherPages();
     void UnitePages();
-    void UniteDetails(int j, QList<QList<VLayoutDetail> > &nDetails, qreal length, int i);
+    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i);
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
-    QList<VLayoutDetail> MoveDetails(qreal length, const QVector<VLayoutDetail> &details);
+    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
 };
 
 typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;

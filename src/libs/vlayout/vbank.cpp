@@ -32,7 +32,7 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -52,7 +52,7 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
-    :details(QVector<VLayoutDetail>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
+    :details(QVector<VLayoutPiece>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
       middle(QHash<int, qint64>()), small(QHash<int, qint64>()), layoutWidth(0), caseType(Cases::CaseDesc),
       prepare(false), diagonal(0)
 {}
@@ -71,7 +71,7 @@ void VBank::SetLayoutWidth(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBank::SetDetails(const QVector<VLayoutDetail> &details)
+void VBank::SetDetails(const QVector<VLayoutPiece> &details)
 {
     this->details = details;
     Reset();
@@ -111,7 +111,7 @@ int VBank::GetTiket()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail VBank::GetDetail(int i) const
+VLayoutPiece VBank::GetDetail(int i) const
 {
     if (i >= 0 && i < details.size())
     {
@@ -119,7 +119,7 @@ VLayoutDetail VBank::GetDetail(int i) const
     }
     else
     {
-        return VLayoutDetail();
+        return VLayoutPiece();
     }
 }
 

@@ -40,7 +40,7 @@ class QGraphicsItem;
 class QGraphicsRectItem;
 class QRectF;
 class VBestSquare;
-class VLayoutDetail;
+class VLayoutPiece;
 class VLayoutPaperData;
 template <typename T> class QList;
 template <typename T> class QVector;
@@ -77,22 +77,22 @@ public:
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
+    bool ArrangeDetail(const VLayoutPiece &detail, volatile bool &stop);
     int  Count() const;
     QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
     QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
 
-    QVector<VLayoutDetail> GetDetails() const;
-    void                   SetDetails(const QList<VLayoutDetail>& details);
+    QVector<VLayoutPiece> GetDetails() const;
+    void                   SetDetails(const QList<VLayoutPiece>& details);
 
     QRectF DetailsBoundingRect() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutDetail &detail, volatile bool &stop);
+    bool AddToSheet(const VLayoutPiece &detail, volatile bool &stop);
 
-    bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
+    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
 
 };
 

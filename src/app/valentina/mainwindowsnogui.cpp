@@ -60,7 +60,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
-    : VAbstractMainWindow(parent), listDetails(QVector<VLayoutDetail>()), currentScene(nullptr), tempSceneLayout(nullptr),
+    : VAbstractMainWindow(parent), listDetails(QVector<VLayoutPiece>()), currentScene(nullptr), tempSceneLayout(nullptr),
       pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), actionDockWidgetGroups(nullptr),
@@ -475,7 +475,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *det
     QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        listDetails.append(VLayoutDetail::Create(i.value(), pattern));
+        listDetails.append(VLayoutPiece::Create(i.value(), pattern));
         ++i;
     }
 }

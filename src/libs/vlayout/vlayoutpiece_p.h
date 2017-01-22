@@ -43,17 +43,17 @@
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-class VLayoutDetailData : public QSharedData
+class VLayoutPieceData : public QSharedData
 {
 public:
-    VLayoutDetailData()
+    VLayoutPieceData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
           matrix(QMatrix()), layoutWidth(0), mirror(false), detailLabel(QVector<QPointF>()),
           patternInfo(QVector<QPointF>()), grainlinePoints(QVector<QPointF>()), detailData(), patternGeom(),
           grainlineGeom(), m_tmDetail(), m_tmPattern(), m_liPP(QList<QPainterPath>())
     {}
 
-    VLayoutDetailData(const VLayoutDetailData &detail)
+    VLayoutPieceData(const VLayoutPieceData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
           layoutAllowence(detail.layoutAllowence), matrix(detail.matrix),
           layoutWidth(detail.layoutWidth), mirror(detail.mirror), detailLabel(detail.detailLabel),
@@ -62,7 +62,7 @@ public:
           m_tmPattern(detail.m_tmPattern), m_liPP(detail.m_liPP)
     {}
 
-    ~VLayoutDetailData() {}
+    ~VLayoutPieceData() {}
 
     /** @brief contour list of contour points. */
     QVector<QPointF>                        contour;
@@ -101,7 +101,7 @@ public:
     QList<QPainterPath>                     m_liPP;
 
 private:
-    VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;
+    VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;
 };
 
 QT_WARNING_POP

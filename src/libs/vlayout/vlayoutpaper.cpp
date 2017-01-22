@@ -45,7 +45,7 @@
 
 #include "vbestsquare.h"
 #include "vcontour.h"
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
 
@@ -185,7 +185,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop)
+bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, volatile bool &stop)
 {
     // First need set size of paper
     if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
@@ -221,7 +221,7 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
+bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, volatile bool &stop)
 {
     VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
@@ -289,11 +289,11 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail)
+bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail)
 {
     if (bestResult.ValidResult())
     {
-        VLayoutDetail workDetail = detail;
+        VLayoutPiece workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
         const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(workDetail, bestResult.GContourEdge(),
@@ -369,13 +369,13 @@ QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutDetail> VLayoutPaper::GetDetails() const
+QVector<VLayoutPiece> VLayoutPaper::GetDetails() const
 {
     return d->details;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SetDetails(const QList<VLayoutDetail> &details)
+void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 {
     d->details = details.toVector();
 }

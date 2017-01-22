@@ -37,7 +37,7 @@
 #include <Qt>
 
 #include "vcontour_p.h"
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 #include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ QSizeF VContour::GetSize() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const
+QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const
 {
     QVector<QPointF> newContour;
     if (d->globalContour.isEmpty()) //-V807
@@ -333,7 +333,7 @@ QPainterPath VContour::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const
+void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
 {
     int processedEdges = 0;
     const int nD = detail.LayoutEdgesCount();

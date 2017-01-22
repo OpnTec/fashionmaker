@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 
 #include <QBrush>
 #include <QFlags>
@@ -49,7 +49,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "vlayoutdef.h"
-#include "vlayoutdetail_p.h"
+#include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
 #include "vgraphicsfillitem.h"
 
@@ -58,17 +58,17 @@ class QLineF;
 class VAbstractPattern;
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail::VLayoutDetail()
-    :VAbstractPiece(), d(new VLayoutDetailData)
+VLayoutPiece::VLayoutPiece()
+    :VAbstractPiece(), d(new VLayoutPieceData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
+VLayoutPiece::VLayoutPiece(const VLayoutPiece &detail)
     :VAbstractPiece(detail), d(detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
+VLayoutPiece &VLayoutPiece::operator=(const VLayoutPiece &detail)
 {
     if ( &detail == this )
     {
@@ -80,13 +80,13 @@ VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail::~VLayoutDetail()
+VLayoutPiece::~VLayoutPiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail VLayoutDetail::Create(const VPiece &piece, const VContainer *pattern)
+VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
-    VLayoutDetail det = VLayoutDetail();
+    VLayoutPiece det = VLayoutPiece();
     det.SetCountourPoints(piece.MainPathPoints(pattern));
     det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
     det.SetName(piece.GetName());
@@ -120,26 +120,26 @@ VLayoutDetail VLayoutDetail::Create(const VPiece &piece, const VContainer *patte
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VLayoutDetail::GetContourPoints() const
+QVector<QPointF> VLayoutPiece::GetContourPoints() const
 {
     return Map(d->contour);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
+void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points)
 {
     d->contour = RemoveDublicates(RoundPoints(points));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
+QVector<QPointF> VLayoutPiece::GetSeamAllowencePoints() const
 {
     return Map(d->seamAllowence);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
+void VLayoutPiece::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
 {
     if (seamAllowence)
     {
@@ -158,13 +158,13 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
+QVector<QPointF> VLayoutPiece::GetLayoutAllowencePoints() const
 {
     return Map(d->layoutAllowence);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& data, const QFont &font)
+void VLayoutPiece::SetDetail(const QString& qsName, const VPatternPieceData& data, const QFont &font)
 {
     d->detailData = data;
     qreal dAng = qDegreesToRadians(data.GetRotation());
@@ -190,7 +190,7 @@ void VLayoutDetail::SetDetail(const QString& qsName, const VPatternPieceData& da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font,
+void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font,
                                    qreal dSize, qreal dHeight)
 {
     d->patternGeom = geom;
@@ -219,7 +219,7 @@ void VLayoutDetail::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern)
+void VLayoutPiece::SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern)
 {
     d->grainlineGeom = geom;
     qreal dAng;
@@ -286,31 +286,31 @@ void VLayoutDetail::SetGrainline(const VGrainlineGeometry& geom, const VContaine
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VLayoutDetail::GetMatrix() const
+QTransform VLayoutPiece::GetMatrix() const
 {
     return d->matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetMatrix(const QTransform &matrix)
+void VLayoutPiece::SetMatrix(const QTransform &matrix)
 {
     d->matrix = matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutDetail::GetLayoutWidth() const
+qreal VLayoutPiece::GetLayoutWidth() const
 {
     return d->layoutWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetLayoutWidth(const qreal &value)
+void VLayoutPiece::SetLayoutWidth(const qreal &value)
 {
     d->layoutWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::Translate(qreal dx, qreal dy)
+void VLayoutPiece::Translate(qreal dx, qreal dy)
 {
     QTransform m;
     m.translate(dx, dy);
@@ -318,7 +318,7 @@ void VLayoutDetail::Translate(qreal dx, qreal dy)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::Rotate(const QPointF &originPoint, qreal degrees)
+void VLayoutPiece::Rotate(const QPointF &originPoint, qreal degrees)
 {
     QTransform m;
     m.translate(originPoint.x(), originPoint.y());
@@ -328,7 +328,7 @@ void VLayoutDetail::Rotate(const QPointF &originPoint, qreal degrees)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::Mirror(const QLineF &edge)
+void VLayoutPiece::Mirror(const QLineF &edge)
 {
     if (edge.isNull())
     {
@@ -361,43 +361,43 @@ void VLayoutDetail::Mirror(const QLineF &edge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::DetailEdgesCount() const
+int VLayoutPiece::DetailEdgesCount() const
 {
     return DetailPath().count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::LayoutEdgesCount() const
+int VLayoutPiece::LayoutEdgesCount() const
 {
     return d->layoutAllowence.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutDetail::DetailEdge(int i) const
+QLineF VLayoutPiece::DetailEdge(int i) const
 {
     return Edge(DetailPath(), i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutDetail::LayoutEdge(int i) const
+QLineF VLayoutPiece::LayoutEdge(int i) const
 {
     return Edge(d->layoutAllowence, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::DetailEdgeByPoint(const QPointF &p1) const
+int VLayoutPiece::DetailEdgeByPoint(const QPointF &p1) const
 {
     return EdgeByPoint(DetailPath(), p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::LayoutEdgeByPoint(const QPointF &p1) const
+int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 {
     return EdgeByPoint(d->layoutAllowence, p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutDetail::DetailBoundingRect() const
+QRectF VLayoutPiece::DetailBoundingRect() const
 {
     QVector<QPointF> points;
     if (IsSeamAllowance())
@@ -414,7 +414,7 @@ QRectF VLayoutDetail::DetailBoundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutDetail::LayoutBoundingRect() const
+QRectF VLayoutPiece::LayoutBoundingRect() const
 {
     QVector<QPointF> points = GetLayoutAllowencePoints();
     points.append(points.first());
@@ -422,14 +422,14 @@ QRectF VLayoutDetail::LayoutBoundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutDetail::Diagonal() const
+qreal VLayoutPiece::Diagonal() const
 {
     const QRectF rec = LayoutBoundingRect();
     return qSqrt(pow(rec.height(), 2) + pow(rec.width(), 2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutDetail::isNull() const
+bool VLayoutPiece::isNull() const
 {
     if (d->contour.isEmpty() == false && d->layoutWidth > 0)
     {
@@ -449,7 +449,7 @@ bool VLayoutDetail::isNull() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VLayoutDetail::Square() const
+qint64 VLayoutPiece::Square() const
 {
     if (d->layoutAllowence.isEmpty()) //-V807
     {
@@ -463,7 +463,7 @@ qint64 VLayoutDetail::Square() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetLayoutAllowencePoints()
+void VLayoutPiece::SetLayoutAllowencePoints()
 {
     if (d->layoutWidth > 0)
     {
@@ -499,7 +499,7 @@ void VLayoutDetail::SetLayoutAllowencePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
+QVector<QPointF> VLayoutPiece::Map(const QVector<QPointF> &points) const
 {
     QVector<QPointF> p;
     for (int i = 0; i < points.size(); ++i)
@@ -520,7 +520,7 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::RoundPoints(const QVector<QPointF> &points)
+QVector<QPointF> VLayoutPiece::RoundPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> p;
     for (int i=0; i < points.size(); ++i)
@@ -531,7 +531,7 @@ QVector<QPointF> VLayoutDetail::RoundPoints(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutDetail::ContourPath() const
+QPainterPath VLayoutPiece::ContourPath() const
 {
     QPainterPath path;
 
@@ -569,13 +569,13 @@ QPainterPath VLayoutDetail::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::ClearTextItems()
+void VLayoutPiece::ClearTextItems()
 {
     d->m_liPP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::CreateTextItems()
+void VLayoutPiece::CreateTextItems()
 {
     ClearTextItems();
     // first add detail texts
@@ -696,7 +696,7 @@ void VLayoutDetail::CreateTextItems()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::GetTextItemsCount() const
+int VLayoutPiece::GetTextItemsCount() const
 {
     return d->m_liPP.count();
 }
@@ -707,7 +707,7 @@ int VLayoutDetail::GetTextItemsCount() const
  * @param i index of the requested item
  * @return pointer to the newly created item. The caller is responsible to delete it.
  */
-QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
+QGraphicsItem* VLayoutPiece::GetTextItem(int i) const
 {
     QGraphicsPathItem* item = new QGraphicsPathItem();
     QTransform transform = d->matrix;
@@ -751,7 +751,7 @@ QGraphicsItem* VLayoutDetail::GetTextItem(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutDetail::LayoutAllowencePath() const
+QPainterPath VLayoutPiece::LayoutAllowencePath() const
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
@@ -768,7 +768,7 @@ QPainterPath VLayoutDetail::LayoutAllowencePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem *VLayoutDetail::GetItem() const
+QGraphicsItem *VLayoutPiece::GetItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
     item->setPath(ContourPath());
@@ -776,7 +776,7 @@ QGraphicsItem *VLayoutDetail::GetItem() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
+QGraphicsItem* VLayoutPiece::GetGrainlineItem() const
 {
     if (d->grainlinePoints.count() < 2)
     {
@@ -795,7 +795,7 @@ QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::DetailPath() const
+QVector<QPointF> VLayoutPiece::DetailPath() const
 {
     if (IsSeamAllowance())
     {
@@ -808,7 +808,7 @@ QVector<QPointF> VLayoutDetail::DetailPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> VLayoutDetail::PrepareAllowance(const QVector<QPointF> &points)
+QVector<VSAPoint> VLayoutPiece::PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
     for(int i = 0; i < points.size(); +i)
@@ -819,13 +819,13 @@ QVector<VSAPoint> VLayoutDetail::PrepareAllowance(const QVector<QPointF> &points
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutDetail::IsMirror() const
+bool VLayoutPiece::IsMirror() const
 {
     return d->mirror;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetMirror(bool value)
+void VLayoutPiece::SetMirror(bool value)
 {
     d->mirror = value;
 }
@@ -838,7 +838,7 @@ void VLayoutDetail::SetMirror(bool value)
  * @param dAng angle of rotation
  * @return position of point pt after rotating it around the center for dAng radians
  */
-QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
+QPointF VLayoutPiece::RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 {
     QPointF ptDest;
     QPointF ptRel = pt - ptCenter;
@@ -855,7 +855,7 @@ QPointF VLayoutDetail::RotatePoint(const QPointF &ptCenter, const QPointF& pt, q
  * @param points list of 4 label vertices
  * @return list of flipped points
  */
-QVector<QPointF> VLayoutDetail::Mirror(const QVector<QPointF> &points) const
+QVector<QPointF> VLayoutPiece::Mirror(const QVector<QPointF> &points) const
 {
     // should only call this method with rectangular shapes
     Q_ASSERT(points.count() == 4);
@@ -880,7 +880,7 @@ QVector<QPointF> VLayoutDetail::Mirror(const QVector<QPointF> &points) const
  * @param pt2 second point
  * @return Euclidian distance between the two points
  */
-qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2)
+qreal VLayoutPiece::GetDistance(const QPointF &pt1, const QPointF &pt2)
 {
     const qreal dX = pt1.x() - pt2.x();
     const qreal dY = pt1.y() - pt2.y();
@@ -889,7 +889,7 @@ qreal VLayoutDetail::GetDistance(const QPointF &pt1, const QPointF &pt2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutDetail::Edge(const QVector<QPointF> &path, int i) const
+QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
 {
     if (i < 1 || i > path.count())
     { // Doesn't exist such edge
@@ -923,7 +923,7 @@ QLineF VLayoutDetail::Edge(const QVector<QPointF> &path, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutDetail::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
+int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
 {
     if (p1.isNull())
     {

@@ -43,7 +43,7 @@ class QPointF;
 class QRectF;
 class QSizeF;
 class VContourData;
-class VLayoutDetail;
+class VLayoutPiece;
 
 class VContour
 {
@@ -68,7 +68,7 @@ public:
 
     QSizeF GetSize() const;
 
-    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
+    QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
 
     QLineF EmptySheetEdge() const;
     int    GlobalEdgesCount() const;
@@ -85,7 +85,7 @@ public:
 private:
     QSharedDataPointer<VContourData> d;
 
-    void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
+    void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);

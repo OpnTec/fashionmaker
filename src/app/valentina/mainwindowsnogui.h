@@ -32,7 +32,7 @@
 #include <QMainWindow>
 #include <QPrinter>
 
-#include "../vlayout/vlayoutdetail.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "xml/vpattern.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
@@ -58,7 +58,7 @@ public slots:
     void PrintOrigin();
     void PrintTiled();
 protected:
-    QVector<VLayoutDetail> listDetails;
+    QVector<VLayoutPiece> listDetails;
 
     /** @brief currentScene pointer to current scene. */
     QGraphicsScene *currentScene;
