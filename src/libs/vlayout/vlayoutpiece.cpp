@@ -128,7 +128,7 @@ QVector<QPointF> VLayoutPiece::GetContourPoints() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points)
 {
-    d->contour = RemoveDublicates(RoundPoints(points));
+    d->contour = RemoveDublicates(RoundPoints(points), false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ void VLayoutPiece::SetSeamAllowencePoints(const QVector<QPointF> &points, bool s
         d->seamAllowence = points;
         if (not d->seamAllowence.isEmpty())
         {
-            d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
+            d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence), false);
         }
         else
         {
