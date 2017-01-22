@@ -45,7 +45,7 @@ SOURCES += \
     tst_vlockguard.cpp \
     tst_misc.cpp \
     tst_vcommandline.cpp \
-    tst_vdetail.cpp \
+    tst_vpiece.cpp \
     tst_vabstractcurve.cpp \
     tst_findpoint.cpp \
     tst_vellipticalarc.cpp \
@@ -71,7 +71,7 @@ HEADERS += \
     tst_vlockguard.h \
     tst_misc.h \
     tst_vcommandline.h \
-    tst_vdetail.h \
+    tst_vpiece.h \
     tst_vabstractcurve.h \
     tst_findpoint.h \
     tst_vellipticalarc.h \

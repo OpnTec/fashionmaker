@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "tst_vdetail.h"
+#include "tst_vpiece.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -36,13 +36,13 @@
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_VDetail::TST_VDetail(QObject *parent)
+TST_VPiece::TST_VPiece(QObject *parent)
     :AbstractTest(parent)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VDetail::ClearLoop()
+void TST_VPiece::ClearLoop()
 {
     // Input data taken from real case
     // See file <root>/src/app/share/collection/jacketМ6_30-110.val
