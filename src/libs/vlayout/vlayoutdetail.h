@@ -45,7 +45,7 @@
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vcontainer.h"
-#include "vabstractdetail.h"
+#include "vabstractpiece.h"
 
 class QFont;
 class QGraphicsItem;
@@ -60,7 +60,7 @@ class VPatternInfoGeometry;
 class VPatternPieceData;
 class VGrainlineGeometry;
 
-class VLayoutDetail :public VAbstractDetail
+class VLayoutDetail :public VAbstractPiece
 {
 public:
     VLayoutDetail();
@@ -74,7 +74,7 @@ public:
     void SetCountourPoints(const QVector<QPointF> &points);
 
     QVector<QPointF> GetSeamAllowencePoints() const;
-    void SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence = true, bool closed = true);
+    void SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence = true);
 
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
@@ -128,6 +128,7 @@ private:
 
     QVector<QPointF> DetailPath() const;
 
+    static QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points);
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 

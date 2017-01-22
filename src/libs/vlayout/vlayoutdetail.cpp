@@ -59,12 +59,12 @@ class VAbstractPattern;
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
-    :VAbstractDetail(), d(new VLayoutDetailData)
+    :VAbstractPiece(), d(new VLayoutDetailData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail(const VLayoutDetail &detail)
-    :VAbstractDetail(detail), d(detail.d)
+    :VAbstractPiece(detail), d(detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ VLayoutDetail &VLayoutDetail::operator=(const VLayoutDetail &detail)
     {
         return *this;
     }
-    VAbstractDetail::operator=(detail);
+    VAbstractPiece::operator=(detail);
     d = detail.d;
     return *this;
 }
@@ -88,8 +88,8 @@ VLayoutDetail VLayoutDetail::Create(const VPiece &piece, const VContainer *patte
 {
     VLayoutDetail det = VLayoutDetail();
     det.SetCountourPoints(piece.MainPathPoints(pattern));
-    det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(), false);
-    det.setName(piece.GetName());
+    det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
+    det.SetName(piece.GetName());
     const VPatternPieceData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
     {
@@ -111,9 +111,9 @@ VLayoutDetail VLayoutDetail::Create(const VPiece &piece, const VContainer *patte
     {
         det.SetGrainline(grainlineGeom, *pattern);
     }
-    det.setWidth(qApp->toPixel(piece.GetSAWidth()));
+    det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
     det.CreateTextItems();
-    det.setForbidFlipping(piece.IsForbidFlipping());
+    det.SetForbidFlipping(piece.IsForbidFlipping());
 
     return det;
 }
@@ -139,12 +139,11 @@ QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence, bool closed)
+void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
 {
     if (seamAllowence)
     {
-        setSeamAllowance(seamAllowence);
-        setClosed(closed);
+        SetSeamAllowance(seamAllowence);
         d->seamAllowence = points;
         if (not d->seamAllowence.isEmpty())
         {
@@ -153,7 +152,7 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
         else
         {
             qWarning()<<"Seam allowence is empty.";
-            setSeamAllowance(false);
+            SetSeamAllowance(false);
         }
     }
 }
@@ -401,7 +400,7 @@ int VLayoutDetail::LayoutEdgeByPoint(const QPointF &p1) const
 QRectF VLayoutDetail::DetailBoundingRect() const
 {
     QVector<QPointF> points;
-    if (getSeamAllowance())
+    if (IsSeamAllowance())
     {
         points = GetSeamAllowencePoints();
     }
@@ -434,7 +433,7 @@ bool VLayoutDetail::isNull() const
 {
     if (d->contour.isEmpty() == false && d->layoutWidth > 0)
     {
-        if (getSeamAllowance() && d->seamAllowence.isEmpty() == false)
+        if (IsSeamAllowance() && d->seamAllowence.isEmpty() == false)
         {
             return false;
         }
@@ -468,10 +467,9 @@ void VLayoutDetail::SetLayoutAllowencePoints()
 {
     if (d->layoutWidth > 0)
     {
-        if (getSeamAllowance())
+        if (IsSeamAllowance())
         {
-            d->layoutAllowence = Equidistant(GetSeamAllowencePoints(), EquidistantType::CloseEquidistant,
-                                             d->layoutWidth);
+            d->layoutAllowence = Equidistant(PrepareAllowance(GetSeamAllowencePoints()), d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
                 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -483,7 +481,7 @@ void VLayoutDetail::SetLayoutAllowencePoints()
         }
         else
         {
-            d->layoutAllowence = Equidistant(GetContourPoints(), EquidistantType::CloseEquidistant, d->layoutWidth);
+            d->layoutAllowence = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
             #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -547,13 +545,13 @@ QPainterPath VLayoutDetail::ContourPath() const
     path.lineTo(points.at(0));
 
     // seam allowence
-    if (getSeamAllowance() == true)
+    if (IsSeamAllowance() == true)
     {
         points = GetSeamAllowencePoints();
 
-        if (getClosed() == true)
+        if (points.last().toPoint() != points.first().toPoint())
         {
-            points.append(points.at(0));
+            points.append(points.at(0));// Should be always closed
         }
 
         QPainterPath ekv;
@@ -799,7 +797,7 @@ QGraphicsItem* VLayoutDetail::GetGrainlineItem() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VLayoutDetail::DetailPath() const
 {
-    if (getSeamAllowance())
+    if (IsSeamAllowance())
     {
         return d->seamAllowence;
     }
@@ -807,6 +805,17 @@ QVector<QPointF> VLayoutDetail::DetailPath() const
     {
         return d->contour;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> VLayoutDetail::PrepareAllowance(const QVector<QPointF> &points)
+{
+    QVector<VSAPoint> allowancePoints;
+    for(int i = 0; i < points.size(); +i)
+    {
+        allowancePoints.append(VSAPoint(points.at(i)));
+    }
+    return allowancePoints;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

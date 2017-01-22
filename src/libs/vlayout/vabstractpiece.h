@@ -203,6 +203,8 @@ private:
     static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
 };
 
+Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.

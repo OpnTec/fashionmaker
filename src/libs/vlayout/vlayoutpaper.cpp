@@ -198,7 +198,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &sto
         return false;//Not enough edges
     }
 
-    if (detail.getForbidFlipping() && not d->globalRotate)
+    if (detail.IsForbidFlipping() && not d->globalRotate)
     { // Compensate forbidden flipping by rotating. 180 degree will be enough.
         d->localRotate = true;
         d->localRotationIncrease = 180;
