@@ -67,16 +67,16 @@ public:
     /** @brief contour list of contour points. */
     QVector<QPointF>                        contour;
 
-    /** @brief seamAllowence list of seam allowence points. */
+    /** @brief seamAllowence list of seam allowance points. */
     QVector<QPointF>                        seamAllowence;
 
-    /** @brief layoutAllowence list of layout allowence points. */
+    /** @brief layoutAllowence list of layout allowance points. */
     QVector<QPointF>                        layoutAllowence;
 
     /** @brief matrix transformation matrix*/
     QTransform                              matrix;
 
-    /** @brief layoutWidth value layout allowence width in pixels. */
+    /** @brief layoutWidth value layout allowance width in pixels. */
     qreal                                   layoutWidth;
 
     bool                                    mirror;

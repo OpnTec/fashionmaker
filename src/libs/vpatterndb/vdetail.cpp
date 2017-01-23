@@ -507,7 +507,7 @@ QPainterPath VDetail::SeamAllowancePath(const VContainer *data) const
     const QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
     QPainterPath ekv;
 
-    // seam allowence
+    // seam allowance
     if (getSeamAllowance())
     {
         if (not pointsEkv.isEmpty())

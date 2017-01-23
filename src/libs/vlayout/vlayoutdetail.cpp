@@ -117,7 +117,7 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
         }
         else
         {
-            qWarning()<<"Seam allowence is empty.";
+            qWarning()<<"Seam allowance is empty.";
             setSeamAllowance(false);
         }
     }
@@ -511,7 +511,7 @@ QPainterPath VLayoutDetail::ContourPath() const
     }
     path.lineTo(points.at(0));
 
-    // seam allowence
+    // seam allowance
     if (getSeamAllowance() == true)
     {
         points = GetSeamAllowencePoints();

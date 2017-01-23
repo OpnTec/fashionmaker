@@ -48,7 +48,7 @@ struct PosterData
           rect(){}
 
     quint32 index; // paper index
-    quint32 row; // positions in the greed
+    quint32 row; // positions in the grid
     quint32 column;
     quint32 rows;
     quint32 columns;
@@ -66,7 +66,7 @@ public:
     QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
 private:
     const QPrinter *printer;
-    quint32 allowence;
+    quint32 allowance;
 
     int CountRows(int height) const;
     int CountColumns(int width) const;
