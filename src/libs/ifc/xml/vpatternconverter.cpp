@@ -132,6 +132,7 @@ const QString strInLayout                  = QStringLiteral("inLayout");
 const QString strSeamAllowance             = QStringLiteral("seamAllowance");
 const QString strNodeType                  = QStringLiteral("nodeType");
 const QString strDet                       = QStringLiteral("det");
+const QString strTypeObject                = QStringLiteral("typeObject");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -1716,9 +1717,9 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
                 QDomElement domElement = domNode.toElement();
                 if (not domElement.isNull())
                 {
-                    if (domElement.hasAttribute(strNodeType))
+                    if (domElement.hasAttribute(strTypeObject))
                     {
-                        domElement.removeAttribute(strNodeType);
+                        domElement.removeAttribute(strTypeObject);
                     }
                 }
                 domNode = domNode.nextSibling();
