@@ -67,7 +67,8 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
     {
         const QPoint p1 = ekv.at(i).toPoint();
         const QPoint p2 = ekvOrig.at(i).toPoint();
-        const QString msg = QString("Got '%1;%2', Exprected '%3;%4'.").arg(p1.x(), p1.y()).arg(p2.x(), p2.y());
+        const QString msg = QString("Index: %1. Got '%2;%3', Exprected '%4;%5'.")
+                .arg(i).arg(p1.x()).arg(p1.y()).arg(p2.x()).arg(p2.y());
         // Check each point. Don't use comparison float values
         QVERIFY2(p1 == p2, qUtf8Printable(msg));
     }
