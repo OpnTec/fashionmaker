@@ -259,14 +259,14 @@ unix{
     }
 }
 
-#win32 {
+win32 {
     for(DIR, INSTALL_OPENSSL) {
         #add these absolute paths to a variable which
         #ends up as 'mkcommands = path1 path2 path3 ...'
         openssl_path += $${PWD}/$$DIR
     }
     copyToDestdir($$openssl_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
-#}
+}
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
