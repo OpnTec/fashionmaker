@@ -51,8 +51,6 @@ private:
     Q_DISABLE_COPY(FvUpdateWindow)
 
     Ui::FvUpdateWindow*	m_ui;
-    QGraphicsScene* m_appIconScene;
-
 };
 
 #endif // FVUPDATEWINDOW_H

@@ -36,8 +36,7 @@ class QWidget;
 //---------------------------------------------------------------------------------------------------------------------
 FvUpdateWindow::FvUpdateWindow(QWidget *parent)
     : QDialog(parent),
-      m_ui(new Ui::FvUpdateWindow),
-      m_appIconScene(nullptr)
+      m_ui(new Ui::FvUpdateWindow)
 {
     m_ui->setupUi(this);
 

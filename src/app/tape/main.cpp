@@ -56,9 +56,6 @@ int main(int argc, char *argv[])
     MApplication app(argc, argv);
     app.InitOptions();
 
-    // Set feed URL before doing anything else
-    FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
-
     QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
 
     return app.exec();

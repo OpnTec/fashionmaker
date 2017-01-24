@@ -55,6 +55,9 @@ public:
     void SetFeedURL(const QString &feedURL);
     QString GetFeedURL() const;
 
+    bool IsDropOnFinnish() const;
+    void SetDropOnFinnish(bool value);
+
 public slots:
     // Check for updates
     bool CheckForUpdates(bool silentAsMuchAsItCouldGet = true);
@@ -102,10 +105,11 @@ private:
     //
     // HTTP feed fetcher infrastructure
     //
-    QUrl                  m_feedURL;		    // Feed URL that will be fetched
-    QNetworkAccessManager m_qnam;
-    QNetworkReply*        m_reply;
-    bool                  m_httpRequestAborted;
+    QUrl                    m_feedURL;		    // Feed URL that will be fetched
+    QNetworkAccessManager   m_qnam;
+    QPointer<QNetworkReply> m_reply;
+    bool                    m_httpRequestAborted;
+    bool                    m_dropOnFinnish;
 
     QXmlStreamReader m_xml;	// XML data collector and parser
 

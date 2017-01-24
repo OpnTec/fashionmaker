@@ -49,6 +49,7 @@
 - [#595] GapWidth affecting to the margins.
 - [#589] Valentina lock up if not enough space for label.
 - [#606] Mac OS X. Can’t type in measurements due to digit count limitation.
+- [#612] Valentina crashes when network is disabled on Linux.
 
 # Version 0.4.6
 - [#594] Broken export on Mac.
