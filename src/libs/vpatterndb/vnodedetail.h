@@ -129,9 +129,6 @@ public:
                                        bool closed);
 private:
     QSharedDataPointer<VNodeDetailData> d;
-
-    static bool IsSABefore(const QLineF &saBaseLine, const QLineF &mLine);
-    static bool IsSAAfter(const QLineF &saBaseLine, const QLineF &mLine);
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)

@@ -733,7 +733,8 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                                               "Time to refactor the code.");
                             const bool closed = GetParametrUInt(domElement, AttrClosed, "1");
-                            ParseDetailNodes(element, detail, closed);
+                            const qreal width = GetParametrDouble(domElement, AttrWidth, "0.0");
+                            ParseDetailNodes(element, detail, width, closed);
                         }
                         else
                         {
@@ -777,7 +778,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, bool closed) const
+void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, qreal width, bool closed) const
 {
     QVector<VNodeDetail> oldNodes;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -791,7 +792,7 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, b
         }
     }
 
-    detail.GetPath().SetNodes(VNodeDetail::Convert(data, oldNodes, detail.GetSAWidth(), closed));
+    detail.GetPath().SetNodes(VNodeDetail::Convert(data, oldNodes, width, closed));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

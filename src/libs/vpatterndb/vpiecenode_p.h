@@ -45,8 +45,8 @@ public:
           m_reverse(false),
           m_saBefore(-1),
           m_saAfter(-1),
-          m_formulaWidthBefore("-1"),
-          m_formulaWidthAfter("-1"),
+          m_formulaWidthBefore(""),
+          m_formulaWidthAfter(""),
           m_angleType(PieceNodeAngle::ByLength)
     {}
 
