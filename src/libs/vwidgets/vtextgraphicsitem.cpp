@@ -37,6 +37,7 @@
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
 #include <Qt>
+#include <QDebug>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"

@@ -32,6 +32,7 @@
 #include <QLatin1String>
 #include <QRegularExpression>
 #include <QApplication>
+#include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"

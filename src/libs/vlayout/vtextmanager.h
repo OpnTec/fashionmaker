@@ -36,9 +36,7 @@
 #include <QStringList>
 #include <Qt>
 #include <QtGlobal>
-
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include <QCoreApplication>
 
 class QFontMetrics;
 class VAbstractPattern;
