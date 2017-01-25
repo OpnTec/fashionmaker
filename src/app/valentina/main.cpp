@@ -29,6 +29,7 @@
 #include "mainwindow.h"
 #include "core/vapplication.h"
 #include "../fervor/fvupdater.h"
+#include "../vpatterndb/vpiecenode.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
@@ -52,6 +53,8 @@ int main(int argc, char *argv[])
     QT_REQUIRE_VERSION(argc, argv, "5.0.0")
 
     qt_qhash_seed.store(0); // Lock producing random attribute order in XML
+
+    qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support

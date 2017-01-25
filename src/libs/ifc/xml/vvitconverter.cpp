@@ -150,6 +150,10 @@ void VVITConverter::DowngradeToCurrentMaxVersion()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::AddNewTagsForV0_3_0()
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     QDomElement rootElement = this->documentElement();
     QDomNode refChild = rootElement.firstChildElement("version");
 
@@ -168,12 +172,20 @@ void VVITConverter::AddNewTagsForV0_3_0()
 //---------------------------------------------------------------------------------------------------------------------
 QString VVITConverter::MUnitV0_2_0()
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     return UniqueTagText(QStringLiteral("unit"), QStringLiteral("cm"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ConvertMeasurementsToV0_3_0()
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     const QString tagBM = QStringLiteral("body-measurements");
 
     QDomElement bm = createElement(tagBM);
@@ -213,6 +225,10 @@ void VVITConverter::ConvertMeasurementsToV0_3_0()
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     QDomElement element = createElement(QStringLiteral("m"));
 
     SetAttribute(element, QStringLiteral("name"), name);
@@ -226,6 +242,10 @@ QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::GenderV0_3_1()
 {
+    // TODO. Delete if minimal supported version is 0.3.1
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+                      "Time to refactor the code.");
+
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("sex"));
     QDomElement sex = nodeList.at(0).toElement();
 
@@ -239,6 +259,10 @@ void VVITConverter::GenderV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::PM_SystemV0_3_2()
 {
+    // TODO. Delete if minimal supported version is 0.3.2
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                      "Time to refactor the code.");
+
     QDomElement pm_system = createElement(QStringLiteral("pm_system"));
     pm_system.appendChild(createTextNode(QStringLiteral("998")));
 
@@ -252,6 +276,10 @@ void VVITConverter::PM_SystemV0_3_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ConvertMeasurementsToV0_3_3()
 {
+    // TODO. Delete if minimal supported version is 0.3.3
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 3),
+                      "Time to refactor the code.");
+
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_3_3();
     auto i = names.constBegin();
     while (i != names.constEnd())
@@ -281,6 +309,10 @@ void VVITConverter::ConvertMeasurementsToV0_3_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
+    // TODO. Delete if minimal supported version is 0.3.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+                      "Time to refactor the code.");
+
     AddRootComment();
     SetVersion(QStringLiteral("0.3.0"));
     AddNewTagsForV0_3_0();
@@ -291,6 +323,10 @@ void VVITConverter::ToV0_3_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_1()
 {
+    // TODO. Delete if minimal supported version is 0.3.1
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.1"));
     GenderV0_3_1();
     Save();
@@ -299,6 +335,10 @@ void VVITConverter::ToV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_2()
 {
+    // TODO. Delete if minimal supported version is 0.3.2
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.2"));
     PM_SystemV0_3_2();
     Save();
@@ -307,6 +347,10 @@ void VVITConverter::ToV0_3_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_3()
 {
+    // TODO. Delete if minimal supported version is 0.3.3
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 3, 3),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.3.3"));
     ConvertMeasurementsToV0_3_3();
     Save();

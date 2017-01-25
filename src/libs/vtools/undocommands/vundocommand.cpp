@@ -33,6 +33,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vnodedetail.h"
+#include "../vpatterndb/vpiecenode.h"
 
 class QDomElement;
 class QDomNode;
@@ -76,19 +77,71 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
+void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->IncrementReferens(nodes.at(i).getId());
+        doc->IncrementReferens(nodes.at(i));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
+void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->DecrementReferens(nodes.at(i).getId());
+        doc->DecrementReferens(nodes.at(i));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).path);
+    }
+
+    IncrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).path);
+    }
+
+    DecrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).GetId());
+    }
+
+    IncrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).GetId());
+    }
+
+    DecrementReferences(n);
 }

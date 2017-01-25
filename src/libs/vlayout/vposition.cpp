@@ -50,10 +50,10 @@
 #include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, volatile bool *stop,
                      bool rotate, int rotationIncrease, bool saveLength)
     :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
-      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate),
+      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutPiece>()), stop(stop), rotate(rotate),
       rotationIncrease(rotationIncrease), angle_between(0)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
@@ -71,7 +71,7 @@ void VPosition::run()
     }
 
     // We should use copy of the detail.
-    VLayoutDetail workDetail = detail;
+    VLayoutPiece workDetail = detail;
 
     int dEdge = i;// For mirror detail edge will be different
     if (CheckCombineEdges(workDetail, j, dEdge))
@@ -139,7 +139,7 @@ void VPosition::setDetailsCount(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::setDetails(const QVector<VLayoutDetail> &details)
+void VPosition::setDetails(const QVector<VLayoutPiece> &details)
 {
     this->details = details;
 }
@@ -151,8 +151,8 @@ VBestSquare VPosition::getBestResult() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutDetail> &details)
+void VPosition::DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
+                          int detailsCount, const QVector<VLayoutPiece> &details)
 {
     const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
     const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
@@ -178,7 +178,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
 
 #ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    p = DrawContour(detail.GetLayoutAllowencePoints());
+    p = DrawContour(detail.GetLayoutAllowancePoints());
     p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
@@ -242,7 +242,7 @@ int VPosition::Bias(int length, int maxLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ,
+void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ,
                               BestFrom type)
 {
     QVector<QPointF> newGContour = gContour.UniteWithContour(detail, globalI, detJ, type);
@@ -252,7 +252,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
+bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagMirror = false;
@@ -294,7 +294,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             break;
     }
 
-    if (flagMirror && not detail.getForbidFlipping())
+    if (flagMirror && not detail.IsForbidFlipping())
     {
         #ifdef LAYOUT_DEBUG
             #ifdef SHOW_MIRROR
@@ -340,7 +340,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const
+bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagSquare = false;
@@ -376,7 +376,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail) const
+VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 {
     const QRectF gRect = gContour.BoundingRect();
     if (not gRect.intersects(detail.LayoutBoundingRect()) && not gRect.contains(detail.DetailBoundingRect()))
@@ -386,7 +386,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail) const
     }
 
     const QPainterPath gPath = gContour.ContourPath();
-    if (not gPath.intersects(detail.LayoutAllowencePath()) && not gPath.contains(detail.ContourPath()))
+    if (not gPath.intersects(detail.LayoutAllowancePath()) && not gPath.contains(detail.ContourPath()))
     {
         return CrossingType::NoIntersection;
     }
@@ -404,7 +404,7 @@ bool VPosition::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge)
+void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge)
 {
     QLineF detailEdge;
     if (gContour.GetContour().isEmpty())
@@ -433,7 +433,7 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const
+void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const
 {
     QLineF detailEdge;
     if (gContour.GetContour().isEmpty())
@@ -472,7 +472,7 @@ void VPosition::Rotate(int increase)
         }
 
         // We should use copy of the detail.
-        VLayoutDetail workDetail = detail;
+        VLayoutPiece workDetail = detail;
 
         if (CheckRotationEdges(workDetail, j, i, angle))
         {
@@ -549,7 +549,7 @@ QPainterPath VPosition::DrawContour(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPosition::DrawDetails(const QVector<VLayoutDetail> &details)
+QPainterPath VPosition::DrawDetails(const QVector<VLayoutPiece> &details)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);

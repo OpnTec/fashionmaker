@@ -45,6 +45,7 @@
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vtools/tools/vdatatool.h"
 #include "vpatternconverter.h"
 #include "vdomdocument.h"
@@ -90,6 +91,9 @@ const QString VAbstractPattern::TagSize             = QStringLiteral("size");
 const QString VAbstractPattern::TagShowDate         = QStringLiteral("showDate");
 const QString VAbstractPattern::TagShowMeasurements = QStringLiteral("showMeasurements");
 const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
+const QString VAbstractPattern::TagPath             = QStringLiteral("path");
+const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
+const QString VAbstractPattern::TagNode             = QStringLiteral("node");
 
 const QString VAbstractPattern::AttrName            = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible         = QStringLiteral("visible");
@@ -102,6 +106,15 @@ const QString VAbstractPattern::AttrUserDefined     = QStringLiteral("userDef");
 const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber");
 const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
 const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
+const QString VAbstractPattern::AttrNodeReverse     = QStringLiteral("reverse");
+const QString VAbstractPattern::AttrSABefore        = QStringLiteral("before");
+const QString VAbstractPattern::AttrSAAfter         = QStringLiteral("after");
+const QString VAbstractPattern::AttrStart           = QStringLiteral("start");
+const QString VAbstractPattern::AttrPath            = QStringLiteral("path");
+const QString VAbstractPattern::AttrEnd             = QStringLiteral("end");
+const QString VAbstractPattern::AttrIncludeAs       = QStringLiteral("includeAs");
+const QString VAbstractPattern::AttrWidth           = QStringLiteral("width");
+const QString VAbstractPattern::AttrRotation        = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -159,10 +172,23 @@ const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
 const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
 const QString VAbstractPattern::IncrementDescription = QStringLiteral("description");
 
+const QString VAbstractPattern::NodeArc        = QStringLiteral("NodeArc");
+const QString VAbstractPattern::NodeElArc      = QStringLiteral("NodeElArc");
+const QString VAbstractPattern::NodePoint      = QStringLiteral("NodePoint");
+const QString VAbstractPattern::NodeSpline     = QStringLiteral("NodeSpline");
+const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath");
+
+QHash<quint32, VDataTool*> VAbstractPattern::tools = QHash<quint32, VDataTool*>();
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
-    : QObject(parent), VDomDocument(), nameActivPP(QString()), cursor(0), tools(QHash<quint32, VDataTool*>()),
-      toolsOnRemove(QVector<VDataTool*>()), history(QVector<VToolRecord>()), patternPieces(QStringList()),
+    : QObject(parent),
+      VDomDocument(),
+      nameActivPP(QString()),
+      cursor(0),
+      toolsOnRemove(QVector<VDataTool*>()),
+      history(QVector<VToolRecord>()),
+      patternPieces(QStringList()),
       modified(false)
 {}
 
@@ -520,7 +546,7 @@ void VAbstractPattern::setCursor(const quint32 &value)
  * @param id tool id.
  * @return tool.
  */
-VDataTool *VAbstractPattern::getTool(const quint32 &id)
+VDataTool *VAbstractPattern::getTool(quint32 id)
 {
     ToolExists(id);
     return tools.value(id);
@@ -532,11 +558,126 @@ VDataTool *VAbstractPattern::getTool(const quint32 &id)
  * @param id tool id.
  * @param tool tool.
  */
-void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
+void VAbstractPattern::AddTool(quint32 id, VDataTool *tool)
 {
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr)
-    tools.insert(id, tool);
+            tools.insert(id, tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::RemoveTool(quint32 id)
+{
+    tools.remove(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath VAbstractPattern::ParsePieceNodes(const QDomElement &domElement)
+{
+    VPiecePath path;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            path.Append(ParseSANode(element));
+        }
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<CustomSARecord> VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement)
+{
+    QVector<CustomSARecord> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            CustomSARecord record;
+            record.startPoint = GetParametrUInt(element, VAbstractPattern::AttrStart, NULL_ID_STR);
+            record.path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
+            record.endPoint = GetParametrUInt(element, VAbstractPattern::AttrEnd, NULL_ID_STR);
+            record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
+            record.includeType = static_cast<PiecePathIncludeType>(GetParametrUInt(element,
+                                                                                   VAbstractPattern::AttrIncludeAs,
+                                                                                   "1"));
+            records.append(record);
+        }
+    }
+    return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement)
+{
+    QVector<quint32> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            const quint32 path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
+            if (path > NULL_ID)
+            {
+                records.append(path);
+            }
+        }
+    }
+    return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
+{
+    const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+    const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
+    const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
+                                                             currentSeamAllowance);
+    const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,
+                                                            currentSeamAllowance);
+    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, "0"));
+
+    const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
+    Tool tool;
+
+    const QStringList types = QStringList() << VAbstractPattern::NodePoint
+                                            << VAbstractPattern::NodeArc
+                                            << VAbstractPattern::NodeSpline
+                                            << VAbstractPattern::NodeSplinePath
+                                            << VAbstractPattern::NodeElArc;
+
+    switch (types.indexOf(t))
+    {
+        case 0: // VAbstractPattern::NodePoint
+            tool = Tool::NodePoint;
+            break;
+        case 1: // VAbstractPattern::NodeArc
+            tool = Tool::NodeArc;
+            break;
+        case 2: // VAbstractPattern::NodeSpline
+            tool = Tool::NodeSpline;
+            break;
+        case 3: // VAbstractPattern::NodeSplinePath
+            tool = Tool::NodeSplinePath;
+            break;
+        case 4: // NodeElArc
+            tool = Tool::NodeElArc;
+            break;
+        default:
+            VException e(QObject::tr("Wrong tag name '%1'.").arg(t));
+            throw e;
+    }
+    VPieceNode node(id, tool, reverse);
+    node.SetFormulaSABefore(saBefore);
+    node.SetFormulaSAAfter(saAfter);
+    node.SetAngleType(angle);
+
+    return node;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -635,7 +776,7 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                     const VToolRecord tool = history.at(j-1);
                     switch ( tool.getTypeTool() )
                     {
-                        case Tool::Detail:
+                        case Tool::Piece:
                         case Tool::UnionDetails:
                         case Tool::NodeArc:
                         case Tool::NodeElArc:
@@ -1255,12 +1396,28 @@ void VAbstractPattern::SelectedDetail(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::ToolExists(const quint32 &id) const
+void VAbstractPattern::ToolExists(const quint32 &id)
 {
     if (tools.contains(id) == false)
     {
         throw VExceptionBadId(tr("Can't find tool in table."), id);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath VAbstractPattern::ParsePathNodes(const QDomElement &domElement)
+{
+    VPiecePath path;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        {
+            path.Append(ParseSANode(element));
+        }
+    }
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1411,12 +1568,16 @@ QStringList VAbstractPattern::ListExpressions() const
     QStringList list;
 
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    // Note. Tool Union Details also contains formulas, but we don't use them for union and keep only to simplifying
+    // working with nodes. Same code for saving reading.
     list << ListPointExpressions();
     list << ListArcExpressions();
     list << ListElArcExpressions();
     list << ListSplineExpressions();
     list << ListIncrementExpressions();
     list << ListOperationExpressions();
+    list << ListPathExpressions();
+    list << ListPieceExpressions();
 
     return list;
 }
@@ -1427,7 +1588,7 @@ QStringList VAbstractPattern::ListPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment a number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1499,7 +1660,7 @@ QStringList VAbstractPattern::ListArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1553,7 +1714,7 @@ QStringList VAbstractPattern::ListElArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagElArc);
@@ -1624,7 +1785,7 @@ QStringList VAbstractPattern::ListPathPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1691,7 +1852,7 @@ QStringList VAbstractPattern::ListOperationExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
 
     QStringList expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);
@@ -1717,6 +1878,112 @@ QStringList VAbstractPattern::ListOperationExpressions() const
         {
             Q_UNUSED(e)
         }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListNodesExpressions(const QDomElement &nodes) const
+{
+    QStringList expressions;
+    VPiecePath path;
+    if (not nodes.isNull())
+    {
+        path = ParsePathNodes(nodes);
+    }
+
+    for(int i = 0; i < path.CountNodes(); ++i)
+    {
+        expressions.append(path.at(i).GetFormulaSABefore());
+        expressions.append(path.at(i).GetFormulaSAAfter());
+    }
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPathExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagPath);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        if (dom.isNull())
+        {
+            continue;
+        }
+
+        expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListGrainlineExpressions(const QDomElement &element) const
+{
+    QStringList expressions;
+    if (not element.isNull())
+    {
+        // Each tag can contains several attributes.
+        try
+        {
+            expressions.append(GetParametrString(element, AttrRotation));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(element, AttrLength));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPieceExpressions() const
+{
+    // Check if new tool doesn't bring new attribute with a formula.
+    // If no just increment number.
+    // If new tool bring absolutely new type and has formula(s) create new method to cover it.
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51);
+
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagDetail);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        if (dom.isNull())
+        {
+            continue;
+        }
+
+        // Each tag can contains several attributes.
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrWidth));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
+        expressions << ListGrainlineExpressions(dom.firstChildElement(TagGrainline));
     }
 
     return expressions;

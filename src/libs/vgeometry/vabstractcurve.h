@@ -70,6 +70,9 @@ public:
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
     virtual bool             IsIntersectLine(const QLineF &line) const;
 
+    static bool              IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p);
+    bool                     IsPointOnCurve(const QPointF &p) const;
+
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
 
@@ -79,13 +82,14 @@ public:
     QString                  GetColor() const;
     void                     SetColor(const QString &color);
 
+    static qreal             PathLength(const QVector<QPointF> &path);
+
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
     virtual void             CreateName() =0;
-    static qreal             PathLength(const QVector<QPointF> &path);
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 

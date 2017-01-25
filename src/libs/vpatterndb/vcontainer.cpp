@@ -151,16 +151,24 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetDetail return detail by id
- * @param id id of detail
- * @return detail
- */
-const VDetail VContainer::GetDetail(quint32 id) const
+VPiece VContainer::GetPiece(quint32 id) const
 {
-    if (d->details->contains(id))
+    if (d->pieces->contains(id))
     {
-        return d->details->value(id);
+        return d->pieces->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath VContainer::GetPiecePath(quint32 id) const
+{
+    if (d->piecePaths->contains(id))
+    {
+        return d->piecePaths->value(id);
     }
     else
     {
@@ -183,15 +191,18 @@ quint32 VContainer::AddGObject(VGObject *obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddDetail add new detail to container
- * @param detail new detail
- * @return return id of new detail in container
- */
-quint32 VContainer::AddDetail(const VDetail &detail)
+quint32 VContainer::AddPiece(const VPiece &detail)
 {
     const quint32 id = getNextId();
-    d->details->insert(id, detail);
+    d->pieces->insert(id, detail);
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddPiecePath(const VPiecePath &path)
+{
+    const quint32 id = getNextId();
+    d->piecePaths->insert(id, path);
     return id;
 }
 
@@ -262,7 +273,8 @@ void VContainer::Clear()
     qCDebug(vCon, "Clearing container data.");
     _id = NULL_ID;
 
-    d->details->clear();
+    d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables();
     ClearGObjects();
     ClearUniqueNames();
@@ -274,7 +286,8 @@ void VContainer::ClearForFullParse()
     qCDebug(vCon, "Clearing container data for full parse.");
     _id = NULL_ID;
 
-    d->details->clear();
+    d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables(VarType::Increment);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
@@ -474,6 +487,12 @@ void VContainer::RemoveVariable(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemovePiece(quint32 id)
+{
+    d->pieces->remove(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddObject add object to container
  * @param obj container
@@ -505,15 +524,18 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateDetail update detail by id
- * @param id id of existing detail
- * @param detail detail
- */
-void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
+void VContainer::UpdatePiece(quint32 id, const VPiece &detail)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    d->details->insert(id, detail);
+    d->pieces->insert(id, detail);
+    UpdateId(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
+{
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
+    d->piecePaths->insert(id, path);
     UpdateId(id);
 }
 
@@ -667,13 +689,6 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VContainer::ClearDetails()
-{
-    d->details->clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearUniqueNames()
 {
     uniqueNames.clear();
@@ -742,13 +757,9 @@ const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief data container with dataDetails return container of details
- * @return pointer on container of details
- */
-const QHash<quint32, VDetail> *VContainer::DataDetails() const
+const QHash<quint32, VPiece> *VContainer::DataPieces() const
 {
-    return d->details.data();
+    return d->pieces.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

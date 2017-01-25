@@ -95,6 +95,7 @@ public:
 
     virtual void     ShowDialog(bool click);
     virtual void     Build(const Tool &type);
+    virtual void     SetPiecesList(const QVector<quint32> &list);
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
@@ -230,7 +231,7 @@ protected:
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer,
                                        const QString &postfix = QString());
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
-                          bool checkZero = true);
+                          bool checkZero = true, bool checkLessThanZero = false);
 
     void             setCurrentPointId(QComboBox *box, const quint32 &value,
                                        FillComboBox rule = FillComboBox::NoChildren,
@@ -274,6 +275,16 @@ protected:
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
     virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
     quint32          DNumber(const QString &baseName) const;
+
+    static quint32   RowId(QListWidget *listWidget, int i);
+    static bool      FirstPointEqualLast(QListWidget *listWidget);
+    static bool      DoublePoints(QListWidget *listWidget);
+    static QString   DialogWarningIcon();
+
+    QString          GetNodeName(const VPieceNode &node) const;
+    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
+
+    void             InitNodeAngles(QComboBox *box);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 

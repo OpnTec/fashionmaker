@@ -37,6 +37,8 @@
 #include "../vmisc/def.h"
 
 class VNodeDetailData;
+class VPieceNode;
+class VContainer;
 
 /**
  * @brief The VNodeDetail class keep information about detail node.
@@ -122,6 +124,9 @@ public:
 
     bool        getReverse() const;
     void        setReverse(bool reverse);
+
+    static QVector<VPieceNode> Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
+                                       bool closed);
 private:
     QSharedDataPointer<VNodeDetailData> d;
 };

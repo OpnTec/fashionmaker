@@ -75,7 +75,7 @@ void VAbstractNode::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::incrementReferens()
 {
-    ++_referens;
+    VAbstractTool::incrementReferens();
     if (_referens == 1)
     {
         if (idTool != NULL_ID)
@@ -102,10 +102,7 @@ void VAbstractNode::incrementReferens()
  */
 void VAbstractNode::decrementReferens()
 {
-    if (_referens > 0)
-    {
-        --_referens;
-    }
+    VAbstractTool::decrementReferens();
     if (_referens == 0)
     {
         if (idTool != NULL_ID)

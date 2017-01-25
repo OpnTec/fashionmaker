@@ -416,7 +416,7 @@
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="length" type="xs:string"></xs:attribute>
                                                                                        <xs:attribute name="rotation" type="xs:string"></xs:attribute>
-										       <xs:attribute name="arrows" type="arrowType"></xs:attribute>
+                                                                                       <xs:attribute name="arrows" type="arrowType"></xs:attribute>
                                                                                     </xs:complexType>
                                                                                </xs:element>
                                                                                <xs:element name="node" maxOccurs="unbounded">

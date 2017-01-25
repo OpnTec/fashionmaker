@@ -36,7 +36,6 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 SOURCES += \
     qttestmainlambda.cpp \
     tst_vposter.cpp \
-    tst_vabstractdetail.cpp \
     tst_vspline.cpp \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
@@ -46,7 +45,7 @@ SOURCES += \
     tst_vlockguard.cpp \
     tst_misc.cpp \
     tst_vcommandline.cpp \
-    tst_vdetail.cpp \
+    tst_vpiece.cpp \
     tst_vabstractcurve.cpp \
     tst_findpoint.cpp \
     tst_vellipticalarc.cpp \
@@ -55,13 +54,13 @@ SOURCES += \
     tst_vsplinepath.cpp \
     tst_vpointf.cpp \
     tst_readval.cpp \
-    tst_vtranslatevars.cpp
+    tst_vtranslatevars.cpp \
+    tst_vabstractpiece.cpp
 
 win32-msvc*:SOURCES += stable.cpp
 
 HEADERS += \
     tst_vposter.h \
-    tst_vabstractdetail.h \
     tst_vspline.h \
     tst_nameregexp.h \
     tst_vlayoutdetail.h \
@@ -72,7 +71,7 @@ HEADERS += \
     tst_vlockguard.h \
     tst_misc.h \
     tst_vcommandline.h \
-    tst_vdetail.h \
+    tst_vpiece.h \
     tst_vabstractcurve.h \
     tst_findpoint.h \
     tst_vellipticalarc.h \
@@ -81,7 +80,8 @@ HEADERS += \
     tst_vsplinepath.h \
     tst_vpointf.h \
     tst_readval.h \
-    tst_vtranslatevars.h
+    tst_vtranslatevars.h \
+    tst_vabstractpiece.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

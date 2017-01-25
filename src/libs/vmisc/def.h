@@ -75,6 +75,24 @@ enum class Source : char { FromGui, FromFile, FromTool };
 enum class NodeUsage : bool {NotInUse = false, InUse = true};
 enum class SelectionType : bool {ByMousePress, ByMouseRelease};
 
+enum class PieceNodeAngle : unsigned char
+{
+    ByLength = 0,
+    ByPointsIntersection,
+    ByFirstEdgeSymmetry,
+    BySecondEdgeSymmetry,
+    ByFirstEdgeRightAngle,
+    BySecondEdgeRightAngle
+};
+
+enum class PiecePathIncludeType : unsigned char
+{
+    AsMainPath = 0,
+    AsCustomSA = 1
+};
+
+enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
+
 typedef unsigned char ToolVisHolderType;
 enum class Tool : ToolVisHolderType
 {
@@ -102,7 +120,8 @@ enum class Tool : ToolVisHolderType
     CubicBezierPath,
     CutSplinePath,
     PointOfContact,
-    Detail,
+    Piece,
+    PiecePath,
     NodePoint,
     NodeArc,
     NodeElArc,
@@ -172,7 +191,9 @@ enum class Vis : ToolVisHolderType
     ToolFlippingByLine,
     ToolFlippingByAxis,
     ToolMove,
-    ToolEllipticalArc
+    ToolEllipticalArc,
+    ToolPiece,
+    ToolPiecePath
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,
@@ -674,6 +695,29 @@ static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
         return qFuzzyCompare(p1, p2);
     }
 }
+
+/**
+ * @brief The CustomSA struct contains record about custom seam allowanse (SA).
+ */
+struct CustomSARecord
+{
+    CustomSARecord()
+        : startPoint(0),
+          path(0),
+          endPoint(0),
+          reverse(false),
+          includeType(PiecePathIncludeType::AsCustomSA)
+    {}
+
+    quint32 startPoint;
+    quint32 path;
+    quint32 endPoint;
+    bool reverse;
+    PiecePathIncludeType includeType;
+};
+
+Q_DECLARE_METATYPE(CustomSARecord)
+Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
 
 /****************************************************************************
 ** This file is derived from code bearing the following notice:

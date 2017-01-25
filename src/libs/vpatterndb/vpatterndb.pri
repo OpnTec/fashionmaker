@@ -4,7 +4,6 @@
 SOURCES += \
     $$PWD/vcontainer.cpp \
     $$PWD/calculator.cpp \
-    $$PWD/vdetail.cpp \
     $$PWD/vnodedetail.cpp \
     $$PWD/vtranslatevars.cpp \
     $$PWD/variables/varcradius.cpp \
@@ -22,7 +21,10 @@ SOURCES += \
     $$PWD/vpatterninfogeometry.cpp \
     $$PWD/vgrainlinegeometry.cpp \
     $$PWD/variables/vcurveclength.cpp \
-    $$PWD/variables/vellipticalarcradius.cpp
+    $$PWD/variables/vellipticalarcradius.cpp \
+    $$PWD/vpiece.cpp \
+    $$PWD/vpiecenode.cpp \
+    $$PWD/vpiecepath.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -31,8 +33,6 @@ HEADERS += \
     $$PWD/stable.h \
     $$PWD/calculator.h \
     $$PWD/variables.h \
-    $$PWD/vdetail.h \
-    $$PWD/vdetail_p.h \
     $$PWD/vnodedetail.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vtranslatevars.h \
@@ -59,4 +59,10 @@ HEADERS += \
     $$PWD/vpatterninfogeometry.h \
     $$PWD/vgrainlinegeometry.h \
     $$PWD/variables/vcurveclength.h \
-    $$PWD/variables/vellipticalarcradius.h
+    $$PWD/variables/vellipticalarcradius.h \
+    $$PWD/vpiece.h \
+    $$PWD/vpiece_p.h \
+    $$PWD/vpiecenode.h \
+    $$PWD/vpiecenode_p.h \
+    $$PWD/vpiecepath.h \
+    $$PWD/vpiecepath_p.h

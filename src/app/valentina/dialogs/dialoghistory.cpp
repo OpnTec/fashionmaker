@@ -212,7 +212,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 50, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -392,7 +392,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
-            case Tool::Detail:
+            case Tool::Piece:
             case Tool::UnionDetails:
             case Tool::NodeArc:
             case Tool::NodeElArc:
@@ -404,6 +404,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::FlippingByLine:
             case Tool::FlippingByAxis:
             case Tool::Move:
+            case Tool::PiecePath:
                 return QString();
         }
     }

@@ -1258,10 +1258,9 @@ void TMainWindow::ImportFromPattern()
         converter.Convert();
 
         VDomDocument::ValidateXML(VPatternConverter::CurrentSchema, mPath);
-        VLitePattern *doc = new VLitePattern();
+        QScopedPointer<VLitePattern> doc(new VLitePattern());
         doc->setXMLContent(mPath);
         measurements = doc->ListMeasurements();
-        delete doc; // close a pattern
     }
     catch (VException &e)
     {

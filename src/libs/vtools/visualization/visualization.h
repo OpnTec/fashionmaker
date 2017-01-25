@@ -84,7 +84,6 @@ protected:
     virtual void AddOnScene()=0;
 
     QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
-    QRectF       PointRect(const qreal &radius) const;
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
@@ -97,8 +96,16 @@ protected:
 
     template <class Item>
     Item         *InitItem(const QColor &color, QGraphicsItem *parent);
+
+    static QRectF                PointRect(qreal radius);
+    static QGraphicsEllipseItem* GetPointItem(const VContainer *data, qreal factor,
+                                              QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
+                                              QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
+
+    static QGraphicsEllipseItem* InitPointItem(const VContainer *data, qreal factor, const QColor &color,
+                                               QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

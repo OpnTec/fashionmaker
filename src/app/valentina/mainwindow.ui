@@ -48,14 +48,14 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -1063,7 +1063,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -1143,8 +1143,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>196</height>
+         <width>130</width>
+         <height>356</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1321,8 +1321,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>104</height>
+         <width>130</width>
+         <height>150</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1423,6 +1423,32 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QToolButton" name="toolButtonPiecePath">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Piece path tool</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/path.png</normaloff>:/toolicon/32x32/path.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="layoutPage">
@@ -1431,7 +1457,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>326</height>
+         <height>356</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2548,8 +2574,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

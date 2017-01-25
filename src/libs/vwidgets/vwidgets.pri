@@ -11,7 +11,10 @@ SOURCES += \
     $$PWD/vabstractsimple.cpp \
     $$PWD/vnobrushscalepathitem.cpp \
     $$PWD/vsimplecurve.cpp \
-    $$PWD/vabstractmainwindow.cpp
+    $$PWD/vabstractmainwindow.cpp \
+    $$PWD/vtextgraphicsitem.cpp \
+    $$PWD/vgrainlineitem.cpp \
+    $$PWD/vpieceitem.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -26,4 +29,7 @@ HEADERS += \
     $$PWD/vabstractsimple.h \
     $$PWD/vnobrushscalepathitem.h \
     $$PWD/vsimplecurve.h \
-    $$PWD/vabstractmainwindow.h
+    $$PWD/vabstractmainwindow.h \
+    $$PWD/vtextgraphicsitem.h \
+    $$PWD/vgrainlineitem.h \
+    $$PWD/vpieceitem.h

@@ -78,17 +78,7 @@ void VisOperation::VisualMode(const quint32 &pointId)
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisOperation::GetPoint(quint32 i, const QColor &color)
 {
-    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
-    {
-        return points.at(static_cast<int>(i));
-    }
-    else
-    {
-        auto point = InitPoint(color, this);
-        points.append(point);
-        return point;
-    }
-    return nullptr;
+    return GetPointItem(Visualization::data, factor, points, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,7 +33,7 @@
 
 class VAbstractPattern;
 class VContainer;
-class VDetail;
+class VPiece;
 
 namespace Ui
 {
@@ -65,7 +65,7 @@ private:
     VAbstractPattern   *m_doc;
     VContainer         *m_data;
 
-    void FillTable(const QHash<quint32, VDetail> *details);
+    void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);
 };
 

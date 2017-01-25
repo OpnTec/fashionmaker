@@ -4,10 +4,6 @@
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/vlayoutgenerator.h \
-    $$PWD/vlayoutdetail.h \
-    $$PWD/vabstractdetail.h \
-    $$PWD/vabstractdetail_p.h \
-    $$PWD/vlayoutdetail_p.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
     $$PWD/vlayoutpaper_p.h \
@@ -17,20 +13,24 @@ HEADERS += \
     $$PWD/vbestsquare.h \
     $$PWD/vposition.h \
     $$PWD/vtextmanager.h \
-    vposter.h \
-    vgraphicsfillitem.h
+    $$PWD/vposter.h \
+    $$PWD/vgraphicsfillitem.h \
+    $$PWD/vabstractpiece.h \
+    $$PWD/vabstractpiece_p.h \
+    $$PWD/vlayoutpiece.h \
+    $$PWD/vlayoutpiece_p.h
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \
-    $$PWD/vlayoutdetail.cpp \
-    $$PWD/vabstractdetail.cpp \
     $$PWD/vlayoutpaper.cpp \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
     $$PWD/vposition.cpp \
     $$PWD/vtextmanager.cpp \
-    vposter.cpp \
-    vgraphicsfillitem.cpp
+    $$PWD/vposter.cpp \
+    $$PWD/vgraphicsfillitem.cpp \
+    $$PWD/vabstractpiece.cpp \
+    $$PWD/vlayoutpiece.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp

@@ -32,8 +32,7 @@
 #include <QMainWindow>
 #include <QPrinter>
 
-#include "../vpatterndb/vdetail.h"
-#include "../vlayout/vlayoutdetail.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "xml/vpattern.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
@@ -59,7 +58,7 @@ public slots:
     void PrintOrigin();
     void PrintTiled();
 protected:
-    QVector<VLayoutDetail> listDetails;
+    QVector<VLayoutPiece> listDetails;
 
     /** @brief currentScene pointer to current scene. */
     QGraphicsScene *currentScene;
@@ -90,7 +89,7 @@ protected:
     QMarginsF margins;
     QSizeF paperSize;
 
-    void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
+    void PrepareDetailsForLayout(const QHash<quint32, VPiece> *details);
     void ExportLayout(const DialogSaveLayout &dialog);
 
     void InitTempLayoutScene();

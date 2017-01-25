@@ -29,8 +29,8 @@
 #include "vgraphicsfillitem.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsFillItem::VGraphicsFillItem()
-    :QGraphicsPathItem()
+VGraphicsFillItem::VGraphicsFillItem(QGraphicsItem *parent)
+    :QGraphicsPathItem(parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

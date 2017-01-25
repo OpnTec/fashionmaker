@@ -140,6 +140,7 @@ extern const QString AttrArc;
 extern const QString AttrSuffix;
 extern const QString AttrIdObject;
 extern const QString AttrInLayout;
+extern const QString AttrClosed;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
@@ -196,6 +197,7 @@ extern const QString angle1SplPath;
 extern const QString angle2SplPath;
 extern const QString seg_;
 extern const QString currentLength;
+extern const QString currentSeamAllowance;
 
 extern const QStringList builInVariables;
 

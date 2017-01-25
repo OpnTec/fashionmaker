@@ -96,16 +96,16 @@ public:
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
 
-    quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static bool    GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue);
 
-    NodeUsage      GetParametrUsage(const QDomElement& domElement, const QString &name) const;
-    void           SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
+    static NodeUsage GetParametrUsage(const QDomElement& domElement, const QString &name);
+    static void      SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
 
-    QString        GetParametrString(const QDomElement& domElement, const QString &name,
-                                     const QString &defValue = QString()) const;
-    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    quint32        GetParametrId(const QDomElement& domElement) const;
+    static QString GetParametrString(const QDomElement& domElement, const QString &name,
+                                     const QString &defValue = QString());
+    static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static quint32 GetParametrId(const QDomElement& domElement);
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
     virtual void   setXMLContent(const QString &fileName);

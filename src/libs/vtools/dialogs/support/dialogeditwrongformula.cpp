@@ -77,7 +77,7 @@ enum {ColumnName = 0, ColumnFullName};
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
-      checkZero(false), postfix(QString()), restoreCursor(false)
+      checkZero(false), checkLessThanZero(false), postfix(QString()), restoreCursor(false)
 {
     ui->setupUi(this);
     InitVariables();
@@ -156,7 +156,8 @@ void DialogEditWrongFormula::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr)
     SCASSERT(labelResultCalculation != nullptr)
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero,
+         checkLessThanZero);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -381,6 +382,12 @@ void DialogEditWrongFormula::SetFormula(const QString &value)
 void DialogEditWrongFormula::setCheckZero(bool value)
 {
     checkZero = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::setCheckLessThanZero(bool value)
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

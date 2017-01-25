@@ -45,7 +45,7 @@
 
 #include "vbestsquare.h"
 #include "vcontour.h"
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
 
@@ -185,7 +185,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop)
+bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, volatile bool &stop)
 {
     // First need set size of paper
     if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
@@ -198,7 +198,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &sto
         return false;//Not enough edges
     }
 
-    if (detail.getForbidFlipping() && not d->globalRotate)
+    if (detail.IsForbidFlipping() && not d->globalRotate)
     { // Compensate forbidden flipping by rotating. 180 degree will be enough.
         d->localRotate = true;
         d->localRotationIncrease = 180;
@@ -221,7 +221,7 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
+bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, volatile bool &stop)
 {
     VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
@@ -289,11 +289,11 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail)
+bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail)
 {
     if (bestResult.ValidResult())
     {
-        VLayoutDetail workDetail = detail;
+        VLayoutPiece workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
         const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(workDetail, bestResult.GContourEdge(),
@@ -354,28 +354,18 @@ QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
     for (int i=0; i < d->details.count(); ++i)
     {
         list.append(d->details.at(i).GetItem());
-        for (int iT = 0; iT < d->details.at(i).GetTextItemsCount(); ++iT)
-        {
-            list.append(d->details.at(i).GetTextItem(iT));
-        }
-
-        QGraphicsItem* pItem = d->details.at(i).GetGrainlineItem();
-        if (pItem != 0)
-        {
-            list.append(pItem);
-        }
     }
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutDetail> VLayoutPaper::GetDetails() const
+QVector<VLayoutPiece> VLayoutPaper::GetDetails() const
 {
     return d->details;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SetDetails(const QList<VLayoutDetail> &details)
+void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 {
     d->details = details.toVector();
 }

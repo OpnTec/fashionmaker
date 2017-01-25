@@ -36,6 +36,7 @@
 
 class VDataTool;
 class VMainGraphicsScene;
+class VNodeDetail;
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -58,6 +59,8 @@ public:
     virtual void   DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
 
     quint32        SPointActiveDraw();
+
+    QVector<quint32> GetActivePPPieces() const;
 
     virtual void   setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
     virtual bool   SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
@@ -112,9 +115,15 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
+    VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
+
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
-    void           ParseDetailElement(const QDomElement &domElement, const Document &parse);
+    void           ParseDetailElement(QDomElement &domElement, const Document &parse);
+    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, qreal width, bool closed) const;
+    void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
@@ -131,6 +140,9 @@ private:
                                      const Document &parse, const QString& type);
     void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
                                          const QString& type);
+
+    void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);

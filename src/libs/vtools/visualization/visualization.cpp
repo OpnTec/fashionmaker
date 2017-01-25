@@ -141,20 +141,11 @@ void Visualization::MousePos(const QPointF &scenePos)
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
 {
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor));
-    point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
-    point->setPos(QPointF());
-    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    point->setZValue(z);
-    point->setVisible(false);
-    return point;
+    return InitPointItem(Visualization::data, factor, color, parent, z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF Visualization::PointRect(const qreal &radius) const
+QRectF Visualization::PointRect(qreal radius)
 {
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -236,6 +227,39 @@ void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &pa
     pathItem->setVisible(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *Visualization::GetPointItem(const VContainer *data, qreal factor,
+                                                  QVector<QGraphicsEllipseItem *> &points, quint32 i,
+                                                  const QColor &color, QGraphicsItem *parent)
+{
+    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
+    {
+        return points.at(static_cast<int>(i));
+    }
+    else
+    {
+        auto point = InitPointItem(data, factor, color, parent);
+        points.append(point);
+        return point;
+    }
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *Visualization::InitPointItem(const VContainer *data, qreal factor, const QColor &color,
+                                                   QGraphicsItem *parent, qreal z)
+{
+    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*data->GetPatternUnit()))/factor));
+    point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
+    point->setPos(QPointF());
+    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setZValue(z);
+    point->setVisible(false);
+    return point;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Mode Visualization::GetMode() const

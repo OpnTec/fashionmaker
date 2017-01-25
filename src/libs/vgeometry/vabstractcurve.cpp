@@ -237,6 +237,37 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p)
+{
+    if (points.isEmpty())
+    {
+        return false;
+    }
+    else if (points.size() < 2)
+    {
+        return points.at(0) == p;
+    }
+    else
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+{
+    return IsPointOnCurve(GetPoints(), p);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VAbstractCurve::GetDuplicate() const
 {
     return d->duplicate;
@@ -321,6 +352,11 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
 {
+    if (path.size() < 2)
+    {
+        return 0;
+    }
+
     QPainterPath splinePath;
     splinePath.moveTo(path.at(0));
     for (qint32 i = 1; i < path.count(); ++i)

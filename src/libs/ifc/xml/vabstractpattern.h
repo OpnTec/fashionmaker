@@ -45,6 +45,8 @@
 #include "vtoolrecord.h"
 
 class QDomElement;
+class VPiecePath;
+class VPieceNode;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
@@ -77,7 +79,6 @@ public:
     bool           ChangeNamePP(const QString& oldName, const QString &newName);
     bool           appendPP(const QString& name);
 
-    bool           GetActivDrawElement(QDomElement &element) const;
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
 
     quint32        getCursor() const;
@@ -91,9 +92,13 @@ public:
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
-    QHash<quint32, VDataTool *> *getTools();
-    VDataTool     *getTool(const quint32 &id);
-    void           AddTool(const quint32 &id, VDataTool *tool);
+    static VDataTool* getTool(quint32 id);
+    static void       AddTool(quint32 id, VDataTool *tool);
+    static void       RemoveTool(quint32 id);
+
+    static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
+    static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
+    static QVector<quint32>        ParsePieceInternalPaths(const QDomElement &domElement);
 
     void           AddToolOnRemove(VDataTool *tool);
 
@@ -195,6 +200,9 @@ public:
     static const QString TagShowDate;
     static const QString TagShowMeasurements;
     static const QString TagGrainline;
+    static const QString TagPath;
+    static const QString TagNodes;
+    static const QString TagNode;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -207,6 +215,15 @@ public:
     static const QString AttrCutNumber;
     static const QString AttrPlacement;
     static const QString AttrArrows;
+    static const QString AttrNodeReverse;
+    static const QString AttrSABefore;
+    static const QString AttrSAAfter;
+    static const QString AttrStart;
+    static const QString AttrPath;
+    static const QString AttrEnd;
+    static const QString AttrIncludeAs;
+    static const QString AttrWidth;
+    static const QString AttrRotation;
 
     static const QString AttrAll;
 
@@ -264,6 +281,12 @@ public:
     static const QString IncrementFormula;
     static const QString IncrementDescription;
 
+    static const QString NodeArc;
+    static const QString NodeElArc;
+    static const QString NodePoint;
+    static const QString NodeSpline;
+    static const QString NodeSplinePath;
+
 signals:
     /**
      * @brief ChangedActivPP change active pattern peace.
@@ -320,9 +343,6 @@ protected:
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
     quint32        cursor;
 
-    /** @brief tools list with pointer on tools. */
-    QHash<quint32, VDataTool*> tools;
-
     QVector<VDataTool*> toolsOnRemove;
 
     /** @brief history history records. */
@@ -334,7 +354,12 @@ protected:
     /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
     mutable bool   modified;
 
-    void           ToolExists(const quint32 &id) const;
+    /** @brief tools list with pointer on tools. */
+    static QHash<quint32, VDataTool*> tools;
+
+    static void       ToolExists(const quint32 &id);
+    static VPiecePath ParsePathNodes(const QDomElement &domElement);
+    static VPieceNode ParseSANode(const QDomElement &domElement);
 
     void           SetActivPP(const QString& name);
 
@@ -343,7 +368,8 @@ protected:
 
     void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
 
-    int GetIndexActivPP() const;
+    int  GetIndexActivPP() const;
+    bool GetActivDrawElement(QDomElement &element) const;
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 
@@ -356,22 +382,17 @@ private:
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;
     QStringList ListOperationExpressions() const;
+    QStringList ListNodesExpressions(const QDomElement &nodes) const;
+    QStringList ListPathExpressions() const;
+    QStringList ListGrainlineExpressions(const QDomElement &element) const;
+    QStringList ListPieceExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
     bool IsFunction(const QString& token) const;
 
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
-};
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTools return list of tools pointers.
- * @return list.
- */
-inline QHash<quint32, VDataTool *> *VAbstractPattern::getTools()
-{
-    return &tools;
-}
+};
 
 #endif // VABSTRACTPATTERN_H

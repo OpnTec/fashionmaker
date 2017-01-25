@@ -33,7 +33,7 @@
 #include "tools/dialogarc.h"
 #include "tools/dialogarcwithlength.h"
 #include "tools/dialogbisector.h"
-#include "tools/dialogdetail.h"
+#include "tools/dialogseamallowance.h"
 #include "tools/dialogendline.h"
 #include "tools/dialogline.h"
 #include "tools/dialoglineintersect.h"
@@ -66,6 +66,7 @@
 #include "tools/dialogflippingbyaxis.h"
 #include "tools/dialogmove.h"
 #include "tools/dialogellipticalarc.h"
+#include "tools/dialogpiecepath.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

@@ -137,6 +137,7 @@ private slots:
     void ToolCutSplinePath(bool checked);
     void ToolPointOfContact(bool checked);
     void ToolDetail(bool checked);
+    void ToolPiecePath(bool checked);
     void ToolHeight(bool checked);
     void ToolTriangle(bool checked);
     void ToolPointOfIntersection(bool checked);
@@ -167,9 +168,9 @@ private slots:
     bool Save();
     void Open();
 
-    void ClosedDialogDetail(int result);
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogGroup(int result);
+    void ClosedDialogPiecePath(int result);
 
     void LoadIndividual();
     void LoadStandard();
@@ -285,10 +286,20 @@ private:
                                               Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
+
     template <typename DrawTool>
-    void               ClosedDialogWithApply(int result);
+    void ClosedDialogWithApply(int result, VMainGraphicsScene *scene);
     template <typename DrawTool>
-    void               ApplyDialog();
+    void ApplyDialog(VMainGraphicsScene *scene);
+    template <typename DrawTool>
+    void ClosedDrawDialogWithApply(int result);
+    template <typename DrawTool>
+    void ApplyDrawDialog();
+    template <typename DrawTool>
+    void ClosedDetailsDialogWithApply(int result);
+    template <typename DrawTool>
+    void ApplyDetailsDialog();
+
     bool               SavePattern(const QString &curFile, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
@@ -328,6 +339,7 @@ private:
     QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path);
     bool               LoadMeasurements(const QString &path);
     bool               UpdateMeasurements(const QString &path, int size, int height);
+    void               CheckRequiredMeasurements(const VMeasurements *m);
 
     void               ReopenFilesAfterCrash(QStringList &args);
     void               DoExport(const VCommandLinePtr& expParams);

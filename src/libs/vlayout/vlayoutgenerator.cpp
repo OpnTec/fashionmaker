@@ -34,7 +34,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
-#include "vlayoutdetail.h"
+#include "vlayoutpiece.h"
 #include "vlayoutpaper.h"
 
 class QMarginsF;
@@ -54,7 +54,7 @@ VLayoutGenerator::~VLayoutGenerator()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetDetails(const QVector<VLayoutDetail> &details)
+void VLayoutGenerator::SetDetails(const QVector<VLayoutPiece> &details)
 {
     bank->SetDetails(details);
 }
@@ -273,7 +273,7 @@ void VLayoutGenerator::GatherPages()
         return;
     }
 
-    QList<QList<VLayoutDetail>> nDetails;
+    QList<QList<VLayoutPiece>> nDetails;
     qreal length = 0;
     int j = 0; // papers count
 
@@ -328,7 +328,7 @@ void VLayoutGenerator::UnitePages()
     }
 
     QList<qreal> papersLength;
-    QList<QList<VLayoutDetail> > nDetails;
+    QList<QList<VLayoutPiece> > nDetails;
     qreal length = 0;
     int j = 0; // papers count
 
@@ -385,7 +385,7 @@ void VLayoutGenerator::UnitePages()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutDetail> > &nDetails, qreal length, int i)
+void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i)
 {
     if ((j == 0 && nDetails.isEmpty()) || j >= nDetails.size())
     {//First or new details in paper
@@ -411,17 +411,17 @@ void VLayoutGenerator::UnitePapers(int j, QList<qreal> &papersLength, qreal leng
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VLayoutDetail> VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutDetail> &details)
+QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &details)
 {
     if (qFuzzyIsNull(length))
     {
         return details.toList();
     }
 
-    QList<VLayoutDetail> newDetails;
+    QList<VLayoutPiece> newDetails;
     for (int i = 0; i < details.size(); ++i)
     {
-        VLayoutDetail d = details.at(i);
+        VLayoutPiece d = details.at(i);
         d.Translate(0, length);
         newDetails.append(d);
     }

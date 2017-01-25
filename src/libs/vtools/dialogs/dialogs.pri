@@ -11,7 +11,6 @@ HEADERS += \
     $$PWD/tools/dialogcutarc.h \
     $$PWD/tools/dialogcutspline.h \
     $$PWD/tools/dialogcutsplinepath.h \
-    $$PWD/tools/dialogdetail.h \
     $$PWD/tools/dialogendline.h \
     $$PWD/tools/dialogheight.h \
     $$PWD/tools/dialogline.h \
@@ -42,8 +41,9 @@ HEADERS += \
     $$PWD/tools/dialogflippingbyline.h \
     $$PWD/tools/dialogflippingbyaxis.h \
     $$PWD/tools/dialogmove.h \
-    $$PWD/tools/dialogellipticalarc.h
-
+    $$PWD/tools/dialogellipticalarc.h \
+    $$PWD/tools/dialogseamallowance.h \
+    $$PWD/tools/dialogpiecepath.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -54,7 +54,6 @@ SOURCES += \
     $$PWD/tools/dialogcutarc.cpp \
     $$PWD/tools/dialogcutspline.cpp \
     $$PWD/tools/dialogcutsplinepath.cpp \
-    $$PWD/tools/dialogdetail.cpp \
     $$PWD/tools/dialogendline.cpp \
     $$PWD/tools/dialogheight.cpp \
     $$PWD/tools/dialogline.cpp \
@@ -85,7 +84,9 @@ SOURCES += \
     $$PWD/tools/dialogflippingbyline.cpp \
     $$PWD/tools/dialogflippingbyaxis.cpp \
     $$PWD/tools/dialogmove.cpp \
-    $$PWD/tools/dialogellipticalarc.cpp
+    $$PWD/tools/dialogellipticalarc.cpp \
+    $$PWD/tools/dialogseamallowance.cpp \
+    $$PWD/tools/dialogpiecepath.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -96,7 +97,6 @@ FORMS += \
     $$PWD/tools/dialogcutarc.ui \
     $$PWD/tools/dialogcutspline.ui \
     $$PWD/tools/dialogcutsplinepath.ui \
-    $$PWD/tools/dialogdetail.ui \
     $$PWD/tools/dialogendline.ui \
     $$PWD/tools/dialogheight.ui \
     $$PWD/tools/dialogline.ui \
@@ -126,4 +126,6 @@ FORMS += \
     $$PWD/tools/dialogflippingbyline.ui \
     $$PWD/tools/dialogflippingbyaxis.ui \
     $$PWD/tools/dialogmove.ui \
-    $$PWD/tools/dialogellipticalarc.ui
+    $$PWD/tools/dialogellipticalarc.ui \
+    $$PWD/tools/dialogseamallowance.ui \
+    $$PWD/tools/dialogpiecepath.ui

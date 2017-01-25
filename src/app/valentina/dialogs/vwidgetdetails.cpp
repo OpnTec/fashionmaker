@@ -31,7 +31,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vtools/undocommands/toggledetailinlayout.h"
+#include "../vtools/undocommands/togglepieceinlayout.h"
 
 #include <QMenu>
 #include <QUndoStack>
@@ -45,7 +45,7 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
 {
     ui->setupUi(this);
 
-    FillTable(m_data->DataDetails());
+    FillTable(m_data->DataPieces());
 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -62,7 +62,7 @@ VWidgetDetails::~VWidgetDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::UpdateList()
 {
-    FillTable(m_data->DataDetails());
+    FillTable(m_data->DataPieces());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,16 +93,16 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
         return;
     }
 
-    const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
+    const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
-    ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, inLayout, m_data, m_doc);
-    connect(togglePrint, &ToggleDetailInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
+    connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
     qApp->getUndoStack()->push(togglePrint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
+void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 {
     const int selectedRow = ui->tableWidget->currentRow();
     ui->tableWidget->clear();
@@ -114,7 +114,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
     while (i != details->constEnd())
     {
         ++currentRow;
-        const VDetail det = i.value();
+        const VPiece det = i.value();
 
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
@@ -134,7 +134,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
 
         ui->tableWidget->setItem(currentRow, 0, item);
 
-        QString name = det.getName();
+        QString name = det.GetName();
         if (name.isEmpty())
         {
             name = tr("Unnamed");
@@ -158,7 +158,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ToggleSectionDetails(bool select)
 {
-    const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
+    const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     if (allDetails->count() == 0)
     {
         return;
@@ -172,8 +172,8 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
         {
             if (not select == allDetails->value(id).IsInLayout())
             {
-                ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &ToggleDetailInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
                 qApp->getUndoStack()->push(togglePrint);
             }
         }
@@ -193,7 +193,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
     QAction *actionInvertSelection = menu->addAction(tr("Invert selection"));
 
-    const QHash<quint32, VDetail> *allDetails = m_data->DataDetails();
+    const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     if (allDetails->count() == 0)
     {
         return;
@@ -201,7 +201,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
     int selectedDetails = 0;
 
-    QHash<quint32, VDetail>::const_iterator iter = allDetails->constBegin();
+    auto iter = allDetails->constBegin();
     while (iter != allDetails->constEnd())
     {
         if(iter.value().IsInLayout())
@@ -219,7 +219,6 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     {
         actionSelectAll->setDisabled(true);
     }
-
 
     QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
@@ -250,8 +249,8 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
             {
                 select = not allDetails->value(id).IsInLayout();
 
-                ToggleDetailInLayout *togglePrint = new ToggleDetailInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &ToggleDetailInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
                 qApp->getUndoStack()->push(togglePrint);
             }
         }

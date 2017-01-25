@@ -73,14 +73,19 @@ public:
 
     static const QString AttrInUse;
 
+    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
+
     static const QStringList    StylesList();
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+    static QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
     static QMap<QString, QIcon> LineStylesPics();
 
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
-    static void             AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     const VContainer        *getData() const;
 
@@ -144,10 +149,16 @@ protected:
     void AddVisualization();
 
     virtual void SetVisualization()=0;
-    void ToolCreation(const Source &typeCreation);
+    virtual void ToolCreation(const Source &typeCreation);
 
-    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                            const qreal radius);
+    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
+                            QGraphicsLineItem *lineName, const qreal radius);
+
+    static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
+    static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
+
+    static QVector<VPieceNode> PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                            VContainer *data);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

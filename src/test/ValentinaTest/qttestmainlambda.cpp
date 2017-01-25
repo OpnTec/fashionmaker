@@ -29,7 +29,7 @@
 #include <QtTest>
 
 #include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
+#include "tst_vabstractpiece.h"
 #include "tst_vspline.h"
 #include "tst_nameregexp.h"
 #include "tst_vlayoutdetail.h"
@@ -40,7 +40,7 @@
 #include "tst_vlockguard.h"
 #include "tst_misc.h"
 #include "tst_vcommandline.h"
-#include "tst_vdetail.h"
+#include "tst_vpiece.h"
 #include "tst_findpoint.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vcubicbezierpath.h"
@@ -67,9 +67,9 @@ int main(int argc, char** argv)
     };
 
     ASSERT_TEST(new TST_FindPoint());
-    ASSERT_TEST(new TST_VDetail());
+    ASSERT_TEST(new TST_VPiece());
     ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
+    ASSERT_TEST(new TST_VAbstractPiece());
     ASSERT_TEST(new TST_VSpline());
     ASSERT_TEST(new TST_VSplinePath());
     ASSERT_TEST(new TST_NameRegExp());

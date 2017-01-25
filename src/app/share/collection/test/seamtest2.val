@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.0</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.79375" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="10"/>
+            <point type="normal" typeLine="hair" id="3" name="A2" firstPoint="2" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="5"/>
+            <point type="alongLine" typeLine="none" id="4" name="A3" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <spline type="simpleInteractive" point4="3" angle1="236.89" angle2="209.202" id="5" color="black" length1="1.06381" length2="2.9538" point1="4"/>
+            <spline type="simpleInteractive" point4="4" angle1="241.792" angle2="241.791" id="6" color="black" length1="2.22517" length2="2.12741" point1="1"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="12" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="13" idObject="2" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="14" idObject="3" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="15" idObject="5"/>
+            <point type="modeling" inUse="true" id="16" idObject="4" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="17" idObject="6"/>
+        </modeling>
+        <details>
+            <detail id="18" name="" forbidFlipping="true" seamAllowance="true" mx="0" inLayout="true" width="1" my="0" version="2">
+                <nodes>
+                    <node type="NodePoint" idObject="12"/>
+                    <node type="NodePoint" idObject="13"/>
+                    <node type="NodePoint" idObject="14"/>
+                    <node type="NodeSpline" reverse="1" idObject="15"/>
+                    <node before="1.01" type="NodePoint" after="1.01" idObject="16"/>
+                    <node type="NodeSpline" reverse="1" idObject="17"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

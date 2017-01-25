@@ -53,8 +53,14 @@ class QKeyEvent;
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr)
+    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
+      QGraphicsEllipseItem(),
+      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
+      namePoint(nullptr),
+      lineName(nullptr),
+      m_onlyPoint(false),
+      m_isHighlight(false),
+      m_visualizationMode(false)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
@@ -64,7 +70,7 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 }
@@ -72,6 +78,39 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::~VSimplePoint()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetOnlyPoint(bool value)
+{
+    m_onlyPoint = value;
+    namePoint->setVisible(not m_onlyPoint);
+    lineName->setVisible(not m_onlyPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSimplePoint::IsOnlyPoint() const
+{
+    return m_onlyPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetVisualizationMode(bool value)
+{
+    m_visualizationMode = value;
+    this->setFlag(QGraphicsItem::ItemIsFocusable, not m_visualizationMode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSimplePoint::IsVisualizationMode() const
+{
+    return m_visualizationMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetPointHighlight(bool value)
+{
+    m_isHighlight = value;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::RefreshLine()
@@ -106,7 +145,7 @@ void VSimplePoint::RefreshLine()
 void VSimplePoint::RefreshGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -127,7 +166,7 @@ void VSimplePoint::RefreshGeometry(const VPointF &point)
 void VSimplePoint::SetEnabled(bool enabled)
 {
     VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
     namePoint->setEnabled(enabled);
 }
@@ -184,24 +223,31 @@ void VSimplePoint::ChangedPosition(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    // Special for not selectable item first need to call standard mousePressEvent then accept event
-    QGraphicsEllipseItem::mousePressEvent(event);
-
-    // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (m_visualizationMode)
     {
-        scene()->clearSelection();
-    }
-
-    if (selectionType == SelectionType::ByMouseRelease)
-    {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event->ignore();
     }
     else
     {
-        if (event->button() == Qt::LeftButton)
+        // Special for not selectable item first need to call standard mousePressEvent then accept event
+        QGraphicsEllipseItem::mousePressEvent(event);
+
+        // Somehow clicking on notselectable object do not clean previous selections.
+        if (not (flags() & ItemIsSelectable) && scene())
         {
-            emit Choosed(id);
+            scene()->clearSelection();
+        }
+
+        if (selectionType == SelectionType::ByMouseRelease)
+        {// Special for not selectable item first need to call standard mousePressEvent then accept event
+            event->accept();
+        }
+        else
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
         }
     }
 }
@@ -209,14 +255,17 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (not m_visualizationMode)
     {
-        if (event->button() == Qt::LeftButton)
+        if (selectionType == SelectionType::ByMouseRelease)
         {
-            emit Choosed(id);
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
         }
+        QGraphicsEllipseItem::mouseReleaseEvent(event);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

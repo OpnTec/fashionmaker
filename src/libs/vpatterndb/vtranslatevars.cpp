@@ -388,6 +388,8 @@ void VTranslateVars::InitVariables()
                                               "Do not add symbol _ to the end of the name"));
     variables.insert(seg_, translate("VTranslateVars", "Seg_", "Segment. Left symbol _ in the name"));
     variables.insert(currentLength, translate("VTranslateVars", "CurrentLength", "Do not add space between words"));
+    variables.insert(currentSeamAllowance, translate("VTranslateVars", "CurrentSeamAllowance",
+                                                     "Do not add space between words"));
     variables.insert(c1LengthSpl_, translate("VTranslateVars", "C1LengthSpl_", "Left symbol _ in the name"));
     variables.insert(c2LengthSpl_, translate("VTranslateVars", "C2LengthSpl_", "Left symbol _ in the name"));
     variables.insert(c1LengthSplPath, translate("VTranslateVars", "C1LengthSplPath",

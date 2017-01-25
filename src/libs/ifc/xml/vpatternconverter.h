@@ -55,10 +55,10 @@ public:
 // GCC 4.6 doesn't allow constexpr and const together
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
     static Q_DECL_CONSTEXPR int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 9);
+    static Q_DECL_CONSTEXPR int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 4, 0);
 #else
     static Q_DECL_CONSTEXPR const int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 3, 9);
+    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 4, 0);
 #endif
 
 protected:
@@ -98,6 +98,7 @@ private:
     void ToV0_3_7();
     void ToV0_3_8();
     void ToV0_3_9();
+    void ToV0_4_0();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
@@ -133,6 +134,12 @@ private:
 
     void FixCutPoint();
     void FixSubPaths(int i, quint32 id, quint32 baseCurve);
+
+    void TagRemoveAttributeTypeObjectInV0_4_0();
+    void TagDetailToV0_4_0();
+    void TagUnionDetailsToV0_4_0();
+    QDomElement GetUnionDetailNodesV0_4_0(const QDomElement &detail);
+    QDomElement GetUnionChildrenNodesV0_4_0(const QDomElement &detail);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

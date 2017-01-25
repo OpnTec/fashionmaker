@@ -33,8 +33,6 @@
     #include <ciso646>
 #endif /* Q_CC_MSVC */
 
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
-
 enum class LayoutErrors : char
 {
     NoError,

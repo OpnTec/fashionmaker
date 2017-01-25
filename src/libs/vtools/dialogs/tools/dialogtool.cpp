@@ -58,6 +58,7 @@
 #include <Qt>
 #include <QtDebug>
 #include <new>
+#include <QBuffer>
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
@@ -66,6 +67,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vabstractcurve.h"
@@ -396,6 +398,128 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogTool::RowId(QListWidget *listWidget, int i)
+{
+    SCASSERT(listWidget != nullptr);
+    const QListWidgetItem *rowItem = listWidget->item(i);
+    SCASSERT(rowItem != nullptr);
+    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+    return rowNode.GetId();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::FirstPointEqualLast(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    if (listWidget->count() > 1)
+    {
+        return RowId(listWidget, 0) == RowId(listWidget, listWidget->count()-1);
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::DoublePoints(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    {
+        if (RowId(listWidget, i) == RowId(listWidget, i+1))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::DialogWarningIcon()
+{
+    const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                  QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+
+    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    pixmap.save(&buffer, "PNG");
+    const QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
+    return url;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::GetNodeName(const VPieceNode &node) const
+{
+    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
+    QString name = obj->name();
+
+    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
+    {
+        name = QLatin1String("- ") + name;
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
+{
+    SCASSERT(listWidget != nullptr);
+    SCASSERT(node.GetId() > NULL_ID);
+    QString name;
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
+        case (Tool::NodeArc):
+        case (Tool::NodeSpline):
+        case (Tool::NodeSplinePath):
+        {
+            name = GetNodeName(node);
+            break;
+        }
+        default:
+            qDebug()<<"Got wrong tools. Ignore.";
+            return;
+    }
+
+    bool canAddNewPoint = false;
+
+    if(listWidget->count() == 0)
+    {
+        canAddNewPoint = true;
+    }
+    else
+    {
+        if(RowId(listWidget, listWidget->count()-1) != node.GetId())
+        {
+            canAddNewPoint = true;
+        }
+    }
+
+    if(canAddNewPoint)
+    {
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, QVariant::fromValue(node));
+        listWidget->addItem(item);
+        listWidget->setCurrentRow(listWidget->count()-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::InitNodeAngles(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+    box->clear();
+
+    box->addItem(tr("by length"), static_cast<unsigned char>(PieceNodeAngle::ByLength));
+    box->addItem(tr("by points intersetions"), static_cast<unsigned char>(PieceNodeAngle::ByPointsIntersection));
+    box->addItem(tr("by first edge symmetry"), static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeSymmetry));
+    box->addItem(tr("by second edge symmetry"), static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeSymmetry));
+    box->addItem(tr("by first edge right angle"), static_cast<unsigned char>(PieceNodeAngle::ByFirstEdgeRightAngle));
+    box->addItem(tr("by second edge right angle"), static_cast<unsigned char>(PieceNodeAngle::BySecondEdgeRightAngle));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
 {
     return (obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath) &&
@@ -458,7 +582,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         return;
     }
     timer->setSingleShot(true);
-    timer->start(1000);
+    timer->start(300);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -470,13 +594,11 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
+qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero,
+                       bool checkLessThanZero)
 {
-    qDebug() << "Eval started";
     SCASSERT(label != nullptr)
-    qDebug() << "Label ok";
     SCASSERT(labelEditFormula != nullptr)
-    qDebug() << "lef ok";
 
     qreal result = INT_MIN;//Value can be 0, so use max imposible value
 
@@ -515,6 +637,13 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                     ChangeColor(labelEditFormula, Qt::red);
                     label->setText(tr("Error") + " (" + postfix + ")");
                     label->setToolTip(tr("Value can't be 0"));
+                }
+                else if (checkLessThanZero && result < 0)
+                {
+                    flag = false;
+                    ChangeColor(labelEditFormula, Qt::red);
+                    label->setText(tr("Error") + " (" + postfix + ")");
+                    label->setToolTip(tr("Value can't be lass than 0"));
                 }
                 else
                 {
@@ -964,6 +1093,12 @@ void DialogTool::ShowDialog(bool click)
 void DialogTool::Build(const Tool &type)
 {
     Q_UNUSED(type)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetPiecesList(const QVector<quint32> &list)
+{
+    Q_UNUSED(list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -54,17 +54,19 @@ enum class UndoCommand: char { AddPatternPiece,
                                MoveSPoint,
                                SaveToolOptions,
                                SaveDetailOptions,
-                               MoveDetail,
+                               SavePieceOptions,
+                               SavePiecePathOptions,
+                               MovePiece,
                                DeleteTool,
                                DeletePatternPiece,
                                RenamePP,
                                MoveLabel,
                                MoveDoubleLabel,
                                RotationMoveLabel,
-                               ToggleDetailInLayout
+                               TogglePieceInLayout
                              };
 
-class VNodeDetail;
+class VPieceNode;
 class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
@@ -85,8 +87,14 @@ protected:
     virtual void RedoFullParsing();
     void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
 
-    void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
-    void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
+    void         IncrementReferences(const QVector<quint32> &nodes) const;
+    void         DecrementReferences(const QVector<quint32> &nodes) const;
+
+    void         IncrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void         DecrementReferences(const QVector<CustomSARecord> &nodes) const;
+
+    void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
+    void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

@@ -52,27 +52,83 @@
 #include <QUndoStack>
 #include <QVector>
 #include <new>
+#include <qnumeric.h>
 
 #include "../vgeometry/vpointf.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../undocommands/deltool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/calculator.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
-#include "vdatatool.h"
+#include "nodeDetails/nodedetails.h"
+#include "../dialogs/support/dialogundo.h"
+#include "../dialogs/support/dialogeditwrongformula.h"
 
 class QGraphicsEllipseItem;
 class QGraphicsLineItem;
 template <class T> class QSharedPointer;
 
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+/**
+ * @brief CreateNode create new node for detail.
+ * @param data container.
+ * @param id id parent object.
+ * @return id for new object.
+ */
+quint32 CreateNode(VContainer *data, quint32 id)
+{
+    //We can't use exist object. Need create new.
+    T *node = new T(*data->GeometricObject<T>(id).data());
+    node->setMode(Draw::Modeling);
+    return data->AddGObject(node);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 CreateNodeSpline(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::Spline)
+    {
+        return CreateNode<VSpline>(data, id);
+    }
+    else
+    {
+        return CreateNode<VCubicBezier>(data, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::SplinePath)
+    {
+        return CreateNode<VSplinePath>(data, id);
+    }
+    else
+    {
+        return CreateNode<VCubicBezierPath>(data, id);
+    }
+}
+}//static functions
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -99,6 +155,96 @@ VAbstractTool::~VAbstractTool()
     {
         delete vis;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckFormula check formula.
+ *
+ * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
+ * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
+ *
+ * @param toolId [in] tool's id.
+ * @param formula [in|out] string with formula.
+ * @param data [in] container with variables. Need for math parser.
+ * @throw QmuParserError.
+ * @return result of calculation formula.
+ */
+qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data)
+{
+    SCASSERT(data != nullptr)
+    qreal result = 0;
+    try
+    {
+        QScopedPointer<Calculator> cal(new Calculator());
+        result = cal->EvalFormula(data->PlainVariables(), formula);
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            qDebug() << "Invalid the formula value";
+            return 0;
+        }
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        qDebug() << "\nMath parser error:\n"
+                 << "--------------------------------------\n"
+                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Expression:  " << e.GetExpr() << "\n"
+                 << "--------------------------------------";
+
+        if (qApp->IsAppInGUIMode())
+        {
+            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(qApp->getMainWindow()));
+            forever
+            {
+                if (dialogUndo->exec() == QDialog::Accepted)
+                {
+                    const UndoButton resultUndo = dialogUndo->Result();
+                    if (resultUndo == UndoButton::Fix)
+                    {
+                        auto *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
+                        dialog->setWindowTitle(tr("Edit wrong formula"));
+                        dialog->SetFormula(formula);
+                        if (dialog->exec() == QDialog::Accepted)
+                        {
+                            formula = dialog->GetFormula();
+                            /* Need delete dialog here because parser in dialog don't allow use correct separator for
+                             * parsing here. */
+                            delete dialog;
+                            QScopedPointer<Calculator> cal1(new Calculator());
+                            result = cal1->EvalFormula(data->PlainVariables(), formula);
+
+                            if (qIsInf(result) || qIsNaN(result))
+                            {
+                                qDebug() << "Invalid the formula value";
+                                return 0;
+                            }
+
+                            break;
+                        }
+                        else
+                        {
+                            delete dialog;
+                        }
+                    }
+                    else
+                    {
+                        throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
+                    }
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        else
+        {
+            throw;
+        }
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -186,6 +332,35 @@ Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
         default:
             return Qt::SolidLine;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractTool::PenStyleToLineStyle(Qt::PenStyle penStyle)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
+    switch (penStyle)
+    {
+        case Qt::NoPen:
+            return TypeLineNone;
+        case Qt::DashLine:
+            return TypeLineDashLine;
+        case Qt::DotLine:
+            return TypeLineDotLine;
+        case Qt::DashDotLine:
+            return TypeLineDashDotLine;
+        case Qt::DashDotDotLine:
+            return TypeLineDashDotDotLine;
+        case Qt::SolidLine:
+        case Qt::CustomDashLine:
+        default:
+            break;
+    }
+
+    QT_WARNING_POP
+
+    return TypeLineLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,6 +561,26 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path)
+{
+    if (path.CountNodes() > 0)
+    {
+        QDomElement nodesElement = doc->createElement(VAbstractPattern::TagNodes);
+        for (int i = 0; i < path.CountNodes(); ++i)
+        {
+            AddNode(doc, nodesElement, path.at(i));
+        }
+        domElement.appendChild(nodesElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+    AddNodes(doc, domElement, piece.GetPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshLine refresh line to label on scene.
  */
@@ -420,4 +615,105 @@ void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleText
     {
         lineName->setVisible(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node)
+{
+    QDomElement nod = doc->createElement(tagName);
+
+    doc->SetAttribute(nod, AttrIdObject, node.GetId());
+
+    const Tool type = node.GetTypeTool();
+    if (type != Tool::NodePoint)
+    {
+        doc->SetAttribute(nod, VAbstractPattern::AttrNodeReverse, static_cast<quint8>(node.GetReverse()));
+    }
+    else
+    {
+        if (node.GetFormulaSABefore() != currentSeamAllowance)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrSABefore, node.GetFormulaSABefore());
+        }
+
+        if (node.GetFormulaSAAfter() != currentSeamAllowance)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrSAAfter, node.GetFormulaSAAfter());
+        }
+    }
+
+    switch (type)
+    {
+        case (Tool::NodeArc):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
+            break;
+        case (Tool::NodePoint):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
+            break;
+        case (Tool::NodeSpline):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
+            break;
+        case (Tool::NodeSplinePath):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
+            break;
+        default:
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            break;
+    }
+
+    const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
+
+    if (angleType > 0)
+    {
+        doc->SetAttribute(nod, AttrAngle, angleType);
+    }
+
+    return nod;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node)
+{
+    domElement.appendChild(AddSANode(doc, VAbstractPattern::TagNode, node));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene,
+                                                VAbstractPattern *doc, VContainer *data)
+{
+    QVector<VPieceNode> nodes;
+    for (int i = 0; i< path.CountNodes(); ++i)
+    {
+        quint32 id = 0;
+        VPieceNode nodeD = path.at(i);
+        switch (nodeD.GetTypeTool())
+        {
+            case (Tool::NodePoint):
+                id = CreateNode<VPointF>(data, nodeD.GetId());
+                VNodePoint::Create(doc, data, scene, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeArc):
+                id = CreateNode<VArc>(data, nodeD.GetId());
+                VNodeArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeElArc):
+                id = CreateNode<VEllipticalArc>(data, nodeD.GetId());
+                VNodeEllipticalArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeSpline):
+                id = CreateNodeSpline(data, nodeD.GetId());
+                VNodeSpline::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            case (Tool::NodeSplinePath):
+                id = CreateNodeSplinePath(data, nodeD.GetId());
+                VNodeSplinePath::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
+                break;
+            default:
+                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+                break;
+        }
+        nodeD.SetId(id);
+        nodes.append(nodeD);
+    }
+    return nodes;
 }

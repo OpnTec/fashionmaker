@@ -60,7 +60,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
-    : VAbstractMainWindow(parent), listDetails(QVector<VLayoutDetail>()), currentScene(nullptr), tempSceneLayout(nullptr),
+    : VAbstractMainWindow(parent), listDetails(QVector<VLayoutPiece>()), currentScene(nullptr), tempSceneLayout(nullptr),
       pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), actionDockWidgetGroups(nullptr),
@@ -463,7 +463,7 @@ void MainWindowsNoGUI::PrintTiled()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
+void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *details)
 {
     listDetails.clear();
     SCASSERT(details != nullptr)
@@ -472,40 +472,10 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         return;
     }
 
-    QHash<quint32, VDetail>::const_iterator i = details->constBegin();
+    QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        VLayoutDetail det = VLayoutDetail();
-        const VDetail d = i.value();
-        det.SetCountourPoints(d.ContourPoints(pattern));
-        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
-        det.setName(d.getName());
-        const VPatternPieceData& data = d.GetPatternPieceData();
-        if (data.IsVisible() == true)
-        {
-            det.SetDetail(d.getName(), data, qApp->font());
-        }
-        const VPatternInfoGeometry& geom = d.GetPatternInfo();
-        if (geom.IsVisible() == true)
-        {
-            VAbstractPattern* pDoc = qApp->getCurrentDocument();
-            QDate date;
-            if (pDoc->IsDateVisible() == true)
-            {
-                date = QDate::currentDate();
-            }
-            det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
-        }
-        const VGrainlineGeometry& grainlineGeom = d.GetGrainlineGeometry();
-        if (grainlineGeom.IsVisible() == true)
-        {
-            det.SetGrainline(grainlineGeom, *pattern);
-        }
-        det.setWidth(qApp->toPixel(d.getWidth()));
-        det.CreateTextItems();
-        det.setForbidFlipping(d.getForbidFlipping());
-
-        listDetails.append(det);
+        listDetails.append(VLayoutPiece::Create(i.value(), pattern));
         ++i;
     }
 }
