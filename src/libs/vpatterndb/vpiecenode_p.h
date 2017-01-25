@@ -45,8 +45,8 @@ public:
           m_reverse(false),
           m_saBefore(-1),
           m_saAfter(-1),
-          m_formulaWidthBefore(""),
-          m_formulaWidthAfter(""),
+          m_formulaWidthBefore(currentSeamAllowance),
+          m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength)
     {}
 
@@ -56,8 +56,8 @@ public:
           m_reverse(reverse),
           m_saBefore(-1),
           m_saAfter(-1),
-          m_formulaWidthBefore("-1"),
-          m_formulaWidthAfter("-1"),
+          m_formulaWidthBefore(currentSeamAllowance),
+          m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength)
     {
         if (m_typeTool == Tool::NodePoint)
