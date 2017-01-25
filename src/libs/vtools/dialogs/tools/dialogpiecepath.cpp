@@ -286,8 +286,6 @@ void DialogPiecePath::NodeChanged(int index)
 
     ui->comboBoxAngle->setDisabled(true);
 
-    ui->plainTextEditFormulaWidthBefore->blockSignals(true);
-    ui->plainTextEditFormulaWidthAfter->blockSignals(true);
     ui->comboBoxAngle->blockSignals(true);
 
     if (index != -1)
@@ -353,8 +351,6 @@ void DialogPiecePath::NodeChanged(int index)
         ui->comboBoxAngle->setCurrentIndex(-1);
     }
 
-    ui->plainTextEditFormulaWidthBefore->blockSignals(false);
-    ui->plainTextEditFormulaWidthAfter->blockSignals(false);
     ui->comboBoxAngle->blockSignals(false);
 }
 
