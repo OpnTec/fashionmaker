@@ -221,7 +221,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLoca
     token_type tok;
 
     // Ignore all non printable characters when reading the expression
-    while ( m_strFormula.data()[m_iPos] > 0 && m_strFormula.data()[m_iPos] <= 0x20 )
+    while (m_strFormula.at(m_iPos) > QChar() && m_strFormula.at(m_iPos) <= QChar(0x20))
     {
         ++m_iPos;
     }
