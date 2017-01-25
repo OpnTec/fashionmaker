@@ -410,7 +410,7 @@
                             <xs:element name="children" minOccurs="1" maxOccurs="1">
                               <xs:complexType>
                                 <xs:sequence>
-                                  <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+                                  <xs:element name="nodes" minOccurs="0" maxOccurs="1">
                                     <xs:complexType>
                                       <xs:sequence>
                                         <xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"/>
