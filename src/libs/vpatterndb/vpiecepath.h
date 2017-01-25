@@ -106,10 +106,6 @@ public:
 
 private:
     QSharedDataPointer<VPiecePathData> d;
-
-    static VSAPoint CurvePoint(const VSAPoint &candidate, const VContainer *data, const VPieceNode &node,
-                               const QSharedPointer<VAbstractCurve> &curve);
-    static int      indexOfNode(const QVector<VPieceNode> &list, quint32 id);
 };
 
 Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);

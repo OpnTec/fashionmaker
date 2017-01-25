@@ -34,6 +34,47 @@
 
 #include <QPainterPath>
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+VSAPoint CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+                    const QVector<QPointF> &curvePoints)
+{
+    if (node.GetTypeTool() == Tool::NodePoint)
+    {
+        const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+        if (VAbstractCurve::IsPointOnCurve(curvePoints, p))
+        {
+            candidate = VSAPoint(p);
+            candidate.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
+            candidate.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
+            candidate.SetAngleType(node.GetAngleType());
+        }
+    }
+    return candidate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param list list nodes detail.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
+int IndexOfNode(const QVector<VPieceNode> &list, quint32 id)
+{
+    for (int i = 0; i < list.size(); ++i)
+    {
+        if (list.at(i).GetId() == id)
+        {
+            return i;
+        }
+    }
+    qDebug()<<"Can't find node.";
+    return -1;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::VPiecePath()
     : d(new VPiecePathData)
@@ -269,19 +310,21 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    QVector<QPointF> points = curve->GetPoints();
-    if (reverse)
+    const QVector<QPointF> points = curve->GetPoints();
+    if (points.isEmpty())
     {
-        points = VGObject::GetReversePoints(points);
+        return VSAPoint();
     }
 
-    VSAPoint begin = VSAPoint(points.first());
+    VSAPoint begin;
+    reverse ? begin = VSAPoint(points.last()) : begin = VSAPoint(points.first());
+
     if (nodes.size() > 1)
     {
         int index = 0;
         i == 0 ? index = nodes.size()-1 : index = i-1;
 
-        begin = CurvePoint(begin, data, nodes.at(index), curve);
+        begin = CurvePoint(begin, data, nodes.at(index), points);
     }
     return begin;
 }
@@ -296,19 +339,21 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    QVector<QPointF> points = curve->GetPoints();
-    if (reverse)
+    const QVector<QPointF> points = curve->GetPoints();
+    if (points.isEmpty())
     {
-        points = VGObject::GetReversePoints(points);
+        return VSAPoint();
     }
 
-    VSAPoint end = VSAPoint(points.last());
+    VSAPoint end;
+    reverse ? end = VSAPoint(points.first()) : end = VSAPoint(points.last());
+
     if (nodes.size() > 2)
     {
         int index = 0;
         i == nodes.size() - 1 ? index = 0 : index = i+1;
 
-        end = CurvePoint(end, data, nodes.at(index), curve);
+        end = CurvePoint(end, data, nodes.at(index), points);
     }
     return end;
 }
@@ -416,7 +461,7 @@ bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
         qDebug()<<"Not enough points.";
         return false;
     }
-    int i = indexOfNode(list, p1);
+    int i = IndexOfNode(list, p1);
     int j1 = 0, j2 = 0;
 
     if (i == list.size() - 1)
@@ -462,8 +507,8 @@ int VPiecePath::Edge(quint32 p1, quint32 p2) const
     }
 
     const QVector<VPieceNode> list = ListNodePoint();
-    int i = indexOfNode(list, p1);
-    int j = indexOfNode(list, p2);
+    int i = IndexOfNode(list, p1);
+    int j = IndexOfNode(list, p2);
 
     int min = qMin(i, j);
 
@@ -749,43 +794,4 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
     }
 
     return pointsEkv;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::CurvePoint(const VSAPoint &candidate, const VContainer *data, const VPieceNode &node,
-                                const QSharedPointer<VAbstractCurve> &curve)
-{
-    VSAPoint point = candidate;
-    if (node.GetTypeTool() == Tool::NodePoint)
-    {
-        const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
-        if (curve->IsPointOnCurve(p))
-        {
-            point = VSAPoint(p);
-            point.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
-            point.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
-            point.SetAngleType(node.GetAngleType());
-        }
-    }
-    return point;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief indexOfNode return index in list node using id object.
- * @param list list nodes detail.
- * @param id object (arc, point, spline, splinePath) id.
- * @return index in list or -1 id can't find.
- */
-int VPiecePath::indexOfNode(const QVector<VPieceNode> &list, quint32 id)
-{
-    for (int i = 0; i < list.size(); ++i)
-    {
-        if (list.at(i).GetId() == id)
-        {
-            return i;
-        }
-    }
-    qDebug()<<"Can't find node.";
-    return -1;
 }
