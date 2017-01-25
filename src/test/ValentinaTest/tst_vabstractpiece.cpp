@@ -543,34 +543,79 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase1() const
 {
     QVector<QPointF> points;
 
-    points += QPointF(30.0, 970.3935748031496);
-    points += QPointF(30.0, 2.1993068570824366);
-    points += QPointF(114.18582053395916, -1.0122621856204752);
-    points += QPointF(193.32267013775137, -14.358819619401812);
-    points += QPointF(242.10707671244683, -32.17908690671806);
-    points += QPointF(271.8971162152593, -50.207724037690014);
-    points += QPointF(295.9981384039675, -73.05193874264779);
-    points += QPointF(291.7916402578659, -67.42426694301096);
+    points += QPointF(30.00000000000004, 970.3929479721926);
+    points += QPointF(30.0, 2.204434307474013);
+    points += QPointF(47.110950439162494, 2.154008996440882);
+    points += QPointF(75.17428353484098, 1.4485680510386028);
+    points += QPointF(94.48820285018608, 0.4902498458165696);
+    points += QPointF(114.29080866669788, -1.0082936883322242);
+    points += QPointF(134.30369213200785, -3.146524533710341);
+    points += QPointF(154.30324182399514, -6.0212092507409025);
+    points += QPointF(174.06202812984606, -9.721413151776975);
+    points += QPointF(193.35089649585723, -14.32603434620921);
+    points += QPointF(212.04908234619523, -19.93308318294329);
+    points += QPointF(225.4146962614004, -24.83196935145066);
+    points += QPointF(233.88383173589082, -28.35105572413872);
+    points += QPointF(242.16354279128632, -32.17883523742874);
+    points += QPointF(250.12919225691988, -36.27548734456109);
+    points += QPointF(257.76141086050376, -40.64361165848513);
+    points += QPointF(265.0438386703493, -45.28609897626606);
+    points += QPointF(271.9635110924753, -50.20688688697322);
+    points += QPointF(278.5110730948284, -55.4119084151831);
+    points += QPointF(284.68071875165725, -60.91018735939974);
+    points += QPointF(290.46975730117975, -66.71498198586181);
+    points += QPointF(295.87773947883056, -72.84482460043537);
+    points += QPointF(301.0311752209645, -79.48669791277798);
+    points += QPointF(292.5914051639158, -67.31392104851938);
     points += QPointF(556.8930273120665, -30.847456102511416);
     points += QPointF(539.6101141051189, 79.89131577778163);
     points += QPointF(585.9167315845334, -20.702420721823447);
-    points += QPointF(1117.424153174025, 212.64949937811681);
-    points += QPointF(1075.303535889726, 303.4417262358707);
-    points += QPointF(1034.367455532369, 409.91489458521534);
-    points += QPointF(1016.7086496269483, 470.1391211588565);
-    points += QPointF(1002.6502749276095, 549.8913110678527);
-    points += QPointF(1002.7092529129402, 594.4292010581551);
-    points += QPointF(1004.1768887194628, 604.1457258376107);
-    points += QPointF(1009.2070121912753, 620.6931338009274);
-    points += QPointF(1019.1613725437678, 641.9748709736807);
-    points += QPointF(1033.0209611044565, 662.9678611314132);
-    points += QPointF(1049.114087400246, 680.4406818558615);
-    points += QPointF(1065.8570577426399, 692.968441452634);
-    points += QPointF(1083.1677152645557, 700.9292457138567);
-    points += QPointF(1105.2479226099044, 705.3103889738845);
-    points += QPointF(1290.6502488400083, 712.9440934612204);
-    points += QPointF(1302.4161318705774, 881.6558256043734);
-    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(1117.4712505569892, 212.6701769158142);
+    points += QPointF(1107.8013393916237, 232.47256047676322);
+    points += QPointF(1096.0328222042483, 257.2724337531229);
+    points += QPointF(1085.2347243947604, 280.86364678273935);
+    points += QPointF(1075.284743777034, 303.4467181585846);
+    points += QPointF(1066.1500107021461, 325.033221582634);
+    points += QPointF(1057.8916931702825, 345.40221101096097);
+    points += QPointF(1046.6844069650929, 374.5619971088514);
+    points += QPointF(1034.1843603449327, 410.2384638595294);
+    points += QPointF(1024.281900134066, 441.9665592645446);
+    points += QPointF(1016.6128103198599, 470.0987514791772);
+    points += QPointF(1010.8915481272591, 494.7652903217387);
+    points += QPointF(1006.8300406648394, 516.1171535751373);
+    points += QPointF(1004.140951447517, 534.3338730421456);
+    points += QPointF(1002.5429209641061, 549.6340874837038);
+    points += QPointF(1001.7684597861733, 562.2905401031172);
+    points += QPointF(1001.5753826870504, 572.6532694631434);
+    points += QPointF(1001.7511114738644, 580.6472328726268);
+    points += QPointF(1002.5244573746393, 592.6631414076071);
+    points += QPointF(1011.1831553003773, 625.860901250618);
+    points += QPointF(1013.5469326629959, 631.1835932583286);
+    points += QPointF(1016.1978697144372, 636.6181674061058);
+    points += QPointF(1019.1173567112357, 642.0917891993197);
+    points += QPointF(1022.283791807397, 647.5382096308747);
+    points += QPointF(1025.6730034935645, 652.8974380139866);
+    points += QPointF(1029.258679857382, 658.1156604426072);
+    points += QPointF(1033.0128662502555, 663.1453581470851);
+    points += QPointF(1036.906587776057, 667.9455799725583);
+    points += QPointF(1040.910648783598, 672.4823173517011);
+    points += QPointF(1044.9966554234593, 676.7289189086724);
+    points += QPointF(1049.138296281844, 680.666466074281);
+    points += QPointF(1053.3128972071952, 684.2840128781046);
+    points += QPointF(1057.5032369521043, 687.5785757108713);
+    points += QPointF(1061.6995688685456, 690.5547476668297);
+    points += QPointF(1065.9017414956827, 693.2238137995831);
+    points += QPointF(1070.1212524492987, 695.6022659553563);
+    points += QPointF(1074.3830151134682, 697.7096649640421);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.8919933013688, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1304.758494368609, 711.4626979457951);
+    points += QPointF(1293.9429531218987, 1089.1048479381132);
+    points += QPointF(30.00000000000004, 970.3929479721926);
 
     return points;
 }
@@ -951,24 +996,58 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase2() const
 
     points += QPointF(6.735602739585184, 2.204598425196849);
     points += QPointF(445.748031496063, 2.204598425196849);
-    points += QPointF(445.748031496063, 252.741597064484);
-    points += QPointF(407.8726873421697, 270.9512393848742);
-    points += QPointF(383.35720786819263, 278.3073990947694);
-    points += QPointF(358.56601090183574, 281.29234689511463);
-    points += QPointF(311.52157429670274, 276.0460457687877);
-    points += QPointF(269.8658512160491, 259.9136567147091);
-    points += QPointF(234.63885608185402, 236.87965105367914);
-    points += QPointF(206.54666866938726, 209.66914671340476);
-    points += QPointF(196.38622691315896, 194.30278046741873);
-    points += QPointF(185.94813049770778, 196.9895807275079);
-    points += QPointF(139.55536916394507, 195.8595124134453);
-    points += QPointF(94.68200851242605, 182.9587775062589);
-    points += QPointF(53.04420235483193, 161.22643763678528);
-    points += QPointF(17.41948377984963, 131.4802352488134);
-    points += QPointF(3.037173945815, 113.17182142233789);
-    points += QPointF(-7.8903334763093635, 91.91076010344419);
-    points += QPointF(-13.507576311258223, 67.42815708759109);
-    points += QPointF(-11.452400232028667, 42.67167813028373);
+    points += QPointF(445.748031496063, 251.48446223243934);
+    points += QPointF(420.1672505436216, 265.34467354701);
+    points += QPointF(408.16868834563587, 270.74969811280204);
+    points += QPointF(395.75743565485675, 275.06821746196044);
+    points += QPointF(383.28015968092507, 278.216263983686);
+    points += QPointF(370.8288026520235, 280.2409452967658);
+    points += QPointF(358.4874104434599, 281.2043381226534);
+    points += QPointF(346.3281093878975, 281.1794055890767);
+    points += QPointF(334.4094715702431, 280.2452307190486);
+    points += QPointF(322.77695514341303, 278.48262025768446);
+    points += QPointF(311.46472096401544, 275.97070996938834);
+    points += QPointF(300.4980766475991, 272.78475431818316);
+    points += QPointF(289.8959627998986, 268.994968265893);
+    points += QPointF(279.67312801429796, 264.6661417252929);
+    points += QPointF(269.84184205634284, 259.8577269753623);
+    points += QPointF(260.4131332789275, 254.62414553625888);
+    points += QPointF(251.39760921382512, 249.0151257350064);
+    points += QPointF(242.80594716150756, 243.07593816151942);
+    points += QPointF(234.64914462550888, 236.84743207794344);
+    points += QPointF(226.93861367892654, 230.36578881474733);
+    points += QPointF(219.6862008839008, 223.6618981488572);
+    points += QPointF(212.90422632696564, 216.76022967199233);
+    points += QPointF(206.60567695694368, 209.67701009653408);
+    points += QPointF(200.8047886617048, 202.41742546763192);
+    points += QPointF(195.51846445950318, 194.97144814919497);
+    points += QPointF(195.49646472111115, 194.93594659378365);
+    points += QPointF(185.71068181674897, 196.88038239808796);
+    points += QPointF(174.06579870156523, 198.0108674081686);
+    points += QPointF(162.4698365016369, 198.12450807507133);
+    points += QPointF(150.93599464376967, 197.35134057907845);
+    points += QPointF(139.4731688630524, 195.78946993073865);
+    points += QPointF(128.09385198069478, 193.51339391764853);
+    points += QPointF(116.81695231109029, 190.58079085562875);
+    points += QPointF(105.66811291289228, 187.03735678012447);
+    points += QPointF(94.6789709925457, 182.91996300992662);
+    points += QPointF(83.88608373098256, 178.2585220934185);
+    points += QPointF(73.32986575781915, 173.07687844159756);
+    points += QPointF(63.05370660182625, 167.39293026852914);
+    points += QPointF(53.10337911388009, 161.21809122399117);
+    points += QPointF(43.52687054865665, 154.55612780781823);
+    points += QPointF(34.37485617471233, 147.40137397927876);
+    points += QPointF(25.702201154685437, 139.73635741878132);
+    points += QPointF(17.571137619050678, 131.52904674063026);
+    points += QPointF(10.057109595108484, 122.7304016692299);
+    points += QPointF(3.2585649313074336, 113.27395345986065);
+    points += QPointF(-2.688329688884947, 103.08109119247632);
+    points += QPointF(-7.591302782642628, 92.07847647311537);
+    points += QPointF(-11.187498579572614, 80.23547322967522);
+    points += QPointF(-13.151329717912063, 67.62324223181253);
+    points += QPointF(-13.149175120030888, 54.474729701833986);
+    points += QPointF(-10.94337542157982, 41.194055939258014);
+    points += QPointF(-6.654890183208465, 28.745230608885407);
     points += QPointF(6.735602739585184, 2.204598425196849);
 
     return points;
@@ -1653,40 +1732,91 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase3() const
     QVector<QPointF> points;
 
     points += QPointF(11.491153250328935, 2.204598425196849);
-    points += QPointF(446.1486580403833, 2.204598425196849);
-    points += QPointF(443.58722975094355, 245.07202661708763);
-    points += QPointF(425.1137484290017, 268.68251714626723);
-    points += QPointF(410.710702976016, 281.17394700785115);
-    points += QPointF(394.6305380089911, 289.87868829070504);
-    points += QPointF(377.68935972259976, 294.42039446773254);
-    points += QPointF(345.2891679003724, 291.71681887702744);
-    points += QPointF(318.8954558500656, 277.387541146342);
-    points += QPointF(299.836181304411, 255.59117266176213);
-    points += QPointF(288.9960506469964, 228.68278781028684);
-    points += QPointF(288.09978928853826, 198.89092343273913);
-    points += QPointF(295.52398476771754, 175.7944621402967);
-    points += QPointF(298.35692700564954, 155.95491384399136);
-    points += QPointF(296.64544203481944, 147.53499165718873);
-    points += QPointF(295.62311476307525, 146.6781151558174);
-    points += QPointF(289.83631178459234, 145.65886137089512);
-    points += QPointF(263.86302969143765, 151.02798077389028);
-    points += QPointF(248.0011124529875, 159.32004134517877);
-    points += QPointF(209.38086747344968, 181.82248571472272);
-    points += QPointF(187.81719911027162, 188.34500166877712);
-    points += QPointF(165.71167711395094, 187.9030433207368);
-    points += QPointF(146.5634417196521, 177.22168648881313);
-    points += QPointF(136.34913944009722, 161.0107028740396);
-    points += QPointF(132.35548185589735, 132.14155778793625);
-    points += QPointF(124.85769773414223, 138.3166750745855);
-    points += QPointF(106.38084062481717, 148.13624736643095);
-    points += QPointF(86.3477370523643, 153.01816260877774);
-    points += QPointF(66.26289964510504, 152.16787828189516);
-    points += QPointF(48.254978841826016, 146.22324827751663);
-    points += QPointF(21.027781980991552, 125.39244823236324);
-    points += QPointF(6.486477180841129, 105.14630485769516);
-    points += QPointF(-4.426684646901568, 80.5250619079355);
-    points += QPointF(-10.01311360817298, 55.62988319219602);
-    points += QPointF(-8.687212589418436, 33.403943526036805);
+    points += QPointF(445.748031496063, 2.204598425196849);
+    points += QPointF(445.748031496063, 239.25772323190495);
+    points += QPointF(437.3011718875349, 252.9620940028659);
+    points += QPointF(431.5210396453687, 261.04286502132345);
+    points += QPointF(425.0742362286929, 268.54423500057675);
+    points += QPointF(418.11166285006243, 275.22268157509825);
+    points += QPointF(410.66293904201643, 281.0200956238725);
+    points += QPointF(402.78657384181963, 285.87157614021027);
+    points += QPointF(394.5732042205309, 289.71737969963584);
+    points += QPointF(386.1419584708077, 292.51680859777775);
+    points += QPointF(377.62937764888807, 294.2596521460023);
+    points += QPointF(369.17363576502424, 294.9709765895621);
+    points += QPointF(360.89908762820056, 294.7076951308071);
+    points += QPointF(352.90578450956633, 293.54885121734077);
+    points += QPointF(345.2659401705694, 291.58363457828597);
+    points += QPointF(338.02638381419206, 288.9008829382743);
+    points += QPointF(331.214452254774, 285.58206377611566);
+    points += QPointF(324.8447893417784, 281.69791760615396);
+    points += QPointF(318.92540323684557, 277.307901893045);
+    points += QPointF(313.4622927999198, 272.4613294067597);
+    points += QPointF(308.4626029358523, 267.199302528306);
+    points += QPointF(303.93656720661477, 261.5568795640949);
+    points += QPointF(299.8985555961715, 255.5651950634023);
+    points += QPointF(296.3674859139379, 249.25344082283073);
+    points += QPointF(293.36675891047514, 242.65070430384247);
+    points += QPointF(290.9237823363554, 235.7876787648548);
+    points += QPointF(289.0690799250026, 228.6982245333719);
+    points += QPointF(287.8349531366277, 221.42069049439027);
+    points += QPointF(287.2536910795491, 213.9988201772971);
+    points += QPointF(287.3554164994589, 206.48200110960104);
+    points += QPointF(288.165803158891, 198.9246157503596);
+    points += QPointF(289.7040578703973, 191.38436170566055);
+    points += QPointF(291.98164916416846, 183.91963819443603);
+    points += QPointF(293.700387439861, 179.7469098237058);
+    points += QPointF(296.5884693392089, 171.49219190163677);
+    points += QPointF(297.59693481965496, 166.31235205234043);
+    points += QPointF(298.2857333094973, 160.53208953533525);
+    points += QPointF(298.43819035278193, 155.84335424804448);
+    points += QPointF(298.1940021729857, 152.25436961670644);
+    points += QPointF(297.7243212024687, 149.73346552056378);
+    points += QPointF(289.51401190033005, 145.54903057599236);
+    points += QPointF(285.1770288005626, 145.6959639947203);
+    points += QPointF(278.3617236899766, 146.6950293230864);
+    points += QPointF(271.14652259400714, 148.48714038237037);
+    points += QPointF(263.9194864200908, 150.92917578435245);
+    points += QPointF(257.2170705229372, 153.76755541765795);
+    points += QPointF(251.60582957396716, 156.6541701343772);
+    points += QPointF(247.78435692308207, 159.04593361720316);
+    points += QPointF(241.3885876220272, 164.12014968959915);
+    points += QPointF(236.47226924439926, 167.68896212834986);
+    points += QPointF(220.7012128062336, 176.43583903855628);
+    points += QPointF(209.5894888372958, 181.6299305429989);
+    points += QPointF(198.8701621522812, 185.51474135189684);
+    points += QPointF(188.2122212804039, 188.0080506184889);
+    points += QPointF(177.3148127107667, 188.81408257358973);
+    points += QPointF(166.19194469464537, 187.37324105698534);
+    points += QPointF(155.57420181410697, 183.17620217869953);
+    points += QPointF(146.72912660379956, 176.5077748886884);
+    points += QPointF(140.4165418057526, 168.5601760939351);
+    points += QPointF(136.398647544906, 160.4725908270882);
+    points += QPointF(134.00844184248987, 152.736031987575);
+    points += QPointF(132.67609691771358, 145.39573210082384);
+    points += QPointF(132.02477039749073, 138.2597894386109);
+    points += QPointF(131.93387537548404, 132.84913141002448);
+    points += QPointF(124.89904457045232, 138.11668139199287);
+    points += QPointF(115.8895831399309, 143.54689645077573);
+    points += QPointF(106.4111230253516, 147.88716086368487);
+    points += QPointF(96.50699490577813, 150.99747783054613);
+    points += QPointF(86.32454442321412, 152.7366302609282);
+    points += QPointF(76.11298204383012, 153.0205687205323);
+    points += QPointF(66.1751535607697, 151.8740677833447);
+    points += QPointF(56.79043276012441, 149.44132674047353);
+    points += QPointF(48.150859730789605, 145.94779600016403);
+    points += QPointF(40.340747704632996, 141.64039002708367);
+    points += QPointF(33.35598458760446, 136.7400113658245);
+    points += QPointF(27.139387101639755, 131.42053399597268);
+    points += QPointF(21.454249077112927, 125.64844566928473);
+    points += QPointF(14.297732218982075, 116.98023078208763);
+    points += QPointF(6.592092174102573, 105.03828991585031);
+    points += QPointF(0.43109819620648937, 92.75351406859683);
+    points += QPointF(-4.287700865002457, 80.50147704363812);
+    points += QPointF(-7.673598677574605, 68.33582707450634);
+    points += QPointF(-9.704701735666333, 56.0002075290815);
+    points += QPointF(-9.95133102840429, 42.85489720779573);
+    points += QPointF(-7.622895431362345, 31.027194419301413);
     points += QPointF(-3.18150493921823, 21.10903158131186);
     points += QPointF(11.491153250328935, 2.204598425196849);
 
@@ -2273,52 +2403,114 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     // We will test only one detail. The second require too accurate data that we cannot get from debuger.
     // The test check an open equdistant of correct detail.
     QVector<VSAPoint> points;// Input points.
-    points.append(VSAPoint(787.5835464566929, 1701.3138897637796));
-    points.append(VSAPoint(938.7646488188976, 1701.3138897637796));
-    points.append(VSAPoint(928.6149958683911, 1732.4440719866434));
-    points.append(VSAPoint(910.0209091217698, 1792.3369853889722));
-    points.append(VSAPoint(893.3643262819251, 1849.7845131987456));
-    points.append(VSAPoint(878.5244039283091, 1905.2261617043234));
-    points.append(VSAPoint(865.3802986403739, 1959.101437194065));
-    points.append(VSAPoint(863.9366982685195, 1965.6834024491068));
-    points.append(VSAPoint(852.8936778444679, 1919.6965437838999));
-    points.append(VSAPoint(837.0628180560684, 1860.2846653184251));
-    points.append(VSAPoint(819.0677656132684, 1798.6758641921479));
-    points.append(VSAPoint(798.7585839758027, 1734.54810216256));
-    points.append(VSAPoint(787.5835464566929, 1701.3138897637796));
 
     qreal width = 37.795275590551185; // seam allowance width
 
+    VSAPoint point = VSAPoint(787.5835464566929, 1701.3138897637796);
+    point.SetSAAfter(width);
+    point.SetSABefore(0);
+    points.append(point);
+
+    point = VSAPoint(863.1740976377953, 1701.3138897637796);
+    point.SetSAAfter(width);
+    point.SetSAAfter(width);
+    points.append(point);
+
+    points.append(VSAPoint(938.7646488188976, 1701.3138897637796));
+    points.append(VSAPoint(928.6149944255945, 1732.4440762118775));
+    points.append(VSAPoint(910.0209054382323, 1792.3369946802652));
+    points.append(VSAPoint(893.3643210561819, 1849.7845240486258));
+    points.append(VSAPoint(878.5243977752426, 1905.2261712206746));
+    points.append(VSAPoint(865.3802920912136, 1959.1014431001254));
+    points.append(VSAPoint(853.8111604998944, 2011.8498465906928));
+    points.append(VSAPoint(843.6961594970844, 2063.910888596092));
+    points.append(VSAPoint(834.9144455785826, 2115.7240760200366));
+    points.append(VSAPoint(827.3451752401882, 2167.7289157662426));
+    points.append(VSAPoint(820.8675049777007, 2220.364914738423));
+    points.append(VSAPoint(815.3605912869193, 2274.0715798402925));
+    points.append(VSAPoint(810.703590663643, 2329.2884179755656));
+    points.append(VSAPoint(806.7756596036716, 2386.454936047957));
+    points.append(VSAPoint(803.455954602804, 2446.0106409611817));
+    points.append(VSAPoint(800.6236321568394, 2508.395039618954));
+    points.append(VSAPoint(798.1578487615775, 2574.047638924988));
+    points.append(VSAPoint(797.0323653543306, 2608.4005039370077));
+    points.append(VSAPoint(929.3158299212598, 2608.4005039370077));
+    points.append(VSAPoint(927.9285659612306, 2548.9599884455793));
+    points.append(VSAPoint(925.157717598664, 2463.8329634071292));
+    points.append(VSAPoint(922.7222742526749, 2408.6782012856274));
+    points.append(VSAPoint(919.6220036804666, 2354.5469017384876));
+    points.append(VSAPoint(915.706969354324, 2301.1170261784787));
+    points.append(VSAPoint(910.8272347465313, 2248.066536018368));
+    points.append(VSAPoint(904.8328633293736, 2195.073392670922));
+    points.append(VSAPoint(897.5739185751353, 2141.8155575489095));
+    points.append(VSAPoint(888.9004639561011, 2087.9709920650976));
+    points.append(VSAPoint(878.6625629445558, 2033.2176576322527));
+    points.append(VSAPoint(866.7102790127839, 1977.233515663143));
+    points.append(VSAPoint(852.8936756330698, 1919.696527570536));
+    points.append(VSAPoint(837.0628162776984, 1860.284654767199));
+    points.append(VSAPoint(819.0677644189545, 1798.675858665899));
+    points.append(VSAPoint(798.7585835291225, 1734.548100679404));
+    points.append(VSAPoint(787.5835464566929, 1701.3138897637796));
+
+    point = VSAPoint(797.0323653543306, 2608.4005039370077);
+    point.SetSAAfter(0);
+    point.SetSABefore(width);
+    points.append(point);
+
     QVector<QPointF> ekvOrig;
-    ekvOrig.append(QPointF(774.8748468280837, 1663.5186141732283));
-    ekvOrig.append(QPointF(990.8407795072413, 1663.5186141732283));
-    ekvOrig.append(QPointF(964.6314912875667, 1743.9055911653147));
-    ekvOrig.append(QPointF(946.2221157804494, 1803.203536155223));
-    ekvOrig.append(QPointF(929.7733291125676, 1859.9343877726233));
-    ekvOrig.append(QPointF(915.1430746962241, 1914.5927211230298));
-    ekvOrig.append(QPointF(902.2033544443959, 1967.630259856634));
-    ekvOrig.append(QPointF(894.4064781634931, 2003.1794116713015));
-    ekvOrig.append(QPointF(834.213891302752, 2003.7742535883901));
-    ekvOrig.append(QPointF(816.2523103379473, 1928.9761772004185));
-    ekvOrig.append(QPointF(800.6574884611877, 1870.4501290629887));
-    ekvOrig.append(QPointF(782.9077417718742, 1809.6811695225983));
-    ekvOrig.append(QPointF(786.7126382487066, 1698.723835966227));
+    ekvOrig.append(QPointF(735.0001191244485, 1663.5186141732283));
+    ekvOrig.append(QPointF(990.8407796109454, 1663.5186141732283));
+    ekvOrig.append(QPointF(964.6314897747087, 1743.9055956070622));
+    ekvOrig.append(QPointF(946.222111945205, 1803.203545947388));
+    ekvOrig.append(QPointF(929.7733236875301, 1859.9343993344141));
+    ekvOrig.append(QPointF(915.1430683369846, 1914.5927314447797));
+    ekvOrig.append(QPointF(902.2033477151627, 1967.6302665424967));
+    ekvOrig.append(QPointF(890.8261161082305, 2019.5037195040304));
+    ekvOrig.append(QPointF(880.8841829577946, 2070.673996127427));
+    ekvOrig.append(QPointF(872.2520522462703, 2121.604624314014));
+    ekvOrig.append(QPointF(864.8064761358401, 2172.759620123457));
+    ekvOrig.append(QPointF(864.2562272534083, 2177.2308109121955));
+    ekvOrig.append(QPointF(860.1867773842832, 2147.3738416825267));
+    ekvOrig.append(QPointF(851.6617474319463, 2094.450692409028));
+    ekvOrig.append(QPointF(841.5996933370075, 2040.6378051462616));
+    ekvOrig.append(QPointF(829.8479530577714, 1985.5930036729653));
+    ekvOrig.append(QPointF(816.2523082919595, 1928.9761616385213));
+    ekvOrig.append(QPointF(800.6574868367429, 1870.4501190599349));
+    ekvOrig.append(QPointF(782.9077406929495, 1809.6811643713463));
+    ekvOrig.append(QPointF(762.8278965797896, 1746.2775544138444));
+    ekvOrig.append(QPointF(735.0001191244485, 1663.5186141732283));
 
     QTest::newRow("GAVAUDAN Laure.") << points << width << ekvOrig;
 
-    points.clear();
-    points.append(VSAPoint(97.33089106412862, -223.03306117556497));
-    points.append(VSAPoint(990.7494050554426, 2.819093995045));
-    points.append(VSAPoint(908.3966357321774, 379.5839357215547));
-    points.append(VSAPoint(-135.41154226686143, 697.6417881399819));
-
     width = 11.338582677165354;
 
+    points.clear();
+    point = VSAPoint(97.33089106412862, -223.03306117556497);
+    point.SetSAAfter(width);
+    point.SetSABefore(0);
+    points.append(point);
+
+    point = VSAPoint(990.7494050554426, 2.819093995045);
+    point.SetSAAfter(width);
+    point.SetSABefore(width);
+    points.append(point);
+
+    point = VSAPoint(908.3966357321774, 379.5839357215547);
+    point.SetSAAfter(width);
+    point.SetSABefore(width);
+    points.append(point);
+
+    point = VSAPoint(-135.41154226686143, 697.6417881399819);
+    point.SetSAAfter(0);
+    point.SetSABefore(width);
+    points.append(point);
+
     ekvOrig.clear();
-    ekvOrig.append(VSAPoint(100.10981413873267, -234.02583351343978));
-    ekvOrig.append(VSAPoint(1004.1704360325447, -5.483401649771952));
-    ekvOrig.append(VSAPoint(918.0553412376563, 388.4941212347381));
-    ekvOrig.append(VSAPoint(-138.65807550610091, 710.4843173601864));
+    ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
+    ekvOrig.append(QPointF(1004.1704360325447, -5.483401649771952));
+    ekvOrig.append(QPointF(918.0553412376563, 388.4941212347381));
+    ekvOrig.append(QPointF(-138.65807550610091, 710.4843173601864));
+    ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
 
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
     QTest::newRow("Issue #604.") << points << width << ekvOrig;
@@ -2603,75 +2795,75 @@ void TST_VAbstractPiece::Case5() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsIssue298Case1() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue298Case1() const
 {
-    QVector<QPointF> points;
+    QVector<VSAPoint> points;
 
-    points += QPointF(35, 39.9999);
-    points += QPointF(412.953, 39.9999);
-    points += QPointF(417.135, 417.929);
-    points += QPointF(417.135, 417.929);
-    points += QPointF(408.797, 405.589);
-    points += QPointF(390.909, 377.669);
-    points += QPointF(362.315, 330.86);
-    points += QPointF(323.075, 264.247);
-    points += QPointF(286.15, 201.448);
-    points += QPointF(262.477, 162.745);
-    points += QPointF(249.22, 142.455);
-    points += QPointF(241.092, 131.261);
-    points += QPointF(236.545, 125.75);
-    points += QPointF(232.808, 122.058);
-    points += QPointF(230.6, 120.629);
-    points += QPointF(229.393, 120.277);
-    points += QPointF(228.421, 120.456);
-    points += QPointF(227.69, 121.185);
-    points += QPointF(227.033, 123.272);
-    points += QPointF(227.112, 128.232);
-    points += QPointF(228.29, 135.699);
-    points += QPointF(230.625, 145.81);
-    points += QPointF(234.173, 158.703);
-    points += QPointF(241.73, 183.168);
-    points += QPointF(248.796, 204.144);
-    points += QPointF(248.796, 204.144);
-    points += QPointF(251.528, 212.406);
-    points += QPointF(255.482, 227.075);
-    points += QPointF(257.717, 239.591);
-    points += QPointF(258.279, 247.554);
-    points += QPointF(258.203, 252.278);
-    points += QPointF(257.756, 256.51);
-    points += QPointF(256.949, 260.264);
-    points += QPointF(255.795, 263.547);
-    points += QPointF(254.308, 266.372);
-    points += QPointF(252.501, 268.749);
-    points += QPointF(250.385, 270.688);
-    points += QPointF(247.974, 272.201);
-    points += QPointF(245.281, 273.296);
-    points += QPointF(242.319, 273.986);
-    points += QPointF(239.1, 274.28);
-    points += QPointF(233.846, 274.05);
-    points += QPointF(226.022, 272.393);
-    points += QPointF(217.402, 269.345);
-    points += QPointF(208.09, 264.991);
-    points += QPointF(198.186, 259.414);
-    points += QPointF(187.795, 252.7);
-    points += QPointF(177.019, 244.933);
-    points += QPointF(165.96, 236.197);
-    points += QPointF(154.721, 226.576);
-    points += QPointF(143.405, 216.157);
-    points += QPointF(132.113, 205.022);
-    points += QPointF(120.95, 193.257);
-    points += QPointF(110.017, 180.946);
-    points += QPointF(99.4167, 168.174);
-    points += QPointF(89.2522, 155.024);
-    points += QPointF(79.626, 141.582);
-    points += QPointF(70.6405, 127.933);
-    points += QPointF(62.3985, 114.16);
-    points += QPointF(55.0025, 100.348);
-    points += QPointF(48.5551, 86.5823);
-    points += QPointF(43.159, 72.9466);
-    points += QPointF(38.9167, 59.5258);
-    points += QPointF(35.9309, 46.4042);
-    points += QPointF(35, 39.9999);
+    points += VSAPoint(35, 39.9999);
+    points += VSAPoint(412.953, 39.9999);
+    points += VSAPoint(417.135, 417.929);
+    points += VSAPoint(417.135, 417.929);
+    points += VSAPoint(408.797, 405.589);
+    points += VSAPoint(390.909, 377.669);
+    points += VSAPoint(362.315, 330.86);
+    points += VSAPoint(323.075, 264.247);
+    points += VSAPoint(286.15, 201.448);
+    points += VSAPoint(262.477, 162.745);
+    points += VSAPoint(249.22, 142.455);
+    points += VSAPoint(241.092, 131.261);
+    points += VSAPoint(236.545, 125.75);
+    points += VSAPoint(232.808, 122.058);
+    points += VSAPoint(230.6, 120.629);
+    points += VSAPoint(229.393, 120.277);
+    points += VSAPoint(228.421, 120.456);
+    points += VSAPoint(227.69, 121.185);
+    points += VSAPoint(227.033, 123.272);
+    points += VSAPoint(227.112, 128.232);
+    points += VSAPoint(228.29, 135.699);
+    points += VSAPoint(230.625, 145.81);
+    points += VSAPoint(234.173, 158.703);
+    points += VSAPoint(241.73, 183.168);
+    points += VSAPoint(248.796, 204.144);
+    points += VSAPoint(248.796, 204.144);
+    points += VSAPoint(251.528, 212.406);
+    points += VSAPoint(255.482, 227.075);
+    points += VSAPoint(257.717, 239.591);
+    points += VSAPoint(258.279, 247.554);
+    points += VSAPoint(258.203, 252.278);
+    points += VSAPoint(257.756, 256.51);
+    points += VSAPoint(256.949, 260.264);
+    points += VSAPoint(255.795, 263.547);
+    points += VSAPoint(254.308, 266.372);
+    points += VSAPoint(252.501, 268.749);
+    points += VSAPoint(250.385, 270.688);
+    points += VSAPoint(247.974, 272.201);
+    points += VSAPoint(245.281, 273.296);
+    points += VSAPoint(242.319, 273.986);
+    points += VSAPoint(239.1, 274.28);
+    points += VSAPoint(233.846, 274.05);
+    points += VSAPoint(226.022, 272.393);
+    points += VSAPoint(217.402, 269.345);
+    points += VSAPoint(208.09, 264.991);
+    points += VSAPoint(198.186, 259.414);
+    points += VSAPoint(187.795, 252.7);
+    points += VSAPoint(177.019, 244.933);
+    points += VSAPoint(165.96, 236.197);
+    points += VSAPoint(154.721, 226.576);
+    points += VSAPoint(143.405, 216.157);
+    points += VSAPoint(132.113, 205.022);
+    points += VSAPoint(120.95, 193.257);
+    points += VSAPoint(110.017, 180.946);
+    points += VSAPoint(99.4167, 168.174);
+    points += VSAPoint(89.2522, 155.024);
+    points += VSAPoint(79.626, 141.582);
+    points += VSAPoint(70.6405, 127.933);
+    points += VSAPoint(62.3985, 114.16);
+    points += VSAPoint(55.0025, 100.348);
+    points += VSAPoint(48.5551, 86.5823);
+    points += VSAPoint(43.159, 72.9466);
+    points += VSAPoint(38.9167, 59.5258);
+    points += VSAPoint(35.9309, 46.4042);
+    points += VSAPoint(35, 39.9999);
 
     return points;
 }
@@ -2720,75 +2912,75 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue298Case1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsIssue298Case2() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue298Case2() const
 {
-    QVector<QPointF> points;
+    QVector<VSAPoint> points;
 
-    points += QPointF(35, 39.9999);
-    points += QPointF(35, 39.9999);
-    points += QPointF(35.9309, 46.4042);
-    points += QPointF(38.9167, 59.5258);
-    points += QPointF(43.159, 72.9466);
-    points += QPointF(48.5551, 86.5823);
-    points += QPointF(55.0025, 100.348);
-    points += QPointF(62.3985, 114.16);
-    points += QPointF(70.6405, 127.933);
-    points += QPointF(79.626, 141.582);
-    points += QPointF(89.2522, 155.024);
-    points += QPointF(99.4167, 168.174);
-    points += QPointF(110.017, 180.946);
-    points += QPointF(120.95, 193.257);
-    points += QPointF(132.113, 205.022);
-    points += QPointF(143.405, 216.157);
-    points += QPointF(154.721, 226.576);
-    points += QPointF(165.96, 236.197);
-    points += QPointF(177.019, 244.933);
-    points += QPointF(187.795, 252.7);
-    points += QPointF(198.186, 259.414);
-    points += QPointF(208.09, 264.991);
-    points += QPointF(217.402, 269.345);
-    points += QPointF(226.022, 272.393);
-    points += QPointF(233.846, 274.05);
-    points += QPointF(239.1, 274.28);
-    points += QPointF(242.319, 273.986);
-    points += QPointF(245.281, 273.296);
-    points += QPointF(247.974, 272.201);
-    points += QPointF(250.385, 270.688);
-    points += QPointF(252.501, 268.749);
-    points += QPointF(254.308, 266.372);
-    points += QPointF(255.795, 263.547);
-    points += QPointF(256.949, 260.264);
-    points += QPointF(257.756, 256.51);
-    points += QPointF(258.203, 252.278);
-    points += QPointF(258.279, 247.554);
-    points += QPointF(257.717, 239.591);
-    points += QPointF(255.482, 227.075);
-    points += QPointF(251.528, 212.406);
-    points += QPointF(248.796, 204.144);
-    points += QPointF(248.796, 204.144);
-    points += QPointF(241.73, 183.168);
-    points += QPointF(234.173, 158.703);
-    points += QPointF(230.625, 145.81);
-    points += QPointF(228.29, 135.699);
-    points += QPointF(227.112, 128.232);
-    points += QPointF(227.033, 123.272);
-    points += QPointF(227.69, 121.185);
-    points += QPointF(228.421, 120.456);
-    points += QPointF(229.393, 120.277);
-    points += QPointF(230.6, 120.629);
-    points += QPointF(232.808, 122.058);
-    points += QPointF(236.545, 125.75);
-    points += QPointF(241.092, 131.261);
-    points += QPointF(249.22, 142.455);
-    points += QPointF(262.477, 162.745);
-    points += QPointF(286.15, 201.448);
-    points += QPointF(323.075, 264.247);
-    points += QPointF(362.315, 330.86);
-    points += QPointF(390.909, 377.669);
-    points += QPointF(408.797, 405.589);
-    points += QPointF(417.135, 417.929);
-    points += QPointF(417.135, 417.929);
-    points += QPointF(35, 417.953);
+    points += VSAPoint(35, 39.9999);
+    points += VSAPoint(35, 39.9999);
+    points += VSAPoint(35.9309, 46.4042);
+    points += VSAPoint(38.9167, 59.5258);
+    points += VSAPoint(43.159, 72.9466);
+    points += VSAPoint(48.5551, 86.5823);
+    points += VSAPoint(55.0025, 100.348);
+    points += VSAPoint(62.3985, 114.16);
+    points += VSAPoint(70.6405, 127.933);
+    points += VSAPoint(79.626, 141.582);
+    points += VSAPoint(89.2522, 155.024);
+    points += VSAPoint(99.4167, 168.174);
+    points += VSAPoint(110.017, 180.946);
+    points += VSAPoint(120.95, 193.257);
+    points += VSAPoint(132.113, 205.022);
+    points += VSAPoint(143.405, 216.157);
+    points += VSAPoint(154.721, 226.576);
+    points += VSAPoint(165.96, 236.197);
+    points += VSAPoint(177.019, 244.933);
+    points += VSAPoint(187.795, 252.7);
+    points += VSAPoint(198.186, 259.414);
+    points += VSAPoint(208.09, 264.991);
+    points += VSAPoint(217.402, 269.345);
+    points += VSAPoint(226.022, 272.393);
+    points += VSAPoint(233.846, 274.05);
+    points += VSAPoint(239.1, 274.28);
+    points += VSAPoint(242.319, 273.986);
+    points += VSAPoint(245.281, 273.296);
+    points += VSAPoint(247.974, 272.201);
+    points += VSAPoint(250.385, 270.688);
+    points += VSAPoint(252.501, 268.749);
+    points += VSAPoint(254.308, 266.372);
+    points += VSAPoint(255.795, 263.547);
+    points += VSAPoint(256.949, 260.264);
+    points += VSAPoint(257.756, 256.51);
+    points += VSAPoint(258.203, 252.278);
+    points += VSAPoint(258.279, 247.554);
+    points += VSAPoint(257.717, 239.591);
+    points += VSAPoint(255.482, 227.075);
+    points += VSAPoint(251.528, 212.406);
+    points += VSAPoint(248.796, 204.144);
+    points += VSAPoint(248.796, 204.144);
+    points += VSAPoint(241.73, 183.168);
+    points += VSAPoint(234.173, 158.703);
+    points += VSAPoint(230.625, 145.81);
+    points += VSAPoint(228.29, 135.699);
+    points += VSAPoint(227.112, 128.232);
+    points += VSAPoint(227.033, 123.272);
+    points += VSAPoint(227.69, 121.185);
+    points += VSAPoint(228.421, 120.456);
+    points += VSAPoint(229.393, 120.277);
+    points += VSAPoint(230.6, 120.629);
+    points += VSAPoint(232.808, 122.058);
+    points += VSAPoint(236.545, 125.75);
+    points += VSAPoint(241.092, 131.261);
+    points += VSAPoint(249.22, 142.455);
+    points += VSAPoint(262.477, 162.745);
+    points += VSAPoint(286.15, 201.448);
+    points += VSAPoint(323.075, 264.247);
+    points += VSAPoint(362.315, 330.86);
+    points += VSAPoint(390.909, 377.669);
+    points += VSAPoint(408.797, 405.589);
+    points += VSAPoint(417.135, 417.929);
+    points += VSAPoint(417.135, 417.929);
+    points += VSAPoint(35, 417.953);
 
     return points;
 }
@@ -2847,16 +3039,16 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue298Case2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsIssue548Case1() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case1() const
 {
-    QVector<QPointF> points;
+    QVector<VSAPoint> points;
 
-    points += QPointF(236.97989607468364, 65.89325192030674);
-    points += QPointF(198.93409106041895, 172.04876297154925);
-    points += QPointF(260.32251114299453, 75.38027418944861);
-    points += QPointF(324.54110236213444, 101.48031496062993);
-    points += QPointF(29.858267716535437, 300.85039370078744);
-    points += QPointF(99.86433649395013, 10.166060970128015);
+    points += VSAPoint(236.97989607468364, 65.89325192030674);
+    points += VSAPoint(198.93409106041895, 172.04876297154925);
+    points += VSAPoint(260.32251114299453, 75.38027418944861);
+    points += VSAPoint(324.54110236213444, 101.48031496062993);
+    points += VSAPoint(29.858267716535437, 300.85039370078744);
+    points += VSAPoint(99.86433649395013, 10.166060970128015);
 
     return points;
 }
@@ -2879,15 +3071,15 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsIssue548Case2() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case2() const
 {
-    QVector<QPointF> points;
-    points << QPointF(99.86433649395013, 10.166060970128015);
-    points << QPointF(236.97989607468364, 65.89325192030674);
-    points << QPointF(198.93409106041895, 172.04876297154925);
-    points << QPointF(260.32251114299453, 75.38027418944861);
-    points << QPointF(324.54110236213444, 101.48031496062993);
-    points << QPointF(29.858267716535437, 300.85039370078744);
+    QVector<VSAPoint> points;
+    points << VSAPoint(99.86433649395013, 10.166060970128015);
+    points << VSAPoint(236.97989607468364, 65.89325192030674);
+    points << VSAPoint(198.93409106041895, 172.04876297154925);
+    points << VSAPoint(260.32251114299453, 75.38027418944861);
+    points << VSAPoint(324.54110236213444, 101.48031496062993);
+    points << VSAPoint(29.858267716535437, 300.85039370078744);
 
     return points;
 }
@@ -2897,10 +3089,8 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case2() const
 {
     QVector<QPointF> points;
     points << QPointF(73.40376616581447, -41.38574336196901);
-    points << QPointF(245.32830125796568, 28.488685370970344);
-    points << QPointF(245.32830125796573, 28.488685370970277);
     points << QPointF(404.3486874792147, 93.11854543221973);
-    points << QPointF(29.598648843228922, 346.6587450186291);
+    points << QPointF(29.59864884322894, 346.6587450186291);
     points << QPointF(-12.946885351826726, 317.1657644661815);
     points << QPointF(73.40376616581447, -41.38574336196901);
 
@@ -2908,16 +3098,16 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsIssue548Case3() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case3() const
 {
-    QVector<QPointF> points;
+    QVector<VSAPoint> points;
 
-    points += QPointF(99.86433649395013, 10.166060970128015);
-    points += QPointF(236.97989607468364, 65.89325192030674);
-    points += QPointF(198.93409106041895, 172.04876297154925);
-    points += QPointF(260.32251114299453, 75.38027418944861);
-    points += QPointF(324.54110236213444, 101.48031496062993);
-    points += QPointF(29.858267716535437, 300.85039370078744);
+    points += VSAPoint(99.86433649395013, 10.166060970128015);
+    points += VSAPoint(236.97989607468364, 65.89325192030674);
+    points += VSAPoint(198.93409106041895, 172.04876297154925);
+    points += VSAPoint(260.32251114299453, 75.38027418944861);
+    points += VSAPoint(324.54110236213444, 101.48031496062993);
+    points += VSAPoint(29.858267716535437, 300.85039370078744);
 
     return points;
 }
@@ -2928,11 +3118,6 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case3() const
     QVector<QPointF> points;
 
     points += QPointF(46.94319583767885, -92.9375476940661);
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-    points += QPointF(234.2633962639462, -16.805935717278903);
-#else
-    points += QPointF(238.798634936, -14.9627013515);
-#endif
     points += QPointF(484.15627259629446, 84.75677590380938);
     points += QPointF(29.339029969922702, 392.46709633647066);
     points += QPointF(-55.75203842018885, 333.48113523157537);
