@@ -191,7 +191,7 @@ bool VBank::Prepare()
     for (int i=0; i < details.size(); ++i)
     {
         details[i].SetLayoutWidth(layoutWidth);
-        details[i].SetLayoutAllowencePoints();
+        details[i].SetLayoutAllowancePoints();
 
         const qreal d = details.at(i).Diagonal();
         if (d > diagonal)

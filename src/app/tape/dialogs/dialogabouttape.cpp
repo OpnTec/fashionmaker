@@ -60,6 +60,8 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutTape::close);
     connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
     {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
         FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
     });
 

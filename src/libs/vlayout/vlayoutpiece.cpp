@@ -88,7 +88,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
 {
     VLayoutPiece det;
     det.SetCountourPoints(piece.MainPathPoints(pattern));
-    det.SetSeamAllowencePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
+    det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
     det.SetInternlaPathsPoints(piece.GetInternalPathsPoints(pattern));
     det.SetName(piece.GetName());
     const VPatternPieceData& data = piece.GetPatternPieceData();
@@ -134,34 +134,34 @@ void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VLayoutPiece::GetSeamAllowencePoints() const
+QVector<QPointF> VLayoutPiece::GetSeamAllowancePoints() const
 {
-    return Map(d->seamAllowence);
+    return Map(d->seamAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
+void VLayoutPiece::SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance)
 {
-    if (seamAllowence)
+    if (seamAllowance)
     {
-        SetSeamAllowance(seamAllowence);
-        d->seamAllowence = points;
-        if (not d->seamAllowence.isEmpty())
+        SetSeamAllowance(seamAllowance);
+        d->seamAllowance = points;
+        if (not d->seamAllowance.isEmpty())
         {
-            d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence), false);
+            d->seamAllowance = RemoveDublicates(RoundPoints(d->seamAllowance), false);
         }
         else
         {
-            qWarning()<<"Seam allowence is empty.";
+            qWarning()<<"Seam allowance is empty.";
             SetSeamAllowance(false);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetLayoutAllowencePoints() const
+QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
 {
-    return Map(d->layoutAllowence);
+    return Map(d->layoutAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,7 +370,7 @@ int VLayoutPiece::DetailEdgesCount() const
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPiece::LayoutEdgesCount() const
 {
-    return d->layoutAllowence.count();
+    return d->layoutAllowance.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -382,7 +382,7 @@ QLineF VLayoutPiece::DetailEdge(int i) const
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VLayoutPiece::LayoutEdge(int i) const
 {
-    return Edge(d->layoutAllowence, i);
+    return Edge(d->layoutAllowance, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ int VLayoutPiece::DetailEdgeByPoint(const QPointF &p1) const
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 {
-    return EdgeByPoint(d->layoutAllowence, p1);
+    return EdgeByPoint(d->layoutAllowance, p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,7 +403,7 @@ QRectF VLayoutPiece::DetailBoundingRect() const
     QVector<QPointF> points;
     if (IsSeamAllowance())
     {
-        points = GetSeamAllowencePoints();
+        points = GetSeamAllowancePoints();
     }
     else
     {
@@ -417,7 +417,7 @@ QRectF VLayoutPiece::DetailBoundingRect() const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::LayoutBoundingRect() const
 {
-    QVector<QPointF> points = GetLayoutAllowencePoints();
+    QVector<QPointF> points = GetLayoutAllowancePoints();
     points.append(points.first());
     return QPolygonF(points).boundingRect();
 }
@@ -434,7 +434,7 @@ bool VLayoutPiece::isNull() const
 {
     if (d->contour.isEmpty() == false && d->layoutWidth > 0)
     {
-        if (IsSeamAllowance() && d->seamAllowence.isEmpty() == false)
+        if (IsSeamAllowance() && d->seamAllowance.isEmpty() == false)
         {
             return false;
         }
@@ -452,50 +452,50 @@ bool VLayoutPiece::isNull() const
 //---------------------------------------------------------------------------------------------------------------------
 qint64 VLayoutPiece::Square() const
 {
-    if (d->layoutAllowence.isEmpty()) //-V807
+    if (d->layoutAllowance.isEmpty()) //-V807
     {
         return 0;
     }
 
-    const qreal res = SumTrapezoids(d->layoutAllowence);
+    const qreal res = SumTrapezoids(d->layoutAllowance);
 
     const qint64 sq = qFloor(qAbs(res/2.0));
     return sq;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetLayoutAllowencePoints()
+void VLayoutPiece::SetLayoutAllowancePoints()
 {
     if (d->layoutWidth > 0)
     {
         if (IsSeamAllowance())
         {
-            d->layoutAllowence = Equidistant(PrepareAllowance(GetSeamAllowencePoints()), d->layoutWidth);
-            if (d->layoutAllowence.isEmpty() == false)
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth);
+            if (d->layoutAllowance.isEmpty() == false)
             {
                 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                    d->layoutAllowence.remove(d->layoutAllowence.size() - 1);
+                    d->layoutAllowance.remove(d->layoutAllowance.size() - 1);
                 #else
-                    d->layoutAllowence.removeLast();
+                    d->layoutAllowance.removeLast();
                 #endif
             }
         }
         else
         {
-            d->layoutAllowence = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth);
-            if (d->layoutAllowence.isEmpty() == false)
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth);
+            if (d->layoutAllowance.isEmpty() == false)
             {
             #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                d->layoutAllowence.remove(d->layoutAllowence.size() - 1);
+                d->layoutAllowance.remove(d->layoutAllowance.size() - 1);
             #else
-                d->layoutAllowence.removeLast();
+                d->layoutAllowance.removeLast();
             #endif
             }
         }
     }
     else
     {
-        d->layoutAllowence.clear();
+        d->layoutAllowance.clear();
     }
 }
 
@@ -557,10 +557,10 @@ QPainterPath VLayoutPiece::ContourPath() const
     }
     path.lineTo(points.at(0));
 
-    // seam allowence
+    // seam allowance
     if (IsSeamAllowance() == true)
     {
-        points = GetSeamAllowencePoints();
+        points = GetSeamAllowancePoints();
 
         if (points.last().toPoint() != points.first().toPoint())
         {
@@ -759,12 +759,12 @@ void VLayoutPiece::CreateTextItem(int i, QGraphicsItem *parent) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::LayoutAllowencePath() const
+QPainterPath VLayoutPiece::LayoutAllowancePath() const
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
 
-    const QVector<QPointF> points = GetLayoutAllowencePoints();
+    const QVector<QPointF> points = GetLayoutAllowancePoints();
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
@@ -841,7 +841,7 @@ QVector<QPointF> VLayoutPiece::DetailPath() const
 {
     if (IsSeamAllowance())
     {
-        return d->seamAllowence;
+        return d->seamAllowance;
     }
     else
     {

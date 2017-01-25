@@ -48,8 +48,8 @@ class VLayoutPieceData : public QSharedData
 public:
     VLayoutPieceData()
         : contour(),
-          seamAllowence(),
-          layoutAllowence(),
+          seamAllowance(),
+          layoutAllowance(),
           m_internalPaths(),
           matrix(),
           layoutWidth(0),
@@ -68,8 +68,8 @@ public:
     VLayoutPieceData(const VLayoutPieceData &detail)
         : QSharedData(detail),
           contour(detail.contour),
-          seamAllowence(detail.seamAllowence),
-          layoutAllowence(detail.layoutAllowence),
+          seamAllowance(detail.seamAllowance),
+          layoutAllowance(detail.layoutAllowance),
           m_internalPaths(detail.m_internalPaths),
           matrix(detail.matrix),
           layoutWidth(detail.layoutWidth),
@@ -90,19 +90,19 @@ public:
     /** @brief contour list of contour points. */
     QVector<QPointF>          contour;
 
-    /** @brief seamAllowence list of seam allowence points. */
-    QVector<QPointF>          seamAllowence;
+    /** @brief seamAllowance list of seam allowance points. */
+    QVector<QPointF>          seamAllowance;
 
-    /** @brief layoutAllowence list of layout allowence points. */
-    QVector<QPointF>          layoutAllowence;
+    /** @brief layoutAllowance list of layout allowance points. */
+    QVector<QPointF>          layoutAllowance;
 
-    /** @brief m_layoutAllowence list of internal paths points. */
+    /** @brief m_internalPaths list of internal paths points. */
     QVector<QVector<QPointF>> m_internalPaths;
 
     /** @brief matrix transformation matrix*/
     QTransform                matrix;
 
-    /** @brief layoutWidth value layout allowence width in pixels. */
+    /** @brief layoutWidth value layout allowance width in pixels. */
     qreal                     layoutWidth;
 
     bool                      mirror;

@@ -61,12 +61,7 @@ FvUpdater* FvUpdater::sharedUpdater()
     if (m_Instance.isNull())
     {
         mutex.lock();
-
-        if (m_Instance.isNull())
-        {
-            m_Instance = new FvUpdater;
-        }
-
+        m_Instance = new FvUpdater;
         mutex.unlock();
     }
 
@@ -92,6 +87,7 @@ FvUpdater::FvUpdater()
       m_qnam(),
       m_reply(nullptr),
       m_httpRequestAborted(false),
+      m_dropOnFinnish(true),
       m_xml()
 {
     // noop
@@ -101,6 +97,7 @@ FvUpdater::FvUpdater()
 FvUpdater::~FvUpdater()
 {
     hideUpdaterWindow();
+    delete m_reply;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,6 +137,18 @@ void FvUpdater::SetFeedURL(const QString &feedURL)
 QString FvUpdater::GetFeedURL() const
 {
     return m_feedURL.toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FvUpdater::IsDropOnFinnish() const
+{
+    return m_dropOnFinnish;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void FvUpdater::SetDropOnFinnish(bool value)
+{
+    m_dropOnFinnish = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -255,10 +264,19 @@ bool FvUpdater::CheckForUpdatesSilent()
 {
     if (qApp->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
     {
-        return CheckForUpdates(true);
+        const bool success = CheckForUpdates(true);
+        if (m_dropOnFinnish && not success)
+        {
+            drop();
+        }
+        return success;
     }
     else
     {
+        if (m_dropOnFinnish)
+        {
+            drop();
+        }
         return true;
     }
 }
@@ -266,7 +284,12 @@ bool FvUpdater::CheckForUpdatesSilent()
 //---------------------------------------------------------------------------------------------------------------------
 bool FvUpdater::CheckForUpdatesNotSilent()
 {
-    return CheckForUpdates(false);
+    const bool success = CheckForUpdates(false);
+    if (m_dropOnFinnish && not success)
+    {
+        drop();
+    }
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,7 +304,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply, &QNetworkReply::readyRead, RECEIVER(this)[this]()
+    connect(m_reply.data(), &QNetworkReply::readyRead, RECEIVER(this)[this]()
     {
         // this slot gets called every time the QNetworkReply has new data.
         // We read all of its new data and write it into the file.
@@ -289,7 +312,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
         // signal of the QNetworkReply
         m_xml.addData(m_reply->readAll());
     });
-    connect(m_reply, &QNetworkReply::downloadProgress, RECEIVER(this)[this](qint64 bytesRead, qint64 totalBytes)
+    connect(m_reply.data(), &QNetworkReply::downloadProgress, RECEIVER(this)[this](qint64 bytesRead, qint64 totalBytes)
     {
         Q_UNUSED(bytesRead)
         Q_UNUSED(totalBytes)
@@ -299,7 +322,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
             return;
         }
     });
-    connect(m_reply, &QNetworkReply::finished, this, &FvUpdater::httpFeedDownloadFinished);
+    connect(m_reply.data(), &QNetworkReply::finished, this, &FvUpdater::httpFeedDownloadFinished);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,7 +367,11 @@ void FvUpdater::httpFeedDownloadFinished()
     }
 
     m_reply->deleteLater();
-    m_reply = 0;
+
+    if (m_dropOnFinnish)
+    {
+        drop();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -460,10 +487,7 @@ bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
     // to the user.
     //
 
-    if (m_proposedUpdate)
-    {
-        delete m_proposedUpdate;
-    }
+    delete m_proposedUpdate;
     m_proposedUpdate = new FvAvailableUpdate(this);
     m_proposedUpdate->SetEnclosureUrl(xmlEnclosureUrl);
     m_proposedUpdate->SetEnclosureVersion(xmlEnclosureVersion);

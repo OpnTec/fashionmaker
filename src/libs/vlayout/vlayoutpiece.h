@@ -73,11 +73,11 @@ public:
     QVector<QPointF> GetContourPoints() const;
     void SetCountourPoints(const QVector<QPointF> &points);
 
-    QVector<QPointF> GetSeamAllowencePoints() const;
-    void SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence = true);
+    QVector<QPointF> GetSeamAllowancePoints() const;
+    void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true);
 
-    QVector<QPointF> GetLayoutAllowencePoints() const;
-    void SetLayoutAllowencePoints();
+    QVector<QPointF> GetLayoutAllowancePoints() const;
+    void SetLayoutAllowancePoints();
 
     QVector<QVector<QPointF>> GetInternlaPathsPoints() const;
     void SetInternlaPathsPoints(const QVector<QVector<QPointF>> &internalPathsPoints);
@@ -119,7 +119,7 @@ public:
     qint64 Square() const;
     QPainterPath ContourPath() const;
 
-    QPainterPath LayoutAllowencePath() const;
+    QPainterPath LayoutAllowancePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
