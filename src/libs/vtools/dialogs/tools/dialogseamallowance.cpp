@@ -1081,7 +1081,7 @@ void DialogSeamAllowance::EvalWidth()
     labelEditFormula = ui->labelEditWidth;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const QString formula = ui->plainTextEditFormulaWidth->toPlainText();
-    m_saWidth = Eval(formula, flagFormula, ui->labelResultWidth, postfix, true, true);
+    m_saWidth = Eval(formula, flagFormula, ui->labelResultWidth, postfix, false, true);
 
     if (m_saWidth >= 0)
     {
@@ -1102,7 +1102,7 @@ void DialogSeamAllowance::EvalWidthBefore()
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
     bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, ui->labelResultBefore, postfix, true, true);
+    Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
 
     UpdateNodeSABefore(GetFormulaSAWidthBefore());
 }
@@ -1114,7 +1114,7 @@ void DialogSeamAllowance::EvalWidthAfter()
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
     bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, ui->labelResultAfter, postfix, true, true);
+    Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
 
     UpdateNodeSAAfter(GetFormulaSAWidthAfter());
 }
