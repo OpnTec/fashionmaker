@@ -76,8 +76,6 @@ public:
     void           SetAngleType(PieceNodeAngle type);
 private:
     QSharedDataPointer<VPieceNodeData> d;
-
-    qreal EvalFormula(const VContainer *data, QString formula) const;
 };
 
 Q_DECLARE_METATYPE(VPieceNode)

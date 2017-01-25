@@ -34,6 +34,39 @@
 #include <QDataStream>
 #include <QtNumeric>
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+qreal EvalFormula(const VContainer *data, QString formula)
+{
+    if (formula.isEmpty())
+    {
+        return -1;
+    }
+    else
+    {
+        try
+        {
+            // Replace line return character with spaces for calc if exist
+            formula.replace("\n", " ");
+            QScopedPointer<Calculator> cal(new Calculator());
+            const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                return -1;
+            }
+            return result;
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            Q_UNUSED(e)
+            return -1;
+        }
+    }
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
     : d(new VPieceNodeData)
@@ -179,36 +212,6 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
     if (d->m_typeTool == Tool::NodePoint)
     {
         d->m_angleType = type;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::EvalFormula(const VContainer *data, QString formula) const
-{
-    if (formula.isEmpty())
-    {
-        return -1;
-    }
-    else
-    {
-        try
-        {
-            // Replace line return character with spaces for calc if exist
-            formula.replace("\n", " ");
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                return -1;
-            }
-            return result;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            return -1;
-        }
     }
 }
 

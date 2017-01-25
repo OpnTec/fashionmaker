@@ -38,7 +38,7 @@ public:
     /**
      * @brief VGraphicsFillItem Constructor
      */
-    VGraphicsFillItem(QGraphicsItem *parent = nullptr);
+    explicit VGraphicsFillItem(QGraphicsItem *parent = nullptr);
     /**
      * @brief ~VGraphicsFillItem Destructor
      */
