@@ -113,3 +113,76 @@ void TST_VAbstractCurve::GetSegmentPoints_issue458()
     // Begin comparison
     Comparison(points, origPoints);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::IsPointOnCurve_data() const
+{
+    QTest::addColumn<QVector<QPointF>>("points");
+    QTest::addColumn<QPointF>("point");
+    QTest::addColumn<bool>("expectedResult");
+
+
+    QVector<QPointF> points;
+    points << QPointF(714.5704733515146, 229.44783247230293);
+    points << QPointF(713.2432059361518, 236.799577781511);
+    points << QPointF(709.8892587314249, 252.1363394689535);
+    points << QPointF(703.6056072956214, 276.4001729111941);
+    points << QPointF(687.7559494358588, 329.1513838344773);
+    points << QPointF(670.3756426535148, 387.2408887452223);
+    points << QPointF(662.3317449567428, 417.643760273044);
+    points << QPointF(657.4471488294345, 438.31881594794856);
+    points << QPointF(653.1084257285696, 459.2974181766972);
+    points << QPointF(649.4426552757304, 480.5376973511262);
+    points << QPointF(646.5769170924987, 501.9977838630714);
+    points << QPointF(644.6382908004568, 523.6358081043691);
+    points << QPointF(644.1029291338583, 534.5132598425197);
+    points << QPointF(644.1029291338583, 534.5132598425197);
+    points << QPointF(643.4592698551749, 551.9888717674471);
+    points << QPointF(642.9134698671897, 584.1776423714557);
+    points << QPointF(643.1914832622404, 613.2382010061506);
+    points << QPointF(644.2199668178571, 639.3780275889782);
+    points << QPointF(645.9255773115714, 662.8046020373845);
+    points << QPointF(648.2349715209137, 683.7254042688159);
+    points << QPointF(651.0748062234152, 702.3479142007185);
+    points << QPointF(654.3717381966065, 718.8796117505387);
+    points << QPointF(658.0524242180187, 733.5279768357226);
+    points << QPointF(662.0435210651824, 746.5004893737165);
+    points << QPointF(666.2716855156286, 758.0046292819667);
+    points << QPointF(670.6635743468883, 768.2478764779191);
+    points << QPointF(677.400406718071, 781.7952098705392);
+    points << QPointF(686.2864119958404, 797.2061069980141);
+    points << QPointF(690.4766621750516, 804.2970071162871);
+    points << QPointF(690.4766621750516, 804.2970071162871);
+    points << QPointF(692.7921674626707, 808.1521079045636);
+    points << QPointF(697.7183992280718, 815.2245015705212);
+    points << QPointF(702.9886930214004, 821.5595818277402);
+    points << QPointF(708.5917117312482, 827.1885221028615);
+    points << QPointF(714.5161182462067, 832.1424958225257);
+    points << QPointF(720.750575454867, 836.4526764133732);
+    points << QPointF(727.2837462458206, 840.1502373020446);
+    points << QPointF(734.1042935076591, 843.2663519151808);
+    points << QPointF(741.200880128974, 845.8321936794223);
+    points << QPointF(748.5621689983566, 847.8789360214096);
+    points << QPointF(756.1768230043983, 849.4377523677833);
+    points << QPointF(764.0335050356908, 850.5398161451842);
+    points << QPointF(772.1208779808252, 851.2163007802526);
+    points << QPointF(780.4276047283932, 851.4983796996295);
+    points << QPointF(793.250306920113, 851.2897382511853);
+    points << QPointF(802.0871811023624, 850.6707401574804);
+
+    QPointF point(652.5169278885382, 462.6106569368444);
+
+    // See file collection/bug/pointOnCurve.val
+    QTest::newRow("Point on curve") << points << point << true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::IsPointOnCurve() const
+{
+    QFETCH(QVector<QPointF>, points);
+    QFETCH(QPointF, point);
+    QFETCH(bool, expectedResult);
+
+    bool result = VAbstractCurve::IsPointOnCurve(points, point);
+    QCOMPARE(result, expectedResult);
+}

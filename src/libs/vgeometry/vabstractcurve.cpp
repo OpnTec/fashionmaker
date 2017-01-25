@@ -237,10 +237,8 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+bool VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p)
 {
-    const QVector<QPointF> points = GetPoints();
-
     if (points.isEmpty())
     {
         return false;
@@ -253,7 +251,7 @@ bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
     {
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            if (IsPointOnLineSegment(p.toPoint(), points.at(i).toPoint(), points.at(i+1).toPoint()))
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
             {
                 return true;
             }
@@ -261,6 +259,12 @@ bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
     }
 
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+{
+    return IsPointOnCurve(GetPoints(), p);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

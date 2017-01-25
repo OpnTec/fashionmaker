@@ -39,7 +39,8 @@ public:
 
 private slots:
     void GetSegmentPoints_issue458();
-
+    void IsPointOnCurve_data() const;
+    void IsPointOnCurve() const;
 };
 
 #endif // TST_VABSTRACTCURVE_H
