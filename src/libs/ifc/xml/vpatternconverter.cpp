@@ -302,6 +302,7 @@ void VPatternConverter::ApplyPatches()
             case (0x000309):
                 ToV0_4_0();
                 ValidateXML(XSDSchema(0x000400), fileName);
+                V_FALLTHROUGH
             case (0x000400):
                 break;
             default:
