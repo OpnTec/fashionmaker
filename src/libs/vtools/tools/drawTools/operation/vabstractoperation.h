@@ -84,7 +84,7 @@ public:
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
-    static void ExtractData(VAbstractPattern *doc, const QDomElement &domElement, QVector<quint32> &source,
+    static void ExtractData(const QDomElement &domElement, QVector<quint32> &source,
                             QVector<DestinationItem> &destination);
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;

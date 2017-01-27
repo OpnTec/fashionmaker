@@ -2749,7 +2749,7 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
 
         QVector<quint32> source;
         QVector<DestinationItem> destination;
-        VAbstractOperation::ExtractData(this, domElement, source, destination);
+        VAbstractOperation::ExtractData(domElement, source, destination);
 
         VToolRotation::Create(id, center, a, suffix, source, destination, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2791,7 +2791,7 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
 
         QVector<quint32> source;
         QVector<DestinationItem> destination;
-        VAbstractOperation::ExtractData(this, domElement, source, destination);
+        VAbstractOperation::ExtractData(domElement, source, destination);
 
         VToolFlippingByLine::Create(id, p1, p2, suffix, source, destination, scene, this, data, parse,
                                     Source::FromFile);
@@ -2821,7 +2821,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
 
         QVector<quint32> source;
         QVector<DestinationItem> destination;
-        VAbstractOperation::ExtractData(this, domElement, source, destination);
+        VAbstractOperation::ExtractData(domElement, source, destination);
 
         VToolFlippingByAxis::Create(id, origin, axisType, suffix, source, destination, scene, this, data, parse,
                                     Source::FromFile);
@@ -2853,7 +2853,7 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
 
         QVector<quint32> source;
         QVector<DestinationItem> destination;
-        VAbstractOperation::ExtractData(this, domElement, source, destination);
+        VAbstractOperation::ExtractData(domElement, source, destination);
 
         VToolMove::Create(id, a, len, suffix, source, destination, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

@@ -96,10 +96,9 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ExtractData(VAbstractPattern *doc, const QDomElement &domElement, QVector<quint32> &source,
+void VAbstractOperation::ExtractData(const QDomElement &domElement, QVector<quint32> &source,
                                      QVector<DestinationItem> &destination)
 {
-    SCASSERT(doc != nullptr)
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
@@ -113,7 +112,7 @@ void VAbstractOperation::ExtractData(VAbstractPattern *doc, const QDomElement &d
                 const QDomElement element = srcList.at(j).toElement();
                 if (not element.isNull())
                 {
-                    source.append(doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
+                    source.append(VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
                 }
             }
         }
@@ -128,9 +127,9 @@ void VAbstractOperation::ExtractData(VAbstractPattern *doc, const QDomElement &d
                 if (not element.isNull())
                 {
                     DestinationItem d;
-                    d.id = doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
-                    d.my = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
+                    d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+                    d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
+                    d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
                     destination.append(d);
                 }
             }
