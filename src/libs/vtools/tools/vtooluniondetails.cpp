@@ -876,8 +876,7 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
 /**
  * @brief UpdateNodes update nodes of united detail.
  * @param data container with variables.
- * @param det detail's nodes.
- * @param i index node in detail.
+ * @param node detail's node.
  * @param children list ids of all children.
  * @param dx bias node x axis.
  * @param dy bias node y axis.
@@ -1356,17 +1355,7 @@ VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsSc
 /**
  * @brief Create help create tool.
  * @param _id tool id, 0 if tool doesn't exist yet.
- * @param d1 first detail.
- * @param d2 second detail.
- * @param d1id id first detail.
- * @param d2id id second detail.
- * @param indexD1 index edge in first detail.
- * @param indexD2 index edge in second detail.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData contains all init data.
  */
 VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VToolUnionDetailsInitData &initData)
 {

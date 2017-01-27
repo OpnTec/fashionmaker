@@ -673,6 +673,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                 case 6: // TagElArc
                     qCDebug(vXML, "Tag elliptical arc.");
                     ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
                 case 7: // TagPath
                     qCDebug(vXML, "Tag path.");
                     ParsePathElement(scene, domElement, parse);
@@ -755,6 +756,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                         break;
                     case 5:// VToolSeamAllowance::TagIPaths
                         detail.SetInternalPaths(ParsePieceInternalPaths(element));
+                        break;
                     default:
                         break;
                 }
