@@ -387,7 +387,7 @@ void DialogEditWrongFormula::setCheckZero(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::setCheckLessThanZero(bool value)
 {
-
+    checkLessThanZero = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
