@@ -80,7 +80,7 @@ int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_f
     Q_UNUSED(locale)
     Q_UNUSED(decimal)
     Q_UNUSED(thousand)
-    if ( a_szExpr.data()[1] == 0 || ( a_szExpr.data()[0] != '0' || a_szExpr.data()[1] != 'x' ) )
+    if ( a_szExpr.size() <= 2 || ( a_szExpr.at(0) != '0' || a_szExpr.at(1) != 'x' ) )
     {
         return 0;
     }
