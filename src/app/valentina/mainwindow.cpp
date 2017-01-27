@@ -1138,8 +1138,6 @@ void MainWindow::ClosedDialogPiecePath(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        DialogPiecePath *dialog = qobject_cast<DialogPiecePath*>(dialogTool);
-        SCASSERT(dialog != nullptr);
         VToolPiecePath::Create(dialogTool, sceneDetails, doc, pattern);
     }
     ArrowTool();
