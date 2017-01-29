@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation>додати деталь</translation>
+        <translation type="vanished">додати деталь</translation>
     </message>
 </context>
 <context>
@@ -20,6 +20,13 @@
     <message>
         <source>add pattern piece %1</source>
         <translation>додати лекало %1</translation>
+    </message>
+</context>
+<context>
+    <name>AddPiece</name>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished">додати деталь</translation>
     </message>
 </context>
 <context>
@@ -311,7 +318,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation>видалити інструмент</translation>
+        <translation type="vanished">видалити інструмент</translation>
     </message>
 </context>
 <context>
@@ -319,6 +326,13 @@
     <message>
         <source>delete pattern piece %1</source>
         <translation>видалити лекало %1</translation>
+    </message>
+</context>
+<context>
+    <name>DeletePiece</name>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished">видалити інструмент</translation>
     </message>
 </context>
 <context>
@@ -1272,7 +1286,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1280,7 +1294,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
         <source>Bias Y</source>
@@ -1288,7 +1302,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation>Параметри</translation>
+        <translation type="vanished">Параметри</translation>
     </message>
     <message>
         <source>Name of detail</source>
@@ -1296,7 +1310,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Прибавка на шви</translation>
+        <translation type="vanished">Прибавка на шви</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1304,31 +1318,31 @@
     </message>
     <message>
         <source>Closed</source>
-        <translation>Замкнена</translation>
+        <translation type="vanished">Замкнена</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation>Отримано не правильний об&apos;єкт сцени. Інгнорується.</translation>
+        <translation type="vanished">Отримано не правильний об&apos;єкт сцени. Інгнорується.</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation>Протилежний напрямок</translation>
+        <translation type="vanished">Протилежний напрямок</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Всі обєкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
+        <translation type="vanished">Всі обєкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation>Перемістити в низ списку</translation>
+        <translation type="vanished">Перемістити в низ списку</translation>
     </message>
     <message>
         <source>...</source>
@@ -1336,15 +1350,15 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation>Перемістити у верх списку</translation>
+        <translation type="vanished">Перемістити у верх списку</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation>Готовий!</translation>
+        <translation type="vanished">Готовий!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation>Потрібно більше точок!</translation>
+        <translation type="vanished">Потрібно більше точок!</translation>
     </message>
     <message>
         <source>First point can not equal the last point!</source>
@@ -1352,79 +1366,79 @@
     </message>
     <message>
         <source>You have double points!</source>
-        <translation>Одна точка не може бути використана два рази підряд!</translation>
+        <translation type="vanished">Одна точка не може бути використана два рази підряд!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>Точки потрібно обирати за годинниковою стрілкою!</translation>
+        <translation type="vanished">Точки потрібно обирати за годинниковою стрілкою!</translation>
     </message>
     <message>
         <source>Bias X:</source>
-        <translation>Зміщення по Х:</translation>
+        <translation type="vanished">Зміщення по Х:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
-        <translation>Зміщення по Y:</translation>
+        <translation type="vanished">Зміщення по Y:</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Ім&apos;я деталі:</translation>
+        <translation type="vanished">Ім&apos;я деталі:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Ширина:</translation>
+        <translation type="vanished">Ширина:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation>Перша точка не може співпадати з останньою точкою!</translation>
+        <translation type="vanished">Перша точка не може співпадати з останньою точкою!</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Загальні</translation>
+        <translation type="vanished">Загальні</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation>Мітка</translation>
+        <translation type="vanished">Мітка</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Матеріал/Кількість деталей/Розташування</translation>
+        <translation type="vanished">Матеріал/Кількість деталей/Розташування</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Тип матеріалу:</translation>
+        <translation type="vanished">Тип матеріалу:</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Кількість деталей:</translation>
+        <translation type="vanished">Кількість деталей:</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation>Розташування:</translation>
+        <translation type="vanished">Розташування:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Додати</translation>
+        <translation type="vanished">Додати</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Відмінити</translation>
+        <translation type="vanished">Відмінити</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation>Літера:</translation>
+        <translation type="vanished">Літера:</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Мітка деталі видима</translation>
+        <translation type="vanished">Мітка деталі видима</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Мітка вікрійки видима</translation>
+        <translation type="vanished">Мітка вікрійки видима</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1440,15 +1454,15 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Жодний</translation>
+        <translation type="vanished">Жодний</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Вирізати на згиб</translation>
+        <translation type="vanished">Вирізати на згиб</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation>Вирізати %1 %2%3</translation>
+        <translation type="vanished">Вирізати %1 %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
@@ -1456,87 +1470,7 @@
     </message>
     <message>
         <source>Update</source>
-        <translation>Оновити</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Значення</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Розрахунок</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Довжина:</translation>
-    </message>
-    <message>
-        <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length should be positive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Just front</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Оновити</translation>
     </message>
 </context>
 <context>
@@ -3414,7 +3348,7 @@ Apply settings anyway?</source>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML редактор</translation>
+        <translation type="vanished">XML редактор</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -3426,7 +3360,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;Немає вибраного&gt;</translation>
+        <translation type="vanished">&lt;Немає вибраного&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -3434,35 +3368,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Add  attribute</source>
-        <translation>Додати атрибут</translation>
+        <translation type="vanished">Додати атрибут</translation>
     </message>
     <message>
         <source>Add  son</source>
-        <translation>Додати сина</translation>
+        <translation type="vanished">Додати сина</translation>
     </message>
     <message>
         <source>Remove attribute</source>
-        <translation>Видалити атрибут</translation>
+        <translation type="vanished">Видалити атрибут</translation>
     </message>
     <message>
         <source>Remove node</source>
-        <translation>Видалити вузол</translation>
+        <translation type="vanished">Видалити вузол</translation>
     </message>
     <message>
         <source>Set</source>
-        <translation>Задати</translation>
+        <translation type="vanished">Задати</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Відмінити</translation>
+        <translation type="vanished">Відмінити</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation>Застосувати зміни</translation>
+        <translation type="vanished">Застосувати зміни</translation>
     </message>
     <message>
         <source>Undo last</source>
-        <translation>Відмінити останнє</translation>
+        <translation type="vanished">Відмінити останнє</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -3470,87 +3404,226 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base selection</source>
-        <translation>Вибір бази</translation>
+        <translation type="vanished">Вибір бази</translation>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation>Всі лекала</translation>
+        <translation type="vanished">Всі лекала</translation>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Немає змін</translation>
+        <translation type="vanished">Немає змін</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
-        <translation>Не вдається видалити раніше створений вузол</translation>
+        <translation type="vanished">Не вдається видалити раніше створений вузол</translation>
     </message>
     <message>
         <source>No changes left</source>
-        <translation>Змін більше не залишилось</translation>
+        <translation type="vanished">Змін більше не залишилось</translation>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Не можу відмінити зміни</translation>
+        <translation type="vanished">Не можу відмінити зміни</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;Немає значення&gt;</translation>
+        <translation type="vanished">&lt;Немає значення&gt;</translation>
     </message>
     <message>
         <source>Unchanged</source>
-        <translation>Незмінений</translation>
+        <translation type="vanished">Незмінений</translation>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation>Не вдається видалити раніше створений атрибут</translation>
+        <translation type="vanished">Не вдається видалити раніше створений атрибут</translation>
     </message>
     <message>
         <source>Node Name</source>
-        <translation>Імя вузла</translation>
+        <translation type="vanished">Імя вузла</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation type="vanished">Імя:</translation>
     </message>
     <message>
         <source>Node Value (may be empty)</source>
-        <translation>Значення вузла (може бути пустим)</translation>
+        <translation type="vanished">Значення вузла (може бути пустим)</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Значення:</translation>
+        <translation type="vanished">Значення:</translation>
     </message>
     <message>
         <source>Attribute Name</source>
-        <translation>Ім&apos;я атрибуту</translation>
+        <translation type="vanished">Ім&apos;я атрибуту</translation>
     </message>
     <message>
         <source>Attribute Value</source>
-        <translation>Значення атрибуту</translation>
+        <translation type="vanished">Значення атрибуту</translation>
     </message>
     <message>
         <source>No selection</source>
-        <translation>Не вибрано</translation>
+        <translation type="vanished">Не вибрано</translation>
     </message>
     <message>
         <source>Root node</source>
-        <translation>Корневий вузол</translation>
+        <translation type="vanished">Корневий вузол</translation>
     </message>
     <message>
         <source>Node</source>
-        <translation>Вузел</translation>
+        <translation type="vanished">Вузел</translation>
     </message>
     <message>
         <source>Attribute</source>
-        <translation>Атрибут</translation>
+        <translation type="vanished">Атрибут</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation>Негайно застосувати</translation>
+        <translation type="vanished">Негайно застосувати</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPiecePath</name>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Шлях</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Імя:</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create name for your path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type:</source>
         <translation type="unfinished">Тип:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of pen:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Готовий!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Прибавка на шви</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Ширина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значення</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Розрахунок</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">По замовчуванню</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Кут:</translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Протилежний напрямок</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Видалити</translation>
+    </message>
+    <message>
+        <source>Current seam aloowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Потрібно більше точок!</translation>
+    </message>
+    <message>
+        <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Одна точка не може бути використана два рази підряд!</translation>
+    </message>
+    <message>
+        <source>List of objects is empty!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4212,6 +4285,301 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogSeamAllowance</name>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished">Всі обєкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Готовий!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Прибавка на шви</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Ширина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значення</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Розрахунок</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">По замовчуванню</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Кут:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished">Мітка</translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished">Літера:</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Ім&apos;я деталі:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Матеріал/Кількість деталей/Розташування</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished">Кількість деталей:</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Тип матеріалу:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Розташування:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Додати</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Відмінити</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Видалити</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished">Мітка деталі видима</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished">Мітка вікрійки видима</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Довжина:</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished">Вирізати %1 %2%3</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Протилежний напрямок</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Видалити</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Параметри</translation>
+    </message>
+    <message>
+        <source>Error. Can&apos;t save piece path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Помилка синтаксичного аналізу: %1</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Оновити</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Потрібно більше точок!</translation>
+    </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation type="unfinished">Точки потрібно обирати за годинниковою стрілкою!</translation>
+    </message>
+    <message>
+        <source>First point cannot be equal to the last point!</source>
+        <translation type="unfinished">Перша точка не може співпадати з останньою точкою!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Одна точка не може бути використана два рази підряд!</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished">Вирізати на згиб</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
@@ -4660,6 +5028,34 @@ Apply settings anyway?</source>
     <message>
         <source>Invalid value</source>
         <translation>Неправильне значення</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5318,7 +5714,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>Редагувати XML код креслення</translation>
+        <translation type="vanished">Редагувати XML код креслення</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -5406,7 +5802,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
+        <translation type="vanished">Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -6146,6 +6542,18 @@ Do you want to save your changes?</source>
         <source>Select point of center of elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6495,6 +6903,34 @@ Do you want to save your changes?</source>
         <source>Changes applied.</source>
         <translation>Зміни застосовано.</translation>
     </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished">Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toUInt parameter</source>
+        <translation type="unfinished">Не можу конвертувати toUInt параметр</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toBool parameter</source>
+        <translation type="unfinished">Не вдається перетворити параметр toBool</translation>
+    </message>
+    <message>
+        <source>Got empty parameter</source>
+        <translation type="unfinished">Отримано пустий параметр</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toDouble parameter</source>
+        <translation type="unfinished">Не можу конвертувати toDouble параметру</translation>
+    </message>
+    <message>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation type="unfinished">Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation type="unfinished">Об&apos;єднана деталь</translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -6725,7 +7161,21 @@ Do you want to save your changes?</source>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation>зберегти параметри деталі</translation>
+        <translation type="vanished">зберегти параметри деталі</translation>
+    </message>
+</context>
+<context>
+    <name>SavePieceOptions</name>
+    <message>
+        <source>save detail option</source>
+        <translation type="unfinished">зберегти параметри деталі</translation>
+    </message>
+</context>
+<context>
+    <name>SavePiecePathOptions</name>
+    <message>
+        <source>save path options</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7460,7 +7910,14 @@ Do you want to save your changes?</source>
     <name>ToggleDetailInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation>деталь в списку розкладки</translation>
+        <translation type="vanished">деталь в списку розкладки</translation>
+    </message>
+</context>
+<context>
+    <name>TogglePieceInLayout</name>
+    <message>
+        <source>detail in layout list</source>
+        <translation type="unfinished">деталь в списку розкладки</translation>
     </message>
 </context>
 <context>
@@ -7552,6 +8009,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPieceData</name>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
@@ -7628,6 +8092,10 @@ Do you want to save your changes?</source>
     <message>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit wrong formula</source>
+        <translation type="unfinished">Редагувати неправильну формулу</translation>
     </message>
 </context>
 <context>
@@ -8006,19 +8474,19 @@ Do you want to save your changes?</source>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation>Не можу конвертувати toUInt параметр</translation>
+        <translation type="vanished">Не можу конвертувати toUInt параметр</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation>Не вдається перетворити параметр toBool</translation>
+        <translation type="vanished">Не вдається перетворити параметр toBool</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation>Отримано пустий параметр</translation>
+        <translation type="vanished">Отримано пустий параметр</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation>Не можу конвертувати toDouble параметру</translation>
+        <translation type="vanished">Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -8049,7 +8517,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
+        <translation type="vanished">Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -8072,7 +8540,7 @@ Do you want to save your changes?</source>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation>Редагувати неправильну формулу</translation>
+        <translation type="vanished">Редагувати неправильну формулу</translation>
     </message>
     <message>
         <source>Options</source>
@@ -8364,6 +8832,18 @@ Do you want to save your changes?</source>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8374,6 +8854,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation>Помилка відновлення резервного файлу: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPoster</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8406,51 +8901,35 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation>Параметри</translation>
+        <translation type="vanished">Параметри</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation>перемістити мітку деталі</translation>
+        <translation type="vanished">перемістити мітку деталі</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation>змінити розмір мітки деталі</translation>
+        <translation type="vanished">змінити розмір мітки деталі</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation>повернути мітку деталі</translation>
+        <translation type="vanished">повернути мітку деталі</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation>перемістити мітку деталі</translation>
+        <translation type="vanished">перемістити мітку деталі</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation>змінити розмір мітки деталі</translation>
+        <translation type="vanished">змінити розмір мітки деталі</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation>повернути мітку деталі</translation>
-    </message>
-    <message>
-        <source>In layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>move grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>resize grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">повернути мітку деталі</translation>
     </message>
 </context>
 <context>
@@ -8737,6 +9216,61 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolSeamAllowance</name>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation type="unfinished">перемістити мітку деталі</translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="unfinished">змінити розмір мітки деталі</translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="unfinished">повернути мітку деталі</translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="unfinished">перемістити мітку деталі</translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="unfinished">змінити розмір мітки деталі</translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="unfinished">повернути мітку деталі</translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Параметри</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Видалити</translation>
+    </message>
+</context>
+<context>
     <name>VToolUnionDetails</name>
     <message>
         <source>union details</source>
@@ -8744,7 +9278,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>United detail</source>
-        <translation>Об&apos;єднана деталь</translation>
+        <translation type="vanished">Об&apos;єднана деталь</translation>
     </message>
 </context>
 <context>
@@ -9872,6 +10406,11 @@ Do you want to save your changes?</source>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CurrentSeamAllowance</source>
+        <comment>Do not add space between words</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

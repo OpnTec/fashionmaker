@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation>προσθήκη λεπτομέρειας</translation>
+        <translation type="vanished">προσθήκη λεπτομέρειας</translation>
     </message>
 </context>
 <context>
@@ -20,6 +20,13 @@
     <message>
         <source>add pattern piece %1</source>
         <translation>προσθήκη κομματιού πατρόν %1</translation>
+    </message>
+</context>
+<context>
+    <name>AddPiece</name>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished">προσθήκη λεπτομέρειας</translation>
     </message>
 </context>
 <context>
@@ -311,7 +318,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation>εργαλείο διαγραφής</translation>
+        <translation type="vanished">εργαλείο διαγραφής</translation>
     </message>
 </context>
 <context>
@@ -319,6 +326,13 @@
     <message>
         <source>delete pattern piece %1</source>
         <translation>διαγραφή κομματιού πατρόν %1</translation>
+    </message>
+</context>
+<context>
+    <name>DeletePiece</name>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished">εργαλείο διαγραφής</translation>
     </message>
 </context>
 <context>
@@ -1260,15 +1274,15 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Λεπτομέρεια</translation>
+        <translation type="vanished">Λεπτομέρεια</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation>εκ</translation>
+        <translation type="vanished">εκ</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Επιλογές</translation>
+        <translation type="vanished">Επιλογές</translation>
     </message>
     <message>
         <source>Name of detail</source>
@@ -1276,7 +1290,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Περιθώριο ραφής</translation>
+        <translation type="vanished">Περιθώριο ραφής</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1284,31 +1298,23 @@
     </message>
     <message>
         <source>Closed</source>
-        <translation>Κλειστό</translation>
+        <translation type="vanished">Κλειστό</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
-    </message>
-    <message>
-        <source>Got wrong scene object. Ignore.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Διαγραφή</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation>Αντιστροφή</translation>
+        <translation type="vanished">Αντιστροφή</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Εργαλείο περιθωρίου ραφής</translation>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation>Κύλιση λίστας προς τα κάτω</translation>
+        <translation type="vanished">Κύλιση λίστας προς τα κάτω</translation>
     </message>
     <message>
         <source>...</source>
@@ -1316,15 +1322,15 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation>Κύλιση λίστας προς τα πάνω</translation>
+        <translation type="vanished">Κύλιση λίστας προς τα πάνω</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation>Έτοιμο!</translation>
+        <translation type="vanished">Έτοιμο!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation>Χρειάζονται περισσότερα σημεία!</translation>
+        <translation type="vanished">Χρειάζονται περισσότερα σημεία!</translation>
     </message>
     <message>
         <source>First point can not equal the last point!</source>
@@ -1332,79 +1338,71 @@
     </message>
     <message>
         <source>You have double points!</source>
-        <translation>Έχετε διπλά σημεία!</translation>
+        <translation type="vanished">Έχετε διπλά σημεία!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>Πρέπει να επιλέξετε τα σημεία με ορολογιακή φορά!</translation>
-    </message>
-    <message>
-        <source>Bias X:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bias Y:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Πρέπει να επιλέξετε τα σημεία με ορολογιακή φορά!</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Όνομα της λεπτομέρειας:</translation>
+        <translation type="vanished">Όνομα της λεπτομέρειας:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Φάρδος:</translation>
+        <translation type="vanished">Φάρδος:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation>Το πρώτο σημείο δεν μπορεί να ισούται με το τελευταίο σημείο!</translation>
+        <translation type="vanished">Το πρώτο σημείο δεν μπορεί να ισούται με το τελευταίο σημείο!</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Γενικά</translation>
+        <translation type="vanished">Γενικά</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation>Στοιχεία κομματιού πατρόν</translation>
+        <translation type="vanished">Στοιχεία κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
+        <translation type="vanished">Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Τύπος υφάσματος:</translation>
+        <translation type="vanished">Τύπος υφάσματος:</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Ποσότητα κοπής:</translation>
+        <translation type="vanished">Ποσότητα κοπής:</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation>Τοποθέτηση:</translation>
+        <translation type="vanished">Τοποθέτηση:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Προσθήκη</translation>
+        <translation type="vanished">Προσθήκη</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation type="vanished">Ακύρωση</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Αφαίρεση</translation>
+        <translation type="vanished">Αφαίρεση</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation>Γράμμα:</translation>
+        <translation type="vanished">Γράμμα:</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Εμφάνιση ετικέτας λεπτομέρειας</translation>
+        <translation type="vanished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Εμφάνιση ετικέτας πατρόν</translation>
+        <translation type="vanished">Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1424,15 +1422,11 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation type="vanished">Κανένα</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Κόψιμο στη δίπλωση</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Κόψιμο στη δίπλωση</translation>
     </message>
     <message>
         <source> on Fold</source>
@@ -1440,87 +1434,71 @@
     </message>
     <message>
         <source>Update</source>
-        <translation>Ενημέρωση</translation>
+        <translation type="vanished">Ενημέρωση</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation>στη Δίπλωση</translation>
+        <translation type="vanished">στη Δίπλωση</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation>Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
+        <translation type="vanished">Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation>Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
+        <translation type="vanished">Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation>Περιορισμός αντιστροφής</translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Περιορισμός αντιστροφής</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation>Ισιάδα</translation>
+        <translation type="vanished">Ισιάδα</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation>Εμφάνιση ισιάδας</translation>
+        <translation type="vanished">Εμφάνιση ισιάδας</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation>Περιστροφή:</translation>
+        <translation type="vanished">Περιστροφή:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Βοηθός φόρμουλας</translation>
+        <translation type="vanished">Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Τιμή</translation>
+        <translation type="vanished">Τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Υπολογισμός</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Υπολογισμός</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Μήκος:</translation>
-    </message>
-    <message>
-        <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Μήκος:</translation>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation>Το μήκος θα πρέπει να έχει θετική τιμή</translation>
+        <translation type="vanished">Το μήκος θα πρέπει να έχει θετική τιμή</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation>Τόξα:</translation>
+        <translation type="vanished">Τόξα:</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation>Και τα δύο</translation>
+        <translation type="vanished">Και τα δύο</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation>Μόνο μπροστά</translation>
+        <translation type="vanished">Μόνο μπροστά</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation>Μόνο πίσω</translation>
+        <translation type="vanished">Μόνο πίσω</translation>
     </message>
 </context>
 <context>
@@ -3377,7 +3355,7 @@ Apply settings anyway?</source>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>Επεξεργαστής XML</translation>
+        <translation type="vanished">Επεξεργαστής XML</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -3389,7 +3367,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;No selection&gt;</translation>
+        <translation type="vanished">&lt;No selection&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -3397,35 +3375,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Add  attribute</source>
-        <translation>Προσθήκη ιδιότητας</translation>
-    </message>
-    <message>
-        <source>Add  son</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Προσθήκη ιδιότητας</translation>
     </message>
     <message>
         <source>Remove attribute</source>
-        <translation>Αφαίρεση ιδιότητας</translation>
-    </message>
-    <message>
-        <source>Remove node</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Αφαίρεση ιδιότητας</translation>
     </message>
     <message>
         <source>Set</source>
-        <translation>Ορισμός</translation>
+        <translation type="vanished">Ορισμός</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation type="vanished">Ακύρωση</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation>Εφαρμογή αλλαγών</translation>
+        <translation type="vanished">Εφαρμογή αλλαγών</translation>
     </message>
     <message>
         <source>Undo last</source>
-        <translation>Αναίρεση τελευταίας κίνησης</translation>
+        <translation type="vanished">Αναίρεση τελευταίας κίνησης</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -3433,83 +3403,59 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base selection</source>
-        <translation>Επιλογής βάσης</translation>
+        <translation type="vanished">Επιλογής βάσης</translation>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation>Όλα τα κομμάτια πατρόν</translation>
+        <translation type="vanished">Όλα τα κομμάτια πατρόν</translation>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Χωρίς αλλαγές</translation>
-    </message>
-    <message>
-        <source>Cannot delete previously created node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No changes left</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Χωρίς αλλαγές</translation>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Δεν είναι δυνατή η αναίρεση της αλλαγής</translation>
+        <translation type="vanished">Δεν είναι δυνατή η αναίρεση της αλλαγής</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;no value&gt;</translation>
+        <translation type="vanished">&lt;no value&gt;</translation>
     </message>
     <message>
         <source>Unchanged</source>
-        <translation>Χωρίς αλλαγές</translation>
+        <translation type="vanished">Χωρίς αλλαγές</translation>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation>Δε μπορεί να γίνει διαγραφή της ιδιότητας που δημιουργήθηκε προηγουμένως</translation>
-    </message>
-    <message>
-        <source>Node Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Δε μπορεί να γίνει διαγραφή της ιδιότητας που δημιουργήθηκε προηγουμένως</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Όνομα:</translation>
-    </message>
-    <message>
-        <source>Node Value (may be empty)</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Όνομα:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Τιμή:</translation>
+        <translation type="vanished">Τιμή:</translation>
     </message>
     <message>
         <source>Attribute Name</source>
-        <translation>Όνομα ιδιότητας</translation>
+        <translation type="vanished">Όνομα ιδιότητας</translation>
     </message>
     <message>
         <source>Attribute Value</source>
-        <translation>Τιμή ιδιότητας</translation>
+        <translation type="vanished">Τιμή ιδιότητας</translation>
     </message>
     <message>
         <source>No selection</source>
-        <translation>Χωρίς επιλογή</translation>
-    </message>
-    <message>
-        <source>Root node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Χωρίς επιλογή</translation>
     </message>
     <message>
         <source>Attribute</source>
-        <translation>Ιδιότητα</translation>
+        <translation type="vanished">Ιδιότητα</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation>Άμεση εφαρμογή</translation>
+        <translation type="vanished">Άμεση εφαρμογή</translation>
     </message>
     <message>
         <source>Type: </source>
@@ -3517,7 +3463,150 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Τύπος:</translation>
+        <translation type="vanished">Τύπος:</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPiecePath</name>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Διαδρομή</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Όνομα:</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create name for your path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Τύπος:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of pen:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Έτοιμο!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Περιθώριο ραφής</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Φάρδος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Αντιστροφή</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Current seam aloowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Χρειάζονται περισσότερα σημεία!</translation>
+    </message>
+    <message>
+        <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Έχετε διπλά σημεία!</translation>
+    </message>
+    <message>
+        <source>List of objects is empty!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4143,6 +4232,301 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogSeamAllowance</name>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished">Εργαλείο περιθωρίου ραφής</translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished">Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Περιορισμός αντιστροφής</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Έτοιμο!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Περιθώριο ραφής</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Φάρδος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished">Στοιχεία κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished">Γράμμα:</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Όνομα της λεπτομέρειας:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Λεπτομέρεια</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished">Ποσότητα κοπής:</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Τύπος υφάσματος:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished">Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Τοποθέτηση:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Προσθήκη</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Ακύρωση</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Αφαίρεση</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished">Εμφάνιση ετικέτας πατρόν</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="unfinished">Ισιάδα</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished">Εμφάνιση ισιάδας</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Περιστροφή:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Μήκος:</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished">Τόξα:</translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished">στη Δίπλωση</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Αντιστροφή</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Επιλογές</translation>
+    </message>
+    <message>
+        <source>Error. Can&apos;t save piece path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="unfinished">Το μήκος θα πρέπει να έχει θετική τιμή</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Ενημέρωση</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Χρειάζονται περισσότερα σημεία!</translation>
+    </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation type="unfinished">Πρέπει να επιλέξετε τα σημεία με ορολογιακή φορά!</translation>
+    </message>
+    <message>
+        <source>First point cannot be equal to the last point!</source>
+        <translation type="unfinished">Το πρώτο σημείο δεν μπορεί να ισούται με το τελευταίο σημείο!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Έχετε διπλά σημεία!</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Κανένα</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished">Κόψιμο στη δίπλωση</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished">Και τα δύο</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished">Μόνο μπροστά</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="unfinished">Μόνο πίσω</translation>
+    </message>
+</context>
+<context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
@@ -4591,6 +4975,34 @@ Apply settings anyway?</source>
     <message>
         <source>Invalid value</source>
         <translation>Άκυρη τιμή</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5229,7 +5641,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>Επεξεργασία του κώδικα XML του πατρόν</translation>
+        <translation type="vanished">Επεξεργασία του κώδικα XML του πατρόν</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -5313,10 +5725,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select points, arcs, curves clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6046,6 +6454,18 @@ Do you want to save your changes?</source>
         <source>Select point of center of elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6380,6 +6800,34 @@ Do you want to save your changes?</source>
         <source>Changes applied.</source>
         <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toUInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toBool parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Got empty parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toDouble parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -6607,9 +7055,16 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>SaveDetailOptions</name>
+    <name>SavePieceOptions</name>
     <message>
         <source>save detail option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SavePiecePathOptions</name>
+    <message>
+        <source>save path options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7326,7 +7781,7 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>ToggleDetailInLayout</name>
+    <name>TogglePieceInLayout</name>
     <message>
         <source>detail in layout list</source>
         <translation type="unfinished"></translation>
@@ -7421,6 +7876,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPieceData</name>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Λεπτομέρεια</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
@@ -7497,6 +7959,10 @@ Do you want to save your changes?</source>
     <message>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit wrong formula</source>
+        <translation type="unfinished">Επεξεργασία εσφαλμένης φόρμουλας</translation>
     </message>
 </context>
 <context>
@@ -7802,22 +8268,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VDomDocument</name>
     <message>
-        <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t convert toBool parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Got empty parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation type="unfinished"></translation>
@@ -7840,10 +8290,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This id is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7860,7 +8306,7 @@ Do you want to save your changes?</source>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation>Επεξεργασία εσφαλμένης φόρμουλας</translation>
+        <translation type="vanished">Επεξεργασία εσφαλμένης φόρμουλας</translation>
     </message>
     <message>
         <source>Options</source>
@@ -8148,6 +8594,18 @@ Do you want to save your changes?</source>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Λεπτομέρεια</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8158,6 +8616,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation>Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPoster</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8198,51 +8671,47 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation>Επιλογές</translation>
+        <translation type="vanished">Επιλογές</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
+        <translation type="vanished">Διαγραφή</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation>μετακίνηση ετικέτας κομματιού πατρόν</translation>
+        <translation type="vanished">μετακίνηση ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation>αλλαγή διαστάσεων ετικέτας κομματιού πατρόν</translation>
+        <translation type="vanished">αλλαγή διαστάσεων ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation>περιστροφή ετικέτας κομματιού πατρόν</translation>
+        <translation type="vanished">περιστροφή ετικέτας κομματιού πατρόν</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation>μετακίνηση ετικέτας πληροφοριών πατρόν</translation>
+        <translation type="vanished">μετακίνηση ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation>αλλαγή διαστάσεων ετικέτας πληροφοριών πατρόν</translation>
+        <translation type="vanished">αλλαγή διαστάσεων ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation>περιστροφή ετικέτας πληροφοριών πατρόν</translation>
-    </message>
-    <message>
-        <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">περιστροφή ετικέτας πληροφοριών πατρόν</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation>μετακίνηση γραμμής ίσιου</translation>
+        <translation type="vanished">μετακίνηση γραμμής ίσιου</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation>αλλαγή διάστασης γραμμής ίσιου</translation>
+        <translation type="vanished">αλλαγή διάστασης γραμμής ίσιου</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation>περιστροφή γραμμής ίσιου</translation>
+        <translation type="vanished">περιστροφή γραμμής ίσιου</translation>
     </message>
 </context>
 <context>
@@ -8525,14 +8994,65 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolSeamAllowance</name>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation type="unfinished">μετακίνηση ετικέτας κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="unfinished">αλλαγή διαστάσεων ετικέτας κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="unfinished">περιστροφή ετικέτας κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="unfinished">μετακίνηση ετικέτας πληροφοριών πατρόν</translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="unfinished">αλλαγή διαστάσεων ετικέτας πληροφοριών πατρόν</translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="unfinished">περιστροφή ετικέτας πληροφοριών πατρόν</translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="unfinished">μετακίνηση γραμμής ίσιου</translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="unfinished">αλλαγή διάστασης γραμμής ίσιου</translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="unfinished">περιστροφή γραμμής ίσιου</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Επιλογές</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+</context>
+<context>
     <name>VToolUnionDetails</name>
     <message>
         <source>union details</source>
         <translation>λεπτομέρειες συνένωσης</translation>
-    </message>
-    <message>
-        <source>United detail</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9600,6 +10120,11 @@ Do you want to save your changes?</source>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CurrentSeamAllowance</source>
+        <comment>Do not add space between words</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

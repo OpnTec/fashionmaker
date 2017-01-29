@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation>Detail hinzufügen</translation>
+        <translation type="vanished">Detail hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -20,6 +20,13 @@
     <message>
         <source>add pattern piece %1</source>
         <translation>Schnittteil %1 hinzufügen</translation>
+    </message>
+</context>
+<context>
+    <name>AddPiece</name>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished">Detail hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -311,7 +318,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation>Löschwerkzeug</translation>
+        <translation type="vanished">Löschwerkzeug</translation>
     </message>
 </context>
 <context>
@@ -319,6 +326,13 @@
     <message>
         <source>delete pattern piece %1</source>
         <translation>Schnittteil %1 löschen</translation>
+    </message>
+</context>
+<context>
+    <name>DeletePiece</name>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished">Löschwerkzeug</translation>
     </message>
 </context>
 <context>
@@ -1276,7 +1290,7 @@
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Detail</translation>
+        <translation type="vanished">Detail</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1284,7 +1298,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
         <source>Bias Y</source>
@@ -1292,7 +1306,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation type="vanished">Optionen</translation>
     </message>
     <message>
         <source>Name of detail</source>
@@ -1300,7 +1314,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Nahtzugaben</translation>
+        <translation type="vanished">Nahtzugaben</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1308,31 +1322,31 @@
     </message>
     <message>
         <source>Closed</source>
-        <translation>Geschlossen</translation>
+        <translation type="vanished">Geschlossen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="vanished">Löschen</translation>
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation>Falsches Szenenobjekt. Wird ignoriert.</translation>
+        <translation type="vanished">Falsches Szenenobjekt. Wird ignoriert.</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation>Umkehren</translation>
+        <translation type="vanished">Umkehren</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Tool für die Nahtzugabe</translation>
+        <translation type="vanished">Tool für die Nahtzugabe</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Alle Objekte im Pfad sollten im Uhrzeigersinn folgen.</translation>
+        <translation type="vanished">Alle Objekte im Pfad sollten im Uhrzeigersinn folgen.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation>Runterblättern</translation>
+        <translation type="vanished">Runterblättern</translation>
     </message>
     <message>
         <source>...</source>
@@ -1340,15 +1354,15 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation>Hochblättern</translation>
+        <translation type="vanished">Hochblättern</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation>Fertig!</translation>
+        <translation type="vanished">Fertig!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation>Sie brauchen mehr Punkte!</translation>
+        <translation type="vanished">Sie brauchen mehr Punkte!</translation>
     </message>
     <message>
         <source>First point can not equal the last point!</source>
@@ -1356,79 +1370,59 @@
     </message>
     <message>
         <source>You have double points!</source>
-        <translation>Sie haben doppelte Punkte!</translation>
+        <translation type="vanished">Sie haben doppelte Punkte!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>Sie müssen Punkte im Uhrzeigersinn wählen!</translation>
+        <translation type="vanished">Sie müssen Punkte im Uhrzeigersinn wählen!</translation>
     </message>
     <message>
         <source>Bias X:</source>
-        <translation>Fadenlauf X:</translation>
+        <translation type="vanished">Fadenlauf X:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
-        <translation>Fadenlauf Y:</translation>
+        <translation type="vanished">Fadenlauf Y:</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Name des Details:</translation>
+        <translation type="vanished">Name des Details:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Breite:</translation>
+        <translation type="vanished">Breite:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation>Der erste Punkt kann nicht gleich dem letzten Punkt sein!</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Der erste Punkt kann nicht gleich dem letzten Punkt sein!</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Material/Schnittnummer/Platzierung</translation>
+        <translation type="vanished">Material/Schnittnummer/Platzierung</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Materialart:</translation>
+        <translation type="vanished">Materialart:</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Schnittnummer:</translation>
+        <translation type="vanished">Schnittnummer:</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation>Platzierung:</translation>
+        <translation type="vanished">Platzierung:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation type="vanished">Hinzufügen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="vanished">Abbrechen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Entfernen</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1436,99 +1430,15 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Keine</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Keine</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation>%1 von %2%3 schneiden</translation>
+        <translation type="vanished">%1 von %2%3 schneiden</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation>Updaten</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Wert</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Berechnung</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Länge:</translation>
-    </message>
-    <message>
-        <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length should be positive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Just front</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Updaten</translation>
     </message>
 </context>
 <context>
@@ -3413,7 +3323,7 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML-Editor</translation>
+        <translation type="vanished">XML-Editor</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -3425,7 +3335,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;nichts ausgewählt&gt;</translation>
+        <translation type="vanished">&lt;nichts ausgewählt&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -3433,35 +3343,35 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Add  attribute</source>
-        <translation>Attribut hinzufügen</translation>
+        <translation type="vanished">Attribut hinzufügen</translation>
     </message>
     <message>
         <source>Add  son</source>
-        <translation>Kind hinzufügen</translation>
+        <translation type="vanished">Kind hinzufügen</translation>
     </message>
     <message>
         <source>Remove attribute</source>
-        <translation>Attribut entfernen</translation>
+        <translation type="vanished">Attribut entfernen</translation>
     </message>
     <message>
         <source>Remove node</source>
-        <translation>Knoten entfernen</translation>
+        <translation type="vanished">Knoten entfernen</translation>
     </message>
     <message>
         <source>Set</source>
-        <translation>Setzen</translation>
+        <translation type="vanished">Setzen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="vanished">Abbrechen</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation>Änderungen übernehmen</translation>
+        <translation type="vanished">Änderungen übernehmen</translation>
     </message>
     <message>
         <source>Undo last</source>
-        <translation>Rückgängig</translation>
+        <translation type="vanished">Rückgängig</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -3469,87 +3379,226 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Base selection</source>
-        <translation>Basisauswahl</translation>
+        <translation type="vanished">Basisauswahl</translation>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation>Alle Schnittteile</translation>
+        <translation type="vanished">Alle Schnittteile</translation>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Keine Änderungen</translation>
+        <translation type="vanished">Keine Änderungen</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
-        <translation>Der vorher erstellte Knoten kann nicht entfernt werden</translation>
+        <translation type="vanished">Der vorher erstellte Knoten kann nicht entfernt werden</translation>
     </message>
     <message>
         <source>No changes left</source>
-        <translation>Keine Änderungen übrig</translation>
+        <translation type="vanished">Keine Änderungen übrig</translation>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Änderung kann nicht rückgängig gemacht werden</translation>
+        <translation type="vanished">Änderung kann nicht rückgängig gemacht werden</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;kein Wert&gt;</translation>
+        <translation type="vanished">&lt;kein Wert&gt;</translation>
     </message>
     <message>
         <source>Unchanged</source>
-        <translation>Unverändert</translation>
+        <translation type="vanished">Unverändert</translation>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation>Das vorher erstellte Attribut kann nicht gelöscht werden</translation>
+        <translation type="vanished">Das vorher erstellte Attribut kann nicht gelöscht werden</translation>
     </message>
     <message>
         <source>Node Name</source>
-        <translation>Knotenname</translation>
+        <translation type="vanished">Knotenname</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="vanished">Name:</translation>
     </message>
     <message>
         <source>Node Value (may be empty)</source>
-        <translation>Knotenwert (kann leer sein)</translation>
+        <translation type="vanished">Knotenwert (kann leer sein)</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Wert:</translation>
+        <translation type="vanished">Wert:</translation>
     </message>
     <message>
         <source>Attribute Name</source>
-        <translation>Attributname</translation>
+        <translation type="vanished">Attributname</translation>
     </message>
     <message>
         <source>Attribute Value</source>
-        <translation>Attributwert</translation>
+        <translation type="vanished">Attributwert</translation>
     </message>
     <message>
         <source>No selection</source>
-        <translation>Nichts ausgewählt</translation>
+        <translation type="vanished">Nichts ausgewählt</translation>
     </message>
     <message>
         <source>Root node</source>
-        <translation>Wurzelknoten</translation>
+        <translation type="vanished">Wurzelknoten</translation>
     </message>
     <message>
         <source>Node</source>
-        <translation>Knoten</translation>
+        <translation type="vanished">Knoten</translation>
     </message>
     <message>
         <source>Attribute</source>
-        <translation>Attribut</translation>
+        <translation type="vanished">Attribut</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation>Sofort übernehmen</translation>
+        <translation type="vanished">Sofort übernehmen</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPiecePath</name>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Name:</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create name for your path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type:</source>
         <translation type="unfinished">Typ:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of pen:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Fertig!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Nahtzugaben</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breite:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Winkel:</translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Umkehren</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Current seam aloowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Sie brauchen mehr Punkte!</translation>
+    </message>
+    <message>
+        <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Sie haben doppelte Punkte!</translation>
+    </message>
+    <message>
+        <source>List of objects is empty!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4211,6 +4260,301 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
 </context>
 <context>
+    <name>DialogSeamAllowance</name>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished">Tool für die Nahtzugabe</translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished">Alle Objekte im Pfad sollten im Uhrzeigersinn folgen.</translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Fertig!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Nahtzugaben</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breite:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Winkel:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Benutzerdefiniert</translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Name des Details:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Detail</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Material/Schnittnummer/Platzierung</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished">Schnittnummer:</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Materialart:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Platzierung:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Entfernen</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Länge:</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished">%1 von %2%3 schneiden</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation type="unfinished">Umkehren</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <source>Error. Can&apos;t save piece path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Auswertungsfehler: %1</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Updaten</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished">Sie brauchen mehr Punkte!</translation>
+    </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation type="unfinished">Sie müssen Punkte im Uhrzeigersinn wählen!</translation>
+    </message>
+    <message>
+        <source>First point cannot be equal to the last point!</source>
+        <translation type="unfinished">Der erste Punkt kann nicht gleich dem letzten Punkt sein!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished">Sie haben doppelte Punkte!</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>custom seam allowance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
@@ -4659,6 +5003,34 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Invalid value</source>
         <translation>Ungültiger Wert</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5317,7 +5689,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>XML-Darstellung des Schnittmusters bearbeiten</translation>
+        <translation type="vanished">XML-Darstellung des Schnittmusters bearbeiten</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -5405,7 +5777,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Punkte, Bögen, Kurven im Uhrzeigersinn auswählen.</translation>
+        <translation type="vanished">Punkte, Bögen, Kurven im Uhrzeigersinn auswählen.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -6146,6 +6518,18 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Select point of center of elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6495,6 +6879,34 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Changes applied.</source>
         <translation>Änderungen angewendet.</translation>
     </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished">Falscher Symbolname &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toUInt parameter</source>
+        <translation type="unfinished">Konnte nicht in Parameter vom Typ &apos;Integer&apos; umwandeln</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toBool parameter</source>
+        <translation type="unfinished">Konnte nicht in Parameter vom Typ &apos;Boolean&apos; umwandeln</translation>
+    </message>
+    <message>
+        <source>Got empty parameter</source>
+        <translation type="unfinished">Leerer Parameter erhalten</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toDouble parameter</source>
+        <translation type="unfinished">Kann Parameter toDouble nicht konvertieren</translation>
+    </message>
+    <message>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation type="unfinished">Falsche Parameter-ID. Wert &gt; 0 erforderlich.</translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -6718,7 +7130,21 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation>Detailoption speichern</translation>
+        <translation type="vanished">Detailoption speichern</translation>
+    </message>
+</context>
+<context>
+    <name>SavePieceOptions</name>
+    <message>
+        <source>save detail option</source>
+        <translation type="unfinished">Detailoption speichern</translation>
+    </message>
+</context>
+<context>
+    <name>SavePiecePathOptions</name>
+    <message>
+        <source>save path options</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7449,7 +7875,7 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>ToggleDetailInLayout</name>
+    <name>TogglePieceInLayout</name>
     <message>
         <source>detail in layout list</source>
         <translation type="unfinished"></translation>
@@ -7544,6 +7970,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPieceData</name>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Detail</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
@@ -7620,6 +8053,10 @@ Do you want to save your changes?</source>
     <message>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit wrong formula</source>
+        <translation type="unfinished">Formel korrigieren</translation>
     </message>
 </context>
 <context>
@@ -7998,19 +8435,19 @@ Do you want to save your changes?</source>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation>Konnte nicht in Parameter vom Typ &apos;Integer&apos; umwandeln</translation>
+        <translation type="vanished">Konnte nicht in Parameter vom Typ &apos;Integer&apos; umwandeln</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation>Konnte nicht in Parameter vom Typ &apos;Boolean&apos; umwandeln</translation>
+        <translation type="vanished">Konnte nicht in Parameter vom Typ &apos;Boolean&apos; umwandeln</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation>Leerer Parameter erhalten</translation>
+        <translation type="vanished">Leerer Parameter erhalten</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation>Kann Parameter toDouble nicht konvertieren</translation>
+        <translation type="vanished">Kann Parameter toDouble nicht konvertieren</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -8041,7 +8478,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Falsche Parameter-ID. Wert &gt; 0 erforderlich.</translation>
+        <translation type="vanished">Falsche Parameter-ID. Wert &gt; 0 erforderlich.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -8064,7 +8501,7 @@ Do you want to save your changes?</source>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation>Formel korrigieren</translation>
+        <translation type="vanished">Formel korrigieren</translation>
     </message>
     <message>
         <source>Options</source>
@@ -8356,6 +8793,18 @@ Do you want to save your changes?</source>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Detail</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8366,6 +8815,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPoster</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8398,51 +8862,11 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation type="vanished">Optionen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>move pattern piece label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>resize pattern piece label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rotate pattern piece label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>move pattern info label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>resize pattern info label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rotate pattern info label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>move grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>resize grainline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Löschen</translation>
     </message>
 </context>
 <context>
@@ -8729,13 +9153,64 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VToolUnionDetails</name>
+    <name>VToolSeamAllowance</name>
     <message>
-        <source>union details</source>
+        <source>Current seam allowance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>United detail</source>
+        <source>move pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+</context>
+<context>
+    <name>VToolUnionDetails</name>
+    <message>
+        <source>union details</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9864,6 +10339,11 @@ Do you want to save your changes?</source>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CurrentSeamAllowance</source>
+        <comment>Do not add space between words</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
