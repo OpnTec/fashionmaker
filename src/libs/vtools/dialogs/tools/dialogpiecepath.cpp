@@ -202,6 +202,15 @@ void DialogPiecePath::ShowVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormulaWidth->blockSignals(true);
+    ui->plainTextEditFormulaWidthBefore->blockSignals(true);
+    ui->plainTextEditFormulaWidthAfter->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ShowContextMenu(const QPoint &pos)
 {
     const int row = ui->listWidget->currentRow();

@@ -305,6 +305,17 @@ void DialogSeamAllowance::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormulaWidth->blockSignals(true);
+    ui->plainTextEditFormulaWidthBefore->blockSignals(true);
+    ui->plainTextEditFormulaWidthAfter->blockSignals(true);
+    ui->lineEditRotFormula->blockSignals(true);
+    ui->lineEditLenFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateList()
 {
     ui->listWidgetMCP->clear();
