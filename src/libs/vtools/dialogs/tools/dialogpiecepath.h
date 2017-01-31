@@ -61,8 +61,6 @@ public slots:
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
 
 protected:
-    /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void CheckState() Q_DECL_OVERRIDE;
     virtual void ShowVisualization() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;

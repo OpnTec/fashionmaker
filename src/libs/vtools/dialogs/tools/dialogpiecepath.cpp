@@ -176,10 +176,6 @@ void DialogPiecePath::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::SaveData()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::CheckState()
 {
     SCASSERT(bOk != nullptr);
@@ -841,18 +837,7 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogPiecePath::GetPieceId() const
 {
-    quint32 id = NULL_ID;
-
-    if (ui->comboBoxPiece->count() > 0)
-    {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    id = ui->comboBoxPiece->itemData(ui->comboBoxPiece->currentIndex()).toUInt();
-#else
-    id = ui->comboBoxPiece->currentData().toUInt();
-#endif
-    }
-
-    return id;
+    return getCurrentObjectId(ui->comboBoxPiece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -868,7 +853,11 @@ void DialogPiecePath::SetPieceId(quint32 id)
         const qint32 index = ui->comboBoxPiece->findData(id);
         if (index != -1)
         {
-            ui->comboBoxType->setCurrentIndex(index);
+            ui->comboBoxPiece->setCurrentIndex(index);
+        }
+        else
+        {
+            ui->comboBoxPiece->setCurrentIndex(0);
         }
     }
 
