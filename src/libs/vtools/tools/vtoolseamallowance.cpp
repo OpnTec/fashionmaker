@@ -1116,25 +1116,23 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitCSAPaths(const VPiece &detail)
 {
-    QVector<CustomSARecord> records = detail.GetCustomSARecords();
-    for (int i = 0; i < records.size(); ++i)
+    for (int i = 0; i < detail.GetCustomSARecords().size(); ++i)
     {
-        doc->IncrementReferens(records.at(i).path);
+        doc->IncrementReferens(detail.GetCustomSARecords().at(i).path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
-    QVector<quint32> records = detail.GetInternalPaths();
-    for (int i = 0; i < records.size(); ++i)
+    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
     {
-        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(records.at(i)));
+        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(detail.GetInternalPaths().at(i)));
         SCASSERT(tool != nullptr);
         tool->setParentItem(this);
         tool->SetParentType(ParentType::Item);
         tool->show();
-        doc->IncrementReferens(records.at(i));
+        doc->IncrementReferens(detail.GetInternalPaths().at(i));
     }
 }
 

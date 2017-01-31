@@ -85,12 +85,16 @@ public:
     void    SetFormulaSAWidth(const QString &formula, qreal value);
 
     QVector<quint32> GetInternalPaths() const;
+    QVector<quint32> &GetInternalPaths();
     void             SetInternalPaths(const QVector<quint32> &iPaths);
-    void             AppendInternalPath(quint32 path);
 
     QVector<CustomSARecord> GetCustomSARecords() const;
+    QVector<CustomSARecord> &GetCustomSARecords();
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
-    void                    AppendCustomSARecord(const CustomSARecord &record);
+
+    QVector<quint32> GetPins() const;
+    QVector<quint32> &GetPins();
+    void             SetPins(const QVector<quint32> &pins);
 
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;

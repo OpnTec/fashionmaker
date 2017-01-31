@@ -127,18 +127,16 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     ui->listWidgetCustomSA->blockSignals(true);
     ui->listWidgetCustomSA->clear();
-    const QVector<CustomSARecord> records = piece.GetCustomSARecords();
-    for (int i = 0; i < records.size(); ++i)
+    for (int i = 0; i < piece.GetCustomSARecords().size(); ++i)
     {
-        NewCustomSA(records.at(i));
+        NewCustomSA(piece.GetCustomSARecords().at(i));
     }
     ui->listWidgetCustomSA->blockSignals(false);
 
     ui->listWidgetInternalPaths->clear();
-    const QVector<quint32> iPaths = piece.GetInternalPaths();
-    for (int i = 0; i < iPaths.size(); ++i)
+    for (int i = 0; i < piece.GetInternalPaths().size(); ++i)
     {
-        NewInternalPath(iPaths.at(i));
+        NewInternalPath(piece.GetInternalPaths().at(i));
     }
 
     ui->comboBoxStartPoint->blockSignals(true);

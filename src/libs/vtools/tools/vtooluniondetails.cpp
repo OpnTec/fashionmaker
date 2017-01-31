@@ -958,12 +958,10 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
                            const QString &drawName, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy,
                            quint32 pRotate, qreal angle)
 {
-    QVector<CustomSARecord> newList = newDetail.GetCustomSARecords();
-    const QVector<CustomSARecord> oldList = d.GetCustomSARecords();
     QVector<quint32> nodeChildren;
-    for(int i=0; i < oldList.size(); ++i)
+    for(int i=0; i < d.GetCustomSARecords().size(); ++i)
     {
-        CustomSARecord record = oldList.at(i);
+        CustomSARecord record = d.GetCustomSARecords().at(i);
         const VPiecePath path = initData.data->GetPiecePath(record.path);
         VPiecePath newPath = path;
         newPath.Clear();//Clear nodes
@@ -975,21 +973,19 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
         VToolPiecePath::Create(idPath, newPath, NULL_ID, initData.scene, initData.doc, initData.data, initData.parse,
                                Source::FromTool, drawName, id);
         record.path = idPath;
-        newList.append(record);
+        newDetail.GetCustomSARecords().append(record);
         nodeChildren.prepend(idPath);
     }
     children += nodeChildren;
-    newDetail.SetCustomSARecords(newList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, quint32 id, const QString &drawName,
                      const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate, qreal angle)
 {
-    const QVector<CustomSARecord> d1Records = d1.GetCustomSARecords();
-    for (int i = 0; i < d1Records.size(); ++i)
+    for (int i = 0; i < d1.GetCustomSARecords().size(); ++i)
     {
-        newDetail.AppendCustomSARecord(d1Records.at(i));
+        newDetail.GetCustomSARecords().append(d1.GetCustomSARecords().at(i));
     }
 
     QVector<quint32> children;
@@ -1004,12 +1000,10 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
                                      const QString &drawName, const VToolUnionDetailsInitData &initData, qreal dx,
                                      qreal dy, quint32 pRotate, qreal angle)
 {
-    QVector<quint32> newList = newDetail.GetInternalPaths();
-    const QVector<quint32> oldList = d.GetInternalPaths();
     QVector<quint32> nodeChildren;
-    for(int i=0; i < oldList.size(); ++i)
+    for(int i=0; i < d.GetInternalPaths().size(); ++i)
     {
-        const VPiecePath path = initData.data->GetPiecePath(oldList.at(i));
+        const VPiecePath path = initData.data->GetPiecePath(d.GetInternalPaths().at(i));
         VPiecePath newPath = path;
         newPath.Clear();//Clear nodes
 
@@ -1020,11 +1014,10 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
         const quint32 idPath = initData.data->AddPiecePath(newPath);
         VToolPiecePath::Create(idPath, newPath, NULL_ID, initData.scene, initData.doc, initData.data, initData.parse,
                                Source::FromTool, drawName, id);
-        newList.append(idPath);
+        newDetail.GetInternalPaths().append(idPath);
         nodeChildren.prepend(idPath);
     }
     children += nodeChildren;
-    newDetail.SetInternalPaths(newList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1032,10 +1025,9 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
                                const QString &drawName, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy,
                                quint32 pRotate, qreal angle)
 {
-    const QVector<quint32> d1Internal = d1.GetInternalPaths();
-    for (int i = 0; i < d1Internal.size(); ++i)
+    for (int i = 0; i < d1.GetInternalPaths().size(); ++i)
     {
-        newDetail.AppendInternalPath(d1Internal.at(i));
+        newDetail.GetInternalPaths().append(d1.GetInternalPaths().at(i));
     }
 
     QVector<quint32> children;
