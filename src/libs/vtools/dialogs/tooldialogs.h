@@ -67,6 +67,7 @@
 #include "tools/dialogmove.h"
 #include "tools/dialogellipticalarc.h"
 #include "tools/dialogpiecepath.h"
+#include "tools/dialogpin.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

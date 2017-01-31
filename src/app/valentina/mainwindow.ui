@@ -48,7 +48,7 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -1144,7 +1144,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>356</height>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1449,6 +1449,32 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="1">
+         <widget class="QToolButton" name="toolButtonPin">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Pin tool</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/pin.png</normaloff>:/toolicon/32x32/pin.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="layoutPage">
@@ -1457,7 +1483,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>356</height>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2574,8 +2600,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

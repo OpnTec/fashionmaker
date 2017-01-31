@@ -147,6 +147,7 @@ enum class Tool : ToolVisHolderType
     Move,
     Midpoint,
     EllipticalArc,
+    Pin,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -193,7 +194,8 @@ enum class Vis : ToolVisHolderType
     ToolMove,
     ToolEllipticalArc,
     ToolPiece,
-    ToolPiecePath
+    ToolPiecePath,
+    ToolPin
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,

@@ -80,5 +80,7 @@
         <file>cursor/el_arc_cursor@2x.png</file>
         <file>cursor/path_cursor.png</file>
         <file>cursor/path_cursor@2x.png</file>
+        <file>cursor/pin_cursor.png</file>
+        <file>cursor/pin_cursor@2x.png</file>
     </qresource>
 </RCC>

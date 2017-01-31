@@ -40,7 +40,8 @@ HEADERS += \
     $$PWD/line/operation/vistoolmove.h \
     $$PWD/path/vistoolellipticalarc.h \
     $$PWD/path/vistoolpiece.h \
-    $$PWD/path/vistoolpiecepath.h
+    $$PWD/path/vistoolpiecepath.h \
+    $$PWD/line/vistoolpin.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -81,4 +82,5 @@ SOURCES += \
     $$PWD/line/operation/vistoolmove.cpp \
     $$PWD/path/vistoolellipticalarc.cpp \
     $$PWD/path/vistoolpiece.cpp \
-    $$PWD/path/vistoolpiecepath.cpp
+    $$PWD/path/vistoolpiecepath.cpp \
+    $$PWD/line/vistoolpin.cpp

@@ -138,6 +138,7 @@ private slots:
     void ToolPointOfContact(bool checked);
     void ToolDetail(bool checked);
     void ToolPiecePath(bool checked);
+    void ToolPin(bool checked);
     void ToolHeight(bool checked);
     void ToolTriangle(bool checked);
     void ToolPointOfIntersection(bool checked);
@@ -171,6 +172,7 @@ private slots:
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);
+    void ClosedDialogPin(int result);
 
     void LoadIndividual();
     void LoadStandard();

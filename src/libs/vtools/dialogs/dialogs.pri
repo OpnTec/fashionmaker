@@ -43,7 +43,8 @@ HEADERS += \
     $$PWD/tools/dialogmove.h \
     $$PWD/tools/dialogellipticalarc.h \
     $$PWD/tools/dialogseamallowance.h \
-    $$PWD/tools/dialogpiecepath.h
+    $$PWD/tools/dialogpiecepath.h \
+    $$PWD/tools/dialogpin.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -86,7 +87,8 @@ SOURCES += \
     $$PWD/tools/dialogmove.cpp \
     $$PWD/tools/dialogellipticalarc.cpp \
     $$PWD/tools/dialogseamallowance.cpp \
-    $$PWD/tools/dialogpiecepath.cpp
+    $$PWD/tools/dialogpiecepath.cpp \
+    $$PWD/tools/dialogpin.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -128,4 +130,5 @@ FORMS += \
     $$PWD/tools/dialogmove.ui \
     $$PWD/tools/dialogellipticalarc.ui \
     $$PWD/tools/dialogseamallowance.ui \
-    $$PWD/tools/dialogpiecepath.ui
+    $$PWD/tools/dialogpiecepath.ui \
+    $$PWD/tools/dialogpin.ui

@@ -576,6 +576,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
                 dialogTool->Build(t);
                 break;
             case Tool::PiecePath:
+            case Tool::Pin:
                 dialogTool->SetPiecesList(doc->GetActivePPPieces());
                 break;
             default:
@@ -996,6 +997,14 @@ void MainWindow::ToolPiecePath(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolPin(bool checked)
+{
+    ToolSelectAllDrawObjects();
+    SetToolButton<DialogPin>(checked, Tool::Pin, "://cursor/pin_cursor.png", tr("Select pin point"),
+                             &MainWindow::ClosedDialogPin);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolHeight handler tool height.
  * @param checked true - button checked.
@@ -1142,6 +1151,18 @@ void MainWindow::ClosedDialogPiecePath(int result)
     }
     ArrowTool();
     doc->LiteParseTree(Document::LiteParse);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClosedDialogPin(int result)
+{
+//    SCASSERT(dialogTool != nullptr);
+//    if (result == QDialog::Accepted)
+//    {
+//        VToolPin::Create(dialogTool, sceneDetails, doc, pattern);
+//    }
+    ArrowTool();
+//    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1760,7 +1781,7 @@ void MainWindow::InitToolButtons()
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Check if all tools were connected.");
 
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -1806,6 +1827,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
     connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
+    connect(ui->toolButtonPin, &QToolButton::clicked, this, &MainWindow::ToolPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1833,7 +1855,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1988,6 +2010,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::EllipticalArc:
             ui->toolButtonEllipticalArc->setChecked(false);
+            break;
+        case Tool::Pin:
+            ui->toolButtonPin->setChecked(false);
             break;
     }
 
@@ -3040,7 +3065,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3081,6 +3106,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonMove->setEnabled(drawTools);
     ui->toolButtonMidpoint->setEnabled(drawTools);
     ui->toolButtonEllipticalArc->setEnabled(drawTools);
+    ui->toolButtonPin->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3362,7 +3388,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3548,6 +3574,10 @@ void MainWindow::LastUsedTool()
         case Tool::EllipticalArc:
             ui->toolButtonEllipticalArc->setChecked(true);
             ToolEllipticalArc(true);
+            break;
+        case Tool::Pin:
+            ui->toolButtonPin->setChecked(true);
+            ToolPin(true);
             break;
     }
 }
