@@ -632,6 +632,26 @@ QVector<quint32> VAbstractPattern::ParsePieceInternalPaths(const QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VAbstractPattern::ParsePiecePins(const QDomElement &domElement)
+{
+    QVector<quint32> records;
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement element = nodeList.at(i).toElement();
+        if (not element.isNull())
+        {
+            const quint32 path = element.text().toUInt();
+            if (path > NULL_ID)
+            {
+                records.append(path);
+            }
+        }
+    }
+    return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
 {
     const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);

@@ -140,15 +140,15 @@ void VToolPin::AddToFile()
 
     if (m_pieceId > NULL_ID)
     {
-//        const VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
-//        VPiece newDet = oldDet;
+        const VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
+        VPiece newDet = oldDet;
 
-//        newDet.GetPins().append(id);
+        newDet.GetPins().append(id);
 
-//        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
-//        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
-//        VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
-//        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
+        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
+        VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
+        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 }
 

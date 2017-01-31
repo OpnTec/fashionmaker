@@ -67,6 +67,7 @@ const quint8 VToolSeamAllowance::pieceVersion = 2;
 const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
 const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
 const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
+const QString VToolSeamAllowance::TagPins    = QStringLiteral("pins");
 
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
@@ -217,6 +218,22 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
             iPathsElement.appendChild(recordNode);
         }
         domElement.appendChild(iPathsElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins)
+{
+    if (pins.size() > 0)
+    {
+        QDomElement pinsElement = doc->createElement(VToolSeamAllowance::TagPins);
+        for (int i = 0; i < pins.size(); ++i)
+        {
+            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
+            recordNode.appendChild(doc->createTextNode(QString().setNum(pins.at(i))));
+            pinsElement.appendChild(recordNode);
+        }
+        domElement.appendChild(pinsElement);
     }
 }
 
@@ -728,6 +745,7 @@ void VToolSeamAllowance::AddToFile()
     //custom seam allowance
     AddCSARecords(doc, domElement, piece.GetCustomSARecords());
     AddInternalPaths(doc, domElement, piece.GetInternalPaths());
+    AddPins(doc, domElement, piece.GetPins());
 
     AddPiece *addDet = new AddPiece(domElement, doc, piece, m_drawName);
     connect(addDet, &AddPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
@@ -760,6 +778,7 @@ void VToolSeamAllowance::RefreshDataInFile()
                 AddNodes(doc, domElement, piece);
                 AddCSARecords(doc, domElement, piece.GetCustomSARecords());
                 AddInternalPaths(doc, domElement, piece.GetInternalPaths());
+                AddPins(doc, domElement, piece.GetPins());
             }
         }
     }

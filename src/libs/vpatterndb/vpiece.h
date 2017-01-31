@@ -99,6 +99,7 @@ public:
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
     QVector<quint32> MissingInternalPaths(const VPiece &det) const;
+    QVector<quint32> MissingPins(const VPiece &det) const;
 
     void                     SetPatternPieceData(const VPatternPieceData &data);
     VPatternPieceData&       GetPatternPieceData();

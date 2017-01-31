@@ -60,6 +60,7 @@ public:
     static const QString TagCSA;
     static const QString TagRecord;
     static const QString TagIPaths;
+    static const QString TagPins;
 
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
@@ -74,6 +75,7 @@ public:
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
     static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
+    static void AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins);
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);

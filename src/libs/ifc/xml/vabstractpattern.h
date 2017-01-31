@@ -99,6 +99,7 @@ public:
     static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
     static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
     static QVector<quint32>        ParsePieceInternalPaths(const QDomElement &domElement);
+    static QVector<quint32>        ParsePiecePins(const QDomElement &domElement);
 
     void           AddToolOnRemove(VDataTool *tool);
 

@@ -36,6 +36,38 @@
 #include <QDebug>
 #include <QPainterPath>
 
+namespace
+{
+QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVector<quint32> &d2Nodes)
+{
+    if (d1Nodes.size() == d2Nodes.size()) //-V807
+    {
+        return QVector<quint32>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d1Nodes.size(); ++i)
+    {
+        set1.insert(d1Nodes.at(i));
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < d2Nodes.size(); ++j)
+    {
+        set2.insert(d2Nodes.at(j));
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<quint32> r;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        r.append(set3.at(i));
+    }
+
+    return r;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece()
     : VAbstractPiece(), d(new VPieceData(PiecePathType::PiecePath))
@@ -367,63 +399,31 @@ QVector<quint32> VPiece::MissingNodes(const VPiece &det) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
 {
-    const QVector<CustomSARecord> detRecords = det.GetCustomSARecords();
-    if (d->m_customSARecords.size() == detRecords.size()) //-V807
-    {
-        return QVector<quint32>();
-    }
-
-    QSet<quint32> set1;
+    QVector<quint32> oldCSARecords;
     for (qint32 i = 0; i < d->m_customSARecords.size(); ++i)
     {
-        set1.insert(d->m_customSARecords.at(i).path);
+        oldCSARecords.append(d->m_customSARecords.at(i).path);
     }
 
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < detRecords.size(); ++j)
+    QVector<quint32> newCSARecords;
+    for (qint32 i = 0; i < det.GetCustomSARecords().size(); ++i)
     {
-        set2.insert(detRecords.at(j).path);
+        newCSARecords.append(det.GetCustomSARecords().at(i).path);
     }
 
-    const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<quint32> r;
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        r.append(set3.at(i));
-    }
-
-    return r;
+    return PieceMissingNodes(oldCSARecords, newCSARecords);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
 {
-    const QVector<quint32> detRecords = det.GetInternalPaths();
-    if (d->m_internalPaths.size() == detRecords.size()) //-V807
-    {
-        return QVector<quint32>();
-    }
+    return PieceMissingNodes(d->m_internalPaths, det.GetInternalPaths());
+}
 
-    QSet<quint32> set1;
-    for (qint32 i = 0; i < d->m_internalPaths.size(); ++i)
-    {
-        set1.insert(d->m_internalPaths.at(i));
-    }
-
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < detRecords.size(); ++j)
-    {
-        set2.insert(detRecords.at(j));
-    }
-
-    const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<quint32> r;
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        r.append(set3.at(i));
-    }
-
-    return r;
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::MissingPins(const VPiece &det) const
+{
+    return PieceMissingNodes(d->m_pins, det.GetPins());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

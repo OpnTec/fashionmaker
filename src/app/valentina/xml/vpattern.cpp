@@ -717,7 +717,8 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                                                << TagPatternInfo
                                                << TagGrainline
                                                << VToolSeamAllowance::TagCSA
-                                               << VToolSeamAllowance::TagIPaths;
+                                               << VToolSeamAllowance::TagIPaths
+                                               << VToolSeamAllowance::TagPins;
 
         const QDomNodeList nodeList = domElement.childNodes();
         for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -756,6 +757,9 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                         break;
                     case 5:// VToolSeamAllowance::TagIPaths
                         detail.SetInternalPaths(ParsePieceInternalPaths(element));
+                        break;
+                    case 6:// VToolSeamAllowance::TagPins
+                        detail.SetPins(ParsePiecePins(element));
                         break;
                     default:
                         break;

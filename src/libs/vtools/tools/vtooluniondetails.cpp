@@ -1422,6 +1422,7 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, const VPiece &d) cons
     //custom seam allowance
     VToolSeamAllowance::AddCSARecords(doc, det, d.GetCustomSARecords());
     VToolSeamAllowance::AddInternalPaths(doc, det, d.GetInternalPaths());
+    VToolSeamAllowance::AddPins(doc, det, d.GetPins());
 
     domElement.appendChild(det);
 }
