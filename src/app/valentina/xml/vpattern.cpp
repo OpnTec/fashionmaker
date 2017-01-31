@@ -963,7 +963,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointFromCircleAndTangent::ToolType  /*19*/
                                        << VToolPointFromArcAndTangent::ToolType     /*20*/
                                        << VToolTrueDarts::ToolType                  /*21*/
-                                       << VToolPointOfIntersectionCurves::ToolType; /*22*/
+                                       << VToolPointOfIntersectionCurves::ToolType  /*22*/
+                                       << VToolPin::ToolType;                       /*23*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -1034,6 +1035,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             break;
         case 22: //VToolPointOfIntersectionCurves::ToolType
             ParseToolPointOfIntersectionCurves(scene, domElement, parse);
+            break;
+        case 23: //VToolPin::ToolType
+            ParsePinPoint(domElement, parse);
             break;
         default:
             VException e(tr("Unknown point type '%1'.").arg(type));
@@ -1531,6 +1535,28 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
     catch (const VExceptionBadId &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &parse)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        VToolPin::Create(id, idObject, NULL_ID, this, data, parse, Source::FromFile, "", idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating pin point"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }

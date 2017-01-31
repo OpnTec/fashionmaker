@@ -35,5 +35,6 @@
 #include "vnodespline.h"
 #include "vnodesplinepath.h"
 #include "vtoolpiecepath.h"
+#include "vtoolpin.h"
 
 #endif // NODEDETAILS_H

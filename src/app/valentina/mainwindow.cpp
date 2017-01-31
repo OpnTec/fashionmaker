@@ -53,6 +53,7 @@
 #include "../vtools/dialogs/tooldialogs.h"
 #include "tools/vtoolseamallowance.h"
 #include "tools/nodeDetails/vtoolpiecepath.h"
+#include "tools/nodeDetails/vtoolpin.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
@@ -1156,13 +1157,13 @@ void MainWindow::ClosedDialogPiecePath(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogPin(int result)
 {
-//    SCASSERT(dialogTool != nullptr);
-//    if (result == QDialog::Accepted)
-//    {
-//        VToolPin::Create(dialogTool, sceneDetails, doc, pattern);
-//    }
+    SCASSERT(dialogTool != nullptr);
+    if (result == QDialog::Accepted)
+    {
+        VToolPin::Create(dialogTool, doc, pattern);
+    }
     ArrowTool();
-//    doc->LiteParseTree(Document::LiteParse);
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
