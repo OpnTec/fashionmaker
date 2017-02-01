@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.0");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.0.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.1");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.1.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -197,6 +197,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000309):
             return QStringLiteral("://schema/pattern/v0.3.9.xsd");
         case (0x000400):
+            return QStringLiteral("://schema/pattern/v0.4.0.xsd");
+        case (0x000401):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -304,7 +306,10 @@ void VPatternConverter::ApplyPatches()
                 ValidateXML(XSDSchema(0x000400), fileName);
                 V_FALLTHROUGH
             case (0x000400):
-                break;
+                ToV0_4_1();
+                ValidateXML(XSDSchema(0x000401), fileName);
+                V_FALLTHROUGH
+            case (0x000401):
             default:
                 break;
         }
@@ -594,6 +599,17 @@ void VPatternConverter::ToV0_4_0()
     TagRemoveAttributeTypeObjectInV0_4_0();
     TagDetailToV0_4_0();
     TagUnionDetailsToV0_4_0();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_4_1()
+{
+    // TODO. Delete if minimal supported version is 0.4.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 1),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.4.1"));
     Save();
 }
 
