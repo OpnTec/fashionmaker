@@ -349,7 +349,7 @@ quint32 AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &in
     children.append(idObject);
     point1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(point1.take());
-    VNodePoint::Create(initData.doc, initData.data, initData.scene, id, idObject, Document::FullParse, Source::FromGui,
+    VNodePoint::Create(initData.doc, initData.data, initData.scene, id, idObject, Document::FullParse, Source::FromTool,
                        drawName, idTool);
     return id;
 }
@@ -391,7 +391,8 @@ quint32 AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &init
     arc2->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(arc2.take());
 
-    VNodeArc::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
+    VNodeArc::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromTool, drawName,
+                     idTool);
     return id;
 }
 
@@ -434,7 +435,7 @@ quint32 AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &in
     arc2->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(arc2.take());
 
-    VNodeEllipticalArc::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromGui,
+    VNodeEllipticalArc::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromTool,
                                drawName, idTool);
     return id;
 }
@@ -469,7 +470,7 @@ quint32 AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &i
     VSpline *spl1 = new VSpline(*spl);
     spl1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(spl1);
-    VNodeSpline::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromGui, drawName,
+    VNodeSpline::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromTool, drawName,
                         idTool);
     return id;
 }
@@ -533,7 +534,7 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
     path1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(path1.take());
 
-    VNodeSplinePath::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromGui, drawName,
+    VNodeSplinePath::Create(initData.doc, initData.data, id, idObject, Document::FullParse, Source::FromTool, drawName,
                             idTool);
     return id;
 }
@@ -997,8 +998,6 @@ void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, quin
 
     QVector<quint32> children;
     CreateUnitedDetailCSA(newDetail, d2, children, id, drawName, initData, dx, dy, pRotate, angle);
-
-    SCASSERT(not children.isEmpty())
     SaveCSAChildren(initData.doc, id, children);
 }
 
@@ -1044,7 +1043,6 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
     QVector<quint32> children;
     CreateUnitedDetailInternalPaths(newDetail, d2, children, id, drawName, initData, dx, dy, pRotate, angle);
 
-    SCASSERT(not children.isEmpty())
     SaveInternalPathsChildren(initData.doc, id, children);
 }
 
