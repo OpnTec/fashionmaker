@@ -621,14 +621,17 @@ QDomElement GetTagChildren(VAbstractPattern *doc, quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void SaveChildren(VAbstractPattern *doc, quint32 id, QDomElement section, const QVector<quint32> &children)
 {
-    for (int i=0; i<children.size(); ++i)
+    if (children.size() > 0)
     {
-        QDomElement tagChild = doc->createElement(VToolUnionDetails::TagChild);
-        tagChild.appendChild(doc->createTextNode(QString().setNum(children.at(i))));
-        section.appendChild(tagChild);
-    }
+        for (int i=0; i<children.size(); ++i)
+        {
+            QDomElement tagChild = doc->createElement(VToolUnionDetails::TagChild);
+            tagChild.appendChild(doc->createTextNode(QString().setNum(children.at(i))));
+            section.appendChild(tagChild);
+        }
 
-    GetTagChildren(doc, id).appendChild(section);
+        GetTagChildren(doc, id).appendChild(section);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
