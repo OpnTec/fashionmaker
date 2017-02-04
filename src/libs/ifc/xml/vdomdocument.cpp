@@ -124,7 +124,8 @@ const QString VDomDocument::TagVersion = QStringLiteral("version");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument()
-    : QDomDocument(), map(QHash<QString, QDomElement>())
+    : QDomDocument(),
+      map()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -804,12 +805,11 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 #endif /*Q_OS_WIN32*/
 
     QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
-    destFile.setAutoRemove(false);
+    destFile.setAutoRemove(false);// Will be renamed to be destination file
     // cppcheck-suppress ConfigurationNotChecked
     if (not destFile.open())
     {
         error = destFile.errorString();
-        result = false;
     }
     else
     {
@@ -849,6 +849,10 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
                     result = true;
                 }
             }
+        }
+        else
+        {
+            error = sourceFile.errorString();
         }
     }
 

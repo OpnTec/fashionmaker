@@ -924,7 +924,6 @@
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
-   <addaction name="actionReadOnly"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBarGradation">

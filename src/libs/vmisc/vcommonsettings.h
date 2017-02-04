@@ -128,7 +128,6 @@ public:
 
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
-    static const QString valentinaUnixHomeFolder;
 #endif
 
 private:

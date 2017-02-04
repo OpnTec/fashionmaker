@@ -54,6 +54,7 @@
 - [#88] New feature: Variable width seam allowances.
 - [#280] New tool: 'Hem' in Detail mode.
 - [#509] Improve feature: Support internal Paths in Detail tool.
+- [#619] Non writable directory prevents opening.
 
 # Version 0.4.6
 - [#594] Broken export on Mac.

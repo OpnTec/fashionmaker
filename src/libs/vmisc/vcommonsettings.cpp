@@ -76,8 +76,7 @@ const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLitera
 static const QString commonIniFilename = QStringLiteral("common");
 
 #if !defined(Q_OS_WIN)
-const QString VCommonSettings::unixStandardSharePath   = QStringLiteral("/usr/share/valentina");
-const QString VCommonSettings::valentinaUnixHomeFolder = QStringLiteral(".valentina");
+const QString VCommonSettings::unixStandardSharePath = QStringLiteral("/usr/share/valentina");
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,15 +109,7 @@ QString VCommonSettings::SharePath(const QString &shareItem)
         }
         else
         {
-            QDir dir(QDir::homePath() + QDir::separator() + VCommonSettings::valentinaUnixHomeFolder + shareItem);
-            if (dir.exists())
-            {
-                return dir.absolutePath();
-            }
-            else
-            {
-                return VCommonSettings::unixStandardSharePath + shareItem;
-            }
+            return VCommonSettings::unixStandardSharePath + shareItem;
         }
     }
 #else // Unix
@@ -132,15 +123,7 @@ QString VCommonSettings::SharePath(const QString &shareItem)
     }
     else
     {
-        QDir dir(QDir::homePath() + QDir::separator() + VCommonSettings::valentinaUnixHomeFolder + shareItem);
-        if (dir.exists())
-        {
-            return dir.absolutePath();
-        }
-        else
-        {
-            return VCommonSettings::unixStandardSharePath + shareItem;
-        }
+        return VCommonSettings::unixStandardSharePath + shareItem;
     }
 #endif
 #endif

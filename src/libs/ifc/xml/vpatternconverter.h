@@ -72,6 +72,8 @@ protected:
     virtual void    ApplyPatches() Q_DECL_OVERRIDE;
     virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
 
+    virtual bool IsReadOnly() const Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString PatternMinVerStr;

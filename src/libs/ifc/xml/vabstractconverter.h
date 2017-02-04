@@ -37,6 +37,7 @@
 
 #include <QCoreApplication>
 #include <QString>
+#include <QTemporaryFile>
 #include <QtGlobal>
 
 #include "vdomdocument.h"
@@ -52,14 +53,15 @@ public:
     explicit VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter() Q_DECL_OVERRIDE;
 
-    void         Convert();
+    QString      Convert();
     virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
     static int GetVersion(const QString &version);
 
 protected:
-    int     ver;
-    QString fileName;
+    int     m_ver;
+    QString m_convertedFileName;
+
 
     void ValidateInputFile(const QString &currentSchema) const;
     Q_NORETURN void InvalidVersion(int ver) const;
@@ -76,6 +78,8 @@ protected:
     virtual void    ApplyPatches() =0;
     virtual void    DowngradeToCurrentMaxVersion() =0;
 
+    virtual bool IsReadOnly() const =0;
+
     void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
@@ -83,12 +87,13 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractConverter)
 
+    QTemporaryFile m_tmpFile;
+
     QString GetVersionStr() const;
 
     static void ValidateVersion(const QString &version);
 
     void ReserveFile() const;
-    void ReplaceSymLink() const;
 };
 
 #endif // VABSTRACTCONVERTER_H

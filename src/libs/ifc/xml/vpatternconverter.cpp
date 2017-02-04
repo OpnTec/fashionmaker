@@ -133,10 +133,11 @@ static const QString strSeamAllowance             = QStringLiteral("seamAllowanc
 static const QString strNodeType                  = QStringLiteral("nodeType");
 static const QString strDet                       = QStringLiteral("det");
 static const QString strTypeObject                = QStringLiteral("typeObject");
+static const QString strReadOnly                  = QStringLiteral("readOnly");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
-    :VAbstractConverter(fileName)
+    : VAbstractConverter(fileName)
 {
     ValidateInputFile(CurrentSchema);
 }
@@ -207,124 +208,105 @@ QString VPatternConverter::XSDSchema(int ver) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ApplyPatches()
 {
-    try
+    switch (m_ver)
     {
-        switch (ver)
-        {
-            case (0x000100):
-                ToV0_1_1();
-                ValidateXML(XSDSchema(0x000101), fileName);
-                V_FALLTHROUGH
-            case (0x000101):
-                ToV0_1_2();
-                ValidateXML(XSDSchema(0x000102), fileName);
-                V_FALLTHROUGH
-            case (0x000102):
-                ToV0_1_3();
-                ValidateXML(XSDSchema(0x000103), fileName);
-                V_FALLTHROUGH
-            case (0x000103):
-                ToV0_1_4();
-                ValidateXML(XSDSchema(0x000104), fileName);
-                V_FALLTHROUGH
-            case (0x000104):
-                ToV0_2_0();
-                ValidateXML(XSDSchema(0x000200), fileName);
-                V_FALLTHROUGH
-            case (0x000200):
-                ToV0_2_1();
-                ValidateXML(XSDSchema(0x000201), fileName);
-                V_FALLTHROUGH
-            case (0x000201):
-                ToV0_2_2();
-                ValidateXML(XSDSchema(0x000202), fileName);
-                V_FALLTHROUGH
-            case (0x000202):
-                ToV0_2_3();
-                ValidateXML(XSDSchema(0x000203), fileName);
-                V_FALLTHROUGH
-            case (0x000203):
-                ToV0_2_4();
-                ValidateXML(XSDSchema(0x000204), fileName);
-                V_FALLTHROUGH
-            case (0x000204):
-                ToV0_2_5();
-                ValidateXML(XSDSchema(0x000205), fileName);
-                V_FALLTHROUGH
-            case (0x000205):
-                ToV0_2_6();
-                ValidateXML(XSDSchema(0x000206), fileName);
-                V_FALLTHROUGH
-            case (0x000206):
-                ToV0_2_7();
-                ValidateXML(XSDSchema(0x000207), fileName);
-                V_FALLTHROUGH
-            case (0x000207):
-                ToV0_3_0();
-                ValidateXML(XSDSchema(0x000300), fileName);
-                V_FALLTHROUGH
-            case (0x000300):
-                ToV0_3_1();
-                ValidateXML(XSDSchema(0x000301), fileName);
-                V_FALLTHROUGH
-            case (0x000301):
-                ToV0_3_2();
-                ValidateXML(XSDSchema(0x000302), fileName);
-                V_FALLTHROUGH
-            case (0x000302):
-                ToV0_3_3();
-                ValidateXML(XSDSchema(0x000303), fileName);
-                V_FALLTHROUGH
-            case (0x000303):
-                ToV0_3_4();
-                ValidateXML(XSDSchema(0x000304), fileName);
-                V_FALLTHROUGH
-            case (0x000304):
-                ToV0_3_5();
-                ValidateXML(XSDSchema(0x000305), fileName);
-                V_FALLTHROUGH
-            case (0x000305):
-                ToV0_3_6();
-                ValidateXML(XSDSchema(0x000306), fileName);
-                V_FALLTHROUGH
-            case (0x000306):
-                ToV0_3_7();
-                ValidateXML(XSDSchema(0x000307), fileName);
-                V_FALLTHROUGH
-            case (0x000307):
-                ToV0_3_8();
-                ValidateXML(XSDSchema(0x000308), fileName);
-                V_FALLTHROUGH
-            case (0x000308):
-                ToV0_3_9();
-                ValidateXML(XSDSchema(0x000309), fileName);
-                V_FALLTHROUGH
-            case (0x000309):
-                ToV0_4_0();
-                ValidateXML(XSDSchema(0x000400), fileName);
-                V_FALLTHROUGH
-            case (0x000400):
-                break;
-            default:
-                break;
-        }
-    }
-    catch (VException &e)
-    {
-        QString error;
-        const QString backupFileName = fileName + QLatin1String(".backup");
-        if (SafeCopy(backupFileName, fileName, error) == false)
-        {
-            const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
-            VException excep(errorMsg);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-
-        QFile file(backupFileName);
-        file.remove();
-
-        throw;
+        case (0x000100):
+            ToV0_1_1();
+            ValidateXML(XSDSchema(0x000101), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000101):
+            ToV0_1_2();
+            ValidateXML(XSDSchema(0x000102), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000102):
+            ToV0_1_3();
+            ValidateXML(XSDSchema(0x000103), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000103):
+            ToV0_1_4();
+            ValidateXML(XSDSchema(0x000104), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000104):
+            ToV0_2_0();
+            ValidateXML(XSDSchema(0x000200), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000200):
+            ToV0_2_1();
+            ValidateXML(XSDSchema(0x000201), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000201):
+            ToV0_2_2();
+            ValidateXML(XSDSchema(0x000202), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000202):
+            ToV0_2_3();
+            ValidateXML(XSDSchema(0x000203), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000203):
+            ToV0_2_4();
+            ValidateXML(XSDSchema(0x000204), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000204):
+            ToV0_2_5();
+            ValidateXML(XSDSchema(0x000205), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000205):
+            ToV0_2_6();
+            ValidateXML(XSDSchema(0x000206), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000206):
+            ToV0_2_7();
+            ValidateXML(XSDSchema(0x000207), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000207):
+            ToV0_3_0();
+            ValidateXML(XSDSchema(0x000300), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000300):
+            ToV0_3_1();
+            ValidateXML(XSDSchema(0x000301), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000301):
+            ToV0_3_2();
+            ValidateXML(XSDSchema(0x000302), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000302):
+            ToV0_3_3();
+            ValidateXML(XSDSchema(0x000303), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000303):
+            ToV0_3_4();
+            ValidateXML(XSDSchema(0x000304), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000304):
+            ToV0_3_5();
+            ValidateXML(XSDSchema(0x000305), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000305):
+            ToV0_3_6();
+            ValidateXML(XSDSchema(0x000306), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000306):
+            ToV0_3_7();
+            ValidateXML(XSDSchema(0x000307), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000307):
+            ToV0_3_8();
+            ValidateXML(XSDSchema(0x000308), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000308):
+            ToV0_3_9();
+            ValidateXML(XSDSchema(0x000309), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000309):
+            ToV0_4_0();
+            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000400):
+            break;
+        default:
+            InvalidVersion(m_ver);
+            break;
     }
 }
 
@@ -333,6 +315,27 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(PatternMaxVerStr);
     Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPatternConverter::IsReadOnly() const
+{
+    // Check if attribute readOnly was not changed in file format
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Check attribute readOnly.");
+
+    // Possibly in future attribute readOnly will change position etc.
+    // For now position is the same for all supported format versions.
+    // But don't forget to keep all versions of attribute until we support that format versions
+
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return false;
+    }
+
+    return GetParametrBool(pattern, strReadOnly, falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1095,7 +1098,7 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
     ms.removeAttribute(strType);
     ms.removeAttribute(strPath);
 
-    QDomText newNodeText = createTextNode(QFileInfo(fileName).absoluteDir().relativeFilePath(path));
+    QDomText newNodeText = createTextNode(QFileInfo(m_convertedFileName).absoluteDir().relativeFilePath(path));
     ms.appendChild(newNodeText);
 }
 

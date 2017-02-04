@@ -60,6 +60,8 @@ const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/st
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+static const QString strTagRead_Only = QStringLiteral("read-only");
+
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
     :VAbstractMConverter(fileName)
@@ -95,48 +97,29 @@ QString VVSTConverter::XSDSchema(int ver) const
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ApplyPatches()
 {
-    try
+    switch (m_ver)
     {
-        switch (ver)
-        {
-            case (0x000300):
-                ToV0_4_0();
-                ValidateXML(XSDSchema(0x000400), fileName);
-                V_FALLTHROUGH
-            case (0x000400):
-                ToV0_4_1();
-                ValidateXML(XSDSchema(0x000401), fileName);
-                V_FALLTHROUGH
-            case (0x000401):
-                ToV0_4_2();
-                ValidateXML(XSDSchema(0x000402), fileName);
-                V_FALLTHROUGH
-            case (0x000402):
-                ToV0_4_3();
-                ValidateXML(XSDSchema(0x000403), fileName);
-                V_FALLTHROUGH
-            case (0x000403):
-                break;
-            default:
-                break;
-        }
-    }
-    catch (VException &e)
-    {
-        QString error;
-        const QString backupFileName = fileName + QLatin1String(".backup");
-        if (SafeCopy(backupFileName, fileName, error) == false)
-        {
-            const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
-            VException excep(errorMsg);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-
-        QFile file(backupFileName);
-        file.remove();
-
-        throw;
+        case (0x000300):
+            ToV0_4_0();
+            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000400):
+            ToV0_4_1();
+            ValidateXML(XSDSchema(0x000401), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000401):
+            ToV0_4_2();
+            ValidateXML(XSDSchema(0x000402), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000402):
+            ToV0_4_3();
+            ValidateXML(XSDSchema(0x000403), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000403):
+            break;
+        default:
+            InvalidVersion(m_ver);
+            break;
     }
 }
 
@@ -145,6 +128,20 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(MeasurementMaxVerStr);
     Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VVSTConverter::IsReadOnly() const
+{
+    // Check if attribute read-only was not changed in file format
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == CONVERTER_VERSION_CHECK(0, 4, 3),
+                      "Check attribute read-only.");
+
+    // Possibly in future attribute read-only will change position etc.
+    // For now position is the same for all supported format versions.
+    // But don't forget to keep all versions of attribute until we support that format versions
+
+    return UniqueTagText(strTagRead_Only, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

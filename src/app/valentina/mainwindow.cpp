@@ -380,19 +380,13 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
         if (m->Type() == MeasurementsType::Standard)
         {
             VVSTConverter converter(path);
-            converter.Convert();
-
-            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
+            m->setXMLContent(converter.Convert());// Read again after conversion
         }
         else
         {
             VVITConverter converter(path);
-            converter.Convert();
-
-            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
+            m->setXMLContent(converter.Convert());// Read again after conversion
         }
-
-        m->setXMLContent(path);// Read again after conversion
 
         if (not m->IsDefinedKnownNamesValid())
         {
@@ -2406,7 +2400,7 @@ bool MainWindow::SaveAs()
     const bool result = SavePattern(fileName, error);
     if (result == false)
     {
-        QMessageBox messageBox;
+        QMessageBox messageBox(this);
         messageBox.setIcon(QMessageBox::Warning);
         messageBox.setInformativeText(tr("Could not save file"));
         messageBox.setDefaultButton(QMessageBox::Ok);
@@ -2449,25 +2443,69 @@ bool MainWindow::SaveAs()
  */
 bool MainWindow::Save()
 {
-    if (curFile.isEmpty())
+    if (curFile.isEmpty() || patternReadOnly)
     {
         return SaveAs();
     }
     else
     {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+        const bool isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+        if (not isFileWritable)
+        {
+            QMessageBox messageBox(this);
+            messageBox.setIcon(QMessageBox::Question);
+            messageBox.setText(tr("The document has no write permissions."));
+            messageBox.setInformativeText("Do you want to change the premissions?");
+            messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+            messageBox.setDefaultButton(QMessageBox::Yes);
+
+            if (messageBox.exec() == QMessageBox::Yes)
+            {
+#ifdef Q_OS_WIN32
+                qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+                bool changed = QFile::setPermissions(curFile,
+                                                     QFileInfo(curFile).permissions() | QFileDevice::WriteUser);
+#ifdef Q_OS_WIN32
+                qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+                if (not changed)
+                {
+                    QMessageBox messageBox(this);
+                    messageBox.setIcon(QMessageBox::Warning);
+                    messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(curFile));
+                    messageBox.setInformativeText(tr("Could not save the file."));
+                    messageBox.setDefaultButton(QMessageBox::Ok);
+                    messageBox.setStandardButtons(QMessageBox::Ok);
+                    messageBox.exec();
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         QString error;
         bool result = SavePattern(curFile, error);
         if (result)
         {
-            QString autofile = curFile + autosavePrefix;
-            QFile file(autofile);
-            file.remove();
+            QFile::remove(curFile + autosavePrefix);
         }
         else
         {
-            QMessageBox messageBox;
+            QMessageBox messageBox(this);
             messageBox.setIcon(QMessageBox::Warning);
-            messageBox.setInformativeText(tr("Could not save file"));
+            messageBox.setText(tr("Could not save the file"));
             messageBox.setDefaultButton(QMessageBox::Ok);
             messageBox.setDetailedText(error);
             messageBox.setStandardButtons(QMessageBox::Ok);
@@ -2559,10 +2597,6 @@ void MainWindow::Clear()
 #endif
     CleanLayout();
     listDetails.clear(); // don't move to CleanLayout()
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
     qApp->getUndoStack()->clear();
     toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
@@ -2698,8 +2732,6 @@ void MainWindow::FullParseFile()
     GlobalChangePP(patternPiece);
 
     SetEnableTool(comboBoxDraws->count() > 0);
-    patternReadOnly = doc->IsReadOnly();
-    SetEnableWidgets(true);
     detailsWidget->UpdateList();
 
     VMainGraphicsView::NewSceneRect(sceneDraw, qApp->getSceneView());
@@ -3272,7 +3304,7 @@ bool MainWindow::MaybeSave()
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
         messageBox->setButtonText(QMessageBox::Yes,
-                                  curFile.isEmpty() || doc->IsReadOnly() ? tr("Save...") : tr("Save"));
+                                  curFile.isEmpty() || patternReadOnly ? tr("Save...") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
@@ -3281,7 +3313,7 @@ bool MainWindow::MaybeSave()
         switch (ret)
         {
             case QMessageBox::Yes:
-                if (doc->IsReadOnly())
+                if (patternReadOnly)
                 {
                     return SaveAs();
                 }
@@ -3910,18 +3942,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-
     qApp->setOpeningPattern();//Begin opening file
     try
     {
         VPatternConverter converter(fileName);
-        converter.Convert();
-
-        VDomDocument::ValidateXML(VPatternConverter::CurrentSchema, fileName);
-        doc->setXMLContent(fileName);
+        doc->setXMLContent(converter.Convert());
         if (!customMeasureFile.isEmpty())
         {
             doc->SetPath(RelativeMPath(fileName, customMeasureFile));
@@ -3984,14 +4009,12 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         return false;
     }
 
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
     FullParseFile();
 
     if (guiEnabled)
     { // No errors occurred
+        patternReadOnly = doc->IsReadOnly();
+        SetEnableWidgets(true);
         setCurrentFile(fileName);
         helpLabel->setText(tr("File loaded"));
         qCDebug(vMainWindow, "File loaded.");
@@ -4297,19 +4320,13 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     if (patternType == MeasurementsType::Standard)
                     {
                         VVSTConverter converter(mPath);
-                        converter.Convert();
-
-                        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
+                        m->setXMLContent(converter.Convert());// Read again after conversion
                     }
                     else
                     {
                         VVITConverter converter(mPath);
-                        converter.Convert();
-
-                        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
+                        m->setXMLContent(converter.Convert());// Read again after conversion
                     }
-
-                    m->setXMLContent(mPath);// Read again after conversion
 
                     if (not m->IsDefinedKnownNamesValid())
                     {
@@ -4630,13 +4647,26 @@ QString MainWindow::GetMeasurementFileName()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateWindowTitle()
 {
-    if (not patternReadOnly)
+    bool isFileWritable = true;
+    if (not curFile.isEmpty())
+    {
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+        isFileWritable = QFileInfo(curFile).isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+    }
+
+    if (not patternReadOnly && isFileWritable)
     {
         setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
     }
     else
     {
-        setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + " " + tr("(read only)"));
+        setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + QLatin1String(" (") + tr("read only") +
+                       QLatin1String(")"));
     }
     setWindowFilePath(curFile);
 

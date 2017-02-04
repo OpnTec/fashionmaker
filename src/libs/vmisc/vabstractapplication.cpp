@@ -125,18 +125,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
         // Connect this slot with VApplication::aboutToQuit.
         Settings()->sync();
     });
-
-#if !defined(Q_OS_WIN)
-    QDir standardPath(VCommonSettings::unixStandardSharePath);
-    const QDir localdata (QDir::homePath() + QDir::separator() + VCommonSettings::valentinaUnixHomeFolder);
-    if (standardPath.exists() && not localdata.exists())
-    {
-        if (localdata.mkdir(localdata.absolutePath()))
-        {
-            SymlinkCopyDirRecursive(standardPath.absolutePath(), localdata.absolutePath(), true);
-        }
-    }
-#endif // !defined(Q_OS_WIN)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -405,55 +393,4 @@ void VAbstractApplication::ClearTranslation()
         removeTranslator(pmsTranslator);
         delete pmsTranslator;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
-{
-    QDir dir;
-    dir.setPath(fromDir);
-
-    foreach (QString copyFile, dir.entryList(QDir::Files))
-    {
-        const QString from = fromDir + QDir::separator() + copyFile;
-        const QString to = toDir + QDir::separator() + copyFile;
-
-        if (QFile::exists(to))
-        {
-            if (replaceOnConflit)
-            {
-                if (QFile::remove(to) == false)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                continue;
-            }
-        }
-
-        if (QFile::link(from, to) == false)
-        {
-            return false;
-        }
-    }
-
-    foreach (QString copyDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
-    {
-        const QString from = fromDir + QDir::separator() + copyDir;
-        const QString to = toDir + QDir::separator() + copyDir;
-
-        if (dir.mkpath(to) == false)
-        {
-            return false;
-        }
-
-        if (SymlinkCopyDirRecursive(from, to, replaceOnConflit) == false)
-        {
-            return false;
-        }
-    }
-
-    return true;
 }
