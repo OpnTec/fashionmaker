@@ -342,6 +342,7 @@ void VToolSeamAllowance::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
 {
+    const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(id);
     VTextGraphicsItem* pVGI = qgraphicsitem_cast<VTextGraphicsItem*>(pItem);
     if (pVGI != m_dataLabel)
@@ -367,6 +368,7 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
         }
     }
 
+    setSelected(selected);
     update();
 }
 
@@ -703,10 +705,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     if (m_dataLabel->IsIdle() == false || m_patternInfo->IsIdle() == false || m_grainLine->IsIdle() == false)
     {
-        painter->save();
-        painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
-        painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
-        painter->restore();
+        setSelected(true);
     }
     QGraphicsPathItem::paint(painter, option, widget);
 }
