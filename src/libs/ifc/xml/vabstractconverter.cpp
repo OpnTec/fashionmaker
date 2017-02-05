@@ -70,7 +70,10 @@ QString VAbstractConverter::Convert()
         return m_convertedFileName;
     }
 
-    ReserveFile();
+    if (not IsReadOnly())
+    {
+        ReserveFile();
+    }
 
     if (m_tmpFile.open())
     {
