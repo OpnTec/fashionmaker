@@ -161,9 +161,6 @@ void DialogAlongLine::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogAlongLine::~DialogAlongLine()
 {
-    VContainer *locData = const_cast<VContainer *> (data);
-    locData->RemoveVariable(currentLength);
-
     delete ui;
 }
 

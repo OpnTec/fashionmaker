@@ -121,6 +121,18 @@ void Visualization::setMainColor(const QColor &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const VContainer *Visualization::GetData() const
+{
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::SetData(const VContainer *data)
+{
+    this->data = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void Visualization::SetFactor(qreal factor)
 {
     CheckFactor(this->factor, factor);

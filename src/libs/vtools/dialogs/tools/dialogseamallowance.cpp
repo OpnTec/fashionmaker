@@ -92,9 +92,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::~DialogSeamAllowance()
 {
-    VContainer *locData = const_cast<VContainer *> (data);
-    locData->RemoveVariable(currentSeamAllowance);
-
     delete ui;
 }
 
