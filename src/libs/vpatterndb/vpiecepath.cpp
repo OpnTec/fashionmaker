@@ -55,6 +55,60 @@ VSAPoint CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSAPoint CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+                         const QVector<QPointF> &curvePoints)
+{
+    if (node.GetTypeTool() == Tool::NodePoint)
+    {
+        return CurvePoint(candidate, data, node, curvePoints);
+    }
+    else
+    {
+        // See issue #620. Detail path not correct. Previous curve also should cut segment.
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+        const QVector<QPointF> points = curve->GetPoints();
+        if (not points.isEmpty())
+        {
+            QPointF end; // Last point for this curve show start of next segment
+            node.GetReverse() ? end = points.first() : end = points.last();
+            if (VAbstractCurve::IsPointOnCurve(curvePoints, end))
+            {
+                candidate = VSAPoint(end);
+            }
+        }
+    }
+    return candidate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+                       const QVector<QPointF> &curvePoints)
+{
+    if (node.GetTypeTool() == Tool::NodePoint)
+    {
+        return CurvePoint(candidate, data, node, curvePoints);
+    }
+    else
+    {
+        // See issue #620. Detail path not correct. Previous curve also should cut segment.
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+        const QVector<QPointF> points = curve->GetPoints();
+        if (not points.isEmpty())
+        {
+            QPointF begin;// First point for this curve show finish of previous segment
+            node.GetReverse() ? begin = points.last() : begin = points.first();
+            if (VAbstractCurve::IsPointOnCurve(curvePoints, begin))
+            {
+                candidate = VSAPoint(begin);
+            }
+        }
+    }
+    return candidate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief indexOfNode return index in list node using id object.
  * @param list list nodes detail.
@@ -324,7 +378,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
         int index = 0;
         i == 0 ? index = nodes.size()-1 : index = i-1;
 
-        begin = CurvePoint(begin, data, nodes.at(index), points);
+        begin = CurveStartPoint(begin, data, nodes.at(index), points);
     }
     return begin;
 }
@@ -353,7 +407,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
         int index = 0;
         i == nodes.size() - 1 ? index = 0 : index = i+1;
 
-        end = CurvePoint(end, data, nodes.at(index), points);
+        end = CurveEndPoint(end, data, nodes.at(index), points);
     }
     return end;
 }

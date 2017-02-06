@@ -39,6 +39,7 @@ public:
 
 private slots:
     void ClearLoop();
+    void Issue620();
 
 private:
     Q_DISABLE_COPY(TST_VPiece)
