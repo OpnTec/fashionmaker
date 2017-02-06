@@ -114,27 +114,27 @@ int main(int argc, char** argv)
         delete obj;
     };
 
-//    ASSERT_TEST(new TST_FindPoint());
+    ASSERT_TEST(new TST_FindPoint());
     ASSERT_TEST(new TST_VPiece());
-//    ASSERT_TEST(new TST_VPoster());
-//    ASSERT_TEST(new TST_VAbstractPiece());
-//    ASSERT_TEST(new TST_VSpline());
-//    ASSERT_TEST(new TST_VSplinePath());
-//    ASSERT_TEST(new TST_NameRegExp());
-//    ASSERT_TEST(new TST_VLayoutDetail());
-//    ASSERT_TEST(new TST_VArc());
-//    ASSERT_TEST(new TST_VEllipticalArc());
-//    ASSERT_TEST(new TST_QmuTokenParser());
-//    ASSERT_TEST(new TST_VMeasurements());
-//    ASSERT_TEST(new TST_VLockGuard());
-//    ASSERT_TEST(new TST_Misc());
-//    ASSERT_TEST(new TST_VCommandLine());
-//    ASSERT_TEST(new TST_VAbstractCurve());
-//    ASSERT_TEST(new TST_VCubicBezierPath());
-//    ASSERT_TEST(new TST_VGObject());
-//    ASSERT_TEST(new TST_VPointF());
-//    ASSERT_TEST(new TST_ReadVal());
-//    ASSERT_TEST(new TST_VTranslateVars());
+    ASSERT_TEST(new TST_VPoster());
+    ASSERT_TEST(new TST_VAbstractPiece());
+    ASSERT_TEST(new TST_VSpline());
+    ASSERT_TEST(new TST_VSplinePath());
+    ASSERT_TEST(new TST_NameRegExp());
+    ASSERT_TEST(new TST_VLayoutDetail());
+    ASSERT_TEST(new TST_VArc());
+    ASSERT_TEST(new TST_VEllipticalArc());
+    ASSERT_TEST(new TST_QmuTokenParser());
+    ASSERT_TEST(new TST_VMeasurements());
+    ASSERT_TEST(new TST_VLockGuard());
+    ASSERT_TEST(new TST_Misc());
+    ASSERT_TEST(new TST_VCommandLine());
+    ASSERT_TEST(new TST_VAbstractCurve());
+    ASSERT_TEST(new TST_VCubicBezierPath());
+    ASSERT_TEST(new TST_VGObject());
+    ASSERT_TEST(new TST_VPointF());
+    ASSERT_TEST(new TST_ReadVal());
+    ASSERT_TEST(new TST_VTranslateVars());
 
     return status;
 }
