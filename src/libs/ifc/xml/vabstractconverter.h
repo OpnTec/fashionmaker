@@ -53,8 +53,7 @@ public:
     explicit VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter() Q_DECL_OVERRIDE;
 
-    QString      Convert();
-    virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
+    QString Convert();
 
     static int GetVersion(const QString &version);
 
@@ -62,10 +61,9 @@ protected:
     int     m_ver;
     QString m_convertedFileName;
 
-
     void ValidateInputFile(const QString &currentSchema) const;
     Q_NORETURN void InvalidVersion(int ver) const;
-    void Save() const;
+    void Save();
     void SetVersion(const QString &version);
 
     virtual int     MinVer() const =0;

@@ -84,7 +84,6 @@ QString VAbstractConverter::Convert()
         const QString errorMsg(tr("Error openning a temp file file: %1.").arg(m_tmpFile.errorString()));
         throw VException(errorMsg);
     }
-    m_tmpFile.close();
 
     m_ver < MaxVer() ? ApplyPatches() : DowngradeToCurrentMaxVersion();
 
@@ -257,23 +256,6 @@ Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) const
-{
-    try
-    {
-        TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        Q_UNUSED(e)
-        error = tr("Error no unique id.");
-        return false;
-    }
-
-    return VDomDocument::SaveDocument(fileName, error);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
 {
     QString schema;
@@ -311,12 +293,28 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Save() const
+void VAbstractConverter::Save()
 {
-    QString error;
-    if (SaveDocument(m_convertedFileName, error) == false)
+    try
     {
-        VException e(error);
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        Q_UNUSED(e)
+        VException ex(tr("Error no unique id."));
+        throw ex;
+    }
+
+    m_tmpFile.resize(0);//clear previous content
+    const int indent = 4;
+    QTextStream out(&m_tmpFile);
+    out.setCodec("UTF-8");
+    save(out, indent);
+
+    if (not m_tmpFile.flush())
+    {
+        VException e(m_tmpFile.errorString());
         throw e;
     }
 }
