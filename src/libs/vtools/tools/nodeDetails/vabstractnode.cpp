@@ -143,6 +143,19 @@ void VAbstractNode::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::ToolCreation(const Source &typeCreation)
+{
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
+    {
+        AddToFile();
+    }
+    else
+    {
+        RefreshDataInFile();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToModeling add tag to modeling tag current pattern peace.
  * @param domElement tag.
