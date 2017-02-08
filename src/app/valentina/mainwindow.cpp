@@ -2811,7 +2811,7 @@ void MainWindow::SetEnableWidgets(bool enable)
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
-    ui->actionSave->setEnabled(enable && not patternReadOnly);
+    ui->actionSave->setEnabled(isWindowModified() && enable && not patternReadOnly);
     ui->actionSaveAs->setEnabled(enable);
     ui->actionPattern_properties->setEnabled(enable && designStage);
     ui->actionZoomIn->setEnabled(enable);
