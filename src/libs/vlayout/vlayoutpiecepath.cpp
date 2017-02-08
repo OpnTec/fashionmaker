@@ -28,6 +28,7 @@
 
 #include "vlayoutpiecepath.h"
 #include "vlayoutpiecepath_p.h"
+#include "vlayoutdef.h"
 
 #include <QPainterPath>
 
