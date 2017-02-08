@@ -40,6 +40,7 @@
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vtools/tools/vabstracttool.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -475,7 +476,9 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *det
     QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        listDetails.append(VLayoutPiece::Create(i.value(), pattern));
+        VAbstractTool *tool = qobject_cast<VAbstractTool*>(doc->getTool(i.key()));
+        SCASSERT(tool != nullptr)
+        listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
         ++i;
     }
 }

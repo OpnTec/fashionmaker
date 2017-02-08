@@ -140,7 +140,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QStr
         doc->AddTool(id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
-    data->RemoveVariable(currentLength);
+    data->RemoveVariable(currentSeamAllowance);
     return piece;
 }
 
