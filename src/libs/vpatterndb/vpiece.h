@@ -64,8 +64,6 @@ public:
     QVector<VPointF> MainPathNodePoints(const VContainer *data) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
-    QVector<QVector<QPointF>> GetInternalPathsPoints(const VContainer *data) const;
-
     QPainterPath MainPathPath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const VContainer *data) const;
 

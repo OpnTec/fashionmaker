@@ -59,6 +59,7 @@ class VLayoutPieceData;
 class VPatternInfoGeometry;
 class VPatternPieceData;
 class VGrainlineGeometry;
+class VLayoutPiecePath;
 
 class VLayoutPiece :public VAbstractPiece
 {
@@ -79,8 +80,8 @@ public:
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
-    QVector<QVector<QPointF>> GetInternlaPathsPoints() const;
-    void SetInternlaPathsPoints(const QVector<QVector<QPointF>> &internalPathsPoints);
+    QVector<VLayoutPiecePath> GetInternalPaths() const;
+    void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
     void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
 
@@ -130,10 +131,9 @@ private:
     void ClearTextItems();
     void CreateTextItems();
 
+    void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
     void CreateTextItem(int i, QGraphicsItem *parent) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
-
-    QPainterPath InternalPathsPath() const;
 
     static QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points);
     QVector<QPointF> Map(const QVector<QPointF> &points) const;

@@ -37,6 +37,8 @@
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vmisc/diagnostic.h"
+#include "vlayoutpiecepath.h"
 
 #include "vtextmanager.h"
 
@@ -96,8 +98,8 @@ public:
     /** @brief layoutAllowance list of layout allowance points. */
     QVector<QPointF>          layoutAllowance;
 
-    /** @brief m_internalPaths list of internal paths points. */
-    QVector<QVector<QPointF>> m_internalPaths;
+    /** @brief m_internalPaths list of internal paths. */
+    QVector<VLayoutPiecePath> m_internalPaths;
 
     /** @brief matrix transformation matrix*/
     QTransform                matrix;
