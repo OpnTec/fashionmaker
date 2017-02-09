@@ -1840,7 +1840,7 @@ void VTranslateMeasurements::InitGroupN()
     g = translate("VTranslateMeasurements",
                   "Rise length, side, sitting", "Full measurement name.");
     d = translate("VTranslateMeasurements",
-                  "From Waist Side around hp curve down to surface, while seated on hard surface.",
+                  "From Waist Side around hip curve down to surface, while seated on hard surface.",
                   "Full measurement description.");
     InitMeasurement(riseLengthSideSitting_M, m, g, d, "N04");
     //=================================================================================================================
