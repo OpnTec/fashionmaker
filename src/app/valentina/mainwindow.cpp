@@ -1506,6 +1506,12 @@ void MainWindow::ShowMeasurements()
                                       << "-u"
                                       << VDomDocument::UnitsToStr(qApp->patternUnit());
         }
+
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
         const QString tape = qApp->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
         QProcess::startDetached(tape, arguments, workingDirectory);
@@ -3779,7 +3785,14 @@ void MainWindow::CreateActions()
     {
         const QString tape = qApp->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-        QProcess::startDetached(tape, QStringList(), workingDirectory);
+
+        QStringList arguments;
+        if (isNoScaling)
+        {
+            arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        }
+
+        QProcess::startDetached(tape, arguments, workingDirectory);
     });
 
     connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
@@ -3906,7 +3919,14 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         {
             const QString tape = qApp->TapeFilePath();
             const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-            QProcess::startDetached(tape, QStringList(fileName), workingDirectory);
+
+            QStringList arguments = QStringList() << fileName;
+            if (isNoScaling)
+            {
+                arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+            }
+
+            QProcess::startDetached(tape, arguments, workingDirectory);
             qApp->exit(V_EX_OK);
             return false; // stop continue processing
         }
@@ -4134,7 +4154,14 @@ void MainWindow::CreateMeasurements()
 {
     const QString tape = qApp->TapeFilePath();
     const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-    QProcess::startDetached(tape, QStringList(), workingDirectory);
+
+    QStringList arguments;
+    if (isNoScaling)
+    {
+        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+    }
+
+    QProcess::startDetached(tape, arguments, workingDirectory);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4546,6 +4573,8 @@ void MainWindow::ProcessCMD()
 {
     const VCommandLinePtr cmd = qApp->CommandLine();
     auto args = cmd->OptInputFileNames();
+
+    isNoScaling = cmd->IsNoScalingEnabled();
 
     if (VApplication::IsGUIMode())
     {

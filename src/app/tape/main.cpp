@@ -49,9 +49,9 @@ int main(int argc, char *argv[])
 
     qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-#endif
+#ifndef Q_OS_MAC // supports natively
+    InitHighDpiScaling(argc, argv);
+#endif //Q_OS_MAC
 
     MApplication app(argc, argv);
     app.InitOptions();

@@ -581,6 +581,11 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             tr("Use for unit testing. Run the program and open a file without showing the main window."));
     parser.addOption(testOption);
     //-----
+    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
+            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+               "Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable."));
+    parser.addOption(scalingOption);
+    //-----
     parser.process(arguments);
 
     bool flagHeight = false;

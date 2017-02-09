@@ -56,10 +56,14 @@ public:
 
     //@brief creates object and applies export related options to parser
 
-    //@brief tests if user enabled test mode from cmd, throws exception if not exactly 1 input VAL file supplied in case test mode enabled
+    //@brief tests if user enabled test mode from cmd, throws exception if not exactly 1 input VAL file supplied in
+    //case test mode enabled
     bool IsTestModeEnabled() const;
 
-    //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case export enabled
+    bool IsNoScalingEnabled() const;
+
+    //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case
+    //export enabled
     bool IsExportEnabled() const;
 
     //@brief returns path to custom measure file or empty string
@@ -68,7 +72,8 @@ public:
     //@brief returns the base name of layout files or empty string if not set
     QString OptBaseName() const;
 
-    //@brief returns the absolute path to output destination directory or path to application's current directory if not set
+    //@brief returns the absolute path to output destination directory or path to application's current directory if
+    //not set
     QString OptDestinationPath() const;
 
     //@brief returns export type set, defaults 0 - svg
