@@ -152,7 +152,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ui->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     ui->lineEditName->setText(piece.GetName());
 
-    ui->plainTextEditFormulaWidth->setPlainText(piece.GetFormulaSAWidth());
+    const QString width = qApp->TrVars()->FormulaToUser(piece.GetFormulaSAWidth(), qApp->Settings()->GetOsSeparator());
+    ui->plainTextEditFormulaWidth->setPlainText(width);
     m_saWidth = piece.GetSAWidth();
 
     m_mx = piece.GetMx();
@@ -635,11 +636,11 @@ void DialogSeamAllowance::NodeChanged(int index)
             {
                 ui->pushButtonDefBefore->setEnabled(true);
             }
+            w1Formula = qApp->TrVars()->FormulaToUser(w1Formula, qApp->Settings()->GetOsSeparator());
             if (w1Formula.length() > 80)// increase height if needed.
             {
                 this->DeployWidthBeforeFormulaTextEdit();
             }
-            w1Formula = qApp->TrVars()->FormulaToUser(w1Formula, qApp->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthBefore->setPlainText(w1Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthBefore);
 
@@ -652,11 +653,11 @@ void DialogSeamAllowance::NodeChanged(int index)
             {
                 ui->pushButtonDefAfter->setEnabled(true);
             }
+            w2Formula = qApp->TrVars()->FormulaToUser(w2Formula, qApp->Settings()->GetOsSeparator());
             if (w2Formula.length() > 80)// increase height if needed.
             {
                 this->DeployWidthAfterFormulaTextEdit();
             }
-            w2Formula = qApp->TrVars()->FormulaToUser(w2Formula, qApp->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthAfter->setPlainText(w2Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthAfter);
 
@@ -1248,6 +1249,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
 
     QString width = ui->plainTextEditFormulaWidth->toPlainText();
     width.replace("\n", " ");
+    width = qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
     piece.SetFormulaSAWidth(width, m_saWidth);
 
     piece.GetPatternPieceData().SetLetter(ui->lineEditLetter->text());
