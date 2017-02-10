@@ -252,6 +252,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
             }
             break;
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
@@ -287,6 +288,7 @@ QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data) const
             }
             break;
             case Tool::NodeArc:
+            case Tool::NodeElArc:
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
             default:
@@ -314,6 +316,7 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
             }
             break;
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
@@ -674,6 +677,7 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
             case (Tool::NodePoint):
                 return *data->GeometricObject<VPointF>(node.GetId());
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {
@@ -725,6 +729,7 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
             case (Tool::NodePoint):
                 return *data->GeometricObject<VPointF>(node.GetId());
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {

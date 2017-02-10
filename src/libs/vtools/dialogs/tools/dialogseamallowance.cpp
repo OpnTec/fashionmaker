@@ -208,6 +208,9 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
                 case SceneObject::Arc:
                     NewMainPathItem(VPieceNode(id, Tool::NodeArc, reverse));
                     break;
+                case SceneObject::ElArc:
+                    NewMainPathItem(VPieceNode(id, Tool::NodeElArc, reverse));
+                    break;
                 case SceneObject::Point:
                     NewMainPathItem(VPieceNode(id, Tool::NodePoint));
                     break;

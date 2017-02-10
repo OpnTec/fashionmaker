@@ -156,6 +156,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
             }
             break;
             case (Tool::NodeArc):
+            case (Tool::NodeElArc):
             case (Tool::NodeSpline):
             case (Tool::NodeSplinePath):
             {

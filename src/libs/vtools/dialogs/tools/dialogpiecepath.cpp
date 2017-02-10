@@ -96,6 +96,9 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
                 case SceneObject::Arc:
                     NewItem(VPieceNode(id, Tool::NodeArc, reverse));
                     break;
+                case SceneObject::ElArc:
+                    NewItem(VPieceNode(id, Tool::NodeElArc, reverse));
+                    break;
                 case SceneObject::Point:
                     NewItem(VPieceNode(id, Tool::NodePoint));
                     break;

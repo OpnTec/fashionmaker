@@ -647,6 +647,9 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
             break;
+        case (Tool::NodeElArc):
+            doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeElArc);
+            break;
         case (Tool::NodePoint):
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
             break;
