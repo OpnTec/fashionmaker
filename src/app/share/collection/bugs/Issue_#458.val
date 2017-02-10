@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.0</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments>
+        <increment name="#YokeLine" description="" formula="3.2"/>
+        <increment name="#CollarDepth" description="" formula="4"/>
+        <increment name="#HemIdentFront" description="" formula="3.5"/>
+        <increment name="#WaistEaseFront" description="" formula="2"/>
+        <increment name="#WaistEaseBack" description="" formula="3"/>
+        <increment name="#HemNarrowing" description="" formula="1.5"/>
+        <increment name="#CollarYokeJut" description="" formula="4.5"/>
+        <increment name="#BackCollarRounding" description="" formula="2"/>
+        <increment name="#CollarLateralEasing" description="" formula="0.3"/>
+        <increment name="#SlopeAdjustment" description="" formula="1"/>
+        <increment name="#ChestEaseFront" description="" formula="1.5"/>
+        <increment name="#ChestEaseBack" description="" formula="2.5"/>
+        <increment name="#ShoulderEase" description="" formula="2"/>
+        <increment name="#ScapulaEase" description="" formula="#ShoulderEase/2"/>
+        <increment name="#HemIdent" description="" formula="6"/>
+        <increment name="#ArmpitEase" description="" formula="7"/>
+        <increment name="#WaistLine" description="" formula="2"/>
+        <increment name="#CuffButton" description="" formula="1.25 "/>
+        <increment name="#CuffEase" description="" formula="3"/>
+        <increment name="#BigWatchEase" description="" formula="2"/>
+        <increment name="#SmallWatchEase" description="" formula="1"/>
+        <increment name="#SleeveLengthEase" description="" formula="4 "/>
+        <increment name="#SleeveFold" description="" formula="2"/>
+        <increment name="#PIQ" description="" formula="0.75"/>
+    </increments>
+    <draw name="collar">
+        <calculation>
+            <point type="single" x="-0.298129" y="-16.1555" id="1000703" name="O1" mx="1.36164" my="0.209928"/>
+            <point type="endLine" typeLine="none" id="1000704" name="O2" basePoint="1000703" mx="-9.60572" lineColor="blue" angle="0" my="1.47684" length="(19.256+11.4668+11.4668)/2"/>
+            <point type="endLine" typeLine="none" id="1000705" name="O3" basePoint="1000703" mx="2.56803" lineColor="blue" angle="0" my="0.214475" length="Line_O1_O2 + 3"/>
+            <point type="alongLine" typeLine="none" id="1000706" name="O4" firstPoint="1000703" secondPoint="1000704" mx="-3.40929" lineColor="black" my="-2.63592" length="Line_O1_O2*2/3"/>
+            <point type="endLine" typeLine="none" id="1000708" name="O12" basePoint="1000703" mx="-5.29549" lineColor="black" angle="90" my="-2.52057" length="0.3"/>
+            <point type="endLine" typeLine="none" id="1000717" name="O6" basePoint="1000703" mx="2.4801" lineColor="black" angle="90" my="-2.63106" length="#CollarDepth"/>
+            <point type="endLine" typeLine="none" id="1000721" name="O7" basePoint="1000717" mx="-3.76081" lineColor="black" angle="90" my="0.706981" length="Line_O1_O6"/>
+            <point type="normal" typeLine="none" id="1000722" name="K12" firstPoint="1000705" secondPoint="1000704" mx="4.01514" lineColor="black" angle="180" my="-1.49418" length="2.3"/>
+            <spline type="pathInteractive" id="1000723" color="black">
+                <pathPoint angle1="180" pSpline="1000708" angle2="0" length1="0" length2="5.62994"/>
+                <pathPoint angle1="179" pSpline="1000706" angle2="359" length1="1.78716" length2="7.39539"/>
+                <pathPoint angle1="210" pSpline="1000722" angle2="30" length1="1.05292" length2="0"/>
+            </spline>
+            <point type="normal" typeLine="none" id="1000724" name="K13" firstPoint="1000704" secondPoint="1000705" mx="6.37576" lineColor="black" angle="0" my="-3.5534" length="Line_O1_O6-1"/>
+            <point type="endLine" typeLine="none" id="1000725" name="K14" basePoint="1000724" mx="7.02485" lineColor="black" angle="180" my="-5.89503" length="0.6"/>
+            <spline point4="1000725" type="simpleInteractive" angle1="0" angle2="173" id="1000726" color="black" length1="8.01324" length2="8.01324" point1="1000717"/>
+            <point type="endLine" typeLine="none" id="1000728" name="K15" basePoint="1000725" mx="-7.80413" lineColor="black" angle="270" my="-3.82789" length="1"/>
+            <spline point4="1000728" type="simpleInteractive" angle1="0" angle2="160" id="1000729" color="black" length1="13.2689" length2="3.21669" point1="1000717"/>
+            <point type="cutSpline" id="1000730" name="K16" spline="1000729" mx="3.62347" my="-8.49816" length="Spl_O6_K14"/>
+            <point type="endLine" typeLine="hair" id="1000733" name="K17" basePoint="1000730" mx="0.0386031" lineColor="black" angle="95-((#CollarDepth-4)*5)" my="-1.5155" length="#CollarDepth+4"/>
+            <spline point4="1000733" type="simpleInteractive" angle1="0" angle2="210" id="1000734" color="black" length1="12.7318" length2="3.08649" point1="1000721"/>
+            <point type="endLine" typeLine="none" id="1000735" name="G1" basePoint="1000703" mx="-0.348152" lineColor="black" angle="180" my="-0.659347" length="Line_O1_O4"/>
+            <point type="alongLine" typeLine="none" id="1000736" name="G2" firstPoint="1000703" secondPoint="1000735" mx="0.00152676" lineColor="black" my="0.0684361" length="Line_O1_O2"/>
+            <point type="alongLine" typeLine="none" id="1000737" name="G3" firstPoint="1000703" secondPoint="1000735" mx="-6.60207" lineColor="black" my="-0.977679" length="Line_O1_O3"/>
+            <point type="normal" typeLine="none" id="1000738" name="G4" firstPoint="1000737" secondPoint="1000736" mx="-6.5367" lineColor="black" angle="0" my="-1.6315" length="Line_O3_K12"/>
+            <point type="normal" typeLine="none" id="1000739" name="G5" firstPoint="1000736" secondPoint="1000735" mx="-7.25594" lineColor="black" angle="0" my="-4.37754" length="Line_O2_K13"/>
+            <point type="endLine" typeLine="none" id="1000740" name="G6" basePoint="1000739" mx="-6.1444" lineColor="black" angle="0" my="-6.20825" length="Line_K13_K14"/>
+            <point type="endLine" typeLine="none" id="1000741" name="G7" basePoint="1000740" mx="-8.89045" lineColor="black" angle="270" my="-2.80838" length="Line_K14_K15"/>
+            <spline type="pathInteractive" id="1000742" color="black">
+                <pathPoint angle1="0" pSpline="1000708" angle2="180" length1="0" length2="5.60314"/>
+                <pathPoint angle1="1" pSpline="1000735" angle2="181" length1="1.81278" length2="7.39539"/>
+                <pathPoint angle1="330" pSpline="1000738" angle2="150" length1="1.045" length2="0"/>
+            </spline>
+            <spline point4="1000740" type="simpleInteractive" angle1="180" angle2="7" id="1000743" color="black" length1="8.01324" length2="8.01324" point1="1000717"/>
+            <spline point4="1000741" type="simpleInteractive" angle1="180" angle2="20" id="1000745" color="black" length1="13.2689" length2="3.21669" point1="1000717"/>
+            <point type="cutSpline" id="1000746" name="G8" spline="1000745" mx="-3.9214" my="-8.49663" length="Spl_O6_K14"/>
+            <point type="endLine" typeLine="hair" id="1000749" name="G9" basePoint="1000746" mx="0.132292" lineColor="black" angle="180-AngleLine_K16_K17" my="0.264583" length="Line_K16_K17"/>
+            <spline point4="1000749" type="simpleInteractive" angle1="180" angle2="330" id="1000750" color="black" length1="12.7318" length2="3.08649" point1="1000721"/>
+            <point type="cutSplinePath" id="1001041" name="PQ21b" mx="-3.41597" splinePath="1000723" my="4.10568" length="(19.256+11.4668+11.4668)/2"/>
+            <point type="cutSplinePath" id="1001044" name="Endpoint" mx="6.55958" splinePath="1000723" my="0.291557" length="(19.256+11.4668+11.4668)/2+1.5+0.25"/>
+            <spline point4="1001044" type="simpleInteractive" angle1="354.282" angle2="111.161" id="1001047" color="black" length1="1.88142" length2="0.800176" point1="1000725"/>
+            <point type="cutSplinePath" id="1001048" name="Endpoint2" mx="-4.45697" splinePath="1000742" my="4.96577" length="(19.256+11.4668+11.4668)/2+1.5+0.25"/>
+            <spline point4="1001048" type="simpleInteractive" angle1="186" angle2="69" id="1001051" color="black" length1="1.88689" length2="0.796687" point1="1000740"/>
+            <point type="cutSplinePath" id="1001210" name="PQ13c" mx="-2.25666" splinePath="1000723" my="3.18441" length="#PIQ"/>
+            <point type="cutSplinePath" id="1001213" name="PQ13a" mx="-1.17739" splinePath="1000742" my="4.60459" length="#PIQ"/>
+            <point type="cutSpline" id="1001216" name="PQ14a" spline="1000750" mx="-1.46034" my="-3.80548" length="#PIQ"/>
+            <point type="cutSpline" id="1001219" name="PQ14c" spline="1000734" mx="-2.5221" my="-3.80548" length="#PIQ"/>
+            <point type="cutSpline" id="1001222" name="PQ15c" spline="1000729" mx="-2.56634" my="1.10514" length="#PIQ"/>
+            <point type="cutSpline" id="1001225" name="PQ15a" spline="1000745" mx="-1.54882" my="1.10514" length="#PIQ"/>
+            <point type="cutSpline" id="1001228" name="PQ16a" spline="1000743" mx="-1.59306" my="-2.87644" length="#PIQ"/>
+            <point type="cutSpline" id="1001231" name="PQ16c" spline="1000726" mx="-2.61058" my="-2.87644" length="#PIQ"/>
+            <point type="cutSpline" id="1001234" name="PQ17a" spline="1000726" mx="-2.78754" my="-3.45156" length="Spl_O6_K14-2-#PIQ"/>
+            <point type="cutSpline" id="1001237" name="PQ17c" spline="1000726" mx="-3.76081" my="-3.58428" length="Spl_O6_K14-2+#PIQ"/>
+            <point type="cutSpline" id="1001240" name="PQ17b" spline="1000726" mx="-3.27418" my="-3.4958" length="Spl_O6_K14-2"/>
+            <point type="cutSpline" id="1001243" name="PQ18a" spline="1000729" mx="-7.46855" my="-5.03497" length="Spl_O6_K15-2-#PIQ"/>
+            <point type="cutSpline" id="1001246" name="PQ18c" spline="1000729" mx="-10.3153" my="-8.0789" length="Spl_O6_K15-2+#PIQ"/>
+            <point type="cutSpline" id="1001249" name="PQ18b" spline="1000729" mx="-10.7768" my="-10.5546" length="Spl_O6_K15-2"/>
+            <point type="cutSpline" id="1001252" name="PQ19c" spline="1000743" mx="-0.0889053" my="-3.18612" length="Spl_O6_G6-2-#PIQ"/>
+            <point type="cutSpline" id="1001255" name="PQ19a" spline="1000743" mx="0.928604" my="-3.36308" length="Spl_O6_G6-2+#PIQ"/>
+            <point type="cutSpline" id="1001258" name="PQ19b" spline="1000743" mx="0.441974" my="-3.2746" length="Spl_O6_G6-2"/>
+            <point type="cutSpline" id="1001261" name="PQ20c" spline="1000745" mx="1.90188" my="0.220344" length="Spl_O6_G7-2-#PIQ"/>
+            <point type="cutSpline" id="1001264" name="PQ20a" spline="1000745" mx="2.89011" my="-0.0585988" length="Spl_O6_G7-2+#PIQ"/>
+            <point type="cutSpline" id="1001267" name="PQ20b" spline="1000745" mx="2.39456" my="0.0706742" length="Spl_O6_G7-2"/>
+            <point type="cutSplinePath" id="1001270" name="PQ21c" mx="2.91924" splinePath="1000723" my="6.50338" length="(19.256+11.4668+11.4668)/2 + #PIQ"/>
+            <point type="cutSplinePath" id="1001273" name="PQ21a" mx="-4.56948" splinePath="1000723" my="5.91078" length="(19.256+11.4668+11.4668)/2 - #PIQ"/>
+            <point type="cutSplinePath" id="1001276" name="PQ22b" mx="0.751649" splinePath="1000742" my="2.87473" length="(19.256+11.4668+11.4668)/2"/>
+            <point type="cutSplinePath" id="1001279" name="PQ22c" mx="0.110644" splinePath="1000742" my="4.9824" length="(19.256+11.4668+11.4668)/2 - #PIQ"/>
+            <point type="cutSplinePath" id="1001282" name="PQ22a" mx="1.16318" splinePath="1000742" my="4.05715" length="(19.256+11.4668+11.4668)/2 + #PIQ"/>
+            <point type="cutSplinePath" id="1001375" name="PQ31a" mx="-0.499994" splinePath="1000723" my="6.05807" length="13.6957 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001378" name="PQ31b" mx="-1.07218" splinePath="1000723" my="4.63625" length="14.4424 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001381" name="PQ31c" mx="-1.63942" splinePath="1000723" my="3.34121" length="15.1943 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001384" name="PQ32a" mx="-2.97397" splinePath="1000723" my="-3.28543" length="16.9019 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001387" name="PQ32b" mx="-3.08141" splinePath="1000723" my="-3.74853" length="17.6527 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001390" name="PQ32c" mx="-2.56808" splinePath="1000723" my="-3.71766" length="18.4045 - 19.256/2"/>
+            <point type="cutSplinePath" id="1001393" name="PQ33a" mx="-2.71341" splinePath="1000723" my="3.22116" length="11.4668 - 10.3135  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001396" name="PQ33b" mx="-2.97775" splinePath="1000723" my="5.72191" length="11.4668 - 9.56001  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001399" name="PQ33c" mx="-3.46427" splinePath="1000723" my="4.50567" length="11.4668 - 8.81535  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001402" name="PQ34a" mx="-6.71681" splinePath="1000723" my="-0.644128" length="11.4668 - 6.48373  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001405" name="PQ34b" mx="-8.93175" splinePath="1000723" my="0.513288" length="11.4668 - 5.74093  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001408" name="PQ34c" mx="-8.70326" splinePath="1000723" my="-1.17302" length="11.4668 - 4.98568  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001411" name="PQ35c" mx="-2.60254" splinePath="1000742" my="1.41026" length="19.256/2 - 5.56642"/>
+            <point type="cutSplinePath" id="1001414" name="PQ35b" mx="-2.3195" splinePath="1000742" my="4.09625" length="19.256/2 - 4.81958"/>
+            <point type="cutSplinePath" id="1001417" name="PQ35a" mx="-1.64165" splinePath="1000742" my="2.54649" length="19.256/2 - 4.06769"/>
+            <point type="cutSplinePath" id="1001420" name="PQ36c" mx="-3.08298" splinePath="1000742" my="-2.65504" length="19.256/2 - 2.35765"/>
+            <point type="cutSplinePath" id="1001423" name="PQ36b" mx="-1.68461" splinePath="1000742" my="-3.12301" length="19.256/2 - 1.60688"/>
+            <point type="cutSplinePath" id="1001426" name="PQ36a" mx="-3.05707" splinePath="1000742" my="-3.46593" length="19.256/2 - 0.855056"/>
+            <point type="cutSplinePath" id="1001429" name="PQ37a" mx="-1.19817" splinePath="1000742" my="2.03853" length="2.66375  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001432" name="PQ37b" mx="-1.6847" splinePath="1000742" my="4.66277" length="1.91988  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001435" name="PQ37c" mx="-2.19601" splinePath="1000742" my="3.40912" length="1.16728  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001438" name="PQ38a" mx="-1.97427" splinePath="1000742" my="0.634155" length="6.49154  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001441" name="PQ38b" mx="-2.73866" splinePath="1000742" my="0.171056" length="5.73631  + 19.256/2"/>
+            <point type="cutSplinePath" id="1001444" name="PQ38c" mx="-2.40371" splinePath="1000742" my="0.825651" length="4.9937  + 19.256/2"/>
+            <point type="normal" typeLine="hair" id="1002410" name="D11" firstPoint="1001405" secondPoint="1001408" mx="-5.09136" lineColor="blue" angle="0" my="-3.40908" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002411" name="D12" firstPoint="1001041" secondPoint="1001270" mx="0.78357" lineColor="black" angle="0" my="2.81434" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002446" name="D13" firstPoint="1001396" secondPoint="1001399" mx="0.463079" lineColor="black" angle="0" my="0.911123" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002447" name="D14" firstPoint="1001387" secondPoint="1001390" mx="-0.546923" lineColor="black" angle="0" my="-1.98918" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002448" name="D15" firstPoint="1001378" secondPoint="1001381" mx="-0.88653" lineColor="black" angle="0" my="1.71563" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002449" name="D16" firstPoint="1000708" secondPoint="1001210" mx="-0.948277" lineColor="black" angle="0" my="6.53188" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002450" name="D17" firstPoint="1001414" secondPoint="1001411" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002451" name="D18" firstPoint="1001423" secondPoint="1001420" mx="-0.94763" lineColor="black" angle="0" my="1.05653" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002452" name="D19" firstPoint="1001432" secondPoint="1001435" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002453" name="D20" firstPoint="1001441" secondPoint="1001444" mx="-0.51605" lineColor="black" angle="0" my="2.39485" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002454" name="D21" firstPoint="1001276" secondPoint="1001279" mx="1.89208" lineColor="black" angle="0" my="6.77887" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002455" name="D22" firstPoint="1001267" secondPoint="1001264" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002456" name="D23" firstPoint="1000717" secondPoint="1001228" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002457" name="D24" firstPoint="1001249" secondPoint="1001243" mx="-8.04996" lineColor="black" angle="0" my="-2.88057" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002458" name="D25" firstPoint="1001240" secondPoint="1001234" mx="-9.12281" lineColor="black" angle="0" my="-4.56349" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002459" name="D26" firstPoint="1001258" secondPoint="1001255" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002460" name="D27" firstPoint="1000717" secondPoint="1001231" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+            <point type="normal" typeLine="hair" id="1002461" name="D28" firstPoint="1000721" secondPoint="1001216" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#PIQ"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="false" id="1002526" idObject="1001044" mx="2.43242" my="0.934251"/>
+            <spline type="modelingPath" inUse="false" id="1002527" idObject="1000723"/>
+            <point type="modeling" inUse="false" id="1002528" idObject="1001270" mx="2.27435" my="2.48326"/>
+            <point type="modeling" inUse="false" id="1002529" idObject="1002411" mx="0.139682" my="2.25889"/>
+            <point type="modeling" inUse="true" id="1002530" idObject="1001273" mx="-2.17557" my="3.5628"/>
+            <spline type="modelingPath" inUse="true" id="1002531" idObject="1000723"/>
+            <point type="modeling" inUse="false" id="1002532" idObject="1001408" mx="-2.62394" my="1.63852"/>
+            <point type="modeling" inUse="true" id="1002588" idObject="1000725" mx="0.664602" my="-3.27325"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="1002590" name="Detail" forbidFlipping="true" united="false" seamAllowance="true" width="1" mx="2.609" inLayout="true" my="-4.50938" version="2">
+                <data rotation="0" letter="" fontSize="0" visible="true" mx="0" width="0" my="0" height="0"/>
+                <patternInfo rotation="0" fontSize="0" visible="true" mx="0" width="0" my="0" height="0"/>
+                <grainline arrows="0" rotation="90" visible="false" mx="0" my="0" length="0"/>
+                <nodes>
+                    <node type="NodePoint" idObject="1002530"/>
+                    <node type="NodeSplinePath" reverse="1" idObject="1002531"/>
+                    <node type="NodePoint" idObject="1002588"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

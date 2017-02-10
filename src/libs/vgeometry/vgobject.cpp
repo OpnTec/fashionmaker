@@ -40,7 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 
-const double VGObject::accuracyPointOnLine = (0.026/*mm*/ / 25.4) * PrintDPI;
+const double VGObject::accuracyPointOnLine = (0.031/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -457,14 +457,20 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     // The test point must lie inside the bounding box spanned by the two line points.
     if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
     {
-        // test point not in x-range
-        return false;
+        if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine) && not (qAbs(p2.x() - t.x()) <= accuracyPointOnLine))
+        {
+            // test point not in x-range
+            return false;
+        }
     }
 
     if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
     {
-        // test point not in y-range
-        return false;
+        if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine) && not (qAbs(p2.y() - t.y()) <= accuracyPointOnLine))
+        {
+            // test point not in y-range
+            return false;
+        }
     }
 
     // Test via the perp dot product (PDP)
