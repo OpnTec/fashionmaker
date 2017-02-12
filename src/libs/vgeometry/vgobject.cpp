@@ -488,7 +488,8 @@ bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QP
 {
     const auto p = qAbs(PerpDotProduct(p1, p2, t));
     const auto e = GetEpsilon(p1, p2);
-    return p <= e;
+    // We can't use common "<=" here because of the floating-point accuraccy problem
+    return p < e || VFuzzyComparePossibleNulls(p, e);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
