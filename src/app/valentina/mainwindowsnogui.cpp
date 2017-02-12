@@ -795,9 +795,11 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
         }
 
         QPainter painter;
-        painter.begin(&generator);
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
+        if (painter.begin(&generator))
+        {
+            scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+            painter.end();
+        }
     }
 }
 
