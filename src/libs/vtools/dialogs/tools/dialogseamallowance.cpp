@@ -40,6 +40,20 @@
 #include <QTimer>
 #include <QtNumeric>
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void EnableDefButton(QPushButton *defButton, const QString &formula)
+{
+    SCASSERT(defButton != nullptr)
+
+    if (formula != currentSeamAllowance)
+    {
+        defButton->setEnabled(true);
+    }
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
@@ -635,10 +649,7 @@ void DialogSeamAllowance::NodeChanged(int index)
             ui->toolButtonExprBefore->setEnabled(true);
 
             QString w1Formula = node.GetFormulaSABefore();
-            if (w1Formula != currentSeamAllowance)
-            {
-                ui->pushButtonDefBefore->setEnabled(true);
-            }
+            EnableDefButton(ui->pushButtonDefBefore, w1Formula);
             w1Formula = qApp->TrVars()->FormulaToUser(w1Formula, qApp->Settings()->GetOsSeparator());
             if (w1Formula.length() > 80)// increase height if needed.
             {
@@ -652,10 +663,7 @@ void DialogSeamAllowance::NodeChanged(int index)
             ui->toolButtonExprAfter->setEnabled(true);
 
             QString w2Formula = node.GetFormulaSAAfter();
-            if (w2Formula != currentSeamAllowance)
-            {
-                ui->pushButtonDefAfter->setEnabled(true);
-            }
+            EnableDefButton(ui->pushButtonDefAfter, w2Formula);
             w2Formula = qApp->TrVars()->FormulaToUser(w2Formula, qApp->Settings()->GetOsSeparator());
             if (w2Formula.length() > 80)// increase height if needed.
             {
@@ -787,12 +795,20 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
 void DialogSeamAllowance::ReturnDefBefore()
 {
     ui->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
+    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    {
+        button->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefAfter()
 {
     ui->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
+    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    {
+        button->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1111,7 +1127,9 @@ void DialogSeamAllowance::EvalWidthBefore()
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
 
-    UpdateNodeSABefore(GetFormulaSAWidthBefore());
+    const QString formulaSABefore = GetFormulaSAWidthBefore();
+    UpdateNodeSABefore(formulaSABefore);
+    EnableDefButton(ui->pushButtonDefBefore, formulaSABefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1123,7 +1141,9 @@ void DialogSeamAllowance::EvalWidthAfter()
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
 
-    UpdateNodeSAAfter(GetFormulaSAWidthAfter());
+    const QString formulaSAAfter = GetFormulaSAWidthAfter();
+    UpdateNodeSAAfter(formulaSAAfter);
+    EnableDefButton(ui->pushButtonDefAfter, formulaSAAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
