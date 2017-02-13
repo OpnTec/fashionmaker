@@ -128,9 +128,10 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::CubicBezier, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::CubicBezier, doc);
         auto _spl = new VToolCubicBezier(doc, data, id, typeCreation);
         scene->addItem(_spl);
         InitSplineToolConnections(scene, _spl);

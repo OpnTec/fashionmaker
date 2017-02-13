@@ -1375,9 +1375,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VToolUnion
     }
 
     //First add tool to file
-    VAbstractTool::AddRecord(id, Tool::UnionDetails, initData.doc);
     if (initData.parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::UnionDetails, initData.doc);
         //Scene doesn't show this tool, so doc will destroy this object.
         unionDetails = new VToolUnionDetails(id, initData);
         initData.doc->AddTool(id, unionDetails);

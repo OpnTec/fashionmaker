@@ -140,9 +140,10 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ArcWithLength, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::ArcWithLength, doc);
         VToolArcWithLength *toolArc = new VToolArcWithLength(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         InitArcToolConnections(scene, toolArc);

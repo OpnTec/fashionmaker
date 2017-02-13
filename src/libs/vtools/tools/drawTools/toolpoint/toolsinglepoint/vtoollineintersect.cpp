@@ -182,9 +182,10 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::LineIntersect, doc);
+
         if (parse == Document::FullParse)
         {
+            VDrawTool::AddRecord(id, Tool::LineIntersect, doc);
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id, p2Line1Id, p1Line2Id,
                                                                p2Line2Id, typeCreation);
             scene->addItem(point);

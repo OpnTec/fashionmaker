@@ -299,10 +299,11 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::AlongLine, doc);
+
     VToolAlongLine *point = nullptr;
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::AlongLine, doc);
         point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine, lineColor,
                                    typeCreation);
         scene->addItem(point);

@@ -239,9 +239,10 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
         VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
                                                              firstPointId, secondPointId, typeCreation);
         scene->addItem(point);

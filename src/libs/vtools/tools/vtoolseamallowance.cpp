@@ -127,10 +127,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QStr
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::Piece, doc);
+
     VToolSeamAllowance *piece = nullptr;
     if (parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::Piece, doc);
         piece = new VToolSeamAllowance(doc, data, id, typeCreation, scene, drawName);
         scene->addItem(piece);
         connect(piece, &VToolSeamAllowance::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);

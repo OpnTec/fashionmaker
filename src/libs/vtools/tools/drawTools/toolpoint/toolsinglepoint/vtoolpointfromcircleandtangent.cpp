@@ -134,9 +134,10 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::PointFromCircleAndTangent, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::PointFromCircleAndTangent, doc);
         VToolPointFromCircleAndTangent *point = new VToolPointFromCircleAndTangent(doc, data, id, circleCenterId,
                                                                                    circleRadius, tangentPointId,
                                                                                    crossPoint, typeCreation);
