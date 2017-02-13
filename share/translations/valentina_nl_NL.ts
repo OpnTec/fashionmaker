@@ -26,7 +26,7 @@
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished">voeg detail toe</translation>
+        <translation>voeg detail toe</translation>
     </message>
 </context>
 <context>
@@ -339,11 +339,11 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Stof</translation>
+        <translation>Stof</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished">Voering</translation>
+        <translation>Voering</translation>
     </message>
     <message>
         <source>Interfacing</source>
@@ -1484,6 +1484,46 @@
         <source>on Fold</source>
         <translation type="vanished">Op vouw</translation>
     </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="vanished">U kunt kiezen uit een van de voorgedefinieerde materialen of voeg een nieuwe toe</translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="vanished">Het stuk kan niet gekanteld worden in de opmaak modus.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="vanished">Kantelen niet toegestaan</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">Letter van patroondeel</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">Naam mag niet leeg zijn</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="vanished">Recht van draad</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">Waarde</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="vanished">Berekening</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="vanished">Pijlen:</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="vanished">Beide</translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1617,11 +1657,11 @@
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Funkties</translation>
     </message>
     <message>
         <source>Lengths to control points</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstand tot controlepunten</translation>
     </message>
     <message>
         <source>Filter list by keyword</source>
@@ -1632,11 +1672,11 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Radius1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal1:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1644,11 +1684,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1656,67 +1696,67 @@
     </message>
     <message>
         <source>Radius2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal2:</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Eerste hoek:</translation>
+        <translation>Eerste hoek:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Tweede hoek:</translation>
+        <translation>Tweede hoek:</translation>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Middelpunt:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished">Selecteer het middelste punt van boog</translation>
+        <translation>Kies middelpunt van boog</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="unfinished">Gelijke zijden</translation>
+        <translation>Gelijke hoeken</translation>
     </message>
     <message>
         <source>Edit radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk straal1</translation>
     </message>
     <message>
         <source>Edit radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk straal2</translation>
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation type="unfinished">Verander eerste hoek</translation>
+        <translation>Bewerk eerste hoek</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation type="unfinished">Verander tweede hoek</translation>
+        <translation>Bewerk tweede hoek</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk de grootte van de hoek</translation>
     </message>
 </context>
 <context>
@@ -1865,15 +1905,15 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Originele punt:</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Achtervoegsel:</translation>
+        <translation>Achtervoegsel:</translation>
     </message>
     <message>
         <source>Axis type:</source>
@@ -1900,7 +1940,7 @@
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -1908,7 +1948,7 @@
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Achtervoegsel:</translation>
+        <translation>Achtervoegsel:</translation>
     </message>
     <message>
         <source>Second line point:</source>
@@ -2953,7 +2993,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -2965,7 +3005,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2977,7 +3017,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Achtervoegsel:</translation>
+        <translation>Achtervoegsel:</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -2989,7 +3029,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
 </context>
 <context>
@@ -3559,11 +3599,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4187,7 +4227,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
 </context>
 <context>
@@ -4328,11 +4368,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het stuk kan niet gekanteld worden in de opmaak modus.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4356,11 +4396,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4424,7 +4464,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Letter van patroondeel</translation>
     </message>
     <message>
         <source>Name of detail:</source>
@@ -4436,7 +4476,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam mag niet leeg zijn</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -4452,7 +4492,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"></translation>
+        <translation>U kunt kiezen uit een van de voorgedefinieerde materialen of voeg een nieuwe toe</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -4480,7 +4520,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Recht van draad</translation>
     </message>
     <message>
         <source>Grainline visible</source>
@@ -4496,7 +4536,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijlen:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4596,7 +4636,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Beide</translation>
     </message>
     <message>
         <source>Just front</source>
@@ -4873,7 +4913,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
 </context>
 <context>
@@ -5004,7 +5044,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
 </context>
 <context>
@@ -5504,6 +5544,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gebruik voor unit testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te tonen.</translation>
+    </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6432,7 +6476,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(alleen lezen)</translation>
+        <translation type="vanished">(alleen lezen)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6580,6 +6624,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6819,7 +6883,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -7461,11 +7525,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Individuele maten (*.vit)</translation>
+        <translation type="vanished">Individuele maten (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Standaard maten(*.vst)</translation>
+        <translation type="vanished">Standaard maten(*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7513,7 +7577,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation>zonder titel</translation>
+        <translation type="vanished">zonder titel</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7816,6 +7880,26 @@ Wil je deze veranderingen opslaan?</translation>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -8003,7 +8087,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Fout bij het maken van reserve bestand: %1.</translation>
+        <translation type="vanished">Fout bij het maken van reserve bestand: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -8014,7 +8098,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Onverwachte versie &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8467,6 +8551,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation>Nummer behorende bij de pagina sjabloon( standaardinstelling = 0, export modus):</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8886,7 +8974,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fout met het heropslaan van reserve bestand: %1.</translation>
+        <translation type="vanished">Fout met het heropslaan van reserve bestand: %1.</translation>
     </message>
 </context>
 <context>
@@ -10467,7 +10555,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fout met het heropslaan van reserve bestand: %1.</translation>
+        <translation type="vanished">Fout met het heropslaan van reserve bestand: %1.</translation>
     </message>
 </context>
 <context>
@@ -10478,7 +10566,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fout met het heropslaan van reserve bestand: %1.</translation>
+        <translation type="vanished">Fout met het heropslaan van reserve bestand: %1.</translation>
     </message>
 </context>
 <context>

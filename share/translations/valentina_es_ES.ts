@@ -26,7 +26,7 @@
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished">añadir detalle</translation>
+        <translation>añadir detalle</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished">herramienta de borrar</translation>
+        <translation>herramienta borrador</translation>
     </message>
 </context>
 <context>
@@ -3599,7 +3599,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -3615,7 +3615,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieza:</translation>
     </message>
     <message>
         <source>Type of pen:</source>
@@ -3623,7 +3623,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">¡Listo!</translation>
+        <translation>¡Listo!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -3631,7 +3631,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Anchura:</translation>
+        <translation>Anchura:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3639,11 +3639,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3659,7 +3659,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Antes:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -3671,7 +3671,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Después:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3687,7 +3687,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
@@ -4416,7 +4416,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">¡Listo!</translation>
+        <translation>¡Listo!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -4428,7 +4428,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Anchura:</translation>
+        <translation>Anchura:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4436,11 +4436,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Cálculo</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4456,7 +4456,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Antes:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -4468,7 +4468,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Después:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -4597,7 +4597,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Options</source>
@@ -5586,6 +5586,10 @@ Apply settings anyway?</source>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar la ventana principal.</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -6514,7 +6518,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(sólo lectura)</translation>
+        <translation type="vanished">(sólo lectura)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6662,6 +6666,26 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7547,11 +7571,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Medidas individuales (*.vit)</translation>
+        <translation type="vanished">Medidas individuales (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Medidas estándar (*.vst)</translation>
+        <translation type="vanished">Medidas estándar (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7599,7 +7623,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>Sin título</translation>
+        <translation type="vanished">Sin título</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7901,6 +7925,26 @@ Do you want to save your changes?</source>
         <source>All files</source>
         <translation>Todos los archivos</translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -8088,7 +8132,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Error, creando archivo de resguardo: %1.</translation>
+        <translation type="vanished">Error, creando archivo de resguardo: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -8100,7 +8144,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
-        <translation>Error al reemplazar un symlink por la vida real: %1.</translation>
+        <translation type="vanished">Error al reemplazar un symlink por la vida real: %1.</translation>
+    </message>
+    <message>
+        <source>Error openning a temp file file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8552,6 +8600,10 @@ Do you want to save your changes?</source>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation>Número correspondiente a plantilla de página (por defecto = 0, modo de esportación):</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8971,7 +9023,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Error restaurando el archivo de copia de seguridad: %1.</translation>
+        <translation type="vanished">Error restaurando el archivo de copia de seguridad: %1.</translation>
     </message>
 </context>
 <context>
@@ -9417,7 +9469,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
@@ -10572,7 +10624,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Error restaurando el archivo de copia de seguridad: %1.</translation>
+        <translation type="vanished">Error restaurando el archivo de copia de seguridad: %1.</translation>
     </message>
 </context>
 <context>
@@ -10583,7 +10635,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Error restaurando el archivo de copia de seguridad: %1.</translation>
+        <translation type="vanished">Error restaurando el archivo de copia de seguridad: %1.</translation>
     </message>
 </context>
 <context>

@@ -3513,10 +3513,9 @@
         <translation type="vanished">Auf eine feste Oberfläche setzen. Von der Taille über die Kurve der Hüfte zur Oberfläche messen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation>Beim Sitzen auf einer festen Oberfläche von der Taillenseite über die Kurve der Hüfte zur Oberfläche messen.</translation>
+        <translation type="vanished">Beim Sitzen auf einer festen Oberfläche von der Taillenseite über die Kurve der Hüfte zur Oberfläche messen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
@@ -3816,6 +3815,12 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1840"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
+        <source>From Waist Side around hip curve down to surface, while seated on hard surface.</source>
+        <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

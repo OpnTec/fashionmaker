@@ -3499,25 +3499,29 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1798"/>
         <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe : Coté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1838"/>
         <source>rise_length_side_sitting</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hauteur_montant_cote_assis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
+        <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
+        <comment>Full measurement name.</comment>
+        <translation type="vanished">Assis sur une surface dure. Hauteur du Montant sur le côté, mesuré de la taille au dessus de la courbure des hanches jusqu&apos;au sol</translation>
+    </message>
+    <message>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Du Côté de la Taille le long de la courbe des hanches jusqu&apos;à la surface, en étant assis sur une surface dure</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
         <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distance verticale à partir du Côté de la Taille jusqu&apos;au niveau de la Fourche. (&apos;Hauteur: Taille Côté&apos; - &apos;Jambe: Fourche jusqu&apos;au Sol&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2124"/>
@@ -3812,6 +3816,12 @@
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
         <translation>Hauteur Montant, côté, assis</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
+        <source>From Waist Side around hip curve down to surface, while seated on hard surface.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
