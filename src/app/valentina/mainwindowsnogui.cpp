@@ -40,6 +40,7 @@
 #include "../vpatterndb/vpatternpiecedata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vtools/tools/vabstracttool.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -60,11 +61,22 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
-    : VAbstractMainWindow(parent), listDetails(QVector<VLayoutPiece>()), currentScene(nullptr), tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
-      shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
-      undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), actionDockWidgetGroups(nullptr),
-      curFile(QString()),
+    : VAbstractMainWindow(parent),
+      listDetails(),
+      currentScene(nullptr),
+      tempSceneLayout(nullptr),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())),
+      doc(nullptr),
+      papers(),
+      shadows(),
+      scenes(),
+      details(),
+      undoAction(nullptr),
+      redoAction(nullptr),
+      actionDockWidgetToolOptions(nullptr),
+      actionDockWidgetGroups(nullptr),
+      curFile(),
+      isNoScaling(false),
       isLayoutStale(true),
       ignorePrinterFields(false),
       margins(),
@@ -475,7 +487,9 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *det
     QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        listDetails.append(VLayoutPiece::Create(i.value(), pattern));
+        VAbstractTool *tool = qobject_cast<VAbstractTool*>(doc->getTool(i.key()));
+        SCASSERT(tool != nullptr)
+        listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
         ++i;
     }
 }
@@ -781,9 +795,11 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
         }
 
         QPainter painter;
-        painter.begin(&generator);
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
+        if (painter.begin(&generator))
+        {
+            scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+            painter.end();
+        }
     }
 }
 

@@ -57,6 +57,24 @@ class QGraphicsPathItem;
 class QLineF;
 class VAbstractPattern;
 
+namespace
+{
+QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VContainer *pattern)
+{
+    QVector<VLayoutPiecePath> paths;
+    const QVector<quint32> pathsId = piece.GetInternalPaths();
+    for (int i = 0; i < pathsId.size(); ++i)
+    {
+        const VPiecePath path = pattern->GetPiecePath(pathsId.at(i));
+        if (path.GetType() == PiecePathType::InternalPath)
+        {
+            paths.append(VLayoutPiecePath(path.PathPoints(pattern), path.GetPenType()));
+        }
+    }
+    return paths;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::VLayoutPiece()
     :VAbstractPiece(), d(new VLayoutPieceData)
@@ -89,7 +107,8 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     VLayoutPiece det;
     det.SetCountourPoints(piece.MainPathPoints(pattern));
     det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
-    det.SetInternlaPathsPoints(piece.GetInternalPathsPoints(pattern));
+    det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
+
     det.SetName(piece.GetName());
     const VPatternPieceData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
@@ -500,15 +519,15 @@ void VLayoutPiece::SetLayoutAllowancePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QVector<QPointF>> VLayoutPiece::GetInternlaPathsPoints() const
+QVector<VLayoutPiecePath> VLayoutPiece::GetInternalPaths() const
 {
     return d->m_internalPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetInternlaPathsPoints(const QVector<QVector<QPointF>> &internalPathsPoints)
+void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths)
 {
-    d->m_internalPaths = internalPathsPoints;
+    d->m_internalPaths = internalPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -709,6 +728,18 @@ void VLayoutPiece::CreateTextItems()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::CreateInternalPathItem(int i, QGraphicsItem *parent) const
+{
+    SCASSERT(parent != nullptr)
+    QGraphicsPathItem* item = new QGraphicsPathItem(parent);
+    item->setPath(d->matrix.map(d->m_internalPaths.at(i).GetPainterPath()));
+
+    QPen pen = item->pen();
+    pen.setStyle(d->m_internalPaths.at(i).PenStyle());
+    item->setPen(pen);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CreateTextItem Creates the i-th text item
  * @param i index of the requested item
@@ -719,9 +750,7 @@ void VLayoutPiece::CreateTextItem(int i, QGraphicsItem *parent) const
     SCASSERT(parent != nullptr)
 
     QGraphicsPathItem* item = new QGraphicsPathItem(parent);
-    QTransform transform = d->matrix;
-
-    QPainterPath path = transform.map(d->m_liPP[i]);
+    QPainterPath path = d->matrix.map(d->m_liPP.at(i));
 
     if (d->mirror == true)
     {
@@ -735,7 +764,8 @@ void VLayoutPiece::CreateTextItem(int i, QGraphicsItem *parent) const
             points = Map(Mirror(d->patternInfo));
         }
         QPointF ptCenter = (points.at(1) + points.at(3))/2;
-        qreal dRot = qRadiansToDegrees(qAtan2(points.at(1).y() - points.at(0).y(), points.at(1).x() - points.at(0).x()));
+        qreal dRot = qRadiansToDegrees(qAtan2(points.at(1).y() - points.at(0).y(),
+                                              points.at(1).x() - points.at(0).x()));
 
         // we need to move the center back to the origin, rotate it to align it with x axis,
         // then mirror it to obtain the proper text direction, rotate it and translate it back to original position.
@@ -779,9 +809,12 @@ QPainterPath VLayoutPiece::LayoutAllowancePath() const
 QGraphicsItem *VLayoutPiece::GetItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
-    QPainterPath contour = ContourPath();
-    contour.addPath(InternalPathsPath());
-    item->setPath(contour);
+    item->setPath(ContourPath());
+
+    for (int i = 0; i < d->m_internalPaths.count(); ++i)
+    {
+        CreateInternalPathItem(i, item);
+    }
 
     for (int i = 0; i < d->m_liPP.count(); ++i)
     {
@@ -811,29 +844,6 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
         path.lineTo(v.at(i));
     }
     item->setPath(path);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::InternalPathsPath() const
-{
-    QPainterPath allPaths;
-    allPaths.setFillRule(Qt::WindingFill);
-
-    for (qint32 i = 0; i < d->m_internalPaths.count(); ++i)
-    {
-        const QVector<QPointF> points = Map(d->m_internalPaths.at(i));
-        QPainterPath path;
-        path.setFillRule(Qt::WindingFill);
-        path.moveTo(points.at(0));
-        for (qint32 j = 1; j < points.count(); ++j)
-        {
-            path.lineTo(points.at(j));
-        }
-        path.lineTo(points.at(0));
-        allPaths.addPath(path);
-    }
-
-    return allPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

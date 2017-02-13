@@ -570,9 +570,8 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase1() const
     points += QPointF(556.8930273120665, -30.847456102511416);
     points += QPointF(539.6101141051189, 79.89131577778163);
     points += QPointF(585.9167315845334, -20.702420721823447);
-    points += QPointF(1117.4712505569892, 212.6701769158142);
-    points += QPointF(1107.8013393916237, 232.47256047676322);
-    points += QPointF(1096.0328222042483, 257.2724337531229);
+    points += QPointF(1117.424153174025, 212.64949937811681);
+    points += QPointF(1095.8827941924872, 257.6002084082805);
     points += QPointF(1085.2347243947604, 280.86364678273935);
     points += QPointF(1075.284743777034, 303.4467181585846);
     points += QPointF(1066.1500107021461, 325.033221582634);
@@ -589,10 +588,6 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase1() const
     points += QPointF(1001.5753826870504, 572.6532694631434);
     points += QPointF(1001.7511114738644, 580.6472328726268);
     points += QPointF(1002.5244573746393, 592.6631414076071);
-    points += QPointF(1011.1831553003773, 625.860901250618);
-    points += QPointF(1013.5469326629959, 631.1835932583286);
-    points += QPointF(1016.1978697144372, 636.6181674061058);
-    points += QPointF(1019.1173567112357, 642.0917891993197);
     points += QPointF(1022.283791807397, 647.5382096308747);
     points += QPointF(1025.6730034935645, 652.8974380139866);
     points += QPointF(1029.258679857382, 658.1156604426072);
@@ -2514,6 +2509,103 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
 
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
     QTest::newRow("Issue #604.") << points << width << ekvOrig;
+
+    width = 56.692913385826778;
+    points.clear();
+
+    point = VSAPoint(11565.008125001967, -71.44488549419934);
+    point.SetSAAfter(0);
+    points.append(point);
+
+    point = VSAPoint(11774.053467225081, -3376.8303371353477);
+    point.SetSABefore(0);
+    points.append(point);
+
+    point = VSAPoint(11774.053467225081, -3376.8303371353477);
+    point.SetSABefore(0);
+    points.append(point);
+
+    points.append(VSAPoint(11821.637653562488, -3457.444047544761));
+    points.append(VSAPoint(11916.506852253828, -3619.698047174161));
+    points.append(VSAPoint(12011.687139013728, -3784.3170132645946));
+    points.append(VSAPoint(12107.923065894336, -3952.559914581168));
+    points.append(VSAPoint(12205.959184947797, -4125.685719888987));
+    points.append(VSAPoint(12306.540048226263, -4304.953397953153));
+    points.append(VSAPoint(12410.410207781879, -4491.621917538776));
+    points.append(VSAPoint(12518.314215666796, -4686.950247410959));
+    points.append(VSAPoint(12630.996623933155, -4892.197356334806));
+    points.append(VSAPoint(12749.201984633113, -5108.622213075425));
+    points.append(VSAPoint(12937.571227539614, -5455.181123300274));
+    points.append(VSAPoint(13216.05428816687, -5970.204948863398));
+    points.append(VSAPoint(13530.031095467164, -6552.6012034655));
+
+    point = VSAPoint(13704.042216387523, -6875.648082494774);
+    point.SetSAAfter(0);
+    points.append(point);
+
+    point = VSAPoint(13704.042216387523, -6875.648082494774);
+    point.SetSAAfter(0);
+    points.append(point);
+
+    point = VSAPoint(13493.259591532773, -71.44488549420451);
+    point.SetSABefore(0);
+    points.append(point);
+
+    point = VSAPoint(13493.259591532773, -71.44488549420451);
+    point.SetSABefore(0);
+    points.append(point);
+
+    points.append(VSAPoint(13458.265794168308, -72.45287893700785));
+    points.append(VSAPoint(13303.675181471457, -76.51882381889763));
+    points.append(VSAPoint(13154.908187746063, -79.90711122047243));
+    points.append(VSAPoint(13010.905973179135, -82.6177411417323));
+    points.append(VSAPoint(12870.60969795768, -84.65071358267716));
+    points.append(VSAPoint(12732.9605222687, -86.0060285433071));
+    points.append(VSAPoint(12596.899606299212, -86.68368602362204));
+    points.append(VSAPoint(12461.36811023622, -86.68368602362204));
+    points.append(VSAPoint(12325.307194266732, -86.0060285433071));
+    points.append(VSAPoint(12187.658018577757, -84.65071358267716));
+    points.append(VSAPoint(12047.361743356301, -82.6177411417323));
+    points.append(VSAPoint(11903.35952878937, -79.90711122047243));
+    points.append(VSAPoint(11754.592535063975, -76.51882381889763));
+    points.append(VSAPoint(11600.001922367124, -72.45287893700785));
+
+    point = VSAPoint(11565.008125001967, -71.44488549419934);
+    point.SetSAAfter(0);
+    points.append(point);
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(11561.415280975947, -14.63551463077929));
+    ekvOrig.append(QPointF(11781.95342513335, -3501.7429788659483));
+    ekvOrig.append(QPointF(11867.496139886347, -3648.194635075343));
+    ekvOrig.append(QPointF(11962.541506347354, -3812.5802499029824));
+    ekvOrig.append(QPointF(12058.651107851038, -3980.6023049242845));
+    ekvOrig.append(QPointF(12156.571541308, -4153.523816526403));
+    ekvOrig.append(QPointF(12257.048738448357, -4332.606727953389));
+    ekvOrig.append(QPointF(12360.827974888123, -4519.11184658243));
+    ekvOrig.append(QPointF(12468.653939048814, -4714.298901347144));
+    ekvOrig.append(QPointF(12581.270838581826, -4919.426688379175));
+    ekvOrig.append(QPointF(12699.418991549643, -5135.746802194771));
+    ekvOrig.append(QPointF(12887.73123714858, -5482.200849627318));
+    ekvOrig.append(QPointF(13166.166408012898, -5997.136108335216));
+    ekvOrig.append(QPointF(13707.969757502442, -7002.431719565925));
+    ekvOrig.append(QPointF(13491.504168170613, -14.778652871227324));
+    ekvOrig.append(QPointF(13302.271351803516, -19.843181325566178));
+    ekvOrig.append(QPointF(13153.729251428536, -23.226346601010544));
+    ekvOrig.append(QPointF(13009.961769808971, -25.932558019731804));
+    ekvOrig.append(QPointF(12869.919891108724, -27.961844111086332));
+    ekvOrig.append(QPointF(12732.540250691125, -29.3145051859673));
+    ekvOrig.append(QPointF(12596.758426378788, -29.990772637795267));
+    ekvOrig.append(QPointF(12461.509290156644, -29.990772637795267));
+    ekvOrig.append(QPointF(12325.727465844308, -29.3145051859673));
+    ekvOrig.append(QPointF(12188.347825426712, -27.961844111086332));
+    ekvOrig.append(QPointF(12048.305946726465, -25.9325580197318));
+    ekvOrig.append(QPointF(11904.538465106896, -23.226346601010544));
+    ekvOrig.append(QPointF(11755.996364731915, -19.843181325566132));
+    ekvOrig.append(QPointF(11561.415280975947, -14.63551463077929));
+
+    // See the file "collection/bugs/Issue_#627.val"
+    QTest::newRow("Issue #627.") << points << width << ekvOrig;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

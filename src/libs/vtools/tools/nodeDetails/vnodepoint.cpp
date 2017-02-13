@@ -112,9 +112,9 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
                         quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const QString &drawName, const quint32 &idTool)
 {
-    VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, drawName, idTool, doc);

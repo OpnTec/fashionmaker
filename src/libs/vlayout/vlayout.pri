@@ -18,7 +18,9 @@ HEADERS += \
     $$PWD/vabstractpiece.h \
     $$PWD/vabstractpiece_p.h \
     $$PWD/vlayoutpiece.h \
-    $$PWD/vlayoutpiece_p.h
+    $$PWD/vlayoutpiece_p.h \
+    $$PWD/vlayoutpiecepath.h \
+    $$PWD/vlayoutpiecepath_p.h
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \
@@ -31,6 +33,7 @@ SOURCES += \
     $$PWD/vposter.cpp \
     $$PWD/vgraphicsfillitem.cpp \
     $$PWD/vabstractpiece.cpp \
-    $$PWD/vlayoutpiece.cpp
+    $$PWD/vlayoutpiece.cpp \
+    $$PWD/vlayoutpiecepath.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp

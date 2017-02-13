@@ -59,6 +59,9 @@ public:
     virtual void VisualMode(const quint32 &pointId);
     void         setMainColor(const QColor &value);
 
+    const VContainer *GetData() const;
+    void              SetData(const VContainer *data);
+
     Mode GetMode() const;
     void SetMode(const Mode &value);
 

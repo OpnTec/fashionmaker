@@ -470,6 +470,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
     {
         case (Tool::NodePoint):
         case (Tool::NodeArc):
+        case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
         {
@@ -1108,6 +1109,11 @@ void DialogTool::SetAssociatedTool(VAbstractTool *tool)
     {
         associatedTool = tool;
         SetToolId(tool->getId());
+        data = tool->getData();
+        if (not vis.isNull())
+        {
+            vis->SetData(data);
+        }
     }
     else
     {

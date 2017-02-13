@@ -94,7 +94,7 @@ public:
     QString Email() const;
     void    SetEmail(const QString &text);
 
-    bool    ReadOnly() const;
+    bool    IsReadOnly() const;
     void    SetReadOnly(bool ro);
 
     void SetMName(const QString &name, const QString &text);

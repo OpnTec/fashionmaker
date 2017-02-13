@@ -38,7 +38,6 @@ public:
     explicit TST_VAbstractCurve(QObject *parent = nullptr);
 
 private slots:
-    void GetSegmentPoints_issue458();
     void IsPointOnCurve_data() const;
     void IsPointOnCurve() const;
 };

@@ -77,9 +77,9 @@ void VNodeSplinePath::Create(VAbstractPattern *doc, VContainer *data, quint32 id
                              quint32 idSpline, const Document &parse, const Source &typeCreation,
                              const QString &drawName, const quint32 &idTool)
 {
-    VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
     if (parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, drawName, idTool, doc);
 
         doc->AddTool(id, splPath);

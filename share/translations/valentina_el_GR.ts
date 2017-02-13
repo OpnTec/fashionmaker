@@ -3450,6 +3450,10 @@ Apply settings anyway?</source>
         <translation type="vanished">Χωρίς επιλογή</translation>
     </message>
     <message>
+        <source>Node</source>
+        <translation type="vanished">Κόμβος</translation>
+    </message>
+    <message>
         <source>Attribute</source>
         <translation type="vanished">Ιδιότητα</translation>
     </message>
@@ -3774,6 +3778,14 @@ Apply settings anyway?</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
+        <source>Top of the line</source>
+        <translation type="vanished">Κορυφή γραμμής</translation>
+    </message>
+    <message>
+        <source>End of the line</source>
+        <translation type="vanished">Τέλος γραμμής</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -3823,7 +3835,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>End of the line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τέλος γραμμής:</translation>
     </message>
 </context>
 <context>
@@ -4145,7 +4157,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιήγηση...</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5095,8 +5107,16 @@ Apply settings anyway?</source>
         <translation>Εξομάλυνση πενσών</translation>
     </message>
     <message>
+        <source>First base point</source>
+        <translation type="vanished">Πρώτο σημείο αναφοράς</translation>
+    </message>
+    <message>
         <source>First point of angle</source>
         <translation type="vanished">Πρώτο σημείο γωνίας</translation>
+    </message>
+    <message>
+        <source>Second base point</source>
+        <translation type="vanished">Δεύτερο σημείο αναφοράς</translation>
     </message>
     <message>
         <source>Second point of angle</source>
@@ -5132,7 +5152,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select the second base point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε το δεύτερο σημείο αναφοράς</translation>
     </message>
     <message>
         <source>Select the first dart point</source>
@@ -5148,11 +5168,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρώτο σημείο αναφοράς:</translation>
     </message>
     <message>
         <source>Second base point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεύτερο σημείο αναφοράς:</translation>
     </message>
     <message>
         <source>First dart point:</source>
@@ -5188,6 +5208,10 @@ Apply settings anyway?</source>
     <message>
         <source>Broken formula</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
+        <translation type="vanished">Σφάλμα κατα τον υπολογισμό της φόρμουλας. Μπορείτε να δοκιμάσετε να αναιρέσετε την τελευταια λειτουργία ή να επιδιορθώσετε τη χαλασμένη φόρμουλα.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -5330,7 +5354,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -5382,7 +5406,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -5402,6 +5426,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5457,7 +5485,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tools for creating curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλεία για δημιουργία καμπύλων.</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -5465,7 +5493,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tools for creating arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλεία για δημιουργία τόξων.</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -5509,7 +5537,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Πατρόν μπάρας εργαλείων</translation>
     </message>
     <message>
         <source>Toolbar options</source>
@@ -5577,7 +5605,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pointer tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλεία δείκτη</translation>
     </message>
     <message>
         <source>New pattern piece</source>
@@ -5629,15 +5657,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγέθυνση</translation>
     </message>
     <message>
         <source>zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>μεγέθυνση</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Σμίκρυνση</translation>
     </message>
     <message>
         <source>Edit pattern XML code</source>
@@ -5713,7 +5741,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή απλής καμπύλης</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -5725,15 +5753,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Επέλεξε διαδρομή καμπύλης</translation>
+    </message>
+    <message>
+        <source>Select points, arcs, curves clockwise.</source>
+        <translation type="vanished">Επιλέξτε σημεία, τόξα, καμπύλες δεξιόστροφα.</translation>
     </message>
     <message>
         <source>Select base point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε σημείο αναφοράς</translation>
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε το πρώτο σημείο του άξονα</translation>
     </message>
     <message>
         <source>Select detail</source>
@@ -5785,11 +5817,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
@@ -5797,7 +5829,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω λάθους ταυτότητας.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -5859,11 +5891,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation type="unfinished"></translation>
+        <translation>Το Valentina δεν τερματίστηκε σωστά. Θέλετε να ανοίξετε εκ νέου τα αρχεία (%1) που είχατε ανοιχτά;</translation>
     </message>
     <message>
         <source>Reopen files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα αρχείων εκ νέου.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -5871,7 +5903,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -5955,7 +5987,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Config pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαμόρφωση κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -6027,7 +6059,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχωρισμός και εκτύπωση της διάταξης σε μικρότερες σελίδες (για κανονικούς εκτυπωτές)</translation>
     </message>
     <message>
         <source>Print preview</source>
@@ -6063,7 +6095,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select the first base line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε το πρώτο σημείο αναφοράς της γραμμής</translation>
     </message>
     <message>
         <source>Detail mode</source>
@@ -6087,11 +6119,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωση Ατομικές ...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωση Στάνταρ ...</translation>
     </message>
     <message>
         <source>Show ...</source>
@@ -6107,7 +6139,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ατομικές μετρήσεις (*.vit);;Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
@@ -6115,15 +6147,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Στάνταρ μετρήσεις (*.vst);;Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπορείς να εξάγεις άδεια σκηνή.</translation>
     </message>
     <message>
         <source>Create new Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργία νέας Διάταξης</translation>
     </message>
     <message>
         <source>Create/Edit</source>
@@ -6144,11 +6176,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
@@ -6220,7 +6252,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
     <message>
         <source>Print an original layout</source>
@@ -6321,10 +6353,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Select first curve</source>
         <translation>Επιλογή πρώτης καμπύλης</translation>
-    </message>
-    <message>
-        <source>(read only)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
@@ -6464,6 +6492,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7323,11 +7371,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Στάνταρ μετρήσεις (*.vst)</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7375,7 +7423,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation>ανώνυμο</translation>
+        <translation type="vanished">ανώνυμο</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7445,7 +7493,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
@@ -7658,6 +7706,26 @@ Do you want to save your changes?</source>
         <source>All files</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7837,10 +7905,6 @@ Do you want to save your changes?</source>
         <translation>Δεν είναι δυνατή η αλλαγή έκδοσης.</translation>
     </message>
     <message>
-        <source>Error creating a backup file: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error creating a reserv copy: %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7849,7 +7913,7 @@ Do you want to save your changes?</source>
         <translation>Απρόσμενη έκδοση &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7985,7 +8049,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -8230,6 +8294,10 @@ Do you want to save your changes?</source>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8372,11 +8440,11 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error parsing file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
@@ -8384,7 +8452,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω λάθους ταυτότητας.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -8615,7 +8683,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
+        <translation type="vanished">Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
     </message>
 </context>
 <context>
@@ -10136,7 +10204,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
+        <translation type="vanished">Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
     </message>
 </context>
 <context>
@@ -10147,7 +10215,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
+        <translation type="vanished">Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
     </message>
 </context>
 <context>

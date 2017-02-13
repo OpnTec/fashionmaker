@@ -257,6 +257,10 @@ enum class GSizes : unsigned char { ALL,
 #define V_FALLTHROUGH
 #endif
 
+extern const QString LONG_OPTION_NO_HDPI_SCALING;
+bool IsOptionSet(int argc, char *argv[], const char *option);
+void InitHighDpiScaling(int argc, char *argv[]);
+
 // measurements
 // A
 extern const QString height_M;                    // A01

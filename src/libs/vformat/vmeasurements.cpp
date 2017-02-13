@@ -373,7 +373,7 @@ QString VMeasurements::Notes() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetNotes(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagNotes, text);
     }
@@ -388,7 +388,7 @@ QString VMeasurements::FamilyName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetFamilyName(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagFamilyName, text);
     }
@@ -403,7 +403,7 @@ QString VMeasurements::GivenName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetGivenName(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagGivenName, text);
     }
@@ -418,7 +418,7 @@ QDate VMeasurements::BirthDate() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetBirthDate(const QDate &date)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagBirthDate, date.toString("yyyy-MM-dd"));
     }
@@ -433,7 +433,7 @@ GenderType VMeasurements::Gender() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetGender(const GenderType &gender)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagGender, GenderToStr(gender));
     }
@@ -448,7 +448,7 @@ QString VMeasurements::PMSystem() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetPMSystem(const QString &system)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagPMSystem, ClearPMCode(system));
     }
@@ -463,23 +463,16 @@ QString VMeasurements::Email() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetEmail(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagEmail, text);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurements::ReadOnly() const
+bool VMeasurements::IsReadOnly() const
 {
-    if (UniqueTagText(TagReadOnly, "false") == "true")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return UniqueTagText(TagReadOnly, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -487,11 +480,11 @@ void VMeasurements::SetReadOnly(bool ro)
 {
     if (ro)
     {
-        setTagText(TagReadOnly, "true");
+        setTagText(TagReadOnly, trueStr);
     }
     else
     {
-        setTagText(TagReadOnly, "false");
+        setTagText(TagReadOnly, falseStr);
     }
 }
 

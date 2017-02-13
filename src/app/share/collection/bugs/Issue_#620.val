@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.0</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Выкройка 1">
+        <calculation>
+            <point type="single" x="0.79375" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0.520081" length="8.0384"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="2" mx="0.132292" lineColor="black" my="0.264583" angle="271.245" length="14.1673"/>
+            <point type="endLine" typeLine="hair" id="4" name="A3" basePoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="179.304" length="10.2985"/>
+            <point type="endLine" typeLine="hair" id="5" name="A4" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="286.021" length="6.87735"/>
+            <point type="alongLine" typeLine="none" id="6" name="A5" firstPoint="3" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*0.8"/>
+            <spline type="pathInteractive" id="7" color="black">
+                <pathPoint angle1="239.377" pSpline="6" angle2="59.3765" length1="0" length2="2.89876"/>
+                <pathPoint angle1="273.972" pSpline="5" angle2="93.9724" length1="2.33261" length2="1.48524"/>
+                <pathPoint angle1="337.326" pSpline="1" angle2="157.326" length1="1.88356" length2="1.3254"/>
+            </spline>
+            <spline type="simpleInteractive" point4="5" angle1="59.9325" angle2="257.57" id="8" color="black" length1="4.5102" length2="3.98506" point1="4"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="9" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="10" idObject="2" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="11" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="12" idObject="4" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="13" idObject="8"/>
+            <spline type="modelingPath" inUse="true" id="14" idObject="7"/>
+        </modeling>
+        <details>
+            <detail id="15" name="Деталь" forbidFlipping="true" united="false" seamAllowance="false" mx="0" inLayout="true" width="1" my="0" version="2">
+                <data rotation="0" letter="" fontSize="0" visible="false" mx="0" width="0" my="0" height="0"/>
+                <patternInfo rotation="0" fontSize="0" visible="false" mx="0" width="0" my="0" height="0"/>
+                <grainline arrows="0" rotation="" visible="false" mx="0" my="0" length=""/>
+                <nodes>
+                    <node type="NodePoint" idObject="9"/>
+                    <node type="NodePoint" idObject="10"/>
+                    <node type="NodePoint" idObject="11"/>
+                    <node type="NodePoint" idObject="12"/>
+                    <node type="NodeSpline" reverse="0" idObject="13"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="14"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

@@ -249,6 +249,14 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                     "this mode loads a single pattern file and silently quit without "
                                                     "showing the main window. The key have priority before key '%1'.")
                                                     .arg(LONG_OPTION_BASENAME)));
+
+    optionsIndex.insert(LONG_OPTION_NO_HDPI_SCALING, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
+                                          translate("VCommandLine", "Disable high dpi scaling. Call this option if has "
+                                                                    "problem with scaling (by default scaling "
+                                                                    "enabled). Alternatively you can use the "
+                                                                    "QT_AUTO_SCREEN_SCALE_FACTOR=0 environment "
+                                                                    "variable.")));
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -500,7 +508,13 @@ bool VCommandLine::IsTestModeEnabled() const
     return r;
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsNoScalingEnabled() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_NO_HDPI_SCALING)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
     const bool r = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BASENAME)));

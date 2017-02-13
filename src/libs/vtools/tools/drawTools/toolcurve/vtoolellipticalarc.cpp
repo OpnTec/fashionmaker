@@ -184,9 +184,10 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::EllipticalArc, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::EllipticalArc, doc);
         VToolEllipticalArc *toolEllipticalArc = new VToolEllipticalArc(doc, data, id, typeCreation);
         scene->addItem(toolEllipticalArc);
         InitElArcToolConnections(scene, toolEllipticalArc);

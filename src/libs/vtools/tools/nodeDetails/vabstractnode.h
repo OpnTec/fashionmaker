@@ -67,6 +67,8 @@ public:
 
 protected:
     ParentType parentType;
+
+    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
 protected:
     /** @brief idNodenode id. */
     quint32       idNode;

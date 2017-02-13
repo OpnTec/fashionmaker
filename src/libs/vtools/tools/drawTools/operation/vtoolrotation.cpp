@@ -238,9 +238,9 @@ QT_WARNING_POP
         }
     }
 
-    VDrawTool::AddRecord(id, Tool::Rotation, doc);
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Rotation, doc);
         VToolRotation *tool = new VToolRotation(doc, data, id, origin, angle, suffix, source, dest, typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);

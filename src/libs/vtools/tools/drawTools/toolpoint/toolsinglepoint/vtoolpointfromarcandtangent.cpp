@@ -125,9 +125,10 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::PointFromArcAndTangent, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::PointFromArcAndTangent, doc);
         VToolPointFromArcAndTangent *point = new VToolPointFromArcAndTangent(doc, data, id, arcId, tangentPointId,
                                                                              crossPoint, typeCreation);
         scene->addItem(point);

@@ -52,12 +52,60 @@
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/vabstractapplication.h"
 
+class TestVApplication : public VAbstractApplication
+{
+public:
+
+    TestVApplication(int &argc, char ** argv);
+    virtual ~TestVApplication();
+
+    virtual const VTranslateVars *TrVars();
+    virtual void                  OpenSettings();
+    virtual bool                  IsAppInGUIMode() const;
+    virtual void                  InitTrVars();
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+TestVApplication::TestVApplication(int &argc, char **argv)
+    : VAbstractApplication(argc, argv)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+TestVApplication::~TestVApplication()
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const VTranslateVars *TestVApplication::TrVars()
+{
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TestVApplication::OpenSettings()
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TestVApplication::IsAppInGUIMode() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TestVApplication::InitTrVars()
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
     Q_INIT_RESOURCE(schema);
 
-    QApplication app( argc, argv );// For QPrinter
+    TestVApplication app( argc, argv );// For QPrinter
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject* obj)

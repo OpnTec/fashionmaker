@@ -1919,7 +1919,6 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
     return QPixmap::fromImage(img);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void ShowInGraphicalShell(const QString &filePath)
 {
@@ -1967,4 +1966,42 @@ void ShowInGraphicalShell(const QString &filePath)
     QProcess::startDetached(cmd);
 #endif
 
+}
+
+const QString LONG_OPTION_NO_HDPI_SCALING = QStringLiteral("no-scaling");
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IsOptionSet(int argc, char *argv[], const char *option)
+{
+    for (int i = 1; i < argc; ++i)
+    {
+        if (!qstrcmp(argv[i], option))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// See issue #624. https://bitbucket.org/dismine/valentina/issues/624
+void InitHighDpiScaling(int argc, char *argv[])
+{
+    /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
+    if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+#else
+        qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
+#endif
+    }
+    else
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+#else
+        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
+#endif
+    }
 }

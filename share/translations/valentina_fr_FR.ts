@@ -26,7 +26,7 @@
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished">Ajouter une pièce de patron</translation>
+        <translation>Ajouter une pièce de patron</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished">Outil de suppression</translation>
+        <translation>Outil de suppression</translation>
     </message>
 </context>
 <context>
@@ -1497,16 +1497,44 @@
         <translation type="vanished">Rotation interdite</translation>
     </message>
     <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">La valeur Nom ne peut pas être vide</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="vanished">Droit-fil</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="vanished">Droit-fil visible</translation>
+    </message>
+    <message>
         <source>Rotation:</source>
         <translation type="vanished">Rotation:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="vanished">Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
         <translation type="vanished">Valeur</translation>
     </message>
     <message>
+        <source>Calculation</source>
+        <translation type="vanished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <source>Length:</source>
         <translation type="vanished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="vanished">Résultat infini ou non défini</translation>
     </message>
     <message>
         <source>Length should be positive</source>
@@ -1515,6 +1543,18 @@
     <message>
         <source>Arrows:</source>
         <translation type="vanished">Fleches:</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="vanished">Les deux</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="vanished">Juste le devant</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="vanished">Juste l&apos;arrière</translation>
     </message>
 </context>
 <context>
@@ -1657,98 +1697,98 @@
     </message>
     <message>
         <source>Filter list by keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrer la liste par mot-clefs</translation>
     </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <source>Radius1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon1 :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon2 :</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Premier angle:</translation>
+        <translation>Premier angle :</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Deuxième angle:</translation>
+        <translation>Deuxième angle :</translation>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Angle de rotation :</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished">Point central:</translation>
+        <translation>Point central :</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished">Choisir le point central de l&apos;arc</translation>
+        <translation>Choisir le point central de l&apos;arc</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur :</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Le rayon ne peut pas être négatif</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="unfinished">Les angles valent</translation>
+        <translation>Les angles se valent</translation>
     </message>
     <message>
         <source>Edit radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier rayon1</translation>
     </message>
     <message>
         <source>Edit radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier rayon2</translation>
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation type="unfinished">Editer le premier angle</translation>
+        <translation>Modifier le premier angle</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation type="unfinished">Editer le deuxième angle</translation>
+        <translation>Modifier le deuxième angle</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier l&apos;angle de rotation</translation>
     </message>
 </context>
 <context>
@@ -1897,7 +1937,7 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <source>Origin point:</source>
@@ -1905,11 +1945,11 @@
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Suffixe:</translation>
+        <translation>Suffixe :</translation>
     </message>
     <message>
         <source>Axis type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type d&apos;axe :</translation>
     </message>
     <message>
         <source>Select origin point</source>
@@ -1917,7 +1957,7 @@
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un point d&apos;origine qui n&apos;est pas dans la liste d&apos;objets</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -1932,7 +1972,7 @@
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -1940,11 +1980,11 @@
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Suffixe:</translation>
+        <translation>Suffixe :</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished">Point de la deuxième ligne:</translation>
+        <translation>Point de la deuxième ligne :</translation>
     </message>
     <message>
         <source>Select first line point</source>
@@ -1952,15 +1992,15 @@
     </message>
     <message>
         <source>Select first line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le premier point de la ligne qui n&apos;est pas dans la liste d&apos;objets</translation>
     </message>
     <message>
         <source>Select second line point</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le deuxième point de la ligne</translation>
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le deuxième point de la ligne qui n&apos;est pas dans la liste d&apos;objets</translation>
     </message>
 </context>
 <context>
@@ -2225,7 +2265,7 @@
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arc éliptique</translation>
     </message>
 </context>
 <context>
@@ -2982,7 +3022,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -2990,7 +3030,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2998,7 +3038,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3006,7 +3046,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Suffixe:</translation>
+        <translation>Suffixe :</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -3018,7 +3058,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
 </context>
 <context>
@@ -3588,19 +3628,19 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4216,11 +4256,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un point d&apos;origine qui n&apos;est pas dans la liste d&apos;objets</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
 </context>
 <context>
@@ -4385,19 +4425,19 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4469,7 +4509,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La valeur Nom ne peut pas être vide</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -4513,11 +4553,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Droit-fil</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Droit-fil visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -4561,7 +4601,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultat infini ou non défini</translation>
     </message>
     <message>
         <source>Length should be positive</source>
@@ -4629,15 +4669,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Les deux</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>Juste le devant</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Juste l&apos;arrière</translation>
     </message>
 </context>
 <context>
@@ -4906,7 +4946,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
 </context>
 <context>
@@ -5037,7 +5077,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Calcul</translation>
     </message>
 </context>
 <context>
@@ -5537,6 +5577,10 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>À utiliser pour tests. Exécutez le programme et ouvrir un fichier sans le voir dans la fenêtre principale.</translation>
+    </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6466,7 +6510,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(lecture seule)</translation>
+        <translation type="vanished">(lecture seule)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6614,6 +6658,26 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7495,11 +7559,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Mesures Individuelles (*.vit)</translation>
+        <translation type="vanished">Mesures Individuelles (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Mesures standard (*.vst)</translation>
+        <translation type="vanished">Mesures standard (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7547,7 +7611,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>sans titre</translation>
+        <translation type="vanished">sans titre</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7850,6 +7914,26 @@ Voulez-vous enregistrer les changements?</translation>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -8037,7 +8121,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Erreur lors de la création du fichier de sauvegarde : %1.</translation>
+        <translation type="vanished">Erreur lors de la création du fichier de sauvegarde : %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -8048,7 +8132,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Version inattendue &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8477,6 +8561,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation>Numéro correspondant au modèle de page (défaut=0, mode export) :</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8895,7 +8983,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Erreur de restauration du fichier de backup: %1.</translation>
+        <translation type="vanished">Erreur de restauration du fichier de backup: %1.</translation>
     </message>
 </context>
 <context>
@@ -9266,7 +9354,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arc éliptique</translation>
     </message>
     <message>
         <source>Rotation angle</source>
@@ -10480,7 +10568,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Erreur de restauration du fichier de sauvegarde: %1.</translation>
+        <translation type="vanished">Erreur de restauration du fichier de sauvegarde: %1.</translation>
     </message>
 </context>
 <context>
@@ -10491,7 +10579,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Erreur de restauration du fichier de sauvegarde: %1.</translation>
+        <translation type="vanished">Erreur de restauration du fichier de sauvegarde: %1.</translation>
     </message>
 </context>
 <context>

@@ -128,10 +128,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QStr
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::Piece, doc);
+
     VToolSeamAllowance *piece = nullptr;
     if (parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::Piece, doc);
         piece = new VToolSeamAllowance(doc, data, id, typeCreation, scene, drawName);
         scene->addItem(piece);
         connect(piece, &VToolSeamAllowance::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -141,7 +142,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QStr
         doc->AddTool(id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
-    data->RemoveVariable(currentLength);
+    data->RemoveVariable(currentSeamAllowance);
     return piece;
 }
 
@@ -359,6 +360,7 @@ void VToolSeamAllowance::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
 {
+    const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(id);
     VTextGraphicsItem* pVGI = qgraphicsitem_cast<VTextGraphicsItem*>(pItem);
     if (pVGI != m_dataLabel)
@@ -384,6 +386,7 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
         }
     }
 
+    setSelected(selected);
     update();
 }
 
@@ -720,10 +723,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     if (m_dataLabel->IsIdle() == false || m_patternInfo->IsIdle() == false || m_grainLine->IsIdle() == false)
     {
-        painter->save();
-        painter->setPen(QPen(Qt::black, 3, Qt::DashLine));
-        painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
-        painter->restore();
+        setSelected(true);
     }
     QGraphicsPathItem::paint(painter, option, widget);
 }

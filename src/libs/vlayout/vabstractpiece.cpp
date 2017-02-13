@@ -395,7 +395,8 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             const qreal angle = AngleBetweenBisectors(b1, b2);
 
             // Comparison bisector angles helps to find direction
-            if (angle <= 90)// Go in a same direction
+            if (angle < 90
+                || VFuzzyComparePossibleNulls(angle, 90.0))// Go in a same direction
             {//Regular equdistant case
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -429,7 +430,7 @@ QT_WARNING_POP
                 const qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
                 const qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
 
-                if (result1 <=0 && result2 <= 0)
+                if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                 {// Dart case. A bisector watch outside. In some cases a point still valid, but ignore if going
                  // outside of an equdistant.
 
@@ -450,7 +451,7 @@ QT_WARNING_POP
                     const qreal result1 = PointPosition(CrosPoint, QLineF(p1Line1, p2Line1));
                     const qreal result2 = PointPosition(CrosPoint, QLineF(p2Line2, p1Line2));
 
-                    if (result1 <=0 && result2 <= 0)
+                    if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                     {// The cross point is still outside of a piece
                         if (line.length() >= localWidth)
                         {

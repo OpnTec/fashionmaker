@@ -222,9 +222,10 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
         VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, lineColor, formula,
                                                            p1Line, p2Line, pShoulder,
                                                            typeCreation);

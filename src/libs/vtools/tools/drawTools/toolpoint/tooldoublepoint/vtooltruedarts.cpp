@@ -189,9 +189,10 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::TrueDarts, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::TrueDarts, doc);
         VToolTrueDarts *points = new VToolTrueDarts(doc, data, id, p1id, p2id, baseLineP1Id, baseLineP2Id,
                                                     dartP1Id, dartP2Id, dartP3Id, typeCreation);
         scene->addItem(points);

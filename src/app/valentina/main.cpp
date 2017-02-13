@@ -56,9 +56,9 @@ int main(int argc, char *argv[])
 
     qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-#endif
+#ifndef Q_OS_MAC // supports natively
+    InitHighDpiScaling(argc, argv);
+#endif //Q_OS_MAC
 
     VApplication app(argc, argv);
 

@@ -78,8 +78,8 @@ private slots:
     void CreateFromExisting();
     void Preferences();
 
-    void FileSave();
-    void FileSaveAs();
+    bool FileSave();
+    bool FileSaveAs();
     void ExportToCSV();
     void AboutToShowWindowMenu();
     void ShowWindow() const;
@@ -96,7 +96,6 @@ private slots:
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void SavePMSystem(int index);
-    void ReadOnly(bool ro);
 
     void Remove();
     void MoveTop();
@@ -147,6 +146,7 @@ private:
     QAction *actionDockDiagram;
     bool dockDiagramVisible;
     bool isInitialized;
+    bool mIsReadOnly;
     enum { MaxRecentFiles = 5 };
     QAction            *recentFileActs[MaxRecentFiles];
     QAction            *separatorAct;
@@ -185,10 +185,11 @@ private:
     void ShowMDiagram(const QString &name);
 
     void Open(const QString &pathTo, const QString &filter);
-    void GUIReadOnly(bool ro);
-    void MeasurementReadOnly(bool ro);
+    void UpdatePadlock(bool ro);
+    void MeasurementGUI();
     void Controls();
     void MFields(bool enabled);
+    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();

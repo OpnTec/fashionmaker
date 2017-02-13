@@ -26,7 +26,7 @@
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished">Detail hinzufügen</translation>
+        <translation>Detail hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -5452,6 +5452,10 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Verwenden zum Einheiten testen. Ausführung des Programms und öffnen einer Datei ohne Fensteranzeige.</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -6380,7 +6384,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(schreibgeschützt)</translation>
+        <translation type="vanished">(schreibgeschützt)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6528,6 +6532,26 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7402,11 +7426,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Individuelle Maße (*.vit)</translation>
+        <translation type="vanished">Individuelle Maße (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Standardmaße (*.vst)</translation>
+        <translation type="vanished">Standardmaße (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7454,7 +7478,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>ohne Titel</translation>
+        <translation type="vanished">ohne Titel</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7752,6 +7776,26 @@ Do you want to save your changes?</source>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7932,7 +7976,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Fehler bei der Erstellung der Sicherungsdatei: %1.</translation>
+        <translation type="vanished">Fehler bei der Erstellung der Sicherungsdatei: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -7943,7 +7987,7 @@ Do you want to save your changes?</source>
         <translation>Unerwartete Version &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8396,6 +8440,10 @@ Do you want to save your changes?</source>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8814,7 +8862,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+        <translation type="vanished">Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
@@ -10355,7 +10403,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+        <translation type="vanished">Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
@@ -10366,7 +10414,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+        <translation type="vanished">Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>

@@ -178,9 +178,6 @@ private:
     void InitGrainlineTab();
 
     void SetFormulaSAWidth(const QString &formula);
-
-    QString GetFormulaSAWidthBefore() const;
-    QString GetFormulaSAWidthAfter() const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

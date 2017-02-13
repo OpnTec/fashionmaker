@@ -2549,8 +2549,9 @@ void DL_Dxf::endSequence(DL_CreationInterface* creationInterface)
  */
 DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
-    char* f = new char[strlen(file)+1];
-    strlcpy(f, file, sizeof(f));
+    const size_t size = strlen(file)+1;
+    char* f = new char[size];
+    strlcpy(f, file, size); // Strange thing the sizeof(f) doesn't return correct value
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);

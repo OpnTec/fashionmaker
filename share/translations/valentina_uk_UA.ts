@@ -5477,6 +5477,10 @@ Apply settings anyway?</source>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Використовуеється для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -6404,7 +6408,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(тільки читання)</translation>
+        <translation type="vanished">(тільки читання)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6552,6 +6556,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7433,11 +7457,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Індивідуальні мірки (*.vit)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Стандартні мірки (*.vst)</translation>
+        <translation type="vanished">Стандартні мірки (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7485,7 +7509,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation>без імені</translation>
+        <translation type="vanished">без імені</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7784,6 +7808,26 @@ Do you want to save your changes?</source>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7971,7 +8015,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Помилка створення резервного файлу: %1.</translation>
+        <translation type="vanished">Помилка створення резервного файлу: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -7982,7 +8026,7 @@ Do you want to save your changes?</source>
         <translation>Неочікувана версія &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8435,6 +8479,10 @@ Do you want to save your changes?</source>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8853,7 +8901,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Помилка відновлення резервного файлу: %1.</translation>
+        <translation type="vanished">Помилка відновлення резервного файлу: %1.</translation>
     </message>
 </context>
 <context>
@@ -10422,7 +10470,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Помилка відновлення резервного файлу: %1.</translation>
+        <translation type="vanished">Помилка відновлення резервного файлу: %1.</translation>
     </message>
 </context>
 <context>
@@ -10433,7 +10481,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Помилка відновлення резервного файлу: %1.</translation>
+        <translation type="vanished">Помилка відновлення резервного файлу: %1.</translation>
     </message>
 </context>
 <context>

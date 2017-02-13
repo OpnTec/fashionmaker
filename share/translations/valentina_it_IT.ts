@@ -5505,6 +5505,10 @@ Applicare le impostazioni comunque?</translation>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Utilizzare per testare l&apos;unità. Eseguire il programma e aprire un file senza mostrare la finestra.</translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -6433,7 +6437,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation>(sola lettura)</translation>
+        <translation type="vanished">(sola lettura)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
@@ -6581,6 +6585,26 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7462,11 +7486,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Misure individuali (*.vit)</translation>
+        <translation type="vanished">Misure individuali (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Misure standard (*.vst)</translation>
+        <translation type="vanished">Misure standard (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -7514,7 +7538,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>senza titolo</translation>
+        <translation type="vanished">senza titolo</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7817,6 +7841,26 @@ Vuoi salvare le tue modifiche?</translation>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -8004,7 +8048,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Errore nella creazione del file di backup: %1.</translation>
+        <translation type="vanished">Errore nella creazione del file di backup: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
@@ -8015,7 +8059,7 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Inaspettata versione &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error replacing a symlink by real file: %1.</source>
+        <source>Error openning a temp file file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8464,6 +8508,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -8842,10 +8890,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation type="vanished">Inaspettata versione &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10343,20 +10387,12 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation type="vanished">Inaspettata versione &quot;%1&quot;.</translation>
     </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation type="vanished">Inaspettata versione &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

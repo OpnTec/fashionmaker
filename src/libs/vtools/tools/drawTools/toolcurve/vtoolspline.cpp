@@ -207,9 +207,10 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Spline, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Spline, doc);
         auto _spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(_spl);
         InitSplineToolConnections(scene, _spl);

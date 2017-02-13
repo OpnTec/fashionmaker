@@ -135,9 +135,10 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::PointOfIntersectionCurves, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::PointOfIntersectionCurves, doc);
         auto point = new VToolPointOfIntersectionCurves(doc, data, id, firstCurveId, secondCurveId, vCrossPoint,
                                                         hCrossPoint, typeCreation);
         scene->addItem(point);

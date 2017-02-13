@@ -131,6 +131,8 @@ The path to output destination folder. By default the directory at which the app
 .RE
 .IP "-t, --test"
 Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key \*(lqbasename\*(rq.
+.IP "--no-scaling"
+.RB "Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable."
 .IP Arguments: 
 .I filename
 \- a pattern file.

@@ -170,9 +170,9 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         }
     }
 
-    VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::CutArc, doc);
         VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);

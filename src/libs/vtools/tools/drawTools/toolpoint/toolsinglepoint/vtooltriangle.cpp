@@ -168,9 +168,10 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Triangle, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Triangle, doc);
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
                                                  secondPointId, typeCreation);
         scene->addItem(point);

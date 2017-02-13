@@ -68,9 +68,9 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
         }
     }
 
-    VAbstractTool::AddRecord(id, Tool::PiecePath, doc);
     if (parse == Document::FullParse)
     {
+        VAbstractTool::AddRecord(id, Tool::PiecePath, doc);
         //TODO Need create garbage collector and remove all nodes, that we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VToolPiecePath *pathTool = new VToolPiecePath(doc, data, id, pieceId, typeCreation, drawName, idTool, doc);

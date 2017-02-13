@@ -32,6 +32,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QtTest>
 
@@ -49,6 +50,7 @@ void TST_VPiece::ClearLoop()
     // Check correct seam allowance
     const Unit unit = Unit::Mm;
     VContainer *data = new VContainer(nullptr, &unit);
+    qApp->setPatternUnit(unit);
 
     data->UpdateGObject(304, new VPointF(61.866708661417327, 446.92270866141735, "Ф1", 5.0000125984251973,
                                          9.9999874015748045));
@@ -137,6 +139,113 @@ void TST_VPiece::ClearLoop()
     origPoints.append(QPointF(826.0032661558732, 877.1274330708662));
     origPoints.append(QPointF(828.6858753986579, 1697.305833468011));
     origPoints.append(QPointF(42.46405659601934, 415.2845470563871));
+
+    // Begin comparison
+    Comparison(pointsEkv, origPoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::Issue620()
+{
+    // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
+    // Check main path
+    const Unit unit = Unit::Cm;
+    VContainer *data = new VContainer(nullptr, &unit);
+    qApp->setPatternUnit(unit);
+
+    data->UpdateGObject(1, new VPointF(30, 39.999874015748034, "A", 5.0000125984251973, 9.9999874015748045));
+    data->UpdateGObject(2, new VPointF(333.80102715408322, 37.242158125518621, "A1", 5.0000125984251973,
+                                       9.9999874015748045));
+    data->UpdateGObject(3, new VPointF(345.43524385831239, 572.57275904711241, "A2", 5.0000125984251973,
+                                       9.9999874015748045));
+    VPointF *p4 = new VPointF(-43.770684129917051, 567.84465074396087, "A3", 5.0000125984251973,
+                              9.9999874015748045);
+    data->UpdateGObject(4, p4);
+
+    VPointF *p5 = new VPointF(101.73836126698214, 289.83563666815587, "A4", 5.0000125984251973, 9.9999874015748045);
+    data->UpdateGObject(5, p5);
+    data->UpdateGObject(6, new VPointF(34.070501467722302, 568.79027240459118, "A5", 5.0000125984251973,
+                                       9.9999874015748045));
+
+    QVector<VSplinePoint> points;
+
+    {
+        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(6);
+        VSplinePoint p(*point.data(), 239.37700000000001, "239.377", 419.37700000000001, "59.3765",
+                       0, "0", 109.55943307086613, "2.89876");
+        points.append(p);
+    }
+
+    {
+        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(5);
+        VSplinePoint p(*point.data(), 273.97199999999998, "273.972", 453.97199999999998, "93.9724",
+                       88.161637795275595, "2.33261", 56.135055118110238, "1.48524");
+        points.append(p);
+    }
+
+    {
+        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(1);
+        VSplinePoint p(*point.data(), 337.32600000000002, "337.326", 157.32599999999999, "157.326",
+                       71.189669291338589, "1.88356", 50.093858267716534, "1.3254");
+        points.append(p);
+    }
+
+    data->UpdateGObject(7, new VSplinePath(points));
+
+    data->UpdateGObject(8, new VSpline(*p4, *p5, 59.932499999999997, "59.9325", 257.56999999999999,
+                                       "257.57", 170.46425196850396, "4.5102", 150.6164409448819,
+                                       "3.98506"));
+
+    VPiece detail;
+    detail.SetSeamAllowance(false);
+    detail.SetSAWidth(7);
+    detail.GetPath().Append(VPieceNode(1, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(2, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(3, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(4, Tool::NodePoint));
+    detail.GetPath().Append(VPieceNode(8, Tool::NodeSpline));
+    detail.GetPath().Append(VPieceNode(7, Tool::NodeSplinePath));
+
+    const QVector<QPointF> pointsEkv = detail.MainPathPoints(data);
+
+    QVector<QPointF> origPoints;
+
+    origPoints.append(QPointF(30.0, 39.999874015748034));
+    origPoints.append(QPointF(333.8010271540832, 37.24215812551862));
+    origPoints.append(QPointF(345.4352438583124, 572.5727590471124));
+    origPoints.append(QPointF(-43.77068412991705, 567.8446507439609));
+    origPoints.append(QPointF(-35.87661251446703, 554.334665281764));
+    origPoints.append(QPointF(-21.170117796937717, 530.280231438072));
+    origPoints.append(QPointF(-7.679257977133303, 509.352260960953));
+    origPoints.append(QPointF(4.687459520857305, 491.0705525945524));
+    origPoints.append(QPointF(21.441835284502346, 467.3785713839818));
+    origPoints.append(QPointF(40.52832726053379, 440.9303122452387));
+    origPoints.append(QPointF(52.86115234049136, 422.54889846842264));
+    origPoints.append(QPointF(60.404360001732, 410.06053639339046));
+    origPoints.append(QPointF(67.46387337253645, 396.85702763809604));
+    origPoints.append(QPointF(74.13118502881582, 382.4581709466849));
+    origPoints.append(QPointF(80.49778754648119, 366.3837650633026));
+    origPoints.append(QPointF(86.65517350144364, 348.15360873209477));
+    origPoints.append(QPointF(92.69483546961428, 327.287500697207));
+    origPoints.append(QPointF(98.70826602690417, 303.30523970278495));
+    origPoints.append(QPointF(101.73836126698214, 289.83563666815587));
+    origPoints.append(QPointF(100.33414592841483, 265.38578532087524));
+    origPoints.append(QPointF(96.68026149584162, 212.73003048920282));
+    origPoints.append(QPointF(93.50326130663731, 183.65468712210458));
+    origPoints.append(QPointF(90.71558574640727, 163.99193793167092));
+    origPoints.append(QPointF(87.25149211813451, 144.48122290748523));
+    origPoints.append(QPointF(83.01539723892088, 125.48779016127345));
+    origPoints.append(QPointF(77.91171792586823, 107.37688780476151));
+    origPoints.append(QPointF(73.4247676790375, 94.64014475361638));
+    origPoints.append(QPointF(70.13263046316489, 86.58901147237839));
+    origPoints.append(QPointF(66.56983159845231, 78.96396285141125));
+    origPoints.append(QPointF(62.72442318703749, 71.81065490468066));
+    origPoints.append(QPointF(58.58445733105817, 65.17474364615236));
+    origPoints.append(QPointF(54.13798613265208, 59.10188508979212));
+    origPoints.append(QPointF(49.373061693956934, 53.63773524956568));
+    origPoints.append(QPointF(44.277736117110486, 48.827950139438784));
+    origPoints.append(QPointF(38.84006150425045, 44.71818577337716));
+    origPoints.append(QPointF(33.04808995751456, 41.35409816534657));
 
     // Begin comparison
     Comparison(pointsEkv, origPoints);

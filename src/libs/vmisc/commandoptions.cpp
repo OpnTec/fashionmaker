@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "commandoptions.h"
+#include "def.h"
 
 #include <QStaticStringData>
 #include <QStringData>
@@ -132,7 +133,8 @@ QStringList AllKeys()
          << LONG_OPTION_LEFT_MARGIN << SINGLE_OPTION_LEFT_MARGIN
          << LONG_OPTION_RIGHT_MARGIN << SINGLE_OPTION_RIGHT_MARGIN
          << LONG_OPTION_TOP_MARGIN << SINGLE_OPTION_TOP_MARGIN
-         << LONG_OPTION_BOTTOM_MARGIN << SINGLE_OPTION_BOTTOM_MARGIN;
+         << LONG_OPTION_BOTTOM_MARGIN << SINGLE_OPTION_BOTTOM_MARGIN
+         << LONG_OPTION_NO_HDPI_SCALING;
 
     return list;
 }

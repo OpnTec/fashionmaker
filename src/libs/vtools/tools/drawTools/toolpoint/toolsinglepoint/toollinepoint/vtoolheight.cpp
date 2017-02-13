@@ -174,9 +174,10 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Height, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Height, doc);
         VToolHeight *point = new VToolHeight(doc, data, id, typeLine, lineColor, basePointId, p1LineId, p2LineId,
                                              typeCreation);
         scene->addItem(point);
