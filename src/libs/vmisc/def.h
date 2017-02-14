@@ -195,7 +195,8 @@ enum class Vis : ToolVisHolderType
     ToolEllipticalArc,
     ToolPiece,
     ToolPiecePath,
-    ToolPin
+    ToolPin,
+    PiecePins
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,

@@ -34,6 +34,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vwidgets/vsimplepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
@@ -58,4 +59,24 @@ void VisPath::InitPen()
 void VisPath::AddOnScene()
 {
     AddItem(this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color)
+{
+    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
+    {
+        return points.at(static_cast<int>(i));
+    }
+    else
+    {
+        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
+        point->SetPointHighlight(true);
+        point->setParentItem(this);
+        point->SetVisualizationMode(true);
+        points.append(point);
+
+        return point;
+    }
+    return nullptr;
 }

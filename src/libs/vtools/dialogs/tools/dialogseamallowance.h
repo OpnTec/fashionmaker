@@ -40,6 +40,8 @@ namespace Ui
     class DialogSeamAllowance;
 }
 
+class VisPiecePins;
+
 class DialogSeamAllowance : public DialogTool
 {
     Q_OBJECT
@@ -90,6 +92,7 @@ private slots:
     void ReturnDefAfter();
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
+    void TabChanged(int index);
 
     void UpdateValues();
     void SetAddMode();
@@ -125,7 +128,8 @@ private:
     qreal  m_mx;
     qreal  m_my;
 
-    QPointer<DialogTool> m_dialog;
+    QPointer<DialogTool>   m_dialog;
+    QPointer<VisPiecePins> m_visPins;
 
     QStringList      m_qslMaterials;
     QStringList      m_qslPlacements;
@@ -181,6 +185,9 @@ private:
     void InitPinsTab();
 
     void SetFormulaSAWidth(const QString &formula);
+
+    template <typename T>
+    QVector<T> GetPieceInternals(const QListWidget *list) const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

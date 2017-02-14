@@ -2,13 +2,13 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   22 11, 2016
+ **  @date   14 2, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,82 +26,53 @@
  **
  *************************************************************************/
 
-#include "vistoolpiecepath.h"
+#include "vispiecepins.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 
-#include <QGraphicsSceneMouseEvent>
-
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent)
+VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       m_points(),
-      m_line(nullptr),
-      m_path()
+      m_pins()
 {
-    m_line = InitItem<QGraphicsLineItem>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPiecePath::~VisToolPiecePath()
-{}
+VisPiecePins::~VisPiecePins()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::RefreshGeometry()
+void VisPiecePins::RefreshGeometry()
 {
     HideAllItems();
 
-    if (m_path.CountNodes() > 0)
+    for (int i = 0; i < m_pins.size(); ++i)
     {
-        DrawPath(this, m_path.PainterPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
-
-        const QVector<VPointF> nodes = m_path.PathNodePoints(Visualization::data);
-
-        for (int i = 0; i < nodes.size(); ++i)
-        {
-            VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
-            point->SetOnlyPoint(mode == Mode::Creation);
-            point->RefreshGeometry(nodes.at(i));
-            point->setVisible(true);
-        }
-
-        if (mode == Mode::Creation)
-        {
-            const QVector<QPointF> points = m_path.PathPoints(Visualization::data);
-            if (points.size() > 0)
-            {
-                DrawLine(m_line, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
-            }
-        }
+        VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+        point->SetOnlyPoint(false);
+        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_pins.at(i));
+        point->RefreshGeometry(*p);
+        point->setVisible(true);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::SetPath(const VPiecePath &path)
+void VisPiecePins::SetPins(const QVector<quint32> &pins)
 {
-    m_path = path;
+    m_pins = pins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    event->ignore();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
+VSimplePoint *VisPiecePins::GetPoint(quint32 i, const QColor &color)
 {
     return VisPath::GetPoint(m_points, i, color);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::HideAllItems()
+void VisPiecePins::HideAllItems()
 {
-    if (m_line)
-    {
-        m_line->setVisible(false);
-    }
-
     for (int i=0; i < m_points.size(); ++i)
     {
         if (QGraphicsEllipseItem *item = m_points.at(i))
@@ -110,3 +81,4 @@ void VisToolPiecePath::HideAllItems()
         }
     }
 }
+

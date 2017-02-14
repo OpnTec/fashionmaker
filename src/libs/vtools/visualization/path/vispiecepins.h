@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vispath.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 8, 2014
+ **  @date   14 2, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,39 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VISPATH_H
-#define VISPATH_H
+#ifndef VISPIECEPINS_H
+#define VISPIECEPINS_H
 
-#include <qcompilerdetection.h>
-#include <QGraphicsItem>
-#include <QGraphicsPathItem>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
-#include <QtGlobal>
+#include "vispath.h"
 
-#include "../visualization.h"
-#include "../vmisc/def.h"
-
-class VContainer;
 class VSimplePoint;
 
-class VisPath : public Visualization, public QGraphicsPathItem
+class VisPiecePins : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisPath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisPath() Q_DECL_OVERRIDE;
+    VisPiecePins(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisPiecePins();
 
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    void         SetPins(const QVector<quint32> &pins);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Path)};
-protected:
-    virtual void InitPen() Q_DECL_OVERRIDE;
-    virtual void AddOnScene() Q_DECL_OVERRIDE;
-
-    VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
+    enum { Type = UserType + static_cast<int>(Vis::PiecePins)};
 private:
-    Q_DISABLE_COPY(VisPath)
+    Q_DISABLE_COPY(VisPiecePins)
+    QVector<VSimplePoint *> m_points;
+    QVector<quint32>        m_pins;
+
+    VSimplePoint *GetPoint(quint32 i, const QColor &color);
+
+    void HideAllItems();
 };
 
-#endif // VISPATH_H
+#endif // VISPIECEPINS_H

@@ -32,6 +32,7 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
 #include "visualization/path/vistoolpiece.h"
+#include "visualization/path/vispiecepins.h"
 #include "dialogpiecepath.h"
 #include "../../undocommands/savepiecepathoptions.h"
 #include "../support/dialogeditwrongformula.h"
@@ -73,6 +74,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_mx(0),
       m_my(0),
       m_dialog(),
+      m_visPins(),
       m_qslMaterials(),
       m_qslPlacements(),
       m_conMCP(),
@@ -100,6 +102,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitPatternPieceDataTab();
     InitGrainlineTab();
     InitPinsTab();
+
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &DialogSeamAllowance::TabChanged);
 
     flagName = true;//We have default name of piece.
     ChangeColor(ui->labelEditName, okColor);
@@ -622,6 +626,7 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     if (selectedAction == actionDelete)
     {
         delete ui->listWidgetPins->item(row);
+        TabChanged(ui->tabWidget->currentIndex());
     }
 }
 
@@ -930,6 +935,36 @@ void DialogSeamAllowance::PathDialogClosed(int result)
         }
     }
     delete m_dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::TabChanged(int index)
+{
+    if (ui->tabWidget->indexOf(ui->tabPins) == index)
+    {
+        if (m_visPins.isNull())
+        {
+            m_visPins = new VisPiecePins(data);
+        }
+
+        m_visPins->SetPins(GetPieceInternals<quint32>(ui->listWidgetPins));
+
+        if (not qApp->getCurrentScene()->items().contains(m_visPins))
+        {
+            m_visPins->VisualMode(NULL_ID);
+        }
+        else
+        {
+            m_visPins->RefreshGeometry();
+        }
+    }
+    else
+    {
+        if (not m_visPins.isNull())
+        {
+            delete m_visPins;
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1276,47 +1311,16 @@ void DialogSeamAllowance::DeployWidthAfterFormulaTextEdit()
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
-    for (qint32 i = 0; i < ui->listWidgetMainPath->count(); ++i)
-    {
-        QListWidgetItem *item = ui->listWidgetMainPath->item(i);
-        piece.GetPath().Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
-    }
-
-    QVector<CustomSARecord> records;
-    for (qint32 i = 0; i < ui->listWidgetCustomSA->count(); ++i)
-    {
-        QListWidgetItem *item = ui->listWidgetCustomSA->item(i);
-        records.append(qvariant_cast<CustomSARecord>(item->data(Qt::UserRole)));
-    }
-    piece.SetCustomSARecords(records);
-
-    QVector<quint32> iPaths;
-    for (qint32 i = 0; i < ui->listWidgetInternalPaths->count(); ++i)
-    {
-        QListWidgetItem *item = ui->listWidgetInternalPaths->item(i);
-        iPaths.append(qvariant_cast<quint32>(item->data(Qt::UserRole)));
-    }
-    piece.SetInternalPaths(iPaths);
-
-    QVector<quint32> pins;
-    for (qint32 i = 0; i < ui->listWidgetPins->count(); ++i)
-    {
-        QListWidgetItem *item = ui->listWidgetPins->item(i);
-        pins.append(qvariant_cast<quint32>(item->data(Qt::UserRole)));
-    }
-    piece.SetPins(pins);
-
+    piece.GetPath().SetNodes(GetPieceInternals<VPieceNode>(ui->listWidgetMainPath));
+    piece.SetCustomSARecords(GetPieceInternals<CustomSARecord>(ui->listWidgetCustomSA));
+    piece.SetInternalPaths(GetPieceInternals<quint32>(ui->listWidgetInternalPaths));
+    piece.SetPins(GetPieceInternals<quint32>(ui->listWidgetPins));
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
     piece.SetName(ui->lineEditName->text());
     piece.SetMx(m_mx);
     piece.SetMy(m_my);
-
-    QString width = ui->plainTextEditFormulaWidth->toPlainText();
-    width.replace("\n", " ");
-    width = qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
-    piece.SetFormulaSAWidth(width, m_saWidth);
-
+    piece.SetFormulaSAWidth(GetFormulaFromUser(ui->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(ui->lineEditLetter->text());
 
     for (int i = 0; i < m_conMCP.count(); ++i)
@@ -1848,4 +1852,18 @@ void DialogSeamAllowance::ClearFields()
     ui->comboBoxMaterial->setCurrentIndex(0);
     ui->spinBoxCutNumber->setValue(0);
     ui->comboBoxPlacement->setCurrentIndex(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+QVector<T> DialogSeamAllowance::GetPieceInternals(const QListWidget *list) const
+{
+    SCASSERT(list != nullptr)
+    QVector<T> internals;
+    for (qint32 i = 0; i < list->count(); ++i)
+    {
+        QListWidgetItem *item = list->item(i);
+        internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
+    }
+    return internals;
 }
