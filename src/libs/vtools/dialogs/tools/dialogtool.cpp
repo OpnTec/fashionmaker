@@ -449,12 +449,18 @@ QString DialogTool::DialogWarningIcon()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::GetNodeName(const VPieceNode &node) const
 {
-    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
+    const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
 
-    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
+    if (node.GetTypeTool() != Tool::NodePoint)
     {
-        name = QLatin1String("- ") + name;
+        int bias = 0;
+        qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
+
+        if (node.GetReverse())
+        {
+            name = QLatin1String("- ") + name;
+        }
     }
 
     return name;
@@ -473,10 +479,8 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-        {
             name = GetNodeName(node);
             break;
-        }
         default:
             qDebug()<<"Got wrong tools. Ignore.";
             return;
