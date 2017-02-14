@@ -99,6 +99,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitInternalPathsTab();
     InitPatternPieceDataTab();
     InitGrainlineTab();
+    InitPinsTab();
 
     flagName = true;//We have default name of piece.
     ChangeColor(ui->labelEditName, okColor);
@@ -129,6 +130,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     ui->tabInternalPaths->setEnabled(applyAllowed);
     ui->tabPatternPieceData->setEnabled(applyAllowed);
     ui->tabGrainline->setEnabled(applyAllowed);
+    ui->tabPins->setEnabled(applyAllowed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,6 +160,12 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     for (int i = 0; i < piece.GetInternalPaths().size(); ++i)
     {
         NewInternalPath(piece.GetInternalPaths().at(i));
+    }
+
+    ui->listWidgetPins->clear();
+    for (int i = 0; i < piece.GetPins().size(); ++i)
+    {
+        NewPin(piece.GetPins().at(i));
     }
 
     ui->comboBoxStartPoint->blockSignals(true);
@@ -595,6 +603,25 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         m_dialog->setModal(true);
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PathDialogClosed);
         m_dialog->show();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
+{
+    const int row = ui->listWidgetPins->currentRow();
+    if (ui->listWidgetPins->count() == 0 || row == -1 || row >= ui->listWidgetPins->count())
+    {
+        return;
+    }
+
+    QMenu *menu = new QMenu(this);
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
+    QAction *selectedAction = menu->exec(ui->listWidgetPins->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete ui->listWidgetPins->item(row);
     }
 }
 
@@ -1271,6 +1298,14 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
     piece.SetInternalPaths(iPaths);
 
+    QVector<quint32> pins;
+    for (qint32 i = 0; i < ui->listWidgetPins->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidgetPins->item(i);
+        pins.append(qvariant_cast<quint32>(item->data(Qt::UserRole)));
+    }
+    piece.SetPins(pins);
+
     piece.SetForbidFlipping(ui->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(ui->checkBoxSeams->isChecked());
     piece.SetName(ui->lineEditName->text());
@@ -1341,6 +1376,21 @@ void DialogSeamAllowance::NewInternalPath(quint32 path)
         item->setData(Qt::UserRole, QVariant::fromValue(path));
         ui->listWidgetInternalPaths->addItem(item);
         ui->listWidgetInternalPaths->setCurrentRow(ui->listWidgetInternalPaths->count()-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::NewPin(quint32 pinPoint)
+{
+    if (pinPoint > NULL_ID)
+    {
+        const QSharedPointer<VGObject> pin = data->GetGObject(pinPoint);
+
+        QListWidgetItem *item = new QListWidgetItem(pin->name());
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, QVariant::fromValue(pinPoint));
+        ui->listWidgetPins->addItem(item);
+        ui->listWidgetPins->setCurrentRow(ui->listWidgetPins->count()-1);
     }
 }
 
@@ -1725,6 +1775,14 @@ void DialogSeamAllowance::InitGrainlineTab()
 
     m_iRotBaseHeight = ui->lineEditRotFormula->height();
     m_iLenBaseHeight = ui->lineEditLenFormula->height();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPinsTab()
+{
+    ui->listWidgetPins->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidgetPins, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowPinsContextMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

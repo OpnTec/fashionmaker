@@ -77,6 +77,7 @@ private slots:
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
+    void ShowPinsContextMenu(const QPoint &pos);
 
     void ListChanged();
     void EnableSeamAllowance(bool enable);
@@ -150,6 +151,7 @@ private:
     void    NewMainPathItem(const VPieceNode &node);
     void    NewCustomSA(const CustomSARecord &record);
     void    NewInternalPath(quint32 path);
+    void    NewPin(quint32 pinPoint);
     QString GetPathName(quint32 path, bool reverse = false) const;
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
@@ -176,6 +178,7 @@ private:
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
     void InitGrainlineTab();
+    void InitPinsTab();
 
     void SetFormulaSAWidth(const QString &formula);
 };
