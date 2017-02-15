@@ -81,11 +81,7 @@ bool DialogExportToCSV::WithHeader() const
 //---------------------------------------------------------------------------------------------------------------------
 int DialogExportToCSV::SelectedMib() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return ui->comboBoxCodec->itemData(ui->comboBoxCodec->currentIndex()).toInt();
-#else
-    return ui->comboBoxCodec->currentData().toInt();
-#endif
+    return CURRENT_DATA(ui->comboBoxCodec).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

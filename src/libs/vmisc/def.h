@@ -59,6 +59,11 @@ template <class T> class QSharedPointer;
 #define RECEIVER(obj)
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+#define CURRENT_DATA(box) box->itemData(box->currentIndex())
+#else
+#define CURRENT_DATA(box) box->currentData()
+#endif
 
 class QComboBox;
 class QMarginsF;
