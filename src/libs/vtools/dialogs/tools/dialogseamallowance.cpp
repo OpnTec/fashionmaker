@@ -172,6 +172,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
         NewPin(piece.GetPins().at(i));
     }
 
+    InitAllPinComboboxes();
+
     ui->comboBoxStartPoint->blockSignals(true);
     ui->comboBoxStartPoint->clear();
     ui->comboBoxStartPoint->blockSignals(false);
@@ -194,8 +196,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     m_my = piece.GetMy();
 
     ui->lineEditLetter->setText(piece.GetPatternPieceData().GetLetter());
-    ui->checkBoxDetail->setChecked(piece.GetPatternPieceData().IsVisible());
-    ui->checkBoxPattern->setChecked(piece.GetPatternInfo().IsVisible());
+    ui->groupBoxDetailLabel->setChecked(piece.GetPatternPieceData().IsVisible());
+    ui->groupBoxPatternLabel->setChecked(piece.GetPatternInfo().IsVisible());
 
     m_conMCP.clear();
     for (int i = 0; i < piece.GetPatternPieceData().GetMCPCount(); ++i)
@@ -385,11 +387,7 @@ void DialogSeamAllowance::AddUpdate()
     MaterialCutPlacement mcp;
     QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    int i = ui->comboBoxMaterial->itemData(ui->comboBoxMaterial->currentIndex()).toInt();
-#else
-    int i = ui->comboBoxMaterial->currentData().toInt();
-#endif
+    const int i = CURRENT_DATA(ui->comboBoxMaterial).toInt();
     QString qsMat = ui->comboBoxMaterial->currentText();
     if (i < m_qslMaterials.count() && qsMat == m_qslMaterials[i])
     {
@@ -627,6 +625,7 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     {
         delete ui->listWidgetPins->item(row);
         TabChanged(ui->tabWidget->currentIndex());
+        InitAllPinComboboxes();
     }
 }
 
@@ -673,13 +672,8 @@ void DialogSeamAllowance::NodeChanged(int index)
 
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
         const VPiece piece = CreatePiece();
-        const int nodeIndex = piece.GetPath().indexOfNode(id);
+        const int nodeIndex = piece.GetPath().indexOfNode(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = piece.GetPath().at(nodeIndex);
@@ -733,71 +727,54 @@ void DialogSeamAllowance::NodeChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CSAStartPointChanged(int index)
 {
+    Q_UNUSED(index);
+
     const int row = ui->listWidgetCustomSA->currentRow();
     if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
     {
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const quint32 startPoint = ui->comboBoxStartPoint->itemData(index).toUInt();
-#else
-    Q_UNUSED(index);
-    const quint32 startPoint = ui->comboBoxStartPoint->currentData().toUInt();
-#endif
-
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.startPoint = startPoint;
+    record.startPoint = CURRENT_DATA(ui->comboBoxStartPoint).toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CSAEndPointChanged(int index)
 {
+    Q_UNUSED(index);
+
     const int row = ui->listWidgetCustomSA->currentRow();
     if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
     {
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const quint32 endPoint = ui->comboBoxEndPoint->itemData(index).toUInt();
-#else
-    Q_UNUSED(index);
-    const quint32 endPoint = ui->comboBoxEndPoint->currentData().toUInt();
-#endif
-
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.endPoint = endPoint;
+    record.endPoint = CURRENT_DATA(ui->comboBoxEndPoint).toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
 {
+    Q_UNUSED(index);
+
     const int row = ui->listWidgetCustomSA->currentRow();
     if (ui->listWidgetCustomSA->count() == 0 || row == -1 || row >= ui->listWidgetCustomSA->count())
     {
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const PiecePathIncludeType type =
-            static_cast<PiecePathIncludeType>(ui->comboBoxIncludeType->itemData(index).toUInt());
-#else
-    Q_UNUSED(index);
-    const PiecePathIncludeType type =
-            static_cast<PiecePathIncludeType>(ui->comboBoxIncludeType->currentData().toUInt());
-#endif
-
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.includeType = type;
+    record.includeType = static_cast<PiecePathIncludeType>(CURRENT_DATA(ui->comboBoxIncludeType).toUInt());
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
@@ -807,23 +784,11 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
     const int i = ui->comboBoxNodes->currentIndex();
     if (i != -1 && index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(i).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
-        #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->itemData(index).toUInt());
-        #else
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
-        #endif
-
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-            rowNode.SetAngleType(angle);
+            rowNode.SetAngleType(static_cast<PieceNodeAngle>(CURRENT_DATA(ui->comboBoxAngle).toUInt()));
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
@@ -1333,10 +1298,10 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetLabelHeight(m_oldData.GetLabelHeight());
     piece.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
     piece.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
-    piece.GetPatternPieceData().SetVisible(ui->checkBoxDetail->isChecked());
+    piece.GetPatternPieceData().SetVisible(ui->groupBoxDetailLabel->isChecked());
 
     piece.GetPatternInfo() = m_oldGeom;
-    piece.GetPatternInfo().SetVisible(ui->checkBoxPattern->isChecked());
+    piece.GetPatternInfo().SetVisible(ui->groupBoxPatternLabel->isChecked());
 
     piece.GetGrainlineGeometry() = m_oldGrainline;
     piece.GetGrainlineGeometry().SetVisible(ui->checkBoxGrainline->isChecked());
@@ -1480,20 +1445,16 @@ bool DialogSeamAllowance::MainPathIsClockwise() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitNodesList()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const quint32 id = ui->comboBoxNodes->itemData(ui->comboBoxNodes->currentIndex()).toUInt();
-#else
-    const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-#endif
+    const quint32 id = CURRENT_DATA(ui->comboBoxNodes).toUInt();
 
     ui->comboBoxNodes->blockSignals(true);
     ui->comboBoxNodes->clear();
 
-    const VPiece piece = CreatePiece();
+    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(ui->listWidgetMainPath);
 
-    for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
+    for (int i = 0; i < nodes.size(); ++i)
     {
-        const VPieceNode node = piece.GetPath().at(i);
+        const VPieceNode node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
             const QString name = GetNodeName(node);
@@ -1567,13 +1528,7 @@ void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -1589,13 +1544,7 @@ void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -1689,16 +1638,45 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
     box->clear();
     box->addItem(tr("Empty"), NULL_ID);
 
-    const VPiece piece = CreatePiece();
+    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(ui->listWidgetMainPath);
 
-    for (int i = 0; i < piece.GetPath().CountNodes(); ++i)
+    for (int i = 0; i < nodes.size(); ++i)
     {
-        const VPieceNode &node = piece.GetPath().at(i);
+        const VPieceNode &node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
             const QString name = GetNodeName(node);
             box->addItem(name, node.GetId());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPinPoint(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+
+    quint32 currentId = NULL_ID;
+    if (box->count() > 0)
+    {
+        currentId = CURRENT_DATA(box).toUInt();
+    }
+
+    box->clear();
+    box->addItem(QLatin1String("<") + tr("no pin") + QLatin1String(">"), NULL_ID);
+
+    const QVector<quint32> pins = GetPieceInternals<quint32>(ui->listWidgetPins);
+
+    for (int i = 0; i < pins.size(); ++i)
+    {
+        const QSharedPointer<VGObject> pin = data->GetGObject(pins.at(i));
+        box->addItem(pin->name(), pins.at(i));
+    }
+
+    const int index = ui->comboBoxNodes->findData(currentId);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
     }
 }
 
@@ -1727,6 +1705,11 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditLetter->setClearButtonEnabled(true);
 #endif
+
+    InitPinPoint(ui->comboBoxDetailLabelTopLeftPin);
+    InitPinPoint(ui->comboBoxDetailLabelBottomRightPin);
+    InitPinPoint(ui->comboBoxPatternLabelTopLeftPin);
+    InitPinPoint(ui->comboBoxPatternLabelBottomRightPin);
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
@@ -1779,6 +1762,9 @@ void DialogSeamAllowance::InitGrainlineTab()
 
     m_iRotBaseHeight = ui->lineEditRotFormula->height();
     m_iLenBaseHeight = ui->lineEditLenFormula->height();
+
+    InitPinPoint(ui->comboBoxGrainlineTopPin);
+    InitPinPoint(ui->comboBoxGrainlineBottomPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1787,6 +1773,18 @@ void DialogSeamAllowance::InitPinsTab()
     ui->listWidgetPins->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidgetPins, &QListWidget::customContextMenuRequested, this,
             &DialogSeamAllowance::ShowPinsContextMenu);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitAllPinComboboxes()
+{
+    InitPinPoint(ui->comboBoxGrainlineTopPin);
+    InitPinPoint(ui->comboBoxGrainlineBottomPin);
+
+    InitPinPoint(ui->comboBoxDetailLabelTopLeftPin);
+    InitPinPoint(ui->comboBoxDetailLabelBottomRightPin);
+    InitPinPoint(ui->comboBoxPatternLabelTopLeftPin);
+    InitPinPoint(ui->comboBoxPatternLabelBottomRightPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

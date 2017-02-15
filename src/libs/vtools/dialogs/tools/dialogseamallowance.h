@@ -178,11 +178,13 @@ private:
     void InitSeamAllowanceTab();
     void InitNodesList();
     void InitCSAPoint(QComboBox *box);
+    void InitPinPoint(QComboBox *box);
     void InitSAIncludeType();
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
     void InitGrainlineTab();
     void InitPinsTab();
+    void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
 

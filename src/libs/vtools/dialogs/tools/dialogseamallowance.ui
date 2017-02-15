@@ -911,7 +911,7 @@
            <item>
             <layout class="QFormLayout" name="formLayout_3">
              <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              <enum>QFormLayout::ExpandingFieldsGrow</enum>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_5">
@@ -1029,17 +1029,82 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
-              <widget class="QCheckBox" name="checkBoxDetail">
-               <property name="text">
+              <widget class="QGroupBox" name="groupBoxDetailLabel">
+               <property name="title">
                 <string>Detail label visible</string>
                </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+               <layout class="QFormLayout" name="formLayout_4">
+                <property name="fieldGrowthPolicy">
+                 <enum>QFormLayout::ExpandingFieldsGrow</enum>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="labelDetailLabelTopLeftPin">
+                  <property name="text">
+                   <string>Top left pin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="comboBoxDetailLabelTopLeftPin"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="labelDetailLabelBottomRightPin">
+                  <property name="text">
+                   <string>Bottom right pin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="comboBoxDetailLabelBottomRightPin"/>
+                </item>
+               </layout>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBoxPattern">
-               <property name="text">
+              <widget class="QGroupBox" name="groupBoxPatternLabel">
+               <property name="title">
                 <string>Pattern label visible</string>
                </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+               <layout class="QFormLayout" name="formLayout_5">
+                <property name="fieldGrowthPolicy">
+                 <enum>QFormLayout::ExpandingFieldsGrow</enum>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="labelPatternLabelTopLeftPin">
+                  <property name="text">
+                   <string>Top left pin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="comboBoxPatternLabelTopLeftPin"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="labelPatternLabelBottomRightPin">
+                  <property name="text">
+                   <string>Bottom right pin:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="comboBoxPatternLabelBottomRightPin"/>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
@@ -1456,8 +1521,11 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
+        <layout class="QFormLayout" name="formLayout">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::ExpandingFieldsGrow</enum>
+         </property>
+         <item row="0" column="0">
           <widget class="QLabel" name="labelEditLen_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -1507,23 +1575,43 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="1">
           <widget class="QComboBox" name="comboBoxArrow"/>
          </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelGrainlineTopPin">
+           <property name="text">
+            <string>Top pin:</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelGrainlineBottomPin">
+           <property name="text">
+            <string>Bottom pin:</string>
            </property>
-          </spacer>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBoxGrainlineTopPin"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="comboBoxGrainlineBottomPin"/>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
