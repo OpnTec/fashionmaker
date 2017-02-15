@@ -38,8 +38,7 @@ VisToolPin::VisToolPin(const VContainer *data, QGraphicsItem *parent)
     this->mainColor = Qt::red;
     this->setZValue(2);// Show on top real tool
 
-    m_point = QSharedPointer<VSimplePoint>(new VSimplePoint(NULL_ID, mainColor, *Visualization::data->GetPatternUnit(),
-                                                            &factor));
+    m_point = new VSimplePoint(NULL_ID, mainColor, *Visualization::data->GetPatternUnit(), &factor);
     m_point->SetPointHighlight(true);
     m_point->setParentItem(this);
     m_point->SetVisualizationMode(true);
@@ -49,6 +48,10 @@ VisToolPin::VisToolPin(const VContainer *data, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPin::~VisToolPin()
 {
+    if (not m_point.isNull())
+    {
+        delete m_point;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

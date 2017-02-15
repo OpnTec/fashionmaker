@@ -45,7 +45,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolPin)};
 private:
     Q_DISABLE_COPY(VisToolPin)
-    QSharedPointer<VSimplePoint> m_point;
+    QPointer<VSimplePoint> m_point;
 };
 
 #endif // VISTOOLPIN_H
