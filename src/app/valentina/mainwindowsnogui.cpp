@@ -853,8 +853,16 @@ void MainWindowsNoGUI::SaveLayoutAs()
         qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
     }
 
+    const QString dir = qApp->ValentinaSettings()->GetPathLayout();
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
     QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                    qApp->ValentinaSettings()->GetPathLayout()+"/"+FileName()+".pdf",
+                                                    dir + QLatin1String("/") + FileName() + QLatin1String(".pdf"),
                                                     tr("PDF file (*.pdf)"));
     if (not fileName.isEmpty())
     {
@@ -868,6 +876,12 @@ void MainWindowsNoGUI::SaveLayoutAs()
         printer.setOutputFileName(fileName);
         printer.setResolution(static_cast<int>(PrintDPI));
         PrintPages( &printer );
+    }
+
+    if (usedNotExistedDir)
+    {
+        QDir directory(dir);
+        directory.rmpath(".");
     }
 }
 

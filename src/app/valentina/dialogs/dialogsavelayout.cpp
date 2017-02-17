@@ -102,12 +102,25 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
             RECEIVER(this)ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, RECEIVER(this)[this]()
     {
-        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"),
-                                                              qApp->ValentinaSettings()->GetPathLayout(),
+        const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
+        bool usedNotExistedDir = false;
+        QDir directory(dirPath);
+        if (not directory.exists())
+        {
+            usedNotExistedDir = directory.mkpath(".");
+        }
+
+        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), dirPath,
                                                           QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
         if (not dir.isEmpty())
         {// If paths equal the signal will not be called, we will do this manually
             dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
+        }
+
+        if (usedNotExistedDir)
+        {
+            QDir directory(dirPath);
+            directory.rmpath(".");
         }
     });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);

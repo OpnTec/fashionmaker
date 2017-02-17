@@ -383,21 +383,35 @@ void TMainWindow::FileNew()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenIndividual()
 {
-    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Standard measurements") +
+    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Multisize measurements") +
             QLatin1String(" (*.vst);;") + tr("All files") + QLatin1String(" (*.*)");
     //Use standard path to individual measurements
     const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
 
+    bool usedNotExistedDir = false;
+    QDir directory(pathTo);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
     Open(pathTo, filter);
+
+    if (usedNotExistedDir)
+    {
+        QDir directory(pathTo);
+        directory.rmpath(".");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenStandard()
 {
-    const QString filter = tr("Standard measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
+    const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
             QLatin1String(" (*.vit);;") + tr("All files") + QLatin1String(" (*.*)");
     //Use standard path to standard measurements
     const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
+    VCommonSettings::PrepareStandardTables(pathTo);
 
     Open(pathTo, filter);
 }
@@ -409,7 +423,7 @@ void TMainWindow::OpenTemplate()
             QLatin1String(" (*.*)");
     //Use standard path to template files
     const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-
+    VCommonSettings::PrepareStandardTemplates(pathTo);
     Open(pathTo, filter);
 
     if (m != nullptr)
@@ -425,6 +439,14 @@ void TMainWindow::CreateFromExisting()
     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit)");
     //Use standard path to standard measurements
     const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+
+    bool usedNotExistedDir = false;
+    QDir directory(pathTo);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
 
     if (not mPath.isEmpty())
@@ -437,6 +459,12 @@ void TMainWindow::CreateFromExisting()
         {
             qApp->NewMainWindow()->CreateFromExisting();
         }
+    }
+
+    if (usedNotExistedDir)
+    {
+        QDir directory(pathTo);
+        directory.rmpath(".");
     }
 }
 
@@ -482,7 +510,7 @@ void TMainWindow::changeEvent(QEvent *event)
 
         if (mType == MeasurementsType::Standard)
         {
-            ui->labelMType->setText(tr("Standard measurements"));
+            ui->labelMType->setText(tr("Multisize measurements"));
             ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QLatin1String(" ") +
                                             VDomDocument::UnitsToStr(m->MUnit(), true));
             ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QLatin1String(" ") +
@@ -691,7 +719,7 @@ bool TMainWindow::FileSaveAs()
     }
     else
     {
-        filters = tr("Standard measurements") + QLatin1String(" (*.vst)");
+        filters = tr("Multisize measurements") + QLatin1String(" (*.vst)");
         suffix = QLatin1String("vst");
         fName += QLatin1String(".") + suffix;
     }
@@ -701,23 +729,40 @@ bool TMainWindow::FileSaveAs()
     {
         if (mType == MeasurementsType::Individual)
         {
-            dir = qApp->TapeSettings()->GetPathIndividualMeasurements() + QLatin1String("/") + fName;
+            dir = qApp->TapeSettings()->GetPathIndividualMeasurements();
         }
         else
         {
-            dir = qApp->TapeSettings()->GetPathStandardMeasurements() + QLatin1String("/") + fName;
+            dir = qApp->TapeSettings()->GetPathStandardMeasurements();
+            VCommonSettings::PrepareStandardTables(dir);
         }
-
     }
     else
     {
-        dir = QFileInfo(curFile).absolutePath() + QLatin1String("/") + fName;
+        dir = QFileInfo(curFile).absolutePath();
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QLatin1String("/") + fName, filters);
+
+    auto RemoveTempDir = [usedNotExistedDir, dir]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir directory(dir);
+            directory.rmpath(".");
+        }
+    };
 
     if (fileName.isEmpty())
     {
+        RemoveTempDir();
         return false;
     }
 
@@ -735,6 +780,7 @@ bool TMainWindow::FileSaveAs()
         {
             qCCritical(tMainWindow, "%s",
                        qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            RemoveTempDir();
             return false;
         }
     }
@@ -760,6 +806,7 @@ bool TMainWindow::FileSaveAs()
         // Restore previous state
         m->SetReadOnly(readOnly);
         mIsReadOnly = readOnly;
+        RemoveTempDir();
         return false;
     }
 
@@ -771,8 +818,10 @@ bool TMainWindow::FileSaveAs()
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
                                                         "Expect collissions when run 2 copies of the program.")));
+        RemoveTempDir();
         return false;
     }
+    RemoveTempDir();
     return true;
 }
 
@@ -1283,6 +1332,7 @@ void TMainWindow::ImportFromPattern()
     const QString filter(tr("Pattern files (*.val)"));
     //Use standard path to individual measurements
     const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
+    VCommonSettings::PrepareStandardTemplates(pathTo);
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter);
     if (mPath.isEmpty())
@@ -1913,7 +1963,7 @@ void TMainWindow::InitWindow()
 
     if (mType == MeasurementsType::Standard)
     {
-        ui->labelMType->setText(tr("Standard measurements"));
+        ui->labelMType->setText(tr("Multisize measurements"));
         ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
                                         VDomDocument::UnitsToStr(m->MUnit(), true));
         ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +

@@ -75,9 +75,59 @@ const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLitera
 
 static const QString commonIniFilename = QStringLiteral("common");
 
-#if !defined(Q_OS_WIN)
-const QString VCommonSettings::unixStandardSharePath = QStringLiteral("/usr/share/valentina");
-#endif
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+bool SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
+{
+    QDir dir;
+    dir.setPath(fromDir);
+
+    foreach (QString copyFile, dir.entryList(QDir::Files))
+    {
+        const QString from = fromDir + QDir::separator() + copyFile;
+        const QString to = toDir + QDir::separator() + copyFile;
+
+        if (QFile::exists(to))
+        {
+            if (replaceOnConflit)
+            {
+                if (QFile::remove(to) == false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        if (QFile::link(from, to) == false)
+        {
+            return false;
+        }
+    }
+
+    foreach (QString copyDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+    {
+        const QString from = fromDir + QDir::separator() + copyDir;
+        const QString to = toDir + QDir::separator() + copyDir;
+
+        if (dir.mkpath(to) == false)
+        {
+            return false;
+        }
+
+        if (SymlinkCopyDirRecursive(from, to, replaceOnConflit) == false)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization,
@@ -136,16 +186,54 @@ QString VCommonSettings::StandardTablesPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::TemplatesPath()
+QString VCommonSettings::StandardTemplatesPath()
 {
     return SharePath(QStringLiteral("/tables/templates"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
+{
+    QDir standardPath(VCommonSettings::StandardTemplatesPath());
+    const QDir localdata (VCommonSettings::GetDefPathTemplate());
+    if (currentPath == VCommonSettings::GetDefPathTemplate() && standardPath.exists() && not localdata.exists())
+    {
+        if (localdata.mkpath("."))
+        {
+            SymlinkCopyDirRecursive(VCommonSettings::StandardTemplatesPath(), VCommonSettings::GetDefPathTemplate(),
+                                    false);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::PrepareStandardTables(const QString &currentPath)
+{
+    QDir standardPath(VCommonSettings::StandardTablesPath());
+    const QDir localdata (VCommonSettings::GetDefPathStandardMeasurements());
+    if (currentPath == VCommonSettings::GetDefPathStandardMeasurements()
+            && standardPath.exists()
+            && not localdata.exists())
+    {
+        if (localdata.mkpath("."))
+        {
+            SymlinkCopyDirRecursive(VCommonSettings::StandardTablesPath(),
+                                    VCommonSettings::GetDefPathStandardMeasurements(), false);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathIndividualMeasurements()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("measurements") + QLatin1String("/") + tr("individual");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
+    return settings.value(SettingPathsIndividualMeasurements, GetDefPathIndividualMeasurements()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -157,10 +245,16 @@ void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathStandardMeasurements()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("measurements") + QLatin1String("/") + tr("multisize");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathStandardMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+    return settings.value(SettingPathsStandardMeasurements, GetDefPathStandardMeasurements()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,12 +265,17 @@ void VCommonSettings::SetPathStandardMeasurements(const QString &value)
     settings.sync();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathTemplate()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("templates");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathTemplate() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsTemplates, TemplatesPath()).toString();
+    return settings.value(SettingPathsTemplates, GetDefPathTemplate()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

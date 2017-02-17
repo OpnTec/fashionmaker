@@ -100,10 +100,16 @@ void VSettings::SetLabelLanguage(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetDefPathPattern()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("patterns");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathPattern() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(SettingPathsPattern, QDir::homePath()).toString();
+    return settings.value(SettingPathsPattern, GetDefPathPattern()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,10 +121,16 @@ void VSettings::SetPathPattern(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetDefPathLayout()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("layouts");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathLayout() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(SettingPathsLayout, QDir::homePath()).toString();
+    return settings.value(SettingPathsLayout, GetDefPathLayout()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
