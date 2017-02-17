@@ -75,6 +75,10 @@ const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLitera
 
 static const QString commonIniFilename = QStringLiteral("common");
 
+#if !defined(Q_OS_WIN)
+const QString VCommonSettings::unixStandardSharePath = QStringLiteral("/usr/share/valentina");
+#endif
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
