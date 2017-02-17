@@ -1642,13 +1642,13 @@
     <property name="title">
      <string>Measurements</string>
     </property>
-    <addaction name="actionTable"/>
+    <addaction name="actionOpenTape"/>
+    <addaction name="actionEditCurrent"/>
+    <addaction name="actionUnloadMeasurements"/>
     <addaction name="actionLoadIndividual"/>
     <addaction name="actionLoadStandard"/>
-    <addaction name="actionUnloadMeasurements"/>
-    <addaction name="actionCreateNew"/>
-    <addaction name="actionShowM"/>
     <addaction name="actionSyncMeasurements"/>
+    <addaction name="actionTable"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -2098,10 +2098,10 @@
      <normaloff>:/icon/32x32/table.png</normaloff>:/icon/32x32/table.png</iconset>
    </property>
    <property name="text">
-    <string>Table of variables</string>
+    <string>Variables Table</string>
    </property>
    <property name="toolTip">
-    <string>Tables of variables</string>
+    <string>Contains information about increments and internal variables</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+T</string>
@@ -2501,7 +2501,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Load Individual ...</string>
+    <string>Load Individual</string>
+   </property>
+   <property name="toolTip">
+    <string>Load Individual measurements file</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2515,21 +2518,13 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Load Standard ...</string>
+    <string>Load Multisize</string>
    </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionCreateNew">
-   <property name="text">
-    <string>Create/Edit</string>
+   <property name="iconText">
+    <string>Load Multisize</string>
    </property>
    <property name="toolTip">
-    <string>Create/edit measurements</string>
+    <string>Load multisize measurements file</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2538,15 +2533,29 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionShowM">
+  <action name="actionOpenTape">
+   <property name="text">
+    <string>Open Tape</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Tape app for creating or editing measurements file </string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionEditCurrent">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Show ...</string>
+    <string>Edit Current</string>
    </property>
    <property name="toolTip">
-    <string>Show measurements</string>
+    <string>Edit linked to the pattern measurements</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2564,7 +2573,10 @@
      <normaloff>:/icon/32x32/syncM.png</normaloff>:/icon/32x32/syncM.png</iconset>
    </property>
    <property name="text">
-    <string>Sync measurements</string>
+    <string>Sync</string>
+   </property>
+   <property name="toolTip">
+    <string>Synchronize linked to the pattern measurements after change</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2578,10 +2590,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Unload measurements</string>
+    <string>Unload Current</string>
    </property>
    <property name="toolTip">
-    <string>Unload measurements if they was not used in a pattern file.</string>
+    <string>Unload measurements if they were not used in a pattern file</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>

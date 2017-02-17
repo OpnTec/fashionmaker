@@ -78,23 +78,24 @@ void TapePathPage::DefaultPath()
     QTableWidgetItem *item = pathTable->item(row, 1);
     SCASSERT(item != nullptr)
 
+    QString path;
     switch (row)
     {
         case 0: // individual measurements
-            item->setText(QDir::homePath());
-            item->setToolTip(QDir::homePath());
+            path = VCommonSettings::GetDefPathIndividualMeasurements();
             break;
         case 1: // standard measurements
-            item->setText(qApp->TapeSettings()->StandardTablesPath());
-            item->setToolTip(qApp->TapeSettings()->StandardTablesPath());
+            path = VCommonSettings::GetDefPathStandardMeasurements();
             break;
         case 2: // templates
-            item->setText(qApp->TapeSettings()->TemplatesPath());
-            item->setToolTip(qApp->TapeSettings()->TemplatesPath());
+            path = VCommonSettings::GetDefPathTemplate();
             break;
         default:
             break;
     }
+
+    item->setText(path);
+    item->setToolTip(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,6 +113,7 @@ void TapePathPage::EditPath()
             break;
         case 1: // standard measurements
             path = qApp->TapeSettings()->GetPathStandardMeasurements();
+            VCommonSettings::PrepareStandardTables(path);
             break;
         case 2: // templates
             path = qApp->TapeSettings()->GetPathTemplate();
@@ -119,10 +121,24 @@ void TapePathPage::EditPath()
         default:
             break;
     }
+
+    bool usedNotExistedDir = false;
+    QDir directory(path);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
     const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
                                                           QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (dir.isEmpty())
     {
+        if (usedNotExistedDir)
+        {
+            QDir directory(path);
+            directory.rmpath(".");
+        }
+
         DefaultPath();
         return;
     }
@@ -188,21 +204,21 @@ void TapePathPage::InitTable()
     const VTapeSettings *settings = qApp->TapeSettings();
 
     {
-        pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
+        pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
         item->setToolTip(settings->GetPathIndividualMeasurements());
         pathTable->setItem(0, 1, item);
     }
 
     {
-        pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
+        pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathStandardMeasurements());
         item->setToolTip(settings->GetPathStandardMeasurements());
         pathTable->setItem(1, 1, item);
     }
 
     {
-        pathTable->setItem(2, 0, new QTableWidgetItem(tr("Templates")));
+        pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Templates")));
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
         item->setToolTip(settings->GetPathTemplate());
         pathTable->setItem(2, 1, item);
@@ -233,7 +249,7 @@ void TapePathPage::RetranslateUi()
     const QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
-    pathTable->item(0, 0)->setText(tr("Individual measurements"));
-    pathTable->item(1, 0)->setText(tr("Standard measurements"));
-    pathTable->item(2, 0)->setText(tr("Templates"));
+    pathTable->item(0, 0)->setText(tr("My Individual Measurements"));
+    pathTable->item(1, 0)->setText(tr("My Multisize measurements"));
+    pathTable->item(2, 0)->setText(tr("My Templates"));
 }

@@ -1397,9 +1397,18 @@ void MainWindow::PrepareSceneList()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadIndividual()
 {
-    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Multisize measurements") +
+                           QLatin1String(" (*.vst)");
     //Use standard path to individual measurements
     const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+
+    bool usedNotExistedDir = false;
+    QDir directory(path);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
 
     if (not mPath.isEmpty())
@@ -1414,21 +1423,29 @@ void MainWindow::LoadIndividual()
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
-            ui->actionShowM->setEnabled(true);
+            ui->actionEditCurrent->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
 
             UpdateWindowTitle();
         }
     }
+
+    if (usedNotExistedDir)
+    {
+        QDir directory(path);
+        directory.rmpath(".");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadStandard()
 {
-    const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit)");
+    const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
+                           QLatin1String("(*.vit)");
     //Use standard path to standard measurements
     const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
+    VCommonSettings::PrepareStandardTables(path);
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
 
     if (not mPath.isEmpty())
@@ -1454,7 +1471,7 @@ void MainWindow::LoadStandard()
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
-            ui->actionShowM->setEnabled(true);
+            ui->actionEditCurrent->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
 
@@ -1490,7 +1507,7 @@ void MainWindow::UnloadMeasurements()
         watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
         doc->SetPath(QString());
         PatternChangesWereSaved(false);
-        ui->actionShowM->setEnabled(false);
+        ui->actionEditCurrent->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
         helpLabel->setText(tr("Measurements unloaded"));
 
@@ -1540,7 +1557,7 @@ void MainWindow::ShowMeasurements()
     }
     else
     {
-        ui->actionShowM->setEnabled(false);
+        ui->actionEditCurrent->setEnabled(false);
     }
 }
 
@@ -2388,29 +2405,43 @@ void MainWindow::ActionLayout(bool checked)
  */
 bool MainWindow::SaveAs()
 {
-    QString filters(tr("Pattern files (*.val)"));
+    QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
     QString dir;
-    if (curFile.isEmpty())
+    curFile.isEmpty() ? dir = qApp->ValentinaSettings()->GetPathPattern() : dir = QFileInfo(curFile).absolutePath();
+
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
     {
-        dir = qApp->ValentinaSettings()->GetPathPattern() + "/" + tr("pattern") + ".val";
+        usedNotExistedDir = directory.mkpath(".");
     }
-    else
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
+                                                    dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
+                                                    filters);
+
+    auto RemoveTempDir = [usedNotExistedDir, dir]()
     {
-        dir = QFileInfo(curFile).absolutePath() + "/" + tr("pattern") + ".val";
-    }
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
+        if (usedNotExistedDir)
+        {
+            QDir directory(dir);
+            directory.rmpath(".");
+        }
+    };
 
     if (fileName.isEmpty())
     {
+        RemoveTempDir();
         return false;
     }
+
     QFileInfo f( fileName );
-    if (f.suffix().isEmpty() && f.suffix() != "val")
+    if (f.suffix().isEmpty() && f.suffix() != QLatin1String("val"))
     {
-        fileName += ".val";
+        fileName += QLatin1String(".val");
     }
 
-    if (QFileInfo(fileName).exists())
+    if (f.exists())
     {
         // Temporary try to lock the file before saving
         // Also help to rewite current read-only pattern
@@ -2419,6 +2450,7 @@ bool MainWindow::SaveAs()
         {
             qCCritical(vMainWindow, "%s",
                        qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            RemoveTempDir();
             return false;
         }
     }
@@ -2444,6 +2476,7 @@ bool MainWindow::SaveAs()
         doc->SetReadOnly(readOnly);
         doc->SetModified(wasModified);
 
+        RemoveTempDir();
         return result;
     }
 
@@ -2465,6 +2498,7 @@ bool MainWindow::SaveAs()
                                      "collissions when run 2 copies of the program.")));
     }
 
+    RemoveTempDir();
     return result;
 }
 
@@ -2619,7 +2653,7 @@ void MainWindow::Clear()
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadStandard->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
-    ui->actionShowM->setEnabled(false);
+    ui->actionEditCurrent->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Unknown);
@@ -3812,7 +3846,7 @@ void MainWindow::CreateActions()
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
 
-    connect(ui->actionCreateNew, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionOpenTape, &QAction::triggered, RECEIVER(this)[this]()
     {
         const QString tape = qApp->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
@@ -3826,7 +3860,7 @@ void MainWindow::CreateActions()
         QProcess::startDetached(tape, arguments, workingDirectory);
     });
 
-    connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
+    connect(ui->actionEditCurrent, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTiled, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
@@ -4038,7 +4072,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             {
                 ui->actionUnloadMeasurements->setEnabled(true);
                 watcher->addPath(path);
-                ui->actionShowM->setEnabled(true);
+                ui->actionEditCurrent->setEnabled(true);
             }
         }
 
@@ -4338,24 +4372,55 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 QString mPath;
                 if (patternType == MeasurementsType::Standard)
                 {
-                    const QString filter = tr("Standard measurements (*.vst)");
+                    const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to standard measurements
                     const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
+                    VCommonSettings::PrepareStandardTables(path);
                     mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
                 }
                 else if (patternType == MeasurementsType::Individual)
                 {
-                    const QString filter = tr("Individual measurements (*.vit)");
+                    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit)");
                     //Use standard path to individual measurements
                     const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+
+                    bool usedNotExistedDir = false;
+                    QDir directory(path);
+                    if (not directory.exists())
+                    {
+                        usedNotExistedDir = directory.mkpath(".");
+                    }
+
                     mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+
+                    if (usedNotExistedDir)
+                    {
+                        QDir directory(path);
+                        directory.rmpath(".");
+                    }
                 }
                 else
                 {
-                    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+                    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") +
+                                           tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
                     const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+                    VCommonSettings::PrepareStandardTables(VCommonSettings::GetDefPathStandardMeasurements());
+
+                    bool usedNotExistedDir = false;
+                    QDir directory(path);
+                    if (not directory.exists())
+                    {
+                        usedNotExistedDir = directory.mkpath(".");
+                    }
+
                     mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+
+                    if (usedNotExistedDir)
+                    {
+                        QDir directory(path);
+                        directory.rmpath(".");
+                    }
                 }
 
                 if (mPath.isEmpty())

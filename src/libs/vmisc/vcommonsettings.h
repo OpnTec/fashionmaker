@@ -51,14 +51,20 @@ public:
 
     static QString SharePath(const QString &shareItem);
     static QString StandardTablesPath();
-    static QString TemplatesPath();
+    static QString StandardTemplatesPath();
 
+    static void PrepareStandardTemplates(const QString &currentPath);
+    static void PrepareStandardTables(const QString &currentPath);
+
+    static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
+    static QString GetDefPathStandardMeasurements();
     QString GetPathStandardMeasurements() const;
     void SetPathStandardMeasurements(const QString &value);
 
+    static QString GetDefPathTemplate();
     QString GetPathTemplate() const;
     void SetPathTemplate(const QString &value);
 
@@ -125,10 +131,6 @@ public:
 
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
-
-#if !defined(Q_OS_WIN)
-    static const QString unixStandardSharePath;
-#endif
 
 private:
     Q_DISABLE_COPY(VCommonSettings)
