@@ -1392,7 +1392,7 @@ void MainWindow::LoadIndividual()
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
-            ui->actionShowM->setEnabled(true);
+            ui->actionEditCurrent->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
 
@@ -1432,7 +1432,7 @@ void MainWindow::LoadStandard()
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
-            ui->actionShowM->setEnabled(true);
+            ui->actionEditCurrent->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
 
@@ -1468,7 +1468,7 @@ void MainWindow::UnloadMeasurements()
         watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
         doc->SetPath(QString());
         PatternChangesWereSaved(false);
-        ui->actionShowM->setEnabled(false);
+        ui->actionEditCurrent->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
         helpLabel->setText(tr("Measurements unloaded"));
 
@@ -1518,7 +1518,7 @@ void MainWindow::ShowMeasurements()
     }
     else
     {
-        ui->actionShowM->setEnabled(false);
+        ui->actionEditCurrent->setEnabled(false);
     }
 }
 
@@ -2593,7 +2593,7 @@ void MainWindow::Clear()
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadStandard->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
-    ui->actionShowM->setEnabled(false);
+    ui->actionEditCurrent->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Unknown);
@@ -3781,7 +3781,7 @@ void MainWindow::CreateActions()
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
 
-    connect(ui->actionCreateNew, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionOpenTape, &QAction::triggered, RECEIVER(this)[this]()
     {
         const QString tape = qApp->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
@@ -3795,7 +3795,7 @@ void MainWindow::CreateActions()
         QProcess::startDetached(tape, arguments, workingDirectory);
     });
 
-    connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
+    connect(ui->actionEditCurrent, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTiled, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
@@ -4007,7 +4007,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             {
                 ui->actionUnloadMeasurements->setEnabled(true);
                 watcher->addPath(path);
-                ui->actionShowM->setEnabled(true);
+                ui->actionEditCurrent->setEnabled(true);
             }
         }
 
