@@ -453,6 +453,8 @@ QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list)
 {
+    SCASSERT(group != nullptr)
+
     QTreeWidgetItem *m = new QTreeWidgetItem(group);
 
     if (selectMode)

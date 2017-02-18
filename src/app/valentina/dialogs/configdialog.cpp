@@ -181,6 +181,8 @@ void ConfigDialog::createIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::createIcon(const QString &icon, const QString &text)
 {
+    SCASSERT(contentsWidget != nullptr)
+
     QListWidgetItem *button = new QListWidgetItem(contentsWidget);
     button->setIcon(QIcon(icon));
     button->setText(text);
