@@ -2234,11 +2234,11 @@ bool TMainWindow::MaybeSave()
             return true;// Don't ask if file was created without modifications.
         }
 
-        QMessageBox *messageBox = new QMessageBox(tr("Unsaved changes"),
-                                                  tr("Measurements have been modified.\n"
-                                                     "Do you want to save your changes?"),
-                                                  QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                  QMessageBox::Cancel, this, Qt::Sheet);
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
+                                                               tr("Measurements have been modified.\n"
+                                                                  "Do you want to save your changes?"),
+                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+                                                               QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);

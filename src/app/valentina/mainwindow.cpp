@@ -3334,11 +3334,11 @@ bool MainWindow::MaybeSave()
 {
     if (this->isWindowModified() && guiEnabled)
     {
-        QMessageBox *messageBox = new QMessageBox(tr("Unsaved changes"),
-                                                  tr("The pattern has been modified.\n"
-                                                     "Do you want to save your changes?"),
-                                                  QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                  QMessageBox::Cancel, this, Qt::Sheet);
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
+                                                               tr("The pattern has been modified.\n"
+                                                                  "Do you want to save your changes?"),
+                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+                                                               QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);

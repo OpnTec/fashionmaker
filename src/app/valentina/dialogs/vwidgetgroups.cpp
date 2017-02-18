@@ -103,7 +103,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     item = ui->tableWidget->item(row, 0);
     const quint32 id = item->data(Qt::UserRole).toUInt();
 
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu(this));
     QAction *actionRename = menu->addAction(tr("Rename"));
     QAction *actionDelete = menu->addAction(tr("Delete"));
     QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));

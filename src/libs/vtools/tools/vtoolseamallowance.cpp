@@ -1141,7 +1141,7 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteTool(bool ask)
 {
-    DeletePiece *delDet = new DeletePiece(doc, id, VAbstractTool::data.GetPiece(id));
+    QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, id, VAbstractTool::data.GetPiece(id)));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)
@@ -1149,7 +1149,7 @@ void VToolSeamAllowance::DeleteTool(bool ask)
             return;
         }
         /* If UnionDetails tool delete detail no need emit FullParsing.*/
-        connect(delDet, &DeletePiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+        connect(delDet.data(), &DeletePiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
 
     // If UnionDetails tool delete the detail this object will be deleted only after full parse.
@@ -1168,7 +1168,7 @@ void VToolSeamAllowance::DeleteTool(bool ask)
 
     hide();// User shouldn't see this object
 
-    qApp->getUndoStack()->push(delDet);
+    qApp->getUndoStack()->push(delDet.take());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
     VExceptionToolWasDeleted e("Tool was used after deleting.");

@@ -482,7 +482,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         return;
     }
 
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu(this));
 
     QListWidgetItem *rowItem = ui->listWidgetMainPath->item(row);
     SCASSERT(rowItem != nullptr);
@@ -524,7 +524,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         return;
     }
 
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu(this));
     QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
     QListWidgetItem *rowItem = ui->listWidgetCustomSA->item(row);
@@ -574,7 +574,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         return;
     }
 
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu(this));
     QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
