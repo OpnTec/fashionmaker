@@ -29,14 +29,8 @@
 #include "vpropertyexplorer_global.h"
 #include "vpropertyset.h"
 
-namespace VPE {
-class VProperty;
-class VPropertySet;
-}  // namespace VPE
-
 namespace VPE
 {
-
 
 class VPROPERTYEXPLORERSHARED_EXPORT VSerializedProperty
 {

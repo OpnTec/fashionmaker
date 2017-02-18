@@ -42,8 +42,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 
-class QMarginsF;
-
 Q_DECLARE_METATYPE(QMarginsF)
 
 const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");

@@ -47,10 +47,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogellipticalarc.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogEllipticalArc create dialog

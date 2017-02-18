@@ -39,10 +39,6 @@
 #include "dialogtool.h"
 #include "ui_dialogpointofcontact.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogPointOfContact;

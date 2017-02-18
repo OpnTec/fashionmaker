@@ -30,9 +30,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 const int VPE::VIntegerProperty::StandardMin = -1000000;
 const int VPE::VIntegerProperty::StandardMax = 1000000;
 

@@ -36,11 +36,6 @@
 
 #include "../vpropertyexplorer_global.h"
 
-class QEvent;
-class QLabel;
-class QSpacerItem;
-class QToolButton;
-
 namespace VPE
 {
 

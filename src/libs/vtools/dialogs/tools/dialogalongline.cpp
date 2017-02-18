@@ -56,9 +56,6 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogalongline.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogAlongLine create dialog

@@ -30,8 +30,6 @@
 
 #include "vpropertyexplorer_global.h"
 
-class QWidget;
-
 namespace VPE
 {
 

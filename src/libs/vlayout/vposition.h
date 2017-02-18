@@ -39,12 +39,6 @@
 #include "vlayoutdef.h"
 #include "vlayoutpiece.h"
 
-class QLineF;
-class QPainterPath;
-class QPointF;
-class QPolygonF;
-class QRectF;
-
 class VPosition : public QRunnable
 {
 public:

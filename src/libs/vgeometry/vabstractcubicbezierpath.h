@@ -39,8 +39,6 @@
 #include "vabstractbezier.h"
 #include "vgeometrydef.h"
 
-class QPainterPath;
-class QPointF;
 class VPointF;
 class VSpline;
 class VSplinePoint;

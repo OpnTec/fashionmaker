@@ -42,13 +42,6 @@
 #include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
 template <class T> class QSharedPointer;
 class VFormula;
 

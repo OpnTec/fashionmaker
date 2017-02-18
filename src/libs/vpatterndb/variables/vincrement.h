@@ -37,8 +37,8 @@
 
 #include "vvariable.h"
 
-class VContainer;
 class VIncrementData;
+class VContainer;
 
 /**
  * @brief The VIncrement class keep data row of increment table

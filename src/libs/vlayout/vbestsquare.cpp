@@ -30,8 +30,6 @@
 
 #include <QMatrix>
 
-class QSizeF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(const QSizeF &sheetSize, bool saveLength)
     :resI(0), resJ(0), resMatrix(QMatrix()), bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),

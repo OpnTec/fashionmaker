@@ -57,19 +57,7 @@
 #include "vpiecepath.h"
 #include "vtranslatevars.h"
 
-class VAbstractCubicBezierPath;
-class VAbstractCurve;
-class VArc;
 class VEllipticalArc;
-class VArcRadius;
-class VCurveAngle;
-class VCurveLength;
-class VGObject;
-class VIncrement;
-class VLengthLine;
-class VLineAngle;
-class VMeasurement;
-class VTranslateVars;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

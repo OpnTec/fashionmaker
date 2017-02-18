@@ -34,9 +34,6 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 class SavePiecePathOptions : public VUndoCommand
 {
 public:

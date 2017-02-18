@@ -31,8 +31,6 @@
 #include "fvupdater.h"
 #include "ui_fvupdatewindow.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 FvUpdateWindow::FvUpdateWindow(QWidget *parent)
     : QDialog(parent),

@@ -36,8 +36,6 @@
 #include "vpointf.h"
 #include "vspline.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)
     : VAbstractBezier(type, idObject, mode)

@@ -34,8 +34,6 @@
 #include "vspline_p.h"
 #include "../vmisc/vmath.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VSpline default constructor

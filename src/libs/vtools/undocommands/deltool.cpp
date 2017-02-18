@@ -35,8 +35,6 @@
 #include "../vmisc/logging.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID),

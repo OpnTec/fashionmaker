@@ -47,8 +47,6 @@
 #include "../vmisc/logging.h"
 #include "../vabstracttool.h"
 
-class QDomElement;
-class VGObject;
 template <class T> class QSharedPointer;
 
 qreal VDrawTool::factor = 1;

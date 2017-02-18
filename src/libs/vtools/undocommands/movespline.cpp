@@ -40,8 +40,6 @@
 #include "../vgeometry/vspline.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
                        QUndoCommand *parent)

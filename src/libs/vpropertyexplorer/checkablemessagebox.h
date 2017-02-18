@@ -31,10 +31,7 @@
 
 #include "vpropertyexplorer_global.h"
 
-class QAbstractButton;
-class QPushButton;
 class QSettings;
-class QWidget;
 
 namespace Utils
 {

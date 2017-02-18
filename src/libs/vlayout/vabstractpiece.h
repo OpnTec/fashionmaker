@@ -41,7 +41,6 @@
 template <class T> class QVector;
 
 class VAbstractPieceData;
-class QLineF;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

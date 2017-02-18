@@ -33,11 +33,6 @@
 #include <QGraphicsPathItem>
 #include <QtGlobal>
 
-class QGraphicsItem;
-class QPainter;
-class QStyleOptionGraphicsItem;
-class QWidget;
-
 class VNoBrushScalePathItem : public QGraphicsPathItem
 {
 public:

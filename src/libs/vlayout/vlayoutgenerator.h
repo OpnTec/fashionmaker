@@ -50,7 +50,6 @@ class QMarginsF;
 #endif
 
 class QGraphicsItem;
-class VLayoutPiece;
 class VLayoutPaper;
 
 class VLayoutGenerator :public QObject

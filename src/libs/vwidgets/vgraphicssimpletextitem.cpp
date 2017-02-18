@@ -46,11 +46,6 @@
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGraphicsSimpleTextItem default constructor.

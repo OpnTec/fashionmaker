@@ -32,8 +32,6 @@
 
 #include "vcubicbezier_p.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier()
     : VAbstractCubicBezier(GOType::CubicBezier), d(new VCubicBezierData)

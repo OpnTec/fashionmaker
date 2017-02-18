@@ -39,12 +39,6 @@
 #include <QUrl>
 #include <Qt>
 
-class QDragEnterEvent;
-class QDragLeaveEvent;
-class QDragMoveEvent;
-class QDropEvent;
-class QHBoxLayout;
-
 VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     : QWidget(parent), CurrentFilePath(), ToolButton(nullptr), FileLineEdit(nullptr), FileDialogFilter(), FilterList(),
       Directory(is_directory)

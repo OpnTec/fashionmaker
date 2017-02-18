@@ -43,9 +43,6 @@
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogline.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogLine create dialog

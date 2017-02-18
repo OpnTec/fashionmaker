@@ -37,9 +37,6 @@
 #include "../vmisc/vabstractapplication.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), cursor(doc->getCursor())

@@ -50,10 +50,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialognormal.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogNormal create dialog

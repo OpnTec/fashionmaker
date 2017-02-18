@@ -54,12 +54,6 @@
 #include "../../vabstracttool.h"
 #include "../vdrawtool.h"
 
-class QDomElement;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),

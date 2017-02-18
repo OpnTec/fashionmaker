@@ -38,9 +38,6 @@
 #include "../vundocommand.h"
 
 class QGraphicsScene;
-class QGraphicsView;
-class QUndoCommand;
-class VAbstractPattern;
 
 class MoveAbstractLabel : public VUndoCommand
 {

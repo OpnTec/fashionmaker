@@ -34,19 +34,17 @@
 
 #include "../vlayout/vabstractpiece.h"
 
-class QPainterPath;
 class VPieceData;
 class VPieceNode;
-class QPointF;
-class VPointF;
-class VContainer;
 template <class T> class QVector;
 template <class T>class QSharedPointer;
-class VAbstractCurve;
 class VPiecePath;
 class VPatternInfoGeometry;
 class VPatternPieceData;
 class VGrainlineGeometry;
+class VContainer;
+class QPainterPath;
+class VPointF;
 
 class VPiece : public VAbstractPiece
 {

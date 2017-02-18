@@ -33,8 +33,6 @@
 
 #include "vdxfengine.h"
 
-class QPaintEngine;
-
  //---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::VDxfPaintDevice()
     :QPaintDevice(), engine(new VDxfEngine()), fileName()

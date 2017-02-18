@@ -50,9 +50,6 @@
 #include "../../vdrawtool.h"
 #include "vtooldoublepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
 template <class T> class QSharedPointer;
 
 const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts");

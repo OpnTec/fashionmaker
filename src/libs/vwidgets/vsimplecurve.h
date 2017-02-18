@@ -43,10 +43,6 @@
 #include "../vmisc/def.h"
 #include "vabstractsimple.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
 class VAbstractCurve;
 template <class T> class QSharedPointer;
 

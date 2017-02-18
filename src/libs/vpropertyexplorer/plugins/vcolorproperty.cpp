@@ -28,9 +28,6 @@
 #include "../vproperty_p.h"
 #include "vcolorpropertyeditor.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VColorProperty::VColorProperty(const QString &name) :
     VProperty(name, QVariant::Color)
 {

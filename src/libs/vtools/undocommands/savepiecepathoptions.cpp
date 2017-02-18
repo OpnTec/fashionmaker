@@ -36,9 +36,6 @@
 #include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 SavePiecePathOptions::SavePiecePathOptions(const VPiecePath &oldPath, const VPiecePath &newPath,
                                            VAbstractPattern *doc, VContainer *data, quint32 id,

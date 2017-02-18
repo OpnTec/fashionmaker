@@ -50,10 +50,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogshoulderpoint.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogShoulderPoint create dialog

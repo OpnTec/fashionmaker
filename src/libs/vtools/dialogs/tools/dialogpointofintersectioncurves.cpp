@@ -41,9 +41,6 @@
 #include "dialogtool.h"
 #include "ui_dialogpointofintersectioncurves.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId,
                                                                  QWidget *parent)

@@ -35,9 +35,6 @@
 #include <QTableWidget>
 #include <QtGlobal>
 
-class QTableWidget;
-class QTableWidgetItem;
-
 class VTableSearch: public QObject
 {
     Q_OBJECT

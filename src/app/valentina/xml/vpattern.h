@@ -34,7 +34,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../ifc/xml/vpatternconverter.h"
 
-class VDataTool;
 class VMainGraphicsScene;
 class VNodeDetail;
 

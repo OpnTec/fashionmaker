@@ -29,8 +29,6 @@
 namespace VPE
 {
 
-class VAbstractPropertyFactory;
-
 class VPropertyFactoryManagerPrivate
 {
 public:

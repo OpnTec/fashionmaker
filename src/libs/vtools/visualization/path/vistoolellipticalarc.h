@@ -38,8 +38,6 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VContainer;
-
 class VisToolEllipticalArc : public VisPath
 {
     Q_OBJECT

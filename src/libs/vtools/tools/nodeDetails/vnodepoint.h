@@ -42,17 +42,6 @@
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
 
-class QGraphicsItem;
-class QGraphicsLineItem;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QPointF;
-class VContainer;
-class VGraphicsSimpleTextItem;
-class VMainGraphicsScene;
-class VPointF;
-
 /**
  * @brief The VNodePoint class point detail node.
  */

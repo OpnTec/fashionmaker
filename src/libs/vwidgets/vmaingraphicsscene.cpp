@@ -44,9 +44,6 @@
 
 #include "../ifc/ifcdef.h"
 
-class QGraphicsSceneMouseEvent;
-class QRectF;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsScene default constructor.

@@ -43,14 +43,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vtoolsinglepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
-class VPointF;
 template <class T> class QSharedPointer;
 
 /**

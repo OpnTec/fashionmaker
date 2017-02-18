@@ -37,12 +37,11 @@
 
 #include "vlayoutdef.h"
 
-class QLineF;
-class QPainterPath;
-class QPointF;
-class QRectF;
-class QSizeF;
 class VContourData;
+class QPointF;
+class QLineF;
+class QRectF;
+class QPainterPath;
 class VLayoutPiece;
 
 class VContour

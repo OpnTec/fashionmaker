@@ -62,9 +62,6 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogrotation.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),

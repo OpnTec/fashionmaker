@@ -33,11 +33,6 @@
 
 #include "vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QModelIndex;
-class QPainter;
-class QStyleOptionViewItem;
-
 //! Standard constructor, takes a name and a parent property as argument
 VPE::VProperty::VProperty(const QString& name, QVariant::Type type)
     : QObject(), d_ptr(new VPropertyPrivate(name, type))

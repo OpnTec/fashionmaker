@@ -40,9 +40,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QWidget;
-class VContainer;
-class VPointF;
 template <class T> class QSharedPointer;
 
 namespace Ui

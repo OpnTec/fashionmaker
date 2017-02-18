@@ -49,15 +49,6 @@ struct DestinationItem
     qreal my;
 };
 
-class VAbstractSimple;
-class VAbstractPattern;
-class QDomElement;
-class QPainter;
-class QPointF;
-class QStyleOptionGraphicsItem;
-class QWidget;
-class VContainer;
-
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
 // QGraphicsItem itself produce case where clicking on empty space produce call to QGraphicsItem.
 // And i don't know how to fix it.

@@ -27,9 +27,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VObjectProperty::VObjectProperty(const QString& name)
     : VProperty(name, QVariant::Int), objects()
 {

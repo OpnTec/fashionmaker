@@ -42,9 +42,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VLineColorProperty::VLineColorProperty(const QString &name)
     : VProperty(name, QVariant::Int), colors(), indexList()
 {

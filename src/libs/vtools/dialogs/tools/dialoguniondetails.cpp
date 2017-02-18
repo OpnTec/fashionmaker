@@ -38,8 +38,6 @@
 #include "dialogtool.h"
 #include "ui_dialoguniondetails.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogUnionDetails create dialog

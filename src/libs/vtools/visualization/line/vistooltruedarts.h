@@ -39,8 +39,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VContainer;
-
 class VisToolTrueDarts :public VisLine
 {
     Q_OBJECT

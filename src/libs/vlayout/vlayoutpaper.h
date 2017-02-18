@@ -36,12 +36,12 @@
 
 #include "vlayoutdef.h"
 
-class QGraphicsItem;
+class VBestSquare;
+class VLayoutPaperData;
+class VLayoutPiece;
 class QGraphicsRectItem;
 class QRectF;
-class VBestSquare;
-class VLayoutPiece;
-class VLayoutPaperData;
+class QGraphicsItem;
 template <typename T> class QList;
 template <typename T> class QVector;
 

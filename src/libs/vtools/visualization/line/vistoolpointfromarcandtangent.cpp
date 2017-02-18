@@ -46,8 +46,6 @@
 #include "../visualization.h"
 #include "visline.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),

@@ -50,10 +50,6 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogbisector.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogBisector create dialog

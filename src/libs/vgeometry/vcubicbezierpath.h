@@ -42,10 +42,7 @@
 #include "vgeometrydef.h"
 #include "vpointf.h"
 
-class QPointF;
 class VCubicBezierPathData;
-class VSpline;
-class VSplinePoint;
 
 class VCubicBezierPath : public VAbstractCubicBezierPath
 {

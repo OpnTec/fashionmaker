@@ -38,7 +38,6 @@
 #include "dxfdef.h"
 #include "dxflib/../dxfdef.h"
 
-class QPaintEngine;
 class VDxfEngine;
 
 class VDxfPaintDevice : public QPaintDevice

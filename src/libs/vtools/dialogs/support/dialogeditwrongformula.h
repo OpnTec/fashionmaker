@@ -39,12 +39,6 @@
 
 #include "../tools/dialogtool.h"
 
-class QCloseEvent;
-class QShowEvent;
-class QTableWidgetItem;
-class QWidget;
-class VContainer;
-class VMeasurement;
 template <class T> class QSharedPointer;
 
 namespace Ui

@@ -49,8 +49,6 @@
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
     :d(new VLayoutPaperData)

@@ -35,10 +35,6 @@
 
 #include "../qmuparser/qmutranslation.h"
 
-namespace qmu {
-class QmuTranslation;
-}  // namespace qmu
-
 class VTranslateMeasurements
 {
 public:

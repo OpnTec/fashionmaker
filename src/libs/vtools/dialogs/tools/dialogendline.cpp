@@ -55,9 +55,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogendline.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogEndLine create dialog

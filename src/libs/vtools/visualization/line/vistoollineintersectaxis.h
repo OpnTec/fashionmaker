@@ -40,10 +40,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QGraphicsEllipseItem;
-class QLineF;
-class VContainer;
-
 class VisToolLineIntersectAxis : public VisLine
 {
     Q_OBJECT

@@ -36,10 +36,6 @@
 #include "dialogtool.h"
 #include "ui_dialogsinglepoint.h"
 
-class QPointF;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogSinglePoint create dialog

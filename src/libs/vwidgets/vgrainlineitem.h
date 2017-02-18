@@ -32,11 +32,6 @@
 #include "vpieceitem.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 
-class QGraphicsObject;
-class QPainter;
-class QStyleOptionGraphicsItem;
-class QWidget;
-
 class VGrainlineItem : public VPieceItem
 {
     Q_OBJECT

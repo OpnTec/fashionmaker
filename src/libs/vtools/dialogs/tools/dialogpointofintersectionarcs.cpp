@@ -40,9 +40,6 @@
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogpointofintersectionarcs.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,
                                                              QWidget *parent)

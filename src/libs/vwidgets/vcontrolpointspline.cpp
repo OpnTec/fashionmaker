@@ -48,10 +48,6 @@
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-
 //---------------------------------------------------------------------------------------------------------------------
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
                                          QGraphicsItem *parent)

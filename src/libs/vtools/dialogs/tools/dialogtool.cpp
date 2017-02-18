@@ -73,9 +73,6 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 
-class QCloseEvent;
-class QKeyEvent;
-class QShowEvent;
 template <class T> class QSharedPointer;
 
 Q_LOGGING_CATEGORY(vDialog, "v.dialog")

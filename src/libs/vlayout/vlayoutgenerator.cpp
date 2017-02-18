@@ -37,8 +37,6 @@
 #include "vlayoutpiece.h"
 #include "vlayoutpaper.h"
 
-class QMarginsF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0), margins(),

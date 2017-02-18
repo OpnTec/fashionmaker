@@ -70,11 +70,6 @@
 #include "../../vdatatool.h"
 #include "../vdrawtool.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPainter;
-class QStyleOptionGraphicsItem;
-class QWidget;
 template <class T> class QSharedPointer;
 
 const QString VToolMove::ToolType = QStringLiteral("moving");

@@ -46,8 +46,6 @@
 #endif
 
 class DL_CreationInterface;
-class DL_WriterA;
-
 
 #define DL_VERSION "3.12.2.0"
 

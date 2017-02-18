@@ -43,18 +43,6 @@
 #include "vpieceitem.h"
 #include "../vlayout/vtextmanager.h"
 
-class QFont;
-class QGraphicsItem;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QPainter;
-class QPointF;
-class QRectF;
-class QStyleOptionGraphicsItem;
-class QWidget;
-class VAbstractPattern;
-class VPatternPieceData;
-
 /**
  * @brief The VTextGraphicsItem class. This class implements text graphics item,
  * which can be dragged around, resized and rotated within the parent item. The text font

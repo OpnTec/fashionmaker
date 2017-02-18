@@ -40,8 +40,6 @@
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-class QPointF;
-class QString;
 class VPointFData;
 
 QT_WARNING_PUSH

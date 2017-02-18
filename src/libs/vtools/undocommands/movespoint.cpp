@@ -37,8 +37,6 @@
 #include "../vmisc/def.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
                        QGraphicsScene *scene, QUndoCommand *parent)

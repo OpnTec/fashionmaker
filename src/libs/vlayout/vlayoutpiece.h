@@ -47,19 +47,9 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
 
-class QFont;
-class QGraphicsItem;
-class QLineF;
-class QPainterPath;
-class QPointF;
-class QRectF;
-class QTransform;
-class VAbstractPattern;
 class VLayoutPieceData;
-class VPatternInfoGeometry;
-class VPatternPieceData;
-class VGrainlineGeometry;
 class VLayoutPiecePath;
+class QGraphicsItem;
 
 class VLayoutPiece :public VAbstractPiece
 {

@@ -40,14 +40,6 @@
 
 #include "delaunay.h"
 
-class QIODevice;
-class QPaintDevice;
-class QPainterPath;
-class QPixmap;
-class QPoint;
-class QPointF;
-class QPolygonF;
-class QRectF;
 class QTextStream;
 
 #define MAX_POINTS      512

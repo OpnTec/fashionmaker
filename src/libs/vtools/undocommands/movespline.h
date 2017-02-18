@@ -39,8 +39,6 @@
 #include "vundocommand.h"
 
 class QGraphicsScene;
-class QUndoCommand;
-class VAbstractPattern;
 
 class MoveSpline : public VUndoCommand
 {

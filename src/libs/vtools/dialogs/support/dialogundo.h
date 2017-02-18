@@ -36,9 +36,6 @@
 #include <QString>
 #include <QtGlobal>
 
-class QCloseEvent;
-class QWidget;
-
 namespace Ui
 {
     class DialogUndo;

@@ -34,7 +34,6 @@
 #include <QDomElement>
 
 class VPattern;
-class VToolRecord;
 
 namespace Ui
 {

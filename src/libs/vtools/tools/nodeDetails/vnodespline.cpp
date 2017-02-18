@@ -39,8 +39,6 @@
 #include "../vdatatool.h"
 #include "vabstractnode.h"
 
-class VContainer;
-
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 //---------------------------------------------------------------------------------------------------------------------

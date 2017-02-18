@@ -42,7 +42,6 @@
 #undef small
 #endif
 
-class QPointF;
 class VLayoutPiece;
 
 enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};

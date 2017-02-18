@@ -46,6 +46,7 @@
 class VCommandLine;
 typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
 typedef QList<QCommandLineOption *> VCommandLineOptions;
+typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;
 
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive

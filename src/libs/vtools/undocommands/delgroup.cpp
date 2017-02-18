@@ -39,8 +39,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 DelGroup::DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), nameActivDraw(doc->GetNameActivPP())

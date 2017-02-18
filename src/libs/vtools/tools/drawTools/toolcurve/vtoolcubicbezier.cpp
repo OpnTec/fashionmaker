@@ -54,9 +54,6 @@
 #include "../vdrawtool.h"
 #include "vabstractspline.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-
 const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 
 //---------------------------------------------------------------------------------------------------------------------

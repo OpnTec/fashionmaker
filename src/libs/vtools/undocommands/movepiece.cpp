@@ -38,9 +38,6 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
                      QGraphicsScene *scene, QUndoCommand *parent)

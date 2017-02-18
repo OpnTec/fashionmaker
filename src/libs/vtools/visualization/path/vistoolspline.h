@@ -41,8 +41,6 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class QPointF;
-class VContainer;
 class VControlPointSpline;
 
 class VisToolSpline : public VisPath

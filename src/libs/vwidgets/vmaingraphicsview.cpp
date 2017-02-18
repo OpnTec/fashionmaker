@@ -52,9 +52,6 @@
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 
-class QMouseEvent;
-class QWheelEvent;
-
 const int GraphicsViewZoom::duration = 300;
 const int GraphicsViewZoom::updateInterval = 40;
 

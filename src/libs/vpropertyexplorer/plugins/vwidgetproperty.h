@@ -28,7 +28,6 @@
 #include "../vpropertyexplorer_global.h"
 #include "vemptyproperty.h"
 
-class QWidget;
 namespace VPE {
 class VProperty;
 }  // namespace VPE

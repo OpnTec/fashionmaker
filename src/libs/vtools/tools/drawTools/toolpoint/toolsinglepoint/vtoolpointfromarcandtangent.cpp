@@ -50,9 +50,6 @@
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
 template <class T> class QSharedPointer;
 
 const QString VToolPointFromArcAndTangent::ToolType = QStringLiteral("pointFromArcAndTangent");

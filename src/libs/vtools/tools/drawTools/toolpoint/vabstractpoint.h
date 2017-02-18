@@ -49,9 +49,6 @@
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
 
-class QPointF;
-class VAbstractPattern;
-
 class VAbstractPoint: public VDrawTool
 {
     Q_OBJECT

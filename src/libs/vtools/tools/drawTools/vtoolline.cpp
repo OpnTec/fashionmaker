@@ -52,10 +52,6 @@
 #include "../vabstracttool.h"
 #include "vdrawtool.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QKeyEvent;
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------

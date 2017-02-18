@@ -37,11 +37,6 @@
 
 #include "vpropertyexplorer_global.h"
 
-class QAbstractItemDelegate;
-class QModelIndex;
-class QPainter;
-class QStyleOptionViewItem;
-class QWidget;
 template <typename T> class QList;
 
 namespace VPE

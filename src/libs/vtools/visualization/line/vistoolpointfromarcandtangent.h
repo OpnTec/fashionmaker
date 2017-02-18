@@ -41,10 +41,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QPointF;
-class VArc;
-class VContainer;
-
 class VisToolPointFromArcAndTangent : public VisLine
 {
     Q_OBJECT

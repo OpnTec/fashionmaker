@@ -49,10 +49,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointofcontact.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogPointOfContact create dialog

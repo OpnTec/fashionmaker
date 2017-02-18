@@ -53,8 +53,6 @@
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
 
-class QDate;
-
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");

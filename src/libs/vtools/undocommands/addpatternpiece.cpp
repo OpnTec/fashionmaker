@@ -33,9 +33,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                                  QUndoCommand *parent)

@@ -46,19 +46,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vdatatool.h"
 
-class QDomElement;
-class QGraphicsEllipseItem;
-class QGraphicsItem;
-class QGraphicsLineItem;
-class QGraphicsScene;
-class QGraphicsView;
-class QIcon;
-class QLineF;
-class QPointF;
-class QRectF;
-class VContainer;
 class VGraphicsSimpleTextItem;
-class Visualization;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.

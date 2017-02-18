@@ -51,11 +51,6 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vdatatool.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VAbstractPattern;
-class VContainer;
-class VGObject;
 template <class T> class QSharedPointer;
 
 /**

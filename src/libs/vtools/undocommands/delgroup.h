@@ -37,9 +37,6 @@
 
 #include "vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 class DelGroup : public VUndoCommand
 {
     Q_OBJECT

@@ -38,10 +38,6 @@
 
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-class VAbstractPattern;
-
 class AddGroup : public VUndoCommand
 {
     Q_OBJECT

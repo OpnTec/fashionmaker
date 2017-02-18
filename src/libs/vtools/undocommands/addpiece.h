@@ -40,11 +40,6 @@
 #include "vpiece.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-class VAbstractPattern;
-
-
 class AddPiece : public VUndoCommand
 {
     Q_OBJECT

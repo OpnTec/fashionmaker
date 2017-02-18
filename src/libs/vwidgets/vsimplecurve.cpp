@@ -42,10 +42,6 @@
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------

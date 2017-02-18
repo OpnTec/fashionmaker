@@ -28,8 +28,6 @@
 #include "../vproperty_p.h"
 #include "vshortcutpropertyeditor.h"
 
-class QStyleOptionViewItem;
-
 VPE::VShortcutProperty::VShortcutProperty(const QString& name)
     : VProperty(name, QVariant::String)
 {

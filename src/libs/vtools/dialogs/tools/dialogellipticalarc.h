@@ -38,11 +38,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QCloseEvent;
-class QTimer;
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogEllipticalArc;

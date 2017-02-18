@@ -36,8 +36,6 @@
 #include "vproperty.h"
 #include "vpropertyformwidget_p.h"
 
-class QKeyEvent;
-
 VPE::VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QString &description,
                                          const QList<VProperty*>& properties, QWidget *parent)
     : QGroupBox(title, parent), d_ptr(new VPropertyFormWidgetPrivate(properties))

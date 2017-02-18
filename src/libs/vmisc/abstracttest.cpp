@@ -50,8 +50,6 @@
 #include "logging.h"
 #include "vsysexits.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 AbstractTest::AbstractTest(QObject *parent) :
     QObject(parent)

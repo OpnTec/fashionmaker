@@ -38,8 +38,6 @@
 #include "../vlayout/vbank.h"
 #include "vcommonsettings.h"
 
-class QMarginsF;
-class QPrinter;
 template <class T> class QSharedPointer;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)

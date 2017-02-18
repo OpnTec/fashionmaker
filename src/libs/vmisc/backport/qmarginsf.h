@@ -38,9 +38,6 @@
 #include <QTypeInfo>
 #include <QtGlobal>
 
-class QDataStream;
-class QDebug;
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #include <QMargins>
 

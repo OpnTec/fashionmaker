@@ -39,7 +39,6 @@
 #include "vabstractbezier.h"
 #include "vgeometrydef.h"
 
-class QPointF;
 class VPointF;
 
 class VAbstractCubicBezier : public VAbstractBezier

@@ -36,7 +36,6 @@
 
 #include "vinternalvariable.h"
 
-class VAbstractCurve;
 class VCurveVariableData;
 
 class VCurveVariable : public VInternalVariable

@@ -38,10 +38,6 @@
 
 #include "moveabstractlabel.h"
 
-class QDomElement;
-class QUndoCommand;
-class VAbstractPattern;
-
 class OperationMoveLabel : public MoveAbstractLabel
 {
     Q_OBJECT

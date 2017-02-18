@@ -38,9 +38,6 @@
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogpointfromarcandtangent.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId,
                                                            QWidget *parent)

@@ -46,12 +46,6 @@
 #include "../vpatterndb/vpiece.h"
 
 class DialogTool;
-class QDomElement;
-class QDomNode;
-class QPointF;
-class VContainer;
-class VMainGraphicsScene;
-class VPointF;
 
 struct VToolUnionDetailsInitData
 {

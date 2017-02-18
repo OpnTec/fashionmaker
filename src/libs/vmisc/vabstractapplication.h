@@ -47,14 +47,10 @@
 #include "vlockguard.h"
 #include "vsettings.h"
 
-class QGraphicsScene;
-class QTranslator;
 class QUndoStack;
-class QWidget;
 class VAbstractApplication;// use in define
 class VAbstractPattern;
 class VMainGraphicsView;
-class VTranslateVars;
 
 #if defined(qApp)
 #undef qApp

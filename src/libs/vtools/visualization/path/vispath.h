@@ -40,8 +40,6 @@
 #include "../visualization.h"
 #include "../vmisc/def.h"
 
-class VContainer;
-
 class VisPath : public Visualization, public QGraphicsPathItem
 {
     Q_OBJECT

@@ -35,8 +35,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()),

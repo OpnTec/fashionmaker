@@ -45,7 +45,6 @@
 #include "vspline.h"
 #include "vsplinepoint.h"
 
-class QPointF;
 class VSplinePathData;
 
 /**

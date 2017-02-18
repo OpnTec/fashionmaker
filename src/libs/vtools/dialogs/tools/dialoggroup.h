@@ -38,9 +38,6 @@
 
 #include "dialogtool.h"
 
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogGroup;

@@ -52,8 +52,6 @@
 #include "dialogtool.h"
 #include "ui_dialogheight.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogHeight create dialog

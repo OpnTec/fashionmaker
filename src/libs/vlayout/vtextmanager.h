@@ -38,9 +38,8 @@
 #include <QtGlobal>
 #include <QCoreApplication>
 
-class QFontMetrics;
-class VAbstractPattern;
 class VPatternPieceData;
+class VAbstractPattern;
 
 #define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128

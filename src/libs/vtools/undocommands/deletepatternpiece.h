@@ -38,9 +38,6 @@
 
 #include "vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 class DeletePatternPiece : public VUndoCommand
 {
     Q_OBJECT

@@ -68,11 +68,6 @@
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-
 const QString VToolBasePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------

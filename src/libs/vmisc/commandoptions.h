@@ -31,8 +31,6 @@
 
 #include <QString>
 
-class QStringList;
-
 extern const QString LONG_OPTION_BASENAME;
 extern const QString SINGLE_OPTION_BASENAME;
 

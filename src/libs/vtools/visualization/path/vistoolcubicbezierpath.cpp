@@ -42,8 +42,6 @@
 #include "../visualization.h"
 #include "vispath.h"
 
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezierPath::VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),

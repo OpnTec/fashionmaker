@@ -29,9 +29,6 @@
 namespace VPE
 {
 
-class VPropertyModel;
-class VPropertySet;
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 

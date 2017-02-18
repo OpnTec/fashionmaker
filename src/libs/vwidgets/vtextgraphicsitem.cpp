@@ -43,13 +43,6 @@
 #include "../vmisc/vmath.h"
 #include "vtextgraphicsitem.h"
 
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QStyleOptionGraphicsItem;
-class QWidget;
-class VAbstractPattern;
-class VPatternPieceData;
-
 const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;
 const qreal rotateCircle = (2./*mm*/ / 25.4) * PrintDPI;
 #define ROTATE_RECT                 60

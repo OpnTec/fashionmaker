@@ -44,15 +44,6 @@
 #include "../vmisc/def.h"
 #include "vtoollinepoint.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
-class VAbstractCurve;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
-class VPointF;
 template <class T> class QSharedPointer;
 
 class VToolCurveIntersectAxis : public VToolLinePoint

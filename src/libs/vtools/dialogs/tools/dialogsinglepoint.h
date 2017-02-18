@@ -38,10 +38,6 @@
 
 #include "dialogtool.h"
 
-class QPointF;
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogSinglePoint;

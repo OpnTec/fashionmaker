@@ -32,8 +32,6 @@
 #include <QtGlobal>
 #include <QString>
 
-class QPointF;
-
 /**
  * @brief The VGrainlineGeometry class holds information about a grainline like
  * position, size, rotation and visibility

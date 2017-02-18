@@ -42,7 +42,6 @@
 
 #include "debugbreak.h"
 
-class QPixmap;
 template <class T> class QSharedPointer;
 
 #ifdef Q_CC_MSVC

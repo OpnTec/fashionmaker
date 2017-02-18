@@ -35,8 +35,6 @@
 #include <QObject>
 #include <QString>
 
-class QWidget;
-
 class VAbstractMainWindow : public QMainWindow
 {
     Q_OBJECT

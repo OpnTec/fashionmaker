@@ -42,8 +42,6 @@
 #include "dialogtool.h"
 #include "ui_dialogcubicbezier.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),

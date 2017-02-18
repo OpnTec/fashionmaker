@@ -49,8 +49,6 @@
 #include "dialogtool.h"
 #include "ui_dialogtruedarts.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogTrueDarts), d1PointName(), d2PointName(), ch1(NULL_ID),

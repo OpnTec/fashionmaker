@@ -31,9 +31,7 @@
 
 #include "vproperty.h"
 
-class QEvent;
 class QFormLayout;
-class QWidget;
 
 namespace VPE
 {

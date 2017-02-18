@@ -45,10 +45,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutarc.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutArc create dialog.

@@ -27,8 +27,6 @@
 #include "vpropertymodel.h"
 #include "vpropertytreeview_p.h"
 
-class QWidget;
-
 VPE::VPropertyTreeView::VPropertyTreeView(QWidget *parent)
     : QTreeView(parent), d_ptr(new VPropertyTreeViewPrivate())
 {

@@ -42,8 +42,6 @@
 
 #include "../vmisc/diagnostic.h"
 
-class QModelIndex;
-
 class QxtCsvModelPrivate : public QxtPrivate<QxtCsvModel>
 {
 public:

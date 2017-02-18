@@ -54,9 +54,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
-class QLineF;
-class QPainterPath;
-class QPointF;
 template <class K, class V> class QHash;
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")

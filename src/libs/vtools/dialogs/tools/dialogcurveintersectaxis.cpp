@@ -54,9 +54,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcurveintersectaxis.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogCurveIntersectAxis), formulaAngle(QString()),

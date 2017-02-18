@@ -38,9 +38,7 @@
 #include "../vwidgets/vtextgraphicsitem.h"
 #include "../vwidgets/vgrainlineitem.h"
 
-class VMainGraphicsScene;
 class DialogTool;
-class VPiece;
 class VNoBrushScalePathItem;
 
 class VToolSeamAllowance : public VAbstractTool, public QGraphicsPathItem
