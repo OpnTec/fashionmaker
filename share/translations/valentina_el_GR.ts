@@ -26,7 +26,7 @@
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished">προσθήκη λεπτομέρειας</translation>
+        <translation>προσθήκη λεπτομέρειας</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished">εργαλείο διαγραφής</translation>
+        <translation>εργαλείο διαγραφής</translation>
     </message>
 </context>
 <context>
@@ -912,7 +912,7 @@
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Άκυρη καμπύλη spline</translation>
     </message>
     <message>
         <source>Tool cubic bezier</source>
@@ -1660,7 +1660,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -1680,7 +1680,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Υπολογισμός</translation>
+        <translation>Υπολογισμός</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -1692,35 +1692,35 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished">Κεντρικό σημείο:</translation>
+        <translation>Κεντρικό σημείο:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished">Επιλέξτε το κεντρικό σημείο του τόξου</translation>
+        <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Χρώμα:</translation>
+        <translation>Χρώμα:</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Σφάλμα</translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
+        <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="unfinished">Ίσες γωνίες</translation>
+        <translation>Ίσες γωνίες</translation>
     </message>
     <message>
         <source>Edit radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία ακτίνας1</translation>
     </message>
     <message>
         <source>Edit radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία ακτίνας2</translation>
     </message>
     <message>
         <source>Edit first angle</source>
@@ -3506,7 +3506,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">Έτοιμο!</translation>
+        <translation>Έτοιμο!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -3522,11 +3522,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Υπολογισμός</translation>
+        <translation>Υπολογισμός</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3534,7 +3534,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόμβοι</translation>
     </message>
     <message>
         <source>Node:</source>
@@ -3546,11 +3546,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιστροφή στο προεπιλεγμένο πλάτος</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>After:</source>
@@ -3558,7 +3558,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Γωνία:</translation>
+        <translation>Γωνία:</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -3831,7 +3831,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Top of the line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κορυφή γραμμής:</translation>
     </message>
     <message>
         <source>End of the line:</source>
@@ -4267,7 +4267,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">Έτοιμο!</translation>
+        <translation>Έτοιμο!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -4287,11 +4287,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
+        <translation>Τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Υπολογισμός</translation>
+        <translation>Υπολογισμός</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4299,7 +4299,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόμβοι</translation>
     </message>
     <message>
         <source>Node:</source>
@@ -4311,11 +4311,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιστροφή στο προεπιλεγμένο πλάτος</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>After:</source>
@@ -4323,7 +4323,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Γωνία:</translation>
+        <translation>Γωνία:</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -4756,7 +4756,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Άκυρη καμπύλη spline</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -5621,11 +5621,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation>Πίνακας μεταβλητών</translation>
+        <translation type="vanished">Πίνακας μεταβλητών</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Πίνακες μεταβλητών</translation>
+        <translation type="vanished">Πίνακες μεταβλητών</translation>
     </message>
     <message>
         <source>History</source>
@@ -5899,11 +5899,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Στάνταρ μετρήσεις (*.vst)</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Ατομικές μετρήσεις (*.vit)</translation>
+        <translation type="vanished">Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -6119,27 +6119,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation>Φόρτωση Ατομικές ...</translation>
+        <translation type="vanished">Φόρτωση Ατομικές ...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation>Φόρτωση Στάνταρ ...</translation>
+        <translation type="vanished">Φόρτωση Στάνταρ ...</translation>
     </message>
     <message>
         <source>Show ...</source>
-        <translation>Εμφάνιση ...</translation>
+        <translation type="vanished">Εμφάνιση ...</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation>Εμφάνιση μετρήσεων</translation>
+        <translation type="vanished">Εμφάνιση μετρήσεων</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation>Συγχρονισμός μετρήσεων</translation>
+        <translation type="vanished">Συγχρονισμός μετρήσεων</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation>Ατομικές μετρήσεις (*.vit);;Στάνταρ μετρήσεις (*.vst)</translation>
+        <translation type="vanished">Ατομικές μετρήσεις (*.vit);;Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
@@ -6147,7 +6147,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation>Στάνταρ μετρήσεις (*.vst);;Ατομικές μετρήσεις (*.vit)</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις (*.vst);;Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
@@ -6159,11 +6159,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create/Edit</source>
-        <translation>Δημιουργία/Επεξεργασία</translation>
+        <translation type="vanished">Δημιουργία/Επεξεργασία</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation>Δημιουργία/Επεξεργασία μετρήσεων</translation>
+        <translation type="vanished">Δημιουργία/Επεξεργασία μετρήσεων</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
@@ -6276,14 +6276,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unload measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unload measurements if they was not used in a pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6514,6 +6506,74 @@ Do you want to save your changes?</source>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Variables Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contains information about increments and internal variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load multisize measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit linked to the pattern measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synchronize linked to the pattern measurements after change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they were not used in a pattern file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6664,7 +6724,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -6679,24 +6739,36 @@ Do you want to save your changes?</source>
         <translation>Διαδρομή</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Patterns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Standard measurements</source>
-        <translation>Στάνταρ μετρήσεις</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Τοποθέτηση</translation>
+        <translation type="vanished">Τοποθέτηση</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Πρότυπα</translation>
+        <translation type="vanished">Πρότυπα</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7407,7 +7479,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Στάνταρ μετρήσεις</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -7726,6 +7798,10 @@ Do you want to save your changes?</source>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7821,7 +7897,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -7836,16 +7912,28 @@ Do you want to save your changes?</source>
         <translation>Διαδρομή</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Standard measurements</source>
-        <translation>Στάνταρ μετρήσεις</translation>
+        <translation type="vanished">Στάνταρ μετρήσεις</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Πρότυπα</translation>
+        <translation type="vanished">Πρότυπα</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8300,6 +8388,25 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VCommonSettings</name>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished">μετρήσεις</translation>
+    </message>
+    <message>
+        <source>individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
@@ -8698,6 +8805,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSettings</name>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layouts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

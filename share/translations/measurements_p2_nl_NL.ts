@@ -1910,7 +1910,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1029"/>
         <source>From Neck Side straight down front to Bust level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zijkant nek tot borstlijn, voorkant en recht naar beneden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1033"/>
@@ -1922,25 +1922,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1035"/>
         <source>Neck Side to Highbust level, front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zijkant nek tot bovenborstlijn, voorkant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1036"/>
         <source>From Neck Side straight down front to Highbust level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zijkant nek tot bovenborstlijn, voorkant en recht naar beneden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1040"/>
         <source>shoulder_center_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>schouder_midden_tot_hogeborst_v</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1042"/>
         <source>Shoulder center to Highbust level, front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Midden van schouder tot hogeborstlijn, voorkant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1043"/>
@@ -1952,13 +1952,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1047"/>
         <source>shoulder_tip_to_waist_side_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>schouder_punt_tot_middel_zijkant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1049"/>
         <source>Shoulder Tip to Waist Side, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schouderpunt tot zijkant taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1050"/>
