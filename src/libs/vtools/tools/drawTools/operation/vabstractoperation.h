@@ -102,6 +102,7 @@ public slots:
     void         AllowElArcHover(bool enabled);
     void         AllowElArcSelecting(bool enabled);
 
+    virtual void ToolSelectionType(const SelectionType &type);
     virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void         ObjectSelected(bool selected, quint32 objId);
     void         DeleteFromLabel();
