@@ -414,6 +414,21 @@ public:
         return static_cast<int>(strtol(str.c_str(), &p, 10));
     }
 
+    int getInt16Value(int code, int def) 
+    {
+        if (!hasValue(code)) 
+        {
+            return def;
+        }
+        return toInt16(values[code]);
+    }
+
+    static int toInt16(const std::string& str) 
+    {
+        char* p;
+        return static_cast<int>(strtol(str.c_str(), &p, 16));
+    }
+
     static bool toBool(const std::string& str)
     {
         char* p;
