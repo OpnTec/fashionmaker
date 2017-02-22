@@ -218,7 +218,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         return;
     }
 
-    QScopedPointer<QMenu> menu(new QMenu(this));
+    QScopedPointer<QMenu> menu(new QMenu());
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
