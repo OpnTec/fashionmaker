@@ -250,8 +250,9 @@ void VLayoutPiece::SetGrainline(const VGrainlineGeometry& geom, const VContainer
         dLen = cal2.EvalFormula(rPattern.PlainVariables(), qsFormula);
         dLen = ToPixel(dLen, *rPattern.GetPatternUnit());
     }
-    catch(...)
+    catch(qmu::QmuParserError &e)
     {
+        Q_UNUSED(e);
         return;
     }
 

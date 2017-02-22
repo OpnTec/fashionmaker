@@ -509,8 +509,9 @@ void VToolSeamAllowance::UpdateGrainline()
             Calculator cal2;
             dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
         }
-        catch(...)
+        catch(qmu::QmuParserError &e)
         {
+            Q_UNUSED(e);
             m_grainLine->hide();
             return;
         }
