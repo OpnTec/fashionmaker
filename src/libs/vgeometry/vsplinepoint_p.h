@@ -60,8 +60,7 @@ public:
         if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180) )
         {
             qDebug()<<"Make angle1 and angle2 correct.";
-            this->angle1 = angle1;
-            this->angle2 = angle1 + 180;
+            this->angle2 = this->angle1 + 180;
         }
     }
 

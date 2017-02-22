@@ -74,12 +74,9 @@ VToolBisector::VToolBisector(VAbstractPattern *doc, VContainer *data, const quin
                              const QString &lineColor, const QString &formula, const quint32 &firstPointId,
                              const quint32 &secondPointId, const quint32 &thirdPointId, const Source &typeCreation,
                              QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, secondPointId, 0, parent), firstPointId(NULL_ID),
-      thirdPointId(NULL_ID)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, secondPointId, 0, parent), firstPointId(firstPointId),
+      thirdPointId(thirdPointId)
 {
-    this->firstPointId = firstPointId;
-    this->thirdPointId = thirdPointId;
-
     ToolCreation(typeCreation);
 }
 
