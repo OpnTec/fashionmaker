@@ -151,17 +151,13 @@ QChar VTapeSettings::GetCSVSeparator() const
     {
         case 0:
             return QChar('\t');
-            break;
         case 1:
             return QChar(';');
-            break;
         case 2:
             return QChar(' ');
-            break;
         case 3:
         default:
             return QChar(',');
-            break;
     }
 }
 

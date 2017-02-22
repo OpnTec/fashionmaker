@@ -166,15 +166,12 @@ QPointF VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPoint
             {
                 return p2;
             }
-            break;
         case 1:
             return p1;
-            break;
         case 3:
         case 0:
         default:
-            return QPointF(0, 0);
-            break;
+            return QPointF();
     }
 }
 

@@ -188,7 +188,6 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
                     {
                         return p2;
                     }
-                    break;
                 case 1:
                     if (flagP1)
                     {
@@ -198,11 +197,9 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
                     {
                         return p2;
                     }
-                    break;
                 case 0:
                 default:
-                    return QPointF(0, 0);
-                    break;
+                    return QPointF();
             }
 
             break;
@@ -214,14 +211,12 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
             }
             else
             {
-                return QPointF(0, 0);
+                return QPointF();
             }
-            break;
         case 3:
         case 0:
         default:
-            return QPointF(0, 0);
-            break;
+            return QPointF();
     }
 }
 

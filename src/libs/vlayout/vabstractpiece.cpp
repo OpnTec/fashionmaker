@@ -382,7 +382,6 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
             // The easiest, real intersection
             points.append(CrosPoint);
             return points;
-            break;
         case (QLineF::UnboundedIntersection):
         { // Most common case
             const qreal localWidth = MaxLocalSA(p2Line1, width);
@@ -480,7 +479,6 @@ QT_WARNING_POP
             /*If we have correct lines this means lines lie on a line.*/
             points.append(bigLine1.p2());
             return points;
-            break;
         default:
             break;
     }

@@ -178,15 +178,12 @@ QPointF VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const
             {
                 return p2;
             }
-            break;
         case 1:
             return p1;
-            break;
         case 3:
         case 0:
         default:
-            return QPointF(0, 0);
-            break;
+            return QPointF();
     }
 }
 

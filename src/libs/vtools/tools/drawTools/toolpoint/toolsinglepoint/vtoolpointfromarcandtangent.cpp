@@ -181,7 +181,6 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
                     {
                         return p2;
                     }
-                    break;
                 case 1:
                     if (flagP1)
                     {
@@ -191,11 +190,9 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
                     {
                         return p2;
                     }
-                    break;
                 case 0:
                 default:
-                    return QPointF(0, 0);
-                    break;
+                    return QPointF();
             }
 
             break;
@@ -207,14 +204,12 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
             }
             else
             {
-                return QPointF(0, 0);
+                return QPointF();
             }
-            break;
         case 3:
         case 0:
         default:
-            return QPointF(0, 0);
-            break;
+            return QPointF();
     }
 }
 
