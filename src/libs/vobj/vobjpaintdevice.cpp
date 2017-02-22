@@ -35,8 +35,6 @@
 
 #include "vobjengine.h"
 
-class QPaintEngine;
-
 //---------------------------------------------------------------------------------------------------------------------
 VObjPaintDevice::VObjPaintDevice()
     :QPaintDevice(), engine(new VObjEngine()), fileName(), owns_iodevice(1)

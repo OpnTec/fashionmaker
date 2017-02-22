@@ -41,7 +41,6 @@
 #include "vgeometrydef.h"
 #include "vpointf.h"
 
-class QPointF;
 class VCubicBezierData;
 
 class VCubicBezier : public VAbstractCubicBezier

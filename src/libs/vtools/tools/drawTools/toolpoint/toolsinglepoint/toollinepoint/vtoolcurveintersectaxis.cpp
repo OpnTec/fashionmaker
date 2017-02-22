@@ -65,9 +65,6 @@
 #include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
 template <class T> class QSharedPointer;
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");

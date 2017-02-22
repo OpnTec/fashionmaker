@@ -29,8 +29,6 @@
 
 #include "vpropertyexplorer_global.h"
 
-class QStringList;
-
 namespace VPE
 {
 

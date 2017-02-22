@@ -40,14 +40,7 @@
 #include "../vmisc/def.h"
 #include "vabstractspline.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VContainer;
 class VCubicBezierPath;
-class VGObject;
-class VMainGraphicsScene;
-class VPointF;
 template <class T> class QSharedPointer;
 
 class VToolCubicBezierPath:public VAbstractSpline

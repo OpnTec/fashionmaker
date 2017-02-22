@@ -42,7 +42,6 @@
 #include "vgeometrydef.h"
 #include "vpointf.h"
 
-class QPointF;
 class VEllipticalArcData;
 
 class VEllipticalArc : public VAbstractArc

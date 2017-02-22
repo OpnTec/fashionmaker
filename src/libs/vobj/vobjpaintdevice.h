@@ -37,7 +37,6 @@
 #include <QtGlobal>
 
 class QIODevice;
-class QPaintEngine;
 class VObjEngine;
 
 class VObjPaintDevice : public QPaintDevice

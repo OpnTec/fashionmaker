@@ -38,8 +38,6 @@
 #include "varc_p.h"
 #include "vspline.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc default constructor.

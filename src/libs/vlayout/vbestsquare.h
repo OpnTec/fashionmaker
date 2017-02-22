@@ -35,8 +35,6 @@
 
 #include "vlayoutdef.h"
 
-class QSizeF;
-
 class VBestSquare
 {
 public:

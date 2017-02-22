@@ -69,8 +69,8 @@ private:
     Ui::DialogPatternProperties *ui;
     VPattern               *doc;
     VContainer             *pattern;
-    char                   heightsChecked;
-    char                   sizesChecked;
+    int                    heightsChecked;
+    int                    sizesChecked;
     QMap<GHeights, bool>   heights;
     QMap<GSizes, bool>     sizes;
     QMap<QCheckBox *, int> data;

@@ -41,7 +41,6 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
 
-class QGraphicsItem;
 class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject

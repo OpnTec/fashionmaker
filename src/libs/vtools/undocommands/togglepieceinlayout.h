@@ -37,10 +37,6 @@
 
 #include "vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-class VContainer;
-
 class TogglePieceInLayout : public VUndoCommand
 {
     Q_OBJECT

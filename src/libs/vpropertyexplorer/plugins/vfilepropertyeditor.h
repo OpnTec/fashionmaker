@@ -34,15 +34,6 @@
 
 #include "../vpropertyexplorer_global.h"
 
-class QDragEnterEvent;
-class QDragLeaveEvent;
-class QDragMoveEvent;
-class QDropEvent;
-class QEvent;
-class QLineEdit;
-class QMimeData;
-class QToolButton;
-
 namespace VPE
 {
 

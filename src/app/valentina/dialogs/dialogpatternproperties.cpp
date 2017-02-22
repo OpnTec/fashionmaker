@@ -37,8 +37,10 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 
-#define MAX_HEIGHTS 18
-#define MAX_SIZES 18
+// calc how many combinations we have
+static const int heightsCount = (static_cast<int>(GHeights::H194) -
+                                 (static_cast<int>(GHeights::H50) - heightStep))/heightStep;
+static const int sizesCount = (static_cast<int>(GSizes::S72) - (static_cast<int>(GSizes::S22) - sizeStep))/sizeStep;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPattern *doc,  VContainer *pattern,
@@ -47,8 +49,8 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       ui(new Ui::DialogPatternProperties),
       doc(doc),
       pattern(pattern),
-      heightsChecked(MAX_HEIGHTS),
-      sizesChecked(MAX_SIZES),
+      heightsChecked(heightsCount),
+      sizesChecked(sizesCount),
       heights (QMap<GHeights, bool>()),
       sizes(QMap<GSizes, bool>()),
       data(QMap<QCheckBox *, int>()),
@@ -334,7 +336,7 @@ void DialogPatternProperties::CheckStateHeight(int state)
         if (state == Qt::Checked)
         {
             ++heightsChecked;
-            if (heightsChecked == MAX_HEIGHTS)
+            if (heightsChecked == heightsCount)
             {
                 ui->checkBoxAllHeights->blockSignals(true);//don't touch anothers checkboxes
                 ui->checkBoxAllHeights->setCheckState(Qt::Checked);
@@ -344,7 +346,7 @@ void DialogPatternProperties::CheckStateHeight(int state)
         }
         else if (state == Qt::Unchecked)
         {
-            if (heightsChecked == MAX_HEIGHTS)
+            if (heightsChecked == heightsCount)
             {
                 ui->checkBoxAllHeights->blockSignals(true);//don't touch anothers checkboxes
                 ui->checkBoxAllHeights->setCheckState(Qt::Unchecked);
@@ -376,7 +378,7 @@ void DialogPatternProperties::CheckStateSize(int state)
         if (state == Qt::Checked)
         {
             ++sizesChecked;
-            if (sizesChecked == MAX_SIZES)
+            if (sizesChecked == sizesCount)
             {
                 ui->checkBoxAllSizes->blockSignals(true);//don't touch anothers checkboxes
                 ui->checkBoxAllSizes->setCheckState(Qt::Checked);
@@ -386,7 +388,7 @@ void DialogPatternProperties::CheckStateSize(int state)
         }
         else if (state == Qt::Unchecked)
         {
-            if (sizesChecked == MAX_SIZES)
+            if (sizesChecked == sizesCount)
             {
                 ui->checkBoxAllSizes->blockSignals(true);//don't touch anothers checkboxes
                 ui->checkBoxAllSizes->setCheckState(Qt::Unchecked);
@@ -490,6 +492,14 @@ void DialogPatternProperties::SetSizesChecked(bool enabled)
     ui->checkBoxS52->setChecked(enabled);
     ui->checkBoxS54->setChecked(enabled);
     ui->checkBoxS56->setChecked(enabled);
+    ui->checkBoxS58->setChecked(enabled);
+    ui->checkBoxS60->setChecked(enabled);
+    ui->checkBoxS62->setChecked(enabled);
+    ui->checkBoxS64->setChecked(enabled);
+    ui->checkBoxS66->setChecked(enabled);
+    ui->checkBoxS68->setChecked(enabled);
+    ui->checkBoxS70->setChecked(enabled);
+    ui->checkBoxS72->setChecked(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -547,6 +557,14 @@ void DialogPatternProperties::InitSizes()
     Init(ui->checkBoxS52, static_cast<int>(GSizes::S52), &DialogPatternProperties::CheckStateSize);
     Init(ui->checkBoxS54, static_cast<int>(GSizes::S54), &DialogPatternProperties::CheckStateSize);
     Init(ui->checkBoxS56, static_cast<int>(GSizes::S56), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS58, static_cast<int>(GSizes::S58), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS60, static_cast<int>(GSizes::S60), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS62, static_cast<int>(GSizes::S62), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS64, static_cast<int>(GSizes::S64), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS66, static_cast<int>(GSizes::S66), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS68, static_cast<int>(GSizes::S68), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS70, static_cast<int>(GSizes::S70), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS72, static_cast<int>(GSizes::S72), &DialogPatternProperties::CheckStateSize);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

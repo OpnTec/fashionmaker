@@ -42,8 +42,6 @@
 #include "vgeometrydef.h"
 #include "vpointf.h"
 
-class QPainterPath;
-class QPointF;
 class VArcData;
 
 /**

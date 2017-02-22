@@ -183,7 +183,7 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 {
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu());
     QAction *actionSelectAll = menu->addAction(tr("Select all"));
     QAction *actionSelectNone = menu->addAction(tr("Select none"));
 

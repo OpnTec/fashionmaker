@@ -68,8 +68,6 @@
 #include "../tools/dialogtool.h"
 #include "ui_dialogeditwrongformula.h"
 
-class QCloseEvent;
-class QShowEvent;
 template <class T> class QSharedPointer;
 
 enum {ColumnName = 0, ColumnFullName};

@@ -55,10 +55,6 @@
 #include "../vdatatool.h"
 #include "vabstractnode.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------

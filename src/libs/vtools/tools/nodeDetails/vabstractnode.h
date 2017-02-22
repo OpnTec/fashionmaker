@@ -39,10 +39,6 @@
 
 #include "../vabstracttool.h"
 
-class QDomElement;
-class VAbstractPattern;
-class VContainer;
-
 enum class ParentType : bool {Scene, Item};
 
 /**

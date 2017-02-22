@@ -38,9 +38,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 AddGroup::AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())

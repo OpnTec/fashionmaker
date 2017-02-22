@@ -51,16 +51,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
-class QDomElement;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-class QPointF;
-class VAbstractPattern;
-class VContainer;
 class VControlPointSpline;
-class VGObject;
-class VSpline;
 template <class T> class QSharedPointer;
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem

@@ -28,9 +28,6 @@
 
 #include "../vproperty.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-class QWidget;
 namespace VPE {
 class VPropertyPrivate;
 }  // namespace VPE

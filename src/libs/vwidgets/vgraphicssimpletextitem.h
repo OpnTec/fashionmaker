@@ -41,12 +41,6 @@
 
 #include "../vmisc/def.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-class QPointF;
-
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.
  */

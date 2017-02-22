@@ -35,10 +35,6 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-class FvAvailableUpdate;
-class FvUpdateWindow;
-class QNetworkReply;
-
 extern const QString defaultFeedURL;
 
 class FvUpdater : public QObject

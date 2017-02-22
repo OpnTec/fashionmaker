@@ -5296,11 +5296,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation>Muuttujien taulukko</translation>
+        <translation type="vanished">Muuttujien taulukko</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Muuttujien taulukko</translation>
+        <translation type="vanished">Muuttujien taulukko</translation>
     </message>
     <message>
         <source>History</source>
@@ -5574,11 +5574,11 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Standardi mitat (*.vst)</translation>
+        <translation type="vanished">Standardi mitat (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Yksilölliset mitat (*.vit)</translation>
+        <translation type="vanished">Yksilölliset mitat (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -5777,35 +5777,7 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load Individual ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load Standard ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sync measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements loaded</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5814,14 +5786,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Create new Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create/Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create/edit measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5926,14 +5890,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unload measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unload measurements if they was not used in a pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6160,6 +6116,74 @@ Haluatko tallentaa muutokset?</translation>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Variables Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contains information about increments and internal variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load multisize measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit linked to the pattern measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synchronize linked to the pattern measurements after change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they were not used in a pattern file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Yksilölliset mitat</translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6306,22 +6330,38 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Yksilölliset mitat</translation>
+        <translation type="vanished">Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation>Kaavat</translation>
+        <translation type="vanished">Kaavat</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Standardi mitat</translation>
+        <translation type="vanished">Standardi mitat</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Sommittelu</translation>
+        <translation type="vanished">Sommittelu</translation>
     </message>
     <message>
-        <source>Templates</source>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7022,7 +7062,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Standardi mitat</translation>
+        <translation type="vanished">Standardi mitat</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -7316,6 +7356,10 @@ Do you want to save your changes?</source>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7427,14 +7471,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Yksilölliset mitat</translation>
+        <translation type="vanished">Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Standardi mitat</translation>
+        <translation type="vanished">Standardi mitat</translation>
     </message>
     <message>
-        <source>Templates</source>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7886,6 +7942,25 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VCommonSettings</name>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
@@ -8318,6 +8393,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSettings</name>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layouts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

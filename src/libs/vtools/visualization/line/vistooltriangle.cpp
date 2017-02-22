@@ -45,8 +45,6 @@
 #include "../visualization.h"
 #include "visline.h"
 
-class QLineF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
     :VisLine(data, parent), object2Id(NULL_ID), hypotenuseP1Id(NULL_ID), hypotenuseP2Id(NULL_ID), point(nullptr),

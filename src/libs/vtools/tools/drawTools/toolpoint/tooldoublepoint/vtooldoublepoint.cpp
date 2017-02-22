@@ -53,10 +53,6 @@
 #include "../../vdrawtool.h"
 #include "../vabstractpoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QKeyEvent;
-
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
                                    QGraphicsItem *parent)

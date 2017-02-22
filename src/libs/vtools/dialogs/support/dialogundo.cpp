@@ -37,9 +37,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogundo.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogUndo::DialogUndo(QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogUndo), result(UndoButton::Cancel)

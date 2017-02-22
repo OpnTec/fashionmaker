@@ -56,9 +56,6 @@
 #include "../vdrawtool.h"
 #include "vabstractspline.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-
 const QString VToolEllipticalArc::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------

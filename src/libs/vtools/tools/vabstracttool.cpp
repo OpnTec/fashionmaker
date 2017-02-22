@@ -79,8 +79,6 @@
 #include "../dialogs/support/dialogundo.h"
 #include "../dialogs/support/dialogeditwrongformula.h"
 
-class QGraphicsEllipseItem;
-class QGraphicsLineItem;
 template <class T> class QSharedPointer;
 
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");

@@ -33,10 +33,6 @@
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-class QWidget;
-
 namespace VPE
 {
 

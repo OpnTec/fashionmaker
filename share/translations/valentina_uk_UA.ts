@@ -5670,11 +5670,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation>Таблиця змінних</translation>
+        <translation type="vanished">Таблиця змінних</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Таблиці змінних</translation>
+        <translation type="vanished">Таблиці змінних</translation>
     </message>
     <message>
         <source>History</source>
@@ -5947,11 +5947,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Стандартні мірки (*.vst)</translation>
+        <translation type="vanished">Стандартні мірки (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Індивідуальні мірки (*.vit)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -6167,27 +6167,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation>Завантажити індивідуальні ...</translation>
+        <translation type="vanished">Завантажити індивідуальні ...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation>Завантажити стандартні ...</translation>
+        <translation type="vanished">Завантажити стандартні ...</translation>
     </message>
     <message>
         <source>Show ...</source>
-        <translation>Показати ...</translation>
+        <translation type="vanished">Показати ...</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation>Показати мірки</translation>
+        <translation type="vanished">Показати мірки</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation>Синхронізувати мірки</translation>
+        <translation type="vanished">Синхронізувати мірки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation>Індивідуальні мірки (*.vit);;Стандартні мірки (*.vst)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit);;Стандартні мірки (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
@@ -6195,7 +6195,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation>Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit)</translation>
+        <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
@@ -6207,11 +6207,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create/Edit</source>
-        <translation>Створити/Редагувати</translation>
+        <translation type="vanished">Створити/Редагувати</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation>Створити/Редагувати мірки</translation>
+        <translation type="vanished">Створити/Редагувати мірки</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
@@ -6332,11 +6332,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation>Вивантажити мірки</translation>
+        <translation type="vanished">Вивантажити мірки</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation>Вивантажити мірки якщо вони не були використані у файлі.</translation>
+        <translation type="vanished">Вивантажити мірки якщо вони не були використані у файлі.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
@@ -6578,6 +6578,74 @@ Do you want to save your changes?</source>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Variables Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contains information about increments and internal variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load multisize measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit linked to the pattern measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synchronize linked to the pattern measurements after change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they were not used in a pattern file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Індивідуальні мірки</translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6744,23 +6812,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Індивідуальні мірки</translation>
+        <translation type="vanished">Індивідуальні мірки</translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation>Лекала</translation>
+        <translation type="vanished">Лекала</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Стандартна таблиця мірок</translation>
+        <translation type="vanished">Стандартна таблиця мірок</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Розкладка</translation>
+        <translation type="vanished">Розкладка</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Шаблони</translation>
+        <translation type="vanished">Шаблони</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7493,7 +7581,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Стандартна таблиця мірок</translation>
+        <translation type="vanished">Стандартна таблиця мірок</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -7828,6 +7916,10 @@ Do you want to save your changes?</source>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7939,15 +8031,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Індивідуальні мірки</translation>
+        <translation type="vanished">Індивідуальні мірки</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Стандартна таблиця мірок</translation>
+        <translation type="vanished">Стандартна таблиця мірок</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Шаблони</translation>
+        <translation type="vanished">Шаблони</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8485,6 +8593,25 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VCommonSettings</name>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished">мірки</translation>
+    </message>
+    <message>
+        <source>individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
@@ -8916,6 +9043,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSettings</name>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layouts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

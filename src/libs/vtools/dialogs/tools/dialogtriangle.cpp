@@ -42,9 +42,6 @@
 #include "dialogtool.h"
 #include "ui_dialogtriangle.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTriangle create dialog

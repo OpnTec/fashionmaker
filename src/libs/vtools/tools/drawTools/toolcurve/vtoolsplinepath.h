@@ -43,18 +43,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QPointF;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
-class VSpline;
 class VSplinePath;
-class VSplinePoint;
 template <class T> class QSharedPointer;
 
 /**

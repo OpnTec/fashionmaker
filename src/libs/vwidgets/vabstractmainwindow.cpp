@@ -28,8 +28,6 @@
 
 #include "vabstractmainwindow.h"
 
-class QWidget;
-
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent) : QMainWindow(parent)
 {}
 

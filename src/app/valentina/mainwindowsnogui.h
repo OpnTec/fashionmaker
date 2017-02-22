@@ -38,9 +38,7 @@
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vwidgets/vabstractmainwindow.h"
 
-
 class QGraphicsScene;
-class QPrinter;
 struct PosterData;
 
 class MainWindowsNoGUI : public VAbstractMainWindow

@@ -38,10 +38,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogShoulderPoint;

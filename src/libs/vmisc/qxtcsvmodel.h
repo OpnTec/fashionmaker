@@ -48,9 +48,6 @@
 
 #include "def.h"
 
-class QIODevice;
-class QModelIndex;
-class QTextCodec;
 class QxtCsvModelPrivate;
 
 class QxtCsvModel : public QAbstractTableModel

@@ -41,9 +41,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 
-class QGraphicsScene;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),

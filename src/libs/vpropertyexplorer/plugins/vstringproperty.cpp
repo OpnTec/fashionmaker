@@ -32,9 +32,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
     : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {

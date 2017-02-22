@@ -37,10 +37,6 @@
 
 #include "vundocommand.h"
 
-class QComboBox;
-class QUndoCommand;
-class VAbstractPattern;
-
 class RenamePP :public VUndoCommand
 {
     Q_OBJECT

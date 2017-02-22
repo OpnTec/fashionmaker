@@ -33,11 +33,6 @@
 #include <QVariant>
 #include <Qt>
 
-class QHBoxLayout;
-class QSpacerItem;
-class QVBoxLayout;
-class QWidget;
-
 static const char kDoNotAskAgainKey[] = "DoNotAskAgain";
 
 namespace Utils

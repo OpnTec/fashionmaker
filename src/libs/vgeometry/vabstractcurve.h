@@ -42,11 +42,8 @@
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-class QPointF;
-
 enum class PathDirection : char { Hide, Show };
 
-class QLineF;
 class QPainterPath;
 class VAbstractCurveData;
 

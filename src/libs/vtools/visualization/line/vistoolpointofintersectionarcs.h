@@ -40,8 +40,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VContainer;
-
 class VisToolPointOfIntersectionArcs : public VisLine
 {
     Q_OBJECT

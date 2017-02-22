@@ -40,8 +40,6 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VContainer;
-
 class VisToolPointOfIntersectionCurves : public VisPath
 {
     Q_OBJECT

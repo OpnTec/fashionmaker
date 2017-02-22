@@ -72,10 +72,6 @@
 #include "vnodedetail.h"
 #include "vtoolseamallowance.h"
 
-class QDomElement;
-class QDomNode;
-class QPointF;
-
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
 const QString VToolUnionDetails::TagDetail        = QStringLiteral("det");
 const QString VToolUnionDetails::TagNode          = QStringLiteral("node");

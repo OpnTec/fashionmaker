@@ -41,14 +41,6 @@
 #include "../vmisc/def.h"
 #include "vtoolcut.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VAbstractCubicBezierPath;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
-class VPointF;
 class VSplinePath;
 template <class T> class QSharedPointer;
 

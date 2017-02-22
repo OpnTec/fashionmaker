@@ -40,10 +40,6 @@
 #include "../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
 
-class QDate;
-class QDomElement;
-class VContainer;
-
 enum class GenderType : char { Male, Female, Unknown };
 
 class VMeasurements : public VDomDocument

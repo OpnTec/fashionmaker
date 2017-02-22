@@ -341,6 +341,23 @@ void VAbstractOperation::AllowElArcSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ToolSelectionType(const SelectionType &type)
+{
+    VAbstractTool::ToolSelectionType(type);
+    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value()->GetType() == GOType::Point)
+        {
+            VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
+            SCASSERT(item != nullptr)
+            item->ToolSelectionType(selectionType);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);

@@ -40,7 +40,6 @@
 #include "../visualization.h"
 #include "../vmisc/def.h"
 
-class VContainer;
 class VSimplePoint;
 
 class VisPath : public Visualization, public QGraphicsPathItem

@@ -41,8 +41,6 @@
 #include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                                            QUndoCommand *parent)

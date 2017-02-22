@@ -49,7 +49,6 @@
 #include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
 
-class QDomElement;
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------

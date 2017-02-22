@@ -33,15 +33,14 @@
 #include <QSharedDataPointer>
 
 #include "../vmisc/def.h"
+#include "../vgeometry/vabstractcurve.h"
 
 class VPiecePathData;
-class VPieceNode;
-class QPointF;
-class VPointF;
-class VContainer;
 class VSAPoint;
+class VContainer;
 class QPainterPath;
-class VAbstractCurve;
+class VPointF;
+class VPieceNode;
 
 class VPiecePath
 {

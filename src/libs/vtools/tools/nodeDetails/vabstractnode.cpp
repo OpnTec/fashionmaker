@@ -44,8 +44,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vabstracttool.h"
 
-class QDomElement;
-
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
 //---------------------------------------------------------------------------------------------------------------------

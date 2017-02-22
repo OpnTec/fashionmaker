@@ -5698,11 +5698,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation>Tabella delle variabili</translation>
+        <translation type="vanished">Tabella delle variabili</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Tabelle delle variabili</translation>
+        <translation type="vanished">Tabelle delle variabili</translation>
     </message>
     <message>
         <source>History</source>
@@ -5976,11 +5976,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Misure standard (*.vst)</translation>
+        <translation type="vanished">Misure standard (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Misure individuali (*.vit)</translation>
+        <translation type="vanished">Misure individuali (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -6196,27 +6196,27 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation>Carico Individuali ...</translation>
+        <translation type="vanished">Carico Individuali ...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation>Carico Standard ...</translation>
+        <translation type="vanished">Carico Standard ...</translation>
     </message>
     <message>
         <source>Show ...</source>
-        <translation>Mostra ...</translation>
+        <translation type="vanished">Mostra ...</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation>Mostra misure</translation>
+        <translation type="vanished">Mostra misure</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation>Sincronizza misure</translation>
+        <translation type="vanished">Sincronizza misure</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation>Misure individuali (*.vit);;Misure Standard (*.vst)</translation>
+        <translation type="vanished">Misure individuali (*.vit);;Misure Standard (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
@@ -6224,7 +6224,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation>Misure standard (*.vst);;Misure individuali (*.vit)</translation>
+        <translation type="vanished">Misure standard (*.vst);;Misure individuali (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
@@ -6236,11 +6236,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Create/Edit</source>
-        <translation>Crea/Modifica</translation>
+        <translation type="vanished">Crea/Modifica</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation>Crea/modifica misure</translation>
+        <translation type="vanished">Crea/modifica misure</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
@@ -6361,11 +6361,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation>Scarica misure</translation>
+        <translation type="vanished">Scarica misure</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation>Scarica misure se non sono state usate in un file cartamodello.</translation>
+        <translation type="vanished">Scarica misure se non sono state usate in un file cartamodello.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
@@ -6607,6 +6607,74 @@ Vuoi salvare i cambiamenti?</translation>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Variables Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contains information about increments and internal variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Individual measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load multisize measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit linked to the pattern measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synchronize linked to the pattern measurements after change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they were not used in a pattern file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Misure individuali</translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6773,23 +6841,43 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Misure individuali</translation>
+        <translation type="vanished">Misure individuali</translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation>Modelli</translation>
+        <translation type="vanished">Modelli</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Misure standard</translation>
+        <translation type="vanished">Misure standard</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Layout</translation>
+        <translation type="vanished">Layout</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Templates</translation>
+        <translation type="vanished">Templates</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7522,7 +7610,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Misure standard</translation>
+        <translation type="vanished">Misure standard</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -7861,6 +7949,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -7972,15 +8064,31 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Misure individuali</translation>
+        <translation type="vanished">Misure individuali</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Misure standard</translation>
+        <translation type="vanished">Misure standard</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Templates</translation>
+        <translation type="vanished">Templates</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Multisize measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8514,6 +8622,25 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
+    <name>VCommonSettings</name>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished">Misure</translation>
+    </message>
+    <message>
+        <source>individual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
@@ -8904,6 +9031,17 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VSettings</name>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layouts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

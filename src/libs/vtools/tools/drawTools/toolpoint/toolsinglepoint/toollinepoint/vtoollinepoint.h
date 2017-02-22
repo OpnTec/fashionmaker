@@ -40,10 +40,6 @@
 #include "../vtoolsinglepoint.h"
 #include "../vmisc/def.h"
 
-class QDomElement;
-class VAbstractPattern;
-class VContainer;
-class VGObject;
 template <class T> class QSharedPointer;
 
 /**

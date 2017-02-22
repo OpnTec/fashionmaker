@@ -38,8 +38,6 @@
 #include "vundocommand.h"
 
 class QGraphicsScene;
-class QUndoCommand;
-class VAbstractPattern;
 
 class MoveSPoint : public VUndoCommand
 {

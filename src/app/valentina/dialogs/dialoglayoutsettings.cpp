@@ -32,6 +32,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/vsettings.h"
 #include "../vmisc/vmath.h"
+#include "../vlayout/vlayoutgenerator.h"
 
 #include <QMessageBox>
 #include <QPushButton>

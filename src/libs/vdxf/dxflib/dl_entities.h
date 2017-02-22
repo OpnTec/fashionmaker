@@ -390,10 +390,12 @@ struct DXFLIB_EXPORT DL_PolylineData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags)
+    DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags, double pElevation = 0.0)
         : number(static_cast<quint32>(pNumber)),
           m(static_cast<quint32>(pMVerteces)),
-          n(static_cast<quint32>(pNVerteces)), flags(pFlags)
+          n(static_cast<quint32>(pNVerteces)),
+          elevation(pElevation),
+          flags(pFlags)
     {
     }
 
@@ -405,6 +407,9 @@ struct DXFLIB_EXPORT DL_PolylineData
 
     /*! Number of vertices in n direction if polyline is a polygon mesh. */
     quint32 n;
+
+    /*! elevation of the polyline. */
+    double elevation;
 
     /*! Flags */
     int flags;

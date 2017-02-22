@@ -39,8 +39,6 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VContainer;
-
 class VisToolCutArc : public VisPath
 {
     Q_OBJECT

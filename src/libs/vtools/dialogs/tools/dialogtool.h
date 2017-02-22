@@ -59,24 +59,14 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
-class QCloseEvent;
-class QEvent;
-class QIcon;
-class QLineEdit;
-class QShowEvent;
-class QTimer;
-class QWidget;
-class VGObject;
 template <class T> class QSharedPointer;
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
 class QDoubleSpinBox;
 class QLabel;
-class QListWidgetItem;
 class QPlainTextEdit;
 class VAbstractTool;
-class VContainer;
 
 enum class FillComboBox : char { Whole, NoChildren};
 

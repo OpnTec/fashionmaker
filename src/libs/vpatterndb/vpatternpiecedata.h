@@ -36,8 +36,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-class QPointF;
-
 enum class MaterialType : char
 {
     mtFabric = 0,

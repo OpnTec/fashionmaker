@@ -42,9 +42,6 @@
 #include "dialogtool.h"
 #include "ui_dialogpointofintersection.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogPointOfIntersection create dialog

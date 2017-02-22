@@ -42,14 +42,7 @@
 #include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
-class VContainer;
 class VFormula;
-class VGObject;
-class VMainGraphicsScene;
 template <class T> class QSharedPointer;
 
 class VToolPointOfIntersectionCircles : public VToolSinglePoint

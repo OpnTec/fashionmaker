@@ -29,8 +29,6 @@
 #include "vfilepropertyeditor.h"
 #include "../vproperty_p.h"
 
-class QStyleOptionViewItem;
-
 VPE::VFileProperty::VFileProperty(const QString& name)
     : VProperty(new VFilePropertyPrivate(name, QVariant::String))
 {

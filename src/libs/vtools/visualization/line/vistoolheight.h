@@ -40,9 +40,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QLineF;
-class VContainer;
-
 class VisToolHeight : public VisLine
 {
     Q_OBJECT

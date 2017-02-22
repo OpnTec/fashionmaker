@@ -46,11 +46,6 @@
 #include "../vgeometry/vpointf.h"
 #include "vgraphicssimpletextitem.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
     : VAbstractSimple(id, currentColor, patternUnit, factor, parent),

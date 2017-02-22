@@ -42,14 +42,6 @@
 #include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
-class VArc;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
 template <class T> class QSharedPointer;
 
 class VToolPointFromArcAndTangent : public VToolSinglePoint

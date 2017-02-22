@@ -49,8 +49,6 @@
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
     :d(new VLayoutPaperData)
@@ -185,7 +183,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, volatile bool &stop)
+bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop)
 {
     // First need set size of paper
     if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
@@ -221,7 +219,7 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, volatile bool &stop)
+bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop)
 {
     VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
@@ -268,9 +266,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, volatile bool &stop)
         QCoreApplication::processEvents();
         QThread::msleep(250);
     }
-    while(thread_pool->activeThreadCount() > 0 && not stop);
+    while(thread_pool->activeThreadCount() > 0 && not stop.load());
 
-    if (stop)
+    if (stop.load())
     {
         qDeleteAll(threads.begin(), threads.end());
         threads.clear();

@@ -34,8 +34,6 @@
 #include "../vmisc/vtablesearch.h"
 
 class VIndividualMeasurements;
-class QTableWidget;
-class QTableWidgetItem;
 
 namespace Ui
 {

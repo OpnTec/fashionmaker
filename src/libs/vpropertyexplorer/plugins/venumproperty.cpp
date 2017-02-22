@@ -27,9 +27,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VEnumProperty::VEnumProperty(const QString& name)
     : VProperty(name, QVariant::Int), EnumerationLiterals()
 {

@@ -36,8 +36,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
     :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())

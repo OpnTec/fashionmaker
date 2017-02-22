@@ -38,10 +38,6 @@
 
 #include "vundocommand.h"
 
-class QGraphicsItem;
-class QUndoCommand;
-class VAbstractPattern;
-
 class DelTool : public VUndoCommand
 {
     Q_OBJECT

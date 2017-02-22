@@ -42,8 +42,6 @@
 #include "../visualization.h"
 #include "visline.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent), object2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),

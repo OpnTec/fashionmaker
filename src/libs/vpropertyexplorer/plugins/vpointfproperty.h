@@ -33,8 +33,6 @@
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
 
-class QPointF;
-
 namespace VPE
 {
 

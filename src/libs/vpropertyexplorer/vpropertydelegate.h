@@ -31,12 +31,6 @@
 
 #include "vpropertyexplorer_global.h"
 
-class QAbstractItemModel;
-class QModelIndex;
-class QPainter;
-class QStyleOptionViewItem;
-class QWidget;
-
 namespace VPE
 {
 

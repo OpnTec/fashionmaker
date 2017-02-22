@@ -42,10 +42,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QLineF;
-class QPainterPath;
-class VContainer;
-
 class VisToolTriangle : public VisLine
 {
     Q_OBJECT

@@ -37,10 +37,7 @@
 
 #include "vundocommand.h"
 
-class QDomElement;
 class QGraphicsScene;
-class QUndoCommand;
-class VAbstractPattern;
 
 class MovePiece : public VUndoCommand
 {

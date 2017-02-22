@@ -63,9 +63,6 @@
 #include "ui_dialogsplinepath.h"
 #include "vtranslatevars.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogSplinePath create dialog

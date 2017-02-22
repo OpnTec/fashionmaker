@@ -43,7 +43,6 @@
 #include "qmuparsertoken.h"
 #include "qmuparsertokenreader.h"
 
-class QStringList;
 template <class T> class QStack;
 
 namespace qmu

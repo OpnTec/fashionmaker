@@ -163,7 +163,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>
         <source>Vertical distance from the widest point of the calf to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du plus large du mollet au sol.</translation>
+        <translation>Longueur verticale au point le plus du large du mollet au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="253"/>
@@ -199,13 +199,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="263"/>
         <source>Vertical distance from point where the front leg meets the foot to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du point où le devant de la jambe rencontre le pied au sol.</translation>
+        <translation>Longueur verticale partant du point où le devant de la jambe rencontre le pied, jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="267"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_hanchehaute</translation>
+        <translation>hauteur_petitehanche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="269"/>
@@ -217,13 +217,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="270"/>
         <source>Vertical distance from the Highhip level, where front abdomen is most prominent, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale des petites hanches, là où le ventre est le plus proéminent, au sol.</translation>
+        <translation>Longueur verticale des petites hanches, là où l&apos;abdomen est le plus proéminent, jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="274"/>
         <source>height_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_taille_avant</translation>
+        <translation>hauteur_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="276"/>
@@ -235,7 +235,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="277"/>
         <source>Vertical distance from the Waist Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du devant de la taille au sol.</translation>
+        <translation>Longueur verticale à partir de la taille devant jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="281"/>
@@ -253,43 +253,43 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
         <source>Vertical distance from Bustpoint to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du point de poitrine au sol.</translation>
+        <translation>Longueur verticale du point de poitrine jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="288"/>
         <source>height_shoulder_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_bout_epaule</translation>
+        <translation>hauteur_pointe_epaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="290"/>
         <source>Height: Shoulder Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Bout d&apos;épaule</translation>
+        <translation>Hauteur: Pointe d&apos;Épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="291"/>
         <source>Vertical distance from the Shoulder Tip to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du bout de l&apos;épaule au sol.</translation>
+        <translation>Longueur verticale partant de la Pointe d&apos;Épaule jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="295"/>
         <source>height_neck_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_cou_devant</translation>
+        <translation>hauteur_encolure_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="297"/>
         <source>Height: Neck Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou devant</translation>
+        <translation>Hauteur: Encolure devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="298"/>
         <source>Vertical distance from the Neck Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du devant du cou au sol.</translation>
+        <translation>Longueur verticale partant du milieu Encolure Devant jusqu&apos;au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="302"/>

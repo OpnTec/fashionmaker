@@ -33,15 +33,16 @@
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
+#include <atomic>
 
 #include "vlayoutdef.h"
 
-class QGraphicsItem;
+class VBestSquare;
+class VLayoutPaperData;
+class VLayoutPiece;
 class QGraphicsRectItem;
 class QRectF;
-class VBestSquare;
-class VLayoutPiece;
-class VLayoutPaperData;
+class QGraphicsItem;
 template <typename T> class QList;
 template <typename T> class QVector;
 
@@ -77,7 +78,7 @@ public:
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutPiece &detail, volatile bool &stop);
+    bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
     QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
     QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
@@ -90,7 +91,7 @@ public:
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutPiece &detail, volatile bool &stop);
+    bool AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop);
 
     bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
 

@@ -34,9 +34,6 @@
 #include "vpiece.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 class SavePieceOptions : public VUndoCommand
 {
 public:

@@ -39,8 +39,6 @@
 #include "../vdatatool.h"
 #include "vabstractnode.h"
 
-class VContainer;
-
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 //---------------------------------------------------------------------------------------------------------------------

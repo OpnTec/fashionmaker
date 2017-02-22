@@ -44,11 +44,6 @@
 #include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
 
-
-class QLineF;
-class QPointF;
-class VContainer;
-
 class VisLine: public Visualization, public QGraphicsLineItem
 {
     Q_OBJECT

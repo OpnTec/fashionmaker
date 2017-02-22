@@ -41,12 +41,6 @@
 #include "../vmisc/def.h"
 #include "vtoollinepoint.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
 template <class T> class QSharedPointer;
 
 /**

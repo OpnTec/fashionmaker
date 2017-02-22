@@ -53,10 +53,6 @@
 #include "vtextmanager.h"
 #include "vgraphicsfillitem.h"
 
-class QGraphicsPathItem;
-class QLineF;
-class VAbstractPattern;
-
 namespace
 {
 QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VContainer *pattern)

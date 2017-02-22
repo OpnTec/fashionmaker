@@ -38,8 +38,6 @@
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
                                  quint32 toolId, quint32 pointId, QUndoCommand *parent)

@@ -28,8 +28,6 @@
 #include "../vproperty_p.h"
 #include "vnumberproperty.h"
 
-class QPointF;
-
 VPE::VPointFProperty::VPointFProperty(const QString &name)
     : VProperty(name, QVariant::PointF)
 {

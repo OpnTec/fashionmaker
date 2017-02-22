@@ -35,10 +35,6 @@
 #include "../vpatterndb/vnodedetail.h"
 #include "../vpatterndb/vpiecenode.h"
 
-class QDomElement;
-class QDomNode;
-class QUndoCommand;
-
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 
 //---------------------------------------------------------------------------------------------------------------------

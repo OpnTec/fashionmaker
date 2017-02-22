@@ -30,7 +30,6 @@
 namespace VPE
 {
 
-class VProperty;
 class VPropertyFactoryManager;
 
 //! The standard property factory is able to create all the properties that are included in VPropertyExplorer

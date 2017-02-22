@@ -38,11 +38,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QLabel;
-class QLineEdit;
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogTrueDarts;

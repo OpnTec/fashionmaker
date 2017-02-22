@@ -43,14 +43,6 @@
 #include "../vmisc/def.h"
 #include "vdrawtool.h"
 
-class DialogTool;
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QKeyEvent;
-class VContainer;
-class VGObject;
-class VMainGraphicsScene;
 template <class T> class QSharedPointer;
 
 /**

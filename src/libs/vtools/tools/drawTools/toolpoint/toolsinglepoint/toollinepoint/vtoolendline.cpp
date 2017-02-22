@@ -52,9 +52,6 @@
 #include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VGObject;
 template <class T> class QSharedPointer;
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");

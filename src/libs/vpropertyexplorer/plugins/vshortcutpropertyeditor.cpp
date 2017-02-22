@@ -27,9 +27,6 @@
 #include <QSizePolicy>
 #include <Qt>
 
-class QHBoxLayout;
-class QKeyEvent;
-
 VPE::VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     : QWidget(parent), CurrentKeySequence(), LineEdit(nullptr)
 {

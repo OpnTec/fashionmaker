@@ -45,10 +45,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutsplinepath.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutSplinePath create dialog.

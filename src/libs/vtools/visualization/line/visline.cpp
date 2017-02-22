@@ -39,8 +39,6 @@
 #include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
     :Visualization(data), QGraphicsLineItem(parent)

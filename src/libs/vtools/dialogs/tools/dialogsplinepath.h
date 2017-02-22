@@ -41,11 +41,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-class VSplinePoint;
-
 namespace Ui
 {
     class DialogSplinePath;

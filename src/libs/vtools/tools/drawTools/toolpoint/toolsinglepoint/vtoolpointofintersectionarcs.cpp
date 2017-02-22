@@ -50,8 +50,6 @@
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
 template <class T> class QSharedPointer;
 
 const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIntersectionArcs");

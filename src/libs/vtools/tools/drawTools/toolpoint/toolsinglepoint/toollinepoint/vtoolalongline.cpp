@@ -54,8 +54,6 @@
 #include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
 template <class T> class QSharedPointer;
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");

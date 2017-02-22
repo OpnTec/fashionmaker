@@ -41,8 +41,6 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),

@@ -54,16 +54,6 @@
 #include "dxflib/dl_entities.h"
 #include "dxflib/dl_writer_ascii.h"
 
-class QLine;
-class QLineF;
-class QPaintDevice;
-class QPixmap;
-class QPoint;
-class QPointF;
-class QPolygonF;
-class QRect;
-class QRectF;
-
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {

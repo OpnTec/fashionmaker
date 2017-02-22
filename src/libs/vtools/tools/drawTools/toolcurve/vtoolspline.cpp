@@ -69,11 +69,6 @@
 #include "../vdrawtool.h"
 #include "vabstractspline.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive");
 const QString VToolSpline::OldToolType = QStringLiteral("simple");
 

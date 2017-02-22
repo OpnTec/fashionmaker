@@ -29,9 +29,6 @@
 #include "vproperty.h"
 #include "vpropertyexplorer_global.h"
 
-namespace VPE {
-class VProperty;
-}  // namespace VPE
 template <class Key, class T> class QMap;
 template <typename T> class QList;
 

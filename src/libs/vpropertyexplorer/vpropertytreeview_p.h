@@ -29,8 +29,6 @@
 namespace VPE
 {
 
-class VPropertyDelegate;
-
 class VPropertyTreeViewPrivate
 {
 public:

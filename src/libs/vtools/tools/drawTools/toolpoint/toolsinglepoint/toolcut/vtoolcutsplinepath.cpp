@@ -57,9 +57,6 @@
 #include "../../../vdrawtool.h"
 #include "vtoolcut.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class VGObject;
 template <class T> class QSharedPointer;
 
 const QString VToolCutSplinePath::ToolType       = QStringLiteral("cutSplinePath");

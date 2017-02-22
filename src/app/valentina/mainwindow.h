@@ -42,7 +42,6 @@ namespace Ui
 
 class VToolOptionsPropertyBrowser;
 class VMeasurements;
-class VMainGraphicsScene;
 class QFileSystemWatcher;
 class QLabel;
 class DialogIncrements;

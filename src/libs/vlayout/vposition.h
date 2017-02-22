@@ -33,22 +33,17 @@
 #include <QRunnable>
 #include <QVector>
 #include <QtGlobal>
+#include <atomic>
 
 #include "vbestsquare.h"
 #include "vcontour.h"
 #include "vlayoutdef.h"
 #include "vlayoutpiece.h"
 
-class QLineF;
-class QPainterPath;
-class QPointF;
-class QPolygonF;
-class QRectF;
-
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, volatile bool *stop, bool rotate,
+    VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
               int rotationIncrease, bool saveLength);
     virtual ~VPosition() Q_DECL_OVERRIDE{}
 
@@ -81,7 +76,7 @@ private:
     quint32 frame;
     quint32 detailsCount;
     QVector<VLayoutPiece> details;
-    volatile bool *stop;
+    std::atomic_bool *stop;
     bool rotate;
     int rotationIncrease;
     /**

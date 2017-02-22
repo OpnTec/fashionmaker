@@ -35,9 +35,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 AddDetNode::AddDetNode(const QDomElement &xml, VAbstractPattern *doc, const QString &drawName, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), m_drawName(drawName)

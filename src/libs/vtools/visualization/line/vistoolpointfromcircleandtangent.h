@@ -41,9 +41,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QPointF;
-class VContainer;
-
 class VisToolPointFromCircleAndTangent : public VisLine
 {
     Q_OBJECT

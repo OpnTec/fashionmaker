@@ -41,10 +41,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
 
-class QDomElement;
-class QDomNode;
-class QUndoCommand;
-
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
 enum class UndoCommand: char { AddPatternPiece,
@@ -66,7 +62,6 @@ enum class UndoCommand: char { AddPatternPiece,
                                TogglePieceInLayout
                              };
 
-class VPieceNode;
 class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand

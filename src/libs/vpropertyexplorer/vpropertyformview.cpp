@@ -29,10 +29,6 @@
 #include "vpropertymodel.h"
 #include "vpropertyset.h"
 
-class QModelIndex;
-class QShowEvent;
-class QWidget;
-
 VPE::VPropertyFormView::VPropertyFormView(QWidget* parent)
     : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {

@@ -33,8 +33,6 @@
 
 #include "../vproperty.h"
 
-class QHBoxLayout;
-
 VPE::VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     : QWidget(parent), Color(), ToolButton(nullptr), TextLabel(nullptr), ColorLabel(nullptr), Spacer(nullptr)
 {

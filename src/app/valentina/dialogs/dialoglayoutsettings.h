@@ -34,7 +34,6 @@
 
 #include "../vlayout/vbank.h"
 #include "../ifc/ifcdef.h"
-#include "../vlayout/vlayoutgenerator.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -67,7 +66,7 @@ public:
                                           Roll44in = 11,
                                           Custom = 12};
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
-    ~DialogLayoutSettings();
+    virtual ~DialogLayoutSettings();
 
     qreal GetPaperHeight() const;
     void SetPaperHeight(qreal value);

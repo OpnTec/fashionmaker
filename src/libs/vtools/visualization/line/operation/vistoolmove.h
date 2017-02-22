@@ -43,9 +43,6 @@
 #include "../vmisc/def.h"
 #include "visoperation.h"
 
-class QPointF;
-class VContainer;
-
 class VisToolMove : public VisOperation
 {
     Q_OBJECT

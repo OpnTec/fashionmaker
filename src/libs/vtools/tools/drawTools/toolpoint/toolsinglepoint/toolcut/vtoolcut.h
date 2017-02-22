@@ -43,7 +43,6 @@
 #include "../../../../vdatatool.h"
 #include "../../../../../visualization/visualization.h"
 
-class VContainer;
 class VFormula;
 
 class VToolCut : public VToolSinglePoint

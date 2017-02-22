@@ -35,10 +35,6 @@
 #include "vpiece.h"
 #include "vundocommand.h"
 
-class QGraphicsItem;
-class QUndoCommand;
-class VAbstractPattern;
-
 class DeletePiece : public VUndoCommand
 {
     Q_OBJECT

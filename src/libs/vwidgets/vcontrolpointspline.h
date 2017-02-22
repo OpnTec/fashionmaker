@@ -43,11 +43,6 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
 
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QPointF;
-
 /**
  * @brief The VControlPointSpline class control spline point.
  */

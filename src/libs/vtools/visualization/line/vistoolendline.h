@@ -39,9 +39,6 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class QGraphicsEllipseItem;
-class VContainer;
-
 class VisToolEndLine : public VisLine
 {
     Q_OBJECT

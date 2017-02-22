@@ -29,7 +29,6 @@
 #include <QtGlobal>
 
 class QGraphicsScene;
-class QWidget;
 
 namespace Ui
 {

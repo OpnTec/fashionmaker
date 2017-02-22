@@ -62,9 +62,6 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogmove.h"
 
-class QCloseEvent;
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),

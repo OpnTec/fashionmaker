@@ -34,9 +34,6 @@
 
 #include "../vpropertyexplorer_global.h"
 
-class QEvent;
-class QLineEdit;
-
 namespace VPE
 {
 

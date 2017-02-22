@@ -50,10 +50,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointofintersectioncircles.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId,
                                                                    QWidget *parent)

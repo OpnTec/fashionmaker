@@ -36,7 +36,6 @@
 #include "../vmisc/def.h"
 
 class VPieceNodeData;
-class QDataStream;
 class VContainer;
 
 class VPieceNode

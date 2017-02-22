@@ -42,11 +42,6 @@
 
 #include "../vmisc/def.h"
 
-class QGraphicsItem;
-class QGraphicsSceneMouseEvent;
-class QPointF;
-class QRectF;
-
 /**
  * @brief The VMainGraphicsScene class main scene.
  */

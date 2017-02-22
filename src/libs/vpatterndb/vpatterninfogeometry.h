@@ -32,8 +32,6 @@
 #include <QPointF>
 #include <QtGlobal>
 
-class QPointF;
-
 /**
  * @brief The VPatternInfoGeometry class holds the information about pattern info label geometry
  */

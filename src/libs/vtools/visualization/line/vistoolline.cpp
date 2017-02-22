@@ -41,8 +41,6 @@
 #include "../visualization.h"
 #include "visualization/line/visline.h"
 
-class QLineF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
     :VisLine(data, parent), point2Id(NULL_ID)

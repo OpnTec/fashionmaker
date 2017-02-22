@@ -33,8 +33,6 @@
 #include <QObject>
 #include <QString>
 
-class QPointF;
-class QStringList;
 template <class T> class QVector;
 
 #ifdef Q_CC_MSVC

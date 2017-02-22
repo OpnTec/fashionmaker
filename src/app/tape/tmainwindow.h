@@ -42,8 +42,6 @@ namespace Ui
     class TMainWindow;
 }
 
-class QComboBox;
-class QTableWidgetItem;
 class QLabel;
 
 class TMainWindow : public QMainWindow

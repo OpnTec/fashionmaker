@@ -40,8 +40,6 @@
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
                                        QUndoCommand *parent)

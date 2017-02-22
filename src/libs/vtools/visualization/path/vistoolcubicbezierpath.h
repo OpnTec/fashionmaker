@@ -41,9 +41,6 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VContainer;
-class VPointF;
-
 class VisToolCubicBezierPath : public VisPath
 {
     Q_OBJECT

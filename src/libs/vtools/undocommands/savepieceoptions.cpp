@@ -44,9 +44,6 @@
 #include "../tools/vtoolseamallowance.h"
 #include "vundocommand.h"
 
-class QDomElement;
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                                    QUndoCommand *parent)

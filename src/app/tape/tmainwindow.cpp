@@ -138,12 +138,14 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
     QMenu *menu = new QMenu(this);
     connect(menu, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowDockMenu);
     AboutToShowDockMenu();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    menu->setAsDockMenu();
+#else
     extern void qt_mac_set_dock_menu(QMenu *);
     qt_mac_set_dock_menu(menu);
 #endif
@@ -2234,11 +2236,11 @@ bool TMainWindow::MaybeSave()
             return true;// Don't ask if file was created without modifications.
         }
 
-        QMessageBox *messageBox = new QMessageBox(tr("Unsaved changes"),
-                                                  tr("Measurements have been modified.\n"
-                                                     "Do you want to save your changes?"),
-                                                  QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                  QMessageBox::Cancel, this, Qt::Sheet);
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
+                                                               tr("Measurements have been modified.\n"
+                                                                  "Do you want to save your changes?"),
+                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+                                                               QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);

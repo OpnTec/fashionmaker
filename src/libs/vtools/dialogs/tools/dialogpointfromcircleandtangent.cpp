@@ -50,10 +50,6 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointfromcircleandtangent.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId,
                                                                  QWidget *parent)

@@ -412,6 +412,13 @@
                                       </xs:sequence>
                                     </xs:complexType>
                                   </xs:element>
+                                  <xs:element name="pins" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="record" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
                                 </xs:sequence>
                               </xs:complexType>
                             </xs:element>
@@ -433,6 +440,13 @@
                                     </xs:complexType>
                                   </xs:element>
                                   <xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="child" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="pins" minOccurs="0" maxOccurs="1">
                                     <xs:complexType>
                                       <xs:sequence>
                                         <xs:element name="child" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
@@ -544,6 +558,13 @@
                                     <xs:attribute name="path" type="xs:unsignedInt" use="required"/>
                                   </xs:complexType>
                                 </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="pins" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="record" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>

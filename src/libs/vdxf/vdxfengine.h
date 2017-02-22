@@ -43,17 +43,6 @@
 #include "dxfdef.h"
 #include "dxflib/dl_dxf.h"
 
-class DL_Dxf;
-class DL_WriterA;
-class QLine;
-class QLineF;
-class QPaintDevice;
-class QPainterPath;
-class QPixmap;
-class QPoint;
-class QPointF;
-class QRect;
-class QRectF;
 class QTextStream;
 
 class VDxfEngine : public QPaintEngine

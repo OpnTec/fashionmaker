@@ -40,8 +40,6 @@
 
 #include "../vlayout/vbank.h"
 
-class QDate;
-
 class VCommonSettings : public QSettings
 {
     Q_OBJECT

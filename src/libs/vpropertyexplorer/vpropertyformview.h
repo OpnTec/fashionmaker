@@ -31,16 +31,10 @@
 #include "vpropertyexplorer_global.h"
 #include "vpropertyformwidget.h"
 
-class QModelIndex;
-class QShowEvent;
-class QWidget;
-
 namespace VPE
 {
 
-class VProperty;
 class VPropertyModel;
-class VPropertySet;
 
 //! This class populates a form layout with the properties in a model
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWidget

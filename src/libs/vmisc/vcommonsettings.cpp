@@ -42,8 +42,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 
-class QDate;
-
 const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");
 const QString VCommonSettings::SettingPathsStandardMeasurements       = QStringLiteral("paths/standard_measurements");
 const QString VCommonSettings::SettingPathsTemplates                  = QStringLiteral("paths/templates");

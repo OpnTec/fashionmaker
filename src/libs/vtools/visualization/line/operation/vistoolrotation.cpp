@@ -55,8 +55,6 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "visoperation.h"
 
-class QPointF;
-
 //---------------------------------------------------------------------------------------------------------------------
 VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
     : VisOperation(data, parent),

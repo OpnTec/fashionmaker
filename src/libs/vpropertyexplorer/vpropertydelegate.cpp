@@ -33,9 +33,6 @@
 
 #include "vproperty.h"
 
-class QStyleOptionViewItem;
-class QWidget;
-
 VPE::VPropertyDelegate::VPropertyDelegate(QObject *parent) :
     QStyledItemDelegate(parent), RowHeight(0), AddRowHeight(false)
 {

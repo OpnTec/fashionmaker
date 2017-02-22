@@ -39,8 +39,6 @@
 #include "../vgeometry/vsplinepath.h"
 #include "vundocommand.h"
 
-class QUndoCommand;
-
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                                const quint32 &id, QUndoCommand *parent)

@@ -42,17 +42,6 @@
 #include "../vabstractpoint.h"
 #include "../vmisc/def.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QGraphicsSceneHoverEvent;
-class QGraphicsSceneMouseEvent;
-class QKeyEvent;
-class QPointF;
-class VAbstractPattern;
-class VContainer;
-class VGObject;
-class VGraphicsSimpleTextItem;
-class VPointF;
 template <class T> class QSharedPointer;
 
 /**

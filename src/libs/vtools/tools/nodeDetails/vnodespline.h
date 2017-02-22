@@ -40,8 +40,6 @@
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
 
-class VContainer;
-
 /**
  * @brief The VNodeSpline class spline detail node.
  */

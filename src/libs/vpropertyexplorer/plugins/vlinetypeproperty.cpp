@@ -39,9 +39,6 @@
 
 #include "../vproperty_p.h"
 
-class QAbstractItemDelegate;
-class QStyleOptionViewItem;
-
 VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
     : VProperty(name, QVariant::Int), styles(), indexList()
 {

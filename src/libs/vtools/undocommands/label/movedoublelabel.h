@@ -37,9 +37,6 @@
 
 #include "moveabstractlabel.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 enum class DoublePoint: char { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel

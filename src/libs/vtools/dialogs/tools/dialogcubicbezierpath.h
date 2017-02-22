@@ -41,9 +41,6 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-class QWidget;
-class VContainer;
-
 namespace Ui
 {
     class DialogCubicBezierPath;

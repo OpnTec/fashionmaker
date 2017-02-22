@@ -50,8 +50,6 @@
 #include "dialogtool.h"
 #include "ui_dialoglineintersect.h"
 
-class QWidget;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogLineIntersect create dialog

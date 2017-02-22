@@ -37,9 +37,7 @@
 #include "vcmdexport.h"
 
 class VApplication;// use in define
-class VMainGraphicsView;
 class VPattern;
-class QFile;
 
 #if defined(qApp)
 #undef qApp

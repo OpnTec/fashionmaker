@@ -35,9 +35,6 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vundocommand.h"
 
-class QUndoCommand;
-class VAbstractPattern;
-
 //---------------------------------------------------------------------------------------------------------------------
 MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y,
                                      QUndoCommand *parent)

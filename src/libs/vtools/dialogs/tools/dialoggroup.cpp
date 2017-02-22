@@ -32,9 +32,6 @@
 
 #include "ui_dialoggroup.h"
 
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogGroup::DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),

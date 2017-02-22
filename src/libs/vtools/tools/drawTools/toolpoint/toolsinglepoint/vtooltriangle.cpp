@@ -51,9 +51,6 @@
 #include "vtoolsinglepoint.h"
 #include "../vmisc/vmath.h"
 
-class QDomElement;
-class QGraphicsSceneContextMenuEvent;
-class QPointF;
 template <class T> class QSharedPointer;
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");

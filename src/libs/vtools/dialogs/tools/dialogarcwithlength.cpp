@@ -47,10 +47,6 @@
 #include "../../visualization/visualization.h"
 #include "ui_dialogarcwithlength.h"
 
-class QCloseEvent;
-class QWidget;
-class VContainer;
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArcWithLength), flagRadius(false), flagF1(false),
