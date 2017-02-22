@@ -583,10 +583,7 @@ Qt::CheckState DialogMDataBase::GlobalCheckState() const
         {
             return Qt::Unchecked;
         }
-        else
-        {
-            return Qt::Checked;
-        }
+        return Qt::Checked;
     }
 
     return Qt::Unchecked;
