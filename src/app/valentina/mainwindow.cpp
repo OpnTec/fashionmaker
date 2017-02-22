@@ -204,7 +204,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     setUnifiedTitleAndToolBarOnMac(true);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
     QMenu *menu = new QMenu(this);
 
@@ -224,6 +223,9 @@ MainWindow::MainWindow(QWidget *parent)
     actionPreferences->setMenuRole(QAction::NoRole);
     connect(actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    menu->setAsDockMenu();
+#else
     extern void qt_mac_set_dock_menu(QMenu *);
     qt_mac_set_dock_menu(menu);
 #endif
