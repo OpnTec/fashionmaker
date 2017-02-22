@@ -211,6 +211,7 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
         default:
             return QPointF();
     }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

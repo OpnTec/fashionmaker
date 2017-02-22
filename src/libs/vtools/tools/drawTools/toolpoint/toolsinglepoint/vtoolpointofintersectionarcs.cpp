@@ -218,6 +218,7 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
         default:
             return QPointF();
     }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

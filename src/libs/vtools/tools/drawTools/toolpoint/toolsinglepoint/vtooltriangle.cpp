@@ -228,6 +228,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
             return line.p2();
         }
     }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

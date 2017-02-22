@@ -137,6 +137,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
             return line.p2();
         }
     }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
