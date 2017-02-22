@@ -115,11 +115,6 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     if (geom.IsVisible() == true)
     {
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
-        QDate date;
-        if (pDoc->IsDateVisible() == true)
-        {
-            date = QDate::currentDate();
-        }
         det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
     }
     const VGrainlineGeometry& grainlineGeom = piece.GetGrainlineGeometry();
