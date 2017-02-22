@@ -271,6 +271,14 @@ public:
     static const QString AttrS52;
     static const QString AttrS54;
     static const QString AttrS56;
+    static const QString AttrS58;
+    static const QString AttrS60;
+    static const QString AttrS62;
+    static const QString AttrS64;
+    static const QString AttrS66;
+    static const QString AttrS68;
+    static const QString AttrS70;
+    static const QString AttrS72;
 
     static const QString AttrCustom;
     static const QString AttrDefHeight;

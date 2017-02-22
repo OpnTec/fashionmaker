@@ -162,6 +162,14 @@ const QString VAbstractPattern::AttrS50             = QStringLiteral("s50");
 const QString VAbstractPattern::AttrS52             = QStringLiteral("s52");
 const QString VAbstractPattern::AttrS54             = QStringLiteral("s54");
 const QString VAbstractPattern::AttrS56             = QStringLiteral("s56");
+const QString VAbstractPattern::AttrS58             = QStringLiteral("s58");
+const QString VAbstractPattern::AttrS60             = QStringLiteral("s60");
+const QString VAbstractPattern::AttrS62             = QStringLiteral("s62");
+const QString VAbstractPattern::AttrS64             = QStringLiteral("s64");
+const QString VAbstractPattern::AttrS66             = QStringLiteral("s66");
+const QString VAbstractPattern::AttrS68             = QStringLiteral("s68");
+const QString VAbstractPattern::AttrS70             = QStringLiteral("s70");
+const QString VAbstractPattern::AttrS72             = QStringLiteral("s72");
 
 const QString VAbstractPattern::AttrCustom          = QStringLiteral("custom");
 const QString VAbstractPattern::AttrDefHeight       = QStringLiteral("defHeight");
@@ -1021,6 +1029,14 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
     map.insert(GSizes::S52, true);
     map.insert(GSizes::S54, true);
     map.insert(GSizes::S56, true);
+    map.insert(GSizes::S58, true);
+    map.insert(GSizes::S60, true);
+    map.insert(GSizes::S62, true);
+    map.insert(GSizes::S64, true);
+    map.insert(GSizes::S66, true);
+    map.insert(GSizes::S68, true);
+    map.insert(GSizes::S70, true);
+    map.insert(GSizes::S72, true);
 
     QDomNodeList tags = elementsByTagName(TagGradation);
     if (tags.size() == 0)
@@ -1070,6 +1086,14 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
                         map.insert(GSizes::S52, GetParametrBool(domElement, AttrS52, defValue));
                         map.insert(GSizes::S54, GetParametrBool(domElement, AttrS54, defValue));
                         map.insert(GSizes::S56, GetParametrBool(domElement, AttrS56, defValue));
+                        map.insert(GSizes::S58, GetParametrBool(domElement, AttrS58, defValue));
+                        map.insert(GSizes::S60, GetParametrBool(domElement, AttrS60, defValue));
+                        map.insert(GSizes::S62, GetParametrBool(domElement, AttrS62, defValue));
+                        map.insert(GSizes::S64, GetParametrBool(domElement, AttrS64, defValue));
+                        map.insert(GSizes::S66, GetParametrBool(domElement, AttrS66, defValue));
+                        map.insert(GSizes::S68, GetParametrBool(domElement, AttrS68, defValue));
+                        map.insert(GSizes::S70, GetParametrBool(domElement, AttrS70, defValue));
+                        map.insert(GSizes::S72, GetParametrBool(domElement, AttrS72, defValue));
                         return map;
                         break;
                     default:
@@ -1128,6 +1152,14 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                             domElement.removeAttribute(AttrS52);
                             domElement.removeAttribute(AttrS54);
                             domElement.removeAttribute(AttrS56);
+                            domElement.removeAttribute(AttrS58);
+                            domElement.removeAttribute(AttrS60);
+                            domElement.removeAttribute(AttrS62);
+                            domElement.removeAttribute(AttrS64);
+                            domElement.removeAttribute(AttrS66);
+                            domElement.removeAttribute(AttrS68);
+                            domElement.removeAttribute(AttrS70);
+                            domElement.removeAttribute(AttrS72);
                         }
                         else
                         {
@@ -1149,6 +1181,14 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                             SetAttribute(domElement, AttrS52, options.value(GSizes::S52));
                             SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
                             SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
+                            SetAttribute(domElement, AttrS58, options.value(GSizes::S58));
+                            SetAttribute(domElement, AttrS60, options.value(GSizes::S60));
+                            SetAttribute(domElement, AttrS62, options.value(GSizes::S62));
+                            SetAttribute(domElement, AttrS64, options.value(GSizes::S64));
+                            SetAttribute(domElement, AttrS66, options.value(GSizes::S66));
+                            SetAttribute(domElement, AttrS68, options.value(GSizes::S68));
+                            SetAttribute(domElement, AttrS70, options.value(GSizes::S70));
+                            SetAttribute(domElement, AttrS72, options.value(GSizes::S72));
                         }
 
                         modified = true;
