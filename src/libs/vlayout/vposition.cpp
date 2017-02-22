@@ -50,11 +50,22 @@
 #include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, volatile bool *stop,
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop,
                      bool rotate, int rotationIncrease, bool saveLength)
-    :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
-      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutPiece>()), stop(stop), rotate(rotate),
-      rotationIncrease(rotationIncrease), angle_between(0)
+    : QRunnable(),
+      bestResult(VBestSquare(gContour.GetSize(), saveLength)),
+      gContour(gContour),
+      detail(detail),
+      i(i),
+      j(j),
+      paperIndex(0),
+      frame(0),
+      detailsCount(0),
+      details(),
+      stop(stop),
+      rotate(rotate),
+      rotationIncrease(rotationIncrease),
+      angle_between(0)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -65,7 +76,7 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
-    if (*stop)
+    if (stop->load())
     {
         return;
     }
@@ -466,7 +477,7 @@ void VPosition::Rotate(int increase)
     }
     for (int angle = startAngle; angle < 360; angle = angle+increase)
     {
-        if (*stop)
+        if (stop->load())
         {
             return;
         }

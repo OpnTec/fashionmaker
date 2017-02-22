@@ -39,10 +39,24 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
-    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0), margins(),
-      usePrinterFields(true),stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true),
-      rotationIncrease(180), autoCrop(false), saveLength(false), unitePages(false), stripOptimizationEnabled(false),
-      multiplier(1), stripOptimization(false)
+    : QObject(parent),
+      papers(),
+      bank(new VBank()),
+      paperHeight(0),
+      paperWidth(0),
+      margins(),
+      usePrinterFields(true),
+      stopGeneration(false),
+      state(LayoutErrors::NoError),
+      shift(0),
+      rotate(true),
+      rotationIncrease(180),
+      autoCrop(false),
+      saveLength(false),
+      unitePages(false),
+      stripOptimizationEnabled(false),
+      multiplier(1),
+      stripOptimization(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,7 +93,7 @@ int VLayoutGenerator::DetailsCount()
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutGenerator::Generate()
 {
-    stopGeneration = false;
+    stopGeneration.store(false);
     papers.clear();
     state = LayoutErrors::NoError;
 
@@ -110,7 +124,7 @@ void VLayoutGenerator::Generate()
 
         while (bank->AllDetailsCount() > 0)
         {
-            if (stopGeneration)
+            if (stopGeneration.load())
             {
                 break;
             }
@@ -135,13 +149,13 @@ void VLayoutGenerator::Generate()
                     bank->NotArranged(index);
                 }
 
-                if (stopGeneration)
+                if (stopGeneration.load())
                 {
                     break;
                 }
             } while(bank->LeftArrange() > 0);
 
-            if (stopGeneration)
+            if (stopGeneration.load())
             {
                 break;
             }
@@ -209,7 +223,7 @@ QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetails() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutGenerator::Abort()
 {
-    stopGeneration = true;
+    stopGeneration.store(true);
     state = LayoutErrors::ProcessStoped;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QThreadPool::globalInstance()->clear();

@@ -37,6 +37,7 @@
 #include <QVector>
 #include <QtGlobal>
 #include <memory>
+#include <atomic>
 
 #include "vbank.h"
 #include "vlayoutdef.h"
@@ -122,7 +123,7 @@ private:
     qreal paperWidth;
     QMarginsF margins;
     bool usePrinterFields;
-    volatile bool stopGeneration;
+    std::atomic_bool stopGeneration;
     LayoutErrors state;
     quint32 shift;
     bool rotate;
