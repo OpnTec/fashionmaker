@@ -53,7 +53,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vnodedetail.h"
 
@@ -874,8 +874,8 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetLength(qsLength);
     QString qsRot = GetParametrString(domElement, AttrRotation, "90");
     detail.GetGrainlineGeometry().SetRotation(qsRot);
-    VGrainlineGeometry::ArrowType eAT =
-            VGrainlineGeometry::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
+    VGrainlineData::ArrowType eAT =
+            VGrainlineData::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
     detail.GetGrainlineGeometry().SetArrowType(eAT);
 }
 

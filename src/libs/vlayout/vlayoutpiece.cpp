@@ -117,7 +117,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
         det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height());
     }
-    const VGrainlineGeometry& grainlineGeom = piece.GetGrainlineGeometry();
+    const VGrainlineData& grainlineGeom = piece.GetGrainlineGeometry();
     if (grainlineGeom.IsVisible() == true)
     {
         det.SetGrainline(grainlineGeom, *pattern);
@@ -230,7 +230,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern)
+void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer& rPattern)
 {
     d->grainlineGeom = geom;
     qreal dAng;
@@ -267,7 +267,7 @@ void VLayoutPiece::SetGrainline(const VGrainlineGeometry& geom, const VContainer
 
     v << pt1;
 
-    if (geom.GetArrowType() != VGrainlineGeometry::atRear) {
+    if (geom.GetArrowType() != VGrainlineData::atRear) {
         pt.setX(pt1.x() + dArrowLen * qCos(dAng + dArrowAng));
         pt.setY(pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
         v << pt;
@@ -280,7 +280,7 @@ void VLayoutPiece::SetGrainline(const VGrainlineGeometry& geom, const VContainer
 
     v << pt2;
 
-    if (geom.GetArrowType() != VGrainlineGeometry::atFront)
+    if (geom.GetArrowType() != VGrainlineData::atFront)
     {
         dAng += M_PI;
 

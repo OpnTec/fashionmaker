@@ -39,7 +39,7 @@
 #include "../vlayout/vposter.h"
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 #include "../vtools/tools/vabstracttool.h"
 
 #include <QFileDialog>

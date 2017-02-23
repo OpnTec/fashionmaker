@@ -33,7 +33,7 @@
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 
 namespace Ui
 {
@@ -138,7 +138,7 @@ private:
 
     VPieceLabelData    m_oldData;
     VPatternLabelData m_oldGeom;
-    VGrainlineGeometry   m_oldGrainline;
+    VGrainlineData   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
     int                  m_formulaBaseWidth;

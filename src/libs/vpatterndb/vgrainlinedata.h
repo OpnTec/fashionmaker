@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vgrainlinegeometry.h
+ **  @file   vgrainlinedata.h
  **  @author Bojan Kverh
  **  @date   September 06, 2016
  **
@@ -31,12 +31,13 @@
 
 #include <QtGlobal>
 #include <QString>
+#include <QPointF>
 
 /**
- * @brief The VGrainlineGeometry class holds information about a grainline like
+ * @brief The VGrainlineData class holds information about a grainline like
  * position, size, rotation and visibility
  */
-class VGrainlineGeometry
+class VGrainlineData
 {
 public:
     // denotes the type of arrow for the grainline
@@ -47,7 +48,7 @@ public:
         atRear
     };
 
-    VGrainlineGeometry();
+    VGrainlineData();
 
     // methods, which set and return values of different parameters
     QPointF                 GetPos() const;

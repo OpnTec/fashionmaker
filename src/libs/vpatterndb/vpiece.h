@@ -41,7 +41,7 @@ template <class T>class QSharedPointer;
 class VPiecePath;
 class VPatternLabelData;
 class VPieceLabelData;
-class VGrainlineGeometry;
+class VGrainlineData;
 class VContainer;
 class QPainterPath;
 class VPointF;
@@ -105,8 +105,8 @@ public:
     VPatternLabelData&       GetPatternInfo();
     const VPatternLabelData& GetPatternInfo() const;
 
-    VGrainlineGeometry&         GetGrainlineGeometry();
-    const VGrainlineGeometry&   GetGrainlineGeometry() const;
+    VGrainlineData&         GetGrainlineGeometry();
+    const VGrainlineData&   GetGrainlineGeometry() const;
 
 private:
     QSharedDataPointer<VPieceData> d;

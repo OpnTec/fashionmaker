@@ -65,7 +65,7 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptFinish(),
       m_ptCenter(),
       m_dAngle(0),
-      m_eArrowType(VGrainlineGeometry::atBoth)
+      m_eArrowType(VGrainlineData::atBoth)
 {
     m_inactiveZ = 5;
     Reset();
@@ -107,7 +107,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     QPolygonF poly;
     QPointF ptA;
     qreal dArrLen = ARROW_LENGTH*m_dScale;
-    if (m_eArrowType != VGrainlineGeometry::atRear)
+    if (m_eArrowType != VGrainlineData::atRear)
     {
         // first arrow
         poly << pt1;
@@ -119,7 +119,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         poly << ptA;
         pP->drawPolygon(poly);
     }
-    if (m_eArrowType != VGrainlineGeometry::atFront)
+    if (m_eArrowType != VGrainlineData::atFront)
     {
         // second arrow
         poly.clear();
@@ -188,7 +188,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
  * @param dLength length of the grainline in user's units
  */
 void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
-                                    VGrainlineGeometry::ArrowType eAT)
+                                    VGrainlineData::ArrowType eAT)
 {
     m_dRotation = qDegreesToRadians(dRotation);
     m_dLength = dLength;

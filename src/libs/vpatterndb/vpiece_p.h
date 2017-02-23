@@ -38,7 +38,7 @@
 #include "vpiecepath.h"
 #include "vpiecelabeldata.h"
 #include "vpatternlabeldata.h"
-#include "vgrainlinegeometry.h"
+#include "vgrainlinedata.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -99,7 +99,7 @@ public:
     VPatternLabelData m_piPatternInfo;
 
     /** @brief m_glGrainline grainline geometry object*/
-    VGrainlineGeometry m_glGrainline;
+    VGrainlineData m_glGrainline;
 
     QString m_formulaWidth;
 

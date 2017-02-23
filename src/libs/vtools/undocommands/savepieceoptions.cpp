@@ -40,7 +40,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 #include "../tools/vtoolseamallowance.h"
 #include "vundocommand.h"
 

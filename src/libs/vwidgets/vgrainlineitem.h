@@ -30,7 +30,7 @@
 #define VGRAINLINEITEM_H
 
 #include "vpieceitem.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 
 class VGrainlineItem : public VPieceItem
 {
@@ -41,7 +41,7 @@ public:
 
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
     void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
-                                VGrainlineGeometry::ArrowType eAT);
+                                VGrainlineData::ArrowType eAT);
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
     void SetScale(qreal dScale);
@@ -75,7 +75,7 @@ private:
     QPointF                       m_ptFinish;
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
-    VGrainlineGeometry::ArrowType m_eArrowType;
+    VGrainlineData::ArrowType m_eArrowType;
 };
 
 #endif // VGRAINLINEITEM_H

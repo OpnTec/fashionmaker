@@ -78,7 +78,7 @@ public:
     void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
                         qreal dSize, qreal dHeight);
 
-    void SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern);
+    void SetGrainline(const VGrainlineData& geom, const VContainer& rPattern);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);

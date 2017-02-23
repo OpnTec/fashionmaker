@@ -36,7 +36,7 @@
 
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/vgrainlinedata.h"
 #include "../vmisc/diagnostic.h"
 #include "vlayoutpiecepath.h"
 
@@ -120,7 +120,7 @@ public:
     /** @brief patternGeom pattern geometry */
     VPatternLabelData      patternGeom;
     /** @brief grainlineGeom grainline geometry */
-    VGrainlineGeometry        grainlineGeom;
+    VGrainlineData        grainlineGeom;
     /** @brief m_tmDetail text manager for laying out detail info */
     VTextManager              m_tmDetail;
     /** @brief m_tmPattern text manager for laying out pattern info */

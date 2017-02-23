@@ -469,7 +469,7 @@ const VPatternLabelData &VPiece::GetPatternInfo() const
  * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
  * @return reference to grainline geometry object
  */
-VGrainlineGeometry &VPiece::GetGrainlineGeometry()
+VGrainlineData &VPiece::GetGrainlineGeometry()
 {
     return d->m_glGrainline;
 }
@@ -479,7 +479,7 @@ VGrainlineGeometry &VPiece::GetGrainlineGeometry()
  * @brief VDetail::GetGrainlineGeometry returns the read-only reference to the grainline geometry object
  * @return reference to grainline geometry object
  */
-const VGrainlineGeometry &VPiece::GetGrainlineGeometry() const
+const VGrainlineData &VPiece::GetGrainlineGeometry() const
 {
     return d->m_glGrainline;
 }

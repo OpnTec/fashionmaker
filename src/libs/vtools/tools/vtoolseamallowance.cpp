@@ -288,7 +288,7 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 {
     // grainline
     QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
-    const VGrainlineGeometry& glGeom = piece.GetGrainlineGeometry();
+    const VGrainlineData& glGeom = piece.GetGrainlineGeometry();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true ? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
@@ -506,7 +506,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 void VToolSeamAllowance::UpdateGrainline()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VGrainlineGeometry& geom = detail.GetGrainlineGeometry();
+    const VGrainlineData& geom = detail.GetGrainlineGeometry();
 
     if (geom.IsVisible() == true)
     {

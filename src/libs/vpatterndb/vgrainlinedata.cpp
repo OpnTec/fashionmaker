@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vgrainlinegeometry.cpp
+ **  @file   vgrainlinedata.cpp
  **  @author Bojan Kverh
  **  @date   September 06, 2016
  **
@@ -28,80 +28,80 @@
 
 #include <QPointF>
 
-#include "vgrainlinegeometry.h"
+#include "vgrainlinedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 
-VGrainlineGeometry::VGrainlineGeometry()
+VGrainlineData::VGrainlineData()
     :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false), m_eArrowType(atBoth)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 
-QPointF VGrainlineGeometry::GetPos() const
+QPointF VGrainlineData::GetPos() const
 {
     return m_ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetPos(const QPointF &ptPos)
+void VGrainlineData::SetPos(const QPointF &ptPos)
 {
     m_ptPos = ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-QString VGrainlineGeometry::GetLength() const
+QString VGrainlineData::GetLength() const
 {
     return m_qsLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetLength(const QString& qsLen)
+void VGrainlineData::SetLength(const QString& qsLen)
 {
     m_qsLength = qsLen;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-QString VGrainlineGeometry::GetRotation() const
+QString VGrainlineData::GetRotation() const
 {
     return m_qsRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetRotation(const QString& qsRot)
+void VGrainlineData::SetRotation(const QString& qsRot)
 {
     m_qsRotation = qsRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-bool VGrainlineGeometry::IsVisible() const
+bool VGrainlineData::IsVisible() const
 {
     return m_bVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetVisible(bool bVisible)
+void VGrainlineData::SetVisible(bool bVisible)
 {
     m_bVisible = bVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-VGrainlineGeometry::ArrowType VGrainlineGeometry::GetArrowType() const
+VGrainlineData::ArrowType VGrainlineData::GetArrowType() const
 {
     return m_eArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void VGrainlineGeometry::SetArrowType(ArrowType eAT)
+void VGrainlineData::SetArrowType(ArrowType eAT)
 {
     m_eArrowType = eAT;
 }
