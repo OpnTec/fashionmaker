@@ -62,6 +62,12 @@ public:
     ArrowType GetArrowType() const;
     void      SetArrowType(ArrowType eAT);
 
+    quint32 TopPin() const;
+    void    SetTopPin(const quint32 &topPin);
+
+    quint32 BottomPin() const;
+    void    SetBottomPin(const quint32 &bottomPin);
+
 private:
     /** @brief m_dLength formula to calculate the length of grainline */
     QString   m_qsLength;
@@ -69,6 +75,10 @@ private:
     QString   m_dRotation;
     /** @brief m_eArrowType type of arrow on the grainline */
     ArrowType m_eArrowType;
+    /** @brief m_topPin top pin id */
+    quint32   m_topPin;
+    /** @brief m_bottomPin bottom pin id */
+    quint32   m_bottomPin;
 };
 
 #endif // VGRAINLINEGEOMETRY_H

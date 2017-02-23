@@ -55,16 +55,25 @@ public:
     qreal GetRotation() const;
     void  SetRotation(qreal dRot);
 
+    quint32 TopLeftPin() const;
+    void    SetTopLeftPin(const quint32 &topLeftPin);
+
+    quint32 BottomRightPin() const;
+    void    SetBottomRightPin(const quint32 &bottomRightPin);
+
 protected:
     /** @brief m_dLabelWidth label width */
-    qreal m_dLabelWidth;
+    qreal   m_dLabelWidth;
     /** @brief m_dLabelHeight label height */
-    qreal m_dLabelHeight;
+    qreal   m_dLabelHeight;
     /** @brief m_iFontSize label text base font size */
-    int   m_iFontSize;
+    int     m_iFontSize;
     /** @brief m_dRotation label rotation */
-    qreal m_dRotation;
-
+    qreal   m_dRotation;
+    /** @brief m_topLeftPin top left corner pin id */
+    quint32 m_topLeftPin;
+    /** @brief m_bottomRightPin bottom right corner pin id */
+    quint32 m_bottomRightPin;
 };
 
 #endif // VPATTERNINFOGEOMETRY_H

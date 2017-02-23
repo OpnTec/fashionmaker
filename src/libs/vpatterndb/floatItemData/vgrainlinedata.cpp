@@ -29,13 +29,16 @@
 #include <QPointF>
 
 #include "vgrainlinedata.h"
+#include "../ifc/ifcdef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData()
     : VAbstractFloatItemData(),
       m_qsLength(),
       m_dRotation(),
-      m_eArrowType(atBoth)
+      m_eArrowType(atBoth),
+      m_topPin(NULL_ID),
+      m_bottomPin(NULL_ID)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,4 +79,28 @@ VGrainlineData::ArrowType VGrainlineData::GetArrowType() const
 void VGrainlineData::SetArrowType(ArrowType eAT)
 {
     m_eArrowType = eAT;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VGrainlineData::TopPin() const
+{
+    return m_topPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineData::SetTopPin(const quint32 &topPin)
+{
+    m_topPin = topPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VGrainlineData::BottomPin() const
+{
+    return m_bottomPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineData::SetBottomPin(const quint32 &bottomPin)
+{
+    m_bottomPin = bottomPin;
 }

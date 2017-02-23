@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vpatternlabeldata.h"
+#include "../ifc/ifcdef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData()
@@ -34,7 +35,9 @@ VPatternLabelData::VPatternLabelData()
       m_dLabelWidth(0),
       m_dLabelHeight(0),
       m_iFontSize(0),
-      m_dRotation(0)
+      m_dRotation(0),
+      m_topLeftPin(NULL_ID),
+      m_bottomRightPin(NULL_ID)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,4 +90,28 @@ qreal VPatternLabelData::GetRotation() const
 void VPatternLabelData::SetRotation(qreal dRot)
 {
     m_dRotation = dRot;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPatternLabelData::TopLeftPin() const
+{
+    return m_topLeftPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternLabelData::SetTopLeftPin(const quint32 &topLeftPin)
+{
+    m_topLeftPin = topLeftPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPatternLabelData::BottomRightPin() const
+{
+    return m_bottomRightPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternLabelData::SetBottomRightPin(const quint32 &bottomRightPin)
+{
+    m_bottomRightPin = bottomRightPin;
 }
