@@ -33,6 +33,8 @@
 
 #include "vabstractfloatitemdata.h"
 
+class VPatternLabelDataPrivate;
+
 /**
  * @brief The VPatternLabelData class holds the information about pattern info label geometry
  */
@@ -40,6 +42,8 @@ class VPatternLabelData : public VAbstractFloatItemData
 {
 public:
     VPatternLabelData();
+    VPatternLabelData(const VPatternLabelData &data);
+    VPatternLabelData &operator=(const VPatternLabelData &data);
     virtual ~VPatternLabelData();
 
     // methods, which set up label parameters
@@ -62,18 +66,7 @@ public:
     void    SetBottomRightPin(const quint32 &bottomRightPin);
 
 protected:
-    /** @brief m_dLabelWidth label width */
-    qreal   m_dLabelWidth;
-    /** @brief m_dLabelHeight label height */
-    qreal   m_dLabelHeight;
-    /** @brief m_iFontSize label text base font size */
-    int     m_iFontSize;
-    /** @brief m_dRotation label rotation */
-    qreal   m_dRotation;
-    /** @brief m_topLeftPin top left corner pin id */
-    quint32 m_topLeftPin;
-    /** @brief m_bottomRightPin bottom right corner pin id */
-    quint32 m_bottomRightPin;
+    QSharedDataPointer<VPatternLabelDataPrivate> d;
 };
 
 #endif // VPATTERNINFOGEOMETRY_H

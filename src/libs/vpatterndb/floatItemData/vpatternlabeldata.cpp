@@ -27,18 +27,32 @@
  *************************************************************************/
 
 #include "vpatternlabeldata.h"
+#include "vpatternlabeldata_p.h"
 #include "../ifc/ifcdef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData()
     : VAbstractFloatItemData(),
-      m_dLabelWidth(0),
-      m_dLabelHeight(0),
-      m_iFontSize(0),
-      m_dRotation(0),
-      m_topLeftPin(NULL_ID),
-      m_bottomRightPin(NULL_ID)
+      d(new VPatternLabelDataPrivate())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPatternLabelData::VPatternLabelData(const VPatternLabelData &data)
+    : VAbstractFloatItemData(data),
+      d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPatternLabelData &VPatternLabelData::operator=(const VPatternLabelData &data)
+{
+    if ( &data == this )
+    {
+        return *this;
+    }
+    VAbstractFloatItemData::operator=(data);
+    d = data.d;
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::~VPatternLabelData()
@@ -47,71 +61,71 @@ VPatternLabelData::~VPatternLabelData()
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPatternLabelData::GetLabelWidth() const
 {
-    return m_dLabelWidth;
+    return d->m_dLabelWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetLabelWidth(qreal dLabelW)
 {
-    m_dLabelWidth = dLabelW;
+    d->m_dLabelWidth = dLabelW;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPatternLabelData::GetLabelHeight() const
 {
-    return m_dLabelHeight;
+    return d->m_dLabelHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetLabelHeight(qreal dLabelH)
 {
-    m_dLabelHeight = dLabelH;
+    d->m_dLabelHeight = dLabelH;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VPatternLabelData::GetFontSize() const
 {
-    return m_iFontSize;
+    return d->m_iFontSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetFontSize(int iSize)
 {
-    m_iFontSize = iSize;
+    d->m_iFontSize = iSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPatternLabelData::GetRotation() const
 {
-    return m_dRotation;
+    return d->m_dRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetRotation(qreal dRot)
 {
-    m_dRotation = dRot;
+    d->m_dRotation = dRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VPatternLabelData::TopLeftPin() const
 {
-    return m_topLeftPin;
+    return d->m_topLeftPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetTopLeftPin(const quint32 &topLeftPin)
 {
-    m_topLeftPin = topLeftPin;
+    d->m_topLeftPin = topLeftPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VPatternLabelData::BottomRightPin() const
 {
-    return m_bottomRightPin;
+    return d->m_bottomRightPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternLabelData::SetBottomRightPin(const quint32 &bottomRightPin)
 {
-    m_bottomRightPin = bottomRightPin;
+    d->m_bottomRightPin = bottomRightPin;
 }
