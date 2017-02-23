@@ -67,4 +67,5 @@ HEADERS += \
     $$PWD/floatItemData/vpiecelabeldata.h \
     $$PWD/floatItemData/vpatternlabeldata.h \
     $$PWD/floatItemData/vgrainlinedata.h \
-    $$PWD/floatItemData/vabstractfloatitemdata.h
+    $$PWD/floatItemData/vabstractfloatitemdata.h \
+    $$PWD/floatItemData/vabstractfloatitemdata_p.h

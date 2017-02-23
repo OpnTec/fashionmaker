@@ -27,12 +27,28 @@
  *************************************************************************/
 
 #include "vabstractfloatitemdata.h"
+#include "vabstractfloatitemdata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFloatItemData::VAbstractFloatItemData()
-    : m_ptPos(),
-      m_bVisible(false)
+    : d(new VAbstractFloatItemDataPrivate())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractFloatItemData::VAbstractFloatItemData(const VAbstractFloatItemData &data)
+    : d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data)
+{
+    if ( &data == this )
+    {
+        return *this;
+    }
+    d = data.d;
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFloatItemData::~VAbstractFloatItemData()
@@ -41,23 +57,23 @@ VAbstractFloatItemData::~VAbstractFloatItemData()
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VAbstractFloatItemData::GetPos() const
 {
-    return m_ptPos;
+    return d->m_ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractFloatItemData::SetPos(const QPointF &ptPos)
 {
-    m_ptPos = ptPos;
+    d->m_ptPos = ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractFloatItemData::IsVisible() const
 {
-    return m_bVisible;
+    return d->m_bVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractFloatItemData::SetVisible(bool bVisible)
 {
-    m_bVisible = bVisible;
+    d->m_bVisible = bVisible;
 }

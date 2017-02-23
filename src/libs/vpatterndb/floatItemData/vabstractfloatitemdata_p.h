@@ -26,31 +26,46 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTFLOATITEMDATA_H
-#define VABSTRACTFLOATITEMDATA_H
+#ifndef VABSTRACTFLOATITEMDATA_P_H
+#define VABSTRACTFLOATITEMDATA_P_H
 
 #include <QPointF>
-#include <QSharedDataPointer>
+#include <QSharedData>
 
-class VAbstractFloatItemDataPrivate;
+#include "../vmisc/diagnostic.h"
 
-class VAbstractFloatItemData
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+class VAbstractFloatItemDataPrivate : public QSharedData
 {
 public:
-    VAbstractFloatItemData();
-    VAbstractFloatItemData(const VAbstractFloatItemData &data);
-    VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
-    virtual ~VAbstractFloatItemData();
+    VAbstractFloatItemDataPrivate()
+        : m_ptPos(),
+          m_bVisible(false)
+    {}
 
-    // methods, which set and return values of different parameters
-    QPointF GetPos() const;
-    void    SetPos(const QPointF& ptPos);
+    VAbstractFloatItemDataPrivate(const VAbstractFloatItemDataPrivate &data)
+        : QSharedData(data),
+          m_ptPos(data.m_ptPos),
+          m_bVisible(data.m_bVisible)
+    {}
 
-    bool IsVisible() const;
-    void SetVisible(bool bVisible);
+    ~VAbstractFloatItemDataPrivate();
+
+    /** @brief m_ptPos position of label's top left corner */
+    QPointF m_ptPos;
+    /** @brief m_bVisible visibility flag */
+    bool    m_bVisible;
 
 private:
-    QSharedDataPointer<VAbstractFloatItemDataPrivate> d;
+    VAbstractFloatItemDataPrivate &operator=(const VAbstractFloatItemDataPrivate &) Q_DECL_EQ_DELETE;
 };
 
-#endif // VABSTRACTFLOATITEMDATA_H
+VAbstractFloatItemDataPrivate::~VAbstractFloatItemDataPrivate()
+{}
+
+QT_WARNING_POP
+
+#endif // VABSTRACTFLOATITEMDATA_P_H
+
