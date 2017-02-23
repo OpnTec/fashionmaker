@@ -26,54 +26,47 @@
  **
  *************************************************************************/
 
-#ifndef FLOATITEMDEF_H
-#define FLOATITEMDEF_H
+#ifndef VPIECELABELDATA_P_H
+#define VPIECELABELDATA_P_H
 
-#include <QList>
+#include <QSharedData>
 #include <QString>
 
-// denotes the type of arrow for the grainline
-enum class ArrowType : char
-{
-    atBoth,
-    atFront,
-    atRear
-};
+#include "../vmisc/diagnostic.h"
+#include "floatitemdef.h"
 
-enum class MaterialType : char
-{
-    mtFabric = 0,
-    mtLining = 1,
-    mtInterfacing = 2,
-    mtInterlining = 3,
-    mtUserDefined = 4
-};
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
-enum class PlacementType : char
+class VPieceLabelDataPrivate : public QSharedData
 {
-    ptNone = 0,
-    ptCutOnFold = 1
-};
-
-/**
- * @brief The MaterialCutPlacement struct used to hold a material, cut number and placement 3-tuple
- */
-struct MaterialCutPlacement
-{
-    MaterialType  m_eMaterial;
-    QString       m_qsMaterialUserDef;
-    int           m_iCutNumber;
-    PlacementType m_ePlacement;
-
-    MaterialCutPlacement()
-        : m_eMaterial(MaterialType::mtFabric),
-          m_qsMaterialUserDef(),
-          m_iCutNumber(0),
-          m_ePlacement(PlacementType::ptNone)
+public:
+    VPieceLabelDataPrivate()
+        : m_qsLetter(),
+          m_conMCP()
     {}
+
+    VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data)
+        : QSharedData(data),
+          m_qsLetter(data.m_qsLetter),
+          m_conMCP(data.m_conMCP)
+    {}
+
+    ~VPieceLabelDataPrivate();
+
+    /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
+    QString      m_qsLetter;
+    /** @brief m_conMCP List of material, cut, placement tuples */
+    MCPContainer m_conMCP;
+
+private:
+    VPieceLabelDataPrivate &operator=(const VPieceLabelDataPrivate &) Q_DECL_EQ_DELETE;
 };
 
-typedef QList<MaterialCutPlacement> MCPContainer;
+VPieceLabelDataPrivate::~VPieceLabelDataPrivate()
+{}
 
-#endif // FLOATITEMDEF_H
+QT_WARNING_POP
+
+#endif // VPIECELABELDATA_P_H
 

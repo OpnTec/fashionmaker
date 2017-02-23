@@ -27,23 +27,33 @@
  *************************************************************************/
 
 #include "vpiecelabeldata.h"
+#include "vpiecelabeldata_p.h"
 
 #include <QList>
 
 //---------------------------------------------------------------------------------------------------------------------
-MaterialCutPlacement::MaterialCutPlacement()
-    : m_eMaterial(MaterialType::mtFabric),
-      m_qsMaterialUserDef(),
-      m_iCutNumber(0),
-      m_ePlacement(PlacementType::ptNone)
+VPieceLabelData::VPieceLabelData()
+    : VPatternLabelData(),
+      d(new VPieceLabelDataPrivate())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData::VPieceLabelData()
-    : VPatternLabelData(),
-      m_qsLetter(),
-      m_conMCP()
+VPieceLabelData::VPieceLabelData(const VPieceLabelData &data)
+    : VPatternLabelData(data),
+      d (data.d)
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceLabelData &VPieceLabelData::operator=(const VPieceLabelData &data)
+{
+    if ( &data == this )
+    {
+        return *this;
+    }
+    VPatternLabelData::operator=(data);
+    d = data.d;
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::~VPieceLabelData()
@@ -52,7 +62,7 @@ VPieceLabelData::~VPieceLabelData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::Append(const MaterialCutPlacement& rMCP)
 {
-    m_conMCP.append(rMCP);
+    d->m_conMCP.append(rMCP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +70,7 @@ void VPieceLabelData::Insert(int i, const MaterialCutPlacement& rMCP)
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i <= GetMCPCount());
-    m_conMCP.insert(i, rMCP);
+    d->m_conMCP.insert(i, rMCP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,13 +78,13 @@ void VPieceLabelData::Set(int i, const MaterialCutPlacement& rMCP)
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < GetMCPCount());
-    m_conMCP[i] = rMCP;
+    d->m_conMCP[i] = rMCP;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VPieceLabelData::GetMCPCount() const
 {
-    return m_conMCP.count();
+    return d->m_conMCP.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +92,7 @@ const MaterialCutPlacement& VPieceLabelData::GetMCP(int i) const
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < GetMCPCount());
-    return m_conMCP.at(i);
+    return d->m_conMCP.at(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,24 +100,24 @@ void VPieceLabelData::RemoveMCP(int i)
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < GetMCPCount());
-    m_conMCP.removeAt(i);
+    d->m_conMCP.removeAt(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::Clear()
 {
-    m_qsLetter.clear();
-    m_conMCP.clear();
+    d->m_qsLetter.clear();
+    d->m_conMCP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 const QString& VPieceLabelData::GetLetter() const
 {
-    return m_qsLetter;
+    return d->m_qsLetter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::SetLetter(QString qsLetter)
 {
-    m_qsLetter = qsLetter.left(3);
+    d->m_qsLetter = qsLetter.left(3);
 }

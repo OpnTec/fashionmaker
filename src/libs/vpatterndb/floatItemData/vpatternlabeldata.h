@@ -65,7 +65,7 @@ public:
     quint32 BottomRightPin() const;
     void    SetBottomRightPin(const quint32 &bottomRightPin);
 
-protected:
+private:
     QSharedDataPointer<VPatternLabelDataPrivate> d;
 };
 

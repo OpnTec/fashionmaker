@@ -29,40 +29,12 @@
 #ifndef VPATTERNPIECEDATA_H
 #define VPATTERNPIECEDATA_H
 
-#include <QList>
 #include <QString>
 
 #include "vpatternlabeldata.h"
+#include "floatitemdef.h"
 
-enum class MaterialType : char
-{
-    mtFabric = 0,
-    mtLining = 1,
-    mtInterfacing = 2,
-    mtInterlining = 3,
-    mtUserDefined = 4
-};
-
-enum class PlacementType : char
-{
-    ptNone = 0,
-    ptCutOnFold = 1
-};
-
-/**
- * @brief The MaterialCutPlacement struct used to hold a material, cut number and placement 3-tuple
- */
-struct MaterialCutPlacement
-{
-    MaterialType  m_eMaterial;
-    QString       m_qsMaterialUserDef;
-    int           m_iCutNumber;
-    PlacementType m_ePlacement;
-
-    MaterialCutPlacement();
-};
-
-typedef QList<MaterialCutPlacement> MCPContainer;
+class VPieceLabelDataPrivate;
 
 /**
  * @brief The VPieceLabelData class holds some information about a single
@@ -72,6 +44,8 @@ class VPieceLabelData : public VPatternLabelData
 {
 public:
     VPieceLabelData();
+    VPieceLabelData(const VPieceLabelData &data);
+    VPieceLabelData &operator=(const VPieceLabelData &data);
     virtual ~VPieceLabelData();
 
     // methods, which operate on MaterialCutPlacement container
@@ -88,10 +62,7 @@ public:
     void                        SetLetter(QString qsLetter);
 
 private:
-    /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
-    QString      m_qsLetter;
-    /** @brief m_conMCP List of material, cut, placement tuples */
-    MCPContainer m_conMCP;
+    QSharedDataPointer<VPieceLabelDataPrivate> d;
 };
 
 #endif // VPATTERNPIECEDATA_H
