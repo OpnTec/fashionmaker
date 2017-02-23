@@ -17,14 +17,14 @@ SOURCES += \
     $$PWD/variables/vmeasurement.cpp \
     $$PWD/variables/vvariable.cpp \
     $$PWD/vformula.cpp \
-    $$PWD/vpatterninfogeometry.cpp \
     $$PWD/vgrainlinegeometry.cpp \
     $$PWD/variables/vcurveclength.cpp \
     $$PWD/variables/vellipticalarcradius.cpp \
     $$PWD/vpiece.cpp \
     $$PWD/vpiecenode.cpp \
     $$PWD/vpiecepath.cpp \
-    $$PWD/vpiecelabeldata.cpp
+    $$PWD/vpiecelabeldata.cpp \
+    $$PWD/vpatternlabeldata.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -55,7 +55,6 @@ HEADERS += \
     $$PWD/variables/vvariable.h \
     $$PWD/variables/vvariable_p.h \
     $$PWD/vformula.h \
-    $$PWD/vpatterninfogeometry.h \
     $$PWD/vgrainlinegeometry.h \
     $$PWD/variables/vcurveclength.h \
     $$PWD/variables/vellipticalarcradius.h \
@@ -65,4 +64,5 @@ HEADERS += \
     $$PWD/vpiecenode_p.h \
     $$PWD/vpiecepath.h \
     $$PWD/vpiecepath_p.h \
-    $$PWD/vpiecelabeldata.h
+    $$PWD/vpiecelabeldata.h \
+    $$PWD/vpatternlabeldata.h

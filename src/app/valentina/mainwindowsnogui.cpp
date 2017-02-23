@@ -38,7 +38,7 @@
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vposter.h"
 #include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../vtools/tools/vabstracttool.h"
 

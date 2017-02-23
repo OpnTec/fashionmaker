@@ -35,7 +35,7 @@
 #include <QTransform>
 
 #include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../vmisc/diagnostic.h"
 #include "vlayoutpiecepath.h"
@@ -118,7 +118,7 @@ public:
     /** @brief detailData detail data */
     VPieceLabelData         detailData;
     /** @brief patternGeom pattern geometry */
-    VPatternInfoGeometry      patternGeom;
+    VPatternLabelData      patternGeom;
     /** @brief grainlineGeom grainline geometry */
     VGrainlineGeometry        grainlineGeom;
     /** @brief m_tmDetail text manager for laying out detail info */

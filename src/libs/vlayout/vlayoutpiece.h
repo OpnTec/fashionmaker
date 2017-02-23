@@ -42,7 +42,7 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
@@ -75,7 +75,7 @@ public:
 
     void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font);
 
-    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font,
+    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
                         qreal dSize, qreal dHeight);
 
     void SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern);

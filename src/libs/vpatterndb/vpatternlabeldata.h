@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpatterninfogeometry.h
+ **  @file   vpatternlabeldata.h
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -33,12 +33,12 @@
 #include <QtGlobal>
 
 /**
- * @brief The VPatternInfoGeometry class holds the information about pattern info label geometry
+ * @brief The VPatternLabelData class holds the information about pattern info label geometry
  */
-class VPatternInfoGeometry
+class VPatternLabelData
 {
 public:
-    VPatternInfoGeometry();
+    VPatternLabelData();
 
     // methods, which set up label parameters
     QPointF                     GetPos() const;

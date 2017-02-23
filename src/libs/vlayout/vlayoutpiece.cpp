@@ -43,7 +43,7 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractapplication.h"
@@ -111,7 +111,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     {
         det.SetDetail(piece.GetName(), data, qApp->font());
     }
-    const VPatternInfoGeometry& geom = piece.GetPatternInfo();
+    const VPatternLabelData& geom = piece.GetPatternInfo();
     if (geom.IsVisible() == true)
     {
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
@@ -201,7 +201,7 @@ void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont &font,
+void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont &font,
                                    qreal dSize, qreal dHeight)
 {
     d->patternGeom = geom;

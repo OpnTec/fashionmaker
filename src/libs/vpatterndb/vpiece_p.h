@@ -37,7 +37,7 @@
 #include "vpiecenode.h"
 #include "vpiecepath.h"
 #include "vpiecelabeldata.h"
-#include "vpatterninfogeometry.h"
+#include "vpatternlabeldata.h"
 #include "vgrainlinegeometry.h"
 
 QT_WARNING_PUSH
@@ -96,7 +96,7 @@ public:
     VPieceLabelData m_ppData;
 
     /** @brief Pattern info coordinates */
-    VPatternInfoGeometry m_piPatternInfo;
+    VPatternLabelData m_piPatternInfo;
 
     /** @brief m_glGrainline grainline geometry object*/
     VGrainlineGeometry m_glGrainline;

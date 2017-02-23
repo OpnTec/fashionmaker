@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpatterninfogeometry.cpp
+ **  @file   vpatternlabeldata.cpp
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -26,82 +26,82 @@
  **
  *************************************************************************/
 
-#include "vpatterninfogeometry.h"
+#include "vpatternlabeldata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternInfoGeometry::VPatternInfoGeometry()
+VPatternLabelData::VPatternLabelData()
     :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(0),
       m_dRotation(0), m_bVisible(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPatternInfoGeometry::GetPos() const
+QPointF VPatternLabelData::GetPos() const
 {
     return m_ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetPos(const QPointF& ptPos)
+void VPatternLabelData::SetPos(const QPointF& ptPos)
 {
     m_ptPos = ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetLabelWidth() const
+qreal VPatternLabelData::GetLabelWidth() const
 {
     return m_dLabelWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetLabelWidth(qreal dLabelW)
+void VPatternLabelData::SetLabelWidth(qreal dLabelW)
 {
     m_dLabelWidth = dLabelW;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetLabelHeight() const
+qreal VPatternLabelData::GetLabelHeight() const
 {
     return m_dLabelHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetLabelHeight(qreal dLabelH)
+void VPatternLabelData::SetLabelHeight(qreal dLabelH)
 {
     m_dLabelHeight = dLabelH;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPatternInfoGeometry::GetFontSize() const
+int VPatternLabelData::GetFontSize() const
 {
     return m_iFontSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetFontSize(int iSize)
+void VPatternLabelData::SetFontSize(int iSize)
 {
     m_iFontSize = iSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetRotation() const
+qreal VPatternLabelData::GetRotation() const
 {
     return m_dRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetRotation(qreal dRot)
+void VPatternLabelData::SetRotation(qreal dRot)
 {
     m_dRotation = dRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPatternInfoGeometry::IsVisible() const
+bool VPatternLabelData::IsVisible() const
 {
     return m_bVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetVisible(bool bVal)
+void VPatternLabelData::SetVisible(bool bVal)
 {
     m_bVisible = bVal;
 }

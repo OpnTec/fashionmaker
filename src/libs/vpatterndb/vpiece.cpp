@@ -439,7 +439,7 @@ const VPieceLabelData &VPiece::GetPatternPieceData() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternInfo(const VPatternInfoGeometry &info)
+void VPiece::SetPatternInfo(const VPatternLabelData &info)
 {
     d->m_piPatternInfo = info;
 }
@@ -449,7 +449,7 @@ void VPiece::SetPatternInfo(const VPatternInfoGeometry &info)
  * @brief Returns full access to the pattern info geometry object
  * @return pattern info geometry object
  */
-VPatternInfoGeometry &VPiece::GetPatternInfo()
+VPatternLabelData &VPiece::GetPatternInfo()
 {
     return d->m_piPatternInfo;
 }
@@ -459,7 +459,7 @@ VPatternInfoGeometry &VPiece::GetPatternInfo()
  * @brief Returns the read only reference to the pattern info geometry object
  * @return pattern info geometry object
  */
-const VPatternInfoGeometry &VPiece::GetPatternInfo() const
+const VPatternLabelData &VPiece::GetPatternInfo() const
 {
     return d->m_piPatternInfo;
 }

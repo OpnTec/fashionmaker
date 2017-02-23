@@ -39,7 +39,7 @@ class VPieceNode;
 template <class T> class QVector;
 template <class T>class QSharedPointer;
 class VPiecePath;
-class VPatternInfoGeometry;
+class VPatternLabelData;
 class VPieceLabelData;
 class VGrainlineGeometry;
 class VContainer;
@@ -101,9 +101,9 @@ public:
     VPieceLabelData&       GetPatternPieceData();
     const VPieceLabelData& GetPatternPieceData() const;
 
-    void                        SetPatternInfo(const VPatternInfoGeometry &info);
-    VPatternInfoGeometry&       GetPatternInfo();
-    const VPatternInfoGeometry& GetPatternInfo() const;
+    void                        SetPatternInfo(const VPatternLabelData &info);
+    VPatternLabelData&       GetPatternInfo();
+    const VPatternLabelData& GetPatternInfo() const;
 
     VGrainlineGeometry&         GetGrainlineGeometry();
     const VGrainlineGeometry&   GetGrainlineGeometry() const;

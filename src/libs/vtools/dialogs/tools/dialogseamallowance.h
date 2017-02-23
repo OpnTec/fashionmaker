@@ -31,7 +31,7 @@
 
 #include "dialogtool.h"
 #include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
+#include "../vpatterndb/vpatternlabeldata.h"
 #include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 
@@ -137,7 +137,7 @@ private:
     MCPContainer m_conMCP;
 
     VPieceLabelData    m_oldData;
-    VPatternInfoGeometry m_oldGeom;
+    VPatternLabelData m_oldGeom;
     VGrainlineGeometry   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
