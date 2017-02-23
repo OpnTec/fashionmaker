@@ -413,7 +413,7 @@ QVector<quint32> VPiece::MissingPins(const VPiece &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternPieceData(const VPatternPieceData &data)
+void VPiece::SetPatternPieceData(const VPieceLabelData &data)
 {
     d->m_ppData = data;
 }
@@ -423,7 +423,7 @@ void VPiece::SetPatternPieceData(const VPatternPieceData &data)
  * @brief Returns full access to the pattern piece data object
  * @return pattern piece data object
  */
-VPatternPieceData &VPiece::GetPatternPieceData()
+VPieceLabelData &VPiece::GetPatternPieceData()
 {
     return d->m_ppData;
 }
@@ -433,7 +433,7 @@ VPatternPieceData &VPiece::GetPatternPieceData()
  * @brief Returns the read only reference to the pattern piece data object
  * @return pattern piece data object
  */
-const VPatternPieceData &VPiece::GetPatternPieceData() const
+const VPieceLabelData &VPiece::GetPatternPieceData() const
 {
     return d->m_ppData;
 }

@@ -39,7 +39,7 @@
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../tools/vtoolseamallowance.h"
 #include "vundocommand.h"

@@ -40,7 +40,7 @@ template <class T> class QVector;
 template <class T>class QSharedPointer;
 class VPiecePath;
 class VPatternInfoGeometry;
-class VPatternPieceData;
+class VPieceLabelData;
 class VGrainlineGeometry;
 class VContainer;
 class QPainterPath;
@@ -97,9 +97,9 @@ public:
     QVector<quint32> MissingInternalPaths(const VPiece &det) const;
     QVector<quint32> MissingPins(const VPiece &det) const;
 
-    void                     SetPatternPieceData(const VPatternPieceData &data);
-    VPatternPieceData&       GetPatternPieceData();
-    const VPatternPieceData& GetPatternPieceData() const;
+    void                     SetPatternPieceData(const VPieceLabelData &data);
+    VPieceLabelData&       GetPatternPieceData();
+    const VPieceLabelData& GetPatternPieceData() const;
 
     void                        SetPatternInfo(const VPatternInfoGeometry &info);
     VPatternInfoGeometry&       GetPatternInfo();

@@ -44,7 +44,7 @@
 #include <QtDebug>
 
 #include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
@@ -106,7 +106,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
 
     det.SetName(piece.GetName());
-    const VPatternPieceData& data = piece.GetPatternPieceData();
+    const VPieceLabelData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
     {
         det.SetDetail(piece.GetName(), data, qApp->font());
@@ -175,7 +175,7 @@ QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetDetail(const QString& qsName, const VPatternPieceData& data, const QFont &font)
+void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data, const QFont &font)
 {
     d->detailData = data;
     qreal dAng = qDegreesToRadians(data.GetRotation());

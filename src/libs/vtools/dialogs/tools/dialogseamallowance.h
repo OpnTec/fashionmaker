@@ -32,7 +32,7 @@
 #include "dialogtool.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 
 namespace Ui
@@ -136,7 +136,7 @@ private:
     // temporary container for Material/Cut/Placement 3-tuples
     MCPContainer m_conMCP;
 
-    VPatternPieceData    m_oldData;
+    VPieceLabelData    m_oldData;
     VPatternInfoGeometry m_oldGeom;
     VGrainlineGeometry   m_oldGrainline;
     int                  m_iRotBaseHeight;

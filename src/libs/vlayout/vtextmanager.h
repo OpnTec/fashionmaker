@@ -38,7 +38,7 @@
 #include <QtGlobal>
 #include <QCoreApplication>
 
-class VPatternPieceData;
+class VPieceLabelData;
 class VAbstractPattern;
 
 #define MIN_FONT_SIZE               5
@@ -85,7 +85,7 @@ public:
     int             GetSourceLinesCount() const;
     const TextLine& GetSourceLine(int i) const;
 
-    void Update(const QString& qsName, const VPatternPieceData& data);
+    void Update(const QString& qsName, const VPieceLabelData& data);
     void Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
 
 private:

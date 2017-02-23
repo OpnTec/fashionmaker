@@ -32,7 +32,7 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
@@ -242,7 +242,7 @@ void VToolSeamAllowance::AddPins(VAbstractPattern *doc, QDomElement &domElement,
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    const VPatternPieceData& data = piece.GetPatternPieceData();
+    const VPieceLabelData& data = piece.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
@@ -417,7 +417,7 @@ void VToolSeamAllowance::Highlight(quint32 id)
 void VToolSeamAllowance::UpdateLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VPatternPieceData& data = detail.GetPatternPieceData();
+    const VPieceLabelData& data = detail.GetPatternPieceData();
 
     if (data.IsVisible() == true)
     {

@@ -34,7 +34,7 @@
 #include <QVector>
 #include <QTransform>
 
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../vmisc/diagnostic.h"
@@ -116,7 +116,7 @@ public:
     /** @brief grainlineInfo line */
     QVector<QPointF>          grainlinePoints;
     /** @brief detailData detail data */
-    VPatternPieceData         detailData;
+    VPieceLabelData         detailData;
     /** @brief patternGeom pattern geometry */
     VPatternInfoGeometry      patternGeom;
     /** @brief grainlineGeom grainline geometry */

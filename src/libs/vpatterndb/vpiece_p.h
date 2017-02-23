@@ -36,7 +36,7 @@
 #include "../vmisc/def.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
-#include "vpatternpiecedata.h"
+#include "vpiecelabeldata.h"
 #include "vpatterninfogeometry.h"
 #include "vgrainlinegeometry.h"
 
@@ -93,7 +93,7 @@ public:
     QVector<quint32>        m_pins;
 
     /** @brief Pattern piece data */
-    VPatternPieceData m_ppData;
+    VPieceLabelData m_ppData;
 
     /** @brief Pattern info coordinates */
     VPatternInfoGeometry m_piPatternInfo;

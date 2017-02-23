@@ -51,7 +51,7 @@
 #include "../core/vapplication.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpiecelabeldata.h"
 #include "../vpatterndb/vpatterninfogeometry.h"
 #include "../vpatterndb/vgrainlinegeometry.h"
 #include "../vpatterndb/vpiecepath.h"

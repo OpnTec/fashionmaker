@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpatternpiecedata.h
+ **  @file   vpiecelabeldata.h
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -67,13 +67,13 @@ struct MaterialCutPlacement
 typedef QList<MaterialCutPlacement> MCPContainer;
 
 /**
- * @brief The VPatternPieceData class holds some information about a single
+ * @brief The VPieceLabelData class holds some information about a single
  * piece like letter, name, material type, cut number and placement.
  */
-class VPatternPieceData
+class VPieceLabelData
 {
 public:
-    VPatternPieceData();
+    VPieceLabelData();
 
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);

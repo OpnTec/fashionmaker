@@ -359,7 +359,7 @@ bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
  * @param qsName name of detail
  * @param data reference to VPatternPieceData
  */
-void VTextGraphicsItem::UpdateData(const QString &qsName, const VPatternPieceData &data)
+void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData &data)
 {
     m_tm.Update(qsName, data);
 }
