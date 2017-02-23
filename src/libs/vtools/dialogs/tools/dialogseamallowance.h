@@ -31,9 +31,9 @@
 
 #include "dialogtool.h"
 #include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 
 namespace Ui
 {

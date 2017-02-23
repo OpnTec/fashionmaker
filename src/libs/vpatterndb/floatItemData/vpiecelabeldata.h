@@ -30,11 +30,9 @@
 #define VPATTERNPIECEDATA_H
 
 #include <QList>
-#include <QPointF>
-#include <QSet>
 #include <QString>
-#include <QVector>
-#include <QtGlobal>
+
+#include "vpatternlabeldata.h"
 
 enum class MaterialType : char
 {
@@ -56,10 +54,10 @@ enum class PlacementType : char
  */
 struct MaterialCutPlacement
 {
-    MaterialType                m_eMaterial;
-    QString                     m_qsMaterialUserDef;
-    int                         m_iCutNumber;
-    PlacementType               m_ePlacement;
+    MaterialType  m_eMaterial;
+    QString       m_qsMaterialUserDef;
+    int           m_iCutNumber;
+    PlacementType m_ePlacement;
 
     MaterialCutPlacement();
 };
@@ -70,10 +68,11 @@ typedef QList<MaterialCutPlacement> MCPContainer;
  * @brief The VPieceLabelData class holds some information about a single
  * piece like letter, name, material type, cut number and placement.
  */
-class VPieceLabelData
+class VPieceLabelData : public VPatternLabelData
 {
 public:
     VPieceLabelData();
+    virtual ~VPieceLabelData();
 
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);
@@ -88,54 +87,11 @@ public:
     const QString&              GetLetter() const;
     void                        SetLetter(QString qsLetter);
 
-    // methods, which set up label parameters
-    QPointF                     GetPos() const;
-    void                        SetPos(const QPointF& ptPos);
-    qreal                       GetLabelWidth() const;
-    void                        SetLabelWidth(qreal dLabelW);
-    qreal                       GetLabelHeight() const;
-    void                        SetLabelHeight(qreal dLabelH);
-    int                         GetFontSize() const;
-    void                        SetFontSize(int iSize);
-    qreal                       GetRotation() const;
-    void                        SetRotation(qreal dRot);
-    bool                        IsVisible() const;
-    void                        SetVisible(bool bVal);
-
 private:
-    /**
-     * @brief m_qsLetter Detail letter (should be no more than 3 characters)
-     */
-    QString             m_qsLetter;
-    /**
-     * @brief m_conMCP List of material, cut, placement tuples
-     */
-    MCPContainer        m_conMCP;
-    /**
-     * @brief m_ptPos position of label's top left corner
-     */
-    QPointF             m_ptPos;
-    /**
-     * @brief m_dLabelWidth label width
-     */
-    qreal               m_dLabelWidth;
-    /**
-     * @brief m_dLabelHeight label height
-     */
-    qreal               m_dLabelHeight;
-    /**
-     * @brief m_iFontSize label font size
-     */
-    int                 m_iFontSize;
-    /**
-     * @brief m_dRotation label rotation
-     */
-    qreal               m_dRotation;
-    /**
-     * @brief m_bVisible visibility flag
-     */
-    bool                m_bVisible;
-
+    /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
+    QString      m_qsLetter;
+    /** @brief m_conMCP List of material, cut, placement tuples */
+    MCPContainer m_conMCP;
 };
 
 #endif // VPATTERNPIECEDATA_H

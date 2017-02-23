@@ -36,9 +36,9 @@
 #include "../vmisc/def.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
-#include "vpiecelabeldata.h"
-#include "vpatternlabeldata.h"
-#include "vgrainlinedata.h"
+#include "floatItemData/vpiecelabeldata.h"
+#include "floatItemData/vpatternlabeldata.h"
+#include "floatItemData/vgrainlinedata.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

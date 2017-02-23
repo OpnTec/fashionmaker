@@ -30,7 +30,7 @@
 #define VGRAINLINEITEM_H
 
 #include "vpieceitem.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 
 class VGrainlineItem : public VPieceItem
 {

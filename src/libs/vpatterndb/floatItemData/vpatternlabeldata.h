@@ -39,22 +39,28 @@ class VPatternLabelData
 {
 public:
     VPatternLabelData();
+    virtual ~VPatternLabelData();
 
     // methods, which set up label parameters
-    QPointF                     GetPos() const;
-    void                        SetPos(const QPointF& ptPos);
-    qreal                       GetLabelWidth() const;
-    void                        SetLabelWidth(qreal dLabelW);
-    qreal                       GetLabelHeight() const;
-    void                        SetLabelHeight(qreal dLabelH);
-    int                         GetFontSize() const;
-    void                        SetFontSize(int iSize);
-    qreal                       GetRotation() const;
-    void                        SetRotation(qreal dRot);
-    bool                        IsVisible() const;
-    void                        SetVisible(bool bVal);
+    QPointF GetPos() const;
+    void    SetPos(const QPointF& ptPos);
 
-private:
+    qreal GetLabelWidth() const;
+    void  SetLabelWidth(qreal dLabelW);
+
+    qreal GetLabelHeight() const;
+    void  SetLabelHeight(qreal dLabelH);
+
+    int   GetFontSize() const;
+    void  SetFontSize(int iSize);
+
+    qreal GetRotation() const;
+    void  SetRotation(qreal dRot);
+
+    bool  IsVisible() const;
+    void  SetVisible(bool bVal);
+
+protected:
     /**
      * @brief m_ptPos position of label's top left corner
      */
@@ -72,7 +78,7 @@ private:
      */
     int                 m_iFontSize;
     /**
-     * @brief m_dRotation Label rotation
+     * @brief m_dRotation label rotation
      */
     qreal               m_dRotation;
     /**

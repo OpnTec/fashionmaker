@@ -38,9 +38,9 @@
 #include "../vmisc/logging.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../tools/vtoolseamallowance.h"
 #include "vundocommand.h"
 

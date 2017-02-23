@@ -22,9 +22,9 @@ SOURCES += \
     $$PWD/vpiece.cpp \
     $$PWD/vpiecenode.cpp \
     $$PWD/vpiecepath.cpp \
-    $$PWD/vpiecelabeldata.cpp \
-    $$PWD/vpatternlabeldata.cpp \
-    $$PWD/vgrainlinedata.cpp
+    $$PWD/floatItemData/vpiecelabeldata.cpp \
+    $$PWD/floatItemData/vpatternlabeldata.cpp \
+    $$PWD/floatItemData/vgrainlinedata.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -63,6 +63,6 @@ HEADERS += \
     $$PWD/vpiecenode_p.h \
     $$PWD/vpiecepath.h \
     $$PWD/vpiecepath_p.h \
-    $$PWD/vpiecelabeldata.h \
-    $$PWD/vpatternlabeldata.h \
-    $$PWD/vgrainlinedata.h
+    $$PWD/floatItemData/vpiecelabeldata.h \
+    $$PWD/floatItemData/vpatternlabeldata.h \
+    $$PWD/floatItemData/vgrainlinedata.h

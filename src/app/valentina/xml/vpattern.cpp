@@ -51,9 +51,9 @@
 #include "../core/vapplication.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vnodedetail.h"
 

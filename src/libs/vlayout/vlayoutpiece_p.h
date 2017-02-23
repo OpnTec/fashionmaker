@@ -34,9 +34,9 @@
 #include <QVector>
 #include <QTransform>
 
-#include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vmisc/diagnostic.h"
 #include "vlayoutpiecepath.h"
 

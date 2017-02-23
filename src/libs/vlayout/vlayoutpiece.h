@@ -42,8 +42,8 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
 

@@ -43,8 +43,8 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"

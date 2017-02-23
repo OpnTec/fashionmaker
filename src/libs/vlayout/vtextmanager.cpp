@@ -35,7 +35,7 @@
 #include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 #include "vtextmanager.h"

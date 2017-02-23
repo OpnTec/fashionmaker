@@ -28,15 +28,25 @@
 
 #include "vpiecelabeldata.h"
 
+#include <QList>
+
 //---------------------------------------------------------------------------------------------------------------------
 MaterialCutPlacement::MaterialCutPlacement()
-    :m_eMaterial(MaterialType::mtFabric), m_qsMaterialUserDef(), m_iCutNumber(0), m_ePlacement(PlacementType::ptNone)
+    : m_eMaterial(MaterialType::mtFabric),
+      m_qsMaterialUserDef(),
+      m_iCutNumber(0),
+      m_ePlacement(PlacementType::ptNone)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::VPieceLabelData()
-    :m_qsLetter(), m_conMCP(), m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0),
-    m_iFontSize(0), m_dRotation(0), m_bVisible(true)
+    : VPatternLabelData(),
+      m_qsLetter(),
+      m_conMCP()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceLabelData::~VPieceLabelData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,78 +111,3 @@ void VPieceLabelData::SetLetter(QString qsLetter)
 {
     m_qsLetter = qsLetter.left(3);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QPointF VPieceLabelData::GetPos() const
-{
-    return m_ptPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetPos(const QPointF& ptPos)
-{
-    m_ptPos = ptPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPieceLabelData::GetLabelWidth() const
-{
-    return m_dLabelWidth;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetLabelWidth(qreal dLabelW)
-{
-    m_dLabelWidth = dLabelW;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPieceLabelData::GetLabelHeight() const
-{
-    return m_dLabelHeight;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetLabelHeight(qreal dLabelH)
-{
-    m_dLabelHeight = dLabelH;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPieceLabelData::GetFontSize() const
-{
-    return m_iFontSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetFontSize(int iSize)
-{
-    m_iFontSize = iSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPieceLabelData::GetRotation() const
-{
-    return m_dRotation;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetRotation(qreal dRot)
-{
-    m_dRotation = dRot;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPieceLabelData::IsVisible() const
-{
-    return m_bVisible;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetVisible(bool bVal)
-{
-    m_bVisible = bVal;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-

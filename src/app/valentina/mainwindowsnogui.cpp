@@ -37,9 +37,9 @@
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vposter.h"
-#include "../vpatterndb/vpiecelabeldata.h"
-#include "../vpatterndb/vpatternlabeldata.h"
-#include "../vpatterndb/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vtools/tools/vabstracttool.h"
 
 #include <QFileDialog>
