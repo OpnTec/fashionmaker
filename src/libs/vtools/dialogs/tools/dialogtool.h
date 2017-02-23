@@ -403,10 +403,8 @@ inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
         case 1:
         case 2:
             return static_cast<T>(value);
-            break;
         default:
             return static_cast<T>(1);
-            break;
     }
 }
 

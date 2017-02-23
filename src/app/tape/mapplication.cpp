@@ -192,6 +192,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             #endif
             case QtDebugMsg:
                 Q_UNREACHABLE(); //-V501
+                break;
             default:
                 break;
         }

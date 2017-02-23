@@ -118,10 +118,8 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
     {
         case 0:
             return QPointF();
-            break;
         case 1:
             return p1;
-            break;
         case 2:
         {
             const bool flagP1 = VGObject::IsPointOnLineSegment (p1, firstPoint, secondPoint);
@@ -150,13 +148,12 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
                     return p2;
                 }
             }
-            break;
         }
         default:
             qDebug() << "Unxpected value" << res;
             return QPointF();
-            break;
     }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
