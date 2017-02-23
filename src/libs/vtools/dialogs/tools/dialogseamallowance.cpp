@@ -70,6 +70,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogSeamAllowance),
       applyAllowed(false),// By default disabled
+      flagGPin(true),
+      flagDPin(true),
+      flagPPin(true),
+      flagGFormulas(false),
       m_bAddMode(true),
       m_mx(0),
       m_my(0),
@@ -213,8 +217,16 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ui->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
     m_oldData = piece.GetPatternPieceData();
+    ChangeCurrentData(ui->comboBoxDetailLabelTopLeftPin, m_oldData.TopLeftPin());
+    ChangeCurrentData(ui->comboBoxDetailLabelTopLeftPin, m_oldData.BottomRightPin());
+
     m_oldGeom = piece.GetPatternInfo();
+    ChangeCurrentData(ui->comboBoxPatternLabelTopLeftPin, m_oldGeom.TopLeftPin());
+    ChangeCurrentData(ui->comboBoxPatternLabelBottomRightPin, m_oldGeom.BottomRightPin());
+
     m_oldGrainline = piece.GetGrainlineGeometry();
+    ChangeCurrentData(ui->comboBoxGrainlineTopPin, m_oldGrainline.TopPin());
+    ChangeCurrentData(ui->comboBoxGrainlineBottomPin, m_oldGrainline.BottomPin());
 
     ValidObjects(MainPathIsValid());
     EnableGrainlineRotation();
@@ -333,7 +345,7 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && flagFormula);
+    bOk->setEnabled(flagName && flagError && flagFormula && flagGPin && flagDPin && flagPPin && flagGFormulas);
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -462,14 +474,13 @@ void DialogSeamAllowance::NameDetailChanged()
             flagName = false;
             ChangeColor(ui->labelEditName, Qt::red);
             QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
-            ui->tabWidget->setTabIcon(1, icon);
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabSeamAllowance), icon);
         }
         else
         {
             flagName = true;
             ChangeColor(ui->labelEditName, okColor);
-            QIcon icon;
-            ui->tabWidget->setTabIcon(1, icon);
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabSeamAllowance), QIcon());
         }
     }
     CheckState();
@@ -997,8 +1008,8 @@ void DialogSeamAllowance::UpdateValues()
         plbVal->setText(qsVal);
     }
 
-    bOk->setEnabled(bFormulasOK);
-    if (bFormulasOK == false)
+    flagGFormulas = bFormulasOK;
+    if (flagGFormulas == false)
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
@@ -1007,6 +1018,7 @@ void DialogSeamAllowance::UpdateValues()
     {
         ResetWarning();
     }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1074,7 +1086,7 @@ void DialogSeamAllowance::EnableGrainlineRotation()
     {
         ChangeColor(ui->labelEditLen, okColor);
         ChangeColor(ui->labelEditRot, okColor);
-        bOk->setEnabled(true);
+        flagGFormulas = true;
         ResetWarning();
     }
 }
@@ -1128,8 +1140,10 @@ void DialogSeamAllowance::DeployLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ResetWarning()
 {
-    QIcon icon;
-    ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
+    if (flagGFormulas && flagGPin)
+    {
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), QIcon());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1273,6 +1287,93 @@ void DialogSeamAllowance::DeployWidthAfterFormulaTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::GrainlinePinPointChanged()
+{
+    QColor color = okColor;
+    const quint32 topPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
+    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
+            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    {
+        flagGPin = true;
+        color = okColor;
+
+        ResetWarning();
+    }
+    else
+    {
+        flagGPin = false;
+        color = errorColor;
+
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
+    }
+    ChangeColor(ui->labelGrainlineTopPin, color);
+    ChangeColor(ui->labelGrainlineBottomPin, color);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DetailPinPointChanged()
+{
+    QColor color = okColor;
+    const quint32 topPinId = getCurrentObjectId(ui->comboBoxDetailLabelTopLeftPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxDetailLabelBottomRightPin);
+    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
+            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    {
+        flagDPin = true;
+        color = okColor;
+
+        if (flagPPin)
+        {
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPatternPieceData), QIcon());
+        }
+    }
+    else
+    {
+        flagDPin = false;
+        color = errorColor;
+
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPatternPieceData), icon);
+    }
+    ChangeColor(ui->labelDetailLabelTopLeftPin, color);
+    ChangeColor(ui->labelDetailLabelBottomRightPin, color);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PatternPinPointChanged()
+{
+    QColor color = okColor;
+    const quint32 topPinId = getCurrentObjectId(ui->comboBoxPatternLabelTopLeftPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxPatternLabelBottomRightPin);
+    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
+            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    {
+        flagPPin = true;
+        color = okColor;
+
+        if (flagDPin)
+        {
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPatternPieceData), QIcon());
+        }
+    }
+    else
+    {
+        flagPPin = false;
+        color = errorColor;
+
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPatternPieceData), icon);
+    }
+    ChangeColor(ui->labelPatternLabelTopLeftPin, color);
+    ChangeColor(ui->labelPatternLabelBottomRightPin, color);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
@@ -1299,15 +1400,21 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
     piece.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
     piece.GetPatternPieceData().SetVisible(ui->groupBoxDetailLabel->isChecked());
+    piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(ui->comboBoxDetailLabelTopLeftPin));
+    piece.GetPatternPieceData().SetBottomRightPin(getCurrentObjectId(ui->comboBoxDetailLabelBottomRightPin));
 
     piece.GetPatternInfo() = m_oldGeom;
     piece.GetPatternInfo().SetVisible(ui->groupBoxPatternLabel->isChecked());
+    piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(ui->comboBoxPatternLabelTopLeftPin));
+    piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(ui->comboBoxPatternLabelBottomRightPin));
 
     piece.GetGrainlineGeometry() = m_oldGrainline;
     piece.GetGrainlineGeometry().SetVisible(ui->checkBoxGrainline->isChecked());
     piece.GetGrainlineGeometry().SetRotation(GetFormulaFromUser(ui->lineEditRotFormula));
     piece.GetGrainlineGeometry().SetLength(GetFormulaFromUser(ui->lineEditLenFormula));
     piece.GetGrainlineGeometry().SetArrowType(static_cast<ArrowType>(ui->comboBoxArrow->currentIndex()));
+    piece.GetGrainlineGeometry().SetTopPin(getCurrentObjectId(ui->comboBoxGrainlineTopPin));
+    piece.GetGrainlineGeometry().SetBottomPin(getCurrentObjectId(ui->comboBoxGrainlineBottomPin));
 
     return piece;
 }
@@ -1708,8 +1815,23 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 
     InitPinPoint(ui->comboBoxDetailLabelTopLeftPin);
     InitPinPoint(ui->comboBoxDetailLabelBottomRightPin);
+
+    connect(ui->comboBoxDetailLabelTopLeftPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::DetailPinPointChanged);
+    connect(ui->comboBoxDetailLabelBottomRightPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::DetailPinPointChanged);
+
     InitPinPoint(ui->comboBoxPatternLabelTopLeftPin);
     InitPinPoint(ui->comboBoxPatternLabelBottomRightPin);
+
+    connect(ui->comboBoxPatternLabelTopLeftPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternPinPointChanged);
+    connect(ui->comboBoxPatternLabelBottomRightPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternPinPointChanged);
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
@@ -1765,6 +1887,13 @@ void DialogSeamAllowance::InitGrainlineTab()
 
     InitPinPoint(ui->comboBoxGrainlineTopPin);
     InitPinPoint(ui->comboBoxGrainlineBottomPin);
+
+    connect(ui->comboBoxGrainlineTopPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::GrainlinePinPointChanged);
+    connect(ui->comboBoxGrainlineTopPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::GrainlinePinPointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

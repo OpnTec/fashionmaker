@@ -119,11 +119,19 @@ private slots:
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
 
+    void GrainlinePinPointChanged();
+    void DetailPinPointChanged();
+    void PatternPinPointChanged();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
     Ui::DialogSeamAllowance *ui;
     bool   applyAllowed;
+    bool   flagGPin;
+    bool   flagDPin;
+    bool   flagPPin;
+    bool   flagGFormulas;
     bool   m_bAddMode;
     qreal  m_mx;
     qreal  m_my;
