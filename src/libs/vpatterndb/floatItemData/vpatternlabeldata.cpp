@@ -30,29 +30,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData()
-    : m_ptPos(),
+    : VAbstractFloatItemData(),
       m_dLabelWidth(0),
       m_dLabelHeight(0),
       m_iFontSize(0),
-      m_dRotation(0),
-      m_bVisible(true)
+      m_dRotation(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::~VPatternLabelData()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPointF VPatternLabelData::GetPos() const
-{
-    return m_ptPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternLabelData::SetPos(const QPointF& ptPos)
-{
-    m_ptPos = ptPos;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPatternLabelData::GetLabelWidth() const
@@ -100,16 +87,4 @@ qreal VPatternLabelData::GetRotation() const
 void VPatternLabelData::SetRotation(qreal dRot)
 {
     m_dRotation = dRot;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPatternLabelData::IsVisible() const
-{
-    return m_bVisible;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternLabelData::SetVisible(bool bVal)
-{
-    m_bVisible = bVal;
 }

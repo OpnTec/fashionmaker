@@ -29,15 +29,16 @@
 #ifndef VGRAINLINEGEOMETRY_H
 #define VGRAINLINEGEOMETRY_H
 
-#include <QtGlobal>
 #include <QString>
 #include <QPointF>
+
+#include "vabstractfloatitemdata.h"
 
 /**
  * @brief The VGrainlineData class holds information about a grainline like
  * position, size, rotation and visibility
  */
-class VGrainlineData
+class VGrainlineData : public VAbstractFloatItemData
 {
 public:
     // denotes the type of arrow for the grainline
@@ -49,40 +50,25 @@ public:
     };
 
     VGrainlineData();
+    virtual ~VGrainlineData();
 
     // methods, which set and return values of different parameters
-    QPointF                 GetPos() const;
-    void                    SetPos(const QPointF& ptPos);
-    QString                 GetLength() const;
-    void                    SetLength(const QString& qsLen);
-    QString                 GetRotation() const;
-    void                    SetRotation(const QString& qsRot);
-    bool                    IsVisible() const;
-    void                    SetVisible(bool bVisible);
-    ArrowType               GetArrowType() const;
-    void                    SetArrowType(ArrowType eAT);
+    QString GetLength() const;
+    void    SetLength(const QString& qsLen);
+
+    QString GetRotation() const;
+    void    SetRotation(const QString& qsRot);
+
+    ArrowType GetArrowType() const;
+    void      SetArrowType(ArrowType eAT);
 
 private:
-    /**
-     * @brief m_ptPos position of grainline's center
-     */
-    QPointF                 m_ptPos;
-    /**
-     * @brief m_dLength formula to calculate the length of grainline
-     */
-    QString                 m_qsLength;
-    /**
-     * @brief m_dRotation formula to calculate the rotation of grainline in [degrees]
-     */
-    QString                 m_qsRotation;
-    /**
-     * @brief m_bVisible visibility flag
-     */
-    bool                    m_bVisible;
-    /**
-     * @brief m_eArrowType type of arrow on the grainline
-     */
-    ArrowType                m_eArrowType;
+    /** @brief m_dLength formula to calculate the length of grainline */
+    QString   m_qsLength;
+    /** @brief m_dRotation formula to calculate the rotation of grainline in [degrees] */
+    QString   m_dRotation;
+    /** @brief m_eArrowType type of arrow on the grainline */
+    ArrowType m_eArrowType;
 };
 
 #endif // VGRAINLINEGEOMETRY_H

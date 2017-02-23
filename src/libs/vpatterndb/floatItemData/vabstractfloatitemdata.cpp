@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vgrainlinedata.cpp
- **  @author Bojan Kverh
- **  @date   September 06, 2016
+ **  @file
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   23 2, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,54 +26,38 @@
  **
  *************************************************************************/
 
-#include <QPointF>
-
-#include "vgrainlinedata.h"
+#include "vabstractfloatitemdata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::VGrainlineData()
-    : VAbstractFloatItemData(),
-      m_qsLength(),
-      m_dRotation(),
-      m_eArrowType(atBoth)
+VAbstractFloatItemData::VAbstractFloatItemData()
+    : m_ptPos(),
+      m_bVisible(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::~VGrainlineData()
+VAbstractFloatItemData::~VAbstractFloatItemData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetLength() const
+QPointF VAbstractFloatItemData::GetPos() const
 {
-    return m_qsLength;
+    return m_ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetLength(const QString& qsLen)
+void VAbstractFloatItemData::SetPos(const QPointF &ptPos)
 {
-    m_qsLength = qsLen;
+    m_ptPos = ptPos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetRotation() const
+bool VAbstractFloatItemData::IsVisible() const
 {
-    return m_dRotation;
+    return m_bVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetRotation(const QString& qsRot)
+void VAbstractFloatItemData::SetVisible(bool bVisible)
 {
-    m_dRotation = qsRot;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::ArrowType VGrainlineData::GetArrowType() const
-{
-    return m_eArrowType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetArrowType(ArrowType eAT)
-{
-    m_eArrowType = eAT;
+    m_bVisible = bVisible;
 }

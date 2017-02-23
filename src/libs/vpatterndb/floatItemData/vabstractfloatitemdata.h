@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpatternlabeldata.h
- **  @author Bojan Kverh
- **  @date   June 16, 2016
+ **  @file
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   23 2, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,45 +26,29 @@
  **
  *************************************************************************/
 
-#ifndef VPATTERNINFOGEOMETRY_H
-#define VPATTERNINFOGEOMETRY_H
+#ifndef VABSTRACTFLOATITEMDATA_H
+#define VABSTRACTFLOATITEMDATA_H
 
 #include <QPointF>
 
-#include "vabstractfloatitemdata.h"
-
-/**
- * @brief The VPatternLabelData class holds the information about pattern info label geometry
- */
-class VPatternLabelData : public VAbstractFloatItemData
+class VAbstractFloatItemData
 {
 public:
-    VPatternLabelData();
-    virtual ~VPatternLabelData();
+    VAbstractFloatItemData();
+    virtual ~VAbstractFloatItemData();
 
-    // methods, which set up label parameters
-    qreal GetLabelWidth() const;
-    void  SetLabelWidth(qreal dLabelW);
+    // methods, which set and return values of different parameters
+    QPointF GetPos() const;
+    void    SetPos(const QPointF& ptPos);
 
-    qreal GetLabelHeight() const;
-    void  SetLabelHeight(qreal dLabelH);
-
-    int   GetFontSize() const;
-    void  SetFontSize(int iSize);
-
-    qreal GetRotation() const;
-    void  SetRotation(qreal dRot);
+    bool IsVisible() const;
+    void SetVisible(bool bVisible);
 
 protected:
-    /** @brief m_dLabelWidth label width */
-    qreal m_dLabelWidth;
-    /** @brief m_dLabelHeight label height */
-    qreal m_dLabelHeight;
-    /** @brief m_iFontSize label text base font size */
-    int   m_iFontSize;
-    /** @brief m_dRotation label rotation */
-    qreal m_dRotation;
-
+    /** @brief m_ptPos position of label's top left corner */
+    QPointF m_ptPos;
+    /** @brief m_bVisible visibility flag */
+    bool    m_bVisible;
 };
 
-#endif // VPATTERNINFOGEOMETRY_H
+#endif // VABSTRACTFLOATITEMDATA_H
