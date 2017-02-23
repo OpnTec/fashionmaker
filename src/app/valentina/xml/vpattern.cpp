@@ -828,6 +828,12 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternPieceData().SetRotation(dRot);
 
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    detail.GetPatternPieceData().SetTopLeftPin(topLeftPin);
+
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+    detail.GetPatternPieceData().SetBottomRightPin(bottomRightPin);
+
     QDomNodeList nodeListMCP = domElement.childNodes();
     for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
     {
@@ -860,6 +866,12 @@ void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &deta
     detail.GetPatternInfo().SetFontSize(iFS);
     qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternInfo().SetRotation(dRot);
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    detail.GetPatternInfo().SetTopLeftPin(topLeftPin);
+
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+    detail.GetPatternInfo().SetBottomRightPin(bottomRightPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -876,6 +888,12 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetRotation(qsRot);
     ArrowType eAT = static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0"));
     detail.GetGrainlineGeometry().SetArrowType(eAT);
+
+    const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
+    detail.GetGrainlineGeometry().SetTopPin(topPin);
+
+    const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
+    detail.GetGrainlineGeometry().SetBottomPin(bottomPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

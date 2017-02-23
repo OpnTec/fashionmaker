@@ -494,6 +494,8 @@
                               <xs:attribute name="width" type="xs:double"/>
                               <xs:attribute name="height" type="xs:double"/>
                               <xs:attribute name="rotation" type="xs:double"/>
+                              <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
                           </xs:element>
                           <xs:element name="patternInfo" minOccurs="0" maxOccurs="1">
@@ -505,6 +507,8 @@
                               <xs:attribute name="width" type="xs:double"/>
                               <xs:attribute name="height" type="xs:double"/>
                               <xs:attribute name="rotation" type="xs:double"/>
+                              <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
                           </xs:element>
                           <xs:element name="grainline" minOccurs="0" maxOccurs="1">
@@ -515,6 +519,8 @@
                               <xs:attribute name="length" type="xs:string"/>
                               <xs:attribute name="rotation" type="xs:string"/>
                               <xs:attribute name="arrows" type="arrowType"/>
+                              <xs:attribute name="topPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomPin" type="xs:unsignedInt"/>
                             </xs:complexType>
                           </xs:element>
                           <xs:element name="nodes" minOccurs="1" maxOccurs="1">

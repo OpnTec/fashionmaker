@@ -75,6 +75,10 @@ const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllow
 const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
+const QString VToolSeamAllowance::AttrTopLeftPin     = QStringLiteral("topLeftPin");
+const QString VToolSeamAllowance::AttrBottomRightPin = QStringLiteral("bottomRightPin");
+const QString VToolSeamAllowance::AttrTopPin         = QStringLiteral("topPin");
+const QString VToolSeamAllowance::AttrBottomPin      = QStringLiteral("bottomPin");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -252,6 +256,24 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
 
+    if (data.TopLeftPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopLeftPin, data.TopLeftPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopLeftPin);
+    }
+
+    if (data.BottomRightPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomRightPin, data.BottomRightPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomRightPin);
+    }
+
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
         const MaterialCutPlacement mcp = data.GetMCP(i);
@@ -280,6 +302,25 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
+
+    if (geom.TopLeftPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopLeftPin, geom.TopLeftPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopLeftPin);
+    }
+
+    if (geom.BottomRightPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomRightPin, geom.BottomRightPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomRightPin);
+    }
+
     domElement.appendChild(domData);
 }
 
@@ -295,6 +336,25 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
+
+    if (glGeom.TopPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopPin, glGeom.TopPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopPin);
+    }
+
+    if (glGeom.BottomPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomPin, glGeom.BottomPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomPin);
+    }
+
     domElement.appendChild(domData);
 }
 

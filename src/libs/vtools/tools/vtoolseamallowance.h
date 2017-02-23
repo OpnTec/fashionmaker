@@ -66,6 +66,10 @@ public:
     static const QString AttrHeight;
     static const QString AttrUnited;
     static const QString AttrFont;
+    static const QString AttrTopLeftPin;
+    static const QString AttrBottomRightPin;
+    static const QString AttrTopPin;
+    static const QString AttrBottomPin;
 
     void Remove(bool ask);
 
