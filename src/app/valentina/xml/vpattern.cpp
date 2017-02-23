@@ -874,8 +874,7 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetLength(qsLength);
     QString qsRot = GetParametrString(domElement, AttrRotation, "90");
     detail.GetGrainlineGeometry().SetRotation(qsRot);
-    VGrainlineData::ArrowType eAT =
-            VGrainlineData::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
+    ArrowType eAT = static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0"));
     detail.GetGrainlineGeometry().SetArrowType(eAT);
 }
 

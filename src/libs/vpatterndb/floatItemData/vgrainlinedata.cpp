@@ -29,17 +29,31 @@
 #include <QPointF>
 
 #include "vgrainlinedata.h"
-#include "../ifc/ifcdef.h"
+#include "vgrainlinedata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData()
     : VAbstractFloatItemData(),
-      m_qsLength(),
-      m_dRotation(),
-      m_eArrowType(atBoth),
-      m_topPin(NULL_ID),
-      m_bottomPin(NULL_ID)
+      d(new VGrainlineDataPrivate())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VGrainlineData::VGrainlineData(const VGrainlineData &data)
+    : VAbstractFloatItemData(data),
+      d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
+{
+    if ( &data == this )
+    {
+        return *this;
+    }
+    VAbstractFloatItemData::operator=(data);
+    d = data.d;
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::~VGrainlineData()
@@ -48,59 +62,59 @@ VGrainlineData::~VGrainlineData()
 //---------------------------------------------------------------------------------------------------------------------
 QString VGrainlineData::GetLength() const
 {
-    return m_qsLength;
+    return d->m_qsLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineData::SetLength(const QString& qsLen)
 {
-    m_qsLength = qsLen;
+    d->m_qsLength = qsLen;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VGrainlineData::GetRotation() const
 {
-    return m_dRotation;
+    return d->m_dRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineData::SetRotation(const QString& qsRot)
 {
-    m_dRotation = qsRot;
+    d->m_dRotation = qsRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::ArrowType VGrainlineData::GetArrowType() const
+ArrowType VGrainlineData::GetArrowType() const
 {
-    return m_eArrowType;
+    return d->m_eArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineData::SetArrowType(ArrowType eAT)
 {
-    m_eArrowType = eAT;
+    d->m_eArrowType = eAT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VGrainlineData::TopPin() const
 {
-    return m_topPin;
+    return d->m_topPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetTopPin(const quint32 &topPin)
+void VGrainlineData::SetTopPin(quint32 topPin)
 {
-    m_topPin = topPin;
+    d->m_topPin = topPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VGrainlineData::BottomPin() const
 {
-    return m_bottomPin;
+    return d->m_bottomPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetBottomPin(const quint32 &bottomPin)
+void VGrainlineData::SetBottomPin(quint32 bottomPin)
 {
-    m_bottomPin = bottomPin;
+    d->m_bottomPin = bottomPin;
 }

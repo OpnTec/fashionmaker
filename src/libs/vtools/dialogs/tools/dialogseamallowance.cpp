@@ -1307,7 +1307,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetGrainlineGeometry().SetVisible(ui->checkBoxGrainline->isChecked());
     piece.GetGrainlineGeometry().SetRotation(GetFormulaFromUser(ui->lineEditRotFormula));
     piece.GetGrainlineGeometry().SetLength(GetFormulaFromUser(ui->lineEditLenFormula));
-    piece.GetGrainlineGeometry().SetArrowType(VGrainlineData::ArrowType(ui->comboBoxArrow->currentIndex()));
+    piece.GetGrainlineGeometry().SetArrowType(static_cast<ArrowType>(ui->comboBoxArrow->currentIndex()));
 
     return piece;
 }

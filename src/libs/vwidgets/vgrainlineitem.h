@@ -40,8 +40,7 @@ public:
     virtual ~VGrainlineItem();
 
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
-    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
-                                VGrainlineData::ArrowType eAT);
+    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
     void SetScale(qreal dScale);
@@ -75,7 +74,7 @@ private:
     QPointF                       m_ptFinish;
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
-    VGrainlineData::ArrowType m_eArrowType;
+    ArrowType                     m_eArrowType;
 };
 
 #endif // VGRAINLINEITEM_H
