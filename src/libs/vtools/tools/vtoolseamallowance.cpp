@@ -1075,6 +1075,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     InitNodes(detail, scene);
     InitCSAPaths(detail);
     InitInternalPaths(detail);
+    InitPins(detail);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
@@ -1200,6 +1201,15 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
         tool->SetParentType(ParentType::Item);
         tool->show();
         doc->IncrementReferens(detail.GetInternalPaths().at(i));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitPins(const VPiece &detail)
+{
+    for (int i = 0; i < detail.GetPins().size(); ++i)
+    {
+        doc->IncrementReferens(detail.GetPins().at(i));
     }
 }
 

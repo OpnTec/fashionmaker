@@ -155,6 +155,7 @@ private:
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     void InitCSAPaths(const VPiece &detail);
     void InitInternalPaths(const VPiece &detail);
+    void InitPins(const VPiece &detail);
 
     template <typename Tool>
     Tool*              InitTool(VMainGraphicsScene *scene, quint32 toolId);
