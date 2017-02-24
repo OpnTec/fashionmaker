@@ -1885,7 +1885,7 @@ void DialogSeamAllowance::InitGrainlineTab()
     connect(ui->comboBoxGrainlineTopPin,
             static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
-    connect(ui->comboBoxGrainlineTopPin,
+    connect(ui->comboBoxGrainlineBottomPin,
             static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
 }
