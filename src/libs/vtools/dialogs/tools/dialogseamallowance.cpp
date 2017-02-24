@@ -1292,7 +1292,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
 {
     QColor color = okColor;
     const quint32 topPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
-    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxGrainlineBottomPin);
     if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
             || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
     {
