@@ -125,6 +125,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::~DialogSeamAllowance()
 {
+    delete m_visPins;
     delete ui;
 }
 
