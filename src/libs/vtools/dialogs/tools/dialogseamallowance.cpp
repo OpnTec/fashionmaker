@@ -346,7 +346,7 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && flagFormula && flagGPin && flagDPin && flagPPin && flagGFormulas);
+    bOk->setEnabled(flagName && flagError && flagFormula && flagDPin && flagPPin && (flagGFormulas || flagGPin));
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -1075,11 +1075,10 @@ void DialogSeamAllowance::EnableGrainlineRotation()
     if (ui->groupBoxGrainline->isChecked() == true)
     {
         UpdateValues();
+        GrainlinePinPointChanged();
     }
     else
     {
-        ChangeColor(ui->labelEditLen, okColor);
-        ChangeColor(ui->labelEditRot, okColor);
         flagGFormulas = true;
         ResetWarning();
     }
@@ -1134,7 +1133,7 @@ void DialogSeamAllowance::DeployLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ResetWarning()
 {
-    if (flagGFormulas && flagGPin)
+    if (flagGFormulas || flagGPin)
     {
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), QIcon());
     }
@@ -1286,8 +1285,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
     QColor color = okColor;
     const quint32 topPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
     const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxGrainlineBottomPin);
-    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
-            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagGPin = true;
         color = okColor;
