@@ -1010,7 +1010,7 @@ void DialogSeamAllowance::UpdateValues()
     }
 
     flagGFormulas = bFormulasOK;
-    if (flagGFormulas == false)
+    if (not flagGFormulas && not flagGPin)
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
@@ -1297,8 +1297,11 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
         flagGPin = false;
         color = errorColor;
 
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
-        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
+        if (not flagGFormulas && not flagGPin)
+        {
+            QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
+        }
     }
     ChangeColor(ui->labelGrainlineTopPin, color);
     ChangeColor(ui->labelGrainlineBottomPin, color);
