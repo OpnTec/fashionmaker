@@ -43,7 +43,6 @@ public:
     void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
-    void SetScale(qreal dScale);
 
 signals:
     void SignalResized(qreal dLength);
@@ -75,6 +74,8 @@ private:
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
     ArrowType                     m_eArrowType;
+
+    qreal GetScale() const;
 };
 
 #endif // VGRAINLINEITEM_H

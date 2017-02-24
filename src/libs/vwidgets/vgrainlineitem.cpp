@@ -32,6 +32,8 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -104,8 +106,10 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     pP->drawLine(pt1, pt2);
 
     pP->setBrush(clr);
+
     QPolygonF poly;
     QPointF ptA;
+    m_dScale = GetScale();
     qreal dArrLen = ARROW_LENGTH*m_dScale;
     if (m_eArrowType != ArrowType::atRear)
     {
@@ -175,7 +179,6 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
             pP->drawArc(iX - iR, -iY, iR, iR, 90*16, -90*16);
             pP->restore();
         }
-
     }
     pP->restore();
 }
@@ -268,18 +271,6 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal
         }
     }
     return bInside;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::SetScale sets the scale for keeping the arrows of constant size
- * @param dScale scale factor
- */
-void VGrainlineItem::SetScale(qreal dScale)
-{
-    m_dScale = dScale;
-    UpdateRectangle();
-    Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -546,4 +537,28 @@ QPointF VGrainlineItem::GetInsideCorner(int i, qreal dDist) const
     pt2 = dDist*pt2/qSqrt(pt2.x()*pt2.x() + pt2.y()*pt2.y());
 
     return m_polyBound.at(i) + pt1 + pt2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetScale gets the scale for keeping the arrows of constant size
+ */
+qreal VGrainlineItem::GetScale() const
+{
+    if (scene()->views().count() > 0)
+    {
+        const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
+        const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
+
+        const QPoint p = pt - pt0;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+        const qreal dScale = qSqrt(QPoint::dotProduct(p, p));
+#else
+        const qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+        return 100/dScale;
+    }
+
+    return 1.0;
 }

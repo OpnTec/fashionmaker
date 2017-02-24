@@ -767,22 +767,9 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
  */
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (scene()->views().count() > 0)
-    {
-        const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
-        const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
-
-        const QPoint p = pt - pt0;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        const qreal dScale = qSqrt(QPoint::dotProduct(p, p));
-#else
-        const qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        m_grainLine->SetScale(100/dScale);
-    }
-
-    if (m_dataLabel->IsIdle() == false || m_patternInfo->IsIdle() == false || m_grainLine->IsIdle() == false)
+    if ((m_dataLabel->IsIdle() == false
+            || m_patternInfo->IsIdle() == false
+            || m_grainLine->IsIdle() == false) && not isSelected())
     {
         setSelected(true);
     }
