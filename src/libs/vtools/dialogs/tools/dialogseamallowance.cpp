@@ -218,7 +218,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     m_oldData = piece.GetPatternPieceData();
     ChangeCurrentData(ui->comboBoxDetailLabelTopLeftPin, m_oldData.TopLeftPin());
-    ChangeCurrentData(ui->comboBoxDetailLabelTopLeftPin, m_oldData.BottomRightPin());
+    ChangeCurrentData(ui->comboBoxDetailLabelBottomRightPin, m_oldData.BottomRightPin());
 
     m_oldGeom = piece.GetPatternInfo();
     ChangeCurrentData(ui->comboBoxPatternLabelTopLeftPin, m_oldGeom.TopLeftPin());
