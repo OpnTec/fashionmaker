@@ -212,7 +212,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     UpdateList();
 
-    ui->checkBoxGrainline->setChecked(piece.GetGrainlineGeometry().IsVisible());
+    ui->groupBoxGrainline->setChecked(piece.GetGrainlineGeometry().IsVisible());
     ui->lineEditRotFormula->setPlainText(piece.GetGrainlineGeometry().GetRotation());
     ui->lineEditLenFormula->setPlainText(piece.GetGrainlineGeometry().GetLength());
     ui->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
@@ -1072,14 +1072,7 @@ void DialogSeamAllowance::SetEditMode()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EnableGrainlineRotation()
 {
-    ui->lineEditRotFormula->setEnabled(ui->checkBoxGrainline->isChecked());
-    ui->lineEditLenFormula->setEnabled(ui->checkBoxGrainline->isChecked());
-    ui->pushButtonRot->setEnabled(ui->checkBoxGrainline->isChecked());
-    ui->pushButtonLen->setEnabled(ui->checkBoxGrainline->isChecked());
-    ui->pushButtonShowLen->setEnabled(ui->checkBoxGrainline->isChecked());
-    ui->pushButtonShowRot->setEnabled(ui->checkBoxGrainline->isChecked());
-
-    if (ui->checkBoxGrainline->isChecked() == true)
+    if (ui->groupBoxGrainline->isChecked() == true)
     {
         UpdateValues();
     }
@@ -1410,7 +1403,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(ui->comboBoxPatternLabelBottomRightPin));
 
     piece.GetGrainlineGeometry() = m_oldGrainline;
-    piece.GetGrainlineGeometry().SetVisible(ui->checkBoxGrainline->isChecked());
+    piece.GetGrainlineGeometry().SetVisible(ui->groupBoxGrainline->isChecked());
     piece.GetGrainlineGeometry().SetRotation(GetFormulaFromUser(ui->lineEditRotFormula));
     piece.GetGrainlineGeometry().SetLength(GetFormulaFromUser(ui->lineEditLenFormula));
     piece.GetGrainlineGeometry().SetArrowType(static_cast<ArrowType>(ui->comboBoxArrow->currentIndex()));
@@ -1867,7 +1860,7 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitGrainlineTab()
 {
-    connect(ui->checkBoxGrainline, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableGrainlineRotation);
+    connect(ui->groupBoxGrainline, &QGroupBox::toggled, this, &DialogSeamAllowance::EnableGrainlineRotation);
     connect(ui->pushButtonRot, &QPushButton::clicked, this, &DialogSeamAllowance::EditFormula);
     connect(ui->pushButtonLen, &QPushButton::clicked, this, &DialogSeamAllowance::EditFormula);
     connect(ui->lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::UpdateValues);
