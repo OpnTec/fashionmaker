@@ -528,7 +528,7 @@ bool QmuParserTokenReader::IsArgSep ( token_type &a_Tok )
 bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
 {
     // check for EOF
-    if ( m_strFormula.data()[m_iPos] == false /*|| szFormula[m_iPos] == '\n'*/ )
+    if ( m_iPos >= m_strFormula.size())
     {
         if ( m_iSynFlags & noEND )
         {
