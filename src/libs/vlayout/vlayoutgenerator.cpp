@@ -46,7 +46,7 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       paperWidth(0),
       margins(),
       usePrinterFields(true),
-      stopGeneration(false),
+      stopGeneration(ATOMIC_VAR_INIT(false)),
       state(LayoutErrors::NoError),
       shift(0),
       rotate(true),
