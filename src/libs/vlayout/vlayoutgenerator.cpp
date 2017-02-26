@@ -46,7 +46,12 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       paperWidth(0),
       margins(),
       usePrinterFields(true),
+#ifdef Q_CC_MSVC
+      // See https://stackoverflow.com/questions/15750917/initializing-stdatomic-bool
       stopGeneration(ATOMIC_VAR_INIT(false)),
+#else
+      stopGeneration(false),
+#endif
       state(LayoutErrors::NoError),
       shift(0),
       rotate(true),
