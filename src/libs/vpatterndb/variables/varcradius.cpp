@@ -33,7 +33,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
-#include "vcurvevariable.h"
+#include "../vgeometry/vellipticalarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius()
@@ -49,8 +49,27 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *a
     SCASSERT(arc != nullptr)
 
     SetType(VarType::ArcRadius);
-    SetName(QString(radius_V+"%1").arg(arc->name()));
+    SetName(radius_V + QString("%1").arg(arc->name()));
     SetValue(FromPixel(arc->GetRadius(), patternUnit));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
+                       Unit patternUnit)
+    : VCurveVariable(id, parentId)
+{
+    SCASSERT(elArc != nullptr)
+
+    SetType(VarType::ArcRadius);
+    SetName(radius_V + QString("%1%2").arg(numberRadius).arg(elArc->name()));
+    if (numberRadius == 1)
+    {
+        SetValue(FromPixel(elArc->GetRadius1(), patternUnit));
+    }
+    else
+    {
+        SetValue(FromPixel(elArc->GetRadius2(), patternUnit));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

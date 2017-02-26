@@ -21,7 +21,6 @@ SOURCES += \
     $$PWD/vpatterninfogeometry.cpp \
     $$PWD/vgrainlinegeometry.cpp \
     $$PWD/variables/vcurveclength.cpp \
-    $$PWD/variables/vellipticalarcradius.cpp \
     $$PWD/vpiece.cpp \
     $$PWD/vpiecenode.cpp \
     $$PWD/vpiecepath.cpp
@@ -59,7 +58,6 @@ HEADERS += \
     $$PWD/vpatterninfogeometry.h \
     $$PWD/vgrainlinegeometry.h \
     $$PWD/variables/vcurveclength.h \
-    $$PWD/variables/vellipticalarcradius.h \
     $$PWD/vpiece.h \
     $$PWD/vpiece_p.h \
     $$PWD/vpiecenode.h \

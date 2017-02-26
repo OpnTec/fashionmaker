@@ -45,7 +45,6 @@
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "variables/varcradius.h"
-#include "variables/vellipticalarcradius.h"
 #include "variables/vcurveangle.h"
 #include "variables/vcurvelength.h"
 #include "variables/vcurveclength.h"
@@ -410,10 +409,10 @@ void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32
     {
         const QSharedPointer<VEllipticalArc> casted = arc.staticCast<VEllipticalArc>();
 
-        VEllipticalArcRadius *radius1 = new VEllipticalArcRadius(id, parentId, casted.data(), 1, *GetPatternUnit());
+        VArcRadius *radius1 = new VArcRadius(id, parentId, casted.data(), 1, *GetPatternUnit());
         AddVariable(radius1->GetName(), radius1);
 
-        VEllipticalArcRadius *radius2 = new VEllipticalArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
+        VArcRadius *radius2 = new VArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
         AddVariable(radius2->GetName(), radius2);
     }
 }
