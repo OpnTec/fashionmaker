@@ -39,6 +39,8 @@ public:
     explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
     virtual ~VGrainlineItem();
 
+    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
+
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
     void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
 
@@ -76,6 +78,10 @@ private:
     ArrowType                     m_eArrowType;
 
     qreal GetScale() const;
+
+    QLineF    MainLine() const;
+    QPolygonF FirstArrow(qreal dArrLen) const;
+    QPolygonF SecondArrow(qreal dArrLen) const;
 };
 
 #endif // VGRAINLINEITEM_H
