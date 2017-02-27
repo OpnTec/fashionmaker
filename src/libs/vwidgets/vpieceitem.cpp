@@ -103,7 +103,7 @@ double VPieceItem::GetAngle(const QPointF &pt) const
     }
     else
     {
-        return qAtan2(dY, dX);
+        return -qAtan2(dY, dX);
     }
 }
 
