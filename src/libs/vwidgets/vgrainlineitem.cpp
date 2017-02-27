@@ -310,6 +310,12 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
+        if (m_moveType == NotMovable)
+        {
+            pME->ignore();
+            return;
+        }
+
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();
         m_dStartLength = m_dLength;
@@ -317,25 +323,42 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         m_dAngle = GetAngle(mapToParent(pME->pos()));
         m_ptRotCenter = m_ptCenter;
 
-        if (m_eMode != mRotate)
+        if (m_moveType == OnlyRotatable)
         {
-            if (m_polyResize.containsPoint(pME->pos(), Qt::OddEvenFill) == true)
-            {
-                m_eMode = mResize;
-                SetOverrideCursor(Qt::SizeFDiagCursor);
-            }
-            else
+            if (m_eMode != mRotate)
             {
                 m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
         }
-        else
+        else if (m_moveType == OnlyMovable)
         {
+            m_eMode = mMove;
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
-        setZValue(ACTIVE_Z);
-        Update();
+        else
+        {
+            if (m_eMode != mRotate)
+            {
+                if (m_polyResize.containsPoint(pME->pos(), Qt::OddEvenFill) == true)
+                {
+                    m_eMode = mResize;
+                    SetOverrideCursor(Qt::SizeFDiagCursor);
+                }
+                else
+                {
+                    m_eMode = mMove;
+                    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                }
+            }
+            else
+            {
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            }
+
+            setZValue(ACTIVE_Z);
+            Update();
+        }
     }
 }
 
@@ -431,7 +454,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         {
             if (bShort == true)
             {
-                if (m_bReleased == true)
+                if (m_bReleased == true && m_moveType != OnlyResizable && m_moveType != OnlyMovable)
                 {
                     m_eMode = mRotate;
                     Update();

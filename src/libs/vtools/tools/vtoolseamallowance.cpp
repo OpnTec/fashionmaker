@@ -1187,7 +1187,7 @@ VPieceItem::MoveType VToolSeamAllowance::FindLabelGeometry(const VPatternLabelDa
     labelWidth = labelData.GetLabelWidth();
     labelHeight = labelData.GetLabelHeight();
     pos = labelData.GetPos();
-    return VTextGraphicsItem::Movable;
+    return VTextGraphicsItem::AllModifications;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1215,7 +1215,7 @@ VPieceItem::MoveType VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineD
 
             pos = grainline.p1();
 
-            return VPieceItem::OnlyRotatable;
+            return VPieceItem::NotMovable;
         }
         catch(const VExceptionBadId &)
         {
@@ -1247,7 +1247,7 @@ VPieceItem::MoveType VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineD
 
     if (isResizable && isRotatable)
     {
-        return VPieceItem::Movable;
+        return VPieceItem::AllModifications;
     }
     else
     {
@@ -1261,7 +1261,7 @@ VPieceItem::MoveType VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineD
             return VPieceItem::OnlyRotatable;
         }
     }
-    return VPieceItem::NotMovable;
+    return VPieceItem::OnlyMovable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

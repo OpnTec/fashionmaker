@@ -36,7 +36,7 @@ class VPieceItem : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    enum MoveType {Movable, OnlyResizable, OnlyRotatable, NotMovable, Error};
+    enum MoveType {AllModifications, OnlyResizable, OnlyRotatable, OnlyMovable, NotMovable, Error};
 
     explicit VPieceItem(QGraphicsItem* pParent = nullptr);
     virtual ~VPieceItem();

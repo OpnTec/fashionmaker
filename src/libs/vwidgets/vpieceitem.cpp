@@ -38,7 +38,7 @@ VPieceItem::VPieceItem(QGraphicsItem *pParent)
       m_eMode(VPieceItem::mNormal),
       m_bReleased(false),
       m_ptRotCenter(),
-      m_moveType(Movable),
+      m_moveType(AllModifications),
       m_inactiveZ(1)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
