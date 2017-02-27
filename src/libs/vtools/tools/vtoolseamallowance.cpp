@@ -477,33 +477,38 @@ void VToolSeamAllowance::Highlight(quint32 id)
 void VToolSeamAllowance::UpdateLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VPieceLabelData& data = detail.GetPatternPieceData();
+    const VPieceLabelData& labelData = detail.GetPatternPieceData();
 
-    if (data.IsVisible() == true)
+    if (labelData.IsVisible() == true)
     {
+        QPointF pos;
+        qreal labelWidth = 0;
+        qreal labelHeight = 0;
+        FindLabelGeometry(labelData, labelWidth, labelHeight, pos);
+
         QFont fnt = qApp->font();
         {
-            const int iFS = data.GetFontSize();
+            const int iFS = labelData.GetFontSize();
             iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
         }
         m_dataLabel->SetFont(fnt);
-        m_dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
-        m_dataLabel->UpdateData(detail.GetName(), data);
-        QPointF pt = data.GetPos();
+        m_dataLabel->SetSize(labelWidth, labelHeight);
+        m_dataLabel->UpdateData(detail.GetName(), labelData);
+
         QRectF rectBB;
-        rectBB.setTopLeft(pt);
+        rectBB.setTopLeft(pos);
         rectBB.setWidth(m_dataLabel->boundingRect().width());
         rectBB.setHeight(m_dataLabel->boundingRect().height());
         qreal dX;
         qreal dY;
-        if (m_dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
+        if (m_dataLabel->IsContained(rectBB, labelData.GetRotation(), dX, dY) == false)
         {
-            pt.setX(pt.x() + dX);
-            pt.setY(pt.y() + dY);
+            pos.setX(pos.x() + dX);
+            pos.setY(pos.y() + dY);
         }
 
-        m_dataLabel->setPos(pt);
-        m_dataLabel->setRotation(data.GetRotation());
+        m_dataLabel->setPos(pos);
+        m_dataLabel->setRotation(labelData.GetRotation());
         m_dataLabel->Update();
         m_dataLabel->show();
     }
@@ -524,6 +529,11 @@ void VToolSeamAllowance::UpdatePatternInfo()
 
     if (geom.IsVisible() == true)
     {
+        QPointF pos;
+        qreal labelWidth = 0;
+        qreal labelHeight = 0;
+        FindLabelGeometry(geom, labelWidth, labelHeight, pos);
+
         QFont fnt = qApp->font();
         int iFS = geom.GetFontSize();
         if (iFS < MIN_FONT_SIZE)
@@ -532,23 +542,22 @@ void VToolSeamAllowance::UpdatePatternInfo()
         }
         fnt.setPixelSize(iFS);
         m_patternInfo->SetFont(fnt);
-        m_patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+        m_patternInfo->SetSize(labelWidth, labelHeight);
         m_patternInfo->UpdateData(doc, getData()->size(), getData()->height());
 
-        QPointF pt = geom.GetPos();
         QRectF rectBB;
-        rectBB.setTopLeft(pt);
+        rectBB.setTopLeft(pos);
         rectBB.setWidth(m_patternInfo->boundingRect().width());
         rectBB.setHeight(m_patternInfo->boundingRect().height());
         qreal dX;
         qreal dY;
         if (m_patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
         {
-            pt.setX(pt.x() + dX);
-            pt.setY(pt.y() + dY);
+            pos.setX(pos.x() + dX);
+            pos.setY(pos.y() + dY);
         }
 
-        m_patternInfo->setPos(pt);
+        m_patternInfo->setPos(pos);
         m_patternInfo->setRotation(geom.GetRotation());
         m_patternInfo->Update();
         m_patternInfo->GetTextLines() > 0 ? m_patternInfo->show() : m_patternInfo->hide();
@@ -570,30 +579,17 @@ void VToolSeamAllowance::UpdateGrainline()
 
     if (geom.IsVisible() == true)
     {
-        qreal dRotation;
-        qreal dLength;
-        try
-        {
-            QString qsFormula;
-            qsFormula = geom.GetRotation().replace("\n", " ");
-            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+        QPointF pos;
+        qreal dRotation = 0;
+        qreal dLength = 0;
 
-            Calculator cal1;
-            dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
-
-            qsFormula = geom.GetLength().replace("\n", " ");
-            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
-            Calculator cal2;
-            dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
-        }
-        catch(qmu::QmuParserError &e)
+        if ( not FindGrainlineGeometry(geom, dLength, dRotation, pos))
         {
-            Q_UNUSED(e);
             m_grainLine->hide();
             return;
         }
 
-        m_grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
+        m_grainLine->UpdateGeometry(pos, dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
                                     geom.GetArrowType());
         m_grainLine->show();
     }
@@ -1153,6 +1149,95 @@ void VToolSeamAllowance::SaveDialogChange()
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(saveCommand);
     UpdateLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData, qreal &labelWidth, qreal &labelHeight,
+                                           QPointF &pos)
+{
+    const quint32 topLeftPin = labelData.TopLeftPin();
+    const quint32 bottomRightPin = labelData.BottomRightPin();
+
+    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID)
+    {
+        try
+        {
+            const auto topLeftPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topLeftPin);
+            const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
+
+            const QRectF labelRect = QRectF(*topLeftPinPoint, *bottomRightPinPoint);
+            labelWidth = qAbs(labelRect.width());
+            labelHeight = qAbs(labelRect.height());
+
+            pos = labelRect.topLeft();
+
+            return;
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing.
+        }
+    }
+
+    labelWidth = labelData.GetLabelWidth();
+    labelHeight = labelData.GetLabelHeight();
+    pos = labelData.GetPos();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData& geom, qreal &length, qreal &rotationAngle,
+                                               QPointF &pos)
+{
+    const quint32 topPin = geom.TopPin();
+    const quint32 bottomPin = geom.BottomPin();
+
+    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    {
+        try
+        {
+            const auto topPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topPin);
+            const auto bottomPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomPin);
+
+            QLineF grainline(*bottomPinPoint, *topPinPoint);
+            length = FromPixel(grainline.length(), *VDataTool::data.GetPatternUnit());
+            rotationAngle = grainline.angle();
+
+            if (not VFuzzyComparePossibleNulls(rotationAngle, 0))
+            {
+                grainline.setAngle(0);
+            }
+
+            pos = grainline.p1();
+
+            return true;
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing.
+        }
+    }
+
+    try
+    {
+        QString qsFormula = geom.GetRotation().replace("\n", " ");
+        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+
+        Calculator cal1;
+        rotationAngle = cal1.EvalFormula(VAbstractTool::data.PlainVariables(), qsFormula);
+
+        qsFormula = geom.GetLength().replace("\n", " ");
+        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+        Calculator cal2;
+        length = cal2.EvalFormula(VAbstractTool::data.PlainVariables(), qsFormula);
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e);
+        return false;
+    }
+
+    pos = geom.GetPos();
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
