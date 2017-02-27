@@ -47,13 +47,13 @@ namespace qmu
 // Trigonometric function
 qreal QmuParser::DegreeToRadian(qreal deg)
 {
-     return deg * M_PI / 180.0;
+     return qDegreesToRadians(deg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::RadianToDegree(qreal rad)
 {
-     return rad * 180.0 / M_PI;
+     return qRadiansToDegrees(rad);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,73 +95,73 @@ qreal QmuParser::ATanh(qreal v)
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::SinhD(qreal v)
 {
-    return RadianToDegree(sinh(v));
+    return qRadiansToDegrees(sinh(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::CoshD(qreal v)
 {
-    return RadianToDegree(cosh(v));
+    return qRadiansToDegrees(cosh(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::TanhD(qreal v)
 {
-    return RadianToDegree(tanh(v));
+    return qRadiansToDegrees(tanh(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ASinhD(qreal v)
 {
-    return RadianToDegree(log(v + qSqrt(v * v + 1)));
+    return qRadiansToDegrees(log(v + qSqrt(v * v + 1)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ACoshD(qreal v)
 {
-    return RadianToDegree(log(v + qSqrt(v * v - 1)));
+    return qRadiansToDegrees(log(v + qSqrt(v * v - 1)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ATanhD(qreal v)
 {
-    return RadianToDegree(0.5 * log((1 + v) / (1 - v)));
+    return qRadiansToDegrees(0.5 * log((1 + v) / (1 - v)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::SinD(qreal v)
 {
-    return RadianToDegree(qSin(v));
+    return qRadiansToDegrees(qSin(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ASinD(qreal v)
 {
-    return RadianToDegree(qAsin(v));
+    return qRadiansToDegrees(qAsin(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::CosD(qreal v)
 {
-    return RadianToDegree(qCos(v));
+    return qRadiansToDegrees(qCos(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ACosD(qreal v)
 {
-    return RadianToDegree(qAcos(v));
+    return qRadiansToDegrees(qAcos(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::TanD(qreal v)
 {
-    return RadianToDegree(qTan(v));
+    return qRadiansToDegrees(qTan(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ATanD(qreal v)
 {
-    return RadianToDegree(qAtan(v));
+    return qRadiansToDegrees(qAtan(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
