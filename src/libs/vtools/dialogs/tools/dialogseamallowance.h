@@ -198,6 +198,8 @@ private:
 
     template <typename T>
     QVector<T> GetPieceInternals(const QListWidget *list) const;
+    void SetGrainlineAngle(const VGrainlineData &data);
+    void SetGrainlineLength(const VGrainlineData &data);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

@@ -213,8 +213,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     UpdateList();
 
     ui->groupBoxGrainline->setChecked(piece.GetGrainlineGeometry().IsVisible());
-    ui->lineEditRotFormula->setPlainText(piece.GetGrainlineGeometry().GetRotation());
-    ui->lineEditLenFormula->setPlainText(piece.GetGrainlineGeometry().GetLength());
+    SetGrainlineAngle(piece.GetGrainlineGeometry());
+    SetGrainlineLength(piece.GetGrainlineGeometry());
     ui->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
     m_oldData = piece.GetPatternPieceData();
@@ -1988,4 +1988,32 @@ QVector<T> DialogSeamAllowance::GetPieceInternals(const QListWidget *list) const
         internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
     }
     return internals;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetGrainlineAngle(const VGrainlineData &data)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(data.GetRotation(), qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployRotation();
+    }
+    ui->lineEditRotFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditRotFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetGrainlineLength(const VGrainlineData &data)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(data.GetLength(), qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployLength();
+    }
+    ui->lineEditLenFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditLenFormula);
 }

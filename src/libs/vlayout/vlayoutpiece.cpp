@@ -238,16 +238,12 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer& rP
 
     try
     {
-        QString qsFormula = geom.GetRotation().replace("\n", " ");
-        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
         Calculator cal1;
-        dAng = cal1.EvalFormula(rPattern.PlainVariables(), qsFormula);
+        dAng = cal1.EvalFormula(rPattern.PlainVariables(), geom.GetRotation());
         dAng = qDegreesToRadians(dAng);
 
-        qsFormula = geom.GetLength().replace("\n", " ");
-        qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
         Calculator cal2;
-        dLen = cal2.EvalFormula(rPattern.PlainVariables(), qsFormula);
+        dLen = cal2.EvalFormula(rPattern.PlainVariables(), geom.GetLength());
         dLen = ToPixel(dLen, *rPattern.GetPatternUnit());
     }
     catch(qmu::QmuParserError &e)

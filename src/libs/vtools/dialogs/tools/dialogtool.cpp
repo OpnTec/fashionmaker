@@ -353,7 +353,7 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
+void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const
 {
     SCASSERT(plainTextEdit != nullptr)
     QTextCursor cursor = plainTextEdit->textCursor();
