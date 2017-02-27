@@ -308,7 +308,7 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal
  */
 void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (pME->button() == Qt::LeftButton)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();

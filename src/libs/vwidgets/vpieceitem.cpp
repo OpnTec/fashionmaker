@@ -38,6 +38,7 @@ VPieceItem::VPieceItem(QGraphicsItem *pParent)
       m_eMode(VPieceItem::mNormal),
       m_bReleased(false),
       m_ptRotCenter(),
+      m_moveType(Movable),
       m_inactiveZ(1)
 {
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
@@ -104,5 +105,17 @@ double VPieceItem::GetAngle(const QPointF &pt) const
     {
         return qAtan2(dY, dX);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceItem::MoveType VPieceItem::GetMoveType() const
+{
+    return m_moveType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceItem::SetMoveType(const MoveType &moveType)
+{
+    m_moveType = moveType;
 }
 

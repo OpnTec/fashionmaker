@@ -36,6 +36,8 @@ class VPieceItem : public QGraphicsObject
 {
     Q_OBJECT
 public:
+    enum MoveType {Movable, OnlyResizable, OnlyRotatable, NotMovable, Error};
+
     explicit VPieceItem(QGraphicsItem* pParent = nullptr);
     virtual ~VPieceItem();
 
@@ -48,6 +50,9 @@ public:
 
     double GetAngle(const QPointF &pt) const;
 
+    MoveType GetMoveType() const;
+    void     SetMoveType(const MoveType &moveType);
+
 signals:
     void SignalMoved(const QPointF &ptPos);
 
@@ -59,10 +64,11 @@ protected:
         mResize,
         mRotate
     };
-    QRectF  m_rectBoundingBox;
-    Mode    m_eMode;
-    bool    m_bReleased;
-    QPointF m_ptRotCenter;
+    QRectF   m_rectBoundingBox;
+    Mode     m_eMode;
+    bool     m_bReleased;
+    QPointF  m_ptRotCenter;
+    MoveType m_moveType;
 
     qreal m_inactiveZ;
 

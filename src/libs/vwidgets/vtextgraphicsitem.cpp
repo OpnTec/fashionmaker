@@ -401,7 +401,7 @@ int VTextGraphicsItem::GetFontSize() const
  */
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         // record the parameters of the mouse press. Specially record the position
         // of the press as the origin for the following operations
