@@ -68,6 +68,22 @@ namespace qmu
         static qreal ASinh(qreal);
         static qreal ACosh(qreal);
         static qreal ATanh(qreal);
+        // functions working with degrees
+        static qreal DegreeToRadian(qreal);
+        static qreal RadianToDegree(qreal);
+        static qreal SinD(qreal);
+        static qreal CosD(qreal);
+        static qreal TanD(qreal);
+        static qreal ASinD(qreal);
+        static qreal ACosD(qreal);
+        static qreal ATanD(qreal);
+        static qreal SinhD(qreal);
+        static qreal CoshD(qreal);
+        static qreal TanhD(qreal);
+        static qreal ASinhD(qreal);
+        static qreal ACoshD(qreal);
+        static qreal ATanhD(qreal);
+
         // Logarithm functions
         static qreal Log2(qreal);  // Logarithm Base 2
         static qreal Log10(qreal); // Logarithm Base 10
