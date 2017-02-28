@@ -615,6 +615,8 @@ QStringList ListPMSystems();
 void InitPMSystems(QComboBox *systemCombo);
 
 // functions
+extern const QString degTorad_F;
+extern const QString radTodeg_F;
 extern const QString sin_F;
 extern const QString cos_F;
 extern const QString tan_F;
@@ -627,6 +629,18 @@ extern const QString tanh_F;
 extern const QString asinh_F;
 extern const QString acosh_F;
 extern const QString atanh_F;
+extern const QString sinD_F;
+extern const QString cosD_F;
+extern const QString tanD_F;
+extern const QString asinD_F;
+extern const QString acosD_F;
+extern const QString atanD_F;
+extern const QString sinhD_F;
+extern const QString coshD_F;
+extern const QString tanhD_F;
+extern const QString asinhD_F;
+extern const QString acoshD_F;
+extern const QString atanhD_F;
 extern const QString log2_F;
 extern const QString log10_F;
 extern const QString log_F;

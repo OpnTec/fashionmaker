@@ -45,6 +45,18 @@ namespace qmu
 {
 //---------------------------------------------------------------------------------------------------------------------
 // Trigonometric function
+qreal QmuParser::DegreeToRadian(qreal deg)
+{
+     return qDegreesToRadians(deg);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::RadianToDegree(qreal rad)
+{
+     return qRadiansToDegrees(rad);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Sinh(qreal v)
 {
     return sinh(v);
@@ -79,6 +91,79 @@ qreal QmuParser::ATanh(qreal v)
 {
     return (0.5 * log((1 + v) / (1 - v)));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::SinhD(qreal v)
+{
+    return qRadiansToDegrees(sinh(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CoshD(qreal v)
+{
+    return qRadiansToDegrees(cosh(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::TanhD(qreal v)
+{
+    return qRadiansToDegrees(tanh(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ASinhD(qreal v)
+{
+    return qRadiansToDegrees(log(v + qSqrt(v * v + 1)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ACoshD(qreal v)
+{
+    return qRadiansToDegrees(log(v + qSqrt(v * v - 1)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ATanhD(qreal v)
+{
+    return qRadiansToDegrees(0.5 * log((1 + v) / (1 - v)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::SinD(qreal v)
+{
+    return qRadiansToDegrees(qSin(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ASinD(qreal v)
+{
+    return qRadiansToDegrees(qAsin(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CosD(qreal v)
+{
+    return qRadiansToDegrees(qCos(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ACosD(qreal v)
+{
+    return qRadiansToDegrees(qAcos(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::TanD(qreal v)
+{
+    return qRadiansToDegrees(qTan(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ATanD(qreal v)
+{
+    return qRadiansToDegrees(qAtan(v));
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm functions
 
@@ -279,23 +364,39 @@ void QmuParser::InitCharSets()
  */
 void QmuParser::InitFun()
 {
+    // trigonometric helper functions
+    DefineFun("degTorad",   DegreeToRadian);
+    DefineFun("radTodeg",   RadianToDegree);
+
     // trigonometric functions
     DefineFun("sin",   qSin);
     DefineFun("cos",   qCos);
     DefineFun("tan",   qTan);
+    DefineFun("sinD",   SinD);
+    DefineFun("cosD",   CosD);
+    DefineFun("tanD",   TanD);
     // arcus functions
     DefineFun("asin",  qAsin);
     DefineFun("acos",  qAcos);
     DefineFun("atan",  qAtan);
     DefineFun("atan2", qAtan2);
+    DefineFun("asinD",  ASinD);
+    DefineFun("acosD",  ACosD);
+    DefineFun("atanD",  ATanD);
     // hyperbolic functions
     DefineFun("sinh",  Sinh);
     DefineFun("cosh",  Cosh);
     DefineFun("tanh",  Tanh);
+    DefineFun("sinhD",  SinhD);
+    DefineFun("coshD",  CoshD);
+    DefineFun("tanhD",  TanhD);
     // arcus hyperbolic functions
     DefineFun("asinh", ASinh);
     DefineFun("acosh", ACosh);
     DefineFun("atanh", ATanh);
+    DefineFun("asinhD", ASinhD);
+    DefineFun("acoshD", ACoshD);
+    DefineFun("atanhD", ATanhD);
     // Logarithm functions
     DefineFun("log2",  Log2);
     DefineFun("log10", Log10);

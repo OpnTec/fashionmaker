@@ -381,6 +381,8 @@ const QString p54_S = QStringLiteral("p54");
 const QString p998_S = QStringLiteral("p998");
 
 //functions
+const QString degTorad_F = QStringLiteral("degTorad");
+const QString radTodeg_F = QStringLiteral("radTodeg");
 const QString sin_F   = QStringLiteral("sin");
 const QString cos_F   = QStringLiteral("cos");
 const QString tan_F   = QStringLiteral("tan");
@@ -393,6 +395,18 @@ const QString tanh_F  = QStringLiteral("tanh");
 const QString asinh_F = QStringLiteral("asinh");
 const QString acosh_F = QStringLiteral("acosh");
 const QString atanh_F = QStringLiteral("atanh");
+const QString sinD_F   = QStringLiteral("sinD");
+const QString cosD_F   = QStringLiteral("cosD");
+const QString tanD_F   = QStringLiteral("tanD");
+const QString asinD_F  = QStringLiteral("asinD");
+const QString acosD_F  = QStringLiteral("acosD");
+const QString atanD_F  = QStringLiteral("atanD");
+const QString sinhD_F  = QStringLiteral("sinhD");
+const QString coshD_F  = QStringLiteral("coshD");
+const QString tanhD_F  = QStringLiteral("tanhD");
+const QString asinhD_F = QStringLiteral("asinhD");
+const QString acoshD_F = QStringLiteral("acoshD");
+const QString atanhD_F = QStringLiteral("atanhD");
 const QString log2_F  = QStringLiteral("log2");
 const QString log10_F = QStringLiteral("log10");
 const QString log_F   = QStringLiteral("log");
@@ -408,8 +422,11 @@ const QString sum_F   = QStringLiteral("sum");
 const QString avg_F   = QStringLiteral("avg");
 const QString fmod_F  = QStringLiteral("fmod");
 
-const QStringList builInFunctions = QStringList() << sin_F  << cos_F   << tan_F  << asin_F  << acos_F  << atan_F
+const QStringList builInFunctions = QStringList() << degTorad_F << radTodeg_F
+                                                  << sin_F  << cos_F   << tan_F  << asin_F  << acos_F  << atan_F
                                                   << sinh_F << cosh_F  << tanh_F << asinh_F << acosh_F << atanh_F
+                                                  << sinD_F  << cosD_F   << tanD_F  << asinD_F  << acosD_F  << atanD_F
+                                                  << sinhD_F << coshD_F  << tanhD_F << asinhD_F << acoshD_F << atanhD_F
                                                   << log2_F << log10_F << log_F  << ln_F    << exp_F   << sqrt_F
                                                   << sign_F << rint_F  << abs_F  << min_F   << max_F   << sum_F
                                                   << avg_F << fmod_F;

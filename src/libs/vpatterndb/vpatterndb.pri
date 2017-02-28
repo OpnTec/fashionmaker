@@ -18,7 +18,6 @@ SOURCES += \
     $$PWD/variables/vvariable.cpp \
     $$PWD/vformula.cpp \
     $$PWD/variables/vcurveclength.cpp \
-    $$PWD/variables/vellipticalarcradius.cpp \
     $$PWD/vpiece.cpp \
     $$PWD/vpiecenode.cpp \
     $$PWD/vpiecepath.cpp \
@@ -57,7 +56,6 @@ HEADERS += \
     $$PWD/variables/vvariable_p.h \
     $$PWD/vformula.h \
     $$PWD/variables/vcurveclength.h \
-    $$PWD/variables/vellipticalarcradius.h \
     $$PWD/vpiece.h \
     $$PWD/vpiece_p.h \
     $$PWD/vpiecenode.h \
