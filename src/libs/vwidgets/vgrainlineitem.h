@@ -54,6 +54,8 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* pME) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pME) Q_DECL_OVERRIDE;
     virtual void Update() Q_DECL_OVERRIDE;
     void         UpdateRectangle();
 
@@ -76,12 +78,15 @@ private:
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
     ArrowType                     m_eArrowType;
+    int                           m_penWidth;
 
     qreal GetScale() const;
 
     QLineF    MainLine() const;
     QPolygonF FirstArrow(qreal dArrLen) const;
     QPolygonF SecondArrow(qreal dArrLen) const;
+
+    QPainterPath MainShape() const;
 };
 
 #endif // VGRAINLINEITEM_H

@@ -68,8 +68,10 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptFinish(),
       m_ptCenter(),
       m_dAngle(0),
-      m_eArrowType(ArrowType::atBoth)
+      m_eArrowType(ArrowType::atBoth),
+      m_penWidth(LINE_PEN_WIDTH)
 {
+    setAcceptHoverEvents(true);
     m_inactiveZ = 5;
     Reset();
     UpdateRectangle();
@@ -85,49 +87,16 @@ VGrainlineItem::~VGrainlineItem()
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VGrainlineItem::shape() const
 {
-    QPainterPath path;
-
     if (m_eMode == mNormal)
     {
-        QPointF pt1;
-        QPointF pt2(pt1.x() + m_dLength * cos(m_dRotation), pt1.y() - m_dLength * sin(m_dRotation));
-
-        const QLineF mainLine = MainLine();
-        QPainterPath linePath;
-        linePath.moveTo(mainLine.p1());
-        linePath.lineTo(mainLine.p2());
-        linePath.closeSubpath();
-
-        QPainterPathStroker stroker;
-        stroker.setWidth(LINE_PEN_WIDTH);
-        path.addPath((stroker.createStroke(linePath) + linePath).simplified());
-        path.closeSubpath();
-
-        const qreal dArrLen = ARROW_LENGTH*GetScale();
-        if (m_eArrowType != ArrowType::atRear)
-        {
-            // first arrow
-            QPainterPath polyPath;
-            polyPath.addPolygon(FirstArrow(dArrLen));
-            path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
-            path.closeSubpath();
-        }
-
-        if (m_eArrowType != ArrowType::atFront)
-        {
-            // second arrow
-            QPainterPath polyPath;
-            polyPath.addPolygon(SecondArrow(dArrLen));
-            path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
-            path.closeSubpath();
-        }
+        return MainShape();
     }
     else
     {
+        QPainterPath path;
         path.addPolygon(m_polyBound);
+        return path;
     }
-
-    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,7 +112,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     Q_UNUSED(pWidget)
     pP->save();
     QColor clr = Qt::black;
-    pP->setPen(QPen(clr, LINE_PEN_WIDTH, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    pP->setPen(QPen(clr, m_penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     pP->setRenderHints(QPainter::Antialiasing);
     // line
@@ -490,6 +459,20 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
+{
+    m_penWidth = LINE_PEN_WIDTH + 1;
+    VPieceItem::hoverEnterEvent(pME);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
+{
+    m_penWidth = LINE_PEN_WIDTH;
+    VPieceItem::hoverLeaveEvent(pME);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGrainlineItem::UpdateBox updates the item
  */
@@ -651,4 +634,40 @@ QPolygonF VGrainlineItem::SecondArrow(qreal dArrLen) const
     poly << QPointF(pt2.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE),
                     pt2.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
     return poly;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VGrainlineItem::MainShape() const
+{
+    QPainterPath path;
+    const QLineF mainLine = MainLine();
+    QPainterPath linePath;
+    linePath.moveTo(mainLine.p1());
+    linePath.lineTo(mainLine.p2());
+    linePath.closeSubpath();
+
+    QPainterPathStroker stroker;
+    stroker.setWidth(m_penWidth);
+    path.addPath((stroker.createStroke(linePath) + linePath).simplified());
+    path.closeSubpath();
+
+    const qreal dArrLen = ARROW_LENGTH*GetScale();
+    if (m_eArrowType != ArrowType::atRear)
+    {
+        // first arrow
+        QPainterPath polyPath;
+        polyPath.addPolygon(FirstArrow(dArrLen));
+        path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
+        path.closeSubpath();
+    }
+
+    if (m_eArrowType != ArrowType::atFront)
+    {
+        // second arrow
+        QPainterPath polyPath;
+        polyPath.addPolygon(SecondArrow(dArrLen));
+        path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
+        path.closeSubpath();
+    }
+    return path;
 }

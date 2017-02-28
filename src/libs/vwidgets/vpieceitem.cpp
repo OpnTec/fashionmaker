@@ -117,5 +117,5 @@ VPieceItem::MoveType VPieceItem::GetMoveType() const
 void VPieceItem::SetMoveType(const MoveType &moveType)
 {
     m_moveType = moveType;
+    setAcceptHoverEvents(m_moveType != NotMovable);
 }
-
