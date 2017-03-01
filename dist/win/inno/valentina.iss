@@ -32,6 +32,7 @@ InfoAfterFile=.\valentina\README.txt
 OutputDir=.\
 OutputBaseFilename=valentina_{#MyAppVersion}{#MyAppStatus}-{#MyDateTimeString}
 SetupIconFile=.\valentina\valentina.ico
+UninstallDisplayIcon={app}\valentina.ico
 Compression=lzma
 SolidCompression=yes
 VersionInfoVersion={#MyAppVersion}
