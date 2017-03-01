@@ -73,12 +73,12 @@ public:
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font);
+    void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
 
     void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
-                        qreal dSize, qreal dHeight);
+                        qreal dSize, qreal dHeight, const VContainer *pattern);
 
-    void SetGrainline(const VGrainlineData& geom, const VContainer& rPattern);
+    void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
