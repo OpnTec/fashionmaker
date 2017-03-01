@@ -299,11 +299,17 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
                 m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
+
+            setZValue(ACTIVE_Z);
+            Update();
         }
         else if (m_moveType == OnlyMovable)
         {
             m_eMode = mMove;
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+
+            setZValue(ACTIVE_Z);
+            Update();
         }
         else
         {
