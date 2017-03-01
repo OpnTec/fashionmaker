@@ -59,6 +59,8 @@ protected:
     virtual void Update() Q_DECL_OVERRIDE;
     void         UpdateRectangle();
 
+    virtual double GetAngle(const QPointF &pt) const Q_DECL_OVERRIDE;
+
     QPointF Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
     QPointF GetInsideCorner(int i, qreal dDist) const;
 

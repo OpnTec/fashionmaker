@@ -542,6 +542,12 @@ void VGrainlineItem::UpdateRectangle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+double VGrainlineItem::GetAngle(const QPointF &pt) const
+{
+    return -VPieceItem::GetAngle(pt);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGrainlineItem::Rotate rotates point pt around ptCenter by angle dAng [rad]
  * and returns the resulting point

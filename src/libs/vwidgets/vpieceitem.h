@@ -48,8 +48,6 @@ public:
     void Reset();
     bool IsIdle() const;
 
-    double GetAngle(const QPointF &pt) const;
-
     MoveType GetMoveType() const;
     void     SetMoveType(const MoveType &moveType);
 
@@ -71,6 +69,8 @@ protected:
     MoveType m_moveType;
 
     qreal m_inactiveZ;
+
+    virtual double GetAngle(const QPointF &pt) const;
 
 private:
     Q_DISABLE_COPY(VPieceItem)
