@@ -299,6 +299,10 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
                 m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
+            else
+            {
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            }
 
             setZValue(ACTIVE_Z);
             Update();
@@ -311,7 +315,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             setZValue(ACTIVE_Z);
             Update();
         }
-        else
+        else // All modifications
         {
             if (m_eMode != mRotate)
             {
