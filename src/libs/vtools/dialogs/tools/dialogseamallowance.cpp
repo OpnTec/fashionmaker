@@ -917,7 +917,9 @@ void DialogSeamAllowance::PathDialogClosed(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::TabChanged(int index)
 {
-    if (ui->tabWidget->indexOf(ui->tabPins) == index)
+    if (index == ui->tabWidget->indexOf(ui->tabPins)
+            || index == ui->tabWidget->indexOf(ui->tabGrainline)
+            || index == ui->tabWidget->indexOf(ui->tabPatternPieceData))
     {
         if (m_visPins.isNull())
         {
