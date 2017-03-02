@@ -80,6 +80,9 @@ public:
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
+
+    template<typename T>
+    static quint32 CreateNode(VContainer *data, quint32 id);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -183,6 +186,22 @@ inline void VAbstractTool::AddVisualization()
 
     connect(visual, &Visualization::ToolTip, [this] (const QString &toolTip) {emit ToolTip(toolTip);});
     vis = visual;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+/**
+ * @brief CreateNode create new node for detail.
+ * @param data container.
+ * @param id id parent object.
+ * @return id for new object.
+ */
+quint32 VAbstractTool::CreateNode(VContainer *data, quint32 id)
+{
+    //We can't use exist object. Need create new.
+    T *node = new T(*data->GeometricObject<T>(id).data());
+    node->setMode(Draw::Modeling);
+    return data->AddGObject(node);
 }
 
 #endif // VABSTRACTTOOL_H

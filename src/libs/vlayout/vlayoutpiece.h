@@ -42,17 +42,20 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
 class QGraphicsItem;
+class QGraphicsPathItem;
+class VTextManager;
 
 class VLayoutPiece :public VAbstractPiece
 {
+    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece)
 public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
@@ -73,12 +76,12 @@ public:
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    void SetDetail(const QString &qsName, const VPatternPieceData& data, const QFont& font);
+    void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
 
-    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternInfoGeometry& geom, const QFont& font,
-                        qreal dSize, qreal dHeight);
+    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
+                        qreal dSize, qreal dHeight, const VContainer *pattern);
 
-    void SetGrainline(const VGrainlineGeometry& geom, const VContainer& rPattern);
+    void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
@@ -114,24 +117,19 @@ public:
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
-    QSharedDataPointer<VLayoutPieceData>   d;
+    QSharedDataPointer<VLayoutPieceData> d;
 
     QVector<QPointF> DetailPath() const;
 
-    void ClearTextItems();
-    void CreateTextItems();
+    QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
+
+    QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
 
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
-    void CreateTextItem(int i, QGraphicsItem *parent) const;
+    void CreateLabel(QGraphicsItem *parent, const QPainterPath &path) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
-    static QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points);
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
-    static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
-
-    static QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
-    QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
-    static qreal GetDistance(const QPointF& pt1, const QPointF& pt2);
 
     QLineF Edge(const QVector<QPointF> &path, int i) const;
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;

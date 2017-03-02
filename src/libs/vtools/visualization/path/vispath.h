@@ -40,6 +40,8 @@
 #include "../visualization.h"
 #include "../vmisc/def.h"
 
+class VSimplePoint;
+
 class VisPath : public Visualization, public QGraphicsPathItem
 {
     Q_OBJECT
@@ -52,6 +54,8 @@ public:
 protected:
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;
+
+    VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
 private:
     Q_DISABLE_COPY(VisPath)
 };

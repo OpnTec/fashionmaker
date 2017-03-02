@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpatterninfogeometry.cpp
+ **  @file   vpiecelabeldata.cpp
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -26,84 +26,98 @@
  **
  *************************************************************************/
 
-#include "vpatterninfogeometry.h"
+#include "vpiecelabeldata.h"
+#include "vpiecelabeldata_p.h"
+
+#include <QList>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternInfoGeometry::VPatternInfoGeometry()
-    :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(0),
-      m_dRotation(0), m_bVisible(true)
+VPieceLabelData::VPieceLabelData()
+    : VPatternLabelData(),
+      d(new VPieceLabelDataPrivate())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPatternInfoGeometry::GetPos() const
+VPieceLabelData::VPieceLabelData(const VPieceLabelData &data)
+    : VPatternLabelData(data),
+      d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceLabelData &VPieceLabelData::operator=(const VPieceLabelData &data)
 {
-    return m_ptPos;
+    if ( &data == this )
+    {
+        return *this;
+    }
+    VPatternLabelData::operator=(data);
+    d = data.d;
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetPos(const QPointF& ptPos)
+VPieceLabelData::~VPieceLabelData()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::Append(const MaterialCutPlacement& rMCP)
 {
-    m_ptPos = ptPos;
+    d->m_conMCP.append(rMCP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetLabelWidth() const
+void VPieceLabelData::Insert(int i, const MaterialCutPlacement& rMCP)
 {
-    return m_dLabelWidth;
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i <= GetMCPCount());
+    d->m_conMCP.insert(i, rMCP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetLabelWidth(qreal dLabelW)
+void VPieceLabelData::Set(int i, const MaterialCutPlacement& rMCP)
 {
-    m_dLabelWidth = dLabelW;
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i < GetMCPCount());
+    d->m_conMCP[i] = rMCP;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetLabelHeight() const
+int VPieceLabelData::GetMCPCount() const
 {
-    return m_dLabelHeight;
+    return d->m_conMCP.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetLabelHeight(qreal dLabelH)
+const MaterialCutPlacement& VPieceLabelData::GetMCP(int i) const
 {
-    m_dLabelHeight = dLabelH;
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i < GetMCPCount());
+    return d->m_conMCP.at(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPatternInfoGeometry::GetFontSize() const
+void VPieceLabelData::RemoveMCP(int i)
 {
-    return m_iFontSize;
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i < GetMCPCount());
+    d->m_conMCP.removeAt(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetFontSize(int iSize)
+void VPieceLabelData::Clear()
 {
-    m_iFontSize = iSize;
+    d->m_qsLetter.clear();
+    d->m_conMCP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternInfoGeometry::GetRotation() const
+const QString& VPieceLabelData::GetLetter() const
 {
-    return m_dRotation;
+    return d->m_qsLetter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetRotation(qreal dRot)
+void VPieceLabelData::SetLetter(QString qsLetter)
 {
-    m_dRotation = dRot;
+    d->m_qsLetter = qsLetter.left(3);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPatternInfoGeometry::IsVisible() const
-{
-    return m_bVisible;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternInfoGeometry::SetVisible(bool bVal)
-{
-    m_bVisible = bVal;
-}
-
-//---------------------------------------------------------------------------------------------------------------------

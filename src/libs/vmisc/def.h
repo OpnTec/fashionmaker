@@ -58,6 +58,11 @@ template <class T> class QSharedPointer;
 #define RECEIVER(obj)
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+#define CURRENT_DATA(box) box->itemData(box->currentIndex())
+#else
+#define CURRENT_DATA(box) box->currentData()
+#endif
 
 class QComboBox;
 class QMarginsF;
@@ -146,6 +151,7 @@ enum class Tool : ToolVisHolderType
     Move,
     Midpoint,
     EllipticalArc,
+    Pin,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -192,7 +198,9 @@ enum class Vis : ToolVisHolderType
     ToolMove,
     ToolEllipticalArc,
     ToolPiece,
-    ToolPiecePath
+    ToolPiecePath,
+    ToolPin,
+    PiecePins
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,

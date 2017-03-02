@@ -298,13 +298,8 @@ void DialogPiecePath::NodeChanged(int index)
 
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
         const VPiecePath path = CreatePath();
-        const int nodeIndex = path.indexOfNode(id);
+        const int nodeIndex = path.indexOfNode(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = path.at(nodeIndex);
@@ -598,11 +593,7 @@ void DialogPiecePath::InitPathTypes()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitNodesList()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const quint32 id = ui->comboBoxNodes->itemData(ui->comboBoxNodes->currentIndex()).toUInt();
-#else
-    const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-#endif
+    const quint32 id = CURRENT_DATA(ui->comboBoxNodes).toUInt();
 
     ui->comboBoxNodes->blockSignals(true);
     ui->comboBoxNodes->clear();
@@ -639,21 +630,10 @@ void DialogPiecePath::NodeAngleChanged(int index)
     const int i = ui->comboBoxNodes->currentIndex();
     if (i != -1 && index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(i).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
-        #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->itemData(index).toUInt());
-        #else
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
-        #endif
-
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(CURRENT_DATA(ui->comboBoxAngle).toUInt());
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetAngleType(angle);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
@@ -694,14 +674,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 PiecePathType DialogPiecePath::GetType() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    const PiecePathType type =
-            static_cast<PiecePathType>(ui->comboBoxType->itemData(ui->comboBoxType->currentIndex()).toInt());
-#else
-    const PiecePathType type = static_cast<PiecePathType>(ui->comboBoxType->currentData().toInt());
-#endif
-
-    return type;
+    return static_cast<PiecePathType>(CURRENT_DATA(ui->comboBoxType).toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -781,13 +754,7 @@ void DialogPiecePath::UpdateNodeSABefore(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -803,13 +770,7 @@ void DialogPiecePath::UpdateNodeSAAfter(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const quint32 id = ui->comboBoxNodes->itemData(index).toUInt();
-    #else
-        const quint32 id = ui->comboBoxNodes->currentData().toUInt();
-    #endif
-
-        QListWidgetItem *rowItem = GetItemById(id);
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));

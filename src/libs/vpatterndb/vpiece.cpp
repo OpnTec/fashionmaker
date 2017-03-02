@@ -36,6 +36,38 @@
 #include <QDebug>
 #include <QPainterPath>
 
+namespace
+{
+QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVector<quint32> &d2Nodes)
+{
+    if (d1Nodes.size() == d2Nodes.size()) //-V807
+    {
+        return QVector<quint32>();
+    }
+
+    QSet<quint32> set1;
+    for (qint32 i = 0; i < d1Nodes.size(); ++i)
+    {
+        set1.insert(d1Nodes.at(i));
+    }
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < d2Nodes.size(); ++j)
+    {
+        set2.insert(d2Nodes.at(j));
+    }
+
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<quint32> r;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        r.append(set3.at(i));
+    }
+
+    return r;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece()
     : VAbstractPiece(), d(new VPieceData(PiecePathType::PiecePath))
@@ -291,19 +323,25 @@ QVector<quint32> VPiece::GetInternalPaths() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> &VPiece::GetInternalPaths()
+{
+    return d->m_internalPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPiece::SetInternalPaths(const QVector<quint32> &iPaths)
 {
     d->m_internalPaths = iPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::AppendInternalPath(quint32 path)
+QVector<CustomSARecord> VPiece::GetCustomSARecords() const
 {
-    d->m_internalPaths.append(path);
+    return d->m_customSARecords;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> VPiece::GetCustomSARecords() const
+QVector<CustomSARecord> &VPiece::GetCustomSARecords()
 {
     return d->m_customSARecords;
 }
@@ -315,9 +353,21 @@ void VPiece::SetCustomSARecords(const QVector<CustomSARecord> &records)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::AppendCustomSARecord(const CustomSARecord &record)
+QVector<quint32> VPiece::GetPins() const
 {
-    d->m_customSARecords.append(record);
+    return d->m_pins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> &VPiece::GetPins()
+{
+    return d->m_pins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPins(const QVector<quint32> &pins)
+{
+    d->m_pins = pins;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,67 +385,35 @@ QVector<quint32> VPiece::MissingNodes(const VPiece &det) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiece::MissingCSAPath(const VPiece &det) const
 {
-    const QVector<CustomSARecord> detRecords = det.GetCustomSARecords();
-    if (d->m_customSARecords.size() == detRecords.size()) //-V807
-    {
-        return QVector<quint32>();
-    }
-
-    QSet<quint32> set1;
+    QVector<quint32> oldCSARecords;
     for (qint32 i = 0; i < d->m_customSARecords.size(); ++i)
     {
-        set1.insert(d->m_customSARecords.at(i).path);
+        oldCSARecords.append(d->m_customSARecords.at(i).path);
     }
 
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < detRecords.size(); ++j)
+    QVector<quint32> newCSARecords;
+    for (qint32 i = 0; i < det.GetCustomSARecords().size(); ++i)
     {
-        set2.insert(detRecords.at(j).path);
+        newCSARecords.append(det.GetCustomSARecords().at(i).path);
     }
 
-    const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<quint32> r;
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        r.append(set3.at(i));
-    }
-
-    return r;
+    return PieceMissingNodes(oldCSARecords, newCSARecords);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
 {
-    const QVector<quint32> detRecords = det.GetInternalPaths();
-    if (d->m_internalPaths.size() == detRecords.size()) //-V807
-    {
-        return QVector<quint32>();
-    }
-
-    QSet<quint32> set1;
-    for (qint32 i = 0; i < d->m_internalPaths.size(); ++i)
-    {
-        set1.insert(d->m_internalPaths.at(i));
-    }
-
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < detRecords.size(); ++j)
-    {
-        set2.insert(detRecords.at(j));
-    }
-
-    const QList<quint32> set3 = set1.subtract(set2).toList();
-    QVector<quint32> r;
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        r.append(set3.at(i));
-    }
-
-    return r;
+    return PieceMissingNodes(d->m_internalPaths, det.GetInternalPaths());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternPieceData(const VPatternPieceData &data)
+QVector<quint32> VPiece::MissingPins(const VPiece &det) const
+{
+    return PieceMissingNodes(d->m_pins, det.GetPins());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPatternPieceData(const VPieceLabelData &data)
 {
     d->m_ppData = data;
 }
@@ -405,7 +423,7 @@ void VPiece::SetPatternPieceData(const VPatternPieceData &data)
  * @brief Returns full access to the pattern piece data object
  * @return pattern piece data object
  */
-VPatternPieceData &VPiece::GetPatternPieceData()
+VPieceLabelData &VPiece::GetPatternPieceData()
 {
     return d->m_ppData;
 }
@@ -415,13 +433,13 @@ VPatternPieceData &VPiece::GetPatternPieceData()
  * @brief Returns the read only reference to the pattern piece data object
  * @return pattern piece data object
  */
-const VPatternPieceData &VPiece::GetPatternPieceData() const
+const VPieceLabelData &VPiece::GetPatternPieceData() const
 {
     return d->m_ppData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternInfo(const VPatternInfoGeometry &info)
+void VPiece::SetPatternInfo(const VPatternLabelData &info)
 {
     d->m_piPatternInfo = info;
 }
@@ -431,7 +449,7 @@ void VPiece::SetPatternInfo(const VPatternInfoGeometry &info)
  * @brief Returns full access to the pattern info geometry object
  * @return pattern info geometry object
  */
-VPatternInfoGeometry &VPiece::GetPatternInfo()
+VPatternLabelData &VPiece::GetPatternInfo()
 {
     return d->m_piPatternInfo;
 }
@@ -441,7 +459,7 @@ VPatternInfoGeometry &VPiece::GetPatternInfo()
  * @brief Returns the read only reference to the pattern info geometry object
  * @return pattern info geometry object
  */
-const VPatternInfoGeometry &VPiece::GetPatternInfo() const
+const VPatternLabelData &VPiece::GetPatternInfo() const
 {
     return d->m_piPatternInfo;
 }
@@ -451,7 +469,7 @@ const VPatternInfoGeometry &VPiece::GetPatternInfo() const
  * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
  * @return reference to grainline geometry object
  */
-VGrainlineGeometry &VPiece::GetGrainlineGeometry()
+VGrainlineData &VPiece::GetGrainlineGeometry()
 {
     return d->m_glGrainline;
 }
@@ -461,7 +479,7 @@ VGrainlineGeometry &VPiece::GetGrainlineGeometry()
  * @brief VDetail::GetGrainlineGeometry returns the read-only reference to the grainline geometry object
  * @return reference to grainline geometry object
  */
-const VGrainlineGeometry &VPiece::GetGrainlineGeometry() const
+const VGrainlineData &VPiece::GetGrainlineGeometry() const
 {
     return d->m_glGrainline;
 }

@@ -91,21 +91,7 @@ void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
 {
-    if (not m_points.isEmpty() && static_cast<quint32>(m_points.size() - 1) >= i)
-    {
-        return m_points.at(static_cast<int>(i));
-    }
-    else
-    {
-        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
-        point->SetPointHighlight(true);
-        point->setParentItem(this);
-        point->SetVisualizationMode(true);
-        m_points.append(point);
-
-        return point;
-    }
-    return nullptr;
+    return VisPath::GetPoint(m_points, i, color);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

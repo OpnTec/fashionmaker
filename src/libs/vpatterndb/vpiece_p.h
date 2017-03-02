@@ -36,9 +36,9 @@
 #include "../vmisc/def.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
-#include "vpatternpiecedata.h"
-#include "vpatterninfogeometry.h"
-#include "vgrainlinegeometry.h"
+#include "floatItemData/vpiecelabeldata.h"
+#include "floatItemData/vpatternlabeldata.h"
+#include "floatItemData/vgrainlinedata.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -54,6 +54,7 @@ public:
           m_united(false),
           m_customSARecords(),
           m_internalPaths(),
+          m_pins(),
           m_ppData(),
           m_piPatternInfo(),
           m_glGrainline(),
@@ -69,6 +70,7 @@ public:
           m_united(detail.m_united),
           m_customSARecords(detail.m_customSARecords),
           m_internalPaths(detail.m_internalPaths),
+          m_pins(detail.m_pins),
           m_ppData(detail.m_ppData),
           m_piPatternInfo(detail.m_piPatternInfo),
           m_glGrainline(detail.m_glGrainline),
@@ -88,15 +90,16 @@ public:
 
     QVector<CustomSARecord> m_customSARecords;
     QVector<quint32>        m_internalPaths;
+    QVector<quint32>        m_pins;
 
     /** @brief Pattern piece data */
-    VPatternPieceData m_ppData;
+    VPieceLabelData m_ppData;
 
     /** @brief Pattern info coordinates */
-    VPatternInfoGeometry m_piPatternInfo;
+    VPatternLabelData m_piPatternInfo;
 
     /** @brief m_glGrainline grainline geometry object*/
-    VGrainlineGeometry m_glGrainline;
+    VGrainlineData m_glGrainline;
 
     QString m_formulaWidth;
 

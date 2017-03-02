@@ -35,7 +35,7 @@
 #include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 #include "vtextmanager.h"
@@ -238,7 +238,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
  * @param qsName detail name
  * @param data reference to the detail data
  */
-void VTextManager::Update(const QString& qsName, const VPatternPieceData& data)
+void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
 {
     ClearSourceLines();
     TextLine tl;

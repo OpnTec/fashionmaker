@@ -359,7 +359,7 @@ bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
  * @param qsName name of detail
  * @param data reference to VPatternPieceData
  */
-void VTextGraphicsItem::UpdateData(const QString &qsName, const VPatternPieceData &data)
+void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData &data)
 {
     m_tm.Update(qsName, data);
 }
@@ -401,7 +401,7 @@ int VTextGraphicsItem::GetFontSize() const
  */
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         // record the parameters of the mouse press. Specially record the position
         // of the press as the origin for the following operations
@@ -413,28 +413,47 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         m_dRotation = rotation();
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
-        if (m_eMode != mRotate)
+
+        if (m_moveType == OnlyRotatable)
         {
-            // if user pressed the button inside the resize square, switch to resize mode
-            if (m_rectResize.contains(pME->pos()) == true)
+            if (m_eMode != mRotate)
             {
-                m_eMode = mResize;
-                SetOverrideCursor(Qt::SizeFDiagCursor);
+                m_eMode = mRotate;
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
             else
             {
-                // if user pressed the button outside the resize square, switch to move mode
-                m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
+
+            setZValue(ACTIVE_Z);
+            Update();
         }
-        else
+        else // All modifications
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            if (m_eMode != mRotate)
+            {
+                // if user pressed the button inside the resize square, switch to resize mode
+                if (m_rectResize.contains(pME->pos()) == true)
+                {
+                    m_eMode = mResize;
+                    SetOverrideCursor(Qt::SizeFDiagCursor);
+                }
+                else
+                {
+                    // if user pressed the button outside the resize square, switch to move mode
+                    m_eMode = mMove;
+                    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                }
+            }
+            else
+            {
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            }
+            // raise the label and redraw it
+            setZValue(ACTIVE_Z);
+            UpdateBox();
         }
-        // raise the label and redraw it
-        setZValue(ACTIVE_Z);
-        UpdateBox();
     }
 }
 
@@ -553,7 +572,10 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         {   // in rotate mode, if user did just press/release, switch to move mode
             if (bShort == true)
             {
-                m_eMode = mMove;
+                if (m_moveType != OnlyRotatable)
+                {
+                    m_eMode = mMove;
+                }
                 UpdateBox();
             }
             else

@@ -65,6 +65,7 @@ void AddPiece::undo()
             DecrementReferences(m_detail.GetPath().GetNodes());
             DecrementReferences(m_detail.GetCustomSARecords());
             DecrementReferences(m_detail.GetInternalPaths());
+            DecrementReferences(m_detail.GetPins());
         }
         else
         {

@@ -31,14 +31,16 @@
 
 #include "dialogtool.h"
 #include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 
 namespace Ui
 {
     class DialogSeamAllowance;
 }
+
+class VisPiecePins;
 
 class DialogSeamAllowance : public DialogTool
 {
@@ -77,6 +79,7 @@ private slots:
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
+    void ShowPinsContextMenu(const QPoint &pos);
 
     void ListChanged();
     void EnableSeamAllowance(bool enable);
@@ -89,6 +92,7 @@ private slots:
     void ReturnDefAfter();
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
+    void TabChanged(int index);
 
     void UpdateValues();
     void SetAddMode();
@@ -115,25 +119,34 @@ private slots:
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
 
+    void GrainlinePinPointChanged();
+    void DetailPinPointChanged();
+    void PatternPinPointChanged();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
     Ui::DialogSeamAllowance *ui;
     bool   applyAllowed;
+    bool   flagGPin;
+    bool   flagDPin;
+    bool   flagPPin;
+    bool   flagGFormulas;
     bool   m_bAddMode;
     qreal  m_mx;
     qreal  m_my;
 
-    QPointer<DialogTool> m_dialog;
+    QPointer<DialogTool>   m_dialog;
+    QPointer<VisPiecePins> m_visPins;
 
     QStringList      m_qslMaterials;
     QStringList      m_qslPlacements;
     // temporary container for Material/Cut/Placement 3-tuples
     MCPContainer m_conMCP;
 
-    VPatternPieceData    m_oldData;
-    VPatternInfoGeometry m_oldGeom;
-    VGrainlineGeometry   m_oldGrainline;
+    VPieceLabelData    m_oldData;
+    VPatternLabelData m_oldGeom;
+    VGrainlineData   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
     int                  m_formulaBaseWidth;
@@ -150,6 +163,7 @@ private:
     void    NewMainPathItem(const VPieceNode &node);
     void    NewCustomSA(const CustomSARecord &record);
     void    NewInternalPath(quint32 path);
+    void    NewPin(quint32 pinPoint);
     QString GetPathName(quint32 path, bool reverse = false) const;
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
@@ -172,12 +186,20 @@ private:
     void InitSeamAllowanceTab();
     void InitNodesList();
     void InitCSAPoint(QComboBox *box);
+    void InitPinPoint(QComboBox *box);
     void InitSAIncludeType();
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
     void InitGrainlineTab();
+    void InitPinsTab();
+    void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
+
+    template <typename T>
+    QVector<T> GetPieceInternals(const QListWidget *list) const;
+    void SetGrainlineAngle(const VGrainlineData &data);
+    void SetGrainlineLength(const VGrainlineData &data);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

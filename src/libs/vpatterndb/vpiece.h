@@ -39,9 +39,9 @@ class VPieceNode;
 template <class T> class QVector;
 template <class T>class QSharedPointer;
 class VPiecePath;
-class VPatternInfoGeometry;
-class VPatternPieceData;
-class VGrainlineGeometry;
+class VPatternLabelData;
+class VPieceLabelData;
+class VGrainlineData;
 class VContainer;
 class QPainterPath;
 class VPointF;
@@ -81,27 +81,32 @@ public:
     void    SetFormulaSAWidth(const QString &formula, qreal value);
 
     QVector<quint32> GetInternalPaths() const;
+    QVector<quint32> &GetInternalPaths();
     void             SetInternalPaths(const QVector<quint32> &iPaths);
-    void             AppendInternalPath(quint32 path);
 
     QVector<CustomSARecord> GetCustomSARecords() const;
+    QVector<CustomSARecord> &GetCustomSARecords();
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
-    void                    AppendCustomSARecord(const CustomSARecord &record);
+
+    QVector<quint32> GetPins() const;
+    QVector<quint32> &GetPins();
+    void             SetPins(const QVector<quint32> &pins);
 
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
     QVector<quint32> MissingInternalPaths(const VPiece &det) const;
+    QVector<quint32> MissingPins(const VPiece &det) const;
 
-    void                     SetPatternPieceData(const VPatternPieceData &data);
-    VPatternPieceData&       GetPatternPieceData();
-    const VPatternPieceData& GetPatternPieceData() const;
+    void                     SetPatternPieceData(const VPieceLabelData &data);
+    VPieceLabelData&       GetPatternPieceData();
+    const VPieceLabelData& GetPatternPieceData() const;
 
-    void                        SetPatternInfo(const VPatternInfoGeometry &info);
-    VPatternInfoGeometry&       GetPatternInfo();
-    const VPatternInfoGeometry& GetPatternInfo() const;
+    void                        SetPatternInfo(const VPatternLabelData &info);
+    VPatternLabelData&       GetPatternInfo();
+    const VPatternLabelData& GetPatternInfo() const;
 
-    VGrainlineGeometry&         GetGrainlineGeometry();
-    const VGrainlineGeometry&   GetGrainlineGeometry() const;
+    VGrainlineData&         GetGrainlineGeometry();
+    const VGrainlineData&   GetGrainlineGeometry() const;
 
 private:
     QSharedDataPointer<VPieceData> d;

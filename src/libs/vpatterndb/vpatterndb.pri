@@ -17,13 +17,14 @@ SOURCES += \
     $$PWD/variables/vmeasurement.cpp \
     $$PWD/variables/vvariable.cpp \
     $$PWD/vformula.cpp \
-    $$PWD/vpatternpiecedata.cpp \
-    $$PWD/vpatterninfogeometry.cpp \
-    $$PWD/vgrainlinegeometry.cpp \
     $$PWD/variables/vcurveclength.cpp \
     $$PWD/vpiece.cpp \
     $$PWD/vpiecenode.cpp \
-    $$PWD/vpiecepath.cpp
+    $$PWD/vpiecepath.cpp \
+    $$PWD/floatItemData/vpiecelabeldata.cpp \
+    $$PWD/floatItemData/vpatternlabeldata.cpp \
+    $$PWD/floatItemData/vgrainlinedata.cpp \
+    $$PWD/floatItemData/vabstractfloatitemdata.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -54,13 +55,19 @@ HEADERS += \
     $$PWD/variables/vvariable.h \
     $$PWD/variables/vvariable_p.h \
     $$PWD/vformula.h \
-    $$PWD/vpatternpiecedata.h \
-    $$PWD/vpatterninfogeometry.h \
-    $$PWD/vgrainlinegeometry.h \
     $$PWD/variables/vcurveclength.h \
     $$PWD/vpiece.h \
     $$PWD/vpiece_p.h \
     $$PWD/vpiecenode.h \
     $$PWD/vpiecenode_p.h \
     $$PWD/vpiecepath.h \
-    $$PWD/vpiecepath_p.h
+    $$PWD/vpiecepath_p.h \
+    $$PWD/floatItemData/vpiecelabeldata.h \
+    $$PWD/floatItemData/vpatternlabeldata.h \
+    $$PWD/floatItemData/vgrainlinedata.h \
+    $$PWD/floatItemData/vabstractfloatitemdata.h \
+    $$PWD/floatItemData/vabstractfloatitemdata_p.h \
+    $$PWD/floatItemData/vgrainlinedata_p.h \
+    $$PWD/floatItemData/floatitemdef.h \
+    $$PWD/floatItemData/vpatternlabeldata_p.h \
+    $$PWD/floatItemData/vpiecelabeldata_p.h

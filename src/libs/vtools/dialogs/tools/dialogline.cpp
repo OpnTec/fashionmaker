@@ -216,11 +216,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  */
 quint32 DialogLine::GetFirstPoint() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(ui->comboBoxFirstPoint->currentIndex()));
-#else
-    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
-#endif
+    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxFirstPoint));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,11 +226,7 @@ quint32 DialogLine::GetFirstPoint() const
  */
 quint32 DialogLine::GetSecondPoint() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(ui->comboBoxSecondPoint->currentIndex()));
-#else
-    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
-#endif
+    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxSecondPoint));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

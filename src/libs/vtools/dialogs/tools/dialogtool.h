@@ -262,7 +262,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData() {}
-    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
+    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const;
     virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
     quint32          DNumber(const QString &baseName) const;
 

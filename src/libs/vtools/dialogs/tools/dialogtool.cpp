@@ -86,17 +86,33 @@ Q_LOGGING_CATEGORY(vDialog, "v.dialog")
  * @param parent parent widget
  */
 DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), flagError(true),
-      timerFormula(nullptr), bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), plainTextEditFormula(nullptr),
-      labelResultCalculation(nullptr), labelEditNamePoint(nullptr), labelEditFormula(nullptr),
-      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
-      toolId(toolId), prepare(false), pointName(QString()), number(0), vis(nullptr)
+    : QDialog(parent),
+      data(data),
+      isInitialized(false),
+      flagName(true),
+      flagFormula(true),
+      flagError(true),
+      timerFormula(nullptr),
+      bOk(nullptr),
+      bApply(nullptr),
+      spinBoxAngle(nullptr),
+      plainTextEditFormula(nullptr),
+      labelResultCalculation(nullptr),
+      labelEditNamePoint(nullptr),
+      labelEditFormula(nullptr),
+      okColor(this->palette().color(QPalette::Active, QPalette::WindowText)),
+      errorColor(Qt::red),
+      associatedTool(nullptr),
+      toolId(toolId),
+      prepare(false),
+      pointName(),
+      number(0),
+      vis(nullptr)
 {
     SCASSERT(data != nullptr)
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::~DialogTool()
@@ -337,7 +353,7 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
+void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const
 {
     SCASSERT(plainTextEdit != nullptr)
     QTextCursor cursor = plainTextEdit->textCursor();
@@ -446,12 +462,18 @@ QString DialogTool::DialogWarningIcon()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::GetNodeName(const VPieceNode &node) const
 {
-    const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(node.GetId());
+    const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
 
-    if (node.GetTypeTool() != Tool::NodePoint && node.GetReverse())
+    if (node.GetTypeTool() != Tool::NodePoint)
     {
-        name = QLatin1String("- ") + name;
+        int bias = 0;
+        qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
+
+        if (node.GetReverse())
+        {
+            name = QLatin1String("- ") + name;
+        }
     }
 
     return name;
@@ -470,10 +492,8 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-        {
             name = GetNodeName(node);
             break;
-        }
         default:
             qDebug()<<"Got wrong tools. Ignore.";
             return;
@@ -918,7 +938,7 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 {
     SCASSERT(widget != nullptr)
     QPalette palette = widget->palette();
-    palette.setColor(widget->foregroundRole(), color);
+    palette.setColor(QPalette::Active, widget->foregroundRole(), color);
     widget->setPalette(palette);
 }
 

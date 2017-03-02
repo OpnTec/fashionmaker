@@ -86,31 +86,15 @@ const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-/**
- * @brief CreateNode create new node for detail.
- * @param data container.
- * @param id id parent object.
- * @return id for new object.
- */
-quint32 CreateNode(VContainer *data, quint32 id)
-{
-    //We can't use exist object. Need create new.
-    T *node = new T(*data->GeometricObject<T>(id).data());
-    node->setMode(Draw::Modeling);
-    return data->AddGObject(node);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 quint32 CreateNodeSpline(VContainer *data, quint32 id)
 {
     if (data->GetGObject(id)->getType() == GOType::Spline)
     {
-        return CreateNode<VSpline>(data, id);
+        return VAbstractTool::CreateNode<VSpline>(data, id);
     }
     else
     {
-        return CreateNode<VCubicBezier>(data, id);
+        return VAbstractTool::CreateNode<VCubicBezier>(data, id);
     }
 }
 
@@ -119,11 +103,11 @@ quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
 {
     if (data->GetGObject(id)->getType() == GOType::SplinePath)
     {
-        return CreateNode<VSplinePath>(data, id);
+        return VAbstractTool::CreateNode<VSplinePath>(data, id);
     }
     else
     {
-        return CreateNode<VCubicBezierPath>(data, id);
+        return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
     }
 }
 }//static functions

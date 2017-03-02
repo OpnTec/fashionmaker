@@ -31,8 +31,8 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
@@ -54,6 +54,7 @@
 #include "../undocommands/togglepieceinlayout.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
+#include "../qmuparser/qmutokenparser.h"
 
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
@@ -67,6 +68,7 @@ const quint8 VToolSeamAllowance::pieceVersion = 2;
 const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
 const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
 const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
+const QString VToolSeamAllowance::TagPins    = QStringLiteral("pins");
 
 const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
@@ -74,6 +76,10 @@ const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllow
 const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
+const QString VToolSeamAllowance::AttrTopLeftPin     = QStringLiteral("topLeftPin");
+const QString VToolSeamAllowance::AttrBottomRightPin = QStringLiteral("bottomRightPin");
+const QString VToolSeamAllowance::AttrTopPin         = QStringLiteral("topPin");
+const QString VToolSeamAllowance::AttrBottomPin      = QStringLiteral("bottomPin");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -222,10 +228,26 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins)
+{
+    if (pins.size() > 0)
+    {
+        QDomElement pinsElement = doc->createElement(VToolSeamAllowance::TagPins);
+        for (int i = 0; i < pins.size(); ++i)
+        {
+            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
+            recordNode.appendChild(doc->createTextNode(QString().setNum(pins.at(i))));
+            pinsElement.appendChild(recordNode);
+        }
+        domElement.appendChild(pinsElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    const VPatternPieceData& data = piece.GetPatternPieceData();
+    const VPieceLabelData& data = piece.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
@@ -234,6 +256,24 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
+
+    if (data.TopLeftPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopLeftPin, data.TopLeftPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopLeftPin);
+    }
+
+    if (data.BottomRightPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomRightPin, data.BottomRightPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomRightPin);
+    }
 
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
@@ -255,7 +295,7 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
 void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
-    const VPatternInfoGeometry& geom = piece.GetPatternInfo();
+    const VPatternLabelData& geom = piece.GetPatternInfo();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true ? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
@@ -263,6 +303,25 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
+
+    if (geom.TopLeftPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopLeftPin, geom.TopLeftPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopLeftPin);
+    }
+
+    if (geom.BottomRightPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomRightPin, geom.BottomRightPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomRightPin);
+    }
+
     domElement.appendChild(domData);
 }
 
@@ -271,13 +330,32 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 {
     // grainline
     QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
-    const VGrainlineGeometry& glGeom = piece.GetGrainlineGeometry();
+    const VGrainlineData& glGeom = piece.GetGrainlineGeometry();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true ? trueStr : falseStr);
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
+
+    if (glGeom.TopPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrTopPin, glGeom.TopPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrTopPin);
+    }
+
+    if (glGeom.BottomPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrBottomPin, glGeom.BottomPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrBottomPin);
+    }
+
     domElement.appendChild(domData);
 }
 
@@ -400,33 +478,39 @@ void VToolSeamAllowance::Highlight(quint32 id)
 void VToolSeamAllowance::UpdateLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VPatternPieceData& data = detail.GetPatternPieceData();
+    const VPieceLabelData& labelData = detail.GetPatternPieceData();
 
-    if (data.IsVisible() == true)
+    if (labelData.IsVisible() == true)
     {
+        QPointF pos;
+        qreal labelWidth = 0;
+        qreal labelHeight = 0;
+        const VTextGraphicsItem::MoveType type = FindLabelGeometry(labelData, labelWidth, labelHeight, pos);
+        m_dataLabel->SetMoveType(type);
+
         QFont fnt = qApp->font();
         {
-            const int iFS = data.GetFontSize();
+            const int iFS = labelData.GetFontSize();
             iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
         }
         m_dataLabel->SetFont(fnt);
-        m_dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
-        m_dataLabel->UpdateData(detail.GetName(), data);
-        QPointF pt = data.GetPos();
+        m_dataLabel->SetSize(labelWidth, labelHeight);
+        m_dataLabel->UpdateData(detail.GetName(), labelData);
+
         QRectF rectBB;
-        rectBB.setTopLeft(pt);
+        rectBB.setTopLeft(pos);
         rectBB.setWidth(m_dataLabel->boundingRect().width());
         rectBB.setHeight(m_dataLabel->boundingRect().height());
         qreal dX;
         qreal dY;
-        if (m_dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
+        if (m_dataLabel->IsContained(rectBB, labelData.GetRotation(), dX, dY) == false)
         {
-            pt.setX(pt.x() + dX);
-            pt.setY(pt.y() + dY);
+            pos.setX(pos.x() + dX);
+            pos.setY(pos.y() + dY);
         }
 
-        m_dataLabel->setPos(pt);
-        m_dataLabel->setRotation(data.GetRotation());
+        m_dataLabel->setPos(pos);
+        m_dataLabel->setRotation(labelData.GetRotation());
         m_dataLabel->Update();
         m_dataLabel->show();
     }
@@ -443,10 +527,16 @@ void VToolSeamAllowance::UpdateLabel()
 void VToolSeamAllowance::UpdatePatternInfo()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VPatternInfoGeometry& geom = detail.GetPatternInfo();
+    const VPatternLabelData& geom = detail.GetPatternInfo();
 
     if (geom.IsVisible() == true)
     {
+        QPointF pos;
+        qreal labelWidth = 0;
+        qreal labelHeight = 0;
+        const VTextGraphicsItem::MoveType type = FindLabelGeometry(geom, labelWidth, labelHeight, pos);
+        m_patternInfo->SetMoveType(type);
+
         QFont fnt = qApp->font();
         int iFS = geom.GetFontSize();
         if (iFS < MIN_FONT_SIZE)
@@ -455,23 +545,22 @@ void VToolSeamAllowance::UpdatePatternInfo()
         }
         fnt.setPixelSize(iFS);
         m_patternInfo->SetFont(fnt);
-        m_patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+        m_patternInfo->SetSize(labelWidth, labelHeight);
         m_patternInfo->UpdateData(doc, getData()->size(), getData()->height());
 
-        QPointF pt = geom.GetPos();
         QRectF rectBB;
-        rectBB.setTopLeft(pt);
+        rectBB.setTopLeft(pos);
         rectBB.setWidth(m_patternInfo->boundingRect().width());
         rectBB.setHeight(m_patternInfo->boundingRect().height());
         qreal dX;
         qreal dY;
         if (m_patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
         {
-            pt.setX(pt.x() + dX);
-            pt.setY(pt.y() + dY);
+            pos.setX(pos.x() + dX);
+            pos.setY(pos.y() + dY);
         }
 
-        m_patternInfo->setPos(pt);
+        m_patternInfo->setPos(pos);
         m_patternInfo->setRotation(geom.GetRotation());
         m_patternInfo->Update();
         m_patternInfo->GetTextLines() > 0 ? m_patternInfo->show() : m_patternInfo->hide();
@@ -489,34 +578,23 @@ void VToolSeamAllowance::UpdatePatternInfo()
 void VToolSeamAllowance::UpdateGrainline()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    const VGrainlineGeometry& geom = detail.GetGrainlineGeometry();
+    const VGrainlineData& geom = detail.GetGrainlineGeometry();
 
     if (geom.IsVisible() == true)
     {
-        qreal dRotation;
-        qreal dLength;
-        try
-        {
-            QString qsFormula;
-            qsFormula = geom.GetRotation().replace("\n", " ");
-            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+        QPointF pos;
+        qreal dRotation = 0;
+        qreal dLength = 0;
 
-            Calculator cal1;
-            dRotation = cal1.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
-
-            qsFormula = geom.GetLength().replace("\n", " ");
-            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
-            Calculator cal2;
-            dLength = cal2.EvalFormula(VDataTool::data.PlainVariables(), qsFormula);
-        }
-        catch(qmu::QmuParserError &e)
+        const VGrainlineItem::MoveType type = FindGrainlineGeometry(geom, dLength, dRotation, pos);
+        if (type == VGrainlineItem::Error)
         {
-            Q_UNUSED(e);
             m_grainLine->hide();
             return;
         }
 
-        m_grainLine->UpdateGeometry(geom.GetPos(), dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
+        m_grainLine->SetMoveType(type);
+        m_grainLine->UpdateGeometry(pos, dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
                                     geom.GetArrowType());
         m_grainLine->show();
     }
@@ -662,7 +740,7 @@ void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
     VPiece newDet = oldDet;
 
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
-    newDet.GetGrainlineGeometry().SetLength(qApp->LocaleToString(dLength));
+    newDet.GetGrainlineGeometry().SetLength(QString().setNum(dLength));
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     resizeCommand->setText(tr("resize grainline"));
     connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -676,7 +754,7 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
     VPiece newDet = oldDet;
 
     dRot = qRadiansToDegrees(dRot);
-    newDet.GetGrainlineGeometry().SetRotation(qApp->LocaleToString(dRot));
+    newDet.GetGrainlineGeometry().SetRotation(QString().setNum(dRot));
     newDet.GetGrainlineGeometry().SetPos(ptPos);
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     rotateCommand->setText(tr("rotate grainline"));
@@ -690,22 +768,9 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
  */
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (scene()->views().count() > 0)
-    {
-        const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
-        const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
-
-        const QPoint p = pt - pt0;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        const qreal dScale = qSqrt(QPoint::dotProduct(p, p));
-#else
-        const qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        m_grainLine->SetScale(100/dScale);
-    }
-
-    if (m_dataLabel->IsIdle() == false || m_patternInfo->IsIdle() == false || m_grainLine->IsIdle() == false)
+    if ((m_dataLabel->IsIdle() == false
+            || m_patternInfo->IsIdle() == false
+            || m_grainLine->IsIdle() == false) && not isSelected())
     {
         setSelected(true);
     }
@@ -729,6 +794,7 @@ void VToolSeamAllowance::AddToFile()
     //custom seam allowance
     AddCSARecords(doc, domElement, piece.GetCustomSARecords());
     AddInternalPaths(doc, domElement, piece.GetInternalPaths());
+    AddPins(doc, domElement, piece.GetPins());
 
     AddPiece *addDet = new AddPiece(domElement, doc, piece, m_drawName);
     connect(addDet, &AddPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
@@ -761,6 +827,7 @@ void VToolSeamAllowance::RefreshDataInFile()
                 AddNodes(doc, domElement, piece);
                 AddCSARecords(doc, domElement, piece.GetCustomSARecords());
                 AddInternalPaths(doc, domElement, piece.GetInternalPaths());
+                AddPins(doc, domElement, piece.GetPins());
             }
         }
     }
@@ -1009,6 +1076,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     InitNodes(detail, scene);
     InitCSAPaths(detail);
     InitInternalPaths(detail);
+    InitPins(detail);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
@@ -1089,6 +1157,114 @@ void VToolSeamAllowance::SaveDialogChange()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPieceItem::MoveType VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData, qreal &labelWidth,
+                                                           qreal &labelHeight, QPointF &pos)
+{
+    const quint32 topLeftPin = labelData.TopLeftPin();
+    const quint32 bottomRightPin = labelData.BottomRightPin();
+
+    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID)
+    {
+        try
+        {
+            const auto topLeftPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topLeftPin);
+            const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
+
+            const QRectF labelRect = QRectF(*topLeftPinPoint, *bottomRightPinPoint);
+            labelWidth = qAbs(labelRect.width());
+            labelHeight = qAbs(labelRect.height());
+
+            pos = labelRect.topLeft();
+
+            return VTextGraphicsItem::OnlyRotatable;
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing.
+        }
+    }
+
+    labelWidth = labelData.GetLabelWidth();
+    labelHeight = labelData.GetLabelHeight();
+    pos = labelData.GetPos();
+    return VTextGraphicsItem::AllModifications;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceItem::MoveType VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData& geom, qreal &length,
+                                                               qreal &rotationAngle, QPointF &pos)
+{
+    const quint32 topPin = geom.TopPin();
+    const quint32 bottomPin = geom.BottomPin();
+
+    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    {
+        try
+        {
+            const auto topPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topPin);
+            const auto bottomPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomPin);
+
+            QLineF grainline(*bottomPinPoint, *topPinPoint);
+            length = FromPixel(grainline.length(), *VDataTool::data.GetPatternUnit());
+            rotationAngle = grainline.angle();
+
+            if (not VFuzzyComparePossibleNulls(rotationAngle, 0))
+            {
+                grainline.setAngle(0);
+            }
+
+            pos = grainline.p1();
+
+            return VPieceItem::NotMovable;
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing.
+        }
+    }
+
+    bool isResizable = false;
+    bool isRotatable = false;
+    try
+    {
+        isRotatable = qmu::QmuTokenParser::IsSingle(geom.GetRotation());
+
+        Calculator cal1;
+        rotationAngle = cal1.EvalFormula(VAbstractTool::data.PlainVariables(), geom.GetRotation());
+
+        isResizable = qmu::QmuTokenParser::IsSingle(geom.GetLength());
+
+        Calculator cal2;
+        length = cal2.EvalFormula(VAbstractTool::data.PlainVariables(), geom.GetLength());
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e);
+        return VPieceItem::Error;
+    }
+
+    pos = geom.GetPos();
+
+    if (isResizable && isRotatable)
+    {
+        return VPieceItem::AllModifications;
+    }
+    else
+    {
+        if (isResizable)
+        {
+            return VPieceItem::OnlyResizable;
+        }
+
+        if (isRotatable)
+        {
+            return VPieceItem::OnlyRotatable;
+        }
+    }
+    return VPieceItem::OnlyMovable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *scene)
 {
     for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
@@ -1117,25 +1293,32 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitCSAPaths(const VPiece &detail)
 {
-    QVector<CustomSARecord> records = detail.GetCustomSARecords();
-    for (int i = 0; i < records.size(); ++i)
+    for (int i = 0; i < detail.GetCustomSARecords().size(); ++i)
     {
-        doc->IncrementReferens(records.at(i).path);
+        doc->IncrementReferens(detail.GetCustomSARecords().at(i).path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
-    QVector<quint32> records = detail.GetInternalPaths();
-    for (int i = 0; i < records.size(); ++i)
+    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
     {
-        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(records.at(i)));
+        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(detail.GetInternalPaths().at(i)));
         SCASSERT(tool != nullptr);
         tool->setParentItem(this);
         tool->SetParentType(ParentType::Item);
         tool->show();
-        doc->IncrementReferens(records.at(i));
+        doc->IncrementReferens(detail.GetInternalPaths().at(i));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitPins(const VPiece &detail)
+{
+    for (int i = 0; i < detail.GetPins().size(); ++i)
+    {
+        doc->IncrementReferens(detail.GetPins().at(i));
     }
 }
 

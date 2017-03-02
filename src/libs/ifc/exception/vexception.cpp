@@ -73,7 +73,7 @@ VException &VException::operator=(const VException &e)
  */
 QString VException::ErrorMessage() const
 {
-    return QString("Exception: %1").arg(error);
+    return tr("Exception: %1").arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

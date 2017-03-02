@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="24"
+   version="1.1"
+   width="24"
+   id="svg14"
+   sodipodi:docname="pin.svg"
+   inkscape:export-filename="/home/dismine/CAD/Valentina_cpoint/valentina/src/app/valentina/share/resources/toolicon/32x32/pin@2x.png"
+   inkscape:export-xdpi="256"
+   inkscape:export-ydpi="256"
+   inkscape:version="0.92.0 unknown">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1460"
+     inkscape:window-height="829"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="9.8333333"
+     inkscape:cx="-8.0847458"
+     inkscape:cy="12"
+     inkscape:window-x="75"
+     inkscape:window-y="34"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14" />
+  <g
+     transform="matrix(1.080652,0,0,1.0806515,-1.8456748,-1111.4295)"
+     id="g12">
+    <g
+       transform="matrix(0.70711,0.70711,-0.70711,0.70711,737.68,297.72)"
+       id="g10">
+      <path
+         d="m 11,1028.4 v 13 h 1 6.406 c -0.595,-1.1 -1.416,-2.1 -2.406,-2.8 v -8 c 0.616,-0.6 1.131,-1.4 1.531,-2.2 H 12 Z"
+         id="path2"
+         inkscape:connector-curvature="0"
+         style="fill:#c0392b" />
+      <path
+         d="m 11,13 v 2 4 2 l 1,2 v -2 -6 -2 z"
+         transform="translate(0,1028.4)"
+         id="path4"
+         inkscape:connector-curvature="0"
+         style="fill:#bdc3c7" />
+      <path
+         d="m 12,13 v 2 4 2 2 l 1,-2 v -2 -4 -2 z"
+         transform="translate(0,1028.4)"
+         id="path6"
+         inkscape:connector-curvature="0"
+         style="fill:#7f8c8d" />
+      <path
+         d="m 6.4688,1028.4 c 0.4006,0.8 0.915,1.6 1.5312,2.2 v 8 c -0.9897,0.7 -1.8113,1.7 -2.4062,2.8 H 12 v -13 z"
+         id="path8"
+         inkscape:connector-curvature="0"
+         style="fill:#e74c3c" />
+    </g>
+  </g>
+</svg>

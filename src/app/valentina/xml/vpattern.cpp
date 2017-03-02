@@ -51,9 +51,9 @@
 #include "../core/vapplication.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vpatternpiecedata.h"
-#include "../vpatterndb/vpatterninfogeometry.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vnodedetail.h"
 
@@ -717,7 +717,8 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                                                << TagPatternInfo
                                                << TagGrainline
                                                << VToolSeamAllowance::TagCSA
-                                               << VToolSeamAllowance::TagIPaths;
+                                               << VToolSeamAllowance::TagIPaths
+                                               << VToolSeamAllowance::TagPins;
 
         const QDomNodeList nodeList = domElement.childNodes();
         for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -756,6 +757,9 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                         break;
                     case 5:// VToolSeamAllowance::TagIPaths
                         detail.SetInternalPaths(ParsePieceInternalPaths(element));
+                        break;
+                    case 6:// VToolSeamAllowance::TagPins
+                        detail.SetPins(ParsePiecePins(element));
                         break;
                     default:
                         break;
@@ -824,6 +828,12 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternPieceData().SetRotation(dRot);
 
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    detail.GetPatternPieceData().SetTopLeftPin(topLeftPin);
+
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+    detail.GetPatternPieceData().SetBottomRightPin(bottomRightPin);
+
     QDomNodeList nodeListMCP = domElement.childNodes();
     for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
     {
@@ -856,6 +866,12 @@ void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &deta
     detail.GetPatternInfo().SetFontSize(iFS);
     qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
     detail.GetPatternInfo().SetRotation(dRot);
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    detail.GetPatternInfo().SetTopLeftPin(topLeftPin);
+
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+    detail.GetPatternInfo().SetBottomRightPin(bottomRightPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -870,9 +886,14 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     detail.GetGrainlineGeometry().SetLength(qsLength);
     QString qsRot = GetParametrString(domElement, AttrRotation, "90");
     detail.GetGrainlineGeometry().SetRotation(qsRot);
-    VGrainlineGeometry::ArrowType eAT =
-            VGrainlineGeometry::ArrowType(GetParametrUInt(domElement, AttrArrows, "0"));
+    ArrowType eAT = static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0"));
     detail.GetGrainlineGeometry().SetArrowType(eAT);
+
+    const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
+    detail.GetGrainlineGeometry().SetTopPin(topPin);
+
+    const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
+    detail.GetGrainlineGeometry().SetBottomPin(bottomPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -963,7 +984,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointFromCircleAndTangent::ToolType  /*19*/
                                        << VToolPointFromArcAndTangent::ToolType     /*20*/
                                        << VToolTrueDarts::ToolType                  /*21*/
-                                       << VToolPointOfIntersectionCurves::ToolType; /*22*/
+                                       << VToolPointOfIntersectionCurves::ToolType  /*22*/
+                                       << VToolPin::ToolType;                       /*23*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -1034,6 +1056,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             break;
         case 22: //VToolPointOfIntersectionCurves::ToolType
             ParseToolPointOfIntersectionCurves(scene, domElement, parse);
+            break;
+        case 23: //VToolPin::ToolType
+            ParsePinPoint(domElement, parse);
             break;
         default:
             VException e(tr("Unknown point type '%1'.").arg(type));
@@ -1531,6 +1556,28 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
     catch (const VExceptionBadId &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &parse)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        VToolPin::Create(id, idObject, NULL_ID, this, data, parse, Source::FromFile, "", idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating pin point"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
@@ -3726,7 +3773,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 51, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 52, "Not all tools were used.");
 
     QRectF rec;
 
@@ -3860,6 +3907,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::NodeSplinePath:
                 case Tool::Group:
                 case Tool::PiecePath:
+                case Tool::Pin:
                     break;
             }
         }

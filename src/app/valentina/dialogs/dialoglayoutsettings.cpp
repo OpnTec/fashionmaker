@@ -824,12 +824,7 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
 QSizeF DialogLayoutSettings::Template()
 {
     PaperSizeTemplate temp;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->itemData(ui->comboBoxTemplates->currentIndex())
-                                          .toInt());
-#else
-    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
-#endif
+    temp = static_cast<PaperSizeTemplate>(CURRENT_DATA(ui->comboBoxTemplates).toInt());
 
     switch (temp)
     {
@@ -981,23 +976,13 @@ QMarginsF DialogLayoutSettings::GetDefPrinterFields() const
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->itemData(ui->comboBoxPaperSizeUnit->currentIndex())
-                                    .toString());
-#else
-    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
-#endif
+    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxPaperSizeUnit).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::LayoutUnit() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->itemData(ui->comboBoxLayoutUnit->currentIndex())
-                                    .toString());
-#else
-    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
-#endif
+    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxLayoutUnit).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

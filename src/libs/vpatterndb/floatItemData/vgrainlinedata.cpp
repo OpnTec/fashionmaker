@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vgrainlinegeometry.cpp
+ **  @file   vgrainlinedata.cpp
  **  @author Bojan Kverh
  **  @date   September 06, 2016
  **
@@ -28,83 +28,93 @@
 
 #include <QPointF>
 
-#include "vgrainlinegeometry.h"
+#include "vgrainlinedata.h"
+#include "vgrainlinedata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-
-VGrainlineGeometry::VGrainlineGeometry()
-    :m_ptPos(0, 0), m_qsLength(), m_qsRotation(), m_bVisible(false), m_eArrowType(atBoth)
+VGrainlineData::VGrainlineData()
+    : VAbstractFloatItemData(),
+      d(new VGrainlineDataPrivate())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VGrainlineData::VGrainlineData(const VGrainlineData &data)
+    : VAbstractFloatItemData(data),
+      d (data.d)
+{}
 
-QPointF VGrainlineGeometry::GetPos() const
+//---------------------------------------------------------------------------------------------------------------------
+VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
 {
-    return m_ptPos;
+    if ( &data == this )
+    {
+        return *this;
+    }
+    VAbstractFloatItemData::operator=(data);
+    d = data.d;
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VGrainlineData::~VGrainlineData()
+{}
 
-void VGrainlineGeometry::SetPos(const QPointF &ptPos)
+//---------------------------------------------------------------------------------------------------------------------
+QString VGrainlineData::GetLength() const
 {
-    m_ptPos = ptPos;
+    return d->m_qsLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-QString VGrainlineGeometry::GetLength() const
+void VGrainlineData::SetLength(const QString& qsLen)
 {
-    return m_qsLength;
+    d->m_qsLength = qsLen;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-void VGrainlineGeometry::SetLength(const QString& qsLen)
+QString VGrainlineData::GetRotation() const
 {
-    m_qsLength = qsLen;
+    return d->m_dRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-QString VGrainlineGeometry::GetRotation() const
+void VGrainlineData::SetRotation(const QString& qsRot)
 {
-    return m_qsRotation;
+    d->m_dRotation = qsRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-void VGrainlineGeometry::SetRotation(const QString& qsRot)
+ArrowType VGrainlineData::GetArrowType() const
 {
-    m_qsRotation = qsRot;
+    return d->m_eArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-bool VGrainlineGeometry::IsVisible() const
+void VGrainlineData::SetArrowType(ArrowType eAT)
 {
-    return m_bVisible;
+    d->m_eArrowType = eAT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-void VGrainlineGeometry::SetVisible(bool bVisible)
+quint32 VGrainlineData::TopPin() const
 {
-    m_bVisible = bVisible;
+    return d->m_topPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-VGrainlineGeometry::ArrowType VGrainlineGeometry::GetArrowType() const
+void VGrainlineData::SetTopPin(quint32 topPin)
 {
-    return m_eArrowType;
+    d->m_topPin = topPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-void VGrainlineGeometry::SetArrowType(ArrowType eAT)
+quint32 VGrainlineData::BottomPin() const
 {
-    m_eArrowType = eAT;
+    return d->m_bottomPin;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
+void VGrainlineData::SetBottomPin(quint32 bottomPin)
+{
+    d->m_bottomPin = bottomPin;
+}

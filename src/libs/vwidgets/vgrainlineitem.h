@@ -30,7 +30,7 @@
 #define VGRAINLINEITEM_H
 
 #include "vpieceitem.h"
-#include "../vpatterndb/vgrainlinegeometry.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 
 class VGrainlineItem : public VPieceItem
 {
@@ -39,12 +39,12 @@ public:
     explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
     virtual ~VGrainlineItem();
 
+    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
+
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
-    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength,
-                                VGrainlineGeometry::ArrowType eAT);
+    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
-    void SetScale(qreal dScale);
 
 signals:
     void SignalResized(qreal dLength);
@@ -54,8 +54,12 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* pME) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pME) Q_DECL_OVERRIDE;
     virtual void Update() Q_DECL_OVERRIDE;
     void         UpdateRectangle();
+
+    virtual double GetAngle(const QPointF &pt) const Q_DECL_OVERRIDE;
 
     QPointF Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
     QPointF GetInsideCorner(int i, qreal dDist) const;
@@ -75,7 +79,16 @@ private:
     QPointF                       m_ptFinish;
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
-    VGrainlineGeometry::ArrowType m_eArrowType;
+    ArrowType                     m_eArrowType;
+    int                           m_penWidth;
+
+    qreal GetScale() const;
+
+    QLineF    MainLine() const;
+    QPolygonF FirstArrow(qreal dArrLen) const;
+    QPolygonF SecondArrow(qreal dArrLen) const;
+
+    QPainterPath MainShape() const;
 };
 
 #endif // VGRAINLINEITEM_H
