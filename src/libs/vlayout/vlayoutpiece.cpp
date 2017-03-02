@@ -267,6 +267,19 @@ QPointF RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 
     return ptDest + ptCenter;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void CreateLabel(QGraphicsItem *parent, const QPainterPath &path)
+{
+    SCASSERT(parent != nullptr)
+
+    if (not path.isEmpty())
+    {
+        QGraphicsPathItem* item = new QGraphicsPathItem(parent);
+        item->setPath(path);
+        item->setBrush(QBrush(Qt::black));
+    }
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -787,19 +800,6 @@ void VLayoutPiece::CreateInternalPathItem(int i, QGraphicsItem *parent) const
     QPen pen = item->pen();
     pen.setStyle(d->m_internalPaths.at(i).PenStyle());
     item->setPen(pen);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::CreateLabel(QGraphicsItem *parent, const QPainterPath &path) const
-{
-    SCASSERT(parent != nullptr)
-
-    if (not path.isEmpty())
-    {
-        QGraphicsPathItem* item = new QGraphicsPathItem(parent);
-        item->setPath(path);
-        item->setBrush(QBrush(Qt::black));
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

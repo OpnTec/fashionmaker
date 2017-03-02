@@ -126,7 +126,6 @@ private:
     QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
 
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
-    void CreateLabel(QGraphicsItem *parent, const QPainterPath &path) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
