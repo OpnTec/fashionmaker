@@ -50,9 +50,12 @@
 class VLayoutPieceData;
 class VLayoutPiecePath;
 class QGraphicsItem;
+class QGraphicsPathItem;
+class VTextManager;
 
 class VLayoutPiece :public VAbstractPiece
 {
+    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece)
 public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
@@ -114,24 +117,19 @@ public:
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
-    QSharedDataPointer<VLayoutPieceData>   d;
+    QSharedDataPointer<VLayoutPieceData> d;
 
     QVector<QPointF> DetailPath() const;
 
-    void ClearTextItems();
-    void CreateTextItems();
+    QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
+
+    QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
 
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
-    void CreateTextItem(int i, QGraphicsItem *parent) const;
+    void CreateLabel(QGraphicsItem *parent, const QPainterPath &path) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
-    static QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points);
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
-    static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
-
-    static QPointF RotatePoint(const QPointF& ptCenter, const QPointF& pt, qreal dAng);
-    QVector<QPointF> Mirror(const QVector<QPointF>& points) const;
-    static qreal GetDistance(const QPointF& pt1, const QPointF& pt2);
 
     QLineF Edge(const QVector<QPointF> &path, int i) const;
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;

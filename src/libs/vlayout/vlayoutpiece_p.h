@@ -59,12 +59,8 @@ public:
           detailLabel(),
           patternInfo(),
           grainlinePoints(),
-          detailData(),
-          patternGeom(),
-          grainlineGeom(),
           m_tmDetail(),
-          m_tmPattern(),
-          m_liPP()
+          m_tmPattern()
     {}
 
     VLayoutPieceData(const VLayoutPieceData &detail)
@@ -79,12 +75,8 @@ public:
           detailLabel(detail.detailLabel),
           patternInfo(detail.patternInfo),
           grainlinePoints(detail.grainlinePoints),
-          detailData(detail.detailData),
-          patternGeom(detail.patternGeom),
-          grainlineGeom(detail.grainlineGeom),
           m_tmDetail(detail.m_tmDetail),
-          m_tmPattern(detail.m_tmPattern),
-          m_liPP(detail.m_liPP)
+          m_tmPattern(detail.m_tmPattern)
     {}
 
     ~VLayoutPieceData() {}
@@ -111,22 +103,18 @@ public:
 
     /** @brief detailLabel detail label rectangle */
     QVector<QPointF>          detailLabel;
+
     /** @brief patternInfo pattern info rectangle */
     QVector<QPointF>          patternInfo;
+
     /** @brief grainlineInfo line */
     QVector<QPointF>          grainlinePoints;
-    /** @brief detailData detail data */
-    VPieceLabelData         detailData;
-    /** @brief patternGeom pattern geometry */
-    VPatternLabelData      patternGeom;
-    /** @brief grainlineGeom grainline geometry */
-    VGrainlineData        grainlineGeom;
+
     /** @brief m_tmDetail text manager for laying out detail info */
     VTextManager              m_tmDetail;
+
     /** @brief m_tmPattern text manager for laying out pattern info */
     VTextManager              m_tmPattern;
-    /** @bried m_liPP list of generated text painter paths */
-    QList<QPainterPath>       m_liPP;
 
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;

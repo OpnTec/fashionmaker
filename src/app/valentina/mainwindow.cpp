@@ -2352,7 +2352,19 @@ void MainWindow::ActionLayout(bool checked)
 
         SaveCurrentScene();
 
-        PrepareDetailsForLayout(&details);
+        try
+        {
+            PrepareDetailsForLayout(&details);
+        }
+        catch (VException &e)
+        {
+            listDetails.clear();
+            QMessageBox::warning(this, tr("Layout mode"),
+                                 tr("You can't use now the Layout mode. \n%1").arg(e.ErrorMessage()),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+            return;
+        }
 
         currentScene = tempSceneLayout;
         ui->view->itemClicked(nullptr);
