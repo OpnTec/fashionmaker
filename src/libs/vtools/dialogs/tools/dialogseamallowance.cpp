@@ -629,7 +629,7 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
         return;
     }
 
-    QMenu *menu = new QMenu(this);
+    QScopedPointer<QMenu> menu(new QMenu());
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidgetPins->viewport()->mapToGlobal(pos));
