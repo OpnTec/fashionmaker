@@ -50,7 +50,7 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-const QString defaultFeedURL = QStringLiteral("http://valentinaproject.bitbucket.org/Appcast.xml");
+const QString defaultFeedURL = QStringLiteral("http://valentinaproject.bitbucket.io/Appcast.xml");
 
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
