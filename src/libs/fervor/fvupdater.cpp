@@ -301,6 +301,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/xml"));
     request.setHeader(QNetworkRequest::UserAgentHeader, QApplication::applicationName());
     request.setUrl(url);
+    request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
 
     m_reply = m_qnam.get(request);
 
@@ -345,7 +346,7 @@ void FvUpdater::httpFeedDownloadFinished()
     }
 
     const QVariant redirectionTarget = m_reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-    if (m_reply->error())
+    if (m_reply->error() != QNetworkReply::NoError)
     {
         // Error.
         showErrorDialog(tr("Feed download failed: %1.").arg(m_reply->errorString()), false);
