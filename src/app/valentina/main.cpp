@@ -64,6 +64,9 @@ int main(int argc, char *argv[])
 
     app.InitOptions();
 
+    // Due to unknown reasons version checker cause a crash. See issue #633.
+    // Before we will find what cause such crashes it will stay disabled in Release mode.
+#ifndef V_NO_ASSERT
     if (VApplication::IsGUIMode())
     {
         // Set feed URL before doing anything else
@@ -72,6 +75,7 @@ int main(int argc, char *argv[])
         // Check for updates automatically
         FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
     }
+#endif // V_NO_ASSERT
 
     MainWindow w;
 #if !defined(Q_OS_MAC)
