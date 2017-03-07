@@ -3655,6 +3655,25 @@ Applicare le impostazioni comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Finestra</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Punto:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <source>Point from arc and tangent</source>
@@ -4604,6 +4623,30 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Just rear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no pin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6675,6 +6718,19 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Pattern files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. 
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8723,6 +8779,13 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8738,6 +8801,13 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Formula</source>
         <translation>Formula</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9009,6 +9079,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10266,52 +10340,52 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sen</translation>
+        <translation type="vanished">sen</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tg</translation>
+        <translation type="vanished">tg</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>arcsen</translation>
+        <translation type="vanished">arcsen</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>arccos</translation>
+        <translation type="vanished">arccos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>arctg</translation>
+        <translation type="vanished">arctg</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation>senh</translation>
+        <translation type="vanished">senh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation>cish</translation>
+        <translation type="vanished">cish</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation>tanh</translation>
+        <translation type="vanished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>arcsinh</translation>
+        <translation type="vanished">arcsinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10321,7 +10395,7 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>arctanh</translation>
+        <translation type="vanished">arctanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10479,11 +10553,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">arccosh</translation>
-    </message>
-    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10516,6 +10585,136 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation type="unfinished">sen</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation type="unfinished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation type="unfinished">tg</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation type="unfinished">arcsen</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation type="unfinished">arccos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation type="unfinished">arctg</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished">senh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished">cish</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished">arcsinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished">arccosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished">arctanh</translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinhD</source>
+        <comment>hyperbolic sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>coshD</source>
+        <comment>hyperbolic cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanhD</source>
+        <comment>hyperbolic tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinhD</source>
+        <comment>hyperbolic arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acoshD</source>
+        <comment>hyperbolic arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanhD</source>
+        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

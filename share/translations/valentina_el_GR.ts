@@ -3570,7 +3570,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Διαγραφή</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
@@ -3578,15 +3578,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής πριν</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής μετά</translation>
     </message>
     <message>
         <source>Internal path</source>
@@ -3598,7 +3598,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">Χρειάζονται περισσότερα σημεία!</translation>
+        <translation>Χρειάζονται περισσότερα σημεία!</translation>
     </message>
     <message>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
@@ -3610,6 +3610,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>List of objects is empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Διάλογος</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Σημείο:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4391,23 +4410,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Προσθήκη</translation>
+        <translation>Προσθήκη</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Ακύρωση</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
+        <translation>Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished">Εμφάνιση ετικέτας πατρόν</translation>
+        <translation>Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4447,11 +4466,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Διαγραφή</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Επιλογές</translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
@@ -4471,31 +4490,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Ενημέρωση</translation>
+        <translation>Ενημέρωση</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Τρέχων περιθώριο ραφής</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής πριν</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους περιθωρίου ραφής μετά</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">Χρειάζονται περισσότερα σημεία!</translation>
+        <translation>Χρειάζονται περισσότερα σημεία!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished">Πρέπει να επιλέξετε τα σημεία με ορολογιακή φορά!</translation>
+        <translation>Πρέπει να επιλέξετε σημεία δεξιόστροφα!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -4536,6 +4555,30 @@ Apply settings anyway?</source>
     <message>
         <source>Just rear</source>
         <translation type="unfinished">Μόνο πίσω</translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no pin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6574,6 +6617,19 @@ Do you want to save your changes?</source>
         <source>Pattern files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. 
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8493,6 +8549,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8508,6 +8571,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <translation>Φόρμουλα</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8779,6 +8849,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9183,7 +9257,7 @@ Do you want to save your changes?</source>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Τρέχων περιθώριο ραφής</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -9223,7 +9297,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Επιλογές</translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -9231,7 +9305,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Διαγραφή</translation>
+        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -10066,57 +10140,17 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>ημίτονο</translation>
+        <translation type="vanished">ημίτονο</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>συνημίτονο</translation>
+        <translation type="vanished">συνημίτονο</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>εφαπτομένη</translation>
-    </message>
-    <message>
-        <source>asin</source>
-        <comment>arcus sine function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acos</source>
-        <comment>arcus cosine function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atan</source>
-        <comment>arcus tangens function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">εφαπτομένη</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10274,11 +10308,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation>μέγεθος</translation>
@@ -10311,6 +10340,136 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation type="unfinished">ημίτονο</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation type="unfinished">συνημίτονο</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation type="unfinished">εφαπτομένη</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinhD</source>
+        <comment>hyperbolic sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>coshD</source>
+        <comment>hyperbolic cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanhD</source>
+        <comment>hyperbolic tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinhD</source>
+        <comment>hyperbolic arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acoshD</source>
+        <comment>hyperbolic arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanhD</source>
+        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

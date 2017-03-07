@@ -3026,7 +3026,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3050,11 +3050,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer l&apos;angle</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la longueur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3426,11 +3426,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir la date de création du plan de coupe (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir le fichier de mesures</translation>
     </message>
 </context>
 <context>
@@ -3588,43 +3588,43 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Chemin</translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <source>Unnamed path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin sans nom</translation>
     </message>
     <message>
         <source>Create name for your path</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nom pour votre chemin</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce:</translation>
     </message>
     <message>
         <source>Type of pen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de crayon:</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">Prêt!</translation>
+        <translation>Prêt!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Marge de couture</translation>
+        <translation>Marge de couture</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3644,83 +3644,102 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nœuds</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nœud:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Avant:</translation>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner à la largeur par défaut</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Défault</translation>
+        <translation>Défaut</translation>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Après:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le chemin principal des objets, &lt;b&gt;Maj.&lt;/b&gt; - inverser la direction de la courbe, &lt;b&gt;Entrée&lt;/b&gt; - finir la création</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Inverser</translation>
+        <translation>Inverser</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge de couture actuelle</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture avant</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture après</translation>
     </message>
     <message>
         <source>Internal path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin interne</translation>
     </message>
     <message>
         <source>Custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnaliser la marge de couture</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">Vous avez besoin de plus de points!</translation>
+        <translation>Vous avez besoin de plus de points!</translation>
     </message>
     <message>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le premier point de la &lt;b&gt;marge de couture personnalisée&lt;/b&gt; ne peut être identique au dernier!</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished">Vous avez des points en double!</translation>
+        <translation>Vous avez des points en double!</translation>
     </message>
     <message>
         <source>List of objects is empty!</source>
+        <translation>La liste des objets est vide!</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogue</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Point :</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished">Pièce:</translation>
     </message>
 </context>
 <context>
@@ -4389,15 +4408,15 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Outil marge de couture</translation>
+        <translation>Outil marge de couture</translation>
     </message>
     <message>
         <source>Main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin principal</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished">Tous les objets du chemin doivent se suivre dans le sens des aiguilles d&apos;une montre.</translation>
+        <translation>Tous les objets du chemin doivent se suivre dans le sens horaire.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -4405,23 +4424,23 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Rotation interdite</translation>
+        <translation>Rotation interdite</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished">Prêt!</translation>
+        <translation>Prêt!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Marge de couture</translation>
+        <translation>Marge de couture</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatique</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4441,43 +4460,43 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nœuds</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nœud:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Avant:</translation>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner à la largeur par défaut</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Défault</translation>
+        <translation>Défaut</translation>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Après:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Personnalisé</translation>
+        <translation>Personnalisé</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point de départ:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point final:</translation>
     </message>
     <message>
         <source>Include as:</source>
@@ -4533,15 +4552,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Retirer</translation>
+        <translation>Retirer</translation>
     </message>
     <message>
         <source>Detail label visible</source>
@@ -4561,15 +4580,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation:</translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Longueur:</translation>
+        <translation>Longueur:</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished">Fleches:</translation>
+        <translation>Flèches:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4585,15 +4604,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Inverser</translation>
+        <translation>Inverser</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Options</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
@@ -4613,27 +4632,27 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge de couture actuelle</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture avant</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la largeur de la marge de couture après</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">Vous avez besoin de plus de points!</translation>
+        <translation>Vous avez besoin de plus de points!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
@@ -4645,15 +4664,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished">Vous avez des points en double!</translation>
+        <translation>Vous avez des points en double!</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vide</translation>
     </message>
     <message>
         <source>main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin principal</translation>
     </message>
     <message>
         <source>custom seam allowance</source>
@@ -4661,7 +4680,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Cut on fold</source>
@@ -4678,6 +4697,30 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Just rear</source>
         <translation>Juste l&apos;arrière</translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no pin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6678,11 +6721,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture seule</translation>
     </message>
     <message>
         <source>Variables Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Table des variables</translation>
     </message>
     <message>
         <source>Contains information about increments and internal variables</source>
@@ -6746,6 +6789,19 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. 
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8000,7 +8056,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers</translation>
     </message>
     <message>
         <source>The measurements document has no write permissions.</source>
@@ -8020,7 +8076,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture seule</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
@@ -8321,7 +8377,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Orange</translation>
     </message>
     <message>
         <source>deep pink</source>
@@ -8547,11 +8603,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur de page en unité courante, ex. 12.0 (ne peut pas être utilisé avec &quot;%1&quot;, mode exportation).</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur de page en unité courante, ex. 12.0 (ne peut pas être utilisé avec &quot;%1&quot;, mode exportation).</translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="vanished">Unité de mesure de hauteur/largeur de page (&quot;%1&quot; ne peut pas être utilisé, mode exportation):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -8574,24 +8634,44 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Règle les marge à 0.</translation>
     </message>
     <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="vanished">La longueur de décalage doit être spécifiée dans l&apos;unité de  décalage</translation>
+    </message>
+    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation>Largeur d&apos;espacement devant être utilisé avec les largeurs de décalage.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>la marge gauche doit être spécifiée dans l&apos;unité de la page.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>la marge droite doit être spécifiée dans l&apos;unité de la page.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>la marge haute doit être spécifiée dans l&apos;unité de la page.</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>la marge basse doit être spécifiée dans l&apos;unité de la page.</translation>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
@@ -8599,7 +8679,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unité de mesure des hauteur/largeur de la page (&quot;%1&quot; ne peut pas être utilisé, mode exportation). Valeur valide: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
@@ -8607,19 +8687,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -8659,7 +8739,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>la longueur de décalage doit être spécifiée dans l&apos;unité de décalage.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
@@ -8678,15 +8758,15 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VCommonSettings</name>
     <message>
         <source>measurements</source>
-        <translation type="unfinished">mesures</translation>
+        <translation>mesures</translation>
     </message>
     <message>
         <source>individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Individuel</translation>
     </message>
     <message>
         <source>multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>multi-tailles</translation>
     </message>
     <message>
         <source>templates</source>
@@ -8809,6 +8889,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8824,6 +8911,13 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Formula</source>
         <translation>Formule</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9095,10 +9189,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Unnamed path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin sans nom</translation>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9503,7 +9601,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge de couture actuelle</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -9543,7 +9641,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Options</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -9551,7 +9649,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
 </context>
 <context>
@@ -10445,52 +10543,52 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sin</translation>
+        <translation type="vanished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tan</translation>
+        <translation type="vanished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>asin</translation>
+        <translation type="vanished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>acos</translation>
+        <translation type="vanished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>atan</translation>
+        <translation type="vanished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation>sinh</translation>
+        <translation type="vanished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation>cosh</translation>
+        <translation type="vanished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation>tanh</translation>
+        <translation type="vanished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>asinh</translation>
+        <translation type="vanished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10500,7 +10598,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10660,7 +10758,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>size</source>
@@ -10695,6 +10793,136 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation type="unfinished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation type="unfinished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation type="unfinished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation type="unfinished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation type="unfinished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation type="unfinished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinhD</source>
+        <comment>hyperbolic sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>coshD</source>
+        <comment>hyperbolic cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanhD</source>
+        <comment>hyperbolic tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinhD</source>
+        <comment>hyperbolic arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acoshD</source>
+        <comment>hyperbolic arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanhD</source>
+        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3591,11 +3591,11 @@ Apply settings anyway?</source>
     <name>DialogPiecePath</name>
     <message>
         <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta de trayectoria de piezas</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Directorio</translation>
+        <translation>Ruta</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -3603,15 +3603,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unnamed path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta sin nombre</translation>
     </message>
     <message>
         <source>Create name for your path</source>
-        <translation type="unfinished"></translation>
+        <translation>Cree un nombre para su ruta</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Piece:</source>
@@ -3619,7 +3619,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of pen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de pluma:</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -3627,7 +3627,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Las costuras</translation>
+        <translation>Las costuras</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -3635,7 +3635,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Asistente de Fórmula</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3647,15 +3647,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el cálculo completo en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodos</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodo:</translation>
     </message>
     <message>
         <source>Before:</source>
@@ -3663,11 +3663,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver al ancho predeterminado</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Defecto</translation>
+        <translation>Defecto</translation>
     </message>
     <message>
         <source>After:</source>
@@ -3675,15 +3675,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Ángulo:</translation>
+        <translation>Ángulo:</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar objetos de trayecto principal, &lt;b&gt;Mayúsculas&lt;/b&gt; - curva de sentido inverso, &lt;b&gt;Intro&lt;/b&gt; - finalizar creación</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Revés</translation>
+        <translation>Revés</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -3691,43 +3691,62 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Current seam aloowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Coste de costura actual</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el ancho de la costura</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el ancho de la costura antes</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el margen del ancho de la costura después de</translation>
     </message>
     <message>
         <source>Internal path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta interna</translation>
     </message>
     <message>
         <source>Custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizar el margen de la costura</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">¡Necesita más puntos!</translation>
+        <translation>¡Necesita más puntos!</translation>
     </message>
     <message>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Primer punto de &lt;b&gt;personalizar el margen de la costura&lt;/b&gt; no puede ser igual al último puinto!</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished">¡Tiene puntos dobles!</translation>
+        <translation>¡Tiene puntos dobles!</translation>
     </message>
     <message>
         <source>List of objects is empty!</source>
+        <translation>¡La lista de objetos está vacía!</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Diálogo</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Punto:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished">Pieza:</translation>
     </message>
 </context>
 <context>
@@ -4396,23 +4415,23 @@ Apply settings anyway?</source>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Herramienta para las costuras</translation>
+        <translation>Herramienta para las costuras</translation>
     </message>
     <message>
         <source>Main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta principal</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished">Todos los objetos en la ruta deben seguir en la direccion de las agujas del reloj.</translation>
+        <translation>Todos los objetos de la ruta deberían seguir en la dirección de las agujas del reloj.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished">Prohibir que el trozo sea reproducido en una capa.</translation>
+        <translation>Prohibir que el trozo sea reproducido en una capa.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Prohibir girado</translation>
+        <translation>Prohibir girado</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4420,11 +4439,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Las costuras</translation>
+        <translation>Las costuras</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -4432,7 +4451,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Asistente de Fórmula</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4444,15 +4463,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el cálculo completo en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodos</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodo:</translation>
     </message>
     <message>
         <source>Before:</source>
@@ -4460,11 +4479,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver al ancho predeterminado</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Defecto</translation>
+        <translation>Defecto</translation>
     </message>
     <message>
         <source>After:</source>
@@ -4472,51 +4491,51 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Ángulo:</translation>
+        <translation>Ángulo:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Personalizado</translation>
+        <translation>Personalizado</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de partida:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto final:</translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Incluir como:</translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Rutas internas</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="unfinished">Datos de la pieza de patrón</translation>
+        <translation>Datos de pieza de patrón</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished">Letra:</translation>
+        <translation>Letra:</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished">Carta de trozo de estampado</translation>
+        <translation>Carta de trozo de estampado</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nombre del detalle:</translation>
+        <translation>Nombre del detalle:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">El nombre no puede estar vacío</translation>
+        <translation>El nombre no puede estar vacío</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -4593,7 +4612,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished">Revés</translation>
+        <translation>Revés</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -4629,19 +4648,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el ancho de la costura</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el ancho de la costura antes</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar el margen del ancho de la costura después de</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished">¡Necesita más puntos!</translation>
+        <translation>¡Necesitas más puntos!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
@@ -4653,7 +4672,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished">¡Tiene puntos dobles!</translation>
+        <translation>¡Tiene puntos dobles!</translation>
     </message>
     <message>
         <source>Empty</source>
@@ -4686,6 +4705,30 @@ Apply settings anyway?</source>
     <message>
         <source>Just rear</source>
         <translation type="unfinished">Justo detrás</translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no pin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6658,7 +6701,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta de trayectoria de piezas</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
@@ -6754,6 +6797,19 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. 
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8285,7 +8341,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
 </context>
 <context>
@@ -8849,6 +8905,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8864,6 +8927,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <translation>Fórmula</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9131,14 +9201,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
     <message>
         <source>Unnamed path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta sin nombre</translation>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10501,52 +10575,52 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sin</translation>
+        <translation type="vanished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tan</translation>
+        <translation type="vanished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>asin</translation>
+        <translation type="vanished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>acos</translation>
+        <translation type="vanished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>atan</translation>
+        <translation type="vanished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation>sinh</translation>
+        <translation type="vanished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation>cosh</translation>
+        <translation type="vanished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation>tanh</translation>
+        <translation type="vanished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>asinh</translation>
+        <translation type="vanished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10556,7 +10630,7 @@ Do you want to save your changes?</source>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10716,7 +10790,7 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>size</source>
@@ -10751,6 +10825,136 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation type="unfinished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation type="unfinished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation type="unfinished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation type="unfinished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation type="unfinished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation type="unfinished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinhD</source>
+        <comment>hyperbolic sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>coshD</source>
+        <comment>hyperbolic cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanhD</source>
+        <comment>hyperbolic tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinhD</source>
+        <comment>hyperbolic arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acoshD</source>
+        <comment>hyperbolic arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanhD</source>
+        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

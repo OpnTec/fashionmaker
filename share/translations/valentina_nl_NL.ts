@@ -3433,7 +3433,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat de datum van de layout-creatie zien (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
@@ -3728,6 +3728,25 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>List of objects is empty!</source>
         <translation>Lijst van objecten is leeg!</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialoog</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Punt:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished">Onderdeel:</translation>
     </message>
 </context>
 <context>
@@ -4322,7 +4341,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Path to destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad naar doelmap</translation>
     </message>
 </context>
 <context>
@@ -4396,15 +4415,15 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Naadtoeslag gereedschap</translation>
+        <translation>Naadtoeslag gereedschap</translation>
     </message>
     <message>
         <source>Main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdpad</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished">Alle objecten op dit pad moeten de richting met de klok mee volgen.</translation>
+        <translation>Alle objecten in het pad moeten in de richting van de klok gekozen worden.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -4424,7 +4443,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -4476,31 +4495,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Op maat</translation>
+        <translation>Gebruikelijk</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Startpunt:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eindpunt:</translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoort bij:</translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingesloten paden</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="unfinished">Patroondeel data</translation>
+        <translation>Gegevens van patroondeel</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished">Letter:</translation>
+        <translation>Letter:</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
@@ -4508,11 +4527,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Detailnaam:</translation>
+        <translation>Benoem detail:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
@@ -4520,15 +4539,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished">Materiaal/Snijnummer/Positie</translation>
+        <translation>Materiaal/Snijnummer/Plaatsing</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="unfinished">Snijnummer:</translation>
+        <translation>Snijnummer:</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished">Materiaalsoort:</translation>
+        <translation>Materiaaltype:</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
@@ -4536,27 +4555,27 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished">Positie:</translation>
+        <translation>Plaatsing:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Voeg toe</translation>
+        <translation>Voeg toe</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Stop</translation>
+        <translation>Breek af</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished">Zichtbare detail label</translation>
+        <translation>Detaillabel zichtbaar</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished">Zichtbare patroon label</translation>
+        <translation>Patroonlabel zichtbaar</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4580,15 +4599,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hoofdpad-objecten met de klok mee,&lt;b&gt;Shift&lt;/b&gt; - draai richting kromme om, &lt;b&gt;Enter&lt;/b&gt; - einde creatie</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="unfinished">Knip %1 van %2%3</translation>
+        <translation>Knip %1 of %2%3</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="unfinished">Op vouw</translation>
+        <translation>Op vouw</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4600,11 +4619,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout. Kan het deelpad niet opslaan.</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
@@ -4616,11 +4635,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Fout bij uitpakken: %1</translation>
+        <translation>Verwerkingsfout: %1</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Update</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4644,11 +4663,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished">Je moet punten kiezen in de &apos;met de klok mee&apos; richting!</translation>
+        <translation>Je moet de punten met de klok mee kiezen!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished">Eerste punt is niet gelijk aan het laatste punt!</translation>
+        <translation>Het eerste punt mag niet gelijk zijn aan het laatste punt!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -4656,15 +4675,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Leeg</translation>
     </message>
     <message>
         <source>main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdpad</translation>
     </message>
     <message>
         <source>custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrij te bepalen naadtoeslag</translation>
     </message>
     <message>
         <source>None</source>
@@ -4672,7 +4691,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished">Knip op vouw</translation>
+        <translation>Knip op de vouw</translation>
     </message>
     <message>
         <source>Both</source>
@@ -4685,6 +4704,30 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Just rear</source>
         <translation>Alleen achterkant</translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no pin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5139,31 +5182,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished"></translation>
+        <translation>op lengte</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished"></translation>
+        <translation>op snijpunten</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>op eerste lijn symmetrie-as</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>op tweede lijn symmetrie-as</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>op eerste lijn rechte hoek</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>op tweede lijn rechte hoek</translation>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarde kan niet kleiner dan 0 zijn</translation>
     </message>
 </context>
 <context>
@@ -5587,7 +5630,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je QT_AUTO_SCREEN_SCALE_FACTOR=0 omgevingsvariabele gebruiken.</translation>
     </message>
 </context>
 <context>
@@ -6620,39 +6663,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Flipping objects by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegelen t.o.v. lijn</translation>
     </message>
     <message>
         <source>Flipping objects by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegelen t.o.v. as</translation>
     </message>
     <message>
         <source>Move objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaatsen</translation>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten zijn gewijzigd. Wil je ze nu synchroniseren?</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Graderen ondersteunt geen inches</translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten zijn gesynchroniseerd</translation>
     </message>
     <message>
         <source>Tools for creating elliptical arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap om elliptische boog te maken.</translation>
     </message>
     <message>
         <source>Elliptical Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Elleptische boog</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het middelpunt van de elliptische boog</translation>
     </message>
     <message>
         <source>Piece path tool</source>
@@ -6660,67 +6703,67 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hoofdpunten met de klok mee.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer pad objecten, &lt;b&gt;Shift&lt;/b&gt; - draai richting kromme om</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit document kan niet gewijzigd worden.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen toestemming geven voor %1 om te wijzigen.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand is niet bewaard.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen lezen</translation>
     </message>
     <message>
         <source>Variables Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabel met variabelen</translation>
     </message>
     <message>
         <source>Contains information about increments and internal variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevat informatie over toevoegingen en interne variabelen</translation>
     </message>
     <message>
         <source>Load Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad individueel</translation>
     </message>
     <message>
         <source>Load Individual measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad het individuele matenbestand</translation>
     </message>
     <message>
         <source>Load Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad meermaten-systeem</translation>
     </message>
     <message>
         <source>Load multisize measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad het meermaten-systeem bestand</translation>
     </message>
     <message>
         <source>Open Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Open Tape</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file </source>
-        <translation type="unfinished"></translation>
+        <translation>Open de Tape app om een matenbestand te wijzigen of aan te maken </translation>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig huidige</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -6752,6 +6795,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. 
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8014,19 +8070,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen toestemming geven voor %1 om te wijzigen.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand is niet bewaard.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen lezen</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
@@ -8276,7 +8332,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
 </context>
 <context>
@@ -8701,7 +8757,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je QT_AUTO_SCREEN_SCALE_FACTOR=0 omgevingsvariabele gebruiken.</translation>
     </message>
 </context>
 <context>
@@ -8840,6 +8896,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8855,6 +8918,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Formula</source>
         <translation>Formule</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9122,7 +9192,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -9130,6 +9200,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9570,7 +9644,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -10472,52 +10546,52 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sin</translation>
+        <translation type="vanished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tan</translation>
+        <translation type="vanished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>asin</translation>
+        <translation type="vanished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>acos</translation>
+        <translation type="vanished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>atan</translation>
+        <translation type="vanished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation>sinh</translation>
+        <translation type="vanished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation>cosh</translation>
+        <translation type="vanished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation>tanh</translation>
+        <translation type="vanished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>asinh</translation>
+        <translation type="vanished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10527,7 +10601,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10685,11 +10759,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>HuidigeLengte</translation>
     </message>
     <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
-    </message>
-    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10722,6 +10791,136 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation type="unfinished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation type="unfinished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation type="unfinished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation type="unfinished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation type="unfinished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation type="unfinished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sinhD</source>
+        <comment>hyperbolic sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>coshD</source>
+        <comment>hyperbolic cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tanhD</source>
+        <comment>hyperbolic tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asinhD</source>
+        <comment>hyperbolic arcus sine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acoshD</source>
+        <comment>hyperbolic arcus cosine function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>atanhD</source>
+        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -205,7 +205,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="267"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ύψος_επάνω_γοφοί</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="269"/>
@@ -217,7 +217,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="270"/>
         <source>Vertical distance from the Highhip level, where front abdomen is most prominent, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Κάθετη απόσταση από το επίπεδο του Επάνω Γοφού, όπου η κοιλιά μπροστά προεξέχει πιο πολύ, ως το έδαφος.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="274"/>
@@ -577,7 +577,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="454"/>
         <source>Length from Wrist line to end of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Μήκος από τη γραμμή του Καρπού ως το τέλος του μεσαίου δαχτύλου.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="458"/>

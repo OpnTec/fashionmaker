@@ -4208,91 +4208,91 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2024"/>
         <source>highbust_back_over_shoulder_to_armfold_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>milieu_buste_dos_sur_épaule_arriver_bas_aisselle_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2026"/>
         <source>Highbust Back, over Shoulder, to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du haut buste dos, en passant sur l&apos;épaule, arriver à l&apos;aisselle devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
         <source>From Highbust Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>A partir du milieu du buste dans le dos, passer par l&apos;Épaule et arriver au bas de l&apos;Aisselle Devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2031"/>
         <source>highbust_back_over_shoulder_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>milieu_buste_dos_passer_épaule_arriver_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2033"/>
         <source>Highbust Back, over Shoulder, to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Milieu buste dos, passer épaule, arriver taille devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2034"/>
         <source>From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>À partir du dos haut, sur l&apos;épaule touchant le côté du cou, à la taille avant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2038"/>
         <source>neck_back_to_armfold_front_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cou_dos_aisselle_devant_cou_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2040"/>
         <source>Neck Back, to Armfold Front, to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cou dos, aisselle devant, cou dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2041"/>
         <source>From Neck Back, over Shoulder to Armfold Front, under arm and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du cou dos, en passant sur l&apos;épaule à l&apos;aisselle devant, passer sous le bras et retourner au point de départ.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2046"/>
         <source>across_back_center_to_armfold_front_to_across_back_center</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>centre_milieu_dos_aisselle_devant_centre_milieu_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2048"/>
         <source>Across Back Center, circled around Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Au milieu du dos, entouré autour de l&apos;épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2049"/>
         <source>From center of Across Back, over Shoulder, under Arm, and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du centre du milieu dos, en passant par dessus l&apos;épaule, puis sous le bras, et revenir au début.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2054"/>
         <source>neck_back_to_armfold_front_to_highbust_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cou_dos_aisselle_devant_haut_buste_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2056"/>
         <source>Neck Back, to Armfold Front, to Highbust Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cou dos, par aisselle devant, à haut du buste dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2057"/>
         <source>From Neck Back over Shoulder to Armfold Front, under arm to Highbust Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Du cou dans le dos, par dessus l&apos;épaule jusqu&apos;à l&apos;aisselle devant, en passant sous le bras jusqu&apos;en haut du buste dans le dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2062"/>
