@@ -96,6 +96,18 @@ void VGrainlineData::SetArrowType(ArrowType eAT)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VGrainlineData::CenterPin() const
+{
+    return d->m_centerPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineData::SetCenterPin(quint32 centerPin)
+{
+    d->m_centerPin = centerPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VGrainlineData::TopPin() const
 {
     return d->m_topPin;

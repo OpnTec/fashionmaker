@@ -226,6 +226,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ChangeCurrentData(ui->comboBoxPatternLabelBottomRightPin, m_oldGeom.BottomRightPin());
 
     m_oldGrainline = piece.GetGrainlineGeometry();
+    ChangeCurrentData(ui->comboBoxGrainlineCenterPin, m_oldGrainline.CenterPin());
     ChangeCurrentData(ui->comboBoxGrainlineTopPin, m_oldGrainline.TopPin());
     ChangeCurrentData(ui->comboBoxGrainlineBottomPin, m_oldGrainline.BottomPin());
 
@@ -1410,6 +1411,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetGrainlineGeometry().SetRotation(GetFormulaFromUser(ui->lineEditRotFormula));
     piece.GetGrainlineGeometry().SetLength(GetFormulaFromUser(ui->lineEditLenFormula));
     piece.GetGrainlineGeometry().SetArrowType(static_cast<ArrowType>(ui->comboBoxArrow->currentIndex()));
+    piece.GetGrainlineGeometry().SetCenterPin(getCurrentObjectId(ui->comboBoxGrainlineCenterPin));
     piece.GetGrainlineGeometry().SetTopPin(getCurrentObjectId(ui->comboBoxGrainlineTopPin));
     piece.GetGrainlineGeometry().SetBottomPin(getCurrentObjectId(ui->comboBoxGrainlineBottomPin));
 
@@ -1882,6 +1884,7 @@ void DialogSeamAllowance::InitGrainlineTab()
     m_iRotBaseHeight = ui->lineEditRotFormula->height();
     m_iLenBaseHeight = ui->lineEditLenFormula->height();
 
+    InitPinPoint(ui->comboBoxGrainlineCenterPin);
     InitPinPoint(ui->comboBoxGrainlineTopPin);
     InitPinPoint(ui->comboBoxGrainlineBottomPin);
 

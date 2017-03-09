@@ -62,7 +62,7 @@
 #include <QMenu>
 #include <QMessageBox>
 
-// Current version of seam allowance tag nned for backward compatibility
+// Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
 const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
@@ -78,6 +78,7 @@ const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
 const QString VToolSeamAllowance::AttrTopLeftPin     = QStringLiteral("topLeftPin");
 const QString VToolSeamAllowance::AttrBottomRightPin = QStringLiteral("bottomRightPin");
+const QString VToolSeamAllowance::AttrCenterPin      = QStringLiteral("centerPin");
 const QString VToolSeamAllowance::AttrTopPin         = QStringLiteral("topPin");
 const QString VToolSeamAllowance::AttrBottomPin      = QStringLiteral("bottomPin");
 
@@ -337,6 +338,15 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
+
+    if (glGeom.CenterPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrCenterPin, glGeom.CenterPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrCenterPin);
+    }
 
     if (glGeom.TopPin() > NULL_ID)
     {

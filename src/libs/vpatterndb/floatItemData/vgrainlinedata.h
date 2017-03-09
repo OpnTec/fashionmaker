@@ -59,6 +59,9 @@ public:
     ArrowType GetArrowType() const;
     void      SetArrowType(ArrowType eAT);
 
+    quint32 CenterPin() const;
+    void    SetCenterPin(quint32 centerPin);
+
     quint32 TopPin() const;
     void    SetTopPin(quint32 topPin);
 

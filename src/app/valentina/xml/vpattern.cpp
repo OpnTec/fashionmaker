@@ -889,6 +889,9 @@ void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail
     ArrowType eAT = static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0"));
     detail.GetGrainlineGeometry().SetArrowType(eAT);
 
+    const quint32 centerPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR);
+    detail.GetGrainlineGeometry().SetCenterPin(centerPin);
+
     const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
     detail.GetGrainlineGeometry().SetTopPin(topPin);
 
