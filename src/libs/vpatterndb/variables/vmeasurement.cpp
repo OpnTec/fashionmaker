@@ -158,7 +158,7 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
         return list;
     }
 
-    for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H194); i = i+heightStep)
+    for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H200); i = i+heightStep)
     {
         ListValue(list, i, patternUnit);
     }
