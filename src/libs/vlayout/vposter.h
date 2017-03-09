@@ -55,6 +55,7 @@ struct PosterData
     QRect rect; // rect section
 };
 
+// cppcheck-suppress noConstructor
 class VPoster
 {
     Q_DECLARE_TR_FUNCTIONS(VPoster)

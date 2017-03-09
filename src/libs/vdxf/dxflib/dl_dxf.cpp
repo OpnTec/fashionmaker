@@ -3170,7 +3170,6 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
 
     // Creare text chunks of 250 characters each:
     int length = static_cast<int>(data.text.length());
-    // cppcheck-suppress arrayIndexOutOfBounds
     char chunk[251];
     int i;
     for (i=250; i<length; i+=250)
@@ -3186,7 +3185,6 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4996)
     strncpy(chunk, &data.text.c_str()[i-250], 250);
 QT_WARNING_POP
-    // cppcheck-suppress arrayIndexOutOfBounds
     chunk[250]='\0';
     dw.dxfString(1, chunk);
 

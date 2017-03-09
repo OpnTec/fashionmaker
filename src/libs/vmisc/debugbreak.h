@@ -107,22 +107,27 @@ enum { HAVE_TRAP_INSTRUCTION = 0 };
 __attribute__((gnu_inline, always_inline))
 __inline__ static void debug_break(void)
 {
-    if (HAVE_TRAP_INSTRUCTION) {
+#if defined(_WIN32) || defined(_WIN64)
+    /* SIGTRAP available only on POSIX-compliant operating systems
+     * use builtin trap instead */
+    HAVE_TRAP_INSTRUCTIO ? trap_instruction() : __builtin_trap();
+#else
+    if (HAVE_TRAP_INSTRUCTION)
+    {
         trap_instruction();
-    } else if (DEBUG_BREAK_PREFER_BUILTIN_TRAP_TO_SIGTRAP) {
+    }
+    else if (DEBUG_BREAK_PREFER_BUILTIN_TRAP_TO_SIGTRAP)
+    {
          /* raises SIGILL on Linux x86{,-64}, to continue in gdb:
           * (gdb) handle SIGILL stop nopass
           * */
         __builtin_trap();
-    } else {
-        #if defined(_WIN32) || defined(_WIN64)
-        /* SIGTRAP available only on POSIX-compliant operating systems
-         * use builtin trap instead */
-            __builtin_trap();
-        #else
-            raise(SIGTRAP);
-        #endif
     }
+    else
+    {
+        raise(SIGTRAP);
+    }
+#endif
 }
 
 #ifdef __cplusplus
