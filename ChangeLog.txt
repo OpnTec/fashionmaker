@@ -1,5 +1,4 @@
 # Version 0.5.0
-- Add 200 in heights
 - [#581] User can now filter input lists by keyword in function wizard.
 - [#24] User can now add labels with different information on the detail
 - [#505] New installer script based on Inno Setup 5.
