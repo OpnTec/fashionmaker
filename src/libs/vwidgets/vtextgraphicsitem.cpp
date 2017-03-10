@@ -414,7 +414,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
 
-        if (m_moveType == OnlyRotatable)
+        if (m_moveType & IsRotatable)
         {
             if (m_eMode != mRotate)
             {
@@ -572,7 +572,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         {   // in rotate mode, if user did just press/release, switch to move mode
             if (bShort == true)
             {
-                if (m_moveType != OnlyRotatable)
+                if (not (m_moveType & IsRotatable))
                 {
                     m_eMode = mMove;
                 }

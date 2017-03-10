@@ -108,13 +108,13 @@ double VPieceItem::GetAngle(const QPointF &pt) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveType VPieceItem::GetMoveType() const
+VPieceItem::MoveTypes VPieceItem::GetMoveType() const
 {
     return m_moveType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceItem::SetMoveType(const MoveType &moveType)
+void VPieceItem::SetMoveType(const VPieceItem::MoveTypes &moveType)
 {
     m_moveType = moveType;
     setAcceptHoverEvents(m_moveType != NotMovable);

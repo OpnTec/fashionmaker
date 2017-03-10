@@ -1523,6 +1523,9 @@
           </item>
           <item>
            <layout class="QFormLayout" name="formLayout_8">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="labelCenter">
               <property name="text">
@@ -1544,6 +1547,9 @@
           </item>
           <item>
            <layout class="QFormLayout" name="formLayout_7">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="labelGrainlineTopPin">
               <property name="text">
@@ -1575,6 +1581,9 @@
           </item>
           <item>
            <layout class="QFormLayout" name="formLayout">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="labelEditLen_2">
               <property name="sizePolicy">

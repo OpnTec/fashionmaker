@@ -1907,6 +1907,7 @@ void DialogSeamAllowance::InitPinsTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitAllPinComboboxes()
 {
+    InitPinPoint(ui->comboBoxGrainlineCenterPin);
     InitPinPoint(ui->comboBoxGrainlineTopPin);
     InitPinPoint(ui->comboBoxGrainlineBottomPin);
 

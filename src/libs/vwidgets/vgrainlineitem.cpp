@@ -292,51 +292,66 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         m_dAngle = GetAngle(mapToParent(pME->pos()));
         m_ptRotCenter = m_ptCenter;
 
-        if (m_moveType == OnlyRotatable)
+        if ((m_moveType & AllModifications ) == AllModifications)
         {
-            if (m_eMode != mRotate)
+            AllUserModifications(pME->pos());
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsRotatable)
+        {
+            if (m_moveType & IsResizable)
+            {
+                AllUserModifications(pME->pos());
+            }
+            else if (m_moveType & IsMovable)
+            {
+                UserRotateAndMove();
+            }
+            else
+            {
+                m_eMode = mRotate;
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            }
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsResizable)
+        {
+            if (m_moveType & IsRotatable)
+            {
+                AllUserModifications(pME->pos());
+            }
+            else if (m_moveType & IsMovable)
+            {
+                UserMoveAndResize(pME->pos());
+            }
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsMovable)
+        {
+            if (m_moveType & IsRotatable)
+            {
+                UserRotateAndMove();
+            }
+            else if (m_moveType & IsResizable)
+            {
+                UserMoveAndResize(pME->pos());
+            }
+            else
             {
                 m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
-            else
-            {
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-            }
 
             setZValue(ACTIVE_Z);
             Update();
         }
-        else if (m_moveType == OnlyMovable)
+        else
         {
-            m_eMode = mMove;
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-
-            setZValue(ACTIVE_Z);
-            Update();
-        }
-        else // All modifications
-        {
-            if (m_eMode != mRotate)
-            {
-                if (m_polyResize.containsPoint(pME->pos(), Qt::OddEvenFill) == true)
-                {
-                    m_eMode = mResize;
-                    SetOverrideCursor(Qt::SizeFDiagCursor);
-                }
-                else
-                {
-                    m_eMode = mMove;
-                    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-                }
-            }
-            else
-            {
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-            }
-
-            setZValue(ACTIVE_Z);
-            Update();
+            pME->ignore();
+            return;
         }
     }
 }
@@ -351,7 +366,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     QPointF ptDiff = pME->scenePos() - m_ptStartMove;
     qreal dX;
     qreal dY;
-    if (m_eMode == mMove)
+    if (m_eMode == mMove && m_moveType & IsMovable)
     {
         QPointF pt = m_ptStartPos + ptDiff;
         if (IsContained(pt, m_dRotation, dX, dY) == false)
@@ -362,7 +377,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         setPos(pt);
         Update();
     }
-    else if (m_eMode == mResize)
+    else if (m_eMode == mResize && m_moveType & IsResizable)
     {
         qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
         qreal dAng = qAtan2(-ptDiff.y(), ptDiff.x());
@@ -379,7 +394,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         UpdateRectangle();
         Update();
     }
-    else if (m_eMode == mRotate)
+    else if (m_eMode == mRotate && m_moveType & IsRotatable)
     {
         // prevent strange angle changes due to singularities
         qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
@@ -433,7 +448,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         {
             if (bShort == true)
             {
-                if (m_bReleased == true && m_moveType != OnlyResizable && m_moveType != OnlyMovable)
+                if (m_bReleased == true && m_moveType & IsRotatable)
                 {
                     m_eMode = mRotate;
                     Update();
@@ -441,11 +456,11 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             }
             else
             {
-                if (m_eMode == mMove)
+                if (m_eMode == mMove && m_moveType & IsMovable)
                 {
                     emit SignalMoved(pos());
                 }
-                else
+                else if (m_moveType & IsResizable)
                 {
                     emit SignalResized(m_dLength);
                 }
@@ -458,7 +473,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             {
                 m_eMode = mMove;
             }
-            else
+            else if (m_moveType & IsRotatable)
             {
                 emit SignalRotated(m_dRotation, m_ptStart);
             }
@@ -686,4 +701,42 @@ QPainterPath VGrainlineItem::MainShape() const
         path.closeSubpath();
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::AllUserModifications(const QPointF &pos)
+{
+    if (m_eMode != mRotate)
+    {
+        UserMoveAndResize(pos);
+    }
+    else
+    {
+        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::UserRotateAndMove()
+{
+    if (m_eMode != mRotate)
+    {
+        m_eMode = mMove;
+    }
+    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::UserMoveAndResize(const QPointF &pos)
+{
+    if (m_polyResize.containsPoint(pos, Qt::OddEvenFill) == true)
+    {
+        m_eMode = mResize;
+        SetOverrideCursor(Qt::SizeFDiagCursor);
+    }
+    else
+    {
+        m_eMode = mMove; // block later if need
+        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    }
 }
