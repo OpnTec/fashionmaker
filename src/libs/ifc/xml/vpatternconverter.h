@@ -103,6 +103,7 @@ private:
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
+    void ToV0_4_3();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
