@@ -38,8 +38,8 @@
 #include "../core/vapplication.h"
 
 // calc how many combinations we have
-static const int heightsCount = (static_cast<int>(GHeights::H194) -
-                                 (static_cast<int>(GHeights::H50) - heightStep))/heightStep;
+static const int heightsCount = (static_cast<int>(GHeights::H200) -
+                                (static_cast<int>(GHeights::H50) - heightStep))/heightStep;
 static const int sizesCount = (static_cast<int>(GSizes::S72) - (static_cast<int>(GSizes::S22) - sizeStep))/sizeStep;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -469,6 +469,7 @@ void DialogPatternProperties::SetHeightsChecked(bool enabled)
     ui->checkBoxH182->setChecked(enabled);
     ui->checkBoxH188->setChecked(enabled);
     ui->checkBoxH194->setChecked(enabled);
+    ui->checkBoxH200->setChecked(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -532,6 +533,7 @@ void DialogPatternProperties::InitHeights()
     Init(ui->checkBoxH182, static_cast<int>(GHeights::H182), &DialogPatternProperties::CheckStateHeight);
     Init(ui->checkBoxH188, static_cast<int>(GHeights::H188), &DialogPatternProperties::CheckStateHeight);
     Init(ui->checkBoxH194, static_cast<int>(GHeights::H194), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH200, static_cast<int>(GHeights::H200), &DialogPatternProperties::CheckStateHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
