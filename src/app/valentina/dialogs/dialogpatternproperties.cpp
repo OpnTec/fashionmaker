@@ -39,7 +39,7 @@
 
 // calc how many combinations we have
 static const int heightsCount = (static_cast<int>(GHeights::H200) -
-                                 (static_cast<int>(GHeights::H50) - heightStep))/heightStep;
+                                (static_cast<int>(GHeights::H50) - heightStep))/heightStep;
 static const int sizesCount = (static_cast<int>(GSizes::S72) - (static_cast<int>(GSizes::S22) - sizeStep))/sizeStep;
 
 //---------------------------------------------------------------------------------------------------------------------
