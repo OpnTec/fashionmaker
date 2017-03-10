@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabMainPath">
       <attribute name="title">
@@ -896,9 +896,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabPatternPieceData">
+     <widget class="QWidget" name="tabPieceLabelData">
       <attribute name="title">
-       <string>Pattern piece data</string>
+       <string>Piece label data</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
