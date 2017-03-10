@@ -513,48 +513,40 @@ void VGrainlineItem::Update()
  */
 void VGrainlineItem::UpdateRectangle()
 {
-    m_polyBound.clear();
     QPointF pt1(0, 0);
-    QPointF pt2;
-
-    pt2.setX(pt1.x() + m_dLength * cos(m_dRotation));
-    pt2.setY(pt1.y() - m_dLength * sin(m_dRotation));
+    QPointF pt2(pt1.x() + m_dLength * cos(m_dRotation), pt1.y() - m_dLength * sin(m_dRotation));
 
     m_ptStart = mapToParent(pt1);
     m_ptFinish = mapToParent(pt2);
     m_ptCenter = (m_ptStart + m_ptFinish)/2;
 
-    QPointF ptA;
-    ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
-    ptA.setY(pt1.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
-    m_polyBound << ptA;
-    ptA.setX(pt1.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
-    ptA.setY(pt1.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
-    m_polyBound << ptA;
-    ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2));
-    ptA.setY(pt2.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
-    m_polyBound << ptA;
-    ptA.setX(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2));
-    ptA.setY(pt2.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
-    m_polyBound << ptA;
+    m_polyBound.clear();
+    m_polyBound << QPointF(pt1.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
+                           pt1.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
+    m_polyBound << QPointF(pt1.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2),
+                           pt1.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
+    m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2),
+                           pt2.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
+    m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
+                           pt2.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
     m_rectBoundingBox = m_polyBound.boundingRect();
     setTransformOriginPoint(m_rectBoundingBox.center());
 
     m_polyResize.clear();
-    ptA = m_polyBound.at(2);
+    QPointF ptA = m_polyBound.at(3);
     m_polyResize << ptA;
-    double dSize = m_dScale * RESIZE_RECT_SIZE;
+    const double dSize = m_dScale * RESIZE_RECT_SIZE;
 
-    ptA.setX(ptA.x() + dSize*cos(m_dRotation + M_PI/2));
-    ptA.setY(ptA.y() - dSize*sin(m_dRotation + M_PI/2));
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation - M_PI/2));
+    ptA.setY(ptA.y() - dSize*sin(m_dRotation - M_PI/2));
     m_polyResize << ptA;
 
     ptA.setX(ptA.x() - dSize*cos(m_dRotation));
     ptA.setY(ptA.y() + dSize*sin(m_dRotation));
     m_polyResize << ptA;
 
-    ptA.setX(ptA.x() + dSize*cos(m_dRotation - M_PI/2));
-    ptA.setY(ptA.y() - dSize*sin(m_dRotation - M_PI/2));
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation + M_PI/2));
+    ptA.setY(ptA.y() - dSize*sin(m_dRotation + M_PI/2));
     m_polyResize << ptA;
 
     prepareGeometryChange();
