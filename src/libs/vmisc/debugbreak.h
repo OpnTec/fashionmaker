@@ -110,7 +110,7 @@ __inline__ static void debug_break(void)
 #if defined(_WIN32) || defined(_WIN64)
     /* SIGTRAP available only on POSIX-compliant operating systems
      * use builtin trap instead */
-    HAVE_TRAP_INSTRUCTIO ? trap_instruction() : __builtin_trap();
+    HAVE_TRAP_INSTRUCTION ? trap_instruction() : __builtin_trap();
 #else
     if (HAVE_TRAP_INSTRUCTION)
     {

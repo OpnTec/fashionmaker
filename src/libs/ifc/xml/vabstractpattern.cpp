@@ -143,6 +143,7 @@ const QString VAbstractPattern::AttrH176            = QStringLiteral("h176");
 const QString VAbstractPattern::AttrH182            = QStringLiteral("h182");
 const QString VAbstractPattern::AttrH188            = QStringLiteral("h188");
 const QString VAbstractPattern::AttrH194            = QStringLiteral("h194");
+const QString VAbstractPattern::AttrH200            = QStringLiteral("h200");
 
 const QString VAbstractPattern::AttrS22             = QStringLiteral("s22");
 const QString VAbstractPattern::AttrS24             = QStringLiteral("s24");
@@ -862,6 +863,7 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
     map.insert(GHeights::H182, true);
     map.insert(GHeights::H188, true);
     map.insert(GHeights::H194, true);
+    map.insert(GHeights::H200, true);
 
     QDomNodeList tags = elementsByTagName(TagGradation);
     if (tags.size() == 0)
@@ -916,6 +918,7 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
                         map.insert(GHeights::H182, GetParametrBool(domElement, AttrH182, defValue));
                         map.insert(GHeights::H188, GetParametrBool(domElement, AttrH188, defValue));
                         map.insert(GHeights::H194, GetParametrBool(domElement, AttrH194, defValue));
+                        map.insert(GHeights::H200, GetParametrBool(domElement, AttrH200, defValue));
                         return map;
                         break;
                     case 1: // TagSizes
@@ -981,6 +984,7 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                             domElement.removeAttribute(AttrH182);
                             domElement.removeAttribute(AttrH188);
                             domElement.removeAttribute(AttrH194);
+                            domElement.removeAttribute(AttrH200);
                         }
                         else
                         {
@@ -1009,6 +1013,7 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                             SetAttribute(domElement, AttrH182, options.value(GHeights::H182));
                             SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
                             SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
+                            SetAttribute(domElement, AttrH200, options.value(GHeights::H200));
                         }
 
                         modified = true;

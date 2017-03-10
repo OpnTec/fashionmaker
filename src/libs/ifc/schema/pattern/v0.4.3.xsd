@@ -49,6 +49,7 @@
                   <xs:attribute name="h182" type="xs:boolean"/>
                   <xs:attribute name="h188" type="xs:boolean"/>
                   <xs:attribute name="h194" type="xs:boolean"/>
+                  <xs:attribute name="h200" type="xs:boolean"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="sizes">
@@ -519,7 +520,6 @@
                               <xs:attribute name="length" type="xs:string"/>
                               <xs:attribute name="rotation" type="xs:string"/>
                               <xs:attribute name="arrows" type="arrowType"/>
-                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
                               <xs:attribute name="topPin" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomPin" type="xs:unsignedInt"/>
                             </xs:complexType>
@@ -699,6 +699,7 @@
       <xs:enumeration value="182"/>
       <xs:enumeration value="188"/>
       <xs:enumeration value="194"/>
+      <xs:enumeration value="200"/>
       <xs:enumeration value="500"/>
       <xs:enumeration value="560"/>
       <xs:enumeration value="620"/>
@@ -724,6 +725,7 @@
       <xs:enumeration value="1820"/>
       <xs:enumeration value="1880"/>
       <xs:enumeration value="1940"/>
+      <xs:enumeration value="2000"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="baseSize">
@@ -746,6 +748,14 @@
       <xs:enumeration value="52"/>
       <xs:enumeration value="54"/>
       <xs:enumeration value="56"/>
+      <xs:enumeration value="58"/>
+      <xs:enumeration value="60"/>
+      <xs:enumeration value="62"/>
+      <xs:enumeration value="64"/>
+      <xs:enumeration value="66"/>
+      <xs:enumeration value="68"/>
+      <xs:enumeration value="70"/>
+      <xs:enumeration value="72"/>
       <xs:enumeration value="220"/>
       <xs:enumeration value="240"/>
       <xs:enumeration value="260"/>
