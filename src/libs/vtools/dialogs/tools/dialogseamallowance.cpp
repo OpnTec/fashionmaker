@@ -1016,13 +1016,20 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         }
         catch (qmu::QmuParserError &e)
         {
-            qsVal.clear();
-            ChangeColor(plbText, Qt::red);
+            qsVal = tr("Error");
+            if (not flagGPin)
+            {
+                ChangeColor(plbText, Qt::red);
+            }
+            else
+            {
+                ChangeColor(plbText, okColor);
+            }
             bFormulasOK = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (qsVal.isEmpty() == false)
+        if (bFormulasOK && qsVal.isEmpty() == false)
         {
             qsVal += qsUnit;
         }
@@ -1102,8 +1109,16 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         }
         catch (qmu::QmuParserError &e)
         {
-            qsVal.clear();
-            ChangeColor(plbText, Qt::red);
+            qsVal = tr("Error");
+            if (not flagDPin)
+            {
+                ChangeColor(plbText, Qt::red);
+            }
+            else
+            {
+                ChangeColor(plbText, okColor);
+            }
+
             if (i == 3)
             {
                 angleFormulaOk = false;
@@ -1115,9 +1130,19 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (qsVal.isEmpty() == false)
+        if (i == 3)
         {
-            qsVal += qsUnit;
+            if (angleFormulaOk && qsVal.isEmpty() == false)
+            {
+                qsVal += qsUnit;
+            }
+        }
+        else
+        {
+            if (bFormulasOK && qsVal.isEmpty() == false)
+            {
+                qsVal += qsUnit;
+            }
         }
         plbVal->setText(qsVal);
     }
@@ -1196,8 +1221,16 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         }
         catch (qmu::QmuParserError &e)
         {
-            qsVal.clear();
-            ChangeColor(plbText, Qt::red);
+            qsVal = tr("Error");
+            if (not flagPPin)
+            {
+                ChangeColor(plbText, Qt::red);
+            }
+            else
+            {
+                ChangeColor(plbText, okColor);
+            }
+
             if (i == 3)
             {
                 angleFormulaOk = false;
@@ -1209,9 +1242,19 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (qsVal.isEmpty() == false)
+        if (i == 3)
         {
-            qsVal += qsUnit;
+            if (angleFormulaOk && qsVal.isEmpty() == false)
+            {
+                qsVal += qsUnit;
+            }
+        }
+        else
+        {
+            if (bFormulasOK && qsVal.isEmpty() == false)
+            {
+                qsVal += qsUnit;
+            }
         }
         plbVal->setText(qsVal);
     }
@@ -1707,8 +1750,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
     QColor color = okColor;
     const quint32 topPinId = getCurrentObjectId(ui->comboBoxGrainlineTopPin);
     const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxGrainlineBottomPin);
-    if ((topPinId == NULL_ID && bottomPinId == NULL_ID) ||
-        (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagGPin = true;
         color = okColor;
@@ -1718,7 +1760,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
     else
     {
         flagGPin = false;
-        color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         if (not flagGFormulas && not flagGPin)
         {
@@ -1726,6 +1768,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
             ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), icon);
         }
     }
+    UpdateGrainlineValues();
     ChangeColor(ui->labelGrainlineTopPin, color);
     ChangeColor(ui->labelGrainlineBottomPin, color);
     CheckState();
@@ -1756,6 +1799,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
+    UpdateDetailLabelValues();
     ChangeColor(ui->labelDLTopLeftPin, color);
     ChangeColor(ui->labelDLBottomRightPin, color);
     CheckState();
@@ -1786,6 +1830,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
+    UpdatePatternLabelValues();
     ChangeColor(ui->labelPLTopLeftPin, color);
     ChangeColor(ui->labelPLBottomRightPin, color);
     CheckState();
