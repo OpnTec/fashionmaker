@@ -73,11 +73,11 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       flagGPin(true),
       flagDPin(true),
       flagPPin(true),
-      flagGFormulas(false),
-      flagDLAngle(false),
-      flagDLFormulas(false),
-      flagPLAngle(false),
-      flagPLFormulas(false),
+      flagGFormulas(true),
+      flagDLAngle(true),
+      flagDLFormulas(true),
+      flagPLAngle(true),
+      flagPLFormulas(true),
       m_bAddMode(true),
       m_mx(0),
       m_my(0),
@@ -363,8 +363,8 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && flagFormula && flagDPin && flagPPin && (flagGFormulas || flagGPin)
-                    && flagDLAngle && (flagDLFormulas || flagGPin) && flagPLAngle && (flagPLFormulas || flagPPin));
+    bOk->setEnabled(flagName && flagError && flagFormula && (flagGFormulas || flagGPin)
+                    && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle && (flagPLFormulas || flagPPin));
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -967,10 +967,8 @@ void DialogSeamAllowance::TabChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateGrainlineValues()
 {
-    QPlainTextEdit* apleSender[2];
-    apleSender[0] = ui->lineEditRotFormula;
-    apleSender[1] = ui->lineEditLenFormula;
-    bool bFormulasOK = true;
+    QPlainTextEdit* apleSender[2] = {ui->lineEditRotFormula, ui->lineEditLenFormula};
+    bool bFormulasOK[2] = {true, true};
 
     for (int i = 0; i < 2; ++i)
     {
@@ -1017,26 +1015,19 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            if (not flagGPin)
-            {
-                ChangeColor(plbText, Qt::red);
-            }
-            else
-            {
-                ChangeColor(plbText, okColor);
-            }
-            bFormulasOK = false;
+            not flagGPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (bFormulasOK && qsVal.isEmpty() == false)
+        if (bFormulasOK[i] && qsVal.isEmpty() == false)
         {
             qsVal += qsUnit;
         }
         plbVal->setText(qsVal);
     }
 
-    flagGFormulas = bFormulasOK;
+    flagGFormulas = bFormulasOK[0] && bFormulasOK[1];
     if (not flagGFormulas && not flagGPin)
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
@@ -1052,12 +1043,9 @@ void DialogSeamAllowance::UpdateGrainlineValues()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateDetailLabelValues()
 {
-    QPlainTextEdit* apleSender[3];
-    apleSender[0] = ui->lineEditDLWidthFormula;
-    apleSender[1] = ui->lineEditDLHeightFormula;
-    apleSender[2] = ui->lineEditDLAngleFormula;
-    bool bFormulasOK = true;
-    bool angleFormulaOk = true;
+    QPlainTextEdit* apleSender[3] = {ui->lineEditDLWidthFormula, ui->lineEditDLHeightFormula,
+                                     ui->lineEditDLAngleFormula};
+    bool bFormulasOK[3] = {true, true, true};
 
     for (int i = 0; i < 3; ++i)
     {
@@ -1110,46 +1098,21 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            if (not flagDPin)
-            {
-                ChangeColor(plbText, Qt::red);
-            }
-            else
-            {
-                ChangeColor(plbText, okColor);
-            }
-
-            if (i == 3)
-            {
-                angleFormulaOk = false;
-            }
-            else
-            {
-                bFormulasOK = false;
-            }
+            not flagDPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (i == 3)
+        if (bFormulasOK[i] && qsVal.isEmpty() == false)
         {
-            if (angleFormulaOk && qsVal.isEmpty() == false)
-            {
-                qsVal += qsUnit;
-            }
-        }
-        else
-        {
-            if (bFormulasOK && qsVal.isEmpty() == false)
-            {
-                qsVal += qsUnit;
-            }
+            qsVal += qsUnit;
         }
         plbVal->setText(qsVal);
     }
 
-    flagDLAngle = angleFormulaOk;
-    flagDLFormulas = bFormulasOK;
-    if (not flagDLAngle && not flagDLFormulas && not flagDPin && not flagPLAngle && not flagPLFormulas && not flagPPin)
+    flagDLAngle = bFormulasOK[2];
+    flagDLFormulas = bFormulasOK[0] && bFormulasOK[1];
+    if (not flagDLAngle && not (flagDLFormulas || flagDPin) && not flagPLAngle && not (flagPLFormulas || flagPPin))
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
@@ -1164,12 +1127,9 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdatePatternLabelValues()
 {
-    QPlainTextEdit* apleSender[3];
-    apleSender[0] = ui->lineEditPLWidthFormula;
-    apleSender[1] = ui->lineEditPLHeightFormula;
-    apleSender[2] = ui->lineEditPLAngleFormula;
-    bool bFormulasOK = true;
-    bool angleFormulaOk = true;
+    QPlainTextEdit* apleSender[3] = {ui->lineEditPLWidthFormula, ui->lineEditPLHeightFormula,
+                                     ui->lineEditPLAngleFormula};
+    bool bFormulasOK[3] = {true, true, true};
 
     for (int i = 0; i < 3; ++i)
     {
@@ -1222,46 +1182,21 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            if (not flagPPin)
-            {
-                ChangeColor(plbText, Qt::red);
-            }
-            else
-            {
-                ChangeColor(plbText, okColor);
-            }
-
-            if (i == 3)
-            {
-                angleFormulaOk = false;
-            }
-            else
-            {
-                bFormulasOK = false;
-            }
+            not flagPPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
 
-        if (i == 3)
+        if (bFormulasOK[i] && qsVal.isEmpty() == false)
         {
-            if (angleFormulaOk && qsVal.isEmpty() == false)
-            {
-                qsVal += qsUnit;
-            }
-        }
-        else
-        {
-            if (bFormulasOK && qsVal.isEmpty() == false)
-            {
-                qsVal += qsUnit;
-            }
+            qsVal += qsUnit;
         }
         plbVal->setText(qsVal);
     }
 
-    flagPLAngle = angleFormulaOk;
-    flagPLFormulas = bFormulasOK;
-    if (not flagDLAngle && not flagDLFormulas && not flagDPin && not flagPLAngle && not flagPLFormulas && not flagPPin)
+    flagPLAngle = bFormulasOK[2];
+    flagPLFormulas = bFormulasOK[0] && bFormulasOK[1];
+    if (not flagDLAngle && not (flagDLFormulas || flagDPin) && not flagPLAngle && not (flagPLFormulas || flagPPin))
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
@@ -1332,6 +1267,7 @@ void DialogSeamAllowance::EnabledGrainline()
     {
         flagGFormulas = true;
         ResetGrainlineWarning();
+        CheckState();
     }
 }
 
@@ -1348,6 +1284,7 @@ void DialogSeamAllowance::EnabledDetailLabel()
         flagDLAngle = true;
         flagDLFormulas = true;
         ResetLabelsWarning();
+        CheckState();
     }
 }
 
@@ -1364,6 +1301,7 @@ void DialogSeamAllowance::EnabledPatternLabel()
         flagPLAngle = true;
         flagPLFormulas = true;
         ResetLabelsWarning();
+        CheckState();
     }
 }
 
@@ -1780,8 +1718,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
     QColor color = okColor;
     const quint32 topPinId = getCurrentObjectId(ui->comboBoxDLTopLeftPin);
     const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxDLBottomRightPin);
-    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
-            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagDPin = true;
         color = okColor;
@@ -1794,7 +1731,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
     else
     {
         flagDPin = false;
-        color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
@@ -1811,8 +1748,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
     QColor color = okColor;
     const quint32 topPinId = getCurrentObjectId(ui->comboBoxPLTopLeftPin);
     const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxPLBottomRightPin);
-    if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
-            || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
+    if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagPPin = true;
         color = okColor;
@@ -1825,7 +1761,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
     else
     {
         flagPPin = false;
-        color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
