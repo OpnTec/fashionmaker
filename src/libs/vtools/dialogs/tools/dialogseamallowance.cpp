@@ -138,6 +138,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     ui->tabSeamAllowance->setEnabled(applyAllowed);
     ui->tabInternalPaths->setEnabled(applyAllowed);
     ui->tabPieceLabelData->setEnabled(applyAllowed);
+    ui->tabLabels->setEnabled(applyAllowed);
     ui->tabGrainline->setEnabled(applyAllowed);
     ui->tabPins->setEnabled(applyAllowed);
 }
@@ -920,7 +921,7 @@ void DialogSeamAllowance::TabChanged(int index)
 {
     if (index == ui->tabWidget->indexOf(ui->tabPins)
             || index == ui->tabWidget->indexOf(ui->tabGrainline)
-            || index == ui->tabWidget->indexOf(ui->tabPieceLabelData))
+            || index == ui->tabWidget->indexOf(ui->tabLabels))
     {
         if (m_visPins.isNull())
         {
@@ -1326,7 +1327,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
 
         if (flagPPin)
         {
-            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPieceLabelData), QIcon());
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), QIcon());
         }
     }
     else
@@ -1335,7 +1336,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
         color = errorColor;
 
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
-        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPieceLabelData), icon);
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
     ChangeColor(ui->labelDetailLabelTopLeftPin, color);
     ChangeColor(ui->labelDetailLabelBottomRightPin, color);
@@ -1356,7 +1357,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
 
         if (flagDPin)
         {
-            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPieceLabelData), QIcon());
+            ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), QIcon());
         }
     }
     else
@@ -1365,7 +1366,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
         color = errorColor;
 
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
-        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabPieceLabelData), icon);
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
     ChangeColor(ui->labelPatternLabelTopLeftPin, color);
     ChangeColor(ui->labelPatternLabelBottomRightPin, color);
