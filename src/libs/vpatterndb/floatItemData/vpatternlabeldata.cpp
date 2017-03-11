@@ -107,6 +107,18 @@ void VPatternLabelData::SetRotation(qreal dRot)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VPatternLabelData::CenterPin() const
+{
+    return d->m_centerPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternLabelData::SetCenterPin(const quint32 &centerPin)
+{
+    d->m_centerPin = centerPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VPatternLabelData::TopLeftPin() const
 {
     return d->m_topLeftPin;

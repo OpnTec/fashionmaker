@@ -74,6 +74,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       flagDPin(true),
       flagPPin(true),
       flagGFormulas(false),
+      flagDLAngle(false),
+      flagDLFormulas(false),
+      flagPLAngle(false),
+      flagPLFormulas(false),
       m_bAddMode(true),
       m_mx(0),
       m_my(0),
@@ -87,6 +91,12 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_oldGrainline(),
       m_iRotBaseHeight(0),
       m_iLenBaseHeight(0),
+      m_DLWidthBaseHeight(0),
+      m_DLHeightBaseHeight(0),
+      m_DLAngleBaseHeight(0),
+      m_PLWidthBaseHeight(0),
+      m_PLHeightBaseHeight(0),
+      m_PLAngleBaseHeight(0),
       m_formulaBaseWidth(0),
       m_formulaBaseWidthBefore(0),
       m_formulaBaseWidthAfter(0),
@@ -104,6 +114,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitSeamAllowanceTab();
     InitInternalPathsTab();
     InitPatternPieceDataTab();
+    InitLabelsTab();
     InitGrainlineTab();
     InitPinsTab();
 
@@ -214,17 +225,19 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     UpdateList();
 
     ui->groupBoxGrainline->setChecked(piece.GetGrainlineGeometry().IsVisible());
-    SetGrainlineAngle(piece.GetGrainlineGeometry());
-    SetGrainlineLength(piece.GetGrainlineGeometry());
+    SetGrainlineAngle(piece.GetGrainlineGeometry().GetRotation());
+    SetGrainlineLength(piece.GetGrainlineGeometry().GetLength());
     ui->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
     m_oldData = piece.GetPatternPieceData();
-    ChangeCurrentData(ui->comboBoxDetailLabelTopLeftPin, m_oldData.TopLeftPin());
-    ChangeCurrentData(ui->comboBoxDetailLabelBottomRightPin, m_oldData.BottomRightPin());
+    ChangeCurrentData(ui->comboBoxDLCenterPin, m_oldData.CenterPin());
+    ChangeCurrentData(ui->comboBoxDLTopLeftPin, m_oldData.TopLeftPin());
+    ChangeCurrentData(ui->comboBoxDLBottomRightPin, m_oldData.BottomRightPin());
 
     m_oldGeom = piece.GetPatternInfo();
-    ChangeCurrentData(ui->comboBoxPatternLabelTopLeftPin, m_oldGeom.TopLeftPin());
-    ChangeCurrentData(ui->comboBoxPatternLabelBottomRightPin, m_oldGeom.BottomRightPin());
+    ChangeCurrentData(ui->comboBoxPLCenterPin, m_oldGeom.CenterPin());
+    ChangeCurrentData(ui->comboBoxPLTopLeftPin, m_oldGeom.TopLeftPin());
+    ChangeCurrentData(ui->comboBoxPLBottomRightPin, m_oldGeom.BottomRightPin());
 
     m_oldGrainline = piece.GetGrainlineGeometry();
     ChangeCurrentData(ui->comboBoxGrainlineCenterPin, m_oldGrainline.CenterPin());
@@ -232,7 +245,9 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ChangeCurrentData(ui->comboBoxGrainlineBottomPin, m_oldGrainline.BottomPin());
 
     ValidObjects(MainPathIsValid());
-    EnableGrainlineRotation();
+    EnabledGrainline();
+    EnabledDetailLabel();
+    EnabledPatternLabel();
 
     ListChanged();
 }
@@ -348,7 +363,8 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && flagFormula && flagDPin && flagPPin && (flagGFormulas || flagGPin));
+    bOk->setEnabled(flagName && flagError && flagFormula && flagDPin && flagPPin && (flagGFormulas || flagGPin)
+                    && flagDLAngle && (flagDLFormulas || flagGPin) && flagPLAngle && (flagPLFormulas || flagPPin));
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -949,7 +965,7 @@ void DialogSeamAllowance::TabChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::UpdateValues()
+void DialogSeamAllowance::UpdateGrainlineValues()
 {
     QPlainTextEdit* apleSender[2];
     apleSender[0] = ui->lineEditRotFormula;
@@ -1021,7 +1037,195 @@ void DialogSeamAllowance::UpdateValues()
     }
     else
     {
-        ResetWarning();
+        ResetGrainlineWarning();
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateDetailLabelValues()
+{
+    QPlainTextEdit* apleSender[3];
+    apleSender[0] = ui->lineEditDLWidthFormula;
+    apleSender[1] = ui->lineEditDLHeightFormula;
+    apleSender[2] = ui->lineEditDLAngleFormula;
+    bool bFormulasOK = true;
+    bool angleFormulaOk = true;
+
+    for (int i = 0; i < 3; ++i)
+    {
+        QLabel* plbVal;
+        QLabel* plbText;
+        QString qsUnit;
+        if (i == 0)
+        {
+            plbVal = ui->labelDLWidth;
+            plbText = ui->labelEditDLWidth;
+            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+        }
+        else if (i == 1)
+        {
+            plbVal = ui->labelDLHeight;
+            plbText = ui->labelEditDLHeight;
+            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+        }
+        else
+        {
+            plbVal = ui->labelDLAngle;
+            plbText = ui->labelEditDLAngle;
+            qsUnit = degreeSymbol;
+        }
+
+        plbVal->setToolTip(tr("Value"));
+
+        QString qsFormula = apleSender[i]->toPlainText().simplified();
+        QString qsVal;
+        try
+        {
+            qsFormula.replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal;
+            qreal dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
+            {
+                throw qmu::QmuParserError(tr("Infinite/undefined result"));
+            }
+            else if ((i == 0 || i == 1) && dVal <= 0.0)
+            {
+                throw qmu::QmuParserError(tr("Length should be positive"));
+            }
+            else
+            {
+                qsVal.setNum(dVal, 'f', 2);
+                ChangeColor(plbText, okColor);
+            }
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            qsVal.clear();
+            ChangeColor(plbText, Qt::red);
+            if (i == 3)
+            {
+                angleFormulaOk = false;
+            }
+            else
+            {
+                bFormulasOK = false;
+            }
+            plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        }
+
+        if (qsVal.isEmpty() == false)
+        {
+            qsVal += qsUnit;
+        }
+        plbVal->setText(qsVal);
+    }
+
+    flagDLAngle = angleFormulaOk;
+    flagDLFormulas = bFormulasOK;
+    if (not flagDLAngle && not flagDLFormulas && not flagDPin && not flagPLAngle && not flagPLFormulas && not flagPPin)
+    {
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
+    }
+    else
+    {
+        ResetLabelsWarning();
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdatePatternLabelValues()
+{
+    QPlainTextEdit* apleSender[3];
+    apleSender[0] = ui->lineEditPLWidthFormula;
+    apleSender[1] = ui->lineEditPLHeightFormula;
+    apleSender[2] = ui->lineEditPLAngleFormula;
+    bool bFormulasOK = true;
+    bool angleFormulaOk = true;
+
+    for (int i = 0; i < 3; ++i)
+    {
+        QLabel* plbVal;
+        QLabel* plbText;
+        QString qsUnit;
+        if (i == 0)
+        {
+            plbVal = ui->labelPLWidth;
+            plbText = ui->labelEditPLWidth;
+            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+        }
+        else if (i == 1)
+        {
+            plbVal = ui->labelPLHeight;
+            plbText = ui->labelEditPLHeight;
+            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+        }
+        else
+        {
+            plbVal = ui->labelPLAngle;
+            plbText = ui->labelEditPLAngle;
+            qsUnit = degreeSymbol;
+        }
+
+        plbVal->setToolTip(tr("Value"));
+
+        QString qsFormula = apleSender[i]->toPlainText().simplified();
+        QString qsVal;
+        try
+        {
+            qsFormula.replace("\n", " ");
+            qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
+            Calculator cal;
+            qreal dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
+            {
+                throw qmu::QmuParserError(tr("Infinite/undefined result"));
+            }
+            else if ((i == 0 || i == 1) && dVal <= 0.0)
+            {
+                throw qmu::QmuParserError(tr("Length should be positive"));
+            }
+            else
+            {
+                qsVal.setNum(dVal, 'f', 2);
+                ChangeColor(plbText, okColor);
+            }
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            qsVal.clear();
+            ChangeColor(plbText, Qt::red);
+            if (i == 3)
+            {
+                angleFormulaOk = false;
+            }
+            else
+            {
+                bFormulasOK = false;
+            }
+            plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        }
+
+        if (qsVal.isEmpty() == false)
+        {
+            qsVal += qsUnit;
+        }
+        plbVal->setText(qsVal);
+    }
+
+    flagPLAngle = angleFormulaOk;
+    flagPLFormulas = bFormulasOK;
+    if (not flagDLAngle && not flagDLFormulas && not flagDPin && not flagPLAngle && not flagPLFormulas && not flagPPin)
+    {
+        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
+    }
+    else
+    {
+        ResetLabelsWarning();
     }
     CheckState();
 }
@@ -1074,35 +1278,70 @@ void DialogSeamAllowance::SetEditMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::EnableGrainlineRotation()
+void DialogSeamAllowance::EnabledGrainline()
 {
     if (ui->groupBoxGrainline->isChecked() == true)
     {
-        UpdateValues();
+        UpdateGrainlineValues();
         GrainlinePinPointChanged();
     }
     else
     {
         flagGFormulas = true;
-        ResetWarning();
+        ResetGrainlineWarning();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::EditFormula()
+void DialogSeamAllowance::EnabledDetailLabel()
+{
+    if (ui->groupBoxDetailLabel->isChecked() == true)
+    {
+        UpdateDetailLabelValues();
+        DetailPinPointChanged();
+    }
+    else
+    {
+        flagDLAngle = true;
+        flagDLFormulas = true;
+        ResetLabelsWarning();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnabledPatternLabel()
+{
+    if (ui->groupBoxPatternLabel->isChecked() == true)
+    {
+        UpdatePatternLabelValues();
+        PatternPinPointChanged();
+    }
+    else
+    {
+        flagPLAngle = true;
+        flagPLFormulas = true;
+        ResetLabelsWarning();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EditGrainlineFormula()
 {
     QPlainTextEdit* pleFormula;
     bool bCheckZero;
+    QString title;
 
     if (sender() == ui->pushButtonLen)
     {
         pleFormula = ui->lineEditLenFormula;
         bCheckZero = true;
+        title = tr("Edit length");
     }
     else if (sender() == ui->pushButtonRot)
     {
         pleFormula = ui->lineEditRotFormula;
         bCheckZero = false;
+        title = tr("Edit angle");
     }
     else
     {
@@ -1111,35 +1350,214 @@ void DialogSeamAllowance::EditFormula()
     }
 
     DialogEditWrongFormula dlg(data, NULL_ID, this);
-    dlg.SetFormula(pleFormula->toPlainText());
+    dlg.setWindowTitle(title);
+    dlg.SetFormula(qApp->TrVars()->TryFormulaFromUser(pleFormula->toPlainText(), qApp->Settings()->GetOsSeparator()));
     dlg.setCheckZero(bCheckZero);
     if (dlg.exec() == QDialog::Accepted)
     {
         QString qsFormula = dlg.GetFormula();
         qsFormula.replace("\n", " ");
-        pleFormula->setPlainText(qsFormula);
-        UpdateValues();
+
+        if (sender() == ui->pushButtonLen)
+        {
+            SetGrainlineLength(qsFormula);
+        }
+        else if (sender() == ui->pushButtonRot)
+        {
+            SetGrainlineAngle(qsFormula);
+        }
+        else
+        {
+            // should not get here!
+            pleFormula->setPlainText(qsFormula);
+        }
+        UpdateGrainlineValues();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::DeployRotation()
+void DialogSeamAllowance::EditDLFormula()
+{
+    QPlainTextEdit* pleFormula;
+    bool bCheckZero;
+    QString title;
+
+    if (sender() == ui->pushButtonDLHeight)
+    {
+        pleFormula = ui->lineEditDLHeightFormula;
+        bCheckZero = true;
+        title = tr("Edit height");
+    }
+    else if (sender() == ui->pushButtonDLWidth)
+    {
+        pleFormula = ui->lineEditDLWidthFormula;
+        bCheckZero = true;
+        title = tr("Edit width");
+    }
+    else if (sender() == ui->pushButtonDLAngle)
+    {
+        pleFormula = ui->lineEditDLAngleFormula;
+        bCheckZero = false;
+        title = tr("Edit angle");
+    }
+    else
+    {
+        // should not get here!
+        return;
+    }
+
+    DialogEditWrongFormula dlg(data, NULL_ID, this);
+    dlg.setWindowTitle(title);
+    dlg.SetFormula(qApp->TrVars()->TryFormulaFromUser(pleFormula->toPlainText(), qApp->Settings()->GetOsSeparator()));
+    dlg.setCheckZero(bCheckZero);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        QString qsFormula = dlg.GetFormula();
+        qsFormula.replace("\n", " ");
+        if (sender() == ui->pushButtonDLHeight)
+        {
+            SetDLHeight(qsFormula);
+        }
+        else if (sender() == ui->pushButtonDLWidth)
+        {
+            SetDLWidth(qsFormula);
+        }
+        else if (sender() == ui->pushButtonDLAngle)
+        {
+            SetDLAngle(qsFormula);
+        }
+        else
+        {
+            // should not get here!
+            pleFormula->setPlainText(qsFormula);
+        }
+        UpdateDetailLabelValues();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EditPLFormula()
+{
+    QPlainTextEdit* pleFormula;
+    bool bCheckZero;
+    QString title;
+
+    if (sender() == ui->pushButtonPLHeight)
+    {
+        pleFormula = ui->lineEditPLHeightFormula;
+        bCheckZero = true;
+        title = tr("Edit height");
+    }
+    else if (sender() == ui->pushButtonPLWidth)
+    {
+        pleFormula = ui->lineEditPLWidthFormula;
+        bCheckZero = true;
+        title = tr("Edit width");
+    }
+    else if (sender() == ui->pushButtonPLAngle)
+    {
+        pleFormula = ui->lineEditPLAngleFormula;
+        bCheckZero = false;
+        title = tr("Edit angle");
+    }
+    else
+    {
+        // should not get here!
+        return;
+    }
+
+    DialogEditWrongFormula dlg(data, NULL_ID, this);
+    dlg.setWindowTitle(title);
+    dlg.SetFormula(qApp->TrVars()->TryFormulaFromUser(pleFormula->toPlainText(), qApp->Settings()->GetOsSeparator()));
+    dlg.setCheckZero(bCheckZero);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        QString qsFormula = dlg.GetFormula();
+        qsFormula.replace("\n", " ");
+        if (sender() == ui->pushButtonPLHeight)
+        {
+            SetPLHeight(qsFormula);
+        }
+        else if (sender() == ui->pushButtonPLWidth)
+        {
+            SetPLWidth(qsFormula);
+        }
+        else if (sender() == ui->pushButtonPLAngle)
+        {
+            SetPLAngle(qsFormula);
+        }
+        else
+        {
+            // should not get here!
+            pleFormula->setPlainText(qsFormula);
+        }
+        UpdatePatternLabelValues();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployGrainlineRotation()
 {
     DeployFormula(ui->lineEditRotFormula, ui->pushButtonShowRot, m_iRotBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::DeployLength()
+void DialogSeamAllowance::DeployGrainlineLength()
 {
     DeployFormula(ui->lineEditLenFormula, ui->pushButtonShowLen, m_iLenBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ResetWarning()
+void DialogSeamAllowance::DeployDLWidth()
+{
+    DeployFormula(ui->lineEditDLWidthFormula, ui->pushButtonShowDLWidth, m_DLWidthBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployDLHeight()
+{
+    DeployFormula(ui->lineEditDLHeightFormula, ui->pushButtonShowDLHeight, m_DLHeightBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployDLAngle()
+{
+    DeployFormula(ui->lineEditDLAngleFormula, ui->pushButtonShowDLAngle, m_DLAngleBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployPLWidth()
+{
+    DeployFormula(ui->lineEditPLWidthFormula, ui->pushButtonShowPLWidth, m_PLWidthBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployPLHeight()
+{
+    DeployFormula(ui->lineEditPLHeightFormula, ui->pushButtonShowPLHeight, m_PLHeightBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployPLAngle()
+{
+    DeployFormula(ui->lineEditPLAngleFormula, ui->pushButtonShowPLAngle, m_PLAngleBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ResetGrainlineWarning()
 {
     if (flagGFormulas || flagGPin)
     {
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabGrainline), QIcon());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ResetLabelsWarning()
+{
+    if (flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle && (flagPLFormulas || flagPPin))
+    {
+        ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), QIcon());
     }
 }
 
@@ -1295,7 +1713,7 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
         flagGPin = true;
         color = okColor;
 
-        ResetWarning();
+        ResetGrainlineWarning();
     }
     else
     {
@@ -1317,8 +1735,8 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
 void DialogSeamAllowance::DetailPinPointChanged()
 {
     QColor color = okColor;
-    const quint32 topPinId = getCurrentObjectId(ui->comboBoxDetailLabelTopLeftPin);
-    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxDetailLabelBottomRightPin);
+    const quint32 topPinId = getCurrentObjectId(ui->comboBoxDLTopLeftPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxDLBottomRightPin);
     if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
             || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
     {
@@ -1338,8 +1756,8 @@ void DialogSeamAllowance::DetailPinPointChanged()
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
-    ChangeColor(ui->labelDetailLabelTopLeftPin, color);
-    ChangeColor(ui->labelDetailLabelBottomRightPin, color);
+    ChangeColor(ui->labelDLTopLeftPin, color);
+    ChangeColor(ui->labelDLBottomRightPin, color);
     CheckState();
 }
 
@@ -1347,8 +1765,8 @@ void DialogSeamAllowance::DetailPinPointChanged()
 void DialogSeamAllowance::PatternPinPointChanged()
 {
     QColor color = okColor;
-    const quint32 topPinId = getCurrentObjectId(ui->comboBoxPatternLabelTopLeftPin);
-    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxPatternLabelBottomRightPin);
+    const quint32 topPinId = getCurrentObjectId(ui->comboBoxPLTopLeftPin);
+    const quint32 bottomPinId = getCurrentObjectId(ui->comboBoxPLBottomRightPin);
     if ((topPinId == NULL_ID && bottomPinId == NULL_ID)
             || (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId))
     {
@@ -1368,8 +1786,8 @@ void DialogSeamAllowance::PatternPinPointChanged()
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
     }
-    ChangeColor(ui->labelPatternLabelTopLeftPin, color);
-    ChangeColor(ui->labelPatternLabelBottomRightPin, color);
+    ChangeColor(ui->labelPLTopLeftPin, color);
+    ChangeColor(ui->labelPLBottomRightPin, color);
     CheckState();
 }
 
@@ -1400,13 +1818,15 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
     piece.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
     piece.GetPatternPieceData().SetVisible(ui->groupBoxDetailLabel->isChecked());
-    piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(ui->comboBoxDetailLabelTopLeftPin));
-    piece.GetPatternPieceData().SetBottomRightPin(getCurrentObjectId(ui->comboBoxDetailLabelBottomRightPin));
+    piece.GetPatternPieceData().SetCenterPin(getCurrentObjectId(ui->comboBoxDLCenterPin));
+    piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(ui->comboBoxDLTopLeftPin));
+    piece.GetPatternPieceData().SetBottomRightPin(getCurrentObjectId(ui->comboBoxDLBottomRightPin));
 
     piece.GetPatternInfo() = m_oldGeom;
     piece.GetPatternInfo().SetVisible(ui->groupBoxPatternLabel->isChecked());
-    piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(ui->comboBoxPatternLabelTopLeftPin));
-    piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(ui->comboBoxPatternLabelBottomRightPin));
+    piece.GetPatternInfo().SetCenterPin(getCurrentObjectId(ui->comboBoxPLCenterPin));
+    piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(ui->comboBoxPLTopLeftPin));
+    piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(ui->comboBoxPLBottomRightPin));
 
     piece.GetGrainlineGeometry() = m_oldGrainline;
     piece.GetGrainlineGeometry().SetVisible(ui->groupBoxGrainline->isChecked());
@@ -1814,26 +2234,6 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     ui->lineEditLetter->setClearButtonEnabled(true);
 #endif
 
-    InitPinPoint(ui->comboBoxDetailLabelTopLeftPin);
-    InitPinPoint(ui->comboBoxDetailLabelBottomRightPin);
-
-    connect(ui->comboBoxDetailLabelTopLeftPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogSeamAllowance::DetailPinPointChanged);
-    connect(ui->comboBoxDetailLabelBottomRightPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogSeamAllowance::DetailPinPointChanged);
-
-    InitPinPoint(ui->comboBoxPatternLabelTopLeftPin);
-    InitPinPoint(ui->comboBoxPatternLabelBottomRightPin);
-
-    connect(ui->comboBoxPatternLabelTopLeftPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogSeamAllowance::PatternPinPointChanged);
-    connect(ui->comboBoxPatternLabelBottomRightPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogSeamAllowance::PatternPinPointChanged);
-
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
     m_qslMaterials << QApplication::translate("Detail", "Fabric", 0)
@@ -1854,30 +2254,99 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 
     m_qslPlacements << tr("None") << tr("Cut on fold");
     ui->comboBoxPlacement->addItems(m_qslPlacements);
-    ui->pushButtonRot->setIcon(QIcon("://icon/16x16/fx.png"));
-    ui->pushButtonLen->setIcon(QIcon("://icon/16x16/fx.png"));
 
     connect(ui->pushButtonAdd, &QPushButton::clicked, this, &DialogSeamAllowance::AddUpdate);
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogSeamAllowance::Cancel);
     connect(ui->pushButtonRemove, &QPushButton::clicked, this, &DialogSeamAllowance::Remove);
     connect(ui->listWidgetMCP, &QListWidget::itemClicked, this, &DialogSeamAllowance::SetEditMode);
     connect(ui->comboBoxMaterial, &QComboBox::currentTextChanged, this, &DialogSeamAllowance::MaterialChanged);
+
+    SetAddMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitLabelsTab()
+{
+    m_DLWidthBaseHeight = ui->lineEditDLWidthFormula->height();
+    m_DLHeightBaseHeight = ui->lineEditDLHeightFormula->height();
+    m_DLAngleBaseHeight = ui->lineEditDLAngleFormula->height();
+
+    connect(ui->groupBoxDetailLabel, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledDetailLabel);
+    InitPinPoint(ui->comboBoxDLCenterPin);
+    InitPinPoint(ui->comboBoxDLTopLeftPin);
+    InitPinPoint(ui->comboBoxDLBottomRightPin);
+
+    connect(ui->comboBoxDLTopLeftPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::DetailPinPointChanged);
+    connect(ui->comboBoxDLBottomRightPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::DetailPinPointChanged);
+
+    connect(ui->pushButtonDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
+    connect(ui->pushButtonDLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
+    connect(ui->pushButtonDLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
+
+    connect(ui->lineEditDLWidthFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdateDetailLabelValues);
+    connect(ui->lineEditDLHeightFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdateDetailLabelValues);
+    connect(ui->lineEditDLAngleFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdateDetailLabelValues);
+
+    connect(ui->pushButtonShowDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployDLWidth);
+    connect(ui->pushButtonShowDLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployDLHeight);
+    connect(ui->pushButtonShowDLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::DeployDLAngle);
+
+    EnabledDetailLabel();
+
+    m_PLWidthBaseHeight = ui->lineEditPLWidthFormula->height();
+    m_PLHeightBaseHeight = ui->lineEditPLHeightFormula->height();
+    m_PLAngleBaseHeight = ui->lineEditPLAngleFormula->height();
+
+    connect(ui->groupBoxPatternLabel, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledPatternLabel);
+    InitPinPoint(ui->comboBoxPLCenterPin);
+    InitPinPoint(ui->comboBoxPLTopLeftPin);
+    InitPinPoint(ui->comboBoxPLBottomRightPin);
+
+    connect(ui->comboBoxPLTopLeftPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternPinPointChanged);
+    connect(ui->comboBoxPLBottomRightPin,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PatternPinPointChanged);
+
+    connect(ui->pushButtonPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
+    connect(ui->pushButtonPLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
+    connect(ui->pushButtonPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
+
+    connect(ui->lineEditPLWidthFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdatePatternLabelValues);
+    connect(ui->lineEditPLHeightFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdatePatternLabelValues);
+    connect(ui->lineEditPLAngleFormula, &QPlainTextEdit::textChanged, this,
+            &DialogSeamAllowance::UpdatePatternLabelValues);
+
+    connect(ui->pushButtonShowPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLWidth);
+    connect(ui->pushButtonShowPLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLHeight);
+    connect(ui->pushButtonShowPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLAngle);
+
+    EnabledPatternLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitGrainlineTab()
 {
-    connect(ui->groupBoxGrainline, &QGroupBox::toggled, this, &DialogSeamAllowance::EnableGrainlineRotation);
-    connect(ui->pushButtonRot, &QPushButton::clicked, this, &DialogSeamAllowance::EditFormula);
-    connect(ui->pushButtonLen, &QPushButton::clicked, this, &DialogSeamAllowance::EditFormula);
-    connect(ui->lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::UpdateValues);
-    connect(ui->lineEditRotFormula, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::UpdateValues);
+    connect(ui->groupBoxGrainline, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledGrainline);
+    connect(ui->pushButtonRot, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
+    connect(ui->pushButtonLen, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
+    connect(ui->lineEditLenFormula, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::UpdateGrainlineValues);
+    connect(ui->lineEditRotFormula, &QPlainTextEdit::textChanged, this, &DialogSeamAllowance::UpdateGrainlineValues);
 
-    connect(ui->pushButtonShowRot, &QPushButton::clicked, this, &DialogSeamAllowance::DeployRotation);
-    connect(ui->pushButtonShowLen, &QPushButton::clicked, this, &DialogSeamAllowance::DeployLength);
+    connect(ui->pushButtonShowRot, &QPushButton::clicked, this, &DialogSeamAllowance::DeployGrainlineRotation);
+    connect(ui->pushButtonShowLen, &QPushButton::clicked, this, &DialogSeamAllowance::DeployGrainlineLength);
 
-    SetAddMode();
-    EnableGrainlineRotation();
+    EnabledGrainline();
 
     ui->comboBoxArrow->addItem(tr("Both"));
     ui->comboBoxArrow->addItem(tr("Just front"));
@@ -1913,10 +2382,13 @@ void DialogSeamAllowance::InitAllPinComboboxes()
     InitPinPoint(ui->comboBoxGrainlineTopPin);
     InitPinPoint(ui->comboBoxGrainlineBottomPin);
 
-    InitPinPoint(ui->comboBoxDetailLabelTopLeftPin);
-    InitPinPoint(ui->comboBoxDetailLabelBottomRightPin);
-    InitPinPoint(ui->comboBoxPatternLabelTopLeftPin);
-    InitPinPoint(ui->comboBoxPatternLabelBottomRightPin);
+    InitPinPoint(ui->comboBoxDLCenterPin);
+    InitPinPoint(ui->comboBoxDLTopLeftPin);
+    InitPinPoint(ui->comboBoxDLBottomRightPin);
+
+    InitPinPoint(ui->comboBoxPLCenterPin);
+    InitPinPoint(ui->comboBoxPLTopLeftPin);
+    InitPinPoint(ui->comboBoxPLBottomRightPin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1999,13 +2471,13 @@ QVector<T> DialogSeamAllowance::GetPieceInternals(const QListWidget *list) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetGrainlineAngle(const VGrainlineData &data)
+void DialogSeamAllowance::SetGrainlineAngle(const QString &angleFormula)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(data.GetRotation(), qApp->Settings()->GetOsSeparator());
+    const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
-        this->DeployRotation();
+        this->DeployGrainlineRotation();
     }
     ui->lineEditRotFormula->setPlainText(formula);
 
@@ -2013,15 +2485,99 @@ void DialogSeamAllowance::SetGrainlineAngle(const VGrainlineData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetGrainlineLength(const VGrainlineData &data)
+void DialogSeamAllowance::SetGrainlineLength(const QString &lengthFormula)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(data.GetLength(), qApp->Settings()->GetOsSeparator());
+    const QString formula = qApp->TrVars()->FormulaToUser(lengthFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
-        this->DeployLength();
+        this->DeployGrainlineLength();
     }
     ui->lineEditLenFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditLenFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetDLWidth(const QString &widthFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployDLWidth();
+    }
+    ui->lineEditDLWidthFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditDLWidthFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetDLHeight(const QString &heightFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployDLHeight();
+    }
+    ui->lineEditDLHeightFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditDLHeightFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetDLAngle(const QString &angleFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployDLAngle();
+    }
+    ui->lineEditDLAngleFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditDLAngleFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetPLWidth(const QString &widthFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployPLWidth();
+    }
+    ui->lineEditPLWidthFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditPLWidthFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetPLHeight(const QString &heightFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployPLHeight();
+    }
+    ui->lineEditPLHeightFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditPLHeightFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetPLAngle(const QString &angleFormula)
+{
+    const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployPLAngle();
+    }
+    ui->lineEditPLAngleFormula->setPlainText(formula);
+
+    MoveCursorToEnd(ui->lineEditPLAngleFormula);
 }

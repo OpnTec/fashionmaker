@@ -59,6 +59,9 @@ public:
     qreal GetRotation() const;
     void  SetRotation(qreal dRot);
 
+    quint32 CenterPin() const;
+    void    SetCenterPin(const quint32 &centerPin);
+
     quint32 TopLeftPin() const;
     void    SetTopLeftPin(const quint32 &topLeftPin);
 

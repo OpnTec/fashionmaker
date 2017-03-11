@@ -46,6 +46,7 @@ public:
           m_dLabelHeight(0),
           m_iFontSize(0),
           m_dRotation(0),
+          m_centerPin(NULL_ID),
           m_topLeftPin(NULL_ID),
           m_bottomRightPin(NULL_ID)
     {}
@@ -56,6 +57,7 @@ public:
           m_dLabelHeight(data.m_dLabelHeight),
           m_iFontSize(data.m_iFontSize),
           m_dRotation(data.m_dRotation),
+          m_centerPin(data.m_centerPin),
           m_topLeftPin(data.m_topLeftPin),
           m_bottomRightPin(data.m_bottomRightPin)
     {}
@@ -70,6 +72,8 @@ public:
     int     m_iFontSize;
     /** @brief m_dRotation label rotation */
     qreal   m_dRotation;
+    /** @brief m_centerPin center pin id */
+    quint32 m_centerPin;
     /** @brief m_topLeftPin top left corner pin id */
     quint32 m_topLeftPin;
     /** @brief m_bottomRightPin bottom right corner pin id */
