@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="tabMainPath">
       <attribute name="title">
@@ -2650,7 +2650,7 @@
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string notr="true"/>
+               <string notr="true">1</string>
               </property>
              </widget>
             </item>
@@ -2839,7 +2839,7 @@
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string notr="true"/>
+               <string notr="true">90</string>
               </property>
              </widget>
             </item>
