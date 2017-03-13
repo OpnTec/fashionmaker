@@ -59,25 +59,25 @@ VPatternLabelData::~VPatternLabelData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternLabelData::GetLabelWidth() const
+QString VPatternLabelData::GetLabelWidth() const
 {
     return d->m_dLabelWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternLabelData::SetLabelWidth(qreal dLabelW)
+void VPatternLabelData::SetLabelWidth(const QString &dLabelW)
 {
     d->m_dLabelWidth = dLabelW;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternLabelData::GetLabelHeight() const
+QString VPatternLabelData::GetLabelHeight() const
 {
     return d->m_dLabelHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternLabelData::SetLabelHeight(qreal dLabelH)
+void VPatternLabelData::SetLabelHeight(const QString &dLabelH)
 {
     d->m_dLabelHeight = dLabelH;
 }
@@ -95,15 +95,15 @@ void VPatternLabelData::SetFontSize(int iSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPatternLabelData::GetRotation() const
+QString VPatternLabelData::GetRotation() const
 {
-    return d->m_dRotation;
+    return d->m_dLabelAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternLabelData::SetRotation(qreal dRot)
+void VPatternLabelData::SetRotation(const QString &dRot)
 {
-    d->m_dRotation = dRot;
+    d->m_dLabelAngle = dRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

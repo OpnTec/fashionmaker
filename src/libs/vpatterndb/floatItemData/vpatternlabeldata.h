@@ -47,17 +47,17 @@ public:
     virtual ~VPatternLabelData();
 
     // methods, which set up label parameters
-    qreal GetLabelWidth() const;
-    void  SetLabelWidth(qreal dLabelW);
+    QString GetLabelWidth() const;
+    void    SetLabelWidth(const QString &dLabelW);
 
-    qreal GetLabelHeight() const;
-    void  SetLabelHeight(qreal dLabelH);
+    QString GetLabelHeight() const;
+    void    SetLabelHeight(const QString &dLabelH);
 
     int   GetFontSize() const;
     void  SetFontSize(int iSize);
 
-    qreal GetRotation() const;
-    void  SetRotation(qreal dRot);
+    QString GetRotation() const;
+    void    SetRotation(const QString &dRot);
 
     quint32 CenterPin() const;
     void    SetCenterPin(const quint32 &centerPin);

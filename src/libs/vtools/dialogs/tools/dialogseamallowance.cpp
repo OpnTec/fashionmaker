@@ -213,8 +213,6 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     m_my = piece.GetMy();
 
     ui->lineEditLetter->setText(piece.GetPatternPieceData().GetLetter());
-    ui->groupBoxDetailLabel->setChecked(piece.GetPatternPieceData().IsVisible());
-    ui->groupBoxPatternLabel->setChecked(piece.GetPatternInfo().IsVisible());
 
     m_conMCP.clear();
     for (int i = 0; i < piece.GetPatternPieceData().GetMCPCount(); ++i)
@@ -224,25 +222,33 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     UpdateList();
 
-    ui->groupBoxGrainline->setChecked(piece.GetGrainlineGeometry().IsVisible());
-    SetGrainlineAngle(piece.GetGrainlineGeometry().GetRotation());
-    SetGrainlineLength(piece.GetGrainlineGeometry().GetLength());
     ui->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
     m_oldData = piece.GetPatternPieceData();
+    ui->groupBoxDetailLabel->setChecked(m_oldData.IsVisible());
     ChangeCurrentData(ui->comboBoxDLCenterPin, m_oldData.CenterPin());
     ChangeCurrentData(ui->comboBoxDLTopLeftPin, m_oldData.TopLeftPin());
     ChangeCurrentData(ui->comboBoxDLBottomRightPin, m_oldData.BottomRightPin());
+    SetDLWidth(m_oldData.GetLabelWidth());
+    SetDLHeight(m_oldData.GetLabelHeight());
+    SetDLHeight(m_oldData.GetRotation());
 
     m_oldGeom = piece.GetPatternInfo();
+    ui->groupBoxPatternLabel->setChecked(m_oldGeom.IsVisible());
     ChangeCurrentData(ui->comboBoxPLCenterPin, m_oldGeom.CenterPin());
     ChangeCurrentData(ui->comboBoxPLTopLeftPin, m_oldGeom.TopLeftPin());
     ChangeCurrentData(ui->comboBoxPLBottomRightPin, m_oldGeom.BottomRightPin());
+    SetPLWidth(m_oldGeom.GetLabelWidth());
+    SetPLHeight(m_oldGeom.GetLabelHeight());
+    SetPLHeight(m_oldGeom.GetRotation());
 
     m_oldGrainline = piece.GetGrainlineGeometry();
+    ui->groupBoxGrainline->setChecked(m_oldGrainline.IsVisible());
     ChangeCurrentData(ui->comboBoxGrainlineCenterPin, m_oldGrainline.CenterPin());
     ChangeCurrentData(ui->comboBoxGrainlineTopPin, m_oldGrainline.TopPin());
     ChangeCurrentData(ui->comboBoxGrainlineBottomPin, m_oldGrainline.BottomPin());
+    SetGrainlineAngle(m_oldGrainline.GetRotation());
+    SetGrainlineLength(m_oldGrainline.GetLength());
 
     ValidObjects(MainPathIsValid());
     EnabledGrainline();
@@ -1794,10 +1800,10 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
 
     piece.GetPatternPieceData().SetPos(m_oldData.GetPos());
-    piece.GetPatternPieceData().SetLabelWidth(m_oldData.GetLabelWidth());
-    piece.GetPatternPieceData().SetLabelHeight(m_oldData.GetLabelHeight());
+    piece.GetPatternPieceData().SetLabelWidth(GetFormulaFromUser(ui->lineEditDLWidthFormula));
+    piece.GetPatternPieceData().SetLabelHeight(GetFormulaFromUser(ui->lineEditDLHeightFormula));
     piece.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
-    piece.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
+    piece.GetPatternPieceData().SetRotation(GetFormulaFromUser(ui->lineEditDLAngleFormula));
     piece.GetPatternPieceData().SetVisible(ui->groupBoxDetailLabel->isChecked());
     piece.GetPatternPieceData().SetCenterPin(getCurrentObjectId(ui->comboBoxDLCenterPin));
     piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(ui->comboBoxDLTopLeftPin));
@@ -1808,6 +1814,9 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternInfo().SetCenterPin(getCurrentObjectId(ui->comboBoxPLCenterPin));
     piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(ui->comboBoxPLTopLeftPin));
     piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(ui->comboBoxPLBottomRightPin));
+    piece.GetPatternInfo().SetLabelWidth(GetFormulaFromUser(ui->lineEditPLWidthFormula));
+    piece.GetPatternInfo().SetLabelHeight(GetFormulaFromUser(ui->lineEditPLHeightFormula));
+    piece.GetPatternInfo().SetRotation(GetFormulaFromUser(ui->lineEditPLAngleFormula));
 
     piece.GetGrainlineGeometry() = m_oldGrainline;
     piece.GetGrainlineGeometry().SetVisible(ui->groupBoxGrainline->isChecked());

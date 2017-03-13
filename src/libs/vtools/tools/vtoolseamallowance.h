@@ -152,8 +152,8 @@ private:
 
     void RefreshGeometry();
     void SaveDialogChange();
-    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &labelWidth, qreal &labelHeight,
-                                            QPointF &pos);
+    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
+                                            qreal &labelHeight, QPointF &pos);
     VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,
                                                 QPointF &pos);
 

@@ -804,35 +804,25 @@ void VPattern::ParseDetailNodes(const QDomElement &domElement, VPiece &detail, q
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const
 {
-    detail.GetPatternPieceData().SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    VPieceLabelData &ppData = detail.GetPatternPieceData();
+    ppData.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     try
     {
         QString qsLetter = GetParametrString(domElement, AttrLetter, "");
-        detail.GetPatternPieceData().SetLetter(qsLetter);
+        ppData.SetLetter(qsLetter);
     }
     catch(const VExceptionEmptyParameter &e)
     {
         Q_UNUSED(e)
-        detail.GetPatternPieceData().SetLetter("");
+        ppData.SetLetter("");
     }
-    QPointF ptPos;
-    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
-    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
-    detail.GetPatternPieceData().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, AttrWidth, "0");
-    detail.GetPatternPieceData().SetLabelWidth(dLW);
-    qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
-    detail.GetPatternPieceData().SetLabelHeight(dLH);
-    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
-    detail.GetPatternPieceData().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
-    detail.GetPatternPieceData().SetRotation(dRot);
-
-    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
-    detail.GetPatternPieceData().SetTopLeftPin(topLeftPin);
-
-    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
-    detail.GetPatternPieceData().SetBottomRightPin(bottomRightPin);
+    ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
+    ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
+    ppData.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
+    ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
+    ppData.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
+    ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
+    ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
 
     QDomNodeList nodeListMCP = domElement.childNodes();
     for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
@@ -846,57 +836,36 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
         }
         mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
         mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
-        detail.GetPatternPieceData().Append(mcp);
+        ppData.Append(mcp);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const
 {
-    detail.GetPatternInfo().SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
-    QPointF ptPos;
-    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
-    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
-    detail.GetPatternInfo().SetPos(ptPos);
-    qreal dLW = GetParametrDouble(domElement, AttrWidth, "0");
-    detail.GetPatternInfo().SetLabelWidth(dLW);
-    qreal dLH = GetParametrDouble(domElement, VToolSeamAllowance::AttrHeight, "0");
-    detail.GetPatternInfo().SetLabelHeight(dLH);
-    int iFS = static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0"));
-    detail.GetPatternInfo().SetFontSize(iFS);
-    qreal dRot = GetParametrDouble(domElement, AttrRotation, "0");
-    detail.GetPatternInfo().SetRotation(dRot);
-
-    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
-    detail.GetPatternInfo().SetTopLeftPin(topLeftPin);
-
-    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
-    detail.GetPatternInfo().SetBottomRightPin(bottomRightPin);
+    VPatternLabelData &patternInfo = detail.GetPatternInfo();
+    patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
+    patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
+    patternInfo.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
+    patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
+    patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
+    patternInfo.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
+    patternInfo.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const
 {
-    detail.GetGrainlineGeometry().SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
-    QPointF ptPos;
-    ptPos.setX(GetParametrDouble(domElement, AttrMx, "0"));
-    ptPos.setY(GetParametrDouble(domElement, AttrMy, "0"));
-    detail.GetGrainlineGeometry().SetPos(ptPos);
-    QString qsLength = GetParametrString(domElement, AttrLength, "0");
-    detail.GetGrainlineGeometry().SetLength(qsLength);
-    QString qsRot = GetParametrString(domElement, AttrRotation, "90");
-    detail.GetGrainlineGeometry().SetRotation(qsRot);
-    ArrowType eAT = static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0"));
-    detail.GetGrainlineGeometry().SetArrowType(eAT);
-
-    const quint32 centerPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR);
-    detail.GetGrainlineGeometry().SetCenterPin(centerPin);
-
-    const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
-    detail.GetGrainlineGeometry().SetTopPin(topPin);
-
-    const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
-    detail.GetGrainlineGeometry().SetBottomPin(bottomPin);
+    VGrainlineData &gGeometry = detail.GetGrainlineGeometry();
+    gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
+    gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
+    gGeometry.SetLength(GetParametrString(domElement, AttrLength, "1"));
+    gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, "90"));
+    gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0")));
+    gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+    gGeometry.SetTopPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR));
+    gGeometry.SetBottomPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

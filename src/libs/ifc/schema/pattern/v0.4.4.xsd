@@ -492,9 +492,9 @@
                               <xs:attribute name="fontSize" type="xs:unsignedInt"/>
                               <xs:attribute name="mx" type="xs:double"/>
                               <xs:attribute name="my" type="xs:double"/>
-                              <xs:attribute name="width" type="xs:double"/>
-                              <xs:attribute name="height" type="xs:double"/>
-                              <xs:attribute name="rotation" type="xs:double"/>
+                              <xs:attribute name="width" type="xs:string"/>
+                              <xs:attribute name="height" type="xs:string"/>
+                              <xs:attribute name="rotation" type="xs:string"/>
                               <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
@@ -505,9 +505,9 @@
                               <xs:attribute name="fontSize" type="xs:unsignedInt"/>
                               <xs:attribute name="mx" type="xs:double"/>
                               <xs:attribute name="my" type="xs:double"/>
-                              <xs:attribute name="width" type="xs:double"/>
-                              <xs:attribute name="height" type="xs:double"/>
-                              <xs:attribute name="rotation" type="xs:double"/>
+                              <xs:attribute name="width" type="xs:string"/>
+                              <xs:attribute name="height" type="xs:string"/>
+                              <xs:attribute name="rotation" type="xs:string"/>
                               <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
