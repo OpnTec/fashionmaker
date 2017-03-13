@@ -495,6 +495,7 @@
                               <xs:attribute name="width" type="xs:string"/>
                               <xs:attribute name="height" type="xs:string"/>
                               <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
                               <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
@@ -508,6 +509,7 @@
                               <xs:attribute name="width" type="xs:string"/>
                               <xs:attribute name="height" type="xs:string"/>
                               <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
                               <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>

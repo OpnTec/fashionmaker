@@ -258,6 +258,15 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
 
+    if (data.CenterPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrCenterPin, data.CenterPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrCenterPin);
+    }
+
     if (data.TopLeftPin() > NULL_ID)
     {
         doc->SetAttribute(domData, AttrTopLeftPin, data.TopLeftPin());
@@ -304,6 +313,15 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
+
+    if (geom.CenterPin() > NULL_ID)
+    {
+        doc->SetAttribute(domData, AttrCenterPin, geom.CenterPin());
+    }
+    else
+    {
+        domData.removeAttribute(AttrCenterPin);
+    }
 
     if (geom.TopLeftPin() > NULL_ID)
     {
