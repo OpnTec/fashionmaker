@@ -546,7 +546,7 @@ void VToolSeamAllowance::UpdateLabel()
         }
 
         m_dataLabel->setPos(pos);
-        m_dataLabel->setRotation(labelAngle);
+        m_dataLabel->setRotation(-labelAngle);
         m_dataLabel->Update();
         m_dataLabel->show();
     }
@@ -694,7 +694,11 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
     VPiece newDet = oldDet;
     newDet.GetPatternPieceData().SetPos(m_dataLabel->pos());
     newDet.GetPatternPieceData().SetFontSize(m_dataLabel->GetFontSize());
-    newDet.GetPatternPieceData().SetRotation(QString().setNum(dRot));
+
+    // Tranform angle to anticlockwise
+    QLineF line(0, 0, 100, 0);
+    line.setAngle(-dRot);
+    newDet.GetPatternPieceData().SetRotation(QString().setNum(line.angle()));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     rotateCommand->setText(tr("rotate pattern piece label"));
@@ -748,6 +752,10 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
 
     newDet.GetPatternInfo().SetPos(m_patternInfo->pos());
     newDet.GetPatternInfo().SetFontSize(m_patternInfo->GetFontSize());
+
+    // Tranform angle to anticlockwise
+    QLineF line(0, 0, 100, 0);
+    line.setAngle(-dRot);
     newDet.GetPatternInfo().SetRotation(QString().setNum(dRot));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
