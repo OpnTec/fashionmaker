@@ -230,16 +230,16 @@ private:
     template <typename T>
     QVector<T> GetPieceInternals(const QListWidget *list) const;
 
-    void SetGrainlineAngle(const QString &angleFormula);
-    void SetGrainlineLength(const QString &lengthFormula);
+    void SetGrainlineAngle(QString angleFormula);
+    void SetGrainlineLength(QString lengthFormula);
 
-    void SetDLWidth(const QString &widthFormula);
-    void SetDLHeight(const QString &heightFormula);
-    void SetDLAngle(const QString &angleFormula);
+    void SetDLWidth(QString widthFormula);
+    void SetDLHeight(QString heightFormula);
+    void SetDLAngle(QString angleFormula);
 
-    void SetPLWidth(const QString &widthFormula);
-    void SetPLHeight(const QString &heightFormula);
-    void SetPLAngle(const QString &angleFormula);
+    void SetPLWidth(QString widthFormula);
+    void SetPLHeight(QString heightFormula);
+    void SetPLAngle(QString angleFormula);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

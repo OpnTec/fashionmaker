@@ -2461,8 +2461,13 @@ QVector<T> DialogSeamAllowance::GetPieceInternals(const QListWidget *list) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetGrainlineAngle(const QString &angleFormula)
+void DialogSeamAllowance::SetGrainlineAngle(QString angleFormula)
 {
+    if (angleFormula.isEmpty())
+    {
+        angleFormula = QString("0");
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
@@ -2475,98 +2480,140 @@ void DialogSeamAllowance::SetGrainlineAngle(const QString &angleFormula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetGrainlineLength(const QString &lengthFormula)
+void DialogSeamAllowance::SetGrainlineLength(QString lengthFormula)
 {
+    if (lengthFormula.isEmpty())
+    {
+        lengthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(lengthFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployGrainlineLength();
     }
+
     ui->lineEditLenFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditLenFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetDLWidth(const QString &widthFormula)
+void DialogSeamAllowance::SetDLWidth(QString widthFormula)
 {
+    if (widthFormula.isEmpty())
+    {
+        widthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployDLWidth();
     }
+
     ui->lineEditDLWidthFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditDLWidthFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetDLHeight(const QString &heightFormula)
+void DialogSeamAllowance::SetDLHeight(QString heightFormula)
 {
+    if (heightFormula.isEmpty())
+    {
+        heightFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployDLHeight();
     }
+
     ui->lineEditDLHeightFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditDLHeightFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetDLAngle(const QString &angleFormula)
+void DialogSeamAllowance::SetDLAngle(QString angleFormula)
 {
+    if (angleFormula.isEmpty())
+    {
+        angleFormula = QString("0");
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployDLAngle();
     }
+
     ui->lineEditDLAngleFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditDLAngleFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetPLWidth(const QString &widthFormula)
+void DialogSeamAllowance::SetPLWidth(QString widthFormula)
 {
+    if (widthFormula.isEmpty())
+    {
+        widthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployPLWidth();
     }
+
     ui->lineEditPLWidthFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditPLWidthFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetPLHeight(const QString &heightFormula)
+void DialogSeamAllowance::SetPLHeight(QString heightFormula)
 {
+    if (heightFormula.isEmpty())
+    {
+        heightFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployPLHeight();
     }
+
     ui->lineEditPLHeightFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditPLHeightFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetPLAngle(const QString &angleFormula)
+void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 {
+    if (angleFormula.isEmpty())
+    {
+        angleFormula = QString("0");
+    }
+
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
         this->DeployPLAngle();
     }
+
     ui->lineEditPLAngleFormula->setPlainText(formula);
 
     MoveCursorToEnd(ui->lineEditPLAngleFormula);
