@@ -516,15 +516,15 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         // in resize mode, resize the label along the mouse move from the origin
         QPointF pt;
 
-//        if (m_moveType & IsMovable)
-//        {
+        if (m_moveType & IsMovable)
+        {
             pt = m_ptStartPos;
-//        }
-//        else
-//        {
-//            pt = m_ptRotCenter - QRectF(0, 0, m_szStart.width() + ptDiff.x(),
-//                                        m_szStart.height() + ptDiff.y()).center();
-//        }
+        }
+        else
+        {
+            pt = m_ptRotCenter - QRectF(0, 0, m_szStart.width() + ptDiff.x(),
+                                        m_szStart.height() + ptDiff.y()).center();
+        }
 
         rectBB.setTopLeft(pt);
         QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
@@ -534,13 +534,13 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         {
             sz = QSizeF(sz.width()+dX, sz.height()+dY);
         }
-//        else
-//        {
-//            if (not (m_moveType & IsMovable))
-//            {
-//                setPos(pt);
-//            }
-//        }
+        else
+        {
+            if (not (m_moveType & IsMovable))
+            {
+                setPos(pt);
+            }
+        }
 
         SetSize(sz.width(), sz.height());
         Update();
