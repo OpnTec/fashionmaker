@@ -206,7 +206,32 @@ bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern
         return false;
     }
 
-    pos = geom.GetPos();
+    const quint32 centerPin = geom.CenterPin();
+    if (centerPin != NULL_ID)
+    {
+        try
+        {
+            const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
+
+            const qreal cLength = ToPixel(length, *pattern->GetPatternUnit());
+            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
+                             centerPinPoint->x() + cLength / 2.0, centerPinPoint->y());
+
+            grainline.setAngle(rotationAngle);
+            grainline = QLineF(grainline.p2(), grainline.p1());
+            grainline.setLength(cLength);
+
+            pos = grainline.p2();
+        }
+        catch(const VExceptionBadId &)
+        {
+            pos = geom.GetPos();
+        }
+    }
+    else
+    {
+        pos = geom.GetPos();
+    }
     return true;
 }
 
