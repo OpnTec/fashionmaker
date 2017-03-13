@@ -92,6 +92,10 @@ private:
     double       m_dAngle;
     QRectF       m_rectResize;
     VTextManager m_tm;
+
+    void AllUserModifications(const QPointF &pos);
+    void UserRotateAndMove();
+    void UserMoveAndResize(const QPointF &pos);
 };
 
 #endif // VTEXTGRAPHICSITEM_H
