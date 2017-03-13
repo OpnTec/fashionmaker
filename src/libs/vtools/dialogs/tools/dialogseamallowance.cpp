@@ -231,7 +231,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ChangeCurrentData(ui->comboBoxDLBottomRightPin, m_oldData.BottomRightPin());
     SetDLWidth(m_oldData.GetLabelWidth());
     SetDLHeight(m_oldData.GetLabelHeight());
-    SetDLHeight(m_oldData.GetRotation());
+    SetDLAngle(m_oldData.GetRotation());
 
     m_oldGeom = piece.GetPatternInfo();
     ui->groupBoxPatternLabel->setChecked(m_oldGeom.IsVisible());
@@ -240,7 +240,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     ChangeCurrentData(ui->comboBoxPLBottomRightPin, m_oldGeom.BottomRightPin());
     SetPLWidth(m_oldGeom.GetLabelWidth());
     SetPLHeight(m_oldGeom.GetLabelHeight());
-    SetPLHeight(m_oldGeom.GetRotation());
+    SetPLAngle(m_oldGeom.GetRotation());
 
     m_oldGrainline = piece.GetGrainlineGeometry();
     ui->groupBoxGrainline->setChecked(m_oldGrainline.IsVisible());
