@@ -637,7 +637,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
  */
 void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    if (m_eMode == mMove || m_eMode == mResize)
+    if (m_eMode == mResize && m_moveType & IsResizable)
     {
         if (m_rectResize.contains(pHE->pos()) == true)
         {
