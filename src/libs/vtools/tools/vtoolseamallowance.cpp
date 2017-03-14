@@ -1234,8 +1234,8 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
             const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
 
             const QRectF labelRect = QRectF(*topLeftPinPoint, *bottomRightPinPoint);
-            labelWidth = qAbs(labelRect.width());
-            labelHeight = qAbs(labelRect.height());
+            labelWidth = FromPixel(qAbs(labelRect.width()), *VDataTool::data.GetPatternUnit());
+            labelHeight = FromPixel(qAbs(labelRect.height()), *VDataTool::data.GetPatternUnit());
 
             pos = labelRect.topLeft();
 
