@@ -145,6 +145,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         if (m_eMode != mRotate)
         {
             pP->setBrush(clr);
+            UpdatePolyResize();
             pP->drawPolygon(m_polyResize);
         }
 
@@ -565,23 +566,7 @@ void VGrainlineItem::UpdateRectangle()
     m_rectBoundingBox = m_polyBound.boundingRect();
     setTransformOriginPoint(m_rectBoundingBox.center());
 
-    m_polyResize.clear();
-    QPointF ptA = m_polyBound.at(1);
-    m_polyResize << ptA;
-    const double dSize = m_dScale * RESIZE_RECT_SIZE;
-
-    ptA.setX(ptA.x() - dSize*cos(m_dRotation - M_PI/2));
-    ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));
-    m_polyResize << ptA;
-
-    ptA.setX(ptA.x() + dSize*cos(m_dRotation));
-    ptA.setY(ptA.y() - dSize*sin(m_dRotation));
-    m_polyResize << ptA;
-
-    ptA.setX(ptA.x() - dSize*cos(m_dRotation + M_PI/2));
-    ptA.setY(ptA.y() + dSize*sin(m_dRotation + M_PI/2));
-    m_polyResize << ptA;
-
+    UpdatePolyResize();
     prepareGeometryChange();
 }
 
@@ -764,4 +749,25 @@ void VGrainlineItem::UserMoveAndResize(const QPointF &pos)
         m_eMode = mMove; // block later if need
         SetOverrideCursor(cursorArrowCloseHand, 1, 1);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineItem::UpdatePolyResize()
+{
+    m_polyResize.clear();
+    QPointF ptA = m_polyBound.at(1);
+    m_polyResize << ptA;
+    const double dSize = m_dScale * RESIZE_RECT_SIZE;
+
+    ptA.setX(ptA.x() - dSize*cos(m_dRotation - M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));
+    m_polyResize << ptA;
+
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation));
+    ptA.setY(ptA.y() - dSize*sin(m_dRotation));
+    m_polyResize << ptA;
+
+    ptA.setX(ptA.x() - dSize*cos(m_dRotation + M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation + M_PI/2));
+    m_polyResize << ptA;
 }
