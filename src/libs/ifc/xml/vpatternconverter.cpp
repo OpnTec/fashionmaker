@@ -119,6 +119,7 @@ static const QString strDetail                    = QStringLiteral("detail");
 static const QString strSupplement                = QStringLiteral("supplement");
 static const QString strClosed                    = QStringLiteral("closed");
 static const QString strWidth                     = QStringLiteral("width");
+static const QString strHeight                    = QStringLiteral("height");
 static const QString strNode                      = QStringLiteral("node");
 static const QString strNodes                     = QStringLiteral("nodes");
 static const QString strData                      = QStringLiteral("data");
@@ -669,6 +670,8 @@ void VPatternConverter::ToV0_4_4()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.4"));
+    LabelTagToV0_4_4(strData);
+    LabelTagToV0_4_4(strPatternInfo);
     Save();
 }
 
@@ -1942,6 +1945,58 @@ QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &de
     }
 
     return tagNodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
+{
+    // TODO. Delete if minimal supported version is 0.4.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+                      "Time to refactor the code.");
+
+    Unit unit = Unit::Cm;
+    const QStringList units = QStringList() << "mm" << "cm" << "inch";
+    switch (units.indexOf(UniqueTagText(strUnit)))
+    {
+        case 0:// mm
+            unit = Unit::Mm;
+            break;
+        case 1:// cm
+            unit = Unit::Cm;
+            break;
+        case 2:// in
+            unit = Unit::Inch;
+            break;
+        default:
+            break;
+    }
+
+    auto ConvertData = [unit](QDomElement &dom, const QString &attribute)
+    {
+        if (dom.hasAttribute(attribute))
+        {
+            QString valStr = dom.attribute(attribute, "1");
+            bool ok = false;
+            qreal val = valStr.toDouble(&ok);
+            if (not ok)
+            {
+                val = 1;
+            }
+            dom.setAttribute(attribute, QString().setNum(FromPixel(val, unit)));
+        }
+    };
+
+    const QDomNodeList list = elementsByTagName(tagName);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+
+        if (not dom.isNull())
+        {
+            ConvertData(dom, strWidth);
+            ConvertData(dom, strHeight);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

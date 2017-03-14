@@ -146,6 +146,8 @@ private:
     void TagUnionDetailsToV0_4_0();
     QDomElement GetUnionDetailNodesV0_4_0(const QDomElement &detail);
     QDomElement GetUnionChildrenNodesV0_4_0(const QDomElement &detail);
+
+    void LabelTagToV0_4_4(const QString &tagName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
