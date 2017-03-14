@@ -3363,6 +3363,10 @@ Applicare le impostazioni comunque?</translation>
         <source>Show measurements file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4434,10 +4438,6 @@ Applicare le impostazioni comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished">Informazioni parte del modello</translation>
-    </message>
-    <message>
         <source>Letter:</source>
         <translation type="unfinished">Lettera:</translation>
     </message>
@@ -4647,6 +4647,42 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>no pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altezza:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Errore</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished">Modifica lunghezza</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Modifica angolo</translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

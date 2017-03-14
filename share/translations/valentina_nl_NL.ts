@@ -3439,6 +3439,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Show measurements file</source>
         <translation>Toon matenbestand</translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3734,19 +3738,19 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPin</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Pin gereedschap</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Punt:</translation>
+        <translation>Punt:</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished">Onderdeel:</translation>
+        <translation>Stuk:</translation>
     </message>
 </context>
 <context>
@@ -4515,7 +4519,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation>Gegevens van patroondeel</translation>
+        <translation type="vanished">Gegevens van patroondeel</translation>
     </message>
     <message>
         <source>Letter:</source>
@@ -4707,26 +4711,62 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Top left pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pin linksboven:</translation>
     </message>
     <message>
         <source>Bottom right pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pin rechtsonder:</translation>
     </message>
     <message>
         <source>Top pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenste pin:</translation>
     </message>
     <message>
         <source>Bottom pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderste pin:</translation>
     </message>
     <message>
         <source>Pins</source>
-        <translation type="unfinished"></translation>
+        <translation>Pins</translation>
     </message>
     <message>
         <source>no pin</source>
+        <translation>geen pin</translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Hoogte:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6767,7 +6807,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijziging gerelateerd aan patroon-maten</translation>
     </message>
     <message>
         <source>Sync</source>
@@ -6779,36 +6819,37 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unload Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder huidige</translation>
     </message>
     <message>
         <source>Unload measurements if they were not used in a pattern file</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder maten als ze niet gebruikt worden in een patroon-bestand</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Individuele maten</translation>
+        <translation>Individuele maten</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatsysteem</translation>
     </message>
     <message>
         <source>Pattern files</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroonbestanden</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Pin gereedschap</translation>
     </message>
     <message>
         <source>Select pin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de pinpunten</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt de layout-mode nu niet gebruiken.
+%1</translation>
     </message>
 </context>
 <context>
@@ -6899,7 +6940,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de printer marges niet bepalen</translation>
     </message>
 </context>
 <context>
@@ -6945,7 +6986,7 @@ Do you want to save your changes?</source>
     <name>OperationMoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation type="unfinished"></translation>
+        <translation>verzet punt-label</translation>
     </message>
 </context>
 <context>
@@ -6996,23 +7037,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>mijn individuele Maten</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn maatsysteem</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn Patronen</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn Layouts</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn Sjabloon</translation>
     </message>
 </context>
 <context>
@@ -7051,27 +7092,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle door de gebruiker gedefinieerde materialen zijn verwijderd!</translation>
     </message>
     <message>
         <source>User defined materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Door gebruiker gedefinieerde materialen</translation>
     </message>
     <message>
         <source>Delete all</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder alles</translation>
     </message>
     <message>
         <source>Workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkstuk</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
         <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
+        <source>By default forbid flipping for all workpieces</source>
+        <translation type="vanished">Standaard is het kantelen uitgeschakeld</translation>
+    </message>
+    <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard is het kantelen voor alle nieuwe werkstukken uitgeschakeld</translation>
     </message>
 </context>
 <context>
@@ -7181,31 +7226,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Verkeerde etiket naam &apos;%1&apos;.</translation>
+        <translation>Verkeerde naam label &apos; %1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="unfinished">Kan niet omzetten naar UInt parameter</translation>
+        <translation>Kan parameter toUlnt niet converteren</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="unfinished">Kan niet omzetten naar toBool parameter</translation>
+        <translation>Kan de parameter toBool niet converteren</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="unfinished">Heeft een lege parameter</translation>
+        <translation>Kreeg een lege parameter</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished">Kan niet omzetten naar toDouble parameter</translation>
+        <translation>Kan niet naar toDouble parameter converteren</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished">Krijg de verkeerde parameter ID. Gebruik alleen ID &gt; 0.</translation>
+        <translation>Kreeg de verkeerde parameter id. Alleen nodig id&gt;0.</translation>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="unfinished">Verenigd detail</translation>
+        <translation>Samengevoegd detail</translation>
     </message>
 </context>
 <context>
@@ -7444,14 +7489,14 @@ Do you want to save your changes?</source>
     <name>SavePieceOptions</name>
     <message>
         <source>save detail option</source>
-        <translation type="unfinished">sla details optie op</translation>
+        <translation>Bewaar opties van detail</translation>
     </message>
 </context>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
         <source>save path options</source>
-        <translation type="unfinished"></translation>
+        <translation>bewaar pad-opties</translation>
     </message>
 </context>
 <context>
@@ -8062,11 +8107,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle bestanden</translation>
     </message>
     <message>
         <source>The measurements document has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het maten-dokument heeft geen schrijftoestemming.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -8086,7 +8131,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatsysteem</translation>
     </message>
 </context>
 <context>
@@ -8211,19 +8256,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>mijn individuele Maten</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn maatsysteem</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn Sjablonen</translation>
     </message>
     <message>
         <source>My Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn Maatsysteem</translation>
     </message>
 </context>
 <context>
@@ -8237,7 +8282,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TogglePieceInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation type="unfinished">detail in opmaak lijst</translation>
+        <translation>detail in de layout-lijst</translation>
     </message>
 </context>
 <context>
@@ -8375,47 +8420,47 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>light salmon</source>
-        <translation type="unfinished"></translation>
+        <translation>lichtzalm</translation>
     </message>
     <message>
         <source>golden rod</source>
-        <translation type="unfinished"></translation>
+        <translation>goudrood</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation type="unfinished"></translation>
+        <translation>oranje</translation>
     </message>
     <message>
         <source>deep pink</source>
-        <translation type="unfinished"></translation>
+        <translation>diep paars</translation>
     </message>
     <message>
         <source>violet</source>
-        <translation type="unfinished"></translation>
+        <translation>violet</translation>
     </message>
     <message>
         <source>dark violet</source>
-        <translation type="unfinished"></translation>
+        <translation>donker violet</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation type="unfinished"></translation>
+        <translation>zeegroen</translation>
     </message>
     <message>
         <source>lime</source>
-        <translation type="unfinished"></translation>
+        <translation>citroengeel</translation>
     </message>
     <message>
         <source>deep sky blue</source>
-        <translation type="unfinished"></translation>
+        <translation>diep luchtblauw</translation>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation type="unfinished"></translation>
+        <translation>korenbloem blauw</translation>
     </message>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="unfinished">Verander verkeerde formule</translation>
+        <translation>Wijzig verkeerde formule</translation>
     </message>
 </context>
 <context>
@@ -8764,19 +8809,19 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VCommonSettings</name>
     <message>
         <source>measurements</source>
-        <translation type="unfinished">Maten</translation>
+        <translation>maten</translation>
     </message>
     <message>
         <source>individual</source>
-        <translation type="unfinished"></translation>
+        <translation>individueel</translation>
     </message>
     <message>
         <source>multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>maatsysteem</translation>
     </message>
     <message>
         <source>templates</source>
-        <translation type="unfinished"></translation>
+        <translation>sjablonen</translation>
     </message>
 </context>
 <context>
@@ -9316,6 +9361,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>rotate pattern info label</source>
         <translation type="vanished">draai patroon informatie label</translation>
     </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="vanished">Draai de recht-van-draad</translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -9577,19 +9626,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Tool move</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap verplaats</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap kantelen op een lijn</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap kantelen t.o.v. as</translation>
     </message>
     <message>
         <source>Axis type</source>
-        <translation type="unfinished"></translation>
+        <translation>As-type</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
@@ -9608,11 +9657,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="unfinished">verplaats patroon deel label</translation>
+        <translation>Verplaats patroondeel label</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="unfinished">vergroot/verkein patroon deel label</translation>
+        <translation>wijzig grootte van patroondeel label</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
@@ -9640,7 +9689,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Draai de recht-van-draad</translation>
     </message>
     <message>
         <source>Options</source>
@@ -10759,6 +10808,11 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>HuidigeLengte</translation>
     </message>
     <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="vanished">acosh</translation>
+    </message>
+    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10806,102 +10860,102 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">sin</translation>
+        <translation>sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
-        <translation type="unfinished">tan</translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
-        <translation type="unfinished">asin</translation>
+        <translation>asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
-        <translation type="unfinished">acos</translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
-        <translation type="unfinished">atan</translation>
+        <translation>atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished">sinh</translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished">cosh</translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished">tanh</translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished">asinh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinD</translation>
     </message>
     <message>
         <source>cosD</source>
         <comment>cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosD</translation>
     </message>
     <message>
         <source>tanD</source>
         <comment>tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>tanD</translation>
     </message>
     <message>
         <source>asinD</source>
         <comment>arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>asinD</translation>
     </message>
     <message>
         <source>acosD</source>
         <comment>arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>acosD</translation>
     </message>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>atanD</translation>
     </message>
     <message>
         <source>sinhD</source>
         <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinhD</translation>
     </message>
     <message>
         <source>coshD</source>
         <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>coshD</translation>
     </message>
     <message>
         <source>tanhD</source>

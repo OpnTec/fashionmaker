@@ -1497,6 +1497,10 @@
         <translation type="vanished">Rotation interdite</translation>
     </message>
     <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">Lettre de l&apos;élément de patron</translation>
+    </message>
+    <message>
         <source>Name can&apos;t be empty</source>
         <translation type="vanished">La valeur Nom ne peut pas être vide</translation>
     </message>
@@ -3432,6 +3436,10 @@ Appliquer les réglages quand-même ?</translation>
         <source>Show measurements file</source>
         <translation>Voir le fichier de mesures</translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3727,7 +3735,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogPin</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <source>Pin tool</source>
@@ -3735,11 +3743,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Point :</translation>
+        <translation>Point :</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished">Pièce:</translation>
+        <translation>Element:</translation>
     </message>
 </context>
 <context>
@@ -4500,31 +4508,27 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Inclus comme:</translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished">Données de pièces de patron</translation>
+        <translation>Chemins internes</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished">Lettre :</translation>
+        <translation>Lettre :</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettre de l&apos;élément de patron</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nom de la pièce de patron:</translation>
+        <translation>Nom de la pièce de patron:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
@@ -4540,7 +4544,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished">Type de matière :</translation>
+        <translation>Type de matière :</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
@@ -4548,7 +4552,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished">Placement:</translation>
+        <translation>Placement:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -4720,6 +4724,42 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>no pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5175,11 +5215,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished"></translation>
+        <translation>Par longueur</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished"></translation>
+        <translation>Par points d&apos;intersections</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
@@ -8326,7 +8366,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
 </context>
 <context>
@@ -9185,7 +9225,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
     <message>
         <source>Unnamed path</source>

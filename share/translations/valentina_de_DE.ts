@@ -3318,6 +3318,10 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Show measurements file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4381,10 +4385,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Letter:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4594,6 +4594,42 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>no pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Höhe:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished">Länge ändern</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Winkel bearbeiten</translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

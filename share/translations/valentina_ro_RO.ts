@@ -3206,6 +3206,10 @@ Apply settings anyway?</source>
         <source>Show measurements file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4085,10 +4089,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Letter:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4298,6 +4298,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>no pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Înălțime:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Eroare</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

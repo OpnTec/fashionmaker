@@ -3439,6 +3439,10 @@ Apply settings anyway?</source>
         <source>Show measurements file</source>
         <translation>Mostrar archivo de medidas</translation>
     </message>
+    <message>
+        <source>200</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3734,19 +3738,19 @@ Apply settings anyway?</source>
     <name>DialogPin</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Imperdible</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Punto:</translation>
+        <translation>Punto:</translation>
     </message>
     <message>
         <source>Piece:</source>
-        <translation type="unfinished">Pieza:</translation>
+        <translation>Pieza:</translation>
     </message>
 </context>
 <context>
@@ -4515,7 +4519,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation>Datos de pieza de patrón</translation>
+        <translation type="vanished">Datos de pieza de patrón</translation>
     </message>
     <message>
         <source>Letter:</source>
@@ -4539,76 +4543,75 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="unfinished">Material/Cortar número/Disposición</translation>
+        <translation>Material/Cortar número/Disposición</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="unfinished">
-</translation>
+        <translation>Curtar número:</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation type="unfinished">Tipo de Material:</translation>
+        <translation>Tipo de Material:</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished">Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
+        <translation>Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished">Ubicación:</translation>
+        <translation>Ubicación:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Agregar</translation>
+        <translation>Agregar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Quitar</translation>
+        <translation>Quitar</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished">Etiqueta de Detalle visible</translation>
+        <translation>Etiqueta de Detalle visible</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished">Etiqueta del Patrón visible</translation>
+        <translation>Etiqueta del patrón visible</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished">Línea discontinua</translation>
+        <translation>Línea discontinua</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished">Línea discontinua visible</translation>
+        <translation>Línea discontinua visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotación:</translation>
+        <translation>Rotación:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud:</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished">Flechas:</translation>
+        <translation>Flechas:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar objetos principales del trayecto, &lt;b&gt;Mayúsculas&lt;/b&gt; - curva de sentido inverso, &lt;b&gt;Intro&lt;/b&gt; - finalizar creación</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="unfinished">Cortar %1 de %2%3</translation>
+        <translation>Cortar %1 de %2%3</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="unfinished">sobre pliegue</translation>
+        <translation>en Pliegue</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4620,31 +4623,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Error. Can&apos;t save piece path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error. No se puede guardar la sección del trayecto.</translation>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished">Resultado infinito/indefinido</translation>
+        <translation>Resultado infinito/indefinido</translation>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="unfinished">La longitud debería de ser positiva</translation>
+        <translation>La longitud debería de ser positiva</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Error en análisis: %1</translation>
+        <translation>Error en análisis: %1</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Actualizar</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Coste de costura actual</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4664,11 +4667,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished">¡Tiene que elegir los puntos en una dirección en sentido horario!</translation>
+        <translation>¡Tiene que elegir los puntos en una dirección en sentido horario!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished">¡El primer punto no puede ser igual al último punto!</translation>
+        <translation>¡El primer punto no puede ser igual al último punto!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -4676,58 +4679,94 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacío</translation>
     </message>
     <message>
         <source>main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta principal</translation>
     </message>
     <message>
         <source>custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizar el margen de la costura</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Ninguno</translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished">Cortar pliegue</translation>
+        <translation>Cortar pliegue</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished">Ambos</translation>
+        <translation>Ambos</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished">Justo delante</translation>
+        <translation>Justo delante</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished">Justo detrás</translation>
+        <translation>Justo detrás</translation>
     </message>
     <message>
         <source>Top left pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfiler izquierdo superior:</translation>
     </message>
     <message>
         <source>Bottom right pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfiler derecho inferior:</translation>
     </message>
     <message>
         <source>Top pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfiler superior:</translation>
     </message>
     <message>
         <source>Bottom pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfiler inferior:</translation>
     </message>
     <message>
         <source>Pins</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfileres</translation>
     </message>
     <message>
         <source>no pin</source>
+        <translation>Sin alfiler</translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altura:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Editar ángulo</translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5183,31 +5222,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished"></translation>
+        <translation>Por longitud</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished"></translation>
+        <translation>por intersecciones de puntos</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>por primera simetría de borde</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>por segunda simetría de borde</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>por el primer ángulo recto del borde</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>por el segundo ángulo recto del borde</translation>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>El valor no puede ser inferior a 0</translation>
     </message>
 </context>
 <context>
@@ -5631,7 +5670,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar la escala alta de ppp. Llame a esta opción si tiene problemas al escalar (el escalado está habilitado por defecto). Alternativamente puede utilizar el ambiente variable QT_AUTO_SCREEN_SCALE_FACTOR=0.</translation>
     </message>
 </context>
 <context>
@@ -6705,19 +6744,19 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar los objetos de la ruta principal en el sentido horario.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar los objetos de la ruta, &lt;b&gt;Mayúscula&lt;/b&gt; - curva de sentido inverso</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>El documento no tiene permisos de escritura.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden establecer permisos para %1 para escribir.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
@@ -6801,7 +6840,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Imperdible</translation>
     </message>
     <message>
         <source>Select pin point</source>
@@ -8075,7 +8114,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pueden establecer permisos para %1 para escribir.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
@@ -8766,7 +8805,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar la escala alta de ppp. Llame a esta opción si tiene problemas al escalar (el escalado está habilitado por defecto). Alternativamente puede utilizar el ambiente variable QT_AUTO_SCREEN_SCALE_FACTOR=0.</translation>
     </message>
 </context>
 <context>
@@ -9633,7 +9672,7 @@ Do you want to save your changes?</source>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Coste de costura actual</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -9673,7 +9712,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>In layout</source>
