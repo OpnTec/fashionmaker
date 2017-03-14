@@ -564,20 +564,20 @@ void VGrainlineItem::UpdateRectangle()
     setTransformOriginPoint(m_rectBoundingBox.center());
 
     m_polyResize.clear();
-    QPointF ptA = m_polyBound.at(3);
+    QPointF ptA = m_polyBound.at(1);
     m_polyResize << ptA;
     const double dSize = m_dScale * RESIZE_RECT_SIZE;
 
-    ptA.setX(ptA.x() + dSize*cos(m_dRotation - M_PI/2));
-    ptA.setY(ptA.y() - dSize*sin(m_dRotation - M_PI/2));
+    ptA.setX(ptA.x() - dSize*cos(m_dRotation - M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));
     m_polyResize << ptA;
 
-    ptA.setX(ptA.x() - dSize*cos(m_dRotation));
-    ptA.setY(ptA.y() + dSize*sin(m_dRotation));
+    ptA.setX(ptA.x() + dSize*cos(m_dRotation));
+    ptA.setY(ptA.y() - dSize*sin(m_dRotation));
     m_polyResize << ptA;
 
-    ptA.setX(ptA.x() + dSize*cos(m_dRotation + M_PI/2));
-    ptA.setY(ptA.y() - dSize*sin(m_dRotation + M_PI/2));
+    ptA.setX(ptA.x() - dSize*cos(m_dRotation + M_PI/2));
+    ptA.setY(ptA.y() + dSize*sin(m_dRotation + M_PI/2));
     m_polyResize << ptA;
 
     prepareGeometryChange();
