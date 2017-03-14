@@ -596,7 +596,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             // but if user did some operation (move/resize), emit the proper signal and update the label
             if (bShort == true)
             {
-                if (m_bReleased == true  && m_moveType & IsRotatable)
+                if (m_bReleased == true && m_moveType & IsRotatable)
                 {
                     m_eMode = mRotate;
                     UpdateBox();
@@ -615,7 +615,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         }
         else
         {   // in rotate mode, if user did just press/release, switch to move mode
-            if (bShort == true)
+            if (bShort == true && (m_moveType & IsMovable || m_moveType & IsResizable))
             {
                 m_eMode = mMove;
             }
