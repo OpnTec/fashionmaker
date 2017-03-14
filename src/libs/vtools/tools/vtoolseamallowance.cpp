@@ -756,7 +756,7 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternInfo().SetRotation(QString().setNum(dRot));
+    newDet.GetPatternInfo().SetRotation(QString().setNum(line.angle()));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     rotateCommand->setText(tr("rotate pattern info label"));

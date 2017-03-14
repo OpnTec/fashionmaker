@@ -667,19 +667,6 @@ QLineF VGrainlineItem::MainLine() const
 //---------------------------------------------------------------------------------------------------------------------
 QPolygonF VGrainlineItem::FirstArrow(qreal dArrLen) const
 {
-    const QPointF pt1 = MainLine().p1();
-    QPolygonF poly;
-    poly << pt1;
-    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE),
-                    pt1.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
-    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE),
-                    pt1.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
-    return poly;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPolygonF VGrainlineItem::SecondArrow(qreal dArrLen) const
-{
     const QPointF pt2 = MainLine().p2();
     QPolygonF poly;
     poly << pt2;
@@ -687,6 +674,19 @@ QPolygonF VGrainlineItem::SecondArrow(qreal dArrLen) const
                     pt2.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
     poly << QPointF(pt2.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE),
                     pt2.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
+    return poly;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPolygonF VGrainlineItem::SecondArrow(qreal dArrLen) const
+{
+    const QPointF pt1 = MainLine().p1();
+    QPolygonF poly;
+    poly << pt1;
+    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE),
+                    pt1.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
+    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE),
+                    pt1.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
     return poly;
 }
 
