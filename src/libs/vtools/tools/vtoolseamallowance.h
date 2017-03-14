@@ -68,6 +68,7 @@ public:
     static const QString AttrFont;
     static const QString AttrTopLeftPin;
     static const QString AttrBottomRightPin;
+    static const QString AttrCenterPin;
     static const QString AttrTopPin;
     static const QString AttrBottomPin;
 
@@ -151,10 +152,10 @@ private:
 
     void RefreshGeometry();
     void SaveDialogChange();
-    VPieceItem::MoveType FindLabelGeometry(const VPatternLabelData &labelData, qreal &labelWidth, qreal &labelHeight,
-                                           QPointF &pos);
-    VPieceItem::MoveType FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,
-                                               QPointF &pos);
+    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
+                                            qreal &labelHeight, QPointF &pos);
+    VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,
+                                                QPointF &pos);
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     void InitCSAPaths(const VPiece &detail);

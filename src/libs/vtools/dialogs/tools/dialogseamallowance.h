@@ -94,14 +94,34 @@ private slots:
     void PathDialogClosed(int result);
     void TabChanged(int index);
 
-    void UpdateValues();
+    void UpdateGrainlineValues();
+    void UpdateDetailLabelValues();
+    void UpdatePatternLabelValues();
+
     void SetAddMode();
     void SetEditMode();
-    void EnableGrainlineRotation();
-    void EditFormula();
-    void DeployRotation();
-    void DeployLength();
-    void ResetWarning();
+
+    void EditGrainlineFormula();
+    void EditDLFormula();
+    void EditPLFormula();
+
+    void DeployGrainlineRotation();
+    void DeployGrainlineLength();
+
+    void DeployDLWidth();
+    void DeployDLHeight();
+    void DeployDLAngle();
+
+    void DeployPLWidth();
+    void DeployPLHeight();
+    void DeployPLAngle();
+
+    void ResetGrainlineWarning();
+    void ResetLabelsWarning();
+
+    void EnabledGrainline();
+    void EnabledDetailLabel();
+    void EnabledPatternLabel();
 
     void EvalWidth();
     void EvalWidthBefore();
@@ -132,6 +152,10 @@ private:
     bool   flagDPin;
     bool   flagPPin;
     bool   flagGFormulas;
+    bool   flagDLAngle;
+    bool   flagDLFormulas;
+    bool   flagPLAngle;
+    bool   flagPLFormulas;
     bool   m_bAddMode;
     qreal  m_mx;
     qreal  m_my;
@@ -149,6 +173,12 @@ private:
     VGrainlineData   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
+    int                  m_DLWidthBaseHeight;
+    int                  m_DLHeightBaseHeight;
+    int                  m_DLAngleBaseHeight;
+    int                  m_PLWidthBaseHeight;
+    int                  m_PLHeightBaseHeight;
+    int                  m_PLAngleBaseHeight;
     int                  m_formulaBaseWidth;
     int                  m_formulaBaseWidthBefore;
     int                  m_formulaBaseWidthAfter;
@@ -190,6 +220,7 @@ private:
     void InitSAIncludeType();
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
+    void InitLabelsTab();
     void InitGrainlineTab();
     void InitPinsTab();
     void InitAllPinComboboxes();
@@ -198,8 +229,17 @@ private:
 
     template <typename T>
     QVector<T> GetPieceInternals(const QListWidget *list) const;
-    void SetGrainlineAngle(const VGrainlineData &data);
-    void SetGrainlineLength(const VGrainlineData &data);
+
+    void SetGrainlineAngle(QString angleFormula);
+    void SetGrainlineLength(QString lengthFormula);
+
+    void SetDLWidth(QString widthFormula);
+    void SetDLHeight(QString heightFormula);
+    void SetDLAngle(QString angleFormula);
+
+    void SetPLWidth(QString widthFormula);
+    void SetPLHeight(QString heightFormula);
+    void SetPLAngle(QString angleFormula);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

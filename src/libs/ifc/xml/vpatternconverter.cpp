@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.3");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.3.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.4");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.4.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -119,6 +119,7 @@ static const QString strDetail                    = QStringLiteral("detail");
 static const QString strSupplement                = QStringLiteral("supplement");
 static const QString strClosed                    = QStringLiteral("closed");
 static const QString strWidth                     = QStringLiteral("width");
+static const QString strHeight                    = QStringLiteral("height");
 static const QString strNode                      = QStringLiteral("node");
 static const QString strNodes                     = QStringLiteral("nodes");
 static const QString strData                      = QStringLiteral("data");
@@ -204,6 +205,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000402):
             return QStringLiteral("://schema/pattern/v0.4.2.xsd");
         case (0x000403):
+            return QStringLiteral("://schema/pattern/v0.4.3.xsd");
+        case (0x000404):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -321,6 +324,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000403), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000403):
+            ToV0_4_4();
+            ValidateXML(XSDSchema(0x000404), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000404):
             break;
         default:
             InvalidVersion(m_ver);
@@ -339,7 +346,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 4, 3),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 4, 4),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -652,6 +659,19 @@ void VPatternConverter::ToV0_4_3()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_4_4()
+{
+    // TODO. Delete if minimal supported version is 0.4.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.4.4"));
+    LabelTagToV0_4_4(strData);
+    LabelTagToV0_4_4(strPatternInfo);
     Save();
 }
 
@@ -1925,6 +1945,58 @@ QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &de
     }
 
     return tagNodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
+{
+    // TODO. Delete if minimal supported version is 0.4.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+                      "Time to refactor the code.");
+
+    Unit unit = Unit::Cm;
+    const QStringList units = QStringList() << "mm" << "cm" << "inch";
+    switch (units.indexOf(UniqueTagText(strUnit)))
+    {
+        case 0:// mm
+            unit = Unit::Mm;
+            break;
+        case 1:// cm
+            unit = Unit::Cm;
+            break;
+        case 2:// in
+            unit = Unit::Inch;
+            break;
+        default:
+            break;
+    }
+
+    auto ConvertData = [unit](QDomElement &dom, const QString &attribute)
+    {
+        if (dom.hasAttribute(attribute))
+        {
+            QString valStr = dom.attribute(attribute, "1");
+            bool ok = false;
+            qreal val = valStr.toDouble(&ok);
+            if (not ok)
+            {
+                val = 1;
+            }
+            dom.setAttribute(attribute, QString().setNum(FromPixel(val, unit)));
+        }
+    };
+
+    const QDomNodeList list = elementsByTagName(tagName);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+
+        if (not dom.isNull())
+        {
+            ConvertData(dom, strWidth);
+            ConvertData(dom, strHeight);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

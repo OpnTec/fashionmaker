@@ -42,10 +42,11 @@ class VPatternLabelDataPrivate : public QSharedData
 {
 public:
     VPatternLabelDataPrivate()
-        : m_dLabelWidth(0),
-          m_dLabelHeight(0),
+        : m_dLabelWidth(),
+          m_dLabelHeight(),
+          m_dLabelAngle(),
           m_iFontSize(0),
-          m_dRotation(0),
+          m_centerPin(NULL_ID),
           m_topLeftPin(NULL_ID),
           m_bottomRightPin(NULL_ID)
     {}
@@ -54,22 +55,25 @@ public:
         : QSharedData(data),
           m_dLabelWidth(data.m_dLabelWidth),
           m_dLabelHeight(data.m_dLabelHeight),
+          m_dLabelAngle(data.m_dLabelAngle),
           m_iFontSize(data.m_iFontSize),
-          m_dRotation(data.m_dRotation),
+          m_centerPin(data.m_centerPin),
           m_topLeftPin(data.m_topLeftPin),
           m_bottomRightPin(data.m_bottomRightPin)
     {}
 
     ~VPatternLabelDataPrivate();
 
-    /** @brief m_dLabelWidth label width */
-    qreal   m_dLabelWidth;
-    /** @brief m_dLabelHeight label height */
-    qreal   m_dLabelHeight;
+    /** @brief m_dLabelWidth formula to calculate the width of label */
+    QString m_dLabelWidth;
+    /** @brief m_dLabelHeight formula to calculate the height of label */
+    QString m_dLabelHeight;
+    /** @brief m_dLabelAngle formula to calculate the rotation angle of label */
+    QString m_dLabelAngle;
     /** @brief m_iFontSize label text base font size */
     int     m_iFontSize;
-    /** @brief m_dRotation label rotation */
-    qreal   m_dRotation;
+    /** @brief m_centerPin center pin id */
+    quint32 m_centerPin;
     /** @brief m_topLeftPin top left corner pin id */
     quint32 m_topLeftPin;
     /** @brief m_bottomRightPin bottom right corner pin id */

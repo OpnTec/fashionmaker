@@ -75,10 +75,21 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pattern, qreal &labelWidth,
-                       qreal &labelHeight, QPointF &pos)
+bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pattern, qreal &rotationAngle,
+                       qreal &labelWidth, qreal &labelHeight, QPointF &pos)
 {
     SCASSERT(pattern != nullptr)
+
+    try
+    {
+        Calculator cal1;
+        rotationAngle = cal1.EvalFormula(pattern->PlainVariables(), labelData.GetRotation());
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e);
+        return false;
+    }
 
     const quint32 topLeftPin = labelData.TopLeftPin();
     const quint32 bottomRightPin = labelData.BottomRightPin();
@@ -96,7 +107,7 @@ void FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
 
             pos = labelRect.topLeft();
 
-            return;
+            return true;
         }
         catch(const VExceptionBadId &)
         {
@@ -104,9 +115,43 @@ void FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
         }
     }
 
-    labelWidth = labelData.GetLabelWidth();
-    labelHeight = labelData.GetLabelHeight();
-    pos = labelData.GetPos();
+    try
+    {
+        Calculator cal1;
+        labelWidth = cal1.EvalFormula(pattern->PlainVariables(), labelData.GetLabelWidth());
+
+        Calculator cal2;
+        labelHeight = cal2.EvalFormula(pattern->PlainVariables(), labelData.GetLabelHeight());
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e);
+        return false;
+    }
+
+    const quint32 centerPin = labelData.CenterPin();
+    if (centerPin != NULL_ID)
+    {
+        try
+        {
+            const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
+
+            const qreal lWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
+            const qreal lHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
+
+            pos = *centerPinPoint - QRectF(0, 0, lWidth, lHeight).center();
+        }
+        catch(const VExceptionBadId &)
+        {
+            pos = labelData.GetPos();
+        }
+    }
+    else
+    {
+        pos = labelData.GetPos();
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,7 +206,32 @@ bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern
         return false;
     }
 
-    pos = geom.GetPos();
+    const quint32 centerPin = geom.CenterPin();
+    if (centerPin != NULL_ID)
+    {
+        try
+        {
+            const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
+
+            const qreal cLength = ToPixel(length, *pattern->GetPatternUnit());
+            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
+                             centerPinPoint->x() + cLength / 2.0, centerPinPoint->y());
+
+            grainline.setAngle(rotationAngle);
+            grainline = QLineF(grainline.p2(), grainline.p1());
+            grainline.setLength(cLength);
+
+            pos = grainline.p2();
+        }
+        catch(const VExceptionBadId &)
+        {
+            pos = geom.GetPos();
+        }
+    }
+    else
+    {
+        pos = geom.GetPos();
+    }
     return true;
 }
 
@@ -401,7 +471,14 @@ void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data,
     QPointF ptPos;
     qreal labelWidth = 0;
     qreal labelHeight = 0;
-    FindLabelGeometry(data, pattern, labelWidth, labelHeight, ptPos);
+    qreal labelAngle = 0;
+    if (not FindLabelGeometry(data, pattern, labelAngle, labelWidth, labelHeight, ptPos))
+    {
+        return;
+    }
+
+    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
+    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
 
     QVector<QPointF> v;
     v << ptPos
@@ -409,7 +486,7 @@ void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data,
       << QPointF(ptPos.x() + labelWidth, ptPos.y() + labelHeight)
       << QPointF(ptPos.x(), ptPos.y() + labelHeight);
 
-    const qreal dAng = qDegreesToRadians(data.GetRotation());
+    const qreal dAng = qDegreesToRadians(labelAngle);
     const QPointF ptCenter(ptPos.x() + labelWidth/2, ptPos.y() + labelHeight/2);
     for (int i = 0; i < v.count(); ++i)
     {
@@ -435,7 +512,14 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
     QPointF ptPos;
     qreal labelWidth = 0;
     qreal labelHeight = 0;
-    FindLabelGeometry(geom, pattern, labelWidth, labelHeight, ptPos);
+    qreal labelAngle = 0;
+    if (not FindLabelGeometry(geom, pattern, labelAngle, labelWidth, labelHeight, ptPos))
+    {
+        return;
+    }
+
+    labelWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
+    labelHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
 
     QVector<QPointF> v;
     v << ptPos
@@ -443,7 +527,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
       << QPointF(ptPos.x() + labelWidth, ptPos.y() + labelHeight)
       << QPointF(ptPos.x(), ptPos.y() + labelHeight);
 
-    const qreal dAng = qDegreesToRadians(geom.GetRotation());
+    const qreal dAng = qDegreesToRadians(labelAngle);
     const QPointF ptCenter(ptPos.x() + labelWidth/2, ptPos.y() + labelHeight/2);
     for (int i = 0; i < v.count(); ++i)
     {

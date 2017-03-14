@@ -403,6 +403,12 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
     if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
+        if (m_moveType == NotMovable)
+        {
+            pME->ignore();
+            return;
+        }
+
         // record the parameters of the mouse press. Specially record the position
         // of the press as the origin for the following operations
         m_ptStartPos = pos();
@@ -414,45 +420,66 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
 
-        if (m_moveType == OnlyRotatable)
+        if ((m_moveType & AllModifications ) == AllModifications)
         {
-            if (m_eMode != mRotate)
+            AllUserModifications(pME->pos());
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsRotatable)
+        {
+            if (m_moveType & IsResizable)
+            {
+                AllUserModifications(pME->pos());
+            }
+            else if (m_moveType & IsMovable)
+            {
+                UserRotateAndMove();
+            }
+            else
             {
                 m_eMode = mRotate;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsResizable)
+        {
+            if (m_moveType & IsRotatable)
+            {
+                AllUserModifications(pME->pos());
+            }
+            else if (m_moveType & IsMovable)
+            {
+                UserMoveAndResize(pME->pos());
+            }
+            setZValue(ACTIVE_Z);
+            Update();
+        }
+        else if (m_moveType & IsMovable)
+        {
+            if (m_moveType & IsRotatable)
+            {
+                UserRotateAndMove();
+            }
+            else if (m_moveType & IsResizable)
+            {
+                UserMoveAndResize(pME->pos());
+            }
             else
             {
+                m_eMode = mMove;
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
 
             setZValue(ACTIVE_Z);
             Update();
         }
-        else // All modifications
+        else
         {
-            if (m_eMode != mRotate)
-            {
-                // if user pressed the button inside the resize square, switch to resize mode
-                if (m_rectResize.contains(pME->pos()) == true)
-                {
-                    m_eMode = mResize;
-                    SetOverrideCursor(Qt::SizeFDiagCursor);
-                }
-                else
-                {
-                    // if user pressed the button outside the resize square, switch to move mode
-                    m_eMode = mMove;
-                    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-                }
-            }
-            else
-            {
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-            }
-            // raise the label and redraw it
-            setZValue(ACTIVE_Z);
-            UpdateBox();
+            pME->ignore();
+            return;
         }
     }
 }
@@ -468,7 +495,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     qreal dY;
     QRectF rectBB;
     const QPointF ptDiff = pME->scenePos() - m_ptStart;
-    if (m_eMode == mMove)
+    if (m_eMode == mMove && m_moveType & IsMovable)
     {
         // in move mode move the label along the mouse move from the origin
         QPointF pt = m_ptStartPos + ptDiff;
@@ -484,10 +511,21 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         setPos(pt);
         UpdateBox();
     }
-    else if (m_eMode == mResize)
+    else if (m_eMode == mResize && m_moveType & IsResizable)
     {
         // in resize mode, resize the label along the mouse move from the origin
-        QPointF pt = m_ptStartPos;
+        QPointF pt;
+
+        if (m_moveType & IsMovable)
+        {
+            pt = m_ptStartPos;
+        }
+        else
+        {
+            pt = m_ptRotCenter - QRectF(0, 0, m_szStart.width() + ptDiff.x(),
+                                        m_szStart.height() + ptDiff.y()).center();
+        }
+
         rectBB.setTopLeft(pt);
         QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
         rectBB.setSize(sz);
@@ -496,12 +534,19 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         {
             sz = QSizeF(sz.width()+dX, sz.height()+dY);
         }
+        else
+        {
+            if (not (m_moveType & IsMovable))
+            {
+                setPos(pt);
+            }
+        }
 
         SetSize(sz.width(), sz.height());
         Update();
         emit SignalShrink();
     }
-    else if (m_eMode == mRotate)
+    else if (m_eMode == mRotate && m_moveType & IsRotatable)
     {
         // if the angle from the original position is small (0.5 degrees), just remeber the new angle
         // new angle will be the starting angle for rotation
@@ -551,18 +596,18 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             // but if user did some operation (move/resize), emit the proper signal and update the label
             if (bShort == true)
             {
-                if (m_bReleased == true)
+                if (m_bReleased == true && m_moveType & IsRotatable)
                 {
                     m_eMode = mRotate;
                     UpdateBox();
                 }
             }
-            else if (m_eMode == mMove)
+            else if (m_eMode == mMove && m_moveType & IsMovable)
             {
                 emit SignalMoved(pos());
                 UpdateBox();
             }
-            else
+            else if (m_moveType & IsResizable)
             {
                 emit SignalResized(m_rectBoundingBox.width(), m_tm.GetFont().pixelSize());
                 Update();
@@ -570,20 +615,16 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         }
         else
         {   // in rotate mode, if user did just press/release, switch to move mode
-            if (bShort == true)
+            if (bShort == true && (m_moveType & IsMovable || m_moveType & IsResizable))
             {
-                if (m_moveType != OnlyRotatable)
-                {
-                    m_eMode = mMove;
-                }
-                UpdateBox();
+                m_eMode = mMove;
             }
-            else
+            else if (m_moveType & IsRotatable)
             {
                 // if user rotated the item, emit proper signal and update the label
                 emit SignalRotated(rotation());
-                UpdateBox();
             }
+            UpdateBox();
         }
         m_bReleased = true;
     }
@@ -596,7 +637,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
  */
 void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    if (m_eMode == mMove || m_eMode == mResize)
+    if (m_eMode == mResize && m_moveType & IsResizable)
     {
         if (m_rectResize.contains(pHE->pos()) == true)
         {
@@ -648,4 +689,42 @@ void VTextGraphicsItem::CorrectLabel()
     }
     m_tm.FitFontSize(m_rectBoundingBox.width(), m_rectBoundingBox.height());
     UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::AllUserModifications(const QPointF &pos)
+{
+    if (m_eMode != mRotate)
+    {
+        UserMoveAndResize(pos);
+    }
+    else
+    {
+        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::UserRotateAndMove()
+{
+    if (m_eMode != mRotate)
+    {
+        m_eMode = mMove;
+    }
+    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::UserMoveAndResize(const QPointF &pos)
+{
+    if (m_rectResize.contains(pos) == true)
+    {
+        m_eMode = mResize;
+        SetOverrideCursor(Qt::SizeFDiagCursor);
+    }
+    else
+    {
+        m_eMode = mMove; // block later if need
+        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    }
 }

@@ -46,6 +46,7 @@ public:
         : m_qsLength(),
           m_dRotation(),
           m_eArrowType(ArrowType::atBoth),
+          m_centerPin(NULL_ID),
           m_topPin(NULL_ID),
           m_bottomPin(NULL_ID)
     {}
@@ -55,6 +56,7 @@ public:
           m_qsLength(data.m_qsLength),
           m_dRotation(data.m_dRotation),
           m_eArrowType(data.m_eArrowType),
+          m_centerPin(data.m_centerPin),
           m_topPin(data.m_topPin),
           m_bottomPin(data.m_bottomPin)
     {}
@@ -67,6 +69,8 @@ public:
     QString   m_dRotation;
     /** @brief m_eArrowType type of arrow on the grainline */
     ArrowType m_eArrowType;
+    /** @brief m_centerPin center pin id */
+    quint32   m_centerPin;
     /** @brief m_topPin top pin id */
     quint32   m_topPin;
     /** @brief m_bottomPin bottom pin id */

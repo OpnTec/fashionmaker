@@ -36,7 +36,16 @@ class VPieceItem : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    enum MoveType {AllModifications, OnlyResizable, OnlyRotatable, OnlyMovable, NotMovable, Error};
+    enum MoveType
+    {
+        NotMovable = 0x0,
+        IsRotatable = 0x1, // 0001
+        IsResizable = 0x2, // 0010
+        IsMovable = 0x4,   // 0100
+        AllModifications = IsRotatable | IsResizable | IsMovable,
+        Error = 0x8        // 1000
+    };
+    Q_DECLARE_FLAGS(MoveTypes, MoveType)
 
     explicit VPieceItem(QGraphicsItem* pParent = nullptr);
     virtual ~VPieceItem();
@@ -48,8 +57,8 @@ public:
     void Reset();
     bool IsIdle() const;
 
-    MoveType GetMoveType() const;
-    void     SetMoveType(const MoveType &moveType);
+    VPieceItem::MoveTypes GetMoveType() const;
+    void                  SetMoveType(const VPieceItem::MoveTypes &moveType);
 
 signals:
     void SignalMoved(const QPointF &ptPos);
@@ -62,11 +71,11 @@ protected:
         mResize,
         mRotate
     };
-    QRectF   m_rectBoundingBox;
-    Mode     m_eMode;
-    bool     m_bReleased;
-    QPointF  m_ptRotCenter;
-    MoveType m_moveType;
+    QRectF                m_rectBoundingBox;
+    Mode                  m_eMode;
+    bool                  m_bReleased;
+    QPointF               m_ptRotCenter;
+    VPieceItem::MoveTypes m_moveType;
 
     qreal m_inactiveZ;
 
@@ -75,5 +84,7 @@ protected:
 private:
     Q_DISABLE_COPY(VPieceItem)
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(VPieceItem::MoveTypes)
 
 #endif // VPIECEITEM_H

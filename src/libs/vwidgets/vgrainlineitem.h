@@ -89,6 +89,12 @@ private:
     QPolygonF SecondArrow(qreal dArrLen) const;
 
     QPainterPath MainShape() const;
+
+    void AllUserModifications(const QPointF &pos);
+    void UserRotateAndMove();
+    void UserMoveAndResize(const QPointF &pos);
+
+    void UpdatePolyResize();
 };
 
 #endif // VGRAINLINEITEM_H
