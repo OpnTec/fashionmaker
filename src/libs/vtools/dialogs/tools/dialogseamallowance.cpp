@@ -1118,7 +1118,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
 
     flagDLAngle = bFormulasOK[2];
     flagDLFormulas = bFormulasOK[0] && bFormulasOK[1];
-    if (not flagDLAngle && not (flagDLFormulas || flagDPin) && not flagPLAngle && not (flagPLFormulas || flagPPin))
+    if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
@@ -1202,7 +1202,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
 
     flagPLAngle = bFormulasOK[2];
     flagPLFormulas = bFormulasOK[0] && bFormulasOK[1];
-    if (not flagDLAngle && not (flagDLFormulas || flagDPin) && not flagPLAngle && not (flagPLFormulas || flagPPin))
+    if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
         ui->tabWidget->setTabIcon(ui->tabWidget->indexOf(ui->tabLabels), icon);
