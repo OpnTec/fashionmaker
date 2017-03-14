@@ -786,6 +786,7 @@ void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
     VPiece newDet = oldDet;
 
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
+    newDet.GetGrainlineGeometry().SetPos(m_grainLine->pos());
     newDet.GetGrainlineGeometry().SetLength(QString().setNum(dLength));
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     resizeCommand->setText(tr("resize grainline"));

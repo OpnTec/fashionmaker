@@ -381,7 +381,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     {
         qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
         qreal dAng = qAtan2(-ptDiff.y(), ptDiff.x());
-        dLen = dLen*qCos(dAng - m_dRotation);
+        dLen = -dLen*qCos(dAng - m_dRotation);
         qreal dPrevLen = m_dLength;
         // try with new length
         if (not (m_moveType & IsMovable))
@@ -394,7 +394,12 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 
         if (m_moveType & IsMovable)
         {
-            pos = m_ptStartPos;
+            QLineF grainline(this->pos().x(), this->pos().y(),
+                             this->pos().x() + dPrevLen, this->pos().y());
+            grainline.setAngle(qRadiansToDegrees(m_dRotation));
+            grainline = QLineF(grainline.p2(), grainline.p1());
+            grainline.setLength(m_dLength);
+            pos = grainline.p2();
         }
         else
         {
@@ -416,10 +421,7 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         }
         else
         {
-            if (not (m_moveType & IsMovable))
-            {
-                setPos(pos);
-            }
+            setPos(pos);
         }
 
         UpdateRectangle();
