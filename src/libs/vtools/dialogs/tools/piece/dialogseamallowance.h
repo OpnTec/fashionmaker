@@ -29,7 +29,7 @@
 #ifndef DIALOGSEAMALLOWANCE_H
 #define DIALOGSEAMALLOWANCE_H
 
-#include "dialogtool.h"
+#include "../dialogtool.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"

@@ -33,9 +33,9 @@
 #include "../vpatterndb/calculator.h"
 #include "visualization/path/vistoolpiece.h"
 #include "visualization/path/vispiecepins.h"
-#include "dialogpiecepath.h"
-#include "../../undocommands/savepiecepathoptions.h"
-#include "../support/dialogeditwrongformula.h"
+#include "../dialogpiecepath.h"
+#include "../../../undocommands/savepiecepathoptions.h"
+#include "../../support/dialogeditwrongformula.h"
 
 #include <QMenu>
 #include <QTimer>
