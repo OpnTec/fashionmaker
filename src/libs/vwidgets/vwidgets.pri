@@ -14,7 +14,10 @@ SOURCES += \
     $$PWD/vabstractmainwindow.cpp \
     $$PWD/vtextgraphicsitem.cpp \
     $$PWD/vgrainlineitem.cpp \
-    $$PWD/vpieceitem.cpp
+    $$PWD/vpieceitem.cpp \
+    $$PWD/fancytabbar/fancytab.cpp \
+    $$PWD/fancytabbar/fancytabbar.cpp \
+    $$PWD/fancytabbar/stylehelper.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -32,4 +35,7 @@ HEADERS += \
     $$PWD/vabstractmainwindow.h \
     $$PWD/vtextgraphicsitem.h \
     $$PWD/vgrainlineitem.h \
-    $$PWD/vpieceitem.h
+    $$PWD/vpieceitem.h \
+    $$PWD/fancytabbar/fancytab.h \
+    $$PWD/fancytabbar/fancytabbar.h \
+    $$PWD/fancytabbar/stylehelper.h
