@@ -131,4 +131,8 @@ FORMS += \
     $$PWD/tools/dialogellipticalarc.ui \
     $$PWD/tools/piece/dialogseamallowance.ui \
     $$PWD/tools/dialogpiecepath.ui \
-    $$PWD/tools/dialogpin.ui
+    $$PWD/tools/dialogpin.ui \
+    $$PWD/tools/piece/tabs/tabpaths.ui \
+    $$PWD/tools/piece/tabs/tablabels.ui \
+    $$PWD/tools/piece/tabs/tabgrainline.ui \
+    $$PWD/tools/piece/tabs/tabpins.ui

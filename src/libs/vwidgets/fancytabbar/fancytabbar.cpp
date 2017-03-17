@@ -602,9 +602,10 @@ QString FancyTabBar::TabText(int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetTabText(int index, QString text) const
+void FancyTabBar::SetTabText(int index, QString text)
 {
     m_attachedTabs.at(index)->m_text=text;
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

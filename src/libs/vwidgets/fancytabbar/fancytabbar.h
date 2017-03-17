@@ -75,7 +75,7 @@ public:
     QIcon TabIcon(int index) const;
 
     QString TabText(int index) const;
-    void    SetTabText(int index, QString text) const;
+    void    SetTabText(int index, QString text);
 
     int   Count() const;
     QRect TabRect(int index) const;
