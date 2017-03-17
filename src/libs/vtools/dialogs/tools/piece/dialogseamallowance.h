@@ -29,7 +29,7 @@
 #ifndef DIALOGSEAMALLOWANCE_H
 #define DIALOGSEAMALLOWANCE_H
 
-#include "dialogtool.h"
+#include "../dialogtool.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
@@ -38,9 +38,14 @@
 namespace Ui
 {
     class DialogSeamAllowance;
+    class TabPaths;
+    class TabLabels;
+    class TabGrainline;
+    class TabPins;
 }
 
 class VisPiecePins;
+class FancyTabBar;
 
 class DialogSeamAllowance : public DialogTool
 {
@@ -66,6 +71,7 @@ protected:
     virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void CheckState() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
 
 protected slots:
     void UpdateList();
@@ -92,6 +98,7 @@ private slots:
     void ReturnDefAfter();
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
+    void FancyTabChanged(int index);
     void TabChanged(int index);
 
     void UpdateGrainlineValues();
@@ -147,6 +154,19 @@ private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
     Ui::DialogSeamAllowance *ui;
+    Ui::TabPaths            *uiTabPaths;
+    Ui::TabLabels           *uiTabLabels;
+    Ui::TabGrainline        *uiTabGrainline;
+    Ui::TabPins             *uiTabPins;
+
+    QWidget *m_tabPaths;
+    QWidget *m_tabLabels;
+    QWidget *m_tabGrainline;
+    QWidget *m_tabPins;
+
+    FancyTabBar* m_ftb;
+
+    bool   dialogIsInitialized;
     bool   applyAllowed;
     bool   flagGPin;
     bool   flagDPin;
@@ -212,6 +232,7 @@ private:
     void UpdateNodeSABefore(const QString &formula);
     void UpdateNodeSAAfter(const QString &formula);
 
+    void InitFancyTabBar();
     void InitMainPathTab();
     void InitSeamAllowanceTab();
     void InitNodesList();
@@ -240,6 +261,8 @@ private:
     void SetPLWidth(QString widthFormula);
     void SetPLHeight(QString heightFormula);
     void SetPLAngle(QString angleFormula);
+
+    void ShowPins();
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

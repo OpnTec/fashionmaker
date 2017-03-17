@@ -66,5 +66,13 @@
         <file>icon/16x16/forbid_detail@2x.png</file>
         <file>icon/16x16/toolsectionelarc.png</file>
         <file>icon/16x16/toolsectionelarc@2x.png</file>
+        <file>icon/32x32/grainline.png</file>
+        <file>icon/32x32/grainline@2x.png</file>
+        <file>icon/32x32/labels.png</file>
+        <file>icon/32x32/labels@2x.png</file>
+        <file>icon/32x32/paths.png</file>
+        <file>icon/32x32/paths@2x.png</file>
+        <file>icon/32x32/pins.png</file>
+        <file>icon/32x32/pins@2x.png</file>
     </qresource>
 </RCC>

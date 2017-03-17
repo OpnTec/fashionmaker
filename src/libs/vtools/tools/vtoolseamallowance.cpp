@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolseamallowance.h"
-#include "../dialogs/tools/dialogseamallowance.h"
+#include "../dialogs/tools/piece/dialogseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
