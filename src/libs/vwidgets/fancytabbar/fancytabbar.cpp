@@ -118,6 +118,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
                 default:
                     break;
             }
+            break;
         case Below:
             switch(corner)
             {
@@ -132,6 +133,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
                 default:
                     break;
             }
+            break;
         case Left:
             switch(corner)
             {
@@ -146,6 +148,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
                 default:
                     break;
             }
+            break;
         case Right:
             switch(corner)
             {
@@ -160,6 +163,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
                 default:
                     break;
             }
+            break;
         default:
             break;
     }
