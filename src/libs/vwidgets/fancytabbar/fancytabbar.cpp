@@ -508,14 +508,9 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
         painter->setPen(selected ? StyleHelper::panelTextColor() : QColor(255, 255, 255, 120));
     }
 
-#if defined(Q_OS_MAC)
-    bool isMac=true;
-#else
-    bool isMac = false;
-#endif
-
+#ifndef Q_OS_MAC
     // hover
-    if(!isMac && !selected && enabled)
+    if(!selected && enabled)
     {
         painter->save();
         int fader = int(m_attachedTabs[tabIndex]->fader());
@@ -540,6 +535,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
 
         painter->restore();
     }
+#endif //#ifndef Q_OS_MAC
 
     if (!enabled)
     {
