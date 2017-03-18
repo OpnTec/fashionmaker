@@ -56,6 +56,7 @@
 #include <QSourceLocation>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTextDocument>
 #include <QTextStream>
 #include <QUrl>
 #include <QVector>
@@ -67,8 +68,13 @@
 class MessageHandler : public QAbstractMessageHandler
 {
 public:
-    MessageHandler() : QAbstractMessageHandler(), m_messageType(QtMsgType()), m_description(QString()),
-        m_sourceLocation(QSourceLocation()){}
+    MessageHandler()
+        : QAbstractMessageHandler(),
+          m_messageType(QtMsgType()),
+          m_description(),
+          m_sourceLocation(QSourceLocation())
+    {}
+
     QString statusMessage() const;
     qint64  line() const;
     qint64  column() const;
@@ -83,9 +89,11 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString MessageHandler::statusMessage() const
+QString MessageHandler::statusMessage() const
 {
-    return m_description;
+    QTextDocument doc;
+    doc.setHtml(m_description);
+    return doc.toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
