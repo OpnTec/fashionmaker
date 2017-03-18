@@ -46,7 +46,7 @@ FancyTab::FancyTab(QWidget *tabbar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-float FancyTab::fader()
+double FancyTab::fader()
 {
     return m_Fader;
 }
@@ -70,7 +70,7 @@ void FancyTab::fadeOut()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTab::setFader(float value)
+void FancyTab::setFader(double value)
 {
     m_Fader = value;
     m_TabBar->update();

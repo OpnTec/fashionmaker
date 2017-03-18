@@ -38,12 +38,12 @@ class FancyTab : public QObject
     friend class FancyTabBar;
     Q_OBJECT
 
-    Q_PROPERTY(float fader READ fader WRITE setFader)
+    Q_PROPERTY(double fader READ fader WRITE setFader)
 public:
     explicit FancyTab(QWidget *tabbar);
 
-    float fader();
-    void  setFader(float value);
+    double fader();
+    void   setFader(double value);
 
     void fadeIn();
     void fadeOut();
@@ -56,7 +56,7 @@ private:
     bool               m_enabled;
     QPropertyAnimation m_Animator;
     QWidget           *m_TabBar;
-    float              m_Fader;
+    double             m_Fader;
 };
 
 #endif // FANCYTAB_H
