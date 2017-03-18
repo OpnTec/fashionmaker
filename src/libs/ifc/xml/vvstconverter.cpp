@@ -94,6 +94,7 @@ QString VVSTConverter::XSDSchema(int ver) const
             InvalidVersion(ver);
             break;
     }
+    return QString();//unreachable code
 }
 
 //---------------------------------------------------------------------------------------------------------------------

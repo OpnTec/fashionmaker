@@ -62,6 +62,11 @@ bool VToolRecord::operator==(const VToolRecord &record) const
 //---------------------------------------------------------------------------------------------------------------------
 VToolRecord &VToolRecord::operator=(const VToolRecord &record)
 {
+    if ( &record == this )
+    {
+        return *this;
+    }
+
     this->id = record.getId();
     this->typeTool = record.getTypeTool();
     this->nameDraw = record.getNameDraw();

@@ -46,7 +46,7 @@
 #include <QTimer>
 #include <QtNumeric>
 
-enum TabOrder {Paths=0, Labels=1, Grainline=2, Pins=3, Count};
+enum TabOrder {Paths=0, Labels=1, Grainline=2, Pins=3, Count=4};
 
 namespace
 {

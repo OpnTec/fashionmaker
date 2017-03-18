@@ -1558,12 +1558,11 @@ void VAbstractPattern::InsertTag(const QStringList &tags, const QDomElement &ele
     for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
     {
         const QDomNodeList list = elementsByTagName(tags.at(i));
-        if (list.isEmpty())
+        if (not list.isEmpty())
         {
-            continue;
+            pattern.insertAfter(element, list.at(0));
+            break;
         }
-        pattern.insertAfter(element, list.at(0));
-        break;
     }
     SetVersion();
 }
