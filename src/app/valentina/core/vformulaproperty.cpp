@@ -35,27 +35,17 @@
 #include "../vpatterndb/vformula.h"
 #include "../vmisc/vabstractapplication.h"
 
-enum class ChildType : char {Invalid = 0, Value = 1, Formula = 2};
-
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaProperty::VFormulaProperty(const QString &name)
     : VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
 {
     d_ptr->type = VPE::Property::Complex;
 
-    VPE::VStringProperty* tmpValue = new VPE::VStringProperty(tr("Value"));
-    addChild(tmpValue);
-    tmpValue->setUpdateBehaviour(true, false);
-    tmpValue->setReadOnly(true);
-    tmpValue->setOsSeparator(qApp->Settings()->GetOsSeparator());
-    tmpValue->setTypeForParent(static_cast<int>(ChildType::Value));
-
     VPE::VStringProperty* tmpFormula = new VPE::VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
     tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
-    tmpFormula->setTypeForParent(static_cast<int>(ChildType::Formula));
 
     setValue(0);
 }
@@ -187,7 +177,7 @@ VFormula VFormulaProperty::GetFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::SetFormula(const VFormula &formula)
 {
-    if (d_ptr->Children.count() < 2)
+    if (d_ptr->Children.count() < 1)
     {
         return;
     }
@@ -197,14 +187,10 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
     value.convert(VFormula::FormulaTypeId());
     VProperty::d_ptr->VariantValue = value;
 
-    QVariant tmpValue(formula.getStringValue());
-    tmpValue.convert(QVariant::String);
-
     QVariant tmpFormula(formula.GetFormula());
     tmpFormula.convert(QVariant::String);
 
-    VProperty::d_ptr->Children.at(0)->setValue(tmpValue);
-    VProperty::d_ptr->Children.at(1)->setValue(tmpFormula);
+    VProperty::d_ptr->Children.at(0)->setValue(tmpFormula);
 
     if (VProperty::d_ptr->editor != nullptr)
     {
@@ -214,10 +200,8 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
 
 void VFormulaProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 {
-    if (typeForParent == static_cast<int>(ChildType::Formula))
-    {
-        VFormula newFormula = GetFormula();
-        newFormula.SetFormula(value.toString(), FormulaType::FromUser);
-        SetFormula(newFormula);
-    }
+    Q_UNUSED(typeForParent)
+    VFormula newFormula = GetFormula();
+    newFormula.SetFormula(value.toString(), FormulaType::FromUser);
+    SetFormula(newFormula);
 }
