@@ -4420,19 +4420,15 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Main path</source>
-        <translation>Chemin principal</translation>
+        <translation type="vanished">Chemin principal</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Tous les objets du chemin doivent se suivre dans le sens horaire.</translation>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished">Forbid piece be mirrored in a layout.</translation>
+        <translation type="vanished">Tous les objets du chemin doivent se suivre dans le sens horaire.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation>Rotation interdite</translation>
+        <translation type="vanished">Rotation interdite</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4440,19 +4436,19 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Marge de couture</translation>
+        <translation type="vanished">Marge de couture</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatique</translation>
+        <translation type="vanished">Automatique</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation type="vanished">Largeur :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Assistant Formule</translation>
+        <translation type="vanished">Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4460,99 +4456,87 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Calcul</translation>
+        <translation type="vanished">Calcul</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation>Nœuds</translation>
+        <translation type="vanished">Nœuds</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation>Nœud:</translation>
+        <translation type="vanished">Nœud:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation>Avant:</translation>
+        <translation type="vanished">Avant:</translation>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation>Retourner à la largeur par défaut</translation>
+        <translation type="vanished">Retourner à la largeur par défaut</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Défaut</translation>
+        <translation type="vanished">Défaut</translation>
     </message>
     <message>
         <source>After:</source>
-        <translation>Après:</translation>
+        <translation type="vanished">Après:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Angle:</translation>
+        <translation type="vanished">Angle:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personnalisé</translation>
+        <translation type="vanished">Personnalisé</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation>Point de départ:</translation>
+        <translation type="vanished">Point de départ:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation>Point final:</translation>
+        <translation type="vanished">Point final:</translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation>Inclus comme:</translation>
+        <translation type="vanished">Inclus comme:</translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation>Chemins internes</translation>
+        <translation type="vanished">Chemins internes</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation>Lettre :</translation>
+        <translation type="vanished">Lettre :</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation>Lettre de l&apos;élément de patron</translation>
+        <translation type="vanished">Lettre de l&apos;élément de patron</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Nom de la pièce de patron:</translation>
+        <translation type="vanished">Nom de la pièce de patron:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation>Pièce de patron</translation>
+        <translation type="vanished">Pièce de patron</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation>La valeur Nom ne peut pas être vide</translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished">Matière/Numéro de coupe/Placement</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished">Numéro de découpe :</translation>
+        <translation type="vanished">La valeur Nom ne peut pas être vide</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Type de matière :</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished">Vous pouvez choisir un des matériaux prédéfinis ou en entrer un nouveau</translation>
+        <translation type="vanished">Type de matière :</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation>Placement:</translation>
+        <translation type="vanished">Placement:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -4560,19 +4544,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="vanished">Annuler</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Retirer</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished">étiquette pièce de patron visible</translation>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="unfinished">étiquette élément de patron visible</translation>
+        <translation type="vanished">Retirer</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4580,19 +4556,19 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation>Droit-fil visible</translation>
+        <translation type="vanished">Droit-fil visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation>Rotation:</translation>
+        <translation type="vanished">Rotation:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Longueur:</translation>
+        <translation type="vanished">Longueur:</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation>Flèches:</translation>
+        <translation type="vanished">Flèches:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4703,22 +4679,6 @@ Appliquer les réglages quand-même ?</translation>
         <translation>Juste l&apos;arrière</translation>
     </message>
     <message>
-        <source>Top left pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom right pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pins</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4727,19 +4687,7 @@ Appliquer les réglages quand-même ?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece label data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Center pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4761,6 +4709,10 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Edit width</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Chemins</translation>
     </message>
 </context>
 <context>
@@ -8120,6 +8072,282 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabGrainline</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished">Droit-fil visible</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Rotation:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Assistant Formule</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabLabels</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished">Lettre :</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished">Lettre de l&apos;élément de patron</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Nom de la pièce de patron:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Pièce de patron</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished">La valeur Nom ne peut pas être vide</translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Matière/Numéro de coupe/Placement</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished">Numéro de découpe :</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Type de matière :</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished">Vous pouvez choisir un des matériaux prédéfinis ou en entrer un nouveau</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Placement:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Ajouter</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Retirer</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished">étiquette pièce de patron visible</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largeur :</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Assistant Formule</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angle:</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished">étiquette élément de patron visible</translation>
+    </message>
+</context>
+<context>
+    <name>TabPaths</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished">Chemin principal</translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished">Forbid piece be mirrored in a layout.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Rotation interdite</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Prêt!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Marge de couture</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished">Automatique</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largeur :</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Assistant Formule</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Calcul</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished">Nœuds</translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished">Nœud:</translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished">Avant:</translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished">Retourner à la largeur par défaut</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished">Après:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angle:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personnalisé</translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished">Point de départ:</translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished">Point final:</translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished">Inclus comme:</translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished">Chemins internes</translation>
+    </message>
+</context>
+<context>
+    <name>TabPins</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

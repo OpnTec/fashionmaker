@@ -4273,40 +4273,8 @@ Apply settings anyway?</source>
         <translation type="unfinished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
-        <source>Main path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished">Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="unfinished">Περιορισμός αντιστροφής</translation>
-    </message>
-    <message>
         <source>Ready!</source>
         <translation>Έτοιμο!</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="unfinished">Περιθώριο ραφής</translation>
-    </message>
-    <message>
-        <source>Automatic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished">Φάρδος:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4314,99 +4282,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Υπολογισμός</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Υπολογισμός</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation>Κόμβοι</translation>
-    </message>
-    <message>
-        <source>Node:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Κόμβοι</translation>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation>Επιστροφή στο προεπιλεγμένο πλάτος</translation>
+        <translation type="vanished">Επιστροφή στο προεπιλεγμένο πλάτος</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Προεπιλογή</translation>
-    </message>
-    <message>
-        <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Προεπιλογή</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Γωνία:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start point:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End point:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Include as:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Internal paths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="unfinished">Γράμμα:</translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished">Όνομα της λεπτομέρειας:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="unfinished">Λεπτομέρεια</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished">Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished">Ποσότητα κοπής:</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished">Τύπος υφάσματος:</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished">Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="unfinished">Τοποθέτηση:</translation>
+        <translation type="vanished">Γωνία:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -4414,39 +4306,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation type="vanished">Ακύρωση</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Αφαίρεση</translation>
+        <translation type="vanished">Αφαίρεση</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Εμφάνιση ετικέτας λεπτομέρειας</translation>
+        <translation type="vanished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Εμφάνιση ετικέτας πατρόν</translation>
+        <translation type="vanished">Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <source>Grainline</source>
         <translation type="unfinished">Ισιάδα</translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished">Εμφάνιση ισιάδας</translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="unfinished">Περιστροφή:</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Μήκος:</translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="unfinished">Τόξα:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4557,22 +4433,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Μόνο πίσω</translation>
     </message>
     <message>
-        <source>Top left pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom right pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom pin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pins</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4581,19 +4441,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece label data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished">Ύψος:</translation>
-    </message>
-    <message>
-        <source>Center pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4615,6 +4463,10 @@ Apply settings anyway?</source>
     <message>
         <source>Edit width</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Διαδρομές</translation>
     </message>
 </context>
 <context>
@@ -7892,6 +7744,282 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabGrainline</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished">Εμφάνιση ισιάδας</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Περιστροφή:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Μήκος:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished">Τόξα:</translation>
+    </message>
+</context>
+<context>
+    <name>TabLabels</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished">Γράμμα:</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Όνομα της λεπτομέρειας:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Λεπτομέρεια</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished">Ποσότητα κοπής:</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Τύπος υφάσματος:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished">Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Τοποθέτηση:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Προσθήκη</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Ακύρωση</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Αφαίρεση</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Φάρδος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Ύψος:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished">Εμφάνιση ετικέτας πατρόν</translation>
+    </message>
+</context>
+<context>
+    <name>TabPaths</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished">Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Περιορισμός αντιστροφής</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">Έτοιμο!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Περιθώριο ραφής</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Φάρδος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished">Κόμβοι</translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished">Επιστροφή στο προεπιλεγμένο πλάτος</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Προεπιλογή</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabPins</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

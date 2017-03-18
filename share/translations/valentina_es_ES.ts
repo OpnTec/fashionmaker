@@ -4423,19 +4423,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Main path</source>
-        <translation>Ruta principal</translation>
+        <translation type="vanished">Ruta principal</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Todos los objetos de la ruta deberían seguir en la dirección de las agujas del reloj.</translation>
+        <translation type="vanished">Todos los objetos de la ruta deberían seguir en la dirección de las agujas del reloj.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation>Prohibir que el trozo sea reproducido en una capa.</translation>
+        <translation type="vanished">Prohibir que el trozo sea reproducido en una capa.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation>Prohibir girado</translation>
+        <translation type="vanished">Prohibir girado</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4443,19 +4443,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Las costuras</translation>
+        <translation type="vanished">Las costuras</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automático</translation>
+        <translation type="vanished">Automático</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Anchura:</translation>
+        <translation type="vanished">Anchura:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation type="vanished">Asistente de Fórmula</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4463,103 +4463,99 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation type="vanished">Cálculo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el cálculo completo en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el cálculo completo en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
-        <translation>Nodos</translation>
+        <translation type="vanished">Nodos</translation>
     </message>
     <message>
         <source>Node:</source>
-        <translation>Nodo:</translation>
+        <translation type="vanished">Nodo:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation>Antes:</translation>
+        <translation type="vanished">Antes:</translation>
     </message>
     <message>
         <source>Return to default width</source>
-        <translation>Volver al ancho predeterminado</translation>
+        <translation type="vanished">Volver al ancho predeterminado</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Defecto</translation>
+        <translation type="vanished">Defecto</translation>
     </message>
     <message>
         <source>After:</source>
-        <translation>Después:</translation>
+        <translation type="vanished">Después:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation type="vanished">Ángulo:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizado</translation>
+        <translation type="vanished">Personalizado</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation>Punto de partida:</translation>
+        <translation type="vanished">Punto de partida:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation>Punto final:</translation>
+        <translation type="vanished">Punto final:</translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation>Incluir como:</translation>
+        <translation type="vanished">Incluir como:</translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation>Rutas internas</translation>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="vanished">Datos de pieza de patrón</translation>
+        <translation type="vanished">Rutas internas</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation>Letra:</translation>
+        <translation type="vanished">Letra:</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation>Carta de trozo de estampado</translation>
+        <translation type="vanished">Carta de trozo de estampado</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Nombre del detalle:</translation>
+        <translation type="vanished">Nombre del detalle:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation>Detalle</translation>
+        <translation type="vanished">Detalle</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation>El nombre no puede estar vacío</translation>
+        <translation type="vanished">El nombre no puede estar vacío</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Material/Cortar número/Disposición</translation>
+        <translation type="vanished">Material/Cortar número/Disposición</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Curtar número:</translation>
+        <translation type="vanished">Curtar número:</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Tipo de Material:</translation>
+        <translation type="vanished">Tipo de Material:</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation>Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
+        <translation type="vanished">Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation>Ubicación:</translation>
+        <translation type="vanished">Ubicación:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -4567,19 +4563,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="vanished">Cancelar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Quitar</translation>
+        <translation type="vanished">Quitar</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation>Etiqueta de Detalle visible</translation>
+        <translation type="vanished">Etiqueta de Detalle visible</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Etiqueta del patrón visible</translation>
+        <translation type="vanished">Etiqueta del patrón visible</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4587,19 +4583,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation>Línea discontinua visible</translation>
+        <translation type="vanished">Línea discontinua visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation>Rotación:</translation>
+        <translation type="vanished">Rotación:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Longitud:</translation>
+        <translation type="vanished">Longitud:</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation>Flechas:</translation>
+        <translation type="vanished">Flechas:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4711,19 +4707,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Top left pin:</source>
-        <translation>Alfiler izquierdo superior:</translation>
+        <translation type="vanished">Alfiler izquierdo superior:</translation>
     </message>
     <message>
         <source>Bottom right pin:</source>
-        <translation>Alfiler derecho inferior:</translation>
+        <translation type="vanished">Alfiler derecho inferior:</translation>
     </message>
     <message>
         <source>Top pin:</source>
-        <translation>Alfiler superior:</translation>
+        <translation type="vanished">Alfiler superior:</translation>
     </message>
     <message>
         <source>Bottom pin:</source>
-        <translation>Alfiler inferior:</translation>
+        <translation type="vanished">Alfiler inferior:</translation>
     </message>
     <message>
         <source>Pins</source>
@@ -4734,19 +4730,7 @@ Apply settings anyway?</source>
         <translation>Sin alfiler</translation>
     </message>
     <message>
-        <source>Piece label data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished">Altura:</translation>
-    </message>
-    <message>
-        <source>Center pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4768,6 +4752,10 @@ Apply settings anyway?</source>
     <message>
         <source>Edit width</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Carpetas</translation>
     </message>
 </context>
 <context>
@@ -8130,6 +8118,282 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabGrainline</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished">Línea discontinua visible</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Rotación:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Cálculo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation type="unfinished">Alfiler superior:</translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation type="unfinished">Alfiler inferior:</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished">Flechas:</translation>
+    </message>
+</context>
+<context>
+    <name>TabLabels</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished">Letra:</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished">Carta de trozo de estampado</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Nombre del detalle:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Detalle</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished">El nombre no puede estar vacío</translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished">Material/Cortar número/Disposición</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished">Tipo de Material:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished">Puede elegir uno de los materiales predefinidos o introducir uno nuevo</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished">Ubicación:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Agregar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Quitar</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished">Etiqueta de Detalle visible</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Anchura:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Cálculo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Altura:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation type="unfinished">Alfiler izquierdo superior:</translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation type="unfinished">Alfiler derecho inferior:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Ángulo:</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabPaths</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main path</source>
+        <translation type="unfinished">Ruta principal</translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished">Prohibir que el trozo sea reproducido en una capa.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Prohibir girado</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished">¡Listo!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Las costuras</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished">Automático</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Anchura:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Cálculo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation type="unfinished">Nodos</translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation type="unfinished">Nodo:</translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation type="unfinished">Antes:</translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation type="unfinished">Volver al ancho predeterminado</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Defecto</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation type="unfinished">Después:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Ángulo:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizado</translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation type="unfinished">Punto de partida:</translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation type="unfinished">Punto final:</translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation type="unfinished">Incluir como:</translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation type="unfinished">Rutas internas</translation>
+    </message>
+</context>
+<context>
+    <name>TabPins</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
