@@ -263,7 +263,6 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
                 break;
             default:// others
                 throw VExceptionConversionError(message, name);
-                break;
         }
     }
     catch (const VExceptionEmptyParameter &e)

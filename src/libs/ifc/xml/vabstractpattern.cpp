@@ -770,14 +770,11 @@ Unit VAbstractPattern::MUnit() const
     {
         case 0:// mm
             return Unit::Mm;
-            break;
         case 2:// in
             return Unit::Inch;
-            break;
         case 1:// cm
         default:
             return Unit::Cm;
-            break;
     }
 }
 
@@ -811,7 +808,6 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                         case Tool::NodeSpline:
                         case Tool::NodeSplinePath:
                             continue;
-                            break;
                         default:
                             siblingId = tool.getId();
                             j = 0;// break loop
@@ -918,7 +914,6 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
                         map.insert(GHeights::H194, GetParametrBool(domElement, AttrH194, defValue));
                         map.insert(GHeights::H200, GetParametrBool(domElement, AttrH200, defValue));
                         return map;
-                        break;
                     case 1: // TagSizes
                     default:
                         break;
@@ -1016,7 +1011,6 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                         modified = true;
                         emit patternChanged(false);
                         return;
-                        break;
                     case 1: // TagSizes
                     default:
                         break;
@@ -1114,7 +1108,6 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
                         map.insert(GSizes::S70, GetParametrBool(domElement, AttrS70, defValue));
                         map.insert(GSizes::S72, GetParametrBool(domElement, AttrS72, defValue));
                         return map;
-                        break;
                     case 0: // TagHeights
                     default:
                         break;
@@ -1212,7 +1205,6 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                         modified = true;
                         emit patternChanged(false);
                         return;
-                        break;
                     case 0: // TagHeights
                     default:
                         break;
