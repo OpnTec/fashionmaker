@@ -43,15 +43,13 @@ qreal WidthMainLine(Unit patternUnit)
     qreal _widthMainLine = DefWidth;
     switch (patternUnit)
     {
-        case Unit::Mm:
-            _widthMainLine = DefWidth;
-            break;
         case Unit::Cm:
             _widthMainLine = DefWidth/10.0;
             break;
         case Unit::Inch:
             _widthMainLine = DefWidth/25.4;
             break;
+        case Unit::Mm:
         default:
             _widthMainLine = DefWidth;
             break;

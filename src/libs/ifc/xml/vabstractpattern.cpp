@@ -771,12 +771,10 @@ Unit VAbstractPattern::MUnit() const
         case 0:// mm
             return Unit::Mm;
             break;
-        case 1:// cm
-            return Unit::Cm;
-            break;
         case 2:// in
             return Unit::Inch;
             break;
+        case 1:// cm
         default:
             return Unit::Cm;
             break;
@@ -922,7 +920,6 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
                         return map;
                         break;
                     case 1: // TagSizes
-                        break;
                     default:
                         break;
                 }
@@ -1021,7 +1018,6 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                         return;
                         break;
                     case 1: // TagSizes
-                        break;
                     default:
                         break;
                 }
@@ -1081,8 +1077,6 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
                 const QString defValue = trueStr;
                 switch (gTags.indexOf(domElement.tagName()))
                 {
-                    case 0: // TagHeights
-                        break;
                     case 1: // TagSizes
                         if (GetParametrBool(domElement, AttrAll, defValue))
                         {
@@ -1121,6 +1115,7 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
                         map.insert(GSizes::S72, GetParametrBool(domElement, AttrS72, defValue));
                         return map;
                         break;
+                    case 0: // TagHeights
                     default:
                         break;
                 }
@@ -1153,8 +1148,6 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
             {
                 switch (gTags.indexOf(domElement.tagName()))
                 {
-                    case 0: // TagHeights
-                        break;
                     case 1: // TagSizes
                         SetAttribute(domElement, AttrAll, options.value(GSizes::ALL));
                         if (options.value(GSizes::ALL))
@@ -1220,6 +1213,7 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                         emit patternChanged(false);
                         return;
                         break;
+                    case 0: // TagHeights
                     default:
                         break;
                 }
@@ -1509,8 +1503,6 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                                          << TagCustomerName << TagSize << TagShowDate << TagShowMeasurements;
         switch (tags.indexOf(tag))
         {
-            case 0: //TagUnit
-                return QDomElement();// Mandatory tag
             case 1: //TagImage
                 element = createElement(TagImage);
                 break;
@@ -1557,6 +1549,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 12: // TagShowMeasurements
                  element = createElement(TagShowMeasurements);
                  break;
+            case 0: //TagUnit (Mandatory tag)
             default:
                 return QDomElement();
         }

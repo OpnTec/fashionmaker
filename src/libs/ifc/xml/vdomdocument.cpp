@@ -254,14 +254,10 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
         switch (bools.indexOf(parametr))
         {
             case 0: // true
-                val = true;
-                break;
-            case 1: // false
-                val = false;
-                break;
             case 2: // 1
                 val = true;
                 break;
+            case 1: // false
             case 3: // 0
                 val = false;
                 break;
@@ -563,15 +559,13 @@ Unit VDomDocument::StrToUnits(const QString &unit)
         case 0:// mm
             result = Unit::Mm;
             break;
-        case 1:// cm
-            result = Unit::Cm;
-            break;
         case 2:// inch
             result = Unit::Inch;
             break;
         case 3:// px
             result = Unit::Px;
             break;
+        case 1:// cm
         default:
             result = Unit::Cm;
             break;
@@ -594,54 +588,17 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
     switch (unit)
     {
         case Unit::Mm:
-            if (translate)
-            {
-                result = QObject::tr("mm");
-            }
-            else
-            {
-                result = UnitMM;
-            }
-            break;
-        case Unit::Cm:
-            if (translate)
-            {
-                result = QObject::tr("cm");
-            }
-            else
-            {
-                result = UnitCM;
-            }
+            translate ? result = QObject::tr("mm") : result = UnitMM;
             break;
         case Unit::Inch:
-            if (translate)
-            {
-                result = QObject::tr("inch");
-            }
-            else
-            {
-                result = UnitINCH;
-            }
+            translate ? result = QObject::tr("inch") : result = UnitINCH;
             break;
         case Unit::Px:
-            if (translate)
-            {
-                result = QObject::tr("px");
-            }
-            else
-            {
-                result = UnitPX;
-            }
+            translate ? result = QObject::tr("px") : result = UnitPX;
             break;
+        case Unit::Cm:
         default:
-            if (translate)
-            {
-                result = QObject::tr("cm");
-            }
-            else
-            {
-                result = UnitCM;
-            }
+            translate ? result = QObject::tr("cm") : result = UnitCM;
             break;
     }
     return result;

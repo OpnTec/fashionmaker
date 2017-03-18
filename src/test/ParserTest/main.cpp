@@ -38,8 +38,6 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
     switch (type)
     {
         case QtDebugMsg:
-            fprintf(stderr, "%s\n", localMsg.constData());
-            break;
         case QtWarningMsg:
             fprintf(stderr, "%s\n", localMsg.constData());
             break;

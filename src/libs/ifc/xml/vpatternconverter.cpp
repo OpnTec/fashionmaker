@@ -1735,14 +1735,6 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
             switch(splTypes.indexOf(type))
             {
                 case 0: //strModelingPath
-                {
-                    const quint32 spl = element.attribute(strIdObject).toUInt();
-                    if (spl == id+1 || spl == id+2)
-                    {
-                        element.setAttribute(strIdObject, baseCurve);
-                    }
-                    break;
-                }
                 case 1: //strModelingSpline
                 {
                     const quint32 spl = element.attribute(strIdObject).toUInt();
