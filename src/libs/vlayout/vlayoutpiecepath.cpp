@@ -70,7 +70,6 @@ VLayoutPiecePath::~VLayoutPiecePath()
 QPainterPath VLayoutPiecePath::GetPainterPath() const
 {
     QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
     if (not d->m_points.isEmpty())
     {
         path.moveTo(d->m_points.at(0));
@@ -78,7 +77,7 @@ QPainterPath VLayoutPiecePath::GetPainterPath() const
         {
             path.lineTo(d->m_points.at(j));
         }
-        path.lineTo(d->m_points.at(0));
+        path.setFillRule(Qt::WindingFill);
     }
     return path;
 }
