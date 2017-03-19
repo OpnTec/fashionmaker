@@ -1866,9 +1866,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item
     i->ShowVisualization(true);
     formView->setTitle(tr("Base point"));
 
-    AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label:"));
 
-    VPE::VPointFProperty* itemPosition = new VPE::VPointFProperty(tr("Position"));
+    VPE::VPointFProperty* itemPosition = new VPE::VPointFProperty(tr("Position:"));
     itemPosition->setValue(i->pos());
     AddProperty(itemPosition, QLatin1String("position"));
 }
@@ -1880,12 +1880,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance and angle"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("Base point"), AttrBasePoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
-    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1895,12 +1895,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance along line"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1910,11 +1910,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc"));
 
-    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
-    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), AttrRadius);
-    AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
-    AddPropertyFormula(tr("Second angle"), i->GetFormulaF2(), AttrAngle2);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
+    AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
+    AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
+    AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1924,11 +1924,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc with given length"));
 
-    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
-    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), AttrRadius);
-    AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
+    AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
+    AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1938,13 +1938,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point along bisector"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->BasePointName(), tr("Second point"), AttrBasePoint);
-    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point"), AttrThirdPoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->BasePointName(), tr("Second point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrThirdPoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1954,13 +1954,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTrueDarts(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("True darts"));
 
-    AddPropertyPointName1(i, tr("Point 1 label"));
-    AddPropertyPointName2(i, tr("Point 2 label"));
-    AddPropertyParentPointName(i->BaseLineP1Name(), tr("First base point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->BaseLineP2Name(), tr("Second base point"), AttrSecondPoint);
-    AddPropertyParentPointName(i->DartP1Name(), tr("First dart point"), AttrDartP1);
-    AddPropertyParentPointName(i->DartP2Name(), tr("First dart point"), AttrDartP2);
-    AddPropertyParentPointName(i->DartP3Name(), tr("First dart point"), AttrDartP3);
+    AddPropertyPointName1(i, tr("Point 1 label:"));
+    AddPropertyPointName2(i, tr("Point 2 label:"));
+    AddPropertyParentPointName(i->BaseLineP1Name(), tr("First base point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->BaseLineP2Name(), tr("Second base point:"), AttrSecondPoint);
+    AddPropertyParentPointName(i->DartP1Name(), tr("First dart point:"), AttrDartP1);
+    AddPropertyParentPointName(i->DartP2Name(), tr("First dart point:"), AttrDartP2);
+    AddPropertyParentPointName(i->DartP3Name(), tr("First dart point:"), AttrDartP3);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1970,9 +1970,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Cut arc tool"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->CurveName(), tr("Arc"), AttrArc);
-    AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->CurveName(), tr("Arc:"), AttrArc);
+    AddPropertyFormula(tr("Length:"), i->GetFormula(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1982,9 +1982,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool for segmenting a curve"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
-    AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyFormula(tr("Length:"), i->GetFormula(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1994,9 +1994,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool segment a pathed curve"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
-    AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyFormula(tr("Length:"), i->GetFormula(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2006,12 +2006,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Perpendicular point along line"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("Base point"), AttrBasePoint);
-    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point"), AttrP1Line);
-    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point"), AttrP2Line);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point:"), AttrP1Line);
+    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point:"), AttrP2Line);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2021,12 +2021,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Line between points"));
 
-    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
     QMap<QString, QIcon> styles = VAbstractTool::LineStylesPics();
     styles.remove(TypeLineNone);
-    AddPropertyLineType(i, tr("Line type"), styles);
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyLineType(i, tr("Line type:"), styles);
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2036,11 +2036,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at line intersection"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->Line1P1Name(), tr("First line (first point)"), AttrP1Line1);
-    AddPropertyParentPointName(i->Line1P2Name(), tr("First line (second point)"), AttrP2Line1);
-    AddPropertyParentPointName(i->Line2P1Name(), tr("Second line (first point)"), AttrP1Line2);
-    AddPropertyParentPointName(i->Line2P2Name(), tr("Second line (second point)"), AttrP2Line2);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->Line1P1Name(), tr("First line (first point):"), AttrP1Line1);
+    AddPropertyParentPointName(i->Line1P2Name(), tr("First line (second point):"), AttrP2Line1);
+    AddPropertyParentPointName(i->Line2P1Name(), tr("Second line (first point):"), AttrP1Line2);
+    AddPropertyParentPointName(i->Line2P2Name(), tr("Second line (second point):"), AttrP2Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2050,14 +2050,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point along perpendicular"));
 
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
 
-    VPE::VDoubleProperty* itemAngle = new VPE::VDoubleProperty(tr("Additional angle degrees"));
+    VPE::VDoubleProperty* itemAngle = new VPE::VDoubleProperty(tr("Additional angle degrees:"));
     itemAngle->setValue(i->GetAngle());
     itemAngle->setSetting("Min", -360);
     itemAngle->setSetting("Max", 360);
@@ -2072,11 +2072,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at intersection of arc and line"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->ArcCenterPointName(), tr("Center of arc"), AttrCenter);
-    AddPropertyParentPointName(i->FirstPointName(), tr("Top of the line"), AttrFirstPoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("End of the line"), AttrSecondPoint);
-    AddPropertyFormula(tr("Radius"), i->getArcRadius(), AttrRadius);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->ArcCenterPointName(), tr("Center of arc:"), AttrCenter);
+    AddPropertyParentPointName(i->FirstPointName(), tr("Top of the line:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("End of the line:"), AttrSecondPoint);
+    AddPropertyFormula(tr("Radius:"), i->getArcRadius(), AttrRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2086,7 +2086,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsIt
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from x & y of two other points"));
 
-    AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->FirstPointName(), tr("X: vertical point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Y: horizontal point:"), AttrSecondPoint);
 }
@@ -2098,10 +2098,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphi
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two arcs"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->FirstArcName(), tr("First arc"), AttrFirstArc);
-    AddPropertyParentPointName(i->SecondArcName(), tr("Second arc"), AttrSecondArc);
-    AddPropertyCrossPoint(i, tr("Take"));
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->FirstArcName(), tr("First arc:"), AttrFirstArc);
+    AddPropertyParentPointName(i->SecondArcName(), tr("Second arc:"), AttrSecondArc);
+    AddPropertyCrossPoint(i, tr("Take:"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2111,12 +2111,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCircles(QGra
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two circles"));
 
-    AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->FirstCircleCenterPointName(), tr("Center of the first circle:"), AttrC1Center);
     AddPropertyParentPointName(i->SecondCircleCenterPointName(), tr("Center of the second circle:"), AttrC2Center);
-    AddPropertyFormula(tr("First circle radius"), i->GetFirstCircleRadius(), AttrC1Radius);
-    AddPropertyFormula(tr("Second circle radius"), i->GetSecondCircleRadius(), AttrC2Radius);
-    AddPropertyCrossPoint(i, tr("Take"));
+    AddPropertyFormula(tr("First circle radius:"), i->GetFirstCircleRadius(), AttrC1Radius);
+    AddPropertyFormula(tr("Second circle radius:"), i->GetSecondCircleRadius(), AttrC2Radius);
+    AddPropertyCrossPoint(i, tr("Take:"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2126,11 +2126,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCurves(QGrap
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two curves"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->FirstCurveName(), tr("First curve"), AttrCurve1);
-    AddPropertyParentPointName(i->SecondCurveName(), tr("Second curve"), AttrCurve2);
-    AddPropertyVCrossPoint(i, tr("Vertical correction"));
-    AddPropertyHCrossPoint(i, tr("Horizontal correction"));
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->FirstCurveName(), tr("First curve:"), AttrCurve1);
+    AddPropertyParentPointName(i->SecondCurveName(), tr("Second curve:"), AttrCurve2);
+    AddPropertyVCrossPoint(i, tr("Vertical correction:"));
+    AddPropertyHCrossPoint(i, tr("Horizontal correction:"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2140,11 +2140,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromCircleAndTangent(QGrap
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from circle and tangent"));
 
-    AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CircleCenterPointName(), tr("Center of the circle:"), AttrCCenter);
     AddPropertyParentPointName(i->TangentPointName(), tr("Tangent point:"), AttrTangent);
-    AddPropertyFormula(tr("Circle radius"), i->GetCircleRadius(), AttrCRadius);
-    AddPropertyCrossPoint(i, tr("Take"));
+    AddPropertyFormula(tr("Circle radius:"), i->GetCircleRadius(), AttrCRadius);
+    AddPropertyCrossPoint(i, tr("Take:"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2154,10 +2154,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromArcAndTangent(QGraphic
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from arc and tangent"));
 
-    AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->TangentPointName(), tr("Tangent point:"), AttrTangent);
-    AddPropertyParentPointName(i->ArcName(), tr("Arc"), AttrArc);
-    AddPropertyCrossPoint(i, tr("Take"));
+    AddPropertyParentPointName(i->ArcName(), tr("Arc:"), AttrArc);
+    AddPropertyCrossPoint(i, tr("Take:"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2167,13 +2167,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Special point on shoulder"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
-    AddPropertyParentPointName(i->ShoulderPointName(), tr("Third point"), AttrThirdPoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
+    AddPropertyParentPointName(i->ShoulderPointName(), tr("Third point:"), AttrThirdPoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2185,33 +2185,33 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
 
     const auto spl = i->getSpline();
 
-    AddPropertyObjectName(i, tr("Name"), true);
+    AddPropertyObjectName(i, tr("Name:"), true);
 
     VFormula angle1(spl.GetStartAngleFormula(), i->getData());
     angle1.setCheckZero(false);
     angle1.setToolId(i->getId());
     angle1.setPostfix(degreeSymbol);
-    AddPropertyFormula(tr("C1: angle"), angle1, AttrAngle1);
+    AddPropertyFormula(tr("C1: angle:"), angle1, AttrAngle1);
 
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
     length1.setCheckZero(false);
     length1.setToolId(i->getId());
     length1.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
-    AddPropertyFormula(tr("C1: length"), length1, AttrLength1);
+    AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
     VFormula angle2(spl.GetEndAngleFormula(), i->getData());
     angle2.setCheckZero(false);
     angle2.setToolId(i->getId());
     angle2.setPostfix(degreeSymbol);
-    AddPropertyFormula(tr("C2: angle"), angle2, AttrAngle2);
+    AddPropertyFormula(tr("C2: angle:"), angle2, AttrAngle2);
 
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
     length2.setCheckZero(false);
     length2.setToolId(i->getId());
     length2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
-    AddPropertyFormula(tr("C2: length"), length2, AttrLength2);
+    AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2221,12 +2221,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     i->ShowVisualization(true);
     formView->setTitle(tr("Cubic bezier curve"));
 
-    AddPropertyObjectName(i, tr("Name"), true);
-    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrPoint1);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrPoint2);
-    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point"), AttrPoint3);
-    AddPropertyParentPointName(i->ForthPointName(), tr("Third point"), AttrPoint4);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrPoint1);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrPoint2);
+    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrPoint3);
+    AddPropertyParentPointName(i->ForthPointName(), tr("Third point:"), AttrPoint4);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2236,8 +2236,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool for path curve"));
 
-    AddPropertyObjectName(i, tr("Name"), true);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2247,8 +2247,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezierPath(QGraphicsItem *
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool cubic bezier curve"));
 
-    AddPropertyObjectName(i, tr("Name"), true);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2258,11 +2258,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool triangle"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->AxisP1Name(), tr("First point of axis"), AttrAxisP1);
-    AddPropertyParentPointName(i->AxisP2Name(), tr("Second point of axis"), AttrAxisP2);
-    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->AxisP1Name(), tr("First point of axis:"), AttrAxisP1);
+    AddPropertyParentPointName(i->AxisP2Name(), tr("Second point of axis:"), AttrAxisP2);
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2272,13 +2272,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
     i->ShowVisualization(true);
     formView->setTitle(tr("Point intersection line and axis"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("Axis point"), AttrBasePoint);
-    AddPropertyParentPointName(i->FirstLinePoint(), tr("First line point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->SecondLinePoint(), tr("Second line point"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->FirstLinePoint(), tr("First line point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondLinePoint(), tr("Second line point:"), AttrSecondPoint);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2288,12 +2288,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     i->ShowVisualization(true);
     formView->setTitle(tr("Point intersection curve and axis"));
 
-    AddPropertyObjectName(i, tr("Point label"));
-    AddPropertyParentPointName(i->BasePointName(), tr("Axis point"), AttrBasePoint);
-    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
-    AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
-    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
-    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+    AddPropertyObjectName(i, tr("Point label:"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
+    AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyLineType(i, tr("Line type:"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
+    AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2303,9 +2303,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool rotation"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix"));
-    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point"), AttrCenter);
-    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+    AddPropertyOperationSuffix(i, tr("Suffix:"));
+    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
+    AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2315,9 +2315,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolMove(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool move"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix"));
-    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
-    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
+    AddPropertyOperationSuffix(i, tr("Suffix:"));
+    AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2327,9 +2327,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *i
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool flipping by line"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix"));
-    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point"), AttrFirstPoint);
-    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point"), AttrSecondPoint);
+    AddPropertyOperationSuffix(i, tr("Suffix:"));
+    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point:"), AttrSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2339,9 +2339,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *i
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool flipping by axis"));
 
-    AddPropertyAxisType(i, tr("Axis type"));
-    AddPropertyOperationSuffix(i, tr("Suffix"));
-    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point"), AttrCenter);
+    AddPropertyAxisType(i, tr("Axis type:"));
+    AddPropertyOperationSuffix(i, tr("Suffix:"));
+    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2351,13 +2351,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Elliptical arc"));
 
-    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
-    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius1(), AttrRadius1);
-    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius2(), AttrRadius2);
-    AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
-    AddPropertyFormula(tr("Second angle"), i->GetFormulaF2(), AttrAngle2);
-    AddPropertyFormula(tr("Rotation angle"), i->GetFormulaRotationAngle(), AttrRotationAngle);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
+    AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius1(), AttrRadius1);
+    AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius2(), AttrRadius2);
+    AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
+    AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
+    AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
