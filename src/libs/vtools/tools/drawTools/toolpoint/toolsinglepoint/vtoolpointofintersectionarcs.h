@@ -62,6 +62,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
 
+    QString FirstArcName() const;
+    QString SecondArcName() const;
+
     quint32 GetFirstArcId() const;
     void    SetFirstArcId(const quint32 &value);
 

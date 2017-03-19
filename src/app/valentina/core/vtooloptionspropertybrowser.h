@@ -125,6 +125,8 @@ private:
                               const QString &id);
 
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
+    void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
+                                    const QString &propertyAttribure);
 
     QStringList PropertiesList() const;
 

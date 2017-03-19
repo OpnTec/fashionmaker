@@ -314,3 +314,9 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     data->RemoveVariable(currentLength);
     return point;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolAlongLine::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}

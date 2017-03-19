@@ -55,6 +55,8 @@ public:
     AxisType GetAxisType() const;
     void     SetAxisType(AxisType value);
 
+    QString OriginPointName() const;
+
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;

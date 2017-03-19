@@ -60,6 +60,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointFromArcAndTangent) };
 
+    QString TangentPointName() const;
+    QString ArcName() const;
+
     quint32 GetTangentPointId() const;
     void    SetTangentPointId(const quint32 &value);
 

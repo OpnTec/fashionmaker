@@ -143,6 +143,34 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolCubicBezier::FirstPointName() const
+{
+    auto spline = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
+    return spline->GetP1().name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCubicBezier::SecondPointName() const
+{
+    auto spline = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
+    return spline->GetP2().name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCubicBezier::ThirdPointName() const
+{
+    auto spline = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
+    return spline->GetP3().name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCubicBezier::ForthPointName() const
+{
+    auto spline = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
+    return spline->GetP4().name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezier VToolCubicBezier::getSpline() const
 {
     auto spline = VAbstractTool::data.GeometricObject<VCubicBezier>(id);

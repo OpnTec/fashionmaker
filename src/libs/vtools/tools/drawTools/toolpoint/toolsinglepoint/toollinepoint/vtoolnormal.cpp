@@ -210,6 +210,12 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolNormal::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

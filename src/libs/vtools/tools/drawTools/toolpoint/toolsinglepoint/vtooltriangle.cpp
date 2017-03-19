@@ -232,6 +232,30 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::AxisP1Name() const
+{
+    return VAbstractTool::data.GetGObject(axisP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::AxisP2Name() const
+{
+    return VAbstractTool::data.GetGObject(axisP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RemoveReferens decrement value of reference.
  */

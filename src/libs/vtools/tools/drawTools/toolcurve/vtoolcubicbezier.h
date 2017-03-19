@@ -58,6 +58,11 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
 
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+    QString ThirdPointName() const;
+    QString ForthPointName() const;
+
     VCubicBezier getSpline()const;
     void         setSpline(const VCubicBezier &spl);
 

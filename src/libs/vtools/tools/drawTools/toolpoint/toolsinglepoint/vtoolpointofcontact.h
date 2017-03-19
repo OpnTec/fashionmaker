@@ -67,6 +67,10 @@ public:
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfContact) };
 
+    QString ArcCenterPointName() const;
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+
     VFormula getArcRadius() const;
     void     setArcRadius(const VFormula &value);
 

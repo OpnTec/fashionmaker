@@ -70,6 +70,8 @@ public:
     VFormula     GetFormulaAngle() const;
     void         SetFormulaAngle(const VFormula &value);
 
+    QString CurveName() const;
+
     quint32      getCurveId() const;
     void         setCurveId(const quint32 &value);
 

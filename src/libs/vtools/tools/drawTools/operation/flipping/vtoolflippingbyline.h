@@ -52,6 +52,9 @@ public:
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
 
+    QString FirstLinePointName() const;
+    QString SecondLinePointName() const;
+
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;

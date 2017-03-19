@@ -63,6 +63,8 @@ public:
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Rotation)};
 
+    QString OriginPointName() const;
+
     VFormula GetFormulaAngle() const;
     void     SetFormulaAngle(const VFormula &value);
 

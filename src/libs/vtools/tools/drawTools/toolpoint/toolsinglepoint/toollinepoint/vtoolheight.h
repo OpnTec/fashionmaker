@@ -64,6 +64,9 @@ public:
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
+    QString FirstLinePointName() const;
+    QString SecondLinePointName() const;
+
     quint32 GetP1LineId() const;
     void    SetP1LineId(const quint32 &value);
 

@@ -70,6 +70,12 @@ public:
 
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
+    QString BaseLineP1Name() const;
+    QString BaseLineP2Name() const;
+    QString DartP1Name() const;
+    QString DartP2Name() const;
+    QString DartP3Name() const;
+
     quint32 GetBaseLineP1Id() const;
     void    SetBaseLineP1Id(const quint32 &value);
 

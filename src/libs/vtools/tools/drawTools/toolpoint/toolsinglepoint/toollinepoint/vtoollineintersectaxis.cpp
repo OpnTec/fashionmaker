@@ -193,6 +193,18 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersectAxis::FirstLinePoint() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersectAxis::SecondLinePoint() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolLineIntersectAxis::GetFormulaAngle() const
 {
     VFormula fAngle(formulaAngle, getData());

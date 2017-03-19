@@ -65,6 +65,11 @@ public:
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 
+    QString AxisP1Name() const;
+    QString AxisP2Name() const;
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+
     quint32 GetAxisP1Id() const;
     void    SetAxisP1Id(const quint32 &value);
 

@@ -212,6 +212,36 @@ void VToolTrueDarts::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::BaseLineP1Name() const
+{
+    return VAbstractTool::data.GetGObject(baseLineP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::BaseLineP2Name() const
+{
+    return VAbstractTool::data.GetGObject(baseLineP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP1Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP2Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP3Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP3Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolTrueDarts::GetBaseLineP1Id() const
 {
     return baseLineP1Id;

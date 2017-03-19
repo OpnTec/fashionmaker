@@ -239,6 +239,18 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolShoulderPoint::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(p2Line)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolShoulderPoint::ShoulderPointName() const
+{
+    return VAbstractTool::data.GetGObject(pShoulder)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

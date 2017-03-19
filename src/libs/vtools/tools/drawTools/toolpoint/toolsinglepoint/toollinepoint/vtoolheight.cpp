@@ -200,6 +200,18 @@ QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolHeight::FirstLinePointName() const
+{
+    return VAbstractTool::data.GetGObject(p1LineId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolHeight::SecondLinePointName() const
+{
+    return VAbstractTool::data.GetGObject(p2LineId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.

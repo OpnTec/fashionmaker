@@ -553,6 +553,15 @@ void VToolOptionsPropertyBrowser::AddPropertyOperationSuffix(Tool *i, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
+                                                             const QString &propertyAttribure)
+{
+    auto itemParentPoint = new VPE::VLabelProperty(propertyName);
+    itemParentPoint->setValue(pointName);
+    AddProperty(itemParentPoint, propertyAttribure);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &propertyName)
 {
@@ -879,6 +888,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEndLine(VPE::VProperty *property
         case 5: // AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
             break;
+        case 2: // AttrBasePoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -908,6 +919,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolAlongLine(VPE::VProperty *proper
             break;
         case 4: // AttrLength
             i->SetFormulaLength(value.value<VFormula>());
+            break;
+        case 2: // AttrBasePoint (read only)
+        case 7: // AttrSecondPoint (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -939,6 +953,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VPE::VProperty *property)
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
             break;
+        case 11: // AttrCenter (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -968,6 +984,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VPE::VProperty *pr
             break;
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
+            break;
+        case 11: // AttrCenter (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -999,6 +1017,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolBisector(VPE::VProperty *propert
         case 26: // AttrTypeLineColor
             i->SetLineColor(value.toString());
             break;
+        case 6:  // AttrFirstPoint (read only)
+        case 2:  // AttrBasePoint (read only)
+        case 12: // AttrThirdPoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1020,6 +1042,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTrueDarts(VPE::VProperty *proper
             break;
         case 33: // AttrName2
             SetPointName2<VToolTrueDarts>(value.toString());
+            break;
+        case 6:  // AttrFirstPoint (read only)
+        case 7:  // AttrSecondPoint (read only)
+        case 43: // AttrDartP1 (read only)
+        case 44: // AttrDartP2 (read only)
+        case 45: // AttrDartP3 (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1045,6 +1073,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VPE::VProperty *property)
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
+        case 13: // AttrArc (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1069,6 +1099,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VPE::VProperty *proper
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
+        case 46: // AttrCurve (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1092,6 +1124,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VPE::VProperty *pr
             break;
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
+            break;
+        case 46: // AttrCurve (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1120,6 +1154,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolHeight(VPE::VProperty *property)
         case 26: // AttrTypeLineColor
             i->SetLineColor(value.toString());
             break;
+        case 2:  // AttrBasePoint (read only)
+        case 16: // AttrP1Line (read only)
+        case 17: // AttrP2Line (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1144,6 +1182,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLine(VPE::VProperty *property)
         case 26: // AttrTypeLineColor
             i->SetLineColor(value.toString());
             break;
+        case 6: // AttrFirstPoint (read only)
+        case 7: // AttrSecondPoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1162,6 +1203,11 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersect(VPE::VProperty *pr
     {
         case 0: // AttrName
             SetPointName<VToolLineIntersect>(value.toString());
+            break;
+        case 18: // AttrP1Line1 (read only)
+        case 19: // AttrP2Line1 (read only)
+        case 20: // AttrP1Line2 (read only)
+        case 21: // AttrP2Line2 (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1196,6 +1242,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VPE::VProperty *property)
         case 26: // AttrTypeLineColor
             i->SetLineColor(value.toString());
             break;
+        case 2: // AttrBasePoint (read only)
+        case 7: // AttrSecondPoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1220,6 +1269,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfContact(VPE::VProperty *p
         case 0: // AttrName
             SetPointName<VToolPointOfContact>(value.toString());
             break;
+        case 11: // AttrCenter (read only)
+        case 6:  // AttrFirstPoint (read only)
+        case 7:  // AttrSecondPoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1238,6 +1291,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersection(VPE::VProper
     {
         case 0: // AttrName
             SetPointName<VToolPointOfIntersection>(value.toString());
+            break;
+        case 6:  // AttrFirstPoint (read only)
+        case 7:  // AttrSecondPoint (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1264,6 +1320,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VPE::VPr
             SetCrossCirclesPoint<VToolPointOfIntersectionArcs>(value);
             break;
         }
+        case 47: // AttrFirstArc (read only)
+        case 48: // AttrSecondArc (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1297,6 +1356,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VPE::
         case 30: // AttrC2Radius
             i->SetSecondCircleRadius(value.value<VFormula>());
             break;
+        case 49: // AttrC1Center (read only)
+        case 50: // AttrC2Center (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1328,6 +1390,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCurves(VPE::V
             SetHCrossCurvesPoint<VToolPointOfIntersectionCurves>(value);
             break;
         }
+        case 51: // AttrCurve1 (read only)
+        case 52: // AttrCurve2 (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1358,6 +1423,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VPE::V
             SetCrossCirclesPoint<VToolPointFromCircleAndTangent>(value);
             break;
         }
+        case 53: // AttrCCenter (read only)
+        case 54: // AttrTangent (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1383,6 +1451,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromArcAndTangent(VPE::VPro
             SetCrossCirclesPoint<VToolPointFromArcAndTangent>(value);
             break;
         }
+        case 54: // AttrTangent (read only)
+        case 13: // AttrArc (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1412,6 +1483,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VPE::VProperty *pr
             break;
         case 26: // AttrTypeLineColor
             i->SetLineColor(value.toString());
+            break;
+        case 6:  // AttrFirstPoint (read only)
+        case 2:  // AttrBasePoint (read only)
+        case 12: // AttrThirdPoint (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1494,6 +1569,11 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezier(VPE::VProperty *prop
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
             break;
+        case 55: // AttrPoint1 (read only)
+        case 56: // AttrPoint2 (read only)
+        case 57: // AttrPoint3 (read only)
+        case 58: // AttrPoint4 (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1561,6 +1641,11 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTriangle(VPE::VProperty *propert
         case 0: // AttrName
             SetPointName<VToolTriangle>(value.toString());
             break;
+        case 23: // AttrAxisP1 (read only)
+        case 24: // AttrAxisP2 (read only)
+        case 6:  // AttrFirstPoint (read only)
+        case 7:  // AttrSecondPoint (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1590,6 +1675,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersectAxis(VPE::VProperty
             break;
         case 5: // AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
+            break;
+        case 2: // AttrBasePoint (read only)
+        case 6: // AttrFirstPoint (read only)
+        case 7: // AttrSecondPoint (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1621,6 +1710,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VPE::VPropert
         case 5: // AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
             break;
+        case 2:  // AttrBasePoint (read only)
+        case 46: // AttrCurve (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1644,6 +1736,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VPE::VProperty *propert
             break;
         case 5: // AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
+            break;
+        case 11: // AttrCenter (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1691,6 +1785,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VPE::VProperty *p
         case 38: // AttrSuffix
             SetOperationSuffix<VToolFlippingByLine>(value.toString());
             break;
+        case 6: // AttrFirstPoint
+        case 7: // AttrSecondPoint
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1715,6 +1812,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VPE::VProperty *p
         }
         case 38: // AttrSuffix
             SetOperationSuffix<VToolFlippingByAxis>(value.toString());
+            break;
+        case 11: // AttrCenter (read only)
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1752,6 +1851,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
         case 27://AttrColor
             i->SetLineColor(value.toString());
             break;
+        case 11: // AttrCenter (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1780,6 +1881,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
     formView->setTitle(tr("Point at distance and angle"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Base point"), AttrBasePoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1794,6 +1896,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
     formView->setTitle(tr("Point at distance along line"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1806,6 +1910,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc"));
 
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
     AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Second angle"), i->GetFormulaF2(), AttrAngle2);
@@ -1819,6 +1924,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc with given length"));
 
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
     AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1833,6 +1939,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
     formView->setTitle(tr("Point along bisector"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->BasePointName(), tr("Second point"), AttrBasePoint);
+    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point"), AttrThirdPoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1847,6 +1956,11 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTrueDarts(QGraphicsItem *item)
 
     AddPropertyPointName1(i, tr("Point 1 label"));
     AddPropertyPointName2(i, tr("Point 2 label"));
+    AddPropertyParentPointName(i->BaseLineP1Name(), tr("First base point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->BaseLineP2Name(), tr("Second base point"), AttrSecondPoint);
+    AddPropertyParentPointName(i->DartP1Name(), tr("First dart point"), AttrDartP1);
+    AddPropertyParentPointName(i->DartP2Name(), tr("First dart point"), AttrDartP2);
+    AddPropertyParentPointName(i->DartP3Name(), tr("First dart point"), AttrDartP3);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1857,6 +1971,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
     formView->setTitle(tr("Cut arc tool"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->CurveName(), tr("Arc"), AttrArc);
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
 }
 
@@ -1868,6 +1983,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
     formView->setTitle(tr("Tool for segmenting a curve"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
 }
 
@@ -1879,6 +1995,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
     formView->setTitle(tr("Tool segment a pathed curve"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
 }
 
@@ -1890,6 +2007,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
     formView->setTitle(tr("Perpendicular point along line"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Base point"), AttrBasePoint);
+    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point"), AttrP1Line);
+    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point"), AttrP2Line);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
 }
@@ -1901,6 +2021,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Line between points"));
 
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
     QMap<QString, QIcon> styles = VAbstractTool::LineStylesPics();
     styles.remove(TypeLineNone);
     AddPropertyLineType(i, tr("Line type"), styles);
@@ -1915,6 +2037,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *it
     formView->setTitle(tr("Point at line intersection"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->Line1P1Name(), tr("First line (first point)"), AttrP1Line1);
+    AddPropertyParentPointName(i->Line1P2Name(), tr("First line (second point)"), AttrP2Line1);
+    AddPropertyParentPointName(i->Line2P1Name(), tr("Second line (first point)"), AttrP1Line2);
+    AddPropertyParentPointName(i->Line2P2Name(), tr("Second line (second point)"), AttrP2Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1926,6 +2052,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
 
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
 
@@ -1945,6 +2073,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
     formView->setTitle(tr("Point at intersection of arc and line"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->ArcCenterPointName(), tr("Center of arc"), AttrCenter);
+    AddPropertyParentPointName(i->FirstPointName(), tr("Top of the line"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("End of the line"), AttrSecondPoint);
     AddPropertyFormula(tr("Radius"), i->getArcRadius(), AttrRadius);
 }
 
@@ -1956,6 +2087,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsIt
     formView->setTitle(tr("Tool to make point from x & y of two other points"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->FirstPointName(), tr("X: vertical point:"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Y: horizontal point:"), AttrSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1966,6 +2099,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphi
     formView->setTitle(tr("Tool to make point from intersection two arcs"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->FirstArcName(), tr("First arc"), AttrFirstArc);
+    AddPropertyParentPointName(i->SecondArcName(), tr("Second arc"), AttrSecondArc);
     AddPropertyCrossPoint(i, tr("Take"));
 }
 
@@ -1977,6 +2112,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCircles(QGra
     formView->setTitle(tr("Tool to make point from intersection two circles"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->FirstCircleCenterPointName(), tr("Center of the first circle:"), AttrC1Center);
+    AddPropertyParentPointName(i->SecondCircleCenterPointName(), tr("Center of the second circle:"), AttrC2Center);
     AddPropertyFormula(tr("First circle radius"), i->GetFirstCircleRadius(), AttrC1Radius);
     AddPropertyFormula(tr("Second circle radius"), i->GetSecondCircleRadius(), AttrC2Radius);
     AddPropertyCrossPoint(i, tr("Take"));
@@ -1990,6 +2127,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCurves(QGrap
     formView->setTitle(tr("Tool to make point from intersection two curves"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->FirstCurveName(), tr("First curve"), AttrCurve1);
+    AddPropertyParentPointName(i->SecondCurveName(), tr("Second curve"), AttrCurve2);
     AddPropertyVCrossPoint(i, tr("Vertical correction"));
     AddPropertyHCrossPoint(i, tr("Horizontal correction"));
 }
@@ -2002,6 +2141,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromCircleAndTangent(QGrap
     formView->setTitle(tr("Tool to make point from circle and tangent"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->CircleCenterPointName(), tr("Center of the circle:"), AttrCCenter);
+    AddPropertyParentPointName(i->TangentPointName(), tr("Tangent point:"), AttrTangent);
     AddPropertyFormula(tr("Circle radius"), i->GetCircleRadius(), AttrCRadius);
     AddPropertyCrossPoint(i, tr("Take"));
 }
@@ -2014,6 +2155,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromArcAndTangent(QGraphic
     formView->setTitle(tr("Tool to make point from arc and tangent"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->TangentPointName(), tr("Tangent point:"), AttrTangent);
+    AddPropertyParentPointName(i->ArcName(), tr("Arc"), AttrArc);
     AddPropertyCrossPoint(i, tr("Take"));
 }
 
@@ -2025,6 +2168,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
     formView->setTitle(tr("Special point on shoulder"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("First point"), AttrBasePoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
+    AddPropertyParentPointName(i->ShoulderPointName(), tr("Third point"), AttrThirdPoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -2076,6 +2222,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     formView->setTitle(tr("Cubic bezier curve"));
 
     AddPropertyObjectName(i, tr("Name"), true);
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrPoint1);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrPoint2);
+    AddPropertyParentPointName(i->ThirdPointName(), tr("Third point"), AttrPoint3);
+    AddPropertyParentPointName(i->ForthPointName(), tr("Third point"), AttrPoint4);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
@@ -2109,6 +2259,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
     formView->setTitle(tr("Tool triangle"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->AxisP1Name(), tr("First point of axis"), AttrAxisP1);
+    AddPropertyParentPointName(i->AxisP2Name(), tr("Second point of axis"), AttrAxisP2);
+    AddPropertyParentPointName(i->FirstPointName(), tr("First point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondPointName(), tr("Second point"), AttrSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2119,6 +2273,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
     formView->setTitle(tr("Point intersection line and axis"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Axis point"), AttrBasePoint);
+    AddPropertyParentPointName(i->FirstLinePoint(), tr("First line point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondLinePoint(), tr("Second line point"), AttrSecondPoint);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
@@ -2132,6 +2289,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     formView->setTitle(tr("Point intersection curve and axis"));
 
     AddPropertyObjectName(i, tr("Point label"));
+    AddPropertyParentPointName(i->BasePointName(), tr("Axis point"), AttrBasePoint);
+    AddPropertyParentPointName(i->CurveName(), tr("Curve"), AttrCurve);
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
@@ -2145,6 +2304,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
     formView->setTitle(tr("Tool rotation"));
 
     AddPropertyOperationSuffix(i, tr("Suffix"));
+    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point"), AttrCenter);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
 }
 
@@ -2168,6 +2328,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *i
     formView->setTitle(tr("Tool flipping by line"));
 
     AddPropertyOperationSuffix(i, tr("Suffix"));
+    AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point"), AttrFirstPoint);
+    AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point"), AttrSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2179,6 +2341,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *i
 
     AddPropertyAxisType(i, tr("Axis type"));
     AddPropertyOperationSuffix(i, tr("Suffix"));
+    AddPropertyParentPointName(i->OriginPointName(), tr("Origin point"), AttrCenter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2188,6 +2351,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Elliptical arc"));
 
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point"), AttrCenter);
     AddPropertyFormula(tr("Radius"), i->GetFormulaRadius1(), AttrRadius1);
     AddPropertyFormula(tr("Radius"), i->GetFormulaRadius2(), AttrRadius2);
     AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), AttrAngle1);
@@ -2227,6 +2391,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2248,6 +2416,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormulaLength());
     idToProperty[AttrLength]->setValue(valueFormula);
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2269,6 +2445,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
 
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrColor]->setValue(index);
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->CenterPointName());
+    idToProperty[AttrCenter]->setValue(valueCenterPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2290,6 +2470,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
 
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrColor]->setValue(index);
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->CenterPointName());
+    idToProperty[AttrCenter]->setValue(valueCenterPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2312,6 +2496,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrLineColor]->setValue(index);
     }
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueThirdPoint;
+    valueThirdPoint.setValue(i->ThirdPointName());
+    idToProperty[AttrThirdPoint]->setValue(valueThirdPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2321,6 +2517,26 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolTrueDarts()
 
     idToProperty[AttrName1]->setValue(i->nameP1());
     idToProperty[AttrName2]->setValue(i->nameP2());
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->BaseLineP1Name());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->BaseLineP2Name());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
+
+    QVariant valueDrartFirstPoint;
+    valueDrartFirstPoint.setValue(i->DartP1Name());
+    idToProperty[AttrDartP1]->setValue(valueDrartFirstPoint);
+
+    QVariant valueDartSecondPoint;
+    valueDartSecondPoint.setValue(i->DartP2Name());
+    idToProperty[AttrDartP2]->setValue(valueDartSecondPoint);
+
+    QVariant valueDartThirdPoint;
+    valueDartThirdPoint.setValue(i->DartP3Name());
+    idToProperty[AttrDartP3]->setValue(valueDartThirdPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2333,6 +2549,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
+
+    QVariant valueArc;
+    valueArc.setValue(i->CurveName());
+    idToProperty[AttrArc]->setValue(valueArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2345,6 +2565,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
+
+    QVariant valueCurve;
+    valueCurve.setValue(i->CurveName());
+    idToProperty[AttrCurve]->setValue(valueCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2357,6 +2581,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
+
+    QVariant valueCurve;
+    valueCurve.setValue(i->CurveName());
+    idToProperty[AttrCurve]->setValue(valueCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2375,6 +2603,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrLineColor]->setValue(index);
     }
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueFirstLinePoint;
+    valueFirstLinePoint.setValue(i->FirstLinePointName());
+    idToProperty[AttrP1Line]->setValue(valueFirstLinePoint);
+
+    QVariant valueSecondLinePoint;
+    valueSecondLinePoint.setValue(i->SecondLinePointName());
+    idToProperty[AttrP2Line]->setValue(valueSecondLinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2391,6 +2631,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrLineColor]->setValue(index);
     }
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2399,6 +2647,22 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersect()
     VToolLineIntersect *i = qgraphicsitem_cast<VToolLineIntersect *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueLine1P1;
+    valueLine1P1.setValue(i->Line1P1Name());
+    idToProperty[AttrP1Line1]->setValue(valueLine1P1);
+
+    QVariant valueLine1P2;
+    valueLine1P2.setValue(i->Line1P2Name());
+    idToProperty[AttrP2Line1]->setValue(valueLine1P2);
+
+    QVariant valueLine2P1;
+    valueLine2P1.setValue(i->Line2P1Name());
+    idToProperty[AttrP1Line2]->setValue(valueLine2P1);
+
+    QVariant valueLine2P2;
+    valueLine2P2.setValue(i->Line2P2Name());
+    idToProperty[AttrP2Line2]->setValue(valueLine2P2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2423,6 +2687,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrLineColor]->setValue(index);
     }
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2435,6 +2707,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfContact()
     idToProperty[AttrRadius]->setValue(valueFormula);
 
     idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->ArcCenterPointName());
+    idToProperty[AttrCenter]->setValue(valueCenterPoint);
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2443,6 +2727,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersection()
     VToolPointOfIntersection *i = qgraphicsitem_cast<VToolPointOfIntersection *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2452,6 +2744,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionArcs()
 
     idToProperty[AttrName]->setValue(i->name());
     idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
+
+    QVariant valueFirstArc;
+    valueFirstArc.setValue(i->FirstArcName());
+    idToProperty[AttrFirstArc]->setValue(valueFirstArc);
+
+    QVariant valueSecondArc;
+    valueSecondArc.setValue(i->SecondArcName());
+    idToProperty[AttrSecondArc]->setValue(valueSecondArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2469,6 +2769,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCircles()
     QVariant c2Radius;
     c2Radius.setValue(i->GetSecondCircleRadius());
     idToProperty[AttrC2Radius]->setValue(c2Radius);
+
+    QVariant valueC1Center;
+    valueC1Center.setValue(i->FirstCircleCenterPointName());
+    idToProperty[AttrC1Center]->setValue(valueC1Center);
+
+    QVariant valueC2Center;
+    valueC2Center.setValue(i->SecondCircleCenterPointName());
+    idToProperty[AttrC2Center]->setValue(valueC2Center);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2479,6 +2787,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCurves()
     idToProperty[AttrName]->setValue(i->name());
     idToProperty[AttrVCrossPoint]->setValue(static_cast<int>(i->GetVCrossPoint())-1);
     idToProperty[AttrHCrossPoint]->setValue(static_cast<int>(i->GetHCrossPoint())-1);
+
+    QVariant valueCurve1;
+    valueCurve1.setValue(i->FirstCurveName());
+    idToProperty[AttrCurve1]->setValue(valueCurve1);
+
+    QVariant valueCurve2;
+    valueCurve2.setValue(i->SecondCurveName());
+    idToProperty[AttrCurve2]->setValue(valueCurve2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2492,6 +2808,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromCircleAndTangent()
     QVariant cRadius;
     cRadius.setValue(i->GetCircleRadius());
     idToProperty[AttrCRadius]->setValue(cRadius);
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->CircleCenterPointName());
+    idToProperty[AttrCCenter]->setValue(valueCenterPoint);
+
+    QVariant valueTangentPoint;
+    valueTangentPoint.setValue(i->TangentPointName());
+    idToProperty[AttrTangent]->setValue(valueTangentPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2501,6 +2825,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromArcAndTangent()
 
     idToProperty[AttrName]->setValue(i->name());
     idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
+
+    QVariant valueTangentPoint;
+    valueTangentPoint.setValue(i->TangentPointName());
+    idToProperty[AttrTangent]->setValue(valueTangentPoint);
+
+    QVariant valueArc;
+    valueArc.setValue(i->ArcName());
+    idToProperty[AttrArc]->setValue(valueArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2523,6 +2855,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrLineColor]->setValue(index);
     }
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
+
+    QVariant valueThirdPoint;
+    valueThirdPoint.setValue(i->ShoulderPointName());
+    idToProperty[AttrThirdPoint]->setValue(valueThirdPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2577,6 +2921,22 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     idToProperty[AttrName]->setValue(i->name());
     idToProperty[AttrColor]->setValue(VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(),
                                                                        i->GetLineColor()));
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrPoint1]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrPoint2]->setValue(valueSecondPoint);
+
+    QVariant valueThirdPoint;
+    valueThirdPoint.setValue(i->ThirdPointName());
+    idToProperty[AttrPoint3]->setValue(valueThirdPoint);
+
+    QVariant valueForthPoint;
+    valueForthPoint.setValue(i->ForthPointName());
+    idToProperty[AttrPoint4]->setValue(valueForthPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2605,6 +2965,22 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolTriangle()
     VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueAxisP1;
+    valueAxisP1.setValue(i->AxisP1Name());
+    idToProperty[AttrAxisP1]->setValue(valueAxisP1);
+
+    QVariant valueAxisP2;
+    valueAxisP2.setValue(i->AxisP2Name());
+    idToProperty[AttrAxisP2]->setValue(valueAxisP2);
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstPointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondPointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2626,6 +3002,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstLinePoint());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondLinePoint());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2647,6 +3035,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+
+    QVariant valueBasePoint;
+    valueBasePoint.setValue(i->BasePointName());
+    idToProperty[AttrBasePoint]->setValue(valueBasePoint);
+
+    QVariant valueCurve;
+    valueCurve.setValue(i->CurveName());
+    idToProperty[AttrCurve]->setValue(valueCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2658,6 +3054,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+
+    QVariant valueOriginPoint;
+    valueOriginPoint.setValue(i->OriginPointName());
+    idToProperty[AttrCenter]->setValue(valueOriginPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2680,6 +3080,14 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByLine()
 {
     VToolFlippingByLine *i = qgraphicsitem_cast<VToolFlippingByLine *>(currentItem);
     idToProperty[AttrSuffix]->setValue(i->Suffix());
+
+    QVariant valueFirstPoint;
+    valueFirstPoint.setValue(i->FirstLinePointName());
+    idToProperty[AttrFirstPoint]->setValue(valueFirstPoint);
+
+    QVariant valueSecondPoint;
+    valueSecondPoint.setValue(i->SecondLinePointName());
+    idToProperty[AttrSecondPoint]->setValue(valueSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2688,6 +3096,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByAxis()
     VToolFlippingByAxis *i = qgraphicsitem_cast<VToolFlippingByAxis *>(currentItem);
     idToProperty[AttrAxisType]->setValue(static_cast<int>(i->GetAxisType())-1);
     idToProperty[AttrSuffix]->setValue(i->Suffix());
+
+    QVariant valueOriginPoint;
+    valueOriginPoint.setValue(i->OriginPointName());
+    idToProperty[AttrCenter]->setValue(valueOriginPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2717,53 +3129,73 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
 
     const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[AttrColor]->setValue(index);
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->CenterPointName());
+    idToProperty[AttrCenter]->setValue(valueCenterPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
-    QStringList attr = QStringList() << AttrName                           /* 0 */
-                                     << QLatin1String("position")          /* 1 */
-                                     << AttrBasePoint                      /* 2 */
-                                     << AttrTypeLine                       /* 3 */
-                                     << AttrLength                         /* 4 */
-                                     << AttrAngle                          /* 5 */
-                                     << AttrFirstPoint                     /* 6 */
-                                     << AttrSecondPoint                    /* 7 */
-                                     << AttrRadius                         /* 8 */
-                                     << AttrAngle1                         /* 9 */
-                                     << AttrAngle2                         /* 10 */
-                                     << AttrCenter                         /* 11 */
-                                     << AttrThirdPoint                     /* 12 */
-                                     << AttrArc                            /* 13 */
-                                     << VToolCutSpline::AttrSpline         /* 14 */
-                                     << VToolCutSplinePath::AttrSplinePath /* 15 */
-                                     << AttrP1Line                         /* 16 */
-                                     << AttrP2Line                         /* 17 */
-                                     << AttrP1Line1                        /* 18 */
-                                     << AttrP2Line1                        /* 19 */
-                                     << AttrP1Line2                        /* 20 */
-                                     << AttrP2Line2                        /* 21 */
-                                     << AttrPShoulder                      /* 22 */
-                                     << AttrAxisP1                         /* 23 */
-                                     << AttrAxisP2                         /* 24 */
-                                     << AttrKCurve /*Not used*/            /* 25 */
-                                     << AttrLineColor                      /* 26 */
-                                     << AttrColor                          /* 27 */
-                                     << AttrCrossPoint                     /* 28 */
-                                     << AttrC1Radius                       /* 29 */
-                                     << AttrC2Radius                       /* 30 */
-                                     << AttrCRadius                        /* 31 */
-                                     << AttrName1                          /* 32 */
-                                     << AttrName2                          /* 33 */
-                                     << AttrVCrossPoint                    /* 34 */
-                                     << AttrHCrossPoint                    /* 35 */
-                                     << AttrLength1                        /* 36 */
-                                     << AttrLength2                        /* 37 */
-                                     << AttrSuffix                         /* 38 */
-                                     << AttrAxisType                       /* 39 */
-                                     << AttrRadius1                        /* 40 */
-                                     << AttrRadius2                        /* 41 */
-                                     << AttrRotationAngle;                 /* 42 */
+    static QStringList attr = QStringList() << AttrName                           /* 0 */
+                                            << QLatin1String("position")          /* 1 */
+                                            << AttrBasePoint                      /* 2 */
+                                            << AttrTypeLine                       /* 3 */
+                                            << AttrLength                         /* 4 */
+                                            << AttrAngle                          /* 5 */
+                                            << AttrFirstPoint                     /* 6 */
+                                            << AttrSecondPoint                    /* 7 */
+                                            << AttrRadius                         /* 8 */
+                                            << AttrAngle1                         /* 9 */
+                                            << AttrAngle2                         /* 10 */
+                                            << AttrCenter                         /* 11 */
+                                            << AttrThirdPoint                     /* 12 */
+                                            << AttrArc                            /* 13 */
+                                            << VToolCutSpline::AttrSpline         /* 14 */
+                                            << VToolCutSplinePath::AttrSplinePath /* 15 */
+                                            << AttrP1Line                         /* 16 */
+                                            << AttrP2Line                         /* 17 */
+                                            << AttrP1Line1                        /* 18 */
+                                            << AttrP2Line1                        /* 19 */
+                                            << AttrP1Line2                        /* 20 */
+                                            << AttrP2Line2                        /* 21 */
+                                            << AttrPShoulder                      /* 22 */
+                                            << AttrAxisP1                         /* 23 */
+                                            << AttrAxisP2                         /* 24 */
+                                            << AttrKCurve /*Not used*/            /* 25 */
+                                            << AttrLineColor                      /* 26 */
+                                            << AttrColor                          /* 27 */
+                                            << AttrCrossPoint                     /* 28 */
+                                            << AttrC1Radius                       /* 29 */
+                                            << AttrC2Radius                       /* 30 */
+                                            << AttrCRadius                        /* 31 */
+                                            << AttrName1                          /* 32 */
+                                            << AttrName2                          /* 33 */
+                                            << AttrVCrossPoint                    /* 34 */
+                                            << AttrHCrossPoint                    /* 35 */
+                                            << AttrLength1                        /* 36 */
+                                            << AttrLength2                        /* 37 */
+                                            << AttrSuffix                         /* 38 */
+                                            << AttrAxisType                       /* 39 */
+                                            << AttrRadius1                        /* 40 */
+                                            << AttrRadius2                        /* 41 */
+                                            << AttrRotationAngle                  /* 42 */
+                                            << AttrDartP1                         /* 43 */
+                                            << AttrDartP2                         /* 44 */
+                                            << AttrDartP3                         /* 45 */
+                                            << AttrCurve                          /* 46 */
+                                            << AttrFirstArc                       /* 47 */
+                                            << AttrSecondArc                      /* 48 */
+                                            << AttrC1Center                       /* 49 */
+                                            << AttrC2Center                       /* 50 */
+                                            << AttrCurve1                         /* 51 */
+                                            << AttrCurve2                         /* 52 */
+                                            << AttrCCenter                        /* 53 */
+                                            << AttrTangent                        /* 54 */
+                                            << AttrPoint1                         /* 55 */
+                                            << AttrPoint2                         /* 56 */
+                                            << AttrPoint3                         /* 57 */
+                                            << AttrPoint4;                        /* 58 */
     return attr;
 }

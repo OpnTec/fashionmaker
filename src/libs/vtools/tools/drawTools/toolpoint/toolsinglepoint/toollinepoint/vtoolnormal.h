@@ -65,6 +65,8 @@ public:
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
+    QString SecondPointName() const;
+
     quint32 GetSecondPointId() const;
     void    SetSecondPointId(const quint32 &value);
 

@@ -229,6 +229,18 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolBisector::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolBisector::ThirdPointName() const
+{
+    return VAbstractTool::data.GetGObject(thirdPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

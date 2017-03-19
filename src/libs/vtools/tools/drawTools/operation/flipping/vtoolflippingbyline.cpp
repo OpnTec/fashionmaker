@@ -141,6 +141,18 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const quint32 _id, quint32 firs
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolFlippingByLine::FirstLinePointName() const
+{
+    return VAbstractTool::data.GetGObject(m_firstLinePointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolFlippingByLine::SecondLinePointName() const
+{
+    return VAbstractTool::data.GetGObject(m_secondLinePointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolFlippingByLine>(show);

@@ -256,6 +256,12 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolRotation::OriginPointName() const
+{
+    return VAbstractTool::data.GetGObject(origPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolRotation::GetFormulaAngle() const
 {
     VFormula fAngle(formulaAngle, getData());

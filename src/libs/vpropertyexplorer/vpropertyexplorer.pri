@@ -29,7 +29,8 @@ SOURCES += \
     $$PWD/plugins/vobjectproperty.cpp \
     $$PWD/plugins/vlinetypeproperty.cpp \
     $$PWD/plugins/vlinecolorproperty.cpp \
-    $$PWD/checkablemessagebox.cpp
+    $$PWD/checkablemessagebox.cpp \
+    $$PWD/plugins/vlabelproperty.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -74,4 +75,5 @@ HEADERS +=\
     $$PWD/stable.h \
     $$PWD/plugins/vlinetypeproperty.h \
     $$PWD/plugins/vlinecolorproperty.h \
-    $$PWD/checkablemessagebox.h
+    $$PWD/checkablemessagebox.h \
+    $$PWD/plugins/vlabelproperty.h

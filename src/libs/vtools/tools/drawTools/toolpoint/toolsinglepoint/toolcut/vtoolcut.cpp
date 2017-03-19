@@ -116,6 +116,12 @@ void VToolCut::SetFormula(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolCut::CurveName() const
+{
+    return VAbstractTool::data.GetGObject(curveCutId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */

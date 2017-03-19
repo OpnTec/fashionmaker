@@ -188,6 +188,18 @@ QPointF VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionCircles::FirstCircleCenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstCircleCenterId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionCircles::SecondCircleCenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondCircleCenterId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfIntersectionCircles::GetFirstCircleCenterId() const
 {
     return firstCircleCenterId;

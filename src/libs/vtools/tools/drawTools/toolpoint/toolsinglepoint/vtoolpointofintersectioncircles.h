@@ -66,6 +66,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
 
+    QString FirstCircleCenterPointName() const;
+    QString SecondCircleCenterPointName() const;
+
     quint32 GetFirstCircleCenterId() const;
     void    SetFirstCircleCenterId(const quint32 &value);
 

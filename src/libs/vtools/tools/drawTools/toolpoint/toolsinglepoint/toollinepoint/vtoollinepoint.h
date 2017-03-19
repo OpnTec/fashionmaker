@@ -59,6 +59,8 @@ public:
     VFormula GetFormulaLength() const;
     void     SetFormulaLength(const VFormula &value);
 
+    QString BasePointName() const;
+
     quint32 GetBasePointId() const;
     void    SetBasePointId(const quint32 &value);
 

@@ -270,6 +270,18 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionCurves::FirstCurveName() const
+{
+    return VAbstractTool::data.GetGObject(firstCurveId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionCurves::SecondCurveName() const
+{
+    return VAbstractTool::data.GetGObject(secondCurveId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfIntersectionCurves::GetFirstCurveId() const
 {
     return firstCurveId;

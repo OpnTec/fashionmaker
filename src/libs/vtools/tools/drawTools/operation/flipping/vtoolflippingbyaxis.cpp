@@ -161,6 +161,12 @@ void VToolFlippingByAxis::SetAxisType(AxisType value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolFlippingByAxis::OriginPointName() const
+{
+    return VAbstractTool::data.GetGObject(m_originPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolFlippingByAxis>(show);

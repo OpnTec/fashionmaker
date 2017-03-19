@@ -64,6 +64,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCurves) };
 
+    QString FirstCurveName() const;
+    QString SecondCurveName() const;
+
     quint32 GetFirstCurveId() const;
     void    SetFirstCurveId(const quint32 &value);
 

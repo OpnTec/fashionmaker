@@ -176,6 +176,18 @@ QPointF VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointFromCircleAndTangent::TangentPointName() const
+{
+    return VAbstractTool::data.GetGObject(tangentPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointFromCircleAndTangent::CircleCenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(circleCenterId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointFromCircleAndTangent::GetTangentPointId() const
 {
     return tangentPointId;

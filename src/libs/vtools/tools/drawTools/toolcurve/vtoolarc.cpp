@@ -188,6 +188,12 @@ QString VToolArc::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolArc::CenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(getCenter())->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolArc::getCenter() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);

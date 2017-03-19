@@ -62,6 +62,10 @@ public:
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
+
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+
     quint32 GetFirstPoint() const;
     void    SetFirstPoint(const quint32 &value);
 

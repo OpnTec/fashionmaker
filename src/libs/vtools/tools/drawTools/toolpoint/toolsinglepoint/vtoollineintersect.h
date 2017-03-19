@@ -62,6 +62,11 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
+    QString Line1P1Name() const;
+    QString Line1P2Name() const;
+    QString Line2P1Name() const;
+    QString Line2P2Name() const;
+
     quint32 GetP1Line1() const;
     void    SetP1Line1(const quint32 &value);
 

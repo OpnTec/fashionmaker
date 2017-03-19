@@ -222,3 +222,9 @@ void VToolLinePoint::SetFormulaLength(const VFormula &value)
         SaveOption(obj);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLinePoint::BasePointName() const
+{
+    return VAbstractTool::data.GetGObject(basePointId)->name();
+}

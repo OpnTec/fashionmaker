@@ -201,6 +201,11 @@ QString VToolEllipticalArc::getTagName() const
     return VAbstractPattern::TagElArc;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolEllipticalArc::CenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(getCenter())->name();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VToolEllipticalArc::getCenter() const

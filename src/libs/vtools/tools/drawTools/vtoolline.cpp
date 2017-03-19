@@ -193,6 +193,18 @@ QString VToolLine::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPoint)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPoint)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */

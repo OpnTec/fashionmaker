@@ -200,6 +200,30 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line1P1Name() const
+{
+    return VAbstractTool::data.GetGObject(p1Line1)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line1P2Name() const
+{
+    return VAbstractTool::data.GetGObject(p2Line1)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line2P1Name() const
+{
+    return VAbstractTool::data.GetGObject(p1Line2)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line2P2Name() const
+{
+    return VAbstractTool::data.GetGObject(p2Line2)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

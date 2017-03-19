@@ -222,6 +222,18 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionArcs::FirstArcName() const
+{
+    return VAbstractTool::data.GetGObject(firstArcId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersectionArcs::SecondArcName() const
+{
+    return VAbstractTool::data.GetGObject(secondArcId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfIntersectionArcs::GetFirstArcId() const
 {
     return firstArcId;

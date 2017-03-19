@@ -215,6 +215,18 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointFromArcAndTangent::TangentPointName() const
+{
+    return VAbstractTool::data.GetGObject(tangentPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointFromArcAndTangent::ArcName() const
+{
+    return VAbstractTool::data.GetGObject(arcId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointFromArcAndTangent::GetTangentPointId() const
 {
     return tangentPointId;

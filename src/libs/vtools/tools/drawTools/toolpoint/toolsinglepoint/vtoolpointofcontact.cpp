@@ -251,6 +251,24 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfContact::ArcCenterPointName() const
+{
+    return VAbstractTool::data.GetGObject(center)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfContact::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfContact::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

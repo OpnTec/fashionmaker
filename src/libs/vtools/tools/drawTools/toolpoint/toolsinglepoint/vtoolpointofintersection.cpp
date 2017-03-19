@@ -172,6 +172,18 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const quint32 _id, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersection::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfIntersection::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RemoveReferens decrement value of reference.
  */

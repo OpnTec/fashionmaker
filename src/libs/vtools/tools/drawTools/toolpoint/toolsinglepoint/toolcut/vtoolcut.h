@@ -57,6 +57,8 @@ public:
     VFormula GetFormula() const;
     void     SetFormula(const VFormula &value);
 
+    QString CurveName() const;
+
     quint32 getCurveCutId() const;
     void    setCurveCutId(const quint32 &value);
 

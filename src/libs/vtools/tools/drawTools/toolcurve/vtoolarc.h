@@ -61,6 +61,8 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
 
+    QString CenterPointName() const;
+
     quint32          getCenter() const;
     void             setCenter(const quint32 &value);
 

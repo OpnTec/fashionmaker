@@ -67,6 +67,9 @@ public:
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::ShoulderPoint) };
 
+    QString SecondPointName() const;
+    QString ShoulderPointName() const;
+
     quint32 GetP2Line() const;
     void    SetP2Line(const quint32 &value);
 

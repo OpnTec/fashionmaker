@@ -61,6 +61,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+
     quint32 GetFirstPointId() const;
     void    SetFirstPointId(const quint32 &value);
 
