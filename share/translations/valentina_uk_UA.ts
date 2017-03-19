@@ -8928,7 +8928,7 @@ Do you want to save your changes?</source>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation>Значення</translation>
+        <translation type="vanished">Значення</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -9328,11 +9328,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Ім&apos;я точки</translation>
+        <translation type="vanished">Ім&apos;я точки</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Позиція</translation>
+        <translation type="vanished">Позиція</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -9340,15 +9340,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line type</source>
-        <translation>Тип лінії</translation>
+        <translation type="vanished">Тип лінії</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Довжина</translation>
+        <translation type="vanished">Довжина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Кут</translation>
+        <translation type="vanished">Кут</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -9360,15 +9360,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радіус</translation>
+        <translation type="vanished">Радіус</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation>Перший кут</translation>
+        <translation type="vanished">Перший кут</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Другий кут</translation>
+        <translation type="vanished">Другий кут</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -9404,7 +9404,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Дод. кут градуси</translation>
+        <translation type="vanished">Дод. кут градуси</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -9440,11 +9440,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Колір лінії</translation>
+        <translation type="vanished">Колір лінії</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Колір</translation>
+        <translation type="vanished">Колір</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -9468,11 +9468,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Ім&apos;я точки 1</translation>
+        <translation type="vanished">Ім&apos;я точки 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Ім&apos;я точки 2</translation>
+        <translation type="vanished">Ім&apos;я точки 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
@@ -9480,7 +9480,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взяти</translation>
+        <translation type="vanished">Взяти</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -9488,11 +9488,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation>Радіус першого кола</translation>
+        <translation type="vanished">Радіус першого кола</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation>Радіус другого кола</translation>
+        <translation type="vanished">Радіус другого кола</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
@@ -9500,7 +9500,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation>Радіус кола</translation>
+        <translation type="vanished">Радіус кола</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
@@ -9528,31 +9528,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation>Коррекція по вертикалі</translation>
+        <translation type="vanished">Коррекція по вертикалі</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation>Корекція по горизонталі</translation>
+        <translation type="vanished">Корекція по горизонталі</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Ім&apos;я</translation>
+        <translation type="vanished">Ім&apos;я</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation>С1: кут</translation>
+        <translation type="vanished">С1: кут</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation>С1: довжина</translation>
+        <translation type="vanished">С1: довжина</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation>С2: кут</translation>
+        <translation type="vanished">С2: кут</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation>С2: довжина</translation>
+        <translation type="vanished">С2: довжина</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -9568,7 +9568,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Суфікс</translation>
+        <translation type="vanished">Суфікс</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -9591,15 +9591,247 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Axis type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rotation angle</source>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished">Базова точка:</translation>
+    </message>
+    <message>
+        <source>Line type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished">Колір лінії:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Довжина:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Кут:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished">Перша точка:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished">Друга точка:</translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished">Точка центру:</translation>
+    </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished">Радіус:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished">Перший кут:</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished">Другий кут:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Колір:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished">Третя точка:</translation>
+    </message>
+    <message>
+        <source>Point 1 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished">Перша базова точка:</translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished">Друга базова точка:</translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished">Перша точка виточки:</translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished">Дуга:</translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished">Крива:</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished">Перша точка лінії:</translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished">Друга точка лінії:</translation>
+    </message>
+    <message>
+        <source>First line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished">Додатковий кут градуси:</translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished">Центер дуги:</translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished">Початок лінії:</translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished">Кінець лінії:</translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished">Х: вертикальна точка:</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation type="unfinished">Y: горизонтальна точка:</translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished">Перша дуга:</translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished">Друга дуга:</translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished">Взяти:</translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished">Центр першого кола:</translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished">Центр другого кола:</translation>
+    </message>
+    <message>
+        <source>First circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation type="unfinished">Перша крива:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation type="unfinished">Друга крива:</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation type="unfinished">Коррекція по вертикалі:</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished">Корекція по горизонталі:</translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished">Центр кола:</translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished">Точка дотичної:</translation>
+    </message>
+    <message>
+        <source>Circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Імя:</translation>
+    </message>
+    <message>
+        <source>C1: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished">Перша точка вісі:</translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished">Друга точка вісі:</translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished">Точка осі:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished">Суфікс:</translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

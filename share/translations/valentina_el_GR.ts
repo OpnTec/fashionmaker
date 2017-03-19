@@ -8730,7 +8730,7 @@ Do you want to save your changes?</source>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation>Τιμή</translation>
+        <translation type="vanished">Τιμή</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -9146,11 +9146,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Ετικέτα σημείου</translation>
+        <translation type="vanished">Ετικέτα σημείου</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Θέση</translation>
+        <translation type="vanished">Θέση</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -9158,15 +9158,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line type</source>
-        <translation>Τύπος γραμμής</translation>
+        <translation type="vanished">Τύπος γραμμής</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Μήκος</translation>
+        <translation type="vanished">Μήκος</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Γωνία</translation>
+        <translation type="vanished">Γωνία</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -9178,15 +9178,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Ακτίνα</translation>
+        <translation type="vanished">Ακτίνα</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation>Πρώτη γωνία</translation>
+        <translation type="vanished">Πρώτη γωνία</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Δεύτερη γωνία</translation>
+        <translation type="vanished">Δεύτερη γωνία</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -9222,7 +9222,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Πρόσθετες μοίρες γωνίας</translation>
+        <translation type="vanished">Πρόσθετες μοίρες γωνίας</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -9254,11 +9254,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Χρώμα γραμμής</translation>
+        <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Χρώμα</translation>
+        <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -9282,19 +9282,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Ετικέτα σημείου 1</translation>
+        <translation type="vanished">Ετικέτα σημείου 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Ετικέτα σημείου 2</translation>
+        <translation type="vanished">Ετικέτα σημείου 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
         <translation>Εργαλείο δημιουργίας σημείου στην τομή δυο τόξων</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -9302,11 +9298,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation>Ακτίνα πρώτου κύκλου</translation>
+        <translation type="vanished">Ακτίνα πρώτου κύκλου</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation>Ακτίνα δεύτερου κύκλου</translation>
+        <translation type="vanished">Ακτίνα δεύτερου κύκλου</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
@@ -9314,7 +9310,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation>Ακτίνα κύκλου</translation>
+        <translation type="vanished">Ακτίνα κύκλου</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
@@ -9342,31 +9338,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation>Κάθετη διόρθωση</translation>
+        <translation type="vanished">Κάθετη διόρθωση</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation>Οριζόντια διόρθωση</translation>
+        <translation type="vanished">Οριζόντια διόρθωση</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Όνομα</translation>
+        <translation type="vanished">Όνομα</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation>C1: γωνία</translation>
+        <translation type="vanished">C1: γωνία</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation>C1: μήκος</translation>
+        <translation type="vanished">C1: μήκος</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation>C2: γωνία</translation>
+        <translation type="vanished">C2: γωνία</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation>C2: μήκος</translation>
+        <translation type="vanished">C2: μήκος</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -9382,7 +9378,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Κατάληξη</translation>
+        <translation type="vanished">Κατάληξη</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -9406,14 +9402,250 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Axis type</source>
-        <translation>Τύπος άξονα</translation>
+        <translation type="vanished">Τύπος άξονα</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rotation angle</source>
+        <source>Point label:</source>
+        <translation type="unfinished">Ετικέτα σημείου:</translation>
+    </message>
+    <message>
+        <source>Position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished">Βασικό σημείο:</translation>
+    </message>
+    <message>
+        <source>Line type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished">Χρώμα γραμμής:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Μήκος:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished">Πρώτο σημείο:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished">Δεύτερο σημείο:</translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished">Κεντρικό σημείο:</translation>
+    </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished">Ακτίνα:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished">Πρώτη γωνία:</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished">Δεύτερη γωνία:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Χρώμα:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished">Τρίτο σημείο:</translation>
+    </message>
+    <message>
+        <source>Point 1 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished">Πρώτο σημείο αναφοράς:</translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished">Δεύτερο σημείο αναφοράς:</translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished">Πρώτο σημείο πένσας:</translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished">Τόξο:</translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished">Καμπύλη:</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished">Πρώτο σημείο γραμμής:</translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished">Δεύτερο σημείο γραμμής:</translation>
+    </message>
+    <message>
+        <source>First line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished">Πρόσθετες μοίρες γωνίας:</translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished">Κέντρο του κύκλου:</translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished">Κορυφή γραμμής:</translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished">Τέλος γραμμής:</translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished">X: κάθετο σημείο:</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation type="unfinished">Υ: οριζόντιο σημείο:</translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished">Πρώτο τόξο:</translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished">Δεύτερο τόξο:</translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished">Κέντρο του πρώτου κύκλου:</translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished">Κέντρο του δεύτερου κύκλου:</translation>
+    </message>
+    <message>
+        <source>First circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation type="unfinished">Πρώτη καμπύλη:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation type="unfinished">Δεύτερη καμπύλη:</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation type="unfinished">Κάθετη διόρθωση:</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished">Οριζόντια διόρθωση:</translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished">Κέντρο του κύκλου:</translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished">Σημείο εφαπτομένης:</translation>
+    </message>
+    <message>
+        <source>Circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Όνομα:</translation>
+    </message>
+    <message>
+        <source>C1: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished">Πρώτο σημείο του άξονα:</translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished">Δεύτερο σημείο του άξονα:</translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished">Σημείο άξονα:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished">Κατάληξη:</translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation type="unfinished">Σημείο αρχής:</translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation type="unfinished">Τύπος άξονα:</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

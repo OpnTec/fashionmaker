@@ -9174,7 +9174,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation>Valeur</translation>
+        <translation type="vanished">Valeur</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -9590,11 +9590,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Nom du point</translation>
+        <translation type="vanished">Nom du point</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Position</translation>
+        <translation type="vanished">Position</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -9602,15 +9602,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Line type</source>
-        <translation>Type de ligne</translation>
+        <translation type="vanished">Type de ligne</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Longueur</translation>
+        <translation type="vanished">Longueur</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation type="vanished">Angle</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -9622,15 +9622,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Rayon</translation>
+        <translation type="vanished">Rayon</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation>Premier angle</translation>
+        <translation type="vanished">Premier angle</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Deuxième angle</translation>
+        <translation type="vanished">Deuxième angle</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -9666,7 +9666,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Degrés d&apos;angle supplémentaires</translation>
+        <translation type="vanished">Degrés d&apos;angle supplémentaires</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -9702,11 +9702,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Couleur de la ligne</translation>
+        <translation type="vanished">Couleur de la ligne</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -9730,11 +9730,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Nom du point 1</translation>
+        <translation type="vanished">Nom du point 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Nom du point 2</translation>
+        <translation type="vanished">Nom du point 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
@@ -9742,7 +9742,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Prendre</translation>
+        <translation type="vanished">Prendre</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -9750,11 +9750,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation>Rayon du premier cercle</translation>
+        <translation type="vanished">Rayon du premier cercle</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation>Rayon du deuxième cercle</translation>
+        <translation type="vanished">Rayon du deuxième cercle</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
@@ -9762,7 +9762,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation>Rayon du cercle</translation>
+        <translation type="vanished">Rayon du cercle</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
@@ -9790,31 +9790,31 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation>Correction verticale</translation>
+        <translation type="vanished">Correction verticale</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation>Correction horizontale</translation>
+        <translation type="vanished">Correction horizontale</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation type="vanished">Nom</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation>C1: angle</translation>
+        <translation type="vanished">C1: angle</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation>C1: longueur</translation>
+        <translation type="vanished">C1: longueur</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation>C2: angle</translation>
+        <translation type="vanished">C2: angle</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation>C2: longueur</translation>
+        <translation type="vanished">C2: longueur</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -9830,7 +9830,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Suffixe</translation>
+        <translation type="vanished">Suffixe</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -9853,16 +9853,248 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Outil rotation autour d&apos;un axe</translation>
     </message>
     <message>
-        <source>Axis type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Elliptical arc</source>
         <translation>Arc éliptique</translation>
     </message>
     <message>
-        <source>Rotation angle</source>
+        <source>Point label:</source>
+        <translation type="unfinished">Nom du point:</translation>
+    </message>
+    <message>
+        <source>Position:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished">Point de départ:</translation>
+    </message>
+    <message>
+        <source>Line type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished">Couleur de la ligne:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angle:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished">Rayon:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 1 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished">Premier point de base :</translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished">Second point de base :</translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished">Premier point de la pince :</translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished">Arc:</translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished">Courbe:</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished">Point de la première ligne:</translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished">Angle additionnel en degré:</translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished">Centre de l&apos;arc:</translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished">Sommet de la ligne:</translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished">Fin de la ligne:</translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished">X : point vertical:</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation type="unfinished">Y : point horizontal:</translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished">Premier arc:</translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished">Deuxième arc:</translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished">Prendre:</translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished">Centre du premier cercle:</translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished">Centre du deuxième cercle:</translation>
+    </message>
+    <message>
+        <source>First circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation type="unfinished">Première courbe:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation type="unfinished">Seconde courbe:</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation type="unfinished">Correction verticale :</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished">Correction horizontale :</translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished">Centre du cercle:</translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished">Point de la tangente:</translation>
+    </message>
+    <message>
+        <source>Circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished">Premier point de l&apos;axe:</translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished">Deuxième point de l&apos;axe:</translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished">Point d&apos;axe :</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation type="unfinished">Point d&apos;origine:</translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation type="unfinished">Type d&apos;axe :</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation type="unfinished">Angle de rotation :</translation>
     </message>
 </context>
 <context>

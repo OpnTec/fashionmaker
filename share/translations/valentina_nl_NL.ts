@@ -9234,7 +9234,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation>Waarde</translation>
+        <translation type="vanished">Waarde</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -9666,11 +9666,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Punt label</translation>
+        <translation type="vanished">Punt label</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Positie</translation>
+        <translation type="vanished">Positie</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -9678,15 +9678,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Line type</source>
-        <translation>Lijn soort</translation>
+        <translation type="vanished">Lijn soort</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Lengte</translation>
+        <translation type="vanished">Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Hoek</translation>
+        <translation type="vanished">Hoek</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -9698,15 +9698,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Straal</translation>
+        <translation type="vanished">Straal</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation>Eerste hoek</translation>
+        <translation type="vanished">Eerste hoek</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Tweede hoek</translation>
+        <translation type="vanished">Tweede hoek</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -9742,7 +9742,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Aanvullende graden hoek</translation>
+        <translation type="vanished">Aanvullende graden hoek</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -9778,11 +9778,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Lijn kleur</translation>
+        <translation type="vanished">Lijn kleur</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -9806,11 +9806,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Punt 1 label</translation>
+        <translation type="vanished">Punt 1 label</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Punt 2 label</translation>
+        <translation type="vanished">Punt 2 label</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
@@ -9818,7 +9818,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Kies</translation>
+        <translation type="vanished">Kies</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -9826,11 +9826,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation>Eerste cirkel straal</translation>
+        <translation type="vanished">Eerste cirkel straal</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation>Tweede cirkel straal</translation>
+        <translation type="vanished">Tweede cirkel straal</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
@@ -9838,7 +9838,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation>Cirkel straal</translation>
+        <translation type="vanished">Cirkel straal</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
@@ -9866,31 +9866,31 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation>Verticale correctie</translation>
+        <translation type="vanished">Verticale correctie</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation>Horizontale correctie</translation>
+        <translation type="vanished">Horizontale correctie</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="vanished">Naam</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation>C1: hoek</translation>
+        <translation type="vanished">C1: hoek</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation>C1: lengte</translation>
+        <translation type="vanished">C1: lengte</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation>C2: hoek</translation>
+        <translation type="vanished">C2: hoek</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation>C2: lengte</translation>
+        <translation type="vanished">C2: lengte</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -9906,7 +9906,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Achtervoegsel</translation>
+        <translation type="vanished">Achtervoegsel</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -9930,7 +9930,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Axis type</source>
-        <translation>As-type</translation>
+        <translation type="vanished">As-type</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
@@ -9938,7 +9938,247 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rotation angle</source>
-        <translation>Hoek van draaiing</translation>
+        <translation type="vanished">Hoek van draaiing</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished">Punt label:</translation>
+    </message>
+    <message>
+        <source>Position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished">Basis punt:</translation>
+    </message>
+    <message>
+        <source>Line type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished">Lijnkleur:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Lengte:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Hoek:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished">Eerste punt:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished">Tweede punt:</translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished">Straal:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished">Eerste hoek:</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished">Tweede hoek:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished">Derde punt:</translation>
+    </message>
+    <message>
+        <source>Point 1 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished">Eerste basis punt:</translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished">Tweede basis punt:</translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished">Eerste figuurnaad punt:</translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished">Boog:</translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished">Kromming:</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (first point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line (second point):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished">Aanvullende graden hoek:</translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished">Midden van de boog:</translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished">Bovenkant van de lijn:</translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished">Einde van de lijn:</translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished">X: verticaal punt:</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation type="unfinished">Y: horizontaal punt:</translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished">Eerste boog:</translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished">Tweede boog:</translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished">Kies:</translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished">Midden van de eerste cirkel:</translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished">Midden van de tweede cirkel:</translation>
+    </message>
+    <message>
+        <source>First circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation type="unfinished">Eerste kromming:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation type="unfinished">Tweede kromming:</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation type="unfinished">Verticale correctie:</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished">Horizontale correctie:</translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished">Midden van de cirkel:</translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished">Raaklijn punt:</translation>
+    </message>
+    <message>
+        <source>Circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>C1: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished">Eerste punt van de as:</translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished">Tweede punt van de as:</translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished">As punt:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished">Achtervoegsel:</translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation type="unfinished">Originele punt:</translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation type="unfinished">As-type:</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation type="unfinished">Hoek van draaiing:</translation>
     </message>
 </context>
 <context>
