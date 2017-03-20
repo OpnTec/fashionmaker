@@ -227,18 +227,20 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
         return buf1;
     }
 
+    int prev = -1;
+
     QVector<T> buf2;
     //Remove point on line
     for (qint32 i = 0; i < buf1.size(); ++i)
     {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
      // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
-        int prev = i-1;
-        int next = i+1;
-        if (i == 0)
+        if (prev == -1)
         {
-            prev = buf1.size() - 1;
+            i == 0 ? prev = buf1.size() - 1 : prev = i-1;
         }
-        else if (i == buf1.size() - 1)
+
+        int next = i+1;
+        if (i == buf1.size() - 1)
         {
             next = 0;
         }
@@ -247,16 +249,13 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
         const QPointF &prevPoint = buf1.at(prev);
         const QPointF &nextPoint = buf1.at(next);
 
-        if (not VGObject::IsPointOnLineviaPDP(buf1.at(i), buf1.at(prev), buf1.at(next))
-                && prevPoint != nextPoint) // not zigzag
+        if ((not VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint) && prevPoint != nextPoint)// not zigzag
+             // If RemoveDublicates does not remove these points it is a valid case.
+             // Case where last point equal first point
+             || ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)))
         {
             buf2.append(buf1.at(i));
-        }
-        else if ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint))
-        {
-            // If RemoveDublicates does not remove these points it is a valid case.
-            // Case where last point equal first point
-            buf2.append(buf1.at(i));
+            prev = -1;
         }
     }
 
