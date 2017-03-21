@@ -996,7 +996,7 @@ void MainWindow::ToolPiecePath(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPin(bool checked)
 {
-    ToolSelectAllDrawObjects();
+    ToolSelectPointByRelease();
     SetToolButton<DialogPin>(checked, Tool::Pin, "://cursor/pin_cursor.png", tr("Select pin point"),
                              &MainWindow::ClosedDialogPin);
 }
