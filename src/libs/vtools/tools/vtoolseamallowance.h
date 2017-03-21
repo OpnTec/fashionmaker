@@ -74,6 +74,8 @@ public:
 
     void Remove(bool ask);
 
+    static void InsertNode(const VPieceNode &node, quint32 pieceId, VContainer *data, VAbstractPattern *doc);
+
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);

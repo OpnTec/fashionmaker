@@ -235,3 +235,15 @@ QDataStream& operator>>(QDataStream& in, VPieceNode& p)
     in >> p.d->m_reverse;
     return in;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsExcluded() const
+{
+    return d->m_excluded;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetExcluded(bool exclude)
+{
+    d->m_excluded = exclude;
+}

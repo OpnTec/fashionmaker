@@ -43,6 +43,7 @@ public:
         : m_id(NULL_ID),
           m_typeTool(Tool::NodePoint),
           m_reverse(false),
+          m_excluded(false),
           m_saBefore(-1),
           m_saAfter(-1),
           m_formulaWidthBefore(currentSeamAllowance),
@@ -54,6 +55,7 @@ public:
         : m_id(id),
           m_typeTool(typeTool),
           m_reverse(reverse),
+          m_excluded(false),
           m_saBefore(-1),
           m_saAfter(-1),
           m_formulaWidthBefore(currentSeamAllowance),
@@ -71,6 +73,7 @@ public:
           m_id(node.m_id),
           m_typeTool(node.m_typeTool),
           m_reverse(node.m_reverse),
+          m_excluded(node.m_excluded),
           m_saBefore(node.m_saBefore),
           m_saAfter(node.m_saAfter),
           m_formulaWidthBefore(node.m_formulaWidthBefore),
@@ -88,6 +91,10 @@ public:
 
     /** @brief reverse true if need reverse points list for node. */
     bool m_reverse;
+
+    /** @brief m_excluded true if item excluded from main path. Excluded item is not visible and also will not has
+     * affect on main path. Also include to exist path items automatically setted excluded. */
+    bool m_excluded;
 
     qreal m_saBefore;
     qreal m_saAfter;

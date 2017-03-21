@@ -59,6 +59,9 @@ public:
     bool GetReverse() const;
     void SetReverse(bool reverse);
 
+    bool IsExcluded() const;
+    void SetExcluded(bool exclude);
+
     qreal GetSABefore(const VContainer *data) const;
     qreal GetSABefore(const VContainer *data, Unit unit) const;
 

@@ -624,6 +624,16 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
+    const bool excluded = node.IsExcluded();
+    if (excluded)
+    {
+        doc->SetAttribute(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded());
+    }
+    else
+    { // For backward compatebility.
+        nod.removeAttribute(VAbstractPattern::AttrNodeExcluded);
+    }
+
     switch (type)
     {
         case (Tool::NodeArc):

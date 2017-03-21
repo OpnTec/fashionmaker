@@ -624,7 +624,11 @@ void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &new
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
-    newPath.Append(VPieceNode(id, node.GetTypeTool(), node.GetReverse()));
+
+    VPieceNode newNode(id, node.GetTypeTool(), node.GetReverse());
+    newNode.SetExcluded(node.IsExcluded());
+
+    newPath.Append(newNode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

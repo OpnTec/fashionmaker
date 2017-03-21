@@ -167,6 +167,34 @@ void VToolSeamAllowance::Remove(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InsertNode(const VPieceNode &node, quint32 pieceId, VContainer *data, VAbstractPattern *doc)
+{
+    SCASSERT(data != nullptr);
+
+    if (pieceId > NULL_ID)
+    {
+        VPiece oldDet;
+        try
+        {
+            oldDet = data->GetPiece(pieceId);
+        }
+        catch (const VExceptionBadId &)
+        {
+            return;
+        }
+
+        VPiece newDet = oldDet;
+
+        newDet.GetPath().Append(node);
+
+        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, pieceId);
+        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
+        data->UpdatePiece(pieceId, newDet);// Update piece because first save will not call lite update
+        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece)
 {
     SCASSERT(doc != nullptr);

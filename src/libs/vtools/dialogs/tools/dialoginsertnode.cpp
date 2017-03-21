@@ -150,6 +150,7 @@ void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
                 return;
         }
 
+        node.SetExcluded(true);
         SetNode(node);
 
         prepare = true;

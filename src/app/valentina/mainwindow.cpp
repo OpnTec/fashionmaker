@@ -1167,12 +1167,14 @@ void MainWindow::ClosedDialogPin(int result)
 void MainWindow::ClosedDialogInsertNode(int result)
 {
     SCASSERT(dialogTool != nullptr);
-//    if (result == QDialog::Accepted)
-//    {
-//        VToolInsertTool::Create(dialogTool, doc, pattern);
-//    }
+    if (result == QDialog::Accepted)
+    {
+        DialogInsertNode *dTool = qobject_cast<DialogInsertNode*>(dialogTool);
+        SCASSERT(dTool != nullptr);
+        VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), pattern, doc);
+    }
     ArrowTool();
-//    doc->LiteParseTree(Document::LiteParse);
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
