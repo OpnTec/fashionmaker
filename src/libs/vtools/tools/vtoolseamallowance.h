@@ -74,7 +74,8 @@ public:
 
     void Remove(bool ask);
 
-    static void InsertNode(const VPieceNode &node, quint32 pieceId, VContainer *data, VAbstractPattern *doc);
+    static void InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene, VContainer *data,
+                           VAbstractPattern *doc);
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
@@ -160,12 +161,11 @@ private:
                                                 QPointF &pos);
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
+    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data, VAbstractPattern *doc,
+                         VToolSeamAllowance *parent);
     void InitCSAPaths(const VPiece &detail);
     void InitInternalPaths(const VPiece &detail);
     void InitPins(const VPiece &detail);
-
-    template <typename Tool>
-    Tool*              InitTool(VMainGraphicsScene *scene, quint32 toolId);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

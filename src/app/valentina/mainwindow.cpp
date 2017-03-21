@@ -1171,7 +1171,7 @@ void MainWindow::ClosedDialogInsertNode(int result)
     {
         DialogInsertNode *dTool = qobject_cast<DialogInsertNode*>(dialogTool);
         SCASSERT(dTool != nullptr);
-        VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), pattern, doc);
+        VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), sceneDetails, pattern, doc);
     }
     ArrowTool();
     doc->LiteParseTree(Document::LiteParse);

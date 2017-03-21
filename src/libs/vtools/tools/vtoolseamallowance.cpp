@@ -167,9 +167,12 @@ void VToolSeamAllowance::Remove(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InsertNode(const VPieceNode &node, quint32 pieceId, VContainer *data, VAbstractPattern *doc)
+void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene,
+                                    VContainer *data, VAbstractPattern *doc)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(data != nullptr)
+    SCASSERT(doc != nullptr)
 
     if (pieceId > NULL_ID)
     {
@@ -185,7 +188,20 @@ void VToolSeamAllowance::InsertNode(const VPieceNode &node, quint32 pieceId, VCo
 
         VPiece newDet = oldDet;
 
+        const quint32 id = PrepareNode(node, scene, doc, data);
+        if (id == NULL_ID)
+        {
+            return;
+        }
+
+        node.SetId(id);
         newDet.GetPath().Append(node);
+
+        // Seam allowance tool already initializated and can't init the node
+        VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(doc->getTool(pieceId));
+        SCASSERT(saTool != nullptr);
+
+        InitNode(node, scene, data, doc, saTool);
 
         SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, pieceId);
         qApp->getUndoStack()->push(saveCommand);// First push then make a connect
@@ -1422,24 +1438,43 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
 {
     for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
     {
-        switch (detail.GetPath().at(i).GetTypeTool())
+        InitNode(detail.GetPath().at(i), scene, &(VAbstractTool::data), doc, this);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data,
+                                  VAbstractPattern *doc, VToolSeamAllowance *parent)
+{
+    SCASSERT(scene != nullptr)
+    SCASSERT(data != nullptr)
+    SCASSERT(doc != nullptr)
+    SCASSERT(parent != nullptr)
+
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
         {
-            case (Tool::NodePoint):
-            {
-                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.GetPath().at(i).GetId());
-                connect(tool, &VNodePoint::ShowContextMenu, this, &VToolSeamAllowance::contextMenuEvent);
-                break;
-            }
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-                doc->IncrementReferens(VAbstractTool::data.GetGObject(detail.GetPath().at(i).GetId())->getIdTool());
-                break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore.";
-                break;
+            VNodePoint *tool = qobject_cast<VNodePoint*>(doc->getTool(node.GetId()));
+            SCASSERT(tool != nullptr);
+
+            connect(tool, &VNodePoint::ShowContextMenu, parent, &VToolSeamAllowance::contextMenuEvent);
+            connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            tool->setParentItem(parent);
+            tool->SetParentType(ParentType::Item);
+            tool->setVisible(not node.IsExcluded());//Hide excluded point
+            doc->IncrementReferens(node.GetId());
+            break;
         }
+        case (Tool::NodeArc):
+        case (Tool::NodeElArc):
+        case (Tool::NodeSpline):
+        case (Tool::NodeSplinePath):
+            doc->IncrementReferens(data->GetGObject(node.GetId())->getIdTool());
+            break;
+        default:
+            qDebug()<<"Get wrong tool type. Ignore.";
+            break;
     }
 }
 
@@ -1527,22 +1562,4 @@ void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
     {
         RefreshDataInFile();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename Tool>
-/**
- * @brief InitTool initial node item on scene
- * @param scene pointer to scene.
- * @param toolId if of tool object.
- */
-Tool *VToolSeamAllowance::InitTool(VMainGraphicsScene *scene, quint32 toolId)
-{
-    Tool *tool = qobject_cast<Tool*>(doc->getTool(toolId));
-    SCASSERT(tool != nullptr);
-    connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-    tool->setParentItem(this);
-    tool->SetParentType(ParentType::Item);
-    doc->IncrementReferens(toolId);
-    return tool;
 }
