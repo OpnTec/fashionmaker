@@ -152,6 +152,7 @@ enum class Tool : ToolVisHolderType
     Midpoint,
     EllipticalArc,
     Pin,
+    InsertNode,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
