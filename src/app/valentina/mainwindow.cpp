@@ -1229,7 +1229,7 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
                                                           "://cursor/point_of_intersection_arcs.png",
                                                           tr("Select first an arc"),
-                                                       &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
+                                                   &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
                                                           &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
 }
 
@@ -1240,8 +1240,8 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(checked, Tool::PointOfIntersectionCircles,
                                                              "://cursor/point_of_intersection_circles.png",
                                                              tr("Select first circle center"),
-                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
-                                                             &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
+                                                         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1251,8 +1251,8 @@ void MainWindow::ToolPointOfIntersectionCurves(bool checked)
     SetToolButtonWithApply<DialogPointOfIntersectionCurves>(checked, Tool::PointOfIntersectionCurves,
                                                              "://cursor/intersection_curves_cursor.png",
                                                              tr("Select first curve"),
-                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCurves>,
-                                                             &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCurves>);
+                                                 &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCurves>,
+                                                          &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCurves>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1262,8 +1262,8 @@ void MainWindow::ToolPointFromCircleAndTangent(bool checked)
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(checked, Tool::PointFromCircleAndTangent,
                                                             "://cursor/point_from_circle_and_tangent_cursor.png",
                                                             tr("Select point on tangent"),
-                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointFromCircleAndTangent>,
-                                                            &MainWindow::ApplyDrawDialog<VToolPointFromCircleAndTangent>);
+                                                 &MainWindow::ClosedDrawDialogWithApply<VToolPointFromCircleAndTangent>,
+                                                          &MainWindow::ApplyDrawDialog<VToolPointFromCircleAndTangent>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1273,7 +1273,7 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
     SetToolButtonWithApply<DialogPointFromArcAndTangent>(checked, Tool::PointFromArcAndTangent,
                                                          "://cursor/point_from_arc_and_tangent_cursor.png",
                                                          tr("Select point on tangent"),
-                                                        &MainWindow::ClosedDrawDialogWithApply<VToolPointFromArcAndTangent>,
+                                                    &MainWindow::ClosedDrawDialogWithApply<VToolPointFromArcAndTangent>,
                                                          &MainWindow::ApplyDrawDialog<VToolPointFromArcAndTangent>);
 }
 
