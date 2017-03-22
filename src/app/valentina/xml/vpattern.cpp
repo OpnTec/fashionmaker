@@ -2312,12 +2312,6 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        auto path = new VSplinePath();
-        if (duplicate > 0)
-        {
-            path->SetDuplicate(duplicate);
-        }
-
         QVector<quint32> points;
         QVector<QString> angle1, a1;
         QVector<QString> angle2, a2;
@@ -2351,8 +2345,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         l1 = length1;
         l2 = length2;
 
-        VToolSplinePath *spl = VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, scene, this, data, parse,
-                                                        Source::FromFile);
+        VToolSplinePath *spl = VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, duplicate, scene, this, data,
+                                                       parse, Source::FromFile);
 
         if (spl != nullptr)
         {

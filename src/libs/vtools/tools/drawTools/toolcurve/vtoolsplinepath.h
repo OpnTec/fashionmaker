@@ -62,8 +62,9 @@ public:
                                    const Document &parse, const Source &typeCreation);
     static VToolSplinePath *Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
                                    QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
-                                   const QString &color, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                   VContainer *data, const Document &parse, const Source &typeCreation);
+                                   const QString &color, quint32 duplicate, VMainGraphicsScene *scene,
+                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                   const Source &typeCreation);
     static const QString ToolType;
     static const QString OldToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path);

@@ -229,10 +229,16 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
 //---------------------------------------------------------------------------------------------------------------------
 VToolSplinePath *VToolSplinePath::Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
                                          QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
-                                         const QString &color, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                         VContainer *data, const Document &parse, const Source &typeCreation)
+                                         const QString &color, quint32 duplicate, VMainGraphicsScene *scene,
+                                         VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                         const Source &typeCreation)
 {
     auto path = new VSplinePath();
+
+    if (duplicate > 0)
+    {
+        path->SetDuplicate(duplicate);
+    }
 
     for (int i = 0; i < points.size(); ++i)
     {
