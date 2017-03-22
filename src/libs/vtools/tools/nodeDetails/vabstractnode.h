@@ -61,11 +61,12 @@ public:
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 
+    bool IsExluded() const;
+    void SetExluded(bool exluded);
+
 protected:
     ParentType parentType;
 
-    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
-protected:
     /** @brief idNodenode id. */
     quint32       idNode;
 
@@ -77,11 +78,16 @@ protected:
 
     QString       m_drawName;
 
+    bool          m_exluded;
+
     void         AddToModeling(const QDomElement &domElement);
+    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 
     virtual void ShowNode()=0;
     virtual void HideNode()=0;
+private:
+    Q_DISABLE_COPY(VAbstractNode)
 };
 
 #endif // VABSTRACTNODE_H

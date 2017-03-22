@@ -587,6 +587,10 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         actionReverse->setChecked(rowNode.GetReverse());
     }
 
+    QAction *actionExcluded = menu->addAction(tr("Excluded"));
+    actionExcluded->setCheckable(true);
+    actionExcluded->setChecked(rowNode.IsExcluded());
+
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetMainPath->viewport()->mapToGlobal(pos));
@@ -600,6 +604,14 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(rowNode));
+        ValidObjects(MainPathIsValid());
+    }
+    else if (selectedAction == actionExcluded)
+    {
+        rowNode.SetExcluded(not rowNode.IsExcluded());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode));
+        rowItem->setFont(NodeFont(rowNode.IsExcluded()));
         ValidObjects(MainPathIsValid());
     }
 
@@ -1989,12 +2001,13 @@ QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 bool DialogSeamAllowance::MainPathIsValid() const
 {
     QString url = DialogWarningIcon();
+    bool valid = true;
 
     if(CreatePiece().MainPathPoints(data).count() < 3)
     {
         url += tr("You need more points!");
         uiTabPaths->helpLabel->setText(url);
-        return false;
+        valid = false;
     }
     else
     {
@@ -2002,23 +2015,33 @@ bool DialogSeamAllowance::MainPathIsValid() const
         {
             url += tr("You have to choose points in a clockwise direction!");
             uiTabPaths->helpLabel->setText(url);
-            return false;
+            valid = false;
         }
         if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath))
         {
             url += tr("First point cannot be equal to the last point!");
             uiTabPaths->helpLabel->setText(url);
-            return false;
+            valid = false;
         }
         else if (DoublePoints(uiTabPaths->listWidgetMainPath))
         {
             url += tr("You have double points!");
             uiTabPaths->helpLabel->setText(url);
-            return false;
+            valid = false;
         }
     }
-    uiTabPaths->helpLabel->setText(tr("Ready!"));
-    return true;
+
+    if (valid)
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
+        uiTabPaths->helpLabel->setText(tr("Ready!"));
+    }
+    else
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
+    }
+
+    return valid;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2059,7 +2082,7 @@ void DialogSeamAllowance::InitNodesList()
     for (int i = 0; i < nodes.size(); ++i)
     {
         const VPieceNode node = nodes.at(i);
-        if (node.GetTypeTool() == Tool::NodePoint)
+        if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
             const QString name = GetNodeName(node);
 
@@ -2283,7 +2306,7 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
     for (int i = 0; i < nodes.size(); ++i)
     {
         const VPieceNode &node = nodes.at(i);
-        if (node.GetTypeTool() == Tool::NodePoint)
+        if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
             const QString name = GetNodeName(node);
             box->addItem(name, node.GetId());

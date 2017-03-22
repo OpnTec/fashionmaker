@@ -58,8 +58,13 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const QString &drawName, const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent), parentType(ParentType::Item), idNode(idNode), idTool(idTool),
-      currentColor(Qt::black), m_drawName(drawName)
+    : VAbstractTool(doc, data, id, parent),
+      parentType(ParentType::Item),
+      idNode(idNode),
+      idTool(idTool),
+      currentColor(Qt::black),
+      m_drawName(drawName),
+      m_exluded(false)
 {
     _referens = 0;
 }
@@ -138,6 +143,18 @@ void VAbstractNode::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
     Q_UNUSED(visible)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractNode::IsExluded() const
+{
+    return m_exluded;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::SetExluded(bool exluded)
+{
+    m_exluded = exluded;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -266,10 +266,12 @@ protected:
     virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
     quint32          DNumber(const QString &baseName) const;
 
-    static quint32   RowId(QListWidget *listWidget, int i);
+    static quint32   FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
+    static quint32   FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
     static bool      FirstPointEqualLast(QListWidget *listWidget);
     static bool      DoublePoints(QListWidget *listWidget);
     static QString   DialogWarningIcon();
+    static QFont     NodeFont(bool nodeExcluded);
 
     QString          GetNodeName(const VPieceNode &node) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);

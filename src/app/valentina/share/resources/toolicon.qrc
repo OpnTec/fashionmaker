@@ -80,5 +80,7 @@
         <file>toolicon/32x32/path@2x.png</file>
         <file>toolicon/32x32/pin.png</file>
         <file>toolicon/32x32/pin@2x.png</file>
+        <file>toolicon/32x32/insert_node.png</file>
+        <file>toolicon/32x32/insert_node@2x.png</file>
     </qresource>
 </RCC>

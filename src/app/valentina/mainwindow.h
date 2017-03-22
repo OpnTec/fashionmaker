@@ -158,6 +158,7 @@ private slots:
     void ToolPointFromArcAndTangent(bool checked);
     void ToolArcWithLength(bool checked);
     void ToolTrueDarts(bool checked);
+    void ToolInsertNode(bool checked);
 
     void ActionDraw(bool checked);
     void ActionDetails(bool checked);
@@ -172,6 +173,7 @@ private slots:
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);
     void ClosedDialogPin(int result);
+    void ClosedDialogInsertNode(int result);
 
     void LoadIndividual();
     void LoadStandard();

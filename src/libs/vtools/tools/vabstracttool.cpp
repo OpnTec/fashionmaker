@@ -624,6 +624,16 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
+    const bool excluded = node.IsExcluded();
+    if (excluded)
+    {
+        doc->SetAttribute(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded());
+    }
+    else
+    { // For backward compatebility.
+        nod.removeAttribute(VAbstractPattern::AttrNodeExcluded);
+    }
+
     switch (type)
     {
         case (Tool::NodeArc):
@@ -669,36 +679,51 @@ QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGra
     QVector<VPieceNode> nodes;
     for (int i = 0; i< path.CountNodes(); ++i)
     {
-        quint32 id = 0;
         VPieceNode nodeD = path.at(i);
-        switch (nodeD.GetTypeTool())
+        const quint32 id = PrepareNode(nodeD, scene, doc, data);
+        if (id > NULL_ID)
         {
-            case (Tool::NodePoint):
-                id = CreateNode<VPointF>(data, nodeD.GetId());
-                VNodePoint::Create(doc, data, scene, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-                break;
-            case (Tool::NodeArc):
-                id = CreateNode<VArc>(data, nodeD.GetId());
-                VNodeArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-                break;
-            case (Tool::NodeElArc):
-                id = CreateNode<VEllipticalArc>(data, nodeD.GetId());
-                VNodeEllipticalArc::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-                break;
-            case (Tool::NodeSpline):
-                id = CreateNodeSpline(data, nodeD.GetId());
-                VNodeSpline::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-                break;
-            case (Tool::NodeSplinePath):
-                id = CreateNodeSplinePath(data, nodeD.GetId());
-                VNodeSplinePath::Create(doc, data, id, nodeD.GetId(), Document::FullParse, Source::FromGui);
-                break;
-            default:
-                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-                break;
+            nodeD.SetId(id);
+            nodes.append(nodeD);
         }
-        nodeD.SetId(id);
-        nodes.append(nodeD);
     }
     return nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene,
+                                   VAbstractPattern *doc, VContainer *data)
+{
+    SCASSERT(scene != nullptr)
+    SCASSERT(doc != nullptr)
+    SCASSERT(data != nullptr)
+
+    quint32 id = NULL_ID;
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
+            id = CreateNode<VPointF>(data, node.GetId());
+            VNodePoint::Create(doc, data, scene, id, node.GetId(), Document::FullParse, Source::FromGui);
+            break;
+        case (Tool::NodeArc):
+            id = CreateNode<VArc>(data, node.GetId());
+            VNodeArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            break;
+        case (Tool::NodeElArc):
+            id = CreateNode<VEllipticalArc>(data, node.GetId());
+            VNodeEllipticalArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            break;
+        case (Tool::NodeSpline):
+            id = CreateNodeSpline(data, node.GetId());
+            VNodeSpline::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            break;
+        case (Tool::NodeSplinePath):
+            id = CreateNodeSplinePath(data, node.GetId());
+            VNodeSplinePath::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            break;
+        default:
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            break;
+    }
+    return id;
 }
