@@ -55,7 +55,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>248</height>
         </rect>
        </property>
@@ -1063,7 +1063,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -1143,8 +1143,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>196</height>
+         <width>130</width>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1316,7 +1316,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_5">
+      <widget class="QWidget" name="detailPage">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -1508,8 +1508,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>58</height>
+         <width>130</width>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2638,8 +2638,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

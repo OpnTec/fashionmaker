@@ -2291,7 +2291,7 @@ void MainWindow::ActionDetails(bool checked)
         mode = Draw::Modeling;
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(5);
+        ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
