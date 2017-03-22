@@ -79,6 +79,25 @@ Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+quint32 RowId(QListWidget *listWidget, int i)
+{
+    SCASSERT(listWidget != nullptr);
+
+    if (i < 0 || i >= listWidget->count())
+    {
+        return NULL_ID;
+    }
+
+    const QListWidgetItem *rowItem = listWidget->item(i);
+    SCASSERT(rowItem != nullptr);
+    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+    return rowNode.GetId();
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTool create dialog
@@ -411,13 +430,65 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTool::RowId(QListWidget *listWidget, int i)
+quint32 DialogTool::FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
 {
     SCASSERT(listWidget != nullptr);
-    const QListWidgetItem *rowItem = listWidget->item(i);
-    SCASSERT(rowItem != nullptr);
-    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-    return rowNode.GetId();
+
+    quint32 id = NULL_ID;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return id;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            id = rowNode.GetId();
+        }
+
+        ++i;
+    }
+    while (rowNode.IsExcluded() && i < listWidget->count());
+
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 DialogTool::FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
+{
+    SCASSERT(listWidget != nullptr);
+
+    quint32 id = NULL_ID;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return id;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            id = rowNode.GetId();
+        }
+
+        --i;
+    }
+    while (rowNode.IsExcluded() && i > -1);
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -426,7 +497,9 @@ bool DialogTool::FirstPointEqualLast(QListWidget *listWidget)
     SCASSERT(listWidget != nullptr);
     if (listWidget->count() > 1)
     {
-        return RowId(listWidget, 0) == RowId(listWidget, listWidget->count()-1);
+        const quint32 topId = FindNotExcludedNodeDown(listWidget, 0);
+        const quint32 bottomId = FindNotExcludedNodeUp(listWidget, listWidget->count()-1);
+        return topId == bottomId;
     }
     return false;
 }
@@ -437,7 +510,10 @@ bool DialogTool::DoublePoints(QListWidget *listWidget)
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
     {
-        if (RowId(listWidget, i) == RowId(listWidget, i+1))
+        const quint32 firstId = FindNotExcludedNodeDown(listWidget, i);
+        const quint32 secondId = FindNotExcludedNodeDown(listWidget, firstId+1);
+
+        if (firstId == secondId)
         {
             return true;
         }
@@ -457,6 +533,14 @@ QString DialogTool::DialogWarningIcon()
     pixmap.save(&buffer, "PNG");
     const QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1String("\"/> ");
     return url;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QFont DialogTool::NodeFont(bool nodeExcluded)
+{
+    QFont font("Times", 12, QFont::Bold);
+    font.setStrikeOut(nodeExcluded);
+    return font;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -516,7 +600,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
     if(canAddNewPoint)
     {
         QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setFont(NodeFont(node.IsExcluded()));
         item->setData(Qt::UserRole, QVariant::fromValue(node));
         listWidget->addItem(item);
         listWidget->setCurrentRow(listWidget->count()-1);

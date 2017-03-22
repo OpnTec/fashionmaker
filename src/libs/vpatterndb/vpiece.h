@@ -59,7 +59,7 @@ public:
     void       SetPath(const VPiecePath &path);
 
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
-    QVector<VPointF> MainPathNodePoints(const VContainer *data) const;
+    QVector<VPointF> MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;

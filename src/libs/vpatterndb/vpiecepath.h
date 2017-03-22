@@ -71,7 +71,7 @@ public:
     void         SetPenType(const Qt::PenStyle &type);
 
     QVector<QPointF>  PathPoints(const VContainer *data) const;
-    QVector<VPointF>  PathNodePoints(const VContainer *data) const;
+    QVector<VPointF>  PathNodePoints(const VContainer *data, bool showExcluded = true) const;
     QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
 
     QPainterPath PainterPath(const VContainer *data) const;

@@ -243,6 +243,11 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
     QVector<QPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
     {
+        if (at(i).IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
         switch (at(i).GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -274,7 +279,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data) const
+QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data, bool showExcluded) const
 {
     QVector<VPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
@@ -283,8 +288,11 @@ QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data) const
         {
             case Tool::NodePoint:
             {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(*point);
+                if (showExcluded || not at(i).IsExcluded())
+                {
+                    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
+                    points.append(*point);
+                }
             }
             break;
             case Tool::NodeArc:

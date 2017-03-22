@@ -153,6 +153,7 @@ private:
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                        VMainGraphicsScene *scene, const QString &m_drawName, QGraphicsItem * parent = nullptr);
 
+    void UpdateExcludeState();
     void RefreshGeometry();
     void SaveDialogChange();
     VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,

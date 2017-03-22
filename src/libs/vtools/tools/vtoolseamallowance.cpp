@@ -453,6 +453,7 @@ void VToolSeamAllowance::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromFile()
 {
+    UpdateExcludeState();
     RefreshGeometry();
 }
 
@@ -1208,6 +1209,24 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::UpdateExcludeState()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    {
+        const VPieceNode &node = detail.GetPath().at(i);
+        if (node.GetTypeTool() == Tool::NodePoint)
+        {
+            VNodePoint *tool = qobject_cast<VNodePoint*>(doc->getTool(node.GetId()));
+            SCASSERT(tool != nullptr);
+
+            tool->SetExluded(node.IsExcluded());
+            tool->setVisible(not node.IsExcluded());//Hide excluded point
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
@@ -1462,6 +1481,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
             connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             tool->setParentItem(parent);
             tool->SetParentType(ParentType::Item);
+            tool->SetExluded(node.IsExcluded());
             tool->setVisible(not node.IsExcluded());//Hide excluded point
             doc->IncrementReferens(node.GetId());
             break;

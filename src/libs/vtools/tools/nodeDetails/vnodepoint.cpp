@@ -321,7 +321,7 @@ void VNodePoint::RefreshLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::ShowNode()
 {
-    if (parentType != ParentType::Scene)
+    if (parentType != ParentType::Scene && not m_exluded)
     {
         show();
     }

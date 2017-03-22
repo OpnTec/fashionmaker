@@ -666,7 +666,7 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
 {
     const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
-    const bool excluded = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeExcluded, "0");
+    const bool excluded = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeExcluded, falseStr);
     const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
                                                              currentSeamAllowance);
     const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,

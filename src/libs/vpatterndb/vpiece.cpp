@@ -121,9 +121,9 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPointF> VPiece::MainPathNodePoints(const VContainer *data) const
+QVector<VPointF> VPiece::MainPathNodePoints(const VContainer *data, bool showExcluded) const
 {
-    return GetPath().PathNodePoints(data);
+    return GetPath().PathNodePoints(data, showExcluded);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -146,6 +146,11 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
     for (int i = 0; i< d->m_path.CountNodes(); ++i)
     {
         const VPieceNode &node = d->m_path.at(i);
+        if (node.IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -491,12 +496,16 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
     for (int i = 0; i < d->m_customSARecords.size(); ++i)
     {
         const CustomSARecord &record = d->m_customSARecords.at(i);
+        const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
+        const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
         if (record.startPoint > NULL_ID
                 && record.path > NULL_ID
                 && record.endPoint > NULL_ID
-                && d->m_path.indexOfNode(record.startPoint) != -1
-                && d->m_path.indexOfNode(record.endPoint) != -1)
+                && indexStartPoint != -1
+                && not d->m_path.at(indexStartPoint).IsExcluded()
+                && indexEndPoint != -1
+                && not d->m_path.at(indexEndPoint).IsExcluded())
         {
             records.append(record);
         }
