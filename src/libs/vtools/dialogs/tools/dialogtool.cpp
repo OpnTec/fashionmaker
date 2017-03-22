@@ -430,14 +430,14 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTool::FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
+int DialogTool::FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
 {
     SCASSERT(listWidget != nullptr);
 
-    quint32 id = NULL_ID;
+    int index = -1;
     if (candidate < 0 || candidate >= listWidget->count())
     {
-        return id;
+        return index;
     }
 
     int i = candidate;
@@ -450,25 +450,25 @@ quint32 DialogTool::FindNotExcludedNodeDown(QListWidget *listWidget, int candida
 
         if (not rowNode.IsExcluded())
         {
-            id = rowNode.GetId();
+            index = i;
         }
 
         ++i;
     }
     while (rowNode.IsExcluded() && i < listWidget->count());
 
-    return id;
+    return index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTool::FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
+int DialogTool::FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
 {
     SCASSERT(listWidget != nullptr);
 
-    quint32 id = NULL_ID;
+    int index = -1;
     if (candidate < 0 || candidate >= listWidget->count())
     {
-        return id;
+        return index;
     }
 
     int i = candidate;
@@ -481,14 +481,14 @@ quint32 DialogTool::FindNotExcludedNodeUp(QListWidget *listWidget, int candidate
 
         if (not rowNode.IsExcluded())
         {
-            id = rowNode.GetId();
+            index = i;
         }
 
         --i;
     }
     while (rowNode.IsExcluded() && i > -1);
 
-    return id;
+    return index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -497,8 +497,8 @@ bool DialogTool::FirstPointEqualLast(QListWidget *listWidget)
     SCASSERT(listWidget != nullptr);
     if (listWidget->count() > 1)
     {
-        const quint32 topId = FindNotExcludedNodeDown(listWidget, 0);
-        const quint32 bottomId = FindNotExcludedNodeUp(listWidget, listWidget->count()-1);
+        const quint32 topId = RowId(listWidget, FindNotExcludedNodeDown(listWidget, 0));
+        const quint32 bottomId = RowId(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
         return topId == bottomId;
     }
     return false;
@@ -510,8 +510,9 @@ bool DialogTool::DoublePoints(QListWidget *listWidget)
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
     {
-        const quint32 firstId = FindNotExcludedNodeDown(listWidget, i);
-        const quint32 secondId = FindNotExcludedNodeDown(listWidget, firstId+1);
+        const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
+        const quint32 firstId = RowId(listWidget, firstIndex);
+        const quint32 secondId = RowId(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
         if (firstId == secondId)
         {
