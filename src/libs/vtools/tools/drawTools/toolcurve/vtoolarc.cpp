@@ -174,7 +174,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         InitArcToolConnections(scene, toolArc);
-        doc->AddTool(id, toolArc);
+        VAbstractPattern::AddTool(id, toolArc);
         doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }

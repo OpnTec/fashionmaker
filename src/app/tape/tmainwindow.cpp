@@ -186,7 +186,7 @@ void TMainWindow::SetBaseMHeight(int height)
         if (mType == MeasurementsType::Standard)
         {
             const int row = ui->tableWidget->currentRow();
-            data->SetHeight(UnitConvertor(height, Unit::Cm, mUnit));
+            VContainer::SetHeight(UnitConvertor(height, Unit::Cm, mUnit));
             RefreshData();
             ui->tableWidget->selectRow(row);
         }
@@ -201,7 +201,7 @@ void TMainWindow::SetBaseMSize(int size)
         if (mType == MeasurementsType::Standard)
         {
             const int row = ui->tableWidget->currentRow();
-            data->SetSize(UnitConvertor(size, Unit::Cm, mUnit));
+            VContainer::SetSize(UnitConvertor(size, Unit::Cm, mUnit));
             RefreshData();
             ui->tableWidget->selectRow(row);
         }
@@ -287,8 +287,8 @@ bool TMainWindow::LoadFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            data->SetHeight(m->BaseHeight());
-            data->SetSize(m->BaseSize());
+            VContainer::SetHeight(m->BaseHeight());
+            VContainer::SetSize(m->BaseSize());
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -353,8 +353,8 @@ void TMainWindow::FileNew()
         mType = measurements.Type();
 
         data = new VContainer(qApp->TrVars(), &mUnit);
-        data->SetHeight(measurements.BaseHeight());
-        data->SetSize(measurements.BaseSize());
+        VContainer::SetHeight(measurements.BaseHeight());
+        VContainer::SetSize(measurements.BaseSize());
 
         if (mType == MeasurementsType::Standard)
         {
@@ -1401,7 +1401,7 @@ void TMainWindow::ImportFromPattern()
 void TMainWindow::ChangedSize(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    data->SetSize(text.toInt());
+    VContainer::SetSize(text.toInt());
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1411,7 +1411,7 @@ void TMainWindow::ChangedSize(const QString &text)
 void TMainWindow::ChangedHeight(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    data->SetHeight(text.toInt());
+    VContainer::SetHeight(text.toInt());
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1997,13 +1997,13 @@ void TMainWindow::InitWindow()
 
         labelGradationHeights = new QLabel(tr("Height:"));
         gradationHeights = SetGradationList(labelGradationHeights, listHeights);
-        SetDefaultHeight(static_cast<int>(data->height()));
+        SetDefaultHeight(static_cast<int>(VContainer::height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedHeight);
 
         labelGradationSizes = new QLabel(tr("Size:"));
         gradationSizes = SetGradationList(labelGradationSizes, listSizes);
-        SetDefaultSize(static_cast<int>(data->size()));
+        SetDefaultSize(static_cast<int>(VContainer::size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
 
@@ -2319,7 +2319,7 @@ void TMainWindow::SetDefaultHeight(int value)
     }
     else
     {
-        data->SetHeight(gradationHeights->currentText().toInt());
+        VContainer::SetHeight(gradationHeights->currentText().toInt());
     }
 }
 
@@ -2333,14 +2333,14 @@ void TMainWindow::SetDefaultSize(int value)
     }
     else
     {
-        data->SetSize(gradationSizes->currentText().toInt());
+        VContainer::SetSize(gradationSizes->currentText().toInt());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData()
 {
-    data->ClearUniqueNames();
+    VContainer::ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements();
 
@@ -2812,8 +2812,8 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            data->SetHeight(m->BaseHeight());
-            data->SetSize(m->BaseSize());
+            VContainer::SetHeight(m->BaseHeight());
+            VContainer::SetSize(m->BaseSize());
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);

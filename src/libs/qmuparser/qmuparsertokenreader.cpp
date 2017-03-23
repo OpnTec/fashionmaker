@@ -389,7 +389,7 @@ QT_WARNING_POP
  */
 bool QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok )
 {
-    const QStringList pOprtDef = m_pParser->GetOprtDef();
+    const QStringList pOprtDef = QmuParserBase::GetOprtDef();
 
     // Compare token with function and operator strings
     // check string for operator/function
@@ -663,7 +663,7 @@ bool QmuParserTokenReader::IsOprt ( token_type &a_Tok )
     }
 
     // Check if the operator is a built in operator, if so ignore it here
-    const QStringList &pOprtDef = m_pParser->GetOprtDef();
+    const QStringList &pOprtDef = QmuParserBase::GetOprtDef();
     QStringList::const_iterator constIterator;
     for ( constIterator = pOprtDef.constBegin(); m_pParser->HasBuiltInOprt() && constIterator != pOprtDef.constEnd();
             ++constIterator )

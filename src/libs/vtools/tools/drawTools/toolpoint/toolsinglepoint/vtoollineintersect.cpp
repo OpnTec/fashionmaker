@@ -188,7 +188,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
                                                                p2Line2Id, typeCreation);
             scene->addItem(point);
             InitToolConnections(scene, point);
-            doc->AddTool(id, point);
+            VAbstractPattern::AddTool(id, point);
             doc->IncrementReferens(p1Line1->getIdTool());
             doc->IncrementReferens(p2Line1->getIdTool());
             doc->IncrementReferens(p1Line2->getIdTool());

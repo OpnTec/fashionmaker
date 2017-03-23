@@ -167,8 +167,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
         //lead to crash
-        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
-                !qApp->activeModalWidget()->inherits("QFileDialog");
+        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                !QApplication::activeModalWidget()->inherits("QFileDialog");
         QMessageBox messageBox;
         switch (type)
         {
@@ -390,8 +390,8 @@ void MApplication::InitOptions()
     qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(this->arguments().join(", ")));
-    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(this->applicationPid())));
+    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 

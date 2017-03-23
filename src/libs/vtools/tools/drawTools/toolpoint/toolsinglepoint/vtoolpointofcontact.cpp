@@ -241,7 +241,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
                                                              firstPointId, secondPointId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(centerP->getIdTool());
         doc->IncrementReferens(firstP->getIdTool());
         doc->IncrementReferens(secondP->getIdTool());

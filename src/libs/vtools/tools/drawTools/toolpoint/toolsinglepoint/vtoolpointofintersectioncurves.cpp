@@ -140,7 +140,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
                                                         hCrossPoint, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(curve1->getIdTool());
         doc->IncrementReferens(curve2->getIdTool());
         return point;

@@ -50,8 +50,8 @@ void TST_VMeasurements::CreateEmptyStandardFile()
     const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    data->SetHeight(height);
-    data->SetSize(size);
+    VContainer::SetHeight(height);
+    VContainer::SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
@@ -138,8 +138,8 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
     const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    data->SetHeight(height);
-    data->SetSize(size);
+    VContainer::SetHeight(height);
+    VContainer::SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));

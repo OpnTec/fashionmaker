@@ -148,7 +148,7 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
     {
         dest.clear();// Try to avoid mistake, value must be empty
 
-        id = data->getNextId();//Just reserve id for tool
+        id = VContainer::getNextId();//Just reserve id for tool
 
         for (int i = 0; i < source.size(); ++i)
         {
@@ -244,7 +244,7 @@ QT_WARNING_POP
         VToolRotation *tool = new VToolRotation(doc, data, id, origin, angle, suffix, source, dest, typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);
-        doc->AddTool(id, tool);
+        VAbstractPattern::AddTool(id, tool);
         doc->IncrementReferens(originPoint.getIdTool());
         for (int i = 0; i < source.size(); ++i)
         {
@@ -278,7 +278,7 @@ void VToolRotation::SetFormulaAngle(const VFormula &value)
     {
         formulaAngle = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }

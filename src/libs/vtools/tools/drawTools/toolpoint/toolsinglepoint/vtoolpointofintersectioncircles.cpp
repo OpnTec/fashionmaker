@@ -152,7 +152,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const q
                                                                                      typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(c1Point.getIdTool());
         doc->IncrementReferens(c2Point.getIdTool());
         return point;

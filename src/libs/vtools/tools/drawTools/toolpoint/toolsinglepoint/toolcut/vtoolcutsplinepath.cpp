@@ -185,7 +185,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(splPath->getIdTool());
         return point;
     }

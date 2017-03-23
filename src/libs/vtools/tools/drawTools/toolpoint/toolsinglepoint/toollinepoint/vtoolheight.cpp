@@ -178,7 +178,7 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
                                              typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(basePoint->getIdTool());
         doc->IncrementReferens(p1Line->getIdTool());
         doc->IncrementReferens(p2Line->getIdTool());

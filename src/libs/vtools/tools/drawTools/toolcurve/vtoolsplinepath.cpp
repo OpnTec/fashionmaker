@@ -220,7 +220,7 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
         InitSplinePathToolConnections(scene, spl);
-        doc->AddTool(id, spl);
+        VAbstractPattern::AddTool(id, spl);
         return spl;
     }
     return nullptr;

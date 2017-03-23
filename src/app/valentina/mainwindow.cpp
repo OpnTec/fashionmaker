@@ -492,8 +492,8 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
 
     if (m->Type() == MeasurementsType::Standard)
     {
-        pattern->SetSize(size);
-        pattern->SetHeight(height);
+        VContainer::SetSize(size);
+        VContainer::SetHeight(height);
     }
 
     try
@@ -1128,7 +1128,7 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
         SCASSERT(dialog != nullptr)
-        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
+        const QDomElement group = doc->CreateGroup(VContainer::getNextId(), dialog->GetName(), dialog->GetGroup());
         if (not group.isNull())
         {
             AddGroup *addGroup = new AddGroup(group, doc);
@@ -1374,7 +1374,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         FileClosedCorrect();
 
         event->accept();
-        qApp->closeAllWindows();
+        QApplication::closeAllWindows();
     }
     else
     {
@@ -1560,9 +1560,9 @@ void MainWindow::ShowMeasurements()
                     << "-u"
                     << VDomDocument::UnitsToStr(qApp->patternUnit())
                     << "-e"
-                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->height(), doc->MUnit(), Unit::Cm)))
+                    << QString().setNum(static_cast<int>(UnitConvertor(VContainer::height(), doc->MUnit(), Unit::Cm)))
                     << "-s"
-                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->size(), doc->MUnit(), Unit::Cm)));
+                    << QString().setNum(static_cast<int>(UnitConvertor(VContainer::size(), doc->MUnit(), Unit::Cm)));
         }
         else
         {
@@ -1623,7 +1623,7 @@ void MainWindow::SyncMeasurements()
     if (mChanges)
     {
         const QString path = AbsoluteMPath(curFile, doc->MPath());
-        if(UpdateMeasurements(path, static_cast<int>(pattern->size()), static_cast<int>(pattern->height())))
+        if(UpdateMeasurements(path, static_cast<int>(VContainer::size()), static_cast<int>(VContainer::height())))
         {
             if (not watcher->files().contains(path))
             {
@@ -1717,7 +1717,7 @@ void MainWindow::ToolBarOption()
         ui->toolBarOption->addSeparator();
     }
 
-    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit(), true)));
+    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
@@ -1886,7 +1886,7 @@ void MainWindow::MouseMove(const QPointF &scenePos)
         //: Coords in status line: "X, Y (units)"
         mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
                                                        .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                                       .arg(doc->UnitsToStr(qApp->patternUnit(), true)));
+                                                       .arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
     }
 }
 
@@ -3030,7 +3030,7 @@ void MainWindow::New()
 
         AddPP(patternPieceName);
 
-        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit(), true)));
+        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
         ui->toolBarOption->addWidget(mouseCoordinate);
     }
     else
@@ -3061,8 +3061,8 @@ void MainWindow::PatternChangesWereSaved(bool saved)
  */
 void MainWindow::ChangedSize(const QString & text)
 {
-    const int size = static_cast<int>(pattern->size());
-    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), text.toInt(), static_cast<int>(pattern->height())))
+    const int size = static_cast<int>(VContainer::size());
+    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), text.toInt(), static_cast<int>(VContainer::height())))
     {
         doc->LiteParseTree(Document::LiteParse);
         emit sceneDetails->DimensionsChanged();
@@ -3090,8 +3090,8 @@ void MainWindow::ChangedSize(const QString & text)
  */
 void MainWindow::ChangedHeight(const QString &text)
 {
-    const int height = static_cast<int>(pattern->height());
-    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), static_cast<int>(pattern->size()), text.toInt()))
+    const int height = static_cast<int>(VContainer::height());
+    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), static_cast<int>(VContainer::size()), text.toInt()))
     {
         doc->LiteParseTree(Document::LiteParse);
         emit sceneDetails->DimensionsChanged();
@@ -3123,13 +3123,13 @@ void MainWindow::SetDefaultHeight()
     }
     else
     {
-        index = gradationHeights->findText(QString().setNum(pattern->height()));
+        index = gradationHeights->findText(QString().setNum(VContainer::height()));
         if (index != -1)
         {
             gradationHeights->setCurrentIndex(index);
         }
     }
-    pattern->SetHeight(gradationHeights->currentText().toInt());
+    VContainer::SetHeight(gradationHeights->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3143,13 +3143,13 @@ void MainWindow::SetDefaultSize()
     }
     else
     {
-        index = gradationSizes->findText(QString().setNum(pattern->size()));
+        index = gradationSizes->findText(QString().setNum(VContainer::size()));
         if (index != -1)
         {
             gradationSizes->setCurrentIndex(index);
         }
     }
-    pattern->SetSize(gradationSizes->currentText().toInt());
+    VContainer::SetSize(gradationSizes->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4384,7 +4384,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
     QFileInfo table(path);
     if (table.exists() == false)
     {
-        if (!qApp->IsGUIMode())
+        if (!VApplication::IsGUIMode())
         {
             return QString();// console mode doesn't support fixing path to a measurement file
         }
@@ -4627,7 +4627,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::SetSize(const QString &text)
 {
-    if (not qApp->IsGUIMode())
+    if (not VApplication::IsGUIMode())
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {
@@ -4670,7 +4670,7 @@ bool MainWindow::SetSize(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::SetHeight(const QString &text)
 {
-    if (not qApp->IsGUIMode())
+    if (not VApplication::IsGUIMode())
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {

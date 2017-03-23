@@ -132,7 +132,7 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
         auto _spl = new VToolCubicBezier(doc, data, id, typeCreation);
         scene->addItem(_spl);
         InitSplineToolConnections(scene, _spl);
-        doc->AddTool(id, _spl);
+        VAbstractPattern::AddTool(id, _spl);
         doc->IncrementReferens(spline->GetP1().getIdTool());
         doc->IncrementReferens(spline->GetP1().getIdTool());
         doc->IncrementReferens(spline->GetP1().getIdTool());

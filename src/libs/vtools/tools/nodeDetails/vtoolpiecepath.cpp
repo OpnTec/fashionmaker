@@ -75,11 +75,11 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
         //Better check garbage before each saving file. Check only modeling tags.
         VToolPiecePath *pathTool = new VToolPiecePath(doc, data, id, pieceId, typeCreation, drawName, idTool, doc);
 
-        doc->AddTool(id, pathTool);
+        VAbstractPattern::AddTool(id, pathTool);
         if (idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = doc->getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(idTool);
             SCASSERT(tool != nullptr);
             pathTool->setParent(tool);// Adopted by a tool
         }
@@ -88,7 +88,7 @@ VToolPiecePath *VToolPiecePath::Create(quint32 _id, const VPiecePath &path, quin
             if (typeCreation == Source::FromGui && path.GetType() == PiecePathType::InternalPath)
             { // Seam allowance tool already initializated and can't init the path
                 SCASSERT(pieceId > NULL_ID);
-                VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(doc->getTool(pieceId));
+                VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
                 SCASSERT(saTool != nullptr);
                 pathTool->setParentItem(saTool);
                 pathTool->SetParentType(ParentType::Item);

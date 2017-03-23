@@ -128,7 +128,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const quint32 _id, quint32 firs
                                                             source, dest, typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);
-        doc->AddTool(id, tool);
+        VAbstractPattern::AddTool(id, tool);
         doc->IncrementReferens(firstPoint.getIdTool());
         doc->IncrementReferens(secondPoint.getIdTool());
         for (int i = 0; i < source.size(); ++i)

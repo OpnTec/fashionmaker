@@ -632,7 +632,7 @@ void DialogPatternProperties::SetDefaultHeight(const QString &def)
     }
     else
     {
-        const int height = static_cast<int>(pattern->height());
+        const int height = static_cast<int>(VContainer::height());
         index = ui->comboBoxHeight->findText(QString().setNum(height));
         if (index != -1)
         {
@@ -653,7 +653,7 @@ void DialogPatternProperties::SetDefaultSize(const QString &def)
     }
     else
     {
-        const int size = static_cast<int>(pattern->size());
+        const int size = static_cast<int>(VContainer::size());
         index = ui->comboBoxSize->findText(QString().setNum(size));
         if (index != -1)
         {

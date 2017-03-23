@@ -140,7 +140,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
                                                                                    crossPoint, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(cPoint.getIdTool());
         doc->IncrementReferens(tPoint.getIdTool());
         return point;

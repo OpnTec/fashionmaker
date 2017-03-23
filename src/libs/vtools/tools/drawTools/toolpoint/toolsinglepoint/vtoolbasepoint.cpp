@@ -138,7 +138,7 @@ VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, 
         VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
         scene->addItem(spoint);
         InitToolConnections(scene, spoint);
-        doc->AddTool(id, spoint);
+        VAbstractPattern::AddTool(id, spoint);
         return spoint;
     }
     return nullptr;

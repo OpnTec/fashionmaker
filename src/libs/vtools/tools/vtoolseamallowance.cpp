@@ -145,7 +145,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QStr
         connect(scene, &VMainGraphicsScene::EnableDetailItemHover, piece, &VToolSeamAllowance::AllowHover);
         connect(scene, &VMainGraphicsScene::EnableDetailItemSelection, piece, &VToolSeamAllowance::AllowSelecting);
         connect(scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
-        doc->AddTool(id, piece);
+        VAbstractPattern::AddTool(id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
     data->RemoveVariable(currentSeamAllowance);
@@ -198,7 +198,7 @@ void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraph
         newDet.GetPath().Append(node);
 
         // Seam allowance tool already initializated and can't init the node
-        VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(doc->getTool(pieceId));
+        VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
         SCASSERT(saTool != nullptr);
 
         InitNode(node, scene, data, doc, saTool);
@@ -568,7 +568,7 @@ void VToolSeamAllowance::UpdateLabel()
         }
         m_dataLabel->SetMoveType(type);
 
-        QFont fnt = qApp->font();
+        QFont fnt = QApplication::font();
         {
             const int iFS = labelData.GetFontSize();
             iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
@@ -624,7 +624,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
         }
         m_patternInfo->SetMoveType(type);
 
-        QFont fnt = qApp->font();
+        QFont fnt = QApplication::font();
         int iFS = geom.GetFontSize();
         if (iFS < MIN_FONT_SIZE)
         {
@@ -634,7 +634,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
         m_patternInfo->SetFont(fnt);
         m_patternInfo->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
                                ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
-        m_patternInfo->UpdateData(doc, getData()->size(), getData()->height());
+        m_patternInfo->UpdateData(doc, VContainer::size(), VContainer::height());
 
         QRectF rectBB;
         rectBB.setTopLeft(pos);
@@ -1217,7 +1217,7 @@ void VToolSeamAllowance::UpdateExcludeState()
         const VPieceNode &node = detail.GetPath().at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(doc->getTool(node.GetId()));
+            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             tool->SetExluded(node.IsExcluded());
@@ -1474,7 +1474,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
     {
         case (Tool::NodePoint):
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(doc->getTool(node.GetId()));
+            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             connect(tool, &VNodePoint::ShowContextMenu, parent, &VToolSeamAllowance::contextMenuEvent);
@@ -1512,7 +1512,7 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
     for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
     {
-        VToolPiecePath *tool = qobject_cast<VToolPiecePath*>(doc->getTool(detail.GetInternalPaths().at(i)));
+        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i)));
         SCASSERT(tool != nullptr);
         tool->setParentItem(this);
         tool->SetParentType(ParentType::Item);

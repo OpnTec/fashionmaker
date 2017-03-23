@@ -42,7 +42,8 @@ FvUpdateWindow::FvUpdateWindow(QWidget *parent)
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     // Set the "new version is available" string
-    const QString newVersString = m_ui->newVersionIsAvailableLabel->text().arg(qApp->applicationDisplayName());
+    const QString newVersString = m_ui->newVersionIsAvailableLabel->text()
+            .arg(QGuiApplication::applicationDisplayName());
     m_ui->newVersionIsAvailableLabel->setText(newVersString);
 
     // Connect buttons
@@ -67,7 +68,8 @@ bool FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate()
     }
 
     const QString downloadString = m_ui->wouldYouLikeToDownloadLabel->text()
-            .arg(qApp->applicationDisplayName(), proposedUpdate->GetEnclosureVersion(), qApp->applicationVersion());
+            .arg(QGuiApplication::applicationDisplayName(), proposedUpdate->GetEnclosureVersion(),
+                 QCoreApplication::applicationVersion());
     m_ui->wouldYouLikeToDownloadLabel->setText(downloadString);
 
     return true;

@@ -153,7 +153,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->getNextId();
+        id = VContainer::getNextId();
         data->AddLine(firstPoint, secondPoint);
     }
     else
@@ -174,7 +174,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         InitDrawToolConnections(scene, line);
         connect(scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
         connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
-        doc->AddTool(id, line);
+        VAbstractPattern::AddTool(id, line);
 
         const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
         const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);

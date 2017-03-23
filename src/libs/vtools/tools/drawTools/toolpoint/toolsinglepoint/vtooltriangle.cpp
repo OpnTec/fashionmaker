@@ -173,7 +173,7 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
                                                  secondPointId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(axisP1->getIdTool());
         doc->IncrementReferens(axisP2->getIdTool());
         doc->IncrementReferens(firstPoint->getIdTool());

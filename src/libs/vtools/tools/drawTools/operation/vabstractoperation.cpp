@@ -62,7 +62,7 @@ void VAbstractOperation::SetSuffix(const QString &suffix)
 {
     // Don't know if need check name here.
     this->suffix = suffix;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
     SaveOption(obj);
 }
 
@@ -423,7 +423,7 @@ VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, 
 void VAbstractOperation::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
@@ -434,7 +434,7 @@ void VAbstractOperation::RefreshDataInFile()
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOptions(domElement, obj);
     }
     else

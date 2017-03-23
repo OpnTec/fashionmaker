@@ -82,11 +82,11 @@ VToolPin *VToolPin::Create(quint32 _id, quint32 pointId, quint32 pieceId, VAbstr
     {
         point = new VToolPin(doc, data, id, pointId, pieceId, typeCreation, drawName, idTool, doc);
 
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         if (idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = doc->getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(idTool);
             SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }

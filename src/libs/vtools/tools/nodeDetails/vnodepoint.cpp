@@ -120,11 +120,11 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         connect(scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
         connect(scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
         connect(scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         if (idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = doc->getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(idTool);
             SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }

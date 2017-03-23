@@ -80,11 +80,11 @@ void VNodeSplinePath::Create(VAbstractPattern *doc, VContainer *data, quint32 id
         VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, drawName, idTool, doc);
 
-        doc->AddTool(id, splPath);
+        VAbstractPattern::AddTool(id, splPath);
         if (idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = doc->getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(idTool);
             SCASSERT(tool != nullptr)
             splPath->setParent(tool);// Adopted by a tool
         }

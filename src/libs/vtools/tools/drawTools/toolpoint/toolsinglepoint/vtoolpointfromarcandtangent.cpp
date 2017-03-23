@@ -130,7 +130,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
                                                                              crossPoint, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(arc.getIdTool());
         doc->IncrementReferens(tPoint.getIdTool());
         return point;

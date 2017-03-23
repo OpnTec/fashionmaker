@@ -134,7 +134,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const quint32 _id, quint32 orig
                                                             dest, typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);
-        doc->AddTool(id, tool);
+        VAbstractPattern::AddTool(id, tool);
         doc->IncrementReferens(originPoint.getIdTool());
         for (int i = 0; i < source.size(); ++i)
         {
@@ -156,7 +156,7 @@ void VToolFlippingByAxis::SetAxisType(AxisType value)
 {
     m_axisType = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
     SaveOption(obj);
 }
 

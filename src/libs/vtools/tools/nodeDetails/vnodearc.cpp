@@ -78,11 +78,11 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint
         VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, drawName, idTool, doc);
 
-        doc->AddTool(id, arc);
+        VAbstractPattern::AddTool(id, arc);
         if (idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = doc->getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(idTool);
             SCASSERT(tool != nullptr)
             arc->setParent(tool);// Adopted by a tool
         }

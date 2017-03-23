@@ -137,7 +137,7 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(const quint32 _id, VCubicBezi
         VToolCubicBezierPath *spl = new VToolCubicBezierPath(doc, data, id, typeCreation);
         scene->addItem(spl);
         InitSplinePathToolConnections(scene, spl);
-        doc->AddTool(id, spl);
+        VAbstractPattern::AddTool(id, spl);
         return spl;
     }
     return nullptr;

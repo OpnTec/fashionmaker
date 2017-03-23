@@ -188,7 +188,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 
         VToolEllipticalArc *toolEllipticalArc = new VToolEllipticalArc(doc, data, id, typeCreation);
         scene->addItem(toolEllipticalArc);
         InitElArcToolConnections(scene, toolEllipticalArc);
-        doc->AddTool(id, toolEllipticalArc);
+        VAbstractPattern::AddTool(id, toolEllipticalArc);
         doc->IncrementReferens(c.getIdTool());
         return toolEllipticalArc;
     }

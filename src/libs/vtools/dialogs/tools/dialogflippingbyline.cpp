@@ -279,7 +279,7 @@ void DialogFlippingByLine::SuffixChanged()
             if (m_suffix != suffix)
             {
                 QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
+                const QStringList uniqueNames = VContainer::AllUniqueNames();
                 for (int i=0; i < uniqueNames.size(); ++i)
                 {
                     const QString name = uniqueNames.at(i) + suffix;

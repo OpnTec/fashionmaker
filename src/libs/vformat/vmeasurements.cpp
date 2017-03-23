@@ -675,13 +675,13 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataSize()
 {
-    data->SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
+    VContainer::SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataHeight()
 {
-    data->SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
+    VContainer::SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

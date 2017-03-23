@@ -148,8 +148,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
         id = data->AddGObject(p);
         data->AddLine(basePointId, id);
 
-        data->getNextId();
-        data->getNextId();
+        VContainer::getNextId();
+        VContainer::getNextId();
         InitSegments(curve->getType(), segLength, p, curveId, data);
     }
     else
@@ -172,7 +172,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
                                                                      basePointId, curveId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(basePoint->getIdTool());
         doc->IncrementReferens(curve->getIdTool());
         return point;

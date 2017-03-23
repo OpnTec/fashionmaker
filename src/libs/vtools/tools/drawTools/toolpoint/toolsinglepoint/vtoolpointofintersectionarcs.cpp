@@ -131,7 +131,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
                                                                                secondArcId, pType, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(firstArc->getIdTool());
         doc->IncrementReferens(secondArc->getIdTool());
         return point;

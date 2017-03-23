@@ -148,8 +148,8 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);
-        a1->setId(data->getNextId());
-        a2->setId(data->getNextId());
+        a1->setId(VContainer::getNextId());
+        a2->setId(VContainer::getNextId());
         data->AddArc(a1, a1->id(), id);
         data->AddArc(a2, a2->id(), id);
     }
@@ -173,7 +173,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(arc->getIdTool());
         return point;
     }

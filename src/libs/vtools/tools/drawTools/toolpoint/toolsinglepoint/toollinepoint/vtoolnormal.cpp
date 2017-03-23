@@ -182,7 +182,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
                                              secondPointId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
-        doc->AddTool(id, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
         return point;

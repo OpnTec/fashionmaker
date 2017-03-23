@@ -397,14 +397,14 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     const VPieceLabelData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
     {
-        det.SetDetail(piece.GetName(), data, qApp->font(), pattern);
+        det.SetDetail(piece.GetName(), data, QApplication::font(), pattern);
     }
 
     const VPatternLabelData& geom = piece.GetPatternInfo();
     if (geom.IsVisible() == true)
     {
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
-        det.SetPatternInfo(pDoc, geom, qApp->font(), pattern->size(), pattern->height(), pattern);
+        det.SetPatternInfo(pDoc, geom, QApplication::font(), VContainer::size(), VContainer::height(), pattern);
     }
 
     const VGrainlineData& grainlineGeom = piece.GetGrainlineGeometry();

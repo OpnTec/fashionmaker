@@ -386,7 +386,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 void VToolDoublePoint::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
@@ -397,7 +397,7 @@ void VToolDoublePoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOptions(domElement, obj);
     }
     else

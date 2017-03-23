@@ -3458,7 +3458,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
 QString VPattern::GenerateSuffix() const
 {
     const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
-    const QStringList uniqueNames = data->AllUniqueNames();
+    const QStringList uniqueNames = VContainer::AllUniqueNames();
     qint32 num = 1;
     QString suffix;
     for (;;)
@@ -3717,7 +3717,7 @@ void VPattern::PrepareForParse(const Document &parse)
     }
     else if (parse == Document::LiteParse)
     {
-        data->ClearUniqueNames();
+        VContainer::ClearUniqueNames();
         data->ClearVariables(VarType::Increment);
         data->ClearVariables(VarType::LineAngle);
         data->ClearVariables(VarType::LineLength);

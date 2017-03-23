@@ -60,7 +60,7 @@ void VAbstractFlipping::CreateDestination(Source typeCreation, quint32 &id, QVec
     {
         dest.clear();// Try to avoid mistake, value must be empty
 
-        id = data->getNextId();//Just reserve id for tool
+        id = VContainer::getNextId();//Just reserve id for tool
 
         for (int i = 0; i < source.size(); ++i)
         {

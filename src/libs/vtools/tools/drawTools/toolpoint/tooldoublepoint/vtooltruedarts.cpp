@@ -173,7 +173,7 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
     quint32 p2id = _p2id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->getNextId();//Just reserve id for tool
+        id = VContainer::getNextId();//Just reserve id for tool
         p1id = data->AddGObject(new VPointF(fPoint1, point1Name, mx1, my1, id));
         p2id = data->AddGObject(new VPointF(fPoint2, point2Name, mx2, my2, id));
     }
@@ -194,7 +194,7 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
                                                     dartP1Id, dartP2Id, dartP3Id, typeCreation);
         scene->addItem(points);
         InitToolConnections(scene, points);
-        doc->AddTool(id, points);
+        VAbstractPattern::AddTool(id, points);
         doc->IncrementReferens(baseLineP1->getIdTool());
         doc->IncrementReferens(baseLineP2->getIdTool());
         doc->IncrementReferens(dartP1->getIdTool());
@@ -254,7 +254,7 @@ void VToolTrueDarts::SetBaseLineP1Id(const quint32 &value)
     {
         baseLineP1Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -272,7 +272,7 @@ void VToolTrueDarts::SetBaseLineP2Id(const quint32 &value)
     {
         baseLineP2Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -290,7 +290,7 @@ void VToolTrueDarts::SetDartP1Id(const quint32 &value)
     {
         dartP1Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -308,7 +308,7 @@ void VToolTrueDarts::SetDartP2Id(const quint32 &value)
     {
         dartP2Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -326,7 +326,7 @@ void VToolTrueDarts::SetDartP3Id(const quint32 &value)
     {
         dartP3Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }

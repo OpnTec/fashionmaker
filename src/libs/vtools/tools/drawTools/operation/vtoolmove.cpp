@@ -130,7 +130,7 @@ VToolMove *VToolMove::Create(quint32 _id, QString &formulaAngle, QString &formul
     {
         dest.clear();// Try to avoid mistake, value must be empty
 
-        id = data->getNextId();//Just reserve id for tool
+        id = VContainer::getNextId();//Just reserve id for tool
 
         for (int i = 0; i < source.size(); ++i)
         {
@@ -229,7 +229,7 @@ QT_WARNING_POP
                                             typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);
-        doc->AddTool(id, tool);
+        VAbstractPattern::AddTool(id, tool);
         for (int i = 0; i < source.size(); ++i)
         {
             doc->IncrementReferens(data->GetGObject(source.at(i))->getIdTool());
@@ -256,7 +256,7 @@ void VToolMove::SetFormulaAngle(const VFormula &value)
     {
         formulaAngle = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -278,7 +278,7 @@ void VToolMove::SetFormulaLength(const VFormula &value)
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }

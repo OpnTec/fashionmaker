@@ -178,8 +178,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
         //lead to crash
-        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
-                !qApp->activeModalWidget()->inherits("QFileDialog");
+        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                !QApplication::activeModalWidget()->inherits("QFileDialog");
 
         QMessageBox messageBox;
         switch (type)
@@ -298,9 +298,10 @@ void VApplication::NewValentina(const QString &fileName)
     qCDebug(vApp, "Open new detached process.");
     if (fileName.isEmpty())
     {
-        qCDebug(vApp, "New process without arguments. program = %s", qUtf8Printable(qApp->applicationFilePath()));
+        qCDebug(vApp, "New process without arguments. program = %s",
+                qUtf8Printable(QCoreApplication::applicationFilePath()));
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+qApp->applicationFilePath()+"\""))
+        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -311,7 +312,7 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QString("\"%1\" \"%2\"").arg(qApp->applicationFilePath()).arg(fileName);
+        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath()).arg(fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
         if (QProcess::startDetached(run))
         {
@@ -466,7 +467,7 @@ QString VApplication::LogDirPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogPath() const
 {
-    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(qApp->applicationPid());
+    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -562,8 +563,8 @@ void VApplication::InitOptions()
     qDebug()<<"Build revision:"<<BUILD_REVISION;
     qDebug()<<buildCompatibilityString();
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
-    qDebug()<<"Command-line arguments:"<<this->arguments();
-    qDebug()<<"Process ID:"<<this->applicationPid();
+    qDebug()<<"Command-line arguments:"<<arguments();
+    qDebug()<<"Process ID:"<<applicationPid();
 
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {

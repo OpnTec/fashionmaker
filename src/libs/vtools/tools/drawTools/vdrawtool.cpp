@@ -268,7 +268,7 @@ void VDrawTool::DialogLinkDestroy()
  */
 void VDrawTool::SetFactor(qreal factor)
 {
-    CheckFactor(this->factor, factor);
+    CheckFactor(VDrawTool::factor, factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

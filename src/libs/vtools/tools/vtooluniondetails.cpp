@@ -1299,7 +1299,7 @@ void CreateUnitedDetail(quint32 id, const VToolUnionDetailsInitData &initData, q
 
     auto RemoveDetail = [initData](quint32 id)
     {
-        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(initData.doc->getTool(id));
+        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
         SCASSERT(toolDet != nullptr);
         bool ask = false;
         toolDet->Remove(ask);
@@ -1472,7 +1472,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VToolUnion
     quint32 id = _id;
     if (initData.typeCreation == Source::FromGui)
     {
-        id = initData.data->getNextId();
+        id = VContainer::getNextId();
     }
     else
     {
@@ -1488,7 +1488,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VToolUnion
         VAbstractTool::AddRecord(id, Tool::UnionDetails, initData.doc);
         //Scene doesn't show this tool, so doc will destroy this object.
         unionDetails = new VToolUnionDetails(id, initData);
-        initData.doc->AddTool(id, unionDetails);
+        VAbstractPattern::AddTool(id, unionDetails);
         // Unfortunatelly doc will destroy all objects only in the end, but we should delete them before each FullParse
         initData.doc->AddToolOnRemove(unionDetails);
     }

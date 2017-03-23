@@ -487,7 +487,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *det
     QHash<quint32, VPiece>::const_iterator i = details->constBegin();
     while (i != details->constEnd())
     {
-        VAbstractTool *tool = qobject_cast<VAbstractTool*>(doc->getTool(i.key()));
+        VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
         SCASSERT(tool != nullptr)
         listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
         ++i;
@@ -643,7 +643,8 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
     if (paper)
     {
         QPrinter printer;
-        printer.setCreator(qApp->applicationDisplayName()+QLatin1String(" ")+qApp->applicationVersion());
+        printer.setCreator(QGuiApplication::applicationDisplayName()+QLatin1String(" ")+
+                           QCoreApplication::applicationVersion());
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(name);
         printer.setDocName(FileName());
@@ -956,7 +957,7 @@ void MainWindowsNoGUI::LayoutPrint()
 void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &printType)
 {
     SCASSERT(printer != nullptr)
-    printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+    printer->setCreator(QGuiApplication::applicationDisplayName()+" "+QCoreApplication::applicationVersion());
 
     // Set orientation
     if (paperSize.height() >= paperSize.width())
