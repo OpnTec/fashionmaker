@@ -283,6 +283,13 @@ g++6:GCC_DEBUG_CXXFLAGS += \
     -Wduplicated-cond \
     -Wmisleading-indentation
 
+# Since GCC 7
+g++7:GCC_DEBUG_CXXFLAGS += \
+    -Wduplicated-branches \
+    -Wrestrict \
+    -Walloc-zero \
+    -Wnonnull
+
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
     -O0 \ # Turn off oprimization.
