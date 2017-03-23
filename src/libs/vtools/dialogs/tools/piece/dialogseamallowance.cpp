@@ -2029,6 +2029,12 @@ bool DialogSeamAllowance::MainPathIsValid() const
             uiTabPaths->helpLabel->setText(url);
             valid = false;
         }
+        else if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
+        {
+            url += tr("Each point in the path must be unique!");
+            uiTabPaths->helpLabel->setText(url);
+            valid = false;
+        }
     }
 
     if (valid)

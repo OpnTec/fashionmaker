@@ -889,6 +889,12 @@ bool DialogPiecePath::PathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
+        else if (not EachPointLabelIsUnique(ui->listWidget))
+        {
+            url += tr("Each point in the path must be unique!");
+            ui->helpLabel->setText(url);
+            return false;
+        }
     }
 
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)

@@ -270,6 +270,7 @@ protected:
     static int       FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
     static bool      FirstPointEqualLast(QListWidget *listWidget);
     static bool      DoublePoints(QListWidget *listWidget);
+    static bool      EachPointLabelIsUnique(QListWidget *listWidget);
     static QString   DialogWarningIcon();
     static QFont     NodeFont(bool nodeExcluded);
 

@@ -523,6 +523,27 @@ bool DialogTool::DoublePoints(QListWidget *listWidget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::EachPointLabelIsUnique(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    QSet<quint32> pointLabels;
+    int countPoints = 0;
+    for (int i=0; i < listWidget->count(); ++i)
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+        if (rowNode.GetTypeTool() == Tool::NodePoint)
+        {
+            ++countPoints;
+            pointLabels.insert(rowNode.GetId());
+        }
+    }
+
+    return countPoints == pointLabels.size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::DialogWarningIcon()
 {
     const QIcon icon = QIcon::fromTheme("dialog-warning",
