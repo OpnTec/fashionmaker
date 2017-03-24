@@ -566,7 +566,7 @@ QFont DialogTool::NodeFont(bool nodeExcluded)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetNodeName(const VPieceNode &node) const
+QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
@@ -579,6 +579,23 @@ QString DialogTool::GetNodeName(const VPieceNode &node) const
         if (node.GetReverse())
         {
             name = QLatin1String("- ") + name;
+        }
+    }
+    else if (showPassmark && node.IsPassmark())
+    {
+        switch(node.GetPassmarkLineType())
+        {
+            case PassmarkLineType::OneLine:
+                name += QLatin1String("^");
+                break;
+            case PassmarkLineType::TwoLines:
+                name += QLatin1String("^^");
+                break;
+            case PassmarkLineType::ThreeLines:
+                name += QLatin1String("^^^");
+                break;
+            default:
+                break;
         }
     }
 
@@ -598,7 +615,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-            name = GetNodeName(node);
+            name = GetNodeName(node, true);
             break;
         default:
             qDebug()<<"Got wrong tools. Ignore.";

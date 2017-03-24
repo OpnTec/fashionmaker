@@ -89,6 +89,19 @@ enum class PieceNodeAngle : unsigned char
     BySecondEdgeRightAngle
 };
 
+enum class PassmarkLineType : unsigned char
+{
+    OneLine = 0,
+    TwoLines,
+    ThreeLines
+};
+
+enum class PassmarkAngleType : unsigned char
+{
+    Straightforward = 0,
+    Bisector
+};
+
 enum class PiecePathIncludeType : unsigned char
 {
     AsMainPath = 0,

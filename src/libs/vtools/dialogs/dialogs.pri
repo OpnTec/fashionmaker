@@ -138,4 +138,5 @@ FORMS += \
     $$PWD/tools/piece/tabs/tablabels.ui \
     $$PWD/tools/piece/tabs/tabgrainline.ui \
     $$PWD/tools/piece/tabs/tabpins.ui \
-    $$PWD/tools/dialoginsertnode.ui
+    $$PWD/tools/dialoginsertnode.ui \
+    $$PWD/tools/piece/tabs/tabpassmarks.ui

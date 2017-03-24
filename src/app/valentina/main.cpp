@@ -54,8 +54,6 @@ int main(int argc, char *argv[])
 
     qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 
-    qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
-
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC

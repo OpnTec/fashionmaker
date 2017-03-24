@@ -244,7 +244,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
         ValidObjects(PathIsValid());
     }
 

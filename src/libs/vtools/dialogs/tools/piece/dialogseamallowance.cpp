@@ -32,6 +32,7 @@
 #include "ui_tablabels.h"
 #include "ui_tabgrainline.h"
 #include "ui_tabpins.h"
+#include "ui_tabpassmarks.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
@@ -46,7 +47,7 @@
 #include <QTimer>
 #include <QtNumeric>
 
-enum TabOrder {Paths=0, Labels=1, Grainline=2, Pins=3, Count=4};
+enum TabOrder {Paths=0, Labels=1, Grainline=2, Pins=3, Passmarks=4, Count=5};
 
 namespace
 {
@@ -80,10 +81,12 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       uiTabLabels(new Ui::TabLabels),
       uiTabGrainline(new Ui::TabGrainline),
       uiTabPins(new Ui::TabPins),
+      uiTabPassmarks(new Ui::TabPassmarks),
       m_tabPaths(new QWidget),
       m_tabLabels(new QWidget),
       m_tabGrainline(new QWidget),
       m_tabPins(new QWidget),
+      m_tabPassmarks(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
       dialogIsInitialized(false),
       applyAllowed(false),// By default disabled
@@ -135,6 +138,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitLabelsTab();
     InitGrainlineTab();
     InitPinsTab();
+    InitPassmarksTab();
 
     flagName = true;//We have default name of piece.
     ChangeColor(uiTabLabels->labelEditName, okColor);
@@ -153,10 +157,12 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 DialogSeamAllowance::~DialogSeamAllowance()
 {
     delete m_visPins;
+    delete m_tabPassmarks;
     delete m_tabPins;
     delete m_tabGrainline;
     delete m_tabLabels;
     delete m_tabPaths;
+    delete uiTabPassmarks;
     delete uiTabPins;
     delete uiTabGrainline;
     delete uiTabLabels;
@@ -176,6 +182,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     m_ftb->SetTabEnabled(TabOrder::Labels, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Pins, applyAllowed);
+    m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -579,12 +586,19 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     SCASSERT(rowItem != nullptr);
     VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
+    QAction *actionPassmark = nullptr;
     QAction *actionReverse = nullptr;
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
         actionReverse = menu->addAction(tr("Reverse"));
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
+    }
+    else
+    {
+        actionPassmark = menu->addAction(tr("Passmark"));
+        actionPassmark->setCheckable(true);
+        actionPassmark->setChecked(rowNode.IsPassmark());
     }
 
     QAction *actionExcluded = menu->addAction(tr("Excluded"));
@@ -597,24 +611,28 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     if (selectedAction == actionDelete)
     {
         delete uiTabPaths->listWidgetMainPath->item(row);
-        ValidObjects(MainPathIsValid());
     }
     else if (rowNode.GetTypeTool() != Tool::NodePoint && selectedAction == actionReverse)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode));
-        ValidObjects(MainPathIsValid());
+        rowItem->setText(GetNodeName(rowNode, true));
     }
     else if (selectedAction == actionExcluded)
     {
         rowNode.SetExcluded(not rowNode.IsExcluded());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
         rowItem->setFont(NodeFont(rowNode.IsExcluded()));
-        ValidObjects(MainPathIsValid());
+    }
+    else if (selectedAction == actionPassmark)
+    {
+        rowNode.SetPassmark(not rowNode.IsPassmark());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
     }
 
+    ValidObjects(MainPathIsValid());
     ListChanged();
 }
 
@@ -736,6 +754,7 @@ void DialogSeamAllowance::ListChanged()
         visPath->RefreshGeometry();
     }
     InitNodesList();
+    InitPassmarksList();
     CustomSAChanged(uiTabPaths->listWidgetCustomSA->currentRow());
 }
 
@@ -818,6 +837,68 @@ void DialogSeamAllowance::NodeChanged(int index)
         uiTabPaths->comboBoxAngle->setCurrentIndex(-1);
     }
     uiTabPaths->comboBoxAngle->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PassmarkChanged(int index)
+{
+    uiTabPassmarks->radioButtonOneLine->setDisabled(true);
+    uiTabPassmarks->radioButtonTwoLines->setDisabled(true);
+    uiTabPassmarks->radioButtonThreeLines->setDisabled(true);
+
+    uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
+    uiTabPassmarks->radioButtonBisector->setDisabled(true);
+
+    uiTabPassmarks->groupBoxLineType->blockSignals(true);
+    uiTabPassmarks->groupBoxAngleType->blockSignals(true);
+
+    if (index != -1)
+    {
+        const VPiece piece = CreatePiece();
+        const int nodeIndex = piece.GetPath().indexOfNode(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        if (nodeIndex != -1)
+        {
+            const VPieceNode &node = piece.GetPath().at(nodeIndex);
+
+            // Line type
+            uiTabPassmarks->radioButtonOneLine->setEnabled(true);
+            uiTabPassmarks->radioButtonTwoLines->setEnabled(true);
+            uiTabPassmarks->radioButtonThreeLines->setEnabled(true);
+
+            switch(node.GetPassmarkLineType())
+            {
+                case PassmarkLineType::OneLine:
+                    uiTabPassmarks->radioButtonOneLine->setChecked(true);
+                    break;
+                case PassmarkLineType::TwoLines:
+                    uiTabPassmarks->radioButtonTwoLines->setChecked(true);
+                    break;
+                case PassmarkLineType::ThreeLines:
+                    uiTabPassmarks->radioButtonThreeLines->setChecked(true);
+                    break;
+                default:
+                    break;
+            }
+
+            // Angle type
+            uiTabPassmarks->radioButtonStraightforward->setEnabled(true);
+            uiTabPassmarks->radioButtonBisector->setEnabled(true);
+
+            switch(node.GetPassmarkAngleType())
+            {
+                case PassmarkAngleType::Straightforward:
+                    uiTabPassmarks->radioButtonStraightforward->setChecked(true);
+                    break;
+                case PassmarkAngleType::Bisector:
+                    uiTabPassmarks->radioButtonBisector->setChecked(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    uiTabPassmarks->groupBoxLineType->blockSignals(false);
+    uiTabPassmarks->groupBoxAngleType->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1010,6 +1091,7 @@ void DialogSeamAllowance::FancyTabChanged(int index)
     m_tabLabels->hide();
     m_tabGrainline->hide();
     m_tabPins->hide();
+    m_tabPassmarks->hide();
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -1026,6 +1108,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             break;
         case TabOrder::Pins:
             m_tabPins->show();
+            break;
+        case TabOrder::Passmarks:
+            m_tabPassmarks->show();
             break;
     }
 QT_WARNING_POP
@@ -1057,6 +1142,70 @@ void DialogSeamAllowance::TabChanged(int index)
         if (not m_visPins.isNull())
         {
             delete m_visPins;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
+{
+    const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+            PassmarkLineType lineType = PassmarkLineType::OneLine;
+            if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonOneLine))
+            {
+                lineType = PassmarkLineType::OneLine;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonTwoLines))
+            {
+                lineType = PassmarkLineType::TwoLines;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonThreeLines))
+            {
+                lineType = PassmarkLineType::ThreeLines;
+            }
+
+            rowNode.SetPassmarkLineType(lineType);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(rowNode, true));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
+{
+    const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+            PassmarkAngleType angleType = PassmarkAngleType::Straightforward;
+            if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonStraightforward))
+            {
+                angleType = PassmarkAngleType::Straightforward;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonBisector))
+            {
+                angleType = PassmarkAngleType::Bisector;
+            }
+
+            rowNode.SetPassmarkAngleType(angleType);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(rowNode, true));
+
+            ListChanged();
         }
     }
 }
@@ -2110,6 +2259,40 @@ void DialogSeamAllowance::InitNodesList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPassmarksList()
+{
+    const quint32 id = CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt();
+
+    uiTabPassmarks->comboBoxPassmarks->blockSignals(true);
+    uiTabPassmarks->comboBoxPassmarks->clear();
+
+    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VPieceNode node = nodes.at(i);
+        if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
+        {
+            const QString name = GetNodeName(node);
+
+            uiTabPassmarks->comboBoxPassmarks->addItem(name, node.GetId());
+        }
+    }
+    uiTabPassmarks->comboBoxPassmarks->blockSignals(false);
+
+    const int index = uiTabPassmarks->comboBoxPassmarks->findData(id);
+    if (index != -1)
+    {
+        uiTabPassmarks->comboBoxPassmarks->setCurrentIndex(index);
+        PassmarkChanged(index);// Need in case combox index was not changed
+    }
+    else
+    {
+        uiTabPassmarks->comboBoxPassmarks->count() > 0 ? PassmarkChanged(0) : PassmarkChanged(-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QListWidgetItem *DialogSeamAllowance::GetItemById(quint32 id)
 {
     for (qint32 i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
@@ -2194,6 +2377,7 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_ftb->InsertTab(TabOrder::Labels, QIcon("://icon/32x32/labels.png"), tr("Labels"));
     m_ftb->InsertTab(TabOrder::Grainline, QIcon("://icon/32x32/grainline.png"), tr("Grainline"));
     m_ftb->InsertTab(TabOrder::Pins, QIcon("://icon/32x32/pins.png"), tr("Pins"));
+    m_ftb->InsertTab(TabOrder::Passmarks, QIcon("://icon/32x32/passmark.png"), tr("Passmarks"));
 
     ui->horizontalLayout->addWidget(m_ftb, 0, Qt::AlignLeft);
 
@@ -2214,6 +2398,10 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_tabPins->hide();
     uiTabPins->setupUi(m_tabPins);
     ui->horizontalLayout->addWidget(m_tabPins, 1);
+
+    m_tabPassmarks->hide();
+    uiTabPassmarks->setupUi(m_tabPassmarks);
+    ui->horizontalLayout->addWidget(m_tabPassmarks, 1);
 
     connect(m_ftb, &FancyTabBar::CurrentChanged, this, &DialogSeamAllowance::FancyTabChanged);
     connect(uiTabLabels->tabWidget, &QTabWidget::currentChanged, this, &DialogSeamAllowance::TabChanged);
@@ -2519,6 +2707,19 @@ void DialogSeamAllowance::InitPinsTab()
     uiTabPins->listWidgetPins->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(uiTabPins->listWidgetPins, &QListWidget::customContextMenuRequested, this,
             &DialogSeamAllowance::ShowPinsContextMenu);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPassmarksTab()
+{
+    InitPassmarksList();
+    connect(uiTabPassmarks->comboBoxPassmarks, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogSeamAllowance::PassmarkChanged);
+
+    connect(uiTabPassmarks->buttonGroupLineType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+            this, &DialogSeamAllowance::PassmarkLineTypeChanged);
+    connect(uiTabPassmarks->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+            this, &DialogSeamAllowance::PassmarkAngleTypeChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

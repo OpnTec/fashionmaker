@@ -47,9 +47,6 @@ public:
     VPieceNode &operator=(const VPieceNode &node);
     ~VPieceNode();
 
-    friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
-    friend QDataStream& operator>>(QDataStream& in, VPieceNode& p);
-
     quint32 GetId() const;
     void    SetId(quint32 id);
 
@@ -76,6 +73,15 @@ public:
 
     PieceNodeAngle GetAngleType() const;
     void           SetAngleType(PieceNodeAngle type);
+
+    bool IsPassmark() const;
+    void SetPassmark(bool passmark);
+
+    PassmarkLineType GetPassmarkLineType() const;
+    void             SetPassmarkLineType(PassmarkLineType lineType);
+
+    PassmarkAngleType GetPassmarkAngleType() const;
+    void               SetPassmarkAngleType(PassmarkAngleType angleType);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

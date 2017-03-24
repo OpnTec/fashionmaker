@@ -215,25 +215,43 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
     }
 }
 
-// Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator<<(QDataStream& out, const VPieceNode& p)
+bool VPieceNode::IsPassmark() const
 {
-    out << p.d->m_id << static_cast<int>(p.d->m_typeTool) << p.d->m_reverse;
-    return out;
+    return d->m_isPassmark;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator>>(QDataStream& in, VPieceNode& p)
+void VPieceNode::SetPassmark(bool passmark)
 {
-    in >> p.d->m_id;
+    if (GetTypeTool() == Tool::NodePoint)
+    {
+        d->m_isPassmark = passmark;
+    }
+}
 
-    int type = 0;
-    in >> type;
-    p.d->m_typeTool = static_cast<Tool>(type);
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkLineType VPieceNode::GetPassmarkLineType() const
+{
+    return d->m_passmarkLineType;
+}
 
-    in >> p.d->m_reverse;
-    return in;
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkLineType(PassmarkLineType lineType)
+{
+    d->m_passmarkLineType = lineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkAngleType VPieceNode::GetPassmarkAngleType() const
+{
+    return d->m_passmarkAngleType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkAngleType(PassmarkAngleType angleType)
+{
+    d->m_passmarkAngleType = angleType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
