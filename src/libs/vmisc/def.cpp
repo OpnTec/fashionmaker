@@ -2022,3 +2022,80 @@ void InitHighDpiScaling(int argc, char *argv[])
 #endif
     }
 }
+
+const QString strOne   = QStringLiteral("one");
+const QString strTwo   = QStringLiteral("two");
+const QString strThree = QStringLiteral("three");
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PassmarkLineTypeToString(PassmarkLineType type)
+{
+    switch(type)
+    {
+        case PassmarkLineType::OneLine:
+            return strOne;
+        case PassmarkLineType::TwoLines:
+            return strTwo;
+        case PassmarkLineType::ThreeLines:
+            return strThree;
+        default:
+            break;
+    }
+
+    return strOne;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkLineType StringToPassmarkLineType(const QString &value)
+{
+    const QStringList values = QStringList() << strOne << strTwo << strThree;
+
+    switch(values.indexOf(value))
+    {
+        case 0:
+            return PassmarkLineType::OneLine;
+        case 1:
+            return PassmarkLineType::TwoLines;
+        case 2:
+            return PassmarkLineType::ThreeLines;
+        default:
+            break;
+    }
+    return PassmarkLineType::OneLine;
+}
+
+const QString strStraightforward = QStringLiteral("straightforward");
+const QString strBisector        = QStringLiteral("bisector");
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PassmarkAngleTypeToString(PassmarkAngleType type)
+{
+    switch(type)
+    {
+        case PassmarkAngleType::Straightforward:
+            return strStraightforward;
+        case PassmarkAngleType::Bisector:
+            return strBisector;
+        default:
+            break;
+    }
+
+    return strStraightforward;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkAngleType StringToPassmarkAngleType(const QString &value)
+{
+    const QStringList values = QStringList() << strStraightforward << strBisector;
+
+    switch(values.indexOf(value))
+    {
+        case 0:
+            return PassmarkAngleType::Straightforward;
+        case 1:
+            return PassmarkAngleType::Bisector;
+        default:
+            break;
+    }
+    return PassmarkAngleType::Straightforward;
+}
