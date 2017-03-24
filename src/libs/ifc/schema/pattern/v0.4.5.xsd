@@ -348,6 +348,7 @@
                                       <xs:attribute name="type" type="xs:string" use="required"/>
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                       <xs:attribute name="reverse" type="xs:unsignedInt"/>
+                                      <xs:attribute name="excluded" type="xs:boolean"/>
                                       <xs:attribute name="before" type="xs:double"/>
                                       <xs:attribute name="after" type="xs:double"/>
                                       <xs:attribute name="angle" type="nodeAngle"/>
