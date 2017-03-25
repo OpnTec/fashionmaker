@@ -387,9 +387,12 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
     if (nodes.size() > 1)
     {
         int index = 0;
-        i == 0 ? index = nodes.size()-1 : index = i-1;
+        i == 0 ? index = FindInLoopNotExcludedUp(nodes.size()-1, nodes) : index = FindInLoopNotExcludedUp(i-1, nodes);
 
-        begin = CurveStartPoint(begin, data, nodes.at(index), points);
+        if (index != -1 && index != i)
+        {
+            begin = CurveStartPoint(begin, data, nodes.at(index), points);
+        }
     }
     return begin;
 }
@@ -416,9 +419,12 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
     if (nodes.size() > 2)
     {
         int index = 0;
-        i == nodes.size() - 1 ? index = 0 : index = i+1;
+        i == nodes.size()-1 ? index=FindInLoopNotExcludedDown(0, nodes) : index=FindInLoopNotExcludedDown(i+1, nodes);
 
-        end = CurveEndPoint(end, data, nodes.at(index), points);
+        if (index != -1 && index != i)
+        {
+            end = CurveEndPoint(end, data, nodes.at(index), points);
+        }
     }
     return end;
 }
@@ -760,6 +766,62 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
     }
 
     return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPiecePath::FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode> &nodes)
+{
+    if (candidate < 0 || candidate >= nodes.size())
+    {
+        return -1;
+    }
+
+    int checked = 0;
+    int i = candidate;
+    do
+    {
+        if (not nodes.at(i).IsExcluded())
+        {
+            break;
+        }
+
+        ++checked;
+        --i;
+        if (i < 0)
+        {
+            i = nodes.size() - 1;
+        }
+    } while (checked < nodes.size());
+
+    return i;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPiecePath::FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNode> &nodes)
+{
+    if (candidate < 0 || candidate >= nodes.size())
+    {
+        return -1;
+    }
+
+    int checked = 0;
+    int i = candidate;
+    do
+    {
+        if (not nodes.at(i).IsExcluded())
+        {
+            break;
+        }
+
+        ++checked;
+        ++i;
+        if (i >= nodes.size())
+        {
+            i = 0;
+        }
+    } while (checked < nodes.size());
+
+    return i;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
