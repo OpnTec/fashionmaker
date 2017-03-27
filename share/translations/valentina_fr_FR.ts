@@ -1708,7 +1708,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation type="vanished">Dialogue</translation>
     </message>
     <message>
         <source>Radius1:</source>
@@ -1793,6 +1793,10 @@
     <message>
         <source>Edit rotation angle</source>
         <translation>Modifier l&apos;angle de rotation</translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation type="unfinished">Arc éliptique</translation>
     </message>
 </context>
 <context>
@@ -1941,7 +1945,7 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation type="vanished">Dialogue</translation>
     </message>
     <message>
         <source>Origin point:</source>
@@ -1971,12 +1975,16 @@
         <source>Horizontal axis</source>
         <translation>Axes horizontaux</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation type="vanished">Dialogue</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -2005,6 +2013,10 @@
     <message>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Sélectionnez le deuxième point de la ligne qui n&apos;est pas dans la liste d&apos;objets</translation>
+    </message>
+    <message>
+        <source>Flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2432,6 +2444,25 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogInsertNode</name>
+    <message>
+        <source>Insert node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3026,7 +3057,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation type="vanished">Dialogue</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3063,6 +3094,10 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Calculation</source>
         <translation>Calcul</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3735,7 +3770,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogPin</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation type="vanished">Dialogue</translation>
     </message>
     <message>
         <source>Pin tool</source>
@@ -3748,6 +3783,10 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Piece:</source>
         <translation>Element:</translation>
+    </message>
+    <message>
+        <source>Pin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4419,156 +4458,20 @@ Appliquer les réglages quand-même ?</translation>
         <translation>Outil marge de couture</translation>
     </message>
     <message>
-        <source>Main path</source>
-        <translation type="vanished">Chemin principal</translation>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Tous les objets du chemin doivent se suivre dans le sens horaire.</translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="vanished">Rotation interdite</translation>
-    </message>
-    <message>
         <source>Ready!</source>
         <translation>Prêt!</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="vanished">Marge de couture</translation>
-    </message>
-    <message>
-        <source>Automatic</source>
-        <translation type="vanished">Automatique</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="vanished">Largeur :</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="vanished">Assistant Formule</translation>
     </message>
     <message>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <source>Calculation</source>
-        <translation type="vanished">Calcul</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Nodes</source>
-        <translation type="vanished">Nœuds</translation>
-    </message>
-    <message>
-        <source>Node:</source>
-        <translation type="vanished">Nœud:</translation>
-    </message>
-    <message>
-        <source>Before:</source>
-        <translation type="vanished">Avant:</translation>
-    </message>
-    <message>
-        <source>Return to default width</source>
-        <translation type="vanished">Retourner à la largeur par défaut</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Défaut</translation>
-    </message>
-    <message>
-        <source>After:</source>
-        <translation type="vanished">Après:</translation>
-    </message>
-    <message>
-        <source>Angle:</source>
-        <translation type="vanished">Angle:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Personnalisé</translation>
-    </message>
-    <message>
-        <source>Start point:</source>
-        <translation type="vanished">Point de départ:</translation>
-    </message>
-    <message>
-        <source>End point:</source>
-        <translation type="vanished">Point final:</translation>
-    </message>
-    <message>
-        <source>Include as:</source>
-        <translation type="vanished">Inclus comme:</translation>
-    </message>
-    <message>
-        <source>Internal paths</source>
-        <translation type="vanished">Chemins internes</translation>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="vanished">Lettre :</translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="vanished">Lettre de l&apos;élément de patron</translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Nom de la pièce de patron:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Pièce de patron</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">La valeur Nom ne peut pas être vide</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="vanished">Type de matière :</translation>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="vanished">Placement:</translation>
-    </message>
-    <message>
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="vanished">Annuler</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Retirer</translation>
-    </message>
-    <message>
         <source>Grainline</source>
         <translation>Droit-fil</translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">Droit-fil visible</translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="vanished">Rotation:</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="vanished">Longueur:</translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="vanished">Flèches:</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4713,6 +4616,10 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Paths</source>
         <translation type="unfinished">Chemins</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6796,6 +6703,14 @@ Voulez-vous sauvegarder les changements?</translation>
 %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Insert node tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an item to insert</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8123,7 +8038,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fleches:</translation>
     </message>
 </context>
 <context>
@@ -8249,11 +8164,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Main path</source>
-        <translation type="unfinished">Chemin principal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tous les objets du chemin doivent se suivre dans le sens des aiguilles d&apos;une montre.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -8273,7 +8188,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished">Automatique</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width:</source>
@@ -8329,19 +8244,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished">Point de départ:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished">Point final:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Include as:</source>
-        <translation type="unfinished">Inclus comme:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation type="unfinished">Chemins internes</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

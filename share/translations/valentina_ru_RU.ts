@@ -1708,7 +1708,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Radius1:</source>
@@ -1793,6 +1793,10 @@
     <message>
         <source>Edit rotation angle</source>
         <translation>Изменить угол поворота</translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation type="unfinished">Эллиптическая дуга</translation>
     </message>
 </context>
 <context>
@@ -1941,7 +1945,7 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Origin point:</source>
@@ -1971,12 +1975,16 @@
         <source>Horizontal axis</source>
         <translation>Горизонтальные оси</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -2005,6 +2013,10 @@
     <message>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Выберите вторую точку линии (точка не должна принадлежать какому-либо объекту)</translation>
+    </message>
+    <message>
+        <source>Flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2433,6 +2445,25 @@
     <message>
         <source>Curves control point lengths</source>
         <translation>Длина контрольных точек кривой</translation>
+    </message>
+</context>
+<context>
+    <name>DialogInsertNode</name>
+    <message>
+        <source>Insert node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3029,7 +3060,7 @@ Apply settings anyway?</source>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3066,6 +3097,10 @@ Apply settings anyway?</source>
     <message>
         <source>Calculation</source>
         <translation>Расчет</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3737,10 +3772,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPin</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
-    </message>
-    <message>
         <source>Pin tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3750,6 +3781,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4580,6 +4615,10 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation type="unfinished">Пути</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6661,6 +6700,14 @@ Do you want to save your changes?</source>
     <message>
         <source>You can&apos;t use now the Layout mode. 
 %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert node tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9747,10 +9794,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Elliptical arc</source>
         <translation>Эллиптическая дуга</translation>
-    </message>
-    <message>
-        <source>Rotation angle</source>
-        <translation type="vanished">Угол поворота</translation>
     </message>
     <message>
         <source>Point label:</source>

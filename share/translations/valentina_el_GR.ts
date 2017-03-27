@@ -1647,10 +1647,6 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished">Διάλογος</translation>
-    </message>
-    <message>
         <source>Radius1:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1732,6 +1728,10 @@
     </message>
     <message>
         <source>Edit rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1881,7 +1881,7 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation>Διάλογος</translation>
+        <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
         <source>Origin point:</source>
@@ -1911,12 +1911,16 @@
         <source>Horizontal axis</source>
         <translation>Οριζόντιος άξονας</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation>Διάλογος</translation>
+        <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
         <source>First line point:</source>
@@ -1944,6 +1948,10 @@
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2364,6 +2372,25 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogInsertNode</name>
+    <message>
+        <source>Insert node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2944,7 +2971,7 @@ Apply settings anyway?</source>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation>Διάλογος</translation>
+        <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -2981,6 +3008,10 @@ Apply settings anyway?</source>
     <message>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3620,10 +3651,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPin</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished">Διάλογος</translation>
-    </message>
-    <message>
         <source>Pin tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3633,6 +3660,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4281,44 +4312,8 @@ Apply settings anyway?</source>
         <translation>Τιμή</translation>
     </message>
     <message>
-        <source>Calculation</source>
-        <translation type="vanished">Υπολογισμός</translation>
-    </message>
-    <message>
-        <source>Nodes</source>
-        <translation type="vanished">Κόμβοι</translation>
-    </message>
-    <message>
-        <source>Return to default width</source>
-        <translation type="vanished">Επιστροφή στο προεπιλεγμένο πλάτος</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Προεπιλογή</translation>
-    </message>
-    <message>
-        <source>Angle:</source>
-        <translation type="vanished">Γωνία:</translation>
-    </message>
-    <message>
         <source>Add</source>
         <translation>Προσθήκη</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Ακύρωση</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Αφαίρεση</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Εμφάνιση ετικέτας λεπτομέρειας</translation>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="vanished">Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4467,6 +4462,10 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation type="unfinished">Διαδρομές</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6516,6 +6515,14 @@ Do you want to save your changes?</source>
     <message>
         <source>You can&apos;t use now the Layout mode. 
 %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert node tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
