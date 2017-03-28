@@ -97,6 +97,21 @@ VPieceNode &VPieceNode::operator=(const VPieceNode &node)
 VPieceNode::~VPieceNode()
 {}
 
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &out, const VPieceNode &p)
+{
+    out << p.d;
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &in, VPieceNode &p)
+{
+    in >> *p.d;
+    return in;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VPieceNode::GetId() const
 {

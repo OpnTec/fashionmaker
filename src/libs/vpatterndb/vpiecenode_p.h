@@ -92,6 +92,9 @@ public:
 
     ~VPieceNodeData();
 
+    friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
+    friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
+
     /** @brief id object id. */
     quint32 m_id;
 
@@ -116,7 +119,7 @@ public:
 
     PieceNodeAngle m_angleType;
 
-    PassmarkLineType   m_passmarkLineType;
+    PassmarkLineType  m_passmarkLineType;
     PassmarkAngleType m_passmarkAngleType;
 
 private:
@@ -125,6 +128,54 @@ private:
 
 VPieceNodeData::~VPieceNodeData()
 {}
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
+{
+    out << p.m_id
+        << static_cast<int>(p.m_typeTool)
+        << p.m_reverse
+        << p.m_excluded
+        << p.m_isPassmark
+        << p.m_saBefore
+        << p.m_saAfter
+        << p.m_formulaWidthBefore
+        << p.m_formulaWidthAfter
+        << static_cast<int>(p.m_angleType)
+        << static_cast<int>(p.m_passmarkLineType)
+        << static_cast<int>(p.m_passmarkAngleType);
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
+{
+    int typeTool = 0;
+    int angleType = 0;
+    int passmarkLineType = 0;
+    int passmarkAngleType = 0;
+
+    in >> p.m_id
+       >> typeTool
+       >> p.m_reverse
+       >> p.m_excluded
+       >> p.m_isPassmark
+       >> p.m_saBefore
+       >> p.m_saAfter
+       >> p.m_formulaWidthBefore
+       >> p.m_formulaWidthAfter
+       >> angleType
+       >> passmarkLineType
+       >> passmarkAngleType;
+
+    p.m_typeTool = static_cast<Tool>(typeTool);
+    p.m_angleType = static_cast<PieceNodeAngle>(angleType);
+    p.m_passmarkLineType = static_cast<PassmarkLineType>(passmarkLineType);
+    p.m_passmarkAngleType = static_cast<PassmarkAngleType>(passmarkAngleType);
+
+    return in;
+}
 
 QT_WARNING_POP
 
