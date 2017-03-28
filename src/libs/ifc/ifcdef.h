@@ -174,6 +174,8 @@ extern const QString ColorCornFlowerBlue;
 #define ARC_ "Arc_"
 #define EARC_ "ElArc_"
 
+extern const QString measurement_;
+extern const QString increment_;
 extern const QString line_;
 extern const QString angleLine_;
 extern const QString arc_;

@@ -372,6 +372,8 @@ void VTranslateVars::InitPatternMakingSystems()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitVariables()
 {
+    variables.insert(measurement_, translate("VTranslateVars", "M_", "Left symbol _ in the name"));
+    variables.insert(increment_, translate("VTranslateVars", "Increment_", "Left symbol _ in the name"));
     variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in the name"));
     variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in the name"));
     variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));

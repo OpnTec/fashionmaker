@@ -1434,10 +1434,6 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Radius1:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1519,6 +1515,10 @@
     </message>
     <message>
         <source>Edit rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1667,10 +1667,6 @@
 <context>
     <name>DialogFlippingByAxis</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Origin point:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1698,13 +1694,13 @@
         <source>Horizontal axis</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>First line point:</source>
         <translation type="unfinished"></translation>
@@ -1731,6 +1727,10 @@
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2114,10 +2114,6 @@
         <translation>Jäsentämis virhe: %1</translation>
     </message>
     <message>
-        <source>Increment_%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit increment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2147,6 +2143,25 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogInsertNode</name>
+    <message>
+        <source>Insert node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2718,10 +2733,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogMove</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2755,6 +2766,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3395,10 +3410,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPin</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pin tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3408,6 +3419,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4154,6 +4169,10 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation type="unfinished">Polut</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6092,6 +6111,14 @@ Haluatko tallentaa muutokset?</translation>
 %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Insert node tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an item to insert</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6950,10 +6977,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>M_%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10387,6 +10410,16 @@ Do you want to save your changes?</source>
     <message>
         <source>atanhD</source>
         <comment>hyperbolic arcur tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

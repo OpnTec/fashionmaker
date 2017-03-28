@@ -471,7 +471,7 @@ void DialogIncrements::AddIncrement()
     QString name;
     do
     {
-        name = CustomIncrSign + tr("Increment_%1").arg(num);
+        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
         num++;
     } while (data->IsUnique(name)==false);
 

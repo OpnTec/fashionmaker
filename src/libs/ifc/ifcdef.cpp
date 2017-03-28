@@ -165,6 +165,8 @@ const QString ColorDeepSkyBlue      = QStringLiteral("deepskyblue");
 const QString ColorCornFlowerBlue   = QStringLiteral("cornflowerblue");
 
 //variables
+const QString measurement_         = QStringLiteral("M_");
+const QString increment_           = QStringLiteral("Increment_");
 const QString line_                = QStringLiteral("Line_");
 const QString angleLine_           = QStringLiteral("AngleLine_");
 const QString spl_                 = QStringLiteral(SPL_);
@@ -190,7 +192,9 @@ const QString seg_                 = QStringLiteral("Seg_");
 const QString currentLength        = QStringLiteral("CurrentLength");
 const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
 
-const QStringList builInVariables = QStringList() << line_
+const QStringList builInVariables = QStringList() << measurement_
+                                                  << increment_
+                                                  << line_
                                                   << angleLine_
                                                   << arc_
                                                   << spl_

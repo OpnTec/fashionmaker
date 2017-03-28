@@ -1237,7 +1237,7 @@ void TMainWindow::AddCustom()
     QString name;
     do
     {
-        name = CustomMSign + tr("M_%1").arg(num);
+        name = CustomMSign + qApp->TrVars()->InternalVarToUser(measurement_) + QString().number(num);
         num++;
     } while (data->IsUnique(name) == false);
 

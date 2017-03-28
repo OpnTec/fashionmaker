@@ -111,33 +111,37 @@ void VToolShoulderPoint::setDialog()
  * @param length length form shoulder point to our.
  * @return point.
  */
-//TODO find better way calculate point.
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                       const qreal &length)
 {
+    QPointF shoulderPoint = p2Line; // Position if result was not found
+    if (length <= 0)
+    {
+        return shoulderPoint;
+    }
+
     QLineF line = QLineF(p1Line, p2Line);
-    qreal toolLength = length;
-    qreal dist = line.length();
-    if (dist>toolLength)
+    const qreal baseLength = line.length();
+    const int baseAngle = qRound(line.angle());
+    line.setLength(length*2);
+
+    QPointF p1;
+    QPointF p2;
+
+    const qint32 res = VGObject::LineIntersectCircle(pShoulder, length, line, p1, p2);
+
+    // If possition is right we will find only one result.
+    // If found two cases this is wrong result. Return default position.
+    if (res == 1)
     {
-        qDebug()<<"Correction of length in shoulder point tool. Parameter length too small.";
-        toolLength = dist;
-    }
-    if (VFuzzyComparePossibleNulls(dist, toolLength))
-    {
-        return line.p2();
-    }
-    qreal step = 0.01;
-    while (1)
-    {
-        line.setLength(line.length()+step);
-        QLineF line2 = QLineF(pShoulder, line.p2());
-        if (line2.length()>=toolLength)
+        const QLineF line = QLineF(p1Line, p1);
+        if (line.length() > baseLength && baseAngle == qRound(line.angle()))
         {
-            return line.p2();
+            shoulderPoint = p1;
         }
     }
-    return QPointF();
+
+    return shoulderPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
