@@ -1172,7 +1172,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
 
-    m_seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
+    m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
@@ -1232,15 +1232,21 @@ void VToolSeamAllowance::RefreshGeometry()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    QPainterPath mainPath = detail.MainPathPath(this->getData());
-    this->setPath(mainPath);
+    QPainterPath path = detail.MainPathPath(this->getData());
+
+    {
+        QPainterPath mainPath = path;
+        mainPath.addPath(detail.PassmarksPath(this->getData()));
+        this->setPath(mainPath);
+    }
+
     this->setPos(detail.GetMx(), detail.GetMy());
 
     if (detail.IsSeamAllowance())
     {
-        mainPath.addPath(detail.SeamAllowancePath(this->getData()));
-        mainPath.setFillRule(Qt::OddEvenFill);
-        m_seamAllowance->setPath(mainPath);
+        path.addPath(detail.SeamAllowancePath(this->getData()));
+        path.setFillRule(Qt::OddEvenFill);
+        m_seamAllowance->setPath(path);
     }
     else
     {

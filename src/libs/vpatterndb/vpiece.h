@@ -61,9 +61,11 @@ public:
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
     QVector<VPointF> MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
+    QVector<QLineF>  PassmarksLines(const VContainer *data) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const VContainer *data) const;
+    QPainterPath PassmarksPath(const VContainer *data) const;
 
     qreal GetMx() const;
     void  SetMx(qreal value);
@@ -112,6 +114,21 @@ private:
     QSharedDataPointer<VPieceData> d;
 
     QVector<CustomSARecord> GetValidRecords() const;
+
+    QVector<VSAPoint> GetNodeSAPoints(int index, const VContainer *data) const;
+
+    bool GetPassmarkSAPoint(int index, const VContainer *data, VSAPoint &point) const;
+    bool GetPassmarkPreviousSAPoint(int index, const VSAPoint &passmarkSAPoint, const VContainer *data,
+                                    VSAPoint &point) const;
+    bool GetPassmarkNextSAPoint(int index, const VSAPoint &passmarkSAPoint, const VContainer *data,
+                                VSAPoint &point) const;
+    bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPoint &passmarkSAPoint,
+                                const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const;
+
+    bool IsPassmarksPossible() const;
+    bool IsPassmarkVisible(int passmarkIndex) const;
+
+    QVector<QLineF> CreatePassmark(int previousIndex, int passmarkIndex, int nextIndex, const VContainer *data) const;
 
     static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
 };

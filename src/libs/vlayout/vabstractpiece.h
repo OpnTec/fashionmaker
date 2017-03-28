@@ -158,6 +158,9 @@ public:
     static QVector<QPointF> Equidistant(const QVector<VSAPoint> &points, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
+    static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+                                     const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
+    static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
@@ -176,8 +179,6 @@ private:
     static QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex);
     static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
     static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
-    static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                     const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QVector<QPointF> AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
                                           qreal width);
     static QVector<QPointF> AngleByIntersection(const QPointF &p1, const QPointF &p2, const QPointF &p3,
@@ -195,7 +196,6 @@ private:
     static QVector<QPointF> AngleBySecondRightAngle(const QPointF &p2, const QPointF &p3,
                                                     const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
                                                     qreal width);
-    static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
     static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
     static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
