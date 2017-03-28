@@ -2324,7 +2324,7 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation>Incremento_%1</translation>
+        <translation type="vanished">Incremento_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
@@ -7533,7 +7533,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>M_%1</source>
-        <translation>M_%1</translation>
+        <translation type="vanished">M_%1</translation>
     </message>
     <message>
         <source>Error</source>
@@ -11074,6 +11074,16 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>atanhD</source>
         <comment>hyperbolic arcur tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1761,10 +1761,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Increment_%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit increment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6143,10 +6139,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>M_%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -9371,6 +9363,16 @@ Do you want to save your changes?</source>
     <message>
         <source>atanhD</source>
         <comment>hyperbolic arcur tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

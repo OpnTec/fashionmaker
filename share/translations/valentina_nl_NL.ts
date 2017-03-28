@@ -1707,10 +1707,6 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialoog</translation>
-    </message>
-    <message>
         <source>Radius1:</source>
         <translation>Straal1:</translation>
     </message>
@@ -2412,7 +2408,7 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation>Verkleinen/vergroten_%1</translation>
+        <translation type="vanished">Verkleinen/vergroten_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
@@ -3771,10 +3767,6 @@ Toch de instellingen aanpassen?</translation>
 </context>
 <context>
     <name>DialogPin</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialoog</translation>
-    </message>
     <message>
         <source>Pin tool</source>
         <translation>Pin gereedschap</translation>
@@ -7637,7 +7629,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>M_%1</source>
-        <translation>M_%1</translation>
+        <translation type="vanished">M_%1</translation>
     </message>
     <message>
         <source>Error</source>
@@ -11366,6 +11358,16 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>atanhD</source>
         <comment>hyperbolic arcur tangens function working with degrees</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
