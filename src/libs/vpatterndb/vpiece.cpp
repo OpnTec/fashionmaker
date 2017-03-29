@@ -679,7 +679,7 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
                 && not d->m_path.at(indexStartPoint).IsExcluded()
                 && indexEndPoint != -1
                 && not d->m_path.at(indexEndPoint).IsExcluded()
-                && record.startPoint < record.endPoint)
+                && indexStartPoint < indexEndPoint)
         {
             records.append(record);
         }
