@@ -114,6 +114,7 @@ private:
     QSharedDataPointer<VPieceData> d;
 
     QVector<CustomSARecord> GetValidRecords() const;
+    QVector<CustomSARecord> FilterRecords(QVector<CustomSARecord> records) const;
 
     QVector<VSAPoint> GetNodeSAPoints(int index, const VContainer *data) const;
 

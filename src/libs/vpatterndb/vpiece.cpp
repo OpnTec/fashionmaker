@@ -68,52 +68,6 @@ QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVecto
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> FilterRecords(QVector<CustomSARecord> records)
-{
-    if (records.size() < 2)
-    {
-        return records;
-    }
-
-    bool foundFilter = false;// Need in case "filter" will stay empty.
-    CustomSARecord filter;
-    int startIndex = records.size()-1;
-
-    for (int i = 0; i < records.size(); ++i)
-    {
-        if (records.at(i).startPoint < static_cast<quint32>(startIndex))
-        {
-            startIndex = i;
-            filter = records.at(i);
-            foundFilter = true;
-        }
-    }
-
-    if (not foundFilter)
-    {
-        return records; // return as is
-    }
-
-    records.remove(startIndex);
-
-    QVector<CustomSARecord> secondRound;
-    for (int i = 0; i < records.size(); ++i)
-    {
-        if (records.at(i).startPoint > filter.endPoint)
-        {
-            secondRound.append(records.at(i));
-        }
-    }
-
-    QVector<CustomSARecord> filtered;
-    filtered.append(filter);
-
-    filtered += FilterRecords(secondRound);
-
-    return filtered;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal PassmarkLength(const VSAPoint &passmarkSAPoint, qreal width)
 {
     qreal w1 = passmarkSAPoint.GetSAAfter();
@@ -731,6 +685,55 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
         }
     }
     return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) const
+{
+    if (records.size() < 2)
+    {
+        return records;
+    }
+
+    bool foundFilter = false;// Need in case "filter" will stay empty.
+    CustomSARecord filter;
+    int startIndex = d->m_path.CountNodes()-1;
+
+    for (int i = 0; i < records.size(); ++i)
+    {
+        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
+        if (indexStartPoint < startIndex)
+        {
+            startIndex = i;
+            filter = records.at(i);
+            foundFilter = true;
+        }
+    }
+
+    if (not foundFilter)
+    {
+        return records; // return as is
+    }
+
+    records.remove(startIndex);
+
+    QVector<CustomSARecord> secondRound;
+    for (int i = 0; i < records.size(); ++i)
+    {
+        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
+        const int indexEndPoint = d->m_path.indexOfNode(filter.endPoint);
+        if (indexStartPoint > indexEndPoint)
+        {
+            secondRound.append(records.at(i));
+        }
+    }
+
+    QVector<CustomSARecord> filtered;
+    filtered.append(filter);
+
+    filtered += FilterRecords(secondRound);
+
+    return filtered;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

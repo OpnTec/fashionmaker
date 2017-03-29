@@ -2029,10 +2029,10 @@ void DialogSeamAllowance::PatternPinPointChanged()
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
-    piece.GetPath().SetNodes(GetPieceInternals<VPieceNode>(uiTabPaths->listWidgetMainPath));
-    piece.SetCustomSARecords(GetPieceInternals<CustomSARecord>(uiTabPaths->listWidgetCustomSA));
-    piece.SetInternalPaths(GetPieceInternals<quint32>(uiTabPaths->listWidgetInternalPaths));
-    piece.SetPins(GetPieceInternals<quint32>(uiTabPins->listWidgetPins));
+    piece.GetPath().SetNodes(GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath));
+    piece.SetCustomSARecords(GetListInternals<CustomSARecord>(uiTabPaths->listWidgetCustomSA));
+    piece.SetInternalPaths(GetListInternals<quint32>(uiTabPaths->listWidgetInternalPaths));
+    piece.SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetName(uiTabLabels->lineEditName->text());
@@ -2232,7 +2232,7 @@ void DialogSeamAllowance::InitNodesList()
     uiTabPaths->comboBoxNodes->blockSignals(true);
     uiTabPaths->comboBoxNodes->clear();
 
-    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
     for (int i = 0; i < nodes.size(); ++i)
     {
@@ -2266,7 +2266,7 @@ void DialogSeamAllowance::InitPassmarksList()
     uiTabPassmarks->comboBoxPassmarks->blockSignals(true);
     uiTabPassmarks->comboBoxPassmarks->clear();
 
-    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
     for (int i = 0; i < nodes.size(); ++i)
     {
@@ -2495,7 +2495,7 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
     box->clear();
     box->addItem(tr("Empty"), NULL_ID);
 
-    const QVector<VPieceNode> nodes = GetPieceInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
     for (int i = 0; i < nodes.size(); ++i)
     {
@@ -2522,7 +2522,7 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
     box->clear();
     box->addItem(QLatin1String("<") + tr("no pin") + QLatin1String(">"), NULL_ID);
 
-    const QVector<quint32> pins = GetPieceInternals<quint32>(uiTabPins->listWidgetPins);
+    const QVector<quint32> pins = GetListInternals<quint32>(uiTabPins->listWidgetPins);
 
     for (int i = 0; i < pins.size(); ++i)
     {
@@ -2804,20 +2804,6 @@ void DialogSeamAllowance::ClearFields()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-QVector<T> DialogSeamAllowance::GetPieceInternals(const QListWidget *list) const
-{
-    SCASSERT(list != nullptr)
-    QVector<T> internals;
-    for (qint32 i = 0; i < list->count(); ++i)
-    {
-        QListWidgetItem *item = list->item(i);
-        internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
-    }
-    return internals;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetGrainlineAngle(QString angleFormula)
 {
     if (angleFormula.isEmpty())
@@ -2984,7 +2970,7 @@ void DialogSeamAllowance::ShowPins()
         m_visPins = new VisPiecePins(data);
     }
 
-    m_visPins->SetPins(GetPieceInternals<quint32>(uiTabPins->listWidgetPins));
+    m_visPins->SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
 
     if (not qApp->getCurrentScene()->items().contains(m_visPins))
     {

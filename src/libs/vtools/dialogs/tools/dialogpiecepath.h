@@ -70,8 +70,11 @@ private slots:
     void ListChanged();
     void NameChanged();
     void NodeChanged(int index);
+    void PassmarkChanged(int index);
     void ReturnDefBefore();
     void ReturnDefAfter();
+    void PassmarkLineTypeChanged(int id);
+    void PassmarkAngleTypeChanged(int id);
 
     void EvalWidth();
     void EvalWidthBefore();
@@ -105,9 +108,11 @@ private:
 
     void InitPathTab();
     void InitSeamAllowanceTab();
+    void InitPassmarksTab();
     void InitPathTypes();
     void InitListPieces();
     void InitNodesList();
+    void InitPassmarksList();
     void NodeAngleChanged(int index);
 
     VPiecePath CreatePath() const;

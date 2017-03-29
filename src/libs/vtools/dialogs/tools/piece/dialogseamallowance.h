@@ -256,9 +256,6 @@ private:
 
     void SetFormulaSAWidth(const QString &formula);
 
-    template <typename T>
-    QVector<T> GetPieceInternals(const QListWidget *list) const;
-
     void SetGrainlineAngle(QString angleFormula);
     void SetGrainlineLength(QString lengthFormula);
 
