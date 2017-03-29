@@ -72,7 +72,8 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
       formulaBaseHeightAngle(0),
       objects(),
       stage1(true),
-      m_suffix()
+      m_suffix(),
+      m_firstRelease(false)
 {
     ui->setupUi(this);
 
@@ -200,6 +201,14 @@ void DialogRotation::ShowDialog(bool click)
     }
     else if (not stage1 && prepare && click)
     {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
         /*We will ignore click if pointer is in point circle*/
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
         SCASSERT(scene != nullptr)

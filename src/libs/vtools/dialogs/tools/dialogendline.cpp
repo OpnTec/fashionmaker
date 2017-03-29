@@ -62,8 +62,13 @@
  * @param parent parent widget
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine),
-      formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogEndLine),
+      formulaLength(),
+      formulaAngle(),
+      formulaBaseHeight(0),
+      formulaBaseHeightAngle(0),
+      m_firstRelease(false)
 {
     ui->setupUi(this);
 
@@ -298,6 +303,14 @@ void DialogEndLine::ShowDialog(bool click)
     {
         if (click)
         {
+            // The check need to ignore first release of mouse button.
+            // User can select point by clicking on a label.
+            if (not m_firstRelease)
+            {
+                m_firstRelease = true;
+                return;
+            }
+
             /*We will ignore click if pointer is in point circle*/
             VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
             SCASSERT(scene != nullptr)

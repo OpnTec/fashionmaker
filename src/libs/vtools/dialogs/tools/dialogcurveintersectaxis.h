@@ -88,6 +88,8 @@ private:
 
     QString formulaAngle;
     int     formulaBaseHeightAngle;
+
+    bool m_firstRelease;
 };
 
 #endif // DIALOGCURVEINTERSECTAXIS_H
