@@ -299,14 +299,13 @@ QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> RoundPoints(const QVector<QPointF> &points)
+QVector<QPointF> RoundPoints(QVector<QPointF> points)
 {
-    QVector<QPointF> p;
     for (int i=0; i < points.size(); ++i)
     {
-        p.append(QPointF(qRound(points.at(i).x()), qRound(points.at(i).y())));
+        points[i] = QPointF(qRound(points.at(i).x()), qRound(points.at(i).y()));
     }
-    return p;
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,6 +384,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetCountourPoints(piece.MainPathPoints(pattern));
     det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
     det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
+    det.SetPassmarks(piece.PassmarksLines(pattern));
 
     det.SetName(piece.GetName());
 
@@ -804,6 +804,21 @@ void VLayoutPiece::SetLayoutAllowancePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> VLayoutPiece::GetPassmarks() const
+{
+    return Map(d->passmarks);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPassmarks(const QVector<QLineF> &passmarks)
+{
+    if (IsSeamAllowance())
+    {
+        d->passmarks = passmarks;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VLayoutPiecePath> VLayoutPiece::GetInternalPaths() const
 {
     return d->m_internalPaths;
@@ -816,9 +831,10 @@ void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::Map(const QVector<QPointF> &points) const
+template <class T>
+QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
 {
-    QVector<QPointF> p;
+    QVector<T> p;
     for (int i = 0; i < points.size(); ++i)
     {
         p.append(d->matrix.map(points.at(i)));
@@ -826,7 +842,7 @@ QVector<QPointF> VLayoutPiece::Map(const QVector<QPointF> &points) const
 
     if (d->mirror)
     {
-        QList<QPointF> list = p.toList();
+        QList<T> list = p.toList();
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
             list.swap(k, s-(1+k));
@@ -853,6 +869,7 @@ QPainterPath VLayoutPiece::ContourPath() const
     // seam allowance
     if (IsSeamAllowance() == true)
     {
+        // Draw seam allowance
         points = GetSeamAllowancePoints();
 
         if (points.last().toPoint() != points.first().toPoint())
@@ -868,6 +885,17 @@ QPainterPath VLayoutPiece::ContourPath() const
         }
 
         path.addPath(ekv);
+
+        // Draw passmarks
+        const QVector<QLineF> passmarks = GetPassmarks();
+        QPainterPath passmaksPath;
+        for (qint32 i = 0; i < passmarks.count(); ++i)
+        {
+            passmaksPath.moveTo(passmarks.at(i).p1());
+            passmaksPath.lineTo(passmarks.at(i).p2());
+        }
+
+        path.addPath(passmaksPath);
         path.setFillRule(Qt::WindingFill);
     }
 
