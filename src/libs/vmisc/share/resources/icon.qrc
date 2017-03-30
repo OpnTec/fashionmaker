@@ -74,5 +74,7 @@
         <file>icon/32x32/paths@2x.png</file>
         <file>icon/32x32/pins.png</file>
         <file>icon/32x32/pins@2x.png</file>
+        <file>icon/32x32/passmark.png</file>
+        <file>icon/32x32/passmark@2x.png</file>
     </qresource>
 </RCC>

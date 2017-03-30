@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.6</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.79375" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="35"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="30"/>
+            <point type="pointOfIntersection" id="4" name="A3" firstPoint="2" secondPoint="3" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="5" firstPoint="3" secondPoint="4" lineColor="black"/>
+            <line typeLine="hair" id="6" firstPoint="2" secondPoint="4" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="7" name="A4" firstPoint="3" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="8" name="A5" firstPoint="2" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="9" name="A6" firstPoint="1" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="10" name="A7" firstPoint="4" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="endLine" typeLine="hair" id="11" name="A8" basePoint="4" mx="0.132292" lineColor="black" my="0.264583" angle="45" length="5"/>
+            <spline type="simpleInteractive" point4="2" angle1="331.947" angle2="206.283" id="22" color="black" length1="10.6467" length2="3.72066" point1="1"/>
+            <point type="alongLine" typeLine="none" id="23" name="A9" firstPoint="9" secondPoint="10" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="alongLine" typeLine="none" id="26" name="A10" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <spline type="pathInteractive" id="28" color="black">
+                <pathPoint angle1="99.6112" pSpline="1" angle2="279.611" length1="0" length2="12.1117"/>
+                <pathPoint angle1="182.155" pSpline="23" angle2="2.155" length1="3.681" length2="7.90283"/>
+                <pathPoint angle1="104.746" pSpline="4" angle2="284.746" length1="7.65108" length2="0"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="36" name="A11" firstPoint="3" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="endLine" typeLine="hair" id="37" name="A12" basePoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="5"/>
+            <point type="endLine" typeLine="hair" id="38" name="A13" basePoint="4" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="5"/>
+            <point type="endLine" typeLine="hair" id="39" name="A14" basePoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="8"/>
+            <spline type="pathInteractive" id="40" color="black">
+                <pathPoint angle1="68.2546" pSpline="38" angle2="248.255" length1="0" length2="3.04533"/>
+                <pathPoint angle1="20.525" pSpline="39" angle2="200.525" length1="6.45371" length2="5.13433"/>
+                <pathPoint angle1="331.658" pSpline="37" angle2="151.658" length1="7.95538" length2="1.19499"/>
+            </spline>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="29" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="30" idObject="1" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="31" idObject="28"/>
+            <point type="modeling" inUse="true" id="32" idObject="23" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="33" idObject="28"/>
+            <point type="modeling" inUse="true" id="34" idObject="4" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="41" idObject="36" mx="0.963072" my="-2.00913"/>
+            <point type="modeling" inUse="true" id="42" idObject="38" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="43" idObject="40"/>
+            <point type="modeling" inUse="true" id="44" idObject="39" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="45" idObject="40"/>
+            <point type="modeling" inUse="true" id="46" idObject="37" mx="0.132292" my="0.264583"/>
+            <path type="1" typeLine="hair" inUse="true" id="47" name="test path">
+                <nodes>
+                    <node type="NodePoint" idObject="42"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="43"/>
+                    <node type="NodePoint" passmarkAngle="straightforward" passmark="true" passmarkLine="one" idObject="44"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="45"/>
+                    <node type="NodePoint" idObject="46"/>
+                </nodes>
+            </path>
+        </modeling>
+        <details>
+            <detail id="35" name="Detail" forbidFlipping="true" united="false" seamAllowance="true" mx="0.290976" inLayout="true" width="1" my="35.1303" version="2">
+                <data rotation="0" letter="" fontSize="0" visible="false" mx="0" width="1" my="0" height="1"/>
+                <patternInfo rotation="0" fontSize="0" visible="false" mx="0" width="1" my="0" height="1"/>
+                <grainline arrows="0" rotation="1" visible="false" mx="0" my="0" length="90"/>
+                <nodes>
+                    <node type="NodePoint" idObject="34"/>
+                    <node type="NodePoint" passmarkAngle="straightforward" passmark="true" passmarkLine="three" idObject="41"/>
+                    <node type="NodePoint" idObject="29"/>
+                    <node type="NodePoint" idObject="30"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="31"/>
+                    <node type="NodePoint" passmarkAngle="straightforward" passmark="true" passmarkLine="three" idObject="32"/>
+                    <node type="NodeSplinePath" reverse="0" idObject="33"/>
+                </nodes>
+                <csa>
+                    <record path="47" reverse="false" includeAs="1" start="34" end="29"/>
+                </csa>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

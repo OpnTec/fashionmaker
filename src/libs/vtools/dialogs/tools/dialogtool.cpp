@@ -523,6 +523,27 @@ bool DialogTool::DoublePoints(QListWidget *listWidget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::EachPointLabelIsUnique(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    QSet<quint32> pointLabels;
+    int countPoints = 0;
+    for (int i=0; i < listWidget->count(); ++i)
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+        if (rowNode.GetTypeTool() == Tool::NodePoint)
+        {
+            ++countPoints;
+            pointLabels.insert(rowNode.GetId());
+        }
+    }
+
+    return countPoints == pointLabels.size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::DialogWarningIcon()
 {
     const QIcon icon = QIcon::fromTheme("dialog-warning",
@@ -545,7 +566,7 @@ QFont DialogTool::NodeFont(bool nodeExcluded)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetNodeName(const VPieceNode &node) const
+QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
@@ -558,6 +579,23 @@ QString DialogTool::GetNodeName(const VPieceNode &node) const
         if (node.GetReverse())
         {
             name = QLatin1String("- ") + name;
+        }
+    }
+    else if (showPassmark && node.IsPassmark())
+    {
+        switch(node.GetPassmarkLineType())
+        {
+            case PassmarkLineType::OneLine:
+                name += QLatin1String("^");
+                break;
+            case PassmarkLineType::TwoLines:
+                name += QLatin1String("^^");
+                break;
+            case PassmarkLineType::ThreeLines:
+                name += QLatin1String("^^^");
+                break;
+            default:
+                break;
         }
     }
 
@@ -577,7 +615,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-            name = GetNodeName(node);
+            name = GetNodeName(node, true);
             break;
         default:
             qDebug()<<"Got wrong tools. Ignore.";

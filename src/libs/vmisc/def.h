@@ -89,6 +89,25 @@ enum class PieceNodeAngle : unsigned char
     BySecondEdgeRightAngle
 };
 
+enum class PassmarkLineType : unsigned char
+{
+    OneLine = 0, // Default
+    TwoLines,
+    ThreeLines
+};
+
+QString          PassmarkLineTypeToString(PassmarkLineType type);
+PassmarkLineType StringToPassmarkLineType(const QString &value);
+
+enum class PassmarkAngleType : unsigned char
+{
+    Straightforward = 0, // Default
+    Bisector
+};
+
+QString           PassmarkAngleTypeToString(PassmarkAngleType type);
+PassmarkAngleType StringToPassmarkAngleType(const QString &value);
+
 enum class PiecePathIncludeType : unsigned char
 {
     AsMainPath = 0,
@@ -676,6 +695,13 @@ extern const QString cursorArrowCloseHand;
 extern const QString degreeSymbol;
 extern const QString trueStr;
 extern const QString falseStr;
+
+extern const QString strOne;
+extern const QString strTwo;
+extern const QString strThree;
+
+extern const QString strStraightforward;
+extern const QString strBisector;
 
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void SetOverrideCursor(Qt::CursorShape shape);

@@ -256,6 +256,9 @@ protected:
     template <typename T>
     void             AddVisualization();
 
+    template <typename T>
+    QVector<T> GetListInternals(const QListWidget *list) const;
+
     void             ChangeColor(QWidget *widget, const QColor &color);
     virtual void     ShowVisualization() {}
     /**
@@ -270,10 +273,11 @@ protected:
     static int       FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
     static bool      FirstPointEqualLast(QListWidget *listWidget);
     static bool      DoublePoints(QListWidget *listWidget);
+    static bool      EachPointLabelIsUnique(QListWidget *listWidget);
     static QString   DialogWarningIcon();
     static QFont     NodeFont(bool nodeExcluded);
 
-    QString          GetNodeName(const VPieceNode &node) const;
+    QString          GetNodeName(const VPieceNode &node, bool showPassmark = false) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
 
     void             InitNodeAngles(QComboBox *box);
@@ -292,6 +296,20 @@ private:
 
 
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+QVector<T> DialogTool::GetListInternals(const QListWidget *list) const
+{
+    SCASSERT(list != nullptr)
+    QVector<T> internals;
+    for (qint32 i = 0; i < list->count(); ++i)
+    {
+        QListWidgetItem *item = list->item(i);
+        internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
+    }
+    return internals;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline VAbstractTool *DialogTool::GetAssociatedTool()

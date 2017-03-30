@@ -44,11 +44,12 @@ public:
           m_typeTool(Tool::NodePoint),
           m_reverse(false),
           m_excluded(false),
-          m_saBefore(-1),
-          m_saAfter(-1),
+          m_isPassmark(false),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength)
+          m_angleType(PieceNodeAngle::ByLength),
+          m_passmarkLineType(PassmarkLineType::OneLine),
+          m_passmarkAngleType(PassmarkAngleType::Straightforward)
     {}
 
     VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
@@ -56,11 +57,12 @@ public:
           m_typeTool(typeTool),
           m_reverse(reverse),
           m_excluded(false),
-          m_saBefore(-1),
-          m_saAfter(-1),
+          m_isPassmark(false),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength)
+          m_angleType(PieceNodeAngle::ByLength),
+          m_passmarkLineType(PassmarkLineType::OneLine),
+          m_passmarkAngleType(PassmarkAngleType::Straightforward)
     {
         if (m_typeTool == Tool::NodePoint)
         {
@@ -74,14 +76,18 @@ public:
           m_typeTool(node.m_typeTool),
           m_reverse(node.m_reverse),
           m_excluded(node.m_excluded),
-          m_saBefore(node.m_saBefore),
-          m_saAfter(node.m_saAfter),
+          m_isPassmark(node.m_isPassmark),
           m_formulaWidthBefore(node.m_formulaWidthBefore),
           m_formulaWidthAfter(node.m_formulaWidthAfter),
-          m_angleType(node.m_angleType)
+          m_angleType(node.m_angleType),
+          m_passmarkLineType(node.m_passmarkLineType),
+          m_passmarkAngleType(node.m_passmarkAngleType)
     {}
 
     ~VPieceNodeData();
+
+    friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
+    friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
 
     /** @brief id object id. */
     quint32 m_id;
@@ -96,13 +102,16 @@ public:
      * affect on main path. Also include to exist path items automatically setted excluded. */
     bool m_excluded;
 
-    qreal m_saBefore;
-    qreal m_saAfter;
+    /** @brief m_isPassmark has sense only for points. If true to seam allowance should be added a passmark. */
+    bool m_isPassmark;
 
     QString m_formulaWidthBefore;
     QString m_formulaWidthAfter;
 
     PieceNodeAngle m_angleType;
+
+    PassmarkLineType  m_passmarkLineType;
+    PassmarkAngleType m_passmarkAngleType;
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
@@ -110,6 +119,50 @@ private:
 
 VPieceNodeData::~VPieceNodeData()
 {}
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
+{
+    out << p.m_id
+        << static_cast<int>(p.m_typeTool)
+        << p.m_reverse
+        << p.m_excluded
+        << p.m_isPassmark
+        << p.m_formulaWidthBefore
+        << p.m_formulaWidthAfter
+        << static_cast<int>(p.m_angleType)
+        << static_cast<int>(p.m_passmarkLineType)
+        << static_cast<int>(p.m_passmarkAngleType);
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
+{
+    int typeTool = 0;
+    int angleType = 0;
+    int passmarkLineType = 0;
+    int passmarkAngleType = 0;
+
+    in >> p.m_id
+       >> typeTool
+       >> p.m_reverse
+       >> p.m_excluded
+       >> p.m_isPassmark
+       >> p.m_formulaWidthBefore
+       >> p.m_formulaWidthAfter
+       >> angleType
+       >> passmarkLineType
+       >> passmarkAngleType;
+
+    p.m_typeTool = static_cast<Tool>(typeTool);
+    p.m_angleType = static_cast<PieceNodeAngle>(angleType);
+    p.m_passmarkLineType = static_cast<PassmarkLineType>(passmarkLineType);
+    p.m_passmarkAngleType = static_cast<PassmarkAngleType>(passmarkAngleType);
+
+    return in;
+}
 
 QT_WARNING_POP
 

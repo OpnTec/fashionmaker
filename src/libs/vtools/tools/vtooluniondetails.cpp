@@ -594,11 +594,11 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
 /**
  * @brief AddToNewDetail create united detail adding one node per time.
  */
-void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &newPath, const VPieceNode &node,
+void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &newPath, VPieceNode node,
                       quint32 idTool, QVector<quint32> &children, const QString &drawName, qreal dx = 0, qreal dy = 0,
                       quint32 pRotate = NULL_ID, qreal angle = 0);
 
-void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &newPath, const VPieceNode &node,
+void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &newPath, VPieceNode node,
                       quint32 idTool, QVector<quint32> &children, const QString &drawName, qreal dx, qreal dy,
                       quint32 pRotate, qreal angle)
 {
@@ -625,10 +625,8 @@ void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &new
             break;
     }
 
-    VPieceNode newNode(id, node.GetTypeTool(), node.GetReverse());
-    newNode.SetExcluded(node.IsExcluded());
-
-    newPath.Append(newNode);
+    node.SetId(id);
+    newPath.Append(node);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

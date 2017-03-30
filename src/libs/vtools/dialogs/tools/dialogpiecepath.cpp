@@ -55,6 +55,7 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 
     InitPathTab();
     InitSeamAllowanceTab();
+    InitPassmarksTab();
 
     flagName = true;//We have default name of piece.
     flagError = PathIsValid();
@@ -62,7 +63,8 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 
     vis = new VisToolPiecePath(data);
 
-    ui->tabWidget->removeTab(1);
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSeamAllowance));
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPassmarks));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,12 +226,19 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     SCASSERT(rowItem != nullptr);
     VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
+    QAction *actionPassmark = nullptr;
     QAction *actionReverse = nullptr;
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
         actionReverse = menu->addAction(tr("Reverse"));
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
+    }
+    else
+    {
+        actionPassmark = menu->addAction(tr("Passmark"));
+        actionPassmark->setCheckable(true);
+        actionPassmark->setChecked(rowNode.IsPassmark());
     }
 
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
@@ -238,16 +247,21 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     if (selectedAction == actionDelete)
     {
         delete ui->listWidget->item(row);
-        ValidObjects(PathIsValid());
     }
     else if (rowNode.GetTypeTool() != Tool::NodePoint && selectedAction == actionReverse)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode));
-        ValidObjects(PathIsValid());
+        rowItem->setText(GetNodeName(rowNode, true));
+    }
+    else if (selectedAction == actionPassmark)
+    {
+        rowNode.SetPassmark(not rowNode.IsPassmark());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
     }
 
+    ValidObjects(PathIsValid());
     ListChanged();
 }
 
@@ -358,6 +372,68 @@ void DialogPiecePath::NodeChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::PassmarkChanged(int index)
+{
+    ui->radioButtonOneLine->setDisabled(true);
+    ui->radioButtonTwoLines->setDisabled(true);
+    ui->radioButtonThreeLines->setDisabled(true);
+
+    ui->radioButtonStraightforward->setDisabled(true);
+    ui->radioButtonBisector->setDisabled(true);
+
+    ui->groupBoxLineType->blockSignals(true);
+    ui->groupBoxAngleType->blockSignals(true);
+
+    if (index != -1)
+    {
+        const VPiecePath path = CreatePath();
+        const int nodeIndex = path.indexOfNode(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        if (nodeIndex != -1)
+        {
+            const VPieceNode &node = path.at(nodeIndex);
+
+            // Line type
+            ui->radioButtonOneLine->setEnabled(true);
+            ui->radioButtonTwoLines->setEnabled(true);
+            ui->radioButtonThreeLines->setEnabled(true);
+
+            switch(node.GetPassmarkLineType())
+            {
+                case PassmarkLineType::OneLine:
+                    ui->radioButtonOneLine->setChecked(true);
+                    break;
+                case PassmarkLineType::TwoLines:
+                    ui->radioButtonTwoLines->setChecked(true);
+                    break;
+                case PassmarkLineType::ThreeLines:
+                    ui->radioButtonThreeLines->setChecked(true);
+                    break;
+                default:
+                    break;
+            }
+
+            // Angle type
+            ui->radioButtonStraightforward->setEnabled(true);
+            ui->radioButtonBisector->setEnabled(true);
+
+            switch(node.GetPassmarkAngleType())
+            {
+                case PassmarkAngleType::Straightforward:
+                    ui->radioButtonStraightforward->setChecked(true);
+                    break;
+                case PassmarkAngleType::Bisector:
+                    ui->radioButtonBisector->setChecked(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    ui->groupBoxLineType->blockSignals(false);
+    ui->groupBoxAngleType->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefBefore()
 {
     ui->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
@@ -367,6 +443,70 @@ void DialogPiecePath::ReturnDefBefore()
 void DialogPiecePath::ReturnDefAfter()
 {
     ui->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::PassmarkLineTypeChanged(int id)
+{
+    const int i = ui->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+            PassmarkLineType lineType = PassmarkLineType::OneLine;
+            if (id == ui->buttonGroupLineType->id(ui->radioButtonOneLine))
+            {
+                lineType = PassmarkLineType::OneLine;
+            }
+            else if (id == ui->buttonGroupLineType->id(ui->radioButtonTwoLines))
+            {
+                lineType = PassmarkLineType::TwoLines;
+            }
+            else if (id == ui->buttonGroupLineType->id(ui->radioButtonThreeLines))
+            {
+                lineType = PassmarkLineType::ThreeLines;
+            }
+
+            rowNode.SetPassmarkLineType(lineType);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(rowNode, true));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::PassmarkAngleTypeChanged(int id)
+{
+    const int i = ui->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+            PassmarkAngleType angleType = PassmarkAngleType::Straightforward;
+            if (id == ui->buttonGroupAngleType->id(ui->radioButtonStraightforward))
+            {
+                angleType = PassmarkAngleType::Straightforward;
+            }
+            else if (id == ui->buttonGroupAngleType->id(ui->radioButtonBisector))
+            {
+                angleType = PassmarkAngleType::Bisector;
+            }
+
+            rowNode.SetPassmarkAngleType(angleType);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(rowNode, true));
+
+            ListChanged();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -582,6 +722,19 @@ void DialogPiecePath::InitSeamAllowanceTab()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarksTab()
+{
+    InitPassmarksList();
+    connect(ui->comboBoxPassmarks, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogPiecePath::PassmarkChanged);
+
+    connect(ui->buttonGroupLineType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+            this, &DialogPiecePath::PassmarkLineTypeChanged);
+    connect(ui->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+            this, &DialogPiecePath::PassmarkAngleTypeChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTypes()
 {
     ui->comboBoxType->addItem(tr("Internal path"), static_cast<int>(PiecePathType::InternalPath));
@@ -621,6 +774,40 @@ void DialogPiecePath::InitNodesList()
     else
     {
         ui->comboBoxNodes->count() > 0 ? NodeChanged(0) : NodeChanged(-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarksList()
+{
+    const quint32 id = CURRENT_DATA(ui->comboBoxPassmarks).toUInt();
+
+    ui->comboBoxPassmarks->blockSignals(true);
+    ui->comboBoxPassmarks->clear();
+
+    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
+
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VPieceNode node = nodes.at(i);
+        if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
+        {
+            const QString name = GetNodeName(node);
+
+            ui->comboBoxPassmarks->addItem(name, node.GetId());
+        }
+    }
+    ui->comboBoxPassmarks->blockSignals(false);
+
+    const int index = ui->comboBoxPassmarks->findData(id);
+    if (index != -1)
+    {
+        ui->comboBoxPassmarks->setCurrentIndex(index);
+        PassmarkChanged(index);// Need in case combox index was not changed
+    }
+    else
+    {
+        ui->comboBoxPassmarks->count() > 0 ? PassmarkChanged(0) : PassmarkChanged(-1);
     }
 }
 
@@ -783,6 +970,11 @@ void DialogPiecePath::UpdateNodeSAAfter(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
 {
+    if (formula.isEmpty())
+    {
+        return;
+    }
+
     const QString width = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
@@ -794,6 +986,16 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
     VisToolPiecePath *path = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(path != nullptr)
     path->SetPath(CreatePath());
+
+    if (ui->tabWidget->indexOf(ui->tabSeamAllowance) == -1)
+    {
+        ui->tabWidget->addTab(ui->tabSeamAllowance, tr("Seam allowance"));
+    }
+
+    if (ui->tabWidget->indexOf(ui->tabPassmarks) == -1)
+    {
+        ui->tabWidget->addTab(ui->tabPassmarks, tr("Passmarks"));
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormulaWidth);
 }
@@ -886,6 +1088,12 @@ bool DialogPiecePath::PathIsValid() const
         else if (DoublePoints(ui->listWidget))
         {
             url += tr("You have double points!");
+            ui->helpLabel->setText(url);
+            return false;
+        }
+        else if (not EachPointLabelIsUnique(ui->listWidget))
+        {
+            url += tr("Each point in the path must be unique!");
             ui->helpLabel->setText(url);
             return false;
         }

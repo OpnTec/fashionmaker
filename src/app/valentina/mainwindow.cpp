@@ -354,6 +354,7 @@ void MainWindow::InitScenes()
     sceneDetails->setTransform(ui->view->transform());
 
     connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+    connect(ui->view, &VMainGraphicsView::MouseRelease, RECEIVER(this)[this](){EndVisualization(true);});
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -588,7 +589,6 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
         connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(ui->view, &VMainGraphicsView::MouseRelease, [this](){EndVisualization(true);});
         ui->view->itemClicked(nullptr);
     }
     else

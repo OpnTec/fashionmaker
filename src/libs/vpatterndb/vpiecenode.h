@@ -76,6 +76,15 @@ public:
 
     PieceNodeAngle GetAngleType() const;
     void           SetAngleType(PieceNodeAngle type);
+
+    bool IsPassmark() const;
+    void SetPassmark(bool passmark);
+
+    PassmarkLineType GetPassmarkLineType() const;
+    void             SetPassmarkLineType(PassmarkLineType lineType);
+
+    PassmarkAngleType GetPassmarkAngleType() const;
+    void               SetPassmarkAngleType(PassmarkAngleType angleType);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

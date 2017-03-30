@@ -97,6 +97,21 @@ VPieceNode &VPieceNode::operator=(const VPieceNode &node)
 VPieceNode::~VPieceNode()
 {}
 
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &out, const VPieceNode &p)
+{
+    out << p.d;
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &in, VPieceNode &p)
+{
+    in >> *p.d;
+    return in;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VPieceNode::GetId() const
 {
@@ -139,12 +154,22 @@ void VPieceNode::SetReverse(bool reverse)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSABefore(const VContainer *data) const
 {
+    if (d->m_formulaWidthBefore == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     return EvalFormula(data, d->m_formulaWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 {
+    if (d->m_formulaWidthBefore == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     qreal value = EvalFormula(data, d->m_formulaWidthBefore);
     if (value >= 0)
     {
@@ -171,12 +196,22 @@ void VPieceNode::SetFormulaSABefore(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSAAfter(const VContainer *data) const
 {
+    if (d->m_formulaWidthAfter == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     return EvalFormula(data, d->m_formulaWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 {
+    if (d->m_formulaWidthAfter == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     qreal value = EvalFormula(data, d->m_formulaWidthAfter);
     if (value >= 0)
     {
@@ -215,25 +250,43 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
     }
 }
 
-// Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator<<(QDataStream& out, const VPieceNode& p)
+bool VPieceNode::IsPassmark() const
 {
-    out << p.d->m_id << static_cast<int>(p.d->m_typeTool) << p.d->m_reverse;
-    return out;
+    return d->m_isPassmark;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator>>(QDataStream& in, VPieceNode& p)
+void VPieceNode::SetPassmark(bool passmark)
 {
-    in >> p.d->m_id;
+    if (GetTypeTool() == Tool::NodePoint)
+    {
+        d->m_isPassmark = passmark;
+    }
+}
 
-    int type = 0;
-    in >> type;
-    p.d->m_typeTool = static_cast<Tool>(type);
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkLineType VPieceNode::GetPassmarkLineType() const
+{
+    return d->m_passmarkLineType;
+}
 
-    in >> p.d->m_reverse;
-    return in;
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkLineType(PassmarkLineType lineType)
+{
+    d->m_passmarkLineType = lineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkAngleType VPieceNode::GetPassmarkAngleType() const
+{
+    return d->m_passmarkAngleType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkAngleType(PassmarkAngleType angleType)
+{
+    d->m_passmarkAngleType = angleType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

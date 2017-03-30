@@ -110,6 +110,8 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
     int               formulaBaseHeightAngle;
+
+    bool m_firstRelease;
 };
 
 #endif // DIALOGENDLINE_H

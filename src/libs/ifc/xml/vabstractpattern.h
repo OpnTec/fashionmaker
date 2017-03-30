@@ -218,6 +218,9 @@ public:
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
     static const QString AttrNodeExcluded;
+    static const QString AttrNodePassmark;
+    static const QString AttrNodePassmarkLine;
+    static const QString AttrNodePassmarkAngle;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
     static const QString AttrStart;

@@ -42,6 +42,7 @@ namespace Ui
     class TabLabels;
     class TabGrainline;
     class TabPins;
+    class TabPassmarks;
 }
 
 class VisPiecePins;
@@ -90,6 +91,7 @@ private slots:
     void ListChanged();
     void EnableSeamAllowance(bool enable);
     void NodeChanged(int index);
+    void PassmarkChanged(int index);
     void CSAStartPointChanged(int index);
     void CSAEndPointChanged(int index);
     void CSAIncludeTypeChanged(int index);
@@ -100,6 +102,8 @@ private slots:
     void PathDialogClosed(int result);
     void FancyTabChanged(int index);
     void TabChanged(int index);
+    void PassmarkLineTypeChanged(int id);
+    void PassmarkAngleTypeChanged(int id);
 
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();
@@ -158,11 +162,13 @@ private:
     Ui::TabLabels           *uiTabLabels;
     Ui::TabGrainline        *uiTabGrainline;
     Ui::TabPins             *uiTabPins;
+    Ui::TabPassmarks        *uiTabPassmarks;
 
     QWidget *m_tabPaths;
     QWidget *m_tabLabels;
     QWidget *m_tabGrainline;
     QWidget *m_tabPins;
+    QWidget *m_tabPassmarks;
 
     FancyTabBar* m_ftb;
 
@@ -236,6 +242,7 @@ private:
     void InitMainPathTab();
     void InitSeamAllowanceTab();
     void InitNodesList();
+    void InitPassmarksList();
     void InitCSAPoint(QComboBox *box);
     void InitPinPoint(QComboBox *box);
     void InitSAIncludeType();
@@ -244,12 +251,10 @@ private:
     void InitLabelsTab();
     void InitGrainlineTab();
     void InitPinsTab();
+    void InitPassmarksTab();
     void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
-
-    template <typename T>
-    QVector<T> GetPieceInternals(const QListWidget *list) const;
 
     void SetGrainlineAngle(QString angleFormula);
     void SetGrainlineLength(QString lengthFormula);

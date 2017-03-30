@@ -95,27 +95,30 @@ const QString VAbstractPattern::TagPath             = QStringLiteral("path");
 const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
 const QString VAbstractPattern::TagNode             = QStringLiteral("node");
 
-const QString VAbstractPattern::AttrName            = QStringLiteral("name");
-const QString VAbstractPattern::AttrVisible         = QStringLiteral("visible");
-const QString VAbstractPattern::AttrObject          = QStringLiteral("object");
-const QString VAbstractPattern::AttrTool            = QStringLiteral("tool");
-const QString VAbstractPattern::AttrType            = QStringLiteral("type");
-const QString VAbstractPattern::AttrLetter          = QStringLiteral("letter");
-const QString VAbstractPattern::AttrMaterial        = QStringLiteral("material");
-const QString VAbstractPattern::AttrUserDefined     = QStringLiteral("userDef");
-const QString VAbstractPattern::AttrCutNumber       = QStringLiteral("cutNumber");
-const QString VAbstractPattern::AttrPlacement       = QStringLiteral("placement");
-const QString VAbstractPattern::AttrArrows          = QStringLiteral("arrows");
-const QString VAbstractPattern::AttrNodeReverse     = QStringLiteral("reverse");
-const QString VAbstractPattern::AttrNodeExcluded     = QStringLiteral("excluded");
-const QString VAbstractPattern::AttrSABefore        = QStringLiteral("before");
-const QString VAbstractPattern::AttrSAAfter         = QStringLiteral("after");
-const QString VAbstractPattern::AttrStart           = QStringLiteral("start");
-const QString VAbstractPattern::AttrPath            = QStringLiteral("path");
-const QString VAbstractPattern::AttrEnd             = QStringLiteral("end");
-const QString VAbstractPattern::AttrIncludeAs       = QStringLiteral("includeAs");
-const QString VAbstractPattern::AttrWidth           = QStringLiteral("width");
-const QString VAbstractPattern::AttrRotation        = QStringLiteral("rotation");
+const QString VAbstractPattern::AttrName              = QStringLiteral("name");
+const QString VAbstractPattern::AttrVisible           = QStringLiteral("visible");
+const QString VAbstractPattern::AttrObject            = QStringLiteral("object");
+const QString VAbstractPattern::AttrTool              = QStringLiteral("tool");
+const QString VAbstractPattern::AttrType              = QStringLiteral("type");
+const QString VAbstractPattern::AttrLetter            = QStringLiteral("letter");
+const QString VAbstractPattern::AttrMaterial          = QStringLiteral("material");
+const QString VAbstractPattern::AttrUserDefined       = QStringLiteral("userDef");
+const QString VAbstractPattern::AttrCutNumber         = QStringLiteral("cutNumber");
+const QString VAbstractPattern::AttrPlacement         = QStringLiteral("placement");
+const QString VAbstractPattern::AttrArrows            = QStringLiteral("arrows");
+const QString VAbstractPattern::AttrNodeReverse       = QStringLiteral("reverse");
+const QString VAbstractPattern::AttrNodeExcluded      = QStringLiteral("excluded");
+const QString VAbstractPattern::AttrNodePassmark      = QStringLiteral("passmark");
+const QString VAbstractPattern::AttrNodePassmarkLine  = QStringLiteral("passmarkLine");
+const QString VAbstractPattern::AttrNodePassmarkAngle = QStringLiteral("passmarkAngle");
+const QString VAbstractPattern::AttrSABefore          = QStringLiteral("before");
+const QString VAbstractPattern::AttrSAAfter           = QStringLiteral("after");
+const QString VAbstractPattern::AttrStart             = QStringLiteral("start");
+const QString VAbstractPattern::AttrPath              = QStringLiteral("path");
+const QString VAbstractPattern::AttrEnd               = QStringLiteral("end");
+const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeAs");
+const QString VAbstractPattern::AttrWidth             = QStringLiteral("width");
+const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -673,6 +676,14 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
                                                             currentSeamAllowance);
     const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, "0"));
 
+    const bool passmark = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodePassmark, falseStr);
+    const PassmarkLineType passmarkLine = StringToPassmarkLineType(VDomDocument::GetParametrString(domElement,
+                                                                                 VAbstractPattern::AttrNodePassmarkLine,
+                                                                                                   strOne));
+    const PassmarkAngleType passmarkAngle = StringToPassmarkAngleType(VDomDocument::GetParametrString(domElement,
+                                                                                VAbstractPattern::AttrNodePassmarkAngle,
+                                                                                                   strStraightforward));
+
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
     Tool tool;
 
@@ -708,6 +719,9 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     node.SetFormulaSAAfter(saAfter);
     node.SetAngleType(angle);
     node.SetExcluded(excluded);
+    node.SetPassmark(passmark);
+    node.SetPassmarkLineType(passmarkLine);
+    node.SetPassmarkAngleType(passmarkAngle);
 
     return node;
 }

@@ -73,6 +73,9 @@ public:
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
+    QVector<QLineF> GetPassmarks() const;
+    void SetPassmarks(const QVector<QLineF> &passmarks);
+
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
@@ -128,7 +131,8 @@ private:
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
-    QVector<QPointF> Map(const QVector<QPointF> &points) const;
+    template <class T>
+    QVector<T> Map(const QVector<T> &points) const;
 
     QLineF Edge(const QVector<QPointF> &path, int i) const;
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;

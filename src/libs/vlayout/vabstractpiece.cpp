@@ -935,3 +935,29 @@ QVector<QPointF> VAbstractPiece::SubPath(const QVector<QPointF> &path, int start
 
     return subPath;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint)
+{
+    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
+            && prevPoint == nextPoint);// not zigzag
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint)
+{
+    // See bug #646
+    bool ekvPointOnLine = false;
+
+    if (VFuzzyComparePossibleNulls(prevPoint.GetSAAfter(), iPoint.GetSABefore())
+            && VFuzzyComparePossibleNulls(iPoint.GetSAAfter(), nextPoint.GetSABefore()))
+    {
+        if (VFuzzyComparePossibleNulls(prevPoint.GetSAAfter(), nextPoint.GetSABefore()))
+        {
+            ekvPointOnLine = true;
+        }
+    }
+    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
+            && prevPoint == nextPoint// not zigzag
+            && ekvPointOnLine);
+}

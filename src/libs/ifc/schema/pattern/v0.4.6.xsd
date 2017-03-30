@@ -352,6 +352,9 @@
                                       <xs:attribute name="before" type="xs:double"/>
                                       <xs:attribute name="after" type="xs:double"/>
                                       <xs:attribute name="angle" type="nodeAngle"/>
+                                      <xs:attribute name="passmark" type="xs:boolean"/>
+                                      <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                      <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>
@@ -384,6 +387,9 @@
                                             <xs:attribute name="before" type="xs:string"/>
                                             <xs:attribute name="after" type="xs:string"/>
                                             <xs:attribute name="angle" type="nodeAngle"/>
+                                            <xs:attribute name="passmark" type="xs:boolean"/>
+                                            <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                            <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                           </xs:complexType>
                                         </xs:element>
                                       </xs:sequence>
@@ -543,6 +549,9 @@
                                     <xs:attribute name="angle" type="nodeAngle"/>
                                     <xs:attribute name="mx" type="xs:double"/>
                                     <xs:attribute name="my" type="xs:double"/>
+                                    <xs:attribute name="passmark" type="xs:boolean"/>
+                                    <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                    <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
@@ -872,6 +881,19 @@
       <!--as main path-->
       <xs:enumeration value="1"/>
       <!--as custom seam allowance-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="passmarkLineType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="one"/>
+      <xs:enumeration value="two"/>
+      <xs:enumeration value="three"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="passmarkAngleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="straightforward"/>
+      <xs:enumeration value="bisector"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

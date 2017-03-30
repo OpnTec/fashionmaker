@@ -109,6 +109,8 @@ private:
 
     QString m_suffix;
 
+    bool m_firstRelease;
+
     void EvalAngle();
 };
 
