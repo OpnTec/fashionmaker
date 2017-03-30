@@ -94,6 +94,8 @@ public:
     QPointF NodePreviousPoint(const VContainer *data, int i) const;
     QPointF NodeNextPoint(const VContainer *data, int i) const;
 
+    static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
+
     static int FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode> &nodes);
     static int FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNode> &nodes);
 

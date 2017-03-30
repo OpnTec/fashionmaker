@@ -466,15 +466,7 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
 //---------------------------------------------------------------------------------------------------------------------
 int VPiecePath::indexOfNode(quint32 id) const
 {
-    for (int i = 0; i < d->m_nodes.size(); ++i)
-    {
-        if (d->m_nodes.at(i).GetId() == id)
-        {
-            return i;
-        }
-    }
-    qDebug()<<"Can't find node.";
-    return -1;
+    return indexOfNode(d->m_nodes, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -769,6 +761,20 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id)
+{
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes.at(i).GetId() == id)
+        {
+            return i;
+        }
+    }
+    qDebug()<<"Can't find node.";
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VPiecePath::FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode> &nodes)
 {
     if (candidate < 0 || candidate >= nodes.size())
@@ -827,6 +833,8 @@ int VPiecePath::FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNod
 //---------------------------------------------------------------------------------------------------------------------
 VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
 {
+    SCASSERT(data !=nullptr)
+
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
     VSAPoint p(point->toQPointF());
 
