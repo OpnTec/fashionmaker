@@ -128,7 +128,6 @@ private:
     bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPoint &passmarkSAPoint,
                                 const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const;
 
-    bool IsPassmarksPossible(const QVector<VPieceNode> &path) const;
     bool IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const;
 
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,

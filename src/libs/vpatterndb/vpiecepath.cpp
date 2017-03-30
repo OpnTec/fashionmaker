@@ -389,7 +389,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
         int index = 0;
         i == 0 ? index = FindInLoopNotExcludedUp(nodes.size()-1, nodes) : index = FindInLoopNotExcludedUp(i-1, nodes);
 
-        if (index != -1 && index != i)
+        if (index != i && index != -1)
         {
             begin = CurveStartPoint(begin, data, nodes.at(index), points);
         }
@@ -421,7 +421,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
         int index = 0;
         i == nodes.size()-1 ? index=FindInLoopNotExcludedDown(0, nodes) : index=FindInLoopNotExcludedDown(i+1, nodes);
 
-        if (index != -1 && index != i)
+        if (index != i && index != -1)
         {
             end = CurveEndPoint(end, data, nodes.at(index), points);
         }

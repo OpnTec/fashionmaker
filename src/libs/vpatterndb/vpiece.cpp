@@ -151,6 +151,26 @@ QVector<QLineF> CreateThreePassmarkLines(const QLineF &line)
     lines.append(QLineF(l2p1, l2p2));
     return lines;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IsPassmarksPossible(const QVector<VPieceNode> &path)
+{
+    int countPointNodes = 0;
+    int countOthers = 0;
+
+    for (int i = 0; i< path.size(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+        if (node.IsExcluded())
+        {
+            continue;// skip node
+        }
+
+        node.GetTypeTool() == Tool::NodePoint ? ++countPointNodes : ++countOthers;
+    }
+
+    return countPointNodes >= 3 || (countPointNodes >= 1 && countOthers >= 1);
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -717,6 +737,7 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
         return records;
     }
 
+    // cppcheck-suppress variableScope
     bool foundFilter = false;// Need in case "filter" will stay empty.
     CustomSARecord filter;
     int startIndex = d->m_path.CountNodes()-1;
@@ -892,26 +913,6 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
         point = line.p2();
     }
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPiece::IsPassmarksPossible(const QVector<VPieceNode> &path) const
-{
-    int countPointNodes = 0;
-    int countOthers = 0;
-
-    for (int i = 0; i< path.size(); ++i)
-    {
-        const VPieceNode &node = path.at(i);
-        if (node.IsExcluded())
-        {
-            continue;// skip node
-        }
-
-        node.GetTypeTool() == Tool::NodePoint ? ++countPointNodes : ++countOthers;
-    }
-
-    return countPointNodes >= 3 || (countPointNodes >= 1 && countOthers >= 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
