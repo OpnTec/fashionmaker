@@ -45,8 +45,6 @@ public:
           m_reverse(false),
           m_excluded(false),
           m_isPassmark(false),
-          m_saBefore(-1),
-          m_saAfter(-1),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
@@ -60,8 +58,6 @@ public:
           m_reverse(reverse),
           m_excluded(false),
           m_isPassmark(false),
-          m_saBefore(-1),
-          m_saAfter(-1),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
@@ -81,8 +77,6 @@ public:
           m_reverse(node.m_reverse),
           m_excluded(node.m_excluded),
           m_isPassmark(node.m_isPassmark),
-          m_saBefore(node.m_saBefore),
-          m_saAfter(node.m_saAfter),
           m_formulaWidthBefore(node.m_formulaWidthBefore),
           m_formulaWidthAfter(node.m_formulaWidthAfter),
           m_angleType(node.m_angleType),
@@ -111,9 +105,6 @@ public:
     /** @brief m_isPassmark has sense only for points. If true to seam allowance should be added a passmark. */
     bool m_isPassmark;
 
-    qreal m_saBefore;
-    qreal m_saAfter;
-
     QString m_formulaWidthBefore;
     QString m_formulaWidthAfter;
 
@@ -138,8 +129,6 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
         << p.m_reverse
         << p.m_excluded
         << p.m_isPassmark
-        << p.m_saBefore
-        << p.m_saAfter
         << p.m_formulaWidthBefore
         << p.m_formulaWidthAfter
         << static_cast<int>(p.m_angleType)
@@ -161,8 +150,6 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
        >> p.m_reverse
        >> p.m_excluded
        >> p.m_isPassmark
-       >> p.m_saBefore
-       >> p.m_saAfter
        >> p.m_formulaWidthBefore
        >> p.m_formulaWidthAfter
        >> angleType
