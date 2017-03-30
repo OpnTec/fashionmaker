@@ -106,7 +106,7 @@ void TST_VPiece::ClearLoop()
     const QVector<QPointF> pointsEkv = detail.SeamAllowancePoints(data);
 
     QVector<QPointF> origPoints;
-    origPoints.append(QPointF(42.46405659601934, 415.2845470563871));
+    origPoints.append(QPointF(42.46405659601932, 415.2845470563871));
     origPoints.append(QPointF(669.4711112822802, 560.1912138528764));
     origPoints.append(QPointF(669.3860586912449, 594.8702688224456));
     origPoints.append(QPointF(669.8537241707239, 619.8499975627876));
@@ -120,8 +120,10 @@ void TST_VPiece::ClearLoop()
     origPoints.append(QPointF(689.2446146317781, 744.0149891243127));
     origPoints.append(QPointF(692.7177992446996, 752.7004886151328));
     origPoints.append(QPointF(696.2448548679188, 760.4478278509594));
-    origPoints.append(QPointF(701.7756191283249, 771.1817664136103));
-    origPoints.append(QPointF(715.0901851898707, 793.875700151992));
+    origPoints.append(QPointF(701.8005387196029, 771.2301295961994));
+    origPoints.append(QPointF(709.4908502689113, 784.4621360005407));
+    origPoints.append(QPointF(713.2090350731621, 790.7616409320319));
+    origPoints.append(QPointF(715.0121915355467, 793.763727920337));
     origPoints.append(QPointF(718.7808834775552, 799.1742815201673));
     origPoints.append(QPointF(722.5723522600899, 803.7317522627161));
     origPoints.append(QPointF(726.4900810611796, 807.6675956080389));
@@ -135,10 +137,10 @@ void TST_VPiece::ClearLoop()
     origPoints.append(QPointF(766.9761113390083, 824.236813134474));
     origPoints.append(QPointF(773.6735265709667, 824.7970381873482));
     origPoints.append(QPointF(780.6615727577812, 825.0343457026618));
-    origPoints.append(QPointF(792.1099959092389, 824.8480813766124));
+    origPoints.append(QPointF(792.109995909239, 824.8480813766124));
     origPoints.append(QPointF(826.0032661558732, 877.1274330708662));
     origPoints.append(QPointF(828.6858753986579, 1697.305833468011));
-    origPoints.append(QPointF(42.46405659601934, 415.2845470563871));
+    origPoints.append(QPointF(42.46405659601932, 415.2845470563871));
 
     // Begin comparison
     Comparison(pointsEkv, origPoints);

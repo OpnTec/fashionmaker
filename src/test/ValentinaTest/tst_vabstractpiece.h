@@ -90,6 +90,9 @@ private:
     QVector<QPointF> InputPointsCase3a() const;
     QVector<QPointF> InputPointsCase4a() const;
     QVector<QPointF> InputPointsCase5a() const;
+
+    QVector<VSAPoint> InputPointsIssue646() const;
+    QVector<QPointF>  OutputPointsIssue646() const;
 };
 
 #endif // TST_VABSTRACTPIECE_H

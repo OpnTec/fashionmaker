@@ -200,6 +200,9 @@ private:
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
     static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
     static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
+    static bool             IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
+    static bool             IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint,
+                                             const VSAPoint &nextPoint);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
@@ -245,16 +248,16 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
             next = 0;
         }
 
-        const QPointF &iPoint = buf1.at(i);
-        const QPointF &prevPoint = buf1.at(prev);
-        const QPointF &nextPoint = buf1.at(next);
+        const T &iPoint = buf1.at(i);
+        const T &prevPoint = buf1.at(prev);
+        const T &nextPoint = buf1.at(next);
 
-        if ((not VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint) && prevPoint != nextPoint)// not zigzag
-             // If RemoveDublicates does not remove these points it is a valid case.
-             // Case where last point equal first point
-             || ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)))
+        if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint)
+                // If RemoveDublicates does not remove these points it is a valid case.
+                // Case where last point equal first point
+                || ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)))
         {
-            buf2.append(buf1.at(i));
+            buf2.append(iPoint);
             prev = -1;
         }
     }
