@@ -154,12 +154,22 @@ void VPieceNode::SetReverse(bool reverse)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSABefore(const VContainer *data) const
 {
+    if (d->m_formulaWidthBefore == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     return EvalFormula(data, d->m_formulaWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 {
+    if (d->m_formulaWidthBefore == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     qreal value = EvalFormula(data, d->m_formulaWidthBefore);
     if (value >= 0)
     {
@@ -186,12 +196,22 @@ void VPieceNode::SetFormulaSABefore(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSAAfter(const VContainer *data) const
 {
+    if (d->m_formulaWidthAfter == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     return EvalFormula(data, d->m_formulaWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 {
+    if (d->m_formulaWidthAfter == currentSeamAllowance)
+    {
+        return -1;
+    }
+
     qreal value = EvalFormula(data, d->m_formulaWidthAfter);
     if (value >= 0)
     {
