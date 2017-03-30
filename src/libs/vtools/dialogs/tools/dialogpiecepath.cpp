@@ -276,6 +276,7 @@ void DialogPiecePath::ListChanged()
         visPath->RefreshGeometry();
     }
 
+    InitPassmarksList();
     InitNodesList();
 }
 
