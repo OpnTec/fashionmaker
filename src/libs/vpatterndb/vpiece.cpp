@@ -67,24 +67,6 @@ QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVecto
     return r;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-qreal PassmarkLength(const VSAPoint &passmarkSAPoint, qreal width)
-{
-    qreal w1 = passmarkSAPoint.GetSAAfter();
-    if (w1 < 0)
-    {
-        w1 = width;
-    }
-
-    qreal w2 = passmarkSAPoint.GetSABefore();
-    if (w2 < 0)
-    {
-        w2 = width;
-    }
-
-    return qMax(w1, w2);
-}
-
 const qreal passmarkGap = (1.5/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -965,7 +947,7 @@ QVector<QLineF> VPiece::CreatePassmark(int previousIndex, int passmarkIndex, int
 
     QVector<QLineF> passmarksLines;
 
-    const qreal passmarkLength = PassmarkLength(passmarkSAPoint, width) * 0.25;
+    const qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * 0.25;
     const VPieceNode &node = d->m_path.at(passmarkIndex);
     if (node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward)
     {

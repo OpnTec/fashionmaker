@@ -168,6 +168,7 @@ public:
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
+    static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
@@ -178,7 +179,6 @@ private:
     static bool             Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2);
     static QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex);
     static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
-    static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
     static QVector<QPointF> AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
                                           qreal width);
     static QVector<QPointF> AngleByIntersection(const QPointF &p1, const QPointF &p2, const QPointF &p3,
