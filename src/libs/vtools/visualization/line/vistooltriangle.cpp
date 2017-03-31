@@ -72,18 +72,18 @@ void VisToolTriangle::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(axisP1, *first, supportColor);
+        DrawPoint(axisP1, static_cast<QPointF>(*first), supportColor);
 
         if (object2Id <= NULL_ID)
         {
-            DrawAimedAxis(axis, QLineF(*first, Visualization::scenePos), supportColor);
+            DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(axisP2, *second, supportColor);
+            DrawPoint(axisP2, static_cast<QPointF>(*second), supportColor);
 
-            DrawAimedAxis(axis, QLineF(*first, *second), supportColor);
+            DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
             if (hypotenuseP1Id <= NULL_ID)
             {
@@ -92,30 +92,37 @@ void VisToolTriangle::RefreshGeometry()
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
-                DrawPoint(hypotenuseP1, *third, supportColor);
+                DrawPoint(hypotenuseP1, static_cast<QPointF>(*third), supportColor);
 
                 if (hypotenuseP2Id <= NULL_ID)
                 {
-                    DrawLine(this, QLineF(*third, Visualization::scenePos), supportColor, Qt::DashLine);
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), supportColor,
+                             Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(*first, *second, *third, Visualization::scenePos);
+                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second),
+                                                               static_cast<QPointF>(*third), Visualization::scenePos);
                     DrawPoint(point, trPoint, mainColor);
 
-                    DrawLine(foot1, QLineF(*third, trPoint), supportColor, Qt::DashLine);
+                    DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
                     DrawLine(foot2, QLineF(Visualization::scenePos, trPoint), supportColor, Qt::DashLine);
                 }
                 else
                 {
                     const QSharedPointer<VPointF> forth = Visualization::data->GeometricObject<VPointF>(hypotenuseP2Id);
-                    DrawPoint(hypotenuseP2, *forth, supportColor);
+                    DrawPoint(hypotenuseP2, static_cast<QPointF>(*forth), supportColor);
 
-                    DrawLine(this, QLineF(*third, *forth), supportColor, Qt::DashLine);
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)), supportColor,
+                                          Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(*first, *second, *third, *forth);
+                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second),
+                                                               static_cast<QPointF>(*third),
+                                                               static_cast<QPointF>(*forth));
                     DrawPoint(point, trPoint, mainColor);
 
-                    DrawLine(foot1, QLineF(*third, trPoint), supportColor, Qt::DashLine);
-                    DrawLine(foot2, QLineF(*forth, trPoint), supportColor, Qt::DashLine);
+                    DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
+                    DrawLine(foot2, QLineF(static_cast<QPointF>(*forth), trPoint), supportColor, Qt::DashLine);
                 }
             }
         }

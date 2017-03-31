@@ -78,7 +78,7 @@ void VisToolSplinePath::RefreshGeometry()
         for (int i = 0; i < size; ++i)
         {
             QGraphicsEllipseItem *point = this->getPoint(static_cast<unsigned>(i));
-            DrawPoint(point, pathPoints.at(i).P(), supportColor);
+            DrawPoint(point, static_cast<QPointF>(pathPoints.at(i).P()), supportColor);
         }
 
         if (mode == Mode::Creation)
@@ -92,14 +92,16 @@ void VisToolSplinePath::RefreshGeometry()
 
                     VSpline spl = path.GetSpline(i);
 
-                    ctrlPoints[preLastPoint]->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint, spl.GetP2(),
-                                                               spl.GetP1());
-                    ctrlPoints[lastPoint]->RefreshCtrlPoint(i, SplinePointPosition::LastPoint, spl.GetP3(),
-                                                            spl.GetP4());
+                    ctrlPoints[preLastPoint]->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint,
+                                                               static_cast<QPointF>(spl.GetP2()),
+                                                               static_cast<QPointF>(spl.GetP1()));
+                    ctrlPoints[lastPoint]->RefreshCtrlPoint(i, SplinePointPosition::LastPoint,
+                                                            static_cast<QPointF>(spl.GetP3()),
+                                                            static_cast<QPointF>(spl.GetP4()));
                 }
             }
 
-            Creating(pathPoints.at(size-1).P(), size);
+            Creating(static_cast<QPointF>(pathPoints.at(size-1).P()), size);
         }
 
         if (size > 1)
@@ -270,7 +272,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         else
         {
             const VSpline spl = path.GetSpline(size - 1);
-            VSpline preSpl(spl.GetP1(), spl.GetP2(), ctrlLine.p2(), VPointF(pSpl));
+            VSpline preSpl(spl.GetP1(), static_cast<QPointF>(spl.GetP2()), ctrlLine.p2(), VPointF(pSpl));
 
             path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
             if (ctrlPoint != pSpl)

@@ -1524,7 +1524,8 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
             Q_UNUSED(e)
             return;// Just ignore
         }
-        data->UpdateGObject(id, new VPointF(*point, point->name(), mx, my, idObject, Draw::Modeling));
+        data->UpdateGObject(id, new VPointF(static_cast<QPointF>(*point), point->name(), mx, my, idObject,
+                                            Draw::Modeling));
         VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, "", idTool);
     }
     catch (const VExceptionBadId &e)

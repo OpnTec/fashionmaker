@@ -1303,7 +1303,8 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
             const auto topLeftPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topLeftPin);
             const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
 
-            const QRectF labelRect = QRectF(*topLeftPinPoint, *bottomRightPinPoint);
+            const QRectF labelRect = QRectF(static_cast<QPointF>(*topLeftPinPoint),
+                                            static_cast<QPointF>(*bottomRightPinPoint));
             labelWidth = FromPixel(qAbs(labelRect.width()), *VDataTool::data.GetPatternUnit());
             labelHeight = FromPixel(qAbs(labelRect.height()), *VDataTool::data.GetPatternUnit());
 
@@ -1353,7 +1354,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
             const qreal lWidth = ToPixel(labelWidth, *VDataTool::data.GetPatternUnit());
             const qreal lHeight = ToPixel(labelHeight, *VDataTool::data.GetPatternUnit());
 
-            pos = *centerPinPoint - QRectF(0, 0, lWidth, lHeight).center();
+            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, lWidth, lHeight).center();
             restrictions &= ~ VPieceItem::IsMovable;
         }
         catch(const VExceptionBadId &)
@@ -1383,7 +1384,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
             const auto topPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topPin);
             const auto bottomPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomPin);
 
-            QLineF grainline(*bottomPinPoint, *topPinPoint);
+            QLineF grainline(static_cast<QPointF>(*bottomPinPoint), static_cast<QPointF>(*topPinPoint));
             length = FromPixel(grainline.length(), *VDataTool::data.GetPatternUnit());
             rotationAngle = grainline.angle();
 

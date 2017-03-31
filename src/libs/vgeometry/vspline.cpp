@@ -116,8 +116,8 @@ VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString
     const VPointF p1 = GetP1().Rotate(originPoint, degrees);
     const VPointF p4 = GetP4().Rotate(originPoint, degrees);
 
-    const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
-    const QPointF p3 = VPointF::RotatePF(originPoint, GetP3(), degrees);
+    const QPointF p2 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP2()), degrees);
+    const QPointF p3 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP3()), degrees);
 
     VSpline spl(p1, p2, p3, p4);
     spl.setName(name() + prefix);
@@ -130,8 +130,8 @@ VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
     const VPointF p1 = GetP1().Flip(axis);
     const VPointF p4 = GetP4().Flip(axis);
 
-    const QPointF p2 = VPointF::FlipPF(axis, GetP2());
-    const QPointF p3 = VPointF::FlipPF(axis, GetP3());
+    const QPointF p2 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP2()));
+    const QPointF p3 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP3()));
 
     VSpline spl(p1, p2, p3, p4);
     spl.setName(name() + prefix);
@@ -144,8 +144,8 @@ VSpline VSpline::Move(qreal length, qreal angle, const QString &prefix) const
     const VPointF p1 = GetP1().Move(length, angle);
     const VPointF p4 = GetP4().Move(length, angle);
 
-    const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
-    const QPointF p3 = VPointF::MovePF(GetP3(), length, angle);
+    const QPointF p2 = VPointF::MovePF(static_cast<QPointF>(GetP2()), length, angle);
+    const QPointF p3 = VPointF::MovePF(static_cast<QPointF>(GetP3()), length, angle);
 
     VSpline spl(p1, p2, p3, p4);
     spl.setName(name() + prefix);
@@ -163,7 +163,8 @@ VSpline::~VSpline()
  */
 qreal VSpline::GetLength () const
 {
-    return LengthBezier ( GetP1(), GetP2(), GetP3(), GetP4());
+    return LengthBezier ( static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
+                          static_cast<QPointF>(GetP4()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,8 +176,8 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
     QPointF spl2p3;
     const QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
 
-    spl1 = VSpline(GetP1(), spl1p2, spl1p3, cutPoint);
-    spl2 = VSpline(cutPoint, spl2p2, spl2p3, GetP4());
+    spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint));
+    spl2 = VSpline(VPointF(cutPoint), spl2p2, spl2p3, GetP4());
     return cutPoint;
 }
 
@@ -187,7 +188,8 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
  */
 QVector<QPointF> VSpline::GetPoints () const
 {
-    return GetCubicBezierPoints(GetP1(), GetP2(), GetP3(), GetP4());
+    return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
+                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -379,8 +381,8 @@ void VSpline::SetC2Length(qreal length, const QString &formula)
  */
 qreal VSpline::GetKasm1() const
 {
-    return QLineF(d->p1, GetP2()).length() / VSplineData::GetL(d->p1, d->p4,
-                                                                           d->kCurve);
+    return QLineF(static_cast<QPointF>(d->p1), static_cast<QPointF>(GetP2())).length() /
+            VSplineData::GetL(static_cast<QPointF>(d->p1), static_cast<QPointF>(d->p4), d->kCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -390,8 +392,8 @@ qreal VSpline::GetKasm1() const
  */
 qreal VSpline::GetKasm2() const
 {
-    return QLineF(d->p4, GetP3()).length() / VSplineData::GetL(d->p1, d->p4,
-                                                                           d->kCurve);
+    return QLineF(static_cast<QPointF>(d->p4), static_cast<QPointF>(GetP3())).length() /
+            VSplineData::GetL(static_cast<QPointF>(d->p1), static_cast<QPointF>(d->p4), d->kCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -516,10 +518,10 @@ qreal VSpline::ParamT (const QPointF &pBt) const
     for (int i=0; i< ts.size(); ++i)
     {
         const qreal t = ts.at(i);
-        const QPointF p0 = GetP1();
-        const QPointF p1 = GetP2();
-        const QPointF p2 = GetP3();
-        const QPointF p3 = GetP4();
+        const QPointF p0 = static_cast<QPointF>(GetP1());
+        const QPointF p1 = static_cast<QPointF>(GetP2());
+        const QPointF p2 = static_cast<QPointF>(GetP3());
+        const QPointF p3 = static_cast<QPointF>(GetP4());
         //The explicit form of the Cubic Bézier curve
         const qreal pointX = pow(1-t, 3)*p0.x() + 3*pow(1-t, 2)*t*p1.x() + 3*(1-t)*pow(t, 2)*p2.x() + pow(t, 3)*p3.x();
         const qreal pointY = pow(1-t, 3)*p0.y() + 3*pow(1-t, 2)*t*p1.y() + 3*(1-t)*pow(t, 2)*p2.y() + pow(t, 3)*p3.y();
@@ -538,11 +540,11 @@ qreal VSpline::ParamT (const QPointF &pBt) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VSpline::GetControlPoint1() const
 {
-    return GetP2 ();
+    return static_cast<QPointF>(GetP2 ());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VSpline::GetControlPoint2() const
 {
-    return GetP3 ();
+    return static_cast<QPointF>(GetP3 ());
 }

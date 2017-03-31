@@ -93,7 +93,8 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
     //Correct angle. Try avoid results like 6,7563e-15.
-    const qreal angle = qFloor(QLineF(*p1, *p2).angle() * 100000.) / 100000.;
+    const qreal angle = qFloor(QLineF(static_cast<QPointF>(*p1),
+                                      static_cast<QPointF>(*p2)).angle() * 100000.) / 100000.;
     VInternalVariable::SetValue(angle);
 }
 

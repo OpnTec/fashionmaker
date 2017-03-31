@@ -108,7 +108,7 @@ void VToolBasePoint::setDialog()
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetData(p->name(), *p);
+    dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

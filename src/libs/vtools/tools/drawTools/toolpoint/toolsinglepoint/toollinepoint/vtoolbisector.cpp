@@ -195,7 +195,8 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolBisector::FindPoint(*firstPoint, *secondPoint, *thirdPoint, qApp->toPixel(result));
+    QPointF fPoint = VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
+                                              static_cast<QPointF>(*thirdPoint), qApp->toPixel(result));
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {

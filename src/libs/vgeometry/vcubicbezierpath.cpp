@@ -137,7 +137,7 @@ const VPointF &VCubicBezierPath::at(int indx) const
 //---------------------------------------------------------------------------------------------------------------------
 void VCubicBezierPath::append(const VPointF &point)
 {
-    if (d->path.size() > 0 && d->path.last() != point)
+    if (d->path.size() > 0 && static_cast<QPointF>(d->path.last()) != static_cast<QPointF>(point))
     {
         return;
     }
@@ -181,18 +181,18 @@ VSpline VCubicBezierPath::GetSpline(qint32 index) const
     const qint32 base = SubSplOffset(index);
 
     // Correction the first control point of each next spline curve except for the first.
-    QPointF p2 = d->path.at(base + 1);
+    QPointF p2 = static_cast<QPointF>(d->path.at(base + 1));
     if (base + 1 > 1)
     {
-        const QPointF b = d->path.at(base);
-        QLineF foot1(b, d->path.at(base - 1));
+        const QPointF b = static_cast<QPointF>(d->path.at(base));
+        QLineF foot1(b, static_cast<QPointF>(d->path.at(base - 1)));
         QLineF foot2(b, p2);
 
         foot2.setAngle(foot1.angle() + 180);
         p2 = foot2.p2();
     }
 
-    VSpline spl(d->path.at(base), p2, d->path.at(base + 2), d->path.at(base + 3));
+    VSpline spl(d->path.at(base), p2, static_cast<QPointF>(d->path.at(base + 2)), d->path.at(base + 3));
     return spl;
 }
 

@@ -53,15 +53,14 @@ class VPointF:public VGObject
 public:
     VPointF ();
     VPointF (const VPointF &point );
-    // cppcheck-suppress noExplicitConstructor
-    VPointF (const QPointF &point );
+    explicit VPointF (const QPointF &point );
     VPointF (qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
              const Draw &mode = Draw::Calculation);
     VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
              const Draw &mode = Draw::Calculation);
     virtual ~VPointF() Q_DECL_OVERRIDE;
     VPointF &operator=(const VPointF &point);
-            operator QPointF() const;
+    explicit operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VPointF Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VPointF Move(qreal length, qreal angle, const QString &prefix = QString()) const;

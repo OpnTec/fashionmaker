@@ -177,7 +177,7 @@ VSplinePath::~VSplinePath()
  */
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && d->path.last().P() == point.P()) //-V807
+    if (d->path.size() > 0 && static_cast<QPointF>(d->path.last().P()) == static_cast<QPointF>(point.P())) //-V807
     {
         return;
     }

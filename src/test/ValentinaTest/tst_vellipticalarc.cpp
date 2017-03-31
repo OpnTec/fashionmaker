@@ -300,13 +300,13 @@ void TST_VEllipticalArc::TestGetPoints2()
     const qreal c = qSqrt(qAbs(radius2*radius2 - radius1*radius1));
     // distance from the center to the focus
 
-    QPointF focus1 = center;
-    QPointF focus2 = center;
+    QPointF focus1 = static_cast<QPointF>(center);
+    QPointF focus2 = static_cast<QPointF>(center);
 
     if (radius1 < radius2)
     {
         focus1.setY(focus1.ry() + c);
-        QLineF line(center, focus1);
+        QLineF line(static_cast<QPointF>(center), focus1);
         line.setAngle(line.angle() + rotationAngle);
         focus1 = line.p2();
 
@@ -318,7 +318,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     else
     {
         focus1.setX(focus1.rx() + c);
-        QLineF line(center, focus1);
+        QLineF line(static_cast<QPointF>(center), focus1);
         line.setAngle(line.angle() + rotationAngle);
         focus1 = line.p2();
 
@@ -329,7 +329,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     }
 
     QPointF ellipsePoint(center.x() + radius1, center.y());
-    QLineF line(center, ellipsePoint);
+    QLineF line(static_cast<QPointF>(center), ellipsePoint);
     line.setAngle(line.angle() + rotationAngle);
     ellipsePoint = line.p2();
 
@@ -464,7 +464,7 @@ void TST_VEllipticalArc::TestFlip_data()
     QTest::addColumn<QLineF>("axis");
     QTest::addColumn<QString>("prefix");
 
-    const VEllipticalArc elArc(QPointF(), 10., 20.0, 1., 91., 0.);
+    const VEllipticalArc elArc(VPointF(), 10., 20.0, 1., 91., 0.);
 
     QLineF axis(QPointF(600, 30), QPointF(600, 1800));
 

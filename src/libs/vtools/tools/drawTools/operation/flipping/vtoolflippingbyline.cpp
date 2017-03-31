@@ -111,10 +111,10 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const quint32 _id, quint32 firs
                                                  const Source &typeCreation)
 {
     const auto firstPoint = *data->GeometricObject<VPointF>(firstLinePointId);
-    const QPointF fPoint = firstPoint;
+    const QPointF fPoint = static_cast<QPointF>(firstPoint);
 
     const auto secondPoint = *data->GeometricObject<VPointF>(secondLinePointId);
-    const QPointF sPoint = secondPoint;
+    const QPointF sPoint = static_cast<QPointF>(secondPoint);
 
     QVector<DestinationItem> dest = destination;
 

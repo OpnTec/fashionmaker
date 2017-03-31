@@ -58,7 +58,7 @@ void VisToolFlippingByLine::RefreshGeometry()
 
     if (object1Id != NULL_ID)
     {
-        firstPoint = *Visualization::data->GeometricObject<VPointF>(object1Id);
+        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
         DrawPoint(point1, firstPoint, supportColor2);
 
         if (object2Id == NULL_ID)
@@ -67,7 +67,7 @@ void VisToolFlippingByLine::RefreshGeometry()
         }
         else
         {
-            secondPoint = *Visualization::data->GeometricObject<VPointF>(object2Id);
+            secondPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object2Id));
             DrawPoint(point2, secondPoint, supportColor2);
         }
 

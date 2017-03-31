@@ -110,7 +110,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const quint32 _id, quint32 orig
                                                  const Source &typeCreation)
 {
     const auto originPoint = *data->GeometricObject<VPointF>(originPointId);
-    const QPointF fPoint = originPoint;
+    const QPointF fPoint = static_cast<QPointF>(originPoint);
 
     QPointF sPoint;
     if (axisType == AxisType::VerticalAxis)

@@ -120,14 +120,14 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
 
                 ++iPoint;
                 QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
-                DrawPoint(point, *p, supportColor2);
+                DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
                 point = GetPoint(static_cast<quint32>(iPoint), supportColor);
 
                 if (object1Id != NULL_ID)
                 {
-                    DrawPoint(point, p->Flip(QLineF(firstPoint, secondPoint)), supportColor);
+                    DrawPoint(point, static_cast<QPointF>(p->Flip(QLineF(firstPoint, secondPoint))), supportColor);
                 }
                 break;
             }

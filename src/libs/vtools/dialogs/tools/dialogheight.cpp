@@ -259,12 +259,12 @@ void DialogHeight::PointNameChanged()
     set.insert(p1LineId);
     set.insert(p2LineId);
 
-    const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
-    const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
+    const QPointF basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
+    const QPointF p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
+    const QPointF p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
 
     QColor color = okColor;
-    if (set.size() != 3 || VGObject::ClosestPoint(QLineF(*p1Line, *p2Line), *basePoint) == QPointF())
+    if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
     {
         flagError = false;
         color = errorColor;

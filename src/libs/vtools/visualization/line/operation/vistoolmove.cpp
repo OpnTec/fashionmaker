@@ -234,7 +234,7 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
 
                 ++iPoint;
                 QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
-                DrawPoint(point, *p, supportColor2);
+                DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
                 originObjects.append(point);
 
                 break;
@@ -289,7 +289,7 @@ void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qre
 
                 ++iPoint;
                 QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor);
-                DrawPoint(point, p->Move(length, angle), supportColor);
+                DrawPoint(point, static_cast<QPointF>(p->Move(length, angle)), supportColor);
                 break;
             }
             case GOType::Arc:

@@ -80,7 +80,7 @@ void VisToolCutSplinePath::RefreshGeometry()
             SCASSERT(spPath1 != nullptr)
             SCASSERT(spPath2 != nullptr)
 
-            DrawPoint(point, *p, mainColor);
+            DrawPoint(point, static_cast<QPointF>(*p), mainColor);
             delete p;
 
             DrawPath(splPath1, spPath1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);

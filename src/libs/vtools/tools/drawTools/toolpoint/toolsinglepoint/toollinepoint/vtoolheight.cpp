@@ -150,7 +150,8 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
     const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
     const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
 
-    QPointF pHeight = FindPoint(QLineF(*p1Line, *p2Line), *basePoint);
+    QPointF pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
+                                static_cast<QPointF>(*basePoint));
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {

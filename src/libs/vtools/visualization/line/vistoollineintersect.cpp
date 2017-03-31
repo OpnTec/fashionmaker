@@ -66,18 +66,18 @@ void VisToolLineIntersect::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(line1P1, *first, supportColor);
+        DrawPoint(line1P1, static_cast<QPointF>(*first), supportColor);
 
         if (line1P2Id <= NULL_ID)
         {
-            DrawLine(line1, QLineF(*first, Visualization::scenePos), supportColor);
+            DrawLine(line1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(line1P2Id);
-            DrawPoint(line1P2, *second, supportColor);
+            DrawPoint(line1P2, static_cast<QPointF>(*second), supportColor);
 
-            DrawLine(line1, QLineF(*first, *second), supportColor);
+            DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
             if (line2P1Id <= NULL_ID)
             {
@@ -86,14 +86,14 @@ void VisToolLineIntersect::RefreshGeometry()
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(line2P1Id);
-                DrawPoint(line2P1, *third, supportColor);
+                DrawPoint(line2P1, static_cast<QPointF>(*third), supportColor);
 
                 if (line2P2Id <= NULL_ID)
                 {
-                    DrawLine(this, QLineF(*third, Visualization::scenePos), supportColor);
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), supportColor);
 
-                    QLineF l1(*first, *second);
-                    QLineF l2(*third, Visualization::scenePos);
+                    QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+                    QLineF l2(static_cast<QPointF>(*third), Visualization::scenePos);
                     QPointF fPoint;
                     QLineF::IntersectType intersect = l1.intersect(l2, &fPoint);
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
@@ -104,12 +104,12 @@ void VisToolLineIntersect::RefreshGeometry()
                 else
                 {
                     const QSharedPointer<VPointF> forth = Visualization::data->GeometricObject<VPointF>(line2P2Id);
-                    DrawPoint(line2P2, *forth, supportColor);
+                    DrawPoint(line2P2, static_cast<QPointF>(*forth), supportColor);
 
-                    DrawLine(this, QLineF(*third, *forth), supportColor);
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)), supportColor);
 
-                    QLineF l1(*first, *second);
-                    QLineF l2(*third, *forth);
+                    QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+                    QLineF l2(static_cast<QPointF>(*third), static_cast<QPointF>(*forth));
                     QPointF fPoint;
                     QLineF::IntersectType intersect = l1.intersect(l2, &fPoint);
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)

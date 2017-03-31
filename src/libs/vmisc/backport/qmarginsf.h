@@ -50,7 +50,7 @@ class QMarginsF
 public:
     Q_DECL_CONSTEXPR QMarginsF() Q_DECL_NOTHROW;
     Q_DECL_CONSTEXPR QMarginsF(qreal left, qreal top, qreal right, qreal bottom) Q_DECL_NOTHROW;
-    Q_DECL_CONSTEXPR QMarginsF(const QMargins &margins) Q_DECL_NOTHROW;
+    Q_DECL_CONSTEXPR explicit QMarginsF(const QMargins &margins) Q_DECL_NOTHROW;
 
     Q_DECL_CONSTEXPR bool isNull() const Q_DECL_NOTHROW;
 

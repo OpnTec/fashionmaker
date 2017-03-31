@@ -72,8 +72,8 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
 {
     this->typeLine = typeLine;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
-    QPointF point1 = *data->GeometricObject<VPointF>(basePointId);
-    QPointF point2 = *data->GeometricObject<VPointF>(id);
+    QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
+    QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
@@ -97,8 +97,8 @@ void VToolLinePoint::RefreshGeometry()
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-    QPointF point = *VDrawTool::data.GeometricObject<VPointF>(id);
-    QPointF basePoint = *VDrawTool::data.GeometricObject<VPointF>(basePointId);
+    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(id));
+    QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
 }
 

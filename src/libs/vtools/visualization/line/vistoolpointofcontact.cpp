@@ -65,17 +65,17 @@ void VisToolPointOfContact::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, *first, supportColor);
+        DrawPoint(lineP1, static_cast<QPointF>(*first), supportColor);
 
         if (lineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(*first, Visualization::scenePos), supportColor);
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-            DrawPoint(lineP2, *second, supportColor);
-            DrawLine(this, QLineF(*first, *second), supportColor);
+            DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
             if (radiusId <= NULL_ID)
             {
@@ -84,15 +84,17 @@ void VisToolPointOfContact::RefreshGeometry()
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
-                DrawPoint(arc_point, *third, supportColor);
+                DrawPoint(arc_point, static_cast<QPointF>(*third), supportColor);
 
                 if (not qFuzzyIsNull(radius))
                 {
-                    QPointF fPoint = VToolPointOfContact::FindPoint(radius, *third, *first, *second);
+                    QPointF fPoint = VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third),
+                                                                    static_cast<QPointF>(*first),
+                                                                    static_cast<QPointF>(*second));
                     DrawPoint(point, fPoint, mainColor);
 
                     circle->setRect(PointRect(radius));
-                    DrawPoint(circle, *third, supportColor, Qt::DashLine);
+                    DrawPoint(circle, static_cast<QPointF>(*third), supportColor, Qt::DashLine);
                 }
             }
         }

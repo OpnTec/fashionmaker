@@ -85,43 +85,49 @@ void VisToolBisector::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(line1P1, *first, supportColor);
+        DrawPoint(line1P1, static_cast<QPointF>(*first), supportColor);
 
         if (object2Id <= NULL_ID)
         {
-            DrawLine(line1, QLineF(*first, Visualization::scenePos), supportColor);
+            DrawLine(line1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(line1P2, *second, supportColor);
+            DrawPoint(line1P2, static_cast<QPointF>(*second), supportColor);
 
-            DrawLine(line1, QLineF(*first, *second), supportColor);
+            DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
             if (object3Id <= NULL_ID)
             {
-                DrawLine(line2, QLineF(*second, Visualization::scenePos), supportColor);
+                DrawLine(line2, QLineF(static_cast<QPointF>(*second), Visualization::scenePos), supportColor);
             }
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(object3Id);
-                DrawPoint(line2P2, *third, supportColor);
+                DrawPoint(line2P2, static_cast<QPointF>(*third), supportColor);
 
-                DrawLine(line2, QLineF(*second, *third), supportColor);
+                DrawLine(line2, QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)), supportColor);
 
                 if (not qFuzzyIsNull(length))
                 {
-                    qreal angle = VToolBisector::BisectorAngle(*first, *second, *third);
-                    QLineF mainLine = VGObject::BuildLine(*second, length, angle);
+                    qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second),
+                                                               static_cast<QPointF>(*third));
+                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second), length, angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
 
                     DrawPoint(point, mainLine.p2(), mainColor);
                 }
                 else
                 {
-                    qreal angle = VToolBisector::BisectorAngle(*first, *second, *third);
-                    QPointF endRay = Ray(*second, angle);
-                    QLineF mainLine = VGObject::BuildLine(*second, QLineF(*second, endRay).length(), angle);
+                    qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second),
+                                                               static_cast<QPointF>(*third));
+                    QPointF endRay = Ray(static_cast<QPointF>(*second), angle);
+                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second),
+                                                          QLineF(static_cast<QPointF>(*second), endRay).length(),
+                                                          angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
                 }
             }

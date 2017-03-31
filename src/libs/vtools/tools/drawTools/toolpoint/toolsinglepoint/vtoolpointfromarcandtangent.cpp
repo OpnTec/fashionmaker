@@ -108,7 +108,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
     const VArc arc = *data->GeometricObject<VArc>(arcId);
     const VPointF tPoint = *data->GeometricObject<VPointF>(tangentPointId);
 
-    const QPointF point = VToolPointFromArcAndTangent::FindPoint(tPoint, &arc, crossPoint);
+    const QPointF point = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc, crossPoint);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -142,7 +142,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
 QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType)
 {
     QPointF p1, p2;
-    const QPointF center = arc->GetCenter();
+    const QPointF center = static_cast<QPointF>(arc->GetCenter());
     const qreal radius = arc->GetRadius();
     const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
 

@@ -91,29 +91,30 @@ void VisToolRotation::RefreshGeometry()
     if (object1Id != NULL_ID)
     {
         origin = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point, *origin, supportColor2);
+        DrawPoint(point, static_cast<QPointF>(*origin), supportColor2);
 
         QLineF rLine;
         if (VFuzzyComparePossibleNulls(angle, INT_MIN))
         {
-            rLine = QLineF(*origin, Visualization::scenePos);
+            rLine = QLineF(static_cast<QPointF>(*origin), Visualization::scenePos);
 
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
                 rLine.setAngle(CorrectAngle(rLine.angle()));
             }
 
-            rLine.setP2(Ray(*origin, rLine.angle()));
+            rLine.setP2(Ray(static_cast<QPointF>(*origin), rLine.angle()));
             tempAngle = rLine.angle();
         }
         else
         {
-            rLine = QLineF(*origin, Ray(*origin, angle));
+            rLine = QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), angle));
             tempAngle = angle;
         }
 
         DrawLine(this, rLine, supportColor2, Qt::DashLine);
-        DrawLine(xAxis, QLineF(*origin, Ray(*origin, 0)), supportColor2, Qt::DashLine);
+        DrawLine(xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), supportColor2,
+                 Qt::DashLine);
 
         VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, tempAngle);
         DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
@@ -140,45 +141,46 @@ void VisToolRotation::RefreshGeometry()
 
                 ++iPoint;
                 QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
-                DrawPoint(point, *p, supportColor2);
+                DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
                 point = GetPoint(static_cast<quint32>(iPoint), supportColor);
 
                 if (object1Id != NULL_ID)
                 {
-                    DrawPoint(point, p->Rotate(*origin, tempAngle), supportColor);
+                    DrawPoint(point, static_cast<QPointF>(p->Rotate(static_cast<QPointF>(*origin), tempAngle)),
+                              supportColor);
                 }
                 break;
             }
             case GOType::Arc:
             {
-                iCurve = AddCurve<VArc>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VArc>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::EllipticalArc:
             {
-                iCurve = AddCurve<VEllipticalArc>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VEllipticalArc>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::Spline:
             {
-                iCurve = AddCurve<VSpline>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VSpline>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::SplinePath:
             {
-                iCurve = AddCurve<VSplinePath>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VSplinePath>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::CubicBezier:
             {
-                iCurve = AddCurve<VCubicBezier>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VCubicBezier>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::CubicBezierPath:
             {
-                iCurve = AddCurve<VCubicBezierPath>(tempAngle, *origin, id, iCurve);
+                iCurve = AddCurve<VCubicBezierPath>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
                 break;
             }
             case GOType::Unknown:

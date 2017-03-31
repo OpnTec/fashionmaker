@@ -69,18 +69,18 @@ void VisToolLineIntersectAxis::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, *first, supportColor);
+        DrawPoint(lineP1, static_cast<QPointF>(*first), supportColor);
 
         if (point2Id <= NULL_ID)
         {
-            DrawLine(baseLine, QLineF(*first, Visualization::scenePos), supportColor);
+            DrawLine(baseLine, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
-            DrawPoint(lineP2, *second, supportColor);
+            DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
 
-            const QLineF base_line(*first, *second);
+            const QLineF base_line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
             DrawLine(baseLine, base_line, supportColor);
 
             if (axisPointId > NULL_ID)
@@ -89,17 +89,17 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(axisPointId);
                 if (VFuzzyComparePossibleNulls(angle, -1))
                 {
-                    axis = Axis(*third, Visualization::scenePos);
+                    axis = Axis(static_cast<QPointF>(*third), Visualization::scenePos);
                 }
                 else
                 {
-                    axis = Axis(*third, angle);
+                    axis = Axis(static_cast<QPointF>(*third), angle);
                 }
-                DrawPoint(basePoint, *third, mainColor);
+                DrawPoint(basePoint, static_cast<QPointF>(*third), mainColor);
                 DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
                 QPointF p = VToolLineIntersectAxis::FindPoint(axis, base_line);
-                QLineF axis_line(*third, p);
+                QLineF axis_line(static_cast<QPointF>(*third), p);
                 DrawLine(this, axis_line, mainColor, lineStyle);
 
                 DrawPoint(point, p, mainColor);

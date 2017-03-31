@@ -156,13 +156,13 @@ void VCubicBezier::SetP4(const VPointF &p)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetStartAngle() const
 {
-    return QLineF(GetP1(), GetP2()).angle();
+    return QLineF(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2())).angle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetEndAngle() const
 {
-    return QLineF(GetP4(), GetP3()).angle();
+    return QLineF(static_cast<QPointF>(GetP4()), static_cast<QPointF>(GetP3())).angle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,8 @@ qreal VCubicBezier::GetEndAngle() const
  */
 qreal VCubicBezier::GetLength() const
 {
-    return LengthBezier (GetP1(), GetP2(), GetP3(), GetP4());
+    return LengthBezier (static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
+                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,29 +183,30 @@ qreal VCubicBezier::GetLength() const
  */
 QVector<QPointF> VCubicBezier::GetPoints() const
 {
-    return GetCubicBezierPoints(GetP1(), GetP2(), GetP3(), GetP4());
+    return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
+                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetC1Length() const
 {
-    return QLineF(GetP1(), GetP2()).length();
+    return QLineF(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2())).length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetC2Length() const
 {
-    return QLineF(GetP4(), GetP3()).length();
+    return QLineF(static_cast<QPointF>(GetP4()), static_cast<QPointF>(GetP3())).length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VCubicBezier::GetControlPoint1() const
 {
-    return GetP2();
+    return static_cast<QPointF>(GetP2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VCubicBezier::GetControlPoint2() const
 {
-    return GetP3();
+    return static_cast<QPointF>(GetP3());
 }

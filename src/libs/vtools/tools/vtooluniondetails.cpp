@@ -311,7 +311,7 @@ void BiasRotatePoint(VPointF *point, qreal dx, qreal dy, const QPointF &pRotate,
 {
     point->setX(point->x()+dx);
     point->setY(point->y()+dy);
-    QLineF line(pRotate, *point);
+    QLineF line(pRotate, static_cast<QPointF>(*point));
     line.setAngle(line.angle()+angle);
     point->setX(line.p2().x());
     point->setY(line.p2().y());
@@ -352,8 +352,8 @@ void UnionInitParameters(const VToolUnionDetailsInitData &initData, const VPiece
     point4.setX(point4.x()+dx);
     point4.setY(point4.y()+dy);
 
-    const QLineF p4p3 = QLineF(point4, point3);
-    const QLineF p1p2 = QLineF(point1, point2);
+    const QLineF p4p3 = QLineF(static_cast<QPointF>(point4), static_cast<QPointF>(point3));
+    const QLineF p1p2 = QLineF(static_cast<QPointF>(point1), static_cast<QPointF>(point2));
 
     angle = p4p3.angleTo(p1p2);
 }
@@ -368,7 +368,8 @@ quint32 AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &in
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        BiasRotatePoint(point.data(), dx, dy, *initData.data->GeometricObject<VPointF>(pRotate), angle);
+        BiasRotatePoint(point.data(), dx, dy, static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate)),
+                        angle);
     }
 
     QScopedPointer<VPointF> point1(new VPointF(*point));
@@ -391,7 +392,8 @@ quint32 AddPin(quint32 id, const VToolUnionDetailsInitData &initData, quint32 id
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        BiasRotatePoint(point.data(), dx, dy, *initData.data->GeometricObject<VPointF>(pRotate), angle);
+        BiasRotatePoint(point.data(), dx, dy, static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate)),
+                        angle);
     }
 
     QScopedPointer<VPointF> point1(new VPointF(*point));
@@ -417,15 +419,15 @@ quint32 AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &init
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *initData.data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(&p1, dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
         BiasRotatePoint(center.data(), dx, dy, p, angle);
     }
 
-    QLineF l1(*center, p1);
-    QLineF l2(*center, p2);
+    QLineF l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
+    QLineF l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
     center->setMode(Draw::Modeling);
     VPointF *tmpCenter = center.take();
     const quint32 idCenter = initData.data->AddGObject(tmpCenter);
@@ -459,15 +461,15 @@ quint32 AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &in
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *initData.data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(&p1, dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
         BiasRotatePoint(center.data(), dx, dy, p, angle);
     }
 
-    QLineF l1(*center, p1);
-    QLineF l2(*center, p2);
+    QLineF l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
+    QLineF l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
     center->setMode(Draw::Modeling);
     VPointF *tmpCenter = center.take();
     quint32 idCenter = initData.data->AddGObject(tmpCenter);
@@ -506,7 +508,7 @@ quint32 AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &i
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *initData.data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(p1.data(), dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
@@ -514,7 +516,7 @@ quint32 AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &i
         BiasRotatePoint(p4.data(), dx, dy, p, angle);
     }
 
-    VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
+    VSpline *spl = new VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0, Draw::Modeling);
     const quint32 idObject = initData.data->AddGObject(spl);
     children.append(idObject);
 
@@ -545,7 +547,7 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
         QScopedPointer<VPointF> p4(new VPointF(spline.GetP4()));
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
-            const QPointF p = *initData.data->GeometricObject<VPointF>(pRotate);
+            const QPointF p = static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate));
 
             BiasRotatePoint(p1.data(), dx, dy, p, angle);
             BiasRotatePoint(&p2, dx, dy, p, angle);
@@ -553,7 +555,7 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
             BiasRotatePoint(p4.data(), dx, dy, p, angle);
         }
 
-        VSpline spl = VSpline(*p1, p2, p3, *p4);
+        VSpline spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
         if (i==1)
         {
             const qreal angle1 = spl.GetStartAngle()+180;
@@ -798,7 +800,7 @@ void UpdateNodePoint(VContainer *data, const VPieceNode &node, QVector<quint32> 
     point->setMode(Draw::Modeling);
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        BiasRotatePoint(point.data(), dx, dy, *data->GeometricObject<VPointF>(pRotate), angle);
+        BiasRotatePoint(point.data(), dx, dy, static_cast<QPointF>(*data->GeometricObject<VPointF>(pRotate)), angle);
     }
     data->UpdateGObject(TakeNextId(children), point.take());
 }
@@ -814,15 +816,15 @@ void UpdateNodeArc(VContainer *data, const VPieceNode &node, QVector<quint32> &c
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(&p1, dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
         BiasRotatePoint(center.data(), dx, dy, p, angle);
     }
 
-    QLineF l1(*center, p1);
-    QLineF l2(*center, p2);
+    QLineF l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
+    QLineF l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
 
     QScopedPointer<VArc> arc1(new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle())));
@@ -841,15 +843,15 @@ void UpdateNodeElArc(VContainer *data, const VPieceNode &node, QVector<quint32> 
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(&p1, dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
         BiasRotatePoint(center.data(), dx, dy, p, angle);
     }
 
-    QLineF l1(*center, p1);
-    QLineF l2(*center, p2);
+    QLineF l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
+    QLineF l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
 
     QScopedPointer<VEllipticalArc> arc1(new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
                                                             arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
@@ -873,7 +875,7 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
-        const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(pRotate));
 
         BiasRotatePoint(p1.data(), dx, dy, p, angle);
         BiasRotatePoint(&p2, dx, dy, p, angle);
@@ -881,7 +883,8 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
         BiasRotatePoint(p4.data(), dx, dy, p, angle);
     }
 
-    QScopedPointer<VSpline> spl(new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling));
+    QScopedPointer<VSpline> spl(new VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0,
+                                            Draw::Modeling));
     data->UpdateGObject(TakeNextId(children), spl.take());
 }
 
@@ -905,7 +908,7 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
 
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
-            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+            const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(pRotate));
 
             BiasRotatePoint(p1.data(), dx, dy, p, angle);
             BiasRotatePoint(&p2, dx, dy, p, angle);
@@ -913,7 +916,7 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
             BiasRotatePoint(p4.data(), dx, dy, p, angle);
         }
 
-        VSpline spl = VSpline(*p1, p2, p3, *p4);
+        VSpline spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
         if (i==1)
         {
             const qreal angle1 = spl.GetStartAngle()+180;
@@ -1263,7 +1266,8 @@ void UpdateUnitedDetailPins(quint32 id, const VToolUnionDetailsInitData &initDat
         point->setMode(Draw::Modeling);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
-            BiasRotatePoint(point.data(), dx, dy, *initData.data->GeometricObject<VPointF>(pRotate), angle);
+            BiasRotatePoint(point.data(), dx, dy,
+                            static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate)), angle);
         }
         initData.data->UpdateGObject(TakeNextId(children), point.take());
     }

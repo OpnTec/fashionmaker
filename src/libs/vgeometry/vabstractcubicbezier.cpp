@@ -101,7 +101,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
 
     const qreal parT = GetParmT(length);
 
-    QLineF seg1_2 ( GetP1 (), GetControlPoint1 () );
+    QLineF seg1_2 ( static_cast<QPointF>(GetP1 ()), GetControlPoint1 () );
     seg1_2.setLength(seg1_2.length () * parT);
     const QPointF p12 = seg1_2.p2();
 
@@ -113,7 +113,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
     seg12_23.setLength(seg12_23.length () * parT);
     const QPointF p123 = seg12_23.p2();
 
-    QLineF seg3_4 ( GetControlPoint2 (), GetP4 () );
+    QLineF seg3_4 ( GetControlPoint2 (), static_cast<QPointF>(GetP4 ()) );
     seg3_4.setLength(seg3_4.length () * parT);
     const QPointF p34 = seg3_4.p2();
 
@@ -551,7 +551,7 @@ qreal VAbstractCubicBezier::LengthT(qreal t) const
         qDebug()<<"Wrong value t.";
         return 0;
     }
-    QLineF seg1_2 ( GetP1 (), GetControlPoint1 () );
+    QLineF seg1_2 ( static_cast<QPointF>(GetP1 ()), GetControlPoint1 () );
     seg1_2.setLength(seg1_2.length () * t);
     const QPointF p12 = seg1_2.p2();
 
@@ -563,7 +563,7 @@ qreal VAbstractCubicBezier::LengthT(qreal t) const
     seg12_23.setLength(seg12_23.length () * t);
     const QPointF p123 = seg12_23.p2();
 
-    QLineF seg3_4 ( GetControlPoint2 (), GetP4 () );
+    QLineF seg3_4 ( GetControlPoint2 (), static_cast<QPointF>(GetP4 ()) );
     seg3_4.setLength(seg3_4.length () * t);
     const QPointF p34 = seg3_4.p2();
 
@@ -575,5 +575,5 @@ qreal VAbstractCubicBezier::LengthT(qreal t) const
     seg123_234.setLength(seg123_234.length () * t);
     const QPointF p1234 = seg123_234.p2();
 
-    return LengthBezier ( GetP1(), p12, p123, p1234);
+    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234);
 }

@@ -299,7 +299,7 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPos(point);
+    this->setPos(static_cast<QPointF>(point));
 
     namePoint->blockSignals(true);
     namePoint->setText(point.name());

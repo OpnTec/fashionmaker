@@ -42,7 +42,7 @@ VSAPoint CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode
 {
     if (node.GetTypeTool() == Tool::NodePoint)
     {
-        const QPointF p = *data->GeometricObject<VPointF>(node.GetId());
+        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
         if (VAbstractCurve::IsPointOnCurve(curvePoints, p))
         {
             candidate = VSAPoint(p);
@@ -253,7 +253,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(*point);
+                points.append(static_cast<QPointF>(*point));
             }
             break;
             case (Tool::NodeArc):
@@ -681,7 +681,7 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
-                return *data->GeometricObject<VPointF>(node.GetId());
+                return static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
             case (Tool::NodeArc):
             case (Tool::NodeElArc):
             case (Tool::NodeSpline):
@@ -733,7 +733,7 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
-                return *data->GeometricObject<VPointF>(node.GetId());
+                return static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
             case (Tool::NodeArc):
             case (Tool::NodeElArc):
             case (Tool::NodeSpline):

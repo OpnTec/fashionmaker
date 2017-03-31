@@ -77,17 +77,18 @@ void VisToolCubicBezier::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point1, *first, Qt::DashLine);
+        DrawPoint(point1, static_cast<QPointF>(*first), Qt::DashLine);
 
         if (object2Id <= NULL_ID)
         {
-            DrawLine(helpLine1, QLineF(*first, Visualization::scenePos), mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), mainColor, Qt::DashLine);
         }
         else
         {
             const auto second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(point2, *second, supportColor);
-            DrawLine(helpLine1, QLineF(*first, *second), mainColor, Qt::DashLine);
+            DrawPoint(point2, static_cast<QPointF>(*second), supportColor);
+            DrawLine(helpLine1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), mainColor,
+                     Qt::DashLine);
 
             if (object3Id <= NULL_ID)
             {
@@ -98,19 +99,21 @@ void VisToolCubicBezier::RefreshGeometry()
             else
             {
                 const auto third = Visualization::data->GeometricObject<VPointF>(object3Id);
-                DrawPoint(point3, *third, supportColor);
+                DrawPoint(point3, static_cast<QPointF>(*third), supportColor);
 
                 if (object4Id <= NULL_ID)
                 {
                     VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
                     DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
-                    DrawLine(helpLine2, QLineF(*third, Visualization::scenePos), mainColor, Qt::DashLine);
+                    DrawLine(helpLine2, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), mainColor,
+                             Qt::DashLine);
                 }
                 else
                 {
                     const auto fourth = Visualization::data->GeometricObject<VPointF>(object4Id);
-                    DrawPoint(point4, *fourth, supportColor);
-                    DrawLine(helpLine2, QLineF(*fourth, *third), mainColor, Qt::DashLine);
+                    DrawPoint(point4, static_cast<QPointF>(*fourth), supportColor);
+                    DrawLine(helpLine2, QLineF(static_cast<QPointF>(*fourth), static_cast<QPointF>(*third)), mainColor,
+                             Qt::DashLine);
 
                     VCubicBezier spline(*first, *second, *third,  *fourth);
                     DrawPath(this, spline.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);

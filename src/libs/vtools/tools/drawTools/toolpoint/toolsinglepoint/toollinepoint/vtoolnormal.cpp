@@ -158,7 +158,8 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolNormal::FindPoint(*firstPoint, *secondPoint, qApp->toPixel(result), angle);
+    QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
+                                            qApp->toPixel(result), angle);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {

@@ -56,7 +56,7 @@ void VisToolFlippingByAxis::RefreshGeometry()
 
     if (object1Id != NULL_ID)
     {
-        firstPoint = *Visualization::data->GeometricObject<VPointF>(object1Id);
+        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
         DrawPoint(point1, firstPoint, supportColor2);
 
         if (m_axisType == AxisType::VerticalAxis)

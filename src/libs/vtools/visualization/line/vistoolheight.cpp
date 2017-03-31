@@ -66,37 +66,37 @@ void VisToolHeight::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(base_point, *first, supportColor);
+        DrawPoint(base_point, static_cast<QPointF>(*first), supportColor);
 
         if (lineP1Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(*first, Visualization::scenePos), mainColor);
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), mainColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP1Id);
-            DrawPoint(lineP1, *second, supportColor);
+            DrawPoint(lineP1, static_cast<QPointF>(*second), supportColor);
 
             QLineF base_line;
             if (lineP2Id <= NULL_ID)
             {
-                base_line = QLineF(*second, Visualization::scenePos);
+                base_line = QLineF(static_cast<QPointF>(*second), Visualization::scenePos);
                 DrawLine(line, base_line, supportColor);
             }
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-                DrawPoint(lineP2, *third, supportColor);
+                DrawPoint(lineP2, static_cast<QPointF>(*third), supportColor);
 
-                base_line = QLineF(*second, *third);
+                base_line = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third));
             }
 
             DrawLine(line, base_line, supportColor);
 
-            QPointF height = VToolHeight::FindPoint(base_line, *first);
+            QPointF height = VToolHeight::FindPoint(base_line, static_cast<QPointF>(*first));
             DrawPoint(point, height, mainColor);
 
-            QLineF height_line(*first, height);
+            QLineF height_line(static_cast<QPointF>(*first), height);
             DrawLine(this, height_line, mainColor, lineStyle);
 
             ShowIntersection(height_line, base_line);

@@ -134,7 +134,7 @@ VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, qreal angle2, qre
       c2LengthF("0"),
       kCurve(kCurve)
 {
-    const qreal L = GetL(p1, p4, kCurve);
+    const qreal L = GetL(static_cast<QPointF>(p1), static_cast<QPointF>(p4), kCurve);
 
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
     p1p2.setAngle(angle1);
@@ -161,7 +161,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4)
       c2LengthF("0"),
       kCurve(1)
 {
-    QLineF p1p2(p1, p2);
+    QLineF p1p2(static_cast<QPointF>(p1), static_cast<QPointF>(p2));
 
     angle1 = p1p2.angle();
     angle1F = QString().number(angle1);
@@ -169,7 +169,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4)
     c1Length = p1p2.length();
     c1LengthF = QString().number(qApp->fromPixel(c1Length));
 
-    QLineF p4p3(p4, p3);
+    QLineF p4p3(static_cast<QPointF>(p4), static_cast<QPointF>(p3));
 
     angle2 = p4p3.angle();
     angle2F = QString().number(angle2);

@@ -326,7 +326,7 @@ void TST_VSpline::CompareThreeWays()
     VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
     VSpline spl1(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
-    VSpline spl2(spl1.GetP1(), spl1.GetP2(), spl1.GetP3(), spl1.GetP4(), 1);
+    VSpline spl2(spl1.GetP1(), static_cast<QPointF>(spl1.GetP2()), static_cast<QPointF>(spl1.GetP3()), spl1.GetP4(), 1);
     VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), "", spl2.GetEndAngle(), "", spl2.GetC1Length(), "",
                  spl2.GetC2Length(), "", 1);
 

@@ -101,7 +101,8 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
             const auto topLeftPinPoint = pattern->GeometricObject<VPointF>(topLeftPin);
             const auto bottomRightPinPoint = pattern->GeometricObject<VPointF>(bottomRightPin);
 
-            const QRectF labelRect = QRectF(*topLeftPinPoint, *bottomRightPinPoint);
+            const QRectF labelRect = QRectF(static_cast<QPointF>(*topLeftPinPoint),
+                                            static_cast<QPointF>(*bottomRightPinPoint));
             labelWidth = qAbs(labelRect.width());
             labelHeight = qAbs(labelRect.height());
 
@@ -139,7 +140,7 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
             const qreal lWidth = ToPixel(labelWidth, *pattern->GetPatternUnit());
             const qreal lHeight = ToPixel(labelHeight, *pattern->GetPatternUnit());
 
-            pos = *centerPinPoint - QRectF(0, 0, lWidth, lHeight).center();
+            pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, lWidth, lHeight).center();
         }
         catch(const VExceptionBadId &)
         {
@@ -170,7 +171,7 @@ bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern
             const auto topPinPoint = pattern->GeometricObject<VPointF>(topPin);
             const auto bottomPinPoint = pattern->GeometricObject<VPointF>(bottomPin);
 
-            QLineF grainline(*bottomPinPoint, *topPinPoint);
+            QLineF grainline(static_cast<QPointF>(*bottomPinPoint), static_cast<QPointF>(*topPinPoint));
             length = grainline.length();
             rotationAngle = grainline.angle();
 
