@@ -158,7 +158,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
     }
     else
     {
-        data->UpdateId(id);
+        VContainer::UpdateId(id);
         data->AddLine(firstPoint, secondPoint);
         if (parse != Document::FullParse)
         {
