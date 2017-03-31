@@ -110,9 +110,6 @@ private:
 
     int           formulaBaseHeightCircle1Radius;
     int           formulaBaseHeightCircle2Radius;
-
-    qreal         angleCircle1Radius;
-    qreal         angleCircle2Radius;
 };
 
 #endif // DIALOGPOINTOFINTERSECTIONCIRCLES_H

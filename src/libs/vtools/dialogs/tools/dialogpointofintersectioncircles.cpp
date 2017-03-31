@@ -55,8 +55,7 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
                                                                    QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersectionCircles), flagCircle1Radius(false),
       flagCircle2Radius(false), timerCircle1Radius(nullptr), timerCircle2Radius(nullptr), circle1Radius(),
-      circle2Radius(), formulaBaseHeightCircle1Radius(0), formulaBaseHeightCircle2Radius(0),
-      angleCircle1Radius(INT_MIN), angleCircle2Radius(INT_MIN)
+      circle2Radius(), formulaBaseHeightCircle1Radius(0), formulaBaseHeightCircle2Radius(0)
 {
     ui->setupUi(this);
 

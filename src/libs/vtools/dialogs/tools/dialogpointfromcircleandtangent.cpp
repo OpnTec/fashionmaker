@@ -54,7 +54,7 @@
 DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId,
                                                                  QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointFromCircleAndTangent), flagCircleRadius(false),
-      timerCircleRadius(nullptr), circleRadius(), formulaBaseHeightCircleRadius(0), angleCircleRadius(INT_MIN)
+      timerCircleRadius(nullptr), circleRadius(), formulaBaseHeightCircleRadius(0)
 {
     ui->setupUi(this);
 

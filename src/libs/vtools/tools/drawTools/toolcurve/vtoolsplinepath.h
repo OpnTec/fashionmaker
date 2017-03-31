@@ -85,11 +85,6 @@ signals:
      */
     void          RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                               const QPointF &splinePoint);
-    /**
-     * @brief setEnabledPoint disable control points.
-     * @param enable enable or diasable points.
-     */
-    void          setEnabledPoint(bool enable);
 public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,

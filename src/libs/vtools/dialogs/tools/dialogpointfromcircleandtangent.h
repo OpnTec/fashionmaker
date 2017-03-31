@@ -93,7 +93,6 @@ private:
     QTimer        *timerCircleRadius;
     QString       circleRadius;
     int           formulaBaseHeightCircleRadius;
-    qreal         angleCircleRadius;
 };
 
 #endif // DIALOGPOINTFROMCIRCLEANDTANGENT_H

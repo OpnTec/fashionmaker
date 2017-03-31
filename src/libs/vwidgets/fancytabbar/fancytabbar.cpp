@@ -37,7 +37,6 @@
 #include <QToolTip>
 
 const int FancyTabBar::m_rounding = 22;
-const int FancyTabBar::m_textPadding = 4;
 
 //---------------------------------------------------------------------------------------------------------------------
 FancyTabBar::FancyTabBar(const TabBarPosition position, QWidget *parent)

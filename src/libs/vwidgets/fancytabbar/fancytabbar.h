@@ -100,7 +100,6 @@ private:
     enum Corner { OutsideBeginning, OutsideEnd, InsideBeginning, InsideEnd };
 
     static const int m_rounding;
-    static const int m_textPadding;
 
     TabBarPosition   m_position;
     QRect            m_hoverRect;
