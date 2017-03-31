@@ -40,7 +40,7 @@ DialogGroup::DialogGroup(const VContainer *data, const quint32 &toolId, QWidget 
 {
     ui->setupUi(this);
     InitOkCancel(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogGroup::NameChanged);
 }

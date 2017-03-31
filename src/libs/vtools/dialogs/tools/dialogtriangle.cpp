@@ -61,7 +61,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisP1);
     FillComboBoxPoints(ui->comboBoxAxisP2);

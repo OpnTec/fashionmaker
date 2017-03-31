@@ -53,7 +53,7 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxTangentPoint);
     FillComboBoxArcs(ui->comboBoxArc);

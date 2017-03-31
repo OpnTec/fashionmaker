@@ -61,7 +61,7 @@ public slots:
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
 
 protected:
-    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void CheckState() Q_DECL_FINAL;
     virtual void ShowVisualization() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 

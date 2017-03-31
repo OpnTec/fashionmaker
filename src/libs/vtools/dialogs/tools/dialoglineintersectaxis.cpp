@@ -80,7 +80,7 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);

@@ -75,7 +75,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void CheckState() Q_DECL_FINAL;
 
 private slots:
     void CurveChanged();

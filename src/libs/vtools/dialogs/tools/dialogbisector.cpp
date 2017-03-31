@@ -73,7 +73,7 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);

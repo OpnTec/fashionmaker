@@ -68,7 +68,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);
 

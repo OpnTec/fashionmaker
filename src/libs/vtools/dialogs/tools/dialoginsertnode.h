@@ -57,7 +57,7 @@ public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
 
 protected:
-    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void CheckState() Q_DECL_FINAL;
 
 private:
     Q_DISABLE_COPY(DialogInsertNode)

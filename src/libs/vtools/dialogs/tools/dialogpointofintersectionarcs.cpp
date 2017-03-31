@@ -55,7 +55,7 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc1);
     FillComboBoxArcs(ui->comboBoxArc2);

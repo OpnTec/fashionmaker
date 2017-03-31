@@ -74,7 +74,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxPoints(ui->comboBoxP1Line);

@@ -85,7 +85,7 @@ private:
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;
 
-    virtual void            CheckState() Q_DECL_OVERRIDE;
+    virtual void            CheckState() Q_DECL_FINAL;
     bool                    CheckIntersecion();
 };
 
