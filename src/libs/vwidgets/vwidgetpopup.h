@@ -63,10 +63,10 @@ public:
     void SetWidget(QWidget *widget, bool own = true);
 
     /** Returns widget to be popped up. */
-    inline QWidget* Widget() const;
+    QWidget* Widget() const;
 
     /** Returns true if widget is owned by this popup widget, false otherwise. */
-    inline bool isOwned() const;
+    bool isOwned() const;
 
     int GetLifeTime() const;
     void SetLifeTime(int value);

@@ -71,7 +71,7 @@ public:
     QMarginsF &operator*=(qreal factor) Q_DECL_NOTHROW;
     QMarginsF &operator/=(qreal divisor);
 
-    Q_DECL_CONSTEXPR inline QMargins toMargins() const Q_DECL_NOTHROW;
+    Q_DECL_CONSTEXPR QMargins toMargins() const Q_DECL_NOTHROW;
 
 private:
     qreal m_left;
