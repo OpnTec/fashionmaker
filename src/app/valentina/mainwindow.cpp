@@ -4261,21 +4261,6 @@ void MainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::CreateMeasurements()
-{
-    const QString tape = qApp->TapeFilePath();
-    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-
-    QStringList arguments;
-    if (isNoScaling)
-    {
-        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
-    }
-
-    QProcess::startDetached(tape, arguments, workingDirectory);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()
 {
     if (isLayoutStale)
@@ -5047,32 +5032,6 @@ void MainWindow::ToolSelectArc() const
     emit EnableLineHover(false);
     emit EnableArcHover(true);
     emit EnableElArcHover(false);
-    emit EnableSplineHover(false);
-    emit EnableSplinePathHover(false);
-
-    emit ItemsSelection(SelectionType::ByMouseRelease);
-
-    ui->view->AllowRubberBand(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectElArc() const
-{
-    // Only true for rubber band selection
-    emit EnableLabelSelection(false);
-    emit EnablePointSelection(false);
-    emit EnableLineSelection(false);
-    emit EnableArcSelection(false);
-    emit EnableElArcSelection(false);
-    emit EnableSplineSelection(false);
-    emit EnableSplinePathSelection(false);
-
-    // Hovering
-    emit EnableLabelHover(false);
-    emit EnablePointHover(false);
-    emit EnableLineHover(false);
-    emit EnableArcHover(false);
-    emit EnableElArcHover(true);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 

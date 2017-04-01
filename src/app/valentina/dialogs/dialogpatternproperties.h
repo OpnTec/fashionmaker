@@ -52,9 +52,7 @@ public:
 signals:
     void UpdateGradation();
 private slots:
-    void ToggleComboBox();
     void DefValueChanged();
-    void SecurityValueChanged();
     void GeneralInfoChanged();
     void Apply();
     void Ok();

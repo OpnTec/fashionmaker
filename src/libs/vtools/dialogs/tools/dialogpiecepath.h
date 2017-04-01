@@ -110,7 +110,6 @@ private:
     void InitSeamAllowanceTab();
     void InitPassmarksTab();
     void InitPathTypes();
-    void InitListPieces();
     void InitNodesList();
     void InitPassmarksList();
     void NodeAngleChanged(int index);

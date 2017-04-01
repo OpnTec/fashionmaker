@@ -1302,50 +1302,6 @@ QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
-{
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
-                      "Time to refactor the code.");
-
-    QStringList expressions;
-    const QDomNodeList list = elementsByTagName(strPathPoint);
-    for (int i=0; i < list.size(); ++i)
-    {
-        const QDomElement dom = list.at(i).toElement();
-
-        try
-        {
-            expressions.append(GetParametrString(dom, strKAsm1));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            expressions.append(GetParametrString(dom, strKAsm2));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            expressions.append(GetParametrString(dom, strAngle));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-    }
-
-    return expressions;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixToolUnionToV0_2_4()
 {
     // TODO. Delete if minimal supported version is 0.2.4

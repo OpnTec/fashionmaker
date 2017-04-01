@@ -131,7 +131,6 @@ private:
     QString MUnitV0_1_4() const;
     QDomElement TagMeasurementsV0_1_4() const;
     QDomElement TagIncrementsV0_1_4() const;
-    QStringList ListPathPointExpressionsV0_1_4() const;
 
     void FixToolUnionToV0_2_4();
     void ParseModelingToV0_2_4(const QDomElement &modeling);

@@ -114,7 +114,6 @@ private slots:
     void ToolBarStyles();
     void ShowPaper(int index);
     void Preferences();
-    void CreateMeasurements();
     void ExportLayoutAs();
 
     void ArrowTool();
@@ -363,7 +362,6 @@ private:
     void ToolSelectSpline() const;
     void ToolSelectSplinePath() const;
     void ToolSelectArc() const;
-    void ToolSelectElArc() const;
     void ToolSelectPointArc() const;
     void ToolSelectCurve() const;
     void ToolSelectAllDrawObjects() const;

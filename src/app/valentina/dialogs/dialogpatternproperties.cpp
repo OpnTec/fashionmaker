@@ -417,22 +417,9 @@ void DialogPatternProperties::DescEdited()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::ToggleComboBox()
-{
-    ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
-    ui->comboBoxSize->setEnabled(ui->radioButtonDefFromP->isChecked());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::DefValueChanged()
 {
     defaultChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SecurityValueChanged()
-{
-    securityChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

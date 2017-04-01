@@ -98,8 +98,6 @@ private:
     std::shared_ptr<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
 
-    void               InitLineWidth();
-
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static const QString GistFileName;
 
