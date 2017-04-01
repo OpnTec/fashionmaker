@@ -4261,6 +4261,7 @@ void MainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MAC)
 void MainWindow::CreateMeasurements()
 {
     const QString tape = qApp->TapeFilePath();
@@ -4274,6 +4275,7 @@ void MainWindow::CreateMeasurements()
 
     QProcess::startDetached(tape, arguments, workingDirectory);
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()

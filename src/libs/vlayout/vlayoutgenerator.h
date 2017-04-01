@@ -145,6 +145,4 @@ private:
     QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
 };
 
-typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;
-
 #endif // VLAYOUTGENERATOR_H
