@@ -660,7 +660,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wvla-extension \
     -Wvolatile-register-var \
     -Wweak-template-vtables \
-    -Wweak-vtables \
+#    -Wweak-vtables \
     -Wwrite-strings \
     -Wzero-length-array \
     -Qunused-arguments \
