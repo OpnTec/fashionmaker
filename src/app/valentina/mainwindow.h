@@ -114,6 +114,9 @@ private slots:
     void ToolBarStyles();
     void ShowPaper(int index);
     void Preferences();
+#if defined(Q_OS_MAC)
+    void CreateMeasurements();
+#endif
     void ExportLayoutAs();
 
     void ArrowTool();

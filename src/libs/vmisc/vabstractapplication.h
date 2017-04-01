@@ -49,7 +49,6 @@
 
 class QUndoStack;
 class VAbstractApplication;// use in define
-class VAbstractPattern;
 class VMainGraphicsView;
 
 #if defined(qApp)

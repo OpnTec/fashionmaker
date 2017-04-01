@@ -4261,6 +4261,21 @@ void MainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CreateMeasurements()
+{
+    const QString tape = qApp->TapeFilePath();
+    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+
+    QStringList arguments;
+    if (isNoScaling)
+    {
+        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+    }
+
+    QProcess::startDetached(tape, arguments, workingDirectory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()
 {
     if (isLayoutStale)
