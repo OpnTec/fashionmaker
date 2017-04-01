@@ -62,7 +62,7 @@ public:
           m_bottomRightPin(data.m_bottomRightPin)
     {}
 
-    ~VPatternLabelDataPrivate();
+    ~VPatternLabelDataPrivate() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_dLabelWidth formula to calculate the width of label */
     QString m_dLabelWidth;
@@ -82,9 +82,6 @@ public:
 private:
     VPatternLabelDataPrivate &operator=(const VPatternLabelDataPrivate &) Q_DECL_EQ_DELETE;
 };
-
-VPatternLabelDataPrivate::~VPatternLabelDataPrivate()
-{}
 
 QT_WARNING_POP
 

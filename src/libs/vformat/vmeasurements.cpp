@@ -116,11 +116,6 @@ VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::~VMeasurements()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::setXMLContent(const QString &fileName)
 {
     VDomDocument::setXMLContent(fileName);

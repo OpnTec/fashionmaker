@@ -44,7 +44,7 @@ class VVITConverter : public VAbstractMConverter
     Q_DECLARE_TR_FUNCTIONS(VVITConverter)
 public:
     explicit VVITConverter(const QString &fileName);
-    virtual ~VVITConverter() Q_DECL_OVERRIDE;
+    virtual ~VVITConverter() Q_DECL_EQ_DEFAULT;
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;

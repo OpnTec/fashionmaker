@@ -63,10 +63,6 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolTriangle::~VisToolTriangle()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

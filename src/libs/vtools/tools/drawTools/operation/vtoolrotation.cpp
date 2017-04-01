@@ -93,10 +93,6 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRotation::~VToolRotation()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::setDialog()
 {
     SCASSERT(dialog != nullptr)

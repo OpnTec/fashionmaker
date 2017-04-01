@@ -132,13 +132,6 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextGraphicsItem::~VTextGraphicsItem destructor
- */
-VTextGraphicsItem::~VTextGraphicsItem()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VTextGraphicsItem::SetFont sets the item font
  * @param fnt font to be used in item
  */

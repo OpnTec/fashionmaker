@@ -70,10 +70,6 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVSTConverter::~VVSTConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VVSTConverter::XSDSchema(int ver) const
 {
     switch (ver)

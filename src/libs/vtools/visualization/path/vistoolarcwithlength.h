@@ -43,8 +43,8 @@ class VisToolArcWithLength : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolArcWithLength() Q_DECL_OVERRIDE;
+    explicit VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolArcWithLength() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setRadius(const QString &expression);

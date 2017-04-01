@@ -63,10 +63,6 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSpline::~VAbstractSpline()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::getTagName() const
 {
     return VAbstractPattern::TagSpline;

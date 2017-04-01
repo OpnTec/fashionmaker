@@ -43,8 +43,8 @@ class VisToolTrueDarts :public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolTrueDarts() Q_DECL_OVERRIDE;
+    explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolTrueDarts() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 

@@ -59,7 +59,7 @@ class TestVApplication : public VAbstractApplication
 public:
 
     TestVApplication(int &argc, char ** argv);
-    virtual ~TestVApplication();
+    virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
 
     virtual const VTranslateVars *TrVars();
     virtual void                  OpenSettings();
@@ -70,11 +70,6 @@ public:
 //---------------------------------------------------------------------------------------------------------------------
 TestVApplication::TestVApplication(int &argc, char **argv)
     : VAbstractApplication(argc, argv)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-TestVApplication::~TestVApplication()
 {
 }
 

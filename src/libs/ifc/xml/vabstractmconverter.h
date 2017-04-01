@@ -41,7 +41,7 @@ class VAbstractMConverter : public VAbstractConverter
 {
 public:
     explicit VAbstractMConverter(const QString &fileName);
-    virtual ~VAbstractMConverter() Q_DECL_OVERRIDE;
+    virtual ~VAbstractMConverter() Q_DECL_EQ_DEFAULT;
 
 protected:
     void AddRootComment();

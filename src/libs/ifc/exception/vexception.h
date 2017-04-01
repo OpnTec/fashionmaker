@@ -46,7 +46,7 @@ public:
     explicit VException(const QString &error);
     VException(const VException &e);
     VException &operator=(const VException &e);
-    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
@@ -96,7 +96,7 @@ public:
     explicit VExceptionToolWasDeleted(const QString &error);
     VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
     VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
-    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction

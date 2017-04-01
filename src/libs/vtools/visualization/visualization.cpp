@@ -73,10 +73,6 @@ Visualization::Visualization(const VContainer *data)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Visualization::~Visualization()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void Visualization::setObject1Id(const quint32 &value)
 {
     object1Id = value;

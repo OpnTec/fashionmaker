@@ -77,7 +77,3 @@ VToolRecord &VToolRecord::operator=(const VToolRecord &record)
 VToolRecord::VToolRecord(const VToolRecord &record)
     :id(record.getId()), typeTool(record.getTypeTool()), nameDraw(record.getNameDraw())
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-VToolRecord::~VToolRecord()
-{}

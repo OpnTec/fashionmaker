@@ -37,7 +37,7 @@ class VToolFlippingByAxis : public VAbstractFlipping
 {
     Q_OBJECT
 public:
-    virtual ~VToolFlippingByAxis();
+    virtual ~VToolFlippingByAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolFlippingByAxis* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data);

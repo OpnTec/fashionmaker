@@ -60,10 +60,6 @@ VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutSpline::~VisToolCutSpline()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSpline::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

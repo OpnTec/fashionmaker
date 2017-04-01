@@ -38,7 +38,7 @@ class VisPiecePins : public VisPath
     Q_OBJECT
 public:
     VisPiecePins(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPiecePins();
+    virtual ~VisPiecePins() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         SetPins(const QVector<quint32> &pins);

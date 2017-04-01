@@ -44,8 +44,8 @@ class VisToolPointOfIntersectionCurves : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersectionCurves() Q_DECL_OVERRIDE {}
+    explicit VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPointOfIntersectionCurves() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;

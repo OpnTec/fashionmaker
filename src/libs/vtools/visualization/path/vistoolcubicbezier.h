@@ -44,7 +44,7 @@ class VisToolCubicBezier : public VisPath
     Q_OBJECT
 public:
     explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier();
+    virtual ~VisToolCubicBezier() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 

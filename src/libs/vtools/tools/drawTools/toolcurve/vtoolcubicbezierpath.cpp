@@ -73,11 +73,6 @@ VToolCubicBezierPath::VToolCubicBezierPath(VAbstractPattern *doc, VContainer *da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezierPath::~VToolCubicBezierPath()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::setDialog()
 {
     SCASSERT(dialog != nullptr)

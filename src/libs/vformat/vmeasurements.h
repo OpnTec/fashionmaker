@@ -49,7 +49,7 @@ public:
     explicit VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
-    virtual ~VMeasurements() Q_DECL_OVERRIDE;
+    virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
 
     virtual void setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
 

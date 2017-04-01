@@ -82,10 +82,6 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(VAbstractPattern *doc, VContain
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCurveIntersectAxis::~VToolCurveIntersectAxis()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::setDialog()
 {
     SCASSERT(dialog != nullptr)

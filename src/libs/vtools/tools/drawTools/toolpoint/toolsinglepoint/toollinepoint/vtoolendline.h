@@ -51,7 +51,7 @@ class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    virtual ~VToolEndLine() Q_DECL_OVERRIDE;
+    virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);

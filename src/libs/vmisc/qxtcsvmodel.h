@@ -58,7 +58,7 @@ public:
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',');
     explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
                          QChar separator = ',');
-    virtual ~QxtCsvModel();
+    virtual ~QxtCsvModel() Q_DECL_EQ_DEFAULT;
 
     virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
     virtual int      columnCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;

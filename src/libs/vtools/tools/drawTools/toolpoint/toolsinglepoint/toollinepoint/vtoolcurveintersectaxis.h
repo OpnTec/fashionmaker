@@ -50,7 +50,7 @@ class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    virtual ~VToolCurveIntersectAxis() Q_DECL_OVERRIDE;
+    virtual ~VToolCurveIntersectAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
 
     static VToolCurveIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,

@@ -67,11 +67,6 @@ VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *pa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCubicBezier::~VisToolCubicBezier()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezier::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

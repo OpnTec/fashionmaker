@@ -35,11 +35,6 @@ const QString VAbstractOperation::TagSource      = QStringLiteral("source");
 const QString VAbstractOperation::TagDestination = QStringLiteral("destination");
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractOperation::~VAbstractOperation()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractOperation::getTagName() const
 {
     return VAbstractPattern::TagOperation;

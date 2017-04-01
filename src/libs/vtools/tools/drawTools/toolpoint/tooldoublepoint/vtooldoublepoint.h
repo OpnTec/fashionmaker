@@ -51,7 +51,7 @@ class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
 public:
     VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
                      QGraphicsItem * parent = nullptr);
-    virtual ~VToolDoublePoint() Q_DECL_OVERRIDE;
+    virtual ~VToolDoublePoint() Q_DECL_EQ_DEFAULT;
 
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};

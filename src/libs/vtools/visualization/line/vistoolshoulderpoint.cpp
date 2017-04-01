@@ -60,10 +60,6 @@ VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolShoulderPoint::~VisToolShoulderPoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolShoulderPoint::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

@@ -51,7 +51,7 @@ public:
     void    setTypeTool(const Tool &value);
     QString getNameDraw() const;
     void    setNameDraw(const QString &value);
-    ~VToolRecord();
+    ~VToolRecord() Q_DECL_EQ_DEFAULT;
 private:
     /** @brief id tool id. */
     quint32 id;

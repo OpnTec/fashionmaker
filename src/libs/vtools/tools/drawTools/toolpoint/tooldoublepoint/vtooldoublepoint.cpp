@@ -79,10 +79,6 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolDoublePoint::~VToolDoublePoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolDoublePoint::nameP1() const
 {
     return ObjectName<VPointF>(p1id);

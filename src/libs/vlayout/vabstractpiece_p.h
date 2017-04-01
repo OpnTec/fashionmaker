@@ -57,7 +57,7 @@ public:
           m_width(piece.m_width)
     {}
 
-    ~VAbstractPieceData();
+    ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
 
     QString m_name;
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
@@ -68,9 +68,6 @@ public:
 private:
     VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;
 };
-
-VAbstractPieceData::~VAbstractPieceData()
-{}
 
 QT_WARNING_POP
 

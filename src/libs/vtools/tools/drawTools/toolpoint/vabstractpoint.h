@@ -54,7 +54,7 @@ class VAbstractPoint: public VDrawTool
     Q_OBJECT
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
-    virtual ~VAbstractPoint() Q_DECL_OVERRIDE;
+    virtual ~VAbstractPoint() Q_DECL_EQ_DEFAULT;
 
     virtual QString      getTagName() const Q_DECL_OVERRIDE;
 

@@ -47,7 +47,7 @@ class VToolCubicBezierPath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    virtual ~VToolCubicBezierPath();
+    virtual ~VToolCubicBezierPath() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCubicBezierPath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                         VContainer *data);

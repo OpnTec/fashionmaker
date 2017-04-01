@@ -42,7 +42,7 @@ class VisToolPiecePath : public VisPath
     Q_OBJECT
 public:
     VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPiecePath();
+    virtual ~VisToolPiecePath() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         SetPath(const VPiecePath &piece);

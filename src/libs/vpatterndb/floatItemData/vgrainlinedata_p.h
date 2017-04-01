@@ -61,7 +61,7 @@ public:
           m_bottomPin(data.m_bottomPin)
     {}
 
-    ~VGrainlineDataPrivate();
+    ~VGrainlineDataPrivate() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_dLength formula to calculate the length of grainline */
     QString   m_qsLength;
@@ -79,9 +79,6 @@ public:
 private:
     VGrainlineDataPrivate &operator=(const VGrainlineDataPrivate &) Q_DECL_EQ_DELETE;
 };
-
-VGrainlineDataPrivate::~VGrainlineDataPrivate()
-{}
 
 QT_WARNING_POP
 

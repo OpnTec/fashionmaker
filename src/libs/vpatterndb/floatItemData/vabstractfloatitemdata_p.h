@@ -51,7 +51,7 @@ public:
           m_bVisible(data.m_bVisible)
     {}
 
-    ~VAbstractFloatItemDataPrivate();
+    ~VAbstractFloatItemDataPrivate() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_ptPos position of label's top left corner */
     QPointF m_ptPos;
@@ -61,9 +61,6 @@ public:
 private:
     VAbstractFloatItemDataPrivate &operator=(const VAbstractFloatItemDataPrivate &) Q_DECL_EQ_DELETE;
 };
-
-VAbstractFloatItemDataPrivate::~VAbstractFloatItemDataPrivate()
-{}
 
 QT_WARNING_POP
 

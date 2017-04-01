@@ -49,7 +49,7 @@ class Visualization : public QObject
     Q_OBJECT
 public:
     explicit Visualization(const VContainer *data);
-    virtual ~Visualization() Q_DECL_OVERRIDE;
+    virtual ~Visualization() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry()=0;
 

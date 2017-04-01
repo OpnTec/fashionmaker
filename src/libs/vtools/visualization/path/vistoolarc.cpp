@@ -50,10 +50,6 @@ VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolArc::~VisToolArc()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

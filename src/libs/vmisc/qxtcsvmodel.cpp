@@ -48,7 +48,7 @@ public:
     QxtCsvModelPrivate() : csvData(), header(), maxColumn(0), quoteMode(QxtCsvModel::DefaultQuoteMode)
     {}
     QXT_DECLARE_PUBLIC(QxtCsvModel)
-    virtual ~QxtCsvModelPrivate();
+    virtual ~QxtCsvModelPrivate() Q_DECL_EQ_DEFAULT;
 
     QList<QStringList> csvData;
     QStringList header;
@@ -58,9 +58,6 @@ public:
 private:
     Q_DISABLE_COPY(QxtCsvModelPrivate)
 };
-
-QxtCsvModelPrivate::~QxtCsvModelPrivate()
-{}
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -107,9 +104,6 @@ QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHead
 }
 
 QT_WARNING_POP
-
-QxtCsvModel::~QxtCsvModel()
-{}
 
 /*!
     \reimp

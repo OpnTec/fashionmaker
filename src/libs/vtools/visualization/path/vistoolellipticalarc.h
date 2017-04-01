@@ -42,8 +42,8 @@ class VisToolEllipticalArc : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolEllipticalArc() Q_DECL_OVERRIDE;
+    explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolEllipticalArc() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void setRadius1(const QString &expression);

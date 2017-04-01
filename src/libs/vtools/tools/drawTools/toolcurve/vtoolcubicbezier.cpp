@@ -71,11 +71,6 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezier::~VToolCubicBezier()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::setDialog()
 {
     SCASSERT(dialog != nullptr)

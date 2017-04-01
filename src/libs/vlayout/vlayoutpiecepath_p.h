@@ -57,7 +57,7 @@ public:
           m_penStyle(path.m_penStyle)
     {}
 
-    ~VLayoutPiecePathData();
+    ~VLayoutPiecePathData() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_points list of path points. */
     QVector<QPointF> m_points;
@@ -68,9 +68,6 @@ public:
 private:
     VLayoutPiecePathData &operator=(const VLayoutPiecePathData &) Q_DECL_EQ_DELETE;
 };
-
-VLayoutPiecePathData::~VLayoutPiecePathData()
-{}
 
 QT_WARNING_POP
 

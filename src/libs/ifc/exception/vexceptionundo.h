@@ -40,7 +40,7 @@ class VExceptionUndo : public VException
 public:
     explicit VExceptionUndo(const QString &error);
     VExceptionUndo(const VExceptionUndo &e);
-    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
+    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 };
 
 #endif // VEXCEPTIONUNDO_H

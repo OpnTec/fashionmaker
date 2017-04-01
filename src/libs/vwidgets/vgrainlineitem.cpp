@@ -78,13 +78,6 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::~VGrainlineItem destructor
- */
-VGrainlineItem::~VGrainlineItem()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VGrainlineItem::shape() const
 {
     if (m_eMode == mNormal)

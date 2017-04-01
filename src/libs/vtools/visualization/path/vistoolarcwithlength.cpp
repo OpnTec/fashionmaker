@@ -50,10 +50,6 @@ VisToolArcWithLength::VisToolArcWithLength(const VContainer *data, QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolArcWithLength::~VisToolArcWithLength()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

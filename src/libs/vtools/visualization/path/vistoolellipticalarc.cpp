@@ -47,10 +47,6 @@ VisToolEllipticalArc::VisToolEllipticalArc(const VContainer *data, QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEllipticalArc::~VisToolEllipticalArc()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

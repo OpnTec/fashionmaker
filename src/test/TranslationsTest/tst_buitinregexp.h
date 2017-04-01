@@ -41,7 +41,7 @@ class TST_BuitInRegExp : public TST_AbstractRegExp
     Q_OBJECT
 public:
     explicit TST_BuitInRegExp(const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_BuitInRegExp();
+    virtual ~TST_BuitInRegExp() Q_DECL_EQ_DEFAULT;
 
 protected:
     virtual void        PrepareData() Q_DECL_OVERRIDE;

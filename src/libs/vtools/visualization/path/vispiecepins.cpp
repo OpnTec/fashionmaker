@@ -39,11 +39,6 @@ VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPiecePins::~VisPiecePins()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisPiecePins::RefreshGeometry()
 {
     HideAllItems();

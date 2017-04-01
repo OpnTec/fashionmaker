@@ -37,7 +37,7 @@ class VAbstractFlipping : public VAbstractOperation
 {
     Q_OBJECT
 public:
-    virtual ~VAbstractFlipping();
+    virtual ~VAbstractFlipping() Q_DECL_EQ_DEFAULT;
 protected:
     VAbstractFlipping(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,

@@ -77,10 +77,6 @@ VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolTrueDarts::~VisToolTrueDarts()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolTrueDarts::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

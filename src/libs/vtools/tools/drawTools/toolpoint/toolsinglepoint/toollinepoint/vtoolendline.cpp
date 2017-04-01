@@ -79,10 +79,6 @@ VToolEndLine::VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolEndLine::~VToolEndLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */

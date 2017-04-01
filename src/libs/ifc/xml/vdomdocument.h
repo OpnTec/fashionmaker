@@ -89,7 +89,7 @@ public:
     static const QString    TagVersion;
 
     VDomDocument();
-    virtual ~VDomDocument();
+    virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
     QDomElement    elementById(const QString& id);
     QDomElement    elementById(quint32 id);
 

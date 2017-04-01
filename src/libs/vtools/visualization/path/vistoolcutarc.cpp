@@ -58,10 +58,6 @@ VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutArc::~VisToolCutArc()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

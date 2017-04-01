@@ -53,7 +53,7 @@ public:
     };
 
     FancyTabBar(const TabBarPosition position, QWidget *parent = nullptr);
-    virtual ~FancyTabBar();
+    virtual ~FancyTabBar() Q_DECL_EQ_DEFAULT;
 
     virtual QSize sizeHint() const Q_DECL_OVERRIDE;
     virtual QSize minimumSizeHint() const Q_DECL_OVERRIDE;

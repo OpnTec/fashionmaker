@@ -49,7 +49,7 @@ class VToolMove : public VAbstractOperation
 {
     Q_OBJECT
 public:
-    virtual ~VToolMove();
+    virtual ~VToolMove() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolMove* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                VContainer *data);

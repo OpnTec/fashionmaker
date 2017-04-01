@@ -43,10 +43,6 @@ VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPiecePath::~VisToolPiecePath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPiecePath::RefreshGeometry()
 {
     HideAllItems();

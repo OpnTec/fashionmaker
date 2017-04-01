@@ -59,10 +59,6 @@ VAbstractConverter::VAbstractConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractConverter::~VAbstractConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractConverter::Convert()
 {
     if (m_ver == MaxVer())

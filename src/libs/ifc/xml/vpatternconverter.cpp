@@ -144,10 +144,6 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternConverter::~VPatternConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::XSDSchema(int ver) const
 {
     switch (ver)

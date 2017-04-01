@@ -206,10 +206,6 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractPattern::~VAbstractPattern()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListMeasurements() const
 {
     QSet<QString> measurements;

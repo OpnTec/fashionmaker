@@ -46,8 +46,8 @@ class VisToolTriangle : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolTriangle() Q_DECL_OVERRIDE;
+    explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolTriangle() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 

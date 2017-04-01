@@ -43,8 +43,8 @@ class VisToolCutSpline : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolCutSpline() Q_DECL_OVERRIDE;
+    explicit VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolCutSpline() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLength(const QString &expression);

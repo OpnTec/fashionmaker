@@ -75,11 +75,6 @@ template <class T> class QSharedPointer;
 const QString VToolMove::ToolType = QStringLiteral("moving");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove::~VToolMove()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolMove::setDialog()
 {
     SCASSERT(dialog != nullptr)

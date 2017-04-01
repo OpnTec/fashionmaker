@@ -71,11 +71,6 @@ FancyTabBar::FancyTabBar(const TabBarPosition position, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-FancyTabBar::~FancyTabBar()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QSize FancyTabBar::TabSizeHint(bool minimum) const
 {
     QFont boldFont(font());

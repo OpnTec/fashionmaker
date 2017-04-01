@@ -40,7 +40,7 @@ class VisToolPiece : public VisPath
     Q_OBJECT
 public:
     VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPiece();
+    virtual ~VisToolPiece() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         SetPiece(const VPiece &piece);

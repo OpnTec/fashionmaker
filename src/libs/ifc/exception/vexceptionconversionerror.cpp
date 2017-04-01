@@ -54,10 +54,6 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError::~VExceptionConversionError() V_NOEXCEPT_EXPR (true)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message

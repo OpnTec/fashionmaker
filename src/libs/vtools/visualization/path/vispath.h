@@ -46,8 +46,8 @@ class VisPath : public Visualization, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    explicit VisPath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisPath() Q_DECL_OVERRIDE;
+    explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisPath() Q_DECL_EQ_DEFAULT;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};

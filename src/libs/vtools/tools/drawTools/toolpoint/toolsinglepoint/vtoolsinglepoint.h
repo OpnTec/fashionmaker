@@ -52,7 +52,7 @@ class VToolSinglePoint: public VAbstractPoint, public QGraphicsEllipseItem
     Q_OBJECT
 public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VToolSinglePoint() Q_DECL_OVERRIDE;
+    virtual ~VToolSinglePoint() Q_DECL_EQ_DEFAULT;
 
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};

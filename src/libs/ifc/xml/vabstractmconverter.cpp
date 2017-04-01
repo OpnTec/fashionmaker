@@ -42,11 +42,6 @@ VAbstractMConverter::VAbstractMConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractMConverter::~VAbstractMConverter()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractMConverter::AddRootComment()
 {
     const QString rootComment =

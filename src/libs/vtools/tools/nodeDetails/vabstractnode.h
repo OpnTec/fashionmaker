@@ -50,7 +50,7 @@ class VAbstractNode : public VAbstractTool
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
-    virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
+    virtual      ~VAbstractNode() Q_DECL_EQ_DEFAULT;
     static const QString AttrIdTool;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;

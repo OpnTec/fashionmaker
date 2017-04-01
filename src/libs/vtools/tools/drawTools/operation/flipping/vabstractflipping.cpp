@@ -38,11 +38,6 @@
 #include "../vgeometry/vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFlipping::~VAbstractFlipping()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VAbstractFlipping::VAbstractFlipping(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                                      const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                                      QGraphicsItem *parent)

@@ -70,10 +70,6 @@ VVITConverter::VVITConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVITConverter::~VVITConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VVITConverter::XSDSchema(int ver) const
 {
     switch (ver)

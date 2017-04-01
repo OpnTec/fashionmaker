@@ -43,8 +43,8 @@ class VisToolShoulderPoint : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolShoulderPoint() Q_DECL_OVERRIDE;
+    explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolShoulderPoint() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLineP1Id(const quint32 &value);

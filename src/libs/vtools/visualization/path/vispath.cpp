@@ -45,10 +45,6 @@ VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPath::~VisPath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
     this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,

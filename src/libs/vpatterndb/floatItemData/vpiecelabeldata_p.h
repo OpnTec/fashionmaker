@@ -52,7 +52,7 @@ public:
           m_conMCP(data.m_conMCP)
     {}
 
-    ~VPieceLabelDataPrivate();
+    ~VPieceLabelDataPrivate() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
     QString      m_qsLetter;
@@ -62,9 +62,6 @@ public:
 private:
     VPieceLabelDataPrivate &operator=(const VPieceLabelDataPrivate &) Q_DECL_EQ_DELETE;
 };
-
-VPieceLabelDataPrivate::~VPieceLabelDataPrivate()
-{}
 
 QT_WARNING_POP
 

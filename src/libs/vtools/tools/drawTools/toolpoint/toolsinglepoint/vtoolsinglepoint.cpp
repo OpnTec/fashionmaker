@@ -93,10 +93,6 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSinglePoint::~VToolSinglePoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolSinglePoint::name() const
 {
     return ObjectName<VPointF>(id);

@@ -68,10 +68,6 @@ VToolLineIntersectAxis::VToolLineIntersectAxis(VAbstractPattern *doc, VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolLineIntersectAxis::~VToolLineIntersectAxis()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::setDialog()
 {
     SCASSERT(dialog != nullptr)

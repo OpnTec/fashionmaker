@@ -60,10 +60,6 @@ VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutSplinePath::~VisToolCutSplinePath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSplinePath::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

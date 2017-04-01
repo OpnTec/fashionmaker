@@ -59,7 +59,7 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VAbstractSpline() Q_DECL_OVERRIDE;
+    virtual ~VAbstractSpline() Q_DECL_EQ_DEFAULT;
 
     virtual int      type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};

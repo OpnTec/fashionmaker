@@ -43,11 +43,6 @@ TST_BuitInRegExp::TST_BuitInRegExp(const QString &locale, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_BuitInRegExp::~TST_BuitInRegExp()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::initTestCase()
 {
     if (m_locale.isEmpty())
