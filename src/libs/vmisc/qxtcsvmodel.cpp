@@ -534,7 +534,6 @@ bool QxtCsvModel::removeColumns(int col, int count, const QModelIndex& parent)
     }
     emit beginRemoveColumns(parent, col, col + count);
     QxtCsvModelPrivate& d_ptr = qxt_d();
-    QString before, after;
     for (int i = 0; i < rowCount(); i++)
     {
         for (int j = 0; j < count; j++)

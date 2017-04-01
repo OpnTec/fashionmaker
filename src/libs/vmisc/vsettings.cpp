@@ -385,9 +385,7 @@ QMarginsF VSettings::GetFields(const QMarginsF &def) const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetFields(const QMarginsF &value)
 {
-    QVariant val = QVariant::fromValue(value);
-    QString str = val.toString();
-    setValue(SettingFields, val);
+    setValue(SettingFields, QVariant::fromValue(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
