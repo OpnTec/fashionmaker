@@ -54,16 +54,6 @@ environment:
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
-  - QT5: Qt\5.8\msvc2013_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.8\msvc2013
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x86
-    DEPLOY: false
   - QT5: Qt\5.7\mingw53_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
@@ -77,16 +67,6 @@ environment:
   - QT5: Qt\5.7\msvc2015
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.7\msvc2013_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.7\msvc2013
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.6\mingw49_32
@@ -104,29 +84,9 @@ environment:
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
-  - QT5: Qt\5.6\msvc2013_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.6\msvc2013
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x86
-    DEPLOY: false
   - QT5: Qt\5.5\mingw492_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.5\msvc2013_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.5\msvc2013
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.4\mingw491_32
@@ -134,29 +94,9 @@ environment:
     MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
     PLATFORM: x86
     DEPLOY: false
-  - QT5: Qt\5.4\msvc2013_64_opengl
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.4\msvc2013_opengl
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x86
-    DEPLOY: false
   - QT5: Qt\5.3\mingw482_32
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.3\msvc2013_64_opengl
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.3\msvc2013_opengl
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 12
     PLATFORM: x86
     DEPLOY: false
 
