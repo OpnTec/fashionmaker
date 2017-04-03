@@ -130,14 +130,17 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
 
     const qint32 res = VGObject::LineIntersectCircle(pShoulder, length, line, p1, p2);
 
-    // If possition is right we will find only one result.
-    // If found two cases this is wrong result. Return default position.
-    if (res == 1)
+    if (res == 1 || res == 2)
     {
-        const QLineF line = QLineF(p1Line, p1);
-        if (line.length() > baseLength && baseAngle == qRound(line.angle()))
+        const QLineF line1 = QLineF(p1Line, p1);
+        const QLineF line2 = QLineF(p1Line, p2);
+        if (line1.length() > baseLength && baseAngle == qRound(line1.angle()))
         {
             shoulderPoint = p1;
+        }
+        else if (res == 2 && line2.length() > baseLength && baseAngle == qRound(line2.angle()))
+        {
+            shoulderPoint = p2;
         }
     }
 

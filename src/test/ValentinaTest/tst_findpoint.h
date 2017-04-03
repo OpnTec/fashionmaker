@@ -50,6 +50,8 @@ private slots:
     void TestTriangle_data();
     void TestTriangle();
 
+    void TestShoulderPoint_data();
+    void TestShoulderPoint();
 };
 
 #endif // TST_FINDPOINT_H

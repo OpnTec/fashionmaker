@@ -31,6 +31,7 @@
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
 
 #include <QtTest>
 
@@ -264,5 +265,45 @@ void TST_FindPoint::TestTriangle()
     QFETCH(QPointF, point);
 
     QPointF resultPoint = VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint);
+    QCOMPARE(point, resultPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestShoulderPoint_data()
+{
+    QTest::addColumn<QPointF>("p1");
+    QTest::addColumn<QPointF>("p2");
+    QTest::addColumn<QPointF>("pShoulder");
+    QTest::addColumn<qreal>("length");
+    QTest::addColumn<QPointF>("point");
+
+    // See file <root>/src/app/share/collection/bugs/Issue_#647.val
+    QTest::newRow("Value found") << QPointF(-234.5669291338583, 39.999874015748034)
+                                 << QPointF(-574.724409448819, 115.5904251968504)
+                                 << QPointF(-234.5669291338583, -35.590677165354336)
+                                 << 566.92913385826773
+                                 << QPointF(-767.2805101289953, 158.3806697924456);
+
+    // The same file <root>/src/app/share/collection/bugs/Issue_#647.val
+    // The length changed to get default value
+    QPointF p2(-574.724409448819, 115.5904251968504);
+    QTest::newRow("Value not found") << QPointF(-234.5669291338583, 39.999874015748034)
+                                     << p2
+                                     << QPointF(-234.5669291338583, -35.590677165354336)
+                                     << 75.59055118110237
+                                     << p2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestShoulderPoint()
+{
+    QFETCH(QPointF, p1);
+    QFETCH(QPointF, p2);
+    QFETCH(QPointF, pShoulder);
+    QFETCH(qreal, length);
+    QFETCH(QPointF, point);
+
+    QPointF resultPoint = VToolShoulderPoint::FindPoint(p1, p2, pShoulder, length);
+
     QCOMPARE(point, resultPoint);
 }
