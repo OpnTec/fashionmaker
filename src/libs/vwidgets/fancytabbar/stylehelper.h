@@ -57,8 +57,8 @@ public:
     // Sets the base color and makes sure all top level widgets are updated
     static void setBaseColor(const QColor &color);
     static void drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
-                                   int radius = 3, const QColor &color = QColor(0, 0, 0, 130),
-                                   const QPoint &offset = QPoint(1, -2));
+                                   int dipRadius = 3, const QColor &color = QColor(0, 0, 0, 130),
+                                   const QPoint &dipOffset = QPoint(1, -2));
 
 private:
     static QColor m_baseColor;

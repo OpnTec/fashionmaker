@@ -38,6 +38,8 @@
 #include <QStyleOption>
 #include <QObject>
 
+#include "../vmisc/vmath.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 qreal StyleHelper::sidebarFontSize()
 {
@@ -122,14 +124,22 @@ void StyleHelper::setBaseColor(const QColor &newcolor)
 //---------------------------------------------------------------------------------------------------------------------
 // Draws a cached pixmap with shadow
 void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
-                                     int radius, const QColor &color, const QPoint &offset)
+                                     int dipRadius, const QColor &color, const QPoint &dipOffset)
 {
     QPixmap cache;
     QString pixmapName = QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
     if (!QPixmapCache::find(pixmapName, cache))
     {
+        // High-dpi support: The in parameters (rect, radius, offset) are in
+        // device-independent pixels. The call to QIcon::pixmap() below might
+        // return a high-dpi pixmap, which will in that case have a devicePixelRatio
+        // different than 1. The shadow drawing caluculations are done in device
+        // pixels.
         QPixmap px = icon.pixmap(rect.size());
+        int devicePixelRatio = qCeil(px.devicePixelRatio());
+        int radius = dipRadius * devicePixelRatio;
+        QPoint offset = dipOffset * devicePixelRatio;
         cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
         cache.fill(Qt::transparent);
 
@@ -157,7 +167,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
 
         QPainter tmpPainter(&tmp);
         tmpPainter.setCompositionMode(QPainter::CompositionMode_Source);
-        tmpPainter.drawPixmap(QPoint(radius, radius), px);
+        tmpPainter.drawPixmap(QRect(radius, radius, px.width(), px.height()), px);
         tmpPainter.end();
 
         // blur the alpha channel
@@ -184,11 +194,13 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         cachePainter.drawImage(QRect(0, 0, cache.rect().width(), cache.rect().height()), tmp);
 
         // Draw the actual pixmap...
-        cachePainter.drawPixmap(QPoint(radius, radius) + offset, px);
+        cachePainter.drawPixmap(QRect(QPoint(radius, radius) + offset, QSize(px.width(), px.height())), px);
+        cache.setDevicePixelRatio(devicePixelRatio);
         QPixmapCache::insert(pixmapName, cache);
     }
 
     QRect targetRect = cache.rect();
-    targetRect.moveCenter(rect.center());
-    p->drawPixmap(targetRect.topLeft() - offset, cache);
+    targetRect.setSize(targetRect.size() / cache.devicePixelRatio());
+    targetRect.moveCenter(rect.center() - dipOffset);
+    p->drawPixmap(targetRect, cache);
 }
