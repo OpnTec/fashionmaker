@@ -30,6 +30,7 @@
 #define VPIECENODE_P_H
 
 #include <QSharedData>
+#include <QDataStream>
 #include "../ifc/ifcdef.h"
 #include "../vmisc/diagnostic.h"
 
