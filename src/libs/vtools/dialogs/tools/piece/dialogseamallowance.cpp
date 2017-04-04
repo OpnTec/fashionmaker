@@ -42,6 +42,7 @@
 #include "../dialogpiecepath.h"
 #include "../../../undocommands/savepiecepathoptions.h"
 #include "../../support/dialogeditwrongformula.h"
+#include "../../../tools/vtoolseamallowance.h"
 
 #include <QMenu>
 #include <QTimer>
@@ -2975,6 +2976,9 @@ void DialogSeamAllowance::ShowPins()
     if (not qApp->getCurrentScene()->items().contains(m_visPins))
     {
         m_visPins->VisualMode(NULL_ID);
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(toolId));
+        SCASSERT(tool != nullptr);
+        m_visPins->setParentItem(tool);
     }
     else
     {
