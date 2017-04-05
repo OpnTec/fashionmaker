@@ -132,6 +132,12 @@ private:
 
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
                                    const VContainer *data) const;
+    QVector<QLineF> SAPassmark(const QVector<VPieceNode> &path, const VSAPoint &previousSAPoint,
+                               const VSAPoint &passmarkSAPoint, const VSAPoint &nextSAPoint, const VContainer *data,
+                               int passmarkIndex) const;
+    QVector<QLineF> BuiltInSAPassmark(const QVector<VPieceNode> &path, const VSAPoint &previousSAPoint,
+                                      const VSAPoint &passmarkSAPoint, const VSAPoint &nextSAPoint,
+                                      const VContainer *data, int passmarkIndex) const;
 
     static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
 };

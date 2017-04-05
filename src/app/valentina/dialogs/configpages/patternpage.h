@@ -63,6 +63,7 @@ private:
     QPushButton* userMaterialClearButton;
     QGroupBox *workpieceGroup;
     QCheckBox *forbidFlippingCheck;
+    QCheckBox *doublePassmarkCheck;
 
     QGroupBox *UserGroup() Q_REQUIRED_RESULT;
     QGroupBox *GraphOutputGroup() Q_REQUIRED_RESULT;

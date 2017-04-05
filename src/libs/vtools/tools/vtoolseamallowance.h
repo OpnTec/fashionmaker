@@ -63,6 +63,7 @@ public:
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
+    static const QString AttrSeamAllowanceBuiltIn;
     static const QString AttrHeight;
     static const QString AttrUnited;
     static const QString AttrFont;

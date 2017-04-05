@@ -4253,6 +4253,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
         connect(dlg.data(), &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
+
         if (guard->exec() == QDialog::Accepted)
         {
             InitAutoSave();

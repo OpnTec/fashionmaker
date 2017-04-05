@@ -235,6 +235,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     uiTabPaths->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
+    uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabLabels->lineEditName->setText(piece.GetName());
 
     const QString width = qApp->TrVars()->FormulaToUser(piece.GetFormulaSAWidth(), qApp->Settings()->GetOsSeparator());
@@ -762,6 +763,7 @@ void DialogSeamAllowance::ListChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EnableSeamAllowance(bool enable)
 {
+    uiTabPaths->checkBoxBuiltIn->setEnabled(enable);
     uiTabPaths->groupBoxAutomatic->setEnabled(enable);
     uiTabPaths->groupBoxCustom->setEnabled(enable);
 
@@ -846,6 +848,8 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonOneLine->setDisabled(true);
     uiTabPassmarks->radioButtonTwoLines->setDisabled(true);
     uiTabPassmarks->radioButtonThreeLines->setDisabled(true);
+    uiTabPassmarks->radioButtonTMark->setDisabled(true);
+    uiTabPassmarks->radioButtonVMark->setDisabled(true);
 
     uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
@@ -865,6 +869,8 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             uiTabPassmarks->radioButtonOneLine->setEnabled(true);
             uiTabPassmarks->radioButtonTwoLines->setEnabled(true);
             uiTabPassmarks->radioButtonThreeLines->setEnabled(true);
+            uiTabPassmarks->radioButtonTMark->setEnabled(true);
+            uiTabPassmarks->radioButtonVMark->setEnabled(true);
 
             switch(node.GetPassmarkLineType())
             {
@@ -876,6 +882,12 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                     break;
                 case PassmarkLineType::ThreeLines:
                     uiTabPassmarks->radioButtonThreeLines->setChecked(true);
+                    break;
+                case PassmarkLineType::TMark:
+                    uiTabPassmarks->radioButtonTMark->setChecked(true);
+                    break;
+                case PassmarkLineType::VMark:
+                    uiTabPassmarks->radioButtonVMark->setChecked(true);
                     break;
                 default:
                     break;
@@ -1170,6 +1182,14 @@ void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonThreeLines))
             {
                 lineType = PassmarkLineType::ThreeLines;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonTMark))
+            {
+                lineType = PassmarkLineType::TMark;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonVMark))
+            {
+                lineType = PassmarkLineType::VMark;
             }
 
             rowNode.SetPassmarkLineType(lineType);
@@ -2036,6 +2056,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
+    piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetName(uiTabLabels->lineEditName->text());
     piece.SetMx(m_mx);
     piece.SetMy(m_my);

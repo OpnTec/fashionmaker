@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>401</width>
-    <height>572</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,6 +102,19 @@
          </property>
          <property name="checked">
           <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxBuiltIn">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>The seam allowance is part of main path</string>
+         </property>
+         <property name="text">
+          <string>Built in</string>
          </property>
         </widget>
        </item>

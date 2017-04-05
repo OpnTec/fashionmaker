@@ -2026,6 +2026,8 @@ void InitHighDpiScaling(int argc, char *argv[])
 const QString strOne   = QStringLiteral("one");
 const QString strTwo   = QStringLiteral("two");
 const QString strThree = QStringLiteral("three");
+const QString strTMark = QStringLiteral("tMark");
+const QString strVMark = QStringLiteral("vMark");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkLineTypeToString(PassmarkLineType type)
@@ -2038,6 +2040,10 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
             return strTwo;
         case PassmarkLineType::ThreeLines:
             return strThree;
+        case PassmarkLineType::TMark:
+            return strTMark;
+        case PassmarkLineType::VMark:
+            return strVMark;
         default:
             break;
     }
@@ -2048,16 +2054,20 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkLineType StringToPassmarkLineType(const QString &value)
 {
-    const QStringList values = QStringList() << strOne << strTwo << strThree;
+    const QStringList values = QStringList() << strOne << strTwo << strThree << strTMark << strVMark;
 
     switch(values.indexOf(value))
     {
-        case 0:
+        case 0: // strOne
             return PassmarkLineType::OneLine;
-        case 1:
+        case 1: // strTwo
             return PassmarkLineType::TwoLines;
-        case 2:
+        case 2: // strThree
             return PassmarkLineType::ThreeLines;
+        case 3: // strTMark
+            return PassmarkLineType::TMark;
+        case 4: // strVMark
+            return PassmarkLineType::VMark;
         default:
             break;
     }

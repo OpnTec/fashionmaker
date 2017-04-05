@@ -130,6 +130,9 @@ public:
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
 
+    bool IsDoublePassmark() const;
+    void SetDoublePassmark(bool value);
+
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif
@@ -154,6 +157,7 @@ private:
     static const QString SettingPatternUser;
     static const QString SettingPatternUndo;
     static const QString SettingPatternForbidFlipping;
+    static const QString SettingDoublePassmark;
 
     static const QString SettingGeneralRecentFileList;
     static const QString SettingGeneralRestoreFileList;

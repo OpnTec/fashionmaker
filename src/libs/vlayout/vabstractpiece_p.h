@@ -46,6 +46,7 @@ public:
         : m_name(tr("Detail")),
           m_forbidFlipping(false),
           m_seamAllowance(false),
+          m_seamAllowanceBuiltIn(false),
           m_width(0)
     {}
 
@@ -54,6 +55,7 @@ public:
           m_name(piece.m_name),
           m_forbidFlipping(piece.m_forbidFlipping),
           m_seamAllowance(piece.m_seamAllowance),
+          m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
           m_width(piece.m_width)
     {}
 
@@ -63,6 +65,7 @@ public:
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
     bool    m_forbidFlipping;
     bool    m_seamAllowance;
+    bool    m_seamAllowanceBuiltIn;
     qreal   m_width;
 
 private:

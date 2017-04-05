@@ -80,6 +80,9 @@ public:
     bool IsPassmark() const;
     void SetPassmark(bool passmark);
 
+    bool IsMainPathNode() const;
+    void SetMainPathNode(bool value);
+
     PassmarkLineType GetPassmarkLineType() const;
     void             SetPassmarkLineType(PassmarkLineType lineType);
 

@@ -68,7 +68,8 @@ public:
     void SetCountourPoints(const QVector<QPointF> &points);
 
     QVector<QPointF> GetSeamAllowancePoints() const;
-    void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true);
+    void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
+                                bool seamAllowanceBuiltIn = false);
 
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();

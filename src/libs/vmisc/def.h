@@ -93,7 +93,9 @@ enum class PassmarkLineType : unsigned char
 {
     OneLine = 0, // Default
     TwoLines,
-    ThreeLines
+    ThreeLines,
+    TMark,
+    VMark
 };
 
 QString          PassmarkLineTypeToString(PassmarkLineType type);

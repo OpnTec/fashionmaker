@@ -70,17 +70,18 @@ const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
 const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
 const QString VToolSeamAllowance::TagPins    = QStringLiteral("pins");
 
-const QString VToolSeamAllowance::AttrVersion        = QStringLiteral("version");
-const QString VToolSeamAllowance::AttrForbidFlipping = QStringLiteral("forbidFlipping");
-const QString VToolSeamAllowance::AttrSeamAllowance  = QStringLiteral("seamAllowance");
-const QString VToolSeamAllowance::AttrHeight         = QStringLiteral("height");
-const QString VToolSeamAllowance::AttrUnited         = QStringLiteral("united");
-const QString VToolSeamAllowance::AttrFont           = QStringLiteral("fontSize");
-const QString VToolSeamAllowance::AttrTopLeftPin     = QStringLiteral("topLeftPin");
-const QString VToolSeamAllowance::AttrBottomRightPin = QStringLiteral("bottomRightPin");
-const QString VToolSeamAllowance::AttrCenterPin      = QStringLiteral("centerPin");
-const QString VToolSeamAllowance::AttrTopPin         = QStringLiteral("topPin");
-const QString VToolSeamAllowance::AttrBottomPin      = QStringLiteral("bottomPin");
+const QString VToolSeamAllowance::AttrVersion              = QStringLiteral("version");
+const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
+const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
+const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
+const QString VToolSeamAllowance::AttrHeight               = QStringLiteral("height");
+const QString VToolSeamAllowance::AttrUnited               = QStringLiteral("united");
+const QString VToolSeamAllowance::AttrFont                 = QStringLiteral("fontSize");
+const QString VToolSeamAllowance::AttrTopLeftPin           = QStringLiteral("topLeftPin");
+const QString VToolSeamAllowance::AttrBottomRightPin       = QStringLiteral("bottomRightPin");
+const QString VToolSeamAllowance::AttrCenterPin            = QStringLiteral("centerPin");
+const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("topPin");
+const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
@@ -223,6 +224,17 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
+
+    const bool saBuiltIn = piece.IsSeamAllowanceBuiltIn();
+    if (saBuiltIn)
+    {
+        doc->SetAttribute(domElement, AttrSeamAllowanceBuiltIn, saBuiltIn);
+    }
+    else
+    { // For backward compatebility.
+        domElement.removeAttribute(AttrSeamAllowanceBuiltIn);
+    }
+
     doc->SetAttribute(domElement, VAbstractPattern::AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }
@@ -1242,7 +1254,7 @@ void VToolSeamAllowance::RefreshGeometry()
 
     this->setPos(detail.GetMx(), detail.GetMy());
 
-    if (detail.IsSeamAllowance())
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
         path.addPath(detail.SeamAllowancePath(this->getData()));
         path.setFillRule(Qt::OddEvenFill);

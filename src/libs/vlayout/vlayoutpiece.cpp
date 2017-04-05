@@ -383,7 +383,8 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
 {
     VLayoutPiece det;
     det.SetCountourPoints(piece.MainPathPoints(pattern));
-    det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance());
+    det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(),
+                               piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
     det.SetPassmarks(piece.PassmarksLines(pattern));
 
@@ -441,17 +442,18 @@ QVector<QPointF> VLayoutPiece::GetSeamAllowancePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance)
+void VLayoutPiece::SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance, bool seamAllowanceBuiltIn)
 {
     if (seamAllowance)
     {
         SetSeamAllowance(seamAllowance);
+        SetSeamAllowanceBuiltIn(seamAllowanceBuiltIn);
         d->seamAllowance = points;
         if (not d->seamAllowance.isEmpty())
         {
             d->seamAllowance = RemoveDublicates(RoundPoints(d->seamAllowance), false);
         }
-        else
+        else if (not IsSeamAllowanceBuiltIn())
         {
             qWarning()<<"Seam allowance is empty.";
             SetSeamAllowance(false);
@@ -706,7 +708,7 @@ int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 QRectF VLayoutPiece::DetailBoundingRect() const
 {
     QVector<QPointF> points;
-    if (IsSeamAllowance())
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
         points = GetSeamAllowancePoints();
     }
@@ -739,7 +741,7 @@ bool VLayoutPiece::isNull() const
 {
     if (d->contour.isEmpty() == false && d->layoutWidth > 0)
     {
-        if (IsSeamAllowance() && d->seamAllowance.isEmpty() == false)
+        if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && d->seamAllowance.isEmpty() == false)
         {
             return false;
         }
@@ -773,7 +775,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
 {
     if (d->layoutWidth > 0)
     {
-        if (IsSeamAllowance())
+        if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
         {
             d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth);
             if (d->layoutAllowance.isEmpty() == false)
@@ -868,24 +870,27 @@ QPainterPath VLayoutPiece::ContourPath() const
     path.lineTo(points.at(0));
 
     // seam allowance
-    if (IsSeamAllowance() == true)
+    if (IsSeamAllowance())
     {
-        // Draw seam allowance
-        points = GetSeamAllowancePoints();
-
-        if (points.last().toPoint() != points.first().toPoint())
+        if (not IsSeamAllowanceBuiltIn())
         {
-            points.append(points.at(0));// Should be always closed
-        }
+            // Draw seam allowance
+            points = GetSeamAllowancePoints();
 
-        QPainterPath ekv;
-        ekv.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            ekv.lineTo(points.at(i));
-        }
+            if (points.last().toPoint() != points.first().toPoint())
+            {
+                points.append(points.at(0));// Should be always closed
+            }
 
-        path.addPath(ekv);
+            QPainterPath ekv;
+            ekv.moveTo(points.at(0));
+            for (qint32 i = 1; i < points.count(); ++i)
+            {
+                ekv.lineTo(points.at(i));
+            }
+
+            path.addPath(ekv);
+        }
 
         // Draw passmarks
         const QVector<QLineF> passmarks = GetPassmarks();
@@ -973,7 +978,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VLayoutPiece::DetailPath() const
 {
-    if (IsSeamAllowance())
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
         return d->seamAllowance;
     }

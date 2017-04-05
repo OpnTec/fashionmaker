@@ -100,6 +100,18 @@ void VAbstractPiece::SetSeamAllowance(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsSeamAllowanceBuiltIn() const
+{
+    return d->m_seamAllowanceBuiltIn;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetSeamAllowanceBuiltIn(bool value)
+{
+    d->m_seamAllowanceBuiltIn = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::GetSAWidth() const
 {
     return d->m_width;

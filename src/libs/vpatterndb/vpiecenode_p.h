@@ -46,6 +46,7 @@ public:
           m_reverse(false),
           m_excluded(false),
           m_isPassmark(false),
+          m_isMainPathNode(true),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
@@ -59,6 +60,7 @@ public:
           m_reverse(reverse),
           m_excluded(false),
           m_isPassmark(false),
+          m_isMainPathNode(true),
           m_formulaWidthBefore(currentSeamAllowance),
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
@@ -78,6 +80,7 @@ public:
           m_reverse(node.m_reverse),
           m_excluded(node.m_excluded),
           m_isPassmark(node.m_isPassmark),
+          m_isMainPathNode(node.m_isMainPathNode),
           m_formulaWidthBefore(node.m_formulaWidthBefore),
           m_formulaWidthAfter(node.m_formulaWidthAfter),
           m_angleType(node.m_angleType),
@@ -105,6 +108,9 @@ public:
 
     /** @brief m_isPassmark has sense only for points. If true to seam allowance should be added a passmark. */
     bool m_isPassmark;
+
+    /** @brief m_isMainPathNode need fin know if allowed for this passmakr to be double. */
+    bool m_isMainPathNode;
 
     QString m_formulaWidthBefore;
     QString m_formulaWidthAfter;

@@ -31,6 +31,8 @@
 #include "../../core/vapplication.h"
 #include "../vmisc/vsettings.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../ifc/xml/vabstractpattern.h"
+
 #include <QGroupBox>
 #include <QLabel>
 #include <QSettings>
@@ -56,7 +58,8 @@ PatternPage::PatternPage(QWidget *parent):
     userMaterialsGroup(nullptr),
     userMaterialClearButton(nullptr),
     workpieceGroup(nullptr),
-    forbidFlippingCheck(nullptr)
+    forbidFlippingCheck(nullptr),
+    doublePassmarkCheck(nullptr)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
@@ -91,6 +94,12 @@ void PatternPage::Apply()
     settings->SetUndoCount(undoCount->value());
 
     settings->SetForbidWorkpieceFlipping(forbidFlippingCheck->isChecked());
+
+    if (settings->IsDoublePassmark() != doublePassmarkCheck->isChecked())
+    {
+        settings->SetDoublePassmark(doublePassmarkCheck->isChecked());
+        qApp->getCurrentDocument()->LiteParseTree(Document::LiteParse);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,8 +207,13 @@ QGroupBox *PatternPage::UserWorkpieceGroup()
     forbidFlippingCheck->setToolTip(tr("By default forbid flipping for all new created workpieces"));
     forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
 
+    doublePassmarkCheck = new QCheckBox(tr("Show second passmark on seam line"));
+    doublePassmarkCheck->setToolTip(tr("Show a passmark both in the seam allowance and on the seam line."));
+    doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
+
     QVBoxLayout *editLayout = new QVBoxLayout;
     editLayout->addWidget(forbidFlippingCheck);
+    editLayout->addWidget(doublePassmarkCheck);
 
     workpieceGroup->setLayout(editLayout);
     return workpieceGroup;
@@ -210,8 +224,19 @@ void PatternPage::RetranslateUi()
 {
     userGroup->setTitle(tr("User"));
     userNameLabel->setText(tr("User name:"));
+
     graphOutputGroup->setTitle(tr("Graphical output"));
     graphOutputCheck->setText(tr("Use antialiasing"));
+
     undoGroup->setTitle(tr("Undo"));
     countStepsLabel->setText(tr("Count steps (0 - no limit):"));
+
+    userMaterialsGroup->setTitle(tr("User defined materials"));
+    userMaterialClearButton->setText(tr("Delete all"));
+
+    workpieceGroup->setTitle(tr("Workpiece"));
+    forbidFlippingCheck->setText(tr("Forbid flipping"));
+    forbidFlippingCheck->setToolTip(tr("By default forbid flipping for all new created workpieces"));
+    doublePassmarkCheck->setText(tr("Show second passmark on seam line"));
+    doublePassmarkCheck->setToolTip(tr("Show a passmark both in the seam allowance and on the seam line."));
 }

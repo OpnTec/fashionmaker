@@ -60,6 +60,7 @@ const QString VCommonSettings::SettingConfigurationToolBarStyle        = QString
 const QString VCommonSettings::SettingPatternUser                      = QStringLiteral("pattern/user");
 const QString VCommonSettings::SettingPatternUndo                      = QStringLiteral("pattern/undo");
 const QString VCommonSettings::SettingPatternForbidFlipping            = QStringLiteral("pattern/forbidFlipping");
+const QString VCommonSettings::SettingDoublePassmark                   = QStringLiteral("pattern/doublePassmark");
 
 const QString VCommonSettings::SettingGeneralRecentFileList            = QStringLiteral("recentFileList");
 const QString VCommonSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
@@ -586,4 +587,16 @@ bool VCommonSettings::GetForbidWorkpieceFlipping() const
 void VCommonSettings::SetForbidWorkpieceFlipping(bool value)
 {
     setValue(SettingPatternForbidFlipping, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsDoublePassmark() const
+{
+    return value(SettingDoublePassmark, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDoublePassmark(bool value)
+{
+    setValue(SettingDoublePassmark, value);
 }

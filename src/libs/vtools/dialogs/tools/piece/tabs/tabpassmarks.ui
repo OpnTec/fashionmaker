@@ -79,6 +79,32 @@
         </attribute>
        </widget>
       </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonTMark">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>T mark</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroupLineType</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonVMark">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>V mark</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroupLineType</string>
+        </attribute>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -135,7 +161,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupLineType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupLineType"/>
  </buttongroups>
 </ui>

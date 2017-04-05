@@ -266,6 +266,18 @@ void VPieceNode::SetPassmark(bool passmark)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsMainPathNode() const
+{
+    return d->m_isMainPathNode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetMainPathNode(bool value)
+{
+    d->m_isMainPathNode = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 PassmarkLineType VPieceNode::GetPassmarkLineType() const
 {
     return d->m_passmarkLineType;
