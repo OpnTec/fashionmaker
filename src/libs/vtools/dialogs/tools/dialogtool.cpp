@@ -586,13 +586,19 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
         switch(node.GetPassmarkLineType())
         {
             case PassmarkLineType::OneLine:
-                name += QLatin1String("^");
+                name += QLatin1Char('|');
                 break;
             case PassmarkLineType::TwoLines:
-                name += QLatin1String("^^");
+                name += QLatin1Literal("||");
                 break;
             case PassmarkLineType::ThreeLines:
-                name += QLatin1String("^^^");
+                name += QLatin1Literal("|||");
+                break;
+            case PassmarkLineType::TMark:
+                name += QString("┴");
+                break;
+            case PassmarkLineType::VMark:
+                name += QLatin1Char('^');
                 break;
             default:
                 break;
