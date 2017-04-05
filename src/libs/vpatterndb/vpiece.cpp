@@ -991,7 +991,7 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
 
     QVector<QLineF> passmarksLines;
 
-    const qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * 0.25;
+    const qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * 0.5;
     const VPieceNode &node = path.at(passmarkIndex);
     if (node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward)
     {
