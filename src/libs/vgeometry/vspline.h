@@ -64,7 +64,7 @@ public:
     VSpline Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VSpline Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSpline();
-    VSpline &operator=(const VSpline &spl);
+    VSpline &operator=(const VSpline &spline);
 
     virtual VPointF GetP1 () const Q_DECL_OVERRIDE;
     void            SetP1 (const VPointF &p);

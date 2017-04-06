@@ -57,7 +57,7 @@ public:
     void          setVerScrollBar(const qint32 &value);
     QTransform    transform() const;
     void          setTransform(const QTransform &transform);
-    void          SetDisableTools(bool enabled, const QString &namePP);
+    void          SetDisableTools(bool disable, const QString &namePP);
     QPointF       getScenePos() const;
 
     QRectF        VisibleItemsBoundingRect() const;

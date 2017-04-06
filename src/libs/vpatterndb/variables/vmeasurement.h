@@ -52,10 +52,10 @@ class VMeasurement :public VVariable
 public:
     VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
                  const qreal &ksize, const qreal &kheight, const QString &gui_text = QString(),
-                 const QString &description = QString(), const QString &TagName = QString());
+                 const QString &description = QString(), const QString &tagName = QString());
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
                  bool ok, const QString &gui_text = QString(), const QString &description = QString(),
-                 const QString &TagName = QString());
+                 const QString &tagName = QString());
     VMeasurement(const VMeasurement &m);
     VMeasurement &operator=(const VMeasurement &m);
     virtual ~VMeasurement() Q_DECL_OVERRIDE;
@@ -63,7 +63,7 @@ public:
     QString GetGuiText() const;
 
     QString TagName() const;
-    void    setTagName(const QString &TagName);
+    void    setTagName(const QString &tagName);
 
     QString GetFormula() const;
 

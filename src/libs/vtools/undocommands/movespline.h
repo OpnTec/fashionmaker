@@ -44,7 +44,7 @@ class MoveSpline : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &spl, const quint32 &id,
+    MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
                QUndoCommand *parent = nullptr);
     virtual ~MoveSpline() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;

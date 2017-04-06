@@ -53,11 +53,11 @@ public:
     static VToolPointOfIntersectionArcs *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                                 VContainer *data);
     static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
-                                                const quint32 &secondArcId, CrossCirclesPoint crossPoint,
+                                                const quint32 &secondArcId, CrossCirclesPoint pType,
                                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                 const Source &typeCreation);
-    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint crossPoint);
+    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
@@ -94,7 +94,7 @@ private:
     CrossCirclesPoint crossPoint;
 
     VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
-                                 const quint32 &secondArcId, CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                 const quint32 &secondArcId, CrossCirclesPoint pType, const Source &typeCreation,
                                  QGraphicsItem * parent = nullptr);
 };
 

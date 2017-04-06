@@ -62,6 +62,21 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParamete
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    name = e.Name();
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message

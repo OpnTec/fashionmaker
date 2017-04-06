@@ -1218,8 +1218,8 @@ int QmuParserTester::ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail
  *
  * @return 1 in case of a failure, 0 otherwise.
  */
-int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1, double a_fRes1, double a_fVar2,
-                                            double a_fRes2 )
+int QmuParserTester::EqnTestWithVarChange (const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                           double a_fVar2)
 {
     QmuParserTester::c_iCount++;
     qreal fVal[2] = { -999, -999 }; // should be equalinitially
@@ -1233,19 +1233,19 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
         p.DefineVar ( "a", &var );
         p.SetExpr ( a_str );
 
-        var = a_fVar1;
+        var = a_fRes1;
         fVal[0] = p.Eval();
 
         // cppcheck-suppress redundantAssignment
-        var = a_fVar2; //-V519
+        var = a_fRes2; //-V519
         fVal[1] = p.Eval();
 
-        if ( fabs ( a_fRes1 - fVal[0] ) > 0.0000000001 )
+        if ( fabs ( a_fVar1 - fVal[0] ) > 0.0000000001 )
         {
             throw std::runtime_error ( "incorrect result (first pass)" );
         }
 
-        if ( fabs ( a_fRes2 - fVal[1] ) > 0.0000000001 )
+        if ( fabs ( a_fVar2 - fVal[1] ) > 0.0000000001 )
         {
             throw std::runtime_error ( "incorrect result (second pass)" );
         }

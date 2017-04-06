@@ -51,7 +51,7 @@ class QmuParserCallback
 public:
     QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type1  a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode=cmFUNC);
-    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eAssociativity);
+    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct);
     QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type3  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type4  a_pFun, bool a_bAllowOpti);

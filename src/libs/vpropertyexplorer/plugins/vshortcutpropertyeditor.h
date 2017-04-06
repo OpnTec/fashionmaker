@@ -47,7 +47,7 @@ public:
     virtual ~VShortcutEditWidget() Q_DECL_OVERRIDE;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject* obj, QEvent* evenvt) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject* obj, QEvent* event) Q_DECL_OVERRIDE;
 
     //! Returns the currently set shortcut
     QString getShortcutAsString() const;

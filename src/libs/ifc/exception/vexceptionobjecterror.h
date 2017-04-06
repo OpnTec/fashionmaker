@@ -44,8 +44,9 @@ class QDomElement;
 class VExceptionObjectError : public VException
 {
 public:
-    VExceptionObjectError(const QString &error, const QDomElement &domElement);
+    VExceptionObjectError(const QString &what, const QDomElement &domElement);
     VExceptionObjectError(const VExceptionObjectError &e);
+    VExceptionObjectError &operator=(const VExceptionObjectError &e);
     virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
     virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
     virtual QString DetailedInformation() const Q_DECL_OVERRIDE;

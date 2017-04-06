@@ -50,7 +50,7 @@ public:
     void             SetPoints(const QVector<QPointF> &points);
 
     Qt::PenStyle PenStyle() const;
-    void         SetPenStyle(const Qt::PenStyle &PenStyle);
+    void         SetPenStyle(const Qt::PenStyle &penStyle);
 
 private:
     QSharedDataPointer<VLayoutPiecePathData> d;

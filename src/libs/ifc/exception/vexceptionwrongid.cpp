@@ -59,6 +59,20 @@ VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message

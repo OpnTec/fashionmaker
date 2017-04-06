@@ -44,7 +44,7 @@ class VCubicBezierData : public QSharedData
 {
 public:
     VCubicBezierData();
-    VCubicBezierData(const VCubicBezierData &spline);
+    VCubicBezierData(const VCubicBezierData &curve);
     VCubicBezierData(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4);
     virtual ~VCubicBezierData();
 

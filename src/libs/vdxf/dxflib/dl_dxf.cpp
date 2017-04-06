@@ -236,7 +236,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @param s Output\n
  *      Pointer to character array that chopped line will be returned in.
  * @param size Size of \p s.  (Including space for NULL.)
- * @param fp Input\n
+ * @param stream Input\n
  *      Handle of input file.
  *
  * @retval true if line could be read
@@ -246,16 +246,16 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @todo Is it a problem if line is blank (i.e., newline only)?
  *      Then, when function returns, (s==NULL).
  */
-bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripSpace)
+bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *stream, bool stripSpace)
 {
-    if (!feof(fp))
+    if (!feof(stream))
     {
         // The whole line in the file.  Includes space for NULL.
         char* wholeLine = new char[size];
         // Only the useful part of the line
         char* line;
 
-        line = fgets(wholeLine, static_cast<int>(size), fp);
+        line = fgets(wholeLine, static_cast<int>(size), stream);
 
         if (line!=NULL && line[0] != '\0')   // Evaluates to fgets() retval
         {

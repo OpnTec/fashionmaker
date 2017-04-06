@@ -114,24 +114,17 @@ public:
     DL_Dxf();
     ~DL_Dxf();
 
-    bool in(const std::string& file,
-            DL_CreationInterface* creationInterface);
-    bool readDxfGroups(FILE* fp,
-                       DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, quint32 size,
-                               FILE* stream, bool stripSpace = true);
+    bool in(const std::string& file, DL_CreationInterface* creationInterface);
+    bool readDxfGroups(FILE* fp, DL_CreationInterface* creationInterface);
+    static bool getStrippedLine(std::string& s, quint32 size, FILE* stream, bool stripSpace = true);
 
-    bool readDxfGroups(std::stringstream& stream,
-                       DL_CreationInterface* creationInterface);
-    bool in(std::stringstream &stream,
-            DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, quint32 size,
-                               std::stringstream& stream, bool stripSpace = true);
+    bool readDxfGroups(std::stringstream& stream, DL_CreationInterface* creationInterface);
+    bool in(std::stringstream &stream, DL_CreationInterface* creationInterface);
+    static bool getStrippedLine(std::string& s, quint32 size, std::stringstream& stream, bool stripSpace = true);
 
-    static bool stripWhiteSpace(char** s, bool stripSpaces = true);
+    static bool stripWhiteSpace(char** s, bool stripSpace = true);
 
-    bool processDXFGroup(DL_CreationInterface* creationInterface,
-                         int groupCode, const std::string& groupValue);
+    bool processDXFGroup(DL_CreationInterface* creationInterface, int groupCode, const std::string& groupValue);
     void addSetting(DL_CreationInterface* creationInterface);
     void addLayer(DL_CreationInterface* creationInterface);
     void addLinetype(DL_CreationInterface *creationInterface);
@@ -203,8 +196,7 @@ public:
 
     //int  stringToInt(const char* s, bool* ok=NULL);
 
-    DL_WriterA* out(const char* file,
-                    DL_Codes::version version=DL_VERSION_2000);
+    DL_WriterA* out(const char* file, DL_Codes::version version=DL_VERSION_2000);
 
     void writeHeader(DL_WriterA& dw) const;
 
@@ -414,16 +406,16 @@ public:
         return static_cast<int>(strtol(str.c_str(), &p, 10));
     }
 
-    int getInt16Value(int code, int def) 
+    int getInt16Value(int code, int def)
     {
-        if (!hasValue(code)) 
+        if (!hasValue(code))
         {
             return def;
         }
         return toInt16(values[code]);
     }
 
-    static int toInt16(const std::string& str) 
+    static int toInt16(const std::string& str)
     {
         char* p;
         return static_cast<int>(strtol(str.c_str(), &p, 16));

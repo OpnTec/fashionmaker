@@ -860,6 +860,7 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
         {
             startIndex = i;
             filter = records.at(i);
+            // cppcheck-suppress unreadVariable
             foundFilter = true;
         }
     }

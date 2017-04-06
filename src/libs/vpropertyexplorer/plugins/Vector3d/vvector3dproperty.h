@@ -47,6 +47,18 @@ public:
         :X(other.X), Y(other.Y), Z(other.Z)
     {}
 
+    Vector3D &operator=(const Vector3D &other)
+    {
+        if ( &other == this )
+        {
+            return *this;
+        }
+        X = other.X;
+        Y = other.Y;
+        Z = other.Z;
+        return *this;
+    }
+
     ~Vector3D() {}
 
     double X, Y, Z;

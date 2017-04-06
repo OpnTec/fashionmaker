@@ -93,7 +93,7 @@ public:
     bool SetIncrease(int increase);
 
     bool GetAutoCrop() const;
-    void SetAutoCrop(bool crop);
+    void SetAutoCrop(bool autoCrop);
 
     bool IsSaveLength() const;
     void SetSaveLength(bool save);

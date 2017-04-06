@@ -39,7 +39,7 @@ class DeletePiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &m_detail, QUndoCommand *parent = nullptr);
+    DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail, QUndoCommand *parent = nullptr);
     virtual ~DeletePiece();
 
     virtual void undo() Q_DECL_OVERRIDE;

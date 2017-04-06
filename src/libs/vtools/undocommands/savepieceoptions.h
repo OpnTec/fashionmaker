@@ -37,7 +37,7 @@
 class SavePieceOptions : public VUndoCommand
 {
 public:
-    SavePieceOptions(const VPiece &m_oldDet, const VPiece &m_newDet, VAbstractPattern *doc, quint32 id,
+    SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
     virtual ~SavePieceOptions();
 

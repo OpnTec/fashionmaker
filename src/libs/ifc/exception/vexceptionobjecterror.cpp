@@ -59,6 +59,20 @@ VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectError &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message

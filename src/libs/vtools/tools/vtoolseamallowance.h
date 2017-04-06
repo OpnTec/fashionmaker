@@ -47,11 +47,11 @@ class VToolSeamAllowance : public VAbstractTool, public QGraphicsPathItem
 public:
     virtual ~VToolSeamAllowance();
 
-    static VToolSeamAllowance* Create(DialogTool *m_dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolSeamAllowance* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                       VContainer *data);
     static VToolSeamAllowance* Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                      const Source &typeCreation, const QString &m_drawName = QString());
+                                      const Source &typeCreation, const QString &drawName = QString());
 
     static const quint8 pieceVersion;
 
@@ -152,7 +152,7 @@ private:
     void SetDialog();
 
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
-                       VMainGraphicsScene *scene, const QString &m_drawName, QGraphicsItem * parent = nullptr);
+                       VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
     void RefreshGeometry();

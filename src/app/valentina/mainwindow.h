@@ -61,7 +61,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
 
-    bool LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
+    bool LoadPattern(const QString &fileName, const QString &customMeasureFile = QString());
 
 public slots:
     void ProcessCMD();
@@ -305,7 +305,7 @@ private:
     template <typename DrawTool>
     void ApplyDetailsDialog();
 
-    bool               SavePattern(const QString &curFile, QString &error);
+    bool               SavePattern(const QString &fileName, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
 

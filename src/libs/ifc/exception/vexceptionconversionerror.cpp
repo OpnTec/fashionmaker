@@ -54,6 +54,18 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionConversionError &VExceptionConversionError::operator=(const VExceptionConversionError &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    str = e.String();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message

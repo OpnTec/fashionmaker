@@ -143,7 +143,7 @@ public:
     explicit QmuParserError ( const QString &sMsg );
     QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), int a_iPos = -1 );
     QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
-    QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
+    QmuParserError ( const QString &szMsg, int iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
     virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}

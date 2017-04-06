@@ -860,6 +860,29 @@ struct DXFLIB_EXPORT DL_TextData
     {
     }
 
+    DL_TextData &operator=(const DL_TextData &d)
+    {
+        if ( &d == this )
+        {
+            return *this;
+        }
+        ipx = d.ipx;
+        ipy = d.ipy;
+        ipz = d.ipz;
+        apx = d.apx;
+        apy = d.apy;
+        apz = d.apz;
+        height = d.height;
+        xScaleFactor = d.xScaleFactor;
+        textGenerationFlags = d.textGenerationFlags;
+        hJustification = d.hJustification;
+        vJustification = d.vJustification;
+        text = d.text;
+        style = d.style;
+        angle = d.angle;
+        return *this;
+    }
+
     virtual ~DL_TextData()
     {}
 

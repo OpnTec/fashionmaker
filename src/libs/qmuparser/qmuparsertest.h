@@ -74,8 +74,8 @@ private:
 
     // Test Double Parser
     static int EqnTest ( const QString &a_str, double a_fRes, bool a_fPass );
-    static int EqnTestWithVarChange ( const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
-                                      double a_fVar2 );
+    static int EqnTestWithVarChange (const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                     double a_fVar2);
     static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
     // Test Bulkmode

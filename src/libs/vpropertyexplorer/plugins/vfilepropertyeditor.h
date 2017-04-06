@@ -70,10 +70,10 @@ signals:
 
 public slots:
     //! Sets the current file, does not check if it is valid
-    //! \param getFile The new filepath the widget should show
+    //! \param value The new filepath the widget should show
     //! \param emit_signal If true, this will emit the dataChangedByUser()-signal (if file differs from the current
     //! file)
-    void setFile(const QString &getFile, bool emit_signal = false);
+    void setFile(const QString &value, bool emit_signal = false);
 
     //! Sets a filter for the file field
     //! \param dialog_filter The filter used for the File Dialog
@@ -94,10 +94,10 @@ protected:
     virtual void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
 
     //! This function checks the mime data, if it is compatible with the filters
-    virtual bool checkMimeData(const QMimeData* data, QString& getFile) const;
+    virtual bool checkMimeData(const QMimeData* data, QString& file) const;
 
     //! This checks, if a file is compatible with the filters
-    virtual bool checkFileFilter(const QString& getFile) const;
+    virtual bool checkFileFilter(const QString& file) const;
 
 
     QString CurrentFilePath;

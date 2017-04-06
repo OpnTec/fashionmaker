@@ -59,7 +59,7 @@ public:
     void EnableApply(bool enable);
 
     VPiece GetPiece() const;
-    void   SetPiece(const VPiece &m_piece);
+    void   SetPiece(const VPiece &piece);
 
     QString GetFormulaSAWidth() const;
 

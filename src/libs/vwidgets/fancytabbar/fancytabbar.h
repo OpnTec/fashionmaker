@@ -110,8 +110,8 @@ private:
 
     QPoint GetCorner(const QRect& rect, const Corner corner) const;
 
-    QRect AdjustRect(const QRect& rect, const qint8 offsetOutside, const qint8 offsetInside, const qint8 offsetStart,
-                     const qint8 offsetEnd) const;
+    QRect AdjustRect(const QRect& rect, const qint8 offsetOutside, const qint8 offsetInside,
+                     const qint8 offsetBeginning, const qint8 offsetEnd) const;
 
     // Same with a point. + means towards Outside/End, - means towards Inside/Beginning
     QPoint AdjustPoint(const QPoint& point, const qint8 offsetInsideOutside, const qint8 offsetBeginningEnd) const;

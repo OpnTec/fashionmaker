@@ -53,11 +53,11 @@ class VToolPointOfContact : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static QPointF FindPoint(const qreal &arcRadius, const QPointF &center, const QPointF &firstPoint,
+    static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static VToolPointOfContact* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                        VContainer *data);
-    static VToolPointOfContact* Create(const quint32 _id, QString &arcRadius, const quint32 &center,
+    static VToolPointOfContact* Create(const quint32 _id, QString &radius, const quint32 &center,
                                        const quint32 &firstPointId, const quint32 &secondPointId,
                                        const QString &pointName,
                                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
@@ -108,7 +108,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
 
-    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
+    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &radius,
                         const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
                         const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };

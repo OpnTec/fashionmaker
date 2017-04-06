@@ -403,9 +403,8 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
 /**
  * @brief Check if a name contains invalid characters.
  *
- * @throw ParserException if the name contains invalid charakters.
+ * @throw ParserException if the name contains invalid characters.
  */
-// cppcheck-suppress
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
     std::wstring a_sNameStd = a_sName.toStdWString();
@@ -483,9 +482,9 @@ const QString &QmuParserBase::ValidInfixOprtChars() const
  * @brief Add a user defined operator.
  * @post Will reset the Parser to string parsing mode.
  */
-void QmuParserBase::DefinePostfixOprt(const QString &a_sName, fun_type1 a_pFun, bool a_bAllowOpt)
+void QmuParserBase::DefinePostfixOprt(const QString &a_sFun, fun_type1 a_pFun, bool a_bAllowOpt)
 {
-    AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, prPOSTFIX, cmOPRT_POSTFIX), m_PostOprtDef,
+    AddCallback(a_sFun, QmuParserCallback(a_pFun, a_bAllowOpt, prPOSTFIX, cmOPRT_POSTFIX), m_PostOprtDef,
                 ValidOprtChars() );
 }
 
