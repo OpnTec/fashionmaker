@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>208</width>
-    <height>285</height>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,12 +32,12 @@
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBoxLineType">
+    <widget class="QGroupBox" name="groupBoxMarkType">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="title">
-      <string>Lines</string>
+      <string>Marks</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>

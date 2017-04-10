@@ -378,11 +378,13 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->radioButtonOneLine->setDisabled(true);
     ui->radioButtonTwoLines->setDisabled(true);
     ui->radioButtonThreeLines->setDisabled(true);
+    ui->radioButtonTMark->setDisabled(true);
+    ui->radioButtonVMark->setDisabled(true);
 
     ui->radioButtonStraightforward->setDisabled(true);
     ui->radioButtonBisector->setDisabled(true);
 
-    ui->groupBoxLineType->blockSignals(true);
+    ui->groupBoxMarkType->blockSignals(true);
     ui->groupBoxAngleType->blockSignals(true);
 
     if (index != -1)
@@ -397,6 +399,8 @@ void DialogPiecePath::PassmarkChanged(int index)
             ui->radioButtonOneLine->setEnabled(true);
             ui->radioButtonTwoLines->setEnabled(true);
             ui->radioButtonThreeLines->setEnabled(true);
+            ui->radioButtonTMark->setEnabled(true);
+            ui->radioButtonVMark->setEnabled(true);
 
             switch(node.GetPassmarkLineType())
             {
@@ -408,6 +412,12 @@ void DialogPiecePath::PassmarkChanged(int index)
                     break;
                 case PassmarkLineType::ThreeLines:
                     ui->radioButtonThreeLines->setChecked(true);
+                    break;
+                case PassmarkLineType::TMark:
+                    ui->radioButtonTMark->setChecked(true);
+                    break;
+                case PassmarkLineType::VMark:
+                    ui->radioButtonVMark->setChecked(true);
                     break;
                 default:
                     break;
@@ -430,7 +440,7 @@ void DialogPiecePath::PassmarkChanged(int index)
             }
         }
     }
-    ui->groupBoxLineType->blockSignals(false);
+    ui->groupBoxMarkType->blockSignals(false);
     ui->groupBoxAngleType->blockSignals(false);
 }
 
@@ -458,17 +468,25 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
             PassmarkLineType lineType = PassmarkLineType::OneLine;
-            if (id == ui->buttonGroupLineType->id(ui->radioButtonOneLine))
+            if (id == ui->buttonGroupMarkType->id(ui->radioButtonOneLine))
             {
                 lineType = PassmarkLineType::OneLine;
             }
-            else if (id == ui->buttonGroupLineType->id(ui->radioButtonTwoLines))
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonTwoLines))
             {
                 lineType = PassmarkLineType::TwoLines;
             }
-            else if (id == ui->buttonGroupLineType->id(ui->radioButtonThreeLines))
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonThreeLines))
             {
                 lineType = PassmarkLineType::ThreeLines;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonTMark))
+            {
+                lineType = PassmarkLineType::TMark;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark))
+            {
+                lineType = PassmarkLineType::VMark;
             }
 
             rowNode.SetPassmarkLineType(lineType);
@@ -729,7 +747,7 @@ void DialogPiecePath::InitPassmarksTab()
     connect(ui->comboBoxPassmarks, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogPiecePath::PassmarkChanged);
 
-    connect(ui->buttonGroupLineType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+    connect(ui->buttonGroupMarkType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);

@@ -854,7 +854,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
 
-    uiTabPassmarks->groupBoxLineType->blockSignals(true);
+    uiTabPassmarks->groupBoxMarkType->blockSignals(true);
     uiTabPassmarks->groupBoxAngleType->blockSignals(true);
 
     if (index != -1)
@@ -910,7 +910,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             }
         }
     }
-    uiTabPassmarks->groupBoxLineType->blockSignals(false);
+    uiTabPassmarks->groupBoxMarkType->blockSignals(false);
     uiTabPassmarks->groupBoxAngleType->blockSignals(false);
 }
 
