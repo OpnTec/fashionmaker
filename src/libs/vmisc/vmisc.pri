@@ -37,19 +37,8 @@ HEADERS += \
     $$PWD/diagnostic.h
 
 # Qt's versions
-# 5.0.0, 5.0.1, 5.0.2
-# 5.1.0, 5.1.1
 # 5.2.0, 5.2.1
 # 5.3.0, 5.3.1, 5.3.2
-
-contains(QT_VERSION, ^5\\.0\\.[0-2]$) { # Since Qt 5.1.0
-    HEADERS += \
-        $$PWD/backport/qsavefile.h \
-        $$PWD/backport/qsavefile_p.h
-
-    SOURCES += \
-        $$PWD/backport/qsavefile.cpp
-}
 
 contains(QT_VERSION, ^5\\.[0-1]\\.[0-2]$) { # Since Qt 5.2.0
     HEADERS += \

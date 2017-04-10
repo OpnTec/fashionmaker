@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(icons);
     Q_INIT_RESOURCE(toolicon);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.0.0")
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0")
 
     qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 

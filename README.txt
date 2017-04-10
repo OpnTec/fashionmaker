@@ -25,8 +25,8 @@ The standalone binary packages support the following platforms:
 Windows XP SP2 (32-bit) or later
 Ubuntu Linux 14.04 (32-bit/64-bit) or later
 OpenSUSE 13.02 (32-bit/64-bit) or later
-Fedora 20 (32-bit/64-bit) or later
-Mac OS X 10.7 (64-bit) or later
+Fedora 24 (32-bit/64-bit) or later
+Mac OS X 10.8 (64-bit) or later
 
 Building the sources requires Qt 5.2.0 or later.
 
@@ -36,7 +36,7 @@ Prerequisites:
    * Qt 5.2.0 or later (On Unix development packages needed)   
    * mercurial (only for working with repository)   
    * On Unix:     
-     - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
+     - g++ (at least GCC 4.7 is needed and GCC 4.8 is recommended) or
        clang (clang 3.4 recommended)
      - xpdf package (tool pdftops).    
    * On Windows:   

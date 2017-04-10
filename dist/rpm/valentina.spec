@@ -8,7 +8,7 @@ Requires(postun): desktop-file-utils
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 
-BuildRequires: qt5-qtbase-devel >= 5.0.0
+BuildRequires: qt5-qtbase-devel >= 5.2.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
@@ -16,13 +16,13 @@ BuildRequires: pkgconfig(Qt5Network)
 BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
-BuildRequires: qt5-qtxmlpatterns-devel  >= 5.0.0
-BuildRequires: qt5-qtsvg-devel >= 5.0.0
-BuildRequires: qt5-qttools-devel >= 5.0.0
+BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
+BuildRequires: qt5-qtsvg-devel >= 5.2.0
+BuildRequires: qt5-qttools-devel >= 5.2.0
 
-Requires:      qt5-qtsvg >= 5.0.0
-Requires:      qt5-qtbase-gui >= 5.0.0
-Requires:      qt5-qtxmlpatterns >= 5.0.0
+Requires:      qt5-qtsvg >= 5.2.0
+Requires:      qt5-qtbase-gui >= 5.2.0
+Requires:      qt5-qtxmlpatterns >= 5.2.0
 %endif
 
 # SUSE Specifics
