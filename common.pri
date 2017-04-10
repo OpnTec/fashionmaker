@@ -171,6 +171,40 @@ defineReplace(enable_ccache){
     return(true)
 }
 
+defineReplace(FindBuildRevision){
+CONFIG(debug, debug|release){
+    # Debug mode
+    return(\\\"unknown\\\")
+}else{
+    # Release mode
+
+    macx{
+        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
+    }else {
+        HG = hg # All other platforms are OK.
+    }
+
+    #build revision number for using in version
+    unix {
+        DVCS_HESH=$$system("$${HG} log -r. --template '{node|short}'")
+    } else {
+        # Use escape character before "|" on Windows
+        DVCS_HESH=$$system($${HG} log -r. --template "{node^|short}")
+    }
+    isEmpty(DVCS_HESH){
+        DVCS_HESH=$$system("git rev-parse --short HEAD")
+        isEmpty(DVCS_HESH){
+            DVCS_HESH = "unknown" # if we can't find build revision left unknown.
+        } else {
+            DVCS_HESH=\\\"Git:$${DVCS_HESH}\\\"
+        }
+    } else {
+        DVCS_HESH=\\\"Hg:$${DVCS_HESH}\\\"
+    }
+    return($${DVCS_HESH})
+}
+}
+
 # Default prefix. Use for creation install path.
 DEFAULT_PREFIX = /usr
 

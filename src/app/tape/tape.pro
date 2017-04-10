@@ -282,10 +282,7 @@ $$enable_ccache()
 
 include(warnings.pri)
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
@@ -307,26 +304,11 @@ CONFIG(debug, debug|release){
             QMAKE_LFLAGS_RELEASE =
         }
     }
-
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms all OK.
-    }
-
-    #build revision number for using in version
-    unix {
-        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(HG_HESH){
-        HG_HESH = "unknown" # if we can't find build revision left unknown.
-    }
-    message("Build revision:" $${HG_HESH})
-    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+DVCS_HESH=$$FindBuildRevision()
+message("Build revision:" $${DVCS_HESH})
+DEFINES += "BUILD_REVISION=$${DVCS_HESH}" # Make available build revision number in sources.
 
 # Path to recource file.
 win32:RC_FILE = share/resources/tape.rc
