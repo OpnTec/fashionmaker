@@ -10,7 +10,7 @@
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)
-#define MyAppStatus "a"
+#define MyAppStatus "b"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
