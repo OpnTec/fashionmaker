@@ -3773,8 +3773,8 @@ Toch de instellingen aanpassen?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Lijnen</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>
@@ -3786,6 +3786,14 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Three lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8230,8 +8238,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Lijnen</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>

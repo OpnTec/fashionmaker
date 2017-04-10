@@ -3773,8 +3773,8 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Líneas</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>
@@ -3786,6 +3786,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Three lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8230,8 +8238,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Líneas</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>

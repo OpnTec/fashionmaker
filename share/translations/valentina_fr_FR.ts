@@ -3770,8 +3770,8 @@ Appliquer les réglages quand-même ?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Lignes</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>
@@ -3783,6 +3783,14 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Three lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8223,8 +8231,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished">Lignes</translation>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>One line</source>

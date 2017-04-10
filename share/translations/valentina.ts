@@ -3778,7 +3778,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="unfinished">Lines</translation>
+        <translation type="obsolete">Lines</translation>
     </message>
     <message>
         <source>One line</source>
@@ -3810,6 +3810,18 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8363,7 +8375,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="unfinished">Lines</translation>
+        <translation type="obsolete">Lines</translation>
     </message>
     <message>
         <source>One line</source>
@@ -8395,6 +8407,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
