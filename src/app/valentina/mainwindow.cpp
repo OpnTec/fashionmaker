@@ -1071,8 +1071,10 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 void MainWindow::ToolGroup(bool checked)
 {
     ToolSelectGroupObjects();
-    SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png",
-                               tr("Select one or more objects, <b>Enter</b> - finish creation"),
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>Enter</b> - finish creation")
+            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+    SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png", tooltip,
                                &MainWindow::ClosedDialogGroup);
 }
 
@@ -1080,9 +1082,10 @@ void MainWindow::ToolGroup(bool checked)
 void MainWindow::ToolRotation(bool checked)
 {
     ToolSelectOperationObjects();
-    SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation,
-                                           ":/cursor/rotation_cursor.png",
-                                           tr("Select one or more objects, <b>Enter</b> - confirm selection"),
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>Enter</b> - confirm selection")
+            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+    SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, ":/cursor/rotation_cursor.png", tooltip,
                                            &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
 }
@@ -1091,21 +1094,23 @@ void MainWindow::ToolRotation(bool checked)
 void MainWindow::ToolFlippingByLine(bool checked)
 {
     ToolSelectOperationObjects();
-    SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine,
-                                           ":/cursor/flipping_line_cursor.png",
-                                           tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                           &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
-                                           &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>Enter</b> - confirm selection")
+            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+    SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine, ":/cursor/flipping_line_cursor.png",
+                                                 tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
+                                                 &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolFlippingByAxis(bool checked)
 {
     ToolSelectOperationObjects();
-    SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis,
-                                           ":/cursor/flipping_axis_cursor.png",
-                                           tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                           &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>Enter</b> - confirm selection")
+            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+    SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis, ":/cursor/flipping_axis_cursor.png",
+                                                 tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
                                                  &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
 }
 
@@ -1113,11 +1118,12 @@ void MainWindow::ToolFlippingByAxis(bool checked)
 void MainWindow::ToolMove(bool checked)
 {
     ToolSelectOperationObjects();
-    SetToolButtonWithApply<DialogMove>(checked, Tool::Move,
-                                         ":/cursor/move_cursor.png",
-                                         tr("Select one or more objects, <b>Enter</b> - confirm selection"),
-                                         &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
-                                         &MainWindow::ApplyDrawDialog<VToolMove>);
+    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
+                               "<b>Enter</b> - confirm selection")
+            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+    SetToolButtonWithApply<DialogMove>(checked, Tool::Move, ":/cursor/move_cursor.png", tooltip,
+                                       &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
+                                       &MainWindow::ApplyDrawDialog<VToolMove>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
