@@ -317,15 +317,19 @@ bool DialogSaveLayout::TestPdf()
 QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
 {
     QVector<std::pair<QString, QString>> list;
-    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1String(".svg")));
-    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1String(".pdf")));
-    list.append(std::make_pair(tr("Images (*.png)"), QLatin1String(".png")));
-    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
+    list.append(std::make_pair(QLatin1String("Svg ") + tr("files") + QLatin1String(" (*.svg)"), QLatin1String(".svg")));
+    list.append(std::make_pair(QLatin1String("PDF ") + tr("files") + QLatin1String(" (*.pdf)"), QLatin1String(".pdf")));
+    list.append(std::make_pair(QLatin1String("Images") + QLatin1String(" (*.png)"), QLatin1String(".png")));
+#ifndef V_NO_ASSERT // Temporarily unavailable
+    list.append(std::make_pair(QLatin1String("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
+#endif
     if (SupportPSTest())
     {
-        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1String(".ps")));
-        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1String(".eps")));
+        list.append(std::make_pair(QLatin1String("PS ") + tr("files") + QLatin1String(" (*.ps)"),
+                                   QLatin1String(".ps")));
+        list.append(std::make_pair(QLatin1String("EPS ") + tr("files") + QLatin1String(" (*.eps)"),
+                                   QLatin1String(".eps")));
     }
-    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1String(".dxf")));
+    list.append(std::make_pair(QLatin1String("DXF ") + tr("files") + QLatin1String(" (*.dxf)"), QLatin1String(".dxf")));
     return list;
 }
