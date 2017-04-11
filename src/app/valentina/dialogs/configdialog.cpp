@@ -38,7 +38,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr),
-    communityPage(nullptr), pathPage(nullptr), applyButton(nullptr), cancelButton(nullptr), okButton(nullptr),
+    pathPage(nullptr), applyButton(nullptr), cancelButton(nullptr), okButton(nullptr),
     isInitialized(false)
 {
     contentsWidget = new QListWidget;
@@ -57,9 +57,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     patternPage = new PatternPage();
     pagesWidget->addWidget(patternPage);
-
-    communityPage = new CommunityPage();
-    pagesWidget->addWidget(communityPage);
 
     pathPage = new PathPage();
     pagesWidget->addWidget(pathPage);
@@ -164,7 +161,6 @@ void ConfigDialog::createIcons()
 {
     createIcon("://icon/config.png", tr("Configuration"));
     createIcon("://icon/pattern_config.png", tr("Pattern"));
-    createIcon("://icon/community_config.png", tr("Community"));
     createIcon("://icon/path_config.png", tr("Paths"));
 
     connect(contentsWidget, &QListWidget::currentItemChanged,
@@ -195,7 +191,6 @@ void ConfigDialog::Apply()
 {
     configurationPage->Apply();
     patternPage->Apply();
-    communityPage->Apply();
     pathPage->Apply();
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());

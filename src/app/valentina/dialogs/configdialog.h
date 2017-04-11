@@ -54,7 +54,6 @@ private:
     QStackedWidget    *pagesWidget;
     ConfigurationPage *configurationPage;
     PatternPage       *patternPage;
-    CommunityPage     *communityPage;
     PathPage          *pathPage;
     QPushButton       *applyButton;
     QPushButton       *cancelButton;

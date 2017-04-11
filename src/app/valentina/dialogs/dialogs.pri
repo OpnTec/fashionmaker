@@ -12,7 +12,6 @@ HEADERS += \
     $$PWD/dialogaboutapp.h \
     $$PWD/configpages/configurationpage.h \
     $$PWD/configpages/patternpage.h \
-    $$PWD/configpages/communitypage.h \
     $$PWD/configpages/pathpage.h \
     $$PWD/dialoglayoutsettings.h \
     $$PWD/dialoglayoutprogress.h \
@@ -29,7 +28,6 @@ SOURCES += \
     $$PWD/dialogaboutapp.cpp \
     $$PWD/configpages/configurationpage.cpp \
     $$PWD/configpages/patternpage.cpp \
-    $$PWD/configpages/communitypage.cpp \
     $$PWD/configpages/pathpage.cpp \
     $$PWD/dialoglayoutsettings.cpp \
     $$PWD/dialoglayoutprogress.cpp \

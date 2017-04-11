@@ -31,7 +31,6 @@
 
 #include "configurationpage.h"
 #include "patternpage.h"
-#include "communitypage.h"
 #include "pathpage.h"
 
 #endif // PAGES_H
