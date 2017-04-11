@@ -34,14 +34,14 @@
 #include <QTextCodec>
 #include <QVariant>
 
-const QString VTapeSettings::SettingDataBaseGeometry    = QStringLiteral("database/geometry");
+const QString settingDataBaseGeometry = QStringLiteral("database/geometry");
 
-const QString VTapeSettings::SettingDefHeight = QStringLiteral("gradation/defHeight");
-const QString VTapeSettings::SettingDefSize   = QStringLiteral("gradation/defHeight");
+const QString settingDefHeight = QStringLiteral("gradation/defHeight");
+const QString settingDefSize   = QStringLiteral("gradation/defHeight");
 
-const QString VTapeSettings::SettingCSVWithHeader = QStringLiteral("csv/withHeader");
-const QString VTapeSettings::SettingCSVCodec      = QStringLiteral("csv/withCodec");
-const QString VTapeSettings::SettingCSVSeparator  = QStringLiteral("csv/withSeparator");
+const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
+const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
+const QString settingCSVSeparator  = QStringLiteral("csv/withSeparator");
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -53,49 +53,49 @@ VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organiza
 //---------------------------------------------------------------------------------------------------------------------
 QByteArray VTapeSettings::GetDataBaseGeometry() const
 {
-    return value(SettingDataBaseGeometry).toByteArray();
+    return value(settingDataBaseGeometry).toByteArray();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
 {
-    setValue(SettingDataBaseGeometry, value);
+    setValue(settingDataBaseGeometry, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDefHeight(int value)
 {
-    setValue(SettingDefHeight, value);
+    setValue(settingDefHeight, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetDefHeight() const
 {
-    return value(SettingDefHeight, 176).toInt();
+    return value(settingDefHeight, 176).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDefSize(int value)
 {
-    setValue(SettingDefSize, value);
+    setValue(settingDefSize, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetDefSize() const
 {
-    return value(SettingDefSize, 50).toInt();
+    return value(settingDefSize, 50).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetCSVWithHeader(bool withHeader)
 {
-    setValue(SettingCSVWithHeader, withHeader);
+    setValue(settingCSVWithHeader, withHeader);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VTapeSettings::GetCSVWithHeader() const
 {
-    return value(SettingCSVWithHeader, GetDefCSVWithHeader()).toBool();
+    return value(settingCSVWithHeader, GetDefCSVWithHeader()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,13 +107,13 @@ bool VTapeSettings::GetDefCSVWithHeader() const
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetCSVCodec(int mib)
 {
-    setValue(SettingCSVCodec, mib);
+    setValue(settingCSVCodec, mib);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetCSVCodec() const
 {
-    return value(SettingCSVCodec, GetDefCSVCodec()).toInt();
+    return value(settingCSVCodec, GetDefCSVCodec()).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,17 +128,17 @@ void VTapeSettings::SetCSVSeparator(const QChar &separator)
     switch(separator.toLatin1())
     {
         case '\t':
-            setValue(SettingCSVSeparator, 0);
+            setValue(settingCSVSeparator, 0);
             break;
         case ';':
-            setValue(SettingCSVSeparator, 1);
+            setValue(settingCSVSeparator, 1);
             break;
         case ' ':
-            setValue(SettingCSVSeparator, 2);
+            setValue(settingCSVSeparator, 2);
             break;
         case ',':
         default:
-            setValue(SettingCSVSeparator, 3);
+            setValue(settingCSVSeparator, 3);
             break;
     }
 }
@@ -146,7 +146,7 @@ void VTapeSettings::SetCSVSeparator(const QChar &separator)
 //---------------------------------------------------------------------------------------------------------------------
 QChar VTapeSettings::GetCSVSeparator() const
 {
-    const quint8 separator = static_cast<quint8>(value(SettingCSVSeparator, 3).toUInt());
+    const quint8 separator = static_cast<quint8>(value(settingCSVSeparator, 3).toUInt());
     switch(separator)
     {
         case 0:

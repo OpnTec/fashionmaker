@@ -42,35 +42,34 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 
-const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");
-const QString VCommonSettings::SettingPathsStandardMeasurements       = QStringLiteral("paths/standard_measurements");
-const QString VCommonSettings::SettingPathsTemplates                  = QStringLiteral("paths/templates");
+const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
+const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
+const QString settingPathsTemplates              = QStringLiteral("paths/templates");
 
-const QString VCommonSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
-const QString VCommonSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
-const QString VCommonSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
-const QString VCommonSettings::SettingConfigurationSendReportState  = QStringLiteral("configuration/send_report/state");
-const QString VCommonSettings::SettingConfigurationLocale              = QStringLiteral("configuration/locale");
-const QString VCommonSettings::SettingPMSystemCode                     = QStringLiteral("configuration/pmscode");
-const QString VCommonSettings::SettingConfigurationUnit                = QStringLiteral("configuration/unit");
-const QString VCommonSettings::SettingConfigurationConfirmItemDeletion
-                                                                = QStringLiteral("configuration/confirm_item_deletion");
-const QString VCommonSettings::SettingConfigurationToolBarStyle        = QStringLiteral("configuration/tool_bar_style");
+const QString settingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
+const QString settingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
+const QString settingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
+const QString settingConfigurationSendReportState     = QStringLiteral("configuration/send_report/state");
+const QString settingConfigurationLocale              = QStringLiteral("configuration/locale");
+const QString settingPMSystemCode                     = QStringLiteral("configuration/pmscode");
+const QString settingConfigurationUnit                = QStringLiteral("configuration/unit");
+const QString settingConfigurationConfirmItemDeletion = QStringLiteral("configuration/confirm_item_deletion");
+const QString settingConfigurationToolBarStyle        = QStringLiteral("configuration/tool_bar_style");
 
-const QString VCommonSettings::SettingPatternUser                      = QStringLiteral("pattern/user");
-const QString VCommonSettings::SettingPatternUndo                      = QStringLiteral("pattern/undo");
-const QString VCommonSettings::SettingPatternForbidFlipping            = QStringLiteral("pattern/forbidFlipping");
-const QString VCommonSettings::SettingDoublePassmark                   = QStringLiteral("pattern/doublePassmark");
+const QString settingPatternUser           = QStringLiteral("pattern/user");
+const QString settingPatternUndo           = QStringLiteral("pattern/undo");
+const QString settingPatternForbidFlipping = QStringLiteral("pattern/forbidFlipping");
+const QString settingDoublePassmark        = QStringLiteral("pattern/doublePassmark");
 
-const QString VCommonSettings::SettingGeneralRecentFileList            = QStringLiteral("recentFileList");
-const QString VCommonSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
-const QString VCommonSettings::SettingGeneralGeometry                  = QStringLiteral("geometry");
-const QString VCommonSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
-const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
-const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
-const QString VCommonSettings::SettingLatestSkippedVersion             = QStringLiteral("lastestSkippedVersion");
-const QString VCommonSettings::SettingDateOfLastRemind                 = QStringLiteral("dateOfLastRemind");
-const QString VCommonSettings::SettingUserDefinedMaterials       = QStringLiteral("configuration/userDefinedMaterials");
+const QString settingGeneralRecentFileList  = QStringLiteral("recentFileList");
+const QString settingGeneralRestoreFileList = QStringLiteral("restoreFileList");
+const QString settingGeneralGeometry        = QStringLiteral("geometry");
+const QString settingGeneralWindowState     = QStringLiteral("windowState");
+const QString settingGeneralToolbarsState   = QStringLiteral("toolbarsState");
+const QString settingPreferenceDialogSize   = QStringLiteral("preferenceDialogSize");
+const QString settingLatestSkippedVersion   = QStringLiteral("lastestSkippedVersion");
+const QString settingDateOfLastRemind       = QStringLiteral("dateOfLastRemind");
+const QString settingUserDefinedMaterials   = QStringLiteral("configuration/userDefinedMaterials");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -236,14 +235,14 @@ QString VCommonSettings::GetDefPathIndividualMeasurements()
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsIndividualMeasurements, GetDefPathIndividualMeasurements()).toString();
+    return settings.value(settingPathsIndividualMeasurements, GetDefPathIndividualMeasurements()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(SettingPathsIndividualMeasurements, value);
+    settings.setValue(settingPathsIndividualMeasurements, value);
     settings.sync();
 }
 
@@ -257,14 +256,14 @@ QString VCommonSettings::GetDefPathStandardMeasurements()
 QString VCommonSettings::GetPathStandardMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsStandardMeasurements, GetDefPathStandardMeasurements()).toString();
+    return settings.value(settingPathsStandardMeasurements, GetDefPathStandardMeasurements()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(SettingPathsStandardMeasurements, value);
+    settings.setValue(settingPathsStandardMeasurements, value);
     settings.sync();
 }
 
@@ -278,49 +277,49 @@ QString VCommonSettings::GetDefPathTemplate()
 QString VCommonSettings::GetPathTemplate() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingPathsTemplates, GetDefPathTemplate()).toString();
+    return settings.value(settingPathsTemplates, GetDefPathTemplate()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathTemplate(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(SettingPathsTemplates, value);
+    settings.setValue(settingPathsTemplates, value);
     settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetOsSeparator() const
 {
-    return value(SettingConfigurationOsSeparator, 1).toBool();
+    return value(settingConfigurationOsSeparator, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetOsSeparator(const bool &value)
 {
-    setValue(SettingConfigurationOsSeparator, value);
+    setValue(settingConfigurationOsSeparator, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetAutosaveState() const
 {
-    return value(SettingConfigurationAutosaveState, 1).toBool();
+    return value(settingConfigurationAutosaveState, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetAutosaveState(const bool &value)
 {
-    setValue(SettingConfigurationAutosaveState, value);
+    setValue(settingConfigurationAutosaveState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VCommonSettings::GetAutosaveTime() const
 {
     bool ok = false;
-    int val = value(SettingConfigurationAutosaveTime, 1).toInt(&ok);
+    int val = value(settingConfigurationAutosaveTime, 1).toInt(&ok);
     if (ok == false)
     {
-        qDebug()<<"Could not convert value"<<value(SettingConfigurationAutosaveTime, 1)
+        qDebug()<<"Could not convert value"<<value(settingConfigurationAutosaveTime, 1)
                <<"to int. Return default value for autosave time"<<1<<"minutes.";
         val = 1;
     }
@@ -330,79 +329,79 @@ int VCommonSettings::GetAutosaveTime() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetAutosaveTime(const int &value)
 {
-    setValue(SettingConfigurationAutosaveTime, value);
+    setValue(settingConfigurationAutosaveTime, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetSendReportState() const
 {
-    return value(SettingConfigurationSendReportState, 1).toBool();
+    return value(settingConfigurationSendReportState, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetSendReportState(const bool &value)
 {
-    setValue(SettingConfigurationSendReportState, value);
+    setValue(settingConfigurationSendReportState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLocale() const
 {
-    return value(SettingConfigurationLocale, QLocale().name()).toString();
+    return value(settingConfigurationLocale, QLocale().name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLocale(const QString &value)
 {
-    setValue(SettingConfigurationLocale, value);
+    setValue(settingConfigurationLocale, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPMSystemCode() const
 {
-    return value(SettingPMSystemCode, p0_S).toString();
+    return value(settingPMSystemCode, p0_S).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPMSystemCode(const QString &value)
 {
-    setValue(SettingPMSystemCode, value);
+    setValue(settingPMSystemCode, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetUnit() const
 {
-    return value(SettingConfigurationUnit, "cm").toString();
+    return value(settingConfigurationUnit, "cm").toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetUnit(const QString &value)
 {
-    setValue(SettingConfigurationUnit, value);
+    setValue(settingConfigurationUnit, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetConfirmItemDelete() const
 {
-    return value(SettingConfigurationConfirmItemDeletion, 1).toBool();
+    return value(settingConfigurationConfirmItemDeletion, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetConfirmItemDelete(const bool &value)
 {
-    setValue(SettingConfigurationConfirmItemDeletion, value);
+    setValue(settingConfigurationConfirmItemDeletion, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetToolBarStyle() const
 {
-    return value(SettingConfigurationToolBarStyle, 1).toBool();
+    return value(settingConfigurationToolBarStyle, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetToolBarStyle(const bool &value)
 {
-    setValue(SettingConfigurationToolBarStyle, value);
+    setValue(settingConfigurationToolBarStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,7 +411,7 @@ QString VCommonSettings::GetUser() const
 #ifdef Q_OS_WIN
     user = value(SettingPatternUser, QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
-    user = value(SettingPatternUser, QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
+    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
 #endif
     return user;
 }
@@ -420,17 +419,17 @@ QString VCommonSettings::GetUser() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetUser(const QString &value)
 {
-    setValue(SettingPatternUser, value);
+    setValue(settingPatternUser, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VCommonSettings::GetUndoCount() const
 {
     bool ok = false;
-    int val = value(SettingPatternUndo, 0).toInt(&ok);
+    int val = value(settingPatternUndo, 0).toInt(&ok);
     if (ok == false)
     {
-        qDebug()<<"Could not convert value"<<value(SettingPatternUndo, 0)
+        qDebug()<<"Could not convert value"<<value(settingPatternUndo, 0)
                <<"to int. Return default value for undo counts 0 (no limit).";
         val = 0;
     }
@@ -440,13 +439,13 @@ int VCommonSettings::GetUndoCount() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetUndoCount(const int &value)
 {
-    setValue(SettingPatternUndo, value);
+    setValue(settingPatternUndo, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::GetRecentFileList() const
 {
-    const QStringList files = value(SettingGeneralRecentFileList).toStringList();
+    const QStringList files = value(settingGeneralRecentFileList).toStringList();
     QStringList cleared;
 
     for (int i = 0; i < files.size(); ++i)
@@ -463,81 +462,81 @@ QStringList VCommonSettings::GetRecentFileList() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetRecentFileList(const QStringList &value)
 {
-    setValue(SettingGeneralRecentFileList, value);
+    setValue(settingGeneralRecentFileList, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::GetRestoreFileList() const
 {
-    return value(SettingGeneralRestoreFileList).toStringList();
+    return value(settingGeneralRestoreFileList).toStringList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetRestoreFileList(const QStringList &value)
 {
-    setValue(SettingGeneralRestoreFileList, value);
+    setValue(settingGeneralRestoreFileList, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QByteArray VCommonSettings::GetGeometry() const
 {
-    return value(SettingGeneralGeometry).toByteArray();
+    return value(settingGeneralGeometry).toByteArray();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetGeometry(const QByteArray &value)
 {
-    setValue(SettingGeneralGeometry, value);
+    setValue(settingGeneralGeometry, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QByteArray VCommonSettings::GetWindowState() const
 {
-    return value(SettingGeneralWindowState).toByteArray();
+    return value(settingGeneralWindowState).toByteArray();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetWindowState(const QByteArray &value)
 {
-    setValue(SettingGeneralWindowState, value);
+    setValue(settingGeneralWindowState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QByteArray VCommonSettings::GetToolbarsState() const
 {
-    return value(SettingGeneralToolbarsState).toByteArray();
+    return value(settingGeneralToolbarsState).toByteArray();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetToolbarsState(const QByteArray &value)
 {
-    setValue(SettingGeneralToolbarsState, value);
+    setValue(settingGeneralToolbarsState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QSize VCommonSettings::GetPreferenceDialogSize() const
 {
-    return value(SettingPreferenceDialogSize, QSize(0, 0)).toSize();
+    return value(settingPreferenceDialogSize, QSize(0, 0)).toSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
 {
-    setValue(SettingPreferenceDialogSize, sz);
+    setValue(settingPreferenceDialogSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VCommonSettings::GetLatestSkippedVersion() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingLatestSkippedVersion, 0x0).toInt();
+    return settings.value(settingLatestSkippedVersion, 0x0).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLatestSkippedVersion(int value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(SettingLatestSkippedVersion, value);
+    settings.setValue(settingLatestSkippedVersion, value);
     settings.sync();
 }
 
@@ -545,21 +544,21 @@ void VCommonSettings::SetLatestSkippedVersion(int value)
 QDate VCommonSettings::GetDateOfLastRemind() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(SettingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
+    return settings.value(settingDateOfLastRemind, QDate(1900, 1, 1)).toDate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetDateOfLastRemind(const QDate &date)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(SettingDateOfLastRemind, date);
+    settings.setValue(settingDateOfLastRemind, date);
     settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::GetUserDefinedMaterials() const
 {
-    return value(SettingUserDefinedMaterials).toStringList();
+    return value(settingUserDefinedMaterials).toStringList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -567,36 +566,36 @@ void VCommonSettings::AddUserDefinedMaterial(QString qsMaterial)
 {
     QStringList qsl = GetUserDefinedMaterials();
     qsl << qsMaterial;
-    setValue(SettingUserDefinedMaterials, qsl);
+    setValue(settingUserDefinedMaterials, qsl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::ClearUserDefinedMaterial()
 {
     QStringList qsl;
-    setValue(SettingUserDefinedMaterials, qsl);
+    setValue(settingUserDefinedMaterials, qsl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetForbidWorkpieceFlipping() const
 {
-    return value(SettingPatternForbidFlipping, false).toBool();
+    return value(settingPatternForbidFlipping, false).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetForbidWorkpieceFlipping(bool value)
 {
-    setValue(SettingPatternForbidFlipping, value);
+    setValue(settingPatternForbidFlipping, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::IsDoublePassmark() const
 {
-    return value(SettingDoublePassmark, false).toBool();
+    return value(settingDoublePassmark, false).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetDoublePassmark(bool value)
 {
-    setValue(SettingDoublePassmark, value);
+    setValue(settingDoublePassmark, value);
 }

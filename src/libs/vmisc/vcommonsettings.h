@@ -139,35 +139,6 @@ public:
 
 private:
     Q_DISABLE_COPY(VCommonSettings)
-
-    static const QString SettingPathsIndividualMeasurements;
-    static const QString SettingPathsStandardMeasurements;
-    static const QString SettingPathsTemplates;
-
-    static const QString SettingConfigurationOsSeparator;
-    static const QString SettingConfigurationAutosaveState;
-    static const QString SettingConfigurationAutosaveTime;
-    static const QString SettingConfigurationSendReportState;
-    static const QString SettingConfigurationLocale;
-    static const QString SettingPMSystemCode;
-    static const QString SettingConfigurationUnit;
-    static const QString SettingConfigurationConfirmItemDeletion;
-    static const QString SettingConfigurationToolBarStyle;
-
-    static const QString SettingPatternUser;
-    static const QString SettingPatternUndo;
-    static const QString SettingPatternForbidFlipping;
-    static const QString SettingDoublePassmark;
-
-    static const QString SettingGeneralRecentFileList;
-    static const QString SettingGeneralRestoreFileList;
-    static const QString SettingGeneralGeometry;
-    static const QString SettingGeneralWindowState;
-    static const QString SettingGeneralToolbarsState;
-    static const QString SettingPreferenceDialogSize;
-    static const QString SettingLatestSkippedVersion;
-    static const QString SettingDateOfLastRemind;
-    static const QString SettingUserDefinedMaterials;
 };
 
 #endif // VCOMMONSETTINGS_H

@@ -69,13 +69,6 @@ public:
 
 private:
     Q_DISABLE_COPY(VTapeSettings)
-
-    static const QString SettingDataBaseGeometry;
-    static const QString SettingDefHeight;
-    static const QString SettingDefSize;
-    static const QString SettingCSVWithHeader;
-    static const QString SettingCSVCodec;
-    static const QString SettingCSVSeparator;
 };
 
 #endif // VTAPESETTINGS_H

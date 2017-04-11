@@ -153,38 +153,6 @@ public:
 
 private:
     Q_DISABLE_COPY(VSettings)
-    static const QString SettingConfigurationLabelLanguage;
-
-    static const QString SettingPathsPattern;
-    static const QString SettingPathsLayout;
-
-    static const QString SettingPatternGraphicalOutput;
-
-    static const QString SettingCommunityServer;
-    static const QString SettingCommunityServerSecure;
-    static const QString SettingCommunityUseProxy;
-    static const QString SettingCommunityProxyAddress;
-    static const QString SettingCommunityProxyPort;
-    static const QString SettingCommunityProxyUser;
-    static const QString SettingCommunityProxyPass;
-    static const QString SettingCommunityUsername;
-    static const QString SettingCommunitySavePassword;
-    static const QString SettingCommunityUserPassword;
-
-    static const QString SettingLayoutWidth;
-    static const QString SettingLayoutSorting;
-    static const QString SettingLayoutPaperHeight;
-    static const QString SettingLayoutPaperWidth;
-    static const QString SettingLayoutShift;
-    static const QString SettingLayoutRotate;
-    static const QString SettingLayoutRotationIncrease;
-    static const QString SettingLayoutAutoCrop;
-    static const QString SettingLayoutSaveLength;
-    static const QString SettingLayoutUnitePages;
-    static const QString SettingFields;
-    static const QString SettingIgnoreFields;
-    static const QString SettingStripOptimization;
-    static const QString SettingMultiplier;
 };
 
 #endif // VSETTINGS_H
