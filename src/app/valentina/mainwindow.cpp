@@ -1913,6 +1913,7 @@ void MainWindow::CancelTool()
 
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
+    ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
 
     switch ( currentTool )
     {
