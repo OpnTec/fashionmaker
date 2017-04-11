@@ -158,7 +158,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
         NewItem(path.at(i));
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->lineEditSplPathName->setText(path.name());
+    ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -700,7 +700,7 @@ void DialogSplinePath::currentPointChanged(int index)
         if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints()-1).P().id())
         {
             newDuplicate = -1;
-            ui->lineEditSplPathName->setText(path.name());
+            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
         }
         else
         {
@@ -712,7 +712,7 @@ void DialogSplinePath::currentPointChanged(int index)
                 newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
             }
 
-            ui->lineEditSplPathName->setText(newPath.name());
+            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
         }
     }
     ChangeColor(ui->labelName, color);
