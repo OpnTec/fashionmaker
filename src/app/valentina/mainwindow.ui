@@ -1645,7 +1645,8 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionOnlineHelp"/>
+    <addaction name="actionWiki"/>
+    <addaction name="actionForum"/>
     <addaction name="actionReportBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
@@ -2359,13 +2360,13 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionOnlineHelp">
+  <action name="actionWiki">
    <property name="icon">
     <iconset theme="help-contents">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Online help</string>
+    <string>Wiki</string>
    </property>
    <property name="toolTip">
     <string>Show online help</string>
@@ -2628,6 +2629,14 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
+  <action name="actionForum">
+   <property name="text">
+    <string>Forum</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2638,8 +2647,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

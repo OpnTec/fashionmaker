@@ -3854,10 +3854,16 @@ void MainWindow::CreateActions()
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/issues/new")));
     });
 
-    connect(ui->actionOnlineHelp, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionWiki, &QAction::triggered, RECEIVER(this)[this]()
     {
         qCDebug(vMainWindow, "Showing online help");
-        QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/wiki/manual/Content")));
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://wiki.valentinaproject.org/wiki/Main_Page")));
+    });
+
+    connect(ui->actionForum, &QAction::triggered, RECEIVER(this)[this]()
+    {
+        qCDebug(vMainWindow, "Opening forum");
+        QDesktopServices::openUrl(QUrl(QStringLiteral("http://forum.valentina-project.org/")));
     });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
