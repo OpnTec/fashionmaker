@@ -214,7 +214,6 @@ void ConfigDialog::RetranslateUi()
     setWindowTitle(tr("Config Dialog"));
     contentsWidget->item(0)->setText(tr("Configuration"));
     contentsWidget->item(1)->setText(tr("Pattern"));
-    contentsWidget->item(2)->setText(tr("Community"));
-    contentsWidget->item(3)->setText(tr("Paths"));
+    contentsWidget->item(2)->setText(tr("Paths"));
 }
 
