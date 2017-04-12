@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   preferencesconfigurationpage.h
+ **  @file   tapepreferencespathpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 4, 2017
  **
@@ -26,38 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef PREFERENCESCONFIGURATIONPAGE_H
-#define PREFERENCESCONFIGURATIONPAGE_H
+#ifndef TAPEPREFERENCESPATHPAGE_H
+#define TAPEPREFERENCESPATHPAGE_H
 
 #include <QWidget>
 
 namespace Ui
 {
-    class PreferencesConfigurationPage;
+    class TapePreferencesPathPage;
 }
 
-class PreferencesConfigurationPage : public QWidget
+class TapePreferencesPathPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~PreferencesConfigurationPage();
+    explicit TapePreferencesPathPage(QWidget *parent = nullptr);
+    virtual ~TapePreferencesPathPage();
 
     void Apply();
-protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+private slots:
+    void DefaultPath();
+    void EditPath();
 private:
-    Q_DISABLE_COPY(PreferencesConfigurationPage)
-    Ui::PreferencesConfigurationPage *ui;
-    bool m_langChanged;
-    bool m_systemChanged;
-    bool m_unitChanged;
-    bool m_labelLangChanged;
+    Q_DISABLE_COPY(TapePreferencesPathPage)
+    Ui::TapePreferencesPathPage *ui;
 
-    void SetLabelComboBox(const QStringList &list);
-    void InitUnits();
-    void RetranslateUi();
+    void InitTable();
 };
 
-#endif // PREFERENCESCONFIGURATIONPAGE_H
+#endif // TAPEPREFERENCESPATHPAGE_H

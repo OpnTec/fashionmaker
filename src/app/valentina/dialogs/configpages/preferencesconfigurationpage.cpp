@@ -47,7 +47,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->setupUi(this);
     ui->autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
 
-    InitLanguages();
+    InitLanguages(ui->langCombo);
     connect(ui->langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_langChanged = true;
@@ -188,56 +188,6 @@ void PreferencesConfigurationPage::SetLabelComboBox(const QStringList &list)
     {
         QLocale loc = QLocale(list.at(i));
         ui->labelCombo->addItem(loc.nativeLanguageName(), list.at(i));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void PreferencesConfigurationPage::InitLanguages()
-{
-    QStringList fileNames;
-    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
-    while (it.hasNext())
-    {
-        it.next();
-        fileNames.append(it.fileName());
-    }
-
-    bool englishUS = false;
-    const QString en_US = QStringLiteral("en_US");
-
-    for (int i = 0; i < fileNames.size(); ++i)
-    {
-        // get locale extracted by filename
-        QString locale;
-        locale = fileNames.at(i);                  // "valentina_de_De.qm"
-        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
-        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
-
-        if (not englishUS)
-        {
-            englishUS = (en_US == locale);
-        }
-
-        QLocale loc = QLocale(locale);
-        QString lang = loc.nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(loc.country())));
-
-        ui->langCombo->addItem(ico, lang, locale);
-    }
-
-    if (ui->langCombo->count() == 0 || not englishUS)
-    {
-        // English language is internal and doens't have own *.qm file.
-        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
-        QString lang = QLocale(en_US).nativeLanguageName();
-        ui->langCombo->addItem(ico, lang, en_US);
-    }
-
-    // set default translators and language checked
-    qint32 index = ui->langCombo->findData(qApp->ValentinaSettings()->GetLocale());
-    if (index != -1)
-    {
-        ui->langCombo->setCurrentIndex(index);
     }
 }
 

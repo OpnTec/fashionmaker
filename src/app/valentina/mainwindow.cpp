@@ -4231,12 +4231,6 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::WindowsLocale()
-{
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyles()
 {
     ToolBarStyle(ui->toolBarDraws);
@@ -4333,19 +4327,6 @@ void MainWindow::ExportLayoutAs()
         return;
     }
     ui->toolButtonLayoutExportAs->setChecked(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolBarStyle(QToolBar *bar)
-{
-    if (qApp->ValentinaSettings()->GetToolBarStyle())
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    }
-    else
-    {
-        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

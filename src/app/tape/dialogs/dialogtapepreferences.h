@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tapepathpage.h
+ **  @file   dialogtapepreferences.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   02 08, 2015
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef PATHPAGE_H
-#define PATHPAGE_H
+#ifndef DIALOGTAPEPREFERENCES_H
+#define DIALOGTAPEPREFERENCES_H
 
-#include <QObject>
-#include <QWidget>
+#include <QDialog>
 
-class QGroupBox;
-class QPushButton;
-class QTableWidget;
+namespace Ui
+{
+    class DialogTapePreferences;
+}
 
-class TapePathPage : public QWidget
+class TapePreferencesConfigurationPage;
+class TapePreferencesPathPage;
+class QListWidgetItem;
+
+class DialogTapePreferences : public QDialog
 {
     Q_OBJECT
-public:
-    explicit TapePathPage(QWidget *parent = nullptr);
-    void      Apply();
-protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-private slots:
-    void DefaultPath();
-    void EditPath();
-private:
-    Q_DISABLE_COPY(TapePathPage)
-    QPushButton  *defaultButton;
-    QPushButton  *editButton;
-    QTableWidget *pathTable;
-    QGroupBox    *pathGroup;
 
-    QGroupBox    *PathGroup() Q_REQUIRED_RESULT;
-    void         InitTable();
-    void         RetranslateUi();
+public:
+    explicit DialogTapePreferences(QWidget *parent = nullptr);
+    virtual ~DialogTapePreferences();
+signals:
+    void UpdateProperties();
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void Apply();
+    void Ok();
+    void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+private:
+    Q_DISABLE_COPY(DialogTapePreferences)
+    Ui::DialogTapePreferences *ui;
+    bool m_isInitialized;
+    TapePreferencesConfigurationPage *m_configurationPage;
+    TapePreferencesPathPage          *m_pathPage;
 };
 
-#endif // PATHPAGE_H
+#endif // DIALOGTAPEPREFERENCES_H

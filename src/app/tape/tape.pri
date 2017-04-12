@@ -8,11 +8,11 @@ SOURCES  += \
     $$PWD/dialogs/dialogabouttape.cpp \
     $$PWD/dialogs/dialognewmeasurements.cpp \
     $$PWD/dialogs/dialogmdatabase.cpp \
-    $$PWD/dialogs/tapeconfigdialog.cpp \
-    $$PWD/dialogs/configpages/tapeconfigurationpage.cpp \
-    $$PWD/dialogs/configpages/tapepathpage.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
-    $$PWD/vlitepattern.cpp
+    $$PWD/vlitepattern.cpp \
+    $$PWD/dialogs/dialogtapepreferences.cpp \
+    $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
+    $$PWD/dialogs/configpages/tapepreferencespathpage.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -24,15 +24,18 @@ HEADERS  += \
     $$PWD/dialogs/dialognewmeasurements.h \
     $$PWD/dialogs/dialogmdatabase.h \
     $$PWD/version.h \
-    $$PWD/dialogs/tapeconfigdialog.h \
-    $$PWD/dialogs/configpages/tapeconfigurationpage.h \
-    $$PWD/dialogs/configpages/tapepathpage.h \
     $$PWD/dialogs/dialogexporttocsv.h \
-    $$PWD/vlitepattern.h
+    $$PWD/vlitepattern.h \
+    $$PWD/dialogs/dialogtapepreferences.h \
+    $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
+    $$PWD/dialogs/configpages/tapepreferencespathpage.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \
     $$PWD/dialogs/dialogabouttape.ui \
     $$PWD/dialogs/dialognewmeasurements.ui \
     $$PWD/dialogs/dialogmdatabase.ui \
-    $$PWD/dialogs/dialogexporttocsv.ui
+    $$PWD/dialogs/dialogexporttocsv.ui \
+    $$PWD/dialogs/dialogtapepreferences.ui \
+    $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
+    $$PWD/dialogs/configpages/tapepreferencespathpage.ui

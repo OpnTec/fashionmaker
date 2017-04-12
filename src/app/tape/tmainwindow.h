@@ -78,6 +78,7 @@ private slots:
     void OpenTemplate();
     void CreateFromExisting();
     void Preferences();
+    void ToolBarStyles();
 
     bool FileSave();
     bool FileSaveAs();

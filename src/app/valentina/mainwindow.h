@@ -110,7 +110,6 @@ private slots:
     void FullParseFile();
     void SetEnabledGUI(bool enabled);
     void GlobalChangePP(const QString &patternPiece);
-    void WindowsLocale();
     void ToolBarStyles();
     void ShowPaper(int index);
     void Preferences();
@@ -334,7 +333,6 @@ private:
     bool               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;
-    void               ToolBarStyle(QToolBar *bar);
 
     void               AddPP(const QString &PPName);
     QPointF            StartPositionNewPP() const;

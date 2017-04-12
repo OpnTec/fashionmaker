@@ -31,6 +31,7 @@
 #include "../vmisc/vabstractapplication.h"
 
 #include <QStyle>
+#include <QToolBar>
 
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -67,4 +68,24 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         }
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
+{
+    SCASSERT(bar != nullptr)
+    if (qApp->Settings()->GetToolBarStyle())
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    }
+    else
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::WindowsLocale()
+{
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tapeconfigdialog.h
+ **  @file   tapepreferencesconfigurationpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   02 08, 2015
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,46 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef TAPEPREFERENCESCONFIGURATIONPAGE_H
+#define TAPEPREFERENCESCONFIGURATIONPAGE_H
 
-#include <QDialog>
-#include "configpages/tapeconfigurationpage.h"
-#include "configpages/tapepathpage.h"
+#include <QWidget>
 
-class QListWidgetItem;
-class QStackedWidget;
-class QListWidget;
+namespace Ui
+{
+    class TapePreferencesConfigurationPage;
+}
 
-class TapeConfigDialog : public QDialog
+class TapePreferencesConfigurationPage : public QWidget
 {
     Q_OBJECT
-public:
-    explicit TapeConfigDialog(QWidget *parent = nullptr);
-signals:
-    void UpdateProperties();
-protected:
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-private:
-    Q_DISABLE_COPY(TapeConfigDialog)
-    QListWidget           *contentsWidget;
-    QStackedWidget        *pagesWidget;
-    TapeConfigurationPage *configurationPage;
-    TapePathPage          *pathPage;
-    QPushButton           *applyButton;
-    QPushButton           *cancelButton;
-    QPushButton           *okButton;
-    bool                  isInitialized;
 
-    void createIcons();
-    void createIcon(const QString &icon, const QString &text);
+public:
+    explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
+    virtual ~TapePreferencesConfigurationPage();
+
     void Apply();
-    void Ok();
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+private:
+    Q_DISABLE_COPY(TapePreferencesConfigurationPage)
+    Ui::TapePreferencesConfigurationPage *ui;
+    bool m_langChanged;
+    bool m_systemChanged;
+    bool m_defGradationChanged;
 
     void RetranslateUi();
 };
 
-#endif // CONFIGDIALOG_H
+#endif // TAPEPREFERENCESCONFIGURATIONPAGE_H

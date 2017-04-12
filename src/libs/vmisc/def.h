@@ -719,6 +719,7 @@ qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RE
 
 void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
+void InitLanguages(QComboBox *combobox);
 QStringList SupportedLocales() Q_REQUIRED_RESULT;
 QStringList AllGroupNames() Q_REQUIRED_RESULT;
 

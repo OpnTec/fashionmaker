@@ -31,7 +31,7 @@
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
-#include "dialogs/tapeconfigdialog.h"
+#include "dialogs/dialogtapepreferences.h"
 #include "dialogs/dialogexporttocsv.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
@@ -485,15 +485,25 @@ void TMainWindow::CreateFromExisting()
 void TMainWindow::Preferences()
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
-    static QPointer<TapeConfigDialog> guard;// Prevent any second run
+    static QPointer<DialogTapePreferences> guard;// Prevent any second run
     if (guard.isNull())
     {
-        TapeConfigDialog *config = new TapeConfigDialog(this);
+        DialogTapePreferences *preferences = new DialogTapePreferences(this);
         // QScopedPointer needs to be sure any exception will never block guard
-        QScopedPointer<TapeConfigDialog> dlg(config);
-        guard = config;
+        QScopedPointer<DialogTapePreferences> dlg(preferences);
+        guard = preferences;
+        // Must be first
+        connect(dlg.data(), &DialogTapePreferences::UpdateProperties, this, &TMainWindow::WindowsLocale);
+        connect(dlg.data(), &DialogTapePreferences::UpdateProperties, this, &TMainWindow::ToolBarStyles);
         dlg->exec();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ToolBarStyles()
+{
+    ToolBarStyle(ui->toolBarGradation);
+    ToolBarStyle(ui->mainToolBar);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2739,6 +2749,9 @@ void TMainWindow::ReadSettings()
     restoreGeometry(settings->GetGeometry());
     restoreState(settings->GetWindowState());
     restoreState(settings->GetToolbarsState(), APP_VERSION);
+
+    // Text under tool buton icon
+    ToolBarStyles();
 
     // Stack limit
     //qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());

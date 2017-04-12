@@ -45,12 +45,15 @@ public:
 public slots:
     virtual void ShowToolTip(const QString &toolTip)=0;
 
+protected slots:
+    void WindowsLocale();
+
 protected:
     int     m_curFileFormatVersion;
     QString m_curFileFormatVersionStr;
 
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
-
+    void ToolBarStyle(QToolBar *bar);
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
 };

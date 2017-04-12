@@ -34,6 +34,7 @@
 #include <QComboBox>
 #include <QCursor>
 #include <QDir>
+#include <QDirIterator>
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QImage>
@@ -2108,4 +2109,57 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
             break;
     }
     return PassmarkAngleType::Straightforward;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitLanguages(QComboBox *combobox)
+{
+    SCASSERT(combobox != nullptr)
+    combobox->clear();
+
+    QStringList fileNames;
+    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
+
+    bool englishUS = false;
+    const QString en_US = QStringLiteral("en_US");
+
+    for (int i = 0; i < fileNames.size(); ++i)
+    {
+        // get locale extracted by filename
+        QString locale;
+        locale = fileNames.at(i);                  // "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
+
+        if (not englishUS)
+        {
+            englishUS = (en_US == locale);
+        }
+
+        QLocale loc = QLocale(locale);
+        QString lang = loc.nativeLanguageName();
+        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(loc.country())));
+
+        combobox->addItem(ico, lang, locale);
+    }
+
+    if (combobox->count() == 0 || not englishUS)
+    {
+        // English language is internal and doens't have own *.qm file.
+        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
+        QString lang = QLocale(en_US).nativeLanguageName();
+        combobox->addItem(ico, lang, en_US);
+    }
+
+    // set default translators and language checked
+    qint32 index = combobox->findData(qApp->Settings()->GetLocale());
+    if (index != -1)
+    {
+        combobox->setCurrentIndex(index);
+    }
 }
