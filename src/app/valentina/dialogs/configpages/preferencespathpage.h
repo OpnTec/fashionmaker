@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   pathpage.h
+ **  @file   preferencespathpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 6, 2014
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef PATHPAGE_H
-#define PATHPAGE_H
+#ifndef PREFERENCESPATHPAGE_H
+#define PREFERENCESPATHPAGE_H
 
-#include <QObject>
 #include <QWidget>
 
-class QGroupBox;
-class QPushButton;
-class QTableWidget;
+namespace Ui
+{
+    class PreferencesPathPage;
+}
 
-class PathPage : public QWidget
+class PreferencesPathPage : public QWidget
 {
     Q_OBJECT
+
 public:
-    explicit PathPage(QWidget *parent = nullptr);
-    void      Apply();
-protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    explicit PreferencesPathPage(QWidget *parent = nullptr);
+    virtual ~PreferencesPathPage();
+
+    void Apply();
+
 private slots:
     void DefaultPath();
     void EditPath();
-private:
-    Q_DISABLE_COPY(PathPage)
-    QPushButton  *defaultButton;
-    QPushButton  *editButton;
-    QTableWidget *pathTable;
-    QGroupBox    *pathGroup;
 
-    QGroupBox    *PathGroup() Q_REQUIRED_RESULT;
-    void         InitTable();
-    void         RetranslateUi();
+private:
+    Q_DISABLE_COPY(PreferencesPathPage)
+    Ui::PreferencesPathPage *ui;
+
+    void InitTable();
 };
 
-#endif // PATHPAGE_H
+#endif // PREFERENCESPATHPAGE_H

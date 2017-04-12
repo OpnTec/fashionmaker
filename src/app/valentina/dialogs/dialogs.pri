@@ -5,35 +5,34 @@ HEADERS += \
     $$PWD/dialogs.h \
     $$PWD/dialogincrements.h \
     $$PWD/dialoghistory.h \
-    $$PWD/configdialog.h \
-    $$PWD/configpages/pages.h \
     $$PWD/dialogpatternproperties.h \
     $$PWD/dialognewpattern.h \
     $$PWD/dialogaboutapp.h \
-    $$PWD/configpages/configurationpage.h \
-    $$PWD/configpages/patternpage.h \
-    $$PWD/configpages/pathpage.h \
     $$PWD/dialoglayoutsettings.h \
     $$PWD/dialoglayoutprogress.h \
     $$PWD/dialogsavelayout.h \
     $$PWD/vwidgetgroups.h \
-    $$PWD/vwidgetdetails.h
+    $$PWD/vwidgetdetails.h \
+    $$PWD/dialogpreferences.h \
+    $$PWD/configpages/preferencesconfigurationpage.h \
+    $$PWD/configpages/preferencespatternpage.h \
+    $$PWD/configpages/preferencespathpage.h
 
 SOURCES += \
     $$PWD/dialogincrements.cpp \
     $$PWD/dialoghistory.cpp \
-    $$PWD/configdialog.cpp \
     $$PWD/dialogpatternproperties.cpp \
     $$PWD/dialognewpattern.cpp \
     $$PWD/dialogaboutapp.cpp \
-    $$PWD/configpages/configurationpage.cpp \
-    $$PWD/configpages/patternpage.cpp \
-    $$PWD/configpages/pathpage.cpp \
     $$PWD/dialoglayoutsettings.cpp \
     $$PWD/dialoglayoutprogress.cpp \
     $$PWD/dialogsavelayout.cpp \
     $$PWD/vwidgetgroups.cpp \
-    $$PWD/vwidgetdetails.cpp
+    $$PWD/vwidgetdetails.cpp \
+    $$PWD/dialogpreferences.cpp \
+    $$PWD/configpages/preferencesconfigurationpage.cpp \
+    $$PWD/configpages/preferencespatternpage.cpp \
+    $$PWD/configpages/preferencespathpage.cpp
 
 FORMS += \
     $$PWD/dialogincrements.ui \
@@ -45,4 +44,8 @@ FORMS += \
     $$PWD/dialoglayoutprogress.ui \
     $$PWD/dialogsavelayout.ui \
     $$PWD/vwidgetgroups.ui \
-    $$PWD/vwidgetdetails.ui
+    $$PWD/vwidgetdetails.ui \
+    $$PWD/dialogpreferences.ui \
+    $$PWD/configpages/preferencesconfigurationpage.ui \
+    $$PWD/configpages/preferencespatternpage.ui \
+    $$PWD/configpages/preferencespathpage.ui

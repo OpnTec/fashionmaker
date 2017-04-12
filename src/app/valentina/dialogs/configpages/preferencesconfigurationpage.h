@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   patternpage.h
+ **  @file   preferencesconfigurationpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 6, 2014
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,52 +26,41 @@
  **
  *************************************************************************/
 
-#ifndef PATTERNPAGE_H
-#define PATTERNPAGE_H
+#ifndef PREFERENCESCONFIGURATIONPAGE_H
+#define PREFERENCESCONFIGURATIONPAGE_H
 
-#include <QObject>
 #include <QWidget>
 
-class QCheckBox;
-class QSpinBox;
-class QGroupBox;
-class QLineEdit;
-class QLabel;
-class QPushButton;
+namespace Ui
+{
+    class PreferencesConfigurationPage;
+}
 
-class PatternPage : public QWidget
+class PreferencesConfigurationPage : public QWidget
 {
     Q_OBJECT
+
 public:
-    explicit PatternPage(QWidget *parent = nullptr);
-    void      Apply();
-public slots:
-    void      ClearUserDefinedMaterials();
+    explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
+    virtual ~PreferencesConfigurationPage();
+
+    void Apply();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(PatternPage)
-    QGroupBox *userGroup;
-    QLineEdit *userName;
-    QLabel    *userNameLabel;
-    QGroupBox *graphOutputGroup;
-    QCheckBox *graphOutputCheck;
-    QGroupBox *undoGroup;
-    QSpinBox  *undoCount;
-    QLabel    *countStepsLabel;
-    QGroupBox *userMaterialsGroup;
-    QPushButton* userMaterialClearButton;
-    QGroupBox *workpieceGroup;
-    QCheckBox *forbidFlippingCheck;
-    QCheckBox *doublePassmarkCheck;
+    Q_DISABLE_COPY(PreferencesConfigurationPage)
+    Ui::PreferencesConfigurationPage *ui;
+    bool m_langChanged;
+    bool m_systemChanged;
+    bool m_unitChanged;
+    bool m_labelLangChanged;
 
-    QGroupBox *UserGroup() Q_REQUIRED_RESULT;
-    QGroupBox *GraphOutputGroup() Q_REQUIRED_RESULT;
-    QGroupBox *UndoGroup() Q_REQUIRED_RESULT;
-    QGroupBox *UserMaterialGroup() Q_REQUIRED_RESULT;
-    QGroupBox *UserWorkpieceGroup() Q_REQUIRED_RESULT;
+    void SetLabelComboBox(const QStringList &list);
 
-    void      RetranslateUi();
+    void InitLanguages();
+    void InitUnits();
+
+    void RetranslateUi();
 };
 
-#endif // PATTERNPAGE_H
+#endif // PREFERENCESCONFIGURATIONPAGE_H

@@ -4265,16 +4265,17 @@ void MainWindow::ShowPaper(int index)
 void MainWindow::Preferences()
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
-    static QPointer<ConfigDialog> guard;// Prevent any second run
+    static QPointer<DialogPreferences> guard;// Prevent any second run
     if (guard.isNull())
     {
-        ConfigDialog *config = new ConfigDialog(this);
+        DialogPreferences *preferences = new DialogPreferences(this);
         // QScopedPointer needs to be sure any exception will never block guard
-        QScopedPointer<ConfigDialog> dlg(config);
-        guard = config;
-        connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
-        connect(dlg.data(), &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-        connect(dlg.data(), &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        QScopedPointer<DialogPreferences> dlg(preferences);
+        guard = preferences;
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, toolOptions,
+                &VToolOptionsPropertyBrowser::RefreshOptions);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
 
         if (guard->exec() == QDialog::Accepted)
         {

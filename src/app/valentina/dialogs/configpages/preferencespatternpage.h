@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   preferencespatternpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,14 +26,29 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef PREFERENCESPATTERNPAGE_H
+#define PREFERENCESPATTERNPAGE_H
 
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogpatternproperties.h"
-#include "dialognewpattern.h"
-#include "dialogaboutapp.h"
-#include "dialogpreferences.h"
+#include <QWidget>
 
-#endif // DIALOGS_H
+namespace Ui
+{
+    class PreferencesPatternPage;
+}
+
+class PreferencesPatternPage : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit PreferencesPatternPage(QWidget *parent = nullptr);
+    virtual ~PreferencesPatternPage();
+
+    void Apply();
+
+private:
+    Q_DISABLE_COPY(PreferencesPatternPage)
+    Ui::PreferencesPatternPage *ui;
+};
+
+#endif // PREFERENCESPATTERNPAGE_H

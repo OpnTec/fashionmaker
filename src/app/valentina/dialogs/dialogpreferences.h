@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   pages.h
+ **  @file   dialogpreferences.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 2, 2014
+ **  @date   12 4, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,11 +26,45 @@
  **
  *************************************************************************/
 
-#ifndef PAGES_H
-#define PAGES_H
+#ifndef DIALOGPREFERENCES_H
+#define DIALOGPREFERENCES_H
 
-#include "configurationpage.h"
-#include "patternpage.h"
-#include "pathpage.h"
+#include <QDialog>
 
-#endif // PAGES_H
+namespace Ui
+{
+    class DialogPreferences;
+}
+
+class PreferencesConfigurationPage;
+class PreferencesPatternPage;
+class PreferencesPathPage;
+class QListWidgetItem;
+
+class DialogPreferences : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DialogPreferences(QWidget *parent = nullptr);
+    virtual ~DialogPreferences();
+signals:
+    void UpdateProperties();
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+private:
+    Q_DISABLE_COPY(DialogPreferences)
+    Ui::DialogPreferences *ui;
+    bool m_isInitialized;
+    PreferencesConfigurationPage *m_configurePage;
+    PreferencesPatternPage       *m_patternPage;
+    PreferencesPathPage          *m_pathPage;
+
+    void Apply();
+    void Ok();
+};
+
+#endif // DIALOGPREFERENCES_H
