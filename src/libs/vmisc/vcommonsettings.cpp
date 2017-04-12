@@ -46,15 +46,16 @@ const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individ
 const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
 const QString settingPathsTemplates              = QStringLiteral("paths/templates");
 
-const QString settingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
-const QString settingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
-const QString settingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
-const QString settingConfigurationSendReportState     = QStringLiteral("configuration/send_report/state");
-const QString settingConfigurationLocale              = QStringLiteral("configuration/locale");
-const QString settingPMSystemCode                     = QStringLiteral("configuration/pmscode");
-const QString settingConfigurationUnit                = QStringLiteral("configuration/unit");
-const QString settingConfigurationConfirmItemDeletion = QStringLiteral("configuration/confirm_item_deletion");
-const QString settingConfigurationToolBarStyle        = QStringLiteral("configuration/tool_bar_style");
+const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
+const QString settingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");
+const QString settingConfigurationAutosaveTime           = QStringLiteral("configuration/autosave/time");
+const QString settingConfigurationSendReportState        = QStringLiteral("configuration/send_report/state");
+const QString settingConfigurationLocale                 = QStringLiteral("configuration/locale");
+const QString settingPMSystemCode                        = QStringLiteral("configuration/pmscode");
+const QString settingConfigurationUnit                   = QStringLiteral("configuration/unit");
+const QString settingConfigurationConfirmItemDeletion    = QStringLiteral("configuration/confirm_item_deletion");
+const QString settingConfigurationConfirmFormatRewriting = QStringLiteral("configuration/confirm_format_rewriting");
+const QString settingConfigurationToolBarStyle           = QStringLiteral("configuration/tool_bar_style");
 
 const QString settingPatternUser           = QStringLiteral("pattern/user");
 const QString settingPatternUndo           = QStringLiteral("pattern/undo");
@@ -390,6 +391,18 @@ bool VCommonSettings::GetConfirmItemDelete() const
 void VCommonSettings::SetConfirmItemDelete(const bool &value)
 {
     setValue(settingConfigurationConfirmItemDeletion, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetConfirmFormatRewriting() const
+{
+    return value(settingConfigurationConfirmFormatRewriting, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetConfirmFormatRewriting(const bool &value)
+{
+    setValue(settingConfigurationConfirmFormatRewriting, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -140,6 +140,8 @@ void ConfigDialog::showEvent(QShowEvent *event)
         resize(sz);
     }
 
+    okButton->setFocus();
+
     isInitialized = true;//first show windows are held
 }
 

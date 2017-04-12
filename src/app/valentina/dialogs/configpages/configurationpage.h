@@ -31,6 +31,7 @@
 
 #include <QObject>
 #include <QPlainTextEdit>
+#include <QPushButton>
 #include <QWidget>
 
 class QCheckBox;
@@ -52,6 +53,8 @@ public slots:
     void      LabelLangChanged();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+private slots:
+    void ResetWarnings();
 private:
     Q_DISABLE_COPY(ConfigurationPage)
     QCheckBox *autoSaveCheck;
@@ -65,7 +68,7 @@ private:
     bool      unitChanged;
     bool      labelLangChanged;
     QCheckBox *sendReportCheck;
-    QCheckBox *askPointDeletionCheck;
+    QPushButton *resetWarningsButton;
     QCheckBox *toolBarStyleCheck;
 
     QGroupBox *saveGroup;

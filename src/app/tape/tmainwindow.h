@@ -29,13 +29,13 @@
 #ifndef TMAINWINDOW_H
 #define TMAINWINDOW_H
 
-#include <QMainWindow>
 #include <QTableWidget>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/vtablesearch.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 namespace Ui
 {
@@ -44,7 +44,7 @@ namespace Ui
 
 class QLabel;
 
-class TMainWindow : public QMainWindow
+class TMainWindow : public VAbstractMainWindow
 {
     Q_OBJECT
 
@@ -61,6 +61,9 @@ public:
     void SetPUnit(Unit unit);
 
     bool LoadFile(const QString &path);
+
+public slots:
+    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;

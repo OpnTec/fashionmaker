@@ -55,6 +55,9 @@ public:
 
     QString Convert();
 
+    int GetCurrentFormatVarsion() const;
+    QString GetVersionStr() const;
+
     static int GetVersion(const QString &version);
 
 protected:
@@ -86,8 +89,6 @@ private:
     Q_DISABLE_COPY(VAbstractConverter)
 
     QTemporaryFile m_tmpFile;
-
-    QString GetVersionStr() const;
 
     static void ValidateVersion(const QString &version);
 

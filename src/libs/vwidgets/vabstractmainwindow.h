@@ -40,10 +40,19 @@ class VAbstractMainWindow : public QMainWindow
     Q_OBJECT
 public:
     explicit VAbstractMainWindow(QWidget *parent = nullptr);
-    virtual ~VAbstractMainWindow() Q_DECL_OVERRIDE;
+    virtual ~VAbstractMainWindow() Q_DECL_EQ_DEFAULT;
 
 public slots:
     virtual void ShowToolTip(const QString &toolTip)=0;
+
+protected:
+    int     m_curFileFormatVersion;
+    QString m_curFileFormatVersionStr;
+
+    bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
+
+private:
+    Q_DISABLE_COPY(VAbstractMainWindow)
 };
 
 #endif // VABSTRACTMAINWINDOW_H

@@ -75,7 +75,7 @@ enum {ColumnName = 0, ColumnFullName, ColumnCalcValue, ColumnFormula, ColumnBase
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
-    :QMainWindow(parent),
+    : VAbstractMainWindow(parent),
       ui(new Ui::TMainWindow),
       m(nullptr),
       data(nullptr),
@@ -270,11 +270,15 @@ bool TMainWindow::LoadFile(const QString &path)
             if (mType == MeasurementsType::Standard)
             {
                 VVSTConverter converter(path);
+                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
             else
             {
                 VVITConverter converter(path);
+                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
 
@@ -335,6 +339,13 @@ bool TMainWindow::LoadFile(const QString &path)
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowToolTip(const QString &toolTip)
+{
+    Q_UNUSED(toolTip)
+    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -645,6 +656,19 @@ bool TMainWindow::FileSave()
     }
     else
     {
+        if (mType == MeasurementsType::Standard
+                && m_curFileFormatVersion < VVSTConverter::MeasurementMaxVer
+                && not ContinueFormatRewrite(m_curFileFormatVersionStr, VVSTConverter::MeasurementMaxVerStr))
+        {
+            return false;
+        }
+        else if (mType == MeasurementsType::Individual
+                 && m_curFileFormatVersion < VVITConverter::MeasurementMaxVer
+                 && not ContinueFormatRewrite(m_curFileFormatVersionStr, VVITConverter::MeasurementMaxVerStr))
+        {
+            return false;
+        }
+
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
@@ -702,6 +726,19 @@ bool TMainWindow::FileSave()
             messageBox.setStandardButtons(QMessageBox::Ok);
             messageBox.exec();
             return false;
+        }
+        else
+        {
+            if (mType == MeasurementsType::Standard)
+            {
+                m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
+                m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
+            }
+            else
+            {
+                m_curFileFormatVersion = VVITConverter::MeasurementMaxVer;
+                m_curFileFormatVersionStr = VVITConverter::MeasurementMaxVerStr;
+            }
         }
     }
     return true;
@@ -2794,12 +2831,14 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
             if (mType == MeasurementsType::Standard)
             {
-                VException e(tr("Export standard measurements not supported."));
+                VException e(tr("Export from standard measurements is not supported."));
                 throw e;
             }
             else
             {
                 VVITConverter converter(path);
+                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
 

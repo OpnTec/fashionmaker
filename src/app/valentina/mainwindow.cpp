@@ -2563,6 +2563,11 @@ bool MainWindow::Save()
     }
     else
     {
+        if (m_curFileFormatVersion < VPatternConverter::PatternMaxVer
+                && not ContinueFormatRewrite(m_curFileFormatVersionStr, VPatternConverter::PatternMaxVerStr))
+        {
+            return false;
+        }
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
@@ -2614,6 +2619,8 @@ bool MainWindow::Save()
         if (result)
         {
             QFile::remove(curFile + autosavePrefix);
+            m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
+            m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
         }
         else
         {
@@ -4090,6 +4097,8 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     try
     {
         VPatternConverter converter(fileName);
+        m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+        m_curFileFormatVersionStr = converter.GetVersionStr();
         doc->setXMLContent(converter.Convert());
         if (!customMeasureFile.isEmpty())
         {

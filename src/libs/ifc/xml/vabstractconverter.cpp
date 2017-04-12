@@ -87,6 +87,12 @@ QString VAbstractConverter::Convert()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VAbstractConverter::GetCurrentFormatVarsion() const
+{
+    return m_ver;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractConverter::GetVersionStr() const
 {
     const QDomNodeList nodeList = this->elementsByTagName(TagVersion);

@@ -90,6 +90,9 @@ public:
     bool GetConfirmItemDelete() const;
     void SetConfirmItemDelete(const bool &value);
 
+    bool GetConfirmFormatRewriting() const;
+    void SetConfirmFormatRewriting(const bool &value);
+
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 

@@ -59,7 +59,7 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
       unitChanged(false),
       labelLangChanged(false),
       sendReportCheck(nullptr),
-      askPointDeletionCheck(nullptr),
+      resetWarningsButton(nullptr),
       toolBarStyleCheck(nullptr),
       saveGroup(nullptr),
       intervalLabel(nullptr),
@@ -112,7 +112,6 @@ void ConfigurationPage::Apply()
 
     settings->SetOsSeparator(osOptionCheck->isChecked());
     settings->SetSendReportState(sendReportCheck->isChecked());
-    settings->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
     settings->SetToolBarStyle(toolBarStyleCheck->isChecked());
 
     if (langChanged || systemChanged)
@@ -366,11 +365,16 @@ QGroupBox *ConfigurationPage::DrawGroup()
 {
     drawGroup = new QGroupBox(tr("Pattern Editing"));
 
-    askPointDeletionCheck = new QCheckBox(tr("Confirm item deletion"));
-    askPointDeletionCheck->setChecked(qApp->ValentinaSettings()->GetConfirmItemDelete());
+    resetWarningsButton = new QPushButton(tr("Reset warnings"));
+    QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(resetWarningsButton->sizePolicy().hasHeightForWidth());
+    resetWarningsButton->setSizePolicy(sizePolicy);
+    connect(resetWarningsButton, &QPushButton::released, this, &ConfigurationPage::ResetWarnings);
 
     QVBoxLayout *editLayout = new QVBoxLayout;
-    editLayout->addWidget(askPointDeletionCheck);
+    editLayout->addWidget(resetWarningsButton);
 
     drawGroup->setLayout(editLayout);
     return drawGroup;
@@ -422,14 +426,23 @@ void ConfigurationPage::changeEvent(QEvent *event)
         RetranslateUi();
     }
     // remember to call base class implementation
-   QWidget::changeEvent(event);
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::ResetWarnings()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    settings->SetConfirmItemDelete(true);
+    settings->SetConfirmFormatRewriting(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::RetranslateUi()
 {
     toolBarStyleCheck->setText(tr("The text appears under the icon (recommended for beginners)."));
-    askPointDeletionCheck->setText(tr("Confirm item deletion"));
+    resetWarningsButton->setText(tr("Reset warnings"));
 
     saveGroup->setTitle(tr("Save"));
     autoSaveCheck->setText(tr("Auto-save modified pattern"));
@@ -477,7 +490,7 @@ void ConfigurationPage::RetranslateUi()
                             "Crash_reports\">kind of information</a> we collect."));
 
     drawGroup->setTitle(tr("Pattern Editing"));
-    askPointDeletionCheck->setText(tr("Confirm item deletion"));
+    resetWarningsButton->setText(tr("Confirm item deletion"));
     toolBarGroup->setTitle(tr("Toolbar"));
     toolBarStyleCheck->setText(tr("The text appears under the icon (recommended for beginners)."));
 }
