@@ -2670,7 +2670,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             if (qIsInf(result) || qIsNaN(result))
             {
                 label->setText(tr("Error") + " (" + postfix + ").");
-                label->setToolTip(tr("Invalid value"));
+                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
                 return false;
             }
 

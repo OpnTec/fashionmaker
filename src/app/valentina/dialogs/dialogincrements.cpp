@@ -343,7 +343,7 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
             if (qIsInf(result) || qIsNaN(result))
             {
                 label->setText(tr("Error") + " (" + postfix + ").");
-                label->setToolTip(tr("Invalid value"));
+                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
                 return false;
             }
 

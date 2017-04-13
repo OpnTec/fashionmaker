@@ -773,7 +773,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
                 label->setText(tr("Error") + " (" + postfix + ")");
-                label->setToolTip(tr("Invalid value"));
+                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
             }
             else
             {
