@@ -402,12 +402,6 @@ const QString tanD_F   = QStringLiteral("tanD");
 const QString asinD_F  = QStringLiteral("asinD");
 const QString acosD_F  = QStringLiteral("acosD");
 const QString atanD_F  = QStringLiteral("atanD");
-const QString sinhD_F  = QStringLiteral("sinhD");
-const QString coshD_F  = QStringLiteral("coshD");
-const QString tanhD_F  = QStringLiteral("tanhD");
-const QString asinhD_F = QStringLiteral("asinhD");
-const QString acoshD_F = QStringLiteral("acoshD");
-const QString atanhD_F = QStringLiteral("atanhD");
 const QString log2_F  = QStringLiteral("log2");
 const QString log10_F = QStringLiteral("log10");
 const QString log_F   = QStringLiteral("log");
@@ -427,7 +421,6 @@ const QStringList builInFunctions = QStringList() << degTorad_F << radTodeg_F
                                                   << sin_F  << cos_F   << tan_F  << asin_F  << acos_F  << atan_F
                                                   << sinh_F << cosh_F  << tanh_F << asinh_F << acosh_F << atanh_F
                                                   << sinD_F  << cosD_F   << tanD_F  << asinD_F  << acosD_F  << atanD_F
-                                                  << sinhD_F << coshD_F  << tanhD_F << asinhD_F << acoshD_F << atanhD_F
                                                   << log2_F << log10_F << log_F  << ln_F    << exp_F   << sqrt_F
                                                   << sign_F << rint_F  << abs_F  << min_F   << max_F   << sum_F
                                                   << avg_F << fmod_F;

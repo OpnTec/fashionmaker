@@ -63,21 +63,15 @@ qreal QmuParser::Sinh(qreal v)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Cosh(qreal v)
-{
-    return cosh(v);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Tanh(qreal v)
-{
-    return tanh(v);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ASinh(qreal v)
 {
     return log(v + qSqrt(v * v + 1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::Cosh(qreal v)
+{
+    return cosh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,51 +81,21 @@ qreal QmuParser::ACosh(qreal v)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::Tanh(qreal v)
+{
+    return tanh(v);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ATanh(qreal v)
 {
     return (0.5 * log((1 + v) / (1 - v)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::SinhD(qreal v)
-{
-    return qRadiansToDegrees(sinh(v));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CoshD(qreal v)
-{
-    return qRadiansToDegrees(cosh(v));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::TanhD(qreal v)
-{
-    return qRadiansToDegrees(tanh(v));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ASinhD(qreal v)
-{
-    return qRadiansToDegrees(log(v + qSqrt(v * v + 1)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ACoshD(qreal v)
-{
-    return qRadiansToDegrees(log(v + qSqrt(v * v - 1)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ATanhD(qreal v)
-{
-    return qRadiansToDegrees(0.5 * log((1 + v) / (1 - v)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::SinD(qreal v)
 {
-    return qRadiansToDegrees(qSin(v));
+    return qSin(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,7 +107,7 @@ qreal QmuParser::ASinD(qreal v)
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::CosD(qreal v)
 {
-    return qRadiansToDegrees(qCos(v));
+    return qCos(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,7 +119,7 @@ qreal QmuParser::ACosD(qreal v)
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::TanD(qreal v)
 {
-    return qRadiansToDegrees(qTan(v));
+    return qTan(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -387,16 +351,10 @@ void QmuParser::InitFun()
     DefineFun("sinh",  Sinh);
     DefineFun("cosh",  Cosh);
     DefineFun("tanh",  Tanh);
-    DefineFun("sinhD",  SinhD);
-    DefineFun("coshD",  CoshD);
-    DefineFun("tanhD",  TanhD);
     // arcus hyperbolic functions
     DefineFun("asinh", ASinh);
     DefineFun("acosh", ACosh);
     DefineFun("atanh", ATanh);
-    DefineFun("asinhD", ASinhD);
-    DefineFun("acoshD", ACoshD);
-    DefineFun("atanhD", ATanhD);
     // Logarithm functions
     DefineFun("log2",  Log2);
     DefineFun("log10", Log10);
