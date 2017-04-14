@@ -283,7 +283,7 @@ void VisToolCubicBezierPath::RefreshToolTip()
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points");
         }
-        else if (size >= 7 && size - VCubicBezierPath::SubSplPointsCount(countSubSpl) == 0)
+        else if (size - VCubicBezierPath::SubSplPointsCount(countSubSpl) == 0)
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points, "
                                         "<b>Enter</b> - finish creation");

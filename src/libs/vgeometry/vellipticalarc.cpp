@@ -300,9 +300,9 @@ int VEllipticalArc::GetQuadransRad(qreal &rad)
     }
 
     int n = 0;
-    if (rad > 0)
+    if (rad >= 0)
     {
-        if (rad >= 0 && rad <= M_PI_2)
+        if (rad <= M_PI_2)
         {
             n = 1;
             rad = -rad;
@@ -315,7 +315,7 @@ int VEllipticalArc::GetQuadransRad(qreal &rad)
     }
     else
     {
-        if (rad <= 0 && rad >= -M_PI_2)
+        if (rad >= -M_PI_2)
         {
             n = 4;
         }
