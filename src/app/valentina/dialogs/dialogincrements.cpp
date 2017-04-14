@@ -80,7 +80,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
-    FillIncrements();
+    const bool freshCall = true;
+    FillIncrements(freshCall);
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
@@ -130,7 +131,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 /**
  * @brief FillIncrementTable fill data for increment table
  */
-void DialogIncrements::FillIncrements()
+void DialogIncrements::FillIncrements(bool freshCall)
 {
     ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->clearContents();
@@ -171,8 +172,12 @@ void DialogIncrements::FillIncrements()
 
         AddCell(ui->tableWidgetIncrement, formula, currentRow, 2, Qt::AlignVCenter); // formula
     }
-    ui->tableWidgetIncrement->resizeColumnsToContents();
-    ui->tableWidgetIncrement->resizeRowsToContents();
+
+    if (freshCall)
+    {
+        ui->tableWidgetIncrement->resizeColumnsToContents();
+        ui->tableWidgetIncrement->resizeRowsToContents();
+    }
     ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidgetIncrement->blockSignals(false);
 }

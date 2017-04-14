@@ -304,7 +304,8 @@ bool TMainWindow::LoadFile(const QString &path)
 
             InitWindow();
 
-            RefreshData();
+            const bool freshCall = true;
+            RefreshData(freshCall);
 
             if (ui->tableWidget->rowCount() > 0)
             {
@@ -2382,17 +2383,17 @@ void TMainWindow::SetDefaultSize(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::RefreshData()
+void TMainWindow::RefreshData(bool freshCall)
 {
     VContainer::ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements();
 
-    RefreshTable();
+    RefreshTable(freshCall);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::RefreshTable()
+void TMainWindow::RefreshTable(bool freshCall)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -2478,8 +2479,11 @@ void TMainWindow::RefreshTable()
         }
     }
 
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
+    if (freshCall)
+    {
+        ui->tableWidget->resizeColumnsToContents();
+        ui->tableWidget->resizeRowsToContents();
+    }
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
@@ -2884,7 +2888,8 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             InitWindow();
 
             m->ClearForExport();
-            RefreshData();
+            const bool freshCall = true;
+            RefreshData(freshCall);
 
             if (ui->tableWidget->rowCount() > 0)
             {

@@ -178,8 +178,8 @@ private:
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 
-    void RefreshData();
-    void RefreshTable();
+    void RefreshData(bool freshCall = false);
+    void RefreshTable(bool freshCall = false);
 
     QString GetCustomName() const;
     QString ClearCustomName(const QString &name) const;

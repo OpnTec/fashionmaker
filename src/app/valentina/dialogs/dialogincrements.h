@@ -92,7 +92,7 @@ private:
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
-    void                 FillIncrements();
+    void                 FillIncrements(bool freshCall = false);
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
