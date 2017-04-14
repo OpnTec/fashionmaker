@@ -65,6 +65,11 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSeamAllowance));
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPassmarks));
+
+    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    {
+        ValidObjects(PathIsValid());
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1030,8 +1035,7 @@ void DialogPiecePath::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        const VPiece piece = data->GetPiece(id);
-        ui->comboBoxPiece->addItem(piece.GetName(), id);
+        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
     }
     else
     {
@@ -1045,8 +1049,6 @@ void DialogPiecePath::SetPieceId(quint32 id)
             ui->comboBoxPiece->setCurrentIndex(0);
         }
     }
-
-    ValidObjects(PathIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1060,12 +1062,7 @@ QString DialogPiecePath::GetFormulaSAWidth() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetPiecesList(const QVector<quint32> &list)
 {
-    for (int i=0; i < list.size(); ++i)
-    {
-        const VPiece piece = data->GetPiece(list.at(i));
-        ui->comboBoxPiece->addItem(piece.GetName(), list.at(i));
-    }
-    ValidObjects(PathIsValid());
+    FillComboBoxPiecesList(ui->comboBoxPiece, list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1121,6 +1118,12 @@ bool DialogPiecePath::PathIsValid() const
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
         url += tr("List of objects is empty!");
+        ui->helpLabel->setText(url);
+        return false;
+    }
+    else if (not m_showMode && ui->comboBoxPiece->currentIndex() == -1)
+    {
+        url += tr("Please, select a detail to insert into!");
         ui->helpLabel->setText(url);
         return false;
     }

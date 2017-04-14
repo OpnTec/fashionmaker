@@ -201,6 +201,7 @@ protected:
     virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
 
+    void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole,

@@ -181,6 +181,20 @@ void DialogTool::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list)
+{
+    SCASSERT(box != nullptr)
+    box->blockSignals(true);
+    box->clear();
+    for (int i=0; i < list.size(); ++i)
+    {
+        box->addItem(data->GetPiece(list.at(i)).GetName(), list.at(i));
+    }
+    box->blockSignals(false);
+    box->setCurrentIndex(-1); // Force a user to choose
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillComboBoxPoints fill comboBox list of points
  * @param box comboBox

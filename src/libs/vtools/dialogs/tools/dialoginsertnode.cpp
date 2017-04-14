@@ -41,6 +41,11 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidg
 
     CheckPieces();
     CheckItem();
+
+    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    {
+        CheckPieces();
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,13 +57,7 @@ DialogInsertNode::~DialogInsertNode()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::SetPiecesList(const QVector<quint32> &list)
 {
-    for (int i=0; i < list.size(); ++i)
-    {
-        const VPiece piece = data->GetPiece(list.at(i));
-        ui->comboBoxPiece->addItem(piece.GetName(), list.at(i));
-    }
-
-    CheckPieces();
+    FillComboBoxPiecesList(ui->comboBoxPiece, list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,8 +71,7 @@ void DialogInsertNode::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        const VPiece piece = data->GetPiece(id);
-        ui->comboBoxPiece->addItem(piece.GetName(), id);
+        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
     }
     else
     {
@@ -87,8 +85,6 @@ void DialogInsertNode::SetPieceId(quint32 id)
             ui->comboBoxPiece->setCurrentIndex(0);
         }
     }
-
-    CheckPieces();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,7 +166,7 @@ void DialogInsertNode::CheckState()
 void DialogInsertNode::CheckPieces()
 {
     QColor color = okColor;
-    if (ui->comboBoxPiece->count() <= 0)
+    if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
     {
         flagError = false;
         color = errorColor;
