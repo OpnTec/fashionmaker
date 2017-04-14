@@ -228,25 +228,25 @@ bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
 
     // Check if application's organization name and domain are set, fail otherwise
     // (nowhere to store QSettings to)
-    if (QApplication::organizationName().isEmpty())
+    if (QCoreApplication::organizationName().isEmpty())
     {
         qCritical() << "QApplication::organizationName is not set. Please do that.";
         return false;
     }
-    if (QApplication::organizationDomain().isEmpty())
+    if (QCoreApplication::organizationDomain().isEmpty())
     {
         qCritical() << "QApplication::organizationDomain is not set. Please do that.";
         return false;
     }
 
     // Set application name / version is not set yet
-    if (QApplication::applicationName().isEmpty())
+    if (QCoreApplication::applicationName().isEmpty())
     {
         qCritical() << "QApplication::applicationName is not set. Please do that.";
         return false;
     }
 
-    if (QApplication::applicationVersion().isEmpty())
+    if (QCoreApplication::applicationVersion().isEmpty())
     {
         qCritical() << "QApplication::applicationVersion is not set. Please do that.";
         return false;
@@ -299,7 +299,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/xml"));
-    request.setHeader(QNetworkRequest::UserAgentHeader, QApplication::applicationName());
+    request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());
     request.setUrl(url);
     request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
 

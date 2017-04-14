@@ -459,7 +459,8 @@ QString VApplication::LogDirPath() const
                                                       QStandardPaths::LocateDirectory) + "Valentina";
 #else
     const QString logDirPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(),
-                                                      QStandardPaths::LocateDirectory) + organizationName();
+                                                      QStandardPaths::LocateDirectory)
+            + QCoreApplication::organizationName();
 #endif
     return logDirPath;
 }
@@ -674,8 +675,8 @@ bool VApplication::event(QEvent *e)
  */
 void VApplication::OpenSettings()
 {
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                             QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

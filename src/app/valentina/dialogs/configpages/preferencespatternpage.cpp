@@ -49,7 +49,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         pSet->ClearUserDefinedMaterial();
         pSet->sync();
         QString qsMsg = tr("All user defined materials have been deleted!");
-        QMessageBox::information(this, QApplication::applicationName(), qsMsg);
+        QMessageBox::information(this, QCoreApplication::applicationName(), qsMsg);
     });
 
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());

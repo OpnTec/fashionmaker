@@ -57,7 +57,12 @@ PreferencesPathPage::~PreferencesPathPage()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPathPage::Apply()
 {
-
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
+    settings->SetPathStandardMeasurements(ui->pathTable->item(1, 1)->text());
+    settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
+    settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
+    settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

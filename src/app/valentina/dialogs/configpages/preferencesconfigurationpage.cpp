@@ -159,7 +159,7 @@ void PreferencesConfigurationPage::Apply()
         m_unitChanged = false;
         const QString text = tr("The Default unit has been updated and will be used as the default for the next "
                                 "pattern you create.");
-        QMessageBox::information(this, QApplication::applicationName(), text);
+        QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
     if (m_labelLangChanged)
     {

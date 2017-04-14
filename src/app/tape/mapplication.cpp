@@ -470,8 +470,8 @@ bool MApplication::event(QEvent *e)
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::OpenSettings()
 {
-    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                                 QApplication::applicationName(), this);
+    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                 QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

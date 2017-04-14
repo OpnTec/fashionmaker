@@ -53,7 +53,7 @@ VCommandLine::VCommandLine() : parser(), optionsUsed(), optionsIndex(), isGuiEna
     VCommandLineOptions::const_iterator i = optionsUsed.constBegin();
     while (i != optionsUsed.constEnd())
     {
-        parser.addOption(*((*i)));
+        parser.addOption(*(*i));
         ++i;
     }
 }
