@@ -143,13 +143,15 @@ public slots:
     void     ZoomOriginal();
     void     ZoomFitBest();
 protected:
-    virtual void mousePressEvent(QMouseEvent *mousePress) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
-    bool     showToolOptions;
-    bool     isAllowRubberBand;
+    bool              showToolOptions;
+    bool              isAllowRubberBand;
+    QPoint            m_ptStartPos;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

@@ -343,9 +343,12 @@ bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
  * @param parent parent object.
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-    :QGraphicsView(parent), zoom(nullptr), showToolOptions(true), isAllowRubberBand(true)
+    : QGraphicsView(parent),
+      zoom(new GraphicsViewZoom(this)),
+      showToolOptions(true),
+      isAllowRubberBand(true),
+      m_ptStartPos()
 {
-    zoom = new GraphicsViewZoom(this);
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -423,9 +426,9 @@ void VMainGraphicsView::ZoomFitBest()
  * @brief mousePressEvent handle mouse press events.
  * @param mousePress mouse press event.
  */
-void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
+void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-    switch (mousePress->button())
+    switch (event->button())
     {
         case Qt::LeftButton:
         {
@@ -435,7 +438,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
             }
             if (showToolOptions)
             {
-                QList<QGraphicsItem *> list = items(mousePress->pos());
+                QList<QGraphicsItem *> list = items(event->pos());
                 if (list.size() == 0)
                 {
                     emit itemClicked(nullptr);
@@ -462,17 +465,38 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
         }
         case Qt::MiddleButton:
         {
-            QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
-            // create a new mouse event that simulates a click of the left button instead of the middle button
-            QMouseEvent mouseEvent (mousePress->type(), mousePress->pos(), Qt::LeftButton, Qt::LeftButton,
-                                    mousePress->modifiers());
-            QGraphicsView::mousePressEvent(&mouseEvent);
-            return;
+            const QList<QGraphicsItem *> list = items(event->pos());
+            if (list.size() == 0)
+            {// Only when the user clicks on the scene background
+                m_ptStartPos = event->pos();
+                QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
+                event->accept();
+                viewport()->setCursor(Qt::ClosedHandCursor);
+            }
+            break;
         }
         default:
             break;
     }
-    QGraphicsView::mousePressEvent(mousePress);
+    QGraphicsView::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
+{
+    if (dragMode() == QGraphicsView::ScrollHandDrag)
+    {
+        QScrollBar *hBar = horizontalScrollBar();
+        QScrollBar *vBar = verticalScrollBar();
+        const QPoint delta = event->pos() - m_ptStartPos;
+        hBar->setValue(hBar->value() + (isRightToLeft() ? delta.x() : -delta.x()));
+        vBar->setValue(vBar->value() - delta.y());
+        m_ptStartPos = event->pos();
+    }
+    else
+    {
+        QGraphicsView::mouseMoveEvent(event);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
