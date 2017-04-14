@@ -574,8 +574,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
 
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
 
-    QString newName = text;
-    newName.isEmpty() ? newName = GetCustomName() : newName = CustomIncrSign + newName;
+    QString newName = text.isEmpty() ? GetCustomName() : CustomIncrSign + text;
 
     if (not data->IsUnique(newName))
     {
