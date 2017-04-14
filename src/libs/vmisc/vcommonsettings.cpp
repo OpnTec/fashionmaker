@@ -422,7 +422,7 @@ QString VCommonSettings::GetUser() const
 {
     QString user;
 #ifdef Q_OS_WIN
-    user = value(SettingPatternUser, QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
+    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
     user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
 #endif
