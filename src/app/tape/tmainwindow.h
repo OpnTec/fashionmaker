@@ -117,7 +117,7 @@ private slots:
 
     void DeployFormula();
 
-    void SaveMName();
+    void SaveMName(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
     void SaveMSizeIncrease(double value);
@@ -181,6 +181,7 @@ private:
     void RefreshData();
     void RefreshTable();
 
+    QString GetCustomName() const;
     QString ClearCustomName(const QString &name) const;
 
     bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);

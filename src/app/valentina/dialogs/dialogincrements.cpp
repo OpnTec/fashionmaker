@@ -92,11 +92,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp()), this));
-#else
-    ui->lineEditName->setValidator( new QRegExpValidator(QRegExp(NameRegExp()), this));
-#endif
+    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
+                                                                        QLatin1String("^$|")+NameRegExp()), this));
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
@@ -107,7 +104,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &DialogIncrements::MoveDown);
     connect(ui->pushButtonGrow, &QPushButton::clicked, this, &DialogIncrements::DeployFormula);
     connect(ui->toolButtonExpr, &QToolButton::clicked, this, &DialogIncrements::Fx);
-    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
     connect(ui->lineEditFind, &QLineEdit::textEdited, RECEIVER(this)[this](const QString &term){search->Find(term);});
@@ -301,6 +298,19 @@ void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogIncrements::GetCustomName() const
+{
+    qint32 num = 1;
+    QString name;
+    do
+    {
+        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
+        num++;
+    } while (not data->IsUnique(name));
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogIncrements::ClearIncrementName(const QString &name) const
 {
     QString clear = name;
@@ -467,15 +477,9 @@ void DialogIncrements::FullUpdateFromFile()
 void DialogIncrements::AddIncrement()
 {
     qCDebug(vDialog, "Add a new increment");
-    qint32 num = 1;
-    QString name;
-    do
-    {
-        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
-        num++;
-    } while (data->IsUnique(name)==false);
 
-    qint32 currentRow;
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
 
     if (ui->tableWidgetIncrement->currentRow() == -1)
     {
@@ -554,7 +558,7 @@ void DialogIncrements::MoveDown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveIncrName()
+void DialogIncrements::SaveIncrName(const QString &text)
 {
     const int row = ui->tableWidgetIncrement->currentRow();
 
@@ -564,19 +568,27 @@ void DialogIncrements::SaveIncrName()
     }
 
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
-    const QString newName = CustomIncrSign + ui->lineEditName->text();
-    if (data->IsUnique(newName))
+
+    QString newName = text;
+    newName.isEmpty() ? newName = GetCustomName() : newName = CustomIncrSign + newName;
+
+    if (not data->IsUnique(newName))
     {
-        doc->SetIncrementName(nameField->text(), newName);
-        FullUpdateTree(Document::LiteParse);
-        ui->tableWidgetIncrement->blockSignals(true);
-        ui->tableWidgetIncrement->selectRow(row);
-        ui->tableWidgetIncrement->blockSignals(false);
+        qint32 num = 2;
+        QString name = newName;
+        do
+        {
+            name = name + QLatin1String("_") + QString().number(num);
+            num++;
+        } while (not data->IsUnique(name));
+        newName = name;
     }
-    else
-    {
-        ui->lineEditName->setText(ClearIncrementName(nameField->text()));
-    }
+
+    doc->SetIncrementName(nameField->text(), newName);
+    FullUpdateTree(Document::LiteParse);
+    ui->tableWidgetIncrement->blockSignals(true);
+    ui->tableWidgetIncrement->selectRow(row);
+    ui->tableWidgetIncrement->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

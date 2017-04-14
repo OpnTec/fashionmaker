@@ -66,7 +66,7 @@ private slots:
     void RemoveIncrement();
     void MoveUp();
     void MoveDown();
-    void SaveIncrName();
+    void SaveIncrName(const QString &text);
     void SaveIncrDescription();
     void SaveIncrFormula();
     void DeployFormula();
@@ -105,7 +105,9 @@ private:
 
     void AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok = true);
 
+    QString GetCustomName() const;
     QString ClearIncrementName(const QString &name) const;
+
     bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
     void    Controls();
     void    EnableDetails(bool enabled);

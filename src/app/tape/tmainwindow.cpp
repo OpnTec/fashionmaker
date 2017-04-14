@@ -1280,15 +1280,8 @@ void TMainWindow::Fx()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddCustom()
 {
-    qint32 num = 1;
-    QString name;
-    do
-    {
-        name = CustomMSign + qApp->TrVars()->InternalVarToUser(measurement_) + QString().number(num);
-        num++;
-    } while (data->IsUnique(name) == false);
-
-    qint32 currentRow;
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
 
     if (ui->tableWidget->currentRow() == -1)
     {
@@ -1489,7 +1482,7 @@ void TMainWindow::ShowMData()
         ShowMDiagram(meash->GetName());
 
         // Don't block all signal for QLineEdit. Need for correct handle with clear button.
-        disconnect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
+        disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(true);
         if (meash->IsCustom())
         {
@@ -1504,7 +1497,7 @@ void TMainWindow::ShowMData()
             ui->lineEditFullName->setText(qApp->TrVars()->GuiText(meash->GetName()));
             ui->lineEditName->setText(nameField->text());
         }
-        connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
+        connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
         if (mType == MeasurementsType::Standard)
@@ -1614,7 +1607,7 @@ void TMainWindow::DeployFormula()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMName()
+void TMainWindow::SaveMName(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1640,26 +1633,32 @@ void TMainWindow::SaveMName()
         return;
     }
 
-    QString newName = ui->lineEditName->text();
+    QString newName = text;
+
     if (meash->IsCustom())
     {
-        newName = CustomMSign + newName;
+        newName.isEmpty() ? newName = GetCustomName() : newName = CustomMSign + newName;
 
-        if (data->IsUnique(newName))
+        if (not data->IsUnique(newName))
         {
-            m->SetMName(nameField->text(), newName);
-            MeasurementsWasSaved(false);
-            RefreshData();
-            search->RefreshList(ui->lineEditFind->text());
+            qint32 num = 2;
+            QString name = newName;
+            do
+            {
+                name = name + QLatin1String("_") + QString().number(num);
+                num++;
+            } while (not data->IsUnique(name));
+            newName = name;
+        }
 
-            ui->tableWidget->blockSignals(true);
-            ui->tableWidget->selectRow(row);
-            ui->tableWidget->blockSignals(false);
-        }
-        else
-        {
-            ui->lineEditName->setText(ClearCustomName(nameField->text()));
-        }
+        m->SetMName(nameField->text(), newName);
+        MeasurementsWasSaved(false);
+        RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
+
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->blockSignals(false);
     }
     else
     {
@@ -2146,11 +2145,9 @@ void TMainWindow::InitWindow()
     ui->actionImportFromPattern->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp()), this));
-#else
-    ui->lineEditName->setValidator( new QRegExpValidator(QRegExp(NameRegExp()), this));
-#endif
+    ui->lineEditName->setValidator(new QRegularExpressionValidator(QRegularExpression(
+                                                                       QLatin1String("^$|")+NameRegExp()),
+                                                                   this));
 
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
     connect(ui->toolButtonTop, &QToolButton::clicked, this, &TMainWindow::MoveTop);
@@ -2158,7 +2155,7 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &TMainWindow::MoveDown);
     connect(ui->toolButtonBottom, &QToolButton::clicked, this, &TMainWindow::MoveBottom);
 
-    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
@@ -2490,6 +2487,20 @@ void TMainWindow::RefreshTable()
     {
         ui->actionExportToCSV->setEnabled(true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::GetCustomName() const
+{
+    qint32 num = 1;
+    QString name;
+    do
+    {
+        name = CustomMSign + qApp->TrVars()->InternalVarToUser(measurement_) + QString().number(num);
+        num++;
+    } while (data->IsUnique(name) == false);
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
