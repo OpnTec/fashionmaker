@@ -424,7 +424,7 @@ void VMainGraphicsView::ZoomFitBest()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mousePressEvent handle mouse press events.
- * @param mousePress mouse press event.
+ * @param event mouse press event.
  */
 void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
 {
