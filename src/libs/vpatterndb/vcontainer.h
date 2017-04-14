@@ -147,6 +147,8 @@ public:
 
     template <typename T>
     void               AddVariable(const QString& name, T *var);
+    template <typename T>
+    void               AddVariable(const QString& name, const QSharedPointer<T> &var);
     void               RemoveVariable(const QString& name);
     void               RemovePiece(quint32 id);
 
@@ -288,6 +290,13 @@ QSharedPointer<T> VContainer::GetVariable(QString name) const
 template <typename T>
 void VContainer::AddVariable(const QString& name, T *var)
 {
+    AddVariable(name, QSharedPointer<T>(var));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
+{
     if (d->variables.contains(name))
     {
         if (d->variables.value(name)->GetType() == var->GetType())
@@ -299,7 +308,7 @@ void VContainer::AddVariable(const QString& name, T *var)
             throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
         }
     }
-    d->variables.insert(name, QSharedPointer<T>(var));
+    d->variables.insert(name, var);
     uniqueNames.insert(name);
 }
 

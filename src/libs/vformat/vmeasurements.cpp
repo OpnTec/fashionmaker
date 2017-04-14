@@ -231,7 +231,7 @@ void VMeasurements::ReadMeasurements() const
     // That's why we need two containers: one for converted values, second for real data.
 
     // Container for values in measurement file's unit
-    VContainer *tempData = new VContainer(data->GetTrVars(), data->GetPatternUnit());
+    QScopedPointer<VContainer> tempData(new VContainer(data->GetTrVars(), data->GetPatternUnit()));
 
     const QDomNodeList list = elementsByTagName(TagMeasurement);
     for (int i=0; i < list.size(); ++i)
@@ -260,16 +260,16 @@ void VMeasurements::ReadMeasurements() const
             Q_UNUSED(e)
         }
 
-        VMeasurement *meash;
-        VMeasurement *tempMeash;
+        QSharedPointer<VMeasurement> meash;
+        QSharedPointer<VMeasurement> tempMeash;
         if (type == MeasurementsType::Standard)
         {
             qreal base = GetParametrDouble(dom, AttrBase, "0");
             qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
             qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            tempMeash = new VMeasurement(static_cast<quint32>(i), name, BaseSize(), BaseHeight(), base, ksize,
-                                         kheight);
+            tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
+                                                                      BaseHeight(), base, ksize, kheight));
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
             ksize = UnitConvertor(ksize, MUnit(), *data->GetPatternUnit());
@@ -278,26 +278,25 @@ void VMeasurements::ReadMeasurements() const
             const qreal baseSize = UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit());
             const qreal baseHeight = UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit());
 
-            meash = new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight, base, ksize, kheight,
-                                     fullName, description);
+            meash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight,
+                                                                  base, ksize, kheight, fullName, description));
         }
         else
         {
             const QString formula = GetParametrString(dom, AttrValue, "0");
             bool ok = false;
-            qreal value = EvalFormula(tempData, formula, &ok);
+            qreal value = EvalFormula(tempData.data(), formula, &ok);
 
-            tempMeash = new VMeasurement(tempData, static_cast<quint32>(i), name, value, formula, ok);
+            tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(tempData.data(), static_cast<quint32>(i), name,
+                                                                      value, formula, ok));
 
             value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
-            meash = new VMeasurement(data, static_cast<quint32>(i), name, value, formula, ok, fullName,
-                                     description);
+            meash = QSharedPointer<VMeasurement>(new VMeasurement(data, static_cast<quint32>(i), name, value, formula,
+                                                                  ok, fullName, description));
         }
         tempData->AddVariable(name, tempMeash);
         data->AddVariable(name, meash);
     }
-
-    delete tempData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
