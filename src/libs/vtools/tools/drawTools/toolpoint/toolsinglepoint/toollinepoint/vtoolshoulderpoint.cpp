@@ -89,9 +89,9 @@ VToolShoulderPoint::VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolShoulderPoint::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -156,12 +156,12 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
  * @param data container with variables.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 p1Line = dialogTool->GetP1Line();
     const quint32 p2Line = dialogTool->GetP2Line();
@@ -173,7 +173,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
                                         10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -308,9 +308,9 @@ void VToolShoulderPoint::RemoveReferens()
  */
 void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

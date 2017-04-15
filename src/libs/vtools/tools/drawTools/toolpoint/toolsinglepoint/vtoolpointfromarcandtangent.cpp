@@ -67,9 +67,9 @@ VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(VAbstractPattern *doc, 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromArcAndTangent *dialogTool = qobject_cast<DialogPointFromArcAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromArcAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetArcId(arcId);
     dialogTool->SetCrossCirclesPoint(crossPoint);
@@ -78,12 +78,13 @@ void VToolPointFromArcAndTangent::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(DialogTool *dialog, VMainGraphicsScene *scene,
+VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<DialogTool> dialog,
+                                                                 VMainGraphicsScene *scene,
                                                                  VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromArcAndTangent *dialogTool = qobject_cast<DialogPointFromArcAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = dialog.objectCast<DialogPointFromArcAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 arcId = dialogTool->GetArcId();
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
@@ -92,7 +93,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(DialogTool *dia
                                                 data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -310,9 +311,9 @@ void VToolPointFromArcAndTangent::contextMenuEvent(QGraphicsSceneContextMenuEven
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromArcAndTangent *dialogTool = qobject_cast<DialogPointFromArcAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromArcAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->GetArcId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));

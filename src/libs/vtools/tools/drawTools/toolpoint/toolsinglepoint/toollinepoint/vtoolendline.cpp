@@ -84,10 +84,10 @@ VToolEndLine::VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint3
  */
 void VToolEndLine::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    dialog->setModal(true);
-    DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    m_dialog->setModal(true);
+    QSharedPointer<DialogEndLine> dialogTool = m_dialog.objectCast<DialogEndLine>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -106,12 +106,12 @@ void VToolEndLine::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolEndLine* VToolEndLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                    VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogEndLine> dialogTool = dialog.objectCast<DialogEndLine>();
+    SCASSERT(not dialogTool.isNull())
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -123,7 +123,7 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
                                  basePointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -213,9 +213,9 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogEndLine> dialogTool = m_dialog.objectCast<DialogEndLine>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

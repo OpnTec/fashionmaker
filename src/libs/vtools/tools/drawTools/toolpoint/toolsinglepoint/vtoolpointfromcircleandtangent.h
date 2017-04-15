@@ -50,8 +50,8 @@ class VToolPointFromCircleAndTangent : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointFromCircleAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                                  VContainer *data);
+    static VToolPointFromCircleAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                                  VAbstractPattern *doc, VContainer *data);
     static VToolPointFromCircleAndTangent *Create(const quint32 _id, const QString &pointName,
                                                   quint32 circleCenterId, QString &circleRadius, quint32 tangentPointId,
                                                   CrossCirclesPoint crossPoint, const qreal &mx, const qreal &my,

@@ -53,7 +53,8 @@ class VToolHeight: public VToolLinePoint
     Q_OBJECT
 public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolHeight *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+                               VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
                                const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,

@@ -89,9 +89,9 @@ VToolPointOfContact::VToolPointOfContact(VAbstractPattern *doc, VContainer *data
  */
 void VToolPointOfContact::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfContact> dialogTool = m_dialog.objectCast<DialogPointOfContact>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center);
@@ -164,12 +164,12 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                 VContainer *data)
+VToolPointOfContact* VToolPointOfContact::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                 VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogPointOfContact> dialogTool = dialog.objectCast<DialogPointOfContact>();
+    SCASSERT(not dialogTool.isNull())
     QString radius = dialogTool->getRadius();
     const quint32 center = dialogTool->getCenter();
     const quint32 firstPointId = dialogTool->GetFirstPoint();
@@ -179,7 +179,7 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
                                         data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -319,9 +319,9 @@ void VToolPointOfContact::RemoveReferens()
  */
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfContact> dialogTool = m_dialog.objectCast<DialogPointOfContact>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));

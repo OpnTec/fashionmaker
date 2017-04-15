@@ -42,9 +42,8 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../../dialogs/tools/dialogtool.h"
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../vabstracttool.h"
+#include "../vinteractivetool.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -56,21 +55,16 @@ template <class T> class QSharedPointer;
 /**
  * @brief The VDrawTool abstract class for all draw tool.
  */
-class VDrawTool : public VAbstractTool
+class VDrawTool : public VInteractiveTool
 {
     Q_OBJECT
 public:
 
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual      ~VDrawTool() Q_DECL_OVERRIDE;
+    virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
 
     /** @brief factor scene scale factor. */
     static qreal factor;
-
-    /** @brief setDialog set dialog when user want change tool option. */
-    virtual void setDialog() {}
-
-    void DialogLinkDestroy();
 
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
@@ -82,8 +76,6 @@ public slots:
     virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    virtual void FullUpdateFromGuiOk(int result);
-    virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
     virtual void EnableToolMove(bool move);
     virtual void Disable(bool disable, const QString &namePP)=0;
@@ -96,9 +88,6 @@ protected:
     /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
 
-    /** @brief dialog dialog options.*/
-    DialogTool  *dialog;
-
     /** @brief typeLine line type. */
     QString      typeLine;
 
@@ -108,7 +97,7 @@ protected:
 
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
-    void         SaveDialogChange();
+    virtual void SaveDialogChange() Q_DECL_FINAL;
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     void         SaveOption(QSharedPointer<VGObject> &obj);
@@ -188,15 +177,15 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     {
         qCDebug(vTool, "Show options.");
         qApp->getSceneView()->itemClicked(nullptr);
-        dialog = new Dialog(getData(), id, qApp->getMainWindow());
-        dialog->setModal(true);
+        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), id, qApp->getMainWindow()));
+        m_dialog->setModal(true);
 
-        connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-        connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
 
         tool->setDialog();
 
-        dialog->show();
+        m_dialog->show();
     }
     if (selectedAction == actionRemove)
     {

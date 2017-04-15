@@ -104,9 +104,9 @@ VToolBasePoint::~VToolBasePoint()
  */
 void VToolBasePoint::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
 }
@@ -280,11 +280,11 @@ void VToolBasePoint::DeleteTool(bool ask)
  */
 void VToolBasePoint::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    SCASSERT(dialogTool != nullptr)
-    QPointF p = dialogTool->GetPoint();
-    QString name = dialogTool->getPointName();
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    SCASSERT(not dialogTool.isNull())
+    const QPointF p = dialogTool->GetPoint();
+    const QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));

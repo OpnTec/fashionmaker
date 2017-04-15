@@ -73,8 +73,8 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
+    SCASSERT(not m_dialog.isNull())
+    auto dialogTool = qobject_cast<DialogCubicBezier*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
     dialogTool->SetSpline(*spl);
@@ -82,19 +82,19 @@ void VToolCubicBezier::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezier *VToolCubicBezier::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                           VContainer *data)
+VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                           VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogCubicBezier> dialogTool = dialog.objectCast<DialogCubicBezier>();
+    SCASSERT(not dialogTool.isNull())
 
     auto spl = Create(0, new VCubicBezier(dialogTool->GetSpline()), dialogTool->GetColor(), scene, doc, data,
                       Document::FullParse, Source::FromGui);
 
     if (spl != nullptr)
     {
-        spl->dialog=dialogTool;
+        spl->m_dialog = dialogTool;
     }
     return spl;
 }
@@ -214,8 +214,8 @@ void VToolCubicBezier::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    auto dialogTool = qobject_cast<DialogCubicBezier*>(dialog);
+    SCASSERT(not m_dialog.isNull())
+    auto dialogTool = qobject_cast<DialogCubicBezier*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
     const VCubicBezier spl = dialogTool->GetSpline();

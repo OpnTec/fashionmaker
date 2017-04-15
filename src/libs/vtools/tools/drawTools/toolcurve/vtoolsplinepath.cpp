@@ -148,9 +148,9 @@ VToolSplinePath::~VToolSplinePath()
  */
 void VToolSplinePath::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSplinePath> dialogTool = m_dialog.objectCast<DialogSplinePath>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
@@ -164,12 +164,12 @@ void VToolSplinePath::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                         VContainer *data)
+VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                         VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogSplinePath> dialogTool = dialog.objectCast<DialogSplinePath>();
+    SCASSERT(not dialogTool.isNull())
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
@@ -179,7 +179,7 @@ VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene 
                                   Source::FromGui);
     if (spl != nullptr)
     {
-        spl->dialog=dialogTool;
+        spl->m_dialog = dialogTool;
     }
     return spl;
 }
@@ -440,9 +440,9 @@ void VToolSplinePath::RemoveReferens()
  */
 void VToolSplinePath::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSplinePath> dialogTool = m_dialog.objectCast<DialogSplinePath>();
+    SCASSERT(not dialogTool.isNull())
 
     const VSplinePath splPath = dialogTool->GetPath();
     for (qint32 i = 1; i <= splPath.CountSubSpl(); ++i)

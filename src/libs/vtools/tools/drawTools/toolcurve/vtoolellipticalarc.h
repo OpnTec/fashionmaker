@@ -51,8 +51,8 @@ class VToolEllipticalArc : public VAbstractSpline
     Q_OBJECT
 public:
     virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolEllipticalArc* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolEllipticalArc* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolEllipticalArc* Create(const quint32 _id, const quint32 &center, QString &radius1, QString &radius2,
                                       QString &f1, QString &f2, QString &rotationAngle, const QString &color,
                                       VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,

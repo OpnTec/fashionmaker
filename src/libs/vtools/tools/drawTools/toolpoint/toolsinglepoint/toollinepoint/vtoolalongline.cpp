@@ -127,9 +127,9 @@ void VToolAlongLine::RemoveReferens()
  */
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -204,9 +204,9 @@ void VToolAlongLine::ShowVisualization(bool show)
  */
 void VToolAlongLine::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -224,12 +224,12 @@ void VToolAlongLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data)
+VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -240,7 +240,7 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
                                    5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }

@@ -53,7 +53,7 @@ class VToolEndLine : public VToolLinePoint
 public:
     virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolEndLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                 const QString &lineColor, QString &formulaLength, QString &formulaAngle,

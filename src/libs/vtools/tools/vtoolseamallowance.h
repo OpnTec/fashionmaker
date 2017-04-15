@@ -34,21 +34,21 @@
 #include <QObject>
 #include <QGraphicsPathItem>
 
-#include "vabstracttool.h"
+#include "vinteractivetool.h"
 #include "../vwidgets/vtextgraphicsitem.h"
 #include "../vwidgets/vgrainlineitem.h"
 
 class DialogTool;
 class VNoBrushScalePathItem;
 
-class VToolSeamAllowance : public VAbstractTool, public QGraphicsPathItem
+class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    virtual ~VToolSeamAllowance();
+    virtual ~VToolSeamAllowance() Q_DECL_EQ_DEFAULT;
 
-    static VToolSeamAllowance* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolSeamAllowance* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolSeamAllowance* Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
                                       const Source &typeCreation, const QString &drawName = QString());
@@ -74,7 +74,6 @@ public:
     static const QString AttrBottomPin;
 
     void Remove(bool ask);
-    void DialogLinkDestroy();
 
     static void InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene, VContainer *data,
                            VAbstractPattern *doc);
@@ -96,8 +95,6 @@ public:
     virtual void       GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
-    virtual void FullUpdateFromGuiOk(int result);
-    void         FullUpdateFromGuiApply();
     void         EnableToolMove(bool move);
     virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
@@ -134,12 +131,11 @@ protected:
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
     virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
     virtual void       ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
+    virtual void       SetDialog() Q_DECL_FINAL;
+    virtual void       SaveDialogChange() Q_DECL_FINAL;
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
-
-    /** @brief dialog dialog options. */
-    QPointer<DialogTool> m_dialog;
 
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *m_sceneDetails;
@@ -150,14 +146,12 @@ private:
     VTextGraphicsItem     *m_patternInfo;
     VGrainlineItem        *m_grainLine;
 
-    void SetDialog();
-
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                        VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
     void RefreshGeometry();
-    void SaveDialogChange();
+
     VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
                                             qreal &labelHeight, QPointF &pos);
     VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,

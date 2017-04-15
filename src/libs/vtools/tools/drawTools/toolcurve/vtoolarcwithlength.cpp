@@ -75,9 +75,9 @@ VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogArcWithLength *dialogTool = qobject_cast<DialogArcWithLength*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogArcWithLength> dialogTool = m_dialog.objectCast<DialogArcWithLength>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
@@ -87,12 +87,12 @@ void VToolArcWithLength::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogArcWithLength *dialogTool = qobject_cast<DialogArcWithLength*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogArcWithLength> dialogTool = dialog.objectCast<DialogArcWithLength>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 center = dialogTool->GetCenter();
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
@@ -102,7 +102,7 @@ VToolArcWithLength *VToolArcWithLength::Create(DialogTool *dialog, VMainGraphics
                                        Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -298,9 +298,9 @@ void VToolArcWithLength::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogArcWithLength *dialogTool = qobject_cast<DialogArcWithLength*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogArcWithLength> dialogTool = m_dialog.objectCast<DialogArcWithLength>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());

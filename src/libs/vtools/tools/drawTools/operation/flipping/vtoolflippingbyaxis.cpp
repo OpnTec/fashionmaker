@@ -69,21 +69,21 @@ const QString VToolFlippingByAxis::ToolType = QStringLiteral("flippingByAxis");
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogFlippingByAxis> dialogTool = m_dialog.objectCast<DialogFlippingByAxis>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetSuffix(suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                 VContainer *data)
+VToolFlippingByAxis *VToolFlippingByAxis::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                 VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogFlippingByAxis> dialogTool = dialog.objectCast<DialogFlippingByAxis>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 originPointId = dialogTool->GetOriginPointId();
     const AxisType axisType = dialogTool->GetAxisType();
     const QString suffix = dialogTool->GetSuffix();
@@ -92,7 +92,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(DialogTool *dialog, VMainGraphi
                                             scene, doc, data, Document::FullParse, Source::FromGui);
     if (operation != nullptr)
     {
-        operation->dialog = dialogTool;
+        operation->m_dialog = dialogTool;
     }
     return operation;
 }
@@ -185,9 +185,9 @@ void VToolFlippingByAxis::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByAxis *dialogTool = qobject_cast<DialogFlippingByAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogFlippingByAxis> dialogTool = m_dialog.objectCast<DialogFlippingByAxis>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));

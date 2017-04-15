@@ -49,8 +49,8 @@ class VToolPointFromArcAndTangent : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointFromArcAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                               VContainer *data);
+    static VToolPointFromArcAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                               VAbstractPattern *doc, VContainer *data);
     static VToolPointFromArcAndTangent *Create(const quint32 _id, const QString &pointName, quint32 arcId,
                                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const qreal &mx,
                                                const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,

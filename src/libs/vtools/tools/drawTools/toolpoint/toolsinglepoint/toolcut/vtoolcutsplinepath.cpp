@@ -87,9 +87,9 @@ VToolCutSplinePath::VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolCutSplinePath::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogCutSplinePath> dialogTool = m_dialog.objectCast<DialogCutSplinePath>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
@@ -104,12 +104,12 @@ void VToolCutSplinePath::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutSplinePath* VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolCutSplinePath* VToolCutSplinePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogCutSplinePath> dialogTool = dialog.objectCast<DialogCutSplinePath>();
+    SCASSERT(not dialogTool.isNull())
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
@@ -117,7 +117,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphics
                                        Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -298,9 +298,9 @@ void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogCutSplinePath> dialogTool = m_dialog.objectCast<DialogCutSplinePath>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));

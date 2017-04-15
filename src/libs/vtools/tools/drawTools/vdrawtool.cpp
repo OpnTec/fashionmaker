@@ -59,18 +59,14 @@ qreal VDrawTool::factor = 1;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), nameActivDraw(doc->GetNameActivPP()),
-      dialog(nullptr), typeLine(TypeLineLine), enabled(true)
+    : VInteractiveTool(doc, data, id, parent),
+      nameActivDraw(doc->GetNameActivPP()),
+      typeLine(TypeLineLine),
+      enabled(true)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VAbstractPattern::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VDrawTool::~VDrawTool()
-{
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,30 +103,6 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
     {
         nameActivDraw = newName;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromGuiOk refresh tool data after change in options.
- * @param result keep result working dialog.
- */
-void VDrawTool::FullUpdateFromGuiOk(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        SaveDialogChange();
-    }
-    delete dialog;
-    dialog=nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
- */
-void VDrawTool::FullUpdateFromGuiApply()
-{
-    SaveDialogChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -250,15 +222,6 @@ void VDrawTool::ReadAttributes()
     {
         qCDebug(vTool, "Can't find tool with id = %u", id);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogLinkDestroy removes dialog pointer
- */
-void VDrawTool::DialogLinkDestroy()
-{
-    this->dialog=nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

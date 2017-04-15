@@ -53,8 +53,8 @@ class VToolCutSplinePath : public VToolCut
     Q_OBJECT
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolCutSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolCutSplinePath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolCutSplinePath *Create(const quint32 _id, const QString &pointName, QString &formula,
                                       const quint32 &splinePathId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,

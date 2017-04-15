@@ -121,9 +121,9 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
  */
 void VToolBisector::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -142,12 +142,12 @@ void VToolBisector::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                           VContainer *data)
+VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                     VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -159,7 +159,7 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
                                   pointName, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -290,9 +290,9 @@ void VToolBisector::RemoveReferens()
  */
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

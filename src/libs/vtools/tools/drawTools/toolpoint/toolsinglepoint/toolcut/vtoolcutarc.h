@@ -51,7 +51,8 @@ class VToolCutArc : public VToolCut
     Q_OBJECT
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolCutArc*  Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolCutArc*  Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data);
     static VToolCutArc*  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                 VAbstractPattern *doc, VContainer *data, const Document &parse,

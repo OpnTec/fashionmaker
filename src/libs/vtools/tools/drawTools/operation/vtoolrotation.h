@@ -51,7 +51,7 @@ class VToolRotation : public VAbstractOperation
 public:
     virtual ~VToolRotation() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolRotation* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolRotation* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolRotation* Create(const quint32 _id, const quint32 &origin, QString &angle, const QString &suffix,
                                  const QVector<quint32> &source, const QVector<DestinationItem> &destination,

@@ -87,9 +87,9 @@ VToolNormal::VToolNormal(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolNormal::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogNormal> dialogTool = m_dialog.objectCast<DialogNormal>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetFormula(formulaLength);
@@ -107,11 +107,12 @@ void VToolNormal::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolNormal* VToolNormal::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogNormal> dialogTool = dialog.objectCast<DialogNormal>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -123,7 +124,7 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
                                 scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -262,9 +263,9 @@ void VToolNormal::RemoveReferens()
  */
 void VToolNormal::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogNormal> dialogTool = m_dialog.objectCast<DialogNormal>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

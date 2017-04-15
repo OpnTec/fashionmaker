@@ -53,7 +53,8 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
     Q_OBJECT
 public:
     virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+                             VContainer *data);
     static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                              const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
                              VAbstractPattern *doc, VContainer *data, const Document &parse,

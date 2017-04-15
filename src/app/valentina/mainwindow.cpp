@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), mChangesAsked(true),
       patternReadOnly(false),
       dialogTable(nullptr),
-      dialogTool(nullptr),
+      dialogTool(),
       dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
       currentDrawIndex(0), currentToolBoxIndex(0),
       isDockToolOptionsVisible(true),
@@ -566,7 +566,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         ui->view->setCursor(cur);
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
-        dialogTool = new Dialog(pattern, 0, this);
+        dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
 
         switch(t)
         {
@@ -1134,7 +1134,7 @@ void MainWindow::ClosedDialogGroup(int result)
     SCASSERT(dialogTool != nullptr)
     if (result == QDialog::Accepted)
     {
-        DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
+        QSharedPointer<DialogGroup> dialog = dialogTool.objectCast<DialogGroup>();
         SCASSERT(dialog != nullptr)
         const QDomElement group = doc->CreateGroup(VContainer::getNextId(), dialog->GetName(), dialog->GetGroup());
         if (not group.isNull())
@@ -1177,8 +1177,8 @@ void MainWindow::ClosedDialogInsertNode(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        DialogInsertNode *dTool = qobject_cast<DialogInsertNode*>(dialogTool);
-        SCASSERT(dTool != nullptr);
+        QSharedPointer<DialogInsertNode> dTool = dialogTool.objectCast<DialogInsertNode>();
+        SCASSERT(dTool != nullptr)
         VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), sceneDetails, pattern, doc);
     }
     ArrowTool();
@@ -1910,7 +1910,7 @@ void MainWindow::CancelTool()
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
-    delete dialogTool;
+    dialogTool.clear();
     qCDebug(vMainWindow, "Dialog closed.");
 
     currentScene->setFocus(Qt::OtherFocusReason);

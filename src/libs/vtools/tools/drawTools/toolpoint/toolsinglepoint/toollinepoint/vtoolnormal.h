@@ -52,7 +52,8 @@ class VToolNormal : public VToolLinePoint
     Q_OBJECT
 public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolNormal* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolNormal* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+                               VContainer *data);
     static VToolNormal* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
                                const QString &pointName, const qreal angle, const qreal &mx, const qreal &my,

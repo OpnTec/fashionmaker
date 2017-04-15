@@ -53,7 +53,7 @@ class VToolTriangle : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolTriangle *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
                                  const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,

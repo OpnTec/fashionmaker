@@ -74,9 +74,10 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersectionCircles *dialogTool = qobject_cast<DialogPointOfIntersectionCircles*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
+            m_dialog.objectCast<DialogPointOfIntersectionCircles>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFirstCircleCenterId(firstCircleCenterId);
     dialogTool->SetSecondCircleCenterId(secondCircleCenterId);
@@ -87,12 +88,14 @@ void VToolPointOfIntersectionCircles::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(DialogTool *dialog, VMainGraphicsScene *scene,
+VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(QSharedPointer<DialogTool> dialog,
+                                                                         VMainGraphicsScene *scene,
                                                                          VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersectionCircles *dialogTool = qobject_cast<DialogPointOfIntersectionCircles*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
+            dialog.objectCast<DialogPointOfIntersectionCircles>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 firstCircleCenterId = dialogTool->GetFirstCircleCenterId();
     const quint32 secondCircleCenterId = dialogTool->GetSecondCircleCenterId();
     QString firstCircleRadius = dialogTool->GetFirstCircleRadius();
@@ -104,7 +107,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(DialogT
                                                     data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -332,9 +335,10 @@ void VToolPointOfIntersectionCircles::contextMenuEvent(QGraphicsSceneContextMenu
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersectionCircles *dialogTool = qobject_cast<DialogPointOfIntersectionCircles*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
+            m_dialog.objectCast<DialogPointOfIntersectionCircles>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrC1Center, QString().setNum(dialogTool->GetFirstCircleCenterId()));
     doc->SetAttribute(domElement, AttrC2Center, QString().setNum(dialogTool->GetSecondCircleCenterId()));

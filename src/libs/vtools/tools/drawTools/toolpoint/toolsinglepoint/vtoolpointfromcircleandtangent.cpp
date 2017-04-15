@@ -70,9 +70,9 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(VAbstractPattern 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
@@ -82,12 +82,13 @@ void VToolPointFromCircleAndTangent::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(DialogTool *dialog, VMainGraphicsScene *scene,
+VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPointer<DialogTool> dialog,
+                                                                       VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = dialog.objectCast<DialogPointFromCircleAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 circleCenterId = dialogTool->GetCircleCenterId();
     QString circleRadius = dialogTool->GetCircleRadius();
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
@@ -97,7 +98,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(DialogToo
                                                    5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -295,9 +296,9 @@ void VToolPointFromCircleAndTangent::contextMenuEvent(QGraphicsSceneContextMenuE
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointFromCircleAndTangent *dialogTool = qobject_cast<DialogPointFromCircleAndTangent*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));

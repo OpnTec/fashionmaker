@@ -84,18 +84,12 @@ const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("top
 const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance::~VToolSeamAllowance()
+VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    delete m_dialog;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
-{
-    SCASSERT(dialog != nullptr);
-    DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull());
+    QSharedPointer<DialogSeamAllowance> dialogTool = dialog.objectCast<DialogSeamAllowance>();
+    SCASSERT(not dialogTool.isNull())
     VPiece detail = dialogTool->GetPiece();
     QString width = detail.GetFormulaSAWidth();
     qApp->getUndoStack()->beginMacro("add detail");
@@ -165,12 +159,6 @@ void VToolSeamAllowance::Remove(bool ask)
         Q_UNUSED(e);
         return;//Leave this method immediately!!!
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::DialogLinkDestroy()
-{
-    m_dialog=nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -473,22 +461,6 @@ void VToolSeamAllowance::FullUpdateFromFile()
 {
     UpdateExcludeState();
     RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::FullUpdateFromGuiOk(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        SaveDialogChange();
-    }
-    delete m_dialog;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::FullUpdateFromGuiApply()
-{
-    SaveDialogChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1103,7 +1075,8 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        auto *dialog = new DialogSeamAllowance(getData(), id, qApp->getMainWindow());
+        QSharedPointer<DialogSeamAllowance> dialog =
+                QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), id, qApp->getMainWindow()));
         dialog->EnableApply(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
@@ -1161,8 +1134,8 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
 void VToolSeamAllowance::SetDialog()
 {
     SCASSERT(not m_dialog.isNull());
-    DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog);
-    SCASSERT(dialogTool != nullptr);
+    QSharedPointer<DialogSeamAllowance> dialogTool = m_dialog.objectCast<DialogSeamAllowance>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetPiece(VAbstractTool::data.GetPiece(id));
     dialogTool->EnableApply(true);
 }
@@ -1171,9 +1144,8 @@ void VToolSeamAllowance::SetDialog()
 VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id,
                                        const Source &typeCreation, VMainGraphicsScene *scene,
                                        const QString &drawName, QGraphicsItem *parent)
-    : VAbstractTool(doc, data, id),
+    : VInteractiveTool(doc, data, id),
       QGraphicsPathItem(parent),
-      m_dialog(),
       m_sceneDetails(scene),
       m_drawName(drawName),
       m_seamAllowance(new VNoBrushScalePathItem(this)),

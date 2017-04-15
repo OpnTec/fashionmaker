@@ -78,9 +78,9 @@ VToolPointOfIntersection::VToolPointOfIntersection(VAbstractPattern *doc, VConta
  */
 void VToolPointOfIntersection::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
@@ -96,13 +96,12 @@ void VToolPointOfIntersection::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                                                           VAbstractPattern *doc,
-                                                           VContainer *data)
+VToolPointOfIntersection *VToolPointOfIntersection::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                           VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogPointOfIntersection> dialogTool = dialog.objectCast<DialogPointOfIntersection>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
@@ -110,7 +109,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(DialogTool *dialog, V
                                              data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -220,9 +219,9 @@ void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *
  */
 void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));

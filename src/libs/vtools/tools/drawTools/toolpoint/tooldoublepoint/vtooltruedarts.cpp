@@ -104,9 +104,9 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id);
@@ -121,12 +121,12 @@ void VToolTrueDarts::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data)
+VToolTrueDarts *VToolTrueDarts::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     const QString point1Name = dialogTool->GetFirstNewDartPointName();
     const QString point2Name = dialogTool->GetSecondNewDartPointName();
@@ -141,7 +141,7 @@ VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *s
                                    Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog = dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -367,9 +367,9 @@ void VToolTrueDarts::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrName1, dialogTool->GetFirstNewDartPointName());
     doc->SetAttribute(domElement, AttrName2, dialogTool->GetSecondNewDartPointName());

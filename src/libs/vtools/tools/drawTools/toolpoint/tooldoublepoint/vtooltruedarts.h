@@ -51,7 +51,7 @@ public:
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolTrueDarts* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolTrueDarts* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolTrueDarts* Create(quint32 _id,
                                   const quint32 &_p1id, const quint32 &_p2id,

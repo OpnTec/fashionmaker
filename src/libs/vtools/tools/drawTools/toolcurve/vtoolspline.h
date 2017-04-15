@@ -53,7 +53,8 @@ class VToolSpline:public VAbstractSpline
 public:
     virtual ~VToolSpline() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                               VContainer *data);
     static VToolSpline *Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
                                VAbstractPattern *doc, VContainer *data, const Document &parse,
                                const Source &typeCreation);

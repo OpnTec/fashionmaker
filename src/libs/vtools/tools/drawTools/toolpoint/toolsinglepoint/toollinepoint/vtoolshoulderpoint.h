@@ -55,8 +55,8 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
-    static VToolShoulderPoint* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolShoulderPoint* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolShoulderPoint* Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
                                       const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
                                       const QString &pointName, const qreal &mx, const qreal &my,

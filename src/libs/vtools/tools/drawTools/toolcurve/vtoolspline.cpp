@@ -138,9 +138,9 @@ VToolSpline::~VToolSpline()
  */
 void VToolSpline::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSpline> dialogTool = m_dialog.objectCast<DialogSpline>();
+    SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     dialogTool->SetSpline(*spl);
     dialogTool->SetColor(spl->GetColor());
@@ -155,11 +155,12 @@ void VToolSpline::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    auto dialogTool = qobject_cast<DialogSpline*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogSpline> dialogTool = dialog.objectCast<DialogSpline>();
+    SCASSERT(not dialogTool.isNull())
 
     VSpline *spline = new VSpline(dialogTool->GetSpline());
 
@@ -167,7 +168,7 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 
     if (spl != nullptr)
     {
-        spl->dialog=dialogTool;
+        spl->m_dialog = dialogTool;
     }
     return spl;
 }
@@ -325,8 +326,8 @@ void VToolSpline::RemoveReferens()
  */
 void VToolSpline::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    auto dialogTool = qobject_cast<DialogSpline*>(dialog);
+    SCASSERT(not m_dialog.isNull())
+    auto dialogTool = qobject_cast<DialogSpline*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
     const VSpline spl = dialogTool->GetSpline();

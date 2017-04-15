@@ -86,9 +86,9 @@ VToolArc::VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const So
  */
 void VToolArc::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogArc> dialogTool = m_dialog.objectCast<DialogArc>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
@@ -105,11 +105,12 @@ void VToolArc::setDialog()
  * @param doc dom document container
  * @param data container with variables
  */
-VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolArc* VToolArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                           VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogArc> dialogTool = dialog.objectCast<DialogArc>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 center = dialogTool->GetCenter();
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
@@ -119,7 +120,7 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstr
                              Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -341,9 +342,9 @@ void VToolArc::RemoveReferens()
  */
 void VToolArc::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogArc> dialogTool = m_dialog.objectCast<DialogArc>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());

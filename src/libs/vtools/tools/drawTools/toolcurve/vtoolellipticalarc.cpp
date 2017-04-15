@@ -86,9 +86,9 @@ VToolEllipticalArc::VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolEllipticalArc::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogEllipticalArc *dialogTool = qobject_cast<DialogEllipticalArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogEllipticalArc> dialogTool = m_dialog.objectCast<DialogEllipticalArc>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(id);
     dialogTool->SetCenter(elArc->GetCenter().id());
     dialogTool->SetF1(elArc->GetFormulaF1());
@@ -108,12 +108,12 @@ void VToolEllipticalArc::setDialog()
  * @param doc dom document container
  * @param data container with variables
  */
-VToolEllipticalArc* VToolEllipticalArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogEllipticalArc *dialogTool = qobject_cast<DialogEllipticalArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogEllipticalArc> dialogTool = dialog.objectCast<DialogEllipticalArc>();
+    SCASSERT(not dialogTool.isNull())
 
     const quint32 center = dialogTool->GetCenter();
     QString radius1 = dialogTool->GetRadius1();
@@ -126,7 +126,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(DialogTool *dialog, VMainGraphics
                                        Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -408,9 +408,9 @@ void VToolEllipticalArc::RemoveReferens()
  */
 void VToolEllipticalArc::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogEllipticalArc *dialogTool = qobject_cast<DialogEllipticalArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogEllipticalArc> dialogTool = m_dialog.objectCast<DialogEllipticalArc>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius1, dialogTool->GetRadius1());
     doc->SetAttribute(domElement, AttrRadius2, dialogTool->GetRadius2());

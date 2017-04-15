@@ -84,9 +84,9 @@ VToolLineIntersect::VToolLineIntersect(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolLineIntersect::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetP1Line1(p1Line1);
     dialogTool->SetP2Line1(p2Line1);
@@ -104,12 +104,12 @@ void VToolLineIntersect::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 p1Line1Id = dialogTool->GetP1Line1();
     const quint32 p2Line1Id = dialogTool->GetP2Line1();
     const quint32 p1Line2Id = dialogTool->GetP1Line2();
@@ -119,7 +119,7 @@ VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphics
                                        data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -275,9 +275,9 @@ void VToolLineIntersect::RemoveReferens()
  */
 void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogTool->GetP1Line1()));
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));

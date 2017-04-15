@@ -34,12 +34,12 @@
 #include "../vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data)
+VToolPiecePath *VToolPiecePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogPiecePath *dialogTool = qobject_cast<DialogPiecePath*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull());
+    QSharedPointer<DialogPiecePath> dialogTool = dialog.objectCast<DialogPiecePath>();
+    SCASSERT(not dialogTool.isNull())
     VPiecePath path = dialogTool->GetPiecePath();
     const quint32 pieceId = dialogTool->GetPieceId();
     qApp->getUndoStack()->beginMacro("add path");

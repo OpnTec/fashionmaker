@@ -55,7 +55,7 @@ public:
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolBisector* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolBisector* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,

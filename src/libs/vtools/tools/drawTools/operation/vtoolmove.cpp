@@ -77,21 +77,21 @@ const QString VToolMove::ToolType = QStringLiteral("moving");
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogMove> dialogTool = m_dialog.objectCast<DialogMove>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetLength(formulaLength);
     dialogTool->SetSuffix(suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove *VToolMove::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+VToolMove *VToolMove::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                             VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogMove> dialogTool = dialog.objectCast<DialogMove>();
+    SCASSERT(not dialogTool.isNull())
     QString angle = dialogTool->GetAngle();
     QString length = dialogTool->GetLength();
     const QString suffix = dialogTool->GetSuffix();
@@ -100,7 +100,7 @@ VToolMove *VToolMove::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbs
                                     Document::FullParse, Source::FromGui);
     if (operation != nullptr)
     {
-        operation->dialog = dialogTool;
+        operation->m_dialog = dialogTool;
     }
     return operation;
 }
@@ -302,9 +302,9 @@ void VToolMove::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogMove *dialogTool = qobject_cast<DialogMove*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogMove> dialogTool = m_dialog.objectCast<DialogMove>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     QString length = dialogTool->GetLength();

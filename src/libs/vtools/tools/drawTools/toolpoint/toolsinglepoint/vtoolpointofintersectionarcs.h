@@ -50,8 +50,8 @@ class VToolPointOfIntersectionArcs : public VToolSinglePoint
 
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersectionArcs *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                                VContainer *data);
+    static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                                VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
                                                 const quint32 &secondArcId, CrossCirclesPoint pType,
                                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,

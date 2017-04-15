@@ -39,8 +39,8 @@ class VToolFlippingByLine : public VAbstractFlipping
 public:
     virtual ~VToolFlippingByLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolFlippingByLine* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data);
+    static VToolFlippingByLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByLine* Create(const quint32 _id, quint32 firstLinePointId, quint32 secondLinePointId,
                                        const QString &suffix, const QVector<quint32> &source,
                                        const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,

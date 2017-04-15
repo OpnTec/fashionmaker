@@ -80,9 +80,9 @@ VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolCutArc::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
@@ -97,11 +97,12 @@ void VToolCutArc::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogCutArc> dialogTool = dialog.objectCast<DialogCutArc>();
+    SCASSERT(not dialogTool.isNull())
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
@@ -109,7 +110,7 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
                                 Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -210,9 +211,9 @@ void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));

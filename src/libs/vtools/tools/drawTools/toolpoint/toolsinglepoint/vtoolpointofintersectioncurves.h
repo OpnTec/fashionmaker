@@ -50,7 +50,7 @@ class VToolPointOfIntersectionCurves : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersectionCurves *Create(DialogTool *dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfIntersectionCurves *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionCurves *Create(const quint32 _id, const QString &pointName,
                                                   quint32 firstCurveId, quint32 secondCurveId,

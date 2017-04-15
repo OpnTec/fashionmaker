@@ -39,8 +39,8 @@ class VToolFlippingByAxis : public VAbstractFlipping
 public:
     virtual ~VToolFlippingByAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolFlippingByAxis* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data);
+    static VToolFlippingByAxis* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByAxis* Create(const quint32 _id, quint32 originPointId, AxisType axisType,
                                        const QString &suffix, const QVector<quint32> &source,
                                        const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,

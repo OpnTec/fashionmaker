@@ -93,9 +93,9 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
  */
 void VToolLine::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(typeLine);
@@ -110,11 +110,12 @@ void VToolLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                             VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 firstPoint = dialogTool->GetFirstPoint();
     const quint32 secondPoint = dialogTool->GetSecondPoint();
     const QString typeLine = dialogTool->GetTypeLine();
@@ -124,7 +125,7 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbs
                              Source::FromGui);
     if (line != nullptr)
     {
-        line->dialog=dialogTool;
+        line->m_dialog = dialogTool;
     }
     return line;
 }
@@ -398,9 +399,9 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
  */
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

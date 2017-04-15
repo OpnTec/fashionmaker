@@ -95,21 +95,21 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogRotation> dialogTool = m_dialog.objectCast<DialogRotation>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRotation *VToolRotation::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                     VContainer *data)
+VToolRotation *VToolRotation::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                     VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogRotation> dialogTool = dialog.objectCast<DialogRotation>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 originPointId = dialogTool->GetOrigPointId();
     QString angle = dialogTool->GetAngle();
     const QString suffix = dialogTool->GetSuffix();
@@ -118,7 +118,7 @@ VToolRotation *VToolRotation::Create(DialogTool *dialog, VMainGraphicsScene *sce
                                       scene, doc, data, Document::FullParse, Source::FromGui);
     if (operation != nullptr)
     {
-        operation->dialog = dialogTool;
+        operation->m_dialog = dialogTool;
     }
     return operation;
 }
@@ -303,9 +303,9 @@ void VToolRotation::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogRotation> dialogTool = m_dialog.objectCast<DialogRotation>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());

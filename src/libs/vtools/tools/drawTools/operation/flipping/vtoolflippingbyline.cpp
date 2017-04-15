@@ -69,21 +69,21 @@ const QString VToolFlippingByLine::ToolType = QStringLiteral("flippingByLine");
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogFlippingByLine> dialogTool = m_dialog.objectCast<DialogFlippingByLine>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstLinePointId(m_firstLinePointId);
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
     dialogTool->SetSuffix(suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine *VToolFlippingByLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                 VContainer *data)
+VToolFlippingByLine *VToolFlippingByLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                 VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogFlippingByLine> dialogTool = dialog.objectCast<DialogFlippingByLine>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 firstLinePointId = dialogTool->GetFirstLinePointId();
     const quint32 secondLinePointId = dialogTool->GetSecondLinePointId();
     const QString suffix = dialogTool->GetSuffix();
@@ -93,7 +93,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(DialogTool *dialog, VMainGraphi
                                             Source::FromGui);
     if (operation != nullptr)
     {
-        operation->dialog = dialogTool;
+        operation->m_dialog = dialogTool;
     }
     return operation;
 }
@@ -171,9 +171,9 @@ void VToolFlippingByLine::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogFlippingByLine *dialogTool = qobject_cast<DialogFlippingByLine*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogFlippingByLine> dialogTool = m_dialog.objectCast<DialogFlippingByLine>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));

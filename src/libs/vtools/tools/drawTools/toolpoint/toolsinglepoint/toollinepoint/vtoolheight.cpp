@@ -80,9 +80,9 @@ VToolHeight::VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 
  */
 void VToolHeight::setDialog()
 {
-    SCASSERT(dialog != nullptr)
-    DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -101,11 +101,12 @@ void VToolHeight::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data)
 {
-    SCASSERT(dialog != nullptr)
-    DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogHeight> dialogTool = dialog.objectCast<DialogHeight>();
+    SCASSERT(not dialogTool.isNull())
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -117,7 +118,7 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
                                 data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -236,9 +237,9 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolHeight::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr)
-    DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    SCASSERT(dialogTool != nullptr)
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
