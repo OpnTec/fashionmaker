@@ -81,10 +81,6 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
-    virtual void setDialog() {}
     static VToolUnionDetails *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data);
     static VToolUnionDetails *Create(const quint32 _id, const VToolUnionDetailsInitData &initData);
