@@ -52,7 +52,7 @@ protected:
     QSharedPointer<DialogTool> m_dialog;
 
     /** @brief setDialog set dialog when user want change tool option. */
-    virtual void setDialog() {}
+    virtual void setDialog() {/*do nothing by default*/}
     virtual void SaveDialogChange()=0;
 
 private:
