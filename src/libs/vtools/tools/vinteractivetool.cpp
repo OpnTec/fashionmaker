@@ -30,7 +30,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    : VAbstractTool(doc, data, id),
+    : VAbstractTool(doc, data, id, parent),
       m_dialog()
 {
 }
