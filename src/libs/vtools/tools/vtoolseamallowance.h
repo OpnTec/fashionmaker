@@ -74,6 +74,7 @@ public:
     static const QString AttrBottomPin;
 
     void Remove(bool ask);
+    void DialogLinkDestroy();
 
     static void InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene, VContainer *data,
                            VAbstractPattern *doc);

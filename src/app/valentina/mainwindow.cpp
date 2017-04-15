@@ -643,6 +643,7 @@ void MainWindow::ClosedDialog(int result)
         SCASSERT(scene != nullptr)
 
         QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
+        SCASSERT(tool != nullptr)
         ui->view->itemClicked(tool);
     }
     ArrowTool();
@@ -664,23 +665,25 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
         {
             SCASSERT(scene != nullptr)
 
-            dialogTool->SetAssociatedTool(
-                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
+            dialogTool->SetAssociatedTool(DrawTool::Create(dialogTool, scene, doc, pattern));
         }
         else
         { // Or update associated tool with data
-            VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+            DrawTool * vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
+            SCASSERT(vtool != nullptr)
             vtool->FullUpdateFromGuiApply();
         }
     }
     SCASSERT(not dialogTool.isNull())
     QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
+    SCASSERT(tool != nullptr)
     ui->view->itemClicked(tool);
     if (dialogTool->GetAssociatedTool() != nullptr)
     {
-        VDrawTool *vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        DrawTool *vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
+        SCASSERT(vtool != nullptr)
         vtool->DialogLinkDestroy();
-        connect(vtool, &VDrawTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(vtool, &DrawTool::ToolTip, this, &MainWindow::ShowToolTip);
     }
     ArrowTool();
     // If insert not to the end of file call lite parse
@@ -708,12 +711,11 @@ void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
     {
         SCASSERT(scene != nullptr)
 
-        dialogTool->SetAssociatedTool(
-                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
+        dialogTool->SetAssociatedTool(DrawTool::Create(dialogTool, scene, doc, pattern));
     }
     else
     { // Or update associated tool with data
-        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        DrawTool * vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
         SCASSERT(vtool != nullptr)
         vtool->FullUpdateFromGuiApply();
     }

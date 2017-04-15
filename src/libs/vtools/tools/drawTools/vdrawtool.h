@@ -69,7 +69,8 @@ public:
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
-    virtual void DialogLinkDestroy();
+
+    void DialogLinkDestroy();
 
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);

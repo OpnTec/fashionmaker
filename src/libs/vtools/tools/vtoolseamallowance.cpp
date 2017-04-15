@@ -168,6 +168,12 @@ void VToolSeamAllowance::Remove(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::DialogLinkDestroy()
+{
+    m_dialog=nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene,
                                     VContainer *data, VAbstractPattern *doc)
 {
