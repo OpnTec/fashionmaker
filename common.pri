@@ -194,7 +194,7 @@ CONFIG(debug, debug|release){
     isEmpty(DVCS_HESH){
         DVCS_HESH=$$system("git rev-parse --short HEAD")
         isEmpty(DVCS_HESH){
-            DVCS_HESH = "unknown" # if we can't find build revision left unknown.
+            DVCS_HESH = \\\"unknown\\\" # if we can't find build revision left unknown.
         } else {
             DVCS_HESH=\\\"Git:$${DVCS_HESH}\\\"
         }
