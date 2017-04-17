@@ -21,8 +21,27 @@
    <locale language="Saho" country="Eritrea"/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
+   <layout class="QFormLayout" name="formLayout_8">
+    <item row="0" column="1">
+     <widget class="VMainGraphicsView" name="view">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
      <widget class="QToolBox" name="toolBox">
       <property name="enabled">
        <bool>true</bool>
@@ -35,7 +54,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>130</width>
+        <width>140</width>
         <height>0</height>
        </size>
       </property>
@@ -48,14 +67,14 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>127</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +446,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +555,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +817,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -1063,8 +1082,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>58</height>
+         <width>140</width>
+         <height>104</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1083,7 +1102,10 @@
        <attribute name="label">
         <string>Elliptical Arc</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
+       <attribute name="toolTip">
+        <string>Elliptical Arc</string>
+       </attribute>
+       <layout class="QFormLayout" name="formLayout_9">
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonPointerEllipticalArc">
           <property name="enabled">
@@ -1110,7 +1132,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="0">
          <widget class="QToolButton" name="toolButtonEllipticalArc">
           <property name="enabled">
            <bool>false</bool>
@@ -1143,7 +1165,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>326</height>
         </rect>
        </property>
@@ -1321,7 +1343,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>196</height>
         </rect>
        </property>
@@ -1508,7 +1530,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>140</width>
          <height>326</height>
         </rect>
        </property>
@@ -1580,25 +1602,6 @@
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="VMainGraphicsView" name="view">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>1</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
-      </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
-      </property>
      </widget>
     </item>
    </layout>
@@ -2647,8 +2650,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>
