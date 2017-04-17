@@ -47,7 +47,7 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation>Server</translation>
+        <translation type="vanished">Server</translation>
     </message>
     <message>
         <source>Server name/IP</source>
@@ -55,15 +55,15 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation>Sichere Verbindung</translation>
+        <translation type="vanished">Sichere Verbindung</translation>
     </message>
     <message>
         <source>Proxy settings</source>
-        <translation>Proxyeinstellungen</translation>
+        <translation type="vanished">Proxyeinstellungen</translation>
     </message>
     <message>
         <source>Use Proxy</source>
-        <translation>Proxy benutzen</translation>
+        <translation type="vanished">Proxy benutzen</translation>
     </message>
     <message>
         <source>Proxy address</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>User settings</source>
-        <translation>Benutzereinstellungen</translation>
+        <translation type="vanished">Benutzereinstellungen</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation>Passwort speichern</translation>
+        <translation type="vanished">Passwort speichern</translation>
     </message>
     <message>
         <source>Password</source>
@@ -99,66 +99,66 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>Servername/IP:</translation>
+        <translation type="vanished">Servername/IP:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation>Proxyadresse:</translation>
+        <translation type="vanished">Proxyadresse:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation>Proxyport:</translation>
+        <translation type="vanished">Proxyport:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
-        <translation>Proxybenutzer:</translation>
+        <translation type="vanished">Proxybenutzer:</translation>
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>Proxypasswort:</translation>
+        <translation type="vanished">Proxypasswort:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation>Username:</translation>
+        <translation type="vanished">Username:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Passwort:</translation>
+        <translation type="vanished">Passwort:</translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation type="vanished">Anwenden</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation type="vanished">&amp;Abbrechen</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Okay</translation>
+        <translation type="vanished">&amp;Okay</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Einstellungen</translation>
+        <translation type="vanished">Einstellungen</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Allgemein</translation>
+        <translation type="vanished">Allgemein</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Schnittmuster</translation>
+        <translation type="vanished">Schnittmuster</translation>
     </message>
     <message>
         <source>Community</source>
-        <translation>Community</translation>
+        <translation type="vanished">Community</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Verzeichnisse</translation>
+        <translation type="vanished">Verzeichnisse</translation>
     </message>
 </context>
 <context>
@@ -173,23 +173,23 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="vanished">Speichern</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Automatisches Speichern</translation>
+        <translation type="vanished">Automatisches Speichern</translation>
     </message>
     <message>
         <source>min</source>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Intervall:</translation>
+        <translation type="vanished">Intervall:</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation type="vanished">Sprache</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Nach Sprache des Betriebssystems (%1)</translation>
+        <translation type="vanished">Nach Sprache des Betriebssystems (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -209,15 +209,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Zentimeter</translation>
+        <translation type="vanished">Zentimeter</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimeter</translation>
+        <translation type="vanished">Millimeter</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Zoll</translation>
+        <translation type="vanished">Zoll</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -225,11 +225,11 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Absturzberichte senden</translation>
+        <translation type="vanished">Absturzberichte senden</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Absturzberichte senden (empfohlen)</translation>
+        <translation type="vanished">Absturzberichte senden (empfohlen)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -237,15 +237,15 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Schnittteilbearbeitung</translation>
+        <translation type="vanished">Schnittteilbearbeitung</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Löschen von Objekten bestätigen</translation>
+        <translation type="vanished">Löschen von Objekten bestätigen</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Symbolleiste</translation>
+        <translation type="vanished">Symbolleiste</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
@@ -253,51 +253,51 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Sprache der Benutzeroberfläche:</translation>
+        <translation type="vanished">Sprache der Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Dezimaltrennzeichen:</translation>
+        <translation type="vanished">Dezimaltrennzeichen:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation>Standard-Maßeinheit:</translation>
+        <translation type="vanished">Standard-Maßeinheit:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation>Sprache der Bezeichnung:</translation>
+        <translation type="vanished">Sprache der Bezeichnung:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Schnittmuster-System</translation>
+        <translation type="vanished">Schnittmuster-System</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Schnittmuster-System:</translation>
+        <translation type="vanished">Schnittmuster-System:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Buch:</translation>
+        <translation type="vanished">Buch:</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>Die Standardmaßeinheit wurde geändert und wird als Standard für neu angelegte Schnittmuster wirksam.</translation>
+        <translation type="vanished">Die Standardmaßeinheit wurde geändert und wird als Standard für neu angelegte Schnittmuster wirksam.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
+        <translation type="vanished">Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation>Der Text wird unter dem Symbol angezeigt (empfohlen für Anfänger).</translation>
+        <translation type="vanished">Der Text wird unter dem Symbol angezeigt (empfohlen für Anfänger).</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, welche %1 Information %2 übertragen werden.</translation>
+        <translation type="vanished">Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, welche %1 Information %2 übertragen werden.</translation>
     </message>
 </context>
 <context>
@@ -2300,7 +2300,7 @@
     </message>
     <message>
         <source>Invalid value</source>
-        <translation>Ungültiger Wert</translation>
+        <translation type="vanished">Ungültiger Wert</translation>
     </message>
     <message>
         <source>Find:</source>
@@ -2312,6 +2312,10 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3632,10 +3636,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3645,14 +3645,6 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3673,6 +3665,22 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select a detail to insert into!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4185,6 +4193,25 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
 </context>
 <context>
+    <name>DialogPreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Einstellungen</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Allgemein</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Schnittmuster</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Verzeichnisse</translation>
+    </message>
+</context>
+<context>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
@@ -4306,31 +4333,31 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>SVG-Dateien (*.svg)</translation>
+        <translation type="vanished">SVG-Dateien (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>PDF-Dateien (*.pdf)</translation>
+        <translation type="vanished">PDF-Dateien (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Bilder (*.png)</translation>
+        <translation type="vanished">Bilder (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>PS-Dateien (*.ps)</translation>
+        <translation type="vanished">PS-Dateien (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS-Dateien (*.eps)</translation>
+        <translation type="vanished">EPS-Dateien (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
-        <translation>DXF-Dateien (*.dxf)</translation>
+        <translation type="vanished">DXF-Dateien (*.dxf)</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
@@ -4351,6 +4378,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>The base filename does not match a regular expression.</source>
         <translation>Der Dateiname enthält unerlaubte Zeichen.</translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4937,6 +4968,21 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
 </context>
 <context>
+    <name>DialogTapePreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Einstellungen</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Allgemein</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Verzeichnisse</translation>
+    </message>
+</context>
+<context>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
@@ -4984,7 +5030,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Invalid value</source>
-        <translation>Ungültiger Wert</translation>
+        <translation type="vanished">Ungültiger Wert</translation>
     </message>
     <message>
         <source>by length</source>
@@ -5012,6 +5058,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5711,7 +5761,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Online help</source>
-        <translation>Onlinehilfe</translation>
+        <translation type="vanished">Onlinehilfe</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -6402,7 +6452,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Ein oder mehr Objekte auswählen, &lt;b&gt;Enter&lt;/b&gt; - Erstellen abschließen</translation>
+        <translation type="vanished">Ein oder mehr Objekte auswählen, &lt;b&gt;Enter&lt;/b&gt; - Erstellen abschließen</translation>
     </message>
     <message>
         <source>Rotate objects</source>
@@ -6411,10 +6461,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Close pattern</source>
         <translation>Schnittmuster schließen</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tool pointer</source>
@@ -6625,6 +6671,22 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6767,27 +6829,27 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Verzeichnis öffnen</translation>
+        <translation type="vanished">Verzeichnis öffnen</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Verwendete Verzeichnisse</translation>
+        <translation type="vanished">Verwendete Verzeichnisse</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="vanished">Standard</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation type="vanished">Bearbeiten</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="vanished">Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Verzeichnis</translation>
+        <translation type="vanished">Verzeichnis</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6808,6 +6870,171 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Templates</source>
         <translation type="vanished">Vorlagen</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <source>User</source>
+        <translation type="vanished">Benutzer</translation>
+    </message>
+    <message>
+        <source>User name</source>
+        <translation type="vanished">Benutzername</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="vanished">Grafische Ausgabe</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="vanished">Antialiasing verwenden</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="vanished">Rückgängig</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit)</source>
+        <translation type="vanished">Schritte (0 - unbegrenzt)</translation>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="vanished">Benutzername:</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
+        <translation type="vanished">Schritte (0 - unbegrenzt):</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesConfigurationPage</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Speichern</translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="unfinished">Automatisches Speichern</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation type="unfinished">Intervall:</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation type="unfinished">min</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Sprache</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished">Sprache der Benutzeroberfläche:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished">Dezimaltrennzeichen:</translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished">Standard-Maßeinheit:</translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished">Sprache der Bezeichnung:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Schnittmuster-System</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Schnittmuster-System:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autor:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Buch:</translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished">Absturzberichte senden</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished">Absturzberichte senden (empfohlen)</translation>
+    </message>
+    <message>
+        <source>Pattern editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished">Symbolleiste</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished">Der Text wird unter dem Symbol angezeigt (empfohlen für Anfänger).</translation>
+    </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished">Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, welche %1 Information %2 übertragen werden.</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished">Die Standardmaßeinheit wurde geändert und wird als Standard für neu angelegte Schnittmuster wirksam.</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Zentimeter</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimeter</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Zoll</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Verzeichnis öffnen</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -6831,42 +7058,30 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
 </context>
 <context>
-    <name>PatternPage</name>
+    <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
-        <translation>Benutzer</translation>
-    </message>
-    <message>
-        <source>User name</source>
-        <translation type="vanished">Benutzername</translation>
-    </message>
-    <message>
-        <source>Graphical output</source>
-        <translation>Grafische Ausgabe</translation>
-    </message>
-    <message>
-        <source>Use antialiasing</source>
-        <translation>Antialiasing verwenden</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Rückgängig</translation>
-    </message>
-    <message>
-        <source>Count steps (0 - no limit)</source>
-        <translation type="vanished">Schritte (0 - unbegrenzt)</translation>
+        <translation type="unfinished">Benutzer</translation>
     </message>
     <message>
         <source>User name:</source>
-        <translation>Benutzername:</translation>
+        <translation type="unfinished">Benutzername:</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="unfinished">Grafische Ausgabe</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="unfinished">Antialiasing verwenden</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Rückgängig</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation>Schritte (0 - unbegrenzt):</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schritte (0 - unbegrenzt):</translation>
     </message>
     <message>
         <source>User defined materials</source>
@@ -6881,11 +7096,15 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>By default forbid flipping for all new created workpieces&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Forbid flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces</source>
+        <source>Show a passmark both in the seam allowance and on the seam line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6893,7 +7112,7 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
+        <source>All user defined materials have been deleted!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7035,15 +7254,22 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation>Die existierende Datei %1 kann nicht geschrieben werden</translation>
+        <translation type="vanished">Die existierende Datei %1 kann nicht geschrieben werden</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation>Schreiben vom Programm abgebrochen</translation>
+        <translation type="vanished">Schreiben vom Programm abgebrochen</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation>Nur teilweise geschrieben. Partition voll?</translation>
+        <translation type="vanished">Nur teilweise geschrieben. Partition voll?</translation>
+    </message>
+</context>
+<context>
+    <name>QShortcut</name>
+    <message>
+        <source>Ctrl</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7753,7 +7979,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation>Exportieren von Standardmaßen wird nicht unterstützt.</translation>
+        <translation type="vanished">Exportieren von Standardmaßen wird nicht unterstützt.</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
@@ -7841,7 +8067,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid value</source>
-        <translation>Ungültiger Wert</translation>
+        <translation type="vanished">Ungültiger Wert</translation>
     </message>
     <message>
         <source>Show in Finder</source>
@@ -7897,6 +8123,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from standard measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8077,10 +8311,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8110,6 +8340,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8235,34 +8469,34 @@ Do you want to save your changes?</source>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation type="vanished">Anwenden</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation type="vanished">&amp;Abbrechen</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;OK</translation>
+        <translation type="vanished">&amp;OK</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Einstellungen</translation>
+        <translation type="vanished">Einstellungen</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Allgemein</translation>
+        <translation type="vanished">Allgemein</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Verzeichnisse</translation>
+        <translation type="vanished">Verzeichnisse</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation type="vanished">Sprache</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -8270,15 +8504,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Schnittmuster-System</translation>
+        <translation type="vanished">Schnittmuster-System</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Buch:</translation>
+        <translation type="vanished">Buch:</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -8286,58 +8520,58 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Nach Sprache des Betriebssystems (%1)</translation>
+        <translation type="vanished">Nach Sprache des Betriebssystems (%1)</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Sprache der Benutzeroberfläche:</translation>
+        <translation type="vanished">Sprache der Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Dezimaltrennzeichen:</translation>
+        <translation type="vanished">Dezimaltrennzeichen:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Schnittmuster-System:</translation>
+        <translation type="vanished">Schnittmuster-System:</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Standardhöhe und Größe</translation>
+        <translation type="vanished">Standardhöhe und Größe</translation>
     </message>
     <message>
         <source>Default height:</source>
-        <translation>Standardhöhe:</translation>
+        <translation type="vanished">Standardhöhe:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation>Standardgröße:</translation>
+        <translation type="vanished">Standardgröße:</translation>
     </message>
 </context>
 <context>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Verzeichnis öffnen</translation>
+        <translation type="vanished">Verzeichnis öffnen</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Verwendete Verzeichnisse</translation>
+        <translation type="vanished">Verwendete Verzeichnisse</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="vanished">Standard</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation type="vanished">Bearbeiten</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="vanished">Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Verzeichnis</translation>
+        <translation type="vanished">Verzeichnis</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -8351,6 +8585,96 @@ Do you want to save your changes?</source>
         <source>Templates</source>
         <translation type="vanished">Vorlagen</translation>
     </message>
+</context>
+<context>
+    <name>TapePreferencesConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Sprache</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished">Sprache der Benutzeroberfläche:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished">Dezimaltrennzeichen:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Schnittmuster-System</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Schnittmuster-System:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autor:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Buch:</translation>
+    </message>
+    <message>
+        <source>Measurements editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished">Symbolleiste</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished">Der Text wird unter dem Symbol angezeigt (empfohlen für Anfänger).</translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished">Standardhöhe und Größe</translation>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished">Standardhöhe:</translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished">Standardgröße:</translation>
+    </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Verzeichnis öffnen</translation>
+    </message>
     <message>
         <source>My Individual Measurements</source>
         <translation type="unfinished"></translation>
@@ -8361,10 +8685,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10898,22 +11218,22 @@ Do you want to save your changes?</source>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="vanished">sinh</translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="vanished">cosh</translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="vanished">tanh</translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="vanished">asinh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10923,7 +11243,7 @@ Do you want to save your changes?</source>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -11081,6 +11401,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -11156,36 +11481,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished">atanh</translation>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation type="unfinished"></translation>
@@ -11213,36 +11508,6 @@ Do you want to save your changes?</source>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sinhD</source>
-        <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>coshD</source>
-        <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tanhD</source>
-        <comment>hyperbolic tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>asinhD</source>
-        <comment>hyperbolic arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acoshD</source>
-        <comment>hyperbolic arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atanhD</source>
-        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

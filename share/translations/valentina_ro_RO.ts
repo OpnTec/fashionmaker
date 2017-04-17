@@ -47,7 +47,7 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation>Server</translation>
+        <translation type="vanished">Server</translation>
     </message>
     <message>
         <source>Server name/IP</source>
@@ -55,15 +55,15 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation>Conexiune securizată</translation>
+        <translation type="vanished">Conexiune securizată</translation>
     </message>
     <message>
         <source>Proxy settings</source>
-        <translation>Setările Proxy</translation>
+        <translation type="vanished">Setările Proxy</translation>
     </message>
     <message>
         <source>Use Proxy</source>
-        <translation>Utilizare Proxy</translation>
+        <translation type="vanished">Utilizare Proxy</translation>
     </message>
     <message>
         <source>Proxy address</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>User settings</source>
-        <translation>Setările de utilizator</translation>
+        <translation type="vanished">Setările de utilizator</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation>Salvează Parola</translation>
+        <translation type="vanished">Salvează Parola</translation>
     </message>
     <message>
         <source>Password</source>
@@ -99,66 +99,66 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>Nume Server/IP:</translation>
+        <translation type="vanished">Nume Server/IP:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation>Adresă Proxy:</translation>
+        <translation type="vanished">Adresă Proxy:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation>Port Proxy:</translation>
+        <translation type="vanished">Port Proxy:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
-        <translation>User Proxy:</translation>
+        <translation type="vanished">User Proxy:</translation>
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>Permis Proxy:</translation>
+        <translation type="vanished">Permis Proxy:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation>Nume User:</translation>
+        <translation type="vanished">Nume User:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Parolă:</translation>
+        <translation type="vanished">Parolă:</translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Aplică</translation>
+        <translation type="vanished">Aplică</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp; Anulare</translation>
+        <translation type="vanished">&amp; Anulare</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation type="vanished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Configurare Dialog</translation>
+        <translation type="vanished">Configurare Dialog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Configurație</translation>
+        <translation type="vanished">Configurație</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Model</translation>
+        <translation type="vanished">Model</translation>
     </message>
     <message>
         <source>Community</source>
-        <translation>Comunitate</translation>
+        <translation type="vanished">Comunitate</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Căi</translation>
+        <translation type="vanished">Căi</translation>
     </message>
 </context>
 <context>
@@ -173,23 +173,23 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Salvează</translation>
+        <translation type="vanished">Salvează</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Auto salvarea modelului modificat</translation>
+        <translation type="vanished">Auto salvarea modelului modificat</translation>
     </message>
     <message>
         <source>min</source>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Interval:</translation>
+        <translation type="vanished">Interval:</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Limba</translation>
+        <translation type="vanished">Limba</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Cu opțiuni OS (%1)</translation>
+        <translation type="vanished">Cu opțiuni OS (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -209,15 +209,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetrii</translation>
+        <translation type="vanished">Centimetrii</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetrii</translation>
+        <translation type="vanished">Milimetrii</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Inci</translation>
+        <translation type="vanished">Inci</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -225,11 +225,11 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Trimite raport de blocare</translation>
+        <translation type="vanished">Trimite raport de blocare</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Trimite rapoarte de blocaj (recomandat)</translation>
+        <translation type="vanished">Trimite rapoarte de blocaj (recomandat)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -237,15 +237,15 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Editare Modele</translation>
+        <translation type="vanished">Editare Modele</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Confirmă ștergere articol</translation>
+        <translation type="vanished">Confirmă ștergere articol</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Bară de instrumente</translation>
+        <translation type="vanished">Bară de instrumente</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
@@ -253,51 +253,43 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Limbaj GUI:</translation>
+        <translation type="vanished">Limbaj GUI:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Piese separator decimal:</translation>
+        <translation type="vanished">Piese separator decimal:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation>Unitate standard:</translation>
+        <translation type="vanished">Unitate standard:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation>Limbă etichetă:</translation>
+        <translation type="vanished">Limbă etichetă:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Sistem construire Tipare</translation>
+        <translation type="vanished">Sistem construire Tipare</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Sistem construire Tipare:</translation>
+        <translation type="vanished">Sistem construire Tipare:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Carte:</translation>
+        <translation type="vanished">Carte:</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>Unitatea standard a fost actualizată și va fi utilizată ca standard pentru modelele viitoare pe care le creați.</translation>
+        <translation type="vanished">Unitatea standard a fost actualizată și va fi utilizată ca standard pentru modelele viitoare pe care le creați.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>După fiecare prăbușire, Valentina colectează informații care pot ajuta să rezolvăm problema. Noi nu colectăm informații personale. Află mai multe despre ce &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; fel de informații &lt;/a&gt; colectăm noi.</translation>
-    </message>
-    <message>
-        <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">După fiecare prăbușire, Valentina colectează informații care pot ajuta să rezolvăm problema. Noi nu colectăm informații personale. Află mai multe despre ce &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; fel de informații &lt;/a&gt; colectăm noi.</translation>
     </message>
 </context>
 <context>
@@ -2223,10 +2215,6 @@
         <translation>Asistent Formulă</translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2236,6 +2224,10 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3424,10 +3416,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3437,14 +3425,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3465,6 +3445,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select a detail to insert into!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3905,6 +3901,25 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Preferințe</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configurație</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Model</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Căi</translation>
+    </message>
+</context>
+<context>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
@@ -4009,34 +4024,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Svg files (*.svg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PDF files (*.pdf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PS files (*.ps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>EPS files (*.eps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DXF files (*.dxf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tried to use out of range format number.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4050,6 +4037,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4613,6 +4604,21 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogTapePreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Preferințe</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configurație</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Căi</translation>
+    </message>
+</context>
+<context>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
@@ -4659,10 +4665,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4688,6 +4690,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5355,7 +5361,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation>Ajutor online</translation>
+        <translation type="vanished">Ajutor online</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -5951,19 +5957,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rotate objects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6175,6 +6173,22 @@ Do you want to save your changes?</source>
         <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6296,19 +6310,117 @@ Do you want to save your changes?</source>
 <context>
     <name>PathPage</name>
     <message>
-        <source>Open Directory</source>
+        <source>Individual measurements</source>
+        <translation type="vanished">Măsuri individuale</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesConfigurationPage</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Salvează</translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="unfinished">Auto salvarea modelului modificat</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation type="unfinished">Interval:</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation type="unfinished">min</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Limba</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished">Limbaj GUI:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished">Piese separator decimal:</translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished">Unitate standard:</translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished">Limbă etichetă:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Sistem construire Tipare</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Sistem construire Tipare:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autor:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Carte:</translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished">Trimite raport de blocare</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished">Trimite rapoarte de blocaj (recomandat)</translation>
+    </message>
+    <message>
+        <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Path that use Valentina</source>
+        <source>Reset warnings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default</source>
+        <source>Toolbar</source>
+        <translation type="unfinished">Bară de instrumente</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit</source>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished">Unitatea standard a fost actualizată și va fi utilizată ca standard pentru modelele viitoare pe care le creați.</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetrii</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Milimetrii</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inci</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6320,8 +6432,16 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Măsuri individuale</translation>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -6345,9 +6465,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>PatternPage</name>
+    <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6363,15 +6487,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>User name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6387,11 +6503,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>By default forbid flipping for all new created workpieces&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Forbid flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces</source>
+        <source>Show a passmark both in the seam allowance and on the seam line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6399,7 +6519,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
+        <source>All user defined materials have been deleted!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6527,17 +6647,9 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>QSaveFile</name>
+    <name>QShortcut</name>
     <message>
-        <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partial write. Partition full?</source>
+        <source>Ctrl</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7192,10 +7304,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurement diagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7268,10 +7376,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show in Finder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7325,6 +7429,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from standard measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7505,10 +7617,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7538,6 +7646,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7663,34 +7775,34 @@ Do you want to save your changes?</source>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Aplică</translation>
+        <translation type="vanished">Aplică</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp; Anulare</translation>
+        <translation type="vanished">&amp; Anulare</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation type="vanished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Configurare Dialog</translation>
+        <translation type="vanished">Configurare Dialog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Configurație</translation>
+        <translation type="vanished">Configurație</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Căi</translation>
+        <translation type="vanished">Căi</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Limba</translation>
+        <translation type="vanished">Limba</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -7698,15 +7810,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Sistem construire Tipare</translation>
+        <translation type="vanished">Sistem construire Tipare</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Carte:</translation>
+        <translation type="vanished">Carte:</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -7714,19 +7826,73 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Cu opțiuni OS (%1)</translation>
+        <translation type="vanished">Cu opțiuni OS (%1)</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Limbaj GUI:</translation>
+        <translation type="vanished">Limbaj GUI:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Piese separator decimal:</translation>
+        <translation type="vanished">Piese separator decimal:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Sistem construire Tipare:</translation>
+        <translation type="vanished">Sistem construire Tipare:</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Măsuri individuale</translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Limba</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished">Limbaj GUI:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished">Piese separator decimal:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Sistem construire Tipare</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Sistem construire Tipare:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autor:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Carte:</translation>
+    </message>
+    <message>
+        <source>Measurements editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished">Bară de instrumente</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -7740,23 +7906,15 @@ Do you want to save your changes?</source>
         <source>Default size:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>TapePathPage</name>
+    <name>TapePreferencesPathPage</name>
     <message>
-        <source>Open Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
+        <source>Paths that Valentina uses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7768,8 +7926,16 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Măsuri individuale</translation>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -7781,10 +7947,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10054,22 +10216,22 @@ Do you want to save your changes?</source>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="vanished">sinh</translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="vanished">cosh</translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="vanished">tanh</translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="vanished">asinh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10079,7 +10241,7 @@ Do you want to save your changes?</source>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10237,6 +10399,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10312,36 +10479,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished">atanh</translation>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation type="unfinished"></translation>
@@ -10369,36 +10506,6 @@ Do you want to save your changes?</source>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sinhD</source>
-        <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>coshD</source>
-        <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tanhD</source>
-        <comment>hyperbolic tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>asinhD</source>
-        <comment>hyperbolic arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acoshD</source>
-        <comment>hyperbolic arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atanhD</source>
-        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

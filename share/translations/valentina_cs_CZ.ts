@@ -40,7 +40,7 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation>Server</translation>
+        <translation type="vanished">Server</translation>
     </message>
     <message>
         <source>Server name/IP</source>
@@ -48,15 +48,15 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation>Zabezpečené připojení</translation>
+        <translation type="vanished">Zabezpečené připojení</translation>
     </message>
     <message>
         <source>Proxy settings</source>
-        <translation>Nastavení proxy</translation>
+        <translation type="vanished">Nastavení proxy</translation>
     </message>
     <message>
         <source>Use Proxy</source>
-        <translation>Použít proxy</translation>
+        <translation type="vanished">Použít proxy</translation>
     </message>
     <message>
         <source>Proxy address</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>User settings</source>
-        <translation>Uživatelská nastavení</translation>
+        <translation type="vanished">Uživatelská nastavení</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -84,74 +84,46 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation>Uložit heslo</translation>
+        <translation type="vanished">Uložit heslo</translation>
     </message>
     <message>
         <source>Password</source>
         <translation type="vanished">Heslo</translation>
-    </message>
-    <message>
-        <source>Server name/IP:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy user:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy pass:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Použít</translation>
+        <translation type="vanished">Použít</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Z&amp;rušit</translation>
+        <translation type="vanished">Z&amp;rušit</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;OK</translation>
+        <translation type="vanished">&amp;OK</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Dialog pro nastavení</translation>
+        <translation type="vanished">Dialog pro nastavení</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Nastavení</translation>
+        <translation type="vanished">Nastavení</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Střih</translation>
+        <translation type="vanished">Střih</translation>
     </message>
     <message>
         <source>Community</source>
-        <translation>Komunita</translation>
+        <translation type="vanished">Komunita</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Cesty</translation>
+        <translation type="vanished">Cesty</translation>
     </message>
 </context>
 <context>
@@ -166,23 +138,23 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Uložit</translation>
+        <translation type="vanished">Uložit</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Automaticky ukládat změny ve střihu</translation>
+        <translation type="vanished">Automaticky ukládat změny ve střihu</translation>
     </message>
     <message>
         <source>min</source>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Interval:</translation>
+        <translation type="vanished">Interval:</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Jazyk</translation>
+        <translation type="vanished">Jazyk</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -194,7 +166,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>S možnostmi OS (%1)</translation>
+        <translation type="vanished">S možnostmi OS (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -202,15 +174,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetry</translation>
+        <translation type="vanished">Centimetry</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetry</translation>
+        <translation type="vanished">Milimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Palce</translation>
+        <translation type="vanished">Palce</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -218,11 +190,11 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Poslat hlášení o pádu</translation>
+        <translation type="vanished">Poslat hlášení o pádu</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Poslat hlášení o pádu (doporučeno)</translation>
+        <translation type="vanished">Poslat hlášení o pádu (doporučeno)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -230,63 +202,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Upravování střihu</translation>
+        <translation type="vanished">Upravování střihu</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Potvrdit smazání položky</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decimal separator parts:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Potvrdit smazání položky</translation>
     </message>
 </context>
 <context>
@@ -2137,10 +2057,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2150,6 +2066,10 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3426,10 +3346,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3439,14 +3355,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3467,6 +3375,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select a detail to insert into!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3927,6 +3851,25 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Předvolby</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Nastavení</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Střih</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Cesty</translation>
+    </message>
+</context>
+<context>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
@@ -4032,31 +3975,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>Soubory SVG (*.svg)</translation>
+        <translation type="vanished">Soubory SVG (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>Soubory PDF (*.pdf)</translation>
+        <translation type="vanished">Soubory PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Obrázky (*.png)</translation>
+        <translation type="vanished">Obrázky (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>Soubory PS (*.ps)</translation>
+        <translation type="vanished">Soubory PS (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>Soubory EPS (*.eps)</translation>
-    </message>
-    <message>
-        <source>DXF files (*.dxf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Soubory EPS (*.eps)</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
@@ -4072,6 +4011,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4635,6 +4578,21 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogTapePreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Předvolby</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Nastavení</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Cesty</translation>
+    </message>
+</context>
+<context>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
@@ -4681,10 +4639,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4710,6 +4664,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5377,7 +5335,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation>Nápověda na Internetu</translation>
+        <translation type="vanished">Nápověda na Internetu</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -5978,19 +5936,11 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rotate objects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6202,6 +6152,22 @@ Chcete uložit své změny?</translation>
         <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6324,27 +6290,27 @@ Chcete uložit své změny?</translation>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Otevřít adresář</translation>
+        <translation type="vanished">Otevřít adresář</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Cesta, kterou používá Valentina</translation>
+        <translation type="vanished">Cesta, kterou používá Valentina</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Výchozí</translation>
+        <translation type="vanished">Výchozí</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Upravit</translation>
+        <translation type="vanished">Upravit</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="vanished">Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Cesta</translation>
+        <translation type="vanished">Cesta</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6357,6 +6323,163 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Layout</source>
         <translation type="vanished">Rozvržení</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <source>User</source>
+        <translation type="vanished">Uživatel</translation>
+    </message>
+    <message>
+        <source>User name</source>
+        <translation type="vanished">Uživatelské jméno</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="vanished">Obrazový výstup</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="vanished">Použít vyhlazování</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="vanished">Zpět</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit)</source>
+        <translation type="vanished">Počítat kroky (0 - bez omezení)</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesConfigurationPage</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Uložit</translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="unfinished">Automaticky ukládat změny ve střihu</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation type="unfinished">Interval:</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation type="unfinished">min</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Jazyk</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished">Poslat hlášení o pádu</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished">Poslat hlášení o pádu (doporučeno)</translation>
+    </message>
+    <message>
+        <source>Pattern editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetry</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Milimetry</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Palce</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Cesta</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Upravit</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Otevřít adresář</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -6380,41 +6503,29 @@ Chcete uložit své změny?</translation>
     </message>
 </context>
 <context>
-    <name>PatternPage</name>
+    <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
-        <translation>Uživatel</translation>
-    </message>
-    <message>
-        <source>User name</source>
-        <translation type="vanished">Uživatelské jméno</translation>
-    </message>
-    <message>
-        <source>Graphical output</source>
-        <translation>Obrazový výstup</translation>
-    </message>
-    <message>
-        <source>Use antialiasing</source>
-        <translation>Použít vyhlazování</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Zpět</translation>
-    </message>
-    <message>
-        <source>Count steps (0 - no limit)</source>
-        <translation type="vanished">Počítat kroky (0 - bez omezení)</translation>
+        <translation type="unfinished">Uživatel</translation>
     </message>
     <message>
         <source>User name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished"></translation>
+        <source>Graphical output</source>
+        <translation type="unfinished">Obrazový výstup</translation>
     </message>
     <message>
-        <source>All user defined materials have been deleted!</source>
+        <source>Use antialiasing</source>
+        <translation type="unfinished">Použít vyhlazování</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Zpět</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6430,11 +6541,15 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>By default forbid flipping for all new created workpieces&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Forbid flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces</source>
+        <source>Show a passmark both in the seam allowance and on the seam line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6442,7 +6557,7 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
+        <source>All user defined materials have been deleted!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6570,17 +6685,9 @@ Chcete uložit své změny?</translation>
     </message>
 </context>
 <context>
-    <name>QSaveFile</name>
+    <name>QShortcut</name>
     <message>
-        <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partial write. Partition full?</source>
+        <source>Ctrl</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7239,10 +7346,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurement diagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7315,10 +7418,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show in Finder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7372,6 +7471,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from standard measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7552,10 +7659,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7585,6 +7688,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7710,41 +7817,99 @@ Do you want to save your changes?</source>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Použít</translation>
+        <translation type="vanished">Použít</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Z&amp;rušit</translation>
+        <translation type="vanished">Z&amp;rušit</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;OK</translation>
+        <translation type="vanished">&amp;OK</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Dialog pro nastavení</translation>
+        <translation type="vanished">Dialog pro nastavení</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Nastavení</translation>
+        <translation type="vanished">Nastavení</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Cesty</translation>
+        <translation type="vanished">Cesty</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Jazyk</translation>
+        <translation type="vanished">Jazyk</translation>
     </message>
     <message>
         <source>GUI language</source>
         <translation type="vanished">Jazyk rozhraní</translation>
     </message>
     <message>
+        <source>Decimal separator parts</source>
+        <translation type="vanished">Oddělovač desetinných míst</translation>
+    </message>
+    <message>
+        <source>With OS options (%1)</source>
+        <translation type="vanished">S možnostmi OS (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="vanished">Otevřít adresář</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="vanished">Cesta, kterou používá Valentina</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="vanished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="vanished">Upravit</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="vanished">Typ</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">Cesta</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Individuální míry</translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Jazyk</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7756,23 +7921,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Decimal separator parts</source>
-        <translation type="vanished">Oddělovač desetinných míst</translation>
-    </message>
-    <message>
-        <source>With OS options (%1)</source>
-        <translation>S možnostmi OS (%1)</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
+        <source>Measurements editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Decimal separator parts:</source>
+        <source>Reset warnings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern making system:</source>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7787,36 +7948,36 @@ Do you want to save your changes?</source>
         <source>Default size:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>TapePathPage</name>
+    <name>TapePreferencesPathPage</name>
     <message>
-        <source>Open Directory</source>
-        <translation>Otevřít adresář</translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation>Cesta, kterou používá Valentina</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Výchozí</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Upravit</translation>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="unfinished">Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Cesta</translation>
+        <translation type="unfinished">Cesta</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Individuální míry</translation>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Upravit</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Otevřít adresář</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -7828,10 +7989,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10209,22 +10366,22 @@ Do you want to save your changes?</source>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="vanished">sinh</translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="vanished">cosh</translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="vanished">tanh</translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="vanished">asinh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10234,7 +10391,7 @@ Do you want to save your changes?</source>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10392,6 +10549,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10467,36 +10629,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished">atanh</translation>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation type="unfinished"></translation>
@@ -10524,36 +10656,6 @@ Do you want to save your changes?</source>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sinhD</source>
-        <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>coshD</source>
-        <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tanhD</source>
-        <comment>hyperbolic tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>asinhD</source>
-        <comment>hyperbolic arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acoshD</source>
-        <comment>hyperbolic arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atanhD</source>
-        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

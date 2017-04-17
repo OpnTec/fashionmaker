@@ -33,7 +33,7 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation>Palvelin</translation>
+        <translation type="vanished">Palvelin</translation>
     </message>
     <message>
         <source>Server name/IP</source>
@@ -41,15 +41,15 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation>Suojattu yhteys</translation>
+        <translation type="vanished">Suojattu yhteys</translation>
     </message>
     <message>
         <source>Proxy settings</source>
-        <translation>Välittävän palvelimen asetukset</translation>
+        <translation type="vanished">Välittävän palvelimen asetukset</translation>
     </message>
     <message>
         <source>Use Proxy</source>
-        <translation>Käyttäjä välittäjäpalvelinta</translation>
+        <translation type="vanished">Käyttäjä välittäjäpalvelinta</translation>
     </message>
     <message>
         <source>Proxy address</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>User settings</source>
-        <translation>Käyttäjän asetukset</translation>
+        <translation type="vanished">Käyttäjän asetukset</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -77,74 +77,46 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation>Tallenna salasana</translation>
+        <translation type="vanished">Tallenna salasana</translation>
     </message>
     <message>
         <source>Password</source>
         <translation type="vanished">Salasana</translation>
-    </message>
-    <message>
-        <source>Server name/IP:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy user:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxy pass:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Toteuta</translation>
+        <translation type="vanished">Toteuta</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Peru</translation>
+        <translation type="vanished">&amp;Peru</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>%Ok</translation>
+        <translation type="vanished">%Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Konfigurointi dialogi</translation>
+        <translation type="vanished">Konfigurointi dialogi</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Asetukset</translation>
+        <translation type="vanished">Asetukset</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Kaava</translation>
+        <translation type="vanished">Kaava</translation>
     </message>
     <message>
         <source>Community</source>
-        <translation>Yhteisö</translation>
+        <translation type="vanished">Yhteisö</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Polut</translation>
+        <translation type="vanished">Polut</translation>
     </message>
 </context>
 <context>
@@ -159,23 +131,23 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Tallenna</translation>
+        <translation type="vanished">Tallenna</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Tallenna automaattisesti muokattu kaava</translation>
+        <translation type="vanished">Tallenna automaattisesti muokattu kaava</translation>
     </message>
     <message>
         <source>min</source>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Väli:</translation>
+        <translation type="vanished">Väli:</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Kieli</translation>
+        <translation type="vanished">Kieli</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -187,7 +159,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Käyttäen käyttöjärjestelmä asetusta (%1)</translation>
+        <translation type="vanished">Käyttäen käyttöjärjestelmä asetusta (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -195,15 +167,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>senttimetriä</translation>
+        <translation type="vanished">senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>millimetriä</translation>
+        <translation type="vanished">millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>tuumaa</translation>
+        <translation type="vanished">tuumaa</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -211,11 +183,11 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Lähetä kaatumisraportteja</translation>
+        <translation type="vanished">Lähetä kaatumisraportteja</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Lähetä kaatumisraportteja (suositus)</translation>
+        <translation type="vanished">Lähetä kaatumisraportteja (suositus)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -223,63 +195,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Kaavan muuttaminen</translation>
+        <translation type="vanished">Kaavan muuttaminen</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Varmista kohdan poistaminen</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decimal separator parts:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Varmista kohdan poistaminen</translation>
     </message>
 </context>
 <context>
@@ -2130,10 +2050,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2143,6 +2059,10 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3415,10 +3335,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3428,14 +3344,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3456,6 +3364,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, select a detail to insert into!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3908,6 +3832,25 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Asetukset</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Asetukset</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Kaava</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Polut</translation>
+    </message>
+</context>
+<context>
     <name>DialogRotation</name>
     <message>
         <source>Rotation</source>
@@ -4013,31 +3956,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>Svg tiedostot (*.svg)</translation>
+        <translation type="vanished">Svg tiedostot (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>PDF tiedostot (*.pdf)</translation>
+        <translation type="vanished">PDF tiedostot (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Kuvat (*.png)</translation>
+        <translation type="vanished">Kuvat (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>PS tiedostot (*.ps)</translation>
+        <translation type="vanished">PS tiedostot (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS tiedostot (*.eps)</translation>
-    </message>
-    <message>
-        <source>DXF files (*.dxf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">EPS tiedostot (*.eps)</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
@@ -4053,6 +3992,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename does not match a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4616,6 +4559,21 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogTapePreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Asetukset</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Asetukset</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Polut</translation>
+    </message>
+</context>
+<context>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
@@ -4662,10 +4620,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4691,6 +4645,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value can&apos;t be lass than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5358,7 +5316,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation>Online apua</translation>
+        <translation type="vanished">Online apua</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -5959,19 +5917,11 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rotate objects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6183,6 +6133,22 @@ Haluatko tallentaa muutokset?</translation>
         <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6305,27 +6271,27 @@ Haluatko tallentaa muutokset?</translation>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Avaa kansio</translation>
+        <translation type="vanished">Avaa kansio</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Valentinan käyttämä polku</translation>
+        <translation type="vanished">Valentinan käyttämä polku</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Oletus</translation>
+        <translation type="vanished">Oletus</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Muokkaa</translation>
+        <translation type="vanished">Muokkaa</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Tyyppi</translation>
+        <translation type="vanished">Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Polku</translation>
+        <translation type="vanished">Polku</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -6342,6 +6308,163 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Layout</source>
         <translation type="vanished">Sommittelu</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <source>User</source>
+        <translation type="vanished">Käyttäjä</translation>
+    </message>
+    <message>
+        <source>User name</source>
+        <translation type="vanished">Käyttäjätunnus</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="vanished">Graafinen tulos</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="vanished">Käytä pehmennystä</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="vanished">Peru</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit)</source>
+        <translation type="vanished">Laske vaiheet (0 - ei rajaa)</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesConfigurationPage</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="unfinished">Tallenna automaattisesti muokattu kaava</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation type="unfinished">Väli:</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation type="unfinished">min</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Kieli</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished">Lähetä kaatumisraportteja</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished">Lähetä kaatumisraportteja (suositus)</translation>
+    </message>
+    <message>
+        <source>Pattern editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tyyppi</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Polku</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Oletus</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Muokkaa</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Avaa kansio</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -6365,41 +6488,29 @@ Haluatko tallentaa muutokset?</translation>
     </message>
 </context>
 <context>
-    <name>PatternPage</name>
+    <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
-        <translation>Käyttäjä</translation>
-    </message>
-    <message>
-        <source>User name</source>
-        <translation type="vanished">Käyttäjätunnus</translation>
-    </message>
-    <message>
-        <source>Graphical output</source>
-        <translation>Graafinen tulos</translation>
-    </message>
-    <message>
-        <source>Use antialiasing</source>
-        <translation>Käytä pehmennystä</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Peru</translation>
-    </message>
-    <message>
-        <source>Count steps (0 - no limit)</source>
-        <translation type="vanished">Laske vaiheet (0 - ei rajaa)</translation>
+        <translation type="unfinished">Käyttäjä</translation>
     </message>
     <message>
         <source>User name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Count steps (0 - no limit):</source>
-        <translation type="unfinished"></translation>
+        <source>Graphical output</source>
+        <translation type="unfinished">Graafinen tulos</translation>
     </message>
     <message>
-        <source>All user defined materials have been deleted!</source>
+        <source>Use antialiasing</source>
+        <translation type="unfinished">Käytä pehmennystä</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Peru</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6415,11 +6526,15 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>By default forbid flipping for all new created workpieces&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Forbid flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces</source>
+        <source>Show a passmark both in the seam allowance and on the seam line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6427,7 +6542,7 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
+        <source>All user defined materials have been deleted!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6555,17 +6670,9 @@ Haluatko tallentaa muutokset?</translation>
     </message>
 </context>
 <context>
-    <name>QSaveFile</name>
+    <name>QShortcut</name>
     <message>
-        <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partial write. Partition full?</source>
+        <source>Ctrl</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7228,10 +7335,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurement diagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7304,10 +7407,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show in Finder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7361,6 +7460,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from standard measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7541,10 +7648,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>One line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7574,6 +7677,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7699,41 +7806,103 @@ Do you want to save your changes?</source>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Toteuta</translation>
+        <translation type="vanished">Toteuta</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Peru</translation>
+        <translation type="vanished">&amp;Peru</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>Ok</translation>
+        <translation type="vanished">Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Konfigurointi dialogi</translation>
+        <translation type="vanished">Konfigurointi dialogi</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Asetukset</translation>
+        <translation type="vanished">Asetukset</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Polut</translation>
+        <translation type="vanished">Polut</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Kieli</translation>
+        <translation type="vanished">Kieli</translation>
     </message>
     <message>
         <source>GUI language</source>
         <translation type="vanished">GUI kieli</translation>
     </message>
     <message>
+        <source>Decimal separator parts</source>
+        <translation type="vanished">Desimaalierotin osat</translation>
+    </message>
+    <message>
+        <source>With OS options (%1)</source>
+        <translation type="vanished">Käyttäen käyttöjärjestelmä asetusta (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="vanished">Avaa kansio</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="vanished">Valentinan käyttämä polku</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="vanished">Oletus</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="vanished">Muokkaa</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="vanished">Tyyppi</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">Polku</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Yksilölliset mitat</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="vanished">Standardi mitat</translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Kieli</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7745,23 +7914,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Decimal separator parts</source>
-        <translation type="vanished">Desimaalierotin osat</translation>
-    </message>
-    <message>
-        <source>With OS options (%1)</source>
-        <translation>Käyttäen käyttöjärjestelmä asetusta (%1)</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
+        <source>Measurements editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Decimal separator parts:</source>
+        <source>Reset warnings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern making system:</source>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7776,40 +7941,36 @@ Do you want to save your changes?</source>
         <source>Default size:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>With OS options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>TapePathPage</name>
+    <name>TapePreferencesPathPage</name>
     <message>
-        <source>Open Directory</source>
-        <translation>Avaa kansio</translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation>Valentinan käyttämä polku</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Oletus</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Muokkaa</translation>
+        <source>Paths that Valentina uses</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Tyyppi</translation>
+        <translation type="unfinished">Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Polku</translation>
+        <translation type="unfinished">Polku</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Yksilölliset mitat</translation>
+        <source>Default</source>
+        <translation type="unfinished">Oletus</translation>
     </message>
     <message>
-        <source>Standard measurements</source>
-        <translation type="vanished">Standardi mitat</translation>
+        <source>Edit</source>
+        <translation type="unfinished">Muokkaa</translation>
+    </message>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Avaa kansio</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -7821,10 +7982,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10192,22 +10349,22 @@ Do you want to save your changes?</source>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="vanished">sinh</translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="vanished">cosh</translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="vanished">tanh</translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="vanished">asinh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -10217,7 +10374,7 @@ Do you want to save your changes?</source>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
@@ -10375,6 +10532,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
         <source>size</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
@@ -10450,36 +10612,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished">atanh</translation>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation type="unfinished"></translation>
@@ -10507,36 +10639,6 @@ Do you want to save your changes?</source>
     <message>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sinhD</source>
-        <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>coshD</source>
-        <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tanhD</source>
-        <comment>hyperbolic tangens function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>asinhD</source>
-        <comment>hyperbolic arcus sine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acoshD</source>
-        <comment>hyperbolic arcus cosine function working with degrees</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>atanhD</source>
-        <comment>hyperbolic arcur tangens function working with degrees</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
