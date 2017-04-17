@@ -660,32 +660,18 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
     SCASSERT(not dialogTool.isNull())
     if (result == QDialog::Accepted)
     {
-        // Only create tool if not already created with apply
-        if (dialogTool->GetAssociatedTool() == nullptr)
-        {
-            SCASSERT(scene != nullptr)
-
-            dialogTool->SetAssociatedTool(DrawTool::Create(dialogTool, scene, doc, pattern));
-        }
-        else
-        { // Or update associated tool with data
-            DrawTool * vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
-            SCASSERT(vtool != nullptr)
-            vtool->FullUpdateFromGuiApply();
-        }
+        ApplyDialog<DrawTool>(scene);
     }
-    SCASSERT(not dialogTool.isNull())
-    QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
-    SCASSERT(tool != nullptr)
-    ui->view->itemClicked(tool);
+    // If before Cancel was used Apply we have an item
+    DrawTool *vtool = qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());// Don't check for nullptr here
     if (dialogTool->GetAssociatedTool() != nullptr)
     {
-        DrawTool *vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
         SCASSERT(vtool != nullptr)
         vtool->DialogLinkDestroy();
         connect(vtool, &DrawTool::ToolTip, this, &MainWindow::ShowToolTip);
     }
     ArrowTool();
+    ui->view->itemClicked(vtool);// Don't check for nullptr here
     // If insert not to the end of file call lite parse
     if (doc->getCursor() > 0)
     {
@@ -715,7 +701,7 @@ void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
     }
     else
     { // Or update associated tool with data
-        DrawTool * vtool= qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
+        DrawTool * vtool = qobject_cast<DrawTool *>(dialogTool->GetAssociatedTool());
         SCASSERT(vtool != nullptr)
         vtool->FullUpdateFromGuiApply();
     }
