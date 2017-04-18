@@ -65,7 +65,6 @@ public:
     void ClearForExport();
 
     MeasurementsType Type() const;
-    Unit MUnit() const;
     int BaseSize() const;
     int BaseHeight() const;
 
@@ -104,7 +103,6 @@ public:
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
-    static const QString TagUnit;
     static const QString TagNotes;
     static const QString TagSize;
     static const QString TagHeight;

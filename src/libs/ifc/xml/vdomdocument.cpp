@@ -129,6 +129,7 @@ const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
 const QString VDomDocument::UnitPX     = QStringLiteral("px");
 const QString VDomDocument::TagVersion = QStringLiteral("version");
+const QString VDomDocument::TagUnit    = QStringLiteral("unit");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument()
@@ -399,6 +400,19 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+Unit VDomDocument::MUnit() const
+{
+    Unit unit = VDomDocument::StrToUnits(UniqueTagText(TagUnit, UnitCM));
+
+    if (unit == Unit::Px)
+    {
+        unit = Unit::Cm;
+    }
+
+    return unit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const
 {
     const QDomNodeList nodeList = this->elementsByTagName(tagName);
@@ -555,7 +569,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::StrToUnits(const QString &unit)
 {
-    QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
+    const QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
     Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {

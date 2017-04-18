@@ -56,7 +56,6 @@
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");
-const QString VMeasurements::TagUnit             = QStringLiteral("unit");
 const QString VMeasurements::TagNotes            = QStringLiteral("notes");
 const QString VMeasurements::TagSize             = QStringLiteral("size");
 const QString VMeasurements::TagHeight           = QStringLiteral("height");
@@ -321,13 +320,6 @@ void VMeasurements::ClearForExport()
 MeasurementsType VMeasurements::Type() const
 {
     return type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit VMeasurements::MUnit() const
-{
-    const QString unit = UniqueTagText(TagUnit, UnitCM);
-    return VDomDocument::StrToUnits(unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

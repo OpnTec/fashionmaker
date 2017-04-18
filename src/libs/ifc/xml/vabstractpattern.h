@@ -108,7 +108,6 @@ public:
 
     QString        MPath() const;
     void           SetPath(const QString &path);
-    Unit           MUnit() const;
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
@@ -189,7 +188,6 @@ public:
     static const QString TagGradation;
     static const QString TagHeights;
     static const QString TagSizes;
-    static const QString TagUnit;
     static const QString TagData;
     static const QString TagPatternInfo;
     static const QString TagMCP;

@@ -79,7 +79,6 @@ const QString VAbstractPattern::TagOperation        = QStringLiteral("operation"
 const QString VAbstractPattern::TagGradation        = QStringLiteral("gradation");
 const QString VAbstractPattern::TagHeights          = QStringLiteral("heights");
 const QString VAbstractPattern::TagSizes            = QStringLiteral("sizes");
-const QString VAbstractPattern::TagUnit             = QStringLiteral("unit");
 const QString VAbstractPattern::TagData             = QStringLiteral("data");
 const QString VAbstractPattern::TagPatternInfo      = QStringLiteral("patternInfo");
 const QString VAbstractPattern::TagMCP              = QStringLiteral("mcp");
@@ -771,23 +770,6 @@ void VAbstractPattern::SetPath(const QString &path)
     else
     {
         qDebug()<<"Can't save path to measurements"<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit VAbstractPattern::MUnit() const
-{
-    const QStringList units = QStringList() << "mm" << "cm" << "inch";
-    const QString unit = UniqueTagText(TagUnit);
-    switch (units.indexOf(unit))
-    {
-        case 0:// mm
-            return Unit::Mm;
-        case 2:// in
-            return Unit::Inch;
-        case 1:// cm
-        default:
-            return Unit::Cm;
     }
 }
 

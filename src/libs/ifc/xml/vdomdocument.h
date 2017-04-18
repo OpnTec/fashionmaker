@@ -81,12 +81,13 @@ class VDomDocument : public QDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
-    static const QString    AttrId;
-    static const QString    UnitMM;
-    static const QString    UnitCM;
-    static const QString    UnitINCH;
-    static const QString    UnitPX;
-    static const QString    TagVersion;
+    static const QString AttrId;
+    static const QString UnitMM;
+    static const QString UnitCM;
+    static const QString UnitINCH;
+    static const QString UnitPX;
+    static const QString TagVersion;
+    static const QString TagUnit;
 
     VDomDocument();
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
@@ -106,6 +107,8 @@ public:
                                      const QString &defValue = QString());
     static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
     static quint32 GetParametrId(const QDomElement& domElement);
+
+    Unit           MUnit() const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
     virtual void   setXMLContent(const QString &fileName);
