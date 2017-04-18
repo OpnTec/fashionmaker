@@ -1061,6 +1061,11 @@ void VToolSeamAllowance::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
+    if (m_suppressContextMenu)
+    {
+        return;
+    }
+
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 

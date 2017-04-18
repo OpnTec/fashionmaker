@@ -141,6 +141,11 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     SCASSERT(tool != nullptr)
     SCASSERT(event != nullptr)
 
+    if (m_suppressContextMenu)
+    {
+        return;
+    }
+
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));

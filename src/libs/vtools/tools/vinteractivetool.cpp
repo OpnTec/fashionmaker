@@ -28,6 +28,8 @@
 
 #include "vinteractivetool.h"
 
+bool VInteractiveTool::m_suppressContextMenu = false;
+
 //---------------------------------------------------------------------------------------------------------------------
 VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     : VAbstractTool(doc, data, id, parent),
