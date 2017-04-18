@@ -172,6 +172,7 @@ protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
     static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
+    static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
@@ -204,8 +205,6 @@ private:
     static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
     static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
     static bool             IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
-    static bool             IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint,
-                                             const VSAPoint &nextPoint);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
@@ -255,7 +254,7 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
         const T &prevPoint = buf1.at(prev);
         const T &nextPoint = buf1.at(next);
 
-        if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint)
+        if (not (IsEkvPointOnLine(iPoint, prevPoint, nextPoint) && prevPoint == nextPoint/*not zigzag*/)
                 // If RemoveDublicates does not remove these points it is a valid case.
                 // Case where last point equal first point
                 || ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)))

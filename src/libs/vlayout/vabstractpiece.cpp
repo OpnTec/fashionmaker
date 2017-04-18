@@ -951,8 +951,7 @@ QVector<QPointF> VAbstractPiece::SubPath(const QVector<QPointF> &path, int start
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint)
 {
-    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
-            && prevPoint == nextPoint);// not zigzag
+    return VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -969,7 +968,5 @@ bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
             ekvPointOnLine = true;
         }
     }
-    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
-            && prevPoint == nextPoint// not zigzag
-            && ekvPointOnLine);
+    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint) && ekvPointOnLine);
 }

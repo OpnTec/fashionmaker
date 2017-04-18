@@ -1006,8 +1006,19 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
 {
     SCASSERT(data != nullptr)
 
+    QVector<QPointF> ekvPoints;
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    const QVector<QPointF> ekvPoints = EkvPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
+    if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)) // see issue #665
+    {
+        QLineF line (passmarkSAPoint, nextSAPoint);
+        line.setAngle(line.angle() + 90);
+        line.setLength(VAbstractPiece::MaxLocalSA(passmarkSAPoint, width));
+        ekvPoints.append(line.p2());
+    }
+    else
+    {
+        ekvPoints = EkvPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
+    }
 
     if (ekvPoints.isEmpty())
     { // Just in case
