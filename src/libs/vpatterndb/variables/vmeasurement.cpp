@@ -190,14 +190,7 @@ bool VMeasurement::IsGradationSizeValid(const QString &size)
     if (not size.isEmpty())
     {
         const QStringList sizes = VMeasurement::WholeListSizes(Unit::Cm);
-        if (sizes.contains(size))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return sizes.contains(size);
     }
     else
     {
@@ -211,14 +204,7 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
     if (not height.isEmpty())
     {
         const QStringList heights = VMeasurement::WholeListHeights(Unit::Cm);
-        if (heights.contains(height))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return heights.contains(height);
     }
     else
     {
