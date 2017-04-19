@@ -2225,7 +2225,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrPoint1);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrPoint2);
     AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrPoint3);
-    AddPropertyParentPointName(i->ForthPointName(), tr("Third point:"), AttrPoint4);
+    AddPropertyParentPointName(i->ForthPointName(), tr("Fourth point:"), AttrPoint4);
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
 }
 
