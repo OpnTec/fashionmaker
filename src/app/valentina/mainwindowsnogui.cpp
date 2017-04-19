@@ -1184,6 +1184,5 @@ int MainWindowsNoGUI::ContinueIfLayoutStale()
     QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
     SCASSERT(layout != nullptr)
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-    msgBox.exec();
-    return msgBox.result();
+    return msgBox.exec();
 }
