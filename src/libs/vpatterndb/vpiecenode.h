@@ -44,8 +44,16 @@ public:
     VPieceNode();
     VPieceNode(quint32 id, Tool typeTool, bool reverse = false);
     VPieceNode(const VPieceNode &node);
-    VPieceNode &operator=(const VPieceNode &node);
+
     ~VPieceNode();
+
+    VPieceNode &operator=(const VPieceNode &node);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
+#endif
+
+    void Swap(VPieceNode &node) Q_DECL_NOTHROW
+    { std::swap(d, node.d); }
 
     friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
     friend QDataStream& operator>>(QDataStream& in, VPieceNode& p);

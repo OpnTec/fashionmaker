@@ -52,8 +52,16 @@ public:
     VLayoutPaper();
     VLayoutPaper(int height, int width);
     VLayoutPaper(const VLayoutPaper &paper);
-    VLayoutPaper &operator=(const VLayoutPaper &paper);
+
     ~VLayoutPaper();
+
+    VLayoutPaper &operator=(const VLayoutPaper &paper);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW { Swap(paper); return *this; }
+#endif
+
+    void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
+    { std::swap(d, paper.d); }
 
     int  GetHeight() const;
     void SetHeight(int height);

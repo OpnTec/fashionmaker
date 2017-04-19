@@ -39,8 +39,16 @@ class VAbstractFloatItemData
 public:
     VAbstractFloatItemData();
     VAbstractFloatItemData(const VAbstractFloatItemData &data);
-    VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
+
     virtual ~VAbstractFloatItemData();
+
+    VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+#endif
+
+    void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
+    { std::swap(d, data.d); }
 
     // methods, which set and return values of different parameters
     QPointF GetPos() const;

@@ -54,8 +54,15 @@ public:
     VAbstractArc (const GOType &type, const VPointF &center, qreal f1, quint32 idObject = 0,
                   Draw mode = Draw::Calculation);
     explicit VAbstractArc(const VAbstractArc &arc);
-    VAbstractArc& operator= (const VAbstractArc &arc);
     virtual ~VAbstractArc();
+
+    VAbstractArc& operator= (const VAbstractArc &arc);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractArc &operator=(VAbstractArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
+#endif
+
+    void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
+    { std::swap(d, arc.d); }
 
     QString       GetFormulaF1 () const;
     void          SetFormulaF1 (const QString &formula, qreal value);

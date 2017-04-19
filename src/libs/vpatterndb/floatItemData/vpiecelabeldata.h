@@ -45,8 +45,16 @@ class VPieceLabelData : public VPatternLabelData
 public:
     VPieceLabelData();
     VPieceLabelData(const VPieceLabelData &data);
-    VPieceLabelData &operator=(const VPieceLabelData &data);
+
     virtual ~VPieceLabelData();
+
+    VPieceLabelData &operator=(const VPieceLabelData &data);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+#endif
+
+    void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
+    { std::swap(d, data.d); }
 
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);

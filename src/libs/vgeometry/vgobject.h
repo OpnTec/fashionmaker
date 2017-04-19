@@ -53,8 +53,16 @@ public:
     VGObject();
     explicit VGObject(const GOType &type, const quint32 &idObject = 0, const Draw &mode = Draw::Calculation);
     VGObject(const VGObject &obj);
-    VGObject& operator= (const VGObject &obj);
+
     virtual ~VGObject();
+
+    VGObject& operator= (const VGObject &obj);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW { Swap(obj); return *this; }
+#endif
+
+    void Swap(VGObject &obj) Q_DECL_NOTHROW
+    { std::swap(d, obj.d); }
 
     quint32         getIdObject() const;
     void            setIdObject(const quint32 &value);

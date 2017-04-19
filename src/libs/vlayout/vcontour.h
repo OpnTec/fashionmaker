@@ -50,8 +50,16 @@ public:
     VContour();
     VContour(int height, int width);
     VContour(const VContour &contour);
-    VContour &operator=(const VContour &contour);
+
     ~VContour();
+
+    VContour &operator=(const VContour &contour);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
+#endif
+
+    void Swap(VContour &contour) Q_DECL_NOTHROW
+    { std::swap(d, contour.d); }
 
     void             SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;

@@ -64,7 +64,14 @@ public:
     VSpline Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VSpline Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSpline();
+
     VSpline &operator=(const VSpline &spline);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VSpline &operator=(VSpline &&spline) Q_DECL_NOTHROW { Swap(spline); return *this; }
+#endif
+
+    void Swap(VSpline &spline) Q_DECL_NOTHROW
+    { std::swap(d, spline.d); }
 
     virtual VPointF GetP1 () const Q_DECL_OVERRIDE;
     void            SetP1 (const VPointF &p);

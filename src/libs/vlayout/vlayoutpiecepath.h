@@ -41,8 +41,16 @@ public:
     VLayoutPiecePath();
     VLayoutPiecePath(const QVector<QPointF> &points, Qt::PenStyle penStyle = Qt::SolidLine);
     VLayoutPiecePath(const VLayoutPiecePath &path);
-    VLayoutPiecePath &operator=(const VLayoutPiecePath &path);
+
     virtual ~VLayoutPiecePath();
+
+    VLayoutPiecePath &operator=(const VLayoutPiecePath &path);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
+#endif
+
+    void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
+    { std::swap(d, path.d); }
 
     QPainterPath GetPainterPath() const;
 

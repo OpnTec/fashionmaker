@@ -49,8 +49,15 @@ public:
     VFSplinePoint();
     VFSplinePoint(const VPointF &pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     VFSplinePoint(const VFSplinePoint &point);
-    VFSplinePoint &operator=(const VFSplinePoint &point);
     ~VFSplinePoint();
+
+    VFSplinePoint &operator=(const VFSplinePoint &point);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+#endif
+
+    void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
+    { std::swap(d, point.d); }
 
     VPointF P() const;
     void    SetP(const VPointF &value);
@@ -82,8 +89,15 @@ public:
     VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
                  qreal length1, const QString &length1F, qreal length2, const QString &length2F);
     VSplinePoint(const VSplinePoint &point);
-    VSplinePoint &operator=(const VSplinePoint &point);
     ~VSplinePoint();
+
+    VSplinePoint &operator=(const VSplinePoint &point);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+#endif
+
+    void Swap(VSplinePoint &point) Q_DECL_NOTHROW
+    { std::swap(d, point.d); }
 
     VPointF P() const;
     void    SetP(const VPointF &value);

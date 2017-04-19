@@ -50,11 +50,18 @@ public:
     VCubicBezier(const VCubicBezier &curve);
     VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4, quint32 idObject = 0,
                  Draw mode = Draw::Calculation);
-    VCubicBezier &operator=(const VCubicBezier &curve);
     VCubicBezier Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VCubicBezier Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VCubicBezier Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VCubicBezier();
+
+    VCubicBezier &operator=(const VCubicBezier &curve);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
+#endif
+
+    void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
+    { std::swap(d, curve.d); }
 
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;
     void            SetP1(const VPointF &p);

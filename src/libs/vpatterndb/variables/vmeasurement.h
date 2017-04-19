@@ -57,8 +57,16 @@ public:
                  bool ok, const QString &gui_text = QString(), const QString &description = QString(),
                  const QString &tagName = QString());
     VMeasurement(const VMeasurement &m);
-    VMeasurement &operator=(const VMeasurement &m);
+
     virtual ~VMeasurement() Q_DECL_OVERRIDE;
+
+    VMeasurement &operator=(const VMeasurement &m);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW { Swap(m); return *this; }
+#endif
+
+    void Swap(VMeasurement &m) Q_DECL_NOTHROW
+    { std::swap(d, m.d); }
 
     QString GetGuiText() const;
 

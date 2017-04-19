@@ -53,8 +53,15 @@ public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
     explicit VAbstractCurve(const VAbstractCurve &curve);
-    VAbstractCurve& operator= (const VAbstractCurve &curve);
     virtual ~VAbstractCurve() Q_DECL_OVERRIDE;
+
+    VAbstractCurve& operator= (const VAbstractCurve &curve);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
+#endif
+
+    void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
+    { std::swap(d, curve.d); }
 
     virtual QVector<QPointF> GetPoints() const =0;
     static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,

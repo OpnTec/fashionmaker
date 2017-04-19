@@ -140,8 +140,15 @@ class VAbstractPiece
 public:
     VAbstractPiece();
     VAbstractPiece(const VAbstractPiece &piece);
-    VAbstractPiece &operator=(const VAbstractPiece &piece);
     virtual ~VAbstractPiece();
+
+    VAbstractPiece &operator=(const VAbstractPiece &piece);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
+#endif
+
+    void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
+    { std::swap(d, piece.d); }
 
     QString GetName() const;
     void    SetName(const QString &value);

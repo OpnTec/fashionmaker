@@ -64,13 +64,22 @@ public:
      * @param node node
      */
     VNodeDetail(const VNodeDetail &node);
+
+    ~VNodeDetail();
+
     /**
      * @brief operator = assignment operator
      * @param node node
      * @return node
      */
     VNodeDetail &operator=(const VNodeDetail &node);
-    ~VNodeDetail();
+#ifdef Q_COMPILER_RVALUE_REFS
+    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
+#endif
+
+    void Swap(VNodeDetail &node) Q_DECL_NOTHROW
+    { std::swap(d, node.d); }
+
     /**
      * @brief getId return object id.
      * @return id.

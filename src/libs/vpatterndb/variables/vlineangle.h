@@ -45,8 +45,16 @@ public:
     VLineAngle();
     VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
     VLineAngle(const VLineAngle &var);
-    VLineAngle &operator=(const VLineAngle &var);
+
     virtual ~VLineAngle() Q_DECL_OVERRIDE;
+
+    VLineAngle &operator=(const VLineAngle &var);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VLineAngle &operator=(VLineAngle &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
+#endif
+
+    void Swap(VLineAngle &var) Q_DECL_NOTHROW
+    { std::swap(d, var.d); }
 
     virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
     void         SetValue(const VPointF *p1, const VPointF *p2);

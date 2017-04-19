@@ -118,9 +118,16 @@ class VContainer
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
     VContainer(const VTranslateVars *trVars, const Unit *patternUnit);
-    VContainer &operator=(const VContainer &data);
     VContainer(const VContainer &data);
     ~VContainer();
+
+    VContainer &operator=(const VContainer &data);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VContainer &operator=(VContainer &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+#endif
+
+    void Swap(VContainer &data) Q_DECL_NOTHROW
+    { std::swap(d, data.d); }
 
     template <typename T>
     const QSharedPointer<T> GeometricObject(const quint32 &id) const;

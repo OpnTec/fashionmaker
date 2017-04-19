@@ -59,7 +59,15 @@ public:
     VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
              const Draw &mode = Draw::Calculation);
     virtual ~VPointF() Q_DECL_OVERRIDE;
+
     VPointF &operator=(const VPointF &point);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+#endif
+
+    void Swap(VPointF &point) Q_DECL_NOTHROW
+    { std::swap(d, point.d); }
+
     explicit operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VPointF Flip(const QLineF &axis, const QString &prefix = QString()) const;

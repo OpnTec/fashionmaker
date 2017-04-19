@@ -49,8 +49,16 @@ public:
               const qreal &kheight = 0, const QString &description = QString());
     VVariable(const QString &name, const qreal &base, const QString &description = QString());
     VVariable(const VVariable &var);
-    VVariable &operator=(const VVariable &var);
+
     virtual ~VVariable() Q_DECL_OVERRIDE;
+
+    VVariable &operator=(const VVariable &var);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
+#endif
+
+    void Swap(VVariable &var) Q_DECL_NOTHROW
+    { std::swap(d, var.d); }
 
     qreal   GetBase() const;
     void    SetBase(const qreal &value);

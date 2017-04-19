@@ -59,15 +59,21 @@ public:
                     qreal rotationAngle, const QString &formulaRotationAngle, quint32 idObject = 0,
                     Draw mode = Draw::Calculation);
     VEllipticalArc (qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
-
     VEllipticalArc(const VEllipticalArc &arc);
 
-    VEllipticalArc& operator= (const VEllipticalArc &arc);
     VEllipticalArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
 
     virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
+
+    VEllipticalArc& operator= (const VEllipticalArc &arc);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
+#endif
+
+    void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
+    { std::swap(d, arc.d); }
 
     QString GetFormulaRotationAngle () const;
     void    SetFormulaRotationAngle (const QString &formula, qreal value);

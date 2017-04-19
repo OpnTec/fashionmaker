@@ -59,11 +59,18 @@ public:
           qreal f1, const QString &formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc (qreal length, const VPointF &center, qreal radius, qreal f1);
     VArc(const VArc &arc);
-    VArc& operator= (const VArc &arc);
     VArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VArc() Q_DECL_OVERRIDE;
+
+    VArc& operator= (const VArc &arc);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VArc &operator=(VArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
+#endif
+
+    void Swap(VArc &arc) Q_DECL_NOTHROW
+    { std::swap(d, arc.d); }
 
     QString GetFormulaRadius () const;
     void    SetFormulaRadius (const QString &formula, qreal value);

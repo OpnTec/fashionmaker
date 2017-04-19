@@ -51,11 +51,18 @@ public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
     VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VCubicBezierPath &operator=(const VCubicBezierPath &curve);
     VCubicBezierPath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VCubicBezierPath Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VCubicBezierPath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VCubicBezierPath();
+
+    VCubicBezierPath &operator=(const VCubicBezierPath &curve);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
+#endif
+
+    void Swap(VCubicBezierPath &curve) Q_DECL_NOTHROW
+    { std::swap(d, curve.d); }
 
     VPointF &operator[](int indx);
 

@@ -64,8 +64,14 @@ public:
     VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSplinePath() Q_DECL_OVERRIDE;
 
-    VSplinePath  &operator=(const VSplinePath &path);
     VSplinePoint &operator[](int indx);
+    VSplinePath  &operator=(const VSplinePath &path);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
+#endif
+
+    void Swap(VSplinePath &path) Q_DECL_NOTHROW
+    { std::swap(d, path.d); }
 
     void   append(const VSplinePoint &point);
 

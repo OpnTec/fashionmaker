@@ -43,8 +43,16 @@ class VPatternLabelData : public VAbstractFloatItemData
 public:
     VPatternLabelData();
     VPatternLabelData(const VPatternLabelData &data);
-    VPatternLabelData &operator=(const VPatternLabelData &data);
+
     virtual ~VPatternLabelData();
+
+    VPatternLabelData &operator=(const VPatternLabelData &data);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+#endif
+
+    void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
+    { std::swap(d, data.d); }
 
     // methods, which set up label parameters
     QString GetLabelWidth() const;
