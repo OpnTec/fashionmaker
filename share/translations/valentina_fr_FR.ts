@@ -10470,6 +10470,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Rotation angle:</source>
         <translation type="unfinished">Angle de rotation :</translation>
     </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation type="unfinished">Quatrième point:</translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>

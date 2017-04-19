@@ -8309,6 +8309,10 @@ Do you want to save your changes?</source>
         <source>Rotation angle:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>

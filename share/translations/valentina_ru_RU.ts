@@ -10506,6 +10506,10 @@ Do you want to save your changes?</source>
         <source>Rotation angle:</source>
         <translation type="unfinished">Угол поворота:</translation>
     </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation type="unfinished">Четвертая точка:</translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>

@@ -7020,26 +7020,6 @@ Do you want to save your changes?</source>
         <source>Templates</source>
         <translation type="vanished">Sjablonen</translation>
     </message>
-    <message>
-        <source>My Individual Measurements</source>
-        <translation type="vanished">mijn individuele Maten</translation>
-    </message>
-    <message>
-        <source>My Multisize Measurements</source>
-        <translation type="vanished">Mijn maatsysteem</translation>
-    </message>
-    <message>
-        <source>My Patterns</source>
-        <translation type="vanished">Mijn Patronen</translation>
-    </message>
-    <message>
-        <source>My Layouts</source>
-        <translation type="vanished">Mijn Layouts</translation>
-    </message>
-    <message>
-        <source>My Templates</source>
-        <translation type="vanished">Mijn Sjabloon</translation>
-    </message>
 </context>
 <context>
     <name>PatternPage</name>
@@ -7235,19 +7215,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished">mijn individuele Maten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished">Mijn maatsysteem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Mijn Patronen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished">Mijn Layouts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Templates</source>
@@ -8794,22 +8774,6 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Templates</source>
         <translation type="vanished">Sjablonen</translation>
     </message>
-    <message>
-        <source>My Individual Measurements</source>
-        <translation type="vanished">mijn individuele Maten</translation>
-    </message>
-    <message>
-        <source>My Multisize Measurements</source>
-        <translation type="vanished">Mijn maatsysteem</translation>
-    </message>
-    <message>
-        <source>My Templates</source>
-        <translation type="vanished">Mijn Sjablonen</translation>
-    </message>
-    <message>
-        <source>My Multisize measurements</source>
-        <translation type="vanished">Mijn Maatsysteem</translation>
-    </message>
 </context>
 <context>
     <name>TapePreferencesConfigurationPage</name>
@@ -8902,11 +8866,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
-        <translation type="unfinished">mijn individuele Maten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished">Mijn maatsysteem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Templates</source>
@@ -10542,6 +10506,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Rotation angle:</source>
         <translation type="unfinished">Hoek van draaiing:</translation>
     </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation type="unfinished">Vierde punt:</translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>
@@ -11782,36 +11750,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="vanished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="vanished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="vanished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="vanished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="vanished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="vanished">atanh</translation>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation>sinD</translation>
@@ -11840,16 +11778,6 @@ Wil je deze veranderingen opslaan?</translation>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
         <translation>atanD</translation>
-    </message>
-    <message>
-        <source>sinhD</source>
-        <comment>hyperbolic sine function working with degrees</comment>
-        <translation type="vanished">sinhD</translation>
-    </message>
-    <message>
-        <source>coshD</source>
-        <comment>hyperbolic cosine function working with degrees</comment>
-        <translation type="vanished">coshD</translation>
     </message>
     <message>
         <source>M_</source>
