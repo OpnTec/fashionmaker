@@ -1498,7 +1498,7 @@ void MainWindow::LoadStandard()
 
             if (qApp->patternType() == MeasurementsType::Standard)
             {
-                if (not hText.isEmpty() && not gradationSizes.isNull())
+                if (not hText.isEmpty() && not gradationHeights.isNull())
                 {
                     gradationHeights->setCurrentText(hText);
                 }

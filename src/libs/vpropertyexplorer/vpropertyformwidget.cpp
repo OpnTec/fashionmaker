@@ -233,7 +233,7 @@ void VPE::VPropertyFormWidget::commitData(int row)
             }
             else if (parent->propertyType() == Property::Complex)
             {
-                tmpProperty->UpdateParent(newValue);
+                parent->UpdateParent(newValue);
                 emit propertyDataSubmitted(parent);
             }
         }

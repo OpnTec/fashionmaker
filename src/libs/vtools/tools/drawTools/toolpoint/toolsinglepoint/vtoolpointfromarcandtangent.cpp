@@ -210,7 +210,7 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
         case 3:
         case 0:
         default:
-            return QPointF();
+            break;
     }
     return QPointF();
 }

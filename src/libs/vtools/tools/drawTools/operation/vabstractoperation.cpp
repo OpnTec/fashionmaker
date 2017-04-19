@@ -67,7 +67,7 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
     if (operatedObjects.contains(object))
     {
         VAbstractSimple *obj = operatedObjects.value(object);
-        if (obj->GetType() == GOType::Point)
+        if (obj && obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
             SCASSERT(item != nullptr)
@@ -392,7 +392,7 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
     if (operatedObjects.contains(labelId))
     {
         VAbstractSimple *obj = operatedObjects.value(labelId);
-        if (obj->GetType() == GOType::Point)
+        if (obj && obj->GetType() == GOType::Point)
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
             SCASSERT(item != nullptr)

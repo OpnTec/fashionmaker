@@ -41,6 +41,7 @@
 
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
+#include "../exception/vexceptionconversionerror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
@@ -2263,33 +2264,40 @@ QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
 {
     QMap<quint32, QPair<QString, bool> > data;
 
-    QDomElement groups = CreateGroups();
-    if (not groups.isNull())
+    try
     {
-        QDomNode domNode = groups.firstChild();
-        while (domNode.isNull() == false)
+        QDomElement groups = CreateGroups();
+        if (not groups.isNull())
         {
-            if (domNode.isElement())
+            QDomNode domNode = groups.firstChild();
+            while (domNode.isNull() == false)
             {
-                const QDomElement group = domNode.toElement();
-                if (group.isNull() == false)
+                if (domNode.isElement())
                 {
-                    if (group.tagName() == TagGroup)
+                    const QDomElement group = domNode.toElement();
+                    if (group.isNull() == false)
                     {
-                        const quint32 id = GetParametrUInt(group, AttrId, "0");
-                        const bool visible = GetParametrBool(group, AttrVisible, trueStr);
-                        const QString name = GetParametrString(group, AttrName, tr("New group"));
+                        if (group.tagName() == TagGroup)
+                        {
+                            const quint32 id = GetParametrUInt(group, AttrId, "0");
+                            const bool visible = GetParametrBool(group, AttrVisible, trueStr);
+                            const QString name = GetParametrString(group, AttrName, tr("New group"));
 
-                        data.insert(id, qMakePair(name, visible));
+                            data.insert(id, qMakePair(name, visible));
+                        }
                     }
                 }
+                domNode = domNode.nextSibling();
             }
-            domNode = domNode.nextSibling();
+        }
+        else
+        {
+            qDebug("Can't get tag Groups.");
         }
     }
-    else
+    catch (const VExceptionConversionError &)
     {
-        qDebug("Can't get tag Groups.");
+        return QMap<quint32, QPair<QString, bool> >();
     }
 
     return data;

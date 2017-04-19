@@ -170,7 +170,7 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
         const quint32 id = item->data(Qt::UserRole).toUInt();
         if (allDetails->contains(id))
         {
-            if (not select == allDetails->value(id).IsInLayout())
+            if (not (select == allDetails->value(id).IsInLayout()))
             {
                 TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);

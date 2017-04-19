@@ -131,7 +131,8 @@ void GraphicsViewZoom::VerticalScrollingTime(qreal x)
     // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
     // Value of _numScheduledScrollings is too short, so we scale the value
 
-    qreal scroll = (qAbs(_numScheduledVerticalScrollings)*(10 + 10/_view->transform().m22()))/(duration/updateInterval);
+    qreal scroll = static_cast<qreal>(qAbs(_numScheduledVerticalScrollings))*(10. + 10./_view->transform().m22())
+            /(static_cast<qreal>(duration)/static_cast<qreal>(updateInterval));
 
     if (qAbs(scroll) < 1)
     {
@@ -152,8 +153,8 @@ void GraphicsViewZoom::HorizontalScrollingTime(qreal x)
     // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
     // Value of _numScheduledScrollings is too short, so we scale the value
 
-    qreal scroll = (qAbs(_numScheduledHorizontalScrollings)*(10 + 10/_view->transform().m11()))/
-            (duration/updateInterval);
+    qreal scroll = static_cast<qreal>(qAbs(_numScheduledHorizontalScrollings))*(10. + 10./_view->transform().m11())
+            /(static_cast<qreal>(duration)/static_cast<qreal>(updateInterval));
 
     if (qAbs(scroll) < 1)
     {

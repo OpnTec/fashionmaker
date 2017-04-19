@@ -2556,7 +2556,7 @@ DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
     const size_t size = strlen(file)+1;
     char* f = new char[size];
-    strlcpy(f, file, size); // Strange thing the sizeof(f) doesn't return correct value
+    strlcpy(f, file, size);
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);
@@ -5925,19 +5925,21 @@ int DL_Dxf::getLibVersion(const std::string& str)
  */
 void DL_Dxf::test()
 {
-    char* buf1 = new char[10];
-    char* buf2 = new char[10];
-    char* buf3 = new char[10];
-    char* buf4 = new char[10];
-    char* buf5 = new char[10];
-    char* buf6 = new char[10];
+    const size_t bufSize = 10;
 
-    strlcpy(buf1, "  10\n", sizeof(buf1));
-    strlcpy(buf2, "10", sizeof(buf2));
-    strlcpy(buf3, "10\n", sizeof(buf3));
-    strlcpy(buf4, "  10 \n", sizeof(buf4));
-    strlcpy(buf5, "  10 \r", sizeof(buf5));
-    strlcpy(buf6, "\t10 \n", sizeof(buf6));
+    char* buf1 = new char[bufSize];
+    char* buf2 = new char[bufSize];
+    char* buf3 = new char[bufSize];
+    char* buf4 = new char[bufSize];
+    char* buf5 = new char[bufSize];
+    char* buf6 = new char[bufSize];
+
+    strlcpy(buf1, "  10\n", bufSize);
+    strlcpy(buf2, "10", bufSize);
+    strlcpy(buf3, "10\n", bufSize);
+    strlcpy(buf4, "  10 \n", bufSize);
+    strlcpy(buf5, "  10 \r", bufSize);
+    strlcpy(buf6, "\t10 \n", bufSize);
 
     // Try to avoid deleting array from an offset
     char* buf1Copy = buf1;

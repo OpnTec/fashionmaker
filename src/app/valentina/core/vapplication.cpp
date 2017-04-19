@@ -472,13 +472,14 @@ QString VApplication::LogPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::CreateLogDir() const
+bool VApplication::CreateLogDir() const
 {
     QDir logDir(LogDirPath());
     if (logDir.exists() == false)
     {
-        logDir.mkpath("."); // Create directory for log if need
+        return logDir.mkpath("."); // Create directory for log if need
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -600,12 +601,14 @@ QStringList VApplication::LabelLanguages()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartLogging()
 {
-    CreateLogDir();
-    BeginLogging();
-    ClearOldLogs();
+    if (CreateLogDir())
+    {
+        BeginLogging();
+        ClearOldLogs();
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    ClearOldReports();
+        ClearOldReports();
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

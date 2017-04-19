@@ -109,7 +109,7 @@ private:
 
     QString            LogDirPath()const;
     QString            LogPath()const;
-    void               CreateLogDir()const;
+    bool               CreateLogDir()const;
     void               BeginLogging();
     void               ClearOldLogs()const;
 

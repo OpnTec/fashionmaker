@@ -49,7 +49,7 @@ void TST_VPiece::ClearLoop()
     // See file <root>/src/app/share/collection/jacketМ6_30-110.val
     // Check correct seam allowance
     const Unit unit = Unit::Mm;
-    VContainer *data = new VContainer(nullptr, &unit);
+    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit));
     qApp->setPatternUnit(unit);
 
     data->UpdateGObject(304, new VPointF(61.866708661417327, 446.92270866141735, "Ф1", 5.0000125984251973,
@@ -103,7 +103,7 @@ void TST_VPiece::ClearLoop()
     detail.GetPath()[0].SetFormulaSABefore("0");
     detail.GetPath()[detail.GetPath().CountNodes()-1].SetFormulaSAAfter("0");
 
-    const QVector<QPointF> pointsEkv = detail.SeamAllowancePoints(data);
+    const QVector<QPointF> pointsEkv = detail.SeamAllowancePoints(data.data());
 
     QVector<QPointF> origPoints;
     origPoints.append(QPointF(42.46405659601932, 415.2845470563871));
@@ -152,7 +152,7 @@ void TST_VPiece::Issue620()
     // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
     // Check main path
     const Unit unit = Unit::Cm;
-    VContainer *data = new VContainer(nullptr, &unit);
+    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit));
     qApp->setPatternUnit(unit);
 
     data->UpdateGObject(1, new VPointF(30, 39.999874015748034, "A", 5.0000125984251973, 9.9999874015748045));
@@ -208,7 +208,7 @@ void TST_VPiece::Issue620()
     detail.GetPath().Append(VPieceNode(8, Tool::NodeSpline));
     detail.GetPath().Append(VPieceNode(7, Tool::NodeSplinePath));
 
-    const QVector<QPointF> pointsEkv = detail.MainPathPoints(data);
+    const QVector<QPointF> pointsEkv = detail.MainPathPoints(data.data());
 
     QVector<QPointF> origPoints;
 
