@@ -1117,7 +1117,7 @@ bool DialogPiecePath::PathIsValid() const
 
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
-        url += tr("List of objects is empty!");
+        url += tr("List of details is empty!");
         ui->helpLabel->setText(url);
         return false;
     }
