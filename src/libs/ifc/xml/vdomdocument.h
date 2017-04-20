@@ -142,6 +142,8 @@ private:
     QHash<QString, QDomElement> map;
 
     bool           find(const QDomElement &node, const QString& id);
+
+    bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

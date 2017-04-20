@@ -63,6 +63,66 @@
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 #include <QtDebug>
+#include <QXmlStreamWriter>
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
+{
+    if (stream.hasError())
+    {
+       return;
+    }
+
+    if (domNode.isElement())
+    {
+        const QDomElement domElement = domNode.toElement();
+        if (not domElement.isNull())
+        {
+            stream.writeStartElement(domElement.tagName());
+
+            if (domElement.hasAttributes())
+            {
+                QMap<QString, QString> attributes;
+                const QDomNamedNodeMap attributeMap = domElement.attributes();
+                for (int i = 0; i < attributeMap.count(); ++i)
+                {
+                    const QDomNode attribute = attributeMap.item(i);
+                    attributes.insert(attribute.nodeName(), attribute.nodeValue());
+                }
+
+                QMap<QString, QString>::const_iterator i = attributes.constBegin();
+                while (i != attributes.constEnd())
+                {
+                    stream.writeAttribute(i.key(), i.value());
+                    ++i;
+                }
+            }
+
+            if (domElement.hasChildNodes())
+            {
+                QDomNode elementChild = domElement.firstChild();
+                while (not elementChild.isNull())
+                {
+                    SaveNodeCanonically(stream, elementChild);
+                    elementChild = elementChild.nextSibling();
+                }
+            }
+
+            stream.writeEndElement();
+        }
+    }
+    else if (domNode.isComment())
+    {
+        stream.writeComment(domNode.nodeValue());
+    }
+    else if (domNode.isText())
+    {
+        stream.writeCharacters(domNode.nodeValue());
+    }
+}
+}
 
 //This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler
@@ -200,6 +260,37 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
         }
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::SaveCanonicalXML(QIODevice *file, int indent, QString &error) const
+{
+    SCASSERT(file != nullptr)
+
+    QXmlStreamWriter stream(file);
+    stream.setAutoFormatting(true);
+    stream.setAutoFormattingIndent(indent);
+    stream.writeStartDocument();
+
+    QDomNode root = documentElement();
+    while (not root.isNull())
+    {
+        SaveNodeCanonically(stream, root);
+        if (stream.hasError())
+        {
+            break;
+        }
+        root = root.nextSibling();
+    }
+
+    stream.writeEndDocument();
+
+    if (stream.hasError())
+    {
+        error = tr("Fail to write Canonical XML.");
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -649,10 +740,17 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
     // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::WriteOnly))
     {
+        // See issue #666. QDomDocument produces random attribute order.
         const int indent = 4;
-        QTextStream out(&file);
-        out.setCodec("UTF-8");
-        save(out, indent);
+        if (not SaveCanonicalXML(&file, indent, error))
+        {
+            return false;
+        }
+        // Left these strings in case we will need them for testing purposes
+        // QTextStream out(&file);
+        // out.setCodec("UTF-8");
+        // save(out, indent);
+
         success = file.commit();
     }
 
