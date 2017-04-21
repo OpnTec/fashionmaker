@@ -36,9 +36,6 @@
 #include <QtGlobal>
 
 #include "../qmuparser/qmuformulabase.h"
-#include "../vmisc/def.h"
-
-class VContainer;
 
 /**
  * @brief The Calculator class for calculation formula.
@@ -62,12 +59,13 @@ class Calculator:public qmu::QmuFormulaBase
 {
 public:
     Calculator();
-    virtual ~Calculator() Q_DECL_OVERRIDE;
-    qreal         EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
+    virtual ~Calculator() Q_DECL_EQ_DEFAULT;
+
+    qreal EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
-    void          InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
-                                const QString &formula);
+
+    void InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens, const QString &formula);
 };
 
 #endif // CALCULATOR_H
