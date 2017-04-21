@@ -3358,10 +3358,6 @@ Apply settings anyway?</source>
         <source>Show measurements file</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>200</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3641,10 +3637,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Одна точка не може бути використана два рази підряд!</translation>
     </message>
     <message>
-        <source>List of objects is empty!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Passmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3698,6 +3690,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, select a detail to insert into!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of details is empty!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4583,6 +4579,10 @@ Apply settings anyway?</source>
         <source>Passmarks</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -5074,11 +5074,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value can&apos;t be lass than 0</source>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <source>Value can&apos;t be less than 0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5502,7 +5502,7 @@ Apply settings anyway?</source>
         <translation>Використовуеється для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6631,10 +6631,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit Current</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6679,11 +6675,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. 
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Insert node tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6705,6 +6696,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7116,10 +7115,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Forbid flipping</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7133,6 +7128,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7283,13 +7282,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Partial write. Partition full?</source>
         <translation type="vanished">Частковий запис. Розділ повний?</translation>
-    </message>
-</context>
-<context>
-    <name>QShortcut</name>
-    <message>
-        <source>Ctrl</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7834,7 +7826,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Пусто&gt;</translation>
+        <translation type="vanished">&lt;Пусто&gt;</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -8161,13 +8153,13 @@ Do you want to save your changes?</source>
         <source>Export from standard measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished">Форма</translation>
-    </message>
     <message>
         <source>Grainline visible</source>
         <translation type="unfinished"></translation>
@@ -8215,10 +8207,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>TabLabels</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished">Форма</translation>
-    </message>
     <message>
         <source>Piece label data</source>
         <translation type="unfinished"></translation>
@@ -8331,10 +8319,6 @@ Do you want to save your changes?</source>
 <context>
     <name>TabPassmarks</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished">Форма</translation>
-    </message>
-    <message>
         <source>Passmark:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8377,10 +8361,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>TabPaths</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished">Форма</translation>
-    </message>
     <message>
         <source>Main path</source>
         <translation type="unfinished"></translation>
@@ -8484,13 +8464,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Built in</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TabPins</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished">Форма</translation>
     </message>
 </context>
 <context>
@@ -8792,7 +8765,7 @@ Do you want to save your changes?</source>
         <translation>Неочікувана версія &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error openning a temp file file: %1.</source>
+        <source>Error openning a temp file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8868,10 +8841,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>golden rod</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>orange</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8906,6 +8875,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Edit wrong formula</source>
         <translation type="unfinished">Редагувати неправильну формулу</translation>
+    </message>
+    <message>
+        <source>goldenrod</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9246,7 +9219,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9367,6 +9340,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>Не вдалося завантажити файл схеми &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Fail to write Canonical XML.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

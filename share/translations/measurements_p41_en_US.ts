@@ -3821,7 +3821,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>From Waist Side around hip curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>From Waist Side around hip curve down to surface, while seated on hard surface.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
