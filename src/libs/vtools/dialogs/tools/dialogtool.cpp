@@ -804,7 +804,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                     flag = false;
                     ChangeColor(labelEditFormula, Qt::red);
                     label->setText(tr("Error") + " (" + postfix + ")");
-                    label->setToolTip(tr("Value can't be lass than 0"));
+                    label->setToolTip(tr("Value can't be less than 0"));
                 }
                 else
                 {

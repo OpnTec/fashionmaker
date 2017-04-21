@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -725,7 +725,7 @@
               <item row="7" column="2">
                <widget class="QCheckBox" name="checkBoxH200">
                 <property name="text">
-                 <string>200</string>
+                 <string notr="true">200</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

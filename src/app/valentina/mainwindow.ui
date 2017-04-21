@@ -55,7 +55,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>127</width>
          <height>358</height>
         </rect>
        </property>
@@ -427,7 +427,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>140</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +536,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +798,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -1146,8 +1146,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>196</height>
+         <width>140</width>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1324,7 +1324,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>140</width>
          <height>196</height>
         </rect>
        </property>
@@ -1511,8 +1511,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>58</height>
+         <width>140</width>
+         <height>326</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2568,7 +2568,7 @@
     <string>Open Tape</string>
    </property>
    <property name="toolTip">
-    <string>Open Tape app for creating or editing measurements file </string>
+    <string>Open Tape app for creating or editing measurements file</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -2650,8 +2650,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

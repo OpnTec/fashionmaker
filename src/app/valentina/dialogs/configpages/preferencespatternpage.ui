@@ -106,7 +106,7 @@
       <item>
        <widget class="QCheckBox" name="forbidFlippingCheck">
         <property name="toolTip">
-         <string>By default forbid flipping for all new created workpieces&quot;</string>
+         <string>By default forbid flipping for all new created workpieces</string>
         </property>
         <property name="text">
          <string>Forbid flipping</string>

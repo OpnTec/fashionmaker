@@ -2233,7 +2233,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     curFile = fileName;
     if (curFile.isEmpty())
     {
-        ui->lineEditPathToFile->setText(tr("<Empty>"));
+        ui->lineEditPathToFile->setText(QLatin1String("<") + tr("Empty") + QLatin1String(">"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
         ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(false);

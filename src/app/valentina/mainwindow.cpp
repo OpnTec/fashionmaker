@@ -96,6 +96,10 @@ QT_WARNING_POP
 
 const QString autosavePrefix = QStringLiteral(".autosave");
 
+// String below need for getting translation for key Ctrl
+const QString strQShortcut   = QStringLiteral("QShortcut"); // Context
+const QString strCtrl        = QStringLiteral("Ctrl"); // String
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MainWindow constructor.
@@ -1061,7 +1065,7 @@ void MainWindow::ToolGroup(bool checked)
     ToolSelectGroupObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - finish creation")
-            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png", tooltip,
                                &MainWindow::ClosedDialogGroup);
 }
@@ -1072,7 +1076,7 @@ void MainWindow::ToolRotation(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, ":/cursor/rotation_cursor.png", tooltip,
                                            &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
@@ -1084,7 +1088,7 @@ void MainWindow::ToolFlippingByLine(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine, ":/cursor/flipping_line_cursor.png",
                                                  tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
                                                  &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
@@ -1096,7 +1100,7 @@ void MainWindow::ToolFlippingByAxis(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis, ":/cursor/flipping_axis_cursor.png",
                                                  tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
                                                  &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
@@ -1108,7 +1112,7 @@ void MainWindow::ToolMove(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move, ":/cursor/move_cursor.png", tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
@@ -2384,7 +2388,7 @@ void MainWindow::ActionLayout(bool checked)
         {
             listDetails.clear();
             QMessageBox::warning(this, tr("Layout mode"),
-                                 tr("You can't use now the Layout mode. \n%1").arg(e.ErrorMessage()),
+                                 tr("You can't use now the Layout mode.") + QLatin1String(" \n") + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
             mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
             return;

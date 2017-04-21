@@ -2211,7 +2211,13 @@ bool DialogSeamAllowance::MainPathIsValid() const
     if (valid)
     {
         m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
-        uiTabPaths->helpLabel->setText(tr("Ready!"));
+        QString tooltip = tr("Ready!");
+        if (not applyAllowed)
+        {
+            tooltip = tooltip + QLatin1String("  <b>") +
+                    tr("To open all detail's features complete creating the main path.") + QLatin1String("</b>");
+        }
+        uiTabPaths->helpLabel->setText(tooltip);
     }
     else
     {

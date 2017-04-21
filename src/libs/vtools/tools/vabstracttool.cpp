@@ -414,7 +414,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
                 name = tr("light salmon");
                 break;
             case 8: // ColorGoldenRod
-                name = tr("golden rod");
+                name = tr("goldenrod");
                 break;
             case 9: // ColorOrange
                 name = tr("orange");
