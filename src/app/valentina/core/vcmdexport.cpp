@@ -256,8 +256,8 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine", "Disable high dpi scaling. Call this option if has "
                                                                     "problem with scaling (by default scaling "
                                                                     "enabled). Alternatively you can use the "
-                                                                    "QT_AUTO_SCREEN_SCALE_FACTOR=0 environment "
-                                                                    "variable.")));
+                                                                    "%1 environment variable.")
+                                          .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")));
 }
 
 //------------------------------------------------------------------------------------------------------
