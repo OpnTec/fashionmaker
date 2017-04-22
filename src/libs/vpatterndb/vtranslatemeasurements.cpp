@@ -425,7 +425,7 @@ void VTranslateMeasurements::InitGroupC()
     m = translate("VTranslateMeasurements", "indent_ankle_high",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements", "Indent: Ankle High", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, "
+    d = translate("VTranslateMeasurements", "Horizontal Distance between a flat stick, placed perpendicular to Heel, "
                   "and the greatest indentation of Ankle.", "Full measurement description.");
     InitMeasurement(indentAnkleHigh_M, m, g, d, "C03");
     //=================================================================================================================
