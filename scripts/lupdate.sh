@@ -15,11 +15,11 @@ NUMBER=${#NUMBER[@]}
 
 for ((i=0;i<NUMBER;i++)); do
   tx pull -r valentina-project.measurements_p${i}ts --mode=developer -f --skip &
-  sleep 6
+  sleep 5
 done
 
 tx pull -r valentina-project.valentina_ts --mode=developer -f --skip &
-sleep 6
+sleep 5
 tx pull -r valentina-project.measurements_p998ts --mode=developer -f --skip &
 
 wait
