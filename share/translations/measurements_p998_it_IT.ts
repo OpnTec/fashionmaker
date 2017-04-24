@@ -556,10 +556,15 @@
         <translation>Tacca: Caviglia Alta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanza orizzontale tra un bastoncino piatto, posto perpendicolare al tallone e la rientranza più profonda della caviglia.</translation>
+        <translation type="vanished">Distanza orizzontale tra un bastoncino piatto, posto perpendicolare al tallone e la rientranza più profonda della caviglia.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
+        <source>Horizontal Distance between a flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>

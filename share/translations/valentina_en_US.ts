@@ -3474,10 +3474,6 @@ Apply settings anyway?</translation>
         <source>Show measurements file</source>
         <translation>Show measurements file</translation>
     </message>
-    <message>
-        <source>200</source>
-        <translation type="vanished">200</translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3765,10 +3761,6 @@ Apply settings anyway?</translation>
         <translation>You have double points!</translation>
     </message>
     <message>
-        <source>List of objects is empty!</source>
-        <translation type="vanished">List of objects is empty!</translation>
-    </message>
-    <message>
         <source>Passmarks</source>
         <translation>Passmarks</translation>
     </message>
@@ -3826,7 +3818,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>List of details is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>List of details is empty!</translation>
     </message>
 </context>
 <context>
@@ -4717,7 +4709,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="unfinished"></translation>
+        <translation>To open all detail&apos;s features complete creating the main path.</translation>
     </message>
 </context>
 <context>
@@ -5210,16 +5202,12 @@ Apply settings anyway?</translation>
         <translation>by second edge right angle</translation>
     </message>
     <message>
-        <source>Value can&apos;t be lass than 0</source>
-        <translation type="vanished">Value can&apos;t be lass than 0</translation>
-    </message>
-    <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Value can&apos;t be less than 0</translation>
     </message>
 </context>
 <context>
@@ -5642,12 +5630,8 @@ Apply settings anyway?</translation>
         <translation>Use for unit testing. Run the program and open a file without showing the main window.</translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</translation>
-    </message>
-    <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</translation>
     </message>
 </context>
 <context>
@@ -6776,10 +6760,6 @@ Do you want to save your changes?</translation>
         <translation>Open Tape</translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file </source>
-        <translation type="vanished">Open Tape app for creating or editing measurements file </translation>
-    </message>
-    <message>
         <source>Edit Current</source>
         <translation>Edit Current</translation>
     </message>
@@ -6824,12 +6804,6 @@ Do you want to save your changes?</translation>
         <translation>Select pin point</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. 
-%1</source>
-        <translation type="vanished">You can&apos;t use now the Layout mode. 
-%1</translation>
-    </message>
-    <message>
         <source>Insert node tool</source>
         <translation>Insert node tool</translation>
     </message>
@@ -6854,12 +6828,12 @@ Do you want to save your changes?</translation>
         <translation>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file</source>
-        <translation type="unfinished"></translation>
+        <source>You can&apos;t use now the Layout mode.</source>
+        <translation>You can&apos;t use now the Layout mode.</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
-        <translation type="unfinished"></translation>
+        <source>Open Tape app for creating or editing measurements file</source>
+        <translation>Open Tape app for creating or editing measurements file</translation>
     </message>
 </context>
 <context>
@@ -7298,10 +7272,6 @@ Do you want to save your changes?</translation>
         <translation>Workpiece</translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces&quot;</source>
-        <translation type="vanished">By default forbid flipping for all new created workpieces&quot;</translation>
-    </message>
-    <message>
         <source>Forbid flipping</source>
         <translation>Forbid flipping</translation>
     </message>
@@ -7319,7 +7289,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished">By default forbid flipping for all new created workpieces</translation>
+        <translation>By default forbid flipping for all new created workpieces</translation>
     </message>
 </context>
 <context>
@@ -7469,13 +7439,6 @@ Do you want to save your changes?</translation>
     <message>
         <source>Partial write. Partition full?</source>
         <translation type="vanished">Partial write. Partition full?</translation>
-    </message>
-</context>
-<context>
-    <name>QShortcut</name>
-    <message>
-        <source>Ctrl</source>
-        <translation type="vanished">Ctrl</translation>
     </message>
 </context>
 <context>
@@ -8353,15 +8316,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished">Empty</translation>
+        <translation>Empty</translation>
     </message>
 </context>
 <context>
     <name>TabGrainline</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
     <message>
         <source>Grainline visible</source>
         <translation>Grainline visible</translation>
@@ -8409,10 +8368,6 @@ Do you want to save your changes?</translation>
 </context>
 <context>
     <name>TabLabels</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
     <message>
         <source>Piece label data</source>
         <translation>Piece label data</translation>
@@ -8525,10 +8480,6 @@ Do you want to save your changes?</translation>
 <context>
     <name>TabPassmarks</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
-    <message>
         <source>Passmark:</source>
         <translation>Passmark:</translation>
     </message>
@@ -8571,10 +8522,6 @@ Do you want to save your changes?</translation>
 </context>
 <context>
     <name>TabPaths</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
-    </message>
     <message>
         <source>Main path</source>
         <translation>Main path</translation>
@@ -8678,13 +8625,6 @@ Do you want to save your changes?</translation>
     <message>
         <source>Built in</source>
         <translation>Built in</translation>
-    </message>
-</context>
-<context>
-    <name>TabPins</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Form</translation>
     </message>
 </context>
 <context>
@@ -8990,12 +8930,8 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Error replacing a symlink by real file: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file file: %1.</source>
-        <translation type="vanished">Error openning a temp file file: %1.</translation>
-    </message>
-    <message>
         <source>Error openning a temp file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error openning a temp file: %1.</translation>
     </message>
 </context>
 <context>
@@ -9111,7 +9047,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>goldenrod</source>
-        <translation type="unfinished"></translation>
+        <translation>goldenrod</translation>
     </message>
 </context>
 <context>
@@ -9452,12 +9388,8 @@ Do you want to save your changes?</translation>
         <translation>Number corresponding to page template (default = 0, export mode):</translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</translation>
-    </message>
-    <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</translation>
     </message>
 </context>
 <context>
@@ -9581,7 +9513,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fail to write Canonical XML.</translation>
     </message>
 </context>
 <context>

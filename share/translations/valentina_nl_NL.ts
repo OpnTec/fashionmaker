@@ -3761,10 +3761,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Je hebt punten dubbel!</translation>
     </message>
     <message>
-        <source>List of objects is empty!</source>
-        <translation type="vanished">Lijst van objecten is leeg!</translation>
-    </message>
-    <message>
         <source>Passmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5206,10 +5202,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>op tweede lijn rechte hoek</translation>
     </message>
     <message>
-        <source>Value can&apos;t be lass than 0</source>
-        <translation type="vanished">Waarde kan niet kleiner dan 0 zijn</translation>
-    </message>
-    <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5636,10 +5628,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gebruik voor unit testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te tonen.</translation>
-    </message>
-    <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je QT_AUTO_SCREEN_SCALE_FACTOR=0 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
@@ -6771,10 +6759,6 @@ Do you want to save your changes?</source>
         <translation>Open Tape</translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file </source>
-        <translation type="vanished">Open de Tape app om een matenbestand te wijzigen of aan te maken </translation>
-    </message>
-    <message>
         <source>Edit Current</source>
         <translation>Wijzig huidige</translation>
     </message>
@@ -6819,12 +6803,6 @@ Do you want to save your changes?</source>
         <translation>Selecteer de pinpunten</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. 
-%1</source>
-        <translation type="vanished">Je kunt de layout-mode nu niet gebruiken.
-%1</translation>
-    </message>
-    <message>
         <source>Insert node tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6849,11 +6827,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file</source>
+        <source>You can&apos;t use now the Layout mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
+        <source>Open Tape app for creating or editing measurements file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9403,10 +9381,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation>Nummer behorende bij de pagina sjabloon( standaardinstelling = 0, export modus):</translation>
-    </message>
-    <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je QT_AUTO_SCREEN_SCALE_FACTOR=0 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>

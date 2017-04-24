@@ -557,10 +557,15 @@
         <translation>Marcare: înălțime Gleznă</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța orizontală dintre un băț drept, plasat perpendicular pe toc, și cea mai mare proeminență a gleznei.</translation>
+        <translation type="vanished">Distanța orizontală dintre un băț drept, plasat perpendicular pe toc, și cea mai mare proeminență a gleznei.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
+        <source>Horizontal Distance between a flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>

@@ -538,10 +538,9 @@
         <translation>Marcar: Tobillo Alto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distancia horizontal entre un palo liso, puesto perpendicular al talón, y la mayor hendidura del Tobillo.</translation>
+        <translation type="vanished">Distancia horizontal entre un palo liso, puesto perpendicular al talón, y la mayor hendidura del Tobillo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>
@@ -968,6 +967,12 @@
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
         <translation>Altura vertical desde la espalda de la cintura hasta el suelo. (&apos;Altura: Frente de la cintura&apos;&apos; - &apos;Pierna: De entrepierna al suelo&apos;&apos;).</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
+        <source>Horizontal Distance between a flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="638"/>

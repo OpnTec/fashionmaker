@@ -556,10 +556,15 @@
         <translation>Положення корпусу: щиколотка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
         <comment>Full measurement description.</comment>
-        <translation>Горизонтальна відстань між плоскою палицею, що розміщена перпендикулярно до п&apos;яти, і найбільшим відступом щиколотки.</translation>
+        <translation type="vanished">Горизонтальна відстань між плоскою палицею, що розміщена перпендикулярно до п&apos;яти, і найбільшим відступом щиколотки.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
+        <source>Horizontal Distance between a flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>

@@ -3474,10 +3474,6 @@ Apply settings anyway?</source>
         <source>Show measurements file</source>
         <translation>Mostrar archivo de medidas</translation>
     </message>
-    <message>
-        <source>200</source>
-        <translation type="vanished">200</translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3763,10 +3759,6 @@ Apply settings anyway?</source>
     <message>
         <source>You have double points!</source>
         <translation>¡Tiene puntos dobles!</translation>
-    </message>
-    <message>
-        <source>List of objects is empty!</source>
-        <translation type="vanished">¡La lista de objetos está vacía!</translation>
     </message>
     <message>
         <source>Passmarks</source>
@@ -5210,10 +5202,6 @@ Apply settings anyway?</source>
         <translation>por el segundo ángulo recto del borde</translation>
     </message>
     <message>
-        <source>Value can&apos;t be lass than 0</source>
-        <translation type="vanished">El valor no puede ser inferior a 0</translation>
-    </message>
-    <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5640,10 +5628,6 @@ Apply settings anyway?</source>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar la ventana principal.</translation>
-    </message>
-    <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Deshabilitar la escala alta de ppp. Llame a esta opción si tiene problemas al escalar (el escalado está habilitado por defecto). Alternativamente puede utilizar el ambiente variable QT_AUTO_SCREEN_SCALE_FACTOR=0.</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
@@ -6844,11 +6828,11 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file</source>
+        <source>You can&apos;t use now the Layout mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
+        <source>Open Tape app for creating or editing measurements file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9402,10 +9386,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
         <translation>Número correspondiente a plantilla de página (por defecto = 0, modo de esportación):</translation>
-    </message>
-    <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Deshabilitar la escala alta de ppp. Llame a esta opción si tiene problemas al escalar (el escalado está habilitado por defecto). Alternativamente puede utilizar el ambiente variable QT_AUTO_SCREEN_SCALE_FACTOR=0.</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>

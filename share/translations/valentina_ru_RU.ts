@@ -347,11 +347,11 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>сопряжение</translation>
+        <translation>Дублерин</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>дополнительная подкладка</translation>
+        <translation>Флизелин</translation>
     </message>
 </context>
 <context>
@@ -1454,11 +1454,11 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">взаимодействие</translation>
+        <translation type="vanished">Дублерин</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="vanished">дополнительная подкладка</translation>
+        <translation type="vanished">Флизелин</translation>
     </message>
     <message>
         <source>None</source>
@@ -3474,10 +3474,6 @@ Apply settings anyway?</source>
         <source>Show measurements file</source>
         <translation>Показать файл мерок</translation>
     </message>
-    <message>
-        <source>200</source>
-        <translation type="vanished">200</translation>
-    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -3765,10 +3761,6 @@ Apply settings anyway?</source>
         <translation>Повторяются две точки подряд!</translation>
     </message>
     <message>
-        <source>List of objects is empty!</source>
-        <translation type="vanished">Список объектов пустой!</translation>
-    </message>
-    <message>
         <source>Passmarks</source>
         <translation>Надсечки</translation>
     </message>
@@ -3826,7 +3818,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>List of details is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Список деталей пустой!</translation>
     </message>
 </context>
 <context>
@@ -4717,7 +4709,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для открытия всех функций детали закончите создание главного контура.</translation>
     </message>
 </context>
 <context>
@@ -5210,16 +5202,12 @@ Apply settings anyway?</source>
         <translation>по прямому углу второго ребра</translation>
     </message>
     <message>
-        <source>Value can&apos;t be lass than 0</source>
-        <translation type="vanished">Значение не может быть меньше 0</translation>
-    </message>
-    <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение не может быть меньше 0</translation>
     </message>
 </context>
 <context>
@@ -5642,12 +5630,8 @@ Apply settings anyway?</source>
         <translation>Используйте для юнит тестирования. Запускает программу и открывает файл без показа окна.</translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать QT_AUTO_SCREEN_SCALE_FACTOR=0 переменную среды.</translation>
-    </message>
-    <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать %1 переменную среды.</translation>
     </message>
 </context>
 <context>
@@ -6776,10 +6760,6 @@ Do you want to save your changes?</source>
         <translation>Отркыть Tape</translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file </source>
-        <translation type="vanished">Открыть программу Tape для создание или редактирования файла мерок</translation>
-    </message>
-    <message>
         <source>Edit Current</source>
         <translation>Редактировать теперешнюю</translation>
     </message>
@@ -6824,12 +6804,6 @@ Do you want to save your changes?</source>
         <translation>Выберите точку шпильки</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. 
-%1</source>
-        <translation type="vanished">Сейчас невозможно использовать режим раскладки. 
-%1</translation>
-    </message>
-    <message>
         <source>Insert node tool</source>
         <translation>Инструмент Вставить узел</translation>
     </message>
@@ -6854,12 +6828,12 @@ Do you want to save your changes?</source>
         <translation>Выберите один или несколько объектов, зажмите  &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file</source>
-        <translation type="unfinished"></translation>
+        <source>You can&apos;t use now the Layout mode.</source>
+        <translation>Сейчас невозможно использовать режим раскладки.</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
-        <translation type="unfinished"></translation>
+        <source>Open Tape app for creating or editing measurements file</source>
+        <translation>Открыть программу Tape для создания или редактирования файла мерок</translation>
     </message>
 </context>
 <context>
@@ -7298,10 +7272,6 @@ Do you want to save your changes?</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces&quot;</source>
-        <translation type="vanished">По умолчанию запретить переворачивание для всех вновь созданных заготовок деталей</translation>
-    </message>
-    <message>
         <source>Forbid flipping</source>
         <translation>Запретить переворачивание</translation>
     </message>
@@ -7319,7 +7289,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="unfinished">По умолчанию запретить поворот для всех вновь созданных заготовок деталей</translation>
+        <translation>По умолчанию запретить поворот для всех вновь созданных заготовок деталей</translation>
     </message>
 </context>
 <context>
@@ -7469,13 +7439,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Partial write. Partition full?</source>
         <translation type="vanished">Частичная запись. Раздел заполнен?</translation>
-    </message>
-</context>
-<context>
-    <name>QShortcut</name>
-    <message>
-        <source>Ctrl</source>
-        <translation type="vanished">Ctrl</translation>
     </message>
 </context>
 <context>
@@ -8353,15 +8316,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished">Пусто</translation>
+        <translation>Пусто</translation>
     </message>
 </context>
 <context>
     <name>TabGrainline</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
     <message>
         <source>Grainline visible</source>
         <translation>Долевая видима</translation>
@@ -8409,10 +8368,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>TabLabels</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
     <message>
         <source>Piece label data</source>
         <translation>Данные метки детали</translation>
@@ -8525,10 +8480,6 @@ Do you want to save your changes?</source>
 <context>
     <name>TabPassmarks</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
-    <message>
         <source>Passmark:</source>
         <translation>Надсечка:</translation>
     </message>
@@ -8571,10 +8522,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>TabPaths</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
-    </message>
     <message>
         <source>Main path</source>
         <translation>Главный контур</translation>
@@ -8678,13 +8625,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Built in</source>
         <translation>Встроеная</translation>
-    </message>
-</context>
-<context>
-    <name>TabPins</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Форма</translation>
     </message>
 </context>
 <context>
@@ -8990,12 +8930,8 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка замены символической ссылки на файл: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file file: %1.</source>
-        <translation type="vanished">Ошибка открытия временного файла: %1.</translation>
-    </message>
-    <message>
         <source>Error openning a temp file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка открытия временного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -9111,7 +9047,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>goldenrod</source>
-        <translation type="unfinished"></translation>
+        <translation>золотистый</translation>
     </message>
 </context>
 <context>
@@ -9452,12 +9388,8 @@ Do you want to save your changes?</source>
         <translation>Номер, соответствующий шаблону страницы (по умолчанию = 0, режим экспорта):</translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.</source>
-        <translation type="vanished">Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать QT_AUTO_SCREEN_SCALE_FACTOR=0 переменную среды.</translation>
-    </message>
-    <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать %1 переменную среды.</translation>
     </message>
 </context>
 <context>
@@ -9581,7 +9513,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать каноничный XML.</translation>
     </message>
 </context>
 <context>
