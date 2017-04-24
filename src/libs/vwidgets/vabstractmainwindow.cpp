@@ -49,7 +49,7 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setWindowTitle(tr("Confirm format rewriting"));
         msgBox.setText(tr("This file is using previous format version v%1. The current is v%2. "
                           "Saving the file with this app version will update the format version for this "
-                          "file. This may prevent you from be abale to open the file with older app versions. "
+                          "file. This may prevent you from be able to open the file with older app versions. "
                           "Do you really want to continue?").arg(currentFormatVersion).arg(maxFormatVersion));
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
