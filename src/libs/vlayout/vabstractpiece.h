@@ -56,9 +56,11 @@ public:
     Q_DECL_CONSTEXPR explicit VSAPoint(const QPointF &p);
 
     Q_DECL_CONSTEXPR qreal GetSABefore() const;
+                     qreal GetSABefore(qreal width) const;
                      void  SetSABefore(qreal value);
 
     Q_DECL_CONSTEXPR qreal GetSAAfter() const;
+                     qreal GetSAAfter(qreal width) const;
                      void  SetSAAfter(qreal value);
 
     Q_DECL_CONSTEXPR PieceNodeAngle GetAngleType() const;
@@ -171,6 +173,7 @@ public:
     static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
+    static QVector<QPointF> ParallelCurve(const QVector<VSAPoint> &points, qreal width);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);

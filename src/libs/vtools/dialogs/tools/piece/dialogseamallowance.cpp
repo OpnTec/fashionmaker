@@ -853,6 +853,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
 
     uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersection->setDisabled(true);
 
     uiTabPassmarks->groupBoxMarkType->blockSignals(true);
     uiTabPassmarks->groupBoxAngleType->blockSignals(true);
@@ -896,6 +897,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             // Angle type
             uiTabPassmarks->radioButtonStraightforward->setEnabled(true);
             uiTabPassmarks->radioButtonBisector->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersection->setEnabled(true);
 
             switch(node.GetPassmarkAngleType())
             {
@@ -904,6 +906,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                     break;
                 case PassmarkAngleType::Bisector:
                     uiTabPassmarks->radioButtonBisector->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection:
+                    uiTabPassmarks->radioButtonIntersection->setChecked(true);
                     break;
                 default:
                     break;
@@ -1220,6 +1225,10 @@ void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonBisector))
             {
                 angleType = PassmarkAngleType::Bisector;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersection))
+            {
+                angleType = PassmarkAngleType::Intersection;
             }
 
             rowNode.SetPassmarkAngleType(angleType);

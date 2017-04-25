@@ -388,6 +388,7 @@ void DialogPiecePath::PassmarkChanged(int index)
 
     ui->radioButtonStraightforward->setDisabled(true);
     ui->radioButtonBisector->setDisabled(true);
+    ui->radioButtonIntersection->setDisabled(true);
 
     ui->groupBoxMarkType->blockSignals(true);
     ui->groupBoxAngleType->blockSignals(true);
@@ -431,6 +432,7 @@ void DialogPiecePath::PassmarkChanged(int index)
             // Angle type
             ui->radioButtonStraightforward->setEnabled(true);
             ui->radioButtonBisector->setEnabled(true);
+            ui->radioButtonIntersection->setEnabled(true);
 
             switch(node.GetPassmarkAngleType())
             {
@@ -439,6 +441,9 @@ void DialogPiecePath::PassmarkChanged(int index)
                     break;
                 case PassmarkAngleType::Bisector:
                     ui->radioButtonBisector->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection:
+                    ui->radioButtonIntersection->setChecked(true);
                     break;
                 default:
                     break;
@@ -522,6 +527,10 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
             else if (id == ui->buttonGroupAngleType->id(ui->radioButtonBisector))
             {
                 angleType = PassmarkAngleType::Bisector;
+            }
+            else if (id == ui->buttonGroupAngleType->id(ui->radioButtonIntersection))
+            {
+                angleType = PassmarkAngleType::Intersection;
             }
 
             rowNode.SetPassmarkAngleType(angleType);

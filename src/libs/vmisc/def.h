@@ -104,7 +104,8 @@ PassmarkLineType StringToPassmarkLineType(const QString &value);
 enum class PassmarkAngleType : unsigned char
 {
     Straightforward = 0, // Default
-    Bisector
+    Bisector,
+    Intersection
 };
 
 QString           PassmarkAngleTypeToString(PassmarkAngleType type);
@@ -698,6 +699,7 @@ extern const QString strThree;
 
 extern const QString strStraightforward;
 extern const QString strBisector;
+extern const QString strIntersection;
 
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void SetOverrideCursor(Qt::CursorShape shape);

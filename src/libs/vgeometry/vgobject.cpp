@@ -419,7 +419,7 @@ QPointF VGObject::ClosestPoint(const QLineF &line, const QPointF &point)
     }
     else
     {
-        return QPointF();
+        return point;
     }
 }
 

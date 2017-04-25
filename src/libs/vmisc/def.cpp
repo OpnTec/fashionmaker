@@ -2070,6 +2070,7 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
 
 const QString strStraightforward = QStringLiteral("straightforward");
 const QString strBisector        = QStringLiteral("bisector");
+const QString strIntersection    = QStringLiteral("intersection");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkAngleTypeToString(PassmarkAngleType type)
@@ -2080,6 +2081,8 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
             return strStraightforward;
         case PassmarkAngleType::Bisector:
             return strBisector;
+        case PassmarkAngleType::Intersection:
+            return strIntersection;
         default:
             break;
     }
@@ -2090,7 +2093,7 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkAngleType StringToPassmarkAngleType(const QString &value)
 {
-    const QStringList values = QStringList() << strStraightforward << strBisector;
+    const QStringList values = QStringList() << strStraightforward << strBisector << strIntersection;
 
     switch(values.indexOf(value))
     {
@@ -2098,6 +2101,8 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
             return PassmarkAngleType::Straightforward;
         case 1:
             return PassmarkAngleType::Bisector;
+        case 2:
+            return PassmarkAngleType::Intersection;
         default:
             break;
     }

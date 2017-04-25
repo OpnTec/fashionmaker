@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>208</width>
-    <height>321</height>
+    <width>222</width>
+    <height>349</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -134,6 +134,22 @@
         </property>
         <property name="text">
          <string>Bisector</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroupAngleType</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonIntersection">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>Select if need designate the corner point as a passmark</string>
+        </property>
+        <property name="text">
+         <string>Intersection</string>
         </property>
         <attribute name="buttonGroup">
          <string notr="true">buttonGroupAngleType</string>

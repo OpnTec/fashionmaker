@@ -923,6 +923,22 @@
             </attribute>
            </widget>
           </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonIntersection">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Select if need designate the corner point as a passmark</string>
+            </property>
+            <property name="text">
+             <string>Intersection</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupAngleType</string>
+            </attribute>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -993,7 +1009,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupMarkType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>
