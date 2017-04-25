@@ -756,51 +756,6 @@ QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::ParallelCurve(const QVector<VSAPoint> &points, qreal width)
-{
-    QVector<QPointF> curvePoints;
-
-    bool removeFirstAndLast = false;
-    const QVector<VSAPoint> p = CorrectEquidistantPoints(points, removeFirstAndLast);
-
-    if (p.size() < 2)
-    {
-        return QVector<QPointF>();
-    }
-    else if (p.size() < 3)
-    {
-         const QLineF line = ParallelLine(p.at(0), p.at(1), width);
-         curvePoints << line.p1();
-         curvePoints << line.p2();
-    }
-    else
-    {
-        for (qint32 i = 0; i < p.size(); ++i)
-        {
-            if ( i == 0)
-            {//first point
-                curvePoints << ParallelLine(p.at(i), p.at(i+1), width).p1();
-                continue;
-            }
-
-            if (i == p.size()-1)
-            {//last point
-                if (not curvePoints.isEmpty())
-                {
-                    curvePoints << ParallelLine(p.at(i-1), p.at(i), width).p2();
-                }
-                continue;
-            }
-            //points in the middle of polyline
-            curvePoints << EkvPoint(p.at(i-1), p.at(i), p.at(i+1), p.at(i), width);
-        }
-    }
-
-    curvePoints = CheckLoops(CorrectEquidistantPoints(curvePoints, removeFirstAndLast));//Result path can contain loops
-    return curvePoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QLineF VAbstractPiece::ParallelLine(const QPointF &p1, const QPointF &p2, qreal width)
 {
     const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, width),

@@ -173,7 +173,6 @@ public:
     static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
-    static QVector<QPointF> ParallelCurve(const QVector<VSAPoint> &points, qreal width);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);

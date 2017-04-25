@@ -129,10 +129,10 @@ private:
     QVector<VSAPoint> GetNodeSAPoints(const QVector<VPieceNode> &path, int index, const VContainer *data) const;
 
     bool GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, const VContainer *data, VSAPoint &point) const;
-    int GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                    const VContainer *data, QVector<VSAPoint> &points) const;
+    bool GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
+                                     const VContainer *data, VSAPoint &point) const;
     int GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                const VContainer *data, QVector<VSAPoint> &points) const;
+                                const VContainer *data, VSAPoint &point) const;
     bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPoint &passmarkSAPoint,
                                 const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const;
 
@@ -140,10 +140,9 @@ private:
 
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
                                    const VContainer *data) const;
-    QVector<QLineF> SAPassmark(const QVector<VPieceNode> &path, const QVector<VSAPoint> &previousSAPoints,
-                               const int previousSAPointIndex, const VSAPoint &passmarkSAPoint,
-                               const QVector<VSAPoint> &nextSAPoints, const int nextSAPointIndex,
-                               const VContainer *data, int passmarkIndex) const;
+    QVector<QLineF> SAPassmark(const QVector<VPieceNode> &path, VSAPoint &previousSAPoint,
+                               const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
+                               int passmarkIndex) const;
     QVector<QLineF> BuiltInSAPassmark(const QVector<VPieceNode> &path, const VSAPoint &previousSAPoint,
                                       const VSAPoint &passmarkSAPoint, const VSAPoint &nextSAPoint,
                                       const VContainer *data, int passmarkIndex) const;

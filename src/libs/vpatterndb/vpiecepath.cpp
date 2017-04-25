@@ -386,8 +386,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 
     if (nodes.size() > 1)
     {
-        int index = 0;
-        i == 0 ? index = FindInLoopNotExcludedUp(nodes.size()-1, nodes) : index = FindInLoopNotExcludedUp(i-1, nodes);
+        const int index = FindInLoopNotExcludedUp(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -418,8 +417,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 
     if (nodes.size() > 2)
     {
-        int index = 0;
-        i == nodes.size()-1 ? index=FindInLoopNotExcludedDown(0, nodes) : index=FindInLoopNotExcludedDown(i+1, nodes);
+        const int index = FindInLoopNotExcludedDown(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -775,19 +773,33 @@ int VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode> &nodes)
+int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes)
 {
-    if (candidate < 0 || candidate >= nodes.size())
+    if (start < 0 || start >= nodes.size())
+    {
+        return -1;
+    }
+
+    int i = (start == 0) ? nodes.size()-1 : start-1;
+
+    if (i < 0 || i >= nodes.size())
     {
         return -1;
     }
 
     int checked = 0;
-    int i = candidate;
+    bool found = false;
     do
     {
-        if (not nodes.at(i).IsExcluded())
+        if (not nodes.at(i).IsExcluded()
+                && (not nodes.at(start).IsMainPathNode()
+                    || (nodes.at(start).IsMainPathNode()
+                        && nodes.at(start).GetPassmarkAngleType() != PassmarkAngleType::Intersection)
+                    || (nodes.at(start).IsMainPathNode()
+                        && nodes.at(start).GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                        && nodes.at(i).IsMainPathNode())))
         {
+            found = true;
             break;
         }
 
@@ -799,23 +811,37 @@ int VPiecePath::FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode>
         }
     } while (checked < nodes.size());
 
-    return i;
+    return (not found) ? -1 : i;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNode> &nodes)
+int VPiecePath::FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes)
 {
-    if (candidate < 0 || candidate >= nodes.size())
+    if (start < 0 || start >= nodes.size())
+    {
+        return -1;
+    }
+
+    int i = (start == nodes.size()-1) ? 0 : start+1;
+
+    if (i < 0 || i >= nodes.size())
     {
         return -1;
     }
 
     int checked = 0;
-    int i = candidate;
+    bool found = false;
     do
     {
-        if (not nodes.at(i).IsExcluded())
+        if (not nodes.at(i).IsExcluded()
+                && (not nodes.at(start).IsMainPathNode()
+                    || (nodes.at(start).IsMainPathNode()
+                        && nodes.at(start).GetPassmarkAngleType() != PassmarkAngleType::Intersection)
+                    || (nodes.at(start).IsMainPathNode()
+                        && nodes.at(start).GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                        && nodes.at(i).IsMainPathNode())))
         {
+            found = true;
             break;
         }
 
@@ -827,7 +853,7 @@ int VPiecePath::FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNod
         }
     } while (checked < nodes.size());
 
-    return i;
+    return (not found) ? -1 : i;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

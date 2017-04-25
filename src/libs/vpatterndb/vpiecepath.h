@@ -104,8 +104,8 @@ public:
 
     static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
 
-    static int FindInLoopNotExcludedUp(int candidate, const QVector<VPieceNode> &nodes);
-    static int FindInLoopNotExcludedDown(int candidate, const QVector<VPieceNode> &nodes);
+    static int FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes);
+    static int FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes);
 
     static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
     static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
