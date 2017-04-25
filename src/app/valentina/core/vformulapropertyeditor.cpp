@@ -117,12 +117,6 @@ bool VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormulaPropertyEditor::~VFormulaPropertyEditor()
-{
-    //
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VFormulaPropertyEditor::GetFormula() const
 {
     return formula;
