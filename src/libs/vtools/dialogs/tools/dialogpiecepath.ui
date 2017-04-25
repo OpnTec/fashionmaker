@@ -326,7 +326,7 @@
             <item>
              <widget class="QComboBox" name="comboBoxNodes">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
              </widget>
             </item>

@@ -348,7 +348,7 @@ void DialogPiecePath::NodeChanged(int index)
             QString w2Formula = node.GetFormulaSAAfter();
             if (w2Formula != currentSeamAllowance)
             {
-                ui->pushButtonDefBefore->setEnabled(true);
+                ui->pushButtonDefAfter->setEnabled(true);
             }
             if (w2Formula.length() > 80)// increase height if needed.
             {
@@ -458,12 +458,20 @@ void DialogPiecePath::PassmarkChanged(int index)
 void DialogPiecePath::ReturnDefBefore()
 {
     ui->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
+    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    {
+        button->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefAfter()
 {
     ui->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
+    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    {
+        button->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -571,6 +579,11 @@ void DialogPiecePath::EvalWidthBefore()
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
 
+    if (formula != currentSeamAllowance)
+    {
+        ui->pushButtonDefBefore->setEnabled(true);
+    }
+
     UpdateNodeSABefore(GetFormulaSAWidthBefore());
 }
 
@@ -582,6 +595,11 @@ void DialogPiecePath::EvalWidthAfter()
     const QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
+
+    if (formula != currentSeamAllowance)
+    {
+        ui->pushButtonDefAfter->setEnabled(true);
+    }
 
     UpdateNodeSABefore(GetFormulaSAWidthAfter());
 }
