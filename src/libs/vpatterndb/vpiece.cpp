@@ -1097,7 +1097,8 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
         lines += SAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
         if (qApp->Settings()->IsDoublePassmark()
                 && path.at(passmarkIndex).IsMainPathNode()
-                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection)
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection
+                && path.at(passmarkIndex).IsShowSecondPassmark())
         {
             lines += BuiltInSAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
         }

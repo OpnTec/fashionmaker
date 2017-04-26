@@ -355,6 +355,7 @@
                                       <xs:attribute name="passmark" type="xs:boolean"/>
                                       <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                       <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                      <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>
@@ -390,6 +391,7 @@
                                             <xs:attribute name="passmark" type="xs:boolean"/>
                                             <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                             <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                            <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                           </xs:complexType>
                                         </xs:element>
                                       </xs:sequence>
@@ -552,6 +554,7 @@
                                     <xs:attribute name="passmark" type="xs:boolean"/>
                                     <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                     <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                    <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>

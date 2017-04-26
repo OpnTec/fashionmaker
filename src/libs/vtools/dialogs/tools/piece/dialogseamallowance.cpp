@@ -855,6 +855,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
     uiTabPassmarks->radioButtonIntersection->setDisabled(true);
 
+    uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
+    uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(true);
+
     uiTabPassmarks->groupBoxMarkType->blockSignals(true);
     uiTabPassmarks->groupBoxAngleType->blockSignals(true);
 
@@ -913,8 +916,15 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                 default:
                     break;
             }
+
+            // Show the second option
+            uiTabPassmarks->checkBoxShowSecondPassmark->setEnabled(true);
+            uiTabPassmarks->checkBoxShowSecondPassmark->setChecked(node.IsShowSecondPassmark());
         }
     }
+
+    uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(false);
+
     uiTabPassmarks->groupBoxMarkType->blockSignals(false);
     uiTabPassmarks->groupBoxAngleType->blockSignals(false);
 }
@@ -1233,7 +1243,24 @@ void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
 
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, true));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PassmarkShowSecondChanged(int state)
+{
+    const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetShowSecondPassmark(state);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
         }
@@ -2757,6 +2784,8 @@ void DialogSeamAllowance::InitPassmarksTab()
             this, &DialogSeamAllowance::PassmarkLineTypeChanged);
     connect(uiTabPassmarks->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
             this, &DialogSeamAllowance::PassmarkAngleTypeChanged);
+    connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
+            &DialogSeamAllowance::PassmarkShowSecondChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

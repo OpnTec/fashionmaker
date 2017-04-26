@@ -51,7 +51,8 @@ public:
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
           m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward)
+          m_passmarkAngleType(PassmarkAngleType::Straightforward),
+          m_isShowSecondPassmark(true)
     {}
 
     VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
@@ -65,7 +66,8 @@ public:
           m_formulaWidthAfter(currentSeamAllowance),
           m_angleType(PieceNodeAngle::ByLength),
           m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward)
+          m_passmarkAngleType(PassmarkAngleType::Straightforward),
+          m_isShowSecondPassmark(true)
     {
         if (m_typeTool == Tool::NodePoint)
         {
@@ -85,10 +87,11 @@ public:
           m_formulaWidthAfter(node.m_formulaWidthAfter),
           m_angleType(node.m_angleType),
           m_passmarkLineType(node.m_passmarkLineType),
-          m_passmarkAngleType(node.m_passmarkAngleType)
+          m_passmarkAngleType(node.m_passmarkAngleType),
+          m_isShowSecondPassmark(node.m_isShowSecondPassmark)
     {}
 
-    ~VPieceNodeData();
+    ~VPieceNodeData() Q_DECL_EQ_DEFAULT;
 
     friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
     friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
@@ -120,12 +123,11 @@ public:
     PassmarkLineType  m_passmarkLineType;
     PassmarkAngleType m_passmarkAngleType;
 
+    bool m_isShowSecondPassmark;
+
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
 };
-
-VPieceNodeData::~VPieceNodeData()
-{}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,7 +142,8 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
         << p.m_formulaWidthAfter
         << static_cast<int>(p.m_angleType)
         << static_cast<int>(p.m_passmarkLineType)
-        << static_cast<int>(p.m_passmarkAngleType);
+        << static_cast<int>(p.m_passmarkAngleType)
+        << p.m_isShowSecondPassmark;
     return out;
 }
 
@@ -161,7 +164,8 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
        >> p.m_formulaWidthAfter
        >> angleType
        >> passmarkLineType
-       >> passmarkAngleType;
+       >> passmarkAngleType
+       >> p.m_isShowSecondPassmark;
 
     p.m_typeTool = static_cast<Tool>(typeTool);
     p.m_angleType = static_cast<PieceNodeAngle>(angleType);

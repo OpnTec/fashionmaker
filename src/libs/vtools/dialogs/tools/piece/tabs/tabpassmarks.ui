@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>222</width>
-    <height>349</height>
+    <width>268</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -157,6 +157,16 @@
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBoxShowSecondPassmark">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Show the second passmark on seam line</string>
+     </property>
     </widget>
    </item>
    <item>

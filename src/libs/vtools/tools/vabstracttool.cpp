@@ -624,14 +624,16 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
-    const bool excluded = node.IsExcluded();
-    if (excluded)
     {
-        doc->SetAttribute(nod, VAbstractPattern::AttrNodeExcluded, excluded);
-    }
-    else
-    { // For backward compatebility.
-        nod.removeAttribute(VAbstractPattern::AttrNodeExcluded);
+        const bool excluded = node.IsExcluded();
+        if (excluded)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrNodeExcluded, excluded);
+        }
+        else
+        { // For backward compatebility.
+            nod.removeAttribute(VAbstractPattern::AttrNodeExcluded);
+        }
     }
 
     switch (type)
@@ -656,11 +658,13 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
             break;
     }
 
-    const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
-
-    if (angleType > 0)
     {
-        doc->SetAttribute(nod, AttrAngle, angleType);
+        const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
+
+        if (angleType > 0)
+        {
+            doc->SetAttribute(nod, AttrAngle, angleType);
+        }
     }
 
     if (type == Tool::NodePoint)
@@ -685,6 +689,18 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         nod.removeAttribute(VAbstractPattern::AttrNodePassmark);
         nod.removeAttribute(VAbstractPattern::AttrNodePassmarkLine);
         nod.removeAttribute(VAbstractPattern::AttrNodePassmarkAngle);
+    }
+
+    {
+        const bool showSecond = node.IsShowSecondPassmark();
+        if (not showSecond)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrNodeShowSecondPassmark, showSecond);
+        }
+        else
+        { // For backward compatebility.
+            nod.removeAttribute(VAbstractPattern::AttrNodeShowSecondPassmark);
+        }
     }
 
     return nod;

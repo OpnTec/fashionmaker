@@ -302,6 +302,18 @@ void VPieceNode::SetPassmarkAngleType(PassmarkAngleType angleType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsShowSecondPassmark() const
+{
+    return d->m_isShowSecondPassmark;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetShowSecondPassmark(bool value)
+{
+    d->m_isShowSecondPassmark = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VPieceNode::IsExcluded() const
 {
     return d->m_excluded;

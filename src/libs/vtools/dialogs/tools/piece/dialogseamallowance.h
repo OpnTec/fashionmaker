@@ -104,6 +104,7 @@ private slots:
     void TabChanged(int index);
     void PassmarkLineTypeChanged(int id);
     void PassmarkAngleTypeChanged(int id);
+    void PassmarkShowSecondChanged(int state);
 
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();

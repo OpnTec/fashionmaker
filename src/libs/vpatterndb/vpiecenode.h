@@ -95,7 +95,10 @@ public:
     void             SetPassmarkLineType(PassmarkLineType lineType);
 
     PassmarkAngleType GetPassmarkAngleType() const;
-    void               SetPassmarkAngleType(PassmarkAngleType angleType);
+    void              SetPassmarkAngleType(PassmarkAngleType angleType);
+
+    bool IsShowSecondPassmark() const;
+    void SetShowSecondPassmark(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

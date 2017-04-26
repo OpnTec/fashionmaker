@@ -219,6 +219,7 @@ public:
     static const QString AttrNodePassmark;
     static const QString AttrNodePassmarkLine;
     static const QString AttrNodePassmarkAngle;
+    static const QString AttrNodeShowSecondPassmark;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
     static const QString AttrStart;
