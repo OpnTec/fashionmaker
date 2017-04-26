@@ -791,13 +791,7 @@ int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &no
     bool found = false;
     do
     {
-        if (not nodes.at(i).IsExcluded()
-                && (not nodes.at(start).IsMainPathNode()
-                    || (nodes.at(start).IsMainPathNode()
-                        && nodes.at(start).GetPassmarkAngleType() != PassmarkAngleType::Intersection)
-                    || (nodes.at(start).IsMainPathNode()
-                        && nodes.at(start).GetPassmarkAngleType() == PassmarkAngleType::Intersection
-                        && nodes.at(i).IsMainPathNode())))
+        if (not nodes.at(i).IsExcluded())
         {
             found = true;
             break;
@@ -833,13 +827,7 @@ int VPiecePath::FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &
     bool found = false;
     do
     {
-        if (not nodes.at(i).IsExcluded()
-                && (not nodes.at(start).IsMainPathNode()
-                    || (nodes.at(start).IsMainPathNode()
-                        && nodes.at(start).GetPassmarkAngleType() != PassmarkAngleType::Intersection)
-                    || (nodes.at(start).IsMainPathNode()
-                        && nodes.at(start).GetPassmarkAngleType() == PassmarkAngleType::Intersection
-                        && nodes.at(i).IsMainPathNode())))
+        if (not nodes.at(i).IsExcluded())
         {
             found = true;
             break;
