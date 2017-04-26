@@ -224,6 +224,22 @@ void VAbstractOperation::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::EnableToolMove(bool move)
+{
+    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value()->GetType() == GOType::Point)
+        {
+            VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
+            SCASSERT(item != nullptr)
+            item->EnableToolMove(move);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowPointHover(bool enabled)
 {
     QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);

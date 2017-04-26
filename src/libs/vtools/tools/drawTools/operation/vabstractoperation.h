@@ -83,6 +83,7 @@ public slots:
 
     virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
 
     void         AllowPointHover(bool enabled);
     void         AllowPointSelecting(bool enabled);
