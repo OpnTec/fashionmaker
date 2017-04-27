@@ -574,35 +574,22 @@ bool QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok )
     auto it = m_pInfixOprtDef->rbegin();
     for ( ; it != m_pInfixOprtDef->rend(); ++it )
     {
-        if ( sTok.indexOf ( it->first ) != 0 )
+        if ( sTok.indexOf ( it->first ) == 0 )
         {
-            continue;
+            a_Tok.Set ( it->second, it->first );
+            m_iPos += static_cast<int>(it->first.length());
+
+            if ( m_iSynFlags & noINFIXOP )
+            {
+                Error ( ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString() );
+            }
+
+            m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
+            return true;
         }
-
-        a_Tok.Set ( it->second, it->first );
-        m_iPos += static_cast<int>(it->first.length());
-
-        if ( m_iSynFlags & noINFIXOP )
-        {
-            Error ( ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString() );
-        }
-
-        m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
-        return true;
     }
 
     return false;
-
-    /*
-        a_Tok.Set(item->second, sTok);
-        m_iPos = (int)iEnd;
-
-        if (m_iSynFlags & noINFIXOP)
-          Error(ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString());
-
-        m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
-        return true;
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -756,16 +743,14 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
     auto it = m_pPostOprtDef->rbegin();
     for ( ; it != m_pPostOprtDef->rend(); ++it )
     {
-        if ( sTok.indexOf ( it->first ) != 0 )
+        if ( sTok.indexOf ( it->first ) == 0 )
         {
-            continue;
+            a_Tok.Set ( it->second, sTok );
+            m_iPos += it->first.length();
+
+            m_iSynFlags = noVAL | noVAR | noFUN | noBO | noPOSTOP | noSTR | noASSIGN;
+            return true;
         }
-
-        a_Tok.Set ( it->second, sTok );
-        m_iPos += it->first.length();
-
-        m_iSynFlags = noVAL | noVAR | noFUN | noBO | noPOSTOP | noSTR | noASSIGN;
-        return true;
     }
 
     return false;
