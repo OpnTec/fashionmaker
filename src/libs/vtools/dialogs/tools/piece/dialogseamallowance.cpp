@@ -3041,6 +3041,7 @@ void DialogSeamAllowance::ShowPins()
     if (not qApp->getCurrentScene()->items().contains(m_visPins))
     {
         m_visPins->VisualMode(NULL_ID);
+        m_visPins->setZValue(10); // pins should be on top
         VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(toolId));
         SCASSERT(tool != nullptr);
         m_visPins->setParentItem(tool);
