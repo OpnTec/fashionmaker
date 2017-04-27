@@ -524,7 +524,7 @@ void VToolSeamAllowance::UpdateAll()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::retranslateUi()
 {
-    UpdateLabel();
+    UpdateDetailLabel();
     UpdatePatternInfo();
 }
 
@@ -538,7 +538,7 @@ void VToolSeamAllowance::Highlight(quint32 id)
 /**
  * @brief UpdateLabel updates the text label, making it just big enough for the text to fit it
  */
-void VToolSeamAllowance::UpdateLabel()
+void VToolSeamAllowance::UpdateDetailLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(id);
     const VPieceLabelData& labelData = detail.GetPatternPieceData();
@@ -546,44 +546,13 @@ void VToolSeamAllowance::UpdateLabel()
     if (labelData.IsVisible() == true)
     {
         QPointF pos;
-        qreal labelWidth = 0;
-        qreal labelHeight = 0;
         qreal labelAngle = 0;
-        const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(labelData, labelAngle, labelWidth, labelHeight,
-                                                                    pos);
-        if (type & VGrainlineItem::Error)
-        {
-            m_dataLabel->hide();
-            return;
-        }
-        m_dataLabel->SetMoveType(type);
 
-        QFont fnt = QApplication::font();
+        if (PrepareLabelData(labelData, m_dataLabel, pos, labelAngle))
         {
-            const int iFS = labelData.GetFontSize();
-            iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
+            m_dataLabel->UpdateData(detail.GetName(), labelData);
+            UpdateLabelItem(m_dataLabel, pos, labelAngle);
         }
-        m_dataLabel->SetFont(fnt);
-        m_dataLabel->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
-                             ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
-        m_dataLabel->UpdateData(detail.GetName(), labelData);
-
-        QRectF rectBB;
-        rectBB.setTopLeft(pos);
-        rectBB.setWidth(m_dataLabel->boundingRect().width());
-        rectBB.setHeight(m_dataLabel->boundingRect().height());
-        qreal dX;
-        qreal dY;
-        if (m_dataLabel->IsContained(rectBB, labelAngle, dX, dY) == false)
-        {
-            pos.setX(pos.x() + dX);
-            pos.setY(pos.y() + dY);
-        }
-
-        m_dataLabel->setPos(pos);
-        m_dataLabel->setRotation(-labelAngle);// expects clockwise direction
-        m_dataLabel->Update();
-        m_dataLabel->show();
     }
     else
     {
@@ -603,45 +572,13 @@ void VToolSeamAllowance::UpdatePatternInfo()
     if (geom.IsVisible() == true)
     {
         QPointF pos;
-        qreal labelWidth = 0;
-        qreal labelHeight = 0;
         qreal labelAngle = 0;
-        const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(geom, labelAngle, labelWidth, labelHeight, pos);
-        if (type & VGrainlineItem::Error)
-        {
-            m_dataLabel->hide();
-            return;
-        }
-        m_patternInfo->SetMoveType(type);
 
-        QFont fnt = QApplication::font();
-        int iFS = geom.GetFontSize();
-        if (iFS < MIN_FONT_SIZE)
+        if (PrepareLabelData(geom, m_patternInfo, pos, labelAngle))
         {
-            iFS = MIN_FONT_SIZE;
+            m_patternInfo->UpdateData(doc, VContainer::size(), VContainer::height());
+            UpdateLabelItem(m_patternInfo, pos, labelAngle);
         }
-        fnt.setPixelSize(iFS);
-        m_patternInfo->SetFont(fnt);
-        m_patternInfo->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
-                               ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
-        m_patternInfo->UpdateData(doc, VContainer::size(), VContainer::height());
-
-        QRectF rectBB;
-        rectBB.setTopLeft(pos);
-        rectBB.setWidth(m_patternInfo->boundingRect().width());
-        rectBB.setHeight(m_patternInfo->boundingRect().height());
-        qreal dX;
-        qreal dY;
-        if (m_patternInfo->IsContained(rectBB, labelAngle, dX, dY) == false)
-        {
-            pos.setX(pos.x() + dX);
-            pos.setY(pos.y() + dY);
-        }
-
-        m_patternInfo->setPos(pos);
-        m_patternInfo->setRotation(-labelAngle);// expects clockwise direction
-        m_patternInfo->Update();
-        m_patternInfo->GetTextLines() > 0 ? m_patternInfo->show() : m_patternInfo->hide();
     }
     else
     {
@@ -1190,15 +1127,15 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     connect(m_grainLine, &VGrainlineItem::SignalRotated, this, &VToolSeamAllowance::SaveRotateGrainline);
 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
-    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateLabel);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
 
-    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateLabel);
+    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);
 
-    UpdateLabel();
+    UpdateDetailLabel();
     UpdatePatternInfo();
     UpdateGrainline();
 }
@@ -1263,7 +1200,7 @@ void VToolSeamAllowance::SaveDialogChange()
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(saveCommand);
-    UpdateLabel();
+    UpdateDetailLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1584,4 +1521,55 @@ void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
     {
         RefreshDataInFile();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem,
+                                          QPointF &pos, qreal &labelAngle)
+{
+    SCASSERT(labelItem != nullptr)
+
+    qreal labelWidth = 0;
+    qreal labelHeight = 0;
+    const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(labelData, labelAngle, labelWidth, labelHeight, pos);
+    if (type & VGrainlineItem::Error)
+    {
+        labelItem->hide();
+        return false;
+    }
+    labelItem->SetMoveType(type);
+
+    QFont fnt = QApplication::font();
+    {
+        const int iFS = labelData.GetFontSize();
+        iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
+    }
+    labelItem->SetFont(fnt);
+    labelItem->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
+                       ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle)
+{
+    SCASSERT(labelItem != nullptr)
+
+    QRectF rectBB;
+    rectBB.setTopLeft(pos);
+    rectBB.setWidth(labelItem->boundingRect().width());
+    rectBB.setHeight(labelItem->boundingRect().height());
+    qreal dX;
+    qreal dY;
+    if (labelItem->IsContained(rectBB, labelAngle, dX, dY) == false)
+    {
+        pos.setX(pos.x() + dX);
+        pos.setY(pos.y() + dY);
+    }
+
+    labelItem->setPos(pos);
+    labelItem->setRotation(-labelAngle);// expects clockwise direction
+    labelItem->Update();
+    labelItem->GetTextLines() > 0 ? labelItem->show() : labelItem->hide();
 }

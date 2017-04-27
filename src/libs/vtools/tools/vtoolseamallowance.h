@@ -103,18 +103,18 @@ public slots:
     virtual void retranslateUi();
     void         Highlight(quint32 id);
 protected slots:
-    virtual void UpdateLabel();
-    virtual void UpdatePatternInfo();
-    virtual void UpdateGrainline();
-    virtual void SaveMoveDetail(const QPointF &ptPos);
-    virtual void SaveResizeDetail(qreal dLabelW, int iFontSize);
-    virtual void SaveRotationDetail(qreal dRot);
-    virtual void SaveMovePattern(const QPointF& ptPos);
-    virtual void SaveResizePattern(qreal dLabelW, int iFontSize);
-    virtual void SaveRotationPattern(qreal dRot);
-    virtual void SaveMoveGrainline(const QPointF& ptPos);
-    virtual void SaveResizeGrainline(qreal dLength);
-    virtual void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
+    void UpdateDetailLabel();
+    void UpdatePatternInfo();
+    void UpdateGrainline();
+    void SaveMoveDetail(const QPointF &ptPos);
+    void SaveResizeDetail(qreal dLabelW, int iFontSize);
+    void SaveRotationDetail(qreal dRot);
+    void SaveMovePattern(const QPointF& ptPos);
+    void SaveResizePattern(qreal dLabelW, int iFontSize);
+    void SaveRotationPattern(qreal dRot);
+    void SaveMoveGrainline(const QPointF& ptPos);
+    void SaveResizeGrainline(qreal dLength);
+    void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
 protected:
     virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                              QWidget *widget) Q_DECL_OVERRIDE;
@@ -163,6 +163,10 @@ private:
     void InitCSAPaths(const VPiece &detail);
     void InitInternalPaths(const VPiece &detail);
     void InitPins(const VPiece &detail);
+
+    bool PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem, QPointF &pos,
+                          qreal &labelAngle);
+    void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H
