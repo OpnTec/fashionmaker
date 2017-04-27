@@ -581,7 +581,7 @@ void VToolSeamAllowance::UpdateLabel()
         }
 
         m_dataLabel->setPos(pos);
-        m_dataLabel->setRotation(-labelAngle);
+        m_dataLabel->setRotation(-labelAngle);// expects clockwise direction
         m_dataLabel->Update();
         m_dataLabel->show();
     }
@@ -639,7 +639,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
         }
 
         m_patternInfo->setPos(pos);
-        m_patternInfo->setRotation(labelAngle);
+        m_patternInfo->setRotation(-labelAngle);// expects clockwise direction
         m_patternInfo->Update();
         m_patternInfo->GetTextLines() > 0 ? m_patternInfo->show() : m_patternInfo->hide();
     }
