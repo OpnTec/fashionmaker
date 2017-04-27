@@ -3820,6 +3820,14 @@ Apply settings anyway?</source>
         <source>List of details is empty!</source>
         <translation>Список деталей пустий!</translation>
     </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -8517,6 +8525,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Marks</source>
         <translation>Позначки</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

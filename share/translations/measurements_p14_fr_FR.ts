@@ -295,49 +295,49 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="302"/>
         <source>height_neck_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_cou_cote</translation>
+        <translation>hauteur_encolure_cote</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="304"/>
         <source>Height: Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou côté</translation>
+        <translation>Hauteur: Encolure côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="305"/>
         <source>Vertical distance from the Neck Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du côté du cou au sol.</translation>
+        <translation>Distance verticale de l&apos;Encolure côté au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="309"/>
         <source>height_neck_back_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_nuque_au_genou</translation>
+        <translation>hauteur_encolure_dos_au_genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="311"/>
         <source>Height: Neck Back to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou dos au genou</translation>
+        <translation>Hauteur: Encolure Dos au Genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="312"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du cou dos (vertèbre cervicale) au pli derrière le genou.</translation>
+        <translation>Distance verticale de l&apos;Encolure Dos (septième cervicale) au pli derrière le genou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="316"/>
         <source>height_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_cote_taille_au_genou</translation>
+        <translation>hauteur_taille_cote_au_genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="318"/>
         <source>Height: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Côté taille au genou</translation>
+        <translation>Hauteur: Taille Côté au genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="319"/>
@@ -349,13 +349,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="324"/>
         <source>height_waist_side_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_cote_taille_aux_hanches</translation>
+        <translation>hauteur_taille_cote_aux_hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
         <source>Height: Waist Side to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Côté taille aux hanches</translation>
+        <translation>Hauteur: Taille Côté aux hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="327"/>
@@ -373,49 +373,49 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
         <source>Height: Knee to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Genou à cheville</translation>
+        <translation>Hauteur: Genou à Cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="334"/>
         <source>Vertical distance from the fold at the back of the knee to the point where the front leg meets the top of the foot.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du pli derrière le genou au point où le devant de la jambe rencontre le pied.</translation>
+        <translation>Longueur verticale du pli derrière le genou au point où le devant de la jambe rencontre le haut du pied.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="338"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_nuque_au_cote_taille</translation>
+        <translation>hauteur_encolure_dos_a_taille_cote</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="340"/>
         <source>Height: Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou dos au côté taille</translation>
+        <translation>Hauteur: Encolure Dos a la Taille Côté</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="341"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du dos du cou au côté de la taille. (&apos;Hauteur: Cou dos&apos; - &apos;Hauteur: Taille côté&apos;).</translation>
+        <translation>Longueur verticale de l&apos;Encolure Dos à la Taille Côté. (&apos;Hauteur: Encolure dos&apos; - &apos;Hauteur: Taille côté&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="364"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>largeur_epaule</translation>
+        <translation>ecart_epaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="366"/>
         <source>Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur: Epaule </translation>
+        <translation>Écart: Épaule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="367"/>
         <source>Horizontal distance from Shoulder Tip to Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur horizontale d&apos;un bout de l&apos;épaule à l&apos;autre.</translation>
+        <translation>Longueur horizontale d&apos;une Pointe d&apos;Épaule à l&apos;autre Pointe d&apos;Épaule.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="371"/>
@@ -475,72 +475,72 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="392"/>
         <source>width_abdomen_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Largeur_aplomb_ventre_hanches</translation>
+        <translation>Largeur_abdomen_aux_hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="394"/>
         <source>Width: Abdomen to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur: Aplomb du ventre et hanches</translation>
+        <translation>Largeur: Aplomb de l&apos;Abdomen aux hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="395"/>
         <source>Horizontal distance from the greatest abdomen prominence to the greatest hip prominence.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance horizontale entre le sommet du ventre et le sommet des fesses</translation>
+        <translation>Distance horizontale entre l&apos;Abdomen au plus fort et au plus fort des fesses.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="411"/>
         <source>indent_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>creux_nuque</translation>
+        <translation>creux_encolure_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="413"/>
         <source>Indent: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Creux de la nuque</translation>
+        <translation>Creux: Encolure_Dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="414"/>
         <source>Horizontal distance from Scapula (Blade point) to the Neck Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance horizontale entre le sommet des homoplates et le creux de la nuque</translation>
+        <translation>Distance horizontale entre les Omoplates (pointe) et le creux de l&apos;Encolure Dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="418"/>
         <source>indent_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>creux_lombaire</translation>
+        <translation>creux_taille_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="420"/>
         <source>Indent: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Creux des lombaires</translation>
+        <translation>Creux: Taille Dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="421"/>
         <source>Horizontal distance between a flat stick, placed to touch Hip and Scapula, and Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance horizontale entre une ligne imaginaire passant par le sommet des homoplates et le creux lombaire (cambrure)</translation>
+        <translation>Distance horizontale et droite, partant du niveau Omoplates, allant jusqu&apos;au niveau des Hanches, le long de la Taille Dos.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="425"/>
         <source>indent_ankle_high</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>creux_talon</translation>
+        <translation>creux_haut_cheville</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="427"/>
         <source>Indent: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation>Creux talon d&apos;achille</translation>
+        <translation>Creux: Haut de la Cheville</translation>
     </message>
     <message>
         <source>Horizontal Distance betwee a  flat stick, placed perpendicular to Heel, and the greatest indentation of Ankle.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Distance horizontale entre un support plat placé perpendiculairement au talon et le point le plus rentré de la cheville.</translation>
+        <translation type="vanished">Distance horizontale et droite, partant du Talon, allant jusqu&apos;au niveau du plus Creux de la Cheville.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="444"/>

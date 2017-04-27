@@ -2474,7 +2474,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок остались не уложеными, но никто из них не подходит для листа</translation>
+        <translation>Несколько заготовок остались не уложенными, но никто из них не подходит для листа</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -3820,6 +3820,14 @@ Apply settings anyway?</source>
         <source>List of details is empty!</source>
         <translation>Список деталей пустой!</translation>
     </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4368,7 +4376,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="vanished">Расчет</translation>
+        <translation type="vanished">Расчёт</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4396,7 +4404,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
 </context>
 <context>
@@ -4601,11 +4609,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation>Редактировать ширину прибавки на швы перед</translation>
+        <translation>Редактировать ширину прибавки на швы до узла</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation>Редактировать ширину прибавки на швы после</translation>
+        <translation>Редактировать ширину прибавки на швы после узла</translation>
     </message>
     <message>
         <source>You need more points!</source>
@@ -4946,7 +4954,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="vanished">Расчет</translation>
+        <translation type="vanished">Расчёт</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4978,7 +4986,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
 </context>
 <context>
@@ -5009,7 +5017,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>List of points</source>
-        <translation>Список точок</translation>
+        <translation>Список точек</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -5073,7 +5081,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="vanished">Расчет</translation>
+        <translation type="vanished">Расчёт</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5109,7 +5117,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
 </context>
 <context>
@@ -5183,11 +5191,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation>по точках пересечения</translation>
+        <translation>по точкам пересечения</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation>по симетрии первого ребра</translation>
+        <translation>по симметрии первого ребра</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
@@ -5369,19 +5377,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation>Первая точка выточки:</translation>
+        <translation>Первая точка вытачки:</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation>Вторая точка выточки:</translation>
+        <translation>Вторая точка вытачки:</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation>Третья точка выточки:</translation>
+        <translation>Третья точка вытачки:</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation>Первая новая точка выточки:</translation>
+        <translation>Первая новая точка вытачки:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -5393,14 +5401,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation>Вторая новая точка выточки:</translation>
+        <translation>Вторая новая точка вытачки:</translation>
     </message>
 </context>
 <context>
     <name>DialogUndo</name>
     <message>
         <source>Broken formula</source>
-        <translation>Сломанная формула</translation>
+        <translation>Неисправная формула</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
@@ -5501,7 +5509,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Feed download failed: %1.</source>
-        <translation>Ошибка закачки: %1.</translation>
+        <translation>Ошибка скачивания: %1.</translation>
     </message>
     <message>
         <source>Feed parsing failed: %1 %2.</source>
@@ -5846,7 +5854,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exit the application</source>
-        <translation>Закрыть программу]</translation>
+        <translation>Закрыть программу</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -5966,7 +5974,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation>Выберите первую тчоку оси</translation>
+        <translation>Выберите первую точку оси</translation>
     </message>
     <message>
         <source>Select detail</source>
@@ -6187,7 +6195,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Config pattern piece</source>
-        <translation>Пареметры выкройки</translation>
+        <translation>Параметры детали выкройки</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -6231,7 +6239,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Страницы роскладки</translation>
+        <translation>Страницы раскладки</translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -6267,7 +6275,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation>Просмотр оригинальной роскладки</translation>
+        <translation>Просмотр оригинальной раскладки</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -6315,7 +6323,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation>Не сохранённые изменения</translation>
+        <translation>Несохранённые изменения</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
@@ -6473,15 +6481,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для работы с выкройками. Эти выкройки -  основа для следующего этапа &amp;quot;Режим деталей&amp;quot;. Перед тем как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot; необходимо создать по крайней мере одну деталь.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для работы с выкройками. Эти выкройки -  основа для следующего этапа &amp;quot;Режим деталей&amp;quot;. Перед тем, как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot;, необходимо создать по крайней мере одну деталь.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для роботы с деталями. Перед тем как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot; необходимо создать по крайней мере одну деталь в &amp;quot;Режиме чертежа&amp;quot;. Детали созданные на этом этапе используются для построения раскладок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для работы с деталями. Перед тем, как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot;, необходимо создать по крайней мере одну деталь в &amp;quot;Режиме чертежа&amp;quot;. Детали, созданные на этом этапе, используются для построения раскладки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим создания раскладок деталей. Этот режим становится доступным если была создана по крайней мере одна деталь в &amp;quot;Режиме чертежа&amp;quot;. Раскладку можно экспортировать в выбранный вами формат файла и сохранить на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим создания раскладки деталей. Этот режим становится доступным, если была создана по крайней мере одна деталь в &amp;quot;Режиме чертежа&amp;quot;. Раскладку можно экспортировать в выбранный вами формат файла и сохранить на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
@@ -6501,7 +6509,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>True darts</source>
-        <translation>Выточка</translation>
+        <translation>Вытачка</translation>
     </message>
     <message>
         <source>New pattern</source>
@@ -6537,7 +6545,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -6545,7 +6553,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки.</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -6577,7 +6585,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
-        <translation>Выберите линию кубической кривой Безье</translation>
+        <translation>Выберите точку кубической кривой Безье</translation>
     </message>
     <message>
         <source>Toolbar pointer</source>
@@ -6633,7 +6641,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation>Вы не можете использовать режим Раскладки. Пожалуйста, включите минимум одну делать в раскладку.</translation>
+        <translation>Вы не можете использовать режим Раскладки. Пожалуйста, включите минимум одну деталь в раскладку.</translation>
     </message>
     <message>
         <source>Original zoom</source>
@@ -6673,7 +6681,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Move objects</source>
-        <translation>Еще объекты</translation>
+        <translation>Переместить объекты</translation>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
@@ -6693,7 +6701,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Elliptical Arc</source>
-        <translation>Эллиптическая Дуга</translation>
+        <translation>Эллиптическая дуга</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
@@ -6737,7 +6745,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Contains information about increments and internal variables</source>
-        <translation>Содержит информацию об прибавках и внутренних переменных</translation>
+        <translation>Содержит информацию о прибавках и внутренних переменных</translation>
     </message>
     <message>
         <source>Load Individual</source>
@@ -6757,11 +6765,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open Tape</source>
-        <translation>Отркыть Tape</translation>
+        <translation>Открыть Tape</translation>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation>Редактировать теперешнюю</translation>
+        <translation>Редактировать текущие</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -6769,7 +6777,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Синхронизовать</translation>
+        <translation>Синхронизировать</translation>
     </message>
     <message>
         <source>Synchronize linked to the pattern measurements after change</source>
@@ -6777,7 +6785,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unload Current</source>
-        <translation>Сбросить теперишние</translation>
+        <translation>Сбросить текущие</translation>
     </message>
     <message>
         <source>Unload measurements if they were not used in a pattern file</source>
@@ -6892,7 +6900,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок деталей остались не размещёнными, но никакая из них не подходит для листа бумаги</translation>
+        <translation>Несколько заготовок остались не уложенными, но никто из них не подходит для листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7072,7 +7080,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="vanished">Запретить литание</translation>
+        <translation type="vanished">Запретить переворачивание</translation>
     </message>
     <message>
         <source>By default forbid flipping for all workpieces</source>
@@ -7594,7 +7602,7 @@ Do you want to save your changes?</source>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Функция, которая принимает строковое значение, вызвана с не строковым типом аргумента.</translation>
+        <translation>Функция, которая принимает строковое значение, вызвана с нестроковым типом аргумента.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
@@ -8176,7 +8184,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation>Файл еще не был сохранен.</translation>
+        <translation>Файл ещё не был сохранен.</translation>
     </message>
     <message>
         <source>Search</source>
@@ -8228,7 +8236,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -8236,7 +8244,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись lock файла.</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись lock файла.</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -8394,11 +8402,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Материал/количество раскроя/размещение</translation>
+        <translation>Материал/количество в раскрое/размещение</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Количество раскроя:</translation>
+        <translation>Количество в раскрое:</translation>
     </message>
     <message>
         <source>Material type:</source>
@@ -8513,11 +8521,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation>Бисектриса</translation>
+        <translation>Биссектриса</translation>
     </message>
     <message>
         <source>Marks</source>
         <translation>Метки</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8616,7 +8636,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Internal paths</source>
-        <translation>Внутрение контуры</translation>
+        <translation>Внутренние контуры</translation>
     </message>
     <message>
         <source>The seam allowance is part of main path</source>
@@ -8624,7 +8644,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Built in</source>
-        <translation>Встроеная</translation>
+        <translation>Встроенная</translation>
     </message>
 </context>
 <context>
@@ -8635,11 +8655,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">От&amp;мена</translation>
+        <translation type="vanished">&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">О&amp;к</translation>
+        <translation type="vanished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -8835,7 +8855,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open Directory</source>
-        <translation>Открыть директорию</translation>
+        <translation>Открыть каталог</translation>
     </message>
     <message>
         <source>My Individual Measurements</source>
@@ -8907,7 +8927,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Ошибка не уникальный id.</translation>
+        <translation>Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -8967,11 +8987,11 @@ Do you want to save your changes?</source>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
-        <translation>черный</translation>
+        <translation>чёрный</translation>
     </message>
     <message>
         <source>green</source>
-        <translation>зеленый</translation>
+        <translation>зелёный</translation>
     </message>
     <message>
         <source>blue</source>
@@ -8979,19 +8999,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark red</source>
-        <translation>темно красный</translation>
+        <translation>тёмно-красный</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>темно зеленый</translation>
+        <translation>тёмно-зеленый</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>темно синий</translation>
+        <translation>темно-синий</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation>желтый</translation>
+        <translation>жёлтый</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
@@ -9003,7 +9023,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>light salmon</source>
-        <translation>светло оранжевый</translation>
+        <translation>светло-оранжевый</translation>
     </message>
     <message>
         <source>golden rod</source>
@@ -9023,11 +9043,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark violet</source>
-        <translation>темно-фиолетовый</translation>
+        <translation>тёмно-фиолетовый</translation>
     </message>
     <message>
         <source>medium sea green</source>
-        <translation>средний морской зеленый</translation>
+        <translation>средний морской зелёный</translation>
     </message>
     <message>
         <source>lime</source>
@@ -9039,7 +9059,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation>васельково-синий</translation>
+        <translation>васильково-синий</translation>
     </message>
     <message>
         <source>Edit wrong formula</source>
@@ -9066,15 +9086,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустой параметр. Программа будет закрыта.</translation>
+        <translation>Ошибка, пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильный id. Программа будет закрыта.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation>Что то не так!!!</translation>
+        <translation>Что-то не так!!!</translation>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
@@ -9133,7 +9153,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation type="vanished">Объединять страницы если возможно (режим экспорта).</translation>
+        <translation type="vanished">Объединять страницы, если возможно (режим экспорта).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
@@ -9189,11 +9209,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsupported paper units.</source>
-        <translation>Не поддерживаемые единицы измерения для бумаги.</translation>
+        <translation>Неподдерживаемые единицы измерения для бумаги.</translation>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation>Не поддерживаемые единицы измерения для раскладки.</translation>
+        <translation>Неподдерживаемые единицы измерения для раскладки.</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
@@ -9325,19 +9345,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Левое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет проигнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Левое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет проигнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Правое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Правое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Верхнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Верхнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Нижнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Нижнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -9353,7 +9373,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Смещение в единицах раскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании раскладки.</translation>
+        <translation type="vanished">Смещение в единицах раскладки (режим экспорта). Указывает, как много точек вдоль ребра будет создано при создании раскладки.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -9438,7 +9458,7 @@ Do you want to save your changes?</source>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Недостаточно точок для создания кривой.</translation>
+        <translation>Недостаточно точек для создания кривой.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
@@ -9477,7 +9497,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation type="vanished">Неудалось открыть файл схемы.</translation>
+        <translation type="vanished">Не удалось открыть файл схемы.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
@@ -9513,7 +9533,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
-        <translation>Не удалось записать каноничный XML.</translation>
+        <translation>Не удалось записать канонический XML.</translation>
     </message>
 </context>
 <context>
@@ -9589,7 +9609,7 @@ Do you want to save your changes?</source>
     <name>VPE::VFileEditWidget</name>
     <message>
         <source>Directory</source>
-        <translation>Директория</translation>
+        <translation>Каталог</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -9600,7 +9620,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка не уникальный id.</translation>
+        <translation type="vanished">Ошибка, не уникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -9612,7 +9632,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Помилка, пустий параметр.</translation>
+        <translation>Ошибка, пустой параметр.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -9656,7 +9676,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation>Ошибка создания или обновления точки прикосновения</translation>
+        <translation>Ошибка создания или обновления точки соприкосновения</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
@@ -9744,7 +9764,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
-        <translation>Ошибка создания или обновления выточки</translation>
+        <translation>Ошибка создания или обновления вытачки</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
@@ -9884,11 +9904,11 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Не достаточно точок для создания кривой.</translation>
+        <translation>Недостаточно точек для создания кривой.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>Этот сплайн не сувществует.</translation>
+        <translation>Этот сплайн не существует.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
@@ -10117,7 +10137,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>True darts</source>
-        <translation>Выточка</translation>
+        <translation>Вытачка</translation>
     </message>
     <message>
         <source>Point 1 label</source>
