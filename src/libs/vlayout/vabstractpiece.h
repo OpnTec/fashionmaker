@@ -181,6 +181,7 @@ protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
     static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
+    static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
 private:
@@ -213,7 +214,6 @@ private:
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
     static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
     static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
-    static bool             IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);

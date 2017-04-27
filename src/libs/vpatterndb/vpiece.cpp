@@ -991,7 +991,16 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
 
     QVector<QPointF> ekvPoints;
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)) // see issue #665
+
+    /* Because method VAbstractPiece::EkvPoint has troubles with edges on a same line we should specially treat such
+       cases.
+       First check if two edges and seam alowance create paralell lines.
+       Second case check if two edges are on a same line geometrically and a passmark point has equal SA width.*/
+    if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)// see issue #665
+        || (IsEkvPointOnLine(static_cast<QPointF>(passmarkSAPoint), static_cast<QPointF>(previousSAPoint),
+                             static_cast<QPointF>(nextSAPoint))
+            && qAbs(passmarkSAPoint.GetSABefore(width)
+                    - passmarkSAPoint.GetSAAfter(width)) < VGObject::accuracyPointOnLine))
     {
         QLineF line (passmarkSAPoint, nextSAPoint);
         line.setAngle(line.angle() + 90);
