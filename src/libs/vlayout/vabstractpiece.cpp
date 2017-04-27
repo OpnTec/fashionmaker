@@ -957,18 +957,15 @@ bool VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prev
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint)
 {
-    // See bug #646
-    bool ekvPointOnLine = false;
+    // See bug #671
+    const qreal tmpWidth = 10;
+    const QLineF bigLine1 = ParallelLine(prevPoint, iPoint, tmpWidth );
+    const QLineF bigLine2 = ParallelLine(iPoint, nextPoint, tmpWidth );
 
-    if (VFuzzyComparePossibleNulls(prevPoint.GetSAAfter(), iPoint.GetSABefore())
-            && VFuzzyComparePossibleNulls(iPoint.GetSAAfter(), nextPoint.GetSABefore()))
-    {
-        if (VFuzzyComparePossibleNulls(prevPoint.GetSAAfter(), nextPoint.GetSABefore()))
-        {
-            ekvPointOnLine = true;
-        }
-    }
-    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint) && ekvPointOnLine);
+    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
+            && VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2())
+            && VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2())
+            && qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < VGObject::accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
