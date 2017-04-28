@@ -54,7 +54,7 @@ public:
 #endif
 
     void Swap(VLineAngle &var) Q_DECL_NOTHROW
-    { std::swap(d, var.d); }
+    { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
     virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
     void         SetValue(const VPointF *p1, const VPointF *p2);

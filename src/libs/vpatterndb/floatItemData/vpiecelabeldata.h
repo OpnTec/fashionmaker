@@ -54,7 +54,7 @@ public:
 #endif
 
     void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
-    { std::swap(d, data.d); }
+    { VPatternLabelData::Swap(data); std::swap(d, data.d); }
 
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);

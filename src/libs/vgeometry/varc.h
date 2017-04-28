@@ -70,7 +70,7 @@ public:
 #endif
 
     void Swap(VArc &arc) Q_DECL_NOTHROW
-    { std::swap(d, arc.d); }
+    { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
 
     QString GetFormulaRadius () const;
     void    SetFormulaRadius (const QString &formula, qreal value);

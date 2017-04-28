@@ -66,7 +66,7 @@ public:
 #endif
 
     void Swap(VMeasurement &m) Q_DECL_NOTHROW
-    { std::swap(d, m.d); }
+    { VVariable::Swap(m); std::swap(d, m.d); }
 
     QString GetGuiText() const;
 

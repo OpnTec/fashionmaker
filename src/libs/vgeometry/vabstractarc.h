@@ -62,7 +62,7 @@ public:
 #endif
 
     void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
-    { std::swap(d, arc.d); }
+    { VAbstractCurve::Swap(arc); std::swap(d, arc.d); }
 
     QString       GetFormulaF1 () const;
     void          SetFormulaF1 (const QString &formula, qreal value);

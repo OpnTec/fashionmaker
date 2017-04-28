@@ -68,7 +68,7 @@ public:
 #endif
 
     void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
-    { std::swap(d, detail.d); }
+    { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
 
     static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
 

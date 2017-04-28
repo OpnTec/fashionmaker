@@ -60,7 +60,7 @@ public:
 #endif
 
     void Swap(VPiece &piece) Q_DECL_NOTHROW
-    { std::swap(d, piece.d); }
+    { VAbstractPiece::Swap(piece); std::swap(d, piece.d); }
 
     VPiecePath GetPath() const;
     VPiecePath &GetPath();

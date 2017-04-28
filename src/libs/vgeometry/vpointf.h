@@ -66,7 +66,7 @@ public:
 #endif
 
     void Swap(VPointF &point) Q_DECL_NOTHROW
-    { std::swap(d, point.d); }
+    { VGObject::Swap(point); std::swap(d, point.d); }
 
     explicit operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;

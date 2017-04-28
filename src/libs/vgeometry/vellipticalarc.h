@@ -73,7 +73,7 @@ public:
 #endif
 
     void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
-    { std::swap(d, arc.d); }
+    { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
 
     QString GetFormulaRotationAngle () const;
     void    SetFormulaRotationAngle (const QString &formula, qreal value);

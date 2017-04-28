@@ -53,7 +53,7 @@ public:
 #endif
 
     void Swap(VCurveVariable &var) Q_DECL_NOTHROW
-    { std::swap(d, var.d); }
+    { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
     virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
 

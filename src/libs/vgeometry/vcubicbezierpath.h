@@ -62,7 +62,7 @@ public:
 #endif
 
     void Swap(VCubicBezierPath &curve) Q_DECL_NOTHROW
-    { std::swap(d, curve.d); }
+    { VAbstractCubicBezierPath::Swap(curve); std::swap(d, curve.d); }
 
     VPointF &operator[](int indx);
 

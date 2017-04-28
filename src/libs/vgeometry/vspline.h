@@ -71,7 +71,7 @@ public:
 #endif
 
     void Swap(VSpline &spline) Q_DECL_NOTHROW
-    { std::swap(d, spline.d); }
+    { VAbstractCubicBezier::Swap(spline); std::swap(d, spline.d); }
 
     virtual VPointF GetP1 () const Q_DECL_OVERRIDE;
     void            SetP1 (const VPointF &p);

@@ -71,7 +71,7 @@ public:
 #endif
 
     void Swap(VSplinePath &path) Q_DECL_NOTHROW
-    { std::swap(d, path.d); }
+    { VAbstractCubicBezierPath::Swap(path); std::swap(d, path.d); }
 
     void   append(const VSplinePoint &point);
 

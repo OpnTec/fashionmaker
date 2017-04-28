@@ -59,7 +59,7 @@ public:
 #endif
 
     void Swap(VIncrement &incr) Q_DECL_NOTHROW
-    { std::swap(d, incr.d); }
+    { VVariable::Swap(incr); std::swap(d, incr.d); }
 
     quint32     getIndex() const;
     QString     GetFormula() const;

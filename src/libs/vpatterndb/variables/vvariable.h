@@ -58,7 +58,7 @@ public:
 #endif
 
     void Swap(VVariable &var) Q_DECL_NOTHROW
-    { std::swap(d, var.d); }
+    { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
     qreal   GetBase() const;
     void    SetBase(const qreal &value);

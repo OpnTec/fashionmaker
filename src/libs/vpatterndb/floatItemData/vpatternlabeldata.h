@@ -52,7 +52,7 @@ public:
 #endif
 
     void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
-    { std::swap(d, data.d); }
+    { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
 
     // methods, which set up label parameters
     QString GetLabelWidth() const;

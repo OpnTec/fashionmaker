@@ -61,7 +61,7 @@ public:
 #endif
 
     void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
-    { std::swap(d, curve.d); }
+    { VGObject::Swap(curve); std::swap(d, curve.d); }
 
     virtual QVector<QPointF> GetPoints() const =0;
     static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,

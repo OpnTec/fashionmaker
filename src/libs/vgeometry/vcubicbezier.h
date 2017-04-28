@@ -61,7 +61,7 @@ public:
 #endif
 
     void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
-    { std::swap(d, curve.d); }
+    { VAbstractCubicBezier::Swap(curve); std::swap(d, curve.d); }
 
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;
     void            SetP1(const VPointF &p);
