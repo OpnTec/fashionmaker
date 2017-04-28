@@ -564,14 +564,14 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
     }
 
     QPointF pt2(pt1.x() + dLen * qCos(dAng), pt1.y() - dLen * qSin(dAng));
-    QVector<QPointF> v;
 
     const qreal dArrowLen = ToPixel(0.5, *pattern->GetPatternUnit());
     const qreal dArrowAng = M_PI/9;
 
+    QVector<QPointF> v;
     v << pt1;
 
-    if (geom.GetArrowType() != ArrowType::atRear)
+    if (geom.GetArrowType() != ArrowType::atFront)
     {
         v << QPointF(pt1.x() + dArrowLen * qCos(dAng + dArrowAng), pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
         v << QPointF(pt1.x() + dArrowLen * qCos(dAng - dArrowAng), pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
@@ -580,7 +580,7 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
 
     v << pt2;
 
-    if (geom.GetArrowType() != ArrowType::atFront)
+    if (geom.GetArrowType() != ArrowType::atRear)
     {
         dAng += M_PI;
 
@@ -966,6 +966,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
     VGraphicsFillItem* item = new VGraphicsFillItem(parent);
 
     QPainterPath path;
+
     QVector<QPointF> gPoints = Map(d->grainlinePoints);
     path.moveTo(gPoints.at(0));
     for (int i = 1; i < gPoints.count(); ++i)
