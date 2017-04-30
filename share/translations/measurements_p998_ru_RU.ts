@@ -13,7 +13,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="192"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Рост</translation>
+        <translation>Рост: общий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="193"/>
@@ -31,13 +31,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="199"/>
         <source>Height: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Высота точки основания шеи сзади</translation>
+        <translation>Высота: шеи сзади</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="200"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Номер размерного признака в стандарте №10. Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
+        <translation>Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="204"/>

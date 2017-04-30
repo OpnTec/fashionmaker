@@ -3822,11 +3822,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть якщо потрібно позначити кутову точку як надсічку</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетин</translation>
     </message>
 </context>
 <context>
@@ -8528,15 +8528,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть якщо потрібно позначити кутову точку як надсічку</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетин</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати другу надсічку на лінії шва</translation>
     </message>
 </context>
 <context>

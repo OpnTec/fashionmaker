@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>материал</translation>
+        <translation>Материал</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>подкладка</translation>
+        <translation>Подкладка</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Дублерин</translation>
+        <translation>Клеевая подкладка</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Флизелин</translation>
+        <translation>Прокладка</translation>
     </message>
 </context>
 <context>
@@ -382,7 +382,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Резвизия:</translation>
+        <translation>Ревизия:</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -401,7 +401,7 @@
     </message>
     <message>
         <source>Tape version</source>
-        <translation>Версия ленты</translation>
+        <translation>Версия  Tape</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -1374,7 +1374,7 @@
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="vanished">Выберите точки за чесовой стрелкой!</translation>
+        <translation type="vanished">Выберите точки по часовой стрелке!</translation>
     </message>
     <message>
         <source>Bias X:</source>
@@ -1406,7 +1406,7 @@
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Материал/номер раскроя/размещение</translation>
+        <translation type="vanished">Материал/количество в раскрое/размещение</translation>
     </message>
     <message>
         <source>Material type:</source>
@@ -1414,7 +1414,7 @@
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="vanished">Номер раскроя:</translation>
+        <translation type="vanished">Количество в раскрое:</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -1446,27 +1446,27 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="vanished">материал</translation>
+        <translation type="vanished">Материал</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="vanished">подкладка</translation>
+        <translation type="vanished">Подкладка</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">Дублерин</translation>
+        <translation type="vanished">Клеевая подкладка</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="vanished">Флизелин</translation>
+        <translation type="vanished">Прокладка</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Ничего</translation>
+        <translation type="vanished">Произвольное</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="vanished">Разрезать на сгибе</translation>
+        <translation type="vanished">Размещать на сгибе</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
@@ -1474,7 +1474,7 @@
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="vanished">на Сгибе</translation>
+        <translation type="vanished">на сгибе</translation>
     </message>
     <message>
         <source>Update</source>
@@ -1494,7 +1494,7 @@
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="vanished">Запретить листание</translation>
+        <translation type="vanished">Запретить переворачивание</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
@@ -1526,7 +1526,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="vanished">Расчет</translation>
+        <translation type="vanished">Расчёт</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1550,15 +1550,15 @@
     </message>
     <message>
         <source>Both</source>
-        <translation type="vanished">Оба</translation>
+        <translation type="vanished">Обе</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="vanished">Только перед</translation>
+        <translation type="vanished">Только вверх</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="vanished">Только зад</translation>
+        <translation type="vanished">Только вниз</translation>
     </message>
 </context>
 <context>
@@ -1621,7 +1621,7 @@
     </message>
     <message>
         <source>Double click for add to formula</source>
-        <translation type="vanished">Двойной щелчок для добавления у формулу</translation>
+        <translation type="vanished">Двойной щелчок для добавления в формулу</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1720,7 +1720,7 @@
     </message>
     <message>
         <source>Calulation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1736,7 +1736,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -2292,7 +2292,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation>Рассчитаное значение</translation>
+        <translation>Рассчитанное значение</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -2474,7 +2474,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок остались не уложенными, но никто из них не подходит для листа</translation>
+        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2482,7 +2482,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лутшей позиции для детали. Пожалуйста подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -2581,7 +2581,7 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation>Буква/символ</translation>
     </message>
     <message>
         <source>Legal</source>
@@ -3096,7 +3096,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Расчет</translation>
+        <translation>Расчёт</translation>
     </message>
     <message>
         <source>Move</source>
@@ -3543,7 +3543,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>No changes</source>
-        <translation type="vanished">Нету изменений</translation>
+        <translation type="vanished">Нет изменений</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
@@ -3694,7 +3694,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation>Перед:</translation>
+        <translation>До узла:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -3706,7 +3706,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation>После:</translation>
+        <translation>После узла:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3790,7 +3790,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation>Бисектриса</translation>
+        <translation>Биссектриса</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -3802,7 +3802,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Marks</source>
-        <translation>Метки</translation>
+        <translation>Вид метки</translation>
     </message>
     <message>
         <source>T mark</source>
@@ -3822,11 +3822,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение</translation>
     </message>
 </context>
 <context>
@@ -4645,23 +4645,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>None</source>
-        <translation>Нисколько</translation>
+        <translation>Произвольное</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Разрезать на сгибе</translation>
+        <translation>Размещать на сгибе</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation>Оба</translation>
+        <translation>Обе</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation>Только перед</translation>
+        <translation>Только вверх</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation>Только зад</translation>
+        <translation>Только вниз</translation>
     </message>
     <message>
         <source>Pins</source>
@@ -6900,7 +6900,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок остались не уложенными, но никто из них не подходит для листа</translation>
+        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -8525,19 +8525,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Marks</source>
-        <translation>Метки</translation>
+        <translation>Вид метки</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать вторую надсечку на линии шва</translation>
     </message>
 </context>
 <context>
@@ -9923,7 +9923,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="vanished">на Сгибе</translation>
+        <translation type="vanished">на сгибе</translation>
     </message>
     <message>
         <source>on Fold</source>
@@ -11892,7 +11892,7 @@ Do you want to save your changes?</source>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation>&lt;b&gt;Пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -11910,7 +11910,7 @@ Do you want to save your changes?</source>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - &quot;фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>

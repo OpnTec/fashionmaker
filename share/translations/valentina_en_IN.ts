@@ -3822,11 +3822,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Select if need designate the corner point as a passmark</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection</translation>
     </message>
 </context>
 <context>
@@ -8529,15 +8529,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Select if need designate the corner point as a passmark</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Show the second passmark on seam line</translation>
     </message>
 </context>
 <context>
