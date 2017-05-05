@@ -5758,7 +5758,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool options</source>
-        <translation>Параметры инструметнов</translation>
+        <translation>Параметры инструментов</translation>
     </message>
     <message>
         <source>New</source>
@@ -6801,7 +6801,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files</source>
-        <translation>Файлы выкройоек</translation>
+        <translation>Файлы выкроек</translation>
     </message>
     <message>
         <source>Pin tool</source>

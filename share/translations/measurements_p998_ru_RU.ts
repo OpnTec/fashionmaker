@@ -37,13 +37,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="200"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Расстояние по вертикали от пола до точки основания шеи сзади.</translation>
+        <translation>Вертикальное расстояние от шеи сзади (шейный позвонок) к полу.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="204"/>
         <source>height_scapula</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Влоп</translation>
+        <translation>высота_лопаточной_точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="206"/>

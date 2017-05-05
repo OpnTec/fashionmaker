@@ -295,6 +295,10 @@
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation type="vanished">Il testo appare sotto l&apos;icona. (raccomandato per i principianti).</translation>
     </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="vanished">Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più in merito al %1tipo di informazioni%2 che collezioniamo.</translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
@@ -328,7 +332,7 @@
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished">Elimina strumento</translation>
+        <translation>cancella strumento</translation>
     </message>
 </context>
 <context>
@@ -920,7 +924,7 @@
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>spline non valida</translation>
     </message>
     <message>
         <source>Tool cubic bezier</source>
@@ -4842,7 +4846,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>spline non valida</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -7063,7 +7067,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più in merito al %1tipo di informazioni%2 che collezioniamo.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
