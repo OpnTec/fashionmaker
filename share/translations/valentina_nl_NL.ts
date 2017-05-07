@@ -2408,7 +2408,7 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation type="vanished">Verkleinen/vergroten_%1</translation>
+        <translation type="vanished">Toenemen_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
@@ -3762,11 +3762,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Passmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkeringen</translation>
     </message>
     <message>
         <source>Passmark:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkering:</translation>
     </message>
     <message>
         <source>One line</source>
@@ -3794,7 +3794,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkering</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
@@ -4705,7 +4705,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkering</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
@@ -4713,7 +4713,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Passmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkeringen</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
@@ -7284,11 +7284,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon een pasmarkering zowel in de naadtoeslag als op de naadlijn.</translation>
     </message>
     <message>
         <source>Show second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
@@ -8488,7 +8488,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabPassmarks</name>
     <message>
         <source>Passmark:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmarkering:</translation>
     </message>
     <message>
         <source>One line</source>
@@ -8536,7 +8536,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de tweede pasmarkering op de naadlijn</translation>
     </message>
 </context>
 <context>
@@ -9160,7 +9160,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Opmaak eenheden (als van een papier behalve px, ecport modus).</translation>
+        <translation>Opmaak eenheden (als van een papier behalve px, export modus).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -9228,7 +9228,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation>De basis bestandsnaam van geëxporteerde lopmaak bestanden. Gebruik het om het export modus console in te schakelen.</translation>
+        <translation>De basis bestandsnaam van geëxporteerde opmaak bestanden. Gebruik het om het export modus console in te schakelen.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
@@ -9308,7 +9308,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation type="vanished">Verschuiving Lengte moet gebruikt worden met verschuiving eenheden</translation>
+        <translation type="vanished">Verschuiving lengte moet gebruikt worden met verschuiving eenheden.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -9320,7 +9320,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation>Rechtermarge moet worden gebruikt in combinatie met pagina eenheden.</translation>
+        <translation>Rechtermarge moet worden gebruikt in combinatie met pagina-eenheden.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
@@ -9368,11 +9368,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Sla lengte van het blad op wanneer ingesteld (export modus). De optie vertelt het programma een zo groot mogelijk breedte van blad te gebruiken. Kwaliteit van een opmaak kan erger worden wanneer deze optie is gebruikt.</translation>
+        <translation>Sla lengte van het blad op wanneer ingesteld (export modus). De optie vertelt het programma een zo groot mogelijk breedte van blad te gebruiken. Kwaliteit van een opmaak kan slechter worden wanneer deze optie is gebruikt.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Verschuiven van opmaak lengte gemeten in opmaak eenheden (export modus). De optie laat zien hoeveel punten langs de rand zal worden gebruikt bij het maken van een opmaak</translation>
+        <translation type="vanished">Verschuiven van opmaak lengte, gemeten in opmaak eenheden (export modus). De optie laat zien hoeveel punten langs de rand zal worden gebruikt bij het maken van een opmaak.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -9423,7 +9423,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>multisize</source>
-        <translation>maatsysteem</translation>
+        <translation>meermaten</translation>
     </message>
     <message>
         <source>templates</source>
@@ -9434,7 +9434,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
-        <translation>Kan object niet vinden</translation>
+        <translation>Kan het object niet vinden</translation>
     </message>
     <message>
         <source>Can&apos;t cast object</source>
@@ -9442,7 +9442,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation>Kan object niet vinden. Soort komt niet overeen.</translation>
+        <translation>Kan het object niet vinden. Soort komt niet overeen.</translation>
     </message>
     <message>
         <source>Number of free id exhausted.</source>
@@ -9532,7 +9532,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het is mislukt om Conanical XML te schrijven.</translation>
     </message>
 </context>
 <context>
@@ -9554,14 +9554,14 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VException</name>
     <message>
         <source>Exception: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitzondering: %1</translation>
     </message>
 </context>
 <context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Fout</translation>
     </message>
 </context>
 <context>
@@ -9579,7 +9579,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deel %1 heeft geen vorm.</translation>
     </message>
 </context>
 <context>
@@ -9743,7 +9743,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error creating or updating union details</source>
-        <translation>Fout bij het maken of bijwerken van verenigde details</translation>
+        <translation>Fout bij het maken of bijwerken van samengevoegde details</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
@@ -9767,7 +9767,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Verkeerde etiket naam &apos;%1&apos;.</translation>
+        <translation>Verkeerde label naam &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown point type &apos;%1&apos;.</source>
@@ -9815,35 +9815,35 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Unknown operation type &apos;%1&apos;.</source>
-        <translation>Onbekende actie type &apos;%1&apos;.</translation>
+        <translation>Onbekende  bewerkingstype &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van de bewerking van kantelen via een lijn</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van de bewerking van kantelen via een as</translation>
     </message>
     <message>
         <source>Error creating or updating operation of moving</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van de bewerking van een verplaatsing</translation>
     </message>
     <message>
         <source>Error creating or updating point of line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van een kruispunt van een lijn</translation>
     </message>
     <message>
         <source>Error creating or updating simple elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van een simpele ellipsvormige boog</translation>
     </message>
     <message>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende ellipsvormige boog type &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error creating or updating modeling elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Fot bij het maken of bijwerken van vormgeven van een ellipsvormige boog</translation>
     </message>
     <message>
         <source>Detail</source>
@@ -9855,11 +9855,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error creating or updating a piece path</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van een pad deel</translation>
     </message>
     <message>
         <source>Error creating or updating pin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken of bijwerken van een pin punt</translation>
     </message>
 </context>
 <context>
@@ -9877,15 +9877,15 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VPoster</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
-        <translation type="unfinished"></translation>
+        <translation>Raster ( %1 , %2 )</translation>
     </message>
     <message>
         <source>Page %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina %1 van %2</translation>
     </message>
     <message>
         <source>Sheet %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad %1 van %2</translation>
     </message>
 </context>
 <context>
@@ -9981,15 +9981,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="vanished">verplaats rechtvandraad</translation>
+        <translation type="vanished">verplaats recht-van-draad</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="vanished">vergroot/verklein rechtvandraad</translation>
+        <translation type="vanished">vergroot/verklein recht-van-draad</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="vanished">Draai de recht-van-draad</translation>
+        <translation type="vanished">draai de recht-van-draad</translation>
     </message>
 </context>
 <context>
@@ -10244,7 +10244,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Vertikale as</translation>
+        <translation>Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
@@ -10252,15 +10252,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Tool move</source>
-        <translation>Gereedschap verplaats</translation>
+        <translation>Gereedschap verplaatsen</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation>Gereedschap kantelen op een lijn</translation>
+        <translation>Gereedschap kantelen via een lijn</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation>Gereedschap kantelen t.o.v. as</translation>
+        <translation>Gereedschap kantelen via as</translation>
     </message>
     <message>
         <source>Axis type</source>
@@ -10272,23 +10272,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished">Punt label:</translation>
+        <translation>Punt label:</translation>
     </message>
     <message>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Positie:</translation>
     </message>
     <message>
         <source>Base point:</source>
-        <translation type="unfinished">Basis punt:</translation>
+        <translation>Basis punt:</translation>
     </message>
     <message>
         <source>Line type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn soort:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished">Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -10300,219 +10300,219 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">Eerste punt:</translation>
+        <translation>Eerste punt:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">Tweede punt:</translation>
+        <translation>Tweede punt:</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Middelste punt:</translation>
     </message>
     <message>
         <source>Radius:</source>
-        <translation type="unfinished">Straal:</translation>
+        <translation>Straal:</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Eerste hoek:</translation>
+        <translation>Eerste hoek:</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Tweede hoek:</translation>
+        <translation>Tweede hoek:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished">Derde punt:</translation>
+        <translation>Derde punt:</translation>
     </message>
     <message>
         <source>Point 1 label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt 1 label:</translation>
     </message>
     <message>
         <source>Point 2 label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt 2 label:</translation>
     </message>
     <message>
         <source>First base point:</source>
-        <translation type="unfinished">Eerste basis punt:</translation>
+        <translation>Eerste basis punt:</translation>
     </message>
     <message>
         <source>Second base point:</source>
-        <translation type="unfinished">Tweede basis punt:</translation>
+        <translation>Tweede basis punt:</translation>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation type="unfinished">Eerste figuurnaad punt:</translation>
+        <translation>Eerste figuurnaad punt:</translation>
     </message>
     <message>
         <source>Arc:</source>
-        <translation type="unfinished">Boog:</translation>
+        <translation>Boog:</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation type="unfinished">Kromming:</translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <source>First line point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste lijnpunt:</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede lijnpunt:</translation>
     </message>
     <message>
         <source>First line (first point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste lijn (eerste punt):</translation>
     </message>
     <message>
         <source>First line (second point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste lijn (tweede punt):</translation>
     </message>
     <message>
         <source>Second line (first point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede lijn (eerste punt):</translation>
     </message>
     <message>
         <source>Second line (second point):</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede lijn (tweede punt):</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
-        <translation type="unfinished">Aanvullende graden hoek:</translation>
+        <translation>Aanvullende graden hoek:</translation>
     </message>
     <message>
         <source>Center of arc:</source>
-        <translation type="unfinished">Midden van de boog:</translation>
+        <translation>Midden van de boog:</translation>
     </message>
     <message>
         <source>Top of the line:</source>
-        <translation type="unfinished">Bovenkant van de lijn:</translation>
+        <translation>Bovenkant van de lijn:</translation>
     </message>
     <message>
         <source>End of the line:</source>
-        <translation type="unfinished">Einde van de lijn:</translation>
+        <translation>Einde van de lijn:</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
-        <translation type="unfinished">X: verticaal punt:</translation>
+        <translation>X: verticaal punt:</translation>
     </message>
     <message>
         <source>Y: horizontal point:</source>
-        <translation type="unfinished">Y: horizontaal punt:</translation>
+        <translation>Y: horizontaal punt:</translation>
     </message>
     <message>
         <source>First arc:</source>
-        <translation type="unfinished">Eerste boog:</translation>
+        <translation>Eerste boog:</translation>
     </message>
     <message>
         <source>Second arc:</source>
-        <translation type="unfinished">Tweede boog:</translation>
+        <translation>Tweede boog:</translation>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished">Kies:</translation>
+        <translation>Kies:</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
-        <translation type="unfinished">Midden van de eerste cirkel:</translation>
+        <translation>Midden van de eerste cirkel:</translation>
     </message>
     <message>
         <source>Center of the second circle:</source>
-        <translation type="unfinished">Midden van de tweede cirkel:</translation>
+        <translation>Midden van de tweede cirkel:</translation>
     </message>
     <message>
         <source>First circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste cirkel straal:</translation>
     </message>
     <message>
         <source>Second circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede cirkel straal:</translation>
     </message>
     <message>
         <source>First curve:</source>
-        <translation type="unfinished">Eerste kromming:</translation>
+        <translation>Eerste kromming:</translation>
     </message>
     <message>
         <source>Second curve:</source>
-        <translation type="unfinished">Tweede kromming:</translation>
+        <translation>Tweede kromming:</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation type="unfinished">Verticale correctie:</translation>
+        <translation>Verticale correctie:</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation type="unfinished">Horizontale correctie:</translation>
+        <translation>Horizontale correctie:</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
-        <translation type="unfinished">Midden van de cirkel:</translation>
+        <translation>Midden van de cirkel:</translation>
     </message>
     <message>
         <source>Tangent point:</source>
-        <translation type="unfinished">Raaklijn punt:</translation>
+        <translation>Raaklijn punt:</translation>
     </message>
     <message>
         <source>Circle radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cirkel straal:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>C1: angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: hoek:</translation>
     </message>
     <message>
         <source>C1: length:</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: lengte:</translation>
     </message>
     <message>
         <source>C2: angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: hoek:</translation>
     </message>
     <message>
         <source>C2: length:</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: lengte:</translation>
     </message>
     <message>
         <source>First point of axis:</source>
-        <translation type="unfinished">Eerste punt van de as:</translation>
+        <translation>Eerste punt van de as:</translation>
     </message>
     <message>
         <source>Second point of axis:</source>
-        <translation type="unfinished">Tweede punt van de as:</translation>
+        <translation>Tweede punt van de as:</translation>
     </message>
     <message>
         <source>Axis point:</source>
-        <translation type="unfinished">As punt:</translation>
+        <translation>As punt:</translation>
     </message>
     <message>
         <source>Suffix:</source>
-        <translation type="unfinished">Achtervoegsel:</translation>
+        <translation>Achtervoegsel:</translation>
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished">Originele punt:</translation>
+        <translation>Originele punt:</translation>
     </message>
     <message>
         <source>Axis type:</source>
-        <translation type="unfinished">As-type:</translation>
+        <translation>As punt:</translation>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Hoek van draaiing:</translation>
+        <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <source>Fourth point:</source>
-        <translation type="unfinished">Vierde punt:</translation>
+        <translation>Vierde punt:</translation>
     </message>
 </context>
 <context>
@@ -10523,7 +10523,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation>Verplaats patroondeel label</translation>
+        <translation>verplaats patroondeel label</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
@@ -10531,7 +10531,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation>draai label</translation>
+        <translation>draai patroon deel label</translation>
     </message>
     <message>
         <source>move pattern info label</source>
@@ -10539,7 +10539,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation>vergroot/verklein patroon informatie label</translation>
+        <translation> wijzig grootte patroon informatie label</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
@@ -10547,15 +10547,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation>verplaats rechtvandraad</translation>
+        <translation>verplaats recht-van-draad</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation>vergroot/verklein rechtvandraad</translation>
+        <translation>wijzig grootte recht-van-draad</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation>Draai de recht-van-draad</translation>
+        <translation>draai de recht-van-draad</translation>
     </message>
     <message>
         <source>Options</source>
@@ -10563,7 +10563,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation>In layout</translation>
+        <translation>In opmaak</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -10578,7 +10578,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>United detail</source>
-        <translation type="vanished">Verenigd detail</translation>
+        <translation type="vanished">Samenvoegend detail</translation>
     </message>
 </context>
 <context>
@@ -10591,12 +10591,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Bunka Fashion College</source>
         <comment>Author name</comment>
-        <translation>Bunka Fashiob College</translation>
+        <translation>Bunka Fashion College</translation>
     </message>
     <message>
         <source>Fundamentals of Garment Design</source>
         <comment>Book name</comment>
-        <translation>Fandamentals of Garment Design</translation>
+        <translation>Fundamentals of Garment Design</translation>
     </message>
     <message>
         <source>Barnfield and Richard</source>
@@ -10616,7 +10616,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Friendship/Women</source>
         <comment>System name</comment>
-        <translation>Vriendschap/Vrouwen</translation>
+        <translation>Friendship/Women</translation>
     </message>
     <message>
         <source>Elizabeth Friendship</source>
@@ -11416,12 +11416,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Vrijevormkromming_</translation>
+        <translation type="vanished">Vvk__</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="vanished">Vrijevormkrommingspad</translation>
+        <translation type="vanished">Vvkpad</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -11691,22 +11691,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>C1LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengteVvk_</translation>
     </message>
     <message>
         <source>C2LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengteVvk_</translation>
     </message>
     <message>
         <source>C1LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C1LengteVvkpad</translation>
     </message>
     <message>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C2LengteVvkpad</translation>
     </message>
     <message>
         <source>CurrentSeamAllowance</source>
@@ -11716,12 +11716,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>degTorad</source>
         <comment>converts degrees to radian</comment>
-        <translation type="unfinished"></translation>
+        <translation>degTorad</translation>
     </message>
     <message>
         <source>radTodeg</source>
         <comment>converts radian to degrees</comment>
-        <translation type="unfinished"></translation>
+        <translation>radTodeg</translation>
     </message>
     <message>
         <source>sin</source>
@@ -11786,12 +11786,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>M_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>M_</translation>
     </message>
     <message>
         <source>Increment_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Toenemen_</translation>
     </message>
 </context>
 <context>
@@ -11859,7 +11859,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Hernoemd</translation>
+        <translation>Hernoem</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -11885,46 +11885,46 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Kruising tussen kromming en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
+        <translation>&lt;b&gt;Kruising tussen kromming en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; -steekhoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Punt op afstand en hoek&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
+        <translation type="vanished">&lt;b&gt;Punt op afstand en hoek&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Punt op afstand en hoek&lt;/b&gt;: hoek = %1 , lengte = %2%3, &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
+        <translation>&lt;b&gt;Punt op afstand en hoek&lt;/b&gt;: hoek = %1 , lengte = %2%3, &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Kruising tussen lijn en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
+        <translation>&lt;b&gt;Kruising tussen lijn en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Lengte = %1%2, hoek = %3°, &lt;b&gt;Shift&lt;/b&gt; - aangrenzende hoek, &lt;b&gt;Muis klik&lt;/b&gt; -voltooi creatie</translation>
+        <translation>Lengte = %1%2, hoek = %3°, &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Muis klik&lt;/b&gt; -voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Hoek van draaiing = %1°, &lt;b&gt;Shift&lt;/b&gt; - aangrenzende hoek, &lt;b&gt;Muisklik&lt;/b&gt; - voltooi creatie</translation>
+        <translation>Hoek van draaiing = %1°, &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Muisklik&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Gebruik &lt;b&gt;Shift&lt;/b&gt; voor klevende hoek!</translation>
+        <translation>Gebruik &lt;b&gt;Shift&lt;/b&gt; voor steekhoek!</translation>
     </message>
 </context>
 <context>
@@ -11939,7 +11939,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Gebruik &lt;b&gt;Shift&lt;/b&gt; voor klevende hoek!</translation>
+        <translation>Gebruik &lt;b&gt;Shift&lt;/b&gt; voor steekhoek!</translation>
     </message>
 </context>
 <context>
