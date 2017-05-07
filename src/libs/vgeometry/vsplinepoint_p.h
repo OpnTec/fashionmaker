@@ -29,11 +29,13 @@
 #ifndef VSPLINEPOINT_P_H
 #define VSPLINEPOINT_P_H
 
+#include <QLineF>
 #include <QSharedData>
 #include <QtDebug>
 
 #include "vpointf.h"
 #include "../vmisc/def.h"
+#include "../qmuparser/qmutokenparser.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -115,24 +117,7 @@ public:
     {}
 
     VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
-                     qreal length1, const QString &length1F, qreal length2, const QString &length2F)
-        : pSpline(pSpline),
-          angle1(angle1),
-          angle1F(angle1F),
-          angle2(angle2),
-          angle2F(angle2F),
-          length1(length1),
-          length1F(length1F),
-          length2(length2),
-          length2F(length2F)
-    {
-        if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180))
-        {
-            qDebug()<<"Make angle1 and angle2 correct.";
-            this->angle2 = angle1 + 180;
-            this->angle2F = QString().number(angle2);
-        }
-    }
+                     qreal length1, const QString &length1F, qreal length2, const QString &length2F);
 
     VSplinePointData(const VSplinePointData &point)
         : QSharedData(point),
@@ -172,6 +157,42 @@ private:
     VSplinePointData &operator=(const VSplinePointData &) Q_DECL_EQ_DELETE;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+VSplinePointData::VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2,
+                                   const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
+                                   const QString &length2F)
+    : pSpline(pSpline),
+      angle1(angle1),
+      angle1F(angle1F),
+      angle2(angle2),
+      angle2F(angle2F),
+      length1(length1),
+      length1F(length1F),
+      length2(length2),
+      length2F(length2F)
+{
+    if (not VFuzzyComparePossibleNulls(qAbs(angle1-angle2), 180))
+    {
+        qDebug()<<"Make angle1 and angle2 correct.";
+
+        QLineF line (0, 0, 100, 0);
+
+        if (not qmu::QmuTokenParser::IsSingle(angle1F) || qmu::QmuTokenParser::IsSingle(angle2F))
+        {
+            line.setAngle(angle1 + 180);
+            this->angle2 = line.angle();
+            this->angle2F = QString().number(line.angle());
+        }
+        else
+        {
+            line.setAngle(angle2 + 180);
+            this->angle1 = line.angle();
+            this->angle1F = QString().number(line.angle());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePointData::~VSplinePointData()
 {}
 
