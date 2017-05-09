@@ -62,11 +62,12 @@ script:
 - $CXX --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
+    # build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
+    make -j$(nproc);
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
     xvfb-run -a make --silent check TESTARGS="-silent";
     cd ..;
-    sonar-scanner;
+    #sonar-scanner;
   else
     make -j1;
   fi  
@@ -94,7 +95,7 @@ deploy:
   on:
     all_branches: true
     condition: $DEPLOY = true
-addons:
-  sonarqube:
-    token:
-      secure: qYgcPp4yCkv6lA2IQjRZInsI9mHWSVjSQw+veI1v5Tg4VnoGSN8II2zh3syruNrfZ2uc5Sy3NlTpqZXB8BN/Sbaw0KP0ylnI8UHjmXazuVdY7P/0hnGrb3be/x47xWSNKIm6jRwbDgYVeNHhF3rW2RxXkBbfqXX8/fe8GIyYWIgy9ls/v1tadfzALg6RO4NpqUNQvA5xn5qlyRZnduruemAQ7WyweaNAWrQ5NOMDkxJ4VC4rB+L62E4aZEsW8uaSFuK8NKpe07cnpfIJ+ceUNJx9r2PGCHKd/U1zY/cl9nPjAzw2z70xBUUBZcqMluA52ZSE0bM1LlzNsGVAyOJmOUYbhuLN3wSNv0av4TbhGQtPN5ePZm4hxIZMkgYl2wLh8Rg3r7veKwGhuJGLEmn6uFSOgP1rgd3pOrEjWyjKpZI3iNHyWQJPh96VSbNnsxp/gfcJR7rxCcaU6xhdEjxHWlBqpSCFw0zLqgbl2evN1vveNcoh3lF04Oh6Rc4S4oZRX6M16cEKDKaLyl/HzoFm7xUviG7iVqKb4yrj2ZTM3VLPBtW4Sh0UoY9DXiiS/SZ5HVn2r+vGIm7AxYz0Eg9gO3scV38nsk0RRP/IOJdb2DFZVH9vVP7dS76rucufzMt/yhn0ZiuPST56Ic41VA2PnnNv7QevgY8g7jzpyTgHGMk=
+#addons:
+#  sonarqube:
+#    token:
+#      secure: qYgcPp4yCkv6lA2IQjRZInsI9mHWSVjSQw+veI1v5Tg4VnoGSN8II2zh3syruNrfZ2uc5Sy3NlTpqZXB8BN/Sbaw0KP0ylnI8UHjmXazuVdY7P/0hnGrb3be/x47xWSNKIm6jRwbDgYVeNHhF3rW2RxXkBbfqXX8/fe8GIyYWIgy9ls/v1tadfzALg6RO4NpqUNQvA5xn5qlyRZnduruemAQ7WyweaNAWrQ5NOMDkxJ4VC4rB+L62E4aZEsW8uaSFuK8NKpe07cnpfIJ+ceUNJx9r2PGCHKd/U1zY/cl9nPjAzw2z70xBUUBZcqMluA52ZSE0bM1LlzNsGVAyOJmOUYbhuLN3wSNv0av4TbhGQtPN5ePZm4hxIZMkgYl2wLh8Rg3r7veKwGhuJGLEmn6uFSOgP1rgd3pOrEjWyjKpZI3iNHyWQJPh96VSbNnsxp/gfcJR7rxCcaU6xhdEjxHWlBqpSCFw0zLqgbl2evN1vveNcoh3lF04Oh6Rc4S4oZRX6M16cEKDKaLyl/HzoFm7xUviG7iVqKb4yrj2ZTM3VLPBtW4Sh0UoY9DXiiS/SZ5HVn2r+vGIm7AxYz0Eg9gO3scV38nsk0RRP/IOJdb2DFZVH9vVP7dS76rucufzMt/yhn0ZiuPST56Ic41VA2PnnNv7QevgY8g7jzpyTgHGMk=

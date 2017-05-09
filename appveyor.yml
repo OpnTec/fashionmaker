@@ -20,6 +20,7 @@ branches:
   only:
     - develop
     - release
+    - default
 
 # Do not build on tags (GitHub and BitBucket)
 skip_tags: true
@@ -156,7 +157,6 @@ notifications:
     to:
       - dismine@gmail.com
       - susan.spencer@gmail.com
-      - zhuravska19@gmail.com
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
