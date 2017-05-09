@@ -9,9 +9,9 @@ syntax: glob
 *.lock
 
 # Valentina and Tape makes reserve copy of each pattern file before conversion to higher version.
-*(v*).val
-*(v*).vit
-*(v*).vst
+*(v*).val*
+*(v*).vit*
+*(v*).vst*
 
 # KDE directory preferences
 .directory
@@ -89,6 +89,7 @@ cov-int/
 /.qmake.stash
 *.pro.user
 *.pro.user.*
+*.qbs.user
 *.moc
 moc_*.cpp
 qrc_*.cpp
@@ -158,3 +159,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Understand IDE file
+*.udb

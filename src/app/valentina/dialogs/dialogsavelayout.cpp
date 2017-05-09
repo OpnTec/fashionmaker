@@ -37,7 +37,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QProcess>
-#include <QDebug>
+#include <QtDebug>
+#include <QRegularExpression>
 
 const QString baseFilenameRegExp = QStringLiteral("^[\\w\\-. ]+$");
 
@@ -55,10 +56,10 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     ui->lineEditFileName->setClearButtonEnabled(true);
 #endif
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
 #if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
@@ -67,7 +68,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     ui->lineEditFileName->setValidator( new QRegExpValidator(QRegExp(baseFilenameRegExp), this));
 #endif
 
-    const QString mask = fileName+QLatin1Literal("_");
+    const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
@@ -90,10 +91,38 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->comboBoxFormat->addItem(v.first, QVariant(v.second));
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &DialogSaveLayout::ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
+
+    auto ShowExample = [this]()
+    {
+        ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + Format());
+    };
+
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, RECEIVER(this)ShowExample);
+    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            RECEIVER(this)ShowExample);
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
+        bool usedNotExistedDir = false;
+        QDir directory(dirPath);
+        if (not directory.exists())
+        {
+            usedNotExistedDir = directory.mkpath(".");
+        }
+
+        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), dirPath,
+                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+        if (not dir.isEmpty())
+        {// If paths equal the signal will not be called, we will do this manually
+            dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
+        }
+
+        if (usedNotExistedDir)
+        {
+            QDir directory(dirPath);
+            directory.rmpath(".");
+        }
+    });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
@@ -121,12 +150,12 @@ void DialogSaveLayout::SelectFormate(const int formate)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::MakeHelpFormatList()
 {
-   QString out = "\n";
+   QString out("\n");
    int cntr = 0;
    const QVector<std::pair<QString, QString>> availFormats = InitAvailFormats();
    foreach(auto& v, availFormats)
    {
-       out += "\t"+v.first+" = "+ QString::number(cntr++)+"\n";
+       out += QLatin1String("\t") + v.first+QLatin1String(" = ") + QString::number(cntr++) + QLatin1String("\n");
    }
    return out;
 }
@@ -177,13 +206,9 @@ QString DialogSaveLayout::FileName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Formate() const
+QString DialogSaveLayout::Format() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return ui->comboBoxFormat->itemData(ui->comboBoxFormat->currentIndex()).toString();
-#else
-    return ui->comboBoxFormat->currentData().toString();
-#endif
+    return CURRENT_DATA(ui->comboBoxFormat).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -191,7 +216,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+"/"+FileName()+QString::number(i+1)+Formate();
+        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+Format();
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -211,28 +236,10 @@ void DialogSaveLayout::Save()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::ShowExample()
-{
-    ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::Browse()
-{
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"),
-                                                          qApp->ValentinaSettings()->GetPathLayout(),
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    if (not dir.isEmpty())
-    {// If paths equal the signal will not be called, we will do this manually
-        dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::PathChanged(const QString &text)
 {
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
 
     QPalette palette = ui->lineEditPath->palette();
 
@@ -267,8 +274,7 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
-    setMinimumSize(size());
+    setFixedHeight(size().height());
 
     isInitialized = true;//first show windows are held
 }
@@ -291,11 +297,12 @@ bool DialogSaveLayout::TestPdf()
 
     QProcess proc;
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    proc.start(qApp->applicationDirPath()+"/"+PDFTOPS); // Seek pdftops in app bundle or near valentin.exe
+    // Seek pdftops in app bundle or near valentin.exe
+    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS);
 #else
     proc.start(PDFTOPS); // Seek pdftops in standard path
 #endif
-    if (proc.waitForFinished(15000))
+    if (proc.waitForStarted(15000) && (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning))
     {
         res = true;
     }
@@ -310,15 +317,19 @@ bool DialogSaveLayout::TestPdf()
 QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
 {
     QVector<std::pair<QString, QString>> list;
-    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1Literal(".svg")));
-    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1Literal(".pdf")));
-    list.append(std::make_pair(tr("Images (*.png)"), QLatin1Literal(".png")));
-    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1Literal(".obj")));
+    list.append(std::make_pair(QLatin1String("Svg ") + tr("files") + QLatin1String(" (*.svg)"), QLatin1String(".svg")));
+    list.append(std::make_pair(QLatin1String("PDF ") + tr("files") + QLatin1String(" (*.pdf)"), QLatin1String(".pdf")));
+    list.append(std::make_pair(QLatin1String("Images") + QLatin1String(" (*.png)"), QLatin1String(".png")));
+#ifndef V_NO_ASSERT // Temporarily unavailable
+    list.append(std::make_pair(QLatin1String("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
+#endif
     if (SupportPSTest())
     {
-        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1Literal(".ps")));
-        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1Literal(".eps")));
+        list.append(std::make_pair(QLatin1String("PS ") + tr("files") + QLatin1String(" (*.ps)"),
+                                   QLatin1String(".ps")));
+        list.append(std::make_pair(QLatin1String("EPS ") + tr("files") + QLatin1String(" (*.eps)"),
+                                   QLatin1String(".eps")));
     }
-    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1Literal(".dxf")));
+    list.append(std::make_pair(QLatin1String("DXF ") + tr("files") + QLatin1String(" (*.dxf)"), QLatin1String(".dxf")));
     return list;
 }

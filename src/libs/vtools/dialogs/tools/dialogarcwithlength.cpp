@@ -27,17 +27,25 @@
  *************************************************************************/
 
 #include "dialogarcwithlength.h"
-#include "ui_dialogarcwithlength.h"
 
+#include <limits.h>
+#include <QDialog>
+#include <QLabel>
+#include <QPlainTextEdit>
+#include <QPointer>
 #include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../../ifc/xml/vdomdocument.h"
-#include "../../visualization/vistoolarcwithlength.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/path/vistoolarcwithlength.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../../visualization/visualization.h"
+#include "ui_dialogarcwithlength.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &toolId, QWidget *parent)
@@ -90,7 +98,6 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::~DialogArcWithLength()
 {
-    DeleteVisualization<VisToolArcWithLength>();
     delete ui;
 }
 
@@ -104,7 +111,7 @@ quint32 DialogArcWithLength::GetCenter() const
 void DialogArcWithLength::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxCenter, value);
-    vis->setPoint1Id(value);
+    vis->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +132,7 @@ void DialogArcWithLength::SetRadius(const QString &value)
     ui->plainTextEditRadius->setPlainText(radius);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditRadius);
@@ -148,7 +155,7 @@ void DialogArcWithLength::SetF1(const QString &value)
     ui->plainTextEditF1->setPlainText(f1);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
@@ -172,7 +179,7 @@ void DialogArcWithLength::SetLength(const QString &value)
     ui->plainTextEditLength->setPlainText(length);
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setLength(radius);
 
     MoveCursorToEnd(ui->plainTextEditLength);
@@ -181,7 +188,7 @@ void DialogArcWithLength::SetLength(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,7 +238,8 @@ void DialogArcWithLength::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,7 +247,7 @@ void DialogArcWithLength::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
     labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
+    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -247,7 +255,8 @@ void DialogArcWithLength::LengthChanged()
 {
     labelEditFormula = ui->labelEditLength;
     labelResultCalculation = ui->labelResultLength;
-    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,7 +304,7 @@ void DialogArcWithLength::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagRadius && flagF1 && flagLength);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
@@ -323,9 +332,9 @@ void DialogArcWithLength::SaveData()
     length.replace("\n", " ");
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
-    path->setPoint1Id(GetCenter());
+    path->setObject1Id(GetCenter());
     path->setRadius(radius);
     path->setF1(f1);
     path->setLength(length);
@@ -366,7 +375,7 @@ void DialogArcWithLength::Length()
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     const qreal length = Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
 
-    if (qFuzzyCompare(length+1, 0+1))
+    if (qFuzzyIsNull(length))
     {
         flagLength = false;
         ChangeColor(labelEditFormula, Qt::red);

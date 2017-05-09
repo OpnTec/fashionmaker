@@ -27,25 +27,39 @@
  *************************************************************************/
 
 #include "vdxfengine.h"
-#include <QDebug>
-#include <QDateTime>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include <QByteArray>
+#include <QColor>
+#include <QDateTime>
+#include <QFlag>
+#include <QFlags>
+#include <QFont>
+#include <QLineF>
+#include <QList>
+#include <QMessageLogger>
+#include <QPaintEngineState>
+#include <QPainterPath>
+#include <QPen>
+#include <QPolygonF>
+#include <QTextItem>
+#include <Qt>
+#include <QtDebug>
+
+#include "../vmisc/def.h"
+#include "../vmisc/diagnostic.h"
+#include "../vmisc/vmath.h"
+#include "dxflib/dl_attributes.h"
+#include "dxflib/dl_codes.h"
+#include "dxflib/dl_dxf.h"
+#include "dxflib/dl_entities.h"
+#include "dxflib/dl_writer_ascii.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#elif defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 68 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+QT_WARNING_DISABLE_INTEL(68)
 
     return QPaintEngine::PaintEngineFeatures(
         QPaintEngine::AllFeatures
@@ -54,11 +68,7 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,29 +263,30 @@ void VDxfEngine::drawPath(const QPainterPath &path)
     for (int j=0; j < subpaths.size(); ++j)
     {
         const QPolygonF polygon = subpaths.at(j);
-        if (polygon.size() < 3)
+        if (polygon.isEmpty())
         {
             return;
         }
 
-        for (int i=1; i < polygon.count(); i++)
-        {
-            dxf->writeLine(*dw,
-                           DL_LineData(FromPixel(polygon.at(i-1).x(), varInsunits), // start point
-                                       FromPixel(getSize().height() - polygon.at(i-1).y(), varInsunits),
-                                       FromPixel(0.0, varInsunits),
-                                       FromPixel(polygon.at(i).x(), varInsunits), // end point
-                                       FromPixel(getSize().height() - polygon.at(i).y(), varInsunits),
-                                       FromPixel(0.0, varInsunits)),
+        dxf->writePolyline(*dw,
+                           DL_PolylineData(polygon.size(), 0, 0, 0),
                            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+
+        for (int i=0; i < polygon.count(); ++i)
+        {
+            dxf->writeVertex(*dw,
+                             DL_VertexData(FromPixel(polygon.at(i).x(), varInsunits),
+                                           FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0, 0));
         }
+
+        dxf->writePolylineEnd(*dw);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
 {
-    for (int i = 0; i < lineCount; i++)
+    for (int i = 0; i < lineCount; ++i)
     {
         const QPointF p1 = matrix.map(lines[i].p1());
         const QPointF p2 = matrix.map(lines[i].p2());
@@ -302,20 +313,24 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 {
     Q_UNUSED(mode)
 
-    for (int i = 1; i < pointCount; i++)
+    if (pointCount <= 0)
     {
-        const QPointF p1 = matrix.map(points[i-1]);
-        const QPointF p2 = matrix.map(points[i]);
-
-        dxf->writeLine(*dw,
-                       DL_LineData(FromPixel(p1.x(), varInsunits), // start point
-                                   FromPixel(getSize().height() - p1.y(), varInsunits),
-                                   FromPixel(0.0, varInsunits),
-                                   FromPixel(p2.x(), varInsunits), // end point
-                                   FromPixel(getSize().height() - p2.y(), varInsunits),
-                                   FromPixel(0.0, varInsunits)),
-                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        return;
     }
+
+    dxf->writePolyline(*dw,
+                       DL_PolylineData(pointCount, 0, 0, 0),
+                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+
+    for (int i = 0; i < pointCount; ++i)
+    {
+        const QPointF p = matrix.map(points[i]);
+        dxf->writeVertex(*dw,
+                         DL_VertexData(FromPixel(p.x(), varInsunits),
+                                       FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
+    }
+
+    dxf->writePolylineEnd(*dw);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -454,24 +469,17 @@ std::string VDxfEngine::getPenStyle()
 {
     switch (state->pen().style())
     {
-        case Qt::SolidLine:
-            return "BYLAYER";
-            break;
         case Qt::DashLine:
             return "DASHED";
-            break;
         case Qt::DotLine:
             return "DOT";
-            break;
         case Qt::DashDotLine:
             return "DASHDOT";
-            break;
         case Qt::DashDotDotLine:
             return "DIVIDE";
-            break;
+        case Qt::SolidLine:
         default:
             return "BYLAYER";
-            break;
     }
 }
 
@@ -561,10 +569,8 @@ void VDxfEngine::setInsunits(const VarInsunits &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
 double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
 {
@@ -580,6 +586,4 @@ double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
     return 0;
 }
 
-#if defined(Q_CC_GNU)
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

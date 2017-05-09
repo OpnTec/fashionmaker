@@ -28,6 +28,7 @@
 
 #include "tst_misc.h"
 #include "../vmisc/def.h"
+#include "../vgeometry/vgobject.h"
 
 #include <QtTest>
 
@@ -96,7 +97,6 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
             << "../measurements/m.vit"
             << QApplication::applicationDirPath() + QStringLiteral("/home/user/measurements/m.vit");
-
     QTest::newRow("Measurements one level above")
             << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
             << "../measurements/m.vit"
@@ -142,7 +142,7 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << QApplication::applicationDirPath() + QStringLiteral("/home/user/patterns")
             << "m.vit"
             << QApplication::applicationDirPath() + QStringLiteral("/home/user/m.vit");
-    #else
+#else
     QTest::newRow("Measurements one level above")
             << "/home/user/patterns/pattern.val" << "../measurements/m.vit" << "/home/user/measurements/m.vit";
 
@@ -170,7 +170,7 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << "/home/user/patterns/pattern.val" << "m.vit" << "/home/user/patterns/m.vit";
 
     QTest::newRow("Absolute pattern path.") << "/home/user/patterns" << "m.vit" << "/home/user/m.vit";
-    #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,4 +182,39 @@ void TST_Misc::TestAbsoluteFilePath()
 
     const QString result = AbsoluteMPath(patternPath, relativeMPath);
     QCOMPARE(output, result);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestCLocale_data()
+{
+    QTest::addColumn<qreal>("number");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("10000") << 10000.0 << "10000";
+    QTest::newRow("10000.5") << 10000.5 << "10000.5";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Need for testing thousand separator in the C locale.
+// Better be sure that the C locale have not thousand separator
+void TST_Misc::TestCLocale()
+{
+    QFETCH(qreal, number);
+    QFETCH(QString, expected);
+
+    const QString localized = QString().number(number);
+
+    QCOMPARE(localized, expected);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestIssue485()
+{
+    const qreal radius = 5.6692913385826778;
+    const QPointF cPoint(407.9527559055118, 39.999874015748034);
+    const QPointF sPoint(407.9527559055118, 39.999874015748034);
+
+    QPointF p1, p2;
+    const int res = VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), sPoint-cPoint), p1, p2);
+    QCOMPARE(res, 0);
 }

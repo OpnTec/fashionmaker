@@ -20,12 +20,14 @@
 
 #include "vshortcutpropertyeditor.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QKeyEvent>
+#include <QLineEdit>
+#include <QSizePolicy>
+#include <Qt>
 
-using namespace VPE;
-
-VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
+VPE::VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     : QWidget(parent), CurrentKeySequence(), LineEdit(nullptr)
 {
     // Create the line edit widget
@@ -34,7 +36,7 @@ VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     LineEdit->clear();
     LineEdit->installEventFilter(this);
     setFocusProxy(LineEdit);
-    connect(LineEdit, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
+    connect(LineEdit, &QLineEdit::textEdited, this, &VShortcutEditWidget::onTextEdited);
 
     // The layout (a horizontal layout)
     QHBoxLayout* layout = new QHBoxLayout(this);
@@ -44,12 +46,12 @@ VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
 }
 
 
-VShortcutEditWidget::~VShortcutEditWidget()
+VPE::VShortcutEditWidget::~VShortcutEditWidget()
 {
     // nothing needs to be done here
 }
 
-bool VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
+bool VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj == LineEdit)
     {
@@ -75,23 +77,23 @@ bool VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
-QString VShortcutEditWidget::getShortcutAsString() const
+QString VPE::VShortcutEditWidget::getShortcutAsString() const
 {
     return CurrentKeySequence.toString();
 }
 
 // cppcheck-suppress unusedFunction
-QKeySequence VShortcutEditWidget::getShortcut()
+QKeySequence VPE::VShortcutEditWidget::getShortcut()
 {
     return CurrentKeySequence;
 }
 
-void VShortcutEditWidget::setShortcut(const QString &shortcut, bool emit_signal)
+void VPE::VShortcutEditWidget::setShortcut(const QString &shortcut, bool emit_signal)
 {
     setShortcut(QKeySequence::fromString(shortcut), emit_signal);
 }
 
-void VShortcutEditWidget::setShortcut(const QKeySequence &shortcut, bool emit_signal)
+void VPE::VShortcutEditWidget::setShortcut(const QKeySequence &shortcut, bool emit_signal)
 {
     if (shortcut != CurrentKeySequence)
     {
@@ -104,7 +106,7 @@ void VShortcutEditWidget::setShortcut(const QKeySequence &shortcut, bool emit_si
     }
 }
 
-void VShortcutEditWidget::onTextEdited(const QString &text)
+void VPE::VShortcutEditWidget::onTextEdited(const QString &text)
 {
     setShortcut(text, true);
 }

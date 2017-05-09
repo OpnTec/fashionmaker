@@ -29,7 +29,10 @@
 #ifndef IFCDEF_H
 #define IFCDEF_H
 
+#include <QString>
+#include <QStringList>
 #include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 extern const QString CustomMSign;
@@ -54,8 +57,8 @@ static const quint32 null_id = 0;
 #    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
 #      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
 #    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-#    define V_NOEXCEPT_EXPR(x) noexcept(x)
+#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#    define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
 #  else
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
@@ -88,9 +91,14 @@ extern const QString AttrSecondPoint;
 extern const QString AttrThirdPoint;
 extern const QString AttrCenter;
 extern const QString AttrRadius;
+extern const QString AttrRadius1;
+extern const QString AttrRadius2;
 extern const QString AttrAngle;
 extern const QString AttrAngle1;
 extern const QString AttrAngle2;
+extern const QString AttrRotationAngle;
+extern const QString AttrLength1;
+extern const QString AttrLength2;
 extern const QString AttrP1Line;
 extern const QString AttrP2Line;
 extern const QString AttrP1Line1;
@@ -100,20 +108,27 @@ extern const QString AttrP2Line2;
 extern const QString AttrPShoulder;
 extern const QString AttrPoint1;
 extern const QString AttrPoint2;
+extern const QString AttrPoint3;
 extern const QString AttrPoint4;
-extern const QString AttrKAsm1;
-extern const QString AttrKAsm2;
-extern const QString AttrKCurve;
+extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKCurve;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrDuplicate;
 extern const QString AttrPathPoint;
 extern const QString AttrPSpline;
 extern const QString AttrAxisP1;
 extern const QString AttrAxisP2;
 extern const QString AttrCurve;
+extern const QString AttrCurve1;
+extern const QString AttrCurve2;
 extern const QString AttrLineColor;
 extern const QString AttrColor;
 extern const QString AttrFirstArc;
 extern const QString AttrSecondArc;
 extern const QString AttrCrossPoint;
+extern const QString AttrVCrossPoint;
+extern const QString AttrHCrossPoint;
+extern const QString AttrAxisType;
 extern const QString AttrC1Center;
 extern const QString AttrC2Center;
 extern const QString AttrC1Radius;
@@ -122,6 +137,10 @@ extern const QString AttrCCenter;
 extern const QString AttrTangent;
 extern const QString AttrCRadius;
 extern const QString AttrArc;
+extern const QString AttrSuffix;
+extern const QString AttrIdObject;
+extern const QString AttrInLayout;
+extern const QString AttrClosed;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
@@ -137,12 +156,26 @@ extern const QString ColorDarkRed;
 extern const QString ColorDarkGreen;
 extern const QString ColorDarkBlue;
 extern const QString ColorYellow;
+extern const QString ColorLightSalmon;
+extern const QString ColorGoldenRod;
+extern const QString ColorOrange;
+extern const QString ColorDeepPink;
+extern const QString ColorViolet;
+extern const QString ColorDarkViolet;
+extern const QString ColorMediumSeaGreen;
+extern const QString ColorLime;
+extern const QString ColorDeepSkyBlue;
+extern const QString ColorCornFlowerBlue;
+
 
 // variables name
 // Hacks for avoiding the linker error "undefined reference to"
 #define SPL_ "Spl_"
 #define ARC_ "Arc_"
+#define EARC_ "ElArc_"
 
+extern const QString measurement_;
+extern const QString increment_;
 extern const QString line_;
 extern const QString angleLine_;
 extern const QString arc_;
@@ -152,12 +185,21 @@ extern const QString radius_V;
 extern const QString radiusArc_;
 extern const QString angle1_V;
 extern const QString angle2_V;
+extern const QString c1Length_V;
+extern const QString c2Length_V;
+extern const QString c1LengthSpl_;
+extern const QString c2LengthSpl_;
+extern const QString c1LengthSplPath;
+extern const QString c2LengthSplPath;
 extern const QString angle1Arc_;
 extern const QString angle2Arc_;
 extern const QString angle1Spl_;
 extern const QString angle2Spl_;
 extern const QString angle1SplPath;
 extern const QString angle2SplPath;
+extern const QString seg_;
+extern const QString currentLength;
+extern const QString currentSeamAllowance;
 
 extern const QStringList builInVariables;
 

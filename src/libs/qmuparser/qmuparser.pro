@@ -39,7 +39,10 @@ OBJECTS_DIR = obj
 
 include(qmuparser.pri)
 
-VERSION = 2.4.1
+VERSION = 2.5.0
+
+# Allow MAC OS X to find library inside a bundle
+macx:QMAKE_SONAME_PREFIX = @rpath
 
 # Allow MAC OS X to find library inside a bundle
 macx:QMAKE_SONAME_PREFIX = @rpath
@@ -65,44 +68,9 @@ unix:!macx{
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
+include(warnings.pri)
 
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS += \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$ICC_DEBUG_CXXFLAGS
-        }
-    } else {
-        *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
 
@@ -137,3 +105,5 @@ CONFIG(debug, debug|release){
         }
     }
 }
+
+include (../libs.pri)

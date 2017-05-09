@@ -20,17 +20,20 @@
 
 #include "vcolorpropertyeditor.h"
 
-#include <QHBoxLayout>
-#include <QFileDialog>
-#include <QKeyEvent>
-#include <QApplication>
 #include <QColorDialog>
+#include <QCoreApplication>
+#include <QEvent>
+#include <QHBoxLayout>
+#include <QImage>
+#include <QLabel>
+#include <QRgb>
+#include <QSizePolicy>
+#include <QSpacerItem>
+#include <QToolButton>
 
 #include "../vproperty.h"
 
-using namespace VPE;
-
-VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
+VPE::VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     : QWidget(parent), Color(), ToolButton(nullptr), TextLabel(nullptr), ColorLabel(nullptr), Spacer(nullptr)
 {
     setAutoFillBackground(true);
@@ -43,7 +46,7 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
-    connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
+    connect(ToolButton, &QToolButton::clicked, this, &VColorPropertyEditor::onToolButtonClicked);
 
     // Create the text label
     TextLabel = new QLabel(this);
@@ -68,7 +71,7 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     //ColorLabel->hide();   // for now, we just use the standard display and only add the button
 }
 
-void VColorPropertyEditor::SetColor(const QColor& color_)
+void VPE::VColorPropertyEditor::SetColor(const QColor& color_)
 {
     if (Color != color_)
     {
@@ -78,7 +81,7 @@ void VColorPropertyEditor::SetColor(const QColor& color_)
     }
 }
 
-QPixmap VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 size)
+QPixmap VPE::VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 size)
 {
     QImage tmpImgage(static_cast<int>(size), static_cast<int>(size), QImage::Format_ARGB32_Premultiplied);
     tmpImgage.fill(static_cast<quint32>(color.rgb()));
@@ -86,12 +89,12 @@ QPixmap VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 size)
     // todo: support alpha channel
 }
 
-QString VColorPropertyEditor::GetColorString(const QColor& color)
+QString VPE::VColorPropertyEditor::GetColorString(const QColor& color)
 {
     return QString("[%1, %2, %3] (%4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
 
-void VColorPropertyEditor::onToolButtonClicked()
+void VPE::VColorPropertyEditor::onToolButtonClicked()
 {
     bool ok = false;
     QRgb oldRgba = Color.rgba();
@@ -105,7 +108,7 @@ void VColorPropertyEditor::onToolButtonClicked()
     }
 }
 
-bool VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
+bool VPE::VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 {
     if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
@@ -118,12 +121,12 @@ bool VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 }
 
 
-VColorPropertyEditor::~VColorPropertyEditor()
+VPE::VColorPropertyEditor::~VColorPropertyEditor()
 {
     //
 }
 
-QColor VColorPropertyEditor::GetColor() const
+QColor VPE::VColorPropertyEditor::GetColor() const
 {
     return Color;
 }

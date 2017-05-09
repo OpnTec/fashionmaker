@@ -63,64 +63,9 @@ OTHER_FILES += \
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
+include(warnings.pri)
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-            # want them in global list. Compromise decision delete them from local list.
-            QMAKE_CXXFLAGS -= \
-                -Wmissing-prototypes \
-                -Wundefined-reinterpret-cast
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS+= \
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$ICC_DEBUG_CXXFLAGS
-        }
-    } else {
-        *-g++{
-        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-
-    #Calculate latest tag distance and build revision only in release mode. Change number each time requare
-    #recompilation precompiled headers file.
-    DEFINES += "LATEST_TAG_DISTANCE=0"
-    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
@@ -142,33 +87,11 @@ CONFIG(debug, debug|release){
             QMAKE_LFLAGS_RELEASE =
         }
     }
-
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms all OK.
-    }
-    #latest tag distance number for using in version
-    HG_DISTANCE=$$system($${HG} log -r. --template '{latesttagdistance}')
-    isEmpty(HG_DISTANCE){
-        HG_DISTANCE = 0 # if we can't find local revision left 0.
-    }
-    message("Latest tag distance:" $${HG_DISTANCE})
-    DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
-
-    #build revision number for using in version
-    unix {
-        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(HG_HESH){
-        HG_HESH = "unknown" # if we can't find build revision left unknown.
-    }
-    message("Build revision:" $${HG_HESH})
-    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+DVCS_HESH=$$FindBuildRevision()
+message("Build revision:" $${DVCS_HESH})
+DEFINES += "BUILD_REVISION=$${DVCS_HESH}" # Make available build revision number in sources.
 
 # Some extra information about Qt. Can be usefull.
 message(Qt version: $$[QT_VERSION])
@@ -187,7 +110,7 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# INSTALL_STANDARD_MEASHUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 
 win32 {
@@ -233,7 +156,7 @@ unix{
 
         # Path to standard measurement after installation
         standard.path = /usr/share/$${TARGET}/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Path to templates after installation
         templates.path = /usr/share/$${TARGET}/tables/templates/
@@ -254,13 +177,17 @@ unix{
 
         # Check which minimal OSX version supports current Qt version
         # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
-        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {
-            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 7) {# Qt 5.8
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         } else {
-            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {
-                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {# Qt 5.7
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
             } else {
-                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {# Qt 5.4
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+                } else {
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                }
             }
         }
 
@@ -296,15 +223,16 @@ unix{
 
         # Copy to bundle standard measurements files
         standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
         icns_resources.path = $$RESOURCES_DIR/
-        icns_resources.files += $$PWD/../../../dist/macx/measurements.icns
-        icns_resources.files += $$PWD/../../../dist/Tape.icns
+        icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
+        icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
+        icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
         # Copy to bundle standard measurements files
         # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
@@ -321,7 +249,7 @@ unix{
 }
 
 # "make install" command for Windows.
-# Depend on nsis script and create installer in folder "package"
+# Depend on inno setup script and create installer in folder "package"
 win32:*-g++ {
     package.path = $${OUT_PWD}/../../../package/valentina
     package.files += \
@@ -329,8 +257,12 @@ win32:*-g++ {
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
-        $$PWD/../../../dist/win/measurements.ico \
+        $$PWD/../../../dist/win/i-measurements.ico \
+        $$PWD/../../../dist/win/s-measurements.ico \
+        $$PWD/../../../dist/win/pattern.ico \
         $$PWD/../../../dist/win/pdftops.exe \
+        $$PWD/../../../dist/win/libeay32.dll \
+        $$PWD/../../../dist/win/ssleay32.dll \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
         $$PWD/../../../README.txt \
@@ -371,7 +303,7 @@ win32:*-g++ {
     INSTALLS += package
 
     package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
-    package_tables.files += $$INSTALL_STANDARD_MEASHUREMENTS
+    package_tables.files += $$INSTALL_STANDARD_MEASUREMENTS
     INSTALLS += package_tables
 
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates
@@ -445,31 +377,34 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
+    SCP_FOUND = false
+    exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
+                INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
+                SCP_FOUND = true
+        } else {
+            exists("C:/Program Files/Inno Setup 5/iscc.exe") {
+                INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+                SCP_FOUND = true
+           }
+    }
 
-    exists($$NSIS_MAKENSISW) {
-        package_nsis.path = $${OUT_PWD}/../../../package
-        package_nsis.files += \
-            $$PWD/../../../dist/win/nsis/valentina.nsi \
-            $$PWD/../../../dist/win/nsis/unList.exe # copy exe instead of creating from nsi
-        INSTALLS += package_nsis
-
-        package_nsis_headers.path = $${OUT_PWD}/../../../package/headers
-        package_nsis_headers.files += \
-            $$PWD/../../../dist/win/nsis/headers/fileassoc.nsh \
-            $$PWD/../../../dist/win/nsis/headers/fileversion.nsh
-        INSTALLS += package_nsis_headers
+    if($$SCP_FOUND) {
+        package_inno.path = $${OUT_PWD}/../../../package
+        package_inno.files += \
+            $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
+            $$PWD/../../../dist/win/inno/valentina.iss
+        INSTALLS += package_inno
 
         # Do the packaging
         # First, mangle all of INSTALLS values. We depend on them.
         unset(MANGLED_INSTALLS)
         for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
         build_package.path = $${OUT_PWD}/../../../package
-        build_package.commands = $$NSIS_MAKENSISW \"$${OUT_PWD}/../../../package/valentina.nsi\"
+        build_package.commands = $$INNO_ISCC \"$${OUT_PWD}/../../../package/valentina.iss\"
         build_package.depends = $${MANGLED_INSTALLS}
         INSTALLS += build_package
     } else {
-        message("NSIS was not found!")
+        message("Inno Setup was not found!")
     }
 }
 
@@ -480,12 +415,25 @@ win32 {
         pdftops_path += $${PWD}/$$DIR
     }
     copyToDestdir($$pdftops_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
+
+    for(DIR, INSTALL_OPENSSL) {
+        #add these absolute paths to a variable which
+        #ends up as 'mkcommands = path1 path2 path3 ...'
+        openssl_path += $${PWD}/$$DIR
+    }
+    copyToDestdir($$openssl_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
 }
 
-unix:!macx{
-    # suppress the default RPATH
-    QMAKE_LFLAGS_RPATH =
-    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+noRunPath{ # For enable run qmake with CONFIG+=noRunPath
+    # do nothing
+} else {
+    unix:!macx{
+        # suppress the default RPATH
+        # helps to run the program without Qt Creator
+        # see problem with path to libqmuparser and libpropertybrowser
+        QMAKE_LFLAGS_RPATH =
+        QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+    }
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
@@ -536,6 +484,15 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
+# Fervor static library (depend on VMisc, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/fervor/$${DESTDIR}/ -lfervor
+
+INCLUDEPATH += $$PWD/../../libs/fervor
+DEPENDPATH += $$PWD/../../libs/fervor
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/fervor.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/libfervor.a
 
 # IFC static library (depend on QMuParser, VMisc)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc

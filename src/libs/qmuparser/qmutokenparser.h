@@ -22,8 +22,13 @@
 #ifndef QMUTOKENPARSER_H
 #define QMUTOKENPARSER_H
 
-#include "qmuparser_global.h"
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../qmuparser/qmuparser_global.h"
 #include "qmuformulabase.h"
+#include "qmuparser_global.h"
 
 namespace qmu
 {

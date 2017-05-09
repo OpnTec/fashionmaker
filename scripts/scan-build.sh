@@ -5,5 +5,5 @@ cd ..
 rm -rfv build
 mkdir build
 cd build
-qmake ../Valentina.pro -r -spec linux-clang
-scan-build --use-cc clang --use-c++ clang++ make -j4
+qmake ../Valentina.pro -r -spec linux-clang CONFIG+=debug
+scan-build --use-cc clang --use-c++ clang++ make -j$(nproc)

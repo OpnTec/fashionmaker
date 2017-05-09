@@ -31,10 +31,9 @@
 
 #include "dialoghistory.h"
 #include "dialogincrements.h"
-#include "configdialog.h"
 #include "dialogpatternproperties.h"
 #include "dialognewpattern.h"
 #include "dialogaboutapp.h"
-#include "dialogpatternxmledit.h"
+#include "dialogpreferences.h"
 
 #endif // DIALOGS_H

@@ -5,14 +5,28 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation>добавить деталь</translation>
+        <translation type="vanished">добавить деталь</translation>
+    </message>
+</context>
+<context>
+    <name>AddGroup</name>
+    <message>
+        <source>add group</source>
+        <translation>добавить группу</translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation>добавить чертёж %1</translation>
+        <translation>добавить выкройку %1</translation>
+    </message>
+</context>
+<context>
+    <name>AddPiece</name>
+    <message>
+        <source>add detail</source>
+        <translation>добавить деталь</translation>
     </message>
 </context>
 <context>
@@ -33,7 +47,7 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation>Сервер</translation>
+        <translation type="vanished">Сервер</translation>
     </message>
     <message>
         <source>Server name/IP</source>
@@ -41,15 +55,15 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation>Безопасное подключение</translation>
+        <translation type="vanished">Безопасное подключение</translation>
     </message>
     <message>
         <source>Proxy settings</source>
-        <translation>Настройки прокси-сервера</translation>
+        <translation type="vanished">Настройки прокси-сервера</translation>
     </message>
     <message>
         <source>Use Proxy</source>
-        <translation>Использовать прокси</translation>
+        <translation type="vanished">Использовать прокси</translation>
     </message>
     <message>
         <source>Proxy address</source>
@@ -61,7 +75,7 @@
     </message>
     <message>
         <source>Proxy user</source>
-        <translation type="vanished">Пользователь прокси-сервера</translation>
+        <translation type="vanished">Пользователь Proxy</translation>
     </message>
     <message>
         <source>Proxy pass</source>
@@ -69,7 +83,7 @@
     </message>
     <message>
         <source>User settings</source>
-        <translation>Пользовательские настройки</translation>
+        <translation type="vanished">Пользовательские настройки</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -77,7 +91,7 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation>Сохранить пароль</translation>
+        <translation type="vanished">Сохранить пароль</translation>
     </message>
     <message>
         <source>Password</source>
@@ -85,66 +99,66 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation>Имя / IP сервера:</translation>
+        <translation type="vanished">Имя / IP сервера:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation>Адрес прокси:</translation>
+        <translation type="vanished">Адрес прокси:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
-        <translation>Порт прокси-сервера:</translation>
+        <translation type="vanished">Порт прокси-сервера:</translation>
     </message>
     <message>
         <source>Proxy user:</source>
-        <translation>Пользователь прокси-сервера:</translation>
+        <translation type="vanished">Пользователь прокси-сервера:</translation>
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>Пароль прокси-сервера:</translation>
+        <translation type="vanished">Пароль прокси-сервера:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation>Имя пользователя:</translation>
+        <translation type="vanished">Имя пользователя:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Пароль:</translation>
+        <translation type="vanished">Пароль:</translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
+        <translation type="vanished">&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ок</translation>
+        <translation type="vanished">&amp;Ок</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Диалог настройки</translation>
+        <translation type="vanished">Диалог параметров</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Настройки</translation>
+        <translation type="vanished">Настройки</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Лекало</translation>
+        <translation type="vanished">Выкройка</translation>
     </message>
     <message>
         <source>Community</source>
-        <translation>Сообщество</translation>
+        <translation type="vanished">Сообщество</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Пути</translation>
+        <translation type="vanished">Пути</translation>
     </message>
 </context>
 <context>
@@ -155,27 +169,27 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
+        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании выкройки</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="vanished">Сохранить</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Автосохранение измененного лекала</translation>
+        <translation type="vanished">Автосохранение измененной выкройки</translation>
     </message>
     <message>
         <source>min</source>
-        <translation>min</translation>
+        <translation type="vanished">мин</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Интервал:</translation>
+        <translation type="vanished">Интервал:</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Язык</translation>
+        <translation type="vanished">Язык</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -187,7 +201,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>С опциями ОС (%1)</translation>
+        <translation type="vanished">С опциями ОС (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -195,15 +209,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Сантиметры</translation>
+        <translation type="vanished">Сантиметры</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Миллиметры</translation>
+        <translation type="vanished">Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Дюймы</translation>
+        <translation type="vanished">Дюймы</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -211,71 +225,86 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Отправка отчета об ошибках</translation>
+        <translation type="vanished">Отправка отчета об ошибках</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Отправка отчета об ошибках (рекомендуется)</translation>
+        <translation type="vanished">Отправка отчета об ошибках (рекомендуется)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Редактирование выкройки</translation>
+        <translation type="vanished">Редактирование выкройки</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Подтвердите удаление элемента</translation>
+        <translation type="vanished">Подтвердите удаление элемента</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Панель инструментов</translation>
+        <translation type="vanished">Панель инструментов</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
+        <translation type="vanished">Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>Язык интерфейса:</translation>
+        <translation type="vanished">Язык интерфейса:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Разделитель дробной части:</translation>
+        <translation type="vanished">Разделитель дробной части:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation>Единица измерения по умолчанию:</translation>
+        <translation type="vanished">Единица измерения по умолчанию:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation>Язык имени точки:</translation>
+        <translation type="vanished">Язык имени точки:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Система создания выкроек</translation>
+        <translation type="vanished">Система создания выкроек</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Система создания выкроек:</translation>
+        <translation type="vanished">Система создания выкроек:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Автор:</translation>
+        <translation type="vanished">Автор:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Книга:</translation>
+        <translation type="vanished">Книга:</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала.</translation>
+        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании выкройки.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше об &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation type="vanished">Текст отображается под иконками (рекомендуется для начинающих).</translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="vanished">После каждого сбоя Валентина отправляет нам информацию, которая может помочь решить возникшую проблему. Мы не собираем личные данные. Вы можете узнать больше о том, %1какую именно информацию%2 мы собираем.</translation>
+    </message>
+</context>
+<context>
+    <name>DelGroup</name>
+    <message>
+        <source>delete group</source>
+        <translation>удалить группу</translation>
     </message>
 </context>
 <context>
@@ -289,25 +318,51 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation>инструмент удаления</translation>
+        <translation type="vanished">инструмент удаления</translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
     <message>
         <source>delete pattern piece %1</source>
-        <translation>удалить чертёж %1</translation>
+        <translation>удалить выкройку %1</translation>
+    </message>
+</context>
+<context>
+    <name>DeletePiece</name>
+    <message>
+        <source>delete tool</source>
+        <translation>удалить инструмент</translation>
+    </message>
+</context>
+<context>
+    <name>Detail</name>
+    <message>
+        <source>Fabric</source>
+        <translation>Материал</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation>Подкладка</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation>Клеевая подкладка</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation>Прокладка</translation>
     </message>
 </context>
 <context>
     <name>DialogAboutApp</name>
     <message>
         <source>About Valentina</source>
-        <translation>Про Valentina</translation>
+        <translation>О проекте Valentina</translation>
     </message>
     <message>
         <source>Valentina version</source>
-        <translation>Версия Valentina</translation>
+        <translation>Версия программы Valentina</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -315,7 +370,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="vanished">Собрано на %3 %4</translation>
+        <translation type="vanished">Создано %3 в %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -327,11 +382,15 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Резвизия:</translation>
+        <translation>Ревизия:</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
         <translation>Собрано %1 в %2</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation>Проверить наличие обновлений</translation>
     </message>
 </context>
 <context>
@@ -342,7 +401,7 @@
     </message>
     <message>
         <source>Tape version</source>
-        <translation>Версия Tape</translation>
+        <translation>Версия  Tape</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -362,7 +421,7 @@
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Веб сайт : %1</translation>
+        <translation>Веб-сайт: %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -371,6 +430,10 @@
     <message>
         <source>Built on %1 at %2</source>
         <translation>Собрано %1 в %2</translation>
+    </message>
+    <message>
+        <source>Check For Updates</source>
+        <translation>Проверить наличие обновлений</translation>
     </message>
 </context>
 <context>
@@ -385,11 +448,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в отдельном окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -421,7 +484,7 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Инструмент точка вдоль линии</translation>
+        <translation>Точка вдоль линии</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -532,7 +595,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Значение радиуса не может быть отрицательным</translation>
+        <translation>Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Angles equal</source>
@@ -568,7 +631,7 @@
     </message>
     <message>
         <source>Calulation</source>
-        <translation>Расчёт</translation>
+        <translation type="vanished">Расчёт</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -611,7 +674,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в отдельном окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -643,7 +706,7 @@
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Редактировать радиус</translation>
+        <translation>Изменить радиус</translation>
     </message>
     <message>
         <source>Edit the first angle</source>
@@ -659,7 +722,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Значение радиуса не может быть отрицательным</translation>
+        <translation>Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -714,7 +777,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -758,7 +821,7 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Инструмент точка биссектрисы</translation>
+        <translation>Точка вдоль биссектрисы</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -818,6 +881,88 @@
     </message>
 </context>
 <context>
+    <name>DialogCubicBezier</name>
+    <message>
+        <source>Cubic bezier</source>
+        <translation type="vanished">Кубическая кривая Безье</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation>Цвет:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation>Начальная точка:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation>Вторая точка:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation>Третья точка:</translation>
+    </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation>Четвертая точка:</translation>
+    </message>
+    <message>
+        <source>Select the second point of curve</source>
+        <translation>Выберите вторую точку кривой</translation>
+    </message>
+    <message>
+        <source>Select the third point of curve</source>
+        <translation>Выберите третью точку кривой</translation>
+    </message>
+    <message>
+        <source>Select the fourth point of curve</source>
+        <translation>Выберите четвертую точку кривой</translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation>Некорректная кривая</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier</source>
+        <translation>Кривая Безье</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCubicBezierPath</name>
+    <message>
+        <source>Dialog cubic bezier path</source>
+        <translation type="vanished">Диалог кубическая кривая Безье</translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation>Точка:</translation>
+    </message>
+    <message>
+        <source>List of points</source>
+        <translation>Список точек</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation>Цвет:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
+        <translation>Некорректное задание кривой</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier path</source>
+        <translation>Инструмент создания кубической кривой Безье</translation>
+    </message>
+</context>
+<context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
@@ -829,7 +974,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -841,7 +986,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -936,7 +1081,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -988,7 +1133,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
@@ -1015,7 +1160,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1063,7 +1208,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
@@ -1090,11 +1235,11 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Разделение сложной кривой</translation>
+        <translation>Разделить сложною кривую</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1138,14 +1283,14 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Bias X</source>
@@ -1153,7 +1298,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
         <source>Bias Y</source>
@@ -1161,7 +1306,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation>Параметры</translation>
+        <translation type="vanished">Параметры</translation>
     </message>
     <message>
         <source>Name of detail</source>
@@ -1169,7 +1314,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Прибавка на швы</translation>
+        <translation type="vanished">Прибавка на швы</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1177,31 +1322,31 @@
     </message>
     <message>
         <source>Closed</source>
-        <translation>Замкнутая</translation>
+        <translation type="vanished">Замкнутая</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation>Получен неправильный объект сцены. Игнорируем.</translation>
+        <translation type="vanished">Получен неправильный объект сцены. Игнорируем.</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation>Изменить направление</translation>
+        <translation type="vanished">Изменить направление</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Все объекты должны следовать в направлении по часовой стрелке.</translation>
+        <translation type="vanished">Все объекты должны следовать в направлении по часовой стрелке.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation>Опустить в низ списка</translation>
+        <translation type="vanished">Опустить в низ списка</translation>
     </message>
     <message>
         <source>...</source>
@@ -1209,15 +1354,15 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation>Поднять на верх списка</translation>
+        <translation type="vanished">Поднять на верх списка</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation>Готовы!</translation>
+        <translation type="vanished">Готовы!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation>Вам нужно выбрать больше точек!</translation>
+        <translation type="vanished">Вам нужно выбрать больше точек!</translation>
     </message>
     <message>
         <source>First point can not equal the last point!</source>
@@ -1225,38 +1370,202 @@
     </message>
     <message>
         <source>You have double points!</source>
-        <translation>Повторяются две точки подряд!</translation>
+        <translation type="vanished">Повторяются две точки подряд!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>Выберите точки по часовой стрелке!</translation>
+        <translation type="vanished">Выберите точки по часовой стрелке!</translation>
     </message>
     <message>
         <source>Bias X:</source>
-        <translation>Смещение по Х:</translation>
+        <translation type="vanished">Смещение по Х:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
-        <translation>Смещение по Y:</translation>
+        <translation type="vanished">Смещение по Y:</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Имя детали:</translation>
+        <translation type="vanished">Имя детали:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Ширина:</translation>
+        <translation type="vanished">Ширина:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation>Первая точка не может быть эквивалентна последней!</translation>
+        <translation type="vanished">Первая точка не может быть эквивалентна последней!</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="vanished">Главная</translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="vanished">Данные выкройки</translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="vanished">Материал/количество в раскрое/размещение</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="vanished">Тип материала:</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="vanished">Количество в раскрое:</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="vanished">Размещение:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="vanished">Добавить</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">Отмена</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="vanished">Удалить</translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="vanished">Буква:</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="vanished">Отображение названий деталей</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="vanished">Отображение названия выкройки</translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="vanished">Материал</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="vanished">Подкладка</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="vanished">Клеевая подкладка</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="vanished">Прокладка</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="vanished">Произвольное</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="vanished">Размещать на сгибе</translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="vanished">Раскрой %1 из %2%3</translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="vanished">на сгибе</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="vanished">Обновление</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="vanished">на сгибе</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="vanished">Вы можете выбрать один из предустановленных в системе материалов или ввести новый</translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="vanished">Запрет отражения выкройки в раскладке.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="vanished">Запретить переворачивание</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">Обозначение выкройки</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">Имя не может быть пустым</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="vanished">Долевая нить</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="vanished">Видимость долевой нити</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="vanished">Вращение:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="vanished">Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="vanished">Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="vanished">Длина:</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="vanished">Недопустимый/неизвестный результат</translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="vanished">Значение длины должно быть положительным числом</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="vanished">Стрелки:</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="vanished">Обе</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="vanished">Только вверх</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="vanished">Только вниз</translation>
     </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
-        <translation>Изменить формулу</translation>
+        <translation>Редактировать формулу</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1296,7 +1605,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Длина дуг</translation>
+        <translation type="vanished">Длина дуг</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1312,7 +1621,7 @@
     </message>
     <message>
         <source>Double click for add to formula</source>
-        <translation>Двойной щелчок для добавления в формулу</translation>
+        <translation type="vanished">Двойной щелчок для добавления в формулу</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1328,7 +1637,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Длина дуги</translation>
+        <translation type="vanished">Длина дуги</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1344,7 +1653,7 @@
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Углы дуг</translation>
+        <translation type="vanished">Углы дуг</translation>
     </message>
     <message>
         <source>Angles of curves</source>
@@ -1356,7 +1665,7 @@
     </message>
     <message>
         <source>Arc angle</source>
-        <translation>Угол дуги</translation>
+        <translation type="vanished">Угол дуги</translation>
     </message>
     <message>
         <source>Curve angle</source>
@@ -1373,6 +1682,117 @@
     <message>
         <source>Calculation</source>
         <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Название</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <translation>Полное название</translation>
+    </message>
+    <message>
+        <source>Functions</source>
+        <translation>Функции</translation>
+    </message>
+    <message>
+        <source>Lengths to control points</source>
+        <translation>Расстояние до контрольной точки</translation>
+    </message>
+    <message>
+        <source>Filter list by keyword</source>
+        <translation>Фильтр списка по ключевому слову</translation>
+    </message>
+</context>
+<context>
+    <name>DialogEllipticalArc</name>
+    <message>
+        <source>Radius1:</source>
+        <translation>Радиус1:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Radius2:</source>
+        <translation>Радиус2:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation>Первый угол:</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation>Второй угол:</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation>Угол поворота:</translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation>Центральная точка:</translation>
+    </message>
+    <message>
+        <source>Select center point of the arc</source>
+        <translation>Выберите центральную точку дуги</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation>Цвет:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation>Радиус не может быть отрицательным</translation>
+    </message>
+    <message>
+        <source>Angles equal</source>
+        <translation>Углы равны</translation>
+    </message>
+    <message>
+        <source>Edit radius1</source>
+        <translation>Изменить радиус1</translation>
+    </message>
+    <message>
+        <source>Edit radius2</source>
+        <translation>Изменить радиус2</translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation>Изменить первый угол</translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation>Изменить второй угол</translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation>Изменить угол поворота</translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation>Эллиптическая дуга</translation>
     </message>
 </context>
 <context>
@@ -1407,7 +1827,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1419,7 +1839,7 @@
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Инструмент точка на конце отрезка</translation>
+        <translation>Точка на конце отрезка</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -1427,7 +1847,7 @@
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактировать угол</translation>
+        <translation>Редактрировать угол</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1479,10 +1899,150 @@
     </message>
 </context>
 <context>
+    <name>DialogExportToCSV</name>
+    <message>
+        <source>Export options</source>
+        <translation>Экспорт настроек</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Экспорт</translation>
+    </message>
+    <message>
+        <source>With header</source>
+        <translation>С заголовком</translation>
+    </message>
+    <message>
+        <source>Codec:</source>
+        <translation>Кодек:</translation>
+    </message>
+    <message>
+        <source>Separator</source>
+        <translation>Разделитель</translation>
+    </message>
+    <message>
+        <source>Tab</source>
+        <translation>Tab</translation>
+    </message>
+    <message>
+        <source>Comma</source>
+        <translation>Запятая</translation>
+    </message>
+    <message>
+        <source>Semicolon</source>
+        <translation>Точка с запятой</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation>Пробел</translation>
+    </message>
+</context>
+<context>
+    <name>DialogFlippingByAxis</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Диалог</translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation>Начальная точка:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation>Суффикс:</translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation>Тип оси:</translation>
+    </message>
+    <message>
+        <source>Select origin point</source>
+        <translation>Выбор начальной точки</translation>
+    </message>
+    <message>
+        <source>Select origin point that is not part of the list of objects</source>
+        <translation>Выбор начальной точки (точка не должна принадлежать какому-либо объекту)</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation>Вертикальные оси</translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation>Горизонтальные оси</translation>
+    </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation>Отразить объект по оси</translation>
+    </message>
+</context>
+<context>
+    <name>DialogFlippingByLine</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Диалог</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation>Первая точка линии:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation>Суффикс:</translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation>Вторая точка линии:</translation>
+    </message>
+    <message>
+        <source>Select first line point</source>
+        <translation>Выберите первую точку линии</translation>
+    </message>
+    <message>
+        <source>Select first line point that is not part of the list of objects</source>
+        <translation>Выберите первую точку линии (точка не должна принадлежать какому-либо объекту)</translation>
+    </message>
+    <message>
+        <source>Select second line point</source>
+        <translation>Выберите вторую точку линии</translation>
+    </message>
+    <message>
+        <source>Select second line point that is not part of the list of objects</source>
+        <translation>Выберите вторую точку линии (точка не должна принадлежать какому-либо объекту)</translation>
+    </message>
+    <message>
+        <source>Flipping by line</source>
+        <translation>Отразить объект по линии</translation>
+    </message>
+</context>
+<context>
+    <name>DialogGroup</name>
+    <message>
+        <source>Group</source>
+        <translation>Группа</translation>
+    </message>
+    <message>
+        <source>Group name:</source>
+        <translation>Название группы:</translation>
+    </message>
+    <message>
+        <source>Unique pattern piece name</source>
+        <translation>Уникальное имя выкройки</translation>
+    </message>
+    <message>
+        <source>Choose group name</source>
+        <translation>Выберите название группы</translation>
+    </message>
+    <message>
+        <source>New group</source>
+        <translation>Новая группа</translation>
+    </message>
+</context>
+<context>
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -1601,15 +2161,15 @@
     </message>
     <message>
         <source>Curve %1_%2</source>
-        <translation>Кривая %1_%2</translation>
+        <translation type="vanished">Кривая %1_%2</translation>
     </message>
     <message>
         <source>Arc with center in point %1</source>
-        <translation>Дуга c центром в точке %1</translation>
+        <translation type="vanished">Дуга c центром в точке %1</translation>
     </message>
     <message>
         <source>Curve point %1</source>
-        <translation>Точка кривой %1</translation>
+        <translation type="vanished">Точка кривой %1</translation>
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
@@ -1629,15 +2189,15 @@
     </message>
     <message>
         <source>%1 - cut arc with center %2</source>
-        <translation>%1 - разрезает дугу с центром в %2</translation>
+        <translation type="vanished">%1 - разрезает дугу с центром в %2</translation>
     </message>
     <message>
         <source>%1 - cut curve %2_%3</source>
-        <translation>%1 - разрезает кривую %2_%3</translation>
+        <translation type="vanished">%1 - разрезает кривую %2_%3</translation>
     </message>
     <message>
         <source>%1 - cut curve path %2</source>
-        <translation>%1 - разрезает сложную кривую %2</translation>
+        <translation type="vanished">%1 - разрезает сложную кривую %2</translation>
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
@@ -1649,7 +2209,7 @@
     </message>
     <message>
         <source>Arc with center in point %1 and length %2</source>
-        <translation>Дуга с центром %1 и длиной %2</translation>
+        <translation type="vanished">Дуга с центром %1 и длиной %2</translation>
     </message>
     <message>
         <source>%1 - point of arcs intersection</source>
@@ -1671,6 +2231,54 @@
         <source>Correction the dart %1_%2_%3</source>
         <translation>Правка вытачки %1_%2_%3</translation>
     </message>
+    <message>
+        <source>%1 - point of curves intersection</source>
+        <translation>%1 - точка пересечения кривых</translation>
+    </message>
+    <message>
+        <source>Curve</source>
+        <translation>Кривая</translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve</source>
+        <translation>Кубическая кривая Безье</translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation>Дуга</translation>
+    </message>
+    <message>
+        <source>%1 with length %2</source>
+        <translation>%1 с длиной %2</translation>
+    </message>
+    <message>
+        <source>Spline path</source>
+        <translation>Сплайн</translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve path</source>
+        <translation>Кубическая кривая Безье</translation>
+    </message>
+    <message>
+        <source>%1 - cut %2</source>
+        <translation>%1 - разрезает %2</translation>
+    </message>
+    <message>
+        <source>arc</source>
+        <translation>дуга</translation>
+    </message>
+    <message>
+        <source>curve</source>
+        <translation>кривая</translation>
+    </message>
+    <message>
+        <source>curve path</source>
+        <translation>сложная кривая</translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation>Эллиптическая дуга</translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -1680,7 +2288,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation>Обозначение</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -1708,7 +2316,7 @@
     </message>
     <message>
         <source>Tables of Variables</source>
-        <translation>Таблицы переменных</translation>
+        <translation>Таблици переменных</translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1728,7 +2336,7 @@
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation>Длины дуг</translation>
+        <translation type="vanished">Длины дуг</translation>
     </message>
     <message>
         <source>Radiuses arcs</source>
@@ -1740,7 +2348,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation>Углы дуг</translation>
+        <translation type="vanished">Углы дуг</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1760,11 +2368,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Имя:</translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Рассчитанное значение:</translation>
+        <translation>Вычисленное значение:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -1772,7 +2380,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -1800,7 +2408,7 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation>Прибавка_%1</translation>
+        <translation type="vanished">Прибавка_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
@@ -1818,16 +2426,55 @@
         <source>Formula wizard</source>
         <translation>Мастер формул</translation>
     </message>
+    <message>
+        <source>Invalid value</source>
+        <translation type="vanished">Некорректное значение</translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation>Найти:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <source>Curves control point lengths</source>
+        <translation>Длина контрольных точек кривой</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+    </message>
+</context>
+<context>
+    <name>DialogInsertNode</name>
+    <message>
+        <source>Insert node</source>
+        <translation>Вставить узел</translation>
+    </message>
+    <message>
+        <source>Item:</source>
+        <translation>Объект:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation>Деталь:</translation>
+    </message>
+    <message>
+        <source>Uknown</source>
+        <translation>Неизвестное</translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Не удалось подготовить данные для создания лекала</translation>
+        <translation>Не удалось подготовить данные для создания раскладки</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько деталей остались неуложенными, но никто из них не подходит для листа</translation>
+        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1839,7 +2486,7 @@
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
-        <translation>Размещено заготовок деталей: %1 из %2</translation>
+        <translation>Размещено заготовок: %1 из %2</translation>
     </message>
 </context>
 <context>
@@ -1862,7 +2509,7 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Поворачивать деталь</translation>
+        <translation>Поворачивать заготовки</translation>
     </message>
     <message>
         <source>Rotate by</source>
@@ -1882,11 +2529,11 @@
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation type="vanished">Принцип выбора очередной детали</translation>
+        <translation type="vanished">Принцип выбора очередной заготовки</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation>Три группы: большие, средние, малые</translation>
+        <translation>Три групы: большие, средние, малые</translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
@@ -1934,7 +2581,7 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation>Буква/символ</translation>
     </message>
     <message>
         <source>Legal</source>
@@ -2002,7 +2649,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательские</translation>
+        <translation>Пользовательский</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2014,7 +2661,7 @@
 Apply settings anyway?</source>
         <translation>Поля выходят за границы печати.
 
-Все равно применить настройки?</translation>
+Всеравно применить настройки?</translation>
     </message>
     <message>
         <source>
@@ -2036,7 +2683,40 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation>Правило выбора очередной детали</translation>
+        <translation>Правило выбора очередной заготовки</translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="vanished">Активация может ускорить время формирования листов, имеющих большую высоту.</translation>
+    </message>
+    <message>
+        <source>Divide into strips</source>
+        <translation>Разделить на полосы</translation>
+    </message>
+    <message>
+        <source>Multiplier</source>
+        <translation>Множитель</translation>
+    </message>
+    <message>
+        <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation>Укажите множитель для длины самой большой заготовки детали в раскладке.</translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="vanished">x</translation>
+    </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating.</source>
+        <translation>Активация может ускорить время формирования листов, имеющих большую высоту.</translation>
+    </message>
+    <message>
+        <source>Printer:</source>
+        <translation>Принтер:</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>Printer</comment>
+        <translation>Ничего</translation>
     </message>
 </context>
 <context>
@@ -2090,7 +2770,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First line</source>
@@ -2157,7 +2837,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -2177,7 +2857,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2377,6 +3057,53 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogMove</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Диалог</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет во всплывающем окне&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation>Суффикс:</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation>Изменить угол</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation>Изменить длину</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation>Переместить</translation>
+    </message>
+</context>
+<context>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
@@ -2427,7 +3154,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="vanished">Название чертежа</translation>
+        <translation type="vanished">Название выкройки</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -2447,19 +3174,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name:</source>
-        <translation>Чертеж:</translation>
+        <translation>Выкройка:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Уникальное имя чертежа</translation>
+        <translation>Уникальное имя выкройки</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
-        <translation>Выберете уникальное имя чертежа.</translation>
+        <translation>Выберите уникальное имя выкройки.</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation>Новое лекало</translation>
+        <translation>Новая выкройка</translation>
     </message>
 </context>
 <context>
@@ -2478,7 +3205,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2577,7 +3304,7 @@ Apply settings anyway?</source>
     <name>DialogPatternProperties</name>
     <message>
         <source>Pattern properties</source>
-        <translation>Свойства лекала</translation>
+        <translation>Свойства выкройки</translation>
     </message>
     <message>
         <source>Description</source>
@@ -2589,7 +3316,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern description</source>
-        <translation>Описание лекала</translation>
+        <translation>Описание выкройки</translation>
     </message>
     <message>
         <source>For technical notes.</source>
@@ -2609,7 +3336,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Рост и размер по умолчанию</translation>
+        <translation>Размер и рост по умолчанию</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -2627,60 +3354,180 @@ Apply settings anyway?</source>
         <source>Size:</source>
         <translation>Размер:</translation>
     </message>
+    <message>
+        <source>Security</source>
+        <translation>Защита</translation>
+    </message>
+    <message>
+        <source>Open only for read</source>
+        <translation>Открыть только для чтения</translation>
+    </message>
+    <message>
+        <source>Call context menu for edit</source>
+        <translation>Для редактирования вызовите контекстное меню</translation>
+    </message>
+    <message>
+        <source>No image</source>
+        <translation>Нет изображения</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation>Удалить изображение</translation>
+    </message>
+    <message>
+        <source>Change image</source>
+        <translation>Заменить изображение</translation>
+    </message>
+    <message>
+        <source>Save image to file</source>
+        <translation>Сохранить изображение в файл</translation>
+    </message>
+    <message>
+        <source>Show image</source>
+        <translation>Показать изображение</translation>
+    </message>
+    <message>
+        <source>Image for pattern</source>
+        <translation>Изображение для выкройки</translation>
+    </message>
+    <message>
+        <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
+        <translation type="vanished">Изображения (*.png *.jpg *.jpeg *.bmp)</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation>Изображения</translation>
+    </message>
+    <message>
+        <source>Save File</source>
+        <translation>Сохранить файл</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation>без названия</translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation>Путь:</translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation>Показать в проводнике</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation>Файл не был записан.</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation>Показать в Finder</translation>
+    </message>
+    <message>
+        <source>General info</source>
+        <translation>Основная информация</translation>
+    </message>
+    <message>
+        <source>Pattern name:</source>
+        <translation>Название модели:</translation>
+    </message>
+    <message>
+        <source>Pattern number:</source>
+        <translation>Номер модели:</translation>
+    </message>
+    <message>
+        <source>Company/Designer name:</source>
+        <translation>Название компании / имя разработчика:</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation>Имя клиента:</translation>
+    </message>
+    <message>
+        <source>Created:</source>
+        <translation type="vanished">Создан:</translation>
+    </message>
+    <message>
+        <source>Pattern size:</source>
+        <translation>Размер модели:</translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="vanished">Показать метки</translation>
+    </message>
+    <message>
+        <source>Show date of creation</source>
+        <translation type="vanished">Показать дату создания</translation>
+    </message>
+    <message>
+        <source>Use %1 and %2 to insert pattern size and height</source>
+        <translation>Используйте %1 и %2 для вставки размера и высоты модели</translation>
+    </message>
+    <message>
+        <source>Show date of layout creation (%1)</source>
+        <translation>Показать дату создания раскладки (%1)</translation>
+    </message>
+    <message>
+        <source>Show measurements file</source>
+        <translation>Показать файл мерок</translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML-редактор</translation>
+        <translation type="vanished">XML редактор</translation>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Значение:</translation>
+        <translation type="vanished">Значение:</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation>Имя:</translation>
+        <translation type="vanished">Имя:</translation>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;Нет выбранного&gt;</translation>
+        <translation type="vanished">&lt;Нет выбранного&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
-        <translation>Тип: </translation>
+        <translation type="vanished">Тип: </translation>
     </message>
     <message>
         <source>Add  attribute</source>
-        <translation>Добавить атрибут</translation>
+        <translation type="vanished">Добавить атрибут</translation>
     </message>
     <message>
         <source>Add  son</source>
-        <translation>Добавить сына</translation>
+        <translation type="vanished">Добавить сына</translation>
     </message>
     <message>
         <source>Remove attribute</source>
-        <translation>Удалить атрибут</translation>
+        <translation type="vanished">Удалить атрибут</translation>
     </message>
     <message>
         <source>Remove node</source>
-        <translation>Удалить узел</translation>
+        <translation type="vanished">Удалить узел</translation>
     </message>
     <message>
         <source>Set</source>
-        <translation>Задать</translation>
+        <translation type="vanished">Задать</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation>Применить изменения</translation>
+        <translation type="vanished">Применить изменения</translation>
     </message>
     <message>
         <source>Undo last</source>
-        <translation>Отменить последнее</translation>
+        <translation type="vanished">Отменить последнее</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -2688,83 +3535,317 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base selection</source>
-        <translation>Выбор базы</translation>
+        <translation type="vanished">Выбор базы</translation>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation>Все выкройки</translation>
+        <translation type="vanished">Все выкройки</translation>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Нет изменений</translation>
+        <translation type="vanished">Нет изменений</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
-        <translation>Не удается удалить ранее созданный узел</translation>
+        <translation type="vanished">Не удается удалить ранее созданный узел</translation>
     </message>
     <message>
         <source>No changes left</source>
-        <translation>Больше изменений не осталось</translation>
+        <translation type="vanished">Больше изменений не осталось</translation>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Невозможно отменить изменение</translation>
+        <translation type="vanished">Невозможно отменить изменение</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;Нет значения&gt;</translation>
+        <translation type="vanished">&lt;Нет значения&gt;</translation>
     </message>
     <message>
         <source>Unchanged</source>
-        <translation>Неизмененный</translation>
+        <translation type="vanished">Неизмененный</translation>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation>Не удается удалить ранее созданный атрибут</translation>
+        <translation type="vanished">Не удается удалить ранее созданный атрибут</translation>
     </message>
     <message>
         <source>Node Name</source>
-        <translation>Имя узла</translation>
+        <translation type="vanished">Имя Узла</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Имя:</translation>
+        <translation type="vanished">Название:</translation>
     </message>
     <message>
         <source>Node Value (may be empty)</source>
-        <translation>Значение узла (может быть пустым)</translation>
+        <translation type="vanished">Значение узла (может быть пустым)</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Значение:</translation>
+        <translation type="vanished">Значение:</translation>
     </message>
     <message>
         <source>Attribute Name</source>
-        <translation>Название атрибута</translation>
+        <translation type="vanished">Название атрибута</translation>
     </message>
     <message>
         <source>Attribute Value</source>
-        <translation>Значение атрибута</translation>
+        <translation type="vanished">Значение атрибута</translation>
     </message>
     <message>
         <source>No selection</source>
-        <translation>Не выбрано</translation>
+        <translation type="vanished">Не выбрано</translation>
     </message>
     <message>
         <source>Root node</source>
-        <translation>Корневой узел</translation>
+        <translation type="vanished">Корневой узел</translation>
     </message>
     <message>
         <source>Node</source>
-        <translation>Узел</translation>
+        <translation type="vanished">Узел</translation>
     </message>
     <message>
         <source>Attribute</source>
-        <translation>Атрибут</translation>
+        <translation type="vanished">Атрибут</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation>Немедленно применить</translation>
+        <translation type="vanished">Немедленно применить</translation>
+    </message>
+    <message>
+        <source>Type: </source>
+        <translation type="vanished">Тип:</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="vanished">Тип:</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPiecePath</name>
+    <message>
+        <source>Piece path tool</source>
+        <translation>Инструмент контур детали</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation>Контур</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation>Безымянный контур</translation>
+    </message>
+    <message>
+        <source>Create name for your path</source>
+        <translation>Задайте имя для вашего контура</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation>Тип:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation>Деталь:</translation>
+    </message>
+    <message>
+        <source>Type of pen:</source>
+        <translation>Тип пера:</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation>Готовы!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation>Прибавка на швы</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation>Ширина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation>Узлы</translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation>Узел:</translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation>До узла:</translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation>Вернуться к значению ширины по умолчанию</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation>После узла:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>Выберите объекты основного контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation>Изменить направление</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Current seam aloowance</source>
+        <translation>Текущая прибавка на швы</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation>Редактировать ширину прибавки на швы</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation>Редактировать ширину прибавки на швы перед</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation>Редактировать ширину прибавки на швы после</translation>
+    </message>
+    <message>
+        <source>Internal path</source>
+        <translation>Внутренний контур</translation>
+    </message>
+    <message>
+        <source>Custom seam allowance</source>
+        <translation>Пользовательская прибавка на швы</translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation>Вам нужно выбрать больше точек!</translation>
+    </message>
+    <message>
+        <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
+        <translation>Первая точка &lt;b&gt;пользовательской прибавки на швы&lt;/b&gt; не может быть равной последней точке!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation>Повторяются две точки подряд!</translation>
+    </message>
+    <message>
+        <source>Passmarks</source>
+        <translation>Надсечки</translation>
+    </message>
+    <message>
+        <source>Passmark:</source>
+        <translation>Надсечка:</translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation>Одна линия</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation>Две линии</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation>Три линии</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Угол</translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation>Прямой</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation>Биссектриса</translation>
+    </message>
+    <message>
+        <source>Passmark</source>
+        <translation>Надсечка</translation>
+    </message>
+    <message>
+        <source>Each point in the path must be unique!</source>
+        <translation>Каждая точка в контуре должна быть уникальной!</translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation>Вид метки</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation>Т метка</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation>V метка</translation>
+    </message>
+    <message>
+        <source>Please, select a detail to insert into!</source>
+        <translation>Пожалуйста, выберите деталь для вставки!</translation>
+    </message>
+    <message>
+        <source>List of details is empty!</source>
+        <translation>Список деталей пустой!</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation>Пересечение</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPin</name>
+    <message>
+        <source>Pin tool</source>
+        <translation>Инструмент шпилька</translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation>Точка:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation>Деталь:</translation>
+    </message>
+    <message>
+        <source>Pin</source>
+        <translation>Шпилька</translation>
     </message>
 </context>
 <context>
@@ -2834,7 +3915,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2862,7 +3943,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Редактировать радиус</translation>
+        <translation>Изменить радиус</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2929,7 +4010,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -3004,7 +4085,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -3055,7 +4136,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3105,12 +4186,16 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation>Взять:</translation>
     </message>
+    <message>
+        <source>Tool point of intersetion arcs</source>
+        <translation>Инструмент Точка пересечения дуг</translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
         <source>Radius of the first circle</source>
@@ -3118,7 +4203,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -3208,6 +4293,119 @@ Apply settings anyway?</source>
         <source>Take:</source>
         <translation>Взять:</translation>
     </message>
+    <message>
+        <source>Tool point of intersection circles</source>
+        <translation>Инструмент Точка пересечения окружностей</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionCurves</name>
+    <message>
+        <source>Tool point of intersection curves</source>
+        <translation>Инструмент Точка пересечения кривых</translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation>Первая кривая:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation>Вторая кривая:</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation>Имя точки:</translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation>Уникальное имя</translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation>Выберите уникальное имя точки.</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation>Коррекция по вертикали:</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation>Коррекция по горизонтали:</translation>
+    </message>
+    <message>
+        <source>Select second curve</source>
+        <translation>Выбрать вторую кривую</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation>Свойства</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation>Выкройка</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation>Пути</translation>
+    </message>
+</context>
+<context>
+    <name>DialogRotation</name>
+    <message>
+        <source>Rotation</source>
+        <translation>Поворот</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="vanished">Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Origin Point:</source>
+        <translation>Начальная точка:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation>Суффикс:</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation>Изменить угол</translation>
+    </message>
+    <message>
+        <source>Select origin point</source>
+        <translation>Выбор начальной точки</translation>
+    </message>
+    <message>
+        <source>Select origin point that is not part of the list of objects</source>
+        <translation>Выбор начальной точки (точка не должна принадлежать какому-либо объекту)</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -3241,7 +4439,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation>Путь к каталогу назначения.</translation>
+        <translation type="vanished">Путь к каталогу назначения.</translation>
     </message>
     <message>
         <source>Select path to destination folder</source>
@@ -3253,7 +4451,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File base name. </source>
-        <translation>Базовое имя файла.</translation>
+        <translation type="vanished">Базовое имя файла.</translation>
+    </message>
+    <message>
+        <source>File base name.</source>
+        <translation type="vanished">Имя файла.</translation>
+    </message>
+    <message>
+        <source>Path to destination folder</source>
+        <translation>Путь к папке назначения</translation>
     </message>
 </context>
 <context>
@@ -3276,31 +4482,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>SVG-файлы (*.svg)</translation>
+        <translation type="vanished">SVG-файлы (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>PDF-файлы (*.pdf)</translation>
+        <translation type="vanished">PDF-файлы (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Изображения (*.png)</translation>
+        <translation type="vanished">Изображения (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>PS-файлы (*.ps)</translation>
+        <translation type="vanished">PS-файлы (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS-файлы (*.eps)</translation>
+        <translation type="vanished">EPS-файлы (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
-        <translation>DXF-файлы (*.dxf)</translation>
+        <translation type="vanished">DXF-файлы (*.dxf)</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
@@ -3322,6 +4528,197 @@ Apply settings anyway?</source>
         <source>The base filename does not match a regular expression.</source>
         <translation>Базовое имя файла не соответствует регулярному выражению.</translation>
     </message>
+    <message>
+        <source>files</source>
+        <translation>файлы</translation>
+    </message>
+</context>
+<context>
+    <name>DialogSeamAllowance</name>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation>Готовы!</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation>Долевая нить</translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>Выберите объекты основного контура по часовой стрелке, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation>Раскрой %1 из %2%3</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation>на сгибе</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation>Изменить направление</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Параметры</translation>
+    </message>
+    <message>
+        <source>Error. Can&apos;t save piece path.</source>
+        <translation>Ошибка. Не удалось сохранить контур детали.</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation>Недопустимый/неизвестный результат</translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation>Значение длины должно быть положительным числом</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Ошибка синтаксического анализа: %1</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Обновление</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation>Текущая прибавка на швы</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width</source>
+        <translation>Редактировать ширину прибавки на швы</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width before</source>
+        <translation>Редактировать ширину прибавки на швы до узла</translation>
+    </message>
+    <message>
+        <source>Edit seam allowance width after</source>
+        <translation>Редактировать ширину прибавки на швы после узла</translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation>Вам нужно выбрать больше точек!</translation>
+    </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation>Выберите точки по часовой стрелке!</translation>
+    </message>
+    <message>
+        <source>First point cannot be equal to the last point!</source>
+        <translation>Первая точка не может быть эквивалентна последней!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation>Повторяются две точки подряд!</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation>Пусто</translation>
+    </message>
+    <message>
+        <source>main path</source>
+        <translation>главный контур</translation>
+    </message>
+    <message>
+        <source>custom seam allowance</source>
+        <translation>пользовательская прибавка на швы</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Произвольное</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation>Размещать на сгибе</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation>Обе</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation>Только вверх</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation>Только вниз</translation>
+    </message>
+    <message>
+        <source>Pins</source>
+        <translation>Шпильки</translation>
+    </message>
+    <message>
+        <source>no pin</source>
+        <translation>без шпильки</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation>Метки</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation>Редактрировать угол</translation>
+    </message>
+    <message>
+        <source>Edit height</source>
+        <translation>Редактировать высоту</translation>
+    </message>
+    <message>
+        <source>Edit width</source>
+        <translation>Редактировать ширину</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation>Пути</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation>Исключенный</translation>
+    </message>
+    <message>
+        <source>Passmark</source>
+        <translation>Надсечка</translation>
+    </message>
+    <message>
+        <source>Each point in the path must be unique!</source>
+        <translation>Каждая точка в контуре должна быть уникальной!</translation>
+    </message>
+    <message>
+        <source>Passmarks</source>
+        <translation>Надсечки</translation>
+    </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path.</source>
+        <translation>Для открытия всех функций детали закончите создание главного контура.</translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -3339,7 +4736,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3454,7 +4851,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation>Имя точки</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3469,7 +4866,7 @@ Apply settings anyway?</source>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
@@ -3481,7 +4878,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
@@ -3509,23 +4906,87 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Коэффициент кривизны кривой</translation>
+        <translation type="vanished">Коэффициент кривизны кривой</translation>
     </message>
     <message>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
     <message>
+        <source>First point:</source>
+        <translation>Начальная точка:</translation>
+    </message>
+    <message>
         <source>Control point</source>
         <translation>Контрольная точка</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation>Угол</translation>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
     </message>
     <message>
-        <source>Length ratio</source>
-        <translation>Коэффициент длины</translation>
+        <source>Length ratio:</source>
+        <translation type="vanished">Коэффициент длины:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation>Вторая точка:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation>Некорректная кривая</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="vanished">Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation>Изменить угол первой контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation>Изменить угол второй контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation>Изменить длину первой контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation>Изменить длину второй контрольной точки</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation>Длина не может быть отрицательной</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
     </message>
 </context>
 <context>
@@ -3572,31 +5033,106 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Коэффициент кривизны кривой</translation>
+        <translation type="vanished">Коэффициент кривизны кривой</translation>
     </message>
     <message>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
     <message>
-        <source>Point</source>
-        <translation>Точка</translation>
+        <source>Point:</source>
+        <translation>Точка:</translation>
     </message>
     <message>
         <source>First control point</source>
         <translation>Первая контрольная точка</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation>Угол</translation>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
     </message>
     <message>
-        <source>Length ratio</source>
-        <translation>Коэффициент длины</translation>
+        <source>Length ratio:</source>
+        <translation type="vanished">Коэффициент длины:</translation>
     </message>
     <message>
         <source>Second control point</source>
         <translation>Вторая контрольная точка</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
+        <translation>Некорректное задание кривой</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="vanished">Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation>Изменить угол первой контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation>Изменить угол второй контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation>Изменить длину первой контрольной точки</translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation>Изменить длину второй контрольной точки</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation>Длина не может быть отрицательной</translation>
+    </message>
+    <message>
+        <source>Not used</source>
+        <translation>Не используется</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+</context>
+<context>
+    <name>DialogTapePreferences</name>
+    <message>
+        <source>Preferences</source>
+        <translation>Свойства</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation>Пути</translation>
     </message>
 </context>
 <context>
@@ -3619,7 +5155,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Ошибка разбора: %1</translation>
+        <translation>Ошибка синтаксического анализа: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3629,12 +5165,64 @@ Apply settings anyway?</source>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
+    <message>
+        <source>Highest point</source>
+        <translation>Самая высокая точка</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation>Самая низкая точка</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation>Самая левая точка</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation>Самая правая точка</translation>
+    </message>
+    <message>
+        <source>Invalid value</source>
+        <translation type="vanished">Некорректное значение</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation>по длине</translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation>по точкам пересечения</translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation>по симметрии первого ребра</translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation>по симметрии второго ребра</translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation>по прямому углу первого ребра</translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation>по прямому углу второго ребра</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Значение не может быть меньше 0</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -3749,7 +5337,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="vanished">Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от второй точки в этой точке</translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -3789,19 +5377,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First dart point:</source>
-        <translation>Первая точка выточки:</translation>
+        <translation>Первая точка вытачки:</translation>
     </message>
     <message>
         <source>Second dart point:</source>
-        <translation>Вторая точка выточки:</translation>
+        <translation>Вторая точка вытачки:</translation>
     </message>
     <message>
         <source>Third dart point:</source>
-        <translation>Третья точка выточки:</translation>
+        <translation>Третья точка вытачки:</translation>
     </message>
     <message>
         <source>First new dart point:</source>
-        <translation>Первая новая точка выточки:</translation>
+        <translation>Первая новая точка вытачки:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3813,14 +5401,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second new dart point:</source>
-        <translation>Вторая новая точка выточки:</translation>
+        <translation>Вторая новая точка вытачки:</translation>
     </message>
 </context>
 <context>
     <name>DialogUndo</name>
     <message>
         <source>Broken formula</source>
-        <translation>Сломанная формула</translation>
+        <translation>Неисправная формула</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
@@ -3859,7 +5447,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Деталь должна иметь по крайней мере две точки и три объекта</translation>
+        <translation>Заготовка детали должна иметь по крайней мере две точки и три объекта</translation>
     </message>
     <message>
         <source>Select a second point</source>
@@ -3881,6 +5469,68 @@ Apply settings anyway?</source>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Вы действительно хотите объединить детали?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>Retain original pieces</source>
+        <translation>Сохранить оригинальную выкройку</translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdateWindow</name>
+    <message>
+        <source>Software Update</source>
+        <translation>Обновление программы</translation>
+    </message>
+    <message>
+        <source>A new version of %1 is available!</source>
+        <translation>Доступна новая версия программы: %1!</translation>
+    </message>
+    <message>
+        <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
+        <translation>%1 %2 доступно для скачивания. У вас установлено %3. Вы хотите скачать сейчас?</translation>
+    </message>
+    <message>
+        <source>Skip This Version</source>
+        <translation>Пропустить эту версию</translation>
+    </message>
+    <message>
+        <source>Remind Me Later</source>
+        <translation>Напомнить позже</translation>
+    </message>
+    <message>
+        <source>Get Update</source>
+        <translation>Получить обновления</translation>
+    </message>
+</context>
+<context>
+    <name>FvUpdater</name>
+    <message>
+        <source>Cannot open your default browser.</source>
+        <translation>Невозможно открыть браузер по умолчанию.</translation>
+    </message>
+    <message>
+        <source>Feed download failed: %1.</source>
+        <translation>Ошибка скачивания: %1.</translation>
+    </message>
+    <message>
+        <source>Feed parsing failed: %1 %2.</source>
+        <translation>Ошибка разбора: %1 %2.</translation>
+    </message>
+    <message>
+        <source>No updates were found.</source>
+        <translation>Обновление не требуется.</translation>
+    </message>
+    <message>
+        <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
+        <translation>Ошибка передачи: недопустимы &quot;контейнер&quot; со ссылкой для загрузки</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
 </context>
 <context>
     <name>InternalStrings</name>
@@ -3893,23 +5543,23 @@ Apply settings anyway?</source>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Ошибка парсинга файла. Программа будет закрыта.</translation>
+        <translation>Ошибка разбора файла. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
+        <translation>Ошибка идентификатора. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation>Ошибка, невозможно преобразовать значение. Программа будет закрыта.</translation>
+        <translation>Ошибка преобразования значения. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустой параметр. Программа будет закрыта.</translation>
+        <translation>Ошибка пустого параметра. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильный id. Программа будет закрыта.</translation>
+        <translation>Ошибка неправильного идентификатора. Работа программы будет завершена.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -3965,7 +5615,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Необходимо указать один входной файл.</translation>
+        <translation>Укажите один входной файл.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -3986,6 +5636,10 @@ Apply settings anyway?</source>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Используйте для юнит тестирования. Запускает программу и открывает файл без показа окна.</translation>
+    </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <translation>Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать %1 переменную среды.</translation>
     </message>
 </context>
 <context>
@@ -4072,7 +5726,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Чертеж</translation>
+        <translation>&amp;Выкройка</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -4092,7 +5746,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation>Панель инструментов лекала</translation>
+        <translation>Панель инструментов выкройки</translation>
     </message>
     <message>
         <source>Toolbar options</source>
@@ -4104,7 +5758,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool options</source>
-        <translation>Параметры инструметнов</translation>
+        <translation>Параметры инструментов</translation>
     </message>
     <message>
         <source>New</source>
@@ -4116,7 +5770,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Create a new pattern</source>
-        <translation>Создать новое лекало</translation>
+        <translation>Создать новую выкройку</translation>
     </message>
     <message>
         <source>Open</source>
@@ -4128,7 +5782,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Open file with pattern</source>
-        <translation>Открыть файл с лекалом</translation>
+        <translation>Открыть файл с выкройкой</translation>
     </message>
     <message>
         <source>Save</source>
@@ -4140,7 +5794,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save pattern</source>
-        <translation>Сохранить лекало</translation>
+        <translation>Сохранить выкройку</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -4148,7 +5802,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation>Сохранить еще не сохраненное лекало</translation>
+        <translation>Сохранить еще не сохраненную выкройку</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -4164,23 +5818,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern piece</source>
-        <translation>Новый чертеж</translation>
+        <translation>Новая выкройка</translation>
     </message>
     <message>
         <source>Add new pattern piece</source>
-        <translation>Добавить новый чертеж</translation>
+        <translation>Добавить новую выкройку</translation>
     </message>
     <message>
         <source>Change the label of pattern piece</source>
-        <translation>Изменить имя чертежа</translation>
+        <translation>Изменить имя выкройки</translation>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation>Таблица переменных</translation>
+        <translation type="vanished">Таблица переменных</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Таблицы переменных</translation>
+        <translation type="vanished">Таблицы переменных</translation>
     </message>
     <message>
         <source>History</source>
@@ -4200,15 +5854,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exit the application</source>
-        <translation>Закрыть программу]</translation>
+        <translation>Закрыть программу</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>Настройки</translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>Pattern properties</source>
-        <translation>Свойства лекала</translation>
+        <translation>Свойства выкройки</translation>
     </message>
     <message>
         <source>Zoom in</source>
@@ -4224,15 +5878,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>Редактировать XML код чертежа</translation>
+        <translation type="vanished">Редактировать XML код выкройки</translation>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Начальный масштаб</translation>
+        <translation type="vanished">Начальный масштаб</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Начальный масштаб</translation>
+        <translation type="vanished">Начальный масштаб</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -4240,11 +5894,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Стоп</translation>
+        <translation type="vanished">Стоп</translation>
     </message>
     <message>
         <source>Stop using tool</source>
-        <translation>Прекратить использование инструмента</translation>
+        <translation type="vanished">Прекратить использование инструмента</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
@@ -4260,7 +5914,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation>Справка в Интернете</translation>
+        <translation type="vanished">Справка в Интернете</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -4268,7 +5922,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece %1</source>
-        <translation>Чертеж %1</translation>
+        <translation>Выкройка %1</translation>
     </message>
     <message>
         <source>Select point</source>
@@ -4312,7 +5966,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Выберите точки, дуги, кривые по часовой стрелке.</translation>
+        <translation type="vanished">Выберите точки, дуги, кривые по часовой стрелке.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -4320,7 +5974,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation>Выберите первую тчоку оси</translation>
+        <translation>Выберите первую точку оси</translation>
     </message>
     <message>
         <source>Select detail</source>
@@ -4340,23 +5994,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Рост:</translation>
+        <translation type="vanished">Рост:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Размер:</translation>
+        <translation type="vanished">Размеры: </translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation>Чертеж:</translation>
+        <translation type="vanished">Выкройка:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Файл лекала (*.val)</translation>
+        <translation>Файлы выкроек (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
-        <translation>Чертеж</translation>
+        <translation>выкройка</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -4364,7 +6018,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation>Невозможно сохранить файл</translation>
+        <translation>Не удалось сохранить файл</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -4380,7 +6034,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Помилка, пустий параметр.</translation>
+        <translation>Ошибка, пустой параметр.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -4405,7 +6059,7 @@ Apply settings anyway?</source>
     <message>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
-        <translation>Лекало было изменено. Вы хотите сохранить ваши изменения?</translation>
+        <translation>Выкройка была изменена. Вы хотите сохранить ваши изменения?</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -4417,11 +6071,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern piece:</source>
-        <translation>Чертеж:</translation>
+        <translation>Выкройка:</translation>
     </message>
     <message>
         <source>Enter a new label for the pattern piece.</source>
-        <translation>Введите новое имя для чертежа.</translation>
+        <translation>Введите новое название выкройки.</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -4453,11 +6107,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Стандартные мерки (*.vst)</translation>
+        <translation type="vanished">Стандартные мерки (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Индивидуальные мерки (*.vit)</translation>
+        <translation type="vanished">Индивидуальные мерки (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -4517,7 +6171,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Панель инструментов</translation>
+        <translation type="vanished">Панель инструментов</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -4541,7 +6195,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Config pattern piece</source>
-        <translation>Пареметры чертежа</translation>
+        <translation>Параметры детали выкройки</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -4585,7 +6239,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Страницы роскладки</translation>
+        <translation>Страницы раскладки</translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -4608,8 +6262,8 @@ Do you want to save your changes?</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Печать плиткой</translation>
+        <source>Print tiled PDF</source>
+        <translation>Печать плиткой в PDF</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -4621,7 +6275,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation>Просмотр оригинальной роскладки</translation>
+        <translation>Просмотр оригинальной раскладки</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -4629,7 +6283,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export original layout</source>
-        <translation>Экспорт оригинальной роскладки</translation>
+        <translation>Экспорт оригинальной раскладки</translation>
     </message>
     <message>
         <source>Select first an arc</source>
@@ -4637,11 +6291,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select first circle center </source>
-        <translation>Выберите центр первой окружности</translation>
+        <translation type="vanished">Выберите центр первой окружности</translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation>Выберите точку на касательной</translation>
+        <translation type="vanished">Выберите точку на касательной</translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
@@ -4661,40 +6315,40 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout mode</source>
-        <translation>Режим роскладки</translation>
+        <translation>Режим раскладки</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Сейчас невозможно использовать режим роскладки. Создайте хотя бы одну заготовку детали.</translation>
+        <translation>Сейчас невозможно использовать режим раскладки. Создайте хотя бы одну заготовку детали.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation>Не сохранённые изменения</translation>
+        <translation>Несохранённые изменения</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation>Открыть индивидуальные...</translation>
+        <translation type="vanished">Открыть индивидуальные...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation>Открыть стандартные...</translation>
+        <translation type="vanished">Открыть стандартные...</translation>
     </message>
     <message>
         <source>Show ...</source>
-        <translation>Показать...</translation>
+        <translation type="vanished">Показать...</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation>Показать мерки</translation>
+        <translation type="vanished">Показать мерки</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation>Согласовать
+        <translation type="vanished">Синхронизировать
 мерки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation>Индивидуальные мерки (*.vit);;Стандартные мерки (*.vst)</translation>
+        <translation type="vanished">Индивидуальные мерки (*.vit);;Стандартные мерки (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
@@ -4702,7 +6356,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation>Стандартные мерки (*.vst);;Индивидуальные мерки (*.vit)</translation>
+        <translation type="vanished">Стандартные мерки (*.vst);;Индивидуальные мерки (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
@@ -4714,16 +6368,16 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create/Edit</source>
-        <translation>Создать/изменить</translation>
+        <translation type="vanished">Создать/изменить</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation>Создать/изменить мерки</translation>
+        <translation type="vanished">Создать/изменить мерки</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
         <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
-        <translation>(%1; %2) %3</translation>
+        <translation type="vanished">(%1; %2) %3</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -4755,11 +6409,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurements was synced</source>
-        <translation>Мерки согласованы</translation>
+        <translation type="vanished">Мерки синхронизированы</translation>
     </message>
     <message>
         <source>Couldn&apos;t sync measurements.</source>
-        <translation>Невозможно согласовать мерки.</translation>
+        <translation>Невозможно синхронизировать мерки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t update measurements.</source>
@@ -4771,7 +6425,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не может быть найден. Вы хотите обновить путь к файлу</translation>
+        <translation type="vanished">Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не может быть найден. Вы хотите обновить путь к файлу</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -4815,11 +6469,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print an original layout</source>
-        <translation>Печать оригинальной расскладки</translation>
+        <translation>Печать оригинальной раскладки</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Предварительный просмотр плиткой</translation>
+        <source>Preview tiled PDF</source>
+        <translation>Просмотр печати плиткой в PDF</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -4827,23 +6481,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для роботы с чертежами. Эти чертежи основа для следующего этапа &amp;quot;Режим деталей&amp;quot;. Перед тем как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot; необходимо создать по крайней мере одну деталь.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для работы с выкройками. Эти выкройки -  основа для следующего этапа &amp;quot;Режим деталей&amp;quot;. Перед тем, как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot;, необходимо создать по крайней мере одну деталь.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для роботы с деталями. Перед тем как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot; необходимо создать по крайней мере одну деталь в &amp;quot;Режиме чертежа&amp;quot;. Детали созданные на этом этапе используются для построения раскладок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для работы с деталями. Перед тем, как вы сможете перейти к использованию &amp;quot;Режима деталей&amp;quot;, необходимо создать по крайней мере одну деталь в &amp;quot;Режиме чертежа&amp;quot;. Детали, созданные на этом этапе, используются для построения раскладки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим создания раскладок деталей. Этот режим становится доступным если была создана по крайней мере одна деталь в &amp;quot;Режиме чертежа&amp;quot;. Раскладку можно экспортировать у выбранный вами формат файла и сохранить на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим создания раскладки деталей. Этот режим становится доступным, если была создана по крайней мере одна деталь в &amp;quot;Режиме чертежа&amp;quot;. Раскладку можно экспортировать в выбранный вами формат файла и сохранить на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation>Сбросить мерки</translation>
+        <translation type="vanished">Сбросить мерки</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation>Сбросить мерки, если они не используются в файле выкройки.</translation>
+        <translation type="vanished">Сбросить мерки, если они не используются в файле выкройки.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
@@ -4859,11 +6513,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation>Новое лекало</translation>
+        <translation>Новая выкройка</translation>
     </message>
     <message>
         <source>Open pattern</source>
-        <translation>Открыть лекало</translation>
+        <translation>Открыть выкройку</translation>
     </message>
     <message>
         <source>Create/Edit measurements</source>
@@ -4879,7 +6533,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Файл блокировки</translation>
+        <translation>Блокировка файла</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4891,7 +6545,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -4899,15 +6553,295 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись lock файла.</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
         <translation>Сообщить об ошибке...</translation>
     </message>
     <message>
+        <source>Point intersection curves</source>
+        <translation>Точка пересечения кривых</translation>
+    </message>
+    <message>
+        <source>Select first curve</source>
+        <translation>Выбрать первую кривую</translation>
+    </message>
+    <message>
+        <source>(read only)</source>
+        <translation type="vanished">(только для чтения)</translation>
+    </message>
+    <message>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
+        <translation type="vanished">Мерки были изменены. Согласовать мерки?</translation>
+    </message>
+    <message>
+        <source>Curve tool which uses point as control handle</source>
+        <translation>Инструмент Кривая использует точку как элемент управления</translation>
+    </message>
+    <message>
+        <source>Select first curve point</source>
+        <translation>Выберите первую точку кривой</translation>
+    </message>
+    <message>
+        <source>Select point of cubic bezier path</source>
+        <translation>Выберите точку кубической кривой Безье</translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
+        <translation type="vanished">Панель инструментов Указатель</translation>
+    </message>
+    <message>
+        <source>Operations</source>
+        <translation>Операции</translation>
+    </message>
+    <message>
+        <source>Create new group</source>
+        <translation>Создать новую группу</translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="vanished">Группы</translation>
+    </message>
+    <message>
+        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="vanished">Выберите один или несколько объектов. &lt;b&gt;Enter&lt;/b&gt; - создать</translation>
+    </message>
+    <message>
+        <source>Rotate objects</source>
+        <translation>Вращение объекта</translation>
+    </message>
+    <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть выкройку</translation>
+    </message>
+    <message>
+        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="vanished">Выберите один или несколько объектов. &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
+    </message>
+    <message>
+        <source>Tool pointer</source>
+        <translation>Инструмент указатель</translation>
+    </message>
+    <message>
+        <source>Midpoint between two points</source>
+        <translation>Середина между двумя точками</translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation>Группа</translation>
+    </message>
+    <message>
+        <source>Contains all visibility groups</source>
+        <translation>Содержит все видимые группы</translation>
+    </message>
+    <message>
+        <source>Show which details will go in layout</source>
+        <translation>Показать детали, которые будут добавлены в раскладку</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
+        <translation>Вы не можете использовать режим Раскладки. Пожалуйста, включите минимум одну деталь в раскладку.</translation>
+    </message>
+    <message>
+        <source>Original zoom</source>
+        <translation>Начальный масштаб</translation>
+    </message>
+    <message>
+        <source>Select first circle center</source>
+        <translation>Выберите первый центр окружности</translation>
+    </message>
+    <message>
+        <source>Select point on tangent</source>
+        <translation>Выберите точку на касательной</translation>
+    </message>
+    <message>
+        <source>Pattern Piece:</source>
+        <translation>Выкройка:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation>Высота:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation>Размер:</translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
+        <translation>Файл меток &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не найден. Вы хотите обновить данные о местоположении файла?</translation>
+    </message>
+    <message>
+        <source>Flipping objects by line</source>
+        <translation>Отразить объект по линии</translation>
+    </message>
+    <message>
+        <source>Flipping objects by axis</source>
+        <translation>Отразить объект по оси</translation>
+    </message>
+    <message>
+        <source>Move objects</source>
+        <translation>Переместить объекты</translation>
+    </message>
+    <message>
+        <source>Measurements were changed. Do you want to sync measurements now?</source>
+        <translation>Мерки были изменены. Согласовать мерки?</translation>
+    </message>
+    <message>
+        <source>Gradation doesn&apos;t support inches</source>
+        <translation>Градация не поддерживает дюймы</translation>
+    </message>
+    <message>
+        <source>Measurements have been synced</source>
+        <translation>Метки синхронизированы</translation>
+    </message>
+    <message>
+        <source>Tools for creating elliptical arcs.</source>
+        <translation>Инструмент для создания эллиптической дуги.</translation>
+    </message>
+    <message>
+        <source>Elliptical Arc</source>
+        <translation>Эллиптическая дуга</translation>
+    </message>
+    <message>
+        <source>Select point of center of elliptical arc</source>
+        <translation>Укажите точку размещения центра эллиптической дуги</translation>
+    </message>
+    <message>
+        <source>Piece path tool</source>
+        <translation>Инструмент контур детали</translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise.</source>
+        <translation>Выберите объекты основного контура по часовой стрелке.</translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
+        <translation>Выберите объекты контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой</translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation>Документ не имеет прав на запись.</translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation>Невозможно установить разрешения для %1 для записи.</translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation>Не удалось сохранить файл.</translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation>Не удалось сохранить файл</translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation>только для чтения</translation>
+    </message>
+    <message>
+        <source>Variables Table</source>
+        <translation>Таблица переменных</translation>
+    </message>
+    <message>
+        <source>Contains information about increments and internal variables</source>
+        <translation>Содержит информацию о прибавках и внутренних переменных</translation>
+    </message>
+    <message>
+        <source>Load Individual</source>
+        <translation>Загрузить индивидуальные</translation>
+    </message>
+    <message>
+        <source>Load Individual measurements file</source>
+        <translation>Загрузить файл с индивидуальными мерками</translation>
+    </message>
+    <message>
+        <source>Load Multisize</source>
+        <translation>Загрузить мультиразмерные</translation>
+    </message>
+    <message>
+        <source>Load multisize measurements file</source>
+        <translation>Загрузить файл с мультиразмерными мерками</translation>
+    </message>
+    <message>
+        <source>Open Tape</source>
+        <translation>Открыть Tape</translation>
+    </message>
+    <message>
+        <source>Edit Current</source>
+        <translation>Редактировать текущие</translation>
+    </message>
+    <message>
+        <source>Edit linked to the pattern measurements</source>
+        <translation>Редактировать подключенные к выкройке мерки</translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation>Синхронизировать</translation>
+    </message>
+    <message>
+        <source>Synchronize linked to the pattern measurements after change</source>
+        <translation>Синхронизовать подключенные к выкройке мерки после изменения</translation>
+    </message>
+    <message>
+        <source>Unload Current</source>
+        <translation>Сбросить текущие</translation>
+    </message>
+    <message>
+        <source>Unload measurements if they were not used in a pattern file</source>
+        <translation>Сбросить мерки, если они не используются в файле выкройки</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation>Индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation>Мультиразмерные мерки</translation>
+    </message>
+    <message>
+        <source>Pattern files</source>
+        <translation>Файлы выкроек</translation>
+    </message>
+    <message>
+        <source>Pin tool</source>
+        <translation>Инструмент шпилька</translation>
+    </message>
+    <message>
+        <source>Select pin point</source>
+        <translation>Выберите точку шпильки</translation>
+    </message>
+    <message>
+        <source>Insert node tool</source>
+        <translation>Инструмент Вставить узел</translation>
+    </message>
+    <message>
+        <source>Select an item to insert</source>
+        <translation>Выберите объект для вставки</translation>
+    </message>
+    <message>
+        <source>Wiki</source>
+        <translation>Вики</translation>
+    </message>
+    <message>
+        <source>Forum</source>
+        <translation>Форум</translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>Выберите один или несколько объектов, зажмите &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation>Выберите один или несколько объектов, зажмите  &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode.</source>
+        <translation>Сейчас невозможно использовать режим раскладки.</translation>
+    </message>
+    <message>
+        <source>Open Tape app for creating or editing measurements file</source>
+        <translation>Открыть программу Tape для создания или редактирования файла мерок</translation>
     </message>
 </context>
 <context>
@@ -4962,11 +6896,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Не удалось подготовить данные для создания лекала</translation>
+        <translation>Невозможно подготовить данные для создания раскладки</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько деталей остались не уложеными, но никто из них не подходит для листа</translation>
+        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -4974,7 +6908,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export error.</source>
-        <translation>Ошибка экспорта.</translation>
+        <translation type="vanished">Ошибка экспорта.</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
@@ -4990,11 +6924,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Страницы будут обрезаны, они не соответствуют формату бумаги принтера.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать контур</translation>
+    </message>
+    <message>
+        <source>Cannot set printer margins</source>
+        <translation>Невозможно установить поля принтера</translation>
     </message>
 </context>
 <context>
@@ -5037,22 +6975,230 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>OperationMoveLabel</name>
+    <message>
+        <source>move point label</source>
+        <translation>переместить метку точки</translation>
+    </message>
+</context>
+<context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Открыть каталог</translation>
+        <translation type="vanished">Открыть директорию</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Путь, что использует Валентина</translation>
+        <translation type="vanished">Путь, что использует Валентина</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>По умолчанию</translation>
+        <translation type="vanished">По умолчанию</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Изменить</translation>
+        <translation type="vanished">Редактировать</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="vanished">Тип</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">Путь</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>Patterns</source>
+        <translation type="vanished">Выкройки</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="vanished">Стандартная таблица мерок</translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="vanished">Раскладка</translation>
+    </message>
+    <message>
+        <source>Templates</source>
+        <translation type="vanished">Шаблоны</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <source>User</source>
+        <translation type="vanished">Пользователь</translation>
+    </message>
+    <message>
+        <source>User name</source>
+        <translation type="vanished">Имя пользователя</translation>
+    </message>
+    <message>
+        <source>Graphical output</source>
+        <translation type="vanished">Графический вывод</translation>
+    </message>
+    <message>
+        <source>Use antialiasing</source>
+        <translation type="vanished">Использовать сглаживание</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="vanished">Отменить</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit)</source>
+        <translation type="vanished">Количество шагов (0 - без ограничений)</translation>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="vanished">Имя пользователя:</translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
+        <translation type="vanished">Количество шагов (0 - без ограничений):</translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation type="vanished">Все установленные пользователем материалы удалены!</translation>
+    </message>
+    <message>
+        <source>User defined materials</source>
+        <translation type="vanished">Установленные пользователем материалы</translation>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation type="vanished">Удалить все</translation>
+    </message>
+    <message>
+        <source>Workpiece</source>
+        <translation type="vanished">Заготовки деталей</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="vanished">Запретить переворачивание</translation>
+    </message>
+    <message>
+        <source>By default forbid flipping for all workpieces</source>
+        <translation type="vanished">По умолчанию запретить поворот для всех заготовок деталей</translation>
+    </message>
+    <message>
+        <source>By default forbid flipping for all new created workpieces</source>
+        <translation type="vanished">По умолчанию запретить поворот для всех вновь созданных заготовок деталей</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesConfigurationPage</name>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation>Автосохранение измененного лекала</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation>Интервал:</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation>мин</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Язык</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation>Язык интерфейса:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation>Разделитель дробной части:</translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation>Единица измерения по умолчанию:</translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation>Язык имени точки:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation>Система создания выкроек</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation>Система создания выкроек:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation>Автор:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation>Книга:</translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation>Отправка отчета об ошибках</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation>Отправка отчета об ошибках (рекомендуется)</translation>
+    </message>
+    <message>
+        <source>Pattern editing</source>
+        <translation>Редактирование выкройки</translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation>Сбросить предупреждения</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation>Панель инструментов</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation>Текст отображается под иконками (рекомендуется для начинающих).</translation>
+    </message>
+    <message>
+        <source>With OS options</source>
+        <translation>С опциями ОС</translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation>После каждого сбоя Валентина отправляет нам информацию, которая может помочь решить возникшую проблему. Мы не собираем личные данные. Вы можете узнать больше о том, %1какую именно информацию%2 мы собираем.</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation>Единицы измерения обновлены и будут применены при следующем создании выкройки.</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation>Сантиметры</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation>Миллиметры</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation>Дюймы</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesPathPage</name>
+    <message>
+        <source>Paths that Valentina uses</source>
+        <translation>Пути, что использует Валентина</translation>
     </message>
     <message>
         <source>Type</source>
@@ -5060,38 +7206,50 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path</source>
-        <translation>Путь</translation>
+        <translation>Контур</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation>Индивидуальные мерки</translation>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
     </message>
     <message>
-        <source>Patterns</source>
-        <translation>Лекала</translation>
+        <source>Edit</source>
+        <translation>Редактировать</translation>
     </message>
     <message>
-        <source>Standard measurements</source>
-        <translation>Стандартные мерки</translation>
+        <source>Open Directory</source>
+        <translation>Открыть директорию</translation>
     </message>
     <message>
-        <source>Layout</source>
-        <translation>Раскладка</translation>
+        <source>My Individual Measurements</source>
+        <translation>Мои индивидуальные мерки</translation>
     </message>
     <message>
-        <source>Templates</source>
-        <translation>Шаблоны</translation>
+        <source>My Multisize Measurements</source>
+        <translation>Мои мультиразмерные мерки</translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation>Мои выкройки</translation>
+    </message>
+    <message>
+        <source>My Layouts</source>
+        <translation>Мои раскладки</translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation>Мои шаблоны</translation>
     </message>
 </context>
 <context>
-    <name>PatternPage</name>
+    <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
         <translation>Пользователь</translation>
     </message>
     <message>
-        <source>User name</source>
-        <translation type="vanished">Имя пользователя</translation>
+        <source>User name:</source>
+        <translation>Имя пользователя:</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -5106,27 +7264,51 @@ Do you want to save your changes?</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <source>Count steps (0 - no limit)</source>
-        <translation type="vanished">Количество шагов (0 - без ограничений)</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation>Имя пользователя:</translation>
-    </message>
-    <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Количество шагов (0 - без ограничений):</translation>
+    </message>
+    <message>
+        <source>User defined materials</source>
+        <translation>Установленные пользователем материалы</translation>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation>Удалить все</translation>
+    </message>
+    <message>
+        <source>Workpiece</source>
+        <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Запретить переворачивание</translation>
+    </message>
+    <message>
+        <source>Show a passmark both in the seam allowance and on the seam line.</source>
+        <translation>Показывать надсечку дважды, на прибавке на швы и на линии шва.</translation>
+    </message>
+    <message>
+        <source>Show second passmark on seam line</source>
+        <translation>Показать вторую надсечку на линии шва</translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation>Все установленные пользователем материалы удалены!</translation>
+    </message>
+    <message>
+        <source>By default forbid flipping for all new created workpieces</source>
+        <translation>По умолчанию запретить поворот для всех вновь созданных заготовок деталей</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation>Путь к меркам уже относительный.</translation>
+        <translation type="vanished">Путь к меркам уже относительный.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation>Путь к меркам уже абсолютный.</translation>
+        <translation type="vanished">Путь к меркам уже абсолютный.</translation>
     </message>
 </context>
 <context>
@@ -5183,7 +7365,7 @@ Do you want to save your changes?</source>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Создайте новый чертеж  для начала работы.</translation>
+        <translation>Создайте новую выкройку  для начала работы.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5223,20 +7405,48 @@ Do you want to save your changes?</source>
         <source>Changes applied.</source>
         <translation>Изменения применены.</translation>
     </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation>Неверное название метки «%1».</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toUInt parameter</source>
+        <translation>Не могу конвертировать toUInt параметр</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toBool parameter</source>
+        <translation>Не удается преобразовать параметр toBool</translation>
+    </message>
+    <message>
+        <source>Got empty parameter</source>
+        <translation>Получен пустой параметр</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toDouble parameter</source>
+        <translation>Не могу конвертировать toDouble параметр</translation>
+    </message>
+    <message>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation>Объединённая деталь</translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation>Существующий файл %1 не доступен для записи</translation>
+        <translation type="vanished">Существующий файл %1 не доступен для записи</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation>Запись была отменена приложением</translation>
+        <translation type="vanished">Запись была отменена приложением</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation>Частичная запись. Раздел заполнен?</translation>
+        <translation type="vanished">Частичная запись. Раздел заполнен?</translation>
     </message>
 </context>
 <context>
@@ -5392,7 +7602,7 @@ Do you want to save your changes?</source>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Функция, которая принимает строковое значение, вызвана с не строковым типом аргумента.</translation>
+        <translation>Функция, которая принимает строковое значение, вызвана с нестроковым типом аргумента.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
@@ -5439,14 +7649,35 @@ Do you want to save your changes?</source>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
-        <translation>переименовать чертёж</translation>
+        <translation>переименовать выкройку</translation>
+    </message>
+</context>
+<context>
+    <name>RotationMoveLabel</name>
+    <message>
+        <source>move point label</source>
+        <translation type="vanished">переместить метку точки</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
+        <translation type="vanished">сохранить параметры детали</translation>
+    </message>
+</context>
+<context>
+    <name>SavePieceOptions</name>
+    <message>
+        <source>save detail option</source>
         <translation>сохранить параметры детали</translation>
+    </message>
+</context>
+<context>
+    <name>SavePiecePathOptions</name>
+    <message>
+        <source>save path options</source>
+        <translation>сохранить параметры контура</translation>
     </message>
 </context>
 <context>
@@ -5500,7 +7731,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -5640,7 +7871,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>Про &amp;Qt</translation>
+        <translation>О &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
@@ -5648,7 +7879,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New</source>
-        <translation>Новое</translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -5704,11 +7935,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Индивидуальные мерки (*.vit)</translation>
+        <translation type="vanished">Индивидуальные мерки (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Стандартные мерки (*.vst)</translation>
+        <translation type="vanished">Стандартные мерки (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -5724,7 +7955,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>M_%1</source>
-        <translation>М_%1</translation>
+        <translation type="vanished">М_%1</translation>
     </message>
     <message>
         <source>Error</source>
@@ -5740,15 +7971,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Стандартные мерки</translation>
+        <translation type="vanished">Стандартные мерки</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Рост:</translation>
+        <translation type="vanished">Рост:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Размер:</translation>
+        <translation type="vanished">Размер:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -5756,11 +7987,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation>безымянный</translation>
+        <translation type="vanished">безымянный</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Пусто&gt;</translation>
+        <translation type="vanished">&lt;Пусто&gt;</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -5790,7 +8021,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Файл лекала (*.val)</translation>
+        <translation>Файлы выкроек (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
@@ -5818,15 +8049,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation>Индивидуальные мерки (*.vit);;Стандартные мерки (*.vst);;Все файлы (*.*)</translation>
+        <translation type="vanished">Индивидуальные мерки (*.vit);;Стандартные мерки (*.vst);;Все файлы (*.*)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation>Стандартные мерки (*.vst);;Индивидуальные мерки (*.vit);;Все файлы (*.*)</translation>
+        <translation type="vanished">Стандартные мерки (*.vst);;Индивидуальные мерки (*.vit);;Все файлы (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
-        <translation>Мерки (*.vst *.vit);;Все файлы (*.*)</translation>
+        <translation type="vanished">Мерки (*.vst *.vit);;Все файлы (*.*)</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -5933,7 +8164,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation>Экспорт стандартных мерок не поддерживается.</translation>
+        <translation type="vanished">Экспорт стандартных мерок не поддерживается.</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
@@ -5953,7 +8184,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation>Файл еще не был сохранен.</translation>
+        <translation>Файл ещё не был сохранен.</translation>
     </message>
     <message>
         <source>Search</source>
@@ -5973,15 +8204,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation>Имя клиента.</translation>
+        <translation type="vanished">Имя клиента.</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation>Фамилия клиента.</translation>
+        <translation type="vanished">Фамилия клиента.</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation>Электронная почта клиента.</translation>
+        <translation type="vanished">Электронная почта клиента.</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -6005,7 +8236,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -6013,41 +8244,441 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись lock файла.</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись lock файла.</translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation>Экспорт в CSV</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values (*.cvs)</source>
+        <translation type="vanished">Значения, разделенные запятыми (*.csv)</translation>
+    </message>
+    <message>
+        <source>Invalid value</source>
+        <translation type="vanished">Некорректное значение</translation>
+    </message>
+    <message>
+        <source>Show in Finder</source>
+        <translation>Показать в Finder</translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values</source>
+        <translation>Значения, разделенные запятыми</translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name</source>
+        <translation>Имя клиента</translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name</source>
+        <translation>Фамилия клиента</translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address</source>
+        <translation>Адрес электронной почты клиента</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation>Высота:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation>Размер:</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Все файлы</translation>
+    </message>
+    <message>
+        <source>The measurements document has no write permissions.</source>
+        <translation>Документ мерок не имеет прав на запись.</translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation>Невозможно установить разрешения для %1 для записи.</translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation>Не удалось сохранить файл.</translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation>Не удалось сохранить файл</translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation>только для чтения</translation>
+    </message>
+    <message>
+        <source>Multisize measurements</source>
+        <translation>Мультиразмерные мерки</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+    </message>
+    <message>
+        <source>Export from standard measurements is not supported.</source>
+        <translation>Экспорт из стандартных мерок не поддерживается.</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation>Пусто</translation>
+    </message>
+</context>
+<context>
+    <name>TabGrainline</name>
+    <message>
+        <source>Grainline visible</source>
+        <translation>Долевая видима</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation>Вращение:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation>Центральная шпилька:</translation>
+    </message>
+    <message>
+        <source>Top pin:</source>
+        <translation>Верхняя шпилька:</translation>
+    </message>
+    <message>
+        <source>Bottom pin:</source>
+        <translation>Нижняя шпилька:</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation>Стрелки:</translation>
+    </message>
+</context>
+<context>
+    <name>TabLabels</name>
+    <message>
+        <source>Piece label data</source>
+        <translation>Данные метки детали</translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation>Буква:</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation>Обозначение выкройки</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation>Имя детали:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation>Имя не может быть пустым</translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation>Материал/количество в раскрое/размещение</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation>Количество в раскрое:</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation>Тип материала:</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation>Вы можете выбрать один из предустановленных в системе материалов или ввести новый</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation>Размещение:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Labels</source>
+        <translation>Метки</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation>Видимость метки детали</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation>Ширина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation>Высота:</translation>
+    </message>
+    <message>
+        <source>Center pin:</source>
+        <translation>Центральная шпилька:</translation>
+    </message>
+    <message>
+        <source>Top left pin:</source>
+        <translation>Верхняя левая шпилька:</translation>
+    </message>
+    <message>
+        <source>Bottom right pin:</source>
+        <translation>Нижняя правая шпилька:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation>Отображение метки детали</translation>
+    </message>
+</context>
+<context>
+    <name>TabPassmarks</name>
+    <message>
+        <source>Passmark:</source>
+        <translation>Надсечка:</translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation>Одна линия</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation>Две линии</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation>Три линии</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation>Т метка</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation>V метка</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Угол</translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation>Прямой</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation>Биссектриса</translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation>Вид метки</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark</source>
+        <translation>Выбрать, если необходимо обозначить угловую точку как надсечку</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation>Пересечение</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation>Показать вторую надсечку на линии шва</translation>
+    </message>
+</context>
+<context>
+    <name>TabPaths</name>
+    <message>
+        <source>Main path</source>
+        <translation>Главный контур</translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation>Все объекты должны следовать в направлении по часовой стрелке.</translation>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation>Запрет отражения выкройки в раскладке.</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Запретить переворачивание</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation>Готовы!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation>Прибавка на швы</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation>Автоматическая</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation>Ширина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Nodes</source>
+        <translation>Узлы</translation>
+    </message>
+    <message>
+        <source>Node:</source>
+        <translation>Узел:</translation>
+    </message>
+    <message>
+        <source>Before:</source>
+        <translation>Перед:</translation>
+    </message>
+    <message>
+        <source>Return to default width</source>
+        <translation>Вернуться к значению ширины по умолчанию</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <source>After:</source>
+        <translation>После:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>Пользовательская</translation>
+    </message>
+    <message>
+        <source>Start point:</source>
+        <translation>Стартовая точка:</translation>
+    </message>
+    <message>
+        <source>End point:</source>
+        <translation>Конечная точка:</translation>
+    </message>
+    <message>
+        <source>Include as:</source>
+        <translation>Вставить как:</translation>
+    </message>
+    <message>
+        <source>Internal paths</source>
+        <translation>Внутренние контуры</translation>
+    </message>
+    <message>
+        <source>The seam allowance is part of main path</source>
+        <translation>Прибавка на швы часть основного контура</translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation>Встроенная</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
+        <translation type="vanished">&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ок</translation>
+        <translation type="vanished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Диалог настройки</translation>
+        <translation type="vanished">Диалог настройки</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Настройки</translation>
+        <translation type="vanished">Настройки</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Пути</translation>
+        <translation type="vanished">Пути</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Язык</translation>
+        <translation type="vanished">Язык</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -6055,23 +8686,93 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Система создания выроек</translation>
+        <translation type="vanished">Система создания выкроек</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Автор:</translation>
+        <translation type="vanished">Автор:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation>Книга:</translation>
+        <translation type="vanished">Книга:</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Разделитель дробной части</translation>
+        <translation type="vanished">Разделитель десятичной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>С опциями ОС (%1)</translation>
+        <translation type="vanished">С опциями ОС (%1)</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="vanished">Язык интерфейса:</translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="vanished">Разделитель дробной части:</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="vanished">Система создания выкроек:</translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="vanished">Рост и размер по умолчанию</translation>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="vanished">Рост по умолчанию:</translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="vanished">Размер по умолчанию:</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="vanished">Открыть каталог</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="vanished">Путь для использования Valentin&apos;ой</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="vanished">По умолчанию</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="vanished">Изменить</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="vanished">Тип</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">Путь</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="vanished">Стандартные мерки</translation>
+    </message>
+    <message>
+        <source>Templates</source>
+        <translation type="vanished">Шаблоны</translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation>Язык</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -6082,8 +8783,36 @@ Do you want to save your changes?</source>
         <translation>Разделитель дробной части:</translation>
     </message>
     <message>
+        <source>Pattern making system</source>
+        <translation>Система создания выкроек</translation>
+    </message>
+    <message>
         <source>Pattern making system:</source>
         <translation>Система создания выкроек:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation>Автор:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation>Книга:</translation>
+    </message>
+    <message>
+        <source>Measurements editing</source>
+        <translation>Редактирование мерок</translation>
+    </message>
+    <message>
+        <source>Reset warnings</source>
+        <translation>Сбросить предупреждения</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation>Панель инструментов</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon (recommended for beginners).</source>
+        <translation>Текст отображается под иконками (рекомендуется для начинающих).</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -6097,24 +8826,16 @@ Do you want to save your changes?</source>
         <source>Default size:</source>
         <translation>Размер по умолчанию:</translation>
     </message>
+    <message>
+        <source>With OS options</source>
+        <translation>С опциями ОС</translation>
+    </message>
 </context>
 <context>
-    <name>TapePathPage</name>
+    <name>TapePreferencesPathPage</name>
     <message>
-        <source>Open Directory</source>
-        <translation>Открыть каталог</translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation>Путь, что использует Валентина</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>По умолчанию</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Изменить</translation>
+        <source>Paths that Valentina uses</source>
+        <translation>Пути, что использует Валентина</translation>
     </message>
     <message>
         <source>Type</source>
@@ -6122,19 +8843,45 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path</source>
-        <translation>Путь</translation>
+        <translation>Контур</translation>
     </message>
     <message>
-        <source>Individual measurements</source>
-        <translation>Индивидуальные мерки</translation>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
     </message>
     <message>
-        <source>Standard measurements</source>
-        <translation>Стандартные мерки</translation>
+        <source>Edit</source>
+        <translation>Редактировать</translation>
     </message>
     <message>
-        <source>Templates</source>
-        <translation>Шаблоны</translation>
+        <source>Open Directory</source>
+        <translation>Открыть каталог</translation>
+    </message>
+    <message>
+        <source>My Individual Measurements</source>
+        <translation>Мои индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>My Multisize Measurements</source>
+        <translation>Мои мультиразмерные мерки</translation>
+    </message>
+    <message>
+        <source>My Templates</source>
+        <translation>Мои шаблоны</translation>
+    </message>
+</context>
+<context>
+    <name>ToggleDetailInLayout</name>
+    <message>
+        <source>detail in layout list</source>
+        <translation type="vanished">деталь в списке раскладки</translation>
+    </message>
+</context>
+<context>
+    <name>TogglePieceInLayout</name>
+    <message>
+        <source>detail in layout list</source>
+        <translation>деталь в списке раскладки</translation>
     </message>
 </context>
 <context>
@@ -6180,7 +8927,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Ошибка не уникальный id.</translation>
+        <translation>Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -6188,11 +8935,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Ошибка создания резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка создания резервного файла: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
         <translation>Ошибка создания резервной копии: %1.</translation>
+    </message>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation>Неизвестная версия &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error replacing a symlink by real file: %1.</source>
+        <translation type="vanished">Ошибка замены символической ссылки на файл: %1.</translation>
+    </message>
+    <message>
+        <source>Error openning a temp file: %1.</source>
+        <translation>Ошибка открытия временного файла: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractCubicBezierPath</name>
+    <message>
+        <source>Can&apos;t cut this spline</source>
+        <translation>Невозможно вырезать кривую</translation>
     </message>
 </context>
 <context>
@@ -6201,16 +8967,31 @@ Do you want to save your changes?</source>
         <source>Can&apos;t find tool in table.</source>
         <translation>Невозможно найти инструмент в таблице.</translation>
     </message>
+    <message>
+        <source>Error creating or updating group</source>
+        <translation>Ошибка создания или обновления группы</translation>
+    </message>
+    <message>
+        <source>New group</source>
+        <translation>Новая группа</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractPieceData</name>
+    <message>
+        <source>Detail</source>
+        <translation>Деталь</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
-        <translation>черный</translation>
+        <translation>чёрный</translation>
     </message>
     <message>
         <source>green</source>
-        <translation>зеленый</translation>
+        <translation>зелёный</translation>
     </message>
     <message>
         <source>blue</source>
@@ -6218,19 +8999,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark red</source>
-        <translation>темно красный</translation>
+        <translation>тёмно-красный</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>темно зеленый</translation>
+        <translation>тёмно-зеленый</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>темно синий</translation>
+        <translation>темно-синий</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation>желтый</translation>
+        <translation>жёлтый</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
@@ -6239,6 +9020,54 @@ Do you want to save your changes?</source>
     <message>
         <source>Do you really want to delete?</source>
         <translation>Вы точно хотите удалить?</translation>
+    </message>
+    <message>
+        <source>light salmon</source>
+        <translation>светло-оранжевый</translation>
+    </message>
+    <message>
+        <source>golden rod</source>
+        <translation type="vanished">золотистый</translation>
+    </message>
+    <message>
+        <source>orange</source>
+        <translation>оранжевый</translation>
+    </message>
+    <message>
+        <source>deep pink</source>
+        <translation>глубокий розовый</translation>
+    </message>
+    <message>
+        <source>violet</source>
+        <translation>фиолетовый</translation>
+    </message>
+    <message>
+        <source>dark violet</source>
+        <translation>тёмно-фиолетовый</translation>
+    </message>
+    <message>
+        <source>medium sea green</source>
+        <translation>средний морской зелёный</translation>
+    </message>
+    <message>
+        <source>lime</source>
+        <translation>лайм</translation>
+    </message>
+    <message>
+        <source>deep sky blue</source>
+        <translation>глубокий небесно-голубой</translation>
+    </message>
+    <message>
+        <source>corn flower blue</source>
+        <translation>васильково-синий</translation>
+    </message>
+    <message>
+        <source>Edit wrong formula</source>
+        <translation>Редактировать неправильную формулу</translation>
+    </message>
+    <message>
+        <source>goldenrod</source>
+        <translation>золотистый</translation>
     </message>
 </context>
 <context>
@@ -6257,15 +9086,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустой параметр. Программа будет закрыта.</translation>
+        <translation>Ошибка, пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильный id. Программа будет закрыта.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation>Что-то не так!</translation>
+        <translation>Что-то не так!!!</translation>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
@@ -6288,7 +9117,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation>Номер выходного формата (по умолчанию = 0, режим экспорта):</translation>
+        <translation type="vanished">Номер выходного формата (по умолчанию = 0, режим экспорта):</translation>
     </message>
     <message>
         <source>Format number</source>
@@ -6296,7 +9125,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation>Номер, соответствующий шаблону (по умолчанию = 0, режим экспорта):</translation>
+        <translation type="vanished">Номер, соответствующий шаблону (по умолчанию = 0, режим экспорта):</translation>
     </message>
     <message>
         <source>Template number</source>
@@ -6324,7 +9153,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation type="vanished">Объединять страницы если возможно (режим экспорта).</translation>
+        <translation type="vanished">Объединять страницы, если возможно (режим экспорта).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
@@ -6332,7 +9161,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Единицы измерения роскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
+        <translation>Единицы измерения раскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -6340,7 +9169,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="vanished">Смещение в единицах роскладки (режим экспорта).</translation>
+        <translation type="vanished">Смещение в единицах раскладки (режим экспорта).</translation>
     </message>
     <message>
         <source>Shift length</source>
@@ -6348,7 +9177,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
-        <translation type="vanished">Ширина зазора ×2 в единицах роскладки (режим экспорта).</translation>
+        <translation type="vanished">Ширина зазора ×2 в единицах раскладки (режим экспорта).</translation>
     </message>
     <message>
         <source>The gap width</source>
@@ -6356,7 +9185,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sets layout groupping (export mode): </source>
-        <translation type="vanished">Устанавливает тип группировки роскладки (режим экспорта):</translation>
+        <translation type="vanished">Устанавливает тип группировки раскладки (режим экспорта):</translation>
     </message>
     <message>
         <source>Grouping type</source>
@@ -6380,11 +9209,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsupported paper units.</source>
-        <translation>Не поддерживаемые единицы измерения для бумаги.</translation>
+        <translation>Неподдерживаемые единицы измерения для бумаги.</translation>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation>Не поддерживаемые единицы измерения для роскладки.</translation>
+        <translation>Неподдерживаемые единицы измерения для раскладки.</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
@@ -6392,7 +9221,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Запускает программу в тестовом режиме. Программа в этом режиме загружает один файл лекала и молча завершается, не показывая главное окно. Ключ имеет приоритет перед ключом &apos;%1&apos;.</translation>
+        <translation type="vanished">Запускает программу в тестовом режиме. Программа в этом режиме загружает один файл выкройки и молча завершается, не показывая главное окно. Ключ имеет приоритет перед ключом &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
@@ -6400,11 +9229,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation>Базовое имя экспортируемых файлов роскладки. Используйте для консольного режима экспорта.</translation>
+        <translation>Базовое имя экспортируемых файлов раскладки. Используйте для консольного режима экспорта.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation>Базовое имя файлов роскладки</translation>
+        <translation>Базовое имя файлов раскладки</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
@@ -6416,7 +9245,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Устанавливает значение размера для файла лекала, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
+        <translation>Устанавливает значение размера для файла выкройки, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -6424,7 +9253,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Устанавливает значение роста для файл лекала, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
+        <translation>Устанавливает значение роста для файла выкройки, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -6456,7 +9285,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation>Файл лекала.</translation>
+        <translation>Файл выкройки.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Set all margins to 0.</source>
@@ -6516,19 +9345,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Левое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет проигнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Левое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет проигнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Правое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Правое поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Верхнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Верхнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Нижнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано если был использован ключ &quot;%1&quot;.</translation>
+        <translation>Нижнее поле страницы в текущих единицах, например 3.0 (режим экспорта). Если не установлено, будет использовано значение из принтера по умолчанию. Или 0, если принтеры не были обнаружены. Значение будет игнорировано, если был использован ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -6540,7 +9369,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество раскладки может быть хуже при использовании этой опции.</translation>
+        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество раскладки может быть хуже во время использования этой опции.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
@@ -6548,19 +9377,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>Ширина зазора ×2 в единицах раскладки (режим экспорта). Устанавливает дистанцию между деталями и деталью и краем листа.</translation>
+        <translation>Ширина зазора ×2 в единицах раскладки (режим экспорта). Устанавливает дистанцию между деталями и дистанцию между деталью и краем листа.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
-        <translation>Устанавливает тип группировки роскладки (режим экспорта): %1.</translation>
+        <translation>Устанавливает тип группировки раскладки (режим экспорта): %1.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation>Запускает программу в тестовом режиме. Программа в этом режиме загружает один файл лекала и молча завершается, не показывая главное окно. Ключ имеет приоритет перед ключом &apos;%1&apos;.</translation>
+        <translation>Запускает программу в тестовом режиме. Программа в этом режиме загружает один файл выкройки и молча завершается, не показывая главное окно. Ключ имеет приоритет перед ключом &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Смещение/сдвиг в единицах роскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании роскладки.</translation>
+        <translation>Смещение/сдвиг в единицах раскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании раскладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
@@ -6569,6 +9398,37 @@ Do you want to save your changes?</source>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
         <translation>Длина сдвига/смещения должна быть использована вместе с единицами измерения смещения.</translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode):</source>
+        <translation>Номер выходного формата (по умолчанию 0 — режим экспорта):</translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <translation>Номер, соответствующий шаблону страницы (по умолчанию = 0, режим экспорта):</translation>
+    </message>
+    <message>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <translation>Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать %1 переменную среды.</translation>
+    </message>
+</context>
+<context>
+    <name>VCommonSettings</name>
+    <message>
+        <source>measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <source>individual</source>
+        <translation>индивиндуальные</translation>
+    </message>
+    <message>
+        <source>multisize</source>
+        <translation>мультиразмерные</translation>
+    </message>
+    <message>
+        <source>templates</source>
+        <translation>шаблоны</translation>
     </message>
 </context>
 <context>
@@ -6585,24 +9445,43 @@ Do you want to save your changes?</source>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation>Невозможно найти объект. Несоответствие типа.</translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation>Количество свободных идентификаторов исчерпано.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation>Невозможно создать кривую типа &apos;%1&apos;</translation>
+    </message>
+</context>
+<context>
+    <name>VCubicBezierPath</name>
+    <message>
+        <source>Not enough points to create the spline.</source>
+        <translation>Недостаточно точек для создания кривой.</translation>
+    </message>
+    <message>
+        <source>This spline does not exist.</source>
+        <translation>Этот сплайн не существует.</translation>
+    </message>
 </context>
 <context>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation>Невозможно преобразовать параметр toUInt</translation>
+        <translation type="vanished">Невозможно преобразовать параметр toUInt</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation>Не удается преобразовать параметр toBool</translation>
+        <translation type="vanished">Не удается преобразовать параметр toBool</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation>Получен пустой параметр</translation>
+        <translation type="vanished">Получен пустой параметр</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation>Невозможно преобразовать параметр toDouble</translation>
+        <translation type="vanished">Невозможно преобразовать параметр toDouble</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -6634,7 +9513,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Получен неправильный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation type="vanished">Получен неправильный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -6652,12 +9531,16 @@ Do you want to save your changes?</source>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>Не удалось открыть файл схемы &apos;%1&apos;.</translation>
     </message>
+    <message>
+        <source>Fail to write Canonical XML.</source>
+        <translation>Не удалось записать канонический XML.</translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation>Редактировать неправильную формулу</translation>
+        <translation type="vanished">Редактировать неправильную формулу</translation>
     </message>
     <message>
         <source>Options</source>
@@ -6666,6 +9549,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
+    </message>
+</context>
+<context>
+    <name>VException</name>
+    <message>
+        <source>Exception: %1</source>
+        <translation>Исключение: %1</translation>
     </message>
 </context>
 <context>
@@ -6679,11 +9569,18 @@ Do you want to save your changes?</source>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation>Значение</translation>
+        <translation type="vanished">Значение</translation>
     </message>
     <message>
         <source>Formula</source>
         <translation>Формула</translation>
+    </message>
+</context>
+<context>
+    <name>VLayoutPiece</name>
+    <message>
+        <source>Piece %1 doesn&apos;t have shape.</source>
+        <translation>Деталь %1 не имеет формы.</translation>
     </message>
 </context>
 <context>
@@ -6712,7 +9609,7 @@ Do you want to save your changes?</source>
     <name>VPE::VFileEditWidget</name>
     <message>
         <source>Directory</source>
-        <translation>Директория</translation>
+        <translation>Каталог</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -6723,7 +9620,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка, неуникальный id.</translation>
+        <translation type="vanished">Ошибка, не уникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6775,11 +9672,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation>Ошибка создания или обновления точки пересечения линий</translation>
+        <translation type="vanished">Ошибка создания или обновления точки пересечения линий</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation>Ошибка создания или обновления точки прикосновения</translation>
+        <translation>Ошибка создания или обновления точки соприкосновения</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
@@ -6893,23 +9790,121 @@ Do you want to save your changes?</source>
         <source>Error not unique id.</source>
         <translation>Ошибка. Не уникальный id.</translation>
     </message>
+    <message>
+        <source>Error creating or updating point of intersection curves</source>
+        <translation>Ошибка создания или обновления точки пересечения кривых</translation>
+    </message>
+    <message>
+        <source>Error creating or updating simple interactive spline</source>
+        <translation>Ошибка создания или обновления простой интерактивной кривой</translation>
+    </message>
+    <message>
+        <source>Error creating or updating interactive spline path</source>
+        <translation>Ошибка создания или обновления интерактивной сложной кривой</translation>
+    </message>
+    <message>
+        <source>Error creating or updating cubic bezier curve</source>
+        <translation>Ошибка создания или обновления кубической кривой Безье</translation>
+    </message>
+    <message>
+        <source>Error creating or updating cubic bezier path curve</source>
+        <translation>Ошибка создания или обновления сложной кубической кривой Безье</translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of rotation</source>
+        <translation>Ошибка выполнения или обновления операции вращения</translation>
+    </message>
+    <message>
+        <source>Unknown operation type &apos;%1&apos;.</source>
+        <translation>Неизвестный тип операции &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of flipping by line</source>
+        <translation>Ошибка создания или обновления операции по отражению по линии</translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of flipping by axis</source>
+        <translation>Ошибка создания или обновления операции по отражению по оси</translation>
+    </message>
+    <message>
+        <source>Error creating or updating operation of moving</source>
+        <translation>Ошибка создания или обновления операции по перемещению</translation>
+    </message>
+    <message>
+        <source>Error creating or updating point of line intersection</source>
+        <translation>Ошибка создания или обновления точки пересечения линий</translation>
+    </message>
+    <message>
+        <source>Error creating or updating simple elliptical arc</source>
+        <translation>Ошибка при создании или редактировании эллиптической дуги</translation>
+    </message>
+    <message>
+        <source>Unknown elliptical arc type &apos;%1&apos;.</source>
+        <translation>Неизвестный тип эллиптической дуги &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error creating or updating modeling elliptical arc</source>
+        <translation>Ошибка при создании или редактировании модели эллиптической дуги</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Unnamed path</source>
+        <translation>Безымянный контур</translation>
+    </message>
+    <message>
+        <source>Error creating or updating a piece path</source>
+        <translation>Ошибка создания или обновления контура детали</translation>
+    </message>
+    <message>
+        <source>Error creating or updating pin point</source>
+        <translation>Ошибка создания или обновления шпильки</translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неожиданная версия «%1».</translation>
+        <translation type="vanished">Неожиданная версия &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка восстановления из резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка востановления с резервного файла: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPoster</name>
+    <message>
+        <source>Grid ( %1 , %2 )</source>
+        <translation>Сетка ( %1 , %2 )</translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation>Страница %1 из %2</translation>
+    </message>
+    <message>
+        <source>Sheet %1 of %2</source>
+        <translation>Лист %1 из %2</translation>
+    </message>
+</context>
+<context>
+    <name>VSettings</name>
+    <message>
+        <source>patterns</source>
+        <translation>выкройки</translation>
+    </message>
+    <message>
+        <source>layouts</source>
+        <translation>раскладки</translation>
     </message>
 </context>
 <context>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Недостаточно точок для создания кривой.</translation>
+        <translation>Недостаточно точек для создания кривой.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
@@ -6917,18 +9912,85 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation>Невозможно разрезать сплайн из одной точки</translation>
+        <translation type="vanished">Невозможно разрезать сплайн из одной точки</translation>
+    </message>
+</context>
+<context>
+    <name>VTextManager</name>
+    <message>
+        <source>Cut %1 on %2%3</source>
+        <translation type="vanished">Раскрой %1 на %2%3</translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="vanished">на сгибе</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="vanished">на сгибе</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="vanished">Вырезать</translation>
+    </message>
+    <message>
+        <source>cut</source>
+        <translation>вырезать</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation>на сгибе</translation>
     </message>
 </context>
 <context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation>Параметры</translation>
+        <translation type="vanished">Параметры</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
+    </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation type="vanished">переместить метку выкройки</translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation type="vanished">изменить размер метки выкройки</translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation type="vanished">повернуть метку выкройки</translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation type="vanished">переместить информацию о выкройке</translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation type="vanished">изменить размер информации о выкройке</translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation type="vanished">повернуть информацию о выкройке</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="vanished">В раскладке</translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="vanished">переместить долевую</translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="vanished">изменить размер долевой</translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="vanished">повернуть долевую</translation>
     </message>
 </context>
 <context>
@@ -6939,11 +10001,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Положение</translation>
+        <translation type="vanished">Положение</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -6951,15 +10013,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line type</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -6971,15 +10033,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation>Первый угол</translation>
+        <translation type="vanished">Первый угол</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Второй угол</translation>
+        <translation type="vanished">Второй угол</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -7015,7 +10077,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Доп. угол градусы</translation>
+        <translation type="vanished">Доп. угол градусы</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -7027,7 +10089,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Специальная точка на плече</translation>
+        <translation>Специальная точка на плечо</translation>
     </message>
     <message>
         <source>Curve tool</source>
@@ -7035,7 +10097,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve factor</source>
-        <translation>Коэффициент кривой</translation>
+        <translation type="vanished">Коэффициент кривой</translation>
     </message>
     <message>
         <source>Tool for path curve</source>
@@ -7051,11 +10113,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -7079,11 +10141,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Метка точки 1</translation>
+        <translation type="vanished">Метка точки 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Метка точки 2</translation>
+        <translation type="vanished">Метка точки 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
@@ -7091,7 +10153,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взять</translation>
+        <translation type="vanished">Взять</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -7099,11 +10161,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation>Радиус первой окружности</translation>
+        <translation type="vanished">Радиус первой окружности</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation>Радиус второй окружности</translation>
+        <translation type="vanished">Радиус второй окружности</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
@@ -7111,11 +10173,413 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation>Радиус окружности</translation>
+        <translation type="vanished">Радиус окружности</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
         <translation>Точка дуги и касательной</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation>Самая высокая точка</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation>Самая низкая точка</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation>Самая левая точка</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation>Самая правая точка</translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two curves</source>
+        <translation>Инструмент создания точки на пересечении двух кривых</translation>
+    </message>
+    <message>
+        <source>Vertical correction</source>
+        <translation type="vanished">Коррекция по вертикали</translation>
+    </message>
+    <message>
+        <source>Horizontal correction</source>
+        <translation type="vanished">Коррекция по горизонтали</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="vanished">Название</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="vanished">С1: угол</translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="vanished">С1: длина</translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="vanished">С2: угол</translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="vanished">С2: длина</translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve</source>
+        <translation>Кубическая кривая Безье</translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier curve</source>
+        <translation>Инструмент Кривая Безье</translation>
+    </message>
+    <message>
+        <source>Tool rotation</source>
+        <translation>Инструмент Поворот</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="vanished">Суффикс</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation>Вертикальные оси</translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation>Горизонтальные оси</translation>
+    </message>
+    <message>
+        <source>Tool move</source>
+        <translation>Инструмент Перемещение</translation>
+    </message>
+    <message>
+        <source>Tool flipping by line</source>
+        <translation>Инструмент Отразить по линии</translation>
+    </message>
+    <message>
+        <source>Tool flipping by axis</source>
+        <translation>Инструмент Отразить по оси</translation>
+    </message>
+    <message>
+        <source>Axis type</source>
+        <translation type="vanished">Тип оси</translation>
+    </message>
+    <message>
+        <source>Elliptical arc</source>
+        <translation>Эллиптическая дуга</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation>Имя точки:</translation>
+    </message>
+    <message>
+        <source>Position:</source>
+        <translation>Положение:</translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation>Базовая точка:</translation>
+    </message>
+    <message>
+        <source>Line type:</source>
+        <translation>Тип линии:</translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation>Цвет линии:</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Угол:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation>Первая точка:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation>Вторая точка:</translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation>Центральная точка:</translation>
+    </message>
+    <message>
+        <source>Radius:</source>
+        <translation>Радиус:</translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation>Первый угол:</translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation>Второй угол:</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation>Цвет:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation>Третья точка:</translation>
+    </message>
+    <message>
+        <source>Point 1 label:</source>
+        <translation>Метка точки 1:</translation>
+    </message>
+    <message>
+        <source>Point 2 label:</source>
+        <translation>Метка точки 2:</translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation>Первая базовая точка:</translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation>Вторая базовая точка:</translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation>Первая точка выточки:</translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation>Дуга:</translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation>Кривая:</translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation>Первая точка линии:</translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation>Вторая точка линии:</translation>
+    </message>
+    <message>
+        <source>First line (first point):</source>
+        <translation>Первая линия (первая точка):</translation>
+    </message>
+    <message>
+        <source>First line (second point):</source>
+        <translation>Первая лини (вторая точка):</translation>
+    </message>
+    <message>
+        <source>Second line (first point):</source>
+        <translation>Вторая линия (первая точка):</translation>
+    </message>
+    <message>
+        <source>Second line (second point):</source>
+        <translation>Вторая линия (вторая точка):</translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation>Доп. угол градусы:</translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation>Центр дуги:</translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation>Начало линии:</translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation>Конец линии:</translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation>Х: вертикальная точка:</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation>Y: горизонтальная точка:</translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation>Первая дуга:</translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation>Вторая дуга:</translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation>Взять:</translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation>Центр первой окружности:</translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation>Центр второй окружности:</translation>
+    </message>
+    <message>
+        <source>First circle radius:</source>
+        <translation>Радиус первой окружности:</translation>
+    </message>
+    <message>
+        <source>Second circle radius:</source>
+        <translation>Радиус второй окружности:</translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation>Первая кривая:</translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation>Вторая кривая:</translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation>Коррекция по вертикали:</translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation>Коррекция по горизонтали:</translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation>Центр окружности:</translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation>Точка касательной:</translation>
+    </message>
+    <message>
+        <source>Circle radius:</source>
+        <translation>Радиус окружности:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Название:</translation>
+    </message>
+    <message>
+        <source>C1: angle:</source>
+        <translation>С1: угол:</translation>
+    </message>
+    <message>
+        <source>C1: length:</source>
+        <translation>С1: длина:</translation>
+    </message>
+    <message>
+        <source>C2: angle:</source>
+        <translation>С2: угол:</translation>
+    </message>
+    <message>
+        <source>C2: length:</source>
+        <translation>С2: длина:</translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation>Первая точка оси:</translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation>Вторая точка оси:</translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation>Точка оси:</translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation>Суффикс:</translation>
+    </message>
+    <message>
+        <source>Origin point:</source>
+        <translation>Начальная точка:</translation>
+    </message>
+    <message>
+        <source>Axis type:</source>
+        <translation>Тип оси:</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation>Угол поворота:</translation>
+    </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation>Четвертая точка:</translation>
+    </message>
+</context>
+<context>
+    <name>VToolSeamAllowance</name>
+    <message>
+        <source>Current seam allowance</source>
+        <translation>Текущая прибавка на швы</translation>
+    </message>
+    <message>
+        <source>move pattern piece label</source>
+        <translation>переместить метку выкройки</translation>
+    </message>
+    <message>
+        <source>resize pattern piece label</source>
+        <translation>изменить размер метки выкройки</translation>
+    </message>
+    <message>
+        <source>rotate pattern piece label</source>
+        <translation>повернуть метку выкройки</translation>
+    </message>
+    <message>
+        <source>move pattern info label</source>
+        <translation>переместить информацию о выкройке</translation>
+    </message>
+    <message>
+        <source>resize pattern info label</source>
+        <translation>изменить размер информации о выкройке</translation>
+    </message>
+    <message>
+        <source>rotate pattern info label</source>
+        <translation>повернуть информацию о выкройке</translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation>переместить долевую</translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation>изменить размер долевой</translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation>повернуть долевую</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Параметры</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation>В раскладке</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+</context>
+<context>
+    <name>VToolUnionDetails</name>
+    <message>
+        <source>union details</source>
+        <translation>объединение деталей</translation>
+    </message>
+    <message>
+        <source>United detail</source>
+        <translation type="vanished">Объединённая деталь</translation>
     </message>
 </context>
 <context>
@@ -7163,7 +10627,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
         <comment>Book name</comment>
-        <translation>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
+        <translation>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries (Создание исторической одежды - шаблоны одежды 16-19 веков)</translation>
     </message>
     <message>
         <source>Morris, K.</source>
@@ -7193,8 +10657,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation>Patternmaking in Practic
-(Практическое изготовление выкроек)</translation>
+        <translation>Patternmaking in Practic (Практическое изготовление выкроек)</translation>
     </message>
     <message>
         <source>Kim &amp; Uh</source>
@@ -7285,7 +10748,7 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
         <comment>Book name</comment>
-        <translation>How to Design Beautiful Clothes: Designing and Pattern Making</translation>
+        <translation>How to Design Beautiful Clothes: Designing and Pattern Making (Как создать красивую одежду: проектирование и конструирование выкроек)</translation>
     </message>
     <message>
         <source>Minister &amp; Son</source>
@@ -7408,8 +10871,7 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
-        <translation>How to Draft Basic Patterns
-(Создание основных выкроек)</translation>
+        <translation>How to Draft Basic Patterns (Создание основных выкроек)</translation>
     </message>
     <message>
         <source>Ekern</source>
@@ -7945,92 +11407,92 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Линия_</translation>
+        <translation type="vanished">Линия_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>УголЛинии_</translation>
+        <translation type="vanished">УголЛинии_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Дуга_</translation>
+        <translation type="vanished">Дуга_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Спл_</translation>
+        <translation type="vanished">Спл_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>СлСпл</translation>
+        <translation type="vanished">СлСпл</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>РадиусДуги_</translation>
+        <translation type="vanished">РадиусДуги_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Улог1Дуги_</translation>
+        <translation type="vanished">Улог1Дуги_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол2Дуги_</translation>
+        <translation type="vanished">Угол2Дуги_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол1Спл_</translation>
+        <translation type="vanished">Угол1Спл_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол2Спл_</translation>
+        <translation type="vanished">Угол2Спл_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Угол1СлСпл</translation>
+        <translation type="vanished">Угол1СлСпл</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Угол2СлСпл</translation>
+        <translation type="vanished">Угол2СлСпл</translation>
     </message>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sin</translation>
+        <translation type="vanished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tan</translation>
+        <translation type="vanished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>asin</translation>
+        <translation type="vanished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>acos</translation>
+        <translation type="vanished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>atan</translation>
+        <translation type="vanished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
@@ -8055,7 +11517,7 @@ Do you want to save your changes?</source>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
@@ -8147,48 +11609,329 @@ Do you want to save your changes?</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Линия_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>УголЛинии_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Дуга_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Спл_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation>СлСпл</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>РадиусДуги_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Улог1Дуги_</translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Угол2Дуги_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Угол1Спл_</translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Угол2Спл_</translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation>Угол1СлСпл</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation>Угол2СлСпл</translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation>Сег_</translation>
+    </message>
+    <message>
+        <source>CurrentLength</source>
+        <comment>Do not add space between words</comment>
+        <translation>ТекущаяДлина</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function</comment>
+        <translation>acosh</translation>
+    </message>
+    <message>
+        <source>size</source>
+        <comment>placeholder</comment>
+        <translation>размер</translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>placeholder</comment>
+        <translation>Рост</translation>
+    </message>
+    <message>
+        <source>C1LengthSpl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>С1ДлинаСпл_</translation>
+    </message>
+    <message>
+        <source>C2LengthSpl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>С2ДлинаСпл_</translation>
+    </message>
+    <message>
+        <source>C1LengthSplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation>С1ДлинаСлСпл</translation>
+    </message>
+    <message>
+        <source>C2LengthSplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation>С2ДлинаСлСпл</translation>
+    </message>
+    <message>
+        <source>CurrentSeamAllowance</source>
+        <comment>Do not add space between words</comment>
+        <translation>ТекущаяПрибавкаНаШов</translation>
+    </message>
+    <message>
+        <source>degTorad</source>
+        <comment>converts degrees to radian</comment>
+        <translation>градКрад</translation>
+    </message>
+    <message>
+        <source>radTodeg</source>
+        <comment>converts radian to degrees</comment>
+        <translation>радКград</translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function working with radians</comment>
+        <translation>sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function working with radians</comment>
+        <translation>cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function working with radians</comment>
+        <translation>tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function working with radians</comment>
+        <translation>asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function working with radians</comment>
+        <translation>acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function working with radians</comment>
+        <translation>atan</translation>
+    </message>
+    <message>
+        <source>sinD</source>
+        <comment>sine function working with degrees</comment>
+        <translation>sinГ</translation>
+    </message>
+    <message>
+        <source>cosD</source>
+        <comment>cosine function working with degrees</comment>
+        <translation>cosГ</translation>
+    </message>
+    <message>
+        <source>tanD</source>
+        <comment>tangens function working with degrees</comment>
+        <translation>tanГ</translation>
+    </message>
+    <message>
+        <source>asinD</source>
+        <comment>arcus sine function working with degrees</comment>
+        <translation>asinГ</translation>
+    </message>
+    <message>
+        <source>acosD</source>
+        <comment>arcus cosine function working with degrees</comment>
+        <translation>acosГ</translation>
+    </message>
+    <message>
+        <source>atanD</source>
+        <comment>arcus tangens function working with degrees</comment>
+        <translation>atanГ</translation>
+    </message>
+    <message>
+        <source>M_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>М_</translation>
+    </message>
+    <message>
+        <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Прибавка_</translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неожиданная версия «%1».</translation>
+        <translation type="vanished">Неожиданная версия «%1».</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка восстановления из резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка восстановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неожиданная версия «%1».</translation>
+        <translation type="vanished">Неожиданная версия «%1».</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка восстановления из резервного файла: %1.</translation>
+        <translation type="vanished">Ошибка восстановления из резервного файла: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VWidgetDetails</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation>Без имени</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation>Выбрать все</translation>
+    </message>
+    <message>
+        <source>Select none</source>
+        <translation>Сбросить выбор</translation>
+    </message>
+    <message>
+        <source>select all details</source>
+        <translation>выбрать все детали</translation>
+    </message>
+    <message>
+        <source>select none details</source>
+        <translation>сбросить выбор деталей</translation>
+    </message>
+    <message>
+        <source>Invert selection</source>
+        <translation>Инвертировать выбор</translation>
+    </message>
+    <message>
+        <source>invert selection</source>
+        <translation>инвертировать выбор</translation>
+    </message>
+</context>
+<context>
+    <name>VWidgetGroups</name>
+    <message>
+        <source>Form</source>
+        <translation type="vanished">Форма</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation>Переименовать</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCubicBezierPath</name>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
+        <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите семь или больше точек</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек,
+&lt;b&gt;Enter&lt;/b&gt; - создать кривую</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
+        <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите больше точек для завершения</translation>
     </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation>&lt;b&gt;Пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation type="vanished">&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Точка на расстоянии и под углом&lt;/b&gt;: угол = %1°, длина = %2%3; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - создание</translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - &quot;фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolMove</name>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation>Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolRotation</name>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation>Угол поворота = %1°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolSpline</name>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation>Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>
@@ -8200,6 +11943,10 @@ Do you want to save your changes?</source>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <translation>Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
     </message>
 </context>
 <context>
@@ -8214,11 +11961,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation>КРИТИЧЕСКАЯ:</translation>
+        <translation>КРИТИЧЕСКИ:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation>ФАТАЛЬНАЯ:</translation>
+        <translation>ФАТАЛЬНО:</translation>
     </message>
     <message>
         <source>INFO:</source>
@@ -8226,19 +11973,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Предупреждение.</translation>
+        <translation type="vanished">Предупреждение.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Критическая ошибка.</translation>
+        <translation type="vanished">Критическая ошибка.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Фатальная ошибка.</translation>
+        <translation type="vanished">Фатальная ошибка.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Информация.</translation>
+        <translation type="vanished">Информация.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Внимание</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation>Критическая ошибка</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation>Фатальная ошибка</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Информация</translation>
     </message>
 </context>
 <context>

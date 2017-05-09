@@ -18,9 +18,18 @@
 #ifndef CHECKABLEMESSAGEBOX_H
 #define CHECKABLEMESSAGEBOX_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QDialog>
 #include <QDialogButtonBox>
+#include <QFlags>
 #include <QMessageBox>
+#include <QMetaObject>
+#include <QObject>
+#include <QPixmap>
+#include <QString>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
 
 class QSettings;
 

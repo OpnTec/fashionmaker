@@ -27,13 +27,33 @@
  *************************************************************************/
 
 #include "def.h"
-#include "vabstractapplication.h"
-#include "../vpatterndb/vtranslatevars.h"
 
+#include <QApplication>
+#include <QChar>
+#include <QColor>
 #include <QComboBox>
+#include <QCursor>
 #include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QGuiApplication>
+#include <QImage>
+#include <QLatin1Char>
+#include <QList>
+#include <QMap>
+#include <QMessageLogger>
+#include <QObject>
+#include <QPixmap>
 #include <QPrinterInfo>
-#include <QDebug>
+#include <QProcess>
+#include <QRgb>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "vabstractapplication.h"
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -362,6 +382,8 @@ const QString p54_S = QStringLiteral("p54");
 const QString p998_S = QStringLiteral("p998");
 
 //functions
+const QString degTorad_F = QStringLiteral("degTorad");
+const QString radTodeg_F = QStringLiteral("radTodeg");
 const QString sin_F   = QStringLiteral("sin");
 const QString cos_F   = QStringLiteral("cos");
 const QString tan_F   = QStringLiteral("tan");
@@ -374,6 +396,12 @@ const QString tanh_F  = QStringLiteral("tanh");
 const QString asinh_F = QStringLiteral("asinh");
 const QString acosh_F = QStringLiteral("acosh");
 const QString atanh_F = QStringLiteral("atanh");
+const QString sinD_F   = QStringLiteral("sinD");
+const QString cosD_F   = QStringLiteral("cosD");
+const QString tanD_F   = QStringLiteral("tanD");
+const QString asinD_F  = QStringLiteral("asinD");
+const QString acosD_F  = QStringLiteral("acosD");
+const QString atanD_F  = QStringLiteral("atanD");
 const QString log2_F  = QStringLiteral("log2");
 const QString log10_F = QStringLiteral("log10");
 const QString log_F   = QStringLiteral("log");
@@ -389,8 +417,10 @@ const QString sum_F   = QStringLiteral("sum");
 const QString avg_F   = QStringLiteral("avg");
 const QString fmod_F  = QStringLiteral("fmod");
 
-const QStringList builInFunctions = QStringList() << sin_F  << cos_F   << tan_F  << asin_F  << acos_F  << atan_F
+const QStringList builInFunctions = QStringList() << degTorad_F << radTodeg_F
+                                                  << sin_F  << cos_F   << tan_F  << asin_F  << acos_F  << atan_F
                                                   << sinh_F << cosh_F  << tanh_F << asinh_F << acosh_F << atanh_F
+                                                  << sinD_F  << cosD_F   << tanD_F  << asinD_F  << acosD_F  << atanD_F
                                                   << log2_F << log10_F << log_F  << ln_F    << exp_F   << sqrt_F
                                                   << sign_F << rint_F  << abs_F  << min_F   << max_F   << sum_F
                                                   << avg_F << fmod_F;
@@ -404,12 +434,17 @@ const QStringList builInPostfixOperators = QStringList() << cm_Oprt
                                                          << mm_Oprt
                                                          << in_Oprt;
 
+const QString pl_size   = QStringLiteral("size");
+const QString pl_height = QStringLiteral("height");
+
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
 
 // From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
 // furthermore blows up the binary sizes.
 const QString degreeSymbol = QStringLiteral("°");
+const QString trueStr = QStringLiteral("true");
+const QString falseStr = QStringLiteral("false");
 
 //---------------------------------------------------------------------------------------------------------------------
 void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
@@ -430,9 +465,31 @@ void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
         QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
     }
 #else
-    Q_UNUSED(pixmapPath);
-    Q_UNUSED(hotX);
-    Q_UNUSED(hotY);
+    Q_UNUSED(pixmapPath)
+    Q_UNUSED(hotX)
+    Q_UNUSED(hotY)
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetOverrideCursor(Qt::CursorShape shape)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    QCursor* pOldCursor = QGuiApplication::overrideCursor();
+    if (pOldCursor != 0)
+    {
+        oldPixmap = pOldCursor->pixmap();
+    }
+    QCursor cursor(shape);
+    QPixmap newPixmap = cursor.pixmap();
+    if (oldPixmap.toImage() != newPixmap.toImage())
+    {
+        QApplication::setOverrideCursor(cursor);
+    }
+
+#else
+    Q_UNUSED(shape)
 #endif
 }
 
@@ -455,7 +512,29 @@ void RestoreOverrideCursor(const QString &pixmapPath)
         QApplication::restoreOverrideCursor();
     }
 #else
-    Q_UNUSED(pixmapPath);
+    Q_UNUSED(pixmapPath)
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RestoreOverrideCursor(Qt::CursorShape shape)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    QCursor* pOldCursor = QGuiApplication::overrideCursor();
+    if (pOldCursor != 0)
+    {
+        oldPixmap = pOldCursor->pixmap();
+    }
+    QCursor cursor(shape);
+    QPixmap newPixmap = cursor.pixmap();
+    if (oldPixmap.toImage() == newPixmap.toImage())
+    {
+        QApplication::restoreOverrideCursor();
+    }
+
+#else
+    Q_UNUSED(shape)
 #endif
 }
 
@@ -958,7 +1037,10 @@ QStringList SupportedLocales()
                                               << QStringLiteral("en_US")
                                               << QStringLiteral("en_CA")
                                               << QStringLiteral("en_IN")
-                                              << QStringLiteral("ro_RO");
+                                              << QStringLiteral("ro_RO")
+                                              << QStringLiteral("zh_CN")
+                                              << QStringLiteral("pt_BR")
+                                              << QStringLiteral("el_GR");
 
     return locales;
 }
@@ -994,13 +1076,13 @@ void InitPMSystems(QComboBox *systemCombo)
     QMap<QString, QString> systems;
     for (int i = 0; i < listSystems.size()-1; ++i)
     {
-        systems.insert(qApp->TrVars()->PMSystemName(listSystems.at(i)), listSystems.at(i));
+        systems.insert(qApp->TrVars()->PMSystemName(listSystems.at(i)) + " ("+listSystems.at(i)+")", listSystems.at(i));
     }
 
 // * The default option (blank field or 'None') should appear at the top of the list.
 // * The list should be sorted alphabetically so users can find their system easily.
 
-    SCASSERT(systemCombo != nullptr);
+    SCASSERT(systemCombo != nullptr)
     systemCombo->addItem(qApp->TrVars()->PMSystemName(listSystems.at(listSystems.size()-1)),
                          listSystems.at(listSystems.size()-1));
 
@@ -1077,20 +1159,22 @@ QStringList ListPMSystems()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListNumbers(const QStringList &listMeasurements)
+QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements)
 {
+    SCASSERT(trM != nullptr)
+
     QStringList numbers;
     for (int i=0; i < listMeasurements.size(); ++i)
     {
-        numbers.append(qApp->TrVars()->MNumber(listMeasurements.at(i)));
+        numbers.append(trM->MNumber(listMeasurements.at(i)));
     }
     return numbers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MapDiagrams(const QString &number)
+QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
 {
-    switch (ListNumbers(ListGroupA()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupA()).indexOf(number))
     {
         // A
         case 0: // A01
@@ -1143,7 +1227,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupB()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupB()).indexOf(number))
     {
         // B
         case 0: // B01
@@ -1160,7 +1244,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupC()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupC()).indexOf(number))
     {
         // C
         case 0: // C01
@@ -1173,7 +1257,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupD()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupD()).indexOf(number))
     {
         // D
         case 0: // D01
@@ -1190,7 +1274,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupE()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupE()).indexOf(number))
     {
         // E
         case 0: // E01
@@ -1205,7 +1289,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupF()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupF()).indexOf(number))
     {
         // F
         case 0: // F01
@@ -1224,7 +1308,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupG()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupG()).indexOf(number))
     {
         // G
         case 0: // G01
@@ -1323,7 +1407,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupH()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupH()).indexOf(number))
     {
         // H
         case 0: // H01
@@ -1414,7 +1498,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupI()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupI()).indexOf(number))
     {
         // I
         case 0: // I01
@@ -1449,7 +1533,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupJ()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupJ()).indexOf(number))
     {
         // J
         case 0: // J01
@@ -1476,7 +1560,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupK()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupK()).indexOf(number))
     {
         // K
         case 0: // K01
@@ -1509,7 +1593,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupL()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupL()).indexOf(number))
     {
         // L
         case 0: // L01
@@ -1560,7 +1644,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupM()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupM()).indexOf(number))
     {
         // M
         case 0: // M01
@@ -1595,7 +1679,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupN()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupN()).indexOf(number))
     {
         // N
         case 0: // N01
@@ -1618,7 +1702,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupO()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupO()).indexOf(number))
     {
         // O
         case 0: // O01
@@ -1653,7 +1737,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupP()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupP()).indexOf(number))
     {
         // P
         case 0: // P01
@@ -1684,7 +1768,7 @@ QString MapDiagrams(const QString &number)
             break;
     }
 
-    switch (ListNumbers(ListGroupQ()).indexOf(number))
+    switch (ListNumbers(trM, ListGroupQ()).indexOf(number))
     {
         // Q
         case 0: // Q01
@@ -1721,7 +1805,6 @@ QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
 
     if (QFileInfo(absoluteMPath).isRelative())
     {
-        qWarning() << QApplication::tr("The path to the measurments is already relative.");
         return absoluteMPath;
     }
 
@@ -1738,7 +1821,6 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 
     if (QFileInfo(relativeMPath).isAbsolute())
     {
-        qWarning() << QApplication::tr("The path to the measurments is already absolute.");
         return relativeMPath;
     }
 
@@ -1746,26 +1828,81 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode)
+QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode)
 {
-    QPrinterInfo def = QPrinterInfo::defaultPrinter();
-
-    //if there is no default printer set the print preview won't show
-    if(def.isNull() || def.printerName().isEmpty())
+    QPrinterInfo tmpInfo = info;
+    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
     {
-        if(QPrinterInfo::availablePrinters().isEmpty())
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+        const QList<QPrinterInfo> list = QPrinterInfo::availablePrinters();
+        if(list.isEmpty())
         {
             return QSharedPointer<QPrinter>();
         }
         else
         {
-            def = QPrinterInfo::availablePrinters().first();
+            tmpInfo = list.first();
         }
+#else
+    const QStringList list = QPrinterInfo::availablePrinterNames();
+    if(list.isEmpty())
+    {
+        return QSharedPointer<QPrinter>();
+    }
+    else
+    {
+        tmpInfo = QPrinterInfo::printerInfo(list.first());
+    }
+#endif
     }
 
-    auto printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
+    auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    QPageLayout layout = printer->pageLayout();
+    layout.setUnits(QPageLayout::Millimeter);
+    const QMarginsF minMargins = layout.minimumMargins();
+
+    QMarginsF min;
+    min.setLeft(UnitConvertor(minMargins.left(), Unit::Mm, Unit::Px));
+    min.setRight(UnitConvertor(minMargins.right(), Unit::Mm, Unit::Px));
+    min.setTop(UnitConvertor(minMargins.top(), Unit::Mm, Unit::Px));
+    min.setBottom(UnitConvertor(minMargins.bottom(), Unit::Mm, Unit::Px));
+    return min;
+#else
+    auto tempPrinter = QSharedPointer<QPrinter>(new QPrinter(QPrinterInfo(* printer)));
+    tempPrinter->setFullPage(false);
+    tempPrinter->setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
+    return GetPrinterFields(tempPrinter);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer)
+{
+    if (printer.isNull())
+    {
+        return QMarginsF();
+    }
+
+    qreal left = 0;
+    qreal top = 0;
+    qreal right = 0;
+    qreal bottom = 0;
+    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+    // We can't use Unit::Px because our dpi in most cases is different
+    QMarginsF def;
+    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
+    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
+    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
+    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
+    return def;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1791,4 +1928,236 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
         }
     }
     return QPixmap::fromImage(img);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ShowInGraphicalShell(const QString &filePath)
+{
+#ifdef Q_OS_MAC
+    QStringList args;
+    args << "-e";
+    args << "tell application \"Finder\"";
+    args << "-e";
+    args << "activate";
+    args << "-e";
+    args << "select POSIX file \""+filePath+"\"";
+    args << "-e";
+    args << "end tell";
+    QProcess::startDetached("osascript", args);
+#elif defined(Q_OS_WIN)
+    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(filePath)));
+#else
+    const QString app = "xdg-open %d";
+    QString cmd;
+    for (int i = 0; i < app.size(); ++i)
+    {
+        QChar c = app.at(i);
+        if (c == QLatin1Char('%') && i < app.size()-1)
+        {
+            c = app.at(++i);
+            QString s;
+            if (c == QLatin1Char('d'))
+            {
+                s = QLatin1Char('"') + QFileInfo(filePath).path() + QLatin1Char('"');
+            }
+            else if (c == QLatin1Char('%'))
+            {
+                s = c;
+            }
+            else
+            {
+                s = QLatin1Char('%');
+                s += c;
+            }
+            cmd += s;
+            continue;
+        }
+        cmd += c;
+    }
+    QProcess::startDetached(cmd);
+#endif
+
+}
+
+const QString LONG_OPTION_NO_HDPI_SCALING = QStringLiteral("no-scaling");
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IsOptionSet(int argc, char *argv[], const char *option)
+{
+    for (int i = 1; i < argc; ++i)
+    {
+        if (!qstrcmp(argv[i], option))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// See issue #624. https://bitbucket.org/dismine/valentina/issues/624
+void InitHighDpiScaling(int argc, char *argv[])
+{
+    /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
+    if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+#else
+        qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
+#endif
+    }
+    else
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+#else
+        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
+#endif
+    }
+}
+
+const QString strOne   = QStringLiteral("one");
+const QString strTwo   = QStringLiteral("two");
+const QString strThree = QStringLiteral("three");
+const QString strTMark = QStringLiteral("tMark");
+const QString strVMark = QStringLiteral("vMark");
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PassmarkLineTypeToString(PassmarkLineType type)
+{
+    switch(type)
+    {
+        case PassmarkLineType::OneLine:
+            return strOne;
+        case PassmarkLineType::TwoLines:
+            return strTwo;
+        case PassmarkLineType::ThreeLines:
+            return strThree;
+        case PassmarkLineType::TMark:
+            return strTMark;
+        case PassmarkLineType::VMark:
+            return strVMark;
+        default:
+            break;
+    }
+
+    return strOne;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkLineType StringToPassmarkLineType(const QString &value)
+{
+    const QStringList values = QStringList() << strOne << strTwo << strThree << strTMark << strVMark;
+
+    switch(values.indexOf(value))
+    {
+        case 0: // strOne
+            return PassmarkLineType::OneLine;
+        case 1: // strTwo
+            return PassmarkLineType::TwoLines;
+        case 2: // strThree
+            return PassmarkLineType::ThreeLines;
+        case 3: // strTMark
+            return PassmarkLineType::TMark;
+        case 4: // strVMark
+            return PassmarkLineType::VMark;
+        default:
+            break;
+    }
+    return PassmarkLineType::OneLine;
+}
+
+const QString strStraightforward = QStringLiteral("straightforward");
+const QString strBisector        = QStringLiteral("bisector");
+const QString strIntersection    = QStringLiteral("intersection");
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PassmarkAngleTypeToString(PassmarkAngleType type)
+{
+    switch(type)
+    {
+        case PassmarkAngleType::Straightforward:
+            return strStraightforward;
+        case PassmarkAngleType::Bisector:
+            return strBisector;
+        case PassmarkAngleType::Intersection:
+            return strIntersection;
+        default:
+            break;
+    }
+
+    return strStraightforward;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PassmarkAngleType StringToPassmarkAngleType(const QString &value)
+{
+    const QStringList values = QStringList() << strStraightforward << strBisector << strIntersection;
+
+    switch(values.indexOf(value))
+    {
+        case 0:
+            return PassmarkAngleType::Straightforward;
+        case 1:
+            return PassmarkAngleType::Bisector;
+        case 2:
+            return PassmarkAngleType::Intersection;
+        default:
+            break;
+    }
+    return PassmarkAngleType::Straightforward;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitLanguages(QComboBox *combobox)
+{
+    SCASSERT(combobox != nullptr)
+    combobox->clear();
+
+    QStringList fileNames;
+    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
+
+    bool englishUS = false;
+    const QString en_US = QStringLiteral("en_US");
+
+    for (int i = 0; i < fileNames.size(); ++i)
+    {
+        // get locale extracted by filename
+        QString locale;
+        locale = fileNames.at(i);                  // "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
+
+        if (not englishUS)
+        {
+            englishUS = (en_US == locale);
+        }
+
+        QLocale loc = QLocale(locale);
+        QString lang = loc.nativeLanguageName();
+        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(loc.country())));
+
+        combobox->addItem(ico, lang, locale);
+    }
+
+    if (combobox->count() == 0 || not englishUS)
+    {
+        // English language is internal and doens't have own *.qm file.
+        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
+        QString lang = QLocale(en_US).nativeLanguageName();
+        combobox->addItem(ico, lang, en_US);
+    }
+
+    // set default translators and language checked
+    qint32 index = combobox->findData(qApp->Settings()->GetLocale());
+    if (index != -1)
+    {
+        combobox->setCurrentIndex(index);
+    }
 }

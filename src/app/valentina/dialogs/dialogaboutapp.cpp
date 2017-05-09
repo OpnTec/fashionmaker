@@ -35,6 +35,7 @@
 #include <QtDebug>
 #include "../options.h"
 #include "../core/vapplication.h"
+#include "../fervor/fvupdater.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
@@ -44,13 +45,13 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
+    QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
     ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
@@ -60,7 +61,20 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 
 
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, &DialogAboutApp::webButtonClicked );
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
+        {
+            qWarning() << tr("Cannot open your default browser");
+        }
+    });
+
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
+        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+    });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -99,22 +113,9 @@ void DialogAboutApp::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutApp::FontPointSize(QWidget *w, int pointSize)
 {
-    SCASSERT(w != nullptr);
+    SCASSERT(w != nullptr)
 
     QFont font = w->font();
     font.setPointSize(pointSize);
     w->setFont(font);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Fake button clicked
- */
-void DialogAboutApp::webButtonClicked()
-{
-    if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
-    {
-        qWarning() << tr("Cannot open your default browser");
-    }
-
 }

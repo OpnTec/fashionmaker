@@ -21,16 +21,20 @@
 #ifndef VPROPERTYFORMVIEW_H
 #define VPROPERTYFORMVIEW_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
 #include <QPointer>
+#include <QString>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
 #include "vpropertyformwidget.h"
 
 namespace VPE
 {
 
-class VProperty;
 class VPropertyModel;
-class VPropertySet;
 
 //! This class populates a form layout with the properties in a model
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWidget
@@ -84,7 +88,7 @@ private slots:
     void dataSubmitted(VProperty* property);
 
 protected:
-    void showEvent(QShowEvent* event);
+    virtual void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
     //! Rebuilds the widegt only if it is visible
     void updatePropertyList();

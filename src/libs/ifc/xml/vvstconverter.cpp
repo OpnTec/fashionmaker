@@ -27,9 +27,23 @@
  *************************************************************************/
 
 #include "vvstconverter.h"
-#include "exception/vexception.h"
 
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomText>
 #include <QFile>
+#include <QForeachContainer>
+#include <QLatin1String>
+#include <QList>
+#include <QMap>
+#include <QMultiMap>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
+#include "../exception/vexception.h"
+#include "../vmisc/def.h"
+#include "vabstractmconverter.h"
 
 /*
  * Version rules:
@@ -40,50 +54,24 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.2");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.4");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.4.xsd");
+
+//VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+//VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+
+static const QString strTagRead_Only = QStringLiteral("read-only");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
     :VAbstractMConverter(fileName)
 {
-    const QString schema = XSDSchema(ver);
-    ValidateXML(schema, fileName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VVSTConverter::~VVSTConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVSTConverter::MinVer() const
-{
-    return GetVersion(MeasurementMinVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVSTConverter::MaxVer() const
-{
-    return GetVersion(MeasurementMaxVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::MinVerStr() const
-{
-    return MeasurementMinVerStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::MaxVerStr() const
-{
-    return MeasurementMaxVerStr;
+    ValidateInputFile(CurrentSchema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VVSTConverter::XSDSchema(int ver) const
 {
-    CheckVersion(ver);
-
     switch (ver)
     {
         case (0x000300):
@@ -93,71 +81,79 @@ QString VVSTConverter::XSDSchema(int ver) const
         case (0x000401):
             return QStringLiteral("://schema/standard_measurements/v0.4.1.xsd");
         case (0x000402):
+            return QStringLiteral("://schema/standard_measurements/v0.4.2.xsd");
+        case (0x000403):
+            return QStringLiteral("://schema/standard_measurements/v0.4.3.xsd");
+        case (0x000404):
             return CurrentSchema;
         default:
-        {
-            const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
-            throw VException(errorMsg);
-        }
+            InvalidVersion(ver);
+            break;
     }
+    return QString();//unreachable code
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ApplyPatches()
 {
-    try
+    switch (m_ver)
     {
-        switch (ver)
-        {
-            case (0x000300):
-            {
-                ToV0_4_0();
-                const QString schema = XSDSchema(0x000400);
-                ValidateXML(schema, fileName);
-                V_FALLTHROUGH
-            }
-            case (0x000400):
-            {
-                ToV0_4_1();
-                const QString schema = XSDSchema(0x000401);
-                ValidateXML(schema, fileName);
-                V_FALLTHROUGH
-            }
-            case (0x000401):
-            {
-                ToV0_4_2();
-                const QString schema = XSDSchema(0x000402);
-                ValidateXML(schema, fileName);
-                V_FALLTHROUGH
-            }
-            case (0x000402):
-                break;
-            default:
-                break;
-        }
+        case (0x000300):
+            ToV0_4_0();
+            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000400):
+            ToV0_4_1();
+            ValidateXML(XSDSchema(0x000401), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000401):
+            ToV0_4_2();
+            ValidateXML(XSDSchema(0x000402), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000402):
+            ToV0_4_3();
+            ValidateXML(XSDSchema(0x000403), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000403):
+            ToV0_4_4();
+            ValidateXML(XSDSchema(0x000404), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000404):
+            break;
+        default:
+            InvalidVersion(m_ver);
+            break;
     }
-    catch (VException &e)
-    {
-        QString error;
-        const QString backupFileName = fileName + QLatin1Literal(".backup");
-        if (SafeCopy(backupFileName, fileName, error) == false)
-        {
-            const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
-            VException excep(errorMsg);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
+}
 
-        QFile file(backupFileName);
-        file.remove();
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::DowngradeToCurrentMaxVersion()
+{
+    SetVersion(MeasurementMaxVerStr);
+    Save();
+}
 
-        throw;
-    }
+//---------------------------------------------------------------------------------------------------------------------
+bool VVSTConverter::IsReadOnly() const
+{
+    // Check if attribute read-only was not changed in file format
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == CONVERTER_VERSION_CHECK(0, 4, 4),
+                      "Check attribute read-only.");
+
+    // Possibly in future attribute read-only will change position etc.
+    // For now position is the same for all supported format versions.
+    // But don't forget to keep all versions of attribute until we support that format versions
+
+    return UniqueTagText(strTagRead_Only, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::AddNewTagsForV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     QDomElement rootElement = this->documentElement();
     QDomNode refChild = rootElement.firstChildElement("version");
 
@@ -179,6 +175,10 @@ void VVSTConverter::AddNewTagsForV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::RemoveTagsForV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     QDomElement rootElement = this->documentElement();
 
     {
@@ -201,6 +201,10 @@ void VVSTConverter::RemoveTagsForV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ConvertMeasurementsToV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     const QString tagBM = QStringLiteral("body-measurements");
 
     QDomElement bm = createElement(tagBM);
@@ -247,6 +251,10 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease)
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     QDomElement element = createElement(QStringLiteral("m"));
 
     SetAttribute(element, QStringLiteral("name"), name);
@@ -262,6 +270,10 @@ QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal si
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::PM_SystemV0_4_1()
 {
+    // TODO. Delete if minimal supported version is 0.4.1
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 1),
+                      "Time to refactor the code.");
+
     QDomElement pm_system = createElement(QStringLiteral("pm_system"));
     pm_system.appendChild(createTextNode(QStringLiteral("998")));
 
@@ -275,6 +287,10 @@ void VVSTConverter::PM_SystemV0_4_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ConvertMeasurementsToV0_4_2()
 {
+    // TODO. Delete if minimal supported version is 0.4.2
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 2),
+                      "Time to refactor the code.");
+
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_3_3();
     auto i = names.constBegin();
     while (i != names.constEnd())
@@ -304,6 +320,10 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
     AddRootComment();
     SetVersion(QStringLiteral("0.4.0"));
     AddNewTagsForV0_4_0();
@@ -315,6 +335,10 @@ void VVSTConverter::ToV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_1()
 {
+    // TODO. Delete if minimal supported version is 0.4.1
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 1),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.4.1"));
     PM_SystemV0_4_1();
     Save();
@@ -323,7 +347,33 @@ void VVSTConverter::ToV0_4_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_2()
 {
+    // TODO. Delete if minimal supported version is 0.4.2
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 2),
+                      "Time to refactor the code.");
+
     SetVersion(QStringLiteral("0.4.2"));
     ConvertMeasurementsToV0_4_2();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_4_3()
+{
+    // TODO. Delete if minimal supported version is 0.4.3
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 3),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.4.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_4_4()
+{
+    // TODO. Delete if minimal supported version is 0.4.4
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.4.4"));
     Save();
 }

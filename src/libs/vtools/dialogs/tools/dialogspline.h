@@ -29,7 +29,18 @@
 #ifndef DIALOGSPLINE_H
 #define DIALOGSPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QSharedPointer>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vgeometry/vspline.h"
+#include "../vmisc/def.h"
 #include "dialogtool.h"
+
+template <class T> class QSharedPointer;
 
 namespace Ui
 {
@@ -46,58 +57,76 @@ public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSpline() Q_DECL_OVERRIDE;
 
-    quint32       GetP1() const;
-    void          SetP1(const quint32 &value);
+    VSpline GetSpline() const;
+    void    SetSpline(const VSpline &spline);
 
-    quint32       GetP4() const;
-    void          SetP4(const quint32 &value);
-
-    qreal         GetAngle1() const;
-    void          SetAngle1(const qreal &value);
-
-    qreal         GetAngle2() const;
-    void          SetAngle2(const qreal &value);
-
-    qreal         GetKAsm1() const;
-    void          SetKAsm1(const qreal &value);
-
-    qreal         GetKAsm2() const;
-    void          SetKAsm2(const qreal &value);
-
-    qreal         GetKCurve() const;
-    void          SetKCurve(const qreal &value);
-
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    QString GetColor() const;
+    void    SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void  PointNameChanged() Q_DECL_OVERRIDE;
+    virtual void  ShowDialog(bool click) Q_DECL_OVERRIDE;
 protected:
+    virtual void  CheckState() Q_DECL_FINAL;
     virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() Q_DECL_OVERRIDE;
+    virtual void  closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void DeployAngle1TextEdit();
+    void DeployAngle2TextEdit();
+    void DeployLength1TextEdit();
+    void DeployLength2TextEdit();
+
+    void Angle1Changed();
+    void Angle2Changed();
+    void Length1Changed();
+    void Length2Changed();
+
+    void FXAngle1();
+    void FXAngle2();
+    void FXLength1();
+    void FXLength2();
 private:
     Q_DISABLE_COPY(DialogSpline)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogSpline *ui;
 
-    /** @brief angle1 first angle of spline in degree */
-    qreal         angle1;
+    /** @brief spl spline */
+    VSpline spl;
 
-    /** @brief angle2 second angle of spline in degree */
-    qreal         angle2;
+    qint32 newDuplicate;
 
-    /** @brief kAsm1 first coefficient asymmetry */
-    qreal         kAsm1;
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeightAngle1;
+    int formulaBaseHeightAngle2;
+    int formulaBaseHeightLength1;
+    int formulaBaseHeightLength2;
 
-    /** @brief kAsm2 second coefficient asymmetry */
-    qreal         kAsm2;
+    /** @brief timerAngle1 timer of check first angle formula */
+    QTimer *timerAngle1;
+    QTimer *timerAngle2;
+    QTimer *timerLength1;
+    QTimer *timerLength2;
 
-    /** @brief kCurve coefficient curve */
-    qreal         kCurve;
+    /** @brief flagAngle1 true if value of first angle is correct */
+    bool flagAngle1;
+    bool flagAngle2;
+    bool flagLength1;
+    bool flagLength2;
+
+    const QSharedPointer<VPointF> GetP1() const;
+    const QSharedPointer<VPointF> GetP4() const;
+
+    void EvalAngle1();
+    void EvalAngle2();
+    void EvalLength1();
+    void EvalLength2();
+
+    VSpline CurrentSpline() const;
 };
 
 #endif // DIALOGSPLINE_H

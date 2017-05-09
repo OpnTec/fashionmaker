@@ -29,7 +29,20 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolBisector class tool for creation bisector point.
@@ -38,16 +51,11 @@ class VToolBisector : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolBisector(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                  const QString &lineColor,
-                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolBisector* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolBisector* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
@@ -58,6 +66,9 @@ public:
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
+
+    QString FirstPointName() const;
+    QString ThirdPointName() const;
 
     quint32 GetFirstPointId() const;
     void    SetFirstPointId(const quint32 &value);
@@ -76,11 +87,18 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolBisector)
+
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;
 
     /** @brief thirdPointId id third point of angle. */
     quint32         thirdPointId;
+
+    VToolBisector(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                  const QString &lineColor,
+                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLBISECTOR_H

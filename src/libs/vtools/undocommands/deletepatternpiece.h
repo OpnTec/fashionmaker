@@ -29,6 +29,13 @@
 #ifndef DELETEPATTERNPIECE_H
 #define DELETEPATTERNPIECE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
 
 class DeletePatternPiece : public VUndoCommand

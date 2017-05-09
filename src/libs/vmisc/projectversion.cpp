@@ -27,13 +27,22 @@
  *************************************************************************/
 
 #include "projectversion.h"
+
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QObject>
+#include <QStaticStringData>
 #include <QString>
-#include <QApplication>
+#include <QStringData>
+#include <QStringDataPtr>
 #include <QSysInfo>
+#include <QtGlobal>
 
 extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 4;
-extern const int DEBUG_VERSION = 5;
+extern const int MINOR_VERSION = 5;
+extern const int DEBUG_VERSION = 0;
 
 extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
                                  .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));

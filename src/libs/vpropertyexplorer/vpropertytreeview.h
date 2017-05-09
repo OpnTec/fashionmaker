@@ -21,16 +21,21 @@
 #ifndef VPROPERTYTREEVIEW_H
 #define VPROPERTYTREEVIEW_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
 #include <QTreeView>
+#include <QtGlobal>
+
 #include "vpropertyexplorer_global.h"
 
 namespace VPE
 {
 
-class VPropertyTreeViewPrivate;
-
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate;
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel;
+class VPropertyTreeViewPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyTreeView : public QTreeView
 {

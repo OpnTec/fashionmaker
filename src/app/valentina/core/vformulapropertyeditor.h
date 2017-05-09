@@ -46,13 +46,13 @@ public:
     explicit VFormulaPropertyEditor(QWidget *parent);
 
     //! Destructor
-    virtual ~VFormulaPropertyEditor() Q_DECL_OVERRIDE;
+    virtual ~VFormulaPropertyEditor() Q_DECL_EQ_DEFAULT;
 
     //! Returns the formula currently set
     VFormula GetFormula() const;
 
     //! Needed for proper event handling
-    bool eventFilter(QObject *obj, QEvent *ev);
+    virtual bool eventFilter(QObject *obj, QEvent *ev) Q_DECL_OVERRIDE;
 
 signals:
     //! This is emitted, when the user changes the color

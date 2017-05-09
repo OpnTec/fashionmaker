@@ -27,9 +27,16 @@
  *************************************************************************/
 
 #include "dialoguniondetails.h"
-#include "ui_dialoguniondetails.h"
-#include "../vpatterndb/vdetail.h"
+
+#include <QCheckBox>
+#include <QVector>
+
+#include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "dialogtool.h"
+#include "ui_dialoguniondetails.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -49,6 +56,12 @@ DialogUnionDetails::DialogUnionDetails(const VContainer *data, const quint32 &to
 DialogUnionDetails::~DialogUnionDetails()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogUnionDetails::RetainPieces() const
+{
+    return ui->checkBox->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,8 +95,8 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
     {
         return false;
     }
-    const VDetail det = data->GetDetail(idDetail);
-    return det.Containes(id);
+    const VPiece det = data->GetPiece(idDetail);
+    return det.GetPath().Contains(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,8 +106,8 @@ bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
     {
         return false;
     }
-    const VDetail det = data->GetDetail(idDetail);
-    if (det.CountNode() >= 3 && det.listNodePoint().size() >= 2)
+    const VPiece det = data->GetPiece(idDetail);
+    if (det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2)
     {
         return true;
     }
@@ -152,11 +165,11 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 emit ToolTip(tr("Select a unique point"));
                 return;
             }
-            VDetail d = data->GetDetail(idDetail);
-            if (d.OnEdge(p1, id))
+            VPiece d = data->GetPiece(idDetail);
+            if (d.GetPath().OnEdge(p1, id))
             {
                 p2 = id;
-                index = d.Edge(p1, p2);
+                index = d.GetPath().Edge(p1, p2);
                 ++numberD;
                 if (numberD > 1)
                 {

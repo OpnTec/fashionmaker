@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss
+	version="2.0"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:fervor="https://github.com/pypt/fervor"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+	<channel>
+		<title>Valentina</title>
+		<link>http://valentina-project.org/</link>
+		<description>Valentina is a cross-platform patternmaking program which allows designers 
+to create and model patterns of clothing. This software allows pattern 
+creation, using either standard sizing tables or an individual’s set of 
+measurements. It blends new technologies with traditional methods to create 
+a unique pattern making tool.</description>
+		<language>en</language>
+		<atom:link href="http://valentinaproject.bitbucket.org/Appcast.xml" rel="self" type="application/rss+xml" />
+
+		<item>
+			<title>Version 0.4.4</title>
+			<link>https://bitbucket.org/dismine/valentina/raw/default/ChangeLog.txt</link>
+  			<description>New minor release</description>
+
+			<!--
+				See QtGlobal's QT_OS_* constants for valid platform versions.
+			-->
+
+			<!-- Windows version. -->
+			<enclosure
+				url="https://bitbucket.org/dismine/valentina/downloads/valentina_0.4.4_i386.exe"
+				fervor:version="0.4.4"
+				fervor:platform="Q_OS_WIN32" />
+
+			<!-- Linux version. -->
+			<enclosure
+				url="http://valentina-project.org/"
+				fervor:version="0.4.4"
+				fervor:platform="Q_OS_LINUX" />
+
+			<!-- OS X version. -->
+			<enclosure
+				url="https://bitbucket.org/dismine/valentina/downloads/valentina_0.4.4_64bit-OSX.dmg"
+				fervor:version="0.4.4"
+				fervor:platform="Q_OS_MAC" />
+
+		</item>
+	</channel>
+</rss>

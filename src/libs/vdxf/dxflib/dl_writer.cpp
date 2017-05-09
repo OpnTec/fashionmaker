@@ -24,6 +24,12 @@
 
 #include "dl_writer.h"
 
+#include <ctype.h>
+#include <algorithm>
+
+#include "dl_attributes.h"
+#include "dl_codes.h"
+
 /**
  * @param version DXF version. Defaults to DL_VERSION_2002.
  */

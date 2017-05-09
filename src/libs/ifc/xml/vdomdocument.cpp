@@ -27,10 +27,17 @@
  *************************************************************************/
 
 #include "vdomdocument.h"
-#include "exception/vexceptionconversionerror.h"
-#include "exception/vexceptionemptyparameter.h"
-#include "exception/vexceptionbadid.h"
-#include "exception/vexceptionwrongid.h"
+
+#include <qcompilerdetection.h>
+#include <qdom.h>
+
+#include "../exception/vexceptionbadid.h"
+#include "../exception/vexceptionconversionerror.h"
+#include "../exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionwrongid.h"
+#include "../exception/vexception.h"
+#include "../vmisc/logging.h"
+#include "../ifcdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/backport/qsavefile.h"
@@ -39,18 +46,95 @@
 #endif
 
 #include <QAbstractMessageHandler>
+#include <QByteArray>
+#include <QDomNodeList>
+#include <QDomText>
+#include <QFile>
+#include <QIODevice>
+#include <QMessageLogger>
+#include <QObject>
+#include <QSourceLocation>
+#include <QStringList>
+#include <QTemporaryFile>
+#include <QTextDocument>
+#include <QTextStream>
+#include <QUrl>
+#include <QVector>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
-#include <QFile>
-#include <QFileInfo>
-#include <QTemporaryFile>
+#include <QtDebug>
+#include <QXmlStreamWriter>
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
+{
+    if (stream.hasError())
+    {
+       return;
+    }
+
+    if (domNode.isElement())
+    {
+        const QDomElement domElement = domNode.toElement();
+        if (not domElement.isNull())
+        {
+            stream.writeStartElement(domElement.tagName());
+
+            if (domElement.hasAttributes())
+            {
+                QMap<QString, QString> attributes;
+                const QDomNamedNodeMap attributeMap = domElement.attributes();
+                for (int i = 0; i < attributeMap.count(); ++i)
+                {
+                    const QDomNode attribute = attributeMap.item(i);
+                    attributes.insert(attribute.nodeName(), attribute.nodeValue());
+                }
+
+                QMap<QString, QString>::const_iterator i = attributes.constBegin();
+                while (i != attributes.constEnd())
+                {
+                    stream.writeAttribute(i.key(), i.value());
+                    ++i;
+                }
+            }
+
+            if (domElement.hasChildNodes())
+            {
+                QDomNode elementChild = domElement.firstChild();
+                while (not elementChild.isNull())
+                {
+                    SaveNodeCanonically(stream, elementChild);
+                    elementChild = elementChild.nextSibling();
+                }
+            }
+
+            stream.writeEndElement();
+        }
+    }
+    else if (domNode.isComment())
+    {
+        stream.writeComment(domNode.nodeValue());
+    }
+    else if (domNode.isText())
+    {
+        stream.writeCharacters(domNode.nodeValue());
+    }
+}
+}
 
 //This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler
 {
 public:
-    MessageHandler() : QAbstractMessageHandler(), m_messageType(QtMsgType()), m_description(QString()),
-        m_sourceLocation(QSourceLocation()){}
+    MessageHandler()
+        : QAbstractMessageHandler(),
+          m_messageType(QtMsgType()),
+          m_description(),
+          m_sourceLocation(QSourceLocation())
+    {}
+
     QString statusMessage() const;
     qint64  line() const;
     qint64  column() const;
@@ -65,9 +149,11 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString MessageHandler::statusMessage() const
+QString MessageHandler::statusMessage() const
 {
-    return m_description;
+    QTextDocument doc;
+    doc.setHtml(m_description);
+    return doc.toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,8 +173,8 @@ inline qint64  MessageHandler::column() const
 void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
                                    const QSourceLocation &sourceLocation)
 {
-    Q_UNUSED(type);
-    Q_UNUSED(identifier);
+    Q_UNUSED(type)
+    Q_UNUSED(identifier)
 
     m_messageType = type;
     m_description = description;
@@ -103,14 +189,12 @@ const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
 const QString VDomDocument::UnitPX     = QStringLiteral("px");
 const QString VDomDocument::TagVersion = QStringLiteral("version");
+const QString VDomDocument::TagUnit    = QStringLiteral("unit");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument()
-    : QDomDocument(), map(QHash<QString, QDomElement>())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VDomDocument::~VDomDocument()
+    : QDomDocument(),
+      map()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,28 +231,6 @@ QDomElement VDomDocument::elementById(quint32 id)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Removes all children of a given element tag. RENAME: removeAllChildren
- * @param element tag
- */
-void VDomDocument::removeAllChilds(QDomElement &element)
-{
-    QDomNode domNode = element.firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                element.removeChild(domElement);
-            }
-        }
-        domNode = element.firstChild();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Find element by id.
  * @param node node
  * @param id id value
@@ -201,13 +263,44 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::SaveCanonicalXML(QIODevice *file, int indent, QString &error) const
+{
+    SCASSERT(file != nullptr)
+
+    QXmlStreamWriter stream(file);
+    stream.setAutoFormatting(true);
+    stream.setAutoFormattingIndent(indent);
+    stream.writeStartDocument();
+
+    QDomNode root = documentElement();
+    while (not root.isNull())
+    {
+        SaveNodeCanonically(stream, root);
+        if (stream.hasError())
+        {
+            break;
+        }
+        root = root.nextSibling();
+    }
+
+    stream.writeEndDocument();
+
+    if (stream.hasError())
+    {
+        error = tr("Fail to write Canonical XML.");
+        return false;
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the long long value of the given attribute. RENAME: GetParameterLongLong?
  * @param domElement tag in xml tree
  * @param name attribute name
  * @return long long value
  */
-quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
+quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
@@ -216,7 +309,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
     QString parametr;
     quint32 id = 0;
 
-    QString message = tr("Can't convert toUInt parameter");
+    const QString message = QObject::tr("Can't convert toUInt parameter");
     try
     {
         parametr = GetParametrString(domElement, name, defValue);
@@ -237,7 +330,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) const
+bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -245,23 +338,27 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     QString parametr;
     bool val = true;
 
-    QString message = tr("Can't convert toBool parameter");
+    const QString message = QObject::tr("Can't convert toBool parameter");
     try
     {
         parametr = GetParametrString(domElement, name, defValue);
 
-        QStringList bools = QStringList() << QLatin1String("true") << QLatin1String("false");
+        const QStringList bools = QStringList() << QLatin1String("true")
+                                                << QLatin1String("false")
+                                                << QLatin1String("1")
+                                                << QLatin1String("0");
         switch (bools.indexOf(parametr))
         {
             case 0: // true
+            case 2: // 1
                 val = true;
                 break;
             case 1: // false
+            case 3: // 0
                 val = false;
                 break;
             default:// others
                 throw VExceptionConversionError(message, name);
-                break;
         }
     }
     catch (const VExceptionEmptyParameter &e)
@@ -275,9 +372,9 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) const
+NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name)
 {
-    const bool value = GetParametrBool(domElement, name, QStringLiteral("true"));
+    const bool value = GetParametrBool(domElement, name, trueStr);
     if (value)
     {
         return NodeUsage::InUse;
@@ -293,11 +390,11 @@ void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name
 {
     if (value == NodeUsage::InUse)
     {
-        domElement.setAttribute(name, QStringLiteral("true"));
+        domElement.setAttribute(name, trueStr);
     }
     else
     {
-        domElement.setAttribute(name, QStringLiteral("false"));
+        domElement.setAttribute(name, falseStr);
     }
 }
 
@@ -310,7 +407,7 @@ void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name
  * @throw VExceptionEmptyParameter when attribute is empty
  */
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
-                                        const QString &defValue) const
+                                        const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -319,7 +416,7 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
     {
         if (defValue.isEmpty())
         {
-            throw VExceptionEmptyParameter(tr("Got empty parameter"), name, domElement);
+            throw VExceptionEmptyParameter(QObject::tr("Got empty parameter"), name, domElement);
         }
         else
         {
@@ -336,7 +433,7 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
  * @param name attribute name
  * @return double value
  */
-qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
+qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -344,7 +441,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     bool ok = false;
     qreal param = 0;
 
-    QString message = tr("Can't convert toDouble parameter");
+    const QString message = QObject::tr("Can't convert toDouble parameter");
     try
     {
         QString parametr = GetParametrString(domElement, name, defValue);
@@ -369,17 +466,17 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
  * @param domElement tag in xml tree.
  * @return id value.
  */
-quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
+quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
+    quint32 id = NULL_ID;
 
-    QString message = tr("Got wrong parameter id. Need only id > 0.");
+    const QString message = QObject::tr("Got wrong parameter id. Need only id > 0.");
     try
     {
         id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
-        if (id == 0)
+        if (id == NULL_ID)
         {
             throw VExceptionWrongId(message, domElement);
         }
@@ -391,6 +488,19 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
         throw excep;
     }
     return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit VDomDocument::MUnit() const
+{
+    Unit unit = VDomDocument::StrToUnits(UniqueTagText(TagUnit, UnitCM));
+
+    if (unit == Unit::Px)
+    {
+        unit = Unit::Cm;
+    }
+
+    return unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -490,8 +600,9 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     {
         pattern.close();
         fileSchema.close();
-        const QString errorMsg(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
-        throw VException(errorMsg);
+        VException e(messageHandler.statusMessage());
+        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+        throw e;
     }
     qCDebug(vXML, "Schema loaded.");
 
@@ -549,15 +660,12 @@ void VDomDocument::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::StrToUnits(const QString &unit)
 {
-    QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
+    const QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
     Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {
         case 0:// mm
             result = Unit::Mm;
-            break;
-        case 1:// cm
-            result = Unit::Cm;
             break;
         case 2:// inch
             result = Unit::Inch;
@@ -565,6 +673,7 @@ Unit VDomDocument::StrToUnits(const QString &unit)
         case 3:// px
             result = Unit::Px;
             break;
+        case 1:// cm
         default:
             result = Unit::Cm;
             break;
@@ -587,54 +696,17 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
     switch (unit)
     {
         case Unit::Mm:
-            if (translate)
-            {
-                result = QObject::tr("mm");
-            }
-            else
-            {
-                result = UnitMM;
-            }
-            break;
-        case Unit::Cm:
-            if (translate)
-            {
-                result = QObject::tr("cm");
-            }
-            else
-            {
-                result = UnitCM;
-            }
+            translate ? result = QObject::tr("mm") : result = UnitMM;
             break;
         case Unit::Inch:
-            if (translate)
-            {
-                result = QObject::tr("inch");
-            }
-            else
-            {
-                result = UnitINCH;
-            }
+            translate ? result = QObject::tr("inch") : result = UnitINCH;
             break;
         case Unit::Px:
-            if (translate)
-            {
-                result = QObject::tr("px");
-            }
-            else
-            {
-                result = UnitPX;
-            }
+            translate ? result = QObject::tr("px") : result = UnitPX;
             break;
+        case Unit::Cm:
         default:
-            if (translate)
-            {
-                result = QObject::tr("cm");
-            }
-            else
-            {
-                result = UnitCM;
-            }
+            translate ? result = QObject::tr("cm") : result = UnitCM;
             break;
     }
     return result;
@@ -668,10 +740,17 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
     // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::WriteOnly))
     {
+        // See issue #666. QDomDocument produces random attribute order.
         const int indent = 4;
-        QTextStream out(&file);
-        out.setCodec("UTF-8");
-        save(out, indent);
+        if (not SaveCanonicalXML(&file, indent, error))
+        {
+            return false;
+        }
+        // Left these strings in case we will need them for testing purposes
+        // QTextStream out(&file);
+        // out.setCodec("UTF-8");
+        // save(out, indent);
+
         success = file.commit();
     }
 
@@ -724,30 +803,35 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
         if (domNode.isNull() == false && domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                QDomElement parent = domElement.parentNode().toElement();
-                QDomElement newTag = createElement(tag);
-                if (not text.isEmpty())
-                {
-                    const QDomText newTagText = createTextNode(text);
-                    newTag.appendChild(newTagText);
-                }
-
-                parent.replaceChild(newTag, domElement);
-                return true;
-            }
+            return setTagText(domElement, text);
         }
     }
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::setTagText(const QDomElement &domElement, const QString &text)
+{
+    if (domElement.isNull() == false)
+    {
+        QDomElement parent = domElement.parentNode().toElement();
+        QDomElement newTag = createElement(domElement.tagName());
+
+        const QDomText newTagText = createTextNode(text);
+        newTag.appendChild(newTagText);
+
+        parent.replaceChild(newTag, domElement);
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveAllChild remove all child from file.
+ * @brief RemoveAllChildren remove all children from file.
  * @param domElement tag in xml tree.
  */
-void VDomDocument::RemoveAllChild(QDomElement &domElement)
+void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 {
     if ( domElement.hasChildNodes() )
     {
@@ -792,13 +876,12 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
 
-    QTemporaryFile destFile(destination + QLatin1Literal(".XXXXXX"));
-    destFile.setAutoRemove(false);
+    QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
+    destFile.setAutoRemove(false);// Will be renamed to be destination file
     // cppcheck-suppress ConfigurationNotChecked
     if (not destFile.open())
     {
         error = destFile.errorString();
-        result = false;
     }
     else
     {
@@ -838,6 +921,10 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
                     result = true;
                 }
             }
+        }
+        else
+        {
+            error = sourceFile.errorString();
         }
     }
 

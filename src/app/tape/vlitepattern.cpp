@@ -60,6 +60,12 @@ QString VLitePattern::GenerateLabel(const LabelType &type, const QString &reserv
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VLitePattern::GenerateSuffix() const
+{
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLitePattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_UNUSED(id)

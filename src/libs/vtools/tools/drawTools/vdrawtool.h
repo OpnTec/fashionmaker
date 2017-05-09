@@ -29,49 +29,57 @@
 #ifndef VDRAWTOOL_H
 #define VDRAWTOOL_H
 
-#include "../vabstracttool.h"
-#include "../../dialogs/tools/dialogtool.h"
+#include <qcompilerdetection.h>
+#include <QAction>
+#include <QByteArray>
+#include <QColor>
+#include <QDomElement>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QIcon>
+#include <QMenu>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vinteractivetool.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vdatatool.h"
 
-#include <QMenu>
-#include <QGraphicsSceneContextMenuEvent>
-#include <QGraphicsView>
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
  */
-class VDrawTool : public VAbstractTool
+class VDrawTool : public VInteractiveTool
 {
     Q_OBJECT
 public:
 
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual      ~VDrawTool() Q_DECL_OVERRIDE;
+    virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
 
     /** @brief factor scene scale factor. */
     static qreal factor;
 
-    /** @brief setDialog set dialog when user want change tool option. */
-    virtual void setDialog() {}
-    virtual void DialogLinkDestroy();
-    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
-
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
 
-    QString      GetLineColor() const;
-    virtual void SetLineColor(const QString &value);
+signals:
+    void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
 
 public slots:
     virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    virtual void FullUpdateFromGuiOk(int result);
-    virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
     virtual void EnableToolMove(bool move);
     virtual void Disable(bool disable, const QString &namePP)=0;
+    virtual void DetailsMode(bool mode);
 protected:
 
     enum class RemoveOption : bool {Disable = false, Enable = true};
@@ -80,14 +88,8 @@ protected:
     /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
 
-    /** @brief dialog dialog options.*/
-    DialogTool  *dialog;
-
     /** @brief typeLine line type. */
     QString      typeLine;
-
-    /** @brief lineColor color line or curve, but not a point. */
-    QString      lineColor;
 
     bool         enabled;
 
@@ -95,7 +97,7 @@ protected:
 
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
-    void         SaveDialogChange();
+    virtual void SaveDialogChange() Q_DECL_FINAL;
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     void         SaveOption(QSharedPointer<VGObject> &obj);
@@ -114,6 +116,12 @@ protected:
 
     template <typename Item>
     void ShowItem(Item *item, quint32 id, bool enable);
+
+    template <typename T>
+    QString ObjectName(quint32 id) const;
+
+    template <typename T>
+    static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
@@ -130,8 +138,13 @@ template <typename Dialog, typename Tool>
 void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, const RemoveOption &showRemove,
                             const Referens &ref)
 {
-    SCASSERT(tool != nullptr);
-    SCASSERT(event != nullptr);
+    SCASSERT(tool != nullptr)
+    SCASSERT(event != nullptr)
+
+    if (m_suppressContextMenu)
+    {
+        return;
+    }
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
@@ -169,15 +182,15 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     {
         qCDebug(vTool, "Show options.");
         qApp->getSceneView()->itemClicked(nullptr);
-        dialog = new Dialog(getData(), id, qApp->getMainWindow());
-        dialog->setModal(true);
+        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), id, qApp->getMainWindow()));
+        m_dialog->setModal(true);
 
-        connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-        connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
 
         tool->setDialog();
 
-        dialog->show();
+        m_dialog->show();
     }
     if (selectedAction == actionRemove)
     {
@@ -197,11 +210,48 @@ template <typename Item>
  */
 void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     if (id == item->id)
     {
         ShowVisualization(enable);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief ObjectName get object (point, curve, arc) name.
+ * @param id object id in container.
+ */
+QString VDrawTool::ObjectName(quint32 id) const
+{
+    try
+    {
+        return data.GeometricObject<T>(id)->name();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
+                qUtf8Printable(e.ErrorMessage()),
+                qUtf8Printable(e.DetailedInformation()));
+        return QString("");// Return empty string for property browser
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
+
+    QObject::connect(tool, &T::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);
+    QObject::connect(scene, &VMainGraphicsScene::NewFactor, tool, &T::SetFactor);
+    QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
+    QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);
+    QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::DetailsMode);
+    QObject::connect(scene, &VMainGraphicsScene::ItemSelection, tool, &T::ToolSelectionType);
 }
 
 #endif // VDRAWTOOL_H

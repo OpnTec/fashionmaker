@@ -29,6 +29,14 @@
 #ifndef DIALOGPOINTOFINTERSECTIONCIRCLES_H
 #define DIALOGPOINTOFINTERSECTIONCIRCLES_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -84,7 +92,7 @@ protected:
      */
     virtual void   SaveData() Q_DECL_OVERRIDE;
     virtual void   closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void   CheckState() Q_DECL_OVERRIDE;
+    virtual void   CheckState() Q_DECL_FINAL;
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionCircles)
@@ -102,9 +110,6 @@ private:
 
     int           formulaBaseHeightCircle1Radius;
     int           formulaBaseHeightCircle2Radius;
-
-    qreal         angleCircle1Radius;
-    qreal         angleCircle2Radius;
 };
 
 #endif // DIALOGPOINTOFINTERSECTIONCIRCLES_H

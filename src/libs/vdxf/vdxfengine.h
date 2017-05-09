@@ -29,10 +29,19 @@
 #ifndef VDXFENGINE_H
 #define VDXFENGINE_H
 
+#include <qcompilerdetection.h>
+#include <QMatrix>
 #include <QPaintEngine>
-#include "dxflib/dl_dxf.h"
+#include <QPointF>
+#include <QRectF>
+#include <QSize>
+#include <QString>
+#include <QtGlobal>
+#include <string>
+
 #include "../vmisc/def.h"
 #include "dxfdef.h"
+#include "dxflib/dl_dxf.h"
 
 class QTextStream;
 

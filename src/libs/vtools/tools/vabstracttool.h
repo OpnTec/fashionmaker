@@ -29,21 +29,25 @@
 #ifndef VABSTRACTTOOL_H
 #define VABSTRACTTOOL_H
 
-#include "vdatatool.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/visualization.h"
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <Qt>
+#include <QtGlobal>
 
-class QDomElement;
-class QLineF;
-class QPointF;
-class QGraphicsScene;
-class QGraphicsView;
-class QGraphicsItem;
-class QRectF;
-class Visualization;
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vtools/visualization/visualization.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "vdatatool.h"
+
 class VGraphicsSimpleTextItem;
+class VAbstractNode;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -58,25 +62,36 @@ public:
 
     static const QString AttrInUse;
 
+    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
+
     static const QStringList    StylesList();
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+    static QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
     static QMap<QString, QIcon> LineStylesPics();
 
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
-    static void             AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
+    static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     const VContainer        *getData() const;
 
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
+
+    template<typename T>
+    static quint32 CreateNode(VContainer *data, quint32 id);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void            FullUpdateFromFile()=0;
+    virtual void            AllowHover(bool enabled)=0;
+    virtual void            AllowSelecting(bool enabled)=0;
+    virtual void            ToolSelectionType(const SelectionType &type);
 signals:
     /**
      * @brief toolhaveChange emit if tool create change that need save.
@@ -92,6 +107,8 @@ signals:
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
     void                    LiteUpdateTree(const Document &parse);
+
+    void                    ToolTip(const QString &toolTip);
 protected:
     /** @brief doc dom document container */
     VAbstractPattern         *doc;
@@ -102,7 +119,8 @@ protected:
     /** @brief baseColor base color for tool. */
     Qt::GlobalColor         baseColor;
 
-    Visualization           *vis;
+    QPointer<Visualization> vis;
+    SelectionType           selectionType;
 
     /**
      * @brief AddToFile add tag with informations about tool into file.
@@ -123,10 +141,18 @@ protected:
     void AddVisualization();
 
     virtual void SetVisualization()=0;
-    void ToolCreation(const Source &typeCreation);
+    virtual void ToolCreation(const Source &typeCreation);
 
-    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                            const qreal radius);
+    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
+                            QGraphicsLineItem *lineName, const qreal radius);
+
+    static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
+    static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
+
+    static QVector<VPieceNode> PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                            VContainer *data);
+    static quint32 PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                               VContainer *data);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
@@ -161,7 +187,24 @@ inline void VAbstractTool::AddVisualization()
     connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
     scene->addItem(visual);
 
+    connect(visual, &Visualization::ToolTip, this, &VAbstractTool::ToolTip);
     vis = visual;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+/**
+ * @brief CreateNode create new node for detail.
+ * @param data container.
+ * @param id id parent object.
+ * @return id for new object.
+ */
+quint32 VAbstractTool::CreateNode(VContainer *data, quint32 id)
+{
+    //We can't use exist object. Need create new.
+    T *node = new T(*data->GeometricObject<T>(id).data());
+    node->setMode(Draw::Modeling);
+    return data->AddGObject(node);
 }
 
 #endif // VABSTRACTTOOL_H

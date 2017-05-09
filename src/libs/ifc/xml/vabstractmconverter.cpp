@@ -28,14 +28,16 @@
 
 #include "vabstractmconverter.h"
 
+#include <QDomElement>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
+#include "vabstractconverter.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMConverter::VAbstractMConverter(const QString &fileName)
     :VAbstractConverter(fileName)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractMConverter::~VAbstractMConverter()
 {
 }
 

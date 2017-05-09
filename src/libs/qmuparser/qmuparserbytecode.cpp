@@ -21,12 +21,15 @@
 
 #include "qmuparserbytecode.h"
 
+#include <assert.h>
+#include <QMessageLogger>
 #include <QStack>
 #include <QString>
-#include <QDebug>
-#include "qmuparsertoken.h"
-#include <QtCore/qmath.h>
-#include <QtGlobal>
+#include <QtDebug>
+
+#include "qmudef.h"
+#include "qmuparsererror.h"
+#include "../vmisc/vmath.h"
 
 namespace qmu
 {
@@ -165,11 +168,11 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
             m_vRPN.pop_back();
             break;
         case cmNEQ:
-            x = (qFuzzyCompare(x, y) == false);
+            x = not QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
         case cmEQ:
-            x = qFuzzyCompare(x, y);
+            x = QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
         case cmADD:
@@ -203,10 +206,9 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
     } // switch opcode
 }
 
-#if defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 1195 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_INTEL(1195)
+QT_WARNING_DISABLE_MSVC(4826)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -342,7 +344,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     break;
                 case cmDIV:
                     if (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
-                            (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2+1, 1+0)==false))
+                            not qFuzzyIsNull(m_vRPN.at(sz-1).Val.data2))
                     {
                         // Optimization: 4*a/2 -> 2*a
                         m_vRPN[sz-2].Val.data  /= m_vRPN.at(sz-1).Val.data2;
@@ -368,9 +370,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
     }
 }
 
-#if defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)

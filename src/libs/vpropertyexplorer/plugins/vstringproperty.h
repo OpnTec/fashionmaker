@@ -21,8 +21,18 @@
 #ifndef VSTRINGPROPERTY_H
 #define VSTRINGPROPERTY_H
 
-#include "../vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <QtGlobal>
+
 #include "../vproperty.h"
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -49,6 +59,7 @@ public:
     virtual QVariant getEditorData(const QWidget* editor) const Q_DECL_OVERRIDE;
 
     void         setReadOnly(bool readOnly);
+    void         setOsSeparator(bool separator);
     void         setClearButtonEnable(bool value);
 
     //! Sets the settings.
@@ -68,7 +79,8 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const Q_DECL_OVERRIDE;
+    virtual VProperty* clone(bool include_children = true,
+                             VProperty* container = nullptr) const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
 
     virtual void UpdateParent(const QVariant &value) Q_DECL_OVERRIDE;
 
@@ -79,6 +91,9 @@ protected:
     bool readOnly;
     int typeForParent;
     bool clearButton;
+    bool m_osSeparator;
+
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VStringProperty)

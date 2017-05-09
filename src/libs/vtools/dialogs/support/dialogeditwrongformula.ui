@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>453</height>
+    <width>448</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -192,8 +192,7 @@
        </property>
        <property name="icon">
         <iconset theme="go-down">
-         <normaloff/>
-        </iconset>
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -273,22 +272,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonLengthArc">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QRadioButton" name="radioButtonLengthSpline">
            <property name="enabled">
             <bool>true</bool>
@@ -334,19 +317,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonAnglesArcs">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Angles of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QRadioButton" name="radioButtonAnglesCurves">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -359,12 +329,39 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonCLength">
+           <property name="text">
+            <string>Lengths to control points</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonFunctions">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Functions</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLineEdit" name="filterFormulaInputs">
+         <property name="placeholderText">
+          <string>Filter list by keyword</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QCheckBox" name="checkBoxHideEmpty">
          <property name="text">
@@ -376,10 +373,23 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="toolTip">
-          <string>Double click for add to formula</string>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          </property>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Full name</string>
+          </property>
+         </column>
         </widget>
        </item>
       </layout>
@@ -415,11 +425,9 @@
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
   <tabstop>radioButtonLengthLine</tabstop>
-  <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>checkBoxHideEmpty</tabstop>
-  <tabstop>listWidget</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

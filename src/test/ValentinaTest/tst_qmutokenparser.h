@@ -29,18 +29,26 @@
 #ifndef TST_QMUTOKENPARSER_H
 #define TST_QMUTOKENPARSER_H
 
+#include <QLocale>
 #include <QObject>
 
 class TST_QmuTokenParser : public QObject
 {
     Q_OBJECT
 public:
-    Q_DISABLE_COPY(TST_QmuTokenParser)
-    explicit TST_QmuTokenParser(QObject *parent = 0);
-
+    explicit TST_QmuTokenParser(QObject *parent = nullptr);
 private slots:
     void IsSingle_data();
     void IsSingle();
+    void TokenFromUser_data();
+    void TokenFromUser();
+    void cleanupTestCase();
+private:
+    Q_DISABLE_COPY(TST_QmuTokenParser)
+    QLocale m_systemLocale;
+
+    void PrepareVal(qreal val, const QLocale &locale);
+    bool IsSingleFromUser(const QString &formula);
 };
 
 #endif // TST_QMUTOKENPARSER_H

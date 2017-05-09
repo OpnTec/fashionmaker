@@ -31,33 +31,13 @@
 #define DXF_CODES_H
 
 #include "dl_global.h"
+#include "../vmisc/diagnostic.h"
 
 #if defined(Q_CC_MSVC)
     #if (_MSC_VER > 1000)
     #pragma once
     #endif // _MSC_VER > 1000
 #endif // Q_CC_MSVC
-
-#if defined(__OS2__)||defined(__EMX__)
-#define strcasecmp(s,t) stricmp(s,t)
-#endif
-
-#if defined(_WIN32)&&!defined(strcasecmp)
-#define strcasecmp(s,t) _stricmp(s,t)
-#endif
-
-
-#ifdef _WIN32
-#undef M_PI
-#define M_PI   3.14159265358979323846
-#if defined(Q_CC_MSVC)
-#pragma warning(disable : 4800)
-#endif // Q_CC_MSVC
-#endif
-
-#ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
-#endif
 
 #define DL_DXF_MAXLINE 1024
 #define DL_DXF_MAXGROUPCODE 1100

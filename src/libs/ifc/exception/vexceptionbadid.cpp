@@ -28,6 +28,8 @@
 
 #include "vexceptionbadid.h"
 
+#include "vexception.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionBadId exception bad id

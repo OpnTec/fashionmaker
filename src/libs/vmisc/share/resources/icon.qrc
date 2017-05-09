@@ -4,6 +4,7 @@
         <file>icon/32x32/draw.png</file>
         <file>icon/32x32/kontur.png</file>
         <file>icon/32x32/arrow_cursor.png</file>
+        <file>icon/32x32/arrow_cursor@2x.png</file>
         <file>icon/32x32/new_draw.png</file>
         <file>icon/32x32/option_draw.png</file>
         <file>icon/32x32/table.png</file>
@@ -15,9 +16,6 @@
         <file>icon/16x16/mirror.png</file>
         <file>icon/config.png</file>
         <file>icon/pattern_config.png</file>
-        <file>icon/Graduation.png</file>
-        <file>icon/individual.png</file>
-        <file>icon/community_config.png</file>
         <file>icon/32x32/arrowLeft.png</file>
         <file>icon/32x32/arrowRight.png</file>
         <file>icon/32x32/arrowRightDown.png</file>
@@ -55,5 +53,27 @@
         <file>icon/16x16/toolsectioncurve@2x.png</file>
         <file>icon/16x16/toolsectionline@2x.png</file>
         <file>icon/16x16/toolsectionpoint@2x.png</file>
+        <file>icon/16x16/operations.png</file>
+        <file>icon/16x16/operations@2x.png</file>
+        <file>icon/16x16/closed_eye.png</file>
+        <file>icon/16x16/closed_eye@2x.png</file>
+        <file>icon/16x16/open_eye.png</file>
+        <file>icon/16x16/open_eye@2x.png</file>
+        <file>icon/16x16/allow_detail.png</file>
+        <file>icon/16x16/allow_detail@2x.png</file>
+        <file>icon/16x16/forbid_detail.png</file>
+        <file>icon/16x16/forbid_detail@2x.png</file>
+        <file>icon/16x16/toolsectionelarc.png</file>
+        <file>icon/16x16/toolsectionelarc@2x.png</file>
+        <file>icon/32x32/grainline.png</file>
+        <file>icon/32x32/grainline@2x.png</file>
+        <file>icon/32x32/labels.png</file>
+        <file>icon/32x32/labels@2x.png</file>
+        <file>icon/32x32/paths.png</file>
+        <file>icon/32x32/paths@2x.png</file>
+        <file>icon/32x32/pins.png</file>
+        <file>icon/32x32/pins@2x.png</file>
+        <file>icon/32x32/passmark.png</file>
+        <file>icon/32x32/passmark@2x.png</file>
     </qresource>
 </RCC>

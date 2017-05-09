@@ -27,11 +27,34 @@
  *************************************************************************/
 
 #include "vtoolshoulderpoint.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLineF>
+#include <QMessageLogger>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogshoulderpoint.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../../visualization/line/vistoolshoulderpoint.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolshoulderpoint.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
@@ -66,9 +89,9 @@ VToolShoulderPoint::VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolShoulderPoint::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -88,32 +111,40 @@ void VToolShoulderPoint::setDialog()
  * @param length length form shoulder point to our.
  * @return point.
  */
-//TODO find better way calculate point.
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                       const qreal &length)
 {
+    QPointF shoulderPoint = p2Line; // Position if result was not found
+    if (length <= 0)
+    {
+        return shoulderPoint;
+    }
+
     QLineF line = QLineF(p1Line, p2Line);
-    qreal toolLength = length;
-    qreal dist = line.length();
-    if (dist>toolLength)
+    const qreal baseLength = line.length();
+    const int baseAngle = qRound(line.angle());
+    line.setLength(length*2);
+
+    QPointF p1;
+    QPointF p2;
+
+    const qint32 res = VGObject::LineIntersectCircle(pShoulder, length, line, p1, p2);
+
+    if (res == 1 || res == 2)
     {
-        qDebug()<<"Correction of length in shoulder point tool. Parameter length too small.";
-        toolLength = dist;
-    }
-    if (qFuzzyCompare(dist, toolLength))
-    {
-        return line.p2();
-    }
-    qreal step = 0.01;
-    while (1)
-    {
-        line.setLength(line.length()+step);
-        QLineF line2 = QLineF(pShoulder, line.p2());
-        if (line2.length()>=toolLength)
+        const QLineF line1 = QLineF(p1Line, p1);
+        const QLineF line2 = QLineF(p1Line, p2);
+        if (line1.length() > baseLength && baseAngle == qRound(line1.angle()))
         {
-            return line.p2();
+            shoulderPoint = p1;
+        }
+        else if (res == 2 && line2.length() > baseLength && baseAngle == qRound(line2.angle()))
+        {
+            shoulderPoint = p2;
         }
     }
+
+    return shoulderPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,12 +156,12 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
  * @param data container with variables.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 p1Line = dialogTool->GetP1Line();
     const quint32 p2Line = dialogTool->GetP2Line();
@@ -142,7 +173,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
                                         10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -178,8 +209,9 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                   shoulderPoint->toQPointF(), qApp->toPixel(result));
+    QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*firstPoint),
+                                                   static_cast<QPointF>(*secondPoint),
+                                                   static_cast<QPointF>(*shoulderPoint), qApp->toPixel(result));
     quint32 id =  _id;
     if (typeCreation == Source::FromGui)
     {
@@ -197,24 +229,34 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
         VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, lineColor, formula,
                                                            p1Line, p2Line, pShoulder,
                                                            typeCreation);
         scene->addItem(point);
-        connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolShoulderPoint::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolShoulderPoint::EnableToolMove);
-        doc->AddTool(id, point);
+        InitToolConnections(scene, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
         doc->IncrementReferens(shoulderPoint->getIdTool());
         return point;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolShoulderPoint::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(p2Line)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolShoulderPoint::ShoulderPointName() const
+{
+    return VAbstractTool::data.GetGObject(pShoulder)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,7 +283,7 @@ void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -266,9 +308,9 @@ void VToolShoulderPoint::RemoveReferens()
  */
 void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -304,12 +346,12 @@ void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(pShoulder);
+        visual->setObject1Id(pShoulder);
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));

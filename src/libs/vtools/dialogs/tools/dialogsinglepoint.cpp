@@ -27,6 +27,13 @@
  *************************************************************************/
 
 #include "dialogsinglepoint.h"
+
+#include <QDoubleSpinBox>
+#include <QLineEdit>
+
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogtool.h"
 #include "ui_dialogsinglepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,7 +57,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &tool
     InitOkCancel(ui);
 
     flagName = true;
-    CheckState();
+    DialogTool::CheckState();
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogTool::NamePointChanged);
 }

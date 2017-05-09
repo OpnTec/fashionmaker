@@ -27,9 +27,15 @@
  *************************************************************************/
 
 #include "addtocalc.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsscene.h"
-#include "../../vwidgets/vmaingraphicsview.h"
+
+#include <QDomNode>
+
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
@@ -49,7 +55,6 @@ void AddToCalc::undo()
     qCDebug(vUndo, "Undo.");
 
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
-    doc->setCursor(cursor);
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
@@ -74,10 +79,6 @@ void AddToCalc::undo()
         qCDebug(vUndo, "Can't find tag Calculation.");
         return;
     }
-    if (cursor > 0)
-    {
-        doc->setCursor(0);
-    }
     emit NeedFullParsing();
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
     doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
@@ -94,7 +95,7 @@ void AddToCalc::redo()
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        if (cursor == 0)
+        if (cursor == NULL_ID)
         {
             calcElement.appendChild(xml);
         }
@@ -104,7 +105,6 @@ void AddToCalc::redo()
             if (refElement.isElement())
             {
                 calcElement.insertAfter(xml, refElement);
-                doc->setCursor(0);
             }
             else
             {

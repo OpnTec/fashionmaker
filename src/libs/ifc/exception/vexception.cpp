@@ -27,13 +27,11 @@
  *************************************************************************/
 
 #include "vexception.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/def.h"
 
-#include <QGridLayout>
-#include <QMessageBox>
-#include <QSpacerItem>
-#include <QApplication>
+#include <QByteArray>
+#include <QtGlobal>
+
+#include "../ifcdef.h"
 
 //Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
 
@@ -75,7 +73,7 @@ VException &VException::operator=(const VException &e)
  */
 QString VException::ErrorMessage() const
 {
-    return QString("Exception: %1").arg(error);
+    return tr("Exception: %1").arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,7 +168,7 @@ VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionTo
  * @brief raise method raise for exception
  */
 // cppcheck-suppress unusedFunction
-Q_NORETURN void VExceptionToolWasDeleted::VExceptionToolWasDeleted::raise() const
+Q_NORETURN void VExceptionToolWasDeleted::raise() const
 {
     throw *this;
 }

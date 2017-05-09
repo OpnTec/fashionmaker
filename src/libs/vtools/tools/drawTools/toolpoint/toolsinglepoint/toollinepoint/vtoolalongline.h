@@ -29,7 +29,19 @@
 #ifndef VTOOLALONGLINE_H
 #define VTOOLALONGLINE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolAlongLine class tool for creation point along line.
@@ -38,14 +50,9 @@ class VToolAlongLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
-                   const quint32 &firstPointId,
-                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
-                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolAlongLine* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                  VContainer *data);
+    static VToolAlongLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                  VAbstractPattern *doc, VContainer *data);
     static VToolAlongLine* Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                   const QString &lineColor, QString &formula, const quint32 &firstPointId,
                                   const quint32 &secondPointId, const qreal &mx, const qreal &my,
@@ -55,6 +62,8 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AlongLine)};
+
+    QString SecondPointName() const;
 
     quint32      GetSecondPointId() const;
     void         SetSecondPointId(const quint32 &value);
@@ -69,8 +78,15 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolAlongLine)
+
     /** @brief secondPointId id second point of line. */
     quint32       secondPointId;
+
+    VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
+                   const quint32 &firstPointId,
+                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
+                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLALONGLINE_H

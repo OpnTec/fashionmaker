@@ -29,6 +29,14 @@
 #ifndef VTAPESETTINGS_H
 #define VTAPESETTINGS_H
 
+#include <QByteArray>
+#include <QChar>
+#include <QMetaObject>
+#include <QObject>
+#include <QSettings>
+#include <QString>
+#include <QtGlobal>
+
 #include "vcommonsettings.h"
 
 class VTapeSettings : public VCommonSettings
@@ -47,12 +55,20 @@ public:
     void SetDefSize(int value);
     int  GetDefSize() const;
 
+    void SetCSVWithHeader(bool withHeader);
+    bool GetCSVWithHeader() const;
+    bool GetDefCSVWithHeader() const;
+
+    void SetCSVCodec(int mib);
+    int  GetCSVCodec() const;
+    int  GetDefCSVCodec() const;
+
+    void  SetCSVSeparator(const QChar &separator);
+    QChar GetCSVSeparator() const;
+    QChar GetDefCSVSeparator() const;
+
 private:
     Q_DISABLE_COPY(VTapeSettings)
-
-    static const QString SettingDataBaseGeometry;
-    static const QString SettingDefHeight;
-    static const QString SettingDefSize;
 };
 
 #endif // VTAPESETTINGS_H

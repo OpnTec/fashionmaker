@@ -27,7 +27,13 @@
  *************************************************************************/
 
 #include "deletepatternpiece.h"
-#include "addpatternpiece.h"
+
+#include <QDomNode>
+#include <QDomNodeList>
+
+#include "../vmisc/logging.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
@@ -62,17 +68,17 @@ void DeletePatternPiece::undo()
         rootElement.insertAfter(patternPiece, previousPP);
     }
     else
-    { // first in the list, add after tag increments
-        const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagIncrements);
-        QDomElement increment;
+    { // first in the list, add before tag draw
+        const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagDraw);
+        QDomElement draw;
 
         if (not list.isEmpty())
         {
-            increment = list.at(0).toElement();
+            draw = list.at(0).toElement();
         }
 
-        Q_ASSERT_X(not increment.isNull(), Q_FUNC_INFO, "Couldn't' find tag Increments");
-        rootElement.insertAfter(patternPiece, increment);
+        Q_ASSERT_X(not draw.isNull(), Q_FUNC_INFO, "Couldn't' find tag draw");
+        rootElement.insertBefore(patternPiece, draw);
     }
 
     emit NeedFullParsing();

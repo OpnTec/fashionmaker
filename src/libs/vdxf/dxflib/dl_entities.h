@@ -26,7 +26,8 @@
 #define DL_ENTITIES_H
 
 #include "dl_global.h"
-#include "dxfdef.h"
+#include "../dxfdef.h"
+#include "../vmisc/diagnostic.h"
 
 #include <string>
 #include <vector>
@@ -389,10 +390,12 @@ struct DXFLIB_EXPORT DL_PolylineData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags)
+    DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags, double pElevation = 0.0)
         : number(static_cast<quint32>(pNumber)),
           m(static_cast<quint32>(pMVerteces)),
-          n(static_cast<quint32>(pNVerteces)), flags(pFlags)
+          n(static_cast<quint32>(pNVerteces)),
+          elevation(pElevation),
+          flags(pFlags)
     {
     }
 
@@ -404,6 +407,9 @@ struct DXFLIB_EXPORT DL_PolylineData
 
     /*! Number of vertices in n direction if polyline is a polygon mesh. */
     quint32 n;
+
+    /*! elevation of the polyline. */
+    double elevation;
 
     /*! Flags */
     int flags;
@@ -809,11 +815,8 @@ struct DXFLIB_EXPORT DL_MTextData
     double angle;
 };
 
-
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 
 /**
  * Text Data.
@@ -843,6 +846,42 @@ struct DXFLIB_EXPORT DL_TextData
           style(style),
           angle(angle)
     {}
+
+    DL_TextData(const DL_TextData &d)
+        : ipx(d.ipx), ipy(d.ipy), ipz(d.ipz),
+          apx(d.apx), apy(d.apy), apz(d.apz),
+          height(d.height), xScaleFactor(d.xScaleFactor),
+          textGenerationFlags(d.textGenerationFlags),
+          hJustification(d.hJustification),
+          vJustification(d.vJustification),
+          text(d.text),
+          style(d.style),
+          angle(d.angle)
+    {
+    }
+
+    DL_TextData &operator=(const DL_TextData &d)
+    {
+        if ( &d == this )
+        {
+            return *this;
+        }
+        ipx = d.ipx;
+        ipy = d.ipy;
+        ipz = d.ipz;
+        apx = d.apx;
+        apy = d.apy;
+        apz = d.apz;
+        height = d.height;
+        xScaleFactor = d.xScaleFactor;
+        textGenerationFlags = d.textGenerationFlags;
+        hJustification = d.hJustification;
+        vJustification = d.vJustification;
+        text = d.text;
+        style = d.style;
+        angle = d.angle;
+        return *this;
+    }
 
     virtual ~DL_TextData()
     {}
@@ -932,9 +971,7 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
     std::string tag;
 };
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 /**
  * Generic Dimension Data.

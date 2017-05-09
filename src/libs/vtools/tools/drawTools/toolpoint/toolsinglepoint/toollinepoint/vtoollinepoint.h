@@ -29,8 +29,18 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
-#include "../vtoolsinglepoint.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vpatterndb/vformula.h"
+#include "../vtoolsinglepoint.h"
+#include "../vmisc/def.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.
@@ -45,14 +55,20 @@ public:
     virtual ~VToolLinePoint() Q_DECL_OVERRIDE;
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
-    VFormula          GetFormulaLength() const;
-    void              SetFormulaLength(const VFormula &value);
 
-    quint32           GetBasePointId() const;
-    void              SetBasePointId(const quint32 &value);
+    VFormula GetFormulaLength() const;
+    void     SetFormulaLength(const VFormula &value);
 
-    qreal             GetAngle() const;
-    void              SetAngle(const qreal &value);
+    QString BasePointName() const;
+
+    quint32 GetBasePointId() const;
+    void    SetBasePointId(const quint32 &value);
+
+    qreal   GetAngle() const;
+    void    SetAngle(const qreal &value);
+
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
 
 public slots:
     virtual void      SetFactor(qreal factor) Q_DECL_OVERRIDE;
@@ -66,10 +82,13 @@ protected:
     qreal             angle;
 
     /** @brief basePointId id base line point. */
-    quint32            basePointId;
+    quint32           basePointId;
 
     /** @brief mainLine line item. */
     QGraphicsLineItem *mainLine;
+
+    /** @brief lineColor color of a line. */
+    QString           lineColor;
 
     virtual void      RefreshGeometry();
     virtual void      RemoveReferens() Q_DECL_OVERRIDE;

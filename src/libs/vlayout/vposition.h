@@ -29,24 +29,21 @@
 #ifndef VPOSITION_H
 #define VPOSITION_H
 
+#include <qcompilerdetection.h>
 #include <QRunnable>
 #include <QVector>
+#include <QtGlobal>
+#include <atomic>
 
-#include "vlayoutdef.h"
 #include "vbestsquare.h"
 #include "vcontour.h"
-#include "vlayoutdetail.h"
-
-class QPointF;
-class QRectF;
-class QLineF;
-class QPolygonF;
-class QPainterPath;
+#include "vlayoutdef.h"
+#include "vlayoutpiece.h"
 
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop, bool rotate,
+    VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
               int rotationIncrease, bool saveLength);
     virtual ~VPosition() Q_DECL_OVERRIDE{}
 
@@ -59,12 +56,12 @@ public:
     quint32 getDetailsCount() const;
     void setDetailsCount(const quint32 &value);
 
-    void setDetails(const QVector<VLayoutDetail> &details);
+    void setDetails(const QVector<VLayoutPiece> &details);
 
     VBestSquare getBestResult() const;
 
-    static void DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutDetail> &details = QVector<VLayoutDetail>());
+    static void DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
+                          int detailsCount, const QVector<VLayoutPiece> &details = QVector<VLayoutPiece>());
 
     static int Bias(int length, int maxLength);
 
@@ -72,14 +69,14 @@ private:
     Q_DISABLE_COPY(VPosition)
     VBestSquare bestResult;
     const VContour gContour;
-    const VLayoutDetail detail;
+    const VLayoutPiece detail;
     int i;
     int j;
     quint32 paperIndex;
     quint32 frame;
     quint32 detailsCount;
-    QVector<VLayoutDetail> details;
-    volatile bool *stop;
+    QVector<VLayoutPiece> details;
+    std::atomic_bool *stop;
     bool rotate;
     int rotationIncrease;
     /**
@@ -103,31 +100,20 @@ private:
 
     virtual void run() Q_DECL_OVERRIDE;
 
-    void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
+    void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 
-    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge);
-    bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;
+    bool CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge);
+    bool CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const;
 
-    CrossingType Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const;
-    InsideType   InsideContour(const VLayoutDetail &detail, const int &detailI) const;
-    qreal        CheckSide(const QLineF &edge, const QPointF &p) const;
+    CrossingType Crossing(const VLayoutPiece &detail) const;
     bool         SheetContains(const QRectF &rect) const;
 
-    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge);
-    void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
-
-    QPolygonF GlobalPolygon() const;
-
-    bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
-    QPointF RoundedPoint(const QPointF &p) const;
-    QVector<QPointF> Triplet(const QLineF &edge) const;
+    void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge);
+    void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
     static QPainterPath ShowDirection(const QLineF &edge);
     static QPainterPath DrawContour(const QVector<QPointF> &points);
-    static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
-
-    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift);
-    static QVector<QPointF> CutEdge(const QLineF &edge, quint32 shift);
+    static QPainterPath DrawDetails(const QVector<VLayoutPiece> &details);
 
     void Rotate(int increase);
 };

@@ -29,29 +29,27 @@
 #ifndef TMAINWINDOW_H
 #define TMAINWINDOW_H
 
-#include <QMainWindow>
 #include <QTableWidget>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
-#include "vtablesearch.h"
+#include "../vmisc/vtablesearch.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 namespace Ui
 {
     class TMainWindow;
 }
 
-class QComboBox;
-class QTableWidgetItem;
 class QLabel;
 
-class TMainWindow : public QMainWindow
+class TMainWindow : public VAbstractMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit TMainWindow(QWidget *parent = 0);
+    explicit TMainWindow(QWidget *parent = nullptr);
     virtual ~TMainWindow() Q_DECL_OVERRIDE;
 
     QString CurrentFile() const;
@@ -62,26 +60,31 @@ public:
     void SetBaseMSize(int size);
     void SetPUnit(Unit unit);
 
-public slots:
     bool LoadFile(const QString &path);
-    void FileNew();
-    void OpenIndividual();
-    void OpenStandard();
-    void OpenTemplate();
-    void CreateFromExisting();
+
+public slots:
+    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
-    void FileSave();
-    void FileSaveAs();
+    void FileNew();
+    void OpenIndividual();
+    void OpenStandard();
+    void OpenTemplate();
+    void CreateFromExisting();
+    void Preferences();
+    void ToolBarStyles();
+
+    bool FileSave();
+    bool FileSaveAs();
+    void ExportToCSV();
     void AboutToShowWindowMenu();
-    void ShowWindow();
-    void AboutApplication();
-    void AboutQt();
+    void ShowWindow() const;
 
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
@@ -95,7 +98,6 @@ private slots:
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void SavePMSystem(int index);
-    void ReadOnly(bool ro);
 
     void Remove();
     void MoveTop();
@@ -114,9 +116,8 @@ private slots:
     void ShowMData();
 
     void DeployFormula();
-    void ShowInGraphicalShell();
 
-    void SaveMName();
+    void SaveMName(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
     void SaveMSizeIncrease(double value);
@@ -124,12 +125,7 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
 
-    void NewWindow();
-    void Preferences();
     void PatternUnitChanged(int index);
-    void Find(const QString &term);
-    void FindPrevious();
-    void FindNext();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
@@ -152,6 +148,10 @@ private:
     QAction *actionDockDiagram;
     bool dockDiagramVisible;
     bool isInitialized;
+    bool mIsReadOnly;
+    enum { MaxRecentFiles = 5 };
+    QAction            *recentFileActs[MaxRecentFiles];
+    QAction            *separatorAct;
     QVector<QObject *> hackedWidgets;
 
     void SetupMenu();
@@ -164,6 +164,7 @@ private:
 
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
+    void UpdateRecentFileActions();
 
     void MeasurementsWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
@@ -173,23 +174,25 @@ private:
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
-    QComboBox *SetGradationList(QLabel *label, const QStringList &list);
+    QComboBox *SetGradationList(QLabel *label, const QStringList &list) Q_REQUIRED_RESULT;
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 
-    void RefreshData();
-    void RefreshTable();
+    void RefreshData(bool freshCall = false);
+    void RefreshTable(bool freshCall = false);
 
+    QString GetCustomName() const;
     QString ClearCustomName(const QString &name) const;
 
     bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
     void ShowMDiagram(const QString &name);
 
     void Open(const QString &pathTo, const QString &filter);
-    void GUIReadOnly(bool ro);
-    void MeasurementReadOnly(bool ro);
+    void UpdatePadlock(bool ro);
+    void MeasurementGUI();
     void Controls();
     void MFields(bool enabled);
+    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();

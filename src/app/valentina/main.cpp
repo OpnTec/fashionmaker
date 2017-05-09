@@ -28,12 +28,11 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
+#include "../fervor/fvupdater.h"
+#include "../vpatterndb/vpiecenode.h"
+
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
-
-// Lock producing random attribute order in XML
-// https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
-extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -47,13 +46,31 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(icons);
     Q_INIT_RESOURCE(toolicon);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.0.0");
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0")
 
-    qt_qhash_seed.store(0); // Lock producing random attribute order in XML
+    // Need to internally move a node inside a piece main path
+    qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
+
+#ifndef Q_OS_MAC // supports natively
+    InitHighDpiScaling(argc, argv);
+#endif //Q_OS_MAC
 
     VApplication app(argc, argv);
 
     app.InitOptions();
+
+    // Due to unknown reasons version checker cause a crash. See issue #633.
+    // Before we will find what cause such crashes it will stay disabled in Release mode.
+#ifndef V_NO_ASSERT
+    if (VApplication::IsGUIMode())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
+
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
+#endif // V_NO_ASSERT
 
     MainWindow w;
 #if !defined(Q_OS_MAC)

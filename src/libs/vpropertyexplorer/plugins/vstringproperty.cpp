@@ -20,16 +20,20 @@
 
 #include "vstringproperty.h"
 
+#include <QKeyEvent>
+#include <QLatin1String>
 #include <QLineEdit>
+#include <QLocale>
 #include <QSizePolicy>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QWidget>
 
 #include "../vproperty_p.h"
 
-using namespace VPE;
-
-
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false)
+    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
@@ -37,7 +41,7 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
-    : VProperty(name), readOnly(false), typeForParent(0), clearButton(false)
+    : VProperty(name), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     d_ptr->VariantValue.setValue(QString());
     d_ptr->VariantValue.convert(QVariant::String);
@@ -46,12 +50,13 @@ VPE::VStringProperty::VStringProperty(const QString &name)
 QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
                                             const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QLineEdit* tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
+    tmpEditor->installEventFilter(this);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     tmpEditor->setClearButtonEnabled(clearButton);
 #endif
@@ -78,7 +83,12 @@ void VPE::VStringProperty::setReadOnly(bool readOnly)
     this->readOnly = readOnly;
 }
 
-void VStringProperty::setClearButtonEnable(bool value)
+void VPE::VStringProperty::setOsSeparator(bool separator)
+{
+    m_osSeparator = separator;
+}
+
+void VPE::VStringProperty::setClearButtonEnable(bool value)
 {
     this->clearButton = value;
 }
@@ -126,18 +136,47 @@ VPE::VProperty *VPE::VStringProperty::clone(bool include_children, VPE::VPropert
     return VProperty::clone(include_children, container ? container : new VStringProperty(getName(), getSettings()));
 }
 
-void VStringProperty::UpdateParent(const QVariant &value)
+void VPE::VStringProperty::UpdateParent(const QVariant &value)
 {
     emit childChanged(value, typeForParent);
 }
 
 // cppcheck-suppress unusedFunction
-int VStringProperty::getTypeForParent() const
+int VPE::VStringProperty::getTypeForParent() const
 {
     return typeForParent;
 }
 
-void VStringProperty::setTypeForParent(int value)
+void VPE::VStringProperty::setTypeForParent(int value)
 {
     typeForParent = value;
+}
+
+bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
+{
+    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (m_osSeparator)
+                {
+                    textEdit->insert(QLocale().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return VProperty::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }

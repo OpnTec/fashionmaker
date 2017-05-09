@@ -29,29 +29,29 @@
 #ifndef VTOOLTRUEDARTS_H
 #define VTOOLTRUEDARTS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtooldoublepoint.h"
+
+template <class T> class QSharedPointer;
 
 class VToolTrueDarts : public VToolDoublePoint
 {
     Q_OBJECT
 public:
-    VToolTrueDarts(VAbstractPattern *doc,
-                   VContainer *data,
-                   const quint32 &id,
-                   const quint32 &p1id,
-                   const quint32 &p2id,
-                   const quint32 &baseLineP1Id,
-                   const quint32 &baseLineP2Id,
-                   const quint32 &dartP1Id,
-                   const quint32 &dartP2Id,
-                   const quint32 &dartP3Id,
-                   const Source &typeCreation,
-                   QGraphicsItem * parent = nullptr);
-
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolTrueDarts* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolTrueDarts* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolTrueDarts* Create(quint32 _id,
                                   const quint32 &_p1id, const quint32 &_p2id,
@@ -69,6 +69,12 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::TrueDarts)};
 
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
+
+    QString BaseLineP1Name() const;
+    QString BaseLineP2Name() const;
+    QString DartP1Name() const;
+    QString DartP2Name() const;
+    QString DartP3Name() const;
 
     quint32 GetBaseLineP1Id() const;
     void    SetBaseLineP1Id(const quint32 &value);
@@ -100,6 +106,19 @@ private:
     quint32 dartP1Id;
     quint32 dartP2Id;
     quint32 dartP3Id;
+
+    VToolTrueDarts(VAbstractPattern *doc,
+                   VContainer *data,
+                   const quint32 &id,
+                   const quint32 &p1id,
+                   const quint32 &p2id,
+                   const quint32 &baseLineP1Id,
+                   const quint32 &baseLineP2Id,
+                   const quint32 &dartP1Id,
+                   const quint32 &dartP2Id,
+                   const quint32 &dartP3Id,
+                   const Source &typeCreation,
+                   QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLTRUEDARTS_H

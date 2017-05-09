@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_vlayoutdetail.h"
-#include "../vlayout/vlayoutdetail.h"
+#include "../vlayout/vlayoutpiece.h"
 
 #include <QtDebug>
 
@@ -56,7 +56,7 @@ void TST_VLayoutDetail::Case1() const
     // See issue #304. Layout appears different than my pattern.
     // https://bitbucket.org/dismine/valentina/issue/304/layout-appears-different-than-my-pattern
 
-    VLayoutDetail det = VLayoutDetail();
+    VLayoutPiece det = VLayoutPiece();
     det.SetCountourPoints(InputPointsCase1());
 
     // Begin comparison
@@ -118,7 +118,7 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase1() const //-V524
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLayoutDetail::Case2() const
 {
-    VLayoutDetail det = VLayoutDetail();
+    VLayoutPiece det = VLayoutPiece();
     det.SetCountourPoints(InputPointsCase2());
 
     // Begin comparison
@@ -159,7 +159,7 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLayoutDetail::Case3() const
 {
-    VLayoutDetail det = VLayoutDetail();
+    VLayoutPiece det = VLayoutPiece();
     det.SetCountourPoints(InputPointsCase3());
 
     // Begin comparison

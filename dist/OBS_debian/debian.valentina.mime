@@ -1,0 +1,3 @@
+application/x-valentina-pattern; valentina %s; nametemplate=%s.val; description="Valentina pattern" edit=valentina '%s'; priority=6
+application/x-valentina-i-pattern; tape %s; nametemplate=%s.vit; description="Valentina individual measurments" edit=tape '%s'; priority=6
+application/x-valentina-s-pattern; tape %s; nametemplate=%s.vst; description="Valentina standard measurments" edit=tape '%s'; priority=6

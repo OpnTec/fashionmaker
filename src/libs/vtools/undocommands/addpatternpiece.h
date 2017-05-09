@@ -29,6 +29,13 @@
 #ifndef ADDPATTERNPIECE_H
 #define ADDPATTERNPIECE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
 
 class AddPatternPiece : public VUndoCommand

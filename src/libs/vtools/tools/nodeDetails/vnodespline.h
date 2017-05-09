@@ -29,41 +29,45 @@
 #ifndef VNODESPLINE_H
 #define VNODESPLINE_H
 
-#include "vabstractnode.h"
+#include <qcompilerdetection.h>
 #include <QGraphicsPathItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "vabstractnode.h"
 
 /**
  * @brief The VNodeSpline class spline detail node.
  */
-class VNodeSpline:public VAbstractNode, public QGraphicsPathItem
+class VNodeSpline:public VAbstractNode
 {
     Q_OBJECT
 public:
-    VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
-                const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr, 
-                QGraphicsItem * parent = nullptr);
-
-    static VNodeSpline *Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
+    static VNodeSpline *Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                                quint32 idSpline, const Document &parse,
-                               const Source &typeCreation, const QString &drawName = QString(), 
-                               const quint32 &idTool = 0, QObject *parent = nullptr);
-    static const QString TagName;
+                               const Source &typeCreation, const QString &drawName = QString(),
+                               const quint32 &idTool = 0);
+
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::NodeSpline)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE {}
+    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
 protected:
     virtual void AddToFile () Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE;
-    virtual void HideNode() Q_DECL_OVERRIDE;
+    virtual void ShowNode() Q_DECL_OVERRIDE {}
+    virtual void HideNode() Q_DECL_OVERRIDE {}
 private:
-    void         RefreshGeometry ();
+    Q_DISABLE_COPY(VNodeSpline)
+
+    VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
+                const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr);
 };
 
 #endif // VNODESPLINE_H

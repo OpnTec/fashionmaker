@@ -31,10 +31,9 @@
 
 #include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
+#include "../vmisc/vtablesearch.h"
 
 class VIndividualMeasurements;
-class QTableWidget;
-class QTableWidgetItem;
 
 namespace Ui
 {
@@ -58,15 +57,16 @@ signals:
     void                 FullUpdateTree(const Document &parse);
 
 protected:
-    virtual void         closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void         changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
+    virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
     void RemoveIncrement();
     void MoveUp();
     void MoveDown();
-    void SaveIncrName();
+    void SaveIncrName(const QString &text);
     void SaveIncrDescription();
     void SaveIncrFormula();
     void DeployFormula();
@@ -87,16 +87,17 @@ private:
 
     int                  formulaBaseHeight;
 
+    QSharedPointer<VTableSearch> search;
+
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
-    void                 FillIncrements();
+    void                 FillIncrements(bool freshCall = false);
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
-    void                 FillLengthArcs();
+    void                 FillCurvesCLengths();
     void                 FillRadiusesArcs();
-    void                 FillAnglesArcs();
     void                 FillAnglesCurves();
 
     void                 ShowUnits();
@@ -104,7 +105,9 @@ private:
 
     void AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok = true);
 
+    QString GetCustomName() const;
     QString ClearIncrementName(const QString &name) const;
+
     bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
     void    Controls();
     void    EnableDetails(bool enabled);

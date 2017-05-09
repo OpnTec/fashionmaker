@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m value="70.5" name="height"/>
+        <m value="38" name="height_hip"/>
+        <m value="19.5" name="height_knee"/>
+        <m value="2" name="height_ankle_high"/>
+        <m value="14.8" name="neck_circ"/>
+        <m value="32.8" name="highbust_circ"/>
+        <m value="34.9" name="bust_circ"/>
+        <m value="30.3" name="lowbust_circ"/>
+        <m value="23" name="waist_circ"/>
+        <m value="23" name="waist_natural_circ"/>
+        <m value="30" name="highhip_circ"/>
+        <m value="34" name="hip_circ"/>
+        <m value="7.2" name="neck_arc_f"/>
+        <m value="17.7" name="highbust_arc_f"/>
+        <m value="20.6" name="bust_arc_f"/>
+        <m value="16.8" name="lowbust_arc_f"/>
+        <m value="11.5" name="waist_arc_f"/>
+        <m value="14" name="highhip_arc_f"/>
+        <m value="15.3" name="hip_arc_f"/>
+        <m value="(neck_circ - neck_arc_f)" name="neck_arc_b"/>
+        <m value="(highbust_circ - highbust_arc_f)" name="highbust_arc_b"/>
+        <m value="(bust_circ - bust_arc_f)" name="bust_arc_b"/>
+        <m value="(lowbust_circ - lowbust_arc_f)" name="lowbust_arc_b"/>
+        <m value="(waist_circ - waist_arc_f)" name="waist_arc_b"/>
+        <m value="(highhip_circ - highhip_arc_f)" name="highhip_arc_b"/>
+        <m value="(hip_circ - hip_arc_f)" name="hip_arc_b"/>
+        <m value="16.7" name="neck_front_to_waist_f"/>
+        <m value="2.9" name="neck_front_to_highbust_f"/>
+        <m value="7.2" name="neck_front_to_bust_f"/>
+        <m value="18.9" name="neck_side_to_waist_f"/>
+        <m value="16.4 " name="neck_back_to_waist_b"/>
+        <m value="7 " name="neck_back_to_highbust_b"/>
+        <m value="9 " name="neck_back_to_bust_b"/>
+        <m value="17.5" name="neck_side_to_waist_b"/>
+        <m value="3.8" name="shoulder_length"/>
+        <m value="10.7" name="armpit_to_waist_side"/>
+        <m value="2.5" name="waist_to_highhip_f"/>
+        <m value="6.9" name="waist_to_hip_f"/>
+        <m value="2.5" name="waist_to_highhip_side"/>
+        <m value="7.5" name="waist_to_hip_side"/>
+        <m value="2.6" name="waist_to_highhip_b"/>
+        <m value="7.4" name="waist_to_hip_b"/>
+        <m value="0" name="waist_to_natural_waist_f"/>
+        <m value="12.6" name="shoulder_tip_to_shoulder_tip_f"/>
+        <m value="14.6" name="armfold_to_armfold_f"/>
+        <m value="13" name="shoulder_tip_to_shoulder_tip_b"/>
+        <m value="13" name="armfold_to_armfold_b"/>
+        <m value="4.7" name="neck_width"/>
+        <m value="6.5" name="bustpoint_to_bustpoint"/>
+        <m value="9.3" name="bustpoint_to_neck_side"/>
+        <m value="9.6" name="bustpoint_to_waist"/>
+        <m value="18.6" name="shoulder_tip_to_waist_front"/>
+        <m value="18" name="neck_front_to_waist_side"/>
+        <m value="16.7" name="shoulder_tip_to_waist_back"/>
+        <m value="18.2" name="neck_back_to_waist_side"/>
+        <m value="24.3" name="arm_shoulder_tip_to_wrist"/>
+        <m value="26 " name="arm_shoulder_tip_to_wrist_bent"/>
+        <m value="4.3" name="arm_shoulder_tip_to_armfold_line"/>
+        <m value="13.5" name="arm_shoulder_tip_to_elbow"/>
+        <m value="(arm_shoulder_tip_to_wrist - arm_shoulder_tip_to_elbow)" name="arm_elbow_to_wrist"/>
+        <m value="9.5" name="arm_upper_circ"/>
+        <m value="8" name="arm_elbow_circ"/>
+        <m value="5.7" name="arm_wrist_circ"/>
+        <m value="3.1" name="armscye_circ"/>
+        <m value="34.1" name="leg_crotch_to_floor"/>
+        <m value="45.5" name="leg_waist_side_to_floor"/>
+        <m value="20.3" name="leg_thigh_upper_circ"/>
+        <m value="12.5" name="leg_knee_circ"/>
+        <m value="13.9" name="leg_calf_circ"/>
+        <m value="8.8" name="leg_ankle_high_circ"/>
+        <m value="26.6" name="crotch_length"/>
+        <m value="11.4" name="rise_length_side_sitting"/>
+    </body-measurements>
+</vit>

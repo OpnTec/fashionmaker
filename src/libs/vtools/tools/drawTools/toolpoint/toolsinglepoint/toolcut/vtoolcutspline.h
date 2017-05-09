@@ -29,7 +29,19 @@
 #ifndef VTOOLCUTSPLINE_H
 #define VTOOLCUTSPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolcut.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolCutSpline class for tool CutSpline. This tool find point on spline and cut spline on two.
@@ -38,15 +50,11 @@ class VToolCutSpline : public VToolCut
 {
     Q_OBJECT
 public:
-
-    VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id, const QString &color,
-                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolCutSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolCutSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolCutSpline *Create(const quint32 _id, const QString &pointName, QString &formula,
-                                  const quint32 &splineId, const qreal &mx, const qreal &my, const QString &color,
+                                  const quint32 &splineId, const qreal &mx, const qreal &my,
                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                   const Document &parse,
                                   const Source &typeCreation);
@@ -63,6 +71,9 @@ protected:
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCutSpline)
+
+    VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                   const quint32 &splineId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINE_H

@@ -39,13 +39,12 @@
     #endif // _MSC_VER > 1000
 #endif // Q_CC_MSVC
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <string>
 
 #include "dl_attributes.h"
 #include "dl_codes.h"
-
-
 
 /**
  * Defines interface for writing low level DXF constructs to

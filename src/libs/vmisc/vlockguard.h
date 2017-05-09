@@ -34,6 +34,8 @@
 #include <stdint.h>
 #include <memory>
 
+#include "../vmisc/diagnostic.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #include <QFileInfo>
 #include <QLockFile>
@@ -43,7 +45,7 @@
 #define PEDANT_COMPILER ,lock(nullptr)
 #else
 #define PEDANT_COMPILER
-#warning To have lock-file support you must use Qt 5.1+. Expect collissions when run 2 copies of the program.
+#pragma message("To have lock-file support you must use Qt 5.1+. Expect collissions when run 2 copies of the program.")
 #endif
 
 /*@brief
@@ -156,10 +158,10 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
-    lockFile = lockName + QLatin1Literal(".lock");
+    lockFile = lockName + QLatin1String(".lock");
 #if defined(Q_OS_UNIX)
     QFileInfo info(lockFile);
-    lockFile = info.absolutePath() + QLatin1Literal("/.") + info.fileName();
+    lockFile = info.absolutePath() + QLatin1String("/.") + info.fileName();
 #endif
     lock.reset(new QLockFile(lockFile));
 
@@ -186,6 +188,10 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
         SetFileAttributesW(lockFile.toStdWString().c_str(), FILE_ATTRIBUTE_HIDDEN);
 #endif
     }
+#else
+    Q_UNUSED(lockName)
+    Q_UNUSED(stale)
+    Q_UNUSED(timeout)
 #endif
     return res;
 }
@@ -195,10 +201,8 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 //use pointer and function below to persistent things like class-member, because lock is taken by constructor
 //helper functions allow to write shorter creating and setting new lock-pointer
 
-#if defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_INTEL(1418)
 
 template <typename Guarded>
 void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockName, int stale = 0, int timeout = 0)
@@ -220,8 +224,6 @@ void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockN
     r.reset(new VLockGuard<Guarded>(lockName, a, d, stale, timeout));
 }
 
-#if defined(Q_CC_INTEL)
-#pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 #endif // VLOCKGUARD_H

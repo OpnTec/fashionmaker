@@ -50,8 +50,8 @@ void TST_VMeasurements::CreateEmptyStandardFile()
     const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    data->SetHeight(height);
-    data->SetSize(size);
+    VContainer::SetHeight(height);
+    VContainer::SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
@@ -59,7 +59,6 @@ void TST_VMeasurements::CreateEmptyStandardFile()
     QTemporaryFile file;
     QString fileName;
     // In Windows we have problems when we try to open QSaveFile when QTemporaryFile with the same name is already open.
-
     if (file.open())
     {
         // So, before we try to open file in m->SaveDocument function we need to close it and remove.
@@ -139,8 +138,8 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
     const int size = 50;
 
     QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    data->SetHeight(height);
-    data->SetSize(size);
+    VContainer::SetHeight(height);
+    VContainer::SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));

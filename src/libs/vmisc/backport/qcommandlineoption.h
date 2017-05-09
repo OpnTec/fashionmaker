@@ -26,10 +26,10 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class QCommandLineOptionPrivate;
 
@@ -71,9 +71,7 @@ private:
     QSharedDataPointer<QCommandLineOptionPrivate> d;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 Q_DECLARE_SHARED(QCommandLineOption)
 

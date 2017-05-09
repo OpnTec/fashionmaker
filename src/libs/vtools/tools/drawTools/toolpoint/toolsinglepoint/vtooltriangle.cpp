@@ -27,10 +27,31 @@
  *************************************************************************/
 
 #include "vtooltriangle.h"
+
+#include <QLine>
+#include <QLineF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../dialogs/tools/dialogtriangle.h"
+#include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../../visualization/line/vistooltriangle.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../visualization/vistooltriangle.h"
-#include <QtCore/qmath.h>
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "vtoolsinglepoint.h"
+#include "../vmisc/vmath.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
@@ -62,9 +83,9 @@ VToolTriangle::VToolTriangle(VAbstractPattern *doc, VContainer *data, const quin
  */
 void VToolTriangle::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTriangle> dialogTool = m_dialog.objectCast<DialogTriangle>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetAxisP1Id(axisP1Id);
     dialogTool->SetAxisP2Id(axisP2Id);
@@ -82,12 +103,12 @@ void VToolTriangle::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                     VContainer *data)
+VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                     VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogTriangle> dialogTool = dialog.objectCast<DialogTriangle>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 axisP1Id = dialogTool->GetAxisP1Id();
     const quint32 axisP2Id = dialogTool->GetAxisP2Id();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
@@ -97,7 +118,7 @@ VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *sce
                                   scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -130,8 +151,8 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
 
-    QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
-                              secondPoint->toQPointF());
+    QPointF point = FindPoint(static_cast<QPointF>(*axisP1), static_cast<QPointF>(*axisP2),
+                              static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -145,17 +166,15 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Triangle, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Triangle, doc);
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
                                                  secondPointId, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolTriangle::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolTriangle::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolTriangle::EnableToolMove);
-        doc->AddTool(id, point);
+        InitToolConnections(scene, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(axisP1->getIdTool());
         doc->IncrementReferens(axisP2->getIdTool());
         doc->IncrementReferens(firstPoint->getIdTool());
@@ -210,6 +229,31 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
             return line.p2();
         }
     }
+    return QPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::AxisP1Name() const
+{
+    return VAbstractTool::data.GetGObject(axisP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::AxisP2Name() const
+{
+    return VAbstractTool::data.GetGObject(axisP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTriangle::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,7 +286,7 @@ void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -253,9 +297,9 @@ void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTriangle> dialogTool = m_dialog.objectCast<DialogTriangle>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
@@ -287,13 +331,13 @@ void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(axisP1Id);
-        visual->setPoint2Id(axisP2Id);
+        visual->setObject1Id(axisP1Id);
+        visual->setObject2Id(axisP2Id);
         visual->setHypotenuseP1Id(firstPointId);
         visual->setHypotenuseP2Id(secondPointId);
         visual->RefreshGeometry();

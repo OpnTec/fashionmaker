@@ -27,16 +27,33 @@
  *************************************************************************/
 
 #include "dialogendline.h"
-#include "ui_dialogendline.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolendline.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../tools/vabstracttool.h"
-#include "../support/dialogeditwrongformula.h"
+#include <QDialog>
+#include <QLineEdit>
+#include <QLineF>
+#include <QPlainTextEdit>
+#include <QPointF>
+#include <QPointer>
+#include <QPushButton>
+#include <QSharedPointer>
 #include <QTimer>
+#include <QToolButton>
+#include <new>
+
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolendline.h"
+#include "../../visualization/visualization.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogendline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,8 +62,13 @@
  * @param parent parent widget
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine),
-      formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogEndLine),
+      formulaLength(),
+      formulaAngle(),
+      formulaBaseHeight(0),
+      formulaBaseHeightAngle(0),
+      m_firstRelease(false)
 {
     ui->setupUi(this);
 
@@ -65,7 +87,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
@@ -108,7 +130,7 @@ void DialogEndLine::FormulaTextChanged()
 void DialogEndLine::AngleTextChanged()
 {
     labelEditFormula = ui->labelEditAngle;
-    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula, degreeSymbol);
     labelEditFormula = ui->labelEditFormula;
 }
 
@@ -167,7 +189,9 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
                 vis->VisualMode(id);
-                connect(vis, &Visualization::ToolTip, this, &DialogTool::ShowVisToolTip);
+                VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+                SCASSERT(window != nullptr)
+                connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 prepare = true;
             }
         }
@@ -213,7 +237,7 @@ void DialogEndLine::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formulaLength);
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formulaLength);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -236,7 +260,7 @@ void DialogEndLine::SetAngle(const QString &value)
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->SetAngle(formulaAngle);
 
     MoveCursorToEnd(ui->plainTextEditAngle);
@@ -252,14 +276,14 @@ void DialogEndLine::SetBasePointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxBasePoint, value);
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEndLine::GetLineColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,14 +303,22 @@ void DialogEndLine::ShowDialog(bool click)
     {
         if (click)
         {
-            /*We will ignore click if poinet is in point circle*/
+            // The check need to ignore first release of mouse button.
+            // User can select point by clicking on a label.
+            if (not m_firstRelease)
+            {
+                m_firstRelease = true;
+                return;
+            }
+
+            /*We will ignore click if pointer is in point circle*/
             VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr);
+            SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
-            QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
+            QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+            const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
             if (line.length() <= radius)
             {
                 return;
@@ -295,9 +327,10 @@ void DialogEndLine::ShowDialog(bool click)
         this->setModal(true);
 
         VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
-        SCASSERT(line != nullptr);
+        SCASSERT(line != nullptr)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
+        this->SetFormula(line->Length());
         emit ToolTip("");
         timerFormula->start();
         this->show();
@@ -322,9 +355,9 @@ void DialogEndLine::SaveData()
     formulaAngle.replace("\n", " ");
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
-    line->setPoint1Id(GetBasePointId());
+    line->setObject1Id(GetBasePointId());
     line->setLength(formulaLength);
     line->SetAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
@@ -342,7 +375,6 @@ void DialogEndLine::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
-    DeleteVisualization<VisToolEndLine>();
     delete ui;
 }
 
@@ -353,7 +385,7 @@ DialogEndLine::~DialogEndLine()
  */
 QString DialogEndLine::GetTypeLine() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,9 +29,11 @@
 #ifndef VEXCEPTION_H
 #define VEXCEPTION_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
 #include <QException>
 #include <QString>
-#include <QCoreApplication>
+
 #include "../ifcdef.h"
 
 /**
@@ -44,17 +46,17 @@ public:
     explicit VException(const QString &error);
     VException(const VException &e);
     VException &operator=(const VException &e);
-    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual VException *clone() const Q_DECL_OVERRIDE;
+    virtual VException *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
     void            AddMoreInformation(const QString &info);
     QString         MoreInformation() const;
-    virtual const char* what() const V_NOEXCEPT_EXPR (true);
+    virtual const char* what() const V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
 
 protected:
     /** @brief error string with error */
@@ -94,7 +96,7 @@ public:
     explicit VExceptionToolWasDeleted(const QString &error);
     VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
     VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
-    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction

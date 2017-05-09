@@ -36,6 +36,7 @@
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vsysexits.h"
+#include "../vmisc/diagnostic.h"
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QDir>
@@ -51,21 +52,13 @@
 #include <QSpacerItem>
 #include <QThread>
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-prototypes"
-#elif defined(Q_CC_INTEL)
-    #pragma warning( push )
-    #pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
 
 Q_LOGGING_CATEGORY(mApp, "m.application")
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-    #pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../vmisc/backport/qcommandlineparser.h"
@@ -79,17 +72,30 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     Q_UNUSED(context)
 
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
-    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
     {
         type = QtWarningMsg;
     }
+
+#if defined(V_NO_ASSERT)
+    // I have decided to hide this annoing message for release builds.
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QSslSocket: cannot resolve")))
+    {
+        type = QtDebugMsg;
+    }
+
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("setGeometry: Unable to set geometry")))
+    {
+        type = QtDebugMsg;
+    }
+#endif //defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
 #   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
         // Try hide very annoying, Qt related, warnings in Mac OS X
         // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
         // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains("QNSView"))
+        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
         {
             type = QtDebugMsg;
         }
@@ -98,7 +104,13 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // Hide Qt bug 'Assertion when reading an icns file'
     // https://bugreports.qt.io/browse/QTBUG-45537
     // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains("QICNSHandler::read()"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
+    {
+        type = QtDebugMsg;
+    }
+
+    // See issue #568
+    if (msg.contains(QStringLiteral("Error receiving trust for a CA certificate")))
     {
         type = QtDebugMsg;
     }
@@ -107,7 +119,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
+        && msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -115,8 +128,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
-            && QString(msg).contains("Cowardly refusing"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
+            && msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
@@ -154,31 +167,32 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
         //lead to crash
-        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
-                !qApp->activeModalWidget()->inherits("QFileDialog");
+        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                !QApplication::activeModalWidget()->inherits("QFileDialog");
         QMessageBox messageBox;
         switch (type)
         {
             case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
             case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information."));
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
             #endif
             case QtDebugMsg:
                 Q_UNREACHABLE(); //-V501
+                break;
             default:
                 break;
         }
@@ -376,10 +390,10 @@ void MApplication::InitOptions()
     qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(this->arguments().join(", ")));
-    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(this->applicationPid())));
+    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
-    LoadTranslation(QLocale::system().name());// By default the console version uses system locale
+    LoadTranslation(QLocale().name());// By default the console version uses system locale
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -423,18 +437,15 @@ bool MApplication::event(QEvent *e)
         case QEvent::FileOpen:
         {
             QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            if(fileOpenEvent)
+            const QString macFileOpen = fileOpenEvent->file();
+            if(not macFileOpen.isEmpty())
             {
-                const QString macFileOpen = fileOpenEvent->file();
-                if(not macFileOpen.isEmpty())
+                TMainWindow *mw = MainWindow();
+                if (mw)
                 {
-                    TMainWindow *mw = MainWindow();
-                    if (mw)
-                    {
-                        mw->LoadFile(macFileOpen);  // open file in existing window
-                    }
-                    return true;
+                    mw->LoadFile(macFileOpen);  // open file in existing window
                 }
+                return true;
             }
             break;
         }
@@ -459,14 +470,14 @@ bool MApplication::event(QEvent *e)
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::OpenSettings()
 {
-    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                                 QApplication::applicationName(), this);
+    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                 QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings *MApplication::TapeSettings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return qobject_cast<VTapeSettings *>(settings);
 }
 
@@ -570,6 +581,11 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     QCommandLineOption testOption(QStringList() << "test",
             tr("Use for unit testing. Run the program and open a file without showing the main window."));
     parser.addOption(testOption);
+    //-----
+    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
+            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
+    parser.addOption(scalingOption);
     //-----
     parser.process(arguments);
 
@@ -749,12 +765,6 @@ TMainWindow *MApplication::NewMainWindow()
 void MApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::OpenFile(const QString &path)
-{
-    MainWindow()->LoadFile(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

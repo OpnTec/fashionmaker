@@ -29,6 +29,13 @@
 #ifndef ADDTOCALC_H
 #define ADDTOCALC_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
 
 class AddToCalc : public VUndoCommand

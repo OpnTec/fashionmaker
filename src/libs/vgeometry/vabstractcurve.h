@@ -29,14 +29,23 @@
 #ifndef VABSTRACTCURVE_H
 #define VABSTRACTCURVE_H
 
-#include "vgobject.h"
-#include "../ifc/ifcdef.h"
+#include <qcompilerdetection.h>
 #include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../ifc/ifcdef.h"
+#include "../vmisc/vmath.h"
+#include "vgeometrydef.h"
+#include "vgobject.h"
 
 enum class PathDirection : char { Hide, Show };
 
 class QPainterPath;
-class QLineF;
+class VAbstractCurveData;
 
 class VAbstractCurve :public VGObject
 {
@@ -44,7 +53,15 @@ public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
     explicit VAbstractCurve(const VAbstractCurve &curve);
+    virtual ~VAbstractCurve() Q_DECL_OVERRIDE;
+
     VAbstractCurve& operator= (const VAbstractCurve &curve);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
+#endif
+
+    void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
+    { VGObject::Swap(curve); std::swap(d, curve.d); }
 
     virtual QVector<QPointF> GetPoints() const =0;
     static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
@@ -53,16 +70,37 @@ public:
 
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
+    qreal                    GetLengthByPoint(const QPointF &point) const;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
     virtual bool             IsIntersectLine(const QLineF &line) const;
 
+    static bool              IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p);
+    bool                     IsPointOnCurve(const QPointF &p) const;
+
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
+
+    quint32                  GetDuplicate() const;
+    void                     SetDuplicate(quint32 number);
+
+    QString                  GetColor() const;
+    void                     SetColor(const QString &color);
+
+    static qreal             PathLength(const QVector<QPointF> &path);
+
+    static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
+
+    virtual QString          NameForHistory(const QString &toolName) const=0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+    virtual void             CreateName() =0;
 private:
-    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
-    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end);
+    QSharedDataPointer<VAbstractCurveData> d;
+
+    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr);
+    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr);
 };
+
+Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE);
 
 #endif // VABSTRACTCURVE_H

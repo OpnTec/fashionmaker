@@ -29,20 +29,32 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
-#include <QDomDocument>
-#include <QDebug>
 #include <QCoreApplication>
+#include <QDomDocument>
+#include <QDomElement>
+#include <QDomNode>
+#include <QHash>
+#include <QLatin1String>
+#include <QStaticStringData>
+#include <QString>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtGlobal>
+#include <QLocale>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
+
+class QDomElement;
+class QDomNode;
+template <typename T> class QVector;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 /**
  * @brief The VDomDocument class represents a Valentina document (.val file).
@@ -69,32 +81,34 @@ class VDomDocument : public QDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
-    static const QString    AttrId;
-    static const QString    UnitMM;
-    static const QString    UnitCM;
-    static const QString    UnitINCH;
-    static const QString    UnitPX;
-    static const QString    TagVersion;
+    static const QString AttrId;
+    static const QString UnitMM;
+    static const QString UnitCM;
+    static const QString UnitINCH;
+    static const QString UnitPX;
+    static const QString TagVersion;
+    static const QString TagUnit;
 
     VDomDocument();
-    virtual ~VDomDocument();
+    virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
     QDomElement    elementById(const QString& id);
     QDomElement    elementById(quint32 id);
-    void           removeAllChilds(QDomElement &element);
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
 
-    quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static bool    GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue);
 
-    NodeUsage      GetParametrUsage(const QDomElement& domElement, const QString &name) const;
-    void           SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
+    static NodeUsage GetParametrUsage(const QDomElement& domElement, const QString &name);
+    static void      SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
 
-    QString        GetParametrString(const QDomElement& domElement, const QString &name,
-                                     const QString &defValue = QString()) const;
-    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    quint32        GetParametrId(const QDomElement& domElement) const;
+    static QString GetParametrString(const QDomElement& domElement, const QString &name,
+                                     const QString &defValue = QString());
+    static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static quint32 GetParametrId(const QDomElement& domElement);
+
+    Unit           MUnit() const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
     virtual void   setXMLContent(const QString &fileName);
@@ -106,7 +120,7 @@ public:
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
-    static void    RemoveAllChild(QDomElement &domElement);
+    static void    RemoveAllChildren(QDomElement &domElement);
 
     QDomNode       ParentNodeById(const quint32 &nodeId);
     QDomElement    CloneNodeById(const quint32 &nodeId);
@@ -116,6 +130,7 @@ public:
 
 protected:
     bool           setTagText(const QString &tag, const QString &text);
+    bool           setTagText(const QDomElement &domElement, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
 
     void           TestUniqueId() const;
@@ -127,6 +142,8 @@ private:
     QHash<QString, QDomElement> map;
 
     bool           find(const QDomElement &node, const QString& id);
+
+    bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,9 +156,9 @@ template <typename T>
  */
 inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
 {
-    QString val = QString().setNum(value);
-    val = val.replace(",", ".");
-    domElement.setAttribute(name, val);
+    // See specification for xs:decimal
+    const QLocale locale = QLocale::c();
+    domElement.setAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,16 +173,7 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 template <>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
-    QString string;
-    if (value)
-    {
-        string = "true";
-    }
-    else
-    {
-        string = "false";
-    }
-    domElement.setAttribute(name, string);
+    domElement.setAttribute(name, value ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,18 +181,10 @@ template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
                                                               const MeasurementsType &value) const
 {
-    if (value == MeasurementsType::Standard)
-    {
-        domElement.setAttribute(name, "standard");
-    }
-    else
-    {
-        domElement.setAttribute(name, "individual");
-    }
+    domElement.setAttribute(name, value == MeasurementsType::Standard ? QStringLiteral("standard") :
+                                                                        QStringLiteral("individual"));
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VDOMDOCUMENT_H

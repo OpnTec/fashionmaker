@@ -29,8 +29,13 @@
 #ifndef RENAMEPP_H
 #define RENAMEPP_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vundocommand.h"
-class QComboBox;
 
 class RenamePP :public VUndoCommand
 {

@@ -29,8 +29,21 @@
 #ifndef VTOOLLINE_H
 #define VTOOLLINE_H
 
-#include "vdrawtool.h"
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
 #include <QGraphicsLineItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "vdrawtool.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolLine class tool for creation line.
@@ -39,36 +52,41 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-              QGraphicsItem * parent = nullptr);
     virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+                             VContainer *data);
     static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                              const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
                              VAbstractPattern *doc, VContainer *data, const Document &parse,
                              const Source &typeCreation);
-    static const QString TagName;
-    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                           QWidget * widget = 0) Q_DECL_OVERRIDE;
+
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
+
+    QString FirstPointName() const;
+    QString SecondPointName() const;
+
     quint32 GetFirstPoint() const;
     void    SetFirstPoint(const quint32 &value);
 
     quint32 GetSecondPoint() const;
     void    SetSecondPoint(const quint32 &value);
 
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
+
     virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
     virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
-    virtual void     SetLineColor(const QString &value) Q_DECL_OVERRIDE;
+    virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     AddToFile() Q_DECL_OVERRIDE;
@@ -83,11 +101,20 @@ protected:
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolLine)
+
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;
 
     /** @brief secondPoint id second line point. */
     quint32           secondPoint;
+
+    /** @brief lineColor color of a line. */
+    QString           lineColor;
+
+    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
+              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
+              QGraphicsItem * parent = nullptr);
 
     void             RefreshGeometry();
 };

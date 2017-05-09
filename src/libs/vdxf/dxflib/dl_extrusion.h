@@ -27,8 +27,7 @@
 
 #include "dl_global.h"
 
-#include <math.h>
-
+#include "../vmisc/vmath.h"
 
 /**
  * Storing and passing around attributes. Attributes
@@ -67,8 +66,6 @@ public:
     /**
      * Constructor for DXF extrusion.
      *
-     * @param direction Vector of axis along which the entity shall be extruded
-     *                  this is also the Z axis of the Entity coordinate system
      * @param elevation Distance of the entities XY plane from the origin of the
      *                  world coordinate system
      */
@@ -103,9 +100,9 @@ public:
 
 
     /**
-     * @return direction vector.
+     * @param dir vector.
      */
-    void getDirection(double dir[]) const 
+    void getDirection(double dir[]) const
     {
         dir[0]=direction[0];
         dir[1]=direction[1];

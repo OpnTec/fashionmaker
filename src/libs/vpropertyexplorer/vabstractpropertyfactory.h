@@ -22,6 +22,7 @@
 #define VABSTRACTPROPERTYFACTORY_H
 
 #include "vpropertyexplorer_global.h"
+#include "../vmisc/diagnostic.h"
 #include <QObject>
 
 namespace VPE
@@ -29,10 +30,8 @@ namespace VPE
 
 class VProperty;
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VAbstractPropertyFactory
 {
@@ -47,9 +46,7 @@ public:
     virtual VProperty* createProperty(const QString& type, const QString &name) = 0;
 };
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 }
 

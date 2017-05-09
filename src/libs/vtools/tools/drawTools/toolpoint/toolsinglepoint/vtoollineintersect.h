@@ -29,7 +29,19 @@
 #ifndef VTOOLLINEINTERSECT_H
 #define VTOOLLINEINTERSECT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolLineIntersect class help find point intersection lines.
@@ -38,12 +50,9 @@ class VToolLineIntersect:public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
-                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolLineIntersect *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolLineIntersect *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolLineIntersect *Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
                                       const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
                                       const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
@@ -52,6 +61,11 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
+
+    QString Line1P1Name() const;
+    QString Line1P2Name() const;
+    QString Line2P1Name() const;
+    QString Line2P2Name() const;
 
     quint32 GetP1Line1() const;
     void    SetP1Line1(const quint32 &value);
@@ -76,6 +90,8 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolLineIntersect)
+
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;
 
@@ -87,6 +103,10 @@ private:
 
     /** @brief p2Line2 id second point second line.*/
     quint32       p2Line2;
+
+    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
+                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
+                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECT_H

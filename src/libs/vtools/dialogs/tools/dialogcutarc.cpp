@@ -27,14 +27,23 @@
  *************************************************************************/
 
 #include "dialogcutarc.h"
-#include "ui_dialogcutarc.h"
 
-#include "../../../vgeometry/varc.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolcutarc.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include <QDialog>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QToolButton>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/path/vistoolcutarc.h"
+#include "../../visualization/visualization.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogcutarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -43,8 +52,7 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0),
-      ch1(NULL_ID), ch2(NULL_ID)
+    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
 
@@ -60,10 +68,9 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
-    FillComboBoxArcs(ui->comboBoxArc, FillComboBox::NoChildren, ch1, ch2);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxArcs(ui->comboBoxArc);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
@@ -108,7 +115,6 @@ void DialogCutArc::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
-    DeleteVisualization<VisToolCutArc>();
     delete ui;
 }
 
@@ -143,9 +149,9 @@ void DialogCutArc::SaveData()
     formula.replace("\n", " ");
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
-    path->setPoint1Id(getArcId());
+    path->setObject1Id(getArcId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -164,31 +170,11 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  */
 void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, value, FillComboBox::NoChildren, ch1, ch2);
+    setCurrentArcId(ui->comboBoxArc, value);
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
-    SCASSERT(path != nullptr);
-    path->setPoint1Id(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCutArc::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::SetChildrenId(const quint32 &ch1, const quint32 &ch2)
-{
-    this->ch1 = ch1;
-    this->ch2 = ch2;
-    FillComboBoxArcs(ui->comboBoxArc, FillComboBox::NoChildren, ch1, ch2);
+    SCASSERT(path != nullptr)
+    path->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,7 +193,7 @@ void DialogCutArc::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);

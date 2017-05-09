@@ -72,8 +72,7 @@ QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec,
-                                       EOprtAssociativity a_eOprtAsct )
+QmuParserCallback::QmuParserCallback (fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct)
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 2 ), m_iPri ( a_iPrec ), m_eOprtAsct ( a_eOprtAsct ),
       m_iCode ( cmOPRT_BIN ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -306,9 +305,9 @@ QmuParserCallback::QmuParserCallback()
  * @brief Copy constructor.
  * @throw nothrow
  */
-QmuParserCallback::QmuParserCallback ( const QmuParserCallback &ref )
-    : m_pFun ( ref.m_pFun ), m_iArgc ( ref.m_iArgc ), m_iPri ( ref.m_iPri ), m_eOprtAsct ( ref.m_eOprtAsct ),
-      m_iCode ( ref.m_iCode ), m_iType ( ref.m_iType ), m_bAllowOpti ( ref.m_bAllowOpti )
+QmuParserCallback::QmuParserCallback (const QmuParserCallback &a_Fun )
+    : m_pFun ( a_Fun.m_pFun ), m_iArgc ( a_Fun.m_iArgc ), m_iPri ( a_Fun.m_iPri ), m_eOprtAsct ( a_Fun.m_eOprtAsct ),
+      m_iCode ( a_Fun.m_iCode ), m_iType ( a_Fun.m_iType ), m_bAllowOpti ( a_Fun.m_bAllowOpti )
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,9 +27,30 @@
  *************************************************************************/
 
 #include "vtooltruedarts.h"
+
+#include <QLine>
+#include <QLineF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../dialogs/tools/dialogtruedarts.h"
+#include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../../visualization/line/vistooltruedarts.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../visualization/vistooltruedarts.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "vtooldoublepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts");
 
@@ -83,9 +104,9 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id);
@@ -100,12 +121,12 @@ void VToolTrueDarts::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data)
+VToolTrueDarts *VToolTrueDarts::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     const QString point1Name = dialogTool->GetFirstNewDartPointName();
     const QString point2Name = dialogTool->GetSecondNewDartPointName();
@@ -120,7 +141,7 @@ VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *s
                                    Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog = dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -146,14 +167,15 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
 
     QPointF fPoint1;
     QPointF fPoint2;
-    VToolTrueDarts::FindPoint(baseLineP1->toQPointF(), baseLineP2->toQPointF(),
-                              dartP1->toQPointF(), dartP2->toQPointF(), dartP3->toQPointF(), fPoint1, fPoint2);
+    VToolTrueDarts::FindPoint(static_cast<QPointF>(*baseLineP1), static_cast<QPointF>(*baseLineP2),
+                              static_cast<QPointF>(*dartP1), static_cast<QPointF>(*dartP2),
+                              static_cast<QPointF>(*dartP3), fPoint1, fPoint2);
     quint32 id = _id;
     quint32 p1id = _p1id;
     quint32 p2id = _p2id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->getNextId();//Just reserve id for tool
+        id = VContainer::getNextId();//Just reserve id for tool
         p1id = data->AddGObject(new VPointF(fPoint1, point1Name, mx1, my1, id));
         p2id = data->AddGObject(new VPointF(fPoint2, point2Name, mx2, my2, id));
     }
@@ -166,17 +188,15 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::TrueDarts, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::TrueDarts, doc);
         VToolTrueDarts *points = new VToolTrueDarts(doc, data, id, p1id, p2id, baseLineP1Id, baseLineP2Id,
                                                     dartP1Id, dartP2Id, dartP3Id, typeCreation);
         scene->addItem(points);
-        connect(points, &VToolDoublePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, points, &VToolTrueDarts::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, points, &VToolTrueDarts::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, points, &VToolTrueDarts::EnableToolMove);
-        doc->AddTool(id, points);
+        InitToolConnections(scene, points);
+        VAbstractPattern::AddTool(id, points);
         doc->IncrementReferens(baseLineP1->getIdTool());
         doc->IncrementReferens(baseLineP2->getIdTool());
         doc->IncrementReferens(dartP1->getIdTool());
@@ -194,6 +214,36 @@ void VToolTrueDarts::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::BaseLineP1Name() const
+{
+    return VAbstractTool::data.GetGObject(baseLineP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::BaseLineP2Name() const
+{
+    return VAbstractTool::data.GetGObject(baseLineP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP1Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP1Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP2Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP2Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolTrueDarts::DartP3Name() const
+{
+    return VAbstractTool::data.GetGObject(dartP3Id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolTrueDarts::GetBaseLineP1Id() const
 {
     return baseLineP1Id;
@@ -206,7 +256,7 @@ void VToolTrueDarts::SetBaseLineP1Id(const quint32 &value)
     {
         baseLineP1Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -224,7 +274,7 @@ void VToolTrueDarts::SetBaseLineP2Id(const quint32 &value)
     {
         baseLineP2Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -242,7 +292,7 @@ void VToolTrueDarts::SetDartP1Id(const quint32 &value)
     {
         dartP1Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -260,7 +310,7 @@ void VToolTrueDarts::SetDartP2Id(const quint32 &value)
     {
         dartP2Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -278,7 +328,7 @@ void VToolTrueDarts::SetDartP3Id(const quint32 &value)
     {
         dartP3Id = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
         SaveOption(obj);
     }
 }
@@ -292,7 +342,7 @@ void VToolTrueDarts::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -317,9 +367,9 @@ void VToolTrueDarts::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogTrueDarts *dialogTool = qobject_cast<DialogTrueDarts*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrName1, dialogTool->GetFirstNewDartPointName());
     doc->SetAttribute(domElement, AttrName2, dialogTool->GetSecondNewDartPointName());
@@ -356,13 +406,13 @@ void VToolTrueDarts::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolTrueDarts *visual = qobject_cast<VisToolTrueDarts *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(baseLineP1Id);
-        visual->setPoint2Id(baseLineP2Id);
+        visual->setObject1Id(baseLineP1Id);
+        visual->setObject2Id(baseLineP2Id);
         visual->setD1PointId(dartP1Id);
         visual->setD2PointId(dartP2Id);
         visual->setD3PointId(dartP3Id);

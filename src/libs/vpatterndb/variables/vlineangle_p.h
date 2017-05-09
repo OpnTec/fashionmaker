@@ -32,11 +32,10 @@
 #include <QSharedData>
 
 #include "../ifc/ifcdef.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VLineAngleData : public QSharedData
 {
@@ -66,8 +65,6 @@ private:
 VLineAngleData::~VLineAngleData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VLINEANGLE_P_H

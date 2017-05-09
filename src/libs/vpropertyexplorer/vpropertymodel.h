@@ -21,13 +21,19 @@
 #ifndef VPROPERTYMODEL_H
 #define VPROPERTYMODEL_H
 
-#include "vpropertyexplorer_global.h"
-
+#include <qcompilerdetection.h>
 #include <QAbstractItemModel>
 #include <QMap>
+#include <QMetaObject>
+#include <QModelIndex>
+#include <QObject>
 #include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
 #include "vproperty.h"
+#include "vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -58,7 +64,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit VPropertyModel(QObject * parent = 0);
+    explicit VPropertyModel(QObject * parent = nullptr);
     virtual ~VPropertyModel() Q_DECL_OVERRIDE;
 
     //! Adds the property to the model and attaches it to the parentid
@@ -75,7 +81,7 @@ public:
     virtual VProperty* getProperty(const QString& id);
 
     //! Returns the item flags for the given index
-    virtual Qt::ItemFlags flags (const QModelIndex& index) const;
+    virtual Qt::ItemFlags flags (const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     //! Sets the role data for the item at index to value
     virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) Q_DECL_OVERRIDE;

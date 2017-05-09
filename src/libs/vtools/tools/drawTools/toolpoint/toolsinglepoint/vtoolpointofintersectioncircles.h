@@ -29,23 +29,29 @@
 #ifndef VTOOLPOINTOFINTERSECTIONCIRCLES_H
 #define VTOOLPOINTOFINTERSECTIONCIRCLES_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
 class VFormula;
+template <class T> class QSharedPointer;
 
 class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfIntersectionCircles(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
-                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
-                                    const QString &firstCircleRadius, const QString &secondCircleRadius,
-                                    CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                    QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersectionCircles *Create(DialogTool *dialog, VMainGraphicsScene  *scene,
-                                                   VAbstractPattern *doc,
-                                                   VContainer *data);
+    static VToolPointOfIntersectionCircles *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionCircles *Create(const quint32 _id, const QString &pointName,
                                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
                                                    QString &firstCircleRadius, QString &secondCircleRadius,
@@ -58,6 +64,9 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
+
+    QString FirstCircleCenterPointName() const;
+    QString SecondCircleCenterPointName() const;
 
     quint32 GetFirstCircleCenterId() const;
     void    SetFirstCircleCenterId(const quint32 &value);
@@ -92,6 +101,12 @@ private:
     QString secondCircleRadius;
 
     CrossCirclesPoint crossPoint;
+
+    VToolPointOfIntersectionCircles(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
+                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
+                                    const QString &firstCircleRadius, const QString &secondCircleRadius,
+                                    CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                    QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCIRCLES_H

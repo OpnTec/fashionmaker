@@ -29,12 +29,20 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
 #include <memory>
+#include <atomic>
 
-#include "vlayoutdef.h"
 #include "vbank.h"
+#include "vlayoutdef.h"
+
+class QMarginsF;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -42,18 +50,17 @@
 #   include <QMargins>
 #endif
 
-class VLayoutPaper;
-class VLayoutDetail;
 class QGraphicsItem;
+class VLayoutPaper;
 
 class VLayoutGenerator :public QObject
 {
     Q_OBJECT
 public:
-    explicit VLayoutGenerator(QObject *parent = 0);
+    explicit VLayoutGenerator(QObject *parent = nullptr);
     virtual ~VLayoutGenerator() Q_DECL_OVERRIDE;
 
-    void SetDetails(const QVector<VLayoutDetail> &details);
+    void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
     void SetCaseType(Cases caseType);
     int DetailsCount();
@@ -64,8 +71,9 @@ public:
     qreal GetPaperWidth() const;
     void SetPaperWidth(qreal value);
 
-    QMarginsF GetFields() const;
-    void SetFields(const QMarginsF &value);
+    bool IsUsePrinterFields() const;
+    QMarginsF GetPrinterFields() const;
+    void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
     quint32 GetShift() const;
     void    SetShift(quint32 shift);
@@ -74,8 +82,8 @@ public:
 
     LayoutErrors State() const;
 
-    QList<QGraphicsItem *> GetPapersItems() const;
-    QList<QList<QGraphicsItem *>> GetAllDetails() const;
+    QList<QGraphicsItem *> GetPapersItems() const Q_REQUIRED_RESULT;
+    QList<QList<QGraphicsItem *>> GetAllDetails() const Q_REQUIRED_RESULT;
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -91,6 +99,12 @@ public:
 
     bool IsUnitePages() const;
     void SetUnitePages(bool value);
+
+    quint8 GetMultiplier() const;
+    void   SetMultiplier(const quint8 &value);
+
+    bool IsStripOptimization() const;
+    void SetStripOptimization(bool value);
 
 signals:
     void Start();
@@ -108,7 +122,8 @@ private:
     qreal paperHeight;
     qreal paperWidth;
     QMarginsF margins;
-    volatile bool stopGeneration;
+    bool usePrinterFields;
+    std::atomic_bool stopGeneration;
     LayoutErrors state;
     quint32 shift;
     bool rotate;
@@ -116,11 +131,18 @@ private:
     bool autoCrop;
     bool saveLength;
     bool unitePages;
+    bool stripOptimizationEnabled;
+    quint8 multiplier;
+    bool stripOptimization;
 
     int PageHeight() const;
     int PageWidth() const;
-};
 
-typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;
+    void GatherPages();
+    void UnitePages();
+    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i);
+    void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
+    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
+};
 
 #endif // VLAYOUTGENERATOR_H

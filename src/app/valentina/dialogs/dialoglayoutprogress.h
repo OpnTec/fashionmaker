@@ -54,7 +54,6 @@ public slots:
     void Arranged(int count);
     void Error(const LayoutErrors &state);
     void Finished();
-    void StopWorking();
 
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;

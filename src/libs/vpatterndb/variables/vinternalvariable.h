@@ -29,8 +29,11 @@
 #ifndef VINTERNALVARIABLE_H
 #define VINTERNALVARIABLE_H
 
-#include <QString>
 #include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 class VInternalVariableData;
@@ -40,8 +43,16 @@ class VInternalVariable
 public:
     VInternalVariable();
     VInternalVariable(const VInternalVariable &var);
-    VInternalVariable &operator=(const VInternalVariable &var);
+
     virtual ~VInternalVariable();
+
+    VInternalVariable &operator=(const VInternalVariable &var);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
+#endif
+
+    void Swap(VInternalVariable &var) Q_DECL_NOTHROW
+    { std::swap(d, var.d); }
 
     qreal        GetValue() const;
     qreal*       GetValue();

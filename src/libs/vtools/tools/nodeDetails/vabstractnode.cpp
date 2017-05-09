@@ -27,11 +27,23 @@
  *************************************************************************/
 
 #include "vabstractnode.h"
+
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <Qt>
+
 #include "../../undocommands/adddetnode.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vabstracttool.h"
 
-#include <QDebug>
-
-const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,8 +58,13 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const QString &drawName, const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent), parentType(ParentType::Item), idNode(idNode), idTool(idTool),
-      currentColor(Qt::black), m_drawName(drawName)
+    : VAbstractTool(doc, data, id, parent),
+      parentType(ParentType::Item),
+      idNode(idNode),
+      idTool(idTool),
+      currentColor(Qt::black),
+      m_drawName(drawName),
+      m_exluded(false)
 {
     _referens = 0;
 }
@@ -61,10 +78,18 @@ void VAbstractNode::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::incrementReferens()
 {
-    ++_referens;
+    VAbstractTool::incrementReferens();
     if (_referens == 1)
     {
-        idTool != NULL_ID ? doc->IncrementReferens(idTool) : doc->IncrementReferens(idNode);
+        if (idTool != NULL_ID)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
+            doc->IncrementReferens(node->getIdTool());
+        }
         ShowNode();
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
@@ -80,13 +105,18 @@ void VAbstractNode::incrementReferens()
  */
 void VAbstractNode::decrementReferens()
 {
-    if (_referens > 0)
-    {
-        --_referens;
-    }
+    VAbstractTool::decrementReferens();
     if (_referens == 0)
     {
-        idTool != NULL_ID ? doc->DecrementReferens(idTool) : doc->DecrementReferens(idNode);
+        if (idTool != NULL_ID)
+        {
+            doc->DecrementReferens(idTool);
+        }
+        else
+        {
+            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
+            doc->DecrementReferens(node->getIdTool());
+        }
         HideNode();
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
@@ -106,6 +136,38 @@ ParentType VAbstractNode::GetParentType() const
 void VAbstractNode::SetParentType(const ParentType &value)
 {
     parentType = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object)
+    Q_UNUSED(visible)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractNode::IsExluded() const
+{
+    return m_exluded;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::SetExluded(bool exluded)
+{
+    m_exluded = exluded;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::ToolCreation(const Source &typeCreation)
+{
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
+    {
+        AddToFile();
+    }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

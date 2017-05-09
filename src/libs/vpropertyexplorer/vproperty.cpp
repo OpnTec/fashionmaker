@@ -19,29 +19,34 @@
  *************************************************************************/
 
 #include "vproperty.h"
-#include <QObject>
-#include <QMetaProperty>
+
+#include <QByteArray>
+#include <QFlags>
+#include <QForeachContainer>
 #include <QItemEditorFactory>
 #include <QLineEdit>
+#include <QList>
+#include <QMetaProperty>
+#include <QObject>
+#include <QStandardItemEditorCreator>
+#include <QWidget>
 
 #include "vproperty_p.h"
 
-using namespace VPE;
-
 //! Standard constructor, takes a name and a parent property as argument
-VProperty::VProperty(const QString& name, QVariant::Type type)
+VPE::VProperty::VProperty(const QString& name, QVariant::Type type)
     : QObject(), d_ptr(new VPropertyPrivate(name, type))
 {
 
 }
 
-VProperty::VProperty(VPropertyPrivate *d)
+VPE::VProperty::VProperty(VPropertyPrivate *d)
     : d_ptr(d)
 {
 }
 
 
-VProperty::~VProperty()
+VPE::VProperty::~VProperty()
 {
     setParent(nullptr);
 
@@ -54,13 +59,13 @@ VProperty::~VProperty()
     delete d_ptr;
 }
 
-QString VProperty::type() const
+QString VPE::VProperty::type() const
 {
     return "string";
 }
 
 //! Get the data how it should be displayed
-QVariant VProperty::data (int column, int role) const
+QVariant VPE::VProperty::data (int column, int role) const
 {
     if (column == DPC_Name && Qt::DisplayRole == role)
     {
@@ -78,7 +83,7 @@ QVariant VProperty::data (int column, int role) const
         return QVariant();
 }
 
-bool VProperty::setData(const QVariant &data, int role)
+bool VPE::VProperty::setData(const QVariant &data, int role)
 {
     bool tmpResult = false;
     if (Qt::EditRole == role)
@@ -90,23 +95,23 @@ bool VProperty::setData(const QVariant &data, int role)
     return tmpResult;
 }
 
-bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
-                      const QAbstractItemDelegate *delegate) const
+bool VPE::VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
+                           const QAbstractItemDelegate *delegate) const
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(option);
-    Q_UNUSED(index);
-    Q_UNUSED(delegate);
+    Q_UNUSED(painter)
+    Q_UNUSED(option)
+    Q_UNUSED(index)
+    Q_UNUSED(delegate)
 
     return false;
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                 const QAbstractItemDelegate* delegate)
+QWidget* VPE::VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                      const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
 
     QItemEditorFactory *factory = new QItemEditorFactory;
     QItemEditorCreatorBase *lineCreator = new QStandardItemEditorCreator<QLineEdit>();
@@ -117,7 +122,7 @@ QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& o
     return d_ptr->editor;
 }
 
-bool VProperty::setEditorData(QWidget* editor)
+bool VPE::VProperty::setEditorData(QWidget* editor)
 {
     if (!editor)
     {
@@ -138,7 +143,7 @@ bool VProperty::setEditorData(QWidget* editor)
 }
 
 //! Gets the data from the widget
-QVariant VProperty::getEditorData(const QWidget* editor) const
+QVariant VPE::VProperty::getEditorData(const QWidget* editor) const
 {
     if (!editor)
     {
@@ -156,7 +161,7 @@ QVariant VProperty::getEditorData(const QWidget* editor) const
 }
 
 //! Returns item flags
-Qt::ItemFlags VProperty::flags(int column) const
+Qt::ItemFlags VPE::VProperty::flags(int column) const
 {
     if (column == DPC_Name)
     {
@@ -171,7 +176,7 @@ Qt::ItemFlags VProperty::flags(int column) const
 }
 
 
-void VProperty::setValue(const QVariant &value)
+void VPE::VProperty::setValue(const QVariant &value)
 {
     d_ptr->VariantValue = value;
     d_ptr->VariantValue.convert(static_cast<int>(d_ptr->PropertyVariantType));
@@ -181,60 +186,60 @@ void VProperty::setValue(const QVariant &value)
     }
 }
 
-QVariant VProperty::getValue() const
+QVariant VPE::VProperty::getValue() const
 {
     return d_ptr->VariantValue;
 }
 
 // cppcheck-suppress unusedFunction
-QString VProperty::serialize() const
+QString VPE::VProperty::serialize() const
 {
     return getValue().toString();
 }
 
-void VProperty::deserialize(const QString& value)
+void VPE::VProperty::deserialize(const QString& value)
 {
     setValue(QVariant(value));
 }
 
 
-void VProperty::setName(const QString& name)
+void VPE::VProperty::setName(const QString& name)
 {
     d_ptr->Name = name;
 }
 
 
-QString VProperty::getName() const
+QString VPE::VProperty::getName() const
 {
     return d_ptr->Name;
 }
 
 
-void VProperty::setDescription(const QString& desc)
+void VPE::VProperty::setDescription(const QString& desc)
 {
     d_ptr->Description = desc;
 }
 
 
-QString VProperty::getDescription() const
+QString VPE::VProperty::getDescription() const
 {
     return d_ptr->Description;
 }
 
 //! Returns a reference to the list of children
-QList<VProperty*>& VProperty::getChildren()
+QList<VPE::VProperty*>& VPE::VProperty::getChildren()
 {
     return d_ptr->Children;
 }
 
 //! Returns a reference to the list of children
-const QList<VProperty*>& VProperty::getChildren() const
+const QList<VPE::VProperty*>& VPE::VProperty::getChildren() const
 {
     return d_ptr->Children;
 }
 
 //! Returns the child at a certain row
-VProperty* VProperty::getChild(int row) const
+VPE::VProperty* VPE::VProperty::getChild(int row) const
 {
     if (row >= 0 && row < getRowCount())
     {
@@ -245,19 +250,19 @@ VProperty* VProperty::getChild(int row) const
 }
 
 //! Gets the number of children
-int VProperty::getRowCount() const
+int VPE::VProperty::getRowCount() const
 {
    return d_ptr->Children.count();
 }
 
 //! Gets the parent of this property
-VProperty* VProperty::getParent() const
+VPE::VProperty* VPE::VProperty::getParent() const
 {
     return d_ptr->Parent;
 }
 
 //! Sets the parent of this property
-void VProperty::setParent(VProperty* parent)
+void VPE::VProperty::setParent(VProperty* parent)
 {
     if (d_ptr->Parent == parent)
     {
@@ -278,7 +283,7 @@ void VProperty::setParent(VProperty* parent)
     }
 }
 
-int VProperty::addChild(VProperty *child)
+int VPE::VProperty::addChild(VProperty *child)
 {
     if (child && child->getParent() != this)
     {
@@ -297,7 +302,7 @@ int VProperty::addChild(VProperty *child)
 }
 
 //! Removes a child from the children list
-void VProperty::removeChild(VProperty* child)
+void VPE::VProperty::removeChild(VProperty* child)
 {
     d_ptr->Children.removeAll(child);
 
@@ -308,32 +313,32 @@ void VProperty::removeChild(VProperty* child)
 }
 
 //! Returns the row the child has
-int VProperty::getChildRow(VProperty* child) const
+int VPE::VProperty::getChildRow(VProperty* child) const
 {
     return d_ptr->Children.indexOf(child);
 }
 
 //! Returns whether the views have to update the parent of this property if it changes
-bool VProperty::getUpdateParent() const
+bool VPE::VProperty::getUpdateParent() const
 {
     return d_ptr->UpdateParent;
 }
 
 //! Returns whether the views have to update the children of this property if it changes
-bool VProperty::getUpdateChildren() const
+bool VPE::VProperty::getUpdateChildren() const
 {
     return d_ptr->UpdateChildren;
 }
 
 //! Sets whether the views should update Parents or children after this property changes
-void VProperty::setUpdateBehaviour(bool update_parent, bool update_children)
+void VPE::VProperty::setUpdateBehaviour(bool update_parent, bool update_children)
 {
     d_ptr->UpdateParent = update_parent;
     d_ptr->UpdateChildren = update_children;
 }
 
 
-void VProperty::setSettings(const QMap<QString, QVariant>& settings)
+void VPE::VProperty::setSettings(const QMap<QString, QVariant>& settings)
 {
     QMap<QString, QVariant>::const_iterator tmpIterator = settings.constBegin();
     for (; tmpIterator != settings.constEnd(); ++tmpIterator)
@@ -342,7 +347,7 @@ void VProperty::setSettings(const QMap<QString, QVariant>& settings)
     }
 }
 
-QMap<QString, QVariant> VProperty::getSettings() const
+QMap<QString, QVariant> VPE::VProperty::getSettings() const
 {
     QMap<QString, QVariant> tmpResult;
 
@@ -353,26 +358,26 @@ QMap<QString, QVariant> VProperty::getSettings() const
     return tmpResult;
 }
 
-void VProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VProperty::setSetting(const QString& key, const QVariant& value)
 {
     Q_UNUSED(key)
     Q_UNUSED(value)
     // Not needed in the Standard property
 }
 
-QVariant VProperty::getSetting(const QString& key) const
+QVariant VPE::VProperty::getSetting(const QString& key) const
 {
     // Not needed in the Standard property
     Q_UNUSED(key)
     return QVariant();
 }
 
-QStringList VProperty::getSettingKeys() const
+QStringList VPE::VProperty::getSettingKeys() const
 {
     return QStringList();
 }
 
-VProperty* VProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VProperty::clone(bool include_children, VProperty* container) const
 {
     if (!container)
     {
@@ -395,28 +400,28 @@ VProperty* VProperty::clone(bool include_children, VProperty* container) const
     return container;
 }
 
-Property VProperty::propertyType() const
+VPE::Property VPE::VProperty::propertyType() const
 {
     return d_ptr->type;
 }
 
-void VProperty::setPropertyType(const Property &type)
+void VPE::VProperty::setPropertyType(const Property &type)
 {
     d_ptr->type = type;
 }
 
-void VProperty::UpdateParent(const QVariant &value)
+void VPE::VProperty::UpdateParent(const QVariant &value)
 {
-    Q_UNUSED(value);
+    Q_UNUSED(value)
 }
 
-void VProperty::ValueChildChanged(const QVariant &value, int typeForParent)
+void VPE::VProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 {
     Q_UNUSED(value)
     Q_UNUSED(typeForParent)
 }
 
-UserChangeEvent::~UserChangeEvent()
+VPE::UserChangeEvent::~UserChangeEvent()
 {}
 
 VPE::VPropertyPrivate::~VPropertyPrivate()

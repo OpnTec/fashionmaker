@@ -29,9 +29,10 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
-#include "../vmisc/def.h"
-
 #include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 
 /**
  * @brief The VToolRecord class record about tool in history.
@@ -50,7 +51,7 @@ public:
     void    setTypeTool(const Tool &value);
     QString getNameDraw() const;
     void    setNameDraw(const QString &value);
-    ~VToolRecord();
+    ~VToolRecord() Q_DECL_EQ_DEFAULT;
 private:
     /** @brief id tool id. */
     quint32 id;

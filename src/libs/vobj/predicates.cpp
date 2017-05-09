@@ -105,16 +105,24 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include <QtGlobal>
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wold-style-cast"
-    #pragma GCC diagnostic ignored "-Wfloat-equal"
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4701)
+QT_WARNING_DISABLE_GCC("-Wold-style-cast")
+QT_WARNING_DISABLE_GCC("-Wfloat-equal")
+#if defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) >= 408
+QT_WARNING_DISABLE_GCC("-Wmaybe-uninitialized")
+#else
+QT_WARNING_DISABLE_GCC("-Wuninitialized")
 #endif
+QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
+QT_WARNING_DISABLE_CLANG("-Wmissing-variable-declarations")
+QT_WARNING_DISABLE_CLANG("-Wfloat-equal")
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_CLANG("-Wconditional-uninitialized")
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */
@@ -1032,6 +1040,7 @@ qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
     return finnow[finlength - 1];
 }
 
+
 qreal incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd)
 {
     qreal adx, bdx, cdx, ady, bdy, cdy;
@@ -1075,6 +1084,4 @@ qreal incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd)
     return incircleadapt(pa, pb, pc, pd, permanent);
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

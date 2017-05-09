@@ -53,17 +53,15 @@ public:
 
     QString Path() const;
     QString FileName() const;
-    QString Formate() const;
+    QString Format() const;
     void    SelectFormate(const int formate);
     static QString MakeHelpFormatList();
     void   SetDestinationPath(const QString& cmdDestinationPath);
-public slots:
-    void Save();
-    void ShowExample();
-    void Browse();
-    void PathChanged(const QString &text);
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void Save();
+    void PathChanged(const QString &text);
 private:
     Q_DISABLE_COPY(DialogSaveLayout)
     Ui::DialogSaveLAyout *ui;

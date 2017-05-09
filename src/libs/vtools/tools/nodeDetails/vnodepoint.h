@@ -29,13 +29,18 @@
 #ifndef VNODEPOINT_H
 #define VNODEPOINT_H
 
-#include "vabstractnode.h"
+#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
 
-class VPointF;
-class VGraphicsSimpleTextItem;
-class QGraphicsLineItem;
-class QGraphicsItem;
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
+#include "vabstractnode.h"
 
 /**
  * @brief The VNodePoint class point detail node.
@@ -44,28 +49,31 @@ class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-
-    VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
-               const QString &drawName = QString(), const quint32 &idTool = 0,  QObject *qoParent = nullptr,
-               QGraphicsItem * parent = nullptr );
-
     static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
                         quint32 id, quint32 idPoint, const Document &parse,
-                        const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0,
-                        QObject *parent = nullptr);
-    static const QString TagName;
+                        const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0);
+
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
+signals:
+    /**
+     * @brief ShowContextMenu emit when need show tool context menu.
+     * @param event context menu event.
+     */
+    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);
     void         PointChoosed();
     void         EnableToolMove(bool move);
+    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    void         AllowLabelHover(bool enabled);
+    void         AllowLabelSelecting(bool enabled);
 protected:
     /** @brief radius radius circle. */
     qreal        radius;
@@ -78,6 +86,7 @@ protected:
 
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
@@ -88,6 +97,10 @@ protected:
     virtual void HideNode() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VNodePoint)
+
+    VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
+               const QString &drawName = QString(), const quint32 &idTool = 0,  QObject *qoParent = nullptr,
+               QGraphicsItem * parent = nullptr );
 };
 
 #endif // VNODEPOINT_H

@@ -29,6 +29,13 @@
 #ifndef DIALOGARC_H
 #define DIALOGARC_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -76,7 +83,7 @@ public slots:
     void          FXF1();
     void          FXF2();
 protected:
-    virtual void  CheckState() Q_DECL_OVERRIDE;
+    virtual void  CheckState() Q_DECL_FINAL;
     virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables

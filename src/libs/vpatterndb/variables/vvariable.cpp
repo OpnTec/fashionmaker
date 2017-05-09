@@ -27,6 +27,11 @@
  *************************************************************************/
 
 #include "vvariable.h"
+
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "vinternalvariable.h"
 #include "vvariable_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +99,7 @@ void VVariable::SetValue(const qreal &size, const qreal &height, Unit patternUni
 //---------------------------------------------------------------------------------------------------------------------
 bool VVariable::IsNotUsed() const
 {
-    if (qFuzzyCompare(d->base+1, 0+1) && qFuzzyCompare(d->ksize+1, 0+1) && qFuzzyCompare(d->kheight+1, 0+1))
+    if (qFuzzyIsNull(d->base) && qFuzzyIsNull(d->ksize) && qFuzzyIsNull(d->kheight))
     {
         return true;
     }

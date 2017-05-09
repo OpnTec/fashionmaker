@@ -29,7 +29,19 @@
 #ifndef VTOOLPOINTOFINTERSECTION_H
 #define VTOOLPOINTOFINTERSECTION_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
@@ -38,12 +50,9 @@ class VToolPointOfIntersection : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Source &typeCreation,
-                             QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersection *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                            VContainer *data);
+    static VToolPointOfIntersection *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                            VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersection *Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
                                             const quint32 &secondPointId, const qreal &mx, const qreal &my,
                                             VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
@@ -51,6 +60,9 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
+
+    QString FirstPointName() const;
+    QString SecondPointName() const;
 
     quint32 GetFirstPointId() const;
     void    SetFirstPointId(const quint32 &value);
@@ -68,11 +80,16 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
+
     /** @brief firstPointId id first line point. */
     quint32       firstPointId;
 
     /** @brief secondPointId id second line point. */
     quint32       secondPointId;
+
+    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
+                             const quint32 &secondPointId, const Source &typeCreation,
+                             QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

@@ -21,9 +21,18 @@
 #ifndef VCOLORPROPERTY_H
 #define VCOLORPROPERTY_H
 
-#include "../vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <stddef.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
 
 #include "../vproperty.h"
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {

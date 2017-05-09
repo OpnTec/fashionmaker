@@ -27,11 +27,20 @@
  *************************************************************************/
 
 #include "dialogtriangle.h"
+
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+#include <QSet>
+
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistooltriangle.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogtool.h"
 #include "ui_dialogtriangle.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../visualization/vistooltriangle.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,7 +61,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisP1);
     FillComboBoxPoints(ui->comboBoxAxisP2);
@@ -75,7 +84,6 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
 //---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::~DialogTriangle()
 {
-    DeleteVisualization<VisToolTriangle>();
     delete ui;
 }
 
@@ -92,7 +100,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -109,7 +117,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
                         {
                             number++;
-                            line->setPoint2Id(id);
+                            line->setObject2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -165,10 +173,10 @@ void DialogTriangle::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
-    line->setPoint1Id(GetAxisP1Id());
-    line->setPoint2Id(GetAxisP2Id());
+    line->setObject1Id(GetAxisP1Id());
+    line->setObject2Id(GetAxisP2Id());
     line->setHypotenuseP1Id(GetFirstPointId());
     line->setHypotenuseP2Id(GetSecondPointId());
     line->RefreshGeometry();
@@ -228,7 +236,7 @@ void DialogTriangle::SetSecondPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setHypotenuseP2Id(value);
 }
 
@@ -242,7 +250,7 @@ void DialogTriangle::SetFirstPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setHypotenuseP1Id(value);
 }
 
@@ -256,8 +264,8 @@ void DialogTriangle::SetAxisP2Id(const quint32 &value)
     setCurrentPointId(ui->comboBoxAxisP2, value);
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint2Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -270,8 +278,8 @@ void DialogTriangle::SetAxisP1Id(const quint32 &value)
     setCurrentPointId(ui->comboBoxAxisP1, value);
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

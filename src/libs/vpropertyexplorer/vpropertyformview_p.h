@@ -24,17 +24,13 @@
 // ONLY INCLUDE THIS IN .CPP FILES
 
 #include "vpropertyformwidget_p.h"
+#include "../vmisc/diagnostic.h"
 
 namespace VPE
 {
 
-class VPropertyModel;
-class VPropertySet;
-
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 
 class VPropertyFormViewPrivate : public VPropertyFormWidgetPrivate
 {
@@ -72,9 +68,7 @@ private:
     Q_DISABLE_COPY(VPropertyFormViewPrivate)
 };
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 }
 

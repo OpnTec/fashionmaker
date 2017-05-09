@@ -28,16 +28,22 @@
 
 #include "vabstractcurve.h"
 
+#include <QLine>
+#include <QLineF>
+#include <QMessageLogger>
 #include <QPainterPath>
-#include <QDebug>
+#include <QPoint>
+#include <QtDebug>
+
+#include "vabstractcurve_p.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :VGObject(type, idObject, mode)
+    :VGObject(type, idObject, mode), d (new VAbstractCurveData())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(const VAbstractCurve &curve)
-    :VGObject(curve)
+    :VGObject(curve), d (curve.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,8 +54,13 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
         return *this;
     }
     VGObject::operator=(curve);
+    d = curve.d;
     return *this;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractCurve::~VAbstractCurve()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin,
@@ -83,10 +94,19 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin)
+QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok)
 {
     if (points.count() >= 2)
     {
+        if (points.first().toPoint() == begin.toPoint())
+        {
+            if (ok != nullptr)
+            {
+                *ok = true;
+            }
+            return points;
+        }
+
         QVector<QPointF> segment;
         bool theBegin = false;
         for (qint32 i = 0; i < points.count()-1; ++i)
@@ -116,25 +136,36 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
 
         if (segment.isEmpty())
         {
+            if (ok != nullptr)
+            {
+                *ok = false;
+            }
             return points;
         }
         else
         {
+            if (ok != nullptr)
+            {
+                *ok = true;
+            }
             return segment;
         }
     }
     else
     {
+        if (ok != nullptr)
+        {
+            *ok = false;
+        }
         return points;
     }
-    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end)
+QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok)
 {
     QVector<QPointF> reversed = GetReversePoints(points);
-    reversed = FromBegin(reversed, end);
+    reversed = FromBegin(reversed, end, ok);
     return GetReversePoints(reversed);
 }
 
@@ -165,6 +196,29 @@ QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
+{
+    const QVector<QPointF> points = GetPoints();
+    if (points.size() < 2)
+    {
+        return -1;
+    }
+
+    if (points.first().toPoint() == point.toPoint())
+    {
+        return 0;
+    }
+
+    bool ok = false;
+    const QVector<QPointF> segment = ToEnd(points, point, &ok);
+    if (not ok)
+    {
+        return -1;
+    }
+    return PathLength(segment);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IntersectLine return list of points for real intersection with line
  * @param line line that intersect with curve
@@ -172,18 +226,7 @@ QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
  */
 QVector<QPointF> VAbstractCurve::IntersectLine(const QLineF &line) const
 {
-    QVector<QPointF> points = this->GetPoints();
-    QVector<QPointF> intersections;
-    for ( qint32 i = 0; i < points.count()-1; ++i )
-    {
-        QPointF crosPoint;
-        QLineF::IntersectType type = line.intersect(QLineF ( points.at(i), points.at(i+1)), &crosPoint);
-        if ( type == QLineF::BoundedIntersection )
-        {
-            intersections.append(crosPoint);
-        }
-    }
-    return intersections;
+    return CurveIntersectLine(this->GetPoints(), line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -191,6 +234,78 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 {
     const QVector<QPointF> points = IntersectLine(line);
     return not points.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p)
+{
+    if (points.isEmpty())
+    {
+        return false;
+    }
+    else if (points.size() < 2)
+    {
+        return points.at(0) == p;
+    }
+    else
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+{
+    return IsPointOnCurve(GetPoints(), p);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractCurve::GetDuplicate() const
+{
+    return d->duplicate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetDuplicate(quint32 number)
+{
+    d->duplicate = number;
+    CreateName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractCurve::GetColor() const
+{
+    return d->color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetColor(const QString &color)
+{
+    d->color = color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
+{
+    QVector<QPointF> intersections;
+    for ( auto i = 0; i < points.count()-1; ++i )
+    {
+        QPointF crosPoint;
+        const auto type = line.intersect(QLineF(points.at(i), points.at(i+1)), &crosPoint);
+        if ( type == QLineF::BoundedIntersection )
+        {
+            intersections.append(crosPoint);
+        }
+    }
+    return intersections;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,4 +347,21 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
         path.lineTo(arrow.p2());
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
+{
+    if (path.size() < 2)
+    {
+        return 0;
+    }
+
+    QPainterPath splinePath;
+    splinePath.moveTo(path.at(0));
+    for (qint32 i = 1; i < path.count(); ++i)
+    {
+        splinePath.lineTo(path.at(i));
+    }
+    return splinePath.length();
 }

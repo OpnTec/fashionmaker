@@ -27,11 +27,32 @@
  *************************************************************************/
 
 #include "vtoolbisector.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLineF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogbisector.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../../visualization/line/vistoolbisector.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolbisector.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 
@@ -53,12 +74,9 @@ VToolBisector::VToolBisector(VAbstractPattern *doc, VContainer *data, const quin
                              const QString &lineColor, const QString &formula, const quint32 &firstPointId,
                              const quint32 &secondPointId, const quint32 &thirdPointId, const Source &typeCreation,
                              QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, secondPointId, 0, parent), firstPointId(NULL_ID),
-      thirdPointId(NULL_ID)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, secondPointId, 0, parent), firstPointId(firstPointId),
+      thirdPointId(thirdPointId)
 {
-    this->firstPointId = firstPointId;
-    this->thirdPointId = thirdPointId;
-
     ToolCreation(typeCreation);
 }
 
@@ -103,9 +121,9 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
  */
 void VToolBisector::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -124,12 +142,12 @@ void VToolBisector::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                           VContainer *data)
+VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                     VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -141,7 +159,7 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
                                   pointName, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -177,8 +195,8 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                              thirdPoint->toQPointF(), qApp->toPixel(result));
+    QPointF fPoint = VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
+                                              static_cast<QPointF>(*thirdPoint), qApp->toPixel(result));
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -194,23 +212,33 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Bisector, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Bisector, doc);
         VToolBisector *point = new VToolBisector(doc, data, id, typeLine, lineColor, formula, firstPointId,
                                                  secondPointId, thirdPointId, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolBisector::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolBisector::EnableToolMove);
-        doc->AddTool(id, point);
+        InitToolConnections(scene, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
         doc->IncrementReferens(thirdPoint->getIdTool());
         return point;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolBisector::FirstPointName() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolBisector::ThirdPointName() const
+{
+    return VAbstractTool::data.GetGObject(thirdPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +265,7 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -262,9 +290,9 @@ void VToolBisector::RemoveReferens()
  */
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -300,14 +328,14 @@ void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(firstPointId);
-        visual->setPoint2Id(basePointId);
-        visual->setPoint3Id(thirdPointId);
+        visual->setObject1Id(firstPointId);
+        visual->setObject2Id(basePointId);
+        visual->setObject3Id(thirdPointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

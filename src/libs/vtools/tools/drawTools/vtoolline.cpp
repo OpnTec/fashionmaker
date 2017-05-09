@@ -27,13 +27,32 @@
  *************************************************************************/
 
 #include "vtoolline.h"
-#include "../../dialogs/tools/dialogline.h"
-#include <QKeyEvent>
-#include "../vgeometry/vpointf.h"
-#include "../../dialogs/tools/dialogline.h"
-#include "../../visualization/vistoolline.h"
 
-const QString VToolLine::TagName = QStringLiteral("line");
+#include <QKeyEvent>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPen>
+#include <QPointF>
+#include <QSharedPointer>
+#include <Qt>
+#include <QtDebug>
+#include <new>
+
+#include "../../dialogs/tools/dialogline.h"
+#include "../../dialogs/tools/dialogtool.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolline.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vabstracttool.h"
+#include "vdrawtool.h"
+
+template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -50,17 +69,16 @@ const QString VToolLine::TagName = QStringLiteral("line");
 VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
                      const QString &typeLine, const QString &lineColor, const Source &typeCreation,
                      QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
+    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
+      lineColor(lineColor)
 {
     this->typeLine = typeLine;
-    this->lineColor = lineColor;
     //Line
     const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
-    this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
+    this->setLine(QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
@@ -75,9 +93,9 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
  */
 void VToolLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(typeLine);
@@ -92,11 +110,12 @@ void VToolLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                             VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 firstPoint = dialogTool->GetFirstPoint();
     const quint32 secondPoint = dialogTool->GetSecondPoint();
     const QString typeLine = dialogTool->GetTypeLine();
@@ -106,7 +125,7 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbs
                              Source::FromGui);
     if (line != nullptr)
     {
-        line->dialog=dialogTool;
+        line->m_dialog = dialogTool;
     }
     return line;
 }
@@ -129,33 +148,34 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
                               VAbstractPattern *doc, VContainer *data, const Document &parse,
                               const Source &typeCreation)
 {
-    SCASSERT(scene != nullptr);
-    SCASSERT(doc != nullptr);
-    SCASSERT(data != nullptr);
+    SCASSERT(scene != nullptr)
+    SCASSERT(doc != nullptr)
+    SCASSERT(data != nullptr)
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->getNextId();
+        id = VContainer::getNextId();
         data->AddLine(firstPoint, secondPoint);
     }
     else
     {
-        data->UpdateId(id);
+        VContainer::UpdateId(id);
         data->AddLine(firstPoint, secondPoint);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Line, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::Line, doc);
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
         scene->addItem(line);
-        connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
-        doc->AddTool(id, line);
+        InitDrawToolConnections(scene, line);
+        connect(scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
+        connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
+        VAbstractPattern::AddTool(id, line);
 
         const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
         const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
@@ -168,22 +188,21 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+QString VToolLine::getTagName() const
 {
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsLineItem::paint(painter, &myOption, widget);
+    return VAbstractPattern::TagLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::getTagName() const
+QString VToolLine::FirstPointName() const
 {
-    return VToolLine::TagName;
+    return VAbstractTool::data.GetGObject(firstPoint)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPoint)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,6 +249,18 @@ void VToolLine::Disable(bool disable, const QString &namePP)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
@@ -242,7 +273,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -253,7 +284,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolLine::AddToFile()
 {
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
     QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
@@ -284,7 +315,7 @@ void VToolLine::RefreshDataInFile()
  */
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
@@ -297,8 +328,8 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
-    if (vis == nullptr)
+    Q_UNUSED(event)
+    if (vis.isNull())
     {
         this->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
@@ -330,15 +361,7 @@ QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
     return QGraphicsItem::itemChange(change, value);
@@ -360,7 +383,7 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
@@ -376,9 +399,9 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
  */
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -408,12 +431,12 @@ void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(firstPoint);
+        visual->setObject1Id(firstPoint);
         visual->setPoint2Id(secondPoint);
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
@@ -443,7 +466,7 @@ void VToolLine::ShowVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<VisToolLine>();
             SetVisualization();
@@ -459,7 +482,6 @@ void VToolLine::ShowVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
         hoverLeaveEvent(nullptr);
     }
 }
@@ -474,12 +496,25 @@ void VToolLine::SetTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::GetLineColor() const
+{
+    return lineColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SetLineColor(const QString &value)
 {
     lineColor = value;
 
     QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
     SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object)
+    setVisible(visible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -508,6 +543,6 @@ void VToolLine::RefreshGeometry()
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
-    this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
+    this->setLine(QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
     this->setPen(QPen(CorrectColor(lineColor), pen().widthF(), LineStyleToPenStyle(typeLine)));
 }

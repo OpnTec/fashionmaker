@@ -27,21 +27,27 @@
 #define DL_WRITER_ASCII_H
 
 #include "dl_global.h"
+#include "dl_codes.h"
 
 #if defined(Q_CC_MSVC)
     #if (_MSC_VER > 1000)
     #pragma once
     #endif // _MSC_VER > 1000
+
+    #if _MSC_VER < 1900
+    #define snprintf _snprintf
+    #endif
 #endif // Q_CC_MSVC
 
-#include "dl_writer.h"
 #include <fstream>
 #include <string>
+
+#include "dl_writer.h"
 
 /**
  * Implements functions defined in DL_Writer for writing low
  *   level DXF constructs to an ASCII format DXF file.
- * 
+ *
  * @para fname File name of the file to be created.
  * @para version DXF version. Defaults to DL_VERSION_2002.
  *

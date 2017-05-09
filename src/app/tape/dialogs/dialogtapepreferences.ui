@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogTapePreferences</class>
+ <widget class="QDialog" name="DialogTapePreferences">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>831</width>
+    <height>669</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Preferences</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../share/resources/tapeicon.qrc">
+    <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QListWidget" name="contentsWidget">
+       <property name="minimumSize">
+        <size>
+         <width>128</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>128</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>96</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideMiddle</enum>
+       </property>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::IconMode</enum>
+       </property>
+       <property name="currentRow">
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Configuration</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
+          <normaloff>:/icon/config.png</normaloff>:/icon/config.png</iconset>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Paths</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
+          <normaloff>:/icon/path_config.png</normaloff>:/icon/path_config.png</iconset>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="pagesWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <widget class="QWidget" name="page_2"/>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../share/resources/tapeicon.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogTapePreferences</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

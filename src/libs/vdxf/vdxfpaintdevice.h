@@ -29,9 +29,14 @@
 #ifndef VDXFPAINTDEVICE_H
 #define VDXFPAINTDEVICE_H
 
+#include <qcompilerdetection.h>
 #include <QPaintDevice>
+#include <QSize>
 #include <QString>
+#include <QtGlobal>
+
 #include "dxfdef.h"
+#include "dxflib/../dxfdef.h"
 
 class VDxfEngine;
 

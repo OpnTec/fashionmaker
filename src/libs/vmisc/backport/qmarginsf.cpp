@@ -32,9 +32,14 @@
 ****************************************************************************/
 
 #include "qmarginsf.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+#include <QDebugStateSaver>
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #include <QDataStream>
-#include <QDebug>
+#include <QtDebug>
 
 /*!
     \class QMarginsF
@@ -350,7 +355,7 @@ QDataStream &operator<<(QDataStream &s, const QMarginsF &m)
 
 QDataStream &operator>>(QDataStream &s, QMarginsF &m)
 {
-    double left, top, right, bottom;
+    double left = 0, top = 0, right = 0, bottom = 0;
     s >> left;
     s >> top;
     s >> right;

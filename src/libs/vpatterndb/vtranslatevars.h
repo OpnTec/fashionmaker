@@ -29,6 +29,9 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
+#include <qcompilerdetection.h>
+#include <QtGlobal>
+
 #include "vtranslatemeasurements.h"
 
 class VTranslateVars : public VTranslateMeasurements
@@ -43,6 +46,7 @@ public:
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
     QString InternalVarToUser(const QString &var) const;
+    QString PlaceholderToUser(const QString &var) const;
 
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
@@ -54,10 +58,12 @@ public:
     QString PostfixOperator(const QString &name) const;
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
-    QString TryFormulaFromUser(const QString &formula, bool osSeparator) const;
+    static QString TryFormulaFromUser(const QString &formula, bool osSeparator);
     QString FormulaToUser(const QString &formula, bool osSeparator) const;
 
     virtual void Retranslate() Q_DECL_OVERRIDE;
+
+    QMap<QString, qmu::QmuTranslation> GetFunctions() const;
 
 private:
     Q_DISABLE_COPY(VTranslateVars)
@@ -67,12 +73,14 @@ private:
     QMap<QString, qmu::QmuTranslation> variables;
     QMap<QString, qmu::QmuTranslation> functions;
     QMap<QString, qmu::QmuTranslation> postfixOperators;
+    QMap<QString, qmu::QmuTranslation> placeholders;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
 
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
     void InitPostfixOperators();
+    void InitPlaceholder();
 
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);

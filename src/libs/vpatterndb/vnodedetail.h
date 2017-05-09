@@ -31,10 +31,14 @@
 
 #include <QMetaType>
 #include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
 
 #include "../vmisc/def.h"
 
 class VNodeDetailData;
+class VPieceNode;
+class VContainer;
 
 /**
  * @brief The VNodeDetail class keep information about detail node.
@@ -60,13 +64,22 @@ public:
      * @param node node
      */
     VNodeDetail(const VNodeDetail &node);
+
+    ~VNodeDetail();
+
     /**
      * @brief operator = assignment operator
      * @param node node
      * @return node
      */
     VNodeDetail &operator=(const VNodeDetail &node);
-    ~VNodeDetail();
+#ifdef Q_COMPILER_RVALUE_REFS
+    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
+#endif
+
+    void Swap(VNodeDetail &node) Q_DECL_NOTHROW
+    { std::swap(d, node.d); }
+
     /**
      * @brief getId return object id.
      * @return id.
@@ -120,6 +133,9 @@ public:
 
     bool        getReverse() const;
     void        setReverse(bool reverse);
+
+    static QVector<VPieceNode> Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
+                                       bool closed);
 private:
     QSharedDataPointer<VNodeDetailData> d;
 };

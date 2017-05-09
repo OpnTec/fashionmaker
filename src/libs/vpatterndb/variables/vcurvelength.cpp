@@ -27,23 +27,42 @@
  *************************************************************************/
 
 #include "vcurvelength.h"
+
+#include <QLatin1String>
+#include <QMessageLogger>
+
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vspline.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()
     :VCurveVariable()
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit)
     :VCurveVariable(id, parentId)
 {
-    SetType(VarType::Unknown);
-    SCASSERT(curve != nullptr);
+    SetType(VarType::CurveLength);
+    SCASSERT(curve != nullptr)
     SetName(curve->name());
     SetValue(FromPixel(curve->GetLength(), patternUnit));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+                           Unit patternUnit, qint32 segment)
+    :VCurveVariable(id, parentId)
+{
+    SCASSERT(not baseCurveName.isEmpty())
+
+    SetType(VarType::CurveLength);
+    SetName(baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+    SetValue(FromPixel(spl.GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

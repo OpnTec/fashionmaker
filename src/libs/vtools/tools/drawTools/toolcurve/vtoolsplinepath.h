@@ -29,7 +29,22 @@
 #ifndef VTOOLSPLINEPATH_H
 #define VTOOLSPLINEPATH_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
+
+class VSplinePath;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolSplinePath class tool for creation spline path.
@@ -38,19 +53,21 @@ class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                    const Source &typeCreation,
-                    QGraphicsItem * parent = nullptr);
     virtual ~VToolSplinePath() Q_DECL_OVERRIDE;
-    virtual void setDialog();
-    static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                   VContainer *data);
+    virtual void setDialog() Q_DECL_OVERRIDE;
+    static VToolSplinePath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                   VAbstractPattern *doc, VContainer *data);
     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
-                                   VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                   const Document &parse,
+                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                   const Document &parse, const Source &typeCreation);
+    static VToolSplinePath *Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
+                                   QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
+                                   const QString &color, quint32 duplicate, VMainGraphicsScene *scene,
+                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
                                    const Source &typeCreation);
     static const QString ToolType;
-    static void  UpdatePathPoint(VAbstractPattern *doc, QDomNode& node, const VSplinePath &path);
+    static const QString OldToolType;
+    static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 
@@ -68,11 +85,6 @@ signals:
      */
     void          RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                               const QPointF &splinePoint);
-    /**
-     * @brief setEnabledPoint disable control points.
-     * @param enable enable or diasable points.
-     */
-    void          setEnabledPoint(bool enable);
 public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
@@ -80,7 +92,6 @@ public slots:
     virtual void  EnableToolMove(bool move) Q_DECL_OVERRIDE;
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void  RemoveReferens() Q_DECL_OVERRIDE;
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
@@ -91,12 +102,18 @@ protected:
     virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolSplinePath)
     QPointF oldPosition;
+    int     splIndex;
 
-    void          RefreshGeometry();
+    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                    QGraphicsItem *parent = nullptr);
+
+    bool          IsMovable(int index) const;
+    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
-    void          RefreshSplinePath(VSplinePath &splPath);
+    void          SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);
 };
 
 #endif // VTOOLSPLINEPATH_H

@@ -25,6 +25,21 @@ win32{
     VCOPY = $$QMAKE_COPY /D
 }
 
+# See question on StackOwerflow "QSslSocket error when SSL is NOT used" (http://stackoverflow.com/a/31277055/3045403)
+# Copy of answer:
+# We occasionally had customers getting very similar warning messages but the software was also crashing.
+# We determined it was because, although we weren't using SSL either, the program found a copy of OpenSSL on the
+# customer's computer and tried interfacing with it. The version it found was too old though (from Qt 5.2 onwards v1.0.0
+# or later is required).
+#
+# Our solution was to distribute the OpenSSL DLLs along with our application (~1.65 MB). The alternative is to compile
+# Qt from scratch without OpenSSL support.
+win32 {
+    INSTALL_OPENSSL += \
+                       ../../../dist/win/libeay32.dll \
+                       ../../../dist/win/ssleay32.dll
+}
+
 macx{
     # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
     CONFIG+=no_ccache
@@ -66,12 +81,9 @@ defineTest(copyToDestdir) {
     DDIR = $$2
     mkpath($$DDIR)
 
-    message("----------------------------------------------begin------------------------------------------------")
-    message("Copy to" $$DDIR "after link")
     for(FILE, files) {
         unix{
             QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
-            message("Command:" ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)))
         } else {
             !exists($$DDIR/$$basename(FILE)) {
                 # Replace slashes in paths with backslashes for Windows
@@ -80,9 +92,6 @@ defineTest(copyToDestdir) {
                     DDIR ~= s,/,\\,g
                 }
                 QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-                message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
-            } else {
-                message("File:" $$DDIR/$$basename(FILE) "already exist")
             }
 
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
@@ -91,7 +100,6 @@ defineTest(copyToDestdir) {
 
     export(QMAKE_POST_LINK)
     export(QMAKE_CLEAN)
-    message("----------------------------------------------end---------------------------------------------------")
 }
 
 # Alwayse copies the given files to the destination directory
@@ -100,12 +108,9 @@ defineTest(forceCopyToDestdir) {
     DDIR = $$2
     mkpath($$DDIR)
 
-    message("----------------------------------------------begin------------------------------------------------")
-    message("Copy to" $$DDIR "after link")
     for(FILE, files) {
         unix{
             QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
-            message("Command:" ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)))
         } else {
             # Replace slashes in paths with backslashes for Windows
             win32{
@@ -113,14 +118,12 @@ defineTest(forceCopyToDestdir) {
                 DDIR ~= s,/,\\,g
             }
             QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-            message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
         }
     }
 
     export(QMAKE_POST_LINK)
     export(QMAKE_CLEAN)
-    message("----------------------------------------------end---------------------------------------------------")
 }
 
 # We use precompiled headers for more fast compilation source code.
@@ -166,6 +169,40 @@ defineReplace(enable_ccache){
         }
     }
     return(true)
+}
+
+defineReplace(FindBuildRevision){
+CONFIG(debug, debug|release){
+    # Debug mode
+    return(\\\"unknown\\\")
+}else{
+    # Release mode
+
+    macx{
+        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
+    }else {
+        HG = hg # All other platforms are OK.
+    }
+
+    #build revision number for using in version
+    unix {
+        DVCS_HESH=$$system("$${HG} log -r. --template '{node|short}'")
+    } else {
+        # Use escape character before "|" on Windows
+        DVCS_HESH=$$system($${HG} log -r. --template "{node^|short}")
+    }
+    isEmpty(DVCS_HESH){
+        DVCS_HESH=$$system("git rev-parse --short HEAD")
+        isEmpty(DVCS_HESH){
+            DVCS_HESH = \\\"unknown\\\" # if we can't find build revision left unknown.
+        } else {
+            DVCS_HESH=\\\"Git:$${DVCS_HESH}\\\"
+        }
+    } else {
+        DVCS_HESH=\\\"Hg:$${DVCS_HESH}\\\"
+    }
+    return($${DVCS_HESH})
+}
 }
 
 # Default prefix. Use for creation install path.
@@ -238,9 +275,9 @@ GCC_DEBUG_CXXFLAGS += \
     -Wmissing-include-dirs \
     -Wpacked \
     -Wredundant-decls \
-    -Winline \
+#    -Winline \
     -Winvalid-pch \
-    -Wunsafe-loop-optimizations \
+#    -Wunsafe-loop-optimizations \
     -Wlong-long \
     -Wmissing-format-attribute \
     -Wswitch-default \
@@ -255,6 +292,37 @@ GCC_DEBUG_CXXFLAGS += \
     -Wundef \
     -Wno-unused \
     -ftrapv
+
+# Good support Q_NULLPTR come later
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 4) {
+GCC_DEBUG_CXXFLAGS += -Wzero-as-null-pointer-constant
+}
+
+# Since GCC 5
+g++5:GCC_DEBUG_CXXFLAGS += \
+    -Wswitch-bool \
+    -Wlogical-not-parentheses \
+    -Wsizeof-array-argument \
+    -Wbool-compare \
+    -Wsuggest-final-types \
+    -Wsuggest-final-methods
+
+# Since GCC 6
+g++6:GCC_DEBUG_CXXFLAGS += \
+    -Wshift-negative-value \
+    -Wshift-overflow \
+    -Wshift-overflow=2 \
+    -Wtautological-compare \
+    -Wnull-dereference \
+    -Wduplicated-cond \
+    -Wmisleading-indentation
+
+# Since GCC 7
+g++7:GCC_DEBUG_CXXFLAGS += \
+    -Wduplicated-branches \
+    -Wrestrict \
+    -Walloc-zero \
+    -Wnonnull
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
@@ -277,7 +345,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wanalyzer-incompatible-plugin \
     -Wanonymous-pack-parens \
     -Warc \
-    -Warc-abi \
     -Warc-bridge-casts-disallowed-in-nonarc \
     -Warc-maybe-repeated-use-of-weak \
     -Warc-non-pod-memaccess \
@@ -301,6 +368,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wbad-array-new-length \
     -Wbad-function-cast \
     -Wbind-to-temporary-copy \
+        -Wno-c++98-compat-bind-to-temporary-copy \
     -Wbitfield-constant-conversion \
     -Wbitwise-op-parentheses \
     -Wbool-conversion \
@@ -426,7 +494,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Winherited-variadic-ctor \
     -Winit-self \
     -Winitializer-overrides \
-    -Winline \
+#    -Winline \
     -Wint-conversion \
     -Wint-conversions \
     -Wint-to-pointer-cast \
@@ -446,6 +514,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wliteral-conversion \
     -Wliteral-range \
     -Wlocal-type-template-args \
+        -Wno-c++98-compat-local-type-template-args \
     -Wlogical-not-parentheses \
     -Wlogical-op-parentheses \
     -Wlong-long \
@@ -611,7 +680,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wunused-parameter \
     -Wunused-private-field \
     -Wunused-result \
-    -Wunused-sanitize-argument \
     -Wunused-value \
     -Wunused-variable \
     -Wunused-volatile-lvalue \
@@ -626,12 +694,19 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wvla-extension \
     -Wvolatile-register-var \
     -Wweak-template-vtables \
-    -Wweak-vtables \
+#    -Wweak-vtables \
     -Wwrite-strings \
     -Wzero-length-array \
     -Qunused-arguments \
     -fcolor-diagnostics \
     -fms-extensions # Need for pragma message
+
+unix:!macx{
+    #Clang on MAC OS X doesn't support all options
+    CLANG_DEBUG_CXXFLAGS += \
+        -Warc-abi \
+        -Wunused-sanitize-argument
+}
 
 ICC_DEBUG_CXXFLAGS += \
     $$ISYSTEM \ # Ignore warnings Qt headers.
@@ -639,7 +714,7 @@ ICC_DEBUG_CXXFLAGS += \
     -Weffc++ \
     -Wextra-tokens \
     -Wformat \
-    #-Winline \
+#    -Winline \
     -Wmain \
     -Wmissing-declarations \
     -Wmissing-prototypes \
@@ -673,4 +748,53 @@ CLANG_DEBUG_CXXFLAGS += \
     -pedantic \
     -fno-omit-frame-pointer \ # Need for exchndl.dll
     -fms-extensions # Need for pragma message
+
+MSVC_DEBUG_CXXFLAGS += \
+    -Wall \
+    -wd4061 \ # enum value is not *explicitly* handled in switch
+    -wd4099 \ # first seen using 'struct' now seen using 'class'
+    -wd4127 \ # conditional expression is constant
+    -wd4217 \ # member template isn't copy constructor
+    -wd4250 \ # inherits (implements) some member via dominance
+    -wd4251 \ # needs to have dll-interface to be used by clients
+    -wd4275 \ # exported class derived from non-exported class
+    -wd4347 \ # "behavior change", function called instead of template
+    -wd4355 \ # "'this': used in member initializer list
+    -wd4505 \ # unreferenced function has been removed
+    -wd4510 \ # default constructor could not be generated
+    -wd4511 \ # copy constructor could not be generated
+    -wd4512 \ # assignment operator could not be generated
+    -wd4513 \ # destructor could not be generated
+    -wd4514 \ # 'function' : unreferenced inline function has been removed
+    -wd4610 \ # can never be instantiated user defined constructor required
+    -wd4623 \ # default constructor could not be generated
+    -wd4624 \ # destructor could not be generated
+    -wd4625 \ # copy constructor could not be generated
+    -wd4626 \ # assignment operator could not be generated
+    -wd4640 \ # a local static object is not thread-safe
+    -wd4661 \ # a member of the template class is not defined.
+    -wd4670 \ # a base class of an exception class is inaccessible for catch
+    -wd4672 \ # a base class of an exception class is ambiguous for catch
+    -wd4673 \ # a base class of an exception class is inaccessible for catch
+    -wd4675 \ # resolved overload was found by argument-dependent lookup
+    -wd4702 \ # unreachable code, e.g. in <list> header.
+    -wd4710 \ # call was not inlined
+    -wd4711 \ # call was inlined
+    -wd4820 \ # some padding was added
+    -wd4917 \ # a GUID can only be associated with a class, interface or namespace
+    -wd4351 \ # elements of array 'array' will be default initialized
+    # The following are real warnings but are generated by almost all MS headers, including
+    # standard library headers, so it's impractical to leave them on.
+    -wd4619 \ # there is no warning number 'XXXX'
+    -wd4668 \ # XXX is not defined as a preprocessor macro
+    # Because Microsoft doesn't provide a way to suppress warnings in headers we will suppress
+    # all warnings we meet in headers globally
+    -wd4548 \
+    -wd4350 \
+    -wd4242 \
+    -wd4265 \
+    -wd4599 \
+    -wd4371 \
+    -wd4718 \
+    -wd4946
 }

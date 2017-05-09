@@ -22,8 +22,15 @@
 #ifndef QMUFORMULABASE_H
 #define QMUFORMULABASE_H
 
-#include "qmuparser_global.h"
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
+#include "qmuparser_global.h"
+
+template <class Key, class T> class QMap;
 
 namespace qmu
 {
@@ -34,14 +41,14 @@ public:
     QmuFormulaBase();
     virtual ~QmuFormulaBase() Q_DECL_OVERRIDE;
 
+    virtual void InitCharSets() Q_DECL_OVERRIDE;
+
+    static void RemoveAll(QMap<int, QString> &map, const QString &val);
+
 protected:
-    void          InitCharacterSets();
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
     void          SetSepForTr(bool osSeparator, bool fromUser);
     void          SetSepForEval();
-
-    static void   RemoveAll(QMap<int, QString> &map, const QString &val);
-
 private:
     Q_DISABLE_COPY(QmuFormulaBase)
 };

@@ -27,24 +27,32 @@
  *************************************************************************/
 
 #include "vformula.h"
+
+#include <qnumeric.h>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QtDebug>
+
+#include "../qmuparser/qmuparsererror.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "calculator.h"
 #include "vcontainer.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vsettings.h"
 #include "vtranslatevars.h"
-#include <QDebug>
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
-    :formula(QString()), value(QString(tr("Error"))), checkZero(true), data(nullptr), toolId(NULL_ID),
+    :formula(QString()), value(tr("Error")), checkZero(true), data(nullptr), toolId(NULL_ID),
       postfix(QString()), _error(true), dValue(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
     : formula(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator())),
-      value(QString(tr("Error"))),
+      value(tr("Error")),
       checkZero(true),
       data(container),
       toolId(NULL_ID),
@@ -88,7 +96,7 @@ bool VFormula::operator==(const VFormula &formula) const
     if (this->formula == formula.GetFormula() && this->value == formula.getStringValue() &&
         this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
         this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
-        this->_error == formula.error() && qFuzzyCompare(this->dValue, formula.getDoubleValue()))
+        this->_error == formula.error() && VFuzzyComparePossibleNulls(this->dValue, formula.getDoubleValue()))
     {
         isEqual = true;
     }
@@ -224,7 +232,7 @@ void VFormula::Eval()
     }
     if (formula.isEmpty())
     {
-        value = QString(tr("Error"));
+        value = tr("Error");
         _error = true;
         dValue = 0;
     }
@@ -232,28 +240,36 @@ void VFormula::Eval()
     {
         try
         {
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
-            delete cal;
 
-            //if result equal 0
-            if (checkZero && qFuzzyCompare(1 + result, 1 + 0))
+            if (qIsInf(result) || qIsNaN(result))
             {
-                value = QString("0");
+                value = tr("Error");
                 _error = true;
                 dValue = 0;
             }
             else
             {
-                dValue = result;
-                value = QString(qApp->LocaleToString(result) + " " + postfix);
-                _error = false;
+                //if result equal 0
+                if (checkZero && qFuzzyIsNull(result))
+                {
+                    value = QString("0");
+                    _error = true;
+                    dValue = 0;
+                }
+                else
+                {
+                    dValue = result;
+                    value = QString(qApp->LocaleToString(result) + " " + postfix);
+                    _error = false;
+                }
             }
         }
         catch (qmu::QmuParserError &e)
         {
-            value = QString(tr("Error"));
+            value = tr("Error");
             _error = true;
             dValue = 0;
             qDebug() << "\nMath parser error:\n"

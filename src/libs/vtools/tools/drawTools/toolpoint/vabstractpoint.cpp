@@ -27,9 +27,13 @@
  *************************************************************************/
 
 #include "vabstractpoint.h"
-#include "../vgeometry/vpointf.h"
 
-const QString VAbstractPoint::TagName = QStringLiteral("point");
+#include <QSharedPointer>
+
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vgobject.h"
+#include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id)
@@ -37,13 +41,9 @@ VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractPoint::~VAbstractPoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPoint::getTagName() const
 {
-    return VAbstractPoint::TagName;
+    return VAbstractPattern::TagPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,23 +66,8 @@ void VAbstractPoint::DeleteFromLabel()
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPoint::PointName(quint32 id) const
-{
-    try
-    {
-        return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
-    }
-    catch (const VExceptionBadId &e)
-    {
-        qCDebug(vTool, "Error! Couldn't get point name. %s %s", qUtf8Printable(e.ErrorMessage()),
-                qUtf8Printable(e.DetailedInformation()));
-        return QString("");// Return empty string for property browser
     }
 }
 

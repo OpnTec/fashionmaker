@@ -29,10 +29,13 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "../qmuparser/qmuformulabase.h"
-#include "../vmisc/def.h"
+#include <qcompilerdetection.h>
+#include <QHash>
+#include <QMap>
+#include <QString>
+#include <QtGlobal>
 
-class VContainer;
+#include "../qmuparser/qmuformulabase.h"
 
 /**
  * @brief The Calculator class for calculation formula.
@@ -48,21 +51,21 @@ class VContainer;
  *     //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
  *     //Don't know why.
  *     delete dialog;
- *     Calculator *cal = new Calculator();
+ *     QScopedPointer<Calculator> cal(new Calculator());
  *     result = cal->EvalFormula(data->PlainVariables(), formula);
- *     delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
  * }
  */
 class Calculator:public qmu::QmuFormulaBase
 {
 public:
     Calculator();
-    virtual ~Calculator() Q_DECL_OVERRIDE;
-    qreal         EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
+    virtual ~Calculator() Q_DECL_EQ_DEFAULT;
+
+    qreal EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
-    void          InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
-                                const QString &formula);
+
+    void InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens, const QString &formula);
 };
 
 #endif // CALCULATOR_H

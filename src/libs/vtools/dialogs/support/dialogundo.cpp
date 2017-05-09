@@ -27,11 +27,15 @@
  *************************************************************************/
 
 #include "dialogundo.h"
-#include "ui_dialogundo.h"
-#include "../../../ifc/exception/vexceptionundo.h"
-#include "../../../vmisc/vabstractapplication.h"
+
 #include <QCloseEvent>
-#include <QUndoStack>
+#include <QLocale>
+#include <QPushButton>
+#include <Qt>
+
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogundo.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogUndo::DialogUndo(QWidget *parent)
@@ -39,7 +43,7 @@ DialogUndo::DialogUndo(QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     bool opening = qApp->getOpeningPattern();
     if (opening)
@@ -48,9 +52,17 @@ DialogUndo::DialogUndo(QWidget *parent)
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, this, &DialogUndo::Undo);
+        connect(ui->pushButtonUndo, &QPushButton::clicked, RECEIVER(this)[this]()
+        {
+            result = UndoButton::Undo;
+            accept();
+        });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, this, &DialogUndo::Fix);
+    connect(ui->pushButtonFix, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        result = UndoButton::Fix;
+        accept();
+    });
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 
     setCursor(Qt::ArrowCursor);
@@ -60,20 +72,6 @@ DialogUndo::DialogUndo(QWidget *parent)
 DialogUndo::~DialogUndo()
 {
     delete ui;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogUndo::Undo()
-{
-    result = UndoButton::Undo;
-    accept();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogUndo::Fix()
-{
-    result = UndoButton::Fix;
-    accept();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

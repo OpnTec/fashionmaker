@@ -29,6 +29,13 @@
 #ifndef DIALOGCUTSPLINE_H
 #define DIALOGCUTSPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -53,11 +60,6 @@ public:
 
     quint32             getSplineId() const;
     void                setSplineId(const quint32 &value);
-
-    QString             GetColor() const;
-    void                SetColor(const QString &value);
-
-    void                SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
@@ -83,9 +85,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                 formulaBaseHeight;
-
-    quint32 ch1;
-    quint32 ch2;
 };
 
 #endif // DIALOGCUTSPLINE_H

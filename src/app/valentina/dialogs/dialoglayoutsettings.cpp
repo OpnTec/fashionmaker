@@ -31,23 +31,20 @@
 #include "../core/vapplication.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/vsettings.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include "../vmisc/vmath.h"
+#include "../vlayout/vlayoutgenerator.h"
 
 #include <QMessageBox>
 #include <QPushButton>
+#include <QPrinterInfo>
 
 //must be the same order as PaperSizeTemplate constants
 const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames =
-        DialogLayoutSettings::FormatsVector () << QLatin1Literal("A0")
-                                               << QLatin1Literal("A1")
-                                               << QLatin1Literal("A2")
-                                               << QLatin1Literal("A3")
-                                               << QLatin1Literal("A4")
+        DialogLayoutSettings::FormatsVector () << QLatin1String("A0")
+                                               << QLatin1String("A1")
+                                               << QLatin1String("A2")
+                                               << QLatin1String("A3")
+                                               << QLatin1String("A4")
                                                << QApplication::translate("DialogLayoutSettings", "Letter")
                                                << QApplication::translate("DialogLayoutSettings", "Legal")
                                                << QApplication::translate("DialogLayoutSettings", "Roll 24in")
@@ -64,7 +61,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     //moved from ReadSettings - well...it seems it can be done once only (i.e. constructor) because Init funcs dont
     //even cleanse lists before adding
@@ -73,6 +70,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     InitTemplates();
     MinimumPaperSize();
     MinimumLayoutSize();
+    InitPrinter();
 
     //in export console mode going to use defaults
     if (disableSettings == false)
@@ -84,24 +82,27 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
         RestoreDefaults();
     }
 
-    connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPrinter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogLayoutSettings::PrinterMargins);
+
+    connect(ui->comboBoxTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
-    connect(ui->comboBoxPaperSizeUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPaperSizeUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertPaperSize);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
 
-    connect(ui->doubleSpinBoxPaperWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
-    connect(ui->doubleSpinBoxPaperHeight,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
 
     connect(ui->checkBoxIgnoreFileds, &QCheckBox::stateChanged, this, &DialogLayoutSettings::IgnoreAllFields);
@@ -224,8 +225,6 @@ void DialogLayoutSettings::SetGroup(const Cases &value)
             ui->radioButtonTwoGroups->setChecked(true);
             break;
         case Cases::CaseDesc:
-            ui->radioButtonDescendingArea->setChecked(true);
-            break;
         default:
             ui->radioButtonDescendingArea->setChecked(true);
             break;
@@ -303,6 +302,30 @@ void DialogLayoutSettings::SetUnitePages(bool save)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsStripOptimization() const
+{
+    return ui->groupBoxStrips->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetStripOptimization(bool save)
+{
+    ui->groupBoxStrips->setChecked(save);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 DialogLayoutSettings::GetMultiplier() const
+{
+    return static_cast<quint8>(ui->spinBoxMultiplier->value());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetMultiplier(const quint8 &value)
+{
+    ui->spinBoxMultiplier->setValue(static_cast<int>(value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::IsIgnoreAllFields() const
 {
     return ui->checkBoxIgnoreFileds->isChecked();
@@ -312,6 +335,12 @@ bool DialogLayoutSettings::IsIgnoreAllFields() const
 void DialogLayoutSettings::SetIgnoreAllFields(bool value)
 {
     ui->checkBoxIgnoreFileds->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLayoutSettings::SelectedPrinter() const
+{
+    return ui->comboBoxPrinter->currentText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -537,47 +566,66 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
+    generator->SetStripOptimization(IsStripOptimization());
+    generator->SetMultiplier(GetMultiplier());
 
     if (IsIgnoreAllFields())
     {
-        generator->SetFields(QMarginsF());
+        generator->SetPrinterFields(false, QMarginsF());
     }
     else
     {
-        const QMarginsF minFields = RoundMargins(VSettings::GetDefFields());
-        const QMarginsF fields = RoundMargins(GetFields());
-        if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
-            fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
+        QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        if (printer.isNull())
         {
-            QMessageBox::StandardButton answer;
-            answer = QMessageBox::question(this, tr("Wrong fields."),
-                                           tr("Fields go beyond printing. \n\nApply settings anyway?"),
-                                           QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-            if (answer == QMessageBox::No)
+            generator->SetPrinterFields(true, GetFields());
+        }
+        else
+        {
+            const QMarginsF minFields = MinPrinterFields();
+            const QMarginsF fields = GetFields();
+            if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
+                fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
             {
-                if (fields.left() < minFields.left())
+                QMessageBox::StandardButton answer;
+                answer = QMessageBox::question(this, tr("Wrong fields."),
+                                               tr("Fields go beyond printing. \n\nApply settings anyway?"),
+                                               QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+                if (answer == QMessageBox::No)
                 {
-                    ui->doubleSpinBoxLeftField->setValue(UnitConvertor(minFields.left(), Unit::Px, LayoutUnit()));
-                }
+                    if (fields.left() < minFields.left())
+                    {
+                        ui->doubleSpinBoxLeftField->setValue(UnitConvertor(minFields.left(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.right() < minFields.right())
-                {
-                    ui->doubleSpinBoxRightField->setValue(UnitConvertor(minFields.right(), Unit::Px, LayoutUnit()));
-                }
+                    if (fields.right() < minFields.right())
+                    {
+                        ui->doubleSpinBoxRightField->setValue(UnitConvertor(minFields.right(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.top() < minFields.top())
-                {
-                    ui->doubleSpinBoxTopField->setValue(UnitConvertor(minFields.top(), Unit::Px, LayoutUnit()));
-                }
+                    if (fields.top() < minFields.top())
+                    {
+                        ui->doubleSpinBoxTopField->setValue(UnitConvertor(minFields.top(), Unit::Px, LayoutUnit()));
+                    }
 
-                if (fields.bottom() < minFields.bottom())
+                    if (fields.bottom() < minFields.bottom())
+                    {
+                        ui->doubleSpinBoxBottomField->setValue(UnitConvertor(minFields.bottom(), Unit::Px,
+                                                                             LayoutUnit()));
+                    }
+
+                    generator->SetPrinterFields(true, GetFields());
+                }
+                else
                 {
-                    ui->doubleSpinBoxBottomField->setValue(UnitConvertor(minFields.bottom(), Unit::Px, LayoutUnit()));
+                    generator->SetPrinterFields(false, GetFields());
                 }
             }
+            else
+            {
+                generator->SetPrinterFields(true, GetFields());
+            }
         }
-
-        generator->SetFields(GetFields());
     }
 
     //don't want to break visual settings when cmd used
@@ -596,16 +644,35 @@ void DialogLayoutSettings::RestoreDefaults()
     TemplateSelected();
     ui->comboBoxTemplates->blockSignals(false);
 
+    ui->comboBoxPrinter->blockSignals(true);
+    InitPrinter();
+    ui->comboBoxPrinter->blockSignals(false);
+
     SetLayoutWidth(VSettings::GetDefLayoutWidth());
     SetShift(VSettings::GetDefLayoutShift());
     SetGroup(VSettings::GetDefLayoutGroup());
     SetRotate(VSettings::GetDefLayoutRotate());
     SetIncrease(VSettings::GetDefLayoutRotationIncrease());
-    SetFields(VSettings::GetDefFields());
+    SetFields(GetDefPrinterFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
+    SetMultiplier(VSettings::GetDefMultiplier());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::PrinterMargins()
+{
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        SetFields(GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
+    }
+    else
+    {
+        SetFields(QMarginsF());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -693,6 +760,51 @@ void DialogLayoutSettings::InitTemplates()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::InitPrinter()
+{
+    ui->comboBoxPrinter->clear();
+    QStringList printerNames;
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+    const QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
+    for(int i = 0; i < printers.size(); ++i)
+    {
+        const QString name = printers.at(i).printerName();
+        if (not name.isEmpty())
+        {
+            printerNames.append(name);
+        }
+    }
+#else
+    printerNames = QPrinterInfo::availablePrinterNames();
+#endif
+
+    ui->comboBoxPrinter->addItems(printerNames);
+
+    if (ui->comboBoxPrinter->count() == 0)
+    {
+        ui->comboBoxPrinter->addItem(tr("None", "Printer"));
+    }
+    else
+    {
+        QString defPrinterName;
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+        const QPrinterInfo def = QPrinterInfo::defaultPrinter();
+        if(not def.isNull())
+        {
+            defPrinterName = def.printerName();
+        }
+#else
+        defPrinterName = QPrinterInfo::defaultPrinterName();
+#endif
+        const int index = ui->comboBoxPrinter->findText(defPrinterName);
+        if(index != -1)
+        {
+            ui->comboBoxPrinter->setCurrentIndex(index);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogLayoutSettings::MakeHelpTemplateList()
 {
     QString out = "\n";
@@ -712,12 +824,7 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
 QSizeF DialogLayoutSettings::Template()
 {
     PaperSizeTemplate temp;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->itemData(ui->comboBoxTemplates->currentIndex())
-                                          .toInt());
-#else
-    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
-#endif
+    temp = static_cast<PaperSizeTemplate>(CURRENT_DATA(ui->comboBoxTemplates).toInt());
 
     switch (temp)
     {
@@ -838,36 +945,44 @@ QSizeF DialogLayoutSettings::RoundTemplateSize(qreal width, qreal height) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF DialogLayoutSettings::RoundMargins(const QMarginsF &margins) const
+QMarginsF DialogLayoutSettings::MinPrinterFields() const
 {
-    QMarginsF newMargins;
-    newMargins.setLeft(qRound(margins.left() * 100.0) / 100.0);
-    newMargins.setRight(qRound(margins.right() * 100.0) / 100.0);
-    newMargins.setTop(qRound(margins.top() * 100.0) / 100.0);
-    newMargins.setBottom(qRound(margins.bottom() * 100.0) / 100.0);
-    return newMargins;
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        QSharedPointer<QPrinter> pr = QSharedPointer<QPrinter>(new QPrinter(printer));
+        return GetMinPrinterFields(pr);
+    }
+    else
+    {
+        return QMarginsF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF DialogLayoutSettings::GetDefPrinterFields() const
+{
+    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    if (not printer.isNull())
+    {
+        return GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
+    }
+    else
+    {
+        return QMarginsF();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->itemData(ui->comboBoxPaperSizeUnit->currentIndex())
-                                    .toString());
-#else
-    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
-#endif
+    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxPaperSizeUnit).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::LayoutUnit() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->itemData(ui->comboBoxLayoutUnit->currentIndex())
-                                    .toString());
-#else
-    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
-#endif
+    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxLayoutUnit).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -951,8 +1066,10 @@ void DialogLayoutSettings::ReadSettings()
     SetAutoCrop(settings->GetLayoutAutoCrop());
     SetSaveLength(settings->GetLayoutSaveLength());
     SetUnitePages(settings->GetLayoutUnitePages());
-    SetFields(settings->GetFields());
+    SetFields(settings->GetFields(GetDefPrinterFields()));
     SetIgnoreAllFields(settings->GetIgnoreAllFields());
+    SetStripOptimization(settings->GetStripOptimization());
+    SetMultiplier(settings->GetMultiplier());
 
     FindTemplate();
 
@@ -976,6 +1093,8 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutUnitePages(IsUnitePages());
     settings->SetFields(GetFields());
     settings->SetIgnoreAllFields(IsIgnoreAllFields());
+    settings->SetStripOptimization(IsStripOptimization());
+    settings->SetMultiplier(GetMultiplier());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -998,4 +1117,5 @@ void DialogLayoutSettings::SetAdditionalOptions(bool value)
     SetAutoCrop(value);
     SetSaveLength(value);
     SetUnitePages(value);
+    SetStripOptimization(value);
 }

@@ -9,22 +9,30 @@ PMSYSTEMS += \
     p0 p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20 p21 p22 p23 p24 p25 p26 p27 p28 p29 p30 \
     p31 p32 p33 p34 p35 p36 p37 p38 p39 p40 p41 p42 p43 p44 p45 p46 p47 p48 p49 p50 p51 p52 p53 p54 p998
 
-LANGUAGES += \
-    ru_RU \
-    uk_UA \
-    de_DE \
-    cs_CZ \
-    he_IL \
-    fr_FR \
-    it_IT \
-    nl_NL \
-    id_ID \
-    es_ES \
-    fi_FI \
-    en_US \
-    en_CA \
-    en_IN \
-    ro_RO
+# An example of using LOCALES="de_DE nl_NL"
+isEmpty(LOCALES){
+    LANGUAGES += \
+        ru_RU \
+        uk_UA \
+        de_DE \
+        cs_CZ \
+        he_IL \
+        fr_FR \
+        it_IT \
+        nl_NL \
+        id_ID \
+        es_ES \
+        fi_FI \
+        en_US \
+        en_CA \
+        en_IN \
+        ro_RO \
+        zh_CN \
+        pt_BR \
+        el_GR
+} else {
+    LANGUAGES = $${LOCALES}
+}
 
 for(lang, LANGUAGES) {
     INSTALL_TRANSLATIONS += $${TRANSLATIONS_PATH}/valentina_$${lang}.qm
@@ -38,7 +46,11 @@ for(lang, LANGUAGES) {
 
 # Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
 isEmpty(LRELEASE){
-    LRELEASE = lrelease
+    win32{
+        LRELEASE = lrelease.exe
+    } else {
+        LRELEASE = lrelease
+    }
 }
 
 # Run generation *.qm file for available *.ts files each time you run qmake.
@@ -47,7 +59,7 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
   _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
     !exists($$_translation_name) {
-        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($$_translation_name))
+        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -silent $$shell_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($$_translation_name))
         unix {
             exists($${OUT_PWD}/$$DESTDIR/valentina) {
                 system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking
@@ -56,6 +68,7 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
         }
         QMAKE_CLEAN += $$shell_path($$_translation_name)
     }
+    QMAKE_CLEAN += $$shell_path($$_translation_name)
 }
 
 # Make possible run program even you do not install it. Seek files in local directory.
@@ -208,5 +221,30 @@ macx{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_ro_RO.path = "$$RESOURCES_DIR/translations/ro_RO.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_ro_RO
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_zh_CN.qm){
+            TRANSLATION_zh_CN.files += \
+                $$files($${TRANSLATIONS_PATH}/*_zh_CN.qm) \
+                $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_zh_CN.path = "$$RESOURCES_DIR/translations/zh_CN.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_zh_CN
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_pt_BR.qm){
+            TRANSLATION_pt_BR.files += \
+                $$files($${TRANSLATIONS_PATH}/*_pt_BR.qm) \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_pt_BR.path = "$$RESOURCES_DIR/translations/pt_BR.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_pt_BR
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_el_GR.qm){
+            TRANSLATION_el_GR.files += \
+                $$files($${TRANSLATIONS_PATH}/*_el_GR.qm) \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_el_GR.path = "$$RESOURCES_DIR/translations/el_GR.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_el_GR
         }
 }

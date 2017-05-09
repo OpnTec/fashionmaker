@@ -30,6 +30,9 @@
 #define VFORMULA_H
 
 #include <QCoreApplication>
+#include <QMetaType>
+#include <QString>
+#include <QtGlobal>
 
 enum class FormulaType : char{ToUser, FromUser};
 

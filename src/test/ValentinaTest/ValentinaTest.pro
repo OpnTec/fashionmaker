@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += testlib gui printsupport xml xmlpatterns
+QT       += core testlib gui printsupport xml xmlpatterns
 
 TARGET = ValentinaTests
 
@@ -36,99 +36,59 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 SOURCES += \
     qttestmainlambda.cpp \
     tst_vposter.cpp \
-    tst_vabstractdetail.cpp \
     tst_vspline.cpp \
-    abstracttest.cpp \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
     tst_varc.cpp \
-    stable.cpp \
-    tst_measurementregexp.cpp \
-    tst_tapecommandline.cpp \
-    tst_valentinacommandline.cpp \
     tst_qmutokenparser.cpp \
     tst_vmeasurements.cpp \
-    tst_qmuparsererrormsg.cpp \
     tst_vlockguard.cpp \
     tst_misc.cpp \
     tst_vcommandline.cpp \
-    tst_tstranslation.cpp \
-    tst_vdetail.cpp \
+    tst_vpiece.cpp \
     tst_vabstractcurve.cpp \
-    tst_vgobject.cpp
+    tst_findpoint.cpp \
+    tst_vellipticalarc.cpp \
+    tst_vcubicbezierpath.cpp \
+    tst_vgobject.cpp \
+    tst_vsplinepath.cpp \
+    tst_vpointf.cpp \
+    tst_readval.cpp \
+    tst_vtranslatevars.cpp \
+    tst_vabstractpiece.cpp
+
+win32-msvc*:SOURCES += stable.cpp
 
 HEADERS += \
     tst_vposter.h \
-    tst_vabstractdetail.h \
     tst_vspline.h \
-    abstracttest.h \
     tst_nameregexp.h \
     tst_vlayoutdetail.h \
     tst_varc.h \
     stable.h \
-    tst_measurementregexp.h \
-    tst_tapecommandline.h \
-    tst_valentinacommandline.h \
     tst_qmutokenparser.h \
     tst_vmeasurements.h \
-    tst_qmuparsererrormsg.h \
     tst_vlockguard.h \
     tst_misc.h \
     tst_vcommandline.h \
-    tst_tstranslation.h \
-    tst_vdetail.h \
+    tst_vpiece.h \
     tst_vabstractcurve.h \
-    tst_vgobject.h
+    tst_findpoint.h \
+    tst_vellipticalarc.h \
+    tst_vcubicbezierpath.h \
+    tst_vgobject.h \
+    tst_vsplinepath.h \
+    tst_vpointf.h \
+    tst_readval.h \
+    tst_vtranslatevars.h \
+    tst_vabstractpiece.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-DEFINES += TS_DIR=\\\"$${PWD}/../../../share/translations\\\"
+include(warnings.pri)
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$CLANG_DEBUG_CXXFLAGS \ # See common.pri for more details.
-                -Wno-gnu-zero-variadic-macro-arguments\ # See macros QSKIP
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS += \
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$ICC_DEBUG_CXXFLAGS
-        }
-    } else {
-        *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
@@ -149,6 +109,24 @@ CONFIG(debug, debug|release){
     }
 }
 
+#VTools static library (depend on VWidgets, VMisc, VPatternDB)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtools/$${DESTDIR}/ -lvtools
+
+INCLUDEPATH += $$PWD/../../libs/vtools
+DEPENDPATH += $$PWD/../../libs/vtools
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
+
+#VWidgets static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
+
+INCLUDEPATH += $$PWD/../../libs/vwidgets
+DEPENDPATH += $$PWD/../../libs/vwidgets
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
+
 # VFormat static library (depend on VPatternDB, IFC)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
 
@@ -167,6 +145,15 @@ DEPENDPATH += $$PWD/../../libs/vpatterndb
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
 
+# IFC static library (depend on QMuParser, VMisc)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
+
+INCLUDEPATH += $$PWD/../../libs/ifc
+DEPENDPATH += $$PWD/../../libs/ifc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
+
 #VMisc static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR}/ -lvmisc
 
@@ -184,15 +171,6 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
-
-# IFC static library (depend on QMuParser)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
-
-INCLUDEPATH += $$PWD/../../libs/ifc
-DEPENDPATH += $$PWD/../../libs/ifc
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
 
 # VLayout static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR} -lvlayout
@@ -219,93 +197,3 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
-
-TAPE_TEST_FILES += \
-    tst_tape/keiko.vit \
-    tst_tape/empty.vit \
-    tst_tape/all_measurements_v0.3.0.vit \
-    tst_tape/all_measurements_v0.4.0.vst \
-    tst_tape/GOST_man_ru_v0.3.0.vst \
-    tst_tape/all_measurements_v0.3.3.vit \
-    tst_tape/all_measurements_v0.4.2.vst \
-    tst_tape/GOST_man_ru_v0.4.2.vst \
-    tst_tape/broken1.vit \
-    tst_tape/broken2.vit \
-    tst_tape/broken3.vit \
-    tst_tape/broken4.vit \
-    tst_tape/text.vit \
-    tst_tape/text.vst
-
-VALENTINA_TEST_FILES += \
-    tst_valentina/empty.val \
-    tst_valentina/issue_372.val \
-    tst_valentina/wrong_obj_type.val \
-    tst_valentina/text.val \
-    tst_valentina/glimited_no_m.val \
-    tst_valentina/glimited_vit.val \
-    tst_valentina/glimited.vit \
-    tst_valentina/glimited_vst.val \
-    tst_valentina/glimited.vst \
-    tst_valentina/issue_256.val \
-    tst_valentina/issue_256_wrong_path.val \
-    tst_valentina/issue_256_correct.vit \
-    tst_valentina/issue_256_wrong.vit \
-    tst_valentina/issue_256_correct.vst \
-    tst_valentina/issue_256_wrong.vit \
-    tst_valentina/wrong_formula.val
-
-COLLECTION_FILES += \
-    $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
-    $${PWD}/../../app/share/collection/bra.val \
-    $${PWD}/../../app/share/collection/bra.vit \
-    $${PWD}/../../app/share/collection/jacketМ1_52-176.val \
-    $${PWD}/../../app/share/collection/jacketМ2_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ3_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ4_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ5_30-110.val \
-    $${PWD}/../../app/share/collection/jacketМ6_30-110.val \
-    $${PWD}/../../app/share/collection/pantsМ1_52-176.val \
-    $${PWD}/../../app/share/collection/pantsМ2_40-146.val \
-    $${PWD}/../../app/share/collection/pantsМ7.val \
-    $${PWD}/../../app/share/collection/TShirt_test.val \
-    $${PWD}/../../app/share/collection/TestDart.val \
-    $${PWD}/../../app/share/collection/patrón_blusa.val \
-    $${PWD}/../../app/share/collection/blusa.vit \
-    $${PWD}/../../app/share/collection/PajamaTopWrap2.val \
-    $${PWD}/../../app/share/collection/Susan.vit \
-    $${PWD}/../../app/share/collection/Moulage_0.5_armhole_neckline.val \
-    $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val \
-    $${PWD}/../../app/share/collection/my_calculated_measurements_for_val.vit \
-    $${PWD}/../../app/share/collection/Keiko_skirt.val \
-    $${PWD}/../../app/share/collection/keiko.vit
-
-
-# Compilation will fail without this files after we added them to this section.
-OTHER_FILES += \
-    $$TAPE_TEST_FILES \
-    $$VALENTINA_TEST_FILES \
-    $$COLLECTION_FILES
-
-for(DIR, TAPE_TEST_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     tape_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$tape_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_tape))
-
-for(DIR, VALENTINA_TEST_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     valentina_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$valentina_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina))
-
-for(DIR, COLLECTION_FILES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     collection_path += $$DIR
-}
-
-copyToDestdir($$collection_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina_collection))

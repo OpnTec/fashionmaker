@@ -24,19 +24,32 @@
 
 #include "dl_dxf.h"
 
+#include <ctype.h>
+#if defined(__GNUC__) && !defined(__APPLE__)
+#if (__GNUC__ * 100 + __GNUC_MINOR__) > 406
+#include <ext/alloc_traits.h>
+#endif
+#endif
+#include <qcompilerdetection.h>
+#include <string.h>
+#include <QString>
+#include <QStringList>
 #include <algorithm>
-#include <string>
-#include <cstdio>
 #include <cassert>
 #include <cmath>
-#include <QStringList>
+#include <memory>
+#include <string>
+#include <utility>
 
+#include "../vmisc/diagnostic.h"
 #include "dl_attributes.h"
 #include "dl_codes.h"
-#include "dl_creationadapter.h"
 #include "dl_writer_ascii.h"
-
+#include "../dxfdef.h"
+#include "dl_creationinterface.h"
+#include "dl_entities.h"
 #include "iostream"
+#include "strlcpy.h"
 
 /**
  * Default constructor.
@@ -109,7 +122,11 @@ bool DL_Dxf::in(const std::string& file, DL_CreationInterface* creationInterface
     firstCall = true;
     currentObjectType = DL_UNKNOWN;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     fp = fopen(file.c_str(), "rt");
+QT_WARNING_POP
+
     if (fp)
     {
         while (readDxfGroups(fp, creationInterface)) {}
@@ -172,13 +189,12 @@ bool DL_Dxf::in(std::stringstream& stream,
  */
 bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 {
-    // cppcheck-suppress variableScope
-    static int line = 1;
-
     // Read one group of the DXF file and strip the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, fp) &&
         DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp, false) )
     {
+        static int line = 1;
+
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
@@ -197,13 +213,11 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 bool DL_Dxf::readDxfGroups(std::stringstream& stream,
                            DL_CreationInterface* creationInterface)
 {
-    // cppcheck-suppress variableScope
-    static int line = 1;
-
     // Read one group of the DXF file and chop the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, stream) &&
         DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream, false) )
     {
+        static int line = 1;
 
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 
@@ -222,7 +236,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @param s Output\n
  *      Pointer to character array that chopped line will be returned in.
  * @param size Size of \p s.  (Including space for NULL.)
- * @param fp Input\n
+ * @param stream Input\n
  *      Handle of input file.
  *
  * @retval true if line could be read
@@ -232,16 +246,16 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @todo Is it a problem if line is blank (i.e., newline only)?
  *      Then, when function returns, (s==NULL).
  */
-bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripSpace)
+bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *stream, bool stripSpace)
 {
-    if (!feof(fp))
+    if (!feof(stream))
     {
         // The whole line in the file.  Includes space for NULL.
         char* wholeLine = new char[size];
         // Only the useful part of the line
         char* line;
 
-        line = fgets(wholeLine, static_cast<int>(size), fp);
+        line = fgets(wholeLine, static_cast<int>(size), stream);
 
         if (line!=NULL && line[0] != '\0')   // Evaluates to fgets() retval
         {
@@ -403,7 +417,7 @@ bool DL_Dxf::processDXFGroup(DL_CreationInterface* creationInterface,
         int color24;
         color24 = getIntValue(420, -1);
         int handle;
-        handle = getIntValue(5, -1);
+        handle = getInt16Value(5, -1);
 
         std::string linetype = getStringValue(6, "BYLAYER");
 
@@ -1137,7 +1151,7 @@ void DL_Dxf::addRay(DL_CreationInterface* creationInterface)
  */
 void DL_Dxf::addPolyline(DL_CreationInterface* creationInterface)
 {
-    DL_PolylineData pd(maxVertices, getIntValue(71, 0), getIntValue(72, 0), getIntValue(70, 0));
+    DL_PolylineData pd(maxVertices, getIntValue(71, 0), getIntValue(72, 0), getIntValue(70, 0), getRealValue(38, 0));
     creationInterface->addPolyline(pd);
 
     maxVertices = std::min(maxVertices, vertexIndex+1);
@@ -1277,7 +1291,7 @@ void DL_Dxf::addEllipse(DL_CreationInterface* creationInterface)
                      getRealValue(31, 0.0),
                      getRealValue(40, 1.0),
                      getRealValue(41, 0.0),
-                     getRealValue(42, 2*M_PI));
+                     getRealValue(42, M_2PI));
 
     creationInterface->addEllipse(d);
 }
@@ -1392,12 +1406,12 @@ void DL_Dxf::addMText(DL_CreationInterface* creationInterface)
     {
         if (libVersion<=0x02000200)
         {
-            // wrong but compatible with dxflib <=2.0.2.0:
+            // wrong but compatible with dxflib <=2.0.2.0 (angle stored in rad):
             angle = getRealValue(50, 0.0);
         }
         else
         {
-            angle = (getRealValue(50, 0.0)*2*M_PI)/360.0;
+            angle = (getRealValue(50, 0.0)*M_2PI)/360.0;
         }
     }
     else if (hasValue(11) && hasValue(21))
@@ -1409,11 +1423,11 @@ void DL_Dxf::addMText(DL_CreationInterface* creationInterface)
         {
             if (y>0.0)
             {
-                angle = M_PI/2.0;
+                angle = M_PI_2;
             }
             else
             {
-                angle = M_PI/2.0*3.0;
+                angle = M_PI_2*3.0;
             }
         }
         else
@@ -1855,7 +1869,7 @@ void DL_Dxf::addText(DL_CreationInterface* creationInterface)
         // style
         getStringValue(7, ""),
         // angle
-        (getRealValue(50, 0.0)*2*M_PI)/360.0);
+        (getRealValue(50, 0.0)*M_2PI)/360.0);
 
     creationInterface->addText(d);
 }
@@ -1894,7 +1908,7 @@ void DL_Dxf::addAttribute(DL_CreationInterface* creationInterface)
         // style
         getStringValue(7, ""),
         // angle
-        (getRealValue(50, 0.0)*2*M_PI)/360.0);
+        (getRealValue(50, 0.0)*M_2PI)/360.0);
 
     creationInterface->addAttribute(d);
 }
@@ -2293,10 +2307,10 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.radius = toReal(groupValue);
                     return true;
                 case 50:
-                    hatchEdge.angle1 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle1 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 51:
-                    hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle2 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
@@ -2328,10 +2342,10 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.ratio = toReal(groupValue);
                     return true;
                 case 50:
-                    hatchEdge.angle1 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle1 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 51:
-                    hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle2 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
@@ -2540,8 +2554,9 @@ void DL_Dxf::endSequence(DL_CreationInterface* creationInterface)
  */
 DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
 {
-    char* f = new char[strlen(file)+1];
-    strcpy(f, file);
+    const size_t size = strlen(file)+1;
+    char* f = new char[size];
+    strlcpy(f, file, size);
     this->version = version;
 
     DL_WriterA* dw = new DL_WriterA(f, version);
@@ -2586,7 +2601,6 @@ void DL_Dxf::writeHeader(DL_WriterA& dw) const
             break;
         case DL_Codes::AC1009_MIN:
             // minimalistic DXF version is unidentified in file:
-            break;
         default:
             break;
     }
@@ -2620,9 +2634,12 @@ void DL_Dxf::writePoint(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbPoint");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbPoint");
+    }
     dw.coord(DL_POINT_COORD_CODE, data.x, data.y, data.z);
 }
 
@@ -2643,9 +2660,12 @@ void DL_Dxf::writeLine(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbLine");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbLine");
+    }
     dw.coord(DL_LINE_START_CODE, data.x1, data.y1, data.z1);
     dw.coord(DL_LINE_END_CODE, data.x2, data.y2, data.z2);
 }
@@ -2667,9 +2687,12 @@ void DL_Dxf::writeXLine(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbLine");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbLine");
+    }
     dw.coord(DL_LINE_START_CODE, data.bx, data.by, data.bz);
     dw.coord(DL_LINE_END_CODE, data.dx, data.dy, data.dz);
 }
@@ -2691,9 +2714,12 @@ void DL_Dxf::writeRay(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbLine");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbLine");
+    }
     dw.coord(DL_LINE_START_CODE, data.bx, data.by, data.bz);
     dw.coord(DL_LINE_END_CODE, data.dx, data.dy, data.dz);
 }
@@ -2715,8 +2741,8 @@ void DL_Dxf::writePolyline(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.entity("LWPOLYLINE");
-        dw.entityAttributes(attrib);
         dw.dxfString(100, "AcDbEntity");
+        dw.entityAttributes(attrib);
         dw.dxfString(100, "AcDbPolyline");
         dw.dxfInt(90, static_cast<int>(data.number));
         dw.dxfInt(70, data.flags);
@@ -2799,10 +2825,13 @@ void DL_Dxf::writeSpline(DL_WriterA& dw,
 {
 
     dw.entity("SPLINE");
-    dw.entityAttributes(attrib);
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
+    }
+    dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
         dw.dxfString(100, "AcDbSpline");
     }
     dw.dxfInt(70, data.flags);
@@ -2878,9 +2907,12 @@ void DL_Dxf::writeCircle(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbCircle");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbCircle");
+    }
     dw.coord(10, data.cx, data.cy, data.cz);
     dw.dxfReal(40, data.radius);
 }
@@ -2938,9 +2970,12 @@ void DL_Dxf::writeEllipse(DL_WriterA& dw,
         if (version==DL_VERSION_2000)
         {
             dw.dxfString(100, "AcDbEntity");
-            dw.dxfString(100, "AcDbEllipse");
         }
         dw.entityAttributes(attrib);
+        if (version==DL_VERSION_2000)
+        {
+            dw.dxfString(100, "AcDbEllipse");
+        }
         dw.coord(10, data.cx, data.cy, data.cz);
         dw.coord(11, data.mx, data.my, data.mz);
         dw.dxfReal(40, data.ratio);
@@ -2966,9 +3001,12 @@ void DL_Dxf::writeSolid(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbTrace");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbTrace");
+    }
     dw.coord(10, data.x[0], data.y[0], data.z[0]);
     dw.coord(11, data.x[1], data.y[1], data.z[1]);
     dw.coord(12, data.x[2], data.y[2], data.z[2]);
@@ -2991,9 +3029,12 @@ void DL_Dxf::writeTrace(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbTrace");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbTrace");
+    }
     dw.coord(10, data.x[0], data.y[0], data.z[0]);
     dw.coord(11, data.x[1], data.y[1], data.z[1]);
     dw.coord(12, data.x[2], data.y[2], data.z[2]);
@@ -3018,9 +3059,12 @@ void DL_Dxf::write3dFace(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbFace");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbFace");
+    }
     dw.coord(10, data.x[0], data.y[0], data.z[0]);
     dw.coord(11, data.x[1], data.y[1], data.z[1]);
     dw.coord(12, data.x[2], data.y[2], data.z[2]);
@@ -3052,6 +3096,10 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
+    }
+    dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
         if (data.cols!=1 || data.rows!=1)
         {
             dw.dxfString(100, "AcDbMInsertBlock");
@@ -3061,7 +3109,6 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
             dw.dxfString(100, "AcDbBlockReference");
         }
     }
-    dw.entityAttributes(attrib);
     dw.dxfString(2, data.name);
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
@@ -3106,9 +3153,12 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbMText");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbMText");
+    }
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
     dw.dxfReal(30, data.ipz);
@@ -3124,18 +3174,24 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     int i;
     for (i=250; i<length; i+=250)
     {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
         strncpy(chunk, &data.text.c_str()[i-250], 250);
+QT_WARNING_POP
         chunk[250]='\0';
         dw.dxfString(3, chunk);
     }
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4996)
     strncpy(chunk, &data.text.c_str()[i-250], 250);
+QT_WARNING_POP
     chunk[250]='\0';
     dw.dxfString(1, chunk);
 
     dw.dxfString(7, data.style);
 
     // since dxflib 2.0.2.1: degrees not rad (error in autodesk dxf doc)
-    dw.dxfReal(50, data.angle/(2.0*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
 
     dw.dxfInt(73, data.lineSpacingStyle);
     dw.dxfReal(44, data.lineSpacingFactor);
@@ -3159,15 +3215,18 @@ void DL_Dxf::writeText(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbText");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbText");
+    }
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
     dw.dxfReal(30, data.ipz);
     dw.dxfReal(40, data.height);
     dw.dxfString(1, data.text);
-    dw.dxfReal(50, data.angle/(2*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
     dw.dxfReal(41, data.xScaleFactor);
     dw.dxfString(7, data.style);
 
@@ -3180,6 +3239,7 @@ void DL_Dxf::writeText(DL_WriterA& dw,
 
     if (version==DL_VERSION_2000)
     {
+        // required twice for some reason:
         dw.dxfString(100, "AcDbText");
     }
 
@@ -3195,15 +3255,18 @@ void DL_Dxf::writeAttribute(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbText");
     }
     dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
+        dw.dxfString(100, "AcDbText");
+    }
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
     dw.dxfReal(30, data.ipz);
     dw.dxfReal(40, data.height);
     dw.dxfString(1, data.text);
-    dw.dxfReal(50, data.angle/(2*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
     dw.dxfReal(41, data.xScaleFactor);
     dw.dxfString(7, data.style);
 
@@ -3368,7 +3431,7 @@ void DL_Dxf::writeDimLinear(DL_WriterA& dw,
     dw.dxfReal(24, edata.dpy2);
     dw.dxfReal(34, 0.0);
 
-    dw.dxfReal(50, edata.angle/(2.0*M_PI)*360.0);
+    dw.dxfReal(50, edata.angle/(M_2PI)*360.0);
 
     if (version==DL_VERSION_2000)
     {
@@ -3732,10 +3795,13 @@ void DL_Dxf::writeLeader(DL_WriterA& dw,
     if (version>DL_VERSION_R12)
     {
         dw.entity("LEADER");
-        dw.entityAttributes(attrib);
         if (version==DL_VERSION_2000)
         {
             dw.dxfString(100, "AcDbEntity");
+        }
+        dw.entityAttributes(attrib);
+        if (version==DL_VERSION_2000)
+        {
             dw.dxfString(100, "AcDbLeader");
         }
         dw.dxfString(3, "Standard");
@@ -3785,10 +3851,13 @@ void DL_Dxf::writeHatch1(DL_WriterA& dw,
 {
 
     dw.entity("HATCH");
-    dw.entityAttributes(attrib);
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
+    }
+    dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
         dw.dxfString(100, "AcDbHatch");
     }
     dw.dxfReal(10, 0.0);             // elevation
@@ -3824,7 +3893,7 @@ void DL_Dxf::writeHatch2(DL_WriterA& dw,
                          const DL_Attributes& attrib) const
 {
 
-    Q_UNUSED(attrib);
+    Q_UNUSED(attrib)
 
     dw.dxfInt(75, 0);                // odd parity
     dw.dxfInt(76, 1);                // pattern type
@@ -3882,7 +3951,7 @@ void DL_Dxf::writeHatchLoop1(DL_WriterA& dw,
 void DL_Dxf::writeHatchLoop2(DL_WriterA& dw,
                              const DL_HatchLoopData& data)
 {
-    Q_UNUSED(data);
+    Q_UNUSED(data)
     dw.dxfInt(97, 0);
 }
 
@@ -3919,8 +3988,8 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(10, data.cx);
             dw.dxfReal(20, data.cy);
             dw.dxfReal(40, data.radius);
-            dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
-            dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
+            dw.dxfReal(50, data.angle1/(M_2PI)*360.0);
+            dw.dxfReal(51, data.angle2/(M_2PI)*360.0);
             dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
@@ -3931,8 +4000,8 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(11, data.mx);
             dw.dxfReal(21, data.my);
             dw.dxfReal(40, data.ratio);
-            dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
-            dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
+            dw.dxfReal(50, data.angle1/(M_2PI)*360.0);
+            dw.dxfReal(51, data.angle2/(M_2PI)*360.0);
             dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
@@ -4003,10 +4072,13 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
 
     dw.entity("IMAGE");
 
-    dw.entityAttributes(attrib);
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
+    }
+    dw.entityAttributes(attrib);
+    if (version==DL_VERSION_2000)
+    {
         dw.dxfString(100, "AcDbRasterImage");
         dw.dxfInt(90, 0);
     }
@@ -4209,14 +4281,7 @@ void DL_Dxf::writeLinetype(DL_WriterA& dw,
     dw.dxfString(2, data.name);
     dw.dxfInt(70, data.flags);
 
-    if (nameUpper=="BYBLOCK")
-    {
-        dw.dxfString(3, "");
-        dw.dxfInt(72, 65);
-        dw.dxfInt(73, 0);
-        dw.dxfReal(40, 0.0);
-    }
-    else if (nameUpper=="BYLAYER")
+    if (nameUpper=="BYBLOCK" || nameUpper=="BYLAYER")
     {
         dw.dxfString(3, "");
         dw.dxfInt(72, 65);
@@ -5840,7 +5905,7 @@ int DL_Dxf::getLibVersion(const std::string& str)
 //        double ret;
 //        if (strchr(value, ',') != NULL) {
 //            char* tmp = new char[strlen(value)+1];
-//            strcpy(tmp, value);
+//            strlcpy(tmp, value, sizeof(tmp));
 //            DL_WriterA::strReplace(tmp, ',', '.');
 //            ret = atof(tmp);
 //            delete[] tmp;
@@ -5860,19 +5925,21 @@ int DL_Dxf::getLibVersion(const std::string& str)
  */
 void DL_Dxf::test()
 {
-    char* buf1 = new char[10];
-    char* buf2 = new char[10];
-    char* buf3 = new char[10];
-    char* buf4 = new char[10];
-    char* buf5 = new char[10];
-    char* buf6 = new char[10];
+    const size_t bufSize = 10;
 
-    strcpy(buf1, "  10\n");
-    strcpy(buf2, "10");
-    strcpy(buf3, "10\n");
-    strcpy(buf4, "  10 \n");
-    strcpy(buf5, "  10 \r");
-    strcpy(buf6, "\t10 \n");
+    char* buf1 = new char[bufSize];
+    char* buf2 = new char[bufSize];
+    char* buf3 = new char[bufSize];
+    char* buf4 = new char[bufSize];
+    char* buf5 = new char[bufSize];
+    char* buf6 = new char[bufSize];
+
+    strlcpy(buf1, "  10\n", bufSize);
+    strlcpy(buf2, "10", bufSize);
+    strlcpy(buf3, "10\n", bufSize);
+    strlcpy(buf4, "  10 \n", bufSize);
+    strlcpy(buf5, "  10 \r", bufSize);
+    strlcpy(buf6, "\t10 \n", bufSize);
 
     // Try to avoid deleting array from an offset
     char* buf1Copy = buf1;

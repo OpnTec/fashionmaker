@@ -4,11 +4,8 @@
 SOURCES += \
     $$PWD/vcontainer.cpp \
     $$PWD/calculator.cpp \
-    $$PWD/vdetail.cpp \
     $$PWD/vnodedetail.cpp \
     $$PWD/vtranslatevars.cpp \
-    $$PWD/variables/varcangle.cpp \
-    $$PWD/variables/varclength.cpp \
     $$PWD/variables/varcradius.cpp \
     $$PWD/variables/vcurveangle.cpp \
     $$PWD/variables/vcurvelength.cpp \
@@ -18,10 +15,16 @@ SOURCES += \
     $$PWD/variables/vlineangle.cpp \
     $$PWD/variables/vlinelength.cpp \
     $$PWD/variables/vmeasurement.cpp \
-    $$PWD/variables/vsplineangle.cpp \
-    $$PWD/variables/vsplinelength.cpp \
     $$PWD/variables/vvariable.cpp \
-    $$PWD/vformula.cpp
+    $$PWD/vformula.cpp \
+    $$PWD/variables/vcurveclength.cpp \
+    $$PWD/vpiece.cpp \
+    $$PWD/vpiecenode.cpp \
+    $$PWD/vpiecepath.cpp \
+    $$PWD/floatItemData/vpiecelabeldata.cpp \
+    $$PWD/floatItemData/vpatternlabeldata.cpp \
+    $$PWD/floatItemData/vgrainlinedata.cpp \
+    $$PWD/floatItemData/vabstractfloatitemdata.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -30,13 +33,9 @@ HEADERS += \
     $$PWD/stable.h \
     $$PWD/calculator.h \
     $$PWD/variables.h \
-    $$PWD/vdetail.h \
-    $$PWD/vdetail_p.h \
     $$PWD/vnodedetail.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vtranslatevars.h \
-    $$PWD/variables/varcangle.h \
-    $$PWD/variables/varclength.h \
     $$PWD/variables/varcradius.h \
     $$PWD/variables/varcradius_p.h \
     $$PWD/variables/vcurveangle.h \
@@ -53,8 +52,22 @@ HEADERS += \
     $$PWD/variables/vlinelength_p.h \
     $$PWD/variables/vmeasurement.h \
     $$PWD/variables/vmeasurement_p.h \
-    $$PWD/variables/vsplineangle.h \
-    $$PWD/variables/vsplinelength.h \
     $$PWD/variables/vvariable.h \
     $$PWD/variables/vvariable_p.h \
-    $$PWD/vformula.h
+    $$PWD/vformula.h \
+    $$PWD/variables/vcurveclength.h \
+    $$PWD/vpiece.h \
+    $$PWD/vpiece_p.h \
+    $$PWD/vpiecenode.h \
+    $$PWD/vpiecenode_p.h \
+    $$PWD/vpiecepath.h \
+    $$PWD/vpiecepath_p.h \
+    $$PWD/floatItemData/vpiecelabeldata.h \
+    $$PWD/floatItemData/vpatternlabeldata.h \
+    $$PWD/floatItemData/vgrainlinedata.h \
+    $$PWD/floatItemData/vabstractfloatitemdata.h \
+    $$PWD/floatItemData/vabstractfloatitemdata_p.h \
+    $$PWD/floatItemData/vgrainlinedata_p.h \
+    $$PWD/floatItemData/floatitemdef.h \
+    $$PWD/floatItemData/vpatternlabeldata_p.h \
+    $$PWD/floatItemData/vpiecelabeldata_p.h

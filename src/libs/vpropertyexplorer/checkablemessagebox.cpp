@@ -17,12 +17,21 @@
 
 #include "checkablemessagebox.h"
 
+#include <QAbstractButton>
 #include <QApplication>
 #include <QCheckBox>
+#include <QForeachContainer>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLatin1String>
 #include <QPushButton>
 #include <QSettings>
+#include <QSize>
+#include <QSizePolicy>
+#include <QSpacerItem>
+#include <QVBoxLayout>
+#include <QVariant>
+#include <Qt>
 
 static const char kDoNotAskAgainKey[] = "DoNotAskAgain";
 

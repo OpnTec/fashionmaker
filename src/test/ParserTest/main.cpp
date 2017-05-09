@@ -27,13 +27,9 @@
  *************************************************************************/
 
 #include <QCoreApplication>
-#include <QDebug>
 #include <QTimer>
 #include <QtGlobal>
 #include "../qmuparser/qmuparsertest.h"
-
-using namespace qmu;
-using namespace Test;
 
 //---------------------------------------------------------------------------------------------------------------------
 void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -42,8 +38,6 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
     switch (type)
     {
         case QtDebugMsg:
-            fprintf(stderr, "%s\n", localMsg.constData());
-            break;
         case QtWarningMsg:
             fprintf(stderr, "%s\n", localMsg.constData());
             break;
@@ -65,7 +59,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     qInstallMessageHandler(testMessageOutput);
-    QmuParserTester pt;
+    qmu::Test::QmuParserTester pt;
     QTimer::singleShot(0, &pt, SLOT(Run()));
     return a.exec();
 }

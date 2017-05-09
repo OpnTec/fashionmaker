@@ -32,10 +32,10 @@
 #include <QSharedData>
 #include <QPointF>
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VContourData : public QSharedData
 {
@@ -70,8 +70,6 @@ private:
     VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;
 };
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VCONTOUR_P_H

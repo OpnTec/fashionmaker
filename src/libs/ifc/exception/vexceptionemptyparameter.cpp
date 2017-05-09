@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vexceptionemptyparameter.h"
+
 #include <QDomElement>
 #include <QTextStream>
+
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,8 +62,19 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParamete
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionEmptyParameter::~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true)
-{}
+VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    name = e.Name();
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

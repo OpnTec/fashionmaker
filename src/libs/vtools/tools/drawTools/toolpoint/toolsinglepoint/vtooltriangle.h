@@ -29,7 +29,20 @@
 #ifndef VTOOLTRIANGLE_H
 #define VTOOLTRIANGLE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolTriangle class for tool that find point intersection two foots right triangle
@@ -39,12 +52,8 @@ class VToolTriangle : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
-                  const quint32 &axisP2Id,
-                  const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                  QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolTriangle *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
                                  const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
@@ -55,6 +64,11 @@ public:
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
+
+    QString AxisP1Name() const;
+    QString AxisP2Name() const;
+    QString FirstPointName() const;
+    QString SecondPointName() const;
 
     quint32 GetAxisP1Id() const;
     void    SetAxisP1Id(const quint32 &value);
@@ -89,6 +103,11 @@ private:
 
     /** @brief secondPointId id second triangle point, what lies on the hypotenuse. */
     quint32        secondPointId;
+
+    VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
+                  const quint32 &axisP2Id,
+                  const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                  QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLTRIANGLE_H

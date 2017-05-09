@@ -29,20 +29,29 @@
 #ifndef VTOOLPOINTFROMCIRCLEANDTANGENT_H
 #define VTOOLPOINTFROMCIRCLEANDTANGENT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
 class VFormula;
+template <class T> class QSharedPointer;
 
 class VToolPointFromCircleAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointFromCircleAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 circleCenterId,
-                                   const QString &circleRadius, quint32 tangentPointId, CrossCirclesPoint crossPoint,
-                                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointFromCircleAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                                  VContainer *data);
+    static VToolPointFromCircleAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                                  VAbstractPattern *doc, VContainer *data);
     static VToolPointFromCircleAndTangent *Create(const quint32 _id, const QString &pointName,
                                                   quint32 circleCenterId, QString &circleRadius, quint32 tangentPointId,
                                                   CrossCirclesPoint crossPoint, const qreal &mx, const qreal &my,
@@ -52,6 +61,9 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointFromCircleAndTangent) };
+
+    QString TangentPointName() const;
+    QString CircleCenterPointName() const;
 
     quint32 GetTangentPointId() const;
     void    SetTangentPointId(const quint32 &value);
@@ -80,6 +92,10 @@ private:
     quint32 tangentPointId;
     QString circleRadius;
     CrossCirclesPoint crossPoint;
+
+    VToolPointFromCircleAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 circleCenterId,
+                                   const QString &circleRadius, quint32 tangentPointId, CrossCirclesPoint crossPoint,
+                                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMCIRCLEANDTANGENT_H

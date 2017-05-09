@@ -20,6 +20,8 @@
  ******************************************************************************************************/
 
 #include "qmutranslation.h"
+
+#include <QByteArray>
 #include <QCoreApplication>
 
 namespace qmu

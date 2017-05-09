@@ -28,6 +28,73 @@
 
 #include "vnodedetail.h"
 #include "vnodedetail_p.h"
+#include "vpiecenode.h"
+#include "vpiecepath.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+
+#include <QLineF>
+#include <QVector>
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+bool IsOX(const QLineF &line)
+{
+    return VFuzzyComparePossibleNulls(line.angle(), 0)
+            || VFuzzyComparePossibleNulls(line.angle(), 360)
+            || VFuzzyComparePossibleNulls(line.angle(), 180);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IsOY(const QLineF &line)
+{
+    return VFuzzyComparePossibleNulls(line.angle(), 90) || VFuzzyComparePossibleNulls(line.angle(), 270);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString LocalWidth(const QLineF &line, const QLineF &movedLine)
+{
+    if (VFuzzyComparePossibleNulls(line.angle(), movedLine.angle()))
+    {
+        return QString().setNum(movedLine.length());
+    }
+    else
+    {// different direction means value is negative
+        return QString("0");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConvertBefore(VPieceNode &node, const QLineF &line, qreal mX, qreal mY)
+{
+    if (not qFuzzyIsNull(mX) && IsOX(line))
+    {
+        const QLineF movedLine(line.p1().x(), line.p1().y(), line.p2().x() + mX, line.p2().y());
+        node.SetFormulaSABefore(LocalWidth(line, movedLine));
+    }
+    else if (not qFuzzyIsNull(mY) && IsOY(line))
+    {
+        const QLineF movedLine(line.p1().x(), line.p1().y(), line.p2().x(), line.p2().y() + mY);
+        node.SetFormulaSABefore(LocalWidth(line, movedLine));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConvertAfter(VPieceNode &node, const QLineF &line, qreal mX, qreal mY)
+{
+    if (not qFuzzyIsNull(mX) && IsOX(line))
+    {
+        const QLineF movedLine(line.p1().x(), line.p1().y(), line.p2().x() + mX, line.p2().y());
+        node.SetFormulaSAAfter(LocalWidth(line, movedLine));
+    }
+    else if (not qFuzzyIsNull(mY) && IsOY(line))
+    {
+        const QLineF movedLine(line.p1().x(), line.p1().y(), line.p2().x(), line.p2().y() + mY);
+        node.SetFormulaSAAfter(LocalWidth(line, movedLine));
+    }
+}
+}//static functions
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
@@ -145,4 +212,59 @@ void VNodeDetail::setReverse(bool reverse)
     {
         d->reverse = reverse;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
+                                         bool closed)
+{
+    if (width < 0)
+    {
+        width = 0;
+    }
+
+    VPiecePath path;
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VNodeDetail &node = nodes.at(i);
+        path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
+    }
+
+    if (path.PathPoints(data).size() > 2)
+    {
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            const VNodeDetail &node = nodes.at(i);
+            if (node.getTypeTool() == Tool::NodePoint)
+            {
+                if (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy()))
+                {
+                    const QPointF previosPoint = path.NodePreviousPoint(data, i);
+                    const QPointF nextPoint = path.NodeNextPoint(data, i);
+
+                    const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
+
+                    QLineF lineBefore(point, previosPoint);
+                    lineBefore.setAngle(lineBefore.angle()-90);
+                    lineBefore.setLength(width);
+
+                    ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
+
+                    QLineF lineAfter(point, nextPoint);
+                    lineAfter.setAngle(lineAfter.angle()+90);
+                    lineAfter.setLength(width);
+
+                    ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
+                }
+            }
+        }
+    }
+
+    if (not closed && path.CountNodes() > 1)
+    {
+        path[0].SetFormulaSABefore("0");
+        path[path.CountNodes()-1].SetFormulaSAAfter("0");
+    }
+
+    return path.GetNodes();
 }

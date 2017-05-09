@@ -27,48 +27,69 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
-#include "exception/vexception.h"
-#include "exception/vexceptionwrongid.h"
 
+#include <QDir>
+#include <QDomElement>
+#include <QDomNode>
+#include <QDomNodeList>
 #include <QFile>
 #include <QFileInfo>
-#include <QDir>
+#include <QLatin1String>
+#include <QMap>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+
+#include "../exception/vexception.h"
+#include "../exception/vexceptionwrongid.h"
+#include "vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
-    :VDomDocument(), ver(0x0), fileName(fileName)
+    : VDomDocument(),
+      m_ver(0x0),
+      m_convertedFileName(fileName),
+      m_tmpFile()
 {
-    this->setXMLContent(fileName);
-    const QString version = GetVersionStr();
-    ver = GetVersion(version);
+    setXMLContent(m_convertedFileName);// Throw an exception on error
+    m_ver = GetVersion(GetVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractConverter::~VAbstractConverter()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Convert()
+QString VAbstractConverter::Convert()
 {
-    if (ver == MaxVer())
+    if (m_ver == MaxVer())
     {
-        return;
+        return m_convertedFileName;
     }
 
-    QString error;
-    const QString backupFileName = fileName + QLatin1Literal(".backup");
-    if (SafeCopy(fileName, backupFileName, error) == false)
+    if (not IsReadOnly())
     {
-        const QString errorMsg(tr("Error creating a backup file: %1.").arg(error));
+        ReserveFile();
+    }
+
+    if (m_tmpFile.open())
+    {
+        m_convertedFileName = m_tmpFile.fileName();
+    }
+    else
+    {
+        const QString errorMsg(tr("Error openning a temp file: %1.").arg(m_tmpFile.errorString()));
         throw VException(errorMsg);
     }
 
-    ReserveFile();
+    m_ver < MaxVer() ? ApplyPatches() : DowngradeToCurrentMaxVersion();
 
-    ApplyPatches();
+    return m_convertedFileName;
+}
 
-    QFile file(backupFileName);
-    file.remove();
+//---------------------------------------------------------------------------------------------------------------------
+int VAbstractConverter::GetCurrentFormatVarsion() const
+{
+    return m_ver;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,29 +121,29 @@ QString VAbstractConverter::GetVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetVersion(const QString &version) const
+int VAbstractConverter::GetVersion(const QString &version)
 {
     ValidateVersion(version);
 
-    QStringList ver = version.split(".");
+    const QStringList ver = version.split(".");
 
     bool ok = false;
-    int major = ver.at(0).toInt(&ok);
-    if (ok == false)
+    const int major = ver.at(0).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    int minor = ver.at(1).toInt(&ok);
-    if (ok == false)
+    const int minor = ver.at(1).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    int patch = ver.at(2).toInt(&ok);
-    if (ok == false)
+    const int patch = ver.at(2).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
@@ -131,11 +152,11 @@ int VAbstractConverter::GetVersion(const QString &version) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(const QString &version) const
+void VAbstractConverter::ValidateVersion(const QString &version)
 {
-    QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
+    const QRegularExpression rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
 
-    if (rx.exactMatch(version) == false)
+    if (rx.match(version).hasMatch() == false)
     {
         const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);
@@ -154,16 +175,27 @@ void VAbstractConverter::ReserveFile() const
     //It's not possible in all cases make conversion without lose data.
     //For such cases we will store old version in a reserve file.
     QString error;
-    QFileInfo info(fileName);
-    const QString reserveFileName = QString("%1/%2(v%3).%4")
+    QFileInfo info(m_convertedFileName);
+    const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
             .arg(info.absoluteDir().absolutePath())
             .arg(info.baseName())
             .arg(GetVersionStr())
             .arg(info.completeSuffix());
-    if (not SafeCopy(fileName, reserveFileName, error))
+    if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
-        const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
-        throw VException(errorMsg);
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+        const bool isFileWritable = info.isWritable();
+#ifdef Q_OS_WIN32
+        qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+        if (not IsReadOnly() && isFileWritable)
+        {
+            const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
+            throw VException(errorMsg);
+        }
     }
 }
 
@@ -207,7 +239,7 @@ void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::CheckVersion(int ver) const
+Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 {
     if (ver < MinVer())
     {
@@ -220,10 +252,50 @@ void VAbstractConverter::CheckVersion(int ver) const
         const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
     }
+
+    const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
+    throw VException(errorMsg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) const
+void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
+{
+    QString schema;
+    try
+    {
+        schema = XSDSchema(m_ver);
+    }
+    catch(const VException &e)
+    {
+        if (m_ver < MinVer())
+        { // Version less than minimally supported version. Can't do anything.
+            throw;
+        }
+        else if (m_ver > MaxVer())
+        { // Version bigger than maximum supported version. We still have a chance to open the file.
+            try
+            { // Try to open like the current version.
+                ValidateXML(currentSchema, m_convertedFileName);
+            }
+            catch(const VException &exp)
+            { // Nope, we can't.
+                Q_UNUSED(exp)
+                throw e;
+            }
+        }
+        else
+        { // Unexpected version. Most time mean that we do not catch all versions between min and max.
+            throw;
+        }
+
+        return; // All is fine and we can try to convert to current max version.
+    }
+
+    ValidateXML(schema, m_convertedFileName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::Save()
 {
     try
     {
@@ -232,20 +304,19 @@ bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) c
     catch (const VExceptionWrongId &e)
     {
         Q_UNUSED(e)
-        error = tr("Error no unique id.");
-        return false;
+        VException ex(tr("Error no unique id."));
+        throw ex;
     }
 
-    return VDomDocument::SaveDocument(fileName, error);
-}
+    m_tmpFile.resize(0);//clear previous content
+    const int indent = 4;
+    QTextStream out(&m_tmpFile);
+    out.setCodec("UTF-8");
+    save(out, indent);
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Save() const
-{
-    QString error;
-    if (SaveDocument(fileName, error) == false)
+    if (not m_tmpFile.flush())
     {
-        VException e(error);
+        VException e(m_tmpFile.errorString());
         throw e;
     }
 }
@@ -253,6 +324,8 @@ void VAbstractConverter::Save() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::SetVersion(const QString &version)
 {
+    ValidateVersion(version);
+
     if (setTagText(TagVersion, version) == false)
     {
         VException e(tr("Could not change version."));

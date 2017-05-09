@@ -31,63 +31,20 @@
 
 #include <QSharedData>
 #include "vgeometrydef.h"
-#include "vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/diagnostic.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VArcData : public QSharedData
 {
 public:
-
-    VArcData ()
-        : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-          center(VPointF()), isFlipped(false), formulaLength()
-    {}
-
-    VArcData (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
-              qreal f2, const QString &formulaF2)
-        : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-          center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData(const VPointF &center, qreal radius, qreal f1, qreal f2)
-        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(f2), formulaF2(QString("%1").arg(f2)), radius(radius),
-          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData (const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1,
-              const QString &formulaF1 )
-        : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
-          center(center), isFlipped(false), formulaLength(formulaLength)
-    {}
-
-    VArcData(const VPointF &center, qreal radius, qreal f1)
-        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(0), formulaF2("0"), radius(radius),
-          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData(const VArcData &arc)
-        : QSharedData(arc), f1(arc.f1), formulaF1(arc.formulaF1), f2(arc.f2), formulaF2(arc.formulaF2),
-          radius(arc.radius), formulaRadius(arc.formulaRadius), center(arc.center), isFlipped(arc.isFlipped),
-          formulaLength(arc.formulaLength)
-    {}
-
+    VArcData();
+    VArcData(qreal radius, const QString &formulaRadius);
+    explicit VArcData(qreal radius);
+    VArcData(const VArcData &arc);
     virtual ~VArcData();
-
-    /** @brief f1 start angle in degree. */
-    qreal              f1;
-
-    /** @brief formulaF1 formula for start angle. */
-    QString            formulaF1;
-
-    /** @brief f2 end angle in degree. */
-    qreal              f2;
-
-    /** @brief formulaF2 formula for end angle. */
-    QString            formulaF2;
 
     /** @brief radius arc radius. */
     qreal              radius;
@@ -95,22 +52,39 @@ public:
     /** @brief formulaRadius formula for arc radius. */
     QString            formulaRadius;
 
-    /** @brief center center point of arc. */
-    VPointF            center;
-
-    bool               isFlipped;
-
-    QString            formulaLength;
-
 private:
     VArcData &operator=(const VArcData &) Q_DECL_EQ_DELETE;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData()
+    : radius(0),
+      formulaRadius(QString())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(qreal radius, const QString &formulaRadius)
+    : radius(radius),
+      formulaRadius(formulaRadius)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(qreal radius)
+    : radius(radius),
+      formulaRadius(QString().number(qApp->fromPixel(radius)))
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(const VArcData &arc)
+    : QSharedData(arc),
+      radius(arc.radius),
+      formulaRadius(arc.formulaRadius)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArcData::~VArcData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VARC_P_H

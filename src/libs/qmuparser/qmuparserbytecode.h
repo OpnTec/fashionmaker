@@ -22,6 +22,10 @@
 #ifndef QMUPARSERBYTECODE_H
 #define QMUPARSERBYTECODE_H
 
+#include <QVector>
+#include <QtGlobal>
+
+#include "qmudef.h"
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
 
@@ -30,10 +34,8 @@
  * @brief Definition of the parser bytecode class.
  */
 
-#ifdef Q_CC_CLANG
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnested-anon-types"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wnested-anon-types")
 namespace qmu
 {
 struct SToken
@@ -69,9 +71,7 @@ struct SToken
     };
 };
 
-#ifdef Q_CC_CLANG
-#pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 /**
  * @brief Bytecode implementation of the Math Parser.

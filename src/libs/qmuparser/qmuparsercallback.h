@@ -22,6 +22,10 @@
 #ifndef QMUPARSERCALLBACK_H
 #define QMUPARSERCALLBACK_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <map>
+
 #include "qmuparserdef.h"
 
 /**
@@ -47,7 +51,7 @@ class QmuParserCallback
 public:
     QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type1  a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode=cmFUNC);
-    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eAssociativity);
+    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct);
     QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type3  a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type4  a_pFun, bool a_bAllowOpti);
@@ -78,7 +82,7 @@ public:
     QmuParserCallback(const QmuParserCallback &a_Fun);
     QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
 
-    QmuParserCallback* Clone() const;
+    QmuParserCallback* Clone() const Q_REQUIRED_RESULT;
     bool               IsOptimizable() const;
     void*              GetAddr() const;
     ECmdCode           GetCode() const;

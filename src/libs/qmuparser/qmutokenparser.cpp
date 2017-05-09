@@ -21,13 +21,20 @@
 
 #include "qmutokenparser.h"
 
+#include <QMap>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+
+#include "qmuparsererror.h"
+
 namespace qmu
 {
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTokenParser::QmuTokenParser()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
 }
 
@@ -50,7 +57,7 @@ QmuTokenParser::QmuTokenParser()
 QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser)
     :QmuFormulaBase()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
     SetVarFactory(AddVariable, this);
 
@@ -81,11 +88,11 @@ bool QmuTokenParser::IsSingle(const QString &formula)
         return false;// if don't know say no
     }
 
-    QmuTokenParser *cal = new QmuTokenParser();
+    QScopedPointer<QmuTokenParser> cal(new QmuTokenParser());
 
     // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown
     // variable set value to 0.
-    cal->SetVarFactory(AddVariable, cal);
+    cal->SetVarFactory(AddVariable, cal.data());
     cal->SetSepForEval();//Reset separators options
 
     try
@@ -101,8 +108,7 @@ bool QmuTokenParser::IsSingle(const QString &formula)
 
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     const QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression
-
-    delete cal;
+    delete cal.take();
 
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
     RemoveAll(tokens, QStringLiteral("-"));

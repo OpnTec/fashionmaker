@@ -31,10 +31,10 @@
 
 #include <QSharedData>
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VArcRadiusData : public QSharedData
 {
@@ -63,8 +63,6 @@ private:
 VArcRadiusData::~VArcRadiusData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VARCRADIUSDATA_H

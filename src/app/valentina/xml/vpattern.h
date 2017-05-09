@@ -32,9 +32,10 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../ifc/xml/vpatternconverter.h"
 
-class VDataTool;
 class VMainGraphicsScene;
+class VNodeDetail;
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -58,6 +59,8 @@ public:
 
     quint32        SPointActiveDraw();
 
+    QVector<quint32> GetActivePPPieces() const;
+
     virtual void   setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
     virtual bool   SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
@@ -77,6 +80,7 @@ public:
     void SetIncrementDescription(const QString &name, const QString &text);
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
+    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
 
     bool IsDefCustom() const;
     void SetDefCustom(bool value);
@@ -87,8 +91,13 @@ public:
     int  GetDefCustomSize() const;
     void SetDefCustomSize(int value);
 
+    bool IsReadOnly() const;
+    void SetReadOnly(bool rOnly);
+
+    static const QString AttrReadOnly;
+
 public slots:
-    void           LiteParseTree(const Document &parse);
+    virtual void LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
 
 protected:
     virtual void   customEvent(QEvent * event) Q_DECL_OVERRIDE;
@@ -105,21 +114,34 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
+    VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
+
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
-    void           ParseDetailElement(const QDomElement &domElement,
-                                      const Document &parse);
+    void           ParseDetailElement(QDomElement &domElement, const Document &parse);
+    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, qreal width, bool closed) const;
+    void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
+    void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
+
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document &parse, const QString &type);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                     const Document &parse);
-    void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+    void           ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                       const Document &parse, const QString& type);
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document &parse, const QString& type);
+    void           ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                             const QString &type);
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document &parse, const QString& type);
+    void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                         const QString& type);
+
+    void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
@@ -131,7 +153,7 @@ private:
     void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
                                            quint32 &idTool);
     template <typename T>
-    QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
+    QRectF         ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
     QString        GetLabelBase(quint32 index)const;
 
@@ -144,6 +166,7 @@ private:
     void ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodePoint(const QDomElement &domElement, const Document &parse);
+    void ParsePinPoint(const QDomElement &domElement, const Document &parse);
     void ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
@@ -154,22 +177,43 @@ private:
     void ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const QDomElement &domElement,
                                           const Document &parse);
-    void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement,
-                                             const Document &parse);
+    void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement,
                                             const Document &parse);
     void ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const QDomElement &domElement,
                                          const Document &parse);
     void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
-    void ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+                      "Time to refactor the code.");
+    void ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
+    void ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+                      "Time to refactor the code.");
+    void ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
     void ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseNodeSpline(const QDomElement &domElement, const Document &parse);
     void ParseNodeSplinePath(const QDomElement &domElement, const Document &parse);
 
     void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodeArc(const QDomElement &domElement, const Document &parse);
     void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
+    void ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseNodeEllipticalArc(const QDomElement &domElement, const Document &parse);
+
+    void ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 

@@ -36,5 +36,6 @@
 #include "plugins/vstringproperty.h"
 #include "plugins/vwidgetproperty.h"
 #include "plugins/vlinecolorproperty.h"
+#include "plugins/vlabelproperty.h"
 
 #endif // VPROPERTIES_H

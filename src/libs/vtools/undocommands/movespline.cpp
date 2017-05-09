@@ -27,21 +27,31 @@
  *************************************************************************/
 
 #include "movespline.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsview.h"
 
 #include <QDomElement>
-#include <QGraphicsView>
+
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
-                       QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldSpline(*oldSpl), newSpline(newSpl), scene(scene)
+                       QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      oldSpline(*oldSpl),
+      newSpline(newSpl),
+      scene(qApp->getCurrentScene())
 {
     setText(tr("move spline"));
     nodeId = id;
 
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -54,6 +64,7 @@ void MoveSpline::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSpline);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -62,13 +73,14 @@ void MoveSpline::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSpline);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool MoveSpline::mergeWith(const QUndoCommand *command)
 {
     const MoveSpline *moveCommand = static_cast<const MoveSpline *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSplineId();
 
     if (id != nodeId)
@@ -92,11 +104,12 @@ void MoveSpline::Do(const VSpline &spl)
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetStartAngle()));
-        doc->SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetEndAngle()));
-        doc->SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        doc->SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
+        doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
+        doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
+        doc->SetAttribute(domElement, AttrAngle1,  spl.GetStartAngleFormula());
+        doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
+        doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
+        doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
 
         emit NeedLiteParsing(Document::LiteParse);
     }

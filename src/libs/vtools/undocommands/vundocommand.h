@@ -29,11 +29,17 @@
 #ifndef VUNDOCOMMAND_H
 #define VUNDOCOMMAND_H
 
-#include <QUndoCommand>
+#include <qcompilerdetection.h>
 #include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QUndoCommand>
+#include <QVector>
+#include <QtGlobal>
 
-#include "../../vmisc/logging.h"
-#include "../../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
@@ -44,16 +50,19 @@ enum class UndoCommand: char { AddPatternPiece,
                                MoveSPoint,
                                SaveToolOptions,
                                SaveDetailOptions,
-                               MoveDetail,
+                               SavePieceOptions,
+                               SavePiecePathOptions,
+                               MovePiece,
                                DeleteTool,
                                DeletePatternPiece,
                                RenamePP,
                                MoveLabel,
-                               MoveDoubleLabel
+                               MoveDoubleLabel,
+                               RotationMoveLabel,
+                               TogglePieceInLayout
                              };
 
 class VPattern;
-class VNodeDetail;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {
@@ -73,8 +82,14 @@ protected:
     virtual void RedoFullParsing();
     void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
 
-    void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
-    void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
+    void         IncrementReferences(const QVector<quint32> &nodes) const;
+    void         DecrementReferences(const QVector<quint32> &nodes) const;
+
+    void         IncrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void         DecrementReferences(const QVector<CustomSARecord> &nodes) const;
+
+    void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
+    void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

@@ -1,0 +1,1725 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.5</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <patternName>Gent jacket(with tummy)</patternName>
+    <patternNumber>Jacket_20160914</patternNumber>
+    <company>StindeDesign</company>
+    <customer>Customer</customer>
+    <size>Bespoke</size>
+    <showDate>true</showDate>
+    <showMeasurements>false</showMeasurements>
+    <measurements/>
+    <increments>
+        <increment name="#Säädettävät" description="" formula="0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0"/>
+        <increment name="#RinnanleveysLisäys" description="2...4" formula="2.8"/>
+        <increment name="#VatsanleveysLisäys" description="RinnanleveysLisäys 2 --> VatsanleveysLisäys 0&#xa;RinnanleveysLisäys 2,5 --> VatsanleveysLisäys 0..0,5&#xa;RinnanleveysLisäys 3 --> VatsanleveysLisäys 0,5...1&#xa;RinnanleveysLisäys 3,5 --> VatsanleveysLisäys 1&#xa;RinnanleveysLisäys 4 --> VatsanleveysLisäys 1...1,5&#xa;&#xa;&#xa;" formula="0.2"/>
+        <increment name="#KädentienleveysLisäys" description="4,5...5" formula="3.9"/>
+        <increment name="#Kaavamuutokset" description="" formula="0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0"/>
+        <increment name="#TakasaumaVyötäröllä" description="0.7...1&#xa;Takasaumaa siirretää vyötäröllä" formula="0.7"/>
+        <increment name="#TakaolkapääLasku" description="Takaosan olkapään lasku" formula="2"/>
+        <increment name="#Takahartiapituuslisäys" description="1,5 ... 2&#xa;Hartialinjan pituuslisäys" formula="2"/>
+        <increment name="#Hartialinjasiirto" description="Hartialinjan siirto eteenpäin" formula="1"/>
+        <increment name="#VyötärösisäänottoSivusauma" description="" formula="1.5"/>
+        <increment name="#TakakappaleenlantionPoisto" description="2,5...3" formula="3"/>
+        <increment name="#Sivuhalkionkorkeus" description="" formula="24"/>
+        <increment name="#Helmataitteenkorkeus" description="" formula="2.5"/>
+        <increment name="#KädentienleveysEtuosassa" description="" formula="3.5"/>
+        <increment name="#Lantiolisäys" description="6 ... 7" formula="6"/>
+        <increment name="#TaskunEtureunanKorkeus" description="" formula="9.2"/>
+        <increment name="#TaskunTakareunankorkeus" description="" formula="7.8"/>
+        <increment name="#Sivuleikkausenkorkeus" description="" formula="0"/>
+        <increment name="#EtulinjanSiirto" description="1...1,5" formula="1.5"/>
+        <increment name="#EtuolkapäänLasku" description="" formula="4"/>
+        <increment name="#Etuhartiakavennus" description="0,5...1" formula="0.5"/>
+        <increment name="#Selänlisäsaumavara" description="" formula="1"/>
+        <increment name="#Etuosansisäänotto" description="" formula="1.5"/>
+        <increment name="#EtusisäänonttoRintalinjalta" description="" formula="4"/>
+        <increment name="#Taitepiste" description="" formula="1.8"/>
+        <increment name="#Taitepistekorkeus" description="" formula="8"/>
+        <increment name="#Kauluksenpituusvähennys" description="" formula="0"/>
+        <increment name="#Kauluksenkäyryys" description="" formula="1.5"/>
+        <increment name="#Kauluksenalaosa" description="" formula="2.5"/>
+        <increment name="#Kauluksenyläosa" description="" formula="4"/>
+        <increment name="#Rintataskunleveys" description="" formula="11"/>
+        <increment name="#Rintataskunkorkeus" description="" formula="3"/>
+        <increment name="#Rintataskusyvyys" description="" formula="12"/>
+        <increment name="#Rintaliinakorkeusrinnalta" description="" formula="7"/>
+        <increment name="#Rintaliinahatiatukietu" description="" formula="4"/>
+        <increment name="#Rintaliinahatiatukikäsi" description="" formula="7"/>
+        <increment name="#Sivutaskunleveyslisäykset" description="" formula="1.5"/>
+        <increment name="#Sivutaskunläppä" description="" formula="6"/>
+        <increment name="#SivutaskuHelmasta" description="" formula="3"/>
+        <increment name="#Etuhelmalisäys" description="1...1,5" formula="1.5"/>
+        <increment name="#EtuhelmanKaartopiste" description="" formula="8"/>
+        <increment name="#Etureunalantiolta" description="" formula="0.7"/>
+        <increment name="#Etuvuorireunasta" description="" formula="7"/>
+        <increment name="#Hiha" description="" formula="0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0"/>
+        <increment name="#Hihankädentie" description="" formula="30"/>
+        <increment name="#KyynerpääLisäys" description="4...5" formula="4.5"/>
+        <increment name="#Hihahalkionkorkeus" description="" formula="9"/>
+        <increment name="#Hihahalkionleveys" description="" formula="4"/>
+        <increment name="#Hihansuunkäänne" description="" formula="4"/>
+        <increment name="#Piirtoarvot" description="" formula="0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0"/>
+        <increment name="#TakaEtuosaväli" description="" formula="20"/>
+        <increment name="#Printfix" description="" formula="1"/>
+        <increment name="#Mainvalues" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0"/>
+        <increment name="#Vp" description="Hight" formula="180"/>
+        <increment name="#Ry" description="Bust girth" formula="122"/>
+        <increment name="#Vy" description="Waist girth" formula="130"/>
+        <increment name="#Ly" description="Hip girth" formula="122"/>
+        <increment name="#Hp" description="Arm legth" formula="65"/>
+        <increment name="#Apumitat" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0"/>
+        <increment name="#Ktk" description="Kädentienkorkeus&#xa;1/8Ry+11...12&#xa;1/8Ry +1/16Vp + 0,5cm " formula="1/8*#Ry +12"/>
+        <increment name="#Sp" description="Selänpituus&#xa;¼Vp + 1,5cm " formula="1/4*#Vp+1"/>
+        <increment name="#Ll" description="Lantiolinja &#xa;1/8Vp vyötäröltä &#xa;" formula="1/8*#Vp"/>
+        <increment name="#Tp" description="Takin pituus &#xa;½Vp % 9cm &#xa;" formula="1/2*#Vp-10"/>
+        <increment name="#Ptl" description="Pääntien leveys &#xa;&#xa;1/10pRy + 3..3,5&#xa;" formula="1/20*#Ry + 3"/>
+        <increment name="#Ekt" description="Etukädentie &#xa;Ktk + 2...2,5&#xa;" formula="#Ktk + 3.5"/>
+        <increment name="#Sl" description="Selänleveys &#xa;1/10Ry + 11cm (Ry yli 100cm) &#xa;2/10 Ry + 1cm (Ry alle 100cm)&#xa;" formula="#Ry>100?(1/10*#Ry + 11.4): (2/10*#Ry + 1)"/>
+        <increment name="#Ktl" description="Kädentienleveys &#xa;1/8Ry + KädentienleveysLisäys&#xa;" formula="1/8*#Ry + #KädentienleveysLisäys"/>
+        <increment name="#Rl" description="Rinnanleveys &#xa;2/10Ry + RinnanleveysLisäys" formula="2/10*#Ry + #RinnanleveysLisäys"/>
+        <increment name="#Vl" description="Vatsanleveys &#xa;¼Vy +  VatsanleveysLisäys&#xa;" formula="1/4*#Vy +  #VatsanleveysLisäys"/>
+        <increment name="#VäljyysRinnankorkeus" description="" formula="#Rl+#Ktl+#Sl-1/2*#Ry"/>
+    </increments>
+    <draw name="Miesten takki">
+        <calculation>
+            <point type="single" x="0.79" y="1.06" id="1" name="Niskapiste" mx="0.264479" my="-0.476908"/>
+            <point type="endLine" typeLine="dotLine" id="2" name="Helmalinja" basePoint="1" mx="0.590581" lineColor="black" my="-0.308278" angle="270" length="#Tp"/>
+            <point type="alongLine" typeLine="none" id="3" name="Kädentie" firstPoint="1" secondPoint="2" mx="0.476008" lineColor="black" my="-0.651994" length="#Ktk"/>
+            <point type="alongLine" typeLine="none" id="4" name="Vyötärö" firstPoint="1" secondPoint="2" mx="0.476008" lineColor="black" my="-0.308278" length="#Sp"/>
+            <point type="alongLine" typeLine="none" id="5" name="Lantio" firstPoint="4" secondPoint="2" mx="0.590581" lineColor="black" my="-0.537422" length="#Ll"/>
+            <point type="alongLine" typeLine="none" id="6" name="A1" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="normal" typeLine="none" id="7" name="A2" firstPoint="5" secondPoint="4" mx="-2.53017" lineColor="black" my="-1.51039" angle="0" length="4"/>
+            <line typeLine="dotLine" id="8" firstPoint="6" secondPoint="7" lineColor="black"/>
+            <point type="lineIntersectAxis" typeLine="none" id="9" name="A3" basePoint="3" p2Line="7" mx="-1.35715" lineColor="black" my="-1.22485" angle="180" p1Line="6"/>
+            <point type="lineIntersectAxis" typeLine="none" id="10" name="A4" basePoint="4" p2Line="7" mx="0.132292" lineColor="black" my="0.264583" angle="180" p1Line="6"/>
+            <point type="normal" typeLine="none" id="11" name="A5" firstPoint="10" secondPoint="4" mx="-1.24257" lineColor="black" my="-1.33943" angle="90" length="#TakasaumaVyötäröllä"/>
+            <point type="normal" typeLine="dotLine" id="12" name="A6" firstPoint="9" secondPoint="3" mx="0.361436" lineColor="black" my="-0.99571" angle="90" length="#Sl"/>
+            <point type="alongLine" typeLine="none" id="13" name="A7" firstPoint="9" secondPoint="12" mx="-1.35715" lineColor="black" my="-0.42285" length="CurrentLength+0.3"/>
+            <point type="pointOfIntersection" id="14" name="A8" firstPoint="12" secondPoint="1" mx="-1.58629" my="-0.99571"/>
+            <point type="alongLine" typeLine="none" id="15" name="A9" firstPoint="1" secondPoint="14" mx="0.132292" lineColor="black" my="0.264583" length="#Ptl"/>
+            <point type="alongLine" typeLine="none" id="16" name="A10" firstPoint="14" secondPoint="12" mx="0.132292" lineColor="black" my="0.264583" length="#TakaolkapääLasku"/>
+            <point type="normal" typeLine="none" id="17" name="A11" firstPoint="15" secondPoint="1" mx="0.529845" lineColor="black" my="-0.66304" angle="0" length="1.5"/>
+            <point type="normal" typeLine="none" id="18" name="A12" firstPoint="17" secondPoint="16" mx="0.397327" lineColor="black" my="-1.06059" angle="180" length="1"/>
+            <point type="normal" typeLine="none" id="19" name="A13" firstPoint="18" secondPoint="16" mx="0.264809" lineColor="black" my="-1.76735" angle="180" length="#Hartialinjasiirto"/>
+            <point type="alongLine" typeLine="none" id="20" name="A14" firstPoint="18" secondPoint="16" mx="-1.89964" lineColor="black" my="-0.353832" length="CurrentLength+#Takahartiapituuslisäys"/>
+            <point type="normal" typeLine="none" id="21" name="A15" firstPoint="20" secondPoint="18" mx="-1.67878" lineColor="black" my="-0.751385" angle="0" length="#Hartialinjasiirto"/>
+            <line typeLine="hair" id="22" firstPoint="21" secondPoint="19" lineColor="darkRed"/>
+            <spline type="simpleInteractive" point4="1" angle1="286.829" angle2="180.09" id="23" color="darkRed" length1="2.32151" length2="5.35355" point1="19"/>
+            <point type="alongLine" typeLine="none" id="24" name="A16" firstPoint="12" secondPoint="14" mx="0.476008" lineColor="black" my="-0.42285" length="#Ktk/4"/>
+            <point type="normal" typeLine="dotLine" id="25" name="A17" firstPoint="7" secondPoint="5" mx="0.428122" lineColor="black" my="1.74373" angle="90" length="#Sl-#TakakappaleenlantionPoisto"/>
+            <line typeLine="dotLine" id="26" firstPoint="12" secondPoint="25" lineColor="black"/>
+            <point type="lineIntersectAxis" typeLine="dotLine" id="27" name="A18" basePoint="11" p2Line="25" mx="-1.80009" lineColor="black" my="-0.697495" angle="180" p1Line="13"/>
+            <point type="alongLine" typeLine="none" id="28" name="A19" firstPoint="27" secondPoint="11" mx="-1.73896" lineColor="black" my="-1.15578" length="#VyötärösisäänottoSivusauma"/>
+            <point type="alongLine" typeLine="none" id="29" name="A20" firstPoint="28" secondPoint="11" mx="0.315662" lineColor="black" my="-1.05683" length="0.5"/>
+            <point type="lineIntersectAxis" typeLine="none" id="30" name="A21" basePoint="24" p2Line="12" mx="-1.93" lineColor="black" my="-0.42285" angle="180" p1Line="29"/>
+            <point type="lineIntersectAxis" typeLine="none" id="31" name="A22" basePoint="2" p2Line="7" mx="-1.81024" lineColor="black" my="-1.31933" angle="180" p1Line="11"/>
+            <point type="normal" typeLine="dotLine" id="32" name="A23" firstPoint="31" secondPoint="7" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A2_A17"/>
+            <point type="alongLine" typeLine="none" id="33" name="A24" firstPoint="32" secondPoint="25" mx="0.132292" lineColor="black" my="0.264583" length="#Sivuhalkionkorkeus"/>
+            <point type="normal" typeLine="none" id="34" name="A25" firstPoint="33" secondPoint="32" mx="-1.14823" lineColor="black" my="-1.51392" angle="180" length="3"/>
+            <point type="alongLine" typeLine="none" id="35" name="A26" firstPoint="31" secondPoint="32" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+3"/>
+            <point type="alongLine" typeLine="none" id="36" name="A27" firstPoint="34" secondPoint="35" mx="-2.07306" lineColor="black" my="-0.233399" length="1"/>
+            <line typeLine="dotLine" id="37" firstPoint="32" secondPoint="35" lineColor="black"/>
+            <line typeLine="dotLine" id="38" firstPoint="35" secondPoint="36" lineColor="black"/>
+            <line typeLine="dotLine" id="39" firstPoint="36" secondPoint="33" lineColor="black"/>
+            <line typeLine="dotLine" id="40" firstPoint="7" secondPoint="31" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="41" name="A28" firstPoint="7" secondPoint="31" mx="-1.24242" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <point type="alongLine" typeLine="none" id="42" name="A29" firstPoint="36" secondPoint="35" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <line typeLine="dotLine" id="43" firstPoint="35" secondPoint="42" lineColor="black"/>
+            <line typeLine="dotLine" id="44" firstPoint="42" secondPoint="41" lineColor="black"/>
+            <line typeLine="dotLine" id="45" firstPoint="31" secondPoint="41" lineColor="black"/>
+            <spline type="pathInteractive" id="46" color="darkRed">
+                <pathPoint angle1="262.34" pSpline="33" angle2="82.34" length1="0" length2="3.41408"/>
+                <pathPoint angle1="267.776" pSpline="28" angle2="87.776" length1="1.46471" length2="4.71469"/>
+                <pathPoint angle1="278.932" pSpline="13" angle2="98.9321" length1="1.40896" length2="0.693956"/>
+                <pathPoint angle1="263.773" pSpline="30" angle2="83.7733" length1="0.498399" length2="3.84556"/>
+                <pathPoint angle1="291.756" pSpline="21" angle2="111.756" length1="6.12567" length2="0.824283"/>
+            </spline>
+            <line typeLine="dotLine" id="47" firstPoint="12" secondPoint="14" lineColor="black"/>
+            <spline type="pathInteractive" id="48" color="black">
+                <pathPoint angle1="87.7127" pSpline="6" angle2="267.713" length1="0" length2="3.25569"/>
+                <pathPoint angle1="85.4446" pSpline="9" angle2="265.445" length1="3.80639" length2="1.33166"/>
+                <pathPoint angle1="84.4299" pSpline="11" angle2="264.43" length1="2.10633" length2="1.26323"/>
+                <pathPoint angle1="92.2164" pSpline="7" angle2="272.216" length1="0.797794" length2="2.54057"/>
+                <pathPoint angle1="87.6072" pSpline="31" angle2="267.607" length1="3.8662" length2="0.830048"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="50" name="A30" firstPoint="34" secondPoint="33" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <point type="alongLine" typeLine="none" id="51" name="A31" firstPoint="35" secondPoint="32" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <spline type="pathInteractive" id="52" color="black">
+                <pathPoint angle1="268.361" pSpline="51" angle2="88.3609" length1="0" length2="2.99337"/>
+                <pathPoint angle1="274.457" pSpline="50" angle2="94.457" length1="0.989665" length2="2.34913"/>
+                <pathPoint angle1="276.915" pSpline="13" angle2="96.915" length1="0.800909" length2="0.838848"/>
+                <pathPoint angle1="264.115" pSpline="30" angle2="84.115" length1="1.31711" length2="6.89725"/>
+                <pathPoint angle1="289.336" pSpline="21" angle2="109.336" length1="5.94882" length2="0.986436"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="53" name="A32" firstPoint="42" secondPoint="41" mx="0.132292" lineColor="black" my="0.264583" length="Line_A26_A31"/>
+            <point type="alongLine" typeLine="none" id="69" name="A33" firstPoint="5" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <point type="alongLine" typeLine="none" id="89" name="A34" firstPoint="1" secondPoint="6" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <spline type="simpleInteractive" point4="89" angle1="0.0475314" angle2="178.974" id="90" color="black" length1="10.5104" length2="23.4658" point1="13"/>
+            <line typeLine="dashLine" id="101" firstPoint="28" secondPoint="25" lineColor="green"/>
+            <line typeLine="dashLine" id="102" firstPoint="25" secondPoint="32" lineColor="green"/>
+            <point type="normal" typeLine="none" id="103" name="A35" firstPoint="12" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="#TakaEtuosaväli"/>
+            <point type="normal" typeLine="dotLine" id="104" name="A36" firstPoint="103" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="#Ktl-#KädentienleveysEtuosassa"/>
+            <point type="normal" typeLine="none" id="105" name="A37" firstPoint="104" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="2"/>
+            <point type="normal" typeLine="none" id="106" name="A38" firstPoint="105" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="2"/>
+            <point type="normal" typeLine="dotLine" id="107" name="A39" firstPoint="106" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="#KädentienleveysEtuosassa"/>
+            <point type="normal" typeLine="dotLine" id="108" name="A40" firstPoint="107" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="#Rl"/>
+            <point type="pointOfIntersection" id="109" name="A41" firstPoint="107" secondPoint="4" mx="-3.47196" my="-2.64654"/>
+            <point type="pointOfIntersection" id="110" name="A42" firstPoint="109" secondPoint="5" mx="-1.83701" my="-0.0590823"/>
+            <point type="normal" typeLine="none" id="111" name="A43" firstPoint="107" secondPoint="3" mx="-1.86679" lineColor="black" my="-3.01479" angle="0" length="#Ekt"/>
+            <line typeLine="dotLine" id="112" firstPoint="110" secondPoint="111" lineColor="black"/>
+            <point type="alongLine" typeLine="dotLine" id="113" name="A44" firstPoint="110" secondPoint="5" mx="0.132292" lineColor="black" my="0.125958" length="2"/>
+            <point type="alongLine" typeLine="none" id="114" name="A45" firstPoint="113" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <point type="alongLine" typeLine="dotLine" id="115" name="A46" firstPoint="114" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="#Ktl+4-max(0;min(3;#Rl+#Ktl+4+Line_A2_A17-(#Ly/2+#Lantiolisäys)))"/>
+            <point type="alongLine" typeLine="none" id="116" name="A47" firstPoint="107" secondPoint="111" mx="-3.39061" lineColor="black" my="-1.77499" length="Line_A6_A16"/>
+            <point type="lineIntersect" id="117" name="A48" p2Line1="103" p2Line2="24" p1Line1="115" p1Line2="116" mx="-1.69327" my="-1.44688"/>
+            <point type="alongLine" typeLine="none" id="118" name="A49" firstPoint="117" secondPoint="24" mx="0.588681" lineColor="black" my="-2.47375" length="0.5"/>
+            <line typeLine="dotLine" id="119" firstPoint="103" secondPoint="115" lineColor="black"/>
+            <point type="lineIntersectAxis" typeLine="none" id="120" name="A50" basePoint="4" p2Line="115" mx="0.132292" lineColor="black" my="0.264583" angle="180" p1Line="103"/>
+            <point type="alongLine" typeLine="none" id="121" name="A51" firstPoint="4" secondPoint="120" mx="-0.21" lineColor="black" my="0.606875" length="CurrentLength+Line_A18_A19"/>
+            <point type="alongLine" typeLine="none" id="122" name="A52" firstPoint="120" secondPoint="121" mx="-1.57917" lineColor="black" my="-1.33278" length="CurrentLength+Line_A19_A20"/>
+            <point type="endLine" typeLine="none" id="123" name="A53" basePoint="115" mx="0.132292" lineColor="black" my="0.264583" angle="2*270-AngleLine_A17_A23" length="Line_A17_A23"/>
+            <point type="alongLine" typeLine="none" id="124" name="A54" firstPoint="123" secondPoint="115" mx="0.132292" lineColor="black" my="0.264583" length="#Sivuhalkionkorkeus"/>
+            <point type="normal" typeLine="none" id="125" name="A55" firstPoint="124" secondPoint="123" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A24_A25"/>
+            <point type="normal" typeLine="dotLine" id="126" name="A56" firstPoint="123" secondPoint="124" mx="-0.221935" lineColor="black" my="0.275749" angle="180" length="Line_A23_A26"/>
+            <point type="alongLine" typeLine="none" id="127" name="A57" firstPoint="125" secondPoint="126" mx="0.132292" lineColor="black" my="0.264583" length="Line_A25_A27"/>
+            <line typeLine="dotLine" id="128" firstPoint="124" secondPoint="127" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="130" name="A58" firstPoint="109" secondPoint="110" mx="-3.47196" lineColor="black" my="-1.67617" length="#TaskunTakareunankorkeus"/>
+            <point type="normal" typeLine="none" id="131" name="A59" firstPoint="130" secondPoint="109" mx="-0.242761" lineColor="black" my="0.350658" angle="180" length="2"/>
+            <point type="alongLine" typeLine="none" id="132" name="A60" firstPoint="130" secondPoint="131" mx="0.820894" lineColor="black" my="-0.596169" length="CurrentLength+2"/>
+            <line typeLine="dotLine" id="133" firstPoint="106" secondPoint="131" lineColor="black"/>
+            <point type="lineIntersect" id="134" name="A61" p2Line1="106" p2Line2="120" p1Line1="131" p1Line2="109" mx="-0.7645" my="-1.7977"/>
+            <point type="alongLine" typeLine="none" id="135" name="A62" firstPoint="109" secondPoint="134" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+2"/>
+            <point type="height" typeLine="none" id="136" name="A63" basePoint="114" p2Line="123" mx="0.132292" lineColor="black" my="0.264583" p1Line="126"/>
+            <line typeLine="dotLine" id="137" firstPoint="136" secondPoint="123" lineColor="black"/>
+            <point type="alongLine" typeLine="dotLine" id="138" name="A64" firstPoint="114" secondPoint="136" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <point type="alongLine" typeLine="dotLine" id="139" name="A65" firstPoint="115" secondPoint="123" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <point type="alongLine" typeLine="dotLine" id="140" name="A66" firstPoint="127" secondPoint="126" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <line typeLine="dotLine" id="141" firstPoint="138" secondPoint="140" lineColor="black"/>
+            <spline type="simpleInteractive" point4="104" angle1="92.3892" angle2="257.857" id="142" color="black" length1="19.3725" length2="5.35194" point1="114"/>
+            <spline type="simpleInteractive" point4="118" angle1="358.067" angle2="252.086" id="143" color="black" length1="4.77322" length2="4.9912" point1="104"/>
+            <spline type="pathInteractive" id="144" color="black">
+                <pathPoint angle1="89.3772" pSpline="118" angle2="269.377" length1="0" length2="6.51817"/>
+                <pathPoint angle1="94.5941" pSpline="121" angle2="274.594" length1="2.91949" length2="0.778239"/>
+                <pathPoint angle1="180" pSpline="124" angle2="0" length1="0" length2="0"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="146" name="A67" firstPoint="136" secondPoint="138" mx="0.132292" lineColor="black" my="0.264583" length="0.8"/>
+            <spline type="simpleInteractive" point4="127" angle1="269.807" angle2="104.237" id="147" color="black" length1="27.9107" length2="4.89706" point1="118"/>
+            <point type="alongLine" typeLine="none" id="148" name="A68" firstPoint="125" secondPoint="124" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <point type="alongLine" typeLine="none" id="149" name="A69" firstPoint="140" secondPoint="139" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <point type="cutSpline" id="150" name="A70" spline="142" mx="0.132292" my="0.264583" length="Spl_A45_A36-#Ktk/4"/>
+            <spline type="simpleInteractive" point4="103" angle1="324.218" angle2="233.577" id="151" color="black" length1="0.740987" length2="7.37175" point1="150"/>
+            <point type="normal" typeLine="dotLine" id="197" name="A71" firstPoint="109" secondPoint="107" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Vl"/>
+            <point type="alongLine" typeLine="none" id="198" name="A72" firstPoint="108" secondPoint="107" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="alongLine" typeLine="none" id="199" name="A73" firstPoint="197" secondPoint="109" mx="-3.31072" lineColor="black" my="-1.8873" length="CurrentLength/2"/>
+            <point type="alongLine" typeLine="none" id="200" name="A74" firstPoint="199" secondPoint="198" mx="-3.14801" lineColor="black" my="-1.8952" length="CurrentLength+#Ekt"/>
+            <point type="normal" typeLine="none" id="201" name="A75" firstPoint="200" secondPoint="198" mx="1.0641" lineColor="black" my="-1.48255" angle="0" length="#EtulinjanSiirto"/>
+            <point type="height" typeLine="none" id="202" name="A76" basePoint="111" p2Line="201" mx="0.132292" lineColor="black" my="-1.86904" p1Line="198"/>
+            <point type="height" typeLine="dotLine" id="203" name="A77" basePoint="107" p2Line="111" mx="0.288152" lineColor="black" my="-1.13816" p1Line="202"/>
+            <point type="alongLine" typeLine="none" id="204" name="A78" firstPoint="202" secondPoint="198" mx="0.132292" lineColor="black" my="0.264583" length="#Ptl"/>
+            <point type="alongLine" typeLine="none" id="205" name="A79" firstPoint="203" secondPoint="107" mx="1.70471" lineColor="black" my="-2.58906" length="#EtuolkapäänLasku"/>
+            <point type="alongLine" typeLine="none" id="206" name="A80" firstPoint="202" secondPoint="205" mx="1.29705" lineColor="black" my="-2.00669" length="Line_A15_A13-#Etuhartiakavennus"/>
+            <point type="normal" typeLine="hair" id="207" name="A81" firstPoint="202" secondPoint="206" mx="-1.73503" lineColor="black" my="-0.0313732" angle="180" length="#Hartialinjasiirto"/>
+            <point type="normal" typeLine="none" id="208" name="A82" firstPoint="206" secondPoint="202" mx="1.51114" lineColor="black" my="-1.01665" angle="0" length="#Hartialinjasiirto"/>
+            <point type="lineIntersect" id="209" name="A83" p2Line1="208" p2Line2="203" p1Line1="207" p1Line2="107" mx="-3.42021" my="0.322821"/>
+            <point type="normal" typeLine="none" id="210" name="A84" firstPoint="208" secondPoint="209" mx="-0.450085" lineColor="black" my="0.751855" angle="0" length="0.5"/>
+            <line typeLine="dotLine" id="211" firstPoint="207" secondPoint="209" lineColor="black"/>
+            <line typeLine="dotLine" id="212" firstPoint="209" secondPoint="210" lineColor="black"/>
+            <line typeLine="dotLine" id="213" firstPoint="210" secondPoint="116" lineColor="black"/>
+            <spline type="pathInteractive" id="214" color="black">
+                <pathPoint angle1="58.0114" pSpline="210" angle2="238.011" length1="0" length2="4.35639"/>
+                <pathPoint angle1="89.1064" pSpline="116" angle2="269.106" length1="4.0652" length2="3.94529"/>
+                <pathPoint angle1="160.698" pSpline="106" angle2="340.698" length1="2.69465" length2="0.668073"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="215" name="A85" firstPoint="107" secondPoint="111" mx="-3.4256" lineColor="black" my="0.694527" length="#Ktl/4-0.5"/>
+            <point type="curveIntersectAxis" typeLine="none" id="216" name="Äe" curve="214" basePoint="215" mx="0.785286" lineColor="black" my="-1.16368" angle="0"/>
+            <line typeLine="dashLine" id="219" firstPoint="107" secondPoint="210" lineColor="green"/>
+            <point type="pointOfIntersection" id="220" name="A86" firstPoint="21" secondPoint="3" mx="-0.802868" my="0.264583"/>
+            <line typeLine="dashLine" id="221" firstPoint="21" secondPoint="220" lineColor="green"/>
+            <point type="normal" typeLine="none" id="222" name="A87" firstPoint="204" secondPoint="198" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#Ptl+2"/>
+            <line typeLine="dotLine" id="223" firstPoint="108" secondPoint="222" lineColor="black"/>
+            <spline type="simpleInteractive" point4="207" angle1="355.904" angle2="254.721" id="224" color="black" length1="6.67668" length2="4.38153" point1="222"/>
+            <point type="normal" typeLine="dotLine" id="400" name="A88" firstPoint="1" secondPoint="6" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Selänlisäsaumavara"/>
+            <point type="normal" typeLine="none" id="401" name="A89" firstPoint="6" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Selänlisäsaumavara"/>
+            <point type="alongLine" typeLine="none" id="402" name="A90" firstPoint="7" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="#Selänlisäsaumavara"/>
+            <point type="alongLine" typeLine="none" id="403" name="A91" firstPoint="31" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="#Selänlisäsaumavara"/>
+            <point type="alongLine" typeLine="none" id="441" name="A92" firstPoint="199" secondPoint="109" mx="-0.672362" lineColor="black" my="0.929248" length="#Vl/10"/>
+            <point type="endLine" typeLine="none" id="442" name="A93" basePoint="441" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="Line_Niskapiste_Vyötärö-Line_Niskapiste_Kädentie-#EtusisäänonttoRintalinjalta"/>
+            <point type="alongLine" typeLine="dotLine" id="443" name="A94" firstPoint="442" secondPoint="441" mx="-1.06566" lineColor="black" my="0.546453" length="CurrentLength+#TaskunEtureunanKorkeus"/>
+            <point type="alongLine" typeLine="none" id="444" name="A95" firstPoint="130" secondPoint="110" mx="-2.70819" lineColor="black" my="1.21141" length="#Sivuleikkausenkorkeus"/>
+            <point type="normal" typeLine="none" id="445" name="A96" firstPoint="441" secondPoint="442" mx="-2.38164" lineColor="black" my="0.966741" angle="0" length="#Etuosansisäänotto/2"/>
+            <point type="normal" typeLine="none" id="446" name="A97" firstPoint="441" secondPoint="442" mx="0.540204" lineColor="black" my="1.08706" angle="180" length="#Etuosansisäänotto/2"/>
+            <point type="normal" typeLine="none" id="447" name="A98" firstPoint="443" secondPoint="442" mx="-2.26361" lineColor="black" my="-1.2857" angle="0" length="#Etuosansisäänotto/2"/>
+            <point type="normal" typeLine="none" id="448" name="A99" firstPoint="443" secondPoint="442" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#Etuosansisäänotto/2"/>
+            <line typeLine="dotLine" id="449" firstPoint="443" secondPoint="444" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="450" name="A100" firstPoint="447" secondPoint="444" mx="0.448657" lineColor="black" my="1.42468" length="Line_A94_A95+2"/>
+            <point type="alongLine" typeLine="none" id="451" name="A101" firstPoint="448" secondPoint="130" mx="0.48463" lineColor="black" my="-1.56757" length="Line_A94_A95+2"/>
+            <line typeLine="dotLine" id="452" firstPoint="107" secondPoint="134" lineColor="black"/>
+            <line typeLine="dotLine" id="453" firstPoint="109" secondPoint="106" lineColor="black"/>
+            <spline type="simpleInteractive" point4="451" angle1="253.655" angle2="95.4543" id="454" color="black" length1="9.74874" length2="7.56679" point1="106"/>
+            <line typeLine="hair" id="455" firstPoint="448" secondPoint="451" lineColor="black"/>
+            <line typeLine="hair" id="456" firstPoint="447" secondPoint="445" lineColor="black"/>
+            <line typeLine="hair" id="457" firstPoint="445" secondPoint="442" lineColor="black"/>
+            <line typeLine="hair" id="458" firstPoint="442" secondPoint="446" lineColor="black"/>
+            <line typeLine="hair" id="459" firstPoint="446" secondPoint="448" lineColor="black"/>
+            <point type="endLine" typeLine="none" id="460" name="A102" basePoint="197" mx="-3.10922" lineColor="black" my="-0.581028" angle="175" length="#Taitepiste"/>
+            <point type="normal" typeLine="none" id="461" name="Taitepiste" firstPoint="460" secondPoint="197" mx="-4.37763" lineColor="black" my="-0.792431" angle="0" length="#Taitepistekorkeus"/>
+            <point type="alongLine" typeLine="none" id="462" name="A103" firstPoint="209" secondPoint="207" mx="-2.54548" lineColor="black" my="-1.0743" length="CurrentLength+2"/>
+            <point type="alongLine" typeLine="dotLine" id="463" name="A104" firstPoint="461" secondPoint="462" mx="-1.98174" lineColor="black" my="0.0531802" length="CurrentLength+sqrt((Spl_A13_Niskapiste-#Kauluksenpituusvähennys)^2-(Line_A83_A103-Line_A81_A83)^2)"/>
+            <point type="normal" typeLine="none" id="464" name="A105" firstPoint="463" secondPoint="462" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Kauluksenkäyryys+#Kauluksenalaosa"/>
+            <point type="alongLine" typeLine="none" id="465" name="A106" firstPoint="462" secondPoint="207" mx="-0.431449" lineColor="black" my="0.616921" length="#Kauluksenalaosa"/>
+            <point type="normal" typeLine="none" id="466" name="A107" firstPoint="464" secondPoint="465" mx="0.132292" lineColor="black" my="-1.2857" angle="180" length="#Kauluksenalaosa"/>
+            <point type="alongLine" typeLine="hair" id="467" name="A108" firstPoint="464" secondPoint="466" mx="-2.0522" lineColor="black" my="-1.21524" length="CurrentLength+#Kauluksenyläosa"/>
+            <point type="normal" typeLine="none" id="468" name="A109" firstPoint="461" secondPoint="462" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_A103_A106"/>
+            <line typeLine="dotLine" id="469" firstPoint="468" secondPoint="465" lineColor="black"/>
+            <point type="lineIntersect" id="470" name="A110" p2Line1="198" p2Line2="468" p1Line1="108" p1Line2="465" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="471" name="A111" firstPoint="470" secondPoint="468" mx="0.132292" lineColor="black" my="0.264583" length="#Rintaliinakorkeusrinnalta"/>
+            <spline type="simpleInteractive" point4="471" angle1="240.851" angle2="357.87" id="472" color="black" length1="4.30669" length2="19.7554" point1="106"/>
+            <point type="alongLine" typeLine="none" id="473" name="A112" firstPoint="465" secondPoint="468" mx="0.132292" lineColor="black" my="0.264583" length="#Rintaliinahatiatukietu"/>
+            <point type="cutSplinePath" id="474" name="A113" mx="0.132292" splinePath="214" my="0.264583" length="#Rintaliinahatiatukikäsi"/>
+            <line typeLine="dotLine" id="475" firstPoint="473" secondPoint="474" lineColor="black"/>
+            <point type="normal" typeLine="none" id="500" name="A114" firstPoint="107" secondPoint="198" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="2"/>
+            <point type="normal" typeLine="none" id="501" name="A115" firstPoint="108" secondPoint="198" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="1"/>
+            <point type="lineIntersect" id="502" name="A116" p2Line1="500" p2Line2="442" p1Line1="501" p1Line2="441" mx="-0.572384" my="-1.2857"/>
+            <point type="alongLine" typeLine="none" id="503" name="A117" firstPoint="502" secondPoint="500" mx="0.132292" lineColor="black" my="0.264583" length="#Rintataskunleveys/2"/>
+            <point type="alongLine" typeLine="hair" id="504" name="A118" firstPoint="503" secondPoint="502" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <point type="endLine" typeLine="hair" id="505" name="A119" basePoint="504" mx="0.132292" lineColor="black" my="0.264583" angle="AngleLine_A93_A94+180" length="#Rintataskunkorkeus"/>
+            <point type="endLine" typeLine="hair" id="506" name="A120" basePoint="503" mx="0.317708" lineColor="black" my="-2.42395" angle="AngleLine_A118_A119" length="Line_A118_A119"/>
+            <line typeLine="hair" id="507" firstPoint="505" secondPoint="506" lineColor="black"/>
+            <point type="alongLine" typeLine="dotLine" id="508" name="A121" firstPoint="505" secondPoint="504" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Rintataskusyvyys"/>
+            <point type="height" typeLine="dotLine" id="509" name="A122" basePoint="508" p2Line="503" mx="0.132292" lineColor="black" my="0.264583" p1Line="506"/>
+            <line typeLine="dotLine" id="510" firstPoint="503" secondPoint="509" lineColor="black"/>
+            <point type="normal" typeLine="dotLine" id="529" name="A123" firstPoint="197" secondPoint="109" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_A19_A17+Line_A17_A23+#Etuhelmalisäys+#Sivuleikkausenkorkeus"/>
+            <point type="pointOfIntersection" id="530" name="A124" firstPoint="197" secondPoint="5" mx="0.132292" my="0.264583"/>
+            <line typeLine="dotLine" id="531" firstPoint="530" secondPoint="110" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="532" name="A125" firstPoint="113" secondPoint="530" mx="-1.93851" lineColor="black" my="0.659023" length="max(0;min(3;((Line_A2_A17+Line_A45_A46+Line_A44_A45+Line_A42_A44+Line_A39_A40)-(#Ly+#Lantiolisäys))))"/>
+            <spline type="simpleInteractive" point4="532" angle1="276.29" angle2="93.2069" id="533" color="black" length1="4.34158" length2="2.14661" point1="450"/>
+            <point type="alongLine" typeLine="dotLine" id="534" name="A126" firstPoint="450" secondPoint="113" mx="-2.09422" lineColor="black" my="-0.595658" length="CurrentLength+(Line_A45_A63+Spl_A45_A36-Spl_A38_A101-Spl_A100_A125)"/>
+            <point type="alongLine" typeLine="dotLine" id="536" name="A127" firstPoint="108" secondPoint="197" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+Line_A71_A123"/>
+            <point type="alongLine" typeLine="none" id="537" name="A128" firstPoint="529" secondPoint="536" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <line typeLine="dotLine" id="538" firstPoint="197" secondPoint="537" lineColor="black"/>
+            <operation type="rotation" suffix="a1" id="539" center="443" angle="AngleLine_A71_A128-AngleLine_A71_A123">
+                <source>
+                    <item idObject="450"/>
+                    <item idObject="533"/>
+                    <item idObject="532"/>
+                    <item idObject="534"/>
+                </source>
+                <destination>
+                    <item idObject="540" mx="0.503715" my="-0.348155"/>
+                    <item idObject="541" mx="2.14748e+9" my="2.14748e+9"/>
+                    <item idObject="542" mx="-4.38338" my="7.40094"/>
+                    <item idObject="543" mx="-0.586122" my="0.290011"/>
+                </destination>
+            </operation>
+            <operation type="rotation" suffix="a2" id="545" center="442" angle="180/3.14*atan(0.5/Line_A93_A94)">
+                <source>
+                    <item idObject="446"/>
+                    <item idObject="448"/>
+                    <item idObject="451"/>
+                    <item idObject="454"/>
+                </source>
+                <destination>
+                    <item idObject="546" mx="0.466268" my="-1.73927"/>
+                    <item idObject="547" mx="0.688919" my="-1.90626"/>
+                    <item idObject="548" mx="0.48463" my="-1.56757"/>
+                    <item idObject="549" mx="2.14748e+9" my="2.14748e+9"/>
+                </destination>
+            </operation>
+            <operation type="rotation" suffix="a3" id="550" center="442" angle="-180/3.14*atan(0.5/Line_A93_A94)">
+                <source>
+                    <item idObject="197"/>
+                    <item idObject="530"/>
+                    <item idObject="537"/>
+                    <item idObject="543"/>
+                    <item idObject="542"/>
+                    <item idObject="541"/>
+                    <item idObject="540"/>
+                    <item idObject="447"/>
+                    <item idObject="445"/>
+                </source>
+                <destination>
+                    <item idObject="551" mx="-1.49762" my="-2.32846"/>
+                    <item idObject="552" mx="0.402094" my="-2.96971"/>
+                    <item idObject="553" mx="-2.07762" my="1.86382"/>
+                    <item idObject="554" mx="-4.54482" my="-1.54733"/>
+                    <item idObject="555" mx="-4.79297" my="-1.3117"/>
+                    <item idObject="556" mx="2.14748e+9" my="2.14748e+9"/>
+                    <item idObject="557" mx="-4.06113" my="-0.194657"/>
+                    <item idObject="558" mx="-3.15399" my="-2.65979"/>
+                    <item idObject="559" mx="-3.33099" my="-2.50587"/>
+                </destination>
+            </operation>
+            <line typeLine="dotLine" id="563" firstPoint="108" secondPoint="551" lineColor="black"/>
+            <line typeLine="dotLine" id="564" firstPoint="551" secondPoint="553" lineColor="black"/>
+            <line typeLine="dotLine" id="565" firstPoint="553" secondPoint="554" lineColor="black"/>
+            <line typeLine="hair" id="566" firstPoint="555" secondPoint="554" lineColor="black"/>
+            <line typeLine="hair" id="568" firstPoint="558" secondPoint="559" lineColor="black"/>
+            <line typeLine="hair" id="569" firstPoint="559" secondPoint="442" lineColor="black"/>
+            <line typeLine="hair" id="570" firstPoint="442" secondPoint="546" lineColor="black"/>
+            <line typeLine="hair" id="571" firstPoint="546" secondPoint="547" lineColor="black"/>
+            <line typeLine="hair" id="572" firstPoint="547" secondPoint="548" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="574" name="A129" firstPoint="558" secondPoint="557" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Sivutaskunleveyslisäykset"/>
+            <point type="alongLine" typeLine="hair" id="575" name="A130" firstPoint="574" secondPoint="558" mx="-2.31183" lineColor="black" my="-0.999615" length="CurrentLength+#Sivutaskunleveyslisäykset"/>
+            <point type="normal" typeLine="hair" id="576" name="A131" firstPoint="574" secondPoint="575" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Sivutaskunläppä"/>
+            <point type="normal" typeLine="hair" id="577" name="A132" firstPoint="575" secondPoint="574" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_A129_A131"/>
+            <line typeLine="hair" id="578" firstPoint="577" secondPoint="576" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="579" name="A133" firstPoint="575" secondPoint="577" mx="0.132292" lineColor="black" my="0.264583" length="Spl_A100_A125a1a3+Line_A125a1a3_A126a1a3-#SivutaskuHelmasta"/>
+            <point type="height" typeLine="dotLine" id="580" name="A134" basePoint="579" p2Line="576" mx="0.132292" lineColor="black" my="0.264583" p1Line="574"/>
+            <line typeLine="dotLine" id="581" firstPoint="577" secondPoint="579" lineColor="black"/>
+            <line typeLine="dotLine" id="582" firstPoint="576" secondPoint="580" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="588" name="A135" firstPoint="575" secondPoint="577" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <point type="alongLine" typeLine="none" id="589" name="A136" firstPoint="574" secondPoint="576" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <point type="lineIntersect" id="600" name="A137" p2Line1="553" p2Line2="110" p1Line1="551" p1Line2="552" mx="-4.80348" my="-1.46294"/>
+            <point type="alongLine" typeLine="none" id="601" name="A138" firstPoint="600" secondPoint="110" mx="1.85981" lineColor="black" my="-4.79458" length="#Etureunalantiolta"/>
+            <point type="alongLine" typeLine="none" id="602" name="A139" firstPoint="553" secondPoint="554" mx="-4.80609" lineColor="black" my="-0.24531" length="#EtuhelmanKaartopiste"/>
+            <point type="alongLine" typeLine="none" id="603" name="A140" firstPoint="602" secondPoint="554" mx="1.32675" lineColor="black" my="-2.12433" length="1"/>
+            <point type="alongLine" typeLine="dotLine" id="604" name="A141" firstPoint="555" secondPoint="554" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+#Helmataitteenkorkeus"/>
+            <point type="normal" typeLine="dotLine" id="605" name="A142" firstPoint="602" secondPoint="553" mx="-4.65679" lineColor="black" my="-0.285317" angle="0" length="#Helmataitteenkorkeus"/>
+            <line typeLine="dotLine" id="606" firstPoint="605" secondPoint="604" lineColor="black"/>
+            <point type="height" typeLine="dotLine" id="607" name="A143" basePoint="603" p2Line="604" mx="0.132292" lineColor="black" my="0.264583" p1Line="605"/>
+            <point type="alongLine" typeLine="none" id="608" name="A144" firstPoint="207" secondPoint="209" mx="0.132292" lineColor="black" my="0.264583" length="#Etuvuorireunasta"/>
+            <spline type="simpleInteractive" point4="608" angle1="83.6147" angle2="211.454" id="609" color="blue" length1="17.433" length2="21.0101" point1="603"/>
+            <line typeLine="dotLine" id="621" firstPoint="109" secondPoint="551" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="622" name="A145" firstPoint="462" secondPoint="461" mx="0.132292" lineColor="black" my="0.264583" length="15"/>
+            <point type="alongLine" typeLine="none" id="623" name="A146" firstPoint="622" secondPoint="462" mx="-2.16935" lineColor="black" my="-1.53197" length="6"/>
+            <point type="normal" typeLine="dotLine" id="624" name="A147" firstPoint="622" secondPoint="623" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="10"/>
+            <point type="alongLine" typeLine="none" id="625" name="A148" firstPoint="624" secondPoint="623" mx="0.132292" lineColor="black" my="0.264583" length="4.5"/>
+            <point type="pointOfIntersectionCircles" c2Radius="4" crossPoint="2" c1Radius="4.8" c2Center="625" id="626" name="A149" c1Center="624" mx="0.132292" my="0.264583"/>
+            <point type="lineIntersect" id="627" name="A150" p2Line1="625" p2Line2="468" p1Line1="624" p1Line2="465" mx="0.204154" my="0.0489961"/>
+            <spline type="pathInteractive" id="628" color="black">
+                <pathPoint angle1="240.05" pSpline="627" angle2="60.0505" length1="0" length2="2.90807"/>
+                <pathPoint angle1="236.453" pSpline="465" angle2="56.453" length1="2.19081" length2="1.026"/>
+                <pathPoint angle1="231.34" pSpline="464" angle2="51.34" length1="0.971785" length2="0.721012"/>
+            </spline>
+            <spline type="simpleInteractive" point4="466" angle1="55.4877" angle2="235.565" id="629" color="black" length1="1.83367" length2="1.27997" point1="462"/>
+            <spline type="simpleInteractive" point4="467" angle1="20.7585" angle2="0" id="630" color="black" length1="7.26827" length2="0" point1="626"/>
+            <line typeLine="hair" id="631" firstPoint="624" secondPoint="627" lineColor="black"/>
+            <line typeLine="hair" id="632" firstPoint="626" secondPoint="625" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="634" name="A151" firstPoint="466" secondPoint="464" mx="0.82882" lineColor="black" my="-0.748549" length="0.5"/>
+            <point type="alongLine" typeLine="none" id="635" name="A152" firstPoint="627" secondPoint="623" mx="-2.33016" lineColor="black" my="1.20232" length="CurrentLength/2.5"/>
+            <spline type="simpleInteractive" point4="635" angle1="228.914" angle2="66.105" id="636" color="black" length1="2.17502" length2="3.73922" point1="634"/>
+            <point type="alongLine" typeLine="none" id="637" name="A153" firstPoint="465" secondPoint="627" mx="0.132292" lineColor="black" my="0.264583" length="Line_A146_A103+Spl_A103_A107-SplPath_A150_A105_Seg_2"/>
+            <spline type="pathInteractive" id="670" color="black">
+                <pathPoint angle1="351.003" pSpline="602" angle2="171.003" length1="0" length2="5.71129"/>
+                <pathPoint angle1="270.94" pSpline="601" angle2="90.9399" length1="2.7862" length2="6.09427"/>
+                <pathPoint angle1="293.524" pSpline="461" angle2="113.524" length1="0.418328" length2="3.76429"/>
+                <pathPoint angle1="234.939" pSpline="624" angle2="54.939" length1="11.3209" length2="1.10965"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="671" name="A154" firstPoint="506" secondPoint="503" mx="1.15208" lineColor="black" my="0.171875" length="#Printfix"/>
+            <point type="cutSplinePath" id="672" name="A155" mx="3.56249" splinePath="214" my="-1.12604" length="SplPath_A84_A38_Seg_1+#Printfix"/>
+            <operation type="flippingByLine" suffix="a4" id="769" p2Line="464" p1Line="467">
+                <source>
+                    <item idObject="630"/>
+                    <item idObject="626"/>
+                    <item idObject="625"/>
+                    <item idObject="623"/>
+                    <item idObject="635"/>
+                    <item idObject="637"/>
+                    <item idObject="627"/>
+                    <item idObject="628"/>
+                    <item idObject="636"/>
+                    <item idObject="462"/>
+                    <item idObject="629"/>
+                </source>
+                <destination>
+                    <item idObject="770" mx="2.14748e+9" my="2.14748e+9"/>
+                    <item idObject="771" mx="0.132292" my="0.264583"/>
+                    <item idObject="772" mx="0.132292" my="0.264583"/>
+                    <item idObject="773" mx="-3.67846" my="-0.669627"/>
+                    <item idObject="774" mx="-3.69555" my="-0.45051"/>
+                    <item idObject="775" mx="0.347879" my="-1.17266"/>
+                    <item idObject="776" mx="-0.155157" my="0.408308"/>
+                    <item idObject="777" mx="2.14748e+9" my="2.14748e+9"/>
+                    <item idObject="778" mx="2.14748e+9" my="2.14748e+9"/>
+                    <item idObject="779" mx="-2.54548" my="-1.0743"/>
+                    <item idObject="780" mx="2.14748e+9" my="2.14748e+9"/>
+                </destination>
+            </operation>
+            <line typeLine="hair" id="794" firstPoint="771" secondPoint="772" lineColor="black"/>
+            <line typeLine="hair" id="795" firstPoint="772" secondPoint="776" lineColor="black"/>
+            <line typeLine="hair" id="796" firstPoint="774" secondPoint="775" lineColor="black"/>
+            <line typeLine="hair" id="797" firstPoint="776" secondPoint="775" lineColor="black"/>
+            <line typeLine="hair" id="798" firstPoint="635" secondPoint="637" lineColor="black"/>
+            <line typeLine="hair" id="799" firstPoint="627" secondPoint="637" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="55" idObject="42" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="56" idObject="35" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="57" idObject="36" mx="-2.07306" my="-0.233399"/>
+            <point type="modeling" inUse="true" id="58" idObject="33" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="59" idObject="46"/>
+            <point type="modeling" inUse="true" id="60" idObject="21" mx="-1.67878" my="-0.751385"/>
+            <point type="modeling" inUse="true" id="61" idObject="19" mx="0.264809" my="-1.76735"/>
+            <spline type="modelingSpline" inUse="true" id="62" idObject="23"/>
+            <point type="modeling" inUse="true" id="63" idObject="1" mx="0.264479" my="-0.476908"/>
+            <point type="modeling" inUse="true" id="64" idObject="6" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="65" idObject="48"/>
+            <point type="modeling" inUse="true" id="66" idObject="31" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="67" idObject="41" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="81" idObject="42" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="82" idObject="35" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="83" idObject="36" mx="-2.07306" my="-0.233399"/>
+            <point type="modeling" inUse="true" id="84" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="85" idObject="50" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="86" idObject="51" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="87" idObject="53" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="91" idObject="1" mx="0.264479" my="-0.476908"/>
+            <point type="modeling" inUse="true" id="92" idObject="89" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="93" idObject="90"/>
+            <point type="modeling" inUse="true" id="94" idObject="13" mx="-1.35715" my="-0.42285"/>
+            <spline type="modelingPath" inUse="true" id="95" idObject="46"/>
+            <point type="modeling" inUse="true" id="96" idObject="21" mx="-1.67878" my="-0.751385"/>
+            <point type="modeling" inUse="true" id="97" idObject="19" mx="0.264809" my="-1.76735"/>
+            <spline type="modelingSpline" inUse="true" id="98" idObject="23"/>
+            <point type="modeling" inUse="true" id="153" idObject="138" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="154" idObject="136" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="155" idObject="114" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="156" idObject="142"/>
+            <point type="modeling" inUse="true" id="157" idObject="104" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="158" idObject="143"/>
+            <point type="modeling" inUse="true" id="159" idObject="118" mx="0.588681" my="-2.47375"/>
+            <spline type="modelingPath" inUse="true" id="160" idObject="144"/>
+            <point type="modeling" inUse="true" id="161" idObject="124" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="162" idObject="127" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="163" idObject="126" mx="-0.221935" my="0.275749"/>
+            <point type="modeling" inUse="true" id="164" idObject="140" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="165" idObject="139" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="167" idObject="146" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="168" idObject="136" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="169" idObject="114" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="170" idObject="142"/>
+            <point type="modeling" inUse="true" id="171" idObject="104" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="172" idObject="143"/>
+            <point type="modeling" inUse="true" id="173" idObject="118" mx="0.588681" my="-2.47375"/>
+            <spline type="modelingSpline" inUse="true" id="174" idObject="147"/>
+            <point type="modeling" inUse="true" id="175" idObject="127" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="176" idObject="126" mx="-0.221935" my="0.275749"/>
+            <point type="modeling" inUse="true" id="177" idObject="140" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="178" idObject="139" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="180" idObject="149" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="181" idObject="148" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="182" idObject="124" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="183" idObject="127" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="184" idObject="126" mx="-0.221935" my="0.275749"/>
+            <point type="modeling" inUse="true" id="185" idObject="140" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="186" idObject="139" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="188" idObject="118" mx="0.588681" my="-2.47375"/>
+            <spline type="modelingPath" inUse="true" id="189" idObject="144"/>
+            <point type="modeling" inUse="true" id="190" idObject="103" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="191" idObject="151"/>
+            <point type="modeling" inUse="true" id="192" idObject="150" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="193" idObject="142"/>
+            <point type="modeling" inUse="true" id="194" idObject="104" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="195" idObject="143"/>
+            <point type="modeling" inUse="true" id="428" idObject="51" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="429" idObject="52"/>
+            <point type="modeling" inUse="true" id="430" idObject="21" mx="-1.67878" my="-0.751385"/>
+            <point type="modeling" inUse="true" id="431" idObject="19" mx="0.264809" my="-1.76735"/>
+            <spline type="modelingSpline" inUse="true" id="432" idObject="23"/>
+            <point type="modeling" inUse="true" id="433" idObject="1" mx="0.264479" my="-0.476908"/>
+            <point type="modeling" inUse="true" id="434" idObject="400" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="435" idObject="401" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="436" idObject="402" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="437" idObject="403" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="476" idObject="471" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="477" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="478" idObject="209" mx="0.0125135" my="-0.435986"/>
+            <point type="modeling" inUse="true" id="479" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="480" idObject="214"/>
+            <point type="modeling" inUse="true" id="481" idObject="106" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="482" idObject="472"/>
+            <point type="modeling" inUse="true" id="484" idObject="471" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="485" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="486" idObject="209" mx="-3.42021" my="0.322821"/>
+            <point type="modeling" inUse="true" id="487" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="488" idObject="214"/>
+            <point type="modeling" inUse="true" id="489" idObject="106" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="490" idObject="472"/>
+            <point type="modeling" inUse="true" id="492" idObject="473" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="493" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="494" idObject="209" mx="-3.42021" my="0.322821"/>
+            <point type="modeling" inUse="true" id="495" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="496" idObject="214"/>
+            <point type="modeling" inUse="true" id="497" idObject="474" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="511" idObject="504" mx="1.13543" my="0.933338"/>
+            <point type="modeling" inUse="true" id="512" idObject="505" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="513" idObject="506" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="514" idObject="503" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="516" idObject="508" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="517" idObject="504" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="518" idObject="503" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="519" idObject="509" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="521" idObject="508" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="522" idObject="505" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="523" idObject="506" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="524" idObject="509" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="583" idObject="577" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="584" idObject="575" mx="-2.31183" my="-0.999615"/>
+            <point type="modeling" inUse="true" id="585" idObject="574" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="586" idObject="576" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="590" idObject="588" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="591" idObject="575" mx="-2.31183" my="-0.999615"/>
+            <point type="modeling" inUse="true" id="592" idObject="574" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="593" idObject="589" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="595" idObject="579" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="596" idObject="575" mx="-2.31183" my="-0.999615"/>
+            <point type="modeling" inUse="true" id="597" idObject="574" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="598" idObject="580" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="610" idObject="603" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="611" idObject="609"/>
+            <point type="modeling" inUse="true" id="612" idObject="608" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="613" idObject="209" mx="-3.42021" my="0.322821"/>
+            <point type="modeling" inUse="true" id="614" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="615" idObject="214"/>
+            <point type="modeling" inUse="true" id="616" idObject="106" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="617" idObject="134" mx="-0.7645" my="-1.7977"/>
+            <point type="modeling" inUse="true" id="618" idObject="110" mx="-1.83701" my="-0.0590823"/>
+            <point type="modeling" inUse="true" id="619" idObject="554" mx="-4.54482" my="-1.54733"/>
+            <point type="modeling" inUse="true" id="673" idObject="605" mx="-4.65679" my="-0.285317"/>
+            <point type="modeling" inUse="true" id="674" idObject="602" mx="-4.80609" my="-0.24531"/>
+            <spline type="modelingPath" inUse="true" id="675" idObject="670"/>
+            <point type="modeling" inUse="true" id="676" idObject="624" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="677" idObject="627" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="678" idObject="628"/>
+            <point type="modeling" inUse="true" id="679" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="680" idObject="209" mx="-3.42021" my="0.322821"/>
+            <point type="modeling" inUse="true" id="681" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="682" idObject="214"/>
+            <point type="modeling" inUse="true" id="683" idObject="116" mx="-3.39061" my="-1.77499"/>
+            <point type="modeling" inUse="true" id="684" idObject="506" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="685" idObject="505" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="686" idObject="504" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="687" idObject="503" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="688" idObject="671" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="689" idObject="672" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="690" idObject="214"/>
+            <point type="modeling" inUse="true" id="691" idObject="106" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="692" idObject="549"/>
+            <point type="modeling" inUse="true" id="693" idObject="548" mx="0.48463" my="-1.56757"/>
+            <point type="modeling" inUse="true" id="694" idObject="547" mx="0.688919" my="-1.90626"/>
+            <point type="modeling" inUse="true" id="695" idObject="546" mx="0.466268" my="-1.73927"/>
+            <point type="modeling" inUse="true" id="696" idObject="442" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="697" idObject="559" mx="-3.33099" my="-2.50587"/>
+            <point type="modeling" inUse="true" id="698" idObject="558" mx="-3.15399" my="-2.65979"/>
+            <point type="modeling" inUse="true" id="699" idObject="557" mx="-4.06113" my="-0.194657"/>
+            <spline type="modelingSpline" inUse="true" id="700" idObject="556"/>
+            <point type="modeling" inUse="true" id="701" idObject="555" mx="-4.79297" my="-1.3117"/>
+            <point type="modeling" inUse="true" id="702" idObject="554" mx="-4.54482" my="-1.54733"/>
+            <point type="modeling" inUse="true" id="703" idObject="604" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="704" idObject="607" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="706" idObject="605" mx="-4.65679" my="-0.285317"/>
+            <point type="modeling" inUse="true" id="707" idObject="602" mx="-4.80609" my="-0.24531"/>
+            <spline type="modelingPath" inUse="true" id="708" idObject="670"/>
+            <point type="modeling" inUse="true" id="709" idObject="624" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="710" idObject="627" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="711" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="712" idObject="608" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="713" idObject="609"/>
+            <point type="modeling" inUse="true" id="714" idObject="603" mx="1.32675" my="-2.12433"/>
+            <point type="modeling" inUse="true" id="715" idObject="607" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="717" idObject="605" mx="-4.65679" my="-0.285317"/>
+            <point type="modeling" inUse="true" id="718" idObject="602" mx="-4.80609" my="-0.24531"/>
+            <spline type="modelingPath" inUse="true" id="719" idObject="670"/>
+            <point type="modeling" inUse="true" id="720" idObject="624" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="721" idObject="627" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="722" idObject="628"/>
+            <point type="modeling" inUse="true" id="723" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="724" idObject="608" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="725" idObject="609"/>
+            <point type="modeling" inUse="true" id="726" idObject="603" mx="1.32675" my="-2.12433"/>
+            <point type="modeling" inUse="true" id="727" idObject="607" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="729" idObject="605" mx="-4.65679" my="-0.285317"/>
+            <point type="modeling" inUse="true" id="730" idObject="602" mx="-4.80609" my="-0.24531"/>
+            <spline type="modelingPath" inUse="true" id="731" idObject="670"/>
+            <point type="modeling" inUse="true" id="732" idObject="624" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="733" idObject="627" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="734" idObject="628"/>
+            <point type="modeling" inUse="true" id="735" idObject="465" mx="-0.431449" my="0.616921"/>
+            <point type="modeling" inUse="true" id="736" idObject="209" mx="-3.42021" my="0.322821"/>
+            <point type="modeling" inUse="true" id="737" idObject="210" mx="-0.450085" my="0.751855"/>
+            <spline type="modelingPath" inUse="true" id="738" idObject="214"/>
+            <point type="modeling" inUse="true" id="739" idObject="106" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="740" idObject="549"/>
+            <point type="modeling" inUse="true" id="741" idObject="548" mx="0.48463" my="-1.56757"/>
+            <point type="modeling" inUse="true" id="742" idObject="547" mx="0.688919" my="-1.90626"/>
+            <point type="modeling" inUse="true" id="743" idObject="546" mx="0.466268" my="-1.73927"/>
+            <point type="modeling" inUse="true" id="744" idObject="442" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="745" idObject="559" mx="-3.33099" my="-2.50587"/>
+            <point type="modeling" inUse="true" id="746" idObject="558" mx="-3.15399" my="-2.65979"/>
+            <point type="modeling" inUse="true" id="747" idObject="557" mx="-4.06113" my="-0.194657"/>
+            <point type="modeling" inUse="true" id="748" idObject="555" mx="-4.79297" my="-1.3117"/>
+            <point type="modeling" inUse="true" id="749" idObject="554" mx="-4.54482" my="-1.54733"/>
+            <point type="modeling" inUse="true" id="750" idObject="604" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="751" idObject="607" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="781" idObject="625" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="782" idObject="626" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="783" idObject="630"/>
+            <point type="modeling" inUse="true" id="784" idObject="467" mx="-2.0522" my="-1.21524"/>
+            <spline type="modelingSpline" inUse="true" id="785" idObject="770"/>
+            <point type="modeling" inUse="true" id="786" idObject="771" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="787" idObject="772" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="788" idObject="776" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="789" idObject="777"/>
+            <point type="modeling" inUse="true" id="790" idObject="464" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="791" idObject="628"/>
+            <point type="modeling" inUse="true" id="792" idObject="627" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="800" idObject="625" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="801" idObject="626" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="802" idObject="630"/>
+            <point type="modeling" inUse="true" id="803" idObject="467" mx="-2.0522" my="-1.21524"/>
+            <spline type="modelingSpline" inUse="true" id="804" idObject="770"/>
+            <point type="modeling" inUse="true" id="805" idObject="771" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="806" idObject="772" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="807" idObject="773" mx="-1.45073" my="0.264583"/>
+            <point type="modeling" inUse="true" id="808" idObject="779" mx="-2.54548" my="-1.0743"/>
+            <spline type="modelingSpline" inUse="true" id="809" idObject="780"/>
+            <point type="modeling" inUse="true" id="810" idObject="466" mx="0.132292" my="-1.2857"/>
+            <spline type="modelingSpline" inUse="true" id="811" idObject="629"/>
+            <point type="modeling" inUse="true" id="812" idObject="462" mx="-2.54548" my="-1.0743"/>
+            <point type="modeling" inUse="true" id="813" idObject="623" mx="-1.45073" my="0.264583"/>
+            <point type="modeling" inUse="true" id="815" idObject="625" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="816" idObject="626" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="817" idObject="630"/>
+            <point type="modeling" inUse="true" id="818" idObject="467" mx="-2.0522" my="-1.21524"/>
+            <spline type="modelingSpline" inUse="true" id="819" idObject="770"/>
+            <point type="modeling" inUse="true" id="820" idObject="771" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="821" idObject="772" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="822" idObject="774" mx="-3.69555" my="-0.45051"/>
+            <spline type="modelingSpline" inUse="true" id="823" idObject="778"/>
+            <point type="modeling" inUse="true" id="824" idObject="634" mx="0.82882" my="-0.748549"/>
+            <spline type="modelingSpline" inUse="true" id="825" idObject="636"/>
+            <point type="modeling" inUse="true" id="826" idObject="635" mx="-2.33016" my="1.20232"/>
+            <point type="modeling" inUse="true" id="828" idObject="625" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="829" idObject="626" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="830" idObject="630"/>
+            <point type="modeling" inUse="true" id="831" idObject="467" mx="-2.0522" my="-1.21524"/>
+            <spline type="modelingSpline" inUse="true" id="832" idObject="770"/>
+            <point type="modeling" inUse="true" id="833" idObject="771" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="834" idObject="772" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="835" idObject="774" mx="-3.69555" my="-0.45051"/>
+            <spline type="modelingSpline" inUse="true" id="836" idObject="778"/>
+            <point type="modeling" inUse="true" id="837" idObject="634" mx="0.82882" my="-0.748549"/>
+            <point type="modeling" inUse="true" id="838" idObject="635" mx="-2.33016" my="1.20232"/>
+            <point type="modeling" inUse="true" id="840" idObject="635" mx="-2.33016" my="1.20232"/>
+            <spline type="modelingSpline" inUse="true" id="841" idObject="636"/>
+            <point type="modeling" inUse="true" id="842" idObject="634" mx="0.82882" my="-0.748549"/>
+            <spline type="modelingSpline" inUse="true" id="843" idObject="778"/>
+            <point type="modeling" inUse="true" id="844" idObject="774" mx="-3.69555" my="-0.45051"/>
+            <point type="modeling" inUse="true" id="845" idObject="775" mx="0.347879" my="-1.17266"/>
+            <point type="modeling" inUse="true" id="846" idObject="776" mx="-0.155157" my="0.408308"/>
+            <spline type="modelingPath" inUse="true" id="847" idObject="777"/>
+            <point type="modeling" inUse="true" id="848" idObject="464" mx="-0.787431" my="-2.25745"/>
+            <spline type="modelingPath" inUse="true" id="849" idObject="628"/>
+            <point type="modeling" inUse="true" id="850" idObject="627" mx="0.204154" my="0.0489961"/>
+            <point type="modeling" inUse="true" id="851" idObject="637" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="853" idObject="635" mx="-2.33016" my="1.20232"/>
+            <spline type="modelingSpline" inUse="true" id="854" idObject="636"/>
+            <point type="modeling" inUse="true" id="855" idObject="634" mx="0.82882" my="-0.748549"/>
+            <spline type="modelingSpline" inUse="true" id="856" idObject="778"/>
+            <point type="modeling" inUse="true" id="857" idObject="774" mx="-3.69555" my="-0.45051"/>
+            <point type="modeling" inUse="true" id="858" idObject="775" mx="0.347879" my="-1.17266"/>
+            <point type="modeling" inUse="true" id="859" idObject="776" mx="-0.155157" my="0.408308"/>
+            <spline type="modelingPath" inUse="true" id="860" idObject="777"/>
+            <point type="modeling" inUse="true" id="861" idObject="464" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="862" idObject="628"/>
+            <point type="modeling" inUse="true" id="863" idObject="627" mx="0.204154" my="0.0489961"/>
+            <point type="modeling" inUse="true" id="864" idObject="637" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="68" name="Takakappale" forbidFlipping="0" supplement="1" mx="142.856" width="1" my="1.37149">
+                <data rotation="0" letter="" fontSize="31" visible="true" mx="-502.728" width="177.275" my="405.865" height="97.0601">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="-478.177" width="143.583" my="231.103" height="73.4762"/>
+                <node type="NodePoint" nodeType="Contour" idObject="55" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="56" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="57" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="58" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="59" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="60" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="61" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="62" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="63" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="64" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="65" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="66" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="67" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="88" name="Takapalahalkio" forbidFlipping="1" supplement="1" mx="146.858" width="0.5" my="37.2986">
+                <data rotation="0" letter="" fontSize="22" visible="true" mx="-979.891" width="169.947" my="2381.14" height="131.353">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="-982.988" width="187.786" my="2193.29" height="152.759"/>
+                <node type="NodePoint" nodeType="Contour" idObject="81" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="82" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="83" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="84" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="85" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="86" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="87" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="99" name="Takakappalehartia" forbidFlipping="1" supplement="1" mx="140.791" width="0.5" my="-31.2562">
+                <data rotation="0" letter="" fontSize="26" visible="true" mx="-422.219" width="237.733" my="99.3217" height="127.786">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="-749.659" width="209.191" my="103.462" height="138.488"/>
+                <node type="NodePoint" nodeType="Contour" idObject="91" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="92" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="93" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="94" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="95" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="96" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="97" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="98" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="166" name="Sivupala" forbidFlipping="1" supplement="1" mx="140.524" width="1" my="17.4216">
+                <data rotation="0" letter="" fontSize="37" visible="true" mx="-2063.24" width="210.966" my="1339.29" height="113.906">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="15" visible="true" mx="-2059.88" width="197.489" my="1547.39" height="127.382"/>
+                <node type="NodePoint" nodeType="Contour" idObject="153" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="154" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="155" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="156" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="157" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="158" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="159" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="160" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="161" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="162" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="163" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="164" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="165" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="179" name="Sivupalavuori" forbidFlipping="0" supplement="1" mx="143.753" width="1" my="121.506">
+                <data rotation="0" letter="" fontSize="34" visible="true" mx="-2126.84" width="224.442" my="1459.34" height="144.228">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="16" visible="true" mx="-2089.37" width="180.644" my="1670.82" height="154.335"/>
+                <node type="NodePoint" nodeType="Contour" idObject="167" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="168" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="169" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="170" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="171" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="172" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="173" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="174" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="175" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="176" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="177" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="178" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="187" name="SIvupalahalkio" forbidFlipping="1" supplement="1" mx="137.4" width="0.5" my="50.3768">
+                <data rotation="0" letter="" fontSize="22" visible="true" mx="-1604.6" width="177.275" my="2386.91" height="110.537">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="15" visible="true" mx="-1604.6" width="167.167" my="2211.72" height="127.382"/>
+                <node type="NodePoint" nodeType="Contour" idObject="180" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="181" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="182" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="183" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="184" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="185" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="186" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="196" name="Sivupalakainalo" forbidFlipping="1" supplement="1" mx="141.284" width="0.5" my="4.19391">
+                <data rotation="0" letter="" fontSize="21" visible="true" mx="-2164.48" width="170.537" my="1121.16" height="80.2144">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="14" visible="true" mx="-1866.37" width="167.167" my="1003.44" height="124.013"/>
+                <node type="NodePoint" nodeType="Contour" idObject="188" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="189" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="190" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="191" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="192" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="193" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="194" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="195" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="438" name="Takakappalevuori" forbidFlipping="0" supplement="1" mx="144.109" width="1" my="135.998">
+                <data rotation="0" letter="" fontSize="23" visible="true" mx="-499.937" width="207.597" my="411.031" height="97.0601">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="-486.461" width="187.382" my="552.533" height="107.167"/>
+                <node type="NodePoint" nodeType="Contour" idObject="428" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="429" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="430" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="431" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="432" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="433" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="434" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="435" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="436" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="437" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="483" name="Rintaliina2" forbidFlipping="1" supplement="1" mx="124.219" width="1" my="39.1375">
+                <data rotation="0" letter="" fontSize="34" visible="true" mx="-2905" width="233.808" my="250.105" height="138.489">
+                    <mcp cutNumber="2" material="3" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="-2882.42" width="241.657" my="530.712" height="138.489"/>
+                <node type="NodePoint" nodeType="Contour" idObject="476" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="477" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="478" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="479" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="480" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="481" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="482" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="491" name="Rintaliina" forbidFlipping="0" supplement="1" mx="124.484" width="1" my="-4.7493">
+                <data rotation="0" letter="" fontSize="33" visible="true" mx="-2935.47" width="225.959" my="317.693" height="138.489">
+                    <mcp cutNumber="2" material="3" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="19" visible="true" mx="-2957.1" width="222.035" my="614.163" height="154.186"/>
+                <node type="NodePoint" nodeType="Contour" idObject="484" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="485" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="486" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="487" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="488" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="489" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="490" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="498" name="Rintaliinatuki" forbidFlipping="1" supplement="1" mx="122.882" width="1" my="-18.2062">
+                <data rotation="37.282" letter="" fontSize="32" visible="true" mx="-2769.45" width="234.908" my="25.4365" height="113.011">
+                    <mcp cutNumber="2" material="3" placement="0"/>
+                </data>
+                <patternInfo rotation="39.0619" fontSize="15" visible="true" mx="-2548.68" width="198.489" my="190.365" height="126.715"/>
+                <node type="NodePoint" nodeType="Contour" idObject="492" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="493" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="494" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="495" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="496" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="497" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="515" name="Rintatasku" forbidFlipping="1" supplement="1" mx="118.962" width="1" my="62.9512">
+                <data rotation="-6.75916" letter="" fontSize="27" visible="true" mx="-3032.35" width="157.659" my="932.762" height="95.4438">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="-7.01212" fontSize="12" visible="true" mx="-3189.04" width="131.268" my="955.059" height="95.4438"/>
+                <node type="NodePoint" nodeType="Contour" idObject="511" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="512" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="513" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="514" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="520" name="Rintataskutaka" forbidFlipping="1" supplement="1" mx="119.725" width="1" my="74.5331">
+                <data rotation="0" letter="" fontSize="28" visible="true" mx="-3150.65" width="210.262" my="1140.39" height="118.866">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="-3127.11" width="186.715" my="1306.13" height="154.186"/>
+                <node type="NodePoint" nodeType="Contour" idObject="516" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="517" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="518" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="519" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="525" name="Rintataskuetu" forbidFlipping="1" supplement="1" mx="122.02" width="1" my="99.9371">
+                <data rotation="0" letter="" fontSize="34" visible="true" mx="-3146.69" width="229.884" my="1068.19" height="134.564">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="21" visible="true" mx="-3163.36" width="249.506" my="1284.98" height="165.959"/>
+                <node type="NodePoint" nodeType="Contour" idObject="521" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="522" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="523" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="524" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="587" name="Taskukansi/peite" forbidFlipping="1" supplement="1" mx="113.431" width="1" my="119.05">
+                <data rotation="2.32439" letter="" fontSize="26" visible="true" mx="-3073.28" width="214.351" my="2171.26" height="151.403">
+                    <mcp cutNumber="4" material="0" placement="0"/>
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="1.48468" fontSize="12" visible="true" mx="-2796.12" width="208.454" my="2212.54" height="110.124"/>
+                <node type="NodePoint" nodeType="Contour" idObject="583" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="584" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="585" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="586" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="594" name="Taskunauha" forbidFlipping="1" supplement="1" mx="114.768" width="1" my="105.252">
+                <data rotation="2.54415" letter="" fontSize="19" visible="true" mx="-2775.24" width="120" my="2150.58" height="60">
+                    <mcp cutNumber="4" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="5.7495" fontSize="12" visible="true" mx="-3047.66" width="176.021" my="2120.86" height="60"/>
+                <node type="NodePoint" nodeType="Contour" idObject="590" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="591" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="592" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="593" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="599" name="Taskupussi" forbidFlipping="1" supplement="1" mx="111.079" width="1" my="131.924">
+                <data rotation="0" letter="" fontSize="44" visible="true" mx="-3017.25" width="252.682" my="2259.71" height="172.042">
+                    <mcp cutNumber="4" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="-2990.71" width="234.991" my="2542.76" height="142.557"/>
+                <node type="NodePoint" nodeType="Contour" idObject="595" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="596" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="597" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="598" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="620" name="Etuvuori" forbidFlipping="0" supplement="1" mx="53.9074" width="1" my="93.1202">
+                <data rotation="0" letter="" fontSize="41" visible="true" mx="-2866.24" width="120" my="708.158" height="60">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="-2777.77" width="120" my="442.762" height="60"/>
+                <node type="NodePoint" nodeType="Contour" idObject="610" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="611" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="612" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="613" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="614" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="615" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="616" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="617" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="618" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="619" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="705" name="Etukappale" forbidFlipping="0" supplement="1" mx="-1.61616" width="1" my="-6.60211">
+                <data rotation="0" letter="" fontSize="46" visible="true" mx="-3275.65" width="260.462" my="407.531" height="161.263">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="19" visible="true" mx="-3275.64" width="214.73" my="656.794" height="167.796"/>
+                <node type="NodePoint" nodeType="Contour" idObject="673" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="674" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="675" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="676" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="677" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="678" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="679" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="680" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="681" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="682" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="683" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="684" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="685" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="686" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="687" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="688" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="689" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="690" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="691" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="692" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="693" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="694" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="695" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="696" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="697" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="698" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="699" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="700" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="701" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="702" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="703" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="704" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="716" name="Laitavaate" forbidFlipping="0" supplement="1" mx="51.0573" width="1" my="-7.21109">
+                <data rotation="0" letter="" fontSize="42" visible="true" mx="-3393.67" width="240.862" my="308.094" height="128.598">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="16" visible="true" mx="-3415.15" width="224.53" my="550.356" height="135.131"/>
+                <node type="NodePoint" nodeType="Contour" idObject="706" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="707" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="708" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="709" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="710" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="711" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="712" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="713" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="714" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="715" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="728" name="Laitavaatetuki" forbidFlipping="0" supplement="1" mx="42.4253" width="0.5" my="92.2594">
+                <data rotation="0" letter="" fontSize="36" visible="true" mx="-3461.81" width="276.794" my="353.424" height="99.1986">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="15" visible="true" mx="-3467.4" width="172.265" my="520.906" height="135.131"/>
+                <node type="NodePoint" nodeType="Contour" idObject="717" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="718" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="719" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="720" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="721" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="722" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="723" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="724" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="725" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="726" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="727" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="752" name="Etukappaletuki" forbidFlipping="0" supplement="1" mx="-4.11817" width="0.5" my="88.3865">
+                <data rotation="0" letter="" fontSize="76" visible="true" mx="-3098.54" width="211.463" my="519.382" height="99.1986">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="18" visible="true" mx="-3114.87" width="227.796" my="770.906" height="148.197"/>
+                <node type="NodePoint" nodeType="Contour" idObject="729" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="730" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="731" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="732" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="733" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="734" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="735" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="736" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="737" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="738" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="739" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="740" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="741" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="742" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="743" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="744" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="745" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="746" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="747" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="748" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="749" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="750" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="751" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="793" name="Alakaulus" forbidFlipping="1" supplement="0" mx="-30.1672" width="1" my="218.528">
+                <data rotation="-51.2986" letter="" fontSize="32" visible="true" mx="-3101.59" width="234.99" my="-239.985" height="90.2604">
+                    <mcp cutNumber="1" material="3" placement="0"/>
+                </data>
+                <patternInfo rotation="-50.8512" fontSize="18" visible="true" mx="-2524.93" width="198.677" my="-983.324" height="150.781"/>
+                <node type="NodePoint" nodeType="Contour" idObject="781" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="782" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="783" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="784" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="785" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="786" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="787" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="788" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="789" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="790" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="791" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="792" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="814" name="Alakaulussauma" forbidFlipping="1" supplement="0" mx="-9.0312" width="1" my="222.998">
+                <data rotation="-54.8298" letter="" fontSize="33" visible="true" mx="-3213.12" width="262.224" my="-186.202" height="105.391"/>
+                <patternInfo rotation="-61.8834" fontSize="14" visible="true" mx="-2451.39" width="165.391" my="-1146.94" height="141.703"/>
+                <node type="NodePoint" nodeType="Contour" idObject="800" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="801" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="802" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="803" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="804" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="805" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="806" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="807" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="808" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="809" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="810" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="811" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="812" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="813" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="827" name="Yläkaulustuki" forbidFlipping="1" supplement="0" mx="36.1357" width="1" my="225.764">
+                <data rotation="-51.915" letter="" fontSize="33" visible="true" mx="-3159.68" width="256.172" my="-227.227" height="108.417">
+                    <mcp cutNumber="1" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="-53.41" fontSize="15" visible="true" mx="-2462.14" width="168.417" my="-1077.53" height="144.729"/>
+                <node type="NodePoint" nodeType="Contour" idObject="815" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="816" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="817" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="818" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="819" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="820" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="821" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="822" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="823" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="824" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="825" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="826" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="839" name="Yläkaulus" forbidFlipping="1" supplement="1" mx="11.0901" width="1" my="225.039">
+                <data rotation="-53.4077" letter="" fontSize="41" visible="true" mx="-3142.79" width="231.964" my="-221.208" height="108.417">
+                    <mcp cutNumber="1" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="-59.9105" fontSize="18" visible="true" mx="-2482.87" width="207.755" my="-1089.45" height="162.885"/>
+                <node type="NodePoint" nodeType="Contour" idObject="828" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="829" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="830" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="831" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="832" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="833" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="834" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="835" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="836" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="837" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="838" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="852" name="Tikkutuki" forbidFlipping="1" supplement="0" mx="77.6252" width="1" my="221.103">
+                <data rotation="-54.8771" letter="" fontSize="26" visible="true" mx="-2707.67" width="120" my="-496.475" height="60"/>
+                <patternInfo rotation="0" fontSize="12" visible="false" mx="-2765.01" width="120" my="-428.115" height="60"/>
+                <node type="NodePoint" nodeType="Contour" idObject="840" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="841" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="842" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="843" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="844" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="845" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="846" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="847" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="848" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="849" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="850" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="851" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="865" name="Tikku" forbidFlipping="1" supplement="1" mx="49.5831" width="1" my="234.565">
+                <data rotation="-46.3647" letter="" fontSize="45" visible="true" mx="-2654.95" width="123.026" my="-566.711" height="60"/>
+                <patternInfo rotation="0" fontSize="12" visible="false" mx="-2750.74" width="120" my="-442.385" height="60"/>
+                <node type="NodePoint" nodeType="Contour" idObject="853" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="854" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="855" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="856" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="857" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="858" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="859" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="860" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="861" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="862" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="863" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="864" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups>
+            <group id="49" name="Takakappale" visible="true">
+                <item tool="1" object="1"/>
+                <item tool="2" object="2"/>
+                <item tool="3" object="3"/>
+                <item tool="4" object="4"/>
+                <item tool="5" object="5"/>
+                <item tool="6" object="6"/>
+                <item tool="7" object="7"/>
+                <item tool="8" object="8"/>
+                <item tool="9" object="9"/>
+                <item tool="10" object="10"/>
+                <item tool="11" object="11"/>
+                <item tool="12" object="12"/>
+                <item tool="13" object="13"/>
+                <item tool="14" object="14"/>
+                <item tool="15" object="15"/>
+                <item tool="16" object="16"/>
+                <item tool="17" object="17"/>
+                <item tool="18" object="18"/>
+                <item tool="19" object="19"/>
+                <item tool="20" object="20"/>
+                <item tool="21" object="21"/>
+                <item tool="22" object="22"/>
+                <item tool="23" object="23"/>
+                <item tool="24" object="24"/>
+                <item tool="25" object="25"/>
+                <item tool="26" object="26"/>
+                <item tool="27" object="27"/>
+                <item tool="28" object="28"/>
+                <item tool="29" object="29"/>
+                <item tool="30" object="30"/>
+                <item tool="31" object="31"/>
+                <item tool="32" object="32"/>
+                <item tool="33" object="33"/>
+                <item tool="34" object="34"/>
+                <item tool="35" object="35"/>
+                <item tool="36" object="36"/>
+                <item tool="37" object="37"/>
+                <item tool="38" object="38"/>
+                <item tool="39" object="39"/>
+                <item tool="40" object="40"/>
+                <item tool="41" object="41"/>
+                <item tool="42" object="42"/>
+                <item tool="43" object="43"/>
+                <item tool="44" object="44"/>
+                <item tool="45" object="45"/>
+                <item tool="46" object="46"/>
+                <item tool="47" object="47"/>
+                <item tool="48" object="48"/>
+            </group>
+            <group id="70" name="Takavuori" visible="false">
+                <item tool="50" object="50"/>
+                <item tool="51" object="51"/>
+                <item tool="52" object="52"/>
+                <item tool="53" object="53"/>
+                <item tool="69" object="69"/>
+            </group>
+            <group id="100" name="Takaliimakangas" visible="false">
+                <item tool="89" object="89"/>
+                <item tool="90" object="90"/>
+            </group>
+            <group id="145" name="Sivukappale" visible="true">
+                <item tool="101" object="101"/>
+                <item tool="102" object="102"/>
+                <item tool="103" object="103"/>
+                <item tool="104" object="104"/>
+                <item tool="105" object="105"/>
+                <item tool="106" object="106"/>
+                <item tool="114" object="114"/>
+                <item tool="115" object="115"/>
+                <item tool="117" object="117"/>
+                <item tool="118" object="118"/>
+                <item tool="119" object="119"/>
+                <item tool="120" object="120"/>
+                <item tool="121" object="121"/>
+                <item tool="122" object="122"/>
+                <item tool="123" object="123"/>
+                <item tool="124" object="124"/>
+                <item tool="125" object="125"/>
+                <item tool="126" object="126"/>
+                <item tool="127" object="127"/>
+                <item tool="128" object="128"/>
+                <item tool="132" object="132"/>
+                <item tool="133" object="133"/>
+                <item tool="135" object="135"/>
+                <item tool="136" object="136"/>
+                <item tool="137" object="137"/>
+                <item tool="138" object="138"/>
+                <item tool="139" object="139"/>
+                <item tool="140" object="140"/>
+                <item tool="141" object="141"/>
+                <item tool="142" object="142"/>
+                <item tool="143" object="143"/>
+                <item tool="144" object="144"/>
+            </group>
+            <group id="152" name="SivukappaleVuoriLiimakangas" visible="false">
+                <item tool="146" object="146"/>
+                <item tool="147" object="147"/>
+                <item tool="148" object="148"/>
+                <item tool="149" object="149"/>
+                <item tool="150" object="150"/>
+                <item tool="151" object="151"/>
+            </group>
+            <group id="440" name="Ylimääräiset etuhartiapisteet" visible="false">
+                <item tool="111" object="111"/>
+                <item tool="200" object="200"/>
+                <item tool="201" object="201"/>
+                <item tool="202" object="202"/>
+                <item tool="203" object="203"/>
+                <item tool="204" object="204"/>
+                <item tool="205" object="205"/>
+                <item tool="206" object="206"/>
+                <item tool="208" object="208"/>
+            </group>
+            <group id="499" name="Rintaliina" visible="false">
+                <item tool="468" object="468"/>
+                <item tool="469" object="469"/>
+                <item tool="470" object="470"/>
+                <item tool="471" object="471"/>
+                <item tool="472" object="472"/>
+                <item tool="473" object="473"/>
+                <item tool="474" object="474"/>
+                <item tool="475" object="475"/>
+            </group>
+            <group id="544" name="Siirta a1" visible="false">
+                <item tool="450" object="450"/>
+                <item tool="532" object="532"/>
+                <item tool="533" object="533"/>
+                <item tool="534" object="534"/>
+            </group>
+            <group id="562" name="Rintatasku" visible="true">
+                <item tool="500" object="500"/>
+                <item tool="501" object="501"/>
+                <item tool="502" object="502"/>
+                <item tool="503" object="503"/>
+                <item tool="504" object="504"/>
+                <item tool="505" object="505"/>
+                <item tool="506" object="506"/>
+                <item tool="507" object="507"/>
+                <item tool="508" object="508"/>
+                <item tool="509" object="509"/>
+                <item tool="510" object="510"/>
+            </group>
+            <group id="567" name="Siirto a2-3" visible="false">
+                <item tool="130" object="130"/>
+                <item tool="131" object="131"/>
+                <item tool="197" object="197"/>
+                <item tool="444" object="444"/>
+                <item tool="445" object="445"/>
+                <item tool="446" object="446"/>
+                <item tool="447" object="447"/>
+                <item tool="448" object="448"/>
+                <item tool="451" object="451"/>
+                <item tool="454" object="454"/>
+                <item tool="455" object="455"/>
+                <item tool="456" object="456"/>
+                <item tool="457" object="457"/>
+                <item tool="458" object="458"/>
+                <item tool="459" object="459"/>
+                <item tool="529" object="529"/>
+                <item tool="530" object="530"/>
+                <item tool="536" object="536"/>
+                <item tool="537" object="537"/>
+                <item tool="538" object="538"/>
+                <item tool="539" object="540"/>
+                <item tool="539" object="541"/>
+                <item tool="539" object="542"/>
+                <item tool="539" object="543"/>
+            </group>
+            <group id="633" name="Etuosakaulakaari" visible="false">
+                <item tool="207" object="207"/>
+                <item tool="222" object="222"/>
+                <item tool="224" object="224"/>
+            </group>
+        </groups>
+    </draw>
+    <draw name="Hiha">
+        <calculation>
+            <point type="single" x="20.401" y="2.16387" id="225" name="B" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="dotLine" id="226" name="B1" basePoint="225" mx="-1.83319" lineColor="black" my="-1.4192" angle="270" length="#Hp"/>
+            <point type="alongLine" typeLine="none" id="227" name="B2" firstPoint="225" secondPoint="226" mx="-0.853047" lineColor="black" my="0.827634" length="((Line_A15_A86+Line_A39_A84)/2)-(((Line_A15_A86+Line_A39_A84)/2)/10+1)"/>
+            <point type="alongLine" typeLine="none" id="228" name="B3" firstPoint="226" secondPoint="227" mx="-1.34862" lineColor="black" my="-2.46575" length="1.5"/>
+            <point type="alongLine" typeLine="none" id="229" name="B4" firstPoint="228" secondPoint="226" mx="-1.7009" lineColor="black" my="-1.36865" length="CurrentLength+1.5"/>
+            <point type="alongLine" typeLine="none" id="230" name="B5" firstPoint="227" secondPoint="228" mx="1.1537" lineColor="black" my="-3.46854" length="CurrentLength/2-1.5"/>
+            <point type="normal" typeLine="dotLine" id="231" name="B6" firstPoint="229" secondPoint="228" mx="-2.17918" lineColor="black" my="-3.27486" angle="180" length="sqrt((#Hihankädentie/2)^2-Line_B3_B4^2)"/>
+            <point type="normal" typeLine="none" id="232" name="B7" firstPoint="230" secondPoint="228" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="1.5"/>
+            <point type="alongLine" typeLine="none" id="233" name="B8" firstPoint="230" secondPoint="232" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+Line_B4_B6+#KyynerpääLisäys"/>
+            <point type="alongLine" typeLine="none" id="234" name="B9" firstPoint="232" secondPoint="230" mx="-4.65364" lineColor="black" my="-0.157705" length="2"/>
+            <point type="alongLine" typeLine="none" id="235" name="B10" firstPoint="234" secondPoint="232" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2"/>
+            <point type="normal" typeLine="dotLine" id="236" name="B11" firstPoint="228" secondPoint="232" mx="-3.38677" lineColor="black" my="-1.98762" angle="0" length="2"/>
+            <point type="alongLine" typeLine="none" id="237" name="B12" firstPoint="236" secondPoint="228" mx="0.782393" lineColor="black" my="-2.98592" length="CurrentLength*2"/>
+            <point type="normal" typeLine="none" id="238" name="B13" firstPoint="227" secondPoint="232" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="2"/>
+            <point type="alongLine" typeLine="none" id="239" name="B14" firstPoint="238" secondPoint="227" mx="-3.52754" lineColor="black" my="-0.720755" length="CurrentLength*2"/>
+            <point type="alongLine" typeLine="none" id="240" name="B15" firstPoint="227" secondPoint="225" mx="1.45616" lineColor="black" my="-3.0288" length="#Ktl/4-1.5"/>
+            <point type="normal" typeLine="dotLine" id="241" name="B16" firstPoint="225" secondPoint="240" mx="0.830289" lineColor="black" my="-1.36408" angle="0" length="sqrt(((SplPath_A84_A38+Spl_A36_A49+SplPath_A31_A15_Seg_4)/2)^2-Line_B15_B^2)"/>
+            <point type="alongLine" typeLine="none" id="242" name="B17" firstPoint="225" secondPoint="241" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="alongLine" typeLine="none" id="243" name="B18" firstPoint="225" secondPoint="242" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="alongLine" typeLine="none" id="244" name="B19" firstPoint="242" secondPoint="241" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/3"/>
+            <point type="alongLine" typeLine="none" id="245" name="B20" firstPoint="240" secondPoint="243" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength/2"/>
+            <point type="pointOfIntersection" id="246" name="B21" firstPoint="242" secondPoint="227" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="247" name="B22" firstPoint="246" secondPoint="227" mx="-1.97915" lineColor="black" my="0.686871" length="1.5"/>
+            <line typeLine="dotLine" id="248" firstPoint="247" secondPoint="241" lineColor="black"/>
+            <point type="normal" typeLine="dotLine" id="249" name="B23" firstPoint="241" secondPoint="225" mx="-3.40559" lineColor="black" my="-0.598426" angle="0" length="#Ktl/4+1"/>
+            <point type="lineIntersectAxis" typeLine="none" id="250" name="B24" basePoint="249" p2Line="241" mx="-2.97375" lineColor="black" my="-1.03562" angle="180" p1Line="247"/>
+            <point type="alongLine" typeLine="none" id="251" name="B25" firstPoint="250" secondPoint="247" mx="-3.55162" lineColor="black" my="-1.32455" length="2"/>
+            <point type="pointOfIntersection" id="252" name="B26" firstPoint="249" secondPoint="251" mx="-2.75705" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="253" name="B27" firstPoint="251" secondPoint="252" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength*2-Line_B23_B24"/>
+            <point type="alongLine" typeLine="none" id="254" name="B28" firstPoint="233" secondPoint="231" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="dotLine" id="255" name="B29" firstPoint="235" secondPoint="238" mx="1.25532" lineColor="black" my="-1.84236" length="CurrentLength+0.5"/>
+            <point type="alongLine" typeLine="none" id="256" name="B30" firstPoint="231" secondPoint="254" mx="-3.04598" lineColor="black" my="-1.39679" length="#Hihahalkionkorkeus"/>
+            <point type="normal" typeLine="none" id="257" name="B31" firstPoint="256" secondPoint="231" mx="1.21579" lineColor="black" my="-1.68572" angle="0" length="#Hihahalkionleveys"/>
+            <point type="normal" typeLine="none" id="258" name="B32" firstPoint="257" secondPoint="256" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="1"/>
+            <line typeLine="dotLine" id="259" firstPoint="237" secondPoint="231" lineColor="black"/>
+            <line typeLine="dotLine" id="260" firstPoint="236" secondPoint="237" lineColor="black"/>
+            <point type="normal" typeLine="dotLine" id="261" name="B33" firstPoint="237" secondPoint="231" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#Hihansuunkäänne"/>
+            <point type="normal" typeLine="none" id="262" name="B34" firstPoint="231" secondPoint="237" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#Hihansuunkäänne"/>
+            <point type="lineIntersect" id="263" name="B35" p2Line1="262" p2Line2="258" p1Line1="261" p1Line2="257" mx="0.132292" my="0.264583"/>
+            <line typeLine="dotLine" id="264" firstPoint="261" secondPoint="263" lineColor="black"/>
+            <line typeLine="dotLine" id="265" firstPoint="263" secondPoint="258" lineColor="black"/>
+            <line typeLine="dotLine" id="266" firstPoint="258" secondPoint="256" lineColor="black"/>
+            <line typeLine="dotLine" id="267" firstPoint="231" secondPoint="254" lineColor="black"/>
+            <point type="alongLine" typeLine="dotLine" id="268" name="B36" firstPoint="234" secondPoint="236" mx="-3.33492" lineColor="black" my="-1.83019" length="CurrentLength+#Hihansuunkäänne"/>
+            <line typeLine="dotLine" id="269" firstPoint="268" secondPoint="261" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="270" name="B37" firstPoint="231" secondPoint="263" mx="0.132292" lineColor="black" my="0.264583" length="1"/>
+            <point type="lineIntersectAxis" typeLine="none" id="271" name="B38" basePoint="270" p2Line="263" mx="0.637926" lineColor="black" my="-0.457752" angle="AngleLine_B6_B37+90" p1Line="258"/>
+            <point type="lineIntersect" id="272" name="B39" p2Line1="263" p2Line2="270" p1Line1="261" p1Line2="271" mx="-2.46811" my="0.336817"/>
+            <line typeLine="dotLine" id="273" firstPoint="237" secondPoint="235" lineColor="black"/>
+            <point type="alongLine" typeLine="dotLine" id="274" name="B40" firstPoint="234" secondPoint="239" mx="-3.87248" lineColor="black" my="-2.07882" length="CurrentLength+0.5"/>
+            <spline type="simpleInteractive" point4="251" angle1="345.819" angle2="233.92" id="275" color="black" length1="7.14584" length2="11.2164" point1="255"/>
+            <line typeLine="dotLine" id="276" firstPoint="238" secondPoint="246" lineColor="black"/>
+            <spline type="pathInteractive" id="277" color="black">
+                <pathPoint angle1="184.577" pSpline="274" angle2="4.57725" length1="0" length2="1.06141"/>
+                <pathPoint angle1="258.382" pSpline="240" angle2="78.3817" length1="1.63864" length2="0.753658"/>
+                <pathPoint angle1="243.71" pSpline="245" angle2="63.7095" length1="3.08851" length2="3.93136"/>
+                <pathPoint angle1="184.668" pSpline="242" angle2="4.668" length1="2.52568" length2="1.33529"/>
+                <pathPoint angle1="169.799" pSpline="244" angle2="349.799" length1="1.74002" length2="3.21924"/>
+                <pathPoint angle1="128.235" pSpline="249" angle2="308.235" length1="1.67015" length2="1.31077"/>
+                <pathPoint angle1="122.444" pSpline="253" angle2="302.444" length1="1.26173" length2="1.26173"/>
+            </spline>
+            <spline type="simpleInteractive" point4="254" angle1="280.369" angle2="81.1362" id="278" color="black" length1="17.8985" length2="7.9764" point1="251"/>
+            <line typeLine="dotLine" id="279" firstPoint="251" secondPoint="233" lineColor="black"/>
+            <line typeLine="dotLine" id="280" firstPoint="253" secondPoint="233" lineColor="black"/>
+            <spline type="simpleInteractive" point4="254" angle1="268.912" angle2="75.1139" id="281" color="black" length1="6.19449" length2="18.8429" point1="253"/>
+            <point type="alongLine" typeLine="none" id="309" name="B41" firstPoint="234" secondPoint="274" mx="-3.35769" lineColor="black" my="-2.29474" length="CurrentLength+2.5"/>
+            <point type="alongLine" typeLine="none" id="310" name="B42" firstPoint="233" secondPoint="253" mx="2.10995" lineColor="black" my="-2.06207" length="CurrentLength+1"/>
+            <spline type="simpleInteractive" point4="310" angle1="76.2364" angle2="121.194" id="311" color="black" length1="13.8889" length2="17.4106" point1="309"/>
+            <point type="alongLine" typeLine="none" id="312" name="B43" firstPoint="235" secondPoint="255" mx="2.45895" lineColor="black" my="-1.59674" length="CurrentLength+2.5"/>
+            <point type="alongLine" typeLine="none" id="313" name="B44" firstPoint="233" secondPoint="251" mx="0.132292" lineColor="black" my="0.264583" length="CurrentLength+1"/>
+            <spline type="simpleInteractive" point4="313" angle1="351.63" angle2="229.537" id="314" color="black" length1="5.07504" length2="9.76093" point1="312"/>
+            <point type="alongLine" typeLine="none" id="345" name="B45" firstPoint="274" secondPoint="234" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="cutSpline" id="346" name="B46" spline="281" mx="0.132292" my="0.264583" length="5"/>
+            <point type="cutSpline" id="347" name="B47" spline="278" mx="0.132292" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="348" name="B48" firstPoint="255" secondPoint="235" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="349" name="B49" firstPoint="236" secondPoint="234" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="alongLine" typeLine="none" id="350" name="B50" firstPoint="256" secondPoint="254" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <spline type="simpleInteractive" point4="346" angle1="13.1015" angle2="132.293" id="351" color="black" length1="10.0433" length2="21.9814" point1="345"/>
+            <spline type="simpleInteractive" point4="350" angle1="357.527" angle2="185.696" id="352" color="black" length1="8.29485" length2="7.34794" point1="349"/>
+            <spline type="simpleInteractive" point4="347" angle1="306.046" angle2="258.128" id="353" color="black" length1="0.985406" length2="14.2176" point1="348"/>
+            <point type="alongLine" typeLine="none" id="355" name="B51" firstPoint="237" secondPoint="235" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <spline type="simpleInteractive" point4="350" angle1="357.928" angle2="182.903" id="356" color="black" length1="4.83491" length2="4.65843" point1="355"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="282" idObject="268" mx="-3.33492" my="-1.83019"/>
+            <point type="modeling" inUse="true" id="283" idObject="236" mx="-3.38677" my="-1.98762"/>
+            <point type="modeling" inUse="true" id="284" idObject="234" mx="-4.65364" my="-0.157705"/>
+            <point type="modeling" inUse="true" id="285" idObject="274" mx="-3.40715" my="-1.61349"/>
+            <spline type="modelingPath" inUse="true" id="286" idObject="277"/>
+            <point type="modeling" inUse="true" id="287" idObject="253" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="288" idObject="281"/>
+            <point type="modeling" inUse="true" id="289" idObject="254" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="290" idObject="256" mx="-3.04598" my="-1.39679"/>
+            <point type="modeling" inUse="true" id="291" idObject="258" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="292" idObject="271" mx="0.637926" my="-0.457752"/>
+            <point type="modeling" inUse="true" id="293" idObject="272" mx="-2.46811" my="0.336817"/>
+            <point type="modeling" inUse="true" id="294" idObject="261" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="296" idObject="261" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="297" idObject="237" mx="0.782393" my="-2.98592"/>
+            <point type="modeling" inUse="true" id="298" idObject="235" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="299" idObject="255" mx="-0.373343" my="-2.19136"/>
+            <spline type="modelingSpline" inUse="true" id="300" idObject="275"/>
+            <point type="modeling" inUse="true" id="301" idObject="251" mx="-3.55162" my="-1.32455"/>
+            <spline type="modelingSpline" inUse="true" id="302" idObject="278"/>
+            <point type="modeling" inUse="true" id="303" idObject="254" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="304" idObject="256" mx="-3.04598" my="-1.39679"/>
+            <point type="modeling" inUse="true" id="305" idObject="258" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="306" idObject="263" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="315" idObject="236" mx="-3.38677" my="-1.98762"/>
+            <point type="modeling" inUse="true" id="316" idObject="234" mx="-4.65364" my="-0.157705"/>
+            <point type="modeling" inUse="true" id="317" idObject="309" mx="-3.35769" my="-2.29474"/>
+            <spline type="modelingSpline" inUse="true" id="318" idObject="311"/>
+            <point type="modeling" inUse="true" id="319" idObject="310" mx="2.10995" my="-2.06207"/>
+            <point type="modeling" inUse="true" id="320" idObject="253" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="321" idObject="281"/>
+            <point type="modeling" inUse="true" id="322" idObject="256" mx="-3.04598" my="-1.39679"/>
+            <point type="modeling" inUse="true" id="323" idObject="231" mx="-2.17918" my="-3.27486"/>
+            <point type="modeling" inUse="true" id="324" idObject="237" mx="0.782393" my="-2.98592"/>
+            <point type="modeling" inUse="true" id="334" idObject="237" mx="0.782393" my="-2.98592"/>
+            <point type="modeling" inUse="true" id="335" idObject="235" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="336" idObject="312" mx="2.45895" my="-1.59674"/>
+            <spline type="modelingSpline" inUse="true" id="337" idObject="314"/>
+            <point type="modeling" inUse="true" id="338" idObject="313" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="339" idObject="251" mx="-3.55162" my="-1.32455"/>
+            <spline type="modelingSpline" inUse="true" id="340" idObject="278"/>
+            <point type="modeling" inUse="true" id="341" idObject="254" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="342" idObject="231" mx="-2.17918" my="-3.27486"/>
+            <point type="modeling" inUse="true" id="365" idObject="348" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="366" idObject="255" mx="1.25532" my="-1.84236"/>
+            <spline type="modelingSpline" inUse="true" id="367" idObject="275"/>
+            <spline type="modelingSpline" inUse="true" id="368" idObject="278"/>
+            <point type="modeling" inUse="true" id="369" idObject="347" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="370" idObject="353"/>
+            <point type="modeling" inUse="true" id="372" idObject="345" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="373" idObject="274" mx="-3.87248" my="-2.07882"/>
+            <spline type="modelingPath" inUse="true" id="374" idObject="277"/>
+            <point type="modeling" inUse="true" id="375" idObject="253" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="376" idObject="281"/>
+            <point type="modeling" inUse="true" id="377" idObject="346" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="378" idObject="351"/>
+            <point type="modeling" inUse="true" id="380" idObject="268" mx="-3.33492" my="-1.83019"/>
+            <point type="modeling" inUse="true" id="381" idObject="236" mx="-3.38677" my="-1.98762"/>
+            <point type="modeling" inUse="true" id="382" idObject="349" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="383" idObject="352"/>
+            <point type="modeling" inUse="true" id="384" idObject="350" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="385" idObject="256" mx="-3.04598" my="-1.39679"/>
+            <point type="modeling" inUse="true" id="386" idObject="258" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="387" idObject="271" mx="0.637926" my="-0.457752"/>
+            <point type="modeling" inUse="true" id="388" idObject="272" mx="-2.46811" my="0.336817"/>
+            <point type="modeling" inUse="true" id="389" idObject="261" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="391" idObject="261" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="392" idObject="237" mx="0.782393" my="-2.98592"/>
+            <point type="modeling" inUse="true" id="393" idObject="355" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="394" idObject="356"/>
+            <point type="modeling" inUse="true" id="395" idObject="350" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="396" idObject="256" mx="-3.04598" my="-1.39679"/>
+            <point type="modeling" inUse="true" id="397" idObject="258" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="398" idObject="263" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="295" name="Hihayläosa" forbidFlipping="1" supplement="1" mx="189.528" width="1" my="4.60448">
+                <data rotation="0" letter="" fontSize="71" visible="true" mx="1078.87" width="198.489" my="574.721" height="117.083">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="18" visible="true" mx="1075.3" width="223.462" my="938.622" height="145.623"/>
+                <node type="NodePoint" nodeType="Contour" idObject="282" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="283" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="284" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="285" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="286" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="287" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="288" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="289" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="290" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="291" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="292" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="293" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="294" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="307" name="Hiha-alaosa" forbidFlipping="1" supplement="1" mx="145.725" width="1" my="-2.04748">
+                <data rotation="0" letter="" fontSize="78" visible="true" mx="1058.71" width="216.327" my="887.524" height="131.353">
+                    <mcp cutNumber="2" material="0" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="17" visible="true" mx="1097.95" width="194.921" my="1215.75" height="145.624"/>
+                <node type="NodePoint" nodeType="Contour" idObject="296" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="297" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="298" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="299" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="300" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="301" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="302" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="303" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="304" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="305" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="306" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="325" name="Hihaylävuori" forbidFlipping="0" supplement="1" mx="187.349" width="1" my="99.5482">
+                <data rotation="0" letter="" fontSize="79" visible="true" mx="1087.36" width="219.894" my="364.243" height="127.786">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="19" visible="true" mx="1094.5" width="219.894" my="778.092" height="156.327"/>
+                <node type="NodePoint" nodeType="Contour" idObject="315" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="316" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="317" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="318" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="319" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="320" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="321" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="322" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="323" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="324" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="343" name="Hiha-alavuori" forbidFlipping="0" supplement="1" mx="143.764" width="1" my="93.8389">
+                <data rotation="0" letter="" fontSize="84" visible="true" mx="1070.59" width="234.165" my="803.456" height="120.65">
+                    <mcp cutNumber="2" material="1" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="18" visible="true" mx="1109.83" width="198.489" my="1174.49" height="156.327"/>
+                <node type="NodePoint" nodeType="Contour" idObject="334" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="335" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="336" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="337" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="338" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="339" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="340" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="341" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="342" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="371" name="Hiha-alakainalo" forbidFlipping="0" supplement="1" mx="141.025" width="0.5" my="-18.288">
+                <data rotation="-45.3979" letter="" fontSize="29" visible="true" mx="1198.73" width="227.03" my="728.467" height="95.6766">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="14" visible="true" mx="901.86" width="166.38" my="891.25" height="142.056"/>
+                <node type="NodePoint" nodeType="Contour" idObject="365" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="366" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="367" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="368" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="369" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="370" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="379" name="Hihayläkainalo" forbidFlipping="0" supplement="1" mx="187.444" width="0.5" my="-14.4312">
+                <data rotation="0.71013" letter="" fontSize="35" visible="true" mx="1244.31" width="273.41" my="150.689" height="113.515">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="-50.1204" fontSize="16" visible="true" mx="942.976" width="194.921" my="443.917" height="131.353"/>
+                <node type="NodePoint" nodeType="Contour" idObject="372" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="373" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="374" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="375" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="376" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="377" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="378" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="390" name="Hihayläsuu" forbidFlipping="1" supplement="1" mx="189.757" width="0.5" my="21.9308">
+                <data rotation="0" letter="" fontSize="29" visible="true" mx="1019.71" width="223.786" my="2306.27" height="111.893">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="20" visible="true" mx="991.104" width="262.706" my="2453.96" height="163.786"/>
+                <node type="NodePoint" nodeType="Contour" idObject="380" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="381" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="382" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="383" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="384" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="385" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="386" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="387" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="388" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="389" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="399" name="HIha-alasuu" forbidFlipping="1" supplement="1" mx="143.816" width="0.5" my="16.7157">
+                <data rotation="0" letter="" fontSize="33" visible="true" mx="1068.76" width="256.22" my="2299.78" height="118.38">
+                    <mcp cutNumber="2" material="2" placement="0"/>
+                </data>
+                <patternInfo rotation="0" fontSize="19" visible="true" mx="1091.28" width="217.3" my="2481.88" height="154.056"/>
+                <node type="NodePoint" nodeType="Contour" idObject="391" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="392" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="393" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="394" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="395" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="396" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="397" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="398" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups>
+            <group id="308" name="Hiha" visible="true">
+                <item tool="225" object="225"/>
+                <item tool="226" object="226"/>
+                <item tool="227" object="227"/>
+                <item tool="228" object="228"/>
+                <item tool="229" object="229"/>
+                <item tool="230" object="230"/>
+                <item tool="231" object="231"/>
+                <item tool="232" object="232"/>
+                <item tool="233" object="233"/>
+                <item tool="234" object="234"/>
+                <item tool="235" object="235"/>
+                <item tool="236" object="236"/>
+                <item tool="237" object="237"/>
+                <item tool="238" object="238"/>
+                <item tool="239" object="239"/>
+                <item tool="240" object="240"/>
+                <item tool="241" object="241"/>
+                <item tool="242" object="242"/>
+                <item tool="243" object="243"/>
+                <item tool="244" object="244"/>
+                <item tool="245" object="245"/>
+                <item tool="246" object="246"/>
+                <item tool="247" object="247"/>
+                <item tool="248" object="248"/>
+                <item tool="249" object="249"/>
+                <item tool="250" object="250"/>
+                <item tool="251" object="251"/>
+                <item tool="252" object="252"/>
+                <item tool="253" object="253"/>
+                <item tool="254" object="254"/>
+                <item tool="255" object="255"/>
+                <item tool="256" object="256"/>
+                <item tool="257" object="257"/>
+                <item tool="258" object="258"/>
+                <item tool="259" object="259"/>
+                <item tool="260" object="260"/>
+                <item tool="261" object="261"/>
+                <item tool="262" object="262"/>
+                <item tool="263" object="263"/>
+                <item tool="264" object="264"/>
+                <item tool="265" object="265"/>
+                <item tool="266" object="266"/>
+                <item tool="267" object="267"/>
+                <item tool="268" object="268"/>
+                <item tool="269" object="269"/>
+                <item tool="270" object="270"/>
+                <item tool="271" object="271"/>
+                <item tool="272" object="272"/>
+                <item tool="273" object="273"/>
+                <item tool="274" object="274"/>
+                <item tool="275" object="275"/>
+                <item tool="276" object="276"/>
+                <item tool="277" object="277"/>
+                <item tool="278" object="278"/>
+                <item tool="279" object="279"/>
+                <item tool="280" object="280"/>
+                <item tool="281" object="281"/>
+            </group>
+            <group id="344" name="Hihanvuori" visible="false">
+                <item tool="309" object="309"/>
+                <item tool="310" object="310"/>
+                <item tool="311" object="311"/>
+                <item tool="312" object="312"/>
+                <item tool="313" object="313"/>
+                <item tool="314" object="314"/>
+            </group>
+            <group id="357" name="Liimakangas" visible="false">
+                <item tool="345" object="345"/>
+                <item tool="346" object="346"/>
+                <item tool="347" object="347"/>
+                <item tool="348" object="348"/>
+                <item tool="349" object="349"/>
+                <item tool="350" object="350"/>
+                <item tool="351" object="351"/>
+                <item tool="352" object="352"/>
+                <item tool="353" object="353"/>
+                <item tool="355" object="355"/>
+                <item tool="356" object="356"/>
+            </group>
+        </groups>
+    </draw>
+</pattern>

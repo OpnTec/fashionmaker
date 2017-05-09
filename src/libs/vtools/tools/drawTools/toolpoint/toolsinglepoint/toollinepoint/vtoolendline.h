@@ -29,7 +29,20 @@
 #ifndef VTOOLENDLINE_H
 #define VTOOLENDLINE_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vformula.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolEndLine class tool for creation point on the line end.
@@ -38,14 +51,9 @@ class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                 const QString &lineColor,
-                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
-                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual ~VToolEndLine() Q_DECL_OVERRIDE;
+    virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolEndLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                 const QString &lineColor, QString &formulaLength, QString &formulaAngle,
@@ -67,7 +75,14 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolEndLine)
+
     QString formulaAngle;
+
+    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                 const QString &lineColor,
+                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
+                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLENDLINE_H

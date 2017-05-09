@@ -27,28 +27,55 @@
  *************************************************************************/
 
 #include "visualization.h"
-#include "../tools/drawTools/vdrawtool.h"
-#include "../../vpatterndb/calculator.h"
-#include "../../vpatterndb/vtranslatevars.h"
 
+#include <qnumeric.h>
+#include <QBrush>
+#include <QColor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QLineF>
+#include <QMessageLogger>
+#include <QPen>
+#include <QPointF>
+#include <QRectF>
+#include <QScopedPointer>
+#include <QString>
+#include <Qt>
+#include <QtDebug>
+
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../tools/drawTools/vdrawtool.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+
+template <class K, class V> class QHash;
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")
 
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
-    :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(NULL_ID), toolTip(QString())
+    :QObject(),
+      data(data),
+      factor(VDrawTool::factor),
+      scenePos(QPointF()),
+      mainColor(Qt::red),
+      supportColor(Qt::magenta),
+      lineStyle(Qt::SolidLine),
+      object1Id(NULL_ID),
+      toolTip(QString()),
+      mode(Mode::Creation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Visualization::~Visualization()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void Visualization::setPoint1Id(const quint32 &value)
+void Visualization::setObject1Id(const quint32 &value)
 {
-    point1Id = value;
+    object1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,9 +96,9 @@ void Visualization::setScenePos(const QPointF &value)
 void Visualization::VisualMode(const quint32 &pointId)
 {
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
-    this->point1Id = pointId;
+    this->object1Id = pointId;
     this->scenePos = scene->getScenePos();
     RefreshGeometry();
 
@@ -84,6 +111,18 @@ void Visualization::setMainColor(const QColor &value)
 {
     mainColor = value;
     InitPen();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const VContainer *Visualization::GetData() const
+{
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::SetData(const VContainer *data)
+{
+    this->data = data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,21 +144,13 @@ void Visualization::MousePos(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent) const
+QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
 {
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor));
-    point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
-    point->setPos(QPointF());
-    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    point->setVisible(false);
-    return point;
+    return InitPointItem(Visualization::data, factor, color, parent, z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF Visualization::PointRect(const qreal &radius) const
+QRectF Visualization::PointRect(qreal radius)
 {
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -127,13 +158,13 @@ QRectF Visualization::PointRect(const qreal &radius) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLength(const QString &expression)
+qreal Visualization::FindLength(const QString &expression, const QHash<QString, qreal *> &vars)
 {
-    return qApp->toPixel(FindVal(expression));
+    return qApp->toPixel(FindVal(expression, vars));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindVal(const QString &expression)
+qreal Visualization::FindVal(const QString &expression, const QHash<QString, qreal *> &vars)
 {
     qreal val = 0;
     if (expression.isEmpty())
@@ -148,9 +179,13 @@ qreal Visualization::FindVal(const QString &expression)
             QString formula = expression;
             formula.replace("\n", " ");
             formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            Calculator *cal = new Calculator();
-            val = cal->EvalFormula(data->PlainVariables(), formula);
-            delete cal;
+            QScopedPointer<Calculator> cal(new Calculator());
+            val = cal->EvalFormula(vars, formula);
+
+            if (qIsInf(val) || qIsNaN(val))
+            {
+                val = 0;
+            }
         }
         catch (qmu::QmuParserError &e)
         {
@@ -168,7 +203,7 @@ qreal Visualization::FindVal(const QString &expression)
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
 {
-    SCASSERT (point != nullptr);
+    SCASSERT (point != nullptr)
 
     point->setPos(pos);
     point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
@@ -178,7 +213,7 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr);
+    SCASSERT (lineItem != nullptr)
 
     lineItem->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
     lineItem->setLine(line);
@@ -189,10 +224,56 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
 {
-    SCASSERT (pathItem != nullptr);
+    SCASSERT (pathItem != nullptr)
 
     pathItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style,
                           cap));
     pathItem->setPath(path);
     pathItem->setVisible(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *Visualization::GetPointItem(const VContainer *data, qreal factor,
+                                                  QVector<QGraphicsEllipseItem *> &points, quint32 i,
+                                                  const QColor &color, QGraphicsItem *parent)
+{
+    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
+    {
+        return points.at(static_cast<int>(i));
+    }
+    else
+    {
+        auto point = InitPointItem(data, factor, color, parent);
+        points.append(point);
+        return point;
+    }
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *Visualization::InitPointItem(const VContainer *data, qreal factor, const QColor &color,
+                                                   QGraphicsItem *parent, qreal z)
+{
+    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*data->GetPatternUnit()))/factor));
+    point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
+    point->setPos(QPointF());
+    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setZValue(z);
+    point->setVisible(false);
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Mode Visualization::GetMode() const
+{
+    return mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::SetMode(const Mode &value)
+{
+    mode = value;
 }

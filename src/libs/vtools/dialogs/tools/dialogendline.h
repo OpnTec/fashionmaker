@@ -29,6 +29,13 @@
 #ifndef DIALOGENDLINE_H
 #define DIALOGENDLINE_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -103,6 +110,8 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
     int               formulaBaseHeightAngle;
+
+    bool m_firstRelease;
 };
 
 #endif // DIALOGENDLINE_H

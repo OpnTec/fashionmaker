@@ -27,12 +27,14 @@
  *************************************************************************/
 
 #include "vcmdexport.h"
-#include "dialogs/dialoglayoutsettings.h"
-#include "dialogs/dialogsavelayout.h"
-#include "xml/vdomdocument.h"
+#include "../dialogs/dialoglayoutsettings.h"
+#include "../dialogs/dialogsavelayout.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsettings.h"
+#include "../vlayout/vlayoutgenerator.h"
+#include <QDebug>
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
@@ -51,7 +53,7 @@ VCommandLine::VCommandLine() : parser(), optionsUsed(), optionsIndex(), isGuiEna
     VCommandLineOptions::const_iterator i = optionsUsed.constBegin();
     while (i != optionsUsed.constEnd())
     {
-        parser.addOption(*((*i)));
+        parser.addOption(*(*i));
         ++i;
     }
 }
@@ -94,7 +96,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_EXP2FORMAT, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
                                           translate("VCommandLine", "Number corresponding to output format (default = "
-                                                                    "0, export mode): ") +
+                                                                    "0, export mode):") +
                                                                     DialogSaveLayout::MakeHelpFormatList(),
                                           translate("VCommandLine", "Format number"), "0"));
 
@@ -118,7 +120,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_PAGETEMPLATE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
                                           translate("VCommandLine", "Number corresponding to page template (default = "
-                                                                    "0, export mode): ") +
+                                                                    "0, export mode):") +
                                                                     DialogLayoutSettings::MakeHelpTemplateList(),
                                           translate("VCommandLine", "Template number"), "0"));
 
@@ -248,6 +250,14 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                     "this mode loads a single pattern file and silently quit without "
                                                     "showing the main window. The key have priority before key '%1'.")
                                                     .arg(LONG_OPTION_BASENAME)));
+
+    optionsIndex.insert(LONG_OPTION_NO_HDPI_SCALING, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
+                                          translate("VCommandLine", "Disable high dpi scaling. Call this option if has "
+                                                                    "problem with scaling (by default scaling "
+                                                                    "enabled). Alternatively you can use the "
+                                                                    "%1 environment variable.")
+                                          .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")));
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -499,7 +509,13 @@ bool VCommandLine::IsTestModeEnabled() const
     return r;
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsNoScalingEnabled() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_NO_HDPI_SCALING)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
     const bool r = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BASENAME)));

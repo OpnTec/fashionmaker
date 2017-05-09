@@ -29,12 +29,22 @@
 #ifndef VSIMPLEPOINT_H
 #define VSIMPLEPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
 
+#include "../vmisc/def.h"
 #include "vabstractsimple.h"
 
-class VPointF;
 class VGraphicsSimpleTextItem;
+class VPointF;
 
 class VSimplePoint : public VAbstractSimple, public QGraphicsEllipseItem
 {
@@ -44,40 +54,47 @@ public:
                  QObject *parent = nullptr);
     virtual ~VSimplePoint() Q_DECL_OVERRIDE;
 
-    virtual void ChangedActivDraw(const bool &flag) Q_DECL_OVERRIDE;
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = 0) Q_DECL_OVERRIDE;
-
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
+    void SetOnlyPoint(bool value);
+    bool IsOnlyPoint() const;
+
+    void SetVisualizationMode(bool value);
+    bool IsVisualizationMode() const;
+
+    void SetPointHighlight(bool value);
+
     void RefreshLine();
     void RefreshGeometry(const VPointF &point);
-    void SetEnabled(bool enabled);
+    virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
     void EnableToolMove(bool move);
-
-    QColor GetCurrentColor() const;
-    void   SetCurrentColor(const QColor &value);
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
+    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief Choosed send id when clicked.
      * @param id point id.
      */
     void Choosed(quint32 id);
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
-    void Delete();
-    void NameChangedPosition(const QPointF &pos);
+    void Selected(bool selected, quint32 id);
+    void NameChangedPosition(const QPointF &pos, quint32 id);
 
 public slots:
     void DeleteFromLabel();
     void PointChoosed();
+    void PointSelected(bool selected);
     void ChangedPosition(const QPointF &pos);
-    void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VSimplePoint)
@@ -91,6 +108,9 @@ private:
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
 
+    bool m_onlyPoint;
+    bool m_isHighlight;
+    bool m_visualizationMode;
 };
 
 #endif // VSIMPLEPOINT_H

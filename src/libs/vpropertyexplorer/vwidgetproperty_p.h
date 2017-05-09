@@ -24,6 +24,7 @@
 // ONLY INCLUDE THIS IN .CPP FILES
 
 #include "vproperty_p.h"
+#include "../vmisc/diagnostic.h"
 
 #include <QPointer>
 #include <QWidget>
@@ -31,10 +32,8 @@
 namespace VPE
 {
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wweak-vtables"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 
 class VWidgetPropertyPrivate : public VPropertyPrivate
 {
@@ -60,9 +59,7 @@ public:
     }
 };
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
 }
 

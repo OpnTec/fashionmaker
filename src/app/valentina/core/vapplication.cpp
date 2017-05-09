@@ -35,15 +35,15 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 
-#include <QDebug>
+#include <QtDebug>
 #include <QDir>
 #include <QProcess>
 #include <QTemporaryFile>
 #include <QUndoStack>
-#include <QtCore/qmath.h>
 #include <QTemporaryFile>
 #include <QFile>
 #include <QStandardPaths>
@@ -53,21 +53,13 @@
 #include <QtXmlPatterns>
 #include <QIcon>
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-prototypes"
-#elif defined(Q_CC_INTEL)
-    #pragma warning( push )
-    #pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-    #pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 
@@ -75,17 +67,30 @@ Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
-    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
     {
         type = QtWarningMsg;
     }
+
+#if defined(V_NO_ASSERT)
+    // I have decided to hide this annoing message for release builds.
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QSslSocket: cannot resolve")))
+    {
+        type = QtDebugMsg;
+    }
+
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("setGeometry: Unable to set geometry")))
+    {
+        type = QtDebugMsg;
+    }
+#endif //defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
 #   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
         // Try hide very annoying, Qt related, warnings in Mac OS X
         // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
         // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains("QNSView"))
+        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
         {
             type = QtDebugMsg;
         }
@@ -94,7 +99,13 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // Hide Qt bug 'Assertion when reading an icns file'
     // https://bugreports.qt.io/browse/QTBUG-45537
     // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains("QICNSHandler::read()"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
+    {
+        type = QtDebugMsg;
+    }
+
+    // See issue #568
+    if (msg.contains(QStringLiteral("Error receiving trust for a CA certificate")))
     {
         type = QtDebugMsg;
     }
@@ -103,7 +114,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
+            && msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -111,8 +123,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
-            && QString(msg).contains("Cowardly refusing"))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
+            && msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
@@ -124,7 +136,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
     {
-        QString debugdate = "[" + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+        QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
 
         switch (type)
         {
@@ -166,8 +178,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
         //lead to crash
-        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
-                !qApp->activeModalWidget()->inherits("QFileDialog");
+        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                !QApplication::activeModalWidget()->inherits("QFileDialog");
 
         QMessageBox messageBox;
         switch (type)
@@ -262,7 +274,7 @@ VApplication::VApplication(int &argc, char **argv)
 
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    LoadTranslation(QLocale::system().name());// By default the console version uses system locale
+    LoadTranslation(QLocale().name());// By default the console version uses system locale
     VCommandLine::Get(*this);
     undoStack = new QUndoStack(this);
 }
@@ -286,9 +298,10 @@ void VApplication::NewValentina(const QString &fileName)
     qCDebug(vApp, "Open new detached process.");
     if (fileName.isEmpty())
     {
-        qCDebug(vApp, "New process without arguments. program = %s", qUtf8Printable(qApp->applicationFilePath()));
+        qCDebug(vApp, "New process without arguments. program = %s",
+                qUtf8Printable(QCoreApplication::applicationFilePath()));
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+qApp->applicationFilePath()+"\""))
+        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -299,7 +312,7 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QString("\"%1\" \"%2\"").arg(qApp->applicationFilePath()).arg(fileName);
+        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath()).arg(fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
         if (QProcess::startDetached(run))
         {
@@ -446,7 +459,8 @@ QString VApplication::LogDirPath() const
                                                       QStandardPaths::LocateDirectory) + "Valentina";
 #else
     const QString logDirPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(),
-                                                      QStandardPaths::LocateDirectory) + organizationName();
+                                                      QStandardPaths::LocateDirectory)
+            + QCoreApplication::organizationName();
 #endif
     return logDirPath;
 }
@@ -454,17 +468,18 @@ QString VApplication::LogDirPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogPath() const
 {
-    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(qApp->applicationPid());
+    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::CreateLogDir() const
+bool VApplication::CreateLogDir() const
 {
     QDir logDir(LogDirPath());
     if (logDir.exists() == false)
     {
-        logDir.mkpath("."); // Create directory for log if need
+        return logDir.mkpath("."); // Create directory for log if need
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -550,8 +565,8 @@ void VApplication::InitOptions()
     qDebug()<<"Build revision:"<<BUILD_REVISION;
     qDebug()<<buildCompatibilityString();
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
-    qDebug()<<"Command-line arguments:"<<this->arguments();
-    qDebug()<<"Process ID:"<<this->applicationPid();
+    qDebug()<<"Command-line arguments:"<<arguments();
+    qDebug()<<"Process ID:"<<applicationPid();
 
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {
@@ -586,12 +601,14 @@ QStringList VApplication::LabelLanguages()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartLogging()
 {
-    CreateLogDir();
-    BeginLogging();
-    ClearOldLogs();
+    if (CreateLogDir())
+    {
+        BeginLogging();
+        ClearOldLogs();
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    ClearOldReports();
+        ClearOldReports();
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -625,18 +642,15 @@ bool VApplication::event(QEvent *e)
         case QEvent::FileOpen:
         {
             QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            if(fileOpenEvent)
+            const QString macFileOpen = fileOpenEvent->file();
+            if(not macFileOpen.isEmpty())
             {
-                const QString macFileOpen = fileOpenEvent->file();
-                if(not macFileOpen.isEmpty())
+                MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
+                if (window)
                 {
-                    MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
-                    if (window)
-                    {
-                        window->LoadPattern(macFileOpen);  // open file in existing window
-                    }
-                    return true;
+                    window->LoadPattern(macFileOpen);  // open file in existing window
                 }
+                return true;
             }
             break;
         }
@@ -664,14 +678,14 @@ bool VApplication::event(QEvent *e)
  */
 void VApplication::OpenSettings()
 {
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                             QCoreApplication::applicationName(), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings *VApplication::ValentinaSettings()
 {
-    SCASSERT(settings != nullptr);
+    SCASSERT(settings != nullptr)
     return qobject_cast<VSettings *>(settings);
 }
 

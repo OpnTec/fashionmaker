@@ -29,27 +29,42 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/logging.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/visualization.h"
-#include "../ifc/xml/vabstractpattern.h"
-
+#include <qcompilerdetection.h>
+#include <QCheckBox>
+#include <QColor>
+#include <QComboBox>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QLineEdit>
+#include <QList>
 #include <QListWidget>
-#include <QRadioButton>
+#include <QLocale>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointer>
 #include <QPushButton>
-#include <QCheckBox>
+#include <QRadioButton>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../vtools/visualization/visualization.h" // Issue on Windows
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+
+template <class T> class QSharedPointer;
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
 class QDoubleSpinBox;
 class QLabel;
-class QComboBox;
-class QListWidgetItem;
-class VContainer;
 class QPlainTextEdit;
 class VAbstractTool;
 
@@ -69,6 +84,8 @@ public:
     void             SetAssociatedTool(VAbstractTool* tool);
 
     virtual void     ShowDialog(bool click);
+    virtual void     Build(const Tool &type);
+    virtual void     SetPiecesList(const QVector<quint32> &list);
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
@@ -90,8 +107,8 @@ signals:
      */
     void             ToolTip(const QString &toolTip);
 public slots:
-    void             ShowVisToolTip(const QString &toolTip);
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
+    virtual void     SelectedObject(bool selected, quint32 object, quint32 tool);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     /**
@@ -179,48 +196,48 @@ protected:
     /** @brief number number of handled objects */
     qint32           number;
 
-    Visualization   *vis;
+    QPointer<Visualization> vis;
 
     virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
 
+    void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                       const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
-    void             FillComboBoxSplines(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
-                                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
-    void             FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
-                                             const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+    void             FillComboBoxSplines(QComboBox *box)const;
+    void             FillComboBoxSplinesPath(QComboBox *box)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
     void             FillComboBoxCrossCirclesPoints(QComboBox *box) const;
+    void             FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
+    void             FillComboBoxHCrossCurvesPoint(QComboBox *box) const;
 
     virtual void     CheckState();
-    QString          GetComboBoxCurrentData(const QComboBox *box)const;
+    QString          GetComboBoxCurrentData(const QComboBox *box, const QString &def)const;
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
-    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
-    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
+    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer, const QString &postfix = QString());
+    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer,
+                                       const QString &postfix = QString());
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
-                          bool checkZero = true);
+                          bool checkZero = true, bool checkLessThanZero = false);
 
     void             setCurrentPointId(QComboBox *box, const quint32 &value,
                                        FillComboBox rule = FillComboBox::NoChildren,
                                        const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
-    void             setCurrentSplineId(QComboBox *box, const quint32 &value,
-                                        FillComboBox rule = FillComboBox::NoChildren,
-                                        const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+    void             setCurrentSplineId(QComboBox *box, const quint32 &value) const;
     void             setCurrentArcId(QComboBox *box, const quint32 &value,
                                      FillComboBox rule = FillComboBox::NoChildren,
                                      const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
-    void             setCurrentSplinePathId(QComboBox *box, const quint32 &value,
-                                            FillComboBox rule = FillComboBox::NoChildren,
-                                            const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+    void             setCurrentSplinePathId(QComboBox *box, const quint32 &value) const;
     void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
 
-    quint32           getCurrentObjectId(QComboBox *box) const;
-    CrossCirclesPoint getCurrentCrossPoint(QComboBox *box) const;
+    quint32          getCurrentObjectId(QComboBox *box) const;
+
+    template <typename T>
+    T                getCurrentCrossPoint(QComboBox *box) const;
 
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
@@ -241,7 +258,7 @@ protected:
     void             AddVisualization();
 
     template <typename T>
-    void             DeleteVisualization();
+    QVector<T> GetListInternals(const QListWidget *list) const;
 
     void             ChangeColor(QWidget *widget, const QColor &color);
     virtual void     ShowVisualization() {}
@@ -249,15 +266,51 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData() {}
-    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
-    bool             eventFilter(QObject *object, QEvent *event);
+    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const;
+    virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    quint32          DNumber(const QString &baseName) const;
+
+    static int       FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
+    static int       FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
+    static bool      FirstPointEqualLast(QListWidget *listWidget);
+    static bool      DoublePoints(QListWidget *listWidget);
+    static bool      EachPointLabelIsUnique(QListWidget *listWidget);
+    static QString   DialogWarningIcon();
+    static QFont     NodeFont(bool nodeExcluded);
+
+    QString          GetNodeName(const VPieceNode &node, bool showPassmark = false) const;
+    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
+
+    void             InitNodeAngles(QComboBox *box);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
+
+    template <typename T>
+    void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
+
+    bool IsSpline(const QSharedPointer<VGObject> &obj) const;
+    bool IsSplinePath(const QSharedPointer<VGObject> &obj) const;
 
     template <typename GObject>
     void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole,
                    const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+
+
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+QVector<T> DialogTool::GetListInternals(const QListWidget *list) const
+{
+    SCASSERT(list != nullptr)
+    QVector<T> internals;
+    for (qint32 i = 0; i < list->count(); ++i)
+    {
+        QListWidgetItem *item = list->item(i);
+        internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
+    }
+    return internals;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline VAbstractTool *DialogTool::GetAssociatedTool()
@@ -269,7 +322,7 @@ inline VAbstractTool *DialogTool::GetAssociatedTool()
 template <typename T>
 inline void DialogTool::InitArrow(T *ui)
 {
-    SCASSERT(ui != nullptr);
+    SCASSERT(ui != nullptr)
     spinBoxAngle = ui->doubleSpinBoxAngle;
     connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
     connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
@@ -291,7 +344,7 @@ inline void DialogTool::InitOkCancelApply(T *ui)
 {
     InitOkCancel(ui);
     bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
 }
 
@@ -304,14 +357,14 @@ template <typename T>
 inline void DialogTool::InitOkCancel(T *ui)
 {
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
+    SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,10 +387,10 @@ inline void DialogTool::AddVisualization()
     if (prepare == false)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
+        SCASSERT(scene != nullptr)
 
         T *toolVis = qobject_cast<T *>(vis);
-        SCASSERT(toolVis != nullptr);
+        SCASSERT(toolVis != nullptr)
 
         if (not scene->items().contains(toolVis))
         {
@@ -345,20 +398,34 @@ inline void DialogTool::AddVisualization()
             scene->addItem(toolVis);
         }
 
+        toolVis->SetMode(Mode::Show);
         toolVis->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline void DialogTool::DeleteVisualization()
+inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
 {
-    T *toolVis = qobject_cast<T *>(vis);
-    SCASSERT(toolVis != nullptr);
+    int value;
+    bool ok = false;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    value = box->itemData(box->currentIndex()).toInt(&ok);
+#else
+    value = box->currentData().toInt(&ok);
+#endif
+    if (not ok)
+    {
+        return static_cast<T>(1);
+    }
 
-    if (qApp->getCurrentScene()->items().contains(toolVis))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete vis;
+    switch(value)
+    {
+        case 1:
+        case 2:
+            return static_cast<T>(value);
+        default:
+            return static_cast<T>(1);
     }
 }
 

@@ -29,12 +29,16 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include "../../vpatterndb/vcontainer.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vmisc/logging.h"
+#include "../vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)
-
-class QObject;
 
 //We need QObject class because we use qobject_cast.
 /**
@@ -45,12 +49,13 @@ class VDataTool : public QObject
     Q_OBJECT
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
-    virtual ~VDataTool() Q_DECL_OVERRIDE;
-    VContainer            getData() const;
-    void                  setData(const VContainer *value);
-    virtual quint32       referens() const;
-    virtual void          incrementReferens();
-    virtual void          decrementReferens();
+    virtual ~VDataTool() Q_DECL_EQ_DEFAULT;
+    VContainer      getData() const;
+    void            setData(const VContainer *value);
+    virtual quint32 referens() const;
+    virtual void    incrementReferens();
+    virtual void    decrementReferens();
+    virtual void    GroupVisibility(quint32 object, bool visible)=0;
 protected:
     /** @brief data container with data */
     VContainer            data;

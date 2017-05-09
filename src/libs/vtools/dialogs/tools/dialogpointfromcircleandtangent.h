@@ -29,6 +29,14 @@
 #ifndef DIALOGPOINTFROMCIRCLEANDTANGENT_H
 #define DIALOGPOINTFROMCIRCLEANDTANGENT_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -74,7 +82,7 @@ protected:
      */
     virtual void   SaveData() Q_DECL_OVERRIDE;
     virtual void   closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void   CheckState() Q_DECL_OVERRIDE;
+    virtual void   CheckState() Q_DECL_FINAL;
 
 private:
     Q_DISABLE_COPY(DialogPointFromCircleAndTangent)
@@ -85,7 +93,6 @@ private:
     QTimer        *timerCircleRadius;
     QString       circleRadius;
     int           formulaBaseHeightCircleRadius;
-    qreal         angleCircleRadius;
 };
 
 #endif // DIALOGPOINTFROMCIRCLEANDTANGENT_H

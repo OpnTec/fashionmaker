@@ -28,8 +28,10 @@
 
 #include "vpointf.h"
 #include "vpointf_p.h"
+#include <QLineF>
 #include <QPointF>
 #include <QString>
+#include <QTransform>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -100,13 +102,30 @@ VPointF &VPointF::operator =(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief toQPointF convert to QPointF
- * @return QPointF point
- */
-QPointF VPointF::toQPointF() const
+VPointF::operator QPointF() const
 {
-    return QPointF(d->_x, d->_y);
+    return toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
+    return VPointF(p, name() + prefix, mx(), my());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Flip(const QLineF &axis, const QString &prefix) const
+{
+    const QPointF p = FlipPF(axis, toQPointF());
+    return VPointF(p, name() + prefix, mx(), my());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Move(qreal length, qreal angle, const QString &prefix) const
+{
+    const QPointF p = MovePF(toQPointF(), length, angle);
+    return VPointF(p, name() + prefix, mx(), my());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,6 +169,12 @@ void VPointF::setMy(qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::toQPointF() const
+{
+    return QPointF(d->_x, d->_y);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief x return x coordinate
  * @return value
@@ -187,4 +212,27 @@ qreal VPointF::y() const
 void VPointF::setY(const qreal &value)
 {
     d->_y = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees)
+{
+    QLineF axis(originPoint, point);
+    axis.setAngle(axis.angle() + degrees);
+    return axis.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::FlipPF(const QLineF &axis, const QPointF &point)
+{
+    const QTransform matrix = FlippingMatrix(axis);
+    return matrix.map(point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::MovePF(const QPointF &originPoint, qreal length, qreal angle)
+{
+    QLineF line(originPoint.x(), originPoint.y(), originPoint.x() + length, originPoint.y());
+    line.setAngle(angle);
+    return line.p2();
 }

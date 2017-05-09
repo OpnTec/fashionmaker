@@ -27,17 +27,34 @@
  *************************************************************************/
 
 #include "vbank.h"
-#include "vlayoutdetail.h"
 
-#include <QPointF>
 #include <climits>
-#include <QRectF>
+
+#include "../vmisc/diagnostic.h"
+#include "../vmisc/logging.h"
+#include "vlayoutpiece.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(lBank, "layout.bank")
+
+QT_WARNING_POP
+
+// An annoying char define, from the Windows team in <rpcndr.h>
+// #define small char
+// http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma push_macro("small")
+#undef small
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
-    :details(QVector<VLayoutDetail>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
+    :details(QVector<VLayoutPiece>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
       middle(QHash<int, qint64>()), small(QHash<int, qint64>()), layoutWidth(0), caseType(Cases::CaseDesc),
-      prepare(false), boundingRect(QRectF())
+      prepare(false), diagonal(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -54,7 +71,7 @@ void VBank::SetLayoutWidth(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBank::SetDetails(const QVector<VLayoutDetail> &details)
+void VBank::SetDetails(const QVector<VLayoutPiece> &details)
 {
     this->details = details;
     Reset();
@@ -94,7 +111,7 @@ int VBank::GetTiket()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutDetail VBank::GetDetail(int i) const
+VLayoutPiece VBank::GetDetail(int i) const
 {
     if (i >= 0 && i < details.size())
     {
@@ -102,7 +119,7 @@ VLayoutDetail VBank::GetDetail(int i) const
     }
     else
     {
-        return VLayoutDetail();
+        return VLayoutPiece();
     }
 }
 
@@ -158,30 +175,40 @@ bool VBank::Prepare()
 {
     if (layoutWidth <= 0)
     {
+        qCDebug(lBank, "Preparing data for layout error: Layout paper sheet <= 0");
         prepare = false;
         return prepare;
     }
 
     if (details.isEmpty())
     {
+        qCDebug(lBank, "Preparing data for layout error: List of details is empty");
         prepare = false;
         return prepare;
     }
 
+    diagonal = 0;
     for (int i=0; i < details.size(); ++i)
     {
         details[i].SetLayoutWidth(layoutWidth);
-        details[i].SetLayoutAllowencePoints();
+        details[i].SetLayoutAllowancePoints();
+
+        const qreal d = details.at(i).Diagonal();
+        if (d > diagonal)
+        {
+            diagonal = d;
+        }
+
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
+            qCDebug(lBank, "Preparing data for layout error: Detail squere <= 0");
             prepare = false;
             return prepare;
         }
         unsorted.insert(i, square);
     }
 
-    BiggestBoundingRect();
     PrepareGroup();
 
     prepare = true;
@@ -196,7 +223,7 @@ void VBank::Reset()
     big.clear();
     middle.clear();
     small.clear();
-    boundingRect = QRectF();
+    diagonal = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,37 +245,9 @@ int VBank::LeftArrange() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBank::BiggestBoundingRect()
+qreal VBank::GetBiggestDiagonal() const
 {
-    int index = -1;
-    qint64 sMax = LLONG_MIN;
-
-    QHash<int, qint64>::const_iterator i = unsorted.constBegin();
-    while (i != unsorted.constEnd())
-    {
-        if (i.value() > sMax)
-        {
-            sMax = i.value();
-            index = i.key();
-        }
-
-        ++i;
-    }
-
-    if (index >= 0 && index < details.size())
-    {
-        boundingRect = QPolygonF(details.at(index).GetLayoutAllowencePoints()).boundingRect();
-    }
-    else
-    {
-        boundingRect = QRectF();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VBank::GetBiggestBoundingRect() const
-{
-    return boundingRect;
+    return diagonal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -424,3 +423,7 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin) const
     }
 
 }
+
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma pop_macro("small")
+#endif

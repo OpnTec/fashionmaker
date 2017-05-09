@@ -22,7 +22,16 @@
 #ifndef QMUPARSERTOKENREADER_H
 #define QMUPARSERTOKENREADER_H
 
+#include <qcompilerdetection.h>
+#include <QChar>
+#include <QString>
+#include <QtGlobal>
+#include <list>
+#include <locale>
+
+#include "qmuparsercallback.h"
 #include "qmuparserdef.h"
+#include "qmuparsererror.h"
 #include "qmuparsertoken.h"
 
 /**
@@ -57,7 +66,7 @@ public:
     QChar          GetArgSep() const;
     void           IgnoreUndefVar(bool bIgnore);
     void           ReInit();
-    token_type     ReadNextToken(const std::locale &s_locale);
+    token_type     ReadNextToken(const QLocale &locale, const QChar &decimal, const QChar &thousand);
 private:
 
     /**
@@ -102,7 +111,7 @@ private:
     bool            IsFunTok(token_type &a_Tok);
     bool            IsPostOpTok(token_type &a_Tok);
     bool            IsOprt(token_type &a_Tok);
-    bool            IsValTok(token_type &a_Tok, const std::locale &s_locale);
+    bool            IsValTok(token_type &a_Tok, const QLocale &locale, const QChar &decimal, const QChar &thousand);
     bool            IsVarTok(token_type &a_Tok);
     bool            IsStrVarTok(token_type &a_Tok);
     bool            IsUndefVarTok(token_type &a_Tok);

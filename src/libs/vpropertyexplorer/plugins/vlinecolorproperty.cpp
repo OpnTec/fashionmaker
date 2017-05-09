@@ -27,21 +27,29 @@
  *************************************************************************/
 
 #include "vlinecolorproperty.h"
-#include "../vproperty_p.h"
 
+#include <QColor>
 #include <QComboBox>
 #include <QCoreApplication>
+#include <QIcon>
+#include <QLocale>
+#include <QPixmap>
+#include <QSize>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QWidget>
 
-using namespace VPE;
+#include "../vproperty_p.h"
 
-VLineColorProperty::VLineColorProperty(const QString &name)
+VPE::VLineColorProperty::VLineColorProperty(const QString &name)
     : VProperty(name, QVariant::Int), colors(), indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
-QVariant VLineColorProperty::data(int column, int role) const
+QVariant VPE::VLineColorProperty::data(int column, int role) const
 {
     if (colors.empty())
     {
@@ -69,11 +77,11 @@ QVariant VLineColorProperty::data(int column, int role) const
     }
 }
 
-QWidget *VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                          const QAbstractItemDelegate *delegate)
+QWidget *VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                               const QAbstractItemDelegate *delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QComboBox* tmpEditor = new QComboBox(parent);
 
     int size = tmpEditor->iconSize().height();
@@ -100,7 +108,7 @@ QWidget *VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVie
     return VProperty::d_ptr->editor;
 }
 
-QVariant VLineColorProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VLineColorProperty::getEditorData(const QWidget *editor) const
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -111,7 +119,7 @@ QVariant VLineColorProperty::getEditorData(const QWidget *editor) const
     return QVariant(0);
 }
 
-void VLineColorProperty::setColors(const QMap<QString, QString> &colors)
+void VPE::VLineColorProperty::setColors(const QMap<QString, QString> &colors)
 {
     this->colors = colors;
     indexList.clear();
@@ -124,12 +132,12 @@ void VLineColorProperty::setColors(const QMap<QString, QString> &colors)
 }
 
 // cppcheck-suppress unusedFunction
-QMap<QString, QString> VLineColorProperty::getColors() const
+QMap<QString, QString> VPE::VLineColorProperty::getColors() const
 {
     return colors;
 }
 
-void VLineColorProperty::setValue(const QVariant &value)
+void VPE::VLineColorProperty::setValue(const QVariant &value)
 {
     int tmpIndex = value.toInt();
 
@@ -147,17 +155,17 @@ void VLineColorProperty::setValue(const QVariant &value)
     }
 }
 
-QString VLineColorProperty::type() const
+QString VPE::VLineColorProperty::type() const
 {
     return QStringLiteral("lineColor");
 }
 
-VProperty *VLineColorProperty::clone(bool include_children, VProperty *container) const
+VPE::VProperty *VPE::VLineColorProperty::clone(bool include_children, VProperty *container) const
 {
     return VProperty::clone(include_children, container ? container : new VLineColorProperty(getName()));
 }
 
-int VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
+int VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
 {
     QVector<QString> indexList;
     QMap<QString, QString>::const_iterator i = colors.constBegin();
@@ -169,7 +177,7 @@ int VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const
     return indexList.indexOf(color);
 }
 
-void VLineColorProperty::currentIndexChanged(int index)
+void VPE::VLineColorProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     UserChangeEvent *event = new UserChangeEvent();

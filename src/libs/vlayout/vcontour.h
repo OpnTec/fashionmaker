@@ -29,16 +29,20 @@
 #ifndef VCONTOUR_H
 #define VCONTOUR_H
 
-#include "vlayoutdef.h"
-
-#include <QVector>
 #include <QSharedDataPointer>
 #include <QSizeF>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
+#include "vlayoutdef.h"
 
 class VContourData;
 class QPointF;
-class VLayoutDetail;
 class QLineF;
+class QRectF;
+class QPainterPath;
+class VLayoutPiece;
 
 class VContour
 {
@@ -46,14 +50,22 @@ public:
     VContour();
     VContour(int height, int width);
     VContour(const VContour &contour);
-    VContour &operator=(const VContour &contour);
+
     ~VContour();
 
-    void SetContour(const QVector<QPointF> &contour);
+    VContour &operator=(const VContour &contour);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
+#endif
+
+    void Swap(VContour &contour) Q_DECL_NOTHROW
+    { std::swap(d, contour.d); }
+
+    void             SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;
 
     quint32 GetShift() const;
-    void         SetShift(quint32 shift);
+    void    SetShift(quint32 shift);
 
     int  GetHeight() const;
     void SetHeight(int height);
@@ -63,19 +75,24 @@ public:
 
     QSizeF GetSize() const;
 
-    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
+    QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
 
     QLineF EmptySheetEdge() const;
-    int    EdgesCount() const;
+    int    GlobalEdgesCount() const;
     QLineF GlobalEdge(int i) const;
     QVector<QPointF> CutEdge(const QLineF &edge) const;
+    QVector<QPointF> CutEmptySheetEdge() const;
 
     const QPointF &	at(int i) const;
+
+    QRectF BoundingRect() const;
+
+    QPainterPath ContourPath() const;
 
 private:
     QSharedDataPointer<VContourData> d;
 
-    void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
+    void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);

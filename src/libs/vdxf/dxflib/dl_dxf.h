@@ -25,39 +25,27 @@
 #ifndef DL_DXF_H
 #define DL_DXF_H
 
-#include "dl_global.h"
-
-#include <limits>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
-#include <sstream>
+#include <QtGlobal>
+#include <algorithm>
+#include <limits>
 #include <map>
+#include <sstream>
+#include <string>
+#include <vector>
 
 #include "dl_attributes.h"
 #include "dl_codes.h"
 #include "dl_entities.h"
+#include "dl_global.h"
 #include "dl_writer_ascii.h"
-
-#ifdef _WIN32
-#undef M_PI
-#define M_PI   3.14159265358979323846
-#if defined(Q_CC_MSVC)
-#pragma warning(disable : 4800)
-#endif // Q_CC_MSVC
-#endif
-
-#ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
-#endif
 
 #ifndef DL_NANDOUBLE
 #define DL_NANDOUBLE std::numeric_limits<double>::quiet_NaN()
 #endif
 
 class DL_CreationInterface;
-class DL_WriterA;
-
 
 #define DL_VERSION "3.12.2.0"
 
@@ -126,24 +114,17 @@ public:
     DL_Dxf();
     ~DL_Dxf();
 
-    bool in(const std::string& file,
-            DL_CreationInterface* creationInterface);
-    bool readDxfGroups(FILE* fp,
-                       DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, quint32 size,
-                               FILE* stream, bool stripSpace = true);
-    
-    bool readDxfGroups(std::stringstream& stream,
-                       DL_CreationInterface* creationInterface);
-    bool in(std::stringstream &stream,
-            DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, quint32 size,
-                               std::stringstream& stream, bool stripSpace = true);
+    bool in(const std::string& file, DL_CreationInterface* creationInterface);
+    bool readDxfGroups(FILE* fp, DL_CreationInterface* creationInterface);
+    static bool getStrippedLine(std::string& s, quint32 size, FILE* stream, bool stripSpace = true);
 
-    static bool stripWhiteSpace(char** s, bool stripSpaces = true);
+    bool readDxfGroups(std::stringstream& stream, DL_CreationInterface* creationInterface);
+    bool in(std::stringstream &stream, DL_CreationInterface* creationInterface);
+    static bool getStrippedLine(std::string& s, quint32 size, std::stringstream& stream, bool stripSpace = true);
 
-    bool processDXFGroup(DL_CreationInterface* creationInterface,
-                         int groupCode, const std::string& groupValue);
+    static bool stripWhiteSpace(char** s, bool stripSpace = true);
+
+    bool processDXFGroup(DL_CreationInterface* creationInterface, int groupCode, const std::string& groupValue);
     void addSetting(DL_CreationInterface* creationInterface);
     void addLayer(DL_CreationInterface* creationInterface);
     void addLinetype(DL_CreationInterface *creationInterface);
@@ -215,8 +196,7 @@ public:
 
     //int  stringToInt(const char* s, bool* ok=NULL);
 
-    DL_WriterA* out(const char* file,
-                    DL_Codes::version version=DL_VERSION_2000);
+    DL_WriterA* out(const char* file, DL_Codes::version version=DL_VERSION_2000);
 
     void writeHeader(DL_WriterA& dw) const;
 
@@ -424,6 +404,21 @@ public:
     {
         char* p;
         return static_cast<int>(strtol(str.c_str(), &p, 10));
+    }
+
+    int getInt16Value(int code, int def)
+    {
+        if (!hasValue(code))
+        {
+            return def;
+        }
+        return toInt16(values[code]);
+    }
+
+    static int toInt16(const std::string& str)
+    {
+        char* p;
+        return static_cast<int>(strtol(str.c_str(), &p, 16));
     }
 
     static bool toBool(const std::string& str)

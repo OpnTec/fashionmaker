@@ -37,9 +37,6 @@
 #include "vcmdexport.h"
 
 class VApplication;// use in define
-class VMainGraphicsView;
-class VPattern;
-class QFile;
 
 #if defined(qApp)
 #undef qApp
@@ -71,14 +68,14 @@ public:
     void               StartLogging();
     QTextStream       *LogFile();
 
-    virtual const VTranslateVars *TrVars();
+    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static void        DrMingw();
     void               CollectReports() const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static IsGUIMode();
-    virtual bool IsAppInGUIMode() const;
+    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
 
     virtual void OpenSettings() Q_DECL_OVERRIDE;
     VSettings *ValentinaSettings();
@@ -100,8 +97,6 @@ private:
     std::shared_ptr<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
 
-    void               InitLineWidth();
-
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static const QString GistFileName;
 
@@ -114,7 +109,7 @@ private:
 
     QString            LogDirPath()const;
     QString            LogPath()const;
-    void               CreateLogDir()const;
+    bool               CreateLogDir()const;
     void               BeginLogging();
     void               ClearOldLogs()const;
 

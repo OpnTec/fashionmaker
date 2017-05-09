@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += widgets printsupport
+QT += widgets printsupport testlib
 
 # Name of library
 TARGET = vmisc
@@ -48,52 +48,13 @@ OBJECTS_DIR = obj
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
+include(warnings.pri)
+
 CONFIG(debug, debug|release){
     # Debug mode
-    unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
-        # want them in global list. Compromise decision delete them from local list.
-        QMAKE_CXXFLAGS -= \
-            -Wmissing-prototypes
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS += \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                $$ICC_DEBUG_CXXFLAGS
-        }
-    } else {
-        *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-
     #Calculate latest tag distance and build revision only in release mode. Change number each time requare
     #recompilation precompiled headers file.
     DEFINES += "LATEST_TAG_DISTANCE=0"
-    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
     !win32-msvc*:CONFIG += silent
@@ -103,11 +64,8 @@ CONFIG(debug, debug|release){
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-        DEFINES += V_NO_DEBUG
+        # do nothing
     } else {
-        noCrashReports{
-            DEFINES += V_NO_DEBUG
-        }
         !macx:!win32-msvc*{
             # Turn on debug symbols in release mode on Unix systems.
             # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
@@ -129,17 +87,6 @@ CONFIG(debug, debug|release){
     }
     message("Latest tag distance:" $${HG_DISTANCE})
     DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
-
-    #build revision number for using in version
-    unix {
-        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(HG_HESH){
-        HG_HESH = "unknown" # if we can't find build revision left unknown.
-    }
-    message("Build revision:" $${HG_HESH})
-    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+include (../libs.pri)

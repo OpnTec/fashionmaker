@@ -29,6 +29,10 @@
 #ifndef VEXCEPTIONCONVERSIONERROR_H
 #define VEXCEPTIONCONVERSIONERROR_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+
+#include "../ifcdef.h"
 #include "vexception.h"
 
 /**
@@ -39,7 +43,8 @@ class VExceptionConversionError : public VException
 public:
     VExceptionConversionError(const QString &error, const QString &str);
     VExceptionConversionError(const VExceptionConversionError &e);
-    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
+    VExceptionConversionError &operator=(const VExceptionConversionError &e);
+    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
     virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
     QString         String() const;
 protected:

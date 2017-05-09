@@ -23,6 +23,12 @@
 
 #include <QGroupBox>
 #include <QLabel>
+#include <QList>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "vproperty.h"
 
 class QFormLayout;

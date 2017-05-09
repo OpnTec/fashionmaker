@@ -29,8 +29,19 @@
 #ifndef VTOOLCUT_H
 #define VTOOLCUT_H
 
-#include "../vtoolsinglepoint.h"
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
 #include "../../../toolcurve/vabstractspline.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vtoolsinglepoint.h"
+#include "../vmisc/def.h"
+#include "../../../../vdatatool.h"
+#include "../../../../../visualization/visualization.h"
 
 class VFormula;
 
@@ -39,35 +50,32 @@ class VToolCut : public VToolSinglePoint
     Q_OBJECT
 public:
     VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-             const quint32 &curveCutId,
-             const quint32 &curve1id, const quint32 &curve2id, const QString &color, QGraphicsItem * parent = nullptr);
+             const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
     VFormula GetFormula() const;
     void     SetFormula(const VFormula &value);
 
+    QString CurveName() const;
+
     quint32 getCurveCutId() const;
     void    setCurveCutId(const quint32 &value);
 
 public slots:
     virtual void  Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    void          DetailsMode(bool mode);
+    virtual void  DetailsMode(bool mode) Q_DECL_OVERRIDE;
     virtual void  FullUpdateFromFile() Q_DECL_OVERRIDE;
 protected:
     /** @brief formula keep formula of length */
     QString       formula;
 
     quint32       curveCutId;
-    quint32       curve1id;
-    quint32       curve2id;
-
     bool          detailsMode;
 
     void          RefreshGeometry();
     virtual void  RemoveReferens() Q_DECL_OVERRIDE;
     void          FullUpdateCurveFromFile(const QString &attrCurve);
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
     void ShowToolVisualization(bool show);
@@ -82,7 +90,7 @@ inline void VToolCut::ShowToolVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<T>();
             SetVisualization();
@@ -98,18 +106,12 @@ inline void VToolCut::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
     }
-    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+
+    VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(curveCutId)->getIdTool());
+    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(parent))
     {
-        if (detailsMode)
-        {
-            parentCurve->ShowHandles(detailsMode);
-        }
-        else
-        {
-            parentCurve->ShowHandles(show);
-        }
+        detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);
     }
 }
 

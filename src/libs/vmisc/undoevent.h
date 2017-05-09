@@ -29,6 +29,7 @@
 #ifndef UNDOEVENT_H
 #define UNDOEVENT_H
 
+#include <qcompilerdetection.h>
 #include <QEvent>
 
 // Define undo event identifier

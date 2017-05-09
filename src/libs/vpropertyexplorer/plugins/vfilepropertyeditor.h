@@ -21,12 +21,18 @@
 #ifndef VFILEPROPERTYEDITOR_H
 #define VFILEPROPERTYEDITOR_H
 
-#include "../vpropertyexplorer_global.h"
-
-#include <QWidget>
-#include <QToolButton>
+#include <qcompilerdetection.h>
 #include <QLineEdit>
+#include <QMetaObject>
 #include <QMimeData>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -45,7 +51,7 @@ public:
     QString getFile() const;
 
     //! Needed for proper event handling
-    bool eventFilter(QObject* obj, QEvent* ev);
+    virtual bool eventFilter(QObject* obj, QEvent* ev) Q_DECL_OVERRIDE;
 
     //! Returns the directory/file setting
     //! \return True, if a directory dialog is being shown, false if a file dialog
@@ -64,10 +70,10 @@ signals:
 
 public slots:
     //! Sets the current file, does not check if it is valid
-    //! \param getFile The new filepath the widget should show
+    //! \param value The new filepath the widget should show
     //! \param emit_signal If true, this will emit the dataChangedByUser()-signal (if file differs from the current
     //! file)
-    void setFile(const QString &getFile, bool emit_signal = false);
+    void setFile(const QString &value, bool emit_signal = false);
 
     //! Sets a filter for the file field
     //! \param dialog_filter The filter used for the File Dialog
@@ -82,16 +88,16 @@ private slots:
     void onToolButtonClicked();
 
 protected:
-    void dragEnterEvent(QDragEnterEvent* event);
-    void dragMoveEvent(QDragMoveEvent* event);
-    void dragLeaveEvent(QDragLeaveEvent* event);
-    void dropEvent(QDropEvent* event);
+    virtual void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
+    virtual void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
+    virtual void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
+    virtual void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
 
     //! This function checks the mime data, if it is compatible with the filters
-    virtual bool checkMimeData(const QMimeData* data, QString& getFile) const;
+    virtual bool checkMimeData(const QMimeData* data, QString& file) const;
 
     //! This checks, if a file is compatible with the filters
-    virtual bool checkFileFilter(const QString& getFile) const;
+    virtual bool checkFileFilter(const QString& file) const;
 
 
     QString CurrentFilePath;

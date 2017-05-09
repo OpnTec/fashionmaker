@@ -29,8 +29,16 @@
 #ifndef VSETTINGS_H
 #define VSETTINGS_H
 
-#include "vcommonsettings.h"
+#include <QMetaObject>
+#include <QObject>
+#include <QSettings>
+#include <QString>
+#include <QtGlobal>
+
 #include "../vlayout/vbank.h"
+#include "vcommonsettings.h"
+
+template <class T> class QSharedPointer;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -48,9 +56,11 @@ public:
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 
+    static QString GetDefPathPattern();
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
 
+    static QString GetDefPathLayout();
     QString GetPathLayout() const;
     void SetPathLayout(const QString &value);
 
@@ -102,8 +112,7 @@ public:
     static qreal GetDefLayoutWidth();
     void SetLayoutWidth(qreal value);
 
-    QMarginsF GetFields() const;
-    static QMarginsF GetDefFields();
+    QMarginsF GetFields(const QMarginsF &def = QMarginsF()) const;
     void SetFields(const QMarginsF &value);
 
     Cases GetLayoutGroup() const;
@@ -134,38 +143,16 @@ public:
     static bool GetDefIgnoreAllFields();
     void SetIgnoreAllFields(bool value);
 
+    bool GetStripOptimization() const;
+    static bool GetDefStripOptimization();
+    void SetStripOptimization(bool value);
+
+    quint8 GetMultiplier() const;
+    static quint8 GetDefMultiplier();
+    void SetMultiplier(quint8 value);
+
 private:
     Q_DISABLE_COPY(VSettings)
-    static const QString SettingConfigurationLabelLanguage;
-
-    static const QString SettingPathsPattern;
-    static const QString SettingPathsLayout;
-
-    static const QString SettingPatternGraphicalOutput;
-
-    static const QString SettingCommunityServer;
-    static const QString SettingCommunityServerSecure;
-    static const QString SettingCommunityUseProxy;
-    static const QString SettingCommunityProxyAddress;
-    static const QString SettingCommunityProxyPort;
-    static const QString SettingCommunityProxyUser;
-    static const QString SettingCommunityProxyPass;
-    static const QString SettingCommunityUsername;
-    static const QString SettingCommunitySavePassword;
-    static const QString SettingCommunityUserPassword;
-
-    static const QString SettingLayoutWidth;
-    static const QString SettingLayoutSorting;
-    static const QString SettingLayoutPaperHeight;
-    static const QString SettingLayoutPaperWidth;
-    static const QString SettingLayoutShift;
-    static const QString SettingLayoutRotate;
-    static const QString SettingLayoutRotationIncrease;
-    static const QString SettingLayoutAutoCrop;
-    static const QString SettingLayoutSaveLength;
-    static const QString SettingLayoutUnitePages;
-    static const QString SettingFields;
-    static const QString SettingIgnoreFields;
 };
 
 #endif // VSETTINGS_H

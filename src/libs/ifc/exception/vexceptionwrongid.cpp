@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vexceptionwrongid.h"
-#include <QDebug>
+
 #include <QDomElement>
+#include <QTextStream>
+
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -54,6 +57,20 @@ VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &dom
 VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

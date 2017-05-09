@@ -27,17 +27,25 @@
  *************************************************************************/
 
 #include "dialogarc.h"
-#include "ui_dialogarc.h"
 
+#include <limits.h>
+#include <QDialog>
+#include <QLabel>
+#include <QPlainTextEdit>
+#include <QPointer>
 #include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../../ifc/xml/vdomdocument.h"
-#include "../../visualization/vistoolarc.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/path/vistoolarc.h"
+#include "../../visualization/visualization.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -113,7 +121,6 @@ void DialogArc::DeployF2TextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
-    DeleteVisualization<VisToolArc>();
     delete ui;
 }
 
@@ -125,7 +132,7 @@ DialogArc::~DialogArc()
 void DialogArc::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxBasePoint, value);
-    vis->setPoint1Id(value);
+    vis->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +151,7 @@ void DialogArc::SetF2(const QString &value)
     ui->plainTextEditF2->setPlainText(f2);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF2(f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
@@ -153,7 +160,7 @@ void DialogArc::SetF2(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArc::GetColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -178,7 +185,7 @@ void DialogArc::SetF1(const QString &value)
     ui->plainTextEditF1->setPlainText(f1);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
@@ -200,7 +207,7 @@ void DialogArc::SetRadius(const QString &value)
     ui->plainTextEditFormula->setPlainText(radius);
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
     path->setRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -246,9 +253,9 @@ void DialogArc::SaveData()
     f2.replace("\n", " ");
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr);
+    SCASSERT(path != nullptr)
 
-    path->setPoint1Id(GetCenter());
+    path->setObject1Id(GetCenter());
     path->setRadius(radius);
     path->setF1(f1);
     path->setF2(f2);
@@ -272,7 +279,8 @@ void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -283,7 +291,7 @@ void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
     labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
+    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +302,7 @@ void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
     labelResultCalculation = ui->labelResultF2;
-    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2);
+    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -345,9 +353,9 @@ void DialogArc::FXF2()
  */
 void DialogArc::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
-    SCASSERT(bApply != nullptr);
+    SCASSERT(bApply != nullptr)
     bApply->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
@@ -395,7 +403,7 @@ void DialogArc::CheckAngles()
         return;
     }
 
-    if (qFuzzyCompare(angleF1 + 1, angleF2 + 1))
+    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
     {
         flagF1 = false;
         ChangeColor(ui->labelEditF1, Qt::red);

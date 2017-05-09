@@ -33,11 +33,11 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QColorDialog>
+#include <QDebug>
+#include <QRegularExpression>
 
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
-
-using namespace VPE;
 
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
-    connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
+    connect(ToolButton, &QToolButton::clicked, this, &VFormulaPropertyEditor::onToolButtonClicked);
 
     // Create the text label
     TextLabel = new QLabel(this);
@@ -98,7 +98,7 @@ void VFormulaPropertyEditor::onToolButtonClicked()
         TextLabel->setText(formula.getStringValue());
         delete tmpWidget;
         emit dataChangedByUser(formula, this);
-        UserChangeEvent *event = new UserChangeEvent();
+        VPE::UserChangeEvent *event = new VPE::UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
     }
 }
@@ -114,12 +114,6 @@ bool VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
     }
 
     return QWidget::eventFilter(obj, ev);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VFormulaPropertyEditor::~VFormulaPropertyEditor()
-{
-    //
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,37 +27,45 @@
  *************************************************************************/
 
 #include "vabstractspline.h"
-#include <QKeyEvent>
 
-const QString VAbstractSpline::TagName = QStringLiteral("spline");
+#include <QColor>
+#include <QFlags>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGuiApplication>
+#include <QKeyEvent>
+#include <QLineF>
+#include <QPen>
+#include <QSharedPointer>
+#include <Qt>
+#include <new>
+
+#include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../vgeometry/../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "../../../visualization/line/visline.h"
+#include "../../vabstracttool.h"
+#include "../vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
       sceneType(SceneObject::Unknown), isHovered(false), detailsMode(false)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractSpline::~VAbstractSpline()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(painter, &myOption, widget);
+    setAcceptHoverEvents(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::getTagName() const
 {
-    return VAbstractSpline::TagName;
+    return VAbstractPattern::TagSpline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,7 +83,8 @@ void VAbstractSpline::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(lineColor),
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    this->setPen(QPen(CorrectColor(curve->GetColor()),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
                       Qt::RoundCap));
     emit setEnabledPoint(enabled);
@@ -87,6 +96,18 @@ void VAbstractSpline::DetailsMode(bool mode)
     detailsMode = mode;
     RefreshGeometry();
     ShowHandles(detailsMode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,8 +140,9 @@ void VAbstractSpline::SetFactor(qreal factor)
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor),
+    Q_UNUSED(event)
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    this->setPen(QPen(CorrectColor(curve->GetColor()),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
                       Qt::RoundCap));
     this->setPath(ToolPath(PathDirection::Show));
@@ -136,8 +158,9 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor),
+    Q_UNUSED(event)
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    this->setPen(QPen(CorrectColor(curve->GetColor()),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     if (detailsMode)
     {
@@ -162,18 +185,10 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
-    return QGraphicsItem::itemChange(change, value);
+    return QGraphicsPathItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -192,14 +207,29 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
             }
             catch(const VExceptionToolWasDeleted &e)
             {
-                Q_UNUSED(e);
+                Q_UNUSED(e)
                 return;//Leave this method immediately!!!
             }
             break;
         default:
             break;
     }
-    QGraphicsItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsPathItem::mousePressEvent(event);
+
+    // Somehow clicking on notselectable object do not clean previous selections.
+    if (not (flags() & ItemIsSelectable) && scene())
+    {
+        scene()->clearSelection();
+    }
+
+    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,7 +243,7 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         emit ChoosedTool(id, sceneType);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsPathItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -229,7 +259,7 @@ QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
 {
-    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
+    Q_UNUSED(domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +267,76 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, AttrColor, lineColor);
+    const QSharedPointer<VAbstractCurve> curve = qSharedPointerCast<VAbstractCurve>(obj);
+    doc->SetAttribute(tag, AttrColor, curve->GetColor());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
+                                         const QPointF &pos) const
+{
+    VSpline spl;
+    if (position == SplinePointPosition::FirstPoint)
+    {
+        QLineF line(static_cast<QPointF>(spline.GetP1()), pos);
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            line.setAngle(VisLine::CorrectAngle(line.angle()));
+        }
+
+        qreal newAngle1 = line.angle();
+        QString newAngle1F = QString().setNum(newAngle1);
+
+        qreal newLength1 = line.length();
+        QString newLength1F = QString().setNum(qApp->fromPixel(newLength1));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetStartAngleFormula()))
+        {
+            newAngle1 = spline.GetStartAngle();
+            newAngle1F = spline.GetStartAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetC1LengthFormula()))
+        {
+            newLength1 = spline.GetC1Length();
+            newLength1F = spline.GetC1LengthFormula();
+        }
+
+        spl = VSpline(spline.GetP1(), spline.GetP4(), newAngle1, newAngle1F, spline.GetEndAngle(),
+                      spline.GetEndAngleFormula(), newLength1, newLength1F, spline.GetC2Length(),
+                      spline.GetC2LengthFormula());
+    }
+    else
+    {
+        QLineF line(static_cast<QPointF>(spline.GetP4()), pos);
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            line.setAngle(VisLine::CorrectAngle(line.angle()));
+        }
+
+        qreal newAngle2 = line.angle();
+        QString newAngle2F = QString().setNum(newAngle2);
+
+        qreal newLength2 = line.length();
+        QString newLength2F = QString().setNum(qApp->fromPixel(newLength2));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetEndAngleFormula()))
+        {
+            newAngle2 = spline.GetEndAngle();
+            newAngle2F = spline.GetEndAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetC2LengthFormula()))
+        {
+            newLength2 = spline.GetC2Length();
+            newLength2F = spline.GetC2LengthFormula();
+        }
+        spl = VSpline(spline.GetP1(), spline.GetP4(), spline.GetStartAngle(), spline.GetStartAngleFormula(),
+                      newAngle2, newAngle2F, spline.GetC1Length(), spline.GetC1LengthFormula(),
+                      newLength2, newLength2F);
+    }
+
+    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -255,7 +354,8 @@ void VAbstractSpline::setEnabled(bool enabled)
     QGraphicsPathItem::setEnabled(enabled);
     if (enabled)
     {
-        setPen(QPen(QColor(lineColor),
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+        setPen(QPen(QColor(curve->GetColor()),
                     qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
     else
@@ -263,4 +363,33 @@ void VAbstractSpline::setEnabled(bool enabled)
         setPen(QPen(Qt::gray,
                     qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::GetLineColor() const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    return curve->GetColor();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SetLineColor(const QString &value)
+{
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    curve->SetColor(value);
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::name() const
+{
+    return ObjectName<VAbstractCurve>(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object)
+    setVisible(visible);
 }

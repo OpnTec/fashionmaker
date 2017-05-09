@@ -29,6 +29,11 @@
 #ifndef VEXCEPTIONOBJECTERROR_H
 #define VEXCEPTIONOBJECTERROR_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifcdef.h"
 #include "vexception.h"
 
 class QDomElement;
@@ -39,9 +44,10 @@ class QDomElement;
 class VExceptionObjectError : public VException
 {
 public:
-    VExceptionObjectError(const QString &error, const QDomElement &domElement);
+    VExceptionObjectError(const QString &what, const QDomElement &domElement);
     VExceptionObjectError(const VExceptionObjectError &e);
-    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    VExceptionObjectError &operator=(const VExceptionObjectError &e);
+    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
     virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
     virtual QString DetailedInformation() const Q_DECL_OVERRIDE;
     QString         TagText() const;

@@ -32,6 +32,8 @@
 /* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
 #pragma message("Compiling precompiled headers for VDxf library.\n")
 
+#define _CRT_SECURE_NO_WARNINGS
+
 /* Add C includes here */
 
 #if defined __cplusplus

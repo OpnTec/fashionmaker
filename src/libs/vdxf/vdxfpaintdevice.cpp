@@ -27,9 +27,11 @@
  *************************************************************************/
 
 #include "vdxfpaintdevice.h"
-#include "vdxfengine.h"
 
-#include <QFile>
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "vdxfengine.h"
 
  //---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::VDxfPaintDevice()
@@ -122,10 +124,6 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
             return engine->getSize().width();
         case QPaintDevice::PdmHeight:
             return engine->getSize().height();
-        case QPaintDevice::PdmDpiX:
-            return static_cast<int>(engine->getResolution());
-        case QPaintDevice::PdmDpiY:
-            return static_cast<int>(engine->getResolution());
         case QPaintDevice::PdmHeightMM:
             return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmWidthMM:
@@ -133,11 +131,15 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
-            return static_cast<int>(engine->getResolution());
         case QPaintDevice::PdmPhysicalDpiY:
+        case QPaintDevice::PdmDpiX:
+        case QPaintDevice::PdmDpiY:
             return static_cast<int>(engine->getResolution());
 #if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
         case QPaintDevice::PdmDevicePixelRatio:
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        case QPaintDevice::PdmDevicePixelRatioScaled:
+#endif
             return 1;
 #endif
         default:

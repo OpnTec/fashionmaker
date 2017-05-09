@@ -27,13 +27,21 @@
  *************************************************************************/
 
 #include "dialogline.h"
-#include "ui_dialogline.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolline.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include <QColor>
+#include <QComboBox>
+#include <QIcon>
+#include <QLabel>
+#include <QMap>
+#include <QPointer>
+#include <QVariant>
+
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolline.h"
+#include "../ifc/ifcdef.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -68,7 +76,6 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
-    DeleteVisualization<VisToolLine>();
     delete ui;
 }
 
@@ -82,7 +89,7 @@ void DialogLine::SetSecondPoint(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setPoint2Id(value);
 }
 
@@ -100,7 +107,7 @@ void DialogLine::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLine::GetLineColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,8 +126,8 @@ void DialogLine::SetFirstPoint(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,9 +159,9 @@ void DialogLine::ShowVisualization()
 void DialogLine::SaveData()
 {
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
-    line->setPoint1Id(GetFirstPoint());
+    line->setObject1Id(GetFirstPoint());
     line->setPoint2Id(GetSecondPoint());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
@@ -209,11 +216,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  */
 quint32 DialogLine::GetFirstPoint() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(ui->comboBoxFirstPoint->currentIndex()));
-#else
-    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
-#endif
+    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxFirstPoint));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,11 +226,7 @@ quint32 DialogLine::GetFirstPoint() const
  */
 quint32 DialogLine::GetSecondPoint() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(ui->comboBoxSecondPoint->currentIndex()));
-#else
-    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
-#endif
+    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxSecondPoint));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,5 +236,5 @@ quint32 DialogLine::GetSecondPoint() const
  */
 QString DialogLine::GetTypeLine() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }

@@ -21,13 +21,20 @@
 #ifndef VCOLORPROPERTYEDITOR_H
 #define VCOLORPROPERTYEDITOR_H
 
-#include "../vpropertyexplorer_global.h"
-
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
+#include <qcompilerdetection.h>
+#include <QColor>
 #include <QLabel>
+#include <QLineEdit>
+#include <QMetaObject>
+#include <QObject>
+#include <QPixmap>
 #include <QSpacerItem>
+#include <QString>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -59,7 +66,7 @@ public:
     static QString GetColorString(const QColor& color);
 
     //! Needed for proper event handling
-    bool eventFilter(QObject *obj, QEvent *ev);
+    virtual bool eventFilter(QObject *obj, QEvent *ev) Q_DECL_OVERRIDE;
 
 signals:
     //! This is emitted, when the user changes the color

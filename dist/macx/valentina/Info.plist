@@ -11,7 +11,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2013-2016, Valentina project</string>
+	<string>© 2013-2017, Valentina project</string>
 	<key>CFBundleSignature</key>
 	<string>@TYPEINFO@</string>
 	<key>CFBundleExecutable</key>
@@ -19,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.5</string>
+	<string>0.5.0</string>
 	<key>CFBundleVersion</key>
-	<string>0.4.5.0</string>
+	<string>0.5.0.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>
@@ -30,7 +30,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>@ICON@</string>
+			<string>pattern.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.val</string>
@@ -44,7 +44,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>i-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vit</string>
@@ -58,7 +58,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>s-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vst</string>
@@ -80,7 +80,7 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina pattern file</string>
 			<key>UTTypeIconFile</key>
-			<string>@ICON@</string>
+			<string>pattern</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.valentinaproject.val</string>
 			<key>UTTypeTagSpecification</key>
@@ -102,7 +102,7 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina individual measurements</string>
 			<key>UTTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>i-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.valentinaproject.vit</string>
 			<key>UTTypeTagSpecification</key>
@@ -124,7 +124,7 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina standard measurements</string>
 			<key>UTTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.valentinaproject.vst</string>
 			<key>UTTypeTagSpecification</key>

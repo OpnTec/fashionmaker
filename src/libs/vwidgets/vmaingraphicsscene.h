@@ -29,7 +29,17 @@
 #ifndef VMAINGRAPHICSSCENE_H
 #define VMAINGRAPHICSSCENE_H
 
+#include <qcompilerdetection.h>
 #include <QGraphicsScene>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QRectF>
+#include <QString>
+#include <QTransform>
+#include <QVector>
+#include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 /**
@@ -39,7 +49,7 @@ class VMainGraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    VMainGraphicsScene();
+    explicit VMainGraphicsScene(QObject *parent = nullptr);
     explicit VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
     qint32        getHorScrollBar() const;
     void          setHorScrollBar(const qint32 &value);
@@ -47,35 +57,64 @@ public:
     void          setVerScrollBar(const qint32 &value);
     QTransform    transform() const;
     void          setTransform(const QTransform &transform);
-    void          SetDisableTools(bool enabled, const QString &namePP);
+    void          SetDisableTools(bool disable, const QString &namePP);
     QPointF       getScenePos() const;
 
     QRectF        VisibleItemsBoundingRect() const;
+    void          InitOrigins();
+    void          SetOriginsVisible(bool visible);
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
+    void          SelectedItem(bool selected, quint32 object, quint32 tool);
     void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
+    void          ItemsSelection(const SelectionType &type);
+    void          HighlightItem(quint32 id);
+
+    void          ToggleLabelSelection(bool enabled);
+    void          TogglePointSelection(bool enabled);
+    void          ToggleLineSelection(bool enabled);
+    void          ToggleArcSelection(bool enabled);
+    void          ToggleElArcSelection(bool enabled);
+    void          ToggleSplineSelection(bool enabled);
+    void          ToggleSplinePathSelection(bool enabled);
+    void          ToggleNodeLabelSelection(bool enabled);
+    void          ToggleNodePointSelection(bool enabled);
+    void          ToggleDetailSelection(bool enabled);
+
+    void          ToggleLabelHover(bool enabled);
+    void          TogglePointHover(bool enabled);
+    void          ToggleLineHover(bool enabled);
+    void          ToggleArcHover(bool enabled);
+    void          ToggleElArcHover(bool enabled);
+    void          ToggleSplineHover(bool enabled);
+    void          ToggleSplinePathHover(bool enabled);
+    void          ToggleNodeLabelHover(bool enabled);
+    void          ToggleNodePointHover(bool enabled);
+    void          ToggleDetailHover(bool enabled);
 protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief mouseMove send new mouse position.
      * @param scenePos new mouse position.
      */
     void          mouseMove(const QPointF &scenePos);
-    /**
-     * @brief mousePress send new mouse press position.
-     * @param scenePos new mouse press position.
-     */
-    void          mousePress(QPointF scenePos);
+
+    void          MouseLeftPressed();
+    void          MouseLeftReleased();
+    void          ItemClicked(QGraphicsItem* pItem);
+
     /**
      * @brief ChoosedObject send option choosed object.
      * @param id object id.
      * @param type object scene type.
      */
     void          ChoosedObject(quint32 id, SceneObject type);
+    void          SelectedObject(bool selected, quint32 object, quint32 tool);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
@@ -84,6 +123,33 @@ signals:
     void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
+    void          ItemSelection(const SelectionType &type);
+    void          HighlightDetail(quint32 id);
+
+    void          EnableLabelItemSelection(bool enable);
+    void          EnablePointItemSelection(bool enable);
+    void          EnableLineItemSelection(bool enable);
+    void          EnableArcItemSelection(bool enable);
+    void          EnableElArcItemSelection(bool enable);
+    void          EnableSplineItemSelection(bool enable);
+    void          EnableSplinePathItemSelection(bool enable);
+    void          EnableNodeLabelItemSelection(bool enabled);
+    void          EnableNodePointItemSelection(bool enabled);
+    void          EnableDetailItemSelection(bool enabled);
+
+    void          EnableLabelItemHover(bool enable);
+    void          EnablePointItemHover(bool enable);
+    void          EnableArcItemHover(bool enable);
+    void          EnableElArcItemHover(bool enable);
+    void          EnableSplineItemHover(bool enable);
+    void          EnableSplinePathItemHover(bool enable);
+    void          EnableNodeLabelItemHover(bool enabled);
+    void          EnableNodePointItemHover(bool enabled);
+    void          EnableDetailItemHover(bool enabled);
+    void          EnableLineItemHover(bool enabled);
+    void          DimensionsChanged();
+    void          LanguageChanged();
+
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;
@@ -97,6 +163,7 @@ private:
     /** @brief _transform view transform value. */
     QTransform    _transform;
     QPointF       scenePos;
+    QVector<QGraphicsItem *> origins;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

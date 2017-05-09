@@ -27,49 +27,56 @@
  *************************************************************************/
 
 #include "vtranslatevars.h"
-#include "calculator.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "../qmuparser/qmutokenparser.h"
-#include "../ifc/ifcdef.h"
 
+#include <QList>
 #include <QLocale>
+#include <QMap>
+#include <QMessageLogger>
+#include <QString>
 #include <QtDebug>
 
-using namespace qmu;
+#include "../ifc/ifcdef.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../qmuparser/qmutranslation.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "vtranslatemeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
     :VTranslateMeasurements(),
-      PMSystemNames(QMap<QString, QmuTranslation>()),
-      PMSystemAuthors(QMap<QString, QmuTranslation>()),
-      PMSystemBooks(QMap<QString, QmuTranslation>()),
-      variables(QMap<QString, QmuTranslation>()),
-      functions(QMap<QString, QmuTranslation>()),
-      postfixOperators(QMap<QString, QmuTranslation>()),
-      stDescriptions(QMap<QString, QmuTranslation>())
+      PMSystemNames(QMap<QString, qmu::QmuTranslation>()),
+      PMSystemAuthors(QMap<QString, qmu::QmuTranslation>()),
+      PMSystemBooks(QMap<QString, qmu::QmuTranslation>()),
+      variables(QMap<QString, qmu::QmuTranslation>()),
+      functions(QMap<QString, qmu::QmuTranslation>()),
+      postfixOperators(QMap<QString, qmu::QmuTranslation>()),
+      placeholders(QMap<QString, qmu::QmuTranslation>()),
+      stDescriptions(QMap<QString, qmu::QmuTranslation>())
 {
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+    InitPlaceholder();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::~VTranslateVars()
 {}
 
-#define translate(context, source, disambiguation) QmuTranslation::translate((context), (source), (disambiguation))
+#define translate(context, source, disambiguation) qmu::QmuTranslation::translate((context), (source), (disambiguation))
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPatternMakingSystems()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation name;
-    QmuTranslation author;
-    QmuTranslation book;
+    qmu::QmuTranslation name;
+    qmu::QmuTranslation author;
+    qmu::QmuTranslation book;
 
     //=================================================================================================================
     name = translate("VTranslateVars", "Bunka", "System name");
@@ -365,37 +372,57 @@ void VTranslateVars::InitPatternMakingSystems()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitVariables()
 {
-    variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in name"));
-    variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in name"));
-    variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in name"));
-    variables.insert(spl_, translate("VTranslateVars", "Spl_", "Left symbol _ in name"));
-    variables.insert(splPath, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of name"));
-    variables.insert(radiusArc_, translate("VTranslateVars", "RadiusArc_", "Left symbol _ in name"));
-    variables.insert(angle1Arc_, translate("VTranslateVars", "Angle1Arc_", "Left symbol _ in name"));
-    variables.insert(angle2Arc_, translate("VTranslateVars", "Angle2Arc_", "Left symbol _ in name"));
-    variables.insert(angle1Spl_, translate("VTranslateVars", "Angle1Spl_", "Left symbol _ in name"));
-    variables.insert(angle2Spl_, translate("VTranslateVars", "Angle2Spl_", "Left symbol _ in name"));
+    variables.insert(measurement_, translate("VTranslateVars", "M_", "Left symbol _ in the name"));
+    variables.insert(increment_, translate("VTranslateVars", "Increment_", "Left symbol _ in the name"));
+    variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in the name"));
+    variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in the name"));
+    variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));
+    variables.insert(spl_, translate("VTranslateVars", "Spl_", "Left symbol _ in the name"));
+    variables.insert(splPath, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of the name"));
+    variables.insert(radiusArc_, translate("VTranslateVars", "RadiusArc_", "Left symbol _ in the name"));
+    variables.insert(angle1Arc_, translate("VTranslateVars", "Angle1Arc_", "Left symbol _ in the name"));
+    variables.insert(angle2Arc_, translate("VTranslateVars", "Angle2Arc_", "Left symbol _ in the name"));
+    variables.insert(angle1Spl_, translate("VTranslateVars", "Angle1Spl_", "Left symbol _ in the name"));
+    variables.insert(angle2Spl_, translate("VTranslateVars", "Angle2Spl_", "Left symbol _ in the name"));
     variables.insert(angle1SplPath, translate("VTranslateVars", "Angle1SplPath",
-                                              "Do not add symbol _ to the end of name"));
+                                              "Do not add symbol _ to the end of the name"));
     variables.insert(angle2SplPath, translate("VTranslateVars", "Angle2SplPath",
-                                              "Do not add symbol _ to the end of name"));
+                                              "Do not add symbol _ to the end of the name"));
+    variables.insert(seg_, translate("VTranslateVars", "Seg_", "Segment. Left symbol _ in the name"));
+    variables.insert(currentLength, translate("VTranslateVars", "CurrentLength", "Do not add space between words"));
+    variables.insert(currentSeamAllowance, translate("VTranslateVars", "CurrentSeamAllowance",
+                                                     "Do not add space between words"));
+    variables.insert(c1LengthSpl_, translate("VTranslateVars", "C1LengthSpl_", "Left symbol _ in the name"));
+    variables.insert(c2LengthSpl_, translate("VTranslateVars", "C2LengthSpl_", "Left symbol _ in the name"));
+    variables.insert(c1LengthSplPath, translate("VTranslateVars", "C1LengthSplPath",
+                                                "Do not add symbol _ to the end of the name"));
+    variables.insert(c2LengthSplPath, translate("VTranslateVars", "C2LengthSplPath",
+                                                "Do not add symbol _ to the end of the name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitFunctions()
 {
-    functions.insert(sin_F, translate("VTranslateVars", "sin", "sine function"));
-    functions.insert(cos_F, translate("VTranslateVars", "cos", "cosine function"));
-    functions.insert(tan_F, translate("VTranslateVars", "tan", "tangens function"));
-    functions.insert(asin_F, translate("VTranslateVars", "asin", "arcus sine function"));
-    functions.insert(acos_F, translate("VTranslateVars", "acos", "arcus cosine function"));
-    functions.insert(atan_F, translate("VTranslateVars", "atan", "arcus tangens function"));
+    functions.insert(degTorad_F, translate("VTranslateVars", "degTorad", "converts degrees to radian"));
+    functions.insert(radTodeg_F, translate("VTranslateVars", "radTodeg", "converts radian to degrees"));
+    functions.insert(sin_F, translate("VTranslateVars", "sin", "sine function working with radians"));
+    functions.insert(cos_F, translate("VTranslateVars", "cos", "cosine function working with radians"));
+    functions.insert(tan_F, translate("VTranslateVars", "tan", "tangens function working with radians"));
+    functions.insert(asin_F, translate("VTranslateVars", "asin", "arcus sine function working with radians"));
+    functions.insert(acos_F, translate("VTranslateVars", "acos", "arcus cosine function working with radians"));
+    functions.insert(atan_F, translate("VTranslateVars", "atan", "arcus tangens function working with radians"));
     functions.insert(sinh_F, translate("VTranslateVars", "sinh", "hyperbolic sine function"));
     functions.insert(cosh_F, translate("VTranslateVars", "cosh", "hyperbolic cosine"));
     functions.insert(tanh_F, translate("VTranslateVars", "tanh", "hyperbolic tangens function"));
     functions.insert(asinh_F, translate("VTranslateVars", "asinh", "hyperbolic arcus sine function"));
-    functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus tangens function"));
+    functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus cosine function"));
     functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcur tangens function"));
+    functions.insert(sinD_F, translate("VTranslateVars", "sinD", "sine function working with degrees"));
+    functions.insert(cosD_F, translate("VTranslateVars", "cosD", "cosine function working with degrees"));
+    functions.insert(tanD_F, translate("VTranslateVars", "tanD", "tangens function working with degrees"));
+    functions.insert(asinD_F, translate("VTranslateVars", "asinD", "arcus sine function working with degrees"));
+    functions.insert(acosD_F, translate("VTranslateVars", "acosD", "arcus cosine function working with degrees"));
+    functions.insert(atanD_F, translate("VTranslateVars", "atanD", "arcus tangens function working with degrees"));
     functions.insert(log2_F, translate("VTranslateVars", "log2", "logarithm to the base 2"));
     functions.insert(log10_F, translate("VTranslateVars", "log10", "logarithm to the base 10"));
     functions.insert(log_F, translate("VTranslateVars", "log", "logarithm to the base 10"));
@@ -421,11 +448,18 @@ void VTranslateVars::InitPostfixOperators()
     postfixOperators.insert(in_Oprt, translate("VTranslateVars", "in", "inch"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::InitPlaceholder()
+{
+    placeholders.insert(pl_size, translate("VTranslateVars", "size", "placeholder"));
+    placeholders.insert(pl_height, translate("VTranslateVars", "height", "placeholder"));
+}
+
 #undef translate
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitSystem(const QString &code, const QmuTranslation &name, const QmuTranslation &author,
-                                const QmuTranslation &book)
+void VTranslateVars::InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
+                                const qmu::QmuTranslation &book)
 {
     PMSystemNames.insert(code, name);
     PMSystemAuthors.insert(code, author);
@@ -495,10 +529,10 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
  */
 bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
-    QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
-        const QmuTranslation &var = i.value();
+        const qmu::QmuTranslation &var = i.value();
         if (token.indexOf( var.translate() ) == 0)
         {
             newFormula.replace(position, var.translate().length(), i.key());
@@ -523,7 +557,7 @@ bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const 
  */
 bool VTranslateVars::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
-    QMap<QString, QmuTranslation>::const_iterator i = postfixOperators.constBegin();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = postfixOperators.constBegin();
     while (i != postfixOperators.constEnd())
     {
         if (token == i.value().translate())
@@ -548,7 +582,7 @@ bool VTranslateVars::PostfixOperatorsFromUser(QString &newFormula, int position,
  */
 bool VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
-    QMap<QString, QmuTranslation>::const_iterator i = functions.constBegin();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
         if (token == i.value().translate())
@@ -573,7 +607,7 @@ bool VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const 
  */
 bool VTranslateVars::VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
-    QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
         if (token.indexOf( i.key() ) == 0)
@@ -603,6 +637,17 @@ QString VTranslateVars::InternalVarToUser(const QString &var) const
     {
         return var;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderToUser(const QString &var) const
+{
+    if (placeholders.contains(var))
+    {
+        return placeholders.value(var).translate();
+    }
+
+    return var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -694,10 +739,10 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
     QString newFormula = formula;// Local copy for making changes
 
-    QmuTokenParser *cal = new QmuTokenParser(formula, osSeparator);// Eval formula
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator));// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
-    delete cal;
+    delete cal.take();
 
     QList<int> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
@@ -747,16 +792,21 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
             }
             continue;
         }
+
+        if (tValues.at(i) == QLocale().negativeSign())
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, '-');
+        }
     }
 
-    QLocale loc = QLocale::system(); // User locale
-    if (loc != QLocale(QLocale::C) && osSeparator)
+    QLocale loc = QLocale(); // User locale
+    if (loc != QLocale::c() && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale::system();// From system locale
+            loc = QLocale();// From system locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
@@ -765,7 +815,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
                 continue;//Leave with out translation
             }
 
-            loc = QLocale(QLocale::C);// To internal locale
+            loc = QLocale::c();// To internal locale
             const QString dStr = loc.toString(d);// Internal look for number
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
@@ -782,7 +832,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator) const
+QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator)
 {
     try
     {
@@ -815,10 +865,9 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
     QMap<int, QString> numbers;
     try
     {
-        QmuTokenParser *cal = new QmuTokenParser(formula, false);// Eval formula
+        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
         tokens = cal->GetTokens();// Tokens (variables, measurements)
         numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
-        delete cal;
     }
     catch (qmu::QmuParserError &e)
     {
@@ -884,16 +933,21 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
             }
             continue;
         }
+
+        if (tValues.at(i) == QChar('-'))
+        {// unary minus
+            newFormula.replace(tKeys.at(i), 1, QLocale().negativeSign());
+        }
     }
 
-    QLocale loc = QLocale::system();// User locale
+    QLocale loc = QLocale();// User locale
     if (loc != QLocale::C && osSeparator)
     {// User want use Os separator
         QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale(QLocale::C);// From pattern locale
+            loc = QLocale::c();// From pattern locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
@@ -902,13 +956,8 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
                 continue;//Leave with out translation
             }
 
-            loc = QLocale::system();// To user locale
+            loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            const QChar thSep = loc.groupSeparator();
-            if (thSep.isSpace())
-            {
-                dStr.remove(thSep);// Remove thousand separator
-            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
@@ -940,4 +989,11 @@ void VTranslateVars::Retranslate()
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+    InitPlaceholder();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, qmu::QmuTranslation> VTranslateVars::GetFunctions() const
+{
+    return functions;
 }

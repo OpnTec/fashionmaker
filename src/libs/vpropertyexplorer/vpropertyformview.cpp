@@ -19,40 +19,40 @@
  *************************************************************************/
 
 #include "vpropertyformview.h"
-#include "vpropertymodel.h"
-#include "vpropertyset.h"
-#include <QFormLayout>
-#include <QGroupBox>
-#include <QShowEvent>
+
+#include <QForeachContainer>
+#include <QList>
+#include <Qt>
 
 #include "vpropertyformview_p.h"
+#include "vpropertyformwidget_p.h"
+#include "vpropertymodel.h"
+#include "vpropertyset.h"
 
-using namespace VPE;
-
-VPropertyFormView::VPropertyFormView(QWidget* parent)
+VPE::VPropertyFormView::VPropertyFormView(QWidget* parent)
     : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     //
 }
 
-VPropertyFormView::VPropertyFormView(VPropertyModel* model, QWidget *parent)
+VPE::VPropertyFormView::VPropertyFormView(VPropertyModel* model, QWidget *parent)
     : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     setModel(model);
 }
 
-VPropertyFormView::VPropertyFormView(VPropertySet* property_set, QWidget *parent)
+VPE::VPropertyFormView::VPropertyFormView(VPropertySet* property_set, QWidget *parent)
     : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     setPropertySet(property_set);
 }
 
-VPropertyFormView::~VPropertyFormView()
+VPE::VPropertyFormView::~VPropertyFormView()
 {
     // Nothing to do
 }
 
-void VPropertyFormView::build()
+void VPE::VPropertyFormView::build()
 {
     VPropertyFormWidget::build();
 
@@ -60,7 +60,7 @@ void VPropertyFormView::build()
     connectPropertyFormWidget(this);
 }
 
-void VPropertyFormView::setModel(VPropertyModel *model)
+void VPE::VPropertyFormView::setModel(VPropertyModel *model)
 {
     // Remove old model or set
     removeModelAndSet();
@@ -76,19 +76,17 @@ void VPropertyFormView::setModel(VPropertyModel *model)
         }
 
         // Connect signals // todo: more signals neccesary!!!
-        connect(model, SIGNAL(destroyed()), this, SLOT(modelDestroyed()));
-        connect(model, SIGNAL(rowsInserted(const QModelIndex&, int, int)), this,
-                SLOT(rowsInserted(QModelIndex, int, int)));
-        connect(model, SIGNAL(modelReset()), this, SLOT(modelReset()));
-        connect(model, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), this,
-                SLOT(rowsRemoved(QModelIndex, int, int)));
+        connect(model, &VPropertyModel::destroyed, this, &VPropertyFormView::modelDestroyed);
+        connect(model, &VPropertyModel::rowsInserted, this, &VPropertyFormView::rowsInserted);
+        connect(model, &VPropertyModel::modelReset, this, &VPropertyFormView::modelReset);
+        connect(model, &VPropertyModel::rowsRemoved, this, &VPropertyFormView::rowsRemoved);
     }
 
     // Build the widget
     updatePropertyList();
 }
 
-void VPropertyFormView::setPropertySet(VPropertySet* property_set)
+void VPE::VPropertyFormView::setPropertySet(VPropertySet* property_set)
 {
     // Remove old model or set
     removeModelAndSet();
@@ -105,7 +103,7 @@ void VPropertyFormView::setPropertySet(VPropertySet* property_set)
     updatePropertyList();
 }
 
-void VPropertyFormView::rowsRemoved(const QModelIndex &parent, int start, int end)
+void VPE::VPropertyFormView::rowsRemoved(const QModelIndex &parent, int start, int end)
 {
     // todo: Only rebuild the neccessary parts
     Q_UNUSED(parent)
@@ -114,7 +112,7 @@ void VPropertyFormView::rowsRemoved(const QModelIndex &parent, int start, int en
     updatePropertyList();
 }
 
-void VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int end) //-V524
+void VPE::VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int end) //-V524
 {
     // todo: Only rebuild the neccessary parts
     Q_UNUSED(parent)
@@ -123,18 +121,18 @@ void VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int e
     updatePropertyList();
 }
 
-void VPropertyFormView::modelReset()
+void VPE::VPropertyFormView::modelReset()
 {
     updatePropertyList();
 }
 
-void VPropertyFormView::modelDestroyed()
+void VPE::VPropertyFormView::modelDestroyed()
 {
     removeModelAndSet();
     updatePropertyList();
 }
 
-void VPropertyFormView::dataChanged(const QModelIndex &top_left, const QModelIndex &bottom_right)
+void VPE::VPropertyFormView::dataChanged(const QModelIndex &top_left, const QModelIndex &bottom_right)
 {
     Q_UNUSED(top_left)
     Q_UNUSED(bottom_right)
@@ -145,7 +143,7 @@ void VPropertyFormView::dataChanged(const QModelIndex &top_left, const QModelInd
     // todo: handle data changes
 }
 
-void VPropertyFormView::dataSubmitted(VProperty *property)
+void VPE::VPropertyFormView::dataSubmitted(VProperty *property)
 {
     VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
 
@@ -157,7 +155,7 @@ void VPropertyFormView::dataSubmitted(VProperty *property)
     }
 }
 
-void VPropertyFormView::showEvent(QShowEvent *event)
+void VPE::VPropertyFormView::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event)
     if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild)
@@ -167,7 +165,7 @@ void VPropertyFormView::showEvent(QShowEvent *event)
     static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = false;
 }
 
-void VPropertyFormView::updatePropertyList()
+void VPE::VPropertyFormView::updatePropertyList()
 {
     VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
     VPropertySet* tmpSet = static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet;
@@ -191,7 +189,7 @@ void VPropertyFormView::updatePropertyList()
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = true;
 }
 
-void VPropertyFormView::removeModelAndSet()
+void VPE::VPropertyFormView::removeModelAndSet()
 {
     if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model)
     {
@@ -204,7 +202,7 @@ void VPropertyFormView::removeModelAndSet()
     static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet = nullptr;
 }
 
-void VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widget)
+void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widget)
 {
     if (!widget)
     {

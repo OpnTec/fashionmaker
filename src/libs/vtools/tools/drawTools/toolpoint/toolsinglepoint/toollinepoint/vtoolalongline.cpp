@@ -27,12 +27,34 @@
  *************************************************************************/
 
 #include "vtoolalongline.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialogalongline.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../../visualization/line/vistoolalongline.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
-#include "../../../../../visualization/vistoolalongline.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
@@ -83,7 +105,7 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -105,9 +127,9 @@ void VToolAlongLine::RemoveReferens()
  */
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -140,12 +162,12 @@ void VToolAlongLine::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolAlongLine *visual = qobject_cast<VisToolAlongLine *>(vis);
         SCASSERT(visual != nullptr)
-        visual->setPoint1Id(basePointId);
-        visual->setPoint2Id(secondPointId);
+        visual->setObject1Id(basePointId);
+        visual->setObject2Id(secondPointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
@@ -182,9 +204,9 @@ void VToolAlongLine::ShowVisualization(bool show)
  */
 void VToolAlongLine::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -202,12 +224,12 @@ void VToolAlongLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                       VContainer *data)
+VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogAlongLine> dialogTool = dialog.objectCast<DialogAlongLine>();
+    SCASSERT(not dialogTool.isNull())
     QString formula = dialogTool->GetFormula();
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
@@ -218,7 +240,7 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
                                    5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -248,7 +270,13 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
-    QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
+    QLineF line = QLineF(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
+
+    //Declare special variable "CurrentLength"
+    VLengthLine *length = new VLengthLine(firstPoint.data(), firstPointId, secondPoint.data(),
+                                          secondPointId, *data->GetPatternUnit());
+    length->SetName(currentLength);
+    data->AddVariable(currentLength, length);
 
     line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
 
@@ -269,20 +297,26 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::AlongLine, doc);
+
+    VToolAlongLine *point = nullptr;
     if (parse == Document::FullParse)
     {
-        VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine,
-                                                   lineColor, typeCreation);
+        VDrawTool::AddRecord(id, Tool::AlongLine, doc);
+        point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine, lineColor,
+                                   typeCreation);
         scene->addItem(point);
-        connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolAlongLine::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolAlongLine::EnableToolMove);
-        doc->AddTool(id, point);
+        InitToolConnections(scene, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
-        return point;
     }
-    return nullptr;
+    //Very important to delete it. Only this tool need this special variable.
+    data->RemoveVariable(currentLength);
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolAlongLine::SecondPointName() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
 }

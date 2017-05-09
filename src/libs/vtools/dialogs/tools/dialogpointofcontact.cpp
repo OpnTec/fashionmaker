@@ -28,12 +28,26 @@
 
 #include "dialogpointofcontact.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolpointofcontact.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QToolButton>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolpointofcontact.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogpointofcontact.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,7 +72,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
@@ -81,7 +95,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfContact::~DialogPointOfContact()
 {
-    DeleteVisualization<VisToolPointOfContact>();
     delete ui;
 }
 
@@ -155,7 +168,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -212,9 +225,9 @@ void DialogPointOfContact::SaveData()
     radius.replace("\n", " ");
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
-    line->setPoint1Id(GetFirstPoint());
+    line->setObject1Id(GetFirstPoint());
     line->setLineP2Id(GetSecondPoint());
     line->setRadiusId(getCenter());
     line->setRadius(radius);
@@ -238,7 +251,7 @@ void DialogPointOfContact::SetSecondPoint(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLineP2Id(value);
 }
 
@@ -252,8 +265,8 @@ void DialogPointOfContact::SetFirstPoint(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +279,7 @@ void DialogPointOfContact::setCenter(const quint32 &value)
     setCurrentPointId(ui->comboBoxCenter, value);
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setRadiusId(value);
 }
 
@@ -286,7 +299,7 @@ void DialogPointOfContact::setRadius(const QString &value)
     ui->plainTextEditFormula->setPlainText(radius);
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -330,7 +343,7 @@ quint32 DialogPointOfContact::getCenter() const
  */
 quint32 DialogPointOfContact::GetFirstPoint() const
 {
-    return getCurrentObjectId(ui->comboBoxFirstPoint);;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

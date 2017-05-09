@@ -27,12 +27,18 @@
  *************************************************************************/
 
 #include "dialogpointofintersectionarcs.h"
-#include "ui_dialogpointofintersectionarcs.h"
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolpointofintersectionarcs.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include <QColor>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPointer>
+
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolpointofintersectionarcs.h"
+#include "../vmisc/vabstractapplication.h"
+#include "dialogs/tools/dialogtool.h"
+#include "ui_dialogpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,
@@ -49,7 +55,7 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc1);
     FillComboBoxArcs(ui->comboBoxArc2);
@@ -67,7 +73,6 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::~DialogPointOfIntersectionArcs()
 {
-    DeleteVisualization<VisToolPointOfIntersectionArcs>();
     delete ui;
 }
 
@@ -90,7 +95,7 @@ void DialogPointOfIntersectionArcs::SetFirstArcId(const quint32 &value)
     setCurrentArcId(ui->comboBoxArc1, value);
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setArc1Id(value);
 }
 
@@ -106,14 +111,14 @@ void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
     setCurrentArcId(ui->comboBoxArc2, value);
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setArc2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +130,7 @@ void DialogPointOfIntersectionArcs::SetCrossArcPoint(const CrossCirclesPoint &p)
         ui->comboBoxResult->setCurrentIndex(index);
 
         VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setCrossPoint(p);
     }
 }
@@ -138,7 +143,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
         if (type == SceneObject::Arc)
         {
             VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-            SCASSERT(point != nullptr);
+            SCASSERT(point != nullptr)
 
             switch (number)
             {
@@ -200,7 +205,7 @@ void DialogPointOfIntersectionArcs::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
 
     point->setArc1Id(GetFirstArcId());
     point->setArc2Id(GetSecondArcId());

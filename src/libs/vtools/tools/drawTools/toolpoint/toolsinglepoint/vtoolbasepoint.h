@@ -29,7 +29,21 @@
 #ifndef VTOOLBASEPOINT_H
 #define VTOOLBASEPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolBasePoint class tool for creation pattern base point. Only base point can move. All object
@@ -39,10 +53,11 @@ class VToolBasePoint : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP, QGraphicsItem * parent = nullptr );
     virtual ~VToolBasePoint() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
+    static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
+                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                  const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
@@ -60,7 +75,7 @@ signals:
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
-    QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
     virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
@@ -71,9 +86,14 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
-    QString namePP;
-    void         SetColorLabel(const Qt::GlobalColor & color);
+    Q_DISABLE_COPY(VToolBasePoint)
 
+    QString namePP;
+
+    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                      const QString &namePP, QGraphicsItem * parent = nullptr );
+
+    void         SetColorLabel(const Qt::GlobalColor & color);
 };
 
 #endif // VTOOLBASEPOINT_H

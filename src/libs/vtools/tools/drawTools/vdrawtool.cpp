@@ -28,13 +28,26 @@
 
 #include "vdrawtool.h"
 
-#include "../../../qmuparser/qmuparsererror.h"
-#include "../../dialogs/support/dialogeditwrongformula.h"
-#include "../../dialogs/support/dialogundo.h"
-#include "../../../vpatterndb/calculator.h"
+#include <QDialog>
+#include <QDomNode>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QSharedPointer>
+#include <QUndoStack>
+#include <Qt>
+#include <QtDebug>
+
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
-#include "../../../ifc/exception/vexceptionundo.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vmisc/logging.h"
+#include "../vabstracttool.h"
+
+template <class T> class QSharedPointer;
 
 qreal VDrawTool::factor = 1;
 
@@ -46,18 +59,14 @@ qreal VDrawTool::factor = 1;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), nameActivDraw(doc->GetNameActivPP()),
-      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack), enabled(true)
+    : VInteractiveTool(doc, data, id, parent),
+      nameActivDraw(doc->GetNameActivPP()),
+      typeLine(TypeLineLine),
+      enabled(true)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VAbstractPattern::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VDrawTool::~VDrawTool()
-{
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,8 +77,8 @@ VDrawTool::~VDrawTool()
  */
 void VDrawTool::ShowTool(quint32 id, bool enable)
 {
-    Q_UNUSED(id);
-    Q_UNUSED(enable);
+    Q_UNUSED(id)
+    Q_UNUSED(enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,30 +103,6 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
     {
         nameActivDraw = newName;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromGuiOk refresh tool data after change in options.
- * @param result keep result working dialog.
- */
-void VDrawTool::FullUpdateFromGuiOk(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        SaveDialogChange();
-    }
-    delete dialog;
-    dialog=nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
- */
-void VDrawTool::FullUpdateFromGuiApply()
-{
-    SaveDialogChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,21 +226,12 @@ void VDrawTool::ReadAttributes()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief DialogLinkDestroy removes dialog pointer
- */
-void VDrawTool::DialogLinkDestroy()
-{
-    this->dialog=nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */
 void VDrawTool::SetFactor(qreal factor)
 {
-    CheckFactor(this->factor, factor);
+    CheckFactor(VDrawTool::factor, factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,89 +242,10 @@ void VDrawTool::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckFormula check formula.
- *
- * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
- * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
- *
- * @param toolId [in] tool's id.
- * @param formula [in|out] string with formula.
- * @param data [in] container with variables. Need for math parser.
- * @throw QmuParserError.
- * @return result of calculation formula.
- */
-qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data)
+void VDrawTool::DetailsMode(bool mode)
 {
-    SCASSERT(data != nullptr)
-    qreal result = 0;
-    Calculator *cal = nullptr;
-    try
-    {
-        cal = new Calculator();
-        result = cal->EvalFormula(data->PlainVariables(), formula);
-        delete cal;
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        //Q_UNUSED(e)
-        qDebug() << "\nMath parser error:\n"
-                 << "--------------------------------------\n"
-                 << "Message:     " << e.GetMsg()  << "\n"
-                 << "Expression:  " << e.GetExpr() << "\n"
-                 << "--------------------------------------";
-        delete cal;
-
-        if (qApp->IsAppInGUIMode())
-        {
-            DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
-            forever
-            {
-                if (dialogUndo->exec() == QDialog::Accepted)
-                {
-                    const UndoButton resultUndo = dialogUndo->Result();
-                    if (resultUndo == UndoButton::Fix)
-                    {
-                        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId,
-                                                                                    qApp->getMainWindow());
-                        dialog->setWindowTitle(tr("Edit wrong formula"));
-                        dialog->SetFormula(formula);
-                        if (dialog->exec() == QDialog::Accepted)
-                        {
-                            formula = dialog->GetFormula();
-                            /* Need delete dialog here because parser in dialog don't allow use correct separator for
-                             * parsing here. */
-                            delete dialog;
-                            Calculator *cal1 = new Calculator();
-                            result = cal1->EvalFormula(data->PlainVariables(), formula);
-                            delete cal1; /* Here can be memory leak, but dialog already check this formula and
-                                            probability very low. */
-                            break;
-                        }
-                        else
-                        {
-                            delete dialog;
-                        }
-                    }
-                    else
-                    {
-                        throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
-                    }
-                }
-                else
-                {
-                    delete dialogUndo;
-                    throw;
-                }
-            }
-            delete dialogUndo;
-        }
-        else
-        {
-            throw;
-        }
-    }
-    return result;
+    Q_UNUSED(mode)
+    // Do nothing.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,22 +270,6 @@ QString VDrawTool::getLineType() const
 void VDrawTool::SetTypeLine(const QString &value)
 {
     typeLine = value;
-
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::GetLineColor() const
-{
-    return lineColor;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetLineColor(const QString &value)
-{
-    lineColor = value;
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);

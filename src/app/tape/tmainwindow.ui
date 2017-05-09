@@ -90,8 +90,7 @@
             </property>
             <property name="icon">
              <iconset theme="go-previous">
-              <normaloff/>
-             </iconset>
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="shortcut">
              <string>Ctrl+Shift+G</string>
@@ -111,8 +110,7 @@
             </property>
             <property name="icon">
              <iconset theme="go-next">
-              <normaloff/>
-             </iconset>
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="shortcut">
              <string>Ctrl+G</string>
@@ -369,8 +367,7 @@
                </property>
                <property name="icon">
                 <iconset theme="go-top">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -387,8 +384,7 @@
                </property>
                <property name="icon">
                 <iconset theme="go-up">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -405,8 +401,7 @@
                </property>
                <property name="icon">
                 <iconset theme="go-down">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -423,8 +418,7 @@
                </property>
                <property name="icon">
                 <iconset theme="go-bottom">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -471,8 +465,7 @@
                </property>
                <property name="icon">
                 <iconset theme="list-remove">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -568,9 +561,6 @@
         <string>Information</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_2">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::ExpandingFieldsGrow</enum>
-        </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_21">
           <property name="text">
@@ -615,7 +605,7 @@
              <bool>true</bool>
             </property>
             <property name="placeholderText">
-             <string notr="true">Path to the measurement file.</string>
+             <string notr="true">Path to the measurement file</string>
             </property>
            </widget>
           </item>
@@ -636,6 +626,32 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="labelPMSystem">
+          <property name="text">
+           <string>PM system:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="comboBoxPMSystem">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="labelBaseSize">
@@ -684,7 +700,7 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>Customer's name.</string>
+           <string>Customer's name</string>
           </property>
          </widget>
         </item>
@@ -707,7 +723,7 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>Customer's family name.</string>
+           <string>Customer's family name</string>
           </property>
          </widget>
         </item>
@@ -724,7 +740,7 @@
            <bool>false</bool>
           </property>
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -760,6 +776,25 @@
           </property>
          </widget>
         </item>
+        <item row="8" column="1">
+         <widget class="QComboBox" name="comboBoxGender">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
         <item row="9" column="0">
          <widget class="QLabel" name="labelEmail">
           <property name="text">
@@ -779,7 +814,7 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>Customer's email address.</string>
+           <string>Customer's email address</string>
           </property>
          </widget>
         </item>
@@ -802,88 +837,6 @@
            </sizepolicy>
           </property>
          </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="labelPMSystem">
-          <property name="text">
-           <string>PM system:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QComboBox" name="comboBoxPMSystem">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item row="8" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QComboBox" name="comboBoxGender">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
@@ -913,6 +866,7 @@
     <addaction name="separator"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="actionExportToCSV"/>
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
@@ -970,7 +924,6 @@
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
-   <addaction name="actionReadOnly"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBarGradation">
@@ -1042,8 +995,7 @@
   <action name="actionOpenIndividual">
    <property name="icon">
     <iconset theme="document-open">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open individual ...</string>
@@ -1058,8 +1010,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-save">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -1074,8 +1025,7 @@
    </property>
    <property name="icon">
     <iconset theme="document-save-as">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save As ...</string>
@@ -1087,8 +1037,7 @@
   <action name="actionQuit">
    <property name="icon">
     <iconset theme="application-exit">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -1108,8 +1057,7 @@
   <action name="actionAboutTape">
    <property name="icon">
     <iconset theme="help-about">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>About Tape</string>
@@ -1121,8 +1069,7 @@
   <action name="actionNew">
    <property name="icon">
     <iconset theme="document-new">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -1182,8 +1129,7 @@
   <action name="actionOpenStandard">
    <property name="icon">
     <iconset theme="document-open">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open standard ...</string>
@@ -1195,8 +1141,7 @@
   <action name="actionOpenTemplate">
    <property name="icon">
     <iconset theme="document-open">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open template</string>
@@ -1244,6 +1189,17 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionExportToCSV">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export to CSV</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

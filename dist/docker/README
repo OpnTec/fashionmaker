@@ -1,0 +1,31 @@
+There are some steps required to create your own docker image.
+
+1. Have a Docker hub account, https://hub.docker.com/
+2. Install docker.io package on 64 bit system. 
+3. Create a Dockerfile. You will find one in this directory.
+4. Build the image from Dockerfile.
+5. Push the image to Docker hub.
+6. Specify the image in your bitbucket-pipelines.yml file
+
+1 Docker hub account
+Well, sign up here =) https://hub.docker.com/
+
+2 Install docker
+sudo apt-get install docker.io
+
+3 Create Dockerfile
+Find example in this directory.
+
+4 Build docker image
+In the same directory as you have your Dockerfile, run command:
+docker build -t yourdockerusername/imagename .
+
+5 Push image to Docker hub
+Run command
+docker push yourdockerusername/imagename
+
+6 Specify the image in your bitbucket-pipelines.yml file
+As documented here: https://confluence.atlassian.com/display/BITBUCKET/Use+Docker+images+as+build+environments+in+Bitbucket+Pipelines
+
+You can use your image on a top level as well as on a specific step like this. 
+image: yourdockerusername/imagename

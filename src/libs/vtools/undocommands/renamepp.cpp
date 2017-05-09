@@ -29,13 +29,19 @@
 #include "renamepp.h"
 
 #include <QComboBox>
+#include <QDomElement>
+
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
     :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())
 {
     setText(tr("rename pattern piece"));
-    SCASSERT(combo != nullptr);
+    SCASSERT(combo != nullptr)
     oldPPname = doc->GetNameActivPP();
 }
 
@@ -63,7 +69,7 @@ void RenamePP::redo()
 bool RenamePP::mergeWith(const QUndoCommand *command)
 {
     const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
-    SCASSERT(renameCommand != nullptr);
+    SCASSERT(renameCommand != nullptr)
 
     const QString oldName = renameCommand->getOldPPname();
     if (newPPname != oldName)

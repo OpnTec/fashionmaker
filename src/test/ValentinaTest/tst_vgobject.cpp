@@ -68,17 +68,35 @@ void TST_VGObject::TestIsPointOnLineviaPDP_data()
     }
 
     {
+    const qreal gap = VGObject::accuracyPointOnLine;
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
-    const QPointF t(483.54330708661416 + VGObject::accuracyPointOnLine, 2874.763653543307);
-    QTest::newRow("Min accuracy gap. On middle.") << p1 << p2 << t << false;
+    const QPointF t(483.54330708661416 + gap, 2874.763653543307);
+    QTest::newRow("Min accuracy gap. On middle.") << p1 << p2 << t << true;
     }
 
     {
+    const qreal gap = VGObject::accuracyPointOnLine;
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
-    const QPointF t(483.54330708661416 + VGObject::accuracyPointOnLine, 1929.763653543307);
-    QTest::newRow("Min accuracy gap.") << p1 << p2 << t << false;
+    const QPointF t(483.54330708661416 + gap, 1929.763653543307);
+    QTest::newRow("Min accuracy gap. The end of segment.") << p1 << p2 << t << true;
+    }
+
+    {
+    const qreal gap = VGObject::accuracyPointOnLine + VGObject::accuracyPointOnLine*0.01;
+    const QPointF p1(483.54330708661416, 3819.527433070866);
+    const QPointF p2(483.54330708661416, 1929.763653543307);
+    const QPointF t(483.54330708661416 + gap, 2874.763653543307);
+    QTest::newRow("Min accuracy gap + 1%. On middle.") << p1 << p2 << t << false;
+    }
+
+    {
+    const qreal gap = VGObject::accuracyPointOnLine + VGObject::accuracyPointOnLine*0.01;
+    const QPointF p1(483.54330708661416, 3819.527433070866);
+    const QPointF p2(483.54330708661416, 1929.763653543307);
+    const QPointF t(483.54330708661416 + gap, 1929.763653543307);
+    QTest::newRow("Min accuracy gap + 1%. The end of segment.") << p1 << p2 << t << false;
     }
 
     {
@@ -92,10 +110,9 @@ void TST_VGObject::TestIsPointOnLineviaPDP_data()
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
     const QPointF t(483.54330708661416 + VGObject::accuracyPointOnLine/2., 1929.763653543307);
-    QTest::newRow("Less than min accuracy gap.") << p1 << p2 << t << true;
+    QTest::newRow("Less than min accuracy gap. The end of segment.") << p1 << p2 << t << true;
     }
 
-    // For more details see issue #534.
     {
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
@@ -107,7 +124,7 @@ void TST_VGObject::TestIsPointOnLineviaPDP_data()
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
     const QPointF t(370.1574803149606, 1929.763653543307);
-    QTest::newRow("Issue 534 - 3 cm gap.") << p1 << p2 << t << false;
+    QTest::newRow("Issue 534 - 3 cm gap. The end of segment.") << p1 << p2 << t << false;
     }
 
     {
@@ -121,7 +138,7 @@ void TST_VGObject::TestIsPointOnLineviaPDP_data()
     const QPointF p1(483.54330708661416, 3819.527433070866);
     const QPointF p2(483.54330708661416, 1929.763653543307);
     const QPointF t(407.9527559055118, 1929.763653543307);
-    QTest::newRow("Issue 534 - 2 cm gap.") << p1 << p2 << t << false;
+    QTest::newRow("Issue 534 - 2 cm gap. The end of segment.") << p1 << p2 << t << false;
     }
 }
 

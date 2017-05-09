@@ -29,6 +29,13 @@
 #ifndef DIALOGUNIONDETAILS_H
 #define DIALOGUNIONDETAILS_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -50,8 +57,10 @@ public:
     quint32          getD2() const;
     int        getIndexD1() const;
     int        getIndexD2() const;
+
+    bool RetainPieces() const;
 public slots:
-    void             ChosenObject(quint32 id, const SceneObject &type);
+    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
 

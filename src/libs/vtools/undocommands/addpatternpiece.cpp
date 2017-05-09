@@ -28,12 +28,17 @@
 
 #include "addpatternpiece.h"
 
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                                  QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), namePP(namePP)
 {
-    SCASSERT(namePP.isEmpty() == false);
+    SCASSERT(namePP.isEmpty() == false)
     setText(tr("add pattern piece %1").arg(namePP));
 }
 

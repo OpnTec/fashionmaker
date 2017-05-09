@@ -29,25 +29,44 @@
 #ifndef VABSTRACTCONVERTER_H
 #define VABSTRACTCONVERTER_H
 
+#include <qcompilerdetection.h>
+
+#if !defined(Q_OS_OSX) && !defined(Q_OS_WIN) && defined(Q_CC_GNU)
+#include <sys/sysmacros.h>
+#endif
+
+#include <QCoreApplication>
+#include <QString>
+#include <QTemporaryFile>
+#include <QtGlobal>
+
 #include "vdomdocument.h"
+
+template <class Key, class T> class QMap;
+
+#define CONVERTER_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 
 class VAbstractConverter :public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractConverter)
 public:
     explicit VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter() Q_DECL_OVERRIDE;
+    virtual ~VAbstractConverter() Q_DECL_EQ_DEFAULT;
 
-    void         Convert();
-    virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
+    QString Convert();
+
+    int GetCurrentFormatVarsion() const;
+    QString GetVersionStr() const;
+
+    static int GetVersion(const QString &version);
 
 protected:
-    int     ver;
-    QString fileName;
+    int     m_ver;
+    QString m_convertedFileName;
 
-    int  GetVersion(const QString &version) const;
-    void CheckVersion(int ver) const;
-    void Save() const;
+    void ValidateInputFile(const QString &currentSchema) const;
+    Q_NORETURN void InvalidVersion(int ver) const;
+    void Save();
     void SetVersion(const QString &version);
 
     virtual int     MinVer() const =0;
@@ -58,6 +77,9 @@ protected:
 
     virtual QString XSDSchema(int ver) const =0;
     virtual void    ApplyPatches() =0;
+    virtual void    DowngradeToCurrentMaxVersion() =0;
+
+    virtual bool IsReadOnly() const =0;
 
     void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
@@ -66,9 +88,9 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractConverter)
 
-    QString GetVersionStr() const;
+    QTemporaryFile m_tmpFile;
 
-    void ValidateVersion(const QString &version) const;
+    static void ValidateVersion(const QString &version);
 
     void ReserveFile() const;
 };

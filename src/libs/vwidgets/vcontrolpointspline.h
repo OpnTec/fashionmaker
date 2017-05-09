@@ -29,8 +29,17 @@
 #ifndef VCONTROLPOINTSPLINE_H
 #define VCONTROLPOINTSPLINE_H
 
+#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QMetaObject>
 #include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
 
@@ -41,11 +50,13 @@ class VControlPointSpline : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
+    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
+                        QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
-                        const QPointF &splinePoint, Unit patternUnit, QGraphicsItem * parent = nullptr);
+                        const QPointF &splinePoint, Unit patternUnit, bool freeAngle, bool freeLength,
+                        QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() Q_DECL_OVERRIDE;
-    virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                            QWidget * widget = 0) Q_DECL_OVERRIDE;
+
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 signals:
@@ -63,12 +74,12 @@ signals:
      */
     void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 public slots:
-    void              RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
-                                  const QPointF &splinePoint);
+    void              RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
+                                       const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
     void              setEnabledPoint(bool enable);
 protected:
     /** @brief radius radius circle. */
-    qreal             radius;
+    const qreal radius;
 
     /** @brief controlLine pointer to line control point. */
     QGraphicsLineItem *controlLine;
@@ -88,6 +99,19 @@ private:
     SplinePointPosition position;
 
     Unit              patternUnit;
+
+    bool freeAngle;
+    bool freeLength;
+
+    inline qreal CircleRadius() const;
+    void  Init();
+    void  SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VControlPointSpline::CircleRadius() const
+{
+    return (1.5/*mm*/ / 25.4) * PrintDPI;
+}
 
 #endif // VCONTROLPOINTSPLINE_H

@@ -29,9 +29,21 @@
 #ifndef VTOOLPOINTOFCONTACT_H
 #define VTOOLPOINTOFCONTACT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
 class VFormula;
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
@@ -40,15 +52,12 @@ class VToolPointOfContact : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
-                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
-                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static QPointF FindPoint(const qreal &arcRadius, const QPointF &center, const QPointF &firstPoint,
+    static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
-    static VToolPointOfContact* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                       VContainer *data);
-    static VToolPointOfContact* Create(const quint32 _id, QString &arcRadius, const quint32 &center,
+    static VToolPointOfContact* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                       VAbstractPattern *doc, VContainer *data);
+    static VToolPointOfContact* Create(const quint32 _id, QString &radius, const quint32 &center,
                                        const quint32 &firstPointId, const quint32 &secondPointId,
                                        const QString &pointName,
                                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
@@ -57,6 +66,10 @@ public:
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfContact) };
+
+    QString ArcCenterPointName() const;
+    QString FirstPointName() const;
+    QString SecondPointName() const;
 
     VFormula getArcRadius() const;
     void     setArcRadius(const VFormula &value);
@@ -81,6 +94,8 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolPointOfContact)
+
     /** @brief radius string with formula radius arc. */
     QString        arcRadius;
 
@@ -92,6 +107,10 @@ private:
 
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
+
+    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &radius,
+                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
+                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

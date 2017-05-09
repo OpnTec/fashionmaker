@@ -21,7 +21,14 @@
 
 #include "qmuformulabase.h"
 
+#include <QChar>
+#include <QList>
 #include <QLocale>
+#include <QMap>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
 
 namespace qmu
 {
@@ -39,31 +46,42 @@ QmuFormulaBase::~QmuFormulaBase()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief InitCharacterSets init character set for parser.
+ * @brief InitCharSets init character set for parser.
  *
  * QMuParser require setting character set for legal characters. Because we try make our expresion language independent
  * we set all posible unique characters from all alphabets.
  *
  */
-void QmuFormulaBase::InitCharacterSets()
+void QmuFormulaBase::InitCharSets()
 {
     //String with all unique symbols for supported alphabets.
     //See script alphabets.py for generation and more information.
     //Note. MSVC doesn't support normal string concatenation for long string. That's why we use QStringList in this
     //case.
     const QStringList symbols = QStringList()
-                                        << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥҔĦШҫ̆جگĮаҳѕεشԶиһνԾрÃυلՆӝшËՎїPÓՖXӛӟŞãզhëծpóӞնxßվāŁЃֆĉЋ"
-                                        << "CŬđҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈЎ"
-                                        << "ґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغẽοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖ"
-                                        << "ЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗј"
-                                        << "ΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥ"
-                                        << "ĹЧΦثÆӳЯIسŲԵзζԽпξكՅÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤک"
-                                        << "ЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌRӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪ"
-                                        << "ЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝŻşҤӑâeէŐımկòuշÕúտŔ";
+                              << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥҔĦШҫ̆جگĮаҳѕεشԶиһνԾрÃυلՆӝшËՎїPÓՖXӛӟŞãզhëծpóӞնxßվāŁЃֆĉЋ"
+                              << "CŬđҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈЎ"
+                              << "ґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغẽοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖ"
+                              << "ЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗј"
+                              << "ΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥ"
+                              << "ĹЧΦثÆӳЯIسŲԵзζԽпξكՅÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤک"
+                              << "ЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌRӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪ"
+                              << "ЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝŻşҤӑâeէŐımկòuշÕúտŔ";
+
+    INIT_LOCALE_VARIABLES(m_locale);
+    Q_UNUSED(expUpper)
+    Q_UNUSED(expLower)
 
     // Defining identifier character sets
-    DefineNameChars(QStringLiteral("0123456789_@#") + symbols.join(""));
-    DefineOprtChars(symbols.join("") + QStringLiteral("+-*^/?<>=!$%&|~_"));
+    const QString nameChars = QString() + sign0 + sign1 + sign2 + sign3 + sign4 + sign5 + sign6 + sign7 + sign8 +
+            sign9 + QLatin1String("_@#'") + symbols.join("");
+    DefineNameChars(nameChars);
+
+    const QString oprtChars = symbols.join("") + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
+    DefineOprtChars(oprtChars);
+
+    const QString infixOprtChars = QString() + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
+    DefineInfixOprtChars(infixOprtChars);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,12 +105,13 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
 {
     if (fromUser)
     {
+        const QLocale loc = QLocale();
+        setLocale(loc);
+        SetArgSep(';');
         if (osSeparator)
         {
-            const QLocale loc = QLocale::system();
-            SetDecSep(loc.decimalPoint().toLatin1());
-            SetThousandsSep(loc.groupSeparator().toLatin1());
-            SetArgSep(';');
+            setDecimalPoint(loc.decimalPoint());
+            setThousandsSeparator(loc.groupSeparator());
             return;
         }
     }
@@ -107,8 +126,8 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
 void QmuFormulaBase::SetSepForEval()
 {
     SetArgSep(';');
-    SetThousandsSep(',');
-    SetDecSep('.');
+    setThousandsSeparator(',');
+    setDecimalPoint('.');
 }
 
 //---------------------------------------------------------------------------------------------------------------------

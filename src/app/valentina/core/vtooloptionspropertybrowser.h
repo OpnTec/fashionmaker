@@ -49,9 +49,10 @@ public:
     void ClearPropertyBrowser();
 public slots:
     void itemClicked(QGraphicsItem *item);
-    void userChangedData(VPE::VProperty* property);
     void UpdateOptions();
     void RefreshOptions();
+private slots:
+    void userChangedData(VPE::VProperty* property);
 private:
     Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
 
@@ -75,10 +76,25 @@ private:
     void SetPointName2(const QString &name);
 
     template<class Tool>
+    void SetOperationSuffix(const QString &suffix);
+
+    template<class Type>
+    Type GetCrossPoint(const QVariant &value);
+
+    template<class Tool>
     void SetCrossCirclesPoint(const QVariant &value);
 
     template<class Tool>
-    void AddPropertyPointName(Tool *i, const QString &propertyName);
+    void SetVCrossCurvesPoint(const QVariant &value);
+
+    template<class Tool>
+    void SetHCrossCurvesPoint(const QVariant &value);
+
+    template<class Tool>
+    void SetAxisType(const QVariant &value);
+
+    template<class Tool>
+    void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template<class Tool>
     void AddPropertyPointName1(Tool *i, const QString &propertyName);
@@ -87,7 +103,19 @@ private:
     void AddPropertyPointName2(Tool *i, const QString &propertyName);
 
     template<class Tool>
+    void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
+
+    template<class Tool>
     void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyAxisType(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
@@ -97,6 +125,8 @@ private:
                               const QString &id);
 
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
+    void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
+                                    const QString &propertyAttribure);
 
     QStringList PropertiesList() const;
 
@@ -118,14 +148,22 @@ private:
     void ChangeDataToolPointOfIntersection(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersectionArcs(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersectionCircles(VPE::VProperty *property);
+    void ChangeDataToolPointOfIntersectionCurves(VPE::VProperty *property);
     void ChangeDataToolPointFromCircleAndTangent(VPE::VProperty *property);
     void ChangeDataToolPointFromArcAndTangent(VPE::VProperty *property);
     void ChangeDataToolShoulderPoint(VPE::VProperty *property);
     void ChangeDataToolSpline(VPE::VProperty *property);
+    void ChangeDataToolCubicBezier(VPE::VProperty *property);
     void ChangeDataToolSplinePath(VPE::VProperty *property);
+    void ChangeDataToolCubicBezierPath(VPE::VProperty *property);
     void ChangeDataToolTriangle(VPE::VProperty *property);
     void ChangeDataToolLineIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolCurveIntersectAxis(VPE::VProperty *property);
+    void ChangeDataToolRotation(VPE::VProperty *property);
+    void ChangeDataToolMove(VPE::VProperty *property);
+    void ChangeDataToolFlippingByLine(VPE::VProperty *property);
+    void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
+    void ChangeDataToolEllipticalArc(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -145,14 +183,22 @@ private:
     void ShowOptionsToolPointOfIntersection(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersectionArcs(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersectionCircles(QGraphicsItem *item);
+    void ShowOptionsToolPointOfIntersectionCurves(QGraphicsItem *item);
     void ShowOptionsToolPointFromCircleAndTangent(QGraphicsItem *item);
     void ShowOptionsToolPointFromArcAndTangent(QGraphicsItem *item);
     void ShowOptionsToolShoulderPoint(QGraphicsItem *item);
     void ShowOptionsToolSpline(QGraphicsItem *item);
+    void ShowOptionsToolCubicBezier(QGraphicsItem *item);
     void ShowOptionsToolSplinePath(QGraphicsItem *item);
+    void ShowOptionsToolCubicBezierPath(QGraphicsItem *item);
     void ShowOptionsToolTriangle(QGraphicsItem *item);
     void ShowOptionsToolLineIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolCurveIntersectAxis(QGraphicsItem *item);
+    void ShowOptionsToolRotation(QGraphicsItem *item);
+    void ShowOptionsToolMove(QGraphicsItem *item);
+    void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
+    void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
+    void ShowOptionsToolEllipticalArc(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -172,14 +218,22 @@ private:
     void UpdateOptionsToolPointOfIntersection();
     void UpdateOptionsToolPointOfIntersectionArcs();
     void UpdateOptionsToolPointOfIntersectionCircles();
+    void UpdateOptionsToolPointOfIntersectionCurves();
     void UpdateOptionsToolPointFromCircleAndTangent();
     void UpdateOptionsToolPointFromArcAndTangent();
     void UpdateOptionsToolShoulderPoint();
     void UpdateOptionsToolSpline();
+    void UpdateOptionsToolCubicBezier();
     void UpdateOptionsToolSplinePath();
+    void UpdateOptionsToolCubicBezierPath();
     void UpdateOptionsToolTriangle();
     void UpdateOptionsToolLineIntersectAxis();
     void UpdateOptionsToolCurveIntersectAxis();
+    void UpdateOptionsToolRotation();
+    void UpdateOptionsToolMove();
+    void UpdateOptionsToolFlippingByLine();
+    void UpdateOptionsToolFlippingByAxis();
+    void UpdateOptionsToolEllipticalArc();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

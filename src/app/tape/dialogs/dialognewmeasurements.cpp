@@ -80,21 +80,13 @@ DialogNewMeasurements::~DialogNewMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 MeasurementsType DialogNewMeasurements::Type() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return static_cast<MeasurementsType>(ui->comboBoxMType->itemData(ui->comboBoxMType->currentIndex()).toInt());
-#else
-    return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
-#endif
+    return static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogNewMeasurements::MUnit() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return static_cast<Unit>(ui->comboBoxUnit->itemData(ui->comboBoxUnit->currentIndex()).toInt());
-#else
-    return static_cast<Unit>(ui->comboBoxUnit->currentData().toInt());
-#endif
+    return static_cast<Unit>(CURRENT_DATA(ui->comboBoxUnit).toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,14 +109,7 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
         InitMTypes();
-
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        const MeasurementsType type =
-                static_cast<MeasurementsType>(ui->comboBoxMType->itemData(ui->comboBoxMType->currentIndex()).toInt());
-    #else
-        const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
-    #endif
-        InitUnits(type);
+        InitUnits(static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt()));
     }
 
     // remember to call base class implementation
@@ -172,7 +157,7 @@ void DialogNewMeasurements::CurrentTypeChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::CurrentUnitChanged(int index)
 {
-    Q_UNUSED(index);
+    Q_UNUSED(index)
 
     if (MUnit() != Unit::Inch)
     {
@@ -192,11 +177,7 @@ void DialogNewMeasurements::InitMTypes()
     int val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        val = ui->comboBoxMType->itemData(ui->comboBoxMType->currentIndex()).toInt();
-    #else
-        val = ui->comboBoxMType->currentData().toInt();
-    #endif
+        val = CURRENT_DATA(ui->comboBoxMType).toInt();
     }
 
     ui->comboBoxMType->blockSignals(true);
@@ -234,11 +215,7 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
     int val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
-    #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-        val = ui->comboBoxUnit->itemData(ui->comboBoxUnit->currentIndex()).toInt();
-    #else
-        val = ui->comboBoxUnit->currentData().toInt();
-    #endif
+        val = CURRENT_DATA(ui->comboBoxUnit).toInt();
     }
 
     ui->comboBoxUnit->blockSignals(true);

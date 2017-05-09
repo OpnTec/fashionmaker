@@ -29,18 +29,34 @@
 #ifndef VABSTRACTPOINT_H
 #define VABSTRACTPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QColor>
+#include <QMetaObject>
+#include <QObject>
+#include <QPen>
+#include <QPointF>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../vdrawtool.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 
 class VAbstractPoint: public VDrawTool
 {
     Q_OBJECT
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
-    virtual ~VAbstractPoint() Q_DECL_OVERRIDE;
+    virtual ~VAbstractPoint() Q_DECL_EQ_DEFAULT;
 
     virtual QString      getTagName() const Q_DECL_OVERRIDE;
-    static const QString TagName;
 
     template <typename T>
     void ShowToolVisualization(bool show);
@@ -48,19 +64,23 @@ public:
 public slots:
     virtual void ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     void         DeleteFromLabel();
+    virtual void DoChangePosition(quint32 id, qreal mx, qreal my) =0;
 
 protected:
-    QString PointName(quint32 id) const;
-    void    SetPointName(quint32 id, const QString &name);
+    void SetPointName(quint32 id, const QString &name);
 
     template <typename T>
-    void    ChangePosition(T *item, quint32 id, const QPointF &pos);
+    void ChangePosition(T *item, quint32 id, const QPointF &pos);
+
 
     virtual void UpdateNamePosition(quint32 id)=0;
     virtual void RefreshLine(quint32 id)=0;
 
     template <typename T>
-    void SetToolEnabled(T *item, bool enabled);
+    void SetToolEnabled(T *item, const QColor &color, bool enabled);
+
+    template <typename T>
+    static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
     Q_DISABLE_COPY(VAbstractPoint)
@@ -72,7 +92,7 @@ void VAbstractPoint::ShowToolVisualization(bool show)
 {
     if (show)
     {
-        if (vis == nullptr)
+        if (vis.isNull())
         {
             AddVisualization<T>();
             SetVisualization();
@@ -88,18 +108,17 @@ void VAbstractPoint::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-        vis = nullptr;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void VAbstractPoint::SetToolEnabled(T *item, bool enabled)
+void VAbstractPoint::SetToolEnabled(T *item, const QColor &color, bool enabled)
 {
     item->setEnabled(enabled);
     if (enabled)
     {
-        item->setPen(QPen(QColor(baseColor),
+        item->setPen(QPen(color,
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
     else
@@ -112,13 +131,23 @@ void VAbstractPoint::SetToolEnabled(T *item, bool enabled)
 template <typename T>
 void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
     const QPointF p = pos - item->pos();
-    point->setMx(p.x());
-    point->setMy(p.y());
-    VAbstractTool::data.UpdateGObject(id, point);
-    RefreshLine(id);
+    DoChangePosition(id, p.x(), p.y());
     UpdateNamePosition(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
+
+    InitDrawToolConnections(scene, tool);
+    QObject::connect(scene, &VMainGraphicsScene::EnablePointItemHover, tool, &T::AllowHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnablePointItemSelection, tool, &T::AllowSelecting);
+    QObject::connect(scene, &VMainGraphicsScene::EnableLabelItemHover, tool, &T::AllowLabelHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableLabelItemSelection, tool, &T::AllowLabelSelecting);
 }
 
 #endif // VABSTRACTPOINT_H

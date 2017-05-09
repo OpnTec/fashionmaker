@@ -29,8 +29,14 @@
 #ifndef MOVESPLINE_H
 #define MOVESPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vgeometry/vspline.h"
 #include "vundocommand.h"
-#include "../../vgeometry/vspline.h"
 
 class QGraphicsScene;
 
@@ -38,8 +44,8 @@ class MoveSpline : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &spl, const quint32 &id,
-               QGraphicsScene *scene, QUndoCommand *parent = 0);
+    MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
+               QUndoCommand *parent = nullptr);
     virtual ~MoveSpline() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

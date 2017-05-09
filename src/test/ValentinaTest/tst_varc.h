@@ -35,13 +35,17 @@ class TST_VArc : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_VArc(QObject *parent = 0);
+    explicit TST_VArc(QObject *parent = nullptr);
 
 private slots:
     void CompareTwoWays();
     void NegativeArc();
     void TestGetPoints_data();
     void TestGetPoints();
+    void TestRotation_data();
+    void TestRotation();
+    void TestFlip_data();
+    void TestFlip();
 };
 
 #endif // TST_VARC_H

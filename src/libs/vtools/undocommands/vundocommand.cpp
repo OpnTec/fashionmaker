@@ -27,9 +27,13 @@
  *************************************************************************/
 
 #include "vundocommand.h"
+
+#include <QDomNode>
+
+#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
-#include "../vgeometry/vpointf.h"
-#include "../vtools/tools/vabstracttool.h"
+#include "../vpatterndb/vnodedetail.h"
+#include "../vpatterndb/vpiecenode.h"
 
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 
@@ -37,7 +41,7 @@ Q_LOGGING_CATEGORY(vUndo, "v.undo")
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
 {
-    SCASSERT(doc != nullptr);
+    SCASSERT(doc != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,19 +73,71 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
+void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->IncrementReferens(nodes.at(i).getId());
+        doc->IncrementReferens(nodes.at(i));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
+void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->DecrementReferens(nodes.at(i).getId());
+        doc->DecrementReferens(nodes.at(i));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).path);
+    }
+
+    IncrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).path);
+    }
+
+    DecrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).GetId());
+    }
+
+    IncrementReferences(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
+{
+    QVector<quint32> n;
+
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        n.append(nodes.at(i).GetId());
+    }
+
+    DecrementReferences(n);
 }

@@ -29,9 +29,15 @@
 #ifndef VABSTRACTNODE_H
 #define VABSTRACTNODE_H
 
-#include "../vabstracttool.h"
-
+#include <qcompilerdetection.h>
 #include <QColor>
+#include <QDomElement>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vabstracttool.h"
 
 enum class ParentType : bool {Scene, Item};
 
@@ -44,8 +50,7 @@ class VAbstractNode : public VAbstractTool
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
-    virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
-    static const QString AttrIdObject;
+    virtual      ~VAbstractNode() Q_DECL_EQ_DEFAULT;
     static const QString AttrIdTool;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;
@@ -54,9 +59,14 @@ public:
     ParentType GetParentType() const;
     void       SetParentType(const ParentType &value);
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
+    bool IsExluded() const;
+    void SetExluded(bool exluded);
+
 protected:
     ParentType parentType;
-protected:
+
     /** @brief idNodenode id. */
     quint32       idNode;
 
@@ -68,11 +78,16 @@ protected:
 
     QString       m_drawName;
 
+    bool          m_exluded;
+
     void         AddToModeling(const QDomElement &domElement);
-    virtual void SetVisualization() {}
+    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE {}
 
     virtual void ShowNode()=0;
     virtual void HideNode()=0;
+private:
+    Q_DISABLE_COPY(VAbstractNode)
 };
 
 #endif // VABSTRACTNODE_H

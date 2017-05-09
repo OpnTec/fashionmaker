@@ -21,9 +21,6 @@
 
 #include "qmuparsererror.h"
 
-#include <QTextStream>
-#include <QDebug>
-
 #ifdef Q_OS_WIN
 #include <assert.h>
 #endif

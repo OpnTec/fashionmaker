@@ -29,19 +29,28 @@
 #ifndef VABSTRACTAPPLICATION_H
 #define VABSTRACTAPPLICATION_H
 
+#include <qcompilerdetection.h>
 #include <QApplication>
+#include <QCoreApplication>
 #include <QGraphicsScene>
+#include <QLocale>
+#include <QMetaObject>
+#include <QObject>
 #include <QPointer>
+#include <QString>
+#include <QtGlobal>
 
-#include "def.h"
-#include "vsettings.h"
-#include "vlockguard.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "def.h"
+#include "vcommonsettings.h"
+#include "vlockguard.h"
+#include "vsettings.h"
 
+class QUndoStack;
 class VAbstractApplication;// use in define
 class VAbstractPattern;
 class VMainGraphicsView;
-class QUndoStack;
 
 #if defined(qApp)
 #undef qApp
@@ -75,7 +84,7 @@ public:
     QString          LocaleToString(const T &value);
 
     QGraphicsScene  *getCurrentScene() const;
-    void             setCurrentScene(QGraphicsScene *value);
+    void             setCurrentScene(QGraphicsScene **value);
 
     VMainGraphicsView *getSceneView() const;
     void               setSceneView(VMainGraphicsView *value);
@@ -95,9 +104,6 @@ public:
     QUndoStack      *getUndoStack() const;
 
     virtual bool     IsAppInGUIMode()const =0;
-
-protected slots:
-    void SyncSettings();
 
 protected:
     QUndoStack         *undoStack;
@@ -127,7 +133,7 @@ private:
     MeasurementsType   _patternType;
 
 
-    QGraphicsScene     *currentScene;
+    QGraphicsScene     **currentScene;
     VMainGraphicsView  *sceneView;
 
     VAbstractPattern   *doc;
@@ -147,7 +153,7 @@ template <typename T>
 inline QString VAbstractApplication::LocaleToString(const T &value)
 {
     QLocale loc;
-    qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
+    qApp->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
     return loc.toString(value);
 }
 

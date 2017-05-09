@@ -22,9 +22,19 @@
 #ifndef QMUPARSERTEST_H
 #define QMUPARSERTEST_H
 
-#include "qmuparser_global.h"
-#include "qmuparser.h"
+#include <stdlib.h>
+#include <QMetaObject>
+#include <QObject>
 #include <QString>
+#include <QVector>
+#include <QtGlobal>
+#include <locale>
+
+#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser.h"
+#include "qmuparser_global.h"
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
 
 /**
  * @file
@@ -52,7 +62,7 @@ public:
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
-public slots:
+private slots:
     void Run();
 
 private:
@@ -64,8 +74,8 @@ private:
 
     // Test Double Parser
     static int EqnTest ( const QString &a_str, double a_fRes, bool a_fPass );
-    static int EqnTestWithVarChange ( const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
-                                      double a_fVar2 );
+    static int EqnTestWithVarChange (const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                     double a_fVar2);
     static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
     // Test Bulkmode
@@ -283,7 +293,8 @@ private:
     }
 
     // Custom value recognition
-    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale);
+    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+                         const QChar &decimal, const QChar &thousand);
 
     // cppcheck-suppress functionStatic
     int TestNames();

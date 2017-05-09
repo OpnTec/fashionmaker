@@ -8,17 +8,23 @@ HEADERS += \
     $$PWD/movespline.h \
     $$PWD/movesplinepath.h \
     $$PWD/savetooloptions.h \
-    $$PWD/savedetailoptions.h \
-    $$PWD/movedetail.h \
     $$PWD/deltool.h \
     $$PWD/deletepatternpiece.h \
     $$PWD/adddetnode.h \
-    $$PWD/adddet.h \
-    $$PWD/deletedetail.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
-    $$PWD/movelabel.h \
-    $$PWD/movedoublelabel.h
+    $$PWD/label/movelabel.h \
+    $$PWD/label/movedoublelabel.h \
+    $$PWD/addgroup.h \
+    $$PWD/delgroup.h \
+    $$PWD/label/moveabstractlabel.h \
+    $$PWD/label/operationmovelabel.h \
+    $$PWD/addpiece.h \
+    $$PWD/deletepiece.h \
+    $$PWD/movepiece.h \
+    $$PWD/savepieceoptions.h \
+    $$PWD/togglepieceinlayout.h \
+    $$PWD/savepiecepathoptions.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -27,14 +33,20 @@ SOURCES += \
     $$PWD/movespline.cpp \
     $$PWD/movesplinepath.cpp \
     $$PWD/savetooloptions.cpp \
-    $$PWD/savedetailoptions.cpp \
-    $$PWD/movedetail.cpp \
     $$PWD/deltool.cpp \
     $$PWD/deletepatternpiece.cpp \
     $$PWD/adddetnode.cpp \
-    $$PWD/adddet.cpp \
-    $$PWD/deletedetail.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
-    $$PWD/movelabel.cpp \
-    $$PWD/movedoublelabel.cpp
+    $$PWD/label/movelabel.cpp \
+    $$PWD/label/movedoublelabel.cpp \
+    $$PWD/addgroup.cpp \
+    $$PWD/delgroup.cpp \
+    $$PWD/label/moveabstractlabel.cpp \
+    $$PWD/label/operationmovelabel.cpp \
+    $$PWD/addpiece.cpp \
+    $$PWD/deletepiece.cpp \
+    $$PWD/movepiece.cpp \
+    $$PWD/savepieceoptions.cpp \
+    $$PWD/togglepieceinlayout.cpp \
+    $$PWD/savepiecepathoptions.cpp

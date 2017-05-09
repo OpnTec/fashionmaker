@@ -22,6 +22,11 @@
 #ifndef QMUPARSER_H
 #define QMUPARSER_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+#include <locale>
+
 #include "qmuparser_global.h"
 #include "qmuparserbase.h"
 
@@ -53,7 +58,8 @@ namespace qmu
         virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) Q_DECL_OVERRIDE;
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
-        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale);
+        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+                           const QChar &decimal, const QChar &thousand);
         // hyperbolic functions
         static qreal Sinh(qreal);
         static qreal Cosh(qreal);
@@ -62,6 +68,16 @@ namespace qmu
         static qreal ASinh(qreal);
         static qreal ACosh(qreal);
         static qreal ATanh(qreal);
+        // functions working with degrees
+        static qreal DegreeToRadian(qreal);
+        static qreal RadianToDegree(qreal);
+        static qreal SinD(qreal);
+        static qreal CosD(qreal);
+        static qreal TanD(qreal);
+        static qreal ASinD(qreal);
+        static qreal ACosD(qreal);
+        static qreal ATanD(qreal);
+
         // Logarithm functions
         static qreal Log2(qreal);  // Logarithm Base 2
         static qreal Log10(qreal); // Logarithm Base 10

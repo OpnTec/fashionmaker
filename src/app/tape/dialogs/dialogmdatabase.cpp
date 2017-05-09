@@ -168,7 +168,7 @@ void DialogMDataBase::RetranslateGroups()
 QString DialogMDataBase::ImgTag(const QString &number)
 {
     QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
-    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(number));
+    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
     if (QFileInfo(filePath).exists())
     {
         // Load your SVG
@@ -453,6 +453,8 @@ QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list)
 {
+    SCASSERT(group != nullptr)
+
     QTreeWidgetItem *m = new QTreeWidgetItem(group);
 
     if (selectMode)
@@ -581,10 +583,7 @@ Qt::CheckState DialogMDataBase::GlobalCheckState() const
         {
             return Qt::Unchecked;
         }
-        else
-        {
-            return Qt::Checked;
-        }
+        return Qt::Checked;
     }
 
     return Qt::Unchecked;

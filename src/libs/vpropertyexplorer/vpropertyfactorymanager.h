@@ -21,15 +21,20 @@
 #ifndef VPROPERTYFACTORYMANAGER_H
 #define VPROPERTYFACTORYMANAGER_H
 
-#include "vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <QMetaObject>
 #include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "vpropertyexplorer_global.h"
 
 namespace VPE
 {
 
 class VAbstractPropertyFactory;
-class VPropertyFactoryManagerPrivate;
 class VProperty;
+class VPropertyFactoryManagerPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFactoryManager : public QObject
 {
@@ -73,7 +78,7 @@ public:
                               const QString& default_value = QString());
 
     //! Returns the default manager.
-    static VPropertyFactoryManager* getDefaultManager();
+    //static VPropertyFactoryManager* getDefaultManager();
 
     //! Returns a list of all supported property types
     QStringList getSupportedTypes();

@@ -29,155 +29,73 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
-#include "vabstractcurve.h"
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QPainterPath>
+#include <QPointF>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QVector>
+#include <QtGlobal>
+
+#include "vabstractcubicbezierpath.h"
+#include "vgeometrydef.h"
+#include "vpointf.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
-#include <QCoreApplication>
-#include <QVector>
-#include <QPainterPath>
 
 class VSplinePathData;
 
 /**
  * @brief The VSplinePath class keep information about splinePath.
  */
-class VSplinePath :public VAbstractCurve
+class VSplinePath :public VAbstractCubicBezierPath
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
-    /**
-     * @brief VSplinePath constructor.
-     * @param kCurve coefficient of curvature spline path.
-     * @param idObject parent id.
-     * @param mode mode creation spline path.
-     */
-    explicit VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    /**
-     * @brief VSplinePath copy constructor.
-     * @param splPath spline path.
-     */
+    explicit VSplinePath(quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
+                Draw mode = Draw::Calculation);
+    VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSplinePath(const VSplinePath& splPath);
+    VSplinePath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
+    VSplinePath Flip(const QLineF &axis, const QString &prefix = QString()) const;
+    VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSplinePath() Q_DECL_OVERRIDE;
-    /**
-     * @brief append add point in the end of list points.
-     * @param point new point.
-     */
-    void          append(const VSplinePoint &point);
-    /**
-     * @brief Count return count point.
-     * @return count.
-     */
-    qint32        Count() const;
-    /**
-     * @brief CountPoint return count point.
-     * @return count.
-     */
-    qint32        CountPoint() const;
-    /**
-     * @brief GetSpline return spline by index.
-     * @param index index spline in spline path.
-     * @return spline
-     */
-    VSpline       GetSpline(qint32 index) const;
-    /**
-     * @brief GetPath return QPainterPath which reprezent spline path.
-     * @return path.
-     */
-    QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
-    /**
-     * @brief GetPathPoints return list of points what located on path.
-     * @return list.
-     */
-    QVector<QPointF> GetPoints() const;
-    /**
-     * @brief GetSplinePath return list with spline points.
-     * @return list.
-     */
-    QVector<VSplinePoint> GetSplinePath() const;
-    /**
-     * @brief GetLength return length of spline path.
-     * @return length.
-     */
-    qreal         GetLength() const;
-    /**
-     * @brief UpdatePoint update spline point in list.
-     * @param indexSpline spline index in list.
-     * @param pos position point in spline.
-     * @param point point.
-     */
-    void          UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
-    /**
-     * @brief GetSplinePoint return spline point from list.
-     * @param indexSpline spline index in list.
-     * @param pos position point in spline.
-     * @return spline point.
-     */
-    VSplinePoint  GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
-    /**
-     * @brief Clear clear list of points.
-     */
-    void          Clear();
-    /**
-     * @brief GetKCurve return coefficient of curvature spline path.
-     * @return coefficient of curvature spline.
-     */
-    qreal         GetKCurve() const;
-    /**
-     * @brief SetKCurve set coefficient of curvature spline path.
-     * @param value coefficient of curvature spline path.
-     */
-    void          SetKCurve(const qreal &value);
-    /**
-     * @brief GetPoint pointer to list spline point.
-     * @return list.
-     */
-    const  QVector<VSplinePoint> *GetPoint() const;
-    /**
-     * @brief operator = assignment operator.
-     * @param path spline path.
-     * @return spline path.
-     */
-    VSplinePath   &operator=(const VSplinePath &path);
-    /**
-     * @brief operator [] return spline point by index.
-     * @param indx index in list.
-     * @return spline point.
-     */
-    VSplinePoint  &operator[](int indx);
-    /**
-     * @brief at return spline point by index.
-     * @param indx index in list.
-     * @return spline point.
-     */
-    const VSplinePoint &at(int indx) const;
-    /**
-     * @brief CutSplinePath cut spline path into two. This method don't return two spline path. You must create spline
-     * paths by yourself.
-     * Example:
-     * QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-     * qint32 p1 = 0, p2 = 0;
-     * QPointF point = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
-     *
-     * VSplinePoint splP1 = splPath->at(p1);
-     * VSplinePoint splP2 = splPath->at(p2);
-     * VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
-     * VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
-     * @param length length first spline path.
-     * @param p1 index first spline point in list.
-     * @param p2 index second spline point in list.
-     * @param spl1p2 first control point first spline.
-     * @param spl1p3 second control point first spline.
-     * @param spl2p2 first control point second spline.
-     * @param spl2p3 second control point second spline.
-     * @return cutting point.
-     */
-    QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                                QPointF &spl2p3) const;
 
-    int Segment(const QPointF &p) const;
+    VSplinePoint &operator[](int indx);
+    VSplinePath  &operator=(const VSplinePath &path);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
+#endif
+
+    void Swap(VSplinePath &path) Q_DECL_NOTHROW
+    { VAbstractCubicBezierPath::Swap(path); std::swap(d, path.d); }
+
+    void   append(const VSplinePoint &point);
+
+    virtual qint32  CountSubSpl() const Q_DECL_OVERRIDE;
+    virtual qint32  CountPoints() const Q_DECL_OVERRIDE;
+    virtual void    Clear() Q_DECL_OVERRIDE;
+    virtual VSpline GetSpline(qint32 index) const Q_DECL_OVERRIDE;
+
+    virtual QVector<VSplinePoint> GetSplinePath() const Q_DECL_OVERRIDE;
+    QVector<VFSplinePoint> GetFSplinePath() const;
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+
+    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+
+    void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
+    VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
+
+    const VSplinePoint &at(int indx) const;
+protected:
+    virtual VPointF FirstPoint() const  Q_DECL_OVERRIDE;
+    virtual VPointF LastPoint() const  Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

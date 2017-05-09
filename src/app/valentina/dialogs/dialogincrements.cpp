@@ -42,6 +42,7 @@
 #include <QTableWidget>
 #include <QSettings>
 #include <QTableWidgetItem>
+#include <QtNumeric>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -57,39 +58,43 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       ui(new Ui::DialogIncrements),
       data(data),
       doc(doc),
-      formulaBaseHeight(0)
+      formulaBaseHeight(0),
+      search()
 {
     ui->setupUi(this);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditName->setClearButtonEnabled(true);
+    ui->lineEditFind->setClearButtonEnabled(true);
 #endif
 
-    formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->lineEditFind->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
+
+    formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
+
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
-    FillIncrements();
+    const bool freshCall = true;
+    FillIncrements(freshCall);
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
-    FillLengthArcs();
+    FillCurvesCLengths();
     FillRadiusesArcs();
-    FillAnglesArcs();
     FillAnglesCurves();
 
     connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp()), this));
-#else
-    ui->lineEditName->setValidator( new QRegExpValidator(QRegExp(NameRegExp()), this));
-#endif
+    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
+                                                                        QLatin1String("^$|")+NameRegExp()), this));
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
@@ -100,9 +105,21 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &DialogIncrements::MoveDown);
     connect(ui->pushButtonGrow, &QPushButton::clicked, this, &DialogIncrements::DeployFormula);
     connect(ui->toolButtonExpr, &QToolButton::clicked, this, &DialogIncrements::Fx);
-    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
+    connect(ui->lineEditFind, &QLineEdit::textEdited, RECEIVER(this)[this](const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, RECEIVER(this)[this](){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, RECEIVER(this)[this](){search->FindNext();});
+
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
+    {
+        ui->toolButtonFindPrevious->setEnabled(state);
+    });
+    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
+    {
+        ui->toolButtonFindNext->setEnabled(state);
+    });
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -114,7 +131,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 /**
  * @brief FillIncrementTable fill data for increment table
  */
-void DialogIncrements::FillIncrements()
+void DialogIncrements::FillIncrements(bool freshCall)
 {
     ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->clearContents();
@@ -149,14 +166,18 @@ void DialogIncrements::FillIncrements()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 
         AddCell(ui->tableWidgetIncrement, formula, currentRow, 2, Qt::AlignVCenter); // formula
     }
-    ui->tableWidgetIncrement->resizeColumnsToContents();
-    ui->tableWidgetIncrement->resizeRowsToContents();
+
+    if (freshCall)
+    {
+        ui->tableWidgetIncrement->resizeColumnsToContents();
+        ui->tableWidgetIncrement->resizeRowsToContents();
+    }
     ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidgetIncrement->blockSignals(false);
 }
@@ -165,7 +186,7 @@ void DialogIncrements::FillIncrements()
 template <typename T>
 void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     qint32 currentRow = -1;
     QMapIterator<QString, T> i(varTable);
@@ -211,28 +232,19 @@ void DialogIncrements::FillLengthLinesAngles()
  */
 void DialogIncrements::FillLengthsCurves()
 {
-    FillTable(data->DataLengthSplines(), ui->tableWidgetSplines);
+    FillTable(data->DataLengthCurves(), ui->tableWidgetSplines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillLengthArcs fill data for table of arcs lengths
- */
-void DialogIncrements::FillLengthArcs()
+void DialogIncrements::FillCurvesCLengths()
 {
-    FillTable(data->DataLengthArcs(), ui->tableWidgetArcs);
+    FillTable(data->DataCurvesCLength(), ui->tableWidgetCLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillRadiusesArcs()
 {
     FillTable(data->DataRadiusesArcs(), ui->tableWidgetRadiusesArcs);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillAnglesArcs()
-{
-    FillTable(data->DataAnglesArcs(), ui->tableWidgetAnglesArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,17 +263,16 @@ void DialogIncrements::ShowUnits()
 
     ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, "°");// angle
+    ShowHeaderUnits(ui->tableWidgetCLength, 1, unit);// lengths
+    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);// angle
     ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
-    ShowHeaderUnits(ui->tableWidgetAnglesArcs, 1, "°");// angle
-    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, "°");// angle
+    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol);// angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
     const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
@@ -271,7 +282,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
 {
-    SCASSERT(table != nullptr);
+    SCASSERT(table != nullptr)
 
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
@@ -289,6 +300,19 @@ void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
     }
 
     table->setItem(row, column, item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogIncrements::GetCustomName() const
+{
+    qint32 num = 1;
+    QString name;
+    do
+    {
+        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
+        num++;
+    } while (not data->IsUnique(name));
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,9 +352,15 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
                 f = formula;
             }
             f.replace("\n", " ");
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
-            delete cal;
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                label->setText(tr("Error") + " (" + postfix + ").");
+                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
+                return false;
+            }
 
             label->setText(qApp->LocaleToString(result) + " " + postfix);
             label->setToolTip(tr("Value"));
@@ -430,8 +460,6 @@ void DialogIncrements::FullUpdateFromFile()
 {
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
-    ui->tableWidgetArcs->clearContents();
-    ui->tableWidgetAnglesArcs->clearContents();
     ui->tableWidgetAnglesCurves->clearContents();
     ui->tableWidgetLinesAngles->clearContents();
     ui->tableWidgetRadiusesArcs->clearContents();
@@ -440,10 +468,11 @@ void DialogIncrements::FullUpdateFromFile()
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
-    FillLengthArcs();
+    FillCurvesCLengths();
     FillRadiusesArcs();
-    FillAnglesArcs();
     FillAnglesCurves();
+
+    search->RefreshList(ui->lineEditFind->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -453,15 +482,9 @@ void DialogIncrements::FullUpdateFromFile()
 void DialogIncrements::AddIncrement()
 {
     qCDebug(vDialog, "Add a new increment");
-    qint32 num = 1;
-    QString name;
-    do
-    {
-        name = CustomIncrSign + tr("Increment_%1").arg(num);
-        num++;
-    } while (data->IsUnique(name)==false);
 
-    qint32 currentRow;
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
 
     if (ui->tableWidgetIncrement->currentRow() == -1)
     {
@@ -540,7 +563,7 @@ void DialogIncrements::MoveDown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveIncrName()
+void DialogIncrements::SaveIncrName(const QString &text)
 {
     const int row = ui->tableWidgetIncrement->currentRow();
 
@@ -550,19 +573,26 @@ void DialogIncrements::SaveIncrName()
     }
 
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
-    const QString newName = CustomIncrSign + ui->lineEditName->text();
-    if (data->IsUnique(newName))
+
+    QString newName = text.isEmpty() ? GetCustomName() : CustomIncrSign + text;
+
+    if (not data->IsUnique(newName))
     {
-        doc->SetIncrementName(nameField->text(), newName);
-        FullUpdateTree(Document::LiteParse);
-        ui->tableWidgetIncrement->blockSignals(true);
-        ui->tableWidgetIncrement->selectRow(row);
-        ui->tableWidgetIncrement->blockSignals(false);
+        qint32 num = 2;
+        QString name = newName;
+        do
+        {
+            name = name + QLatin1String("_") + QString().number(num);
+            num++;
+        } while (not data->IsUnique(name));
+        newName = name;
     }
-    else
-    {
-        ui->lineEditName->setText(ClearIncrementName(nameField->text()));
-    }
+
+    doc->SetIncrementName(nameField->text(), newName);
+    FullUpdateTree(Document::LiteParse);
+    ui->tableWidgetIncrement->blockSignals(true);
+    ui->tableWidgetIncrement->selectRow(row);
+    ui->tableWidgetIncrement->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -622,9 +652,7 @@ void DialogIncrements::SaveIncrFormula()
     }
 
     QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
-    const bool ok = EvalIncrementFormula(text, true, incr->GetData(), ui->labelCalculatedValue);
-
-    if (not ok)
+    if (not EvalIncrementFormula(text, true, incr->GetData(), ui->labelCalculatedValue))
     {
         return;
     }
@@ -652,8 +680,8 @@ void DialogIncrements::SaveIncrFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::DeployFormula()
 {
-    SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr);
+    SCASSERT(ui->plainTextEditFormula != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr)
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
@@ -735,7 +763,37 @@ void DialogIncrements::changeEvent(QEvent *event)
         FullUpdateFromFile();
     }
     // remember to call base class implementation
-   QWidget::changeEvent(event);
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
+{
+    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            {
+                if (qApp->Settings()->GetOsSeparator())
+                {
+                    textEdit->insert(QLocale().decimalPoint());
+                }
+                else
+                {
+                    textEdit->insert(QLocale::c().decimalPoint());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return DialogTool::eventFilter(object, event);
+    }
+    return false;// pass the event to the widget
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -755,7 +813,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch(const VExceptionBadId &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             EnableDetails(false);
             return;
         }
@@ -778,7 +836,7 @@ void DialogIncrements::ShowIncrementDetails()
         }
         catch (qmu::QmuParserError &e)
         {
-            Q_UNUSED(e);
+            Q_UNUSED(e)
             formula = incr->GetFormula();
         }
 

@@ -22,12 +22,17 @@
 #ifndef QMUPARSERERROR_H
 #define QMUPARSERERROR_H
 
-#include "qmuparser_global.h"
-#include <sstream>
-#include <QException>
-#include <QVector>
+#include <qcompilerdetection.h>
 #include <QCoreApplication>
+#include <QException>
+#include <QMap>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+#include <sstream>
 
+#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser_global.h"
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
 
@@ -45,7 +50,7 @@ enum EErrorCodes
     ecUNEXPECTED_OPERATOR    = 0,  ///< Unexpected binary operator found
     ecUNASSIGNABLE_TOKEN     = 1,  ///< Token cant be identified.
     ecUNEXPECTED_EOF         = 2,  ///< Unexpected end of formula. (Example: "2+sin(")
-    ecUNEXPECTED_ARG_SEP     = 3,  ///< An unexpected comma has been found. (Example: "1,23")
+    ecUNEXPECTED_ARG_SEP     = 3,  ///< An unexpected semicolon has been found. (Example: "1;23")
     ecUNEXPECTED_ARG         = 4,  ///< An unexpected argument has been found
     ecUNEXPECTED_VAL         = 5,  ///< An unexpected value token has been found
     ecUNEXPECTED_VAR         = 6,  ///< An unexpected variable token has been found
@@ -57,7 +62,7 @@ enum EErrorCodes
     ecUNEXPECTED_FUN         = 12, ///< Unexpected function found. (Example: "sin(8)cos(9)")
     ecUNTERMINATED_STRING    = 13, ///< unterminated string constant. (Example: "3*valueof("hello)")
     ecTOO_MANY_PARAMS        = 14, ///< Too many function parameters
-    ecTOO_FEW_PARAMS         = 15, ///< Too few function parameters. (Example: "ite(1<2,2)")
+    ecTOO_FEW_PARAMS         = 15, ///< Too few function parameters. (Example: "ite(1<2;2)")
     ecOPRT_TYPE_CONFLICT     = 16, ///< binary operators may only be applied to value items of the same type
     ecSTR_RESULT             = 17, ///< result is a string
 
@@ -138,7 +143,7 @@ public:
     explicit QmuParserError ( const QString &sMsg );
     QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), int a_iPos = -1 );
     QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
-    QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
+    QmuParserError ( const QString &szMsg, int iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
     virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
@@ -150,7 +155,7 @@ public:
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
     Q_NORETURN virtual void   raise() const Q_DECL_OVERRIDE;
-    virtual QmuParserError *clone() const Q_DECL_OVERRIDE;
+    virtual QmuParserError *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string

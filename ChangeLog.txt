@@ -1,3 +1,64 @@
+# Version 0.5.0 May 9, 2017
+- [#581] User can now filter input lists by keyword in function wizard.
+- [#24] User can now add labels with different information on the detail
+- [#505] New installer script based on Inno Setup 5.
+- Size of preferences dialog in both Valentina and Tape app is now preserved between sessions
+- [#479] Preferences dialog is now extendable and when it is opened again, it will be resized to its previous size.
+- [#508] Settings saved to INI files in different folders.
+- [#193] Undeletable zombie arc objects.
+- New feature. Groups.
+- Tool "Curve intersect axis" store data about subpaths. 
+- [#444] Length along Path seems not valid.
+- Added new curve path segment variables. 
+- Toggle ScrollHandDrag mode by clicking a middle mouse button.
+- Added horizontal scrolling by pressiong Shift + mouse wheel.
+- [#366] Update 'Point from Distance and Angle' tool to read distance and angle between points.
+- [#395] Create Curve tool which uses point as control handle.
+- pdftops updated to version 3.04.
+- [#306] Layout generator optimization. Divide into strips.
+- Fixed case with duplicate names of curves if they connect same points.
+- [#216] Better powerful way creation curved path.
+- Improved exporting to dxf. QPainterPath export as Polyline.
+- Show additional message dialog if measurements was changed. Related to issue [#440].
+- [#132] Intersect Curves.
+- Added new languages Chinese (China), Portuguese (Brazil) and Greek (Greece).
+- New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
+- [#325] Check pattern for inverse compatibility.
+- [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
+- [#471] Add a 'Show/Hide' button for measurement diagram in Tape.
+- [#478] Rename 'Print preview tiled' to 'Preview Tiled PDF'.
+- [#472] Add 'Full Name' column to Formula dialog.
+- [#487] True dart point always goes to origin when the label is moved.
+- [#128] New Tool: Slash and Spread.
+- [#409] New feature: Export measurement file to Excel .csv.
+- [#180] New feature: Search field in tape app and dialog Increments.
+- [#514] Read only setting not working properly.
+- [#480] New tool: Midpoint between two points.
+- [#496] Selector for selecting which pieces to print.
+- [#520] Improve Union tool. An option to select about original pieces.
+- [#262] Automatic Update notification.
+- [#424] Improve Formula Wizard dialog.
+- Added "All/None" menu in detail list area for easier handling of many parts.
+- [#560] Flipped pattern pieces in Layout.
+- [#138] New tool: 'Mirror Point' or 'Symmetric Point'.
+- [#573] New tool: 'Move Point'.
+- [#577] 10 new colors added for the lines
+- [#570] Tiled PDF : Margin values correctly taken into account
+- [#580] Extend the list of heights.
+- [#582] Issue with standard path to shared data on Linux.
+- [#595] GapWidth affecting to the margins.
+- [#589] Valentina lock up if not enough space for label.
+- [#606] Mac OS X. Can’t type in measurements due to digit count limitation.
+- [#612] Valentina crashes when network is disabled on Linux.
+- [#406] New feature: Seam allowance tool -> Preview.
+- [#88] New feature: Variable width seam allowances.
+- [#280] New tool: 'Hem' in Detail mode.
+- [#509] Improve feature: Support internal Paths in Detail tool.
+- [#619] Non writable directory prevents opening.
+- [#620] Detail path not correct. Previous curve also should cut segment.
+- [#157] New feature: Passmarks tool.
+- [#679] Second control point at beginning of curved path - bug.
+
 # Version 0.4.5 October 15, 2016
 - [#435] Valentina doesn't change the cursor.
 - [#473] Tape 'Preferences' cause loss of focus.

@@ -19,27 +19,32 @@
  *************************************************************************/
 
 #include "vpropertydelegate.h"
+
+#include <QAbstractItemModel>
+#include <QApplication>
+#include <QColor>
+#include <QModelIndex>
+#include <QPainter>
+#include <QPen>
+#include <QRect>
+#include <QRgb>
+#include <QStyle>
+#include <QVariant>
+
 #include "vproperty.h"
 
-#include <QApplication>
-#include <QStyle>
-#include <QPen>
-#include <QPainter>
-
-using namespace VPE;
-
-VPropertyDelegate::VPropertyDelegate(QObject *parent) :
+VPE::VPropertyDelegate::VPropertyDelegate(QObject *parent) :
     QStyledItemDelegate(parent), RowHeight(0), AddRowHeight(false)
 {
 }
 
-VPropertyDelegate::~VPropertyDelegate()
+VPE::VPropertyDelegate::~VPropertyDelegate()
 {
     //
 }
 
-QWidget* VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionViewItem& option,
-                                          const QModelIndex& index) const
+QWidget* VPE::VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionViewItem& option,
+                                               const QModelIndex& index) const
 {
     QWidget* tmpWidget = nullptr;
     if (index.isValid())
@@ -53,7 +58,7 @@ QWidget* VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionVie
 
 
 //! Sets the index data to the editor
-void VPropertyDelegate::setEditorData (QWidget * editor, const QModelIndex & index) const
+void VPE::VPropertyDelegate::setEditorData (QWidget * editor, const QModelIndex & index) const
 {
     bool done = false;
     if (index.isValid() && editor)
@@ -69,7 +74,8 @@ void VPropertyDelegate::setEditorData (QWidget * editor, const QModelIndex & ind
 }
 
 //! Updates the index data
-void VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel * model, const QModelIndex & index) const
+void VPE::VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel * model,
+                                           const QModelIndex & index) const
 {
     QVariant tmpData;
     if (index.isValid() && editor)
@@ -86,7 +92,7 @@ void VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel * mod
         model->setData(index, tmpData);
 }
 
-QSize VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const
+QSize VPE::VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     QSize tmpStandardSizeHint = QStyledItemDelegate::sizeHint(option, index);
     tmpStandardSizeHint.setHeight(tmpStandardSizeHint.height() + 1);
@@ -99,13 +105,14 @@ QSize VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, const QMo
         return tmpStandardSizeHint;
 }
 
-void VPropertyDelegate::setRowHeight(int height, bool add_to_standard)
+void VPE::VPropertyDelegate::setRowHeight(int height, bool add_to_standard)
 {
     RowHeight = height;
     AddRowHeight = add_to_standard;
 }
 
-void VPropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
+void VPE::VPropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
+                                   const QModelIndex& index ) const
 {
     bool done = false;
     if (index.isValid() && index.column() == 1)

@@ -29,17 +29,20 @@
 #ifndef VGOBJECT_H
 #define VGOBJECT_H
 
-#include "vgeometrydef.h"
-#include <QString>
-#include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
 #include <QVector>
+#include <QtGlobal>
 
-class VGObjectData;
+#include "vgeometrydef.h"
+
 class QLineF;
 class QPoint;
 class QPointF;
 class QRectF;
+class VGObjectData;
+class QTransform;
 
 /**
  * @brief The VGObject class keep information graphical objects.
@@ -50,8 +53,16 @@ public:
     VGObject();
     explicit VGObject(const GOType &type, const quint32 &idObject = 0, const Draw &mode = Draw::Calculation);
     VGObject(const VGObject &obj);
-    VGObject& operator= (const VGObject &obj);
+
     virtual ~VGObject();
+
+    VGObject& operator= (const VGObject &obj);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW { Swap(obj); return *this; }
+#endif
+
+    void Swap(VGObject &obj) Q_DECL_NOTHROW
+    { std::swap(d, obj.d); }
 
     quint32         getIdObject() const;
     void            setIdObject(const quint32 &value);
@@ -87,18 +98,44 @@ public:
     static bool    IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2);
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
 
-    static QVector<QPointF> GetReversePoints(const QVector<QPointF> &points);
+    template <typename T>
+    static QVector<T> GetReversePoints(const QVector<T> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
 
-    static double accuracyPointOnLine;
+    static const double accuracyPointOnLine;
+protected:
+    static QTransform FlippingMatrix(const QLineF &axis);
 private:
     QSharedDataPointer<VGObjectData> d;
 
-    static double  PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
-    static double  GetEpsilon(const QPointF &p1, const QPointF &p2);
+    static double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
+    static double GetEpsilon(const QPointF &p1, const QPointF &p2);
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetReversePoint return revers container of points.
+ * @param points container with points.
+ * @return reverced points.
+ */
+template <typename T>
+QVector<T> VGObject::GetReversePoints(const QVector<T> &points)
+{
+    if (points.isEmpty())
+    {
+        return points;
+    }
+    QVector<T> reversePoints(points.size());
+    qint32 j = 0;
+    for (qint32 i = points.size() - 1; i >= 0; --i)
+    {
+        reversePoints.replace(j, points.at(i));
+        ++j;
+    }
+    return reversePoints;
+}
 
 Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE);
 

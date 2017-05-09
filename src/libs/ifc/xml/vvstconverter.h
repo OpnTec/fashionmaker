@@ -29,17 +29,33 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QString>
+#include <QtGlobal>
+
 #include "vabstractmconverter.h"
+#include "vabstractconverter.h"
+
+class QDomElement;
 
 class VVSTConverter : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
 public:
     explicit VVSTConverter(const QString &fileName);
-    virtual ~VVSTConverter() Q_DECL_OVERRIDE;
+    virtual ~VVSTConverter() Q_DECL_EQ_DEFAULT;
 
-    static const QString    MeasurementMaxVerStr;
-    static const QString    CurrentSchema;
+    static const QString MeasurementMaxVerStr;
+    static const QString CurrentSchema;
+// GCC 4.6 doesn't allow constexpr and const together
+#if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
+    static Q_DECL_CONSTEXPR int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
+    static Q_DECL_CONSTEXPR int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 4);
+#else
+    static Q_DECL_CONSTEXPR const int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
+    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 4);
+#endif
 
 protected:
     virtual int     MinVer() const Q_DECL_OVERRIDE;
@@ -48,12 +64,14 @@ protected:
     virtual QString MinVerStr() const Q_DECL_OVERRIDE;
     virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
 
-    QString         XSDSchema(int ver) const;
+    virtual QString XSDSchema(int ver) const Q_DECL_OVERRIDE;
     virtual void    ApplyPatches() Q_DECL_OVERRIDE;
+    virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
+    virtual bool    IsReadOnly() const Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VVSTConverter)
-    static const QString    MeasurementMinVerStr;
+    static const QString MeasurementMinVerStr;
 
     void AddNewTagsForV0_4_0();
     void RemoveTagsForV0_4_0();
@@ -65,6 +83,32 @@ private:
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
+    void ToV0_4_3();
+    void ToV0_4_4();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VVSTConverter::MinVer() const
+{
+    return MeasurementMinVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VVSTConverter::MaxVer() const
+{
+    return MeasurementMaxVer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VVSTConverter::MinVerStr() const
+{
+    return MeasurementMinVerStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VVSTConverter::MaxVerStr() const
+{
+    return MeasurementMaxVerStr;
+}
 
 #endif // VMEASUREMENTCONVERTER_H

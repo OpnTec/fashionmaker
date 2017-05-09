@@ -27,13 +27,20 @@
  *************************************************************************/
 
 #include "vgobject.h"
-#include "vgobject_p.h"
 
+#include <QLine>
 #include <QLineF>
+#include <QPoint>
 #include <QPointF>
 #include <QRectF>
-#include <QtCore/qmath.h>
-#include <climits>
+#include <QTransform>
+
+#include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
+#include "../ifc/ifcdef.h"
+#include "vgobject_p.h"
+
+const double VGObject::accuracyPointOnLine = (0.031/*mm*/ / 25.4) * PrintDPI;
 
 double VGObject::accuracyPointOnLine = (0.5/*mm*/ / 25.4) * PrintDPI;
 
@@ -306,7 +313,8 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 //---------------------------------------------------------------------------------------------------------------------
 int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2)
 {
-    if (qFuzzyCompare(c1.x(), c2.x()) && qFuzzyCompare(c1.y(), c2.y()) && qFuzzyCompare(r1, r2))
+    if (VFuzzyComparePossibleNulls(c1.x(), c2.x()) && VFuzzyComparePossibleNulls(c1.y(), c2.y())
+            && VFuzzyComparePossibleNulls(r1, r2))
     {
         return 3;// Circles are equal
     }
@@ -321,7 +329,7 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
     {
         return 0;
     }
-    else if (qFuzzyCompare(c*c, r1*r1*(a*a+b*b)))
+    else if (VFuzzyComparePossibleNulls(c*c, r1*r1*(a*a+b*b)))
     {
         p1 = QPointF(x0 + c1.x(), y0  + c1.y());
         return 1;
@@ -368,7 +376,7 @@ qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const 
     // how many solutions?
     qint32 flag = 0;
     const qreal d = QLineF (center, p).length();
-    if (qFuzzyCompare(d, radius))
+    if (VFuzzyComparePossibleNulls(d, radius))
     {
         flag = 1;
     }
@@ -413,7 +421,7 @@ QPointF VGObject::ClosestPoint(const QLineF &line, const QPointF &point)
     }
     else
     {
-        return QPointF();
+        return point;
     }
 }
 
@@ -458,14 +466,20 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     // The test point must lie inside the bounding box spanned by the two line points.
     if (not ( (p1R.x() <= tR.x() && tR.x() <= p2R.x()) || (p2R.x() <= tR.x() && tR.x() <= p1R.x()) ))
     {
-        // test point not in x-range
-        return false;
+        if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine) && not (qAbs(p2.x() - t.x()) <= accuracyPointOnLine))
+        {
+            // test point not in x-range
+            return false;
+        }
     }
 
     if (not ( (p1R.y() <= tR.y() && tR.y() <= p2R.y()) || (p2R.y() <= tR.y() && tR.y() <= p1R.y()) ))
     {
-        // test point not in y-range
-        return false;
+        if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine) && not (qAbs(p2.y() - t.y()) <= accuracyPointOnLine))
+        {
+            // test point not in y-range
+            return false;
+        }
     }
 
     // Test via the perp dot product (PDP)
@@ -477,10 +491,14 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
  * @brief IsPointOnLineviaPDP use the perp dot product (PDP) way.
  *
  *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
+ * @return true if point is on line
  */
 bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    return ( qAbs(PerpDotProduct(p1, p2, t)) < GetEpsilon(p1, p2) );
+    const double p = qAbs(PerpDotProduct(p1, p2, t));
+    const double e = GetEpsilon(p1, p2);
+    // We can't use common "<=" here because of the floating-point accuraccy problem
+    return p < e || VFuzzyComparePossibleNulls(p, e);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -517,7 +535,7 @@ double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
 int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radius)
 {
     const double d = QLineF (p, center).length();
-    if (qFuzzyCompare(radius, d))
+    if (VFuzzyComparePossibleNulls(radius, d))
     {
         return 1; // on circle
     }
@@ -526,26 +544,6 @@ int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radiu
         return 0; // outside circle
     }
     return 2; // inside circle
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetReversePoint return revers container of points.
- * @param points container with points.
- * @return reverced points.
- */
-QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
-{
-    if (points.isEmpty())
-    {
-        return points;
-    }
-    QVector<QPointF> reversePoints;
-    for (qint32 i = points.size() - 1; i >= 0; --i)
-    {
-        reversePoints.append(points.at(i));
-    }
-    return reversePoints;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -567,4 +565,40 @@ int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QP
         length += line.length();
     }
     return qFloor(length);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTransform VGObject::FlippingMatrix(const QLineF &axis)
+{
+    QTransform matrix;
+
+    if (axis.isNull())
+    {
+        return matrix;
+    }
+
+    const QLineF axisOX = QLineF(axis.x2(), axis.y2(), axis.x2() + 100, axis.y2()); // Ox axis
+
+    const qreal angle = axis.angleTo(axisOX);
+    const QPointF p2 = axis.p2();
+
+    QTransform m;
+    m.translate(p2.x(), p2.y());
+    m.rotate(-angle);
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    m.reset();
+    m.translate(p2.x(), p2.y());
+    m.scale(m.m11(), m.m22()*-1);
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    m.reset();
+    m.translate(p2.x(), p2.y());
+    m.rotate(-(360-angle));
+    m.translate(-p2.x(), -p2.y());
+    matrix *= m;
+
+    return matrix;
 }

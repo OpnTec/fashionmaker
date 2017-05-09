@@ -44,9 +44,6 @@
 
 #endif /*Q_OS_WIN32*/
 
-class QString;
-class QStringList;
-
 enum class Contour : char { OpenContour, CloseContour };
 
 #endif // OPTIONS_H

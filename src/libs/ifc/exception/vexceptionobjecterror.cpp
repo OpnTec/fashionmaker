@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vexceptionobjecterror.h"
-#include <QDebug>
+
 #include <QDomElement>
+#include <QTextStream>
+
+#include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -54,6 +57,20 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
 VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectError &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    tagText = e.TagText();
+    tagName = e.TagName();
+    lineNumber = e.LineNumber();
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

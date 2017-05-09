@@ -27,31 +27,45 @@
  *************************************************************************/
 
 #include "vposition.h"
-#include "../vmisc/def.h"
 
-#include <QPointF>
-#include <QRectF>
-#include <QLineF>
-#include <QPolygonF>
-#include <QPainterPath>
-#include <QImage>
-#include <QPainter>
-#include <QCoreApplication>
 #include <QDir>
-#include <QtWidgets>
+#include <QImage>
+#include <QLineF>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPen>
+#include <QPicture>
+#include <QPointF>
+#include <QPolygonF>
+#include <QRect>
+#include <QRectF>
+#include <QSizeF>
+#include <QStaticStringData>
+#include <QString>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <Qt>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop,
                      bool rotate, int rotationIncrease, bool saveLength)
-    :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
-      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate),
-      rotationIncrease(rotationIncrease), angle_between(0)
+    : QRunnable(),
+      bestResult(VBestSquare(gContour.GetSize(), saveLength)),
+      gContour(gContour),
+      detail(detail),
+      i(i),
+      j(j),
+      paperIndex(0),
+      frame(0),
+      detailsCount(0),
+      details(),
+      stop(stop),
+      rotate(rotate),
+      rotationIncrease(rotationIncrease),
+      angle_between(0)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -62,13 +76,13 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
-    if (*stop)
+    if (stop->load())
     {
         return;
     }
 
     // We should use copy of the detail.
-    VLayoutDetail workDetail = detail;
+    VLayoutPiece workDetail = detail;
 
     int dEdge = i;// For mirror detail edge will be different
     if (CheckCombineEdges(workDetail, j, dEdge))
@@ -136,7 +150,7 @@ void VPosition::setDetailsCount(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::setDetails(const QVector<VLayoutDetail> &details)
+void VPosition::setDetails(const QVector<VLayoutPiece> &details)
 {
     this->details = details;
 }
@@ -148,8 +162,8 @@ VBestSquare VPosition::getBestResult() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutDetail> &details)
+void VPosition::DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
+                          int detailsCount, const QVector<VLayoutPiece> &details)
 {
     const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
     const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
@@ -162,7 +176,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
-        p = DrawContour(contour.CutEdge(contour.EmptySheetEdge()));
+        p = DrawContour(contour.CutEmptySheetEdge());
         p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
@@ -175,7 +189,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
 
 #ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    p = DrawContour(detail.GetLayoutAllowencePoints());
+    p = DrawContour(detail.GetLayoutAllowancePoints());
     p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
@@ -239,7 +253,7 @@ int VPosition::Bias(int length, int maxLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ,
+void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ,
                               BestFrom type)
 {
     QVector<QPointF> newGContour = gContour.UniteWithContour(detail, globalI, detJ, type);
@@ -249,7 +263,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
+bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagMirror = false;
@@ -264,11 +278,11 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.BoundingRect()))
+    if (SheetContains(detail.DetailBoundingRect()))
     {
         if (not gContour.GetContour().isEmpty())
         {
-            type = Crossing(detail, j, dEdge);
+            type = Crossing(detail);
         }
         else
         {
@@ -285,28 +299,13 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             flagMirror = true;
             break;
         case CrossingType::NoIntersection:
-        {
-            switch (InsideContour(detail, dEdge))
-            {
-                case InsideType::EdgeError:
-                    return false;
-                case InsideType::Inside:
-                    detail.Mirror(globalEdge);
-                    flagMirror = true;
-                    break;
-                case InsideType::Outside:
-                    flagSquare = true;
-                    break;
-                default:
-                    break;
-            }
+            flagSquare = true;
             break;
-        }
         default:
             break;
     }
 
-    if (flagMirror)
+    if (flagMirror && not detail.IsForbidFlipping())
     {
         #ifdef LAYOUT_DEBUG
             #ifdef SHOW_MIRROR
@@ -314,16 +313,24 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             #endif
         #endif
 
-        dEdge = detail.EdgeByPoint(globalEdge.p2());
+        if (gContour.GetContour().isEmpty())
+        {
+            dEdge = detail.DetailEdgeByPoint(globalEdge.p2());
+        }
+        else
+        {
+            dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
+        }
+
         if (dEdge <= 0)
         {
             return false;
         }
 
         CrossingType type = CrossingType::Intersection;
-        if (SheetContains(detail.BoundingRect()))
+        if (SheetContains(detail.DetailBoundingRect()))
         {
-            type = Crossing(detail, j, dEdge);
+            type = Crossing(detail);
         }
 
         switch (type)
@@ -334,22 +341,8 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
                 flagSquare = false;
                 break;
             case CrossingType::NoIntersection:
-            {
-                switch (InsideContour(detail, dEdge))
-                {
-                    case InsideType::EdgeError:
-                        return false;
-                    case InsideType::Inside:
-                        flagSquare = false;
-                        break;
-                    case InsideType::Outside:
-                        flagSquare = true;
-                        break;
-                    default:
-                        break;
-                }
+                flagSquare = true;
                 break;
-            }
             default:
                 break;
         }
@@ -358,7 +351,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const
+bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagSquare = false;
@@ -372,9 +365,9 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.BoundingRect()))
+    if (SheetContains(detail.DetailBoundingRect()))
     {
-        type = Crossing(detail, j, dEdge);
+        type = Crossing(detail);
     }
 
     switch (type)
@@ -385,22 +378,8 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
             flagSquare = false;
             break;
         case CrossingType::NoIntersection:
-        {
-            switch (InsideContour(detail, dEdge))
-            {
-                case InsideType::EdgeError:
-                    return false;
-                case InsideType::Inside:
-                    flagSquare = false;
-                    break;
-                case InsideType::Outside:
-                    flagSquare = true;
-                    break;
-                default:
-                    break;
-            }
+            flagSquare = true;
             break;
-        }
         default:
             break;
     }
@@ -408,160 +387,24 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const
+VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 {
-    int globalEdgesCount = gContour.EdgesCount();
-    if (globalEdgesCount == 0)
+    const QRectF gRect = gContour.BoundingRect();
+    if (not gRect.intersects(detail.LayoutBoundingRect()) && not gRect.contains(detail.DetailBoundingRect()))
     {
-        globalEdgesCount = 1;// For blank sheet
+        // This we can determine efficiently.
+        return CrossingType::NoIntersection;
     }
 
-    const int detailEdgesCount = detail.EdgesCount();
-    if (detailEdgesCount < 3)
+    const QPainterPath gPath = gContour.ContourPath();
+    if (not gPath.intersects(detail.LayoutAllowancePath()) && not gPath.contains(detail.ContourPath()))
     {
-        return CrossingType::EdgeError;
-    }
-
-    const QLineF gEdge = gContour.GlobalEdge(globalI);
-    const QLineF dEdge = detail.Edge(detailI);
-
-    for (int i = 1; i <= globalEdgesCount; i++)
-    {
-        const QLineF globalEdge = gContour.GlobalEdge(i);
-        if (globalEdge.isNull()) // Got null edge
-        {
-            return CrossingType::EdgeError;
-        }
-
-        for (int j = 1; j <= detailEdgesCount; j++)
-        {
-            if (i == globalI && j == detailI)
-            {
-                continue;
-            }
-
-            const QLineF detailEdge = detail.Edge(j);
-            if (detailEdge.isNull()) // Got null edge
-            {
-                return CrossingType::EdgeError;
-            }
-
-            QPointF xPoint;
-            if (globalEdge.intersect(detailEdge, &xPoint) == QLineF::BoundedIntersection)
-            {
-                if (TrueIntersection(gEdge, dEdge, xPoint))
-                {
-                    return CrossingType::Intersection;
-                }
-            }
-        }
-    }
-
-    return CrossingType::NoIntersection;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, const int &detailI) const
-{
-    if (detail.EdgesCount() < 3)
-    {
-        return InsideType::EdgeError;
-    }
-
-    const QVector<QPointF> lPoints = detail.GetLayoutAllowencePoints();
-
-    const QLineF detailEdge = detail.Edge(detailI);
-    if (detailEdge.isNull()) // Got null edge
-    {
-        return InsideType::EdgeError;
-    }
-
-    if (gContour.GetContour().isEmpty())
-    {
-        const QLineF globalEdge = gContour.GlobalEdge(1);
-        for (int i = 0; i < lPoints.count(); i++)
-        {
-            if (CheckSide(globalEdge, lPoints.at(i)) < 0)
-            {
-                return InsideType::Inside;
-            }
-        }
+        return CrossingType::NoIntersection;
     }
     else
     {
-        const int polyCorners = gContour.EdgesCount();
-        int j = polyCorners-1;
-
-        QVector<qreal> constant;
-        QVector<qreal> multiple;
-
-        for (int i=0; i<polyCorners; i++)
-        {
-            const qreal xi = gContour.at(i).x(); //-V807
-            const qreal xj = gContour.at(j).x(); //-V807
-            const qreal yi = gContour.at(i).y();
-            const qreal yj = gContour.at(j).y();
-            if (qFuzzyCompare(yj, yi))
-            {
-                constant.insert(i, xi);
-                multiple.insert(i, 0);
-            }
-            else
-            {
-                constant.insert(i, xi - (yi*xj)/(yj-yi) + (yi*xi)/(yj-yi));
-                multiple.insert(i, (xj-xi)/(yj-yi));
-            }
-
-            j=i;
-        }
-
-        for (int m = 1; m <= detail.EdgesCount(); ++m)
-        {
-            if (m == detailI)
-            {
-                continue;
-            }
-
-            const QLineF detailEdge = detail.Edge(m);
-            if (detailEdge.isNull()) // Got null edge
-            {
-                return InsideType::EdgeError;
-            }
-
-            const QVector<QPointF> p = Triplet(detailEdge);
-            for (int n=0; n<p.size(); ++n )
-            {
-                int j = polyCorners-1;
-                bool oddNodes = false;
-
-                for (int i=0; i<polyCorners; i++)
-                {
-                    const qreal yi = gContour.at(i).y();
-                    const qreal yj = gContour.at(j).y();
-
-					const QPointF &pn = p.at(n);
-                    if (((yi < pn.y() && yj >= pn.y()) || (yj < pn.y() && yi >= pn.y())))
-                    {
-                        oddNodes ^= (pn.y() * multiple.at(i) + constant.at(i) < pn.x());
-                    }
-
-                    j=i;
-                }
-
-                if (oddNodes)
-                {
-                    return InsideType::Inside;
-                }
-            }
-        }
+        return CrossingType::Intersection;
     }
-    return InsideType::Outside;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPosition::CheckSide(const QLineF &edge, const QPointF &p) const
-{
-    return (edge.x2() - edge.x1()) * (p.y() - edge.y1()) - (edge.y2() - edge.y1()) * (p.x() - edge.x1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -572,9 +415,17 @@ bool VPosition::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge)
+void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge)
 {
-    QLineF detailEdge = detail.Edge(dEdge);
+    QLineF detailEdge;
+    if (gContour.GetContour().isEmpty())
+    {
+        detailEdge = detail.DetailEdge(dEdge);
+    }
+    else
+    {
+        detailEdge = detail.LayoutEdge(dEdge);
+    }
 
     // Find distance between two edges for two begin vertex.
     const qreal dx = globalEdge.x2() - detailEdge.x2();
@@ -586,16 +437,24 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
-    if (not qFuzzyCompare(angle_between+360, 0+360))
+    if (not qFuzzyIsNull(angle_between) || not qFuzzyCompare(angle_between, 360))
     {
         detail.Rotate(detailEdge.p2(), -angle_between);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const
+void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const
 {
-    QLineF detailEdge = detail.Edge(dEdge);
+    QLineF detailEdge;
+    if (gContour.GetContour().isEmpty())
+    {
+        detailEdge = detail.DetailEdge(dEdge);
+    }
+    else
+    {
+        detailEdge = detail.LayoutEdge(dEdge);
+    }
 
     // Find distance between two edges for two begin vertex.
     const qreal dx = globalEdge.x2() - detailEdge.x2();
@@ -609,85 +468,22 @@ void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift)
-{
-    int processedEdges = 0;
-    const int nD = detail.EdgesCount();
-    int j = detJ+1;
-    do
-    {
-        if (j > nD)
-        {
-            j=1;
-        }
-        const QVector<QPointF> points = CutEdge(detail.Edge(j), shift);
-        for (int i = 0; i < points.size()-1; ++i)
-        {
-            contour.append(points.at(i));
-        }
-        ++processedEdges;
-        ++j;
-    }while (processedEdges < nD);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QPolygonF VPosition::GlobalPolygon() const
-{
-    QVector<QPointF> points = gContour.GetContour();
-    points.append(points.first());
-    return QPolygonF(points);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::CutEdge(const QLineF &edge, quint32 shift)
-{
-    QVector<QPointF> points;
-    if (shift == 0)
-    {
-        points.append(edge.p1());
-        points.append(edge.p2());
-    }
-    else
-    {
-        const int n = qFloor(edge.length()/shift);
-
-        if (n <= 0)
-        {
-            points.append(edge.p1());
-            points.append(edge.p2());
-        }
-        else
-        {
-            const qreal nShift = edge.length()/n;
-            for (int i = 1; i <= n+1; ++i)
-            {
-                QLineF l1 = edge;
-                l1.setLength(nShift*(i-1));
-                points.append(l1.p2());
-            }
-        }
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPosition::Rotate(int increase)
 {
     int startAngle = 0;
-    if (qFuzzyCompare(angle_between+360, 0+360))
+    if (VFuzzyComparePossibleNulls(angle_between, 360))
     {
         startAngle = increase;
     }
     for (int angle = startAngle; angle < 360; angle = angle+increase)
     {
-        if (*stop)
+        if (stop->load())
         {
             return;
         }
 
         // We should use copy of the detail.
-        VLayoutDetail workDetail = detail;
+        VLayoutPiece workDetail = detail;
 
         if (CheckRotationEdges(workDetail, j, i, angle))
         {
@@ -702,48 +498,6 @@ void VPosition::Rotate(int increase)
         }
         ++frame;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPosition::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const
-{
-    const QPointF pX = RoundedPoint(p);
-
-    QPointF xPoint;
-    if (gEdge.intersect(dEdge, &xPoint) == QLineF::NoIntersection)
-    {
-        const QPointF gP1 = RoundedPoint(gEdge.p1());
-        const QPointF gP2 = RoundedPoint(gEdge.p2());
-        const QPointF dP1 = RoundedPoint(dEdge.p1());
-        const QPointF dP2 = RoundedPoint(dEdge.p2());
-
-        // If two edges are same line ignorring all intersection point that are equal to the start or the end point
-        return !(pX == gP1 || pX == gP2 || pX == dP1 || pX == dP2);
-    }
-    else
-    {
-        // Rotation case. Ignore intersection only in the point of edges intersection.
-        return pX != RoundedPoint(xPoint);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPointF VPosition::RoundedPoint(const QPointF &p) const
-{
-    return QPointF(qRound(p.x()), qRound(p.y()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::Triplet(const QLineF &edge) const
-{
-    QVector<QPointF> p;
-    QLineF line = edge;
-    line.setLength(edge.length()/2);
-
-    p.append(edge.p1());
-    p.append(line.p2());
-    p.append(edge.p2());
-    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -806,7 +560,7 @@ QPainterPath VPosition::DrawContour(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPosition::DrawDetails(const QVector<VLayoutDetail> &details)
+QPainterPath VPosition::DrawDetails(const QVector<VLayoutPiece> &details)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);

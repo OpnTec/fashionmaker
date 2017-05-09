@@ -27,9 +27,13 @@
  *************************************************************************/
 
 #include "vobjpaintdevice.h"
-#include "vobjengine.h"
 
 #include <QFile>
+#include <QIODevice>
+#include <QMessageLogger>
+#include <QtDebug>
+
+#include "vobjengine.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjPaintDevice::VObjPaintDevice()
@@ -141,22 +145,22 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
             return engine->getSize().width();
         case QPaintDevice::PdmHeight:
             return engine->getSize().height();
-        case QPaintDevice::PdmDpiX:
-            return engine->getResolution();
-        case QPaintDevice::PdmDpiY:
-            return engine->getResolution();
         case QPaintDevice::PdmHeightMM:
             return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmWidthMM:
             return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
+        case QPaintDevice::PdmDpiX:
+        case QPaintDevice::PdmDpiY:
         case QPaintDevice::PdmPhysicalDpiX:
-            return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:
             return engine->getResolution();
 #if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
         case QPaintDevice::PdmDevicePixelRatio:
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        case QPaintDevice::PdmDevicePixelRatioScaled:
+#endif
             return 1;
 #endif
         default:

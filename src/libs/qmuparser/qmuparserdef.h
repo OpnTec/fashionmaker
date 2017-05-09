@@ -32,8 +32,8 @@
     @brief This file contains standard definitions used by the parser.
 */
 
-#define QMUP_VERSION "2.2.4"
-#define QMUP_VERSION_DATE "20140504; GC"
+#define QMUP_VERSION "2.5.0"
+#define QMUP_VERSION_DATE "20170101; GC"
 
 #define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -46,8 +46,8 @@
 #    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
 #      define QMUP_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
 #    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
+#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
 #  else
 #    define QMUP_NOEXCEPT_EXPR(x)
 #  endif
@@ -63,6 +63,8 @@
 
 /** @brief Definition of the basic parser string type. */
 #define QMUP_STRING_TYPE std::wstring
+
+class QLocale;
 
 namespace qmu
 {
@@ -275,7 +277,8 @@ typedef qreal ( *strfun_type2 ) ( const QString &, qreal );
 typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 
 /** @brief Callback used for functions that identify values in a string. */
-typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const std::locale &s_locale );
+typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const QLocale &locale,
+                                 const QChar &decimal, const QChar &thousand );
 
 /** @brief Callback used for variable creation factory functions. */
 typedef qreal* ( *facfun_type ) ( const QString &, void* );

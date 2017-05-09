@@ -29,8 +29,16 @@
 #ifndef VGRAPHICSSIMPLETEXTITEM_H
 #define VGRAPHICSSIMPLETEXTITEM_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
 #include <QGraphicsSimpleTextItem>
+#include <QMetaObject>
 #include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QVariant>
+#include <QtGlobal>
+
 #include "../vmisc/def.h"
 
 /**
@@ -45,11 +53,11 @@ public:
     virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
 
     qint32       FontSize()const;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) Q_DECL_OVERRIDE;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
     void setEnabled(bool enabled);
+    void LabelSelectionType(const SelectionType &type);
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -63,8 +71,9 @@ signals:
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void         DeleteTool();
     void         PointChoosed();
+    void         PointSelected(bool selected);
 protected:
-    QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;
@@ -73,7 +82,8 @@ protected:
     virtual void keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
 private:
     /** @brief fontSize label font size. */
-    qint32       fontSize;
+    qint32        fontSize;
+    SelectionType selectionType;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

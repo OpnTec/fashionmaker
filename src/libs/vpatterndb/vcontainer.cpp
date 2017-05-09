@@ -27,36 +27,46 @@
  *************************************************************************/
 
 #include "vcontainer.h"
+
+#include <limits.h>
+#include <QVector>
+#include <QtDebug>
+
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "variables/varcradius.h"
+#include "variables/vcurveangle.h"
+#include "variables/vcurvelength.h"
+#include "variables/vcurveclength.h"
+#include "variables/vincrement.h"
+#include "variables/vlineangle.h"
+#include "variables/vlinelength.h"
+#include "variables/vmeasurement.h"
+#include "variables/vvariable.h"
 #include "vtranslatevars.h"
 
-#include <QLineF>
-#include <QtAlgorithms>
-#include <QDebug>
-
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-prototypes"
-#elif defined(Q_CC_INTEL)
-    #pragma warning( push )
-    #pragma warning( disable: 1418 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
 
 Q_LOGGING_CATEGORY(vCon, "v.container")
 
-#if defined(Q_CC_CLANG)
-    #pragma clang diagnostic pop
-#elif defined(Q_CC_INTEL)
-    #pragma warning( pop )
-#endif
+QT_WARNING_POP
 
 quint32 VContainer::_id = NULL_ID;
 qreal VContainer::_size = 50;
 qreal VContainer::_height = 176;
-QSet<const QString> VContainer::uniqueNames = QSet<const QString>();
+QSet<QString> VContainer::uniqueNames = QSet<QString>();
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -140,16 +150,24 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetDetail return detail by id
- * @param id id of detail
- * @return detail
- */
-const VDetail VContainer::GetDetail(quint32 id) const
+VPiece VContainer::GetPiece(quint32 id) const
 {
-    if (d->details.contains(id))
+    if (d->pieces->contains(id))
     {
-        return d->details.value(id);
+        return d->pieces->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath VContainer::GetPiecePath(quint32 id) const
+{
+    if (d->piecePaths->contains(id))
+    {
+        return d->piecePaths->value(id);
     }
     else
     {
@@ -165,22 +183,25 @@ const VDetail VContainer::GetDetail(quint32 id) const
  */
 quint32 VContainer::AddGObject(VGObject *obj)
 {
-    SCASSERT(obj != nullptr);
+    SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
     uniqueNames.insert(obj->name());
     return AddObject(d->gObjects, pointer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddDetail add new detail to container
- * @param detail new detail
- * @return return id of new detail in container
- */
-quint32 VContainer::AddDetail(const VDetail &detail)
+quint32 VContainer::AddPiece(const VPiece &detail)
 {
-    quint32 id = getNextId();
-    d->details[id] = detail;
+    const quint32 id = getNextId();
+    d->pieces->insert(id, detail);
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddPiecePath(const VPiecePath &path)
+{
+    const quint32 id = getNextId();
+    d->piecePaths->insert(id, path);
     return id;
 }
 
@@ -197,6 +218,13 @@ quint32 VContainer::getId()
  */
 quint32 VContainer::getNextId()
 {
+    //TODO. Current count of ids are very big and allow us save time before someone will reach its max value.
+    //Better way, of cource, is to seek free ids inside the set of values and reuse them.
+    //But for now better to keep it as it is now.
+    if (_id == UINT_MAX)
+    {
+        qCritical()<<(tr("Number of free id exhausted."));
+    }
     _id++;
     return _id;
 }
@@ -225,7 +253,7 @@ template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    SCASSERT(point.isNull() == false);
+    SCASSERT(point.isNull() == false)
     point->setId(id);
     if (d->gObjects.contains(id))
     {
@@ -244,7 +272,8 @@ void VContainer::Clear()
     qCDebug(vCon, "Clearing container data.");
     _id = NULL_ID;
 
-    d->details.clear();
+    d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables();
     ClearGObjects();
     ClearUniqueNames();
@@ -256,15 +285,15 @@ void VContainer::ClearForFullParse()
     qCDebug(vCon, "Clearing container data for full parse.");
     _id = NULL_ID;
 
-    d->details.clear();
+    d->pieces->clear();
+    d->piecePaths->clear();
     ClearVariables(VarType::Increment);
-    ClearVariables(VarType::ArcLength);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
-    ClearVariables(VarType::SplineLength);
+    ClearVariables(VarType::CurveLength);
+    ClearVariables(VarType::CurveCLength);
     ClearVariables(VarType::ArcRadius);
-    ClearVariables(VarType::ArcAngle);
-    ClearVariables(VarType::SplineAngle);
+    ClearVariables(VarType::CurveAngle);
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -365,21 +394,101 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddArc(const quint32 &id, const quint32 &parentId)
+void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32 &id, const quint32 &parentId)
 {
-    const QSharedPointer<VArc> arc = GeometricObject<VArc>(id);
+    AddCurve(arc, id, parentId);
 
-    VArcLength *length = new VArcLength(id, parentId, arc.data(), *GetPatternUnit());
+    if (arc->getType() == GOType::Arc)
+    {
+        const QSharedPointer<VArc> casted = arc.staticCast<VArc>();
+
+        VArcRadius *radius = new VArcRadius(id, parentId, casted.data(), *GetPatternUnit());
+        AddVariable(radius->GetName(), radius);
+    }
+    else if (arc->getType() == GOType::EllipticalArc)
+    {
+        const QSharedPointer<VEllipticalArc> casted = arc.staticCast<VEllipticalArc>();
+
+        VArcRadius *radius1 = new VArcRadius(id, parentId, casted.data(), 1, *GetPatternUnit());
+        AddVariable(radius1->GetName(), radius1);
+
+        VArcRadius *radius2 = new VArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
+        AddVariable(radius2->GetName(), radius2);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId)
+{
+    const GOType curveType = curve->getType();
+    if (curveType != GOType::Spline      && curveType != GOType::SplinePath &&
+        curveType != GOType::CubicBezier && curveType != GOType::CubicBezierPath &&
+        curveType != GOType::Arc         && curveType != GOType::EllipticalArc)
+    {
+        throw VException(tr("Can't create a curve with type '%1'").arg(static_cast<int>(curveType)));
+    }
+
+    VCurveLength *length = new VCurveLength(id, parentId, curve.data(), *GetPatternUnit());
     AddVariable(length->GetName(), length);
 
-    VArcRadius *radius = new VArcRadius(id, parentId, arc.data(), *GetPatternUnit());
-    AddVariable(radius->GetName(), radius);
-
-    VArcAngle *startAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::StartAngle);
+    VCurveAngle *startAngle = new VCurveAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
     AddVariable(startAngle->GetName(), startAngle);
 
-    VArcAngle *endAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::EndAngle);
+    VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
     AddVariable(endAngle->GetName(), endAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId)
+{
+    AddCurve(curve, id, parentId);
+
+    VCurveCLength *c1Length = new VCurveCLength(id, parentId, curve.data(), CurveCLength::C1, *GetPatternUnit());
+    AddVariable(c1Length->GetName(), c1Length);
+
+    VCurveCLength *c2Length = new VCurveCLength(id, parentId, curve.data(), CurveCLength::C2, *GetPatternUnit());
+    AddVariable(c2Length->GetName(), c2Length);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
+                                      quint32 parentId)
+{
+    AddSpline(curve, id, parentId);
+
+    for (qint32 i = 1; i <= curve->CountSubSpl(); ++i)
+    {
+        const VSpline spl = curve->GetSpline(i);
+
+        VCurveLength *length = new VCurveLength(id, parentId, curve->name(), spl, *GetPatternUnit(), i);
+        AddVariable(length->GetName(), length);
+
+        VCurveAngle *startAngle = new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::StartAngle, i);
+        AddVariable(startAngle->GetName(), startAngle);
+
+        VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::EndAngle, i);
+        AddVariable(endAngle->GetName(), endAngle);
+
+        VCurveCLength *c1Length = new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C1,
+                                                    *GetPatternUnit(), i);
+        AddVariable(c1Length->GetName(), c1Length);
+
+        VCurveCLength *c2Length = new VCurveCLength(id, parentId, curve->name(), spl, CurveCLength::C2,
+                                                    *GetPatternUnit(), i);
+        AddVariable(c2Length->GetName(), c2Length);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemoveVariable(const QString &name)
+{
+    d->variables.remove(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemovePiece(quint32 id)
+{
+    d->pieces->remove(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -392,7 +501,7 @@ void VContainer::AddArc(const quint32 &id, const quint32 &parentId)
 template <typename key, typename val>
 quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
-    SCASSERT(value != nullptr);
+    SCASSERT(value != nullptr)
     const quint32 id = getNextId();
     value->setId(id);
     obj[id] = value;
@@ -407,22 +516,25 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
  */
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
-    SCASSERT(obj != nullptr);
+    SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
     UpdateObject(d->gObjects, id, pointer);
     uniqueNames.insert(obj->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateDetail update detail by id
- * @param id id of existing detail
- * @param detail detail
- */
-void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
+void VContainer::UpdatePiece(quint32 id, const VPiece &detail)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    d->details[id] = detail;
+    d->pieces->insert(id, detail);
+    UpdateId(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
+{
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
+    d->piecePaths->insert(id, path);
     UpdateId(id);
 }
 
@@ -467,15 +579,15 @@ const QMap<QString, QSharedPointer<VLengthLine> > VContainer::DataLengthLines() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VSplineLength> > VContainer::DataLengthSplines() const
+const QMap<QString, QSharedPointer<VCurveLength> > VContainer::DataLengthCurves() const
 {
-    return DataVar<VSplineLength>(VarType::SplineLength);
+    return DataVar<VCurveLength>(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VArcLength> > VContainer::DataLengthArcs() const
+const QMap<QString, QSharedPointer<VCurveCLength> > VContainer::DataCurvesCLength() const
 {
-    return DataVar<VArcLength>(VarType::ArcLength);
+    return DataVar<VCurveCLength>(VarType::CurveCLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -491,15 +603,9 @@ const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VArcAngle> > VContainer::DataAnglesArcs() const
+const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
 {
-    return DataVar<VArcAngle>(VarType::ArcAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves() const
-{
-    return DataVar<VSplineAngle>(VarType::SplineAngle);
+    return DataVar<VCurveAngle>(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -529,6 +635,14 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
 bool VContainer::IsUnique(const QString &name)
 {
     return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VContainer::AllUniqueNames()
+{
+    QStringList names = builInFunctions;
+    names.append(uniqueNames.toList());
+    return names;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -571,13 +685,6 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
         }
     }
     return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VContainer::ClearDetails()
-{
-    d->details.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -649,13 +756,9 @@ const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief data container with dataDetails return container of details
- * @return pointer on container of details
- */
-const QHash<quint32, VDetail> *VContainer::DataDetails() const
+const QHash<quint32, VPiece> *VContainer::DataPieces() const
 {
-    return &d->details;
+    return d->pieces.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

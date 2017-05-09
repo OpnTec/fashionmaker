@@ -21,11 +21,17 @@
 
 #include "qmuparser.h"
 
-#include <QtGlobal>
-#include <QtCore/qmath.h>
 #include <QCoreApplication>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtGlobal>
+#include <sstream>
+#include <string>
 
-using namespace std;
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
+#include "../vmisc/vmath.h"
 
 /**
  * @file
@@ -39,21 +45,21 @@ namespace qmu
 {
 //---------------------------------------------------------------------------------------------------------------------
 // Trigonometric function
+qreal QmuParser::DegreeToRadian(qreal deg)
+{
+     return qDegreesToRadians(deg);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::RadianToDegree(qreal rad)
+{
+     return qRadiansToDegrees(rad);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Sinh(qreal v)
 {
     return sinh(v);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Cosh(qreal v)
-{
-    return cosh(v);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Tanh(qreal v)
-{
-    return tanh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,9 +69,21 @@ qreal QmuParser::ASinh(qreal v)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::Cosh(qreal v)
+{
+    return cosh(v);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ACosh(qreal v)
 {
     return log(v + qSqrt(v * v - 1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::Tanh(qreal v)
+{
+    return tanh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,6 +91,43 @@ qreal QmuParser::ATanh(qreal v)
 {
     return (0.5 * log((1 + v) / (1 - v)));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::SinD(qreal v)
+{
+    return qSin(qDegreesToRadians(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ASinD(qreal v)
+{
+    return qRadiansToDegrees(qAsin(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CosD(qreal v)
+{
+    return qCos(qDegreesToRadians(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ACosD(qreal v)
+{
+    return qRadiansToDegrees(qAcos(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::TanD(qreal v)
+{
+    return qTan(qDegreesToRadians(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::ATanD(qreal v)
+{
+    return qRadiansToDegrees(qAtan(v));
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm functions
 
@@ -219,23 +274,19 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 * @param [out] a_fVal Pointer where the value should be stored in case one is found.
 * @return 1 if a value was found 0 otherwise.
 */
-int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale)
+int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, const QChar &decimal,
+                     const QChar &thousand)
 {
     qreal fVal(0);
 
-    std::wstring a_szExprStd = a_szExpr.toStdWString();
-    stringstream_type stream(a_szExprStd);
-    stream.seekg(0);        // todo:  check if this really is necessary
-    stream.imbue(s_locale);
-    stream >> fVal;
-    stringstream_type::pos_type iEnd = stream.tellg(); // Position after reading
+    const int pos = ReadVal(a_szExpr, fVal, locale, decimal, thousand);
 
-    if (iEnd==static_cast<stringstream_type::pos_type>(-1))
+    if (pos == -1)
     {
         return 0;
     }
 
-    *a_iPos += static_cast<int>(iEnd);
+    *a_iPos += pos;
     *a_fVal = fVal;
     return 1;
 }
@@ -277,15 +328,25 @@ void QmuParser::InitCharSets()
  */
 void QmuParser::InitFun()
 {
+    // trigonometric helper functions
+    DefineFun("degTorad",   DegreeToRadian);
+    DefineFun("radTodeg",   RadianToDegree);
+
     // trigonometric functions
     DefineFun("sin",   qSin);
     DefineFun("cos",   qCos);
     DefineFun("tan",   qTan);
+    DefineFun("sinD",   SinD);
+    DefineFun("cosD",   CosD);
+    DefineFun("tanD",   TanD);
     // arcus functions
     DefineFun("asin",  qAsin);
     DefineFun("acos",  qAcos);
     DefineFun("atan",  qAtan);
     DefineFun("atan2", qAtan2);
+    DefineFun("asinD",  ASinD);
+    DefineFun("acosD",  ACosD);
+    DefineFun("atanD",  ATanD);
     // hyperbolic functions
     DefineFun("sinh",  Sinh);
     DefineFun("cosh",  Cosh);
@@ -334,15 +395,15 @@ void QmuParser::InitConst()
  */
 void QmuParser::InitOprt()
 {
-    DefineInfixOprt("-", UnaryMinus);
+    DefineInfixOprt(m_locale.negativeSign(), UnaryMinus);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-    Q_UNUSED(pExpr);
-    Q_UNUSED(nStart);
-    Q_UNUSED(nEnd);
+    Q_UNUSED(pExpr)
+    Q_UNUSED(nStart)
+    Q_UNUSED(nEnd)
     // this is just sample code to illustrate modifying variable names on the fly.
     // I'm not sure anyone really needs such a feature...
     /*
@@ -389,9 +450,9 @@ qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
 
     // Backwards compatible calculation of epsilon inc case the user doesnt provide
     // his own epsilon
-    if (qFuzzyCompare(fEpsilon + 1, 1 + 0))
+    if (qFuzzyIsNull(fEpsilon))
     {
-        fEpsilon = (qFuzzyCompare(a_fPos + 1, 1 + 0)) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
+        fEpsilon = qFuzzyIsNull(a_fPos) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
     }
 
     *a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();

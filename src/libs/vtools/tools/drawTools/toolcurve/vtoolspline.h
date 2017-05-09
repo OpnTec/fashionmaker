@@ -29,7 +29,20 @@
 #ifndef VTOOLSPLINE_H
 #define VTOOLSPLINE_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.
@@ -38,17 +51,19 @@ class VToolSpline:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
-                 QGraphicsItem * parent = nullptr );
     virtual ~VToolSpline() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
-    static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
-                               const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                               const QString &color, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                               VContainer *data,
+    static VToolSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                               VContainer *data);
+    static VToolSpline *Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
+                               VAbstractPattern *doc, VContainer *data, const Document &parse,
+                               const Source &typeCreation);
+    static VToolSpline *Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2, QString &l1,
+                               QString &l2, quint32 duplicate, const QString &color,
+                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    static const QString OldToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
 
@@ -73,8 +88,14 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSpline)
-    void         RefreshGeometry ();
     QPointF oldPosition;
+
+    VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                 QGraphicsItem * parent = nullptr );
+
+    bool IsMovable() const;
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 };
 
 #endif // VTOOLSPLINE_H

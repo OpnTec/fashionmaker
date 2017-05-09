@@ -29,21 +29,32 @@
 #ifndef VTOOLLINEINTERSECTAXIS_H
 #define VTOOLLINEINTERSECTAXIS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vformula.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 class VToolLineIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolLineIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                           QGraphicsItem * parent = nullptr);
-    virtual ~VToolLineIntersectAxis() Q_DECL_OVERRIDE;
+    virtual ~VToolLineIntersectAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() Q_DECL_OVERRIDE;
 
-    static VToolLineIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                          VContainer *data);
+    static VToolLineIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                          VAbstractPattern *doc, VContainer *data);
     static VToolLineIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                           const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
                                           const quint32 &firstPointId, const quint32 &secondPointId,
@@ -56,6 +67,9 @@ public:
     static const QString ToolType;
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersectAxis)};
+
+    QString FirstLinePoint() const;
+    QString SecondLinePoint() const;
 
     VFormula     GetFormulaAngle() const;
     void         SetFormulaAngle(const VFormula &value);
@@ -75,9 +89,15 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLineIntersectAxis)
+
     QString formulaAngle;
     quint32 firstPointId;
     quint32 secondPointId;
+
+    VToolLineIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                           QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECTAXIS_H

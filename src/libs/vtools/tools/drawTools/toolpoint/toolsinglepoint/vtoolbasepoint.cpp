@@ -27,14 +27,46 @@
  *************************************************************************/
 
 #include "vtoolbasepoint.h"
+
+#include <QApplication>
+#include <QEvent>
+#include <QFlags>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
+#include <QList>
+#include <QMessageBox>
+#include <QPen>
+#include <QPointF>
+#include <QPolygonF>
+#include <QRectF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QUndoStack>
+#include <new>
+
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../../../../undocommands/movespoint.h"
 #include "../../../../undocommands/addpatternpiece.h"
 #include "../../../../undocommands/deletepatternpiece.h"
+#include "../../../../undocommands/movespoint.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-
-#include <QMessageBox>
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vmisc/logging.h"
+#include "../../../vabstracttool.h"
+#include "../../../vdatatool.h"
+#include "../../vdrawtool.h"
+#include "vtoolsinglepoint.h"
 
 const QString VToolBasePoint::ToolType = QStringLiteral("single");
 
@@ -55,7 +87,6 @@ VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, false);
     SetColorLabel(Qt::black);
     ToolCreation(typeCreation);
 }
@@ -73,17 +104,50 @@ VToolBasePoint::~VToolBasePoint()
  */
 void VToolBasePoint::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetData(p->name(), p->toQPointF());
+    dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, VPointF *point,
+                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                       const Document &parse, const Source &typeCreation)
+{
+    SCASSERT(point != nullptr)
+
+    quint32 id = _id;
+    if (typeCreation == Source::FromGui)
+    {
+        id = data->AddGObject(point);
+    }
+    else
+    {
+        data->UpdateGObject(id, point);
+        if (parse != Document::FullParse)
+        {
+            doc->UpdateToolData(id, data);
+        }
+    }
+
+    if (parse == Document::FullParse)
+    {
+        VDrawTool::AddRecord(id, Tool::BasePoint, doc);
+        VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
+        scene->addItem(spoint);
+        InitToolConnections(scene, spoint);
+        VAbstractPattern::AddTool(id, spoint);
+        return spoint;
+    }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ShowVisualization(bool show)
 {
-    Q_UNUSED(show); //don't have any visualization for base point yet
+    Q_UNUSED(show) //don't have any visualization for base point yet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +158,7 @@ void VToolBasePoint::AddToFile()
 {
     Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
 
-    QDomElement sPoint = doc->createElement(TagName);
+    QDomElement sPoint = doc->createElement(getTagName());
 
     // Create SPoint tag
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
@@ -161,7 +225,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
                     {
                         // Ensure visible only small rect around a cursor
                         VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                        SCASSERT(currentScene);
+                        SCASSERT(currentScene)
                         const QPointF cursorPosition = currentScene->getScenePos();
                         view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
                     }
@@ -216,11 +280,11 @@ void VToolBasePoint::DeleteTool(bool ask)
  */
 void VToolBasePoint::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    SCASSERT(dialogTool != nullptr);
-    QPointF p = dialogTool->GetPoint();
-    QString name = dialogTool->getPointName();
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    SCASSERT(not dialogTool.isNull())
+    const QPointF p = dialogTool->GetPoint();
+    const QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
@@ -293,7 +357,7 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
     VToolSinglePoint::SaveOptions(tag, obj);
 
     QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrX, qApp->fromPixel(point->x()));
@@ -303,7 +367,7 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 {
-    Q_UNUSED(domElement);
+    Q_UNUSED(domElement)
     // This tool doesn't need read attributes from file.
 }
 
@@ -336,7 +400,7 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
     catch(const VExceptionToolWasDeleted &e)
     {
         qCDebug(vTool, "Tool was deleted. Immediately leave method.");
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
     qCDebug(vTool, "Context menu closed. Tool was not deleted.");
@@ -348,8 +412,7 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
  */
 void  VToolBasePoint::FullUpdateFromFile()
 {
-    VPointF point = *VAbstractTool::data.GeometricObject<VPointF>(id);
-    RefreshPointGeometry(point);
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

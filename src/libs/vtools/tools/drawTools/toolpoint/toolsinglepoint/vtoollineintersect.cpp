@@ -27,9 +27,31 @@
  *************************************************************************/
 
 #include "vtoollineintersect.h"
+
+#include <QLine>
+#include <QLineF>
+#include <QPointF>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../dialogs/tools/dialoglineintersect.h"
+#include "../../../../visualization/line/vistoollineintersect.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../visualization/vistoollineintersect.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
+#include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
@@ -62,9 +84,9 @@ VToolLineIntersect::VToolLineIntersect(VAbstractPattern *doc, VContainer *data, 
  */
 void VToolLineIntersect::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetP1Line1(p1Line1);
     dialogTool->SetP2Line1(p2Line1);
@@ -82,12 +104,12 @@ void VToolLineIntersect::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data)
+VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     const quint32 p1Line1Id = dialogTool->GetP1Line1();
     const quint32 p2Line1Id = dialogTool->GetP2Line1();
     const quint32 p1Line2Id = dialogTool->GetP1Line2();
@@ -97,7 +119,7 @@ VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphics
                                        data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -131,8 +153,8 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
     const QSharedPointer<VPointF> p1Line2 = data->GeometricObject<VPointF>(p1Line2Id);
     const QSharedPointer<VPointF> p2Line2 = data->GeometricObject<VPointF>(p2Line2Id);
 
-    QLineF line1(p1Line1->toQPointF(), p2Line1->toQPointF());
-    QLineF line2(p1Line2->toQPointF(), p2Line2->toQPointF());
+    QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
+    QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
@@ -158,17 +180,15 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::LineIntersect, doc);
+
         if (parse == Document::FullParse)
         {
+            VDrawTool::AddRecord(id, Tool::LineIntersect, doc);
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id, p2Line1Id, p1Line2Id,
                                                                p2Line2Id, typeCreation);
             scene->addItem(point);
-            connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersect::SetFactor);
-            connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersect::Disable);
-            connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersect::EnableToolMove);
-            doc->AddTool(id, point);
+            InitToolConnections(scene, point);
+            VAbstractPattern::AddTool(id, point);
             doc->IncrementReferens(p1Line1->getIdTool());
             doc->IncrementReferens(p2Line1->getIdTool());
             doc->IncrementReferens(p1Line2->getIdTool());
@@ -177,6 +197,30 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
         }
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line1P1Name() const
+{
+    return VAbstractTool::data.GetGObject(p1Line1)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line1P2Name() const
+{
+    return VAbstractTool::data.GetGObject(p2Line1)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line2P1Name() const
+{
+    return VAbstractTool::data.GetGObject(p1Line2)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::Line2P2Name() const
+{
+    return VAbstractTool::data.GetGObject(p2Line2)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,7 +247,7 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -231,9 +275,9 @@ void VToolLineIntersect::RemoveReferens()
  */
 void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogTool->GetP1Line1()));
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
@@ -265,16 +309,16 @@ void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(p1Line1);
+        visual->setObject1Id(p1Line1);
         visual->setLine1P2Id(p2Line1);
         visual->setLine2P1Id(p1Line2);
         visual->setLine2P2Id(p2Line2);
-        vis->RefreshGeometry();
+        visual->RefreshGeometry();
     }
 }
 

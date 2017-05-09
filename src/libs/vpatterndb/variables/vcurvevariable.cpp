@@ -27,8 +27,11 @@
  *************************************************************************/
 
 #include "vcurvevariable.h"
+
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vinternalvariable.h"
 #include "vcurvevariable_p.h"
-#include "../vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable()
@@ -68,7 +71,12 @@ VCurveVariable::~VCurveVariable()
 //---------------------------------------------------------------------------------------------------------------------
 bool VCurveVariable::Filter(quint32 id)
 {
-    if (d->parentId != 0)//Do not check if value zero
+    if (id == NULL_ID)
+    {
+        return false;
+    }
+
+    if (d->parentId != NULL_ID)//Do not check if value zero
     {// Not all curves have parents. Only those who was created after cutting the parent curve.
         return d->id == id || d->parentId == id;
     }

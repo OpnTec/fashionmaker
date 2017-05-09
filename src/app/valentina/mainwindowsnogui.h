@@ -32,18 +32,16 @@
 #include <QMainWindow>
 #include <QPrinter>
 
-#include "../vpatterndb/vdetail.h"
-#include "../vlayout/vlayoutdetail.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "xml/vpattern.h"
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
-
+#include "../vwidgets/vabstractmainwindow.h"
 
 class QGraphicsScene;
-class QPrinter;
-class PosterData;
+struct PosterData;
 
-class MainWindowsNoGUI : public QMainWindow
+class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
 public:
@@ -52,16 +50,13 @@ public:
 
 public slots:
     void ToolLayoutSettings(bool checked);
-    void ExportLayoutAs();
     void SaveAsTiledPDF();
-    void PrintPages (QPrinter *printer);
     void PrintPreviewOrigin();
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
-    void ErrorConsoleMode(const LayoutErrors &state);
 protected:
-    QVector<VLayoutDetail> listDetails;
+    QVector<VLayoutPiece> listDetails;
 
     /** @brief currentScene pointer to current scene. */
     QGraphicsScene *currentScene;
@@ -82,15 +77,18 @@ protected:
     QAction *undoAction;
     QAction *redoAction;
     QAction *actionDockWidgetToolOptions;
+    QAction *actionDockWidgetGroups;
 
     /** @brief fileName name current pattern file. */
     QString            curFile;
 
+    bool isNoScaling;
     bool isLayoutStale;
+    bool ignorePrinterFields;
     QMarginsF margins;
     QSizeF paperSize;
 
-    void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
+    void PrepareDetailsForLayout(const QHash<quint32, VPiece> *details);
     void ExportLayout(const DialogSaveLayout &dialog);
 
     void InitTempLayoutScene();
@@ -98,10 +96,19 @@ protected:
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
     bool LayoutSettings(VLayoutGenerator& lGenerator);
+    int ContinueIfLayoutStale();
+    QString FileName() const;
+private slots:
+    void PrintPages (QPrinter *printer);
+    void ErrorConsoleMode(const LayoutErrors &state);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
     bool isTiled;
+    bool isAutoCrop;
+    bool isUnitePages;
+
+    QString layoutPrinterName;
 
     void CreateShadows();
     void CreateScenes();
@@ -130,14 +137,6 @@ private:
 
     bool isPagesUniform() const;
     bool IsPagesFit(const QSizeF &printPaper) const;
-    QString FileName() const;
-
-    int ContinueIfLayoutStale();
-
-    void UnitePages();
-    QList<QGraphicsItem *> MoveDetails(qreal length, const QList<QGraphicsItem *> &details);
-    void UnitePapers(int j, QList<QGraphicsItem *> &nPapers, qreal width, qreal length);
-    void UniteDetails(int j, QList<QList<QGraphicsItem *> > &nDetails, qreal length, int i);
 };
 
 #endif // MAINWINDOWSNOGUI_H

@@ -28,6 +28,8 @@
 
 #include "vdatatool.h"
 
+#include "../vmisc/def.h"
+
 Q_LOGGING_CATEGORY(vTool, "v.tool")
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -39,12 +41,8 @@ Q_LOGGING_CATEGORY(vTool, "v.tool")
 VDataTool::VDataTool(VContainer *data, QObject *parent)
     : QObject(parent), data(*data), _referens(1)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VDataTool::~VDataTool()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

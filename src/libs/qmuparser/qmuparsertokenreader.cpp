@@ -20,9 +20,22 @@
  ******************************************************************************************************/
 
 #include "qmuparsertokenreader.h"
-#include "qmuparserbase.h"
+
+#include <assert.h>
+#include <QCharRef>
+#include <QList>
+#include <QMessageLogger>
 #include <QStringList>
-#include <QDebug>
+#include <QtDebug>
+#include <fstream>
+#include <iterator>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+
+#include "qmudef.h"
+#include "qmuparserbase.h"
 
 /**
  * @file
@@ -31,9 +44,6 @@
 
 namespace qmu
 {
-
-// Forward declaration
-class QmuParserBase;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -120,7 +130,7 @@ QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
       m_pFunDef ( nullptr ), m_pPostOprtDef ( nullptr ), m_pInfixOprtDef ( nullptr ), m_pOprtDef ( nullptr ),
       m_pConstDef ( nullptr ), m_pStrVarDef ( nullptr ), m_pVarDef ( nullptr ), m_pFactory ( nullptr ),
       m_pFactoryData ( nullptr ), m_vIdentFun(), m_UsedVar(), m_fZero ( 0 ), m_iBrackets ( 0 ), m_lastTok(),
-      m_cArgSep ( ',' )
+      m_cArgSep ( ';' )
 {
     assert ( m_pParser );
     SetParent ( m_pParser );
@@ -203,14 +213,15 @@ void QmuParserTokenReader::ReInit()
 /**
  * @brief Read the next token from the string.
  */
-QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const std::locale &s_locale)
+QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLocale &locale, const QChar &decimal,
+                                                                     const QChar &thousand)
 {
     assert ( m_pParser );
 
     token_type tok;
 
     // Ignore all non printable characters when reading the expression
-    while ( m_strFormula.data()[m_iPos] > 0 && m_strFormula.data()[m_iPos] <= 0x20 )
+    while (m_strFormula.size() > m_iPos && m_strFormula.at(m_iPos) <= QChar(0x20))
     {
         ++m_iPos;
     }
@@ -235,7 +246,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const std::
     {
         return SaveBeforeReturn ( tok ); // Check for function argument separators
     }
-    if ( IsValTok ( tok, s_locale ) )
+    if ( IsValTok ( tok, locale, decimal, thousand ) )
     {
         return SaveBeforeReturn ( tok ); // Check for values / constant tokens
     }
@@ -310,6 +321,8 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
  * @return The Position of the first character not listed in a_szCharSet.
  * @throw nothrow
  */
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_MSVC(4309)
 int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const
 {
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
@@ -366,6 +379,7 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
         return ExtractToken ( QMUP_CHARS, a_sTok, a_iPos );
     }
 }
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -375,7 +389,7 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
  */
 bool QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok )
 {
-    const QStringList pOprtDef = m_pParser->GetOprtDef();
+    const QStringList pOprtDef = QmuParserBase::GetOprtDef();
 
     // Compare token with function and operator strings
     // check string for operator/function
@@ -514,7 +528,7 @@ bool QmuParserTokenReader::IsArgSep ( token_type &a_Tok )
 bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
 {
     // check for EOF
-    if ( m_strFormula.data()[m_iPos] == false /*|| szFormula[m_iPos] == '\n'*/ )
+    if ( m_iPos >= m_strFormula.size())
     {
         if ( m_iSynFlags & noEND )
         {
@@ -560,35 +574,22 @@ bool QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok )
     auto it = m_pInfixOprtDef->rbegin();
     for ( ; it != m_pInfixOprtDef->rend(); ++it )
     {
-        if ( sTok.indexOf ( it->first ) != 0 )
+        if ( sTok.indexOf ( it->first ) == 0 )
         {
-            continue;
+            a_Tok.Set ( it->second, it->first );
+            m_iPos += static_cast<int>(it->first.length());
+
+            if ( m_iSynFlags & noINFIXOP )
+            {
+                Error ( ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString() );
+            }
+
+            m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
+            return true;
         }
-
-        a_Tok.Set ( it->second, it->first );
-        m_iPos += static_cast<int>(it->first.length());
-
-        if ( m_iSynFlags & noINFIXOP )
-        {
-            Error ( ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString() );
-        }
-
-        m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
-        return true;
     }
 
     return false;
-
-    /*
-        a_Tok.Set(item->second, sTok);
-        m_iPos = (int)iEnd;
-
-        if (m_iSynFlags & noINFIXOP)
-          Error(ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString());
-
-        m_iSynFlags = noPOSTOP | noINFIXOP | noOPT | noBC | noSTR | noASSIGN;
-        return true;
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -649,7 +650,7 @@ bool QmuParserTokenReader::IsOprt ( token_type &a_Tok )
     }
 
     // Check if the operator is a built in operator, if so ignore it here
-    const QStringList pOprtDef = m_pParser->GetOprtDef();
+    const QStringList &pOprtDef = QmuParserBase::GetOprtDef();
     QStringList::const_iterator constIterator;
     for ( constIterator = pOprtDef.constBegin(); m_pParser->HasBuiltInOprt() && constIterator != pOprtDef.constEnd();
             ++constIterator )
@@ -742,16 +743,14 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
     auto it = m_pPostOprtDef->rbegin();
     for ( ; it != m_pPostOprtDef->rend(); ++it )
     {
-        if ( sTok.indexOf ( it->first ) != 0 )
+        if ( sTok.indexOf ( it->first ) == 0 )
         {
-            continue;
+            a_Tok.Set ( it->second, sTok );
+            m_iPos += it->first.length();
+
+            m_iSynFlags = noVAL | noVAR | noFUN | noBO | noPOSTOP | noSTR | noASSIGN;
+            return true;
         }
-
-        a_Tok.Set ( it->second, sTok );
-        m_iPos += it->first.length();
-
-        m_iSynFlags = noVAL | noVAR | noFUN | noBO | noPOSTOP | noSTR | noASSIGN;
-        return true;
     }
 
     return false;
@@ -766,7 +765,8 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
  * @param a_Tok [out] If a value token is found it will be placed here.
  * @return true if a value token has been found.
  */
-bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const std::locale &s_locale )
+bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, const QChar &decimal,
+                                      const QChar &thousand )
 {
     assert ( m_pConstDef );
     assert ( m_pParser );
@@ -802,7 +802,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const std::locale &s_lo
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
         int iStart = m_iPos;
-        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, s_locale ) == 1 )
+        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, decimal, thousand ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
             strTok = m_strFormula.mid ( iStart, m_iPos-iStart );

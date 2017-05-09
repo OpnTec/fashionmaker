@@ -27,15 +27,28 @@
  *************************************************************************/
 
 #include "dialogbisector.h"
-#include "ui_dialogbisector.h"
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolbisector.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
+#include <QSet>
+#include <QToolButton>
+
 #include "../../tools/vabstracttool.h"
+#include "../../visualization/line/vistoolbisector.h"
+#include "../../visualization/visualization.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "ui_dialogbisector.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -60,7 +73,7 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    CheckState();
+    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
@@ -142,7 +155,6 @@ void DialogBisector::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogBisector::~DialogBisector()
 {
-    DeleteVisualization<VisToolBisector>();
     delete ui;
 }
 
@@ -159,7 +171,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Point)
         {
             VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-            SCASSERT(line != nullptr);
+            SCASSERT(line != nullptr)
 
             switch (number)
             {
@@ -176,7 +188,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
                         {
                             number++;
-                            line->setPoint2Id(id);
+                            line->setObject2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -192,7 +204,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxThirdPoint, ""))
                         {
-                            line->setPoint3Id(id);
+                            line->setObject3Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -246,7 +258,7 @@ void DialogBisector::SetFormula(const QString &value)
     ui->plainTextEditFormula->setPlainText(formula);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
     line->setLength(formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
@@ -262,8 +274,8 @@ void DialogBisector::SetFirstPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -276,8 +288,8 @@ void DialogBisector::SetSecondPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint2Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,14 +302,14 @@ void DialogBisector::SetThirdPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxThirdPoint, value);
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
-    line->setPoint3Id(value);
+    SCASSERT(line != nullptr)
+    line->setObject3Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogBisector::GetLineColor() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,11 +327,11 @@ void DialogBisector::SaveData()
     formula.replace("\n", " ");
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr);
+    SCASSERT(line != nullptr)
 
-    line->setPoint1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
-    line->setPoint3Id(GetThirdPointId());
+    line->setObject1Id(GetFirstPointId());
+    line->setObject2Id(GetSecondPointId());
+    line->setObject3Id(GetThirdPointId());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
@@ -339,7 +351,7 @@ void DialogBisector::closeEvent(QCloseEvent *event)
  */
 QString DialogBisector::GetTypeLine() const
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

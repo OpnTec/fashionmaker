@@ -19,7 +19,8 @@ DEPENDPATH +=  \
             ../../src/libs/vpatterndb \
             ../../src/libs/vmisc \
             ../../src/libs/vtools \
-            ../../src/libs/vformat
+            ../../src/libs/vformat \
+            ../../src/libs/fervor
 
 include(../../src/app/valentina/valentina.pri)
 include(../../src/app/tape/tape.pri)
@@ -33,26 +34,38 @@ include(../../src/libs/vpatterndb/vpatterndb.pri)
 include(../../src/libs/vmisc/vmisc.pri)
 include(../../src/libs/vtools/vtools.pri)
 include(../../src/libs/vformat/vformat.pri)
+include(../../src/libs/fervor/fervor.pri)
 
 # Add here path to new translation file with name "valentina_*_*.ts" if you want to add new language.
-# Same paths in variable INSTALL_TRANSLATIONS (app.pro).
+# Same paths in variable INSTALL_TRANSLATIONS (translations.pri).
 
 # File valentina.ts we use in transifex.com. It is empty translation file only with english inside. transifex.com use
-# this file like base for new language. Don't add path to valentina.ts to INSTALL_TRANSLATIONS variable (app.pro).
-# When adding a translation here, also add it in the macx part (app.pro).
-TRANSLATIONS += valentina.ts \
-                valentina_ru_RU.ts \
-                valentina_uk_UA.ts \
-                valentina_de_DE.ts \
-                valentina_cs_CZ.ts \
-                valentina_he_IL.ts \
-                valentina_fr_FR.ts \
-                valentina_it_IT.ts \
-                valentina_nl_NL.ts \
-                valentina_id_ID.ts \
-                valentina_es_ES.ts \
-                valentina_fi_FI.ts \
-                valentina_en_US.ts \
-                valentina_en_CA.ts \
-                valentina_en_IN.ts \
-                valentina_ro_RO.ts
+# this file like base for new language. Don't add path to valentina.ts to INSTALL_TRANSLATIONS variable (translations.pri).
+# When adding a translation here, also add it in the macx part (translations.pri).
+
+LANGUAGES += \
+    ru_RU \
+    uk_UA \
+    de_DE \
+    cs_CZ \
+    he_IL \
+    fr_FR \
+    it_IT \
+    nl_NL \
+    id_ID \
+    es_ES \
+    fi_FI \
+    en_US \
+    en_CA \
+    en_IN \
+    ro_RO \
+    zh_CN \
+    pt_BR \
+    el_GR
+
+TRANSLATIONS += valentina.ts
+
+for(lang, LANGUAGES) {
+    TRANSLATIONS += valentina_$${lang}.ts
+}
+

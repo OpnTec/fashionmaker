@@ -28,14 +28,29 @@
 
 #include "vobjengine.h"
 
+#include <QByteArray>
+#include <QFlag>
+#include <QFlags>
+#include <QIODevice>
+#include <QLatin1Char>
+#include <QMessageLogger>
+#include <QPaintEngineState>
+#include <QPainterPath>
+#include <QPointF>
+#include <QString>
 #include <QTextStream>
-#include <QDebug>
+#include <QVector>
+#include <QtDebug>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include "../vmisc/diagnostic.h"
+#include "../vmisc/vmath.h"
+
+class QPaintDevice;
+class QPixmap;
+class QPoint;
+class QPointF;
+class QPolygonF;
+class QRectF;
 
 #ifdef Q_CC_MSVC
     #include <ciso646>
@@ -44,14 +59,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#elif defined (Q_CC_INTEL)
-#pragma warning( push )
-#pragma warning( disable: 68 )
-#pragma warning( disable: 2022 )
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+QT_WARNING_DISABLE_INTEL(68)
+QT_WARNING_DISABLE_INTEL(2022)
 
     return QPaintEngine::PaintEngineFeatures(
         QPaintEngine::AllFeatures
@@ -60,9 +71,7 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#if defined(Q_CC_CLANG)
-#pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

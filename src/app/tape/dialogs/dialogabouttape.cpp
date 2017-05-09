@@ -30,6 +30,7 @@
 #include "ui_dialogabouttape.h"
 #include "../version.h"
 #include "../vmisc/def.h"
+#include "../fervor/fvupdater.h"
 
 #include <QDate>
 #include <QDesktopServices>
@@ -46,11 +47,23 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, &DialogAboutTape::WebButtonClicked);
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
+    {
+        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
+        {
+            qWarning() << tr("Cannot open your default browser");
+        }
+    });
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutTape::close);
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
+        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+    });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -100,18 +113,9 @@ void DialogAboutTape::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAboutTape::WebButtonClicked()
-{
-    if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
-    {
-        qWarning() << tr("Cannot open your default browser");
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::FontPointSize(QWidget *w, int pointSize)
 {
-    SCASSERT(w != nullptr);
+    SCASSERT(w != nullptr)
 
     QFont font = w->font();
     font.setPointSize(pointSize);
@@ -125,7 +129,7 @@ void DialogAboutTape::RetranslateUi()
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    const QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
+    const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
     ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",

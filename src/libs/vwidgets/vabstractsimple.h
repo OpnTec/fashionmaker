@@ -29,20 +29,43 @@
 #ifndef VABSTRACTSIMPLE_H
 #define VABSTRACTSIMPLE_H
 
+#include <QColor>
+#include <QMetaObject>
 #include <QObject>
 #include <QPen>
-#include <QColor>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
+
+class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject
 {
     Q_OBJECT
 public:
     VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
-                    QObject *parent = 0);
-    virtual ~VAbstractSimple() Q_DECL_OVERRIDE;
+                    QObject *parent = nullptr);
+    virtual ~VAbstractSimple();
 
-    virtual void ChangedActivDraw(const bool &flag)=0;
+    virtual void ToolSelectionType(const SelectionType &type);
+
+    QColor GetCurrentColor() const;
+
+    virtual void SetEnabled(bool enabled);
+
+    GOType GetType() const;
+    void   SetType(const GOType &value);
+
+signals:
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
+    void Delete();
+
+public slots:
+    void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
     /** @brief id spline id. */
@@ -58,27 +81,27 @@ protected:
 
     Unit    patternUnit;
 
+    SelectionType selectionType;
+
+    GOType  type;
+
     QColor CorrectColor(const QColor &color) const;
 
     template <class T>
-    void   SetPen(T *item, const QColor &color, qreal width);
+    void SetPen(T *item, const QColor &color, qreal width);
 
 private:
     Q_DISABLE_COPY(VAbstractSimple)
+
+    const static qreal m_defFactor;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
 void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
 {
-    if (factor == nullptr)
-    {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)));
-    }
-    else
-    {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor));
-    }
+    SCASSERT(item)
+    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
 }
 
 #endif // VABSTRACTSIMPLE_H

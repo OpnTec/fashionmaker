@@ -29,6 +29,13 @@
 #ifndef DIALOGSINGLEPOINT_H
 #define DIALOGSINGLEPOINT_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
 #include "dialogtool.h"
 
 namespace Ui

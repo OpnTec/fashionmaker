@@ -29,12 +29,15 @@
 #ifndef VOBJPAINTDEVICE_H
 #define VOBJPAINTDEVICE_H
 
+#include <qcompilerdetection.h>
 #include <QPaintDevice>
-#include <QString>
 #include <QSharedPointer>
+#include <QSize>
+#include <QString>
+#include <QtGlobal>
 
-class VObjEngine;
 class QIODevice;
+class VObjEngine;
 
 class VObjPaintDevice : public QPaintDevice
 {

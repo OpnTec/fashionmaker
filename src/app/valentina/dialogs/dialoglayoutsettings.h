@@ -34,7 +34,6 @@
 
 #include "../vlayout/vbank.h"
 #include "../ifc/ifcdef.h"
-#include "../vlayout/vlayoutgenerator.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "../vmisc/backport/qmarginsf.h"
@@ -67,7 +66,7 @@ public:
                                           Roll44in = 11,
                                           Custom = 12};
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
-    ~DialogLayoutSettings();
+    virtual ~DialogLayoutSettings();
 
     qreal GetPaperHeight() const;
     void SetPaperHeight(qreal value);
@@ -94,7 +93,7 @@ public:
     bool SetIncrease(int increase);
 
     bool GetAutoCrop() const;
-    void SetAutoCrop(bool crop);
+    void SetAutoCrop(bool autoCrop);
 
     bool IsSaveLength() const;
     void SetSaveLength(bool save);
@@ -102,8 +101,16 @@ public:
     bool IsUnitePages() const;
     void SetUnitePages(bool save);
 
+    bool IsStripOptimization() const;
+    void SetStripOptimization(bool save);
+
+    quint8 GetMultiplier() const;
+    void   SetMultiplier(const quint8 &value);
+
     bool IsIgnoreAllFields() const;
     void SetIgnoreAllFields(bool value);
+
+    QString SelectedPrinter() const;
 
     //support functions for the command line parser which uses invisible dialog to properly build layout generator
     bool SelectTemplate(const PaperSizeTemplate& id);
@@ -116,17 +123,17 @@ public:
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 public slots:
+    void DialogAccepted();
+private slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
-
     void TemplateSelected();
     void FindTemplate();
     void PaperSizeChanged();
     void Swap(bool checked);
-
-    void DialogAccepted();
     void RestoreDefaults();
-private slots:
+    void PrinterMargins();
+
     void CorrectMaxFileds();
     void IgnoreAllFields(int state);
 private:
@@ -146,10 +153,12 @@ private:
     void InitPaperUnits();
     void InitLayoutUnits();
     void InitTemplates();
+    void InitPrinter();
     QSizeF Template();
     QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
     QSizeF RoundTemplateSize(qreal width, qreal height) const;
-    QMarginsF RoundMargins(const QMarginsF &margins) const;
+    QMarginsF MinPrinterFields() const;
+    QMarginsF GetDefPrinterFields() const;
 
     Unit PaperUnit() const;
     Unit LayoutUnit() const;

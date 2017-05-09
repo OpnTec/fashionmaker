@@ -34,7 +34,6 @@
 #include <QDomElement>
 
 class VPattern;
-class VToolRecord;
 
 namespace Ui
 {
@@ -91,6 +90,7 @@ private:
     QString           PointName(quint32 pointId);
     quint32           AttrUInt(const QDomElement &domElement, const QString &name);
     void              RetranslateUi();
+    int               CursorRow() const;
 };
 
 #endif // DIALOGHISTORY_H

@@ -169,7 +169,7 @@ QMAKE_EXTRA_COMPILERS += diagrams
 
 QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
 
-# INSTALL_STANDARD_MEASHUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 copyToDestdir($$INSTALL_STANDARD_TEMPLATES, $$shell_path($${OUT_PWD}/$${DESTDIR}/tables/templates))
 include(../translations.pri)
@@ -202,13 +202,17 @@ unix{
 
         # Check which minimal OSX version supports current Qt version
         # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
-        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {
-            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 7) {# Qt 5.8
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
         } else {
-            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {
-                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {# Qt 5.7
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
             } else {
-                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {# Qt 5.4
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+                } else {
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                }
             }
         }
 
@@ -237,7 +241,7 @@ unix{
 
         # Copy to bundle standard measurements files
         standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
@@ -248,7 +252,8 @@ unix{
         QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/$${DESTDIR}/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
 
         format.path = $$RESOURCES_DIR/
-        format.files = $$PWD/../../../dist/macx/measurements.icns
+        format.files += $$PWD/../../../dist/macx/i-measurements.icns
+        format.files += $$PWD/../../../dist/macx/s-measurements.icns
 
         QMAKE_BUNDLE_DATA += \
             templates \
@@ -256,6 +261,15 @@ unix{
             libraries \
             format
     }
+}
+
+win32 {
+    for(DIR, INSTALL_OPENSSL) {
+        #add these absolute paths to a variable which
+        #ends up as 'mkcommands = path1 path2 path3 ...'
+        openssl_path += $${PWD}/$$DIR
+    }
+    copyToDestdir($$openssl_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
 }
 
 # Compilation will fail without this files after we added them to this section.
@@ -266,56 +280,9 @@ OTHER_FILES += \
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-CONFIG(debug, debug|release){
-    # Debug mode
-    unix {
-        #Turn on compilers warnings.
-        *-g++{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
+include(warnings.pri)
 
-            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
-                # do nothing
-            } else {
-                #gcc’s 4.8.0 Address Sanitizer
-                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
-                QMAKE_LFLAGS += -fsanitize=address
-            }
-        }
-        clang*{
-            QMAKE_CXXFLAGS += \
-                # Key -isystem disable checking errors in system headers.
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
-
-            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-            # want them in global list. Compromise decision delete them from local list.
-            QMAKE_CXXFLAGS -= \
-                -Wundefined-reinterpret-cast \
-                -Wmissing-prototypes # rcc folder
-        }
-        *-icc-*{
-            QMAKE_CXXFLAGS += \
-                -isystem "$${OUT_PWD}/$${UI_DIR}" \
-                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$ICC_DEBUG_CXXFLAGS
-        }
-    } else {
-        *-g++{
-        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
-        }
-    }
-    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
-}else{
+CONFIG(release, debug|release){
     # Release mode
     !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
@@ -337,34 +304,25 @@ CONFIG(debug, debug|release){
             QMAKE_LFLAGS_RELEASE =
         }
     }
-
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms all OK.
-    }
-
-    #build revision number for using in version
-    unix {
-        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(HG_HESH){
-        HG_HESH = "unknown" # if we can't find build revision left unknown.
-    }
-    message("Build revision:" $${HG_HESH})
-    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+DVCS_HESH=$$FindBuildRevision()
+message("Build revision:" $${DVCS_HESH})
+DEFINES += "BUILD_REVISION=$${DVCS_HESH}" # Make available build revision number in sources.
 
 # Path to recource file.
 win32:RC_FILE = share/resources/tape.rc
 
-unix:!macx{
-    # suppress the default RPATH
-    QMAKE_LFLAGS_RPATH =
-    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+noRunPath{ # For enable run qmake with CONFIG+=noRunPath
+    # do nothing
+} else {
+    unix:!macx{
+        # suppress the default RPATH
+        # helps to run the program without Qt Creator
+        # see problem with path to libqmuparser and libpropertybrowser
+        QMAKE_LFLAGS_RPATH =
+        QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+    }
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
@@ -407,6 +365,24 @@ DEPENDPATH += $$PWD/../../libs/vpatterndb
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
 
+# Fervor static library (depend on VMisc, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/fervor/$${DESTDIR}/ -lfervor
+
+INCLUDEPATH += $$PWD/../../libs/fervor
+DEPENDPATH += $$PWD/../../libs/fervor
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/fervor.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/fervor/$${DESTDIR}/libfervor.a
+
+# IFC static library (depend on QMuParser, VMisc)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
+
+INCLUDEPATH += $$PWD/../../libs/ifc
+DEPENDPATH += $$PWD/../../libs/ifc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
+
 #VMisc static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR}/ -lvmisc
 
@@ -424,15 +400,6 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
-
-# IFC static library (depend on QMuParser)
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
-
-INCLUDEPATH += $$PWD/../../libs/ifc
-DEPENDPATH += $$PWD/../../libs/ifc
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
 
 # VLayout static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout

@@ -29,6 +29,12 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
+#include <qcompilerdetection.h>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <QtGlobal>
+
 #include "vvariable.h"
 
 class VIncrementData;
@@ -44,8 +50,16 @@ public:
     VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula, bool ok,
                const QString &description = QString());
     VIncrement(const VIncrement &incr);
-    VIncrement &operator=(const VIncrement &incr);
+
     virtual ~VIncrement() Q_DECL_OVERRIDE;
+
+    VIncrement &operator=(const VIncrement &incr);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW { Swap(incr); return *this; }
+#endif
+
+    void Swap(VIncrement &incr) Q_DECL_NOTHROW
+    { VVariable::Swap(incr); std::swap(d, incr.d); }
 
     quint32     getIndex() const;
     QString     GetFormula() const;

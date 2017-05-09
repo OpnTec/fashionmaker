@@ -27,10 +27,14 @@
  *************************************************************************/
 
 #include "vmeasurement.h"
-#include "vmeasurement_p.h"
 
 #include <QMap>
+#include <QMessageLogger>
 #include <QtDebug>
+
+#include "../ifc/ifcdef.h"
+#include "vvariable.h"
+#include "vmeasurement_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -112,7 +116,6 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
 
     if (list.isEmpty())
     {
-        // from 92 cm to 194 cm
         list = VMeasurement::WholeListHeights(patternUnit);
     }
     return list;
@@ -140,7 +143,6 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
 
     if (list.isEmpty())
     {
-        // from 22 cm to 56 cm
         list = VMeasurement::WholeListSizes(patternUnit);
     }
     return list;
@@ -155,8 +157,8 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
         qWarning()<<"Standard table doesn't support inches.";
         return list;
     }
-    // from 92 cm to 194 cm
-    for (int i = 92; i<= 194; i = i+6)
+
+    for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H200); i = i+heightStep)
     {
         ListValue(list, i, patternUnit);
     }
@@ -174,8 +176,7 @@ QStringList VMeasurement::WholeListSizes(Unit patternUnit)
         return list;
     }
 
-    // from 22 cm to 56 cm
-    for (int i = 22; i<= 56; i = i+2)
+    for (int i = static_cast<int>(GSizes::S22); i<= static_cast<int>(GSizes::S72); i = i+sizeStep)
     {
        ListValue(list, i, patternUnit);
     }
@@ -189,14 +190,7 @@ bool VMeasurement::IsGradationSizeValid(const QString &size)
     if (not size.isEmpty())
     {
         const QStringList sizes = VMeasurement::WholeListSizes(Unit::Cm);
-        if (sizes.contains(size))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return sizes.contains(size);
     }
     else
     {
@@ -210,14 +204,7 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
     if (not height.isEmpty())
     {
         const QStringList heights = VMeasurement::WholeListHeights(Unit::Cm);
-        if (heights.contains(height))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return heights.contains(height);
     }
     else
     {

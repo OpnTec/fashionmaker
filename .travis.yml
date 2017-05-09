@@ -1,62 +1,101 @@
 language: cpp
-
-os:
-  - linux
-
-compiler:
-  - gcc
-  - clang
-
-sudo: false
-
-install:
-  # g++4.8.1
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"  CC="gcc-4.8"; fi
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - ubuntu-sdk-team
-    packages:
-    - qtbase5-dev 
-    - libqt5svg5-dev 
-    - qt5-default 
-    - qttools5-dev-tools 
-    - libqt5xmlpatterns5-dev
-    - libqt5core5a 
-    - libqt5gui5 
-    - libqt5printsupport5 
-    - libqt5svg5 
-    - libqt5widgets5 
-    - libqt5xml5 
-    - libqt5xmlpatterns5 
-    - xpdf
-    - gcc-4.8
-    - g++-4.8
-    - clang
-
+matrix:
+  include:
+  - os: linux
+    dist: trusty
+    sudo: required
+    compiler: clang
+    env: DEPLOY=false
+    cache:
+    - ccache
+    directories:
+      - '$HOME/.sonar/cache'
+  - os: osx
+    compiler: clang
+    env: DEPLOY=true
+before_install:
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    sudo apt-get -qq update;
+    sudo apt-get install -y qtbase5-dev;
+    sudo apt-get install -y libqt5svg5-dev;
+    sudo apt-get install -y qt5-default;
+    sudo apt-get install -y qttools5-dev-tools;
+    sudo apt-get install -y libqt5xmlpatterns5-dev;
+    sudo apt-get install -y libqt5core5a;
+    sudo apt-get install -y libqt5gui5;
+    sudo apt-get install -y libqt5printsupport5;
+    sudo apt-get install -y libqt5svg5;
+    sudo apt-get install -y libqt5widgets5;
+    sudo apt-get install -y libqt5xml5;
+    sudo apt-get install -y libqt5xmlpatterns5;
+    sudo apt-get install -y xpdf;
+    sudo apt-get install -y xvfb;
+  else
+    brew update > /dev/null;
+    brew install qt5;
+    chmod -R 755 /usr/local/opt/qt5/*
+  fi
 before_script:
-  # QTestLib require GUI support for some tests
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - mkdir build
-  - cd build
-  - which qmake
-  - uname -a
-  - qmake --version
-  - qmake ../Valentina.pro -r CONFIG+=no_ccache
-
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    uname -a;
+    which qmake;
+  else
+    QTDIR="/usr/local/opt/qt5";
+    PATH="$QTDIR/bin:$PATH";
+    LDFLAGS=-L$QTDIR/lib;
+    CPPFLAGS=-I$QTDIR/include;
+    PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig;
+  fi
+- mkdir build
+- cd build
+- pwd
+- qmake --version
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+  else
+    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
+  fi
 script:
-  - $CXX --version
-  - make -j$(nproc)
-  - DISPLAY=:99.0 make check
-
+- $CXX --version
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    # build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
+    make -j$(nproc);
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
+    xvfb-run -a make --silent check TESTARGS="-silent";
+    cd ..;
+    #sonar-scanner;
+  else
+    make -j1;
+  fi  
 notifications:
-   email:
-     recipients:
-        - dismine@gmail.com
-        - susan.spencer@gmail.com
-        - zhuravska19@gmail.com
-     on_success: change
-     on_failure: always
+  email:
+    recipients:
+    - dismine@gmail.com
+    - susan.spencer@gmail.com
+    on_success: change
+    on_failure: always
+before_deploy:
+- |
+  if [[ "$DEPLOY" == "true" ]]; then
+    ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
+    tar --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app/;
+  fi
+deploy:
+  provider: bintray
+  skip_cleanup: true
+  file: ../share/bintray.json
+  user: dismine
+  key:
+    secure: iVSPhWX6DiHu2RVMkR2LwnnyX5CvsJDcN6wakDVQ3TKnthCuTLiW1XGHAqdWZpY3TqZz+0/KcFcn8afVohxLMLsNB6h71APvsyjiGusM+VtPpIIbQagWxViNcadE/gNSiQszCe1eMUp5EFaLrNXoDj1Zu1OJcy3misrt0NxOXRuYX4uupl1dWNxl38j8CFycNwh89N5vNi/XEboFwzaGZLrYIAClyeUuXYDGFBUuWOvSGgPUXycBvsb37qkYQmiNk+LOx6327KLbnTapAkisqO+jvJuYyUHByBZ2a1moUCyP8vWY243kpXLdcoZljOWZ4af7+SBdpAFe7h0e32+MKA6DbnuVUZ8ElA7WKNmLaPxuJo7jfdfZukVSSPvP0Bcz+cthoRKVSvYr0ejKppofi8pQ23/JgShuMgG1QXTis//7o4AL4qrJkF09+SrfVAjRPV57iDY8Bllj/g2BAK6Xh+XK2byjHQQ1+HKjPV3ESsRL2g0S/2xp77jd1wik9yRWBUb3sZCFnwxi8/m7G/WXqLu16VccbkckiBeyt8I6P++hLDMUc1Jb+S3CuHWB5/Obz4KrxMUMgNBfCEgud5ic/RAsmnJdzuzT364pm1spF3P+iOiffCPHcbFncdarFNPNrW2Kza7julLSDeMXqP4b78cPxt0eCymbr8Uae67c2RM=
+  dry-run: false
+  on:
+    all_branches: true
+    condition: $DEPLOY = true
+#addons:
+#  sonarqube:
+#    token:
+#      secure: qYgcPp4yCkv6lA2IQjRZInsI9mHWSVjSQw+veI1v5Tg4VnoGSN8II2zh3syruNrfZ2uc5Sy3NlTpqZXB8BN/Sbaw0KP0ylnI8UHjmXazuVdY7P/0hnGrb3be/x47xWSNKIm6jRwbDgYVeNHhF3rW2RxXkBbfqXX8/fe8GIyYWIgy9ls/v1tadfzALg6RO4NpqUNQvA5xn5qlyRZnduruemAQ7WyweaNAWrQ5NOMDkxJ4VC4rB+L62E4aZEsW8uaSFuK8NKpe07cnpfIJ+ceUNJx9r2PGCHKd/U1zY/cl9nPjAzw2z70xBUUBZcqMluA52ZSE0bM1LlzNsGVAyOJmOUYbhuLN3wSNv0av4TbhGQtPN5ePZm4hxIZMkgYl2wLh8Rg3r7veKwGhuJGLEmn6uFSOgP1rgd3pOrEjWyjKpZI3iNHyWQJPh96VSbNnsxp/gfcJR7rxCcaU6xhdEjxHWlBqpSCFw0zLqgbl2evN1vveNcoh3lF04Oh6Rc4S4oZRX6M16cEKDKaLyl/HzoFm7xUviG7iVqKb4yrj2ZTM3VLPBtW4Sh0UoY9DXiiS/SZ5HVn2r+vGIm7AxYz0Eg9gO3scV38nsk0RRP/IOJdb2DFZVH9vVP7dS76rucufzMt/yhn0ZiuPST56Ic41VA2PnnNv7QevgY8g7jzpyTgHGMk=

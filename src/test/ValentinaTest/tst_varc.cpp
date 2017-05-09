@@ -28,7 +28,7 @@
 
 #include "tst_varc.h"
 #include "../vgeometry/varc.h"
-#include "../vlayout/vabstractdetail.h"
+#include "../vlayout/vabstractpiece.h"
 #include "../vmisc/logging.h"
 
 #include <QtTest>
@@ -181,7 +181,7 @@ void TST_VArc::TestGetPoints()
 
         for (int i=0; i < points.size(); ++i)
         {
-            QLineF rLine(center.toQPointF(), points.at(i));
+            QLineF rLine(static_cast<QPointF>(center), points.at(i));
             const qreal value = qAbs(rLine.length() - radius);
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
                                              "the center. Error ='%1'.").arg(value);
@@ -190,24 +190,130 @@ void TST_VArc::TestGetPoints()
     }
 
     {
-        qreal gSquere = 0.0;// geometry squere
+        qreal gSquere = 0.0;// geometry square
 
-        if (qFuzzyCompare(arc.AngleArc(), 360.0))
-        {// circle squere
+        if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
+        {// circle square
             gSquere = M_PI * radius * radius;
         }
         else
-        {// sector squere
+        {// sector square
             gSquere = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
-            points.append(center.toQPointF());
+            points.append(static_cast<QPointF>(center));
         }
 
-        // calculated squere
-        const qreal cSquare = qAbs(VAbstractDetail::SumTrapezoids(points)/2.0);
+        // calculated square
+        const qreal cSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
         const qreal value = qAbs(gSquere - cSquare);
         const QString errorMsg =
                 QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
         const qreal epsSquere = gSquere * 0.24 / 100; // computing error 0.24 % from origin squere
         QVERIFY2(value <= epsSquere, qUtf8Printable(errorMsg));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotation_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<QPointF>("rotatePoint");
+    QTest::addColumn<qreal>("degrees");
+    QTest::addColumn<QString>("prefix");
+
+    QTest::newRow("Test arc 1") << QPointF(10, 10) << 10. << 0. << 90. << QPointF() << 90. << "_r";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotation()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(QPointF, rotatePoint);
+    QFETCH(qreal, degrees);
+    QFETCH(QString, prefix);
+
+    const VArc arcOrigin(VPointF(center), radius, startAngle, endAngle);
+    const VArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
+
+    QCOMPARE(arcOrigin.GetLength(), rotatedArc.GetLength());
+    QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
+    QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestFlip_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QString>("prefix");
+
+    const qreal radius = 5;
+    QPointF center(10, 5);
+
+    QPointF p1(10, 0);
+    QPointF p2(5, 5);
+
+    QLineF axis(QPointF(4, 6), QPointF(12, 6));
+
+    QTest::newRow("Vertical axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                   << axis << "a2";
+
+    p1 = QPointF(15, 5);
+    p2 = QPointF(10, 0);
+
+    axis = QLineF(QPointF(9, -1), QPointF(9, 6));
+
+    QTest::newRow("Horizontal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                     << axis << "a2";
+
+    QLineF l(center.x(), center.y(), center.x() + radius, center.y());
+
+    l.setAngle(45);
+    p2 = l.p2();
+
+    l.setAngle(225);
+    p1 = l.p2();
+
+    l.setAngle(45+90);
+    l.setLength(5);
+
+    const QPointF p1Axis = l.p2();
+    axis = QLineF(p1Axis.x(), p1Axis.y(), p1Axis.x() + radius, p1Axis.y());
+    axis.setAngle(45);
+
+    QTest::newRow("Diagonal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
+                                   << axis << "a2";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestFlip()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(QLineF, axis);
+    QFETCH(QString, prefix);
+
+    VArc originArc(VPointF(center), radius, startAngle, endAngle);
+    const VArc res = originArc.Flip(axis, prefix);
+
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    QVERIFY2(res.IsFlipped(), qUtf8Printable("The arc is not flipped"));
+
+    QCOMPARE(originArc.GetLength()*-1, res.GetLength());
+    QCOMPARE(originArc.GetRadius(), res.GetRadius());
+    QCOMPARE(originArc.AngleArc(), res.AngleArc());
 }

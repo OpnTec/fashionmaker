@@ -2,7 +2,6 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
-    $$PWD/vtooldetail.h \
     $$PWD/vdatatool.h \
     $$PWD/vabstracttool.h \
     $$PWD/tools.h \
@@ -46,10 +45,24 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolarcwithlength.h \
     $$PWD/drawTools/toolpoint/vabstractpoint.h \
     $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.h \
-    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h \
+    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h \
+    $$PWD/drawTools/toolcurve/vtoolcubicbezier.h \
+    $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.h \
+    $$PWD/drawTools/operation/vtoolrotation.h \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyline.h \
+    $$PWD/drawTools/operation/vabstractoperation.h \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.h \
+    $$PWD/drawTools/operation/flipping/vabstractflipping.h \
+    $$PWD/drawTools/operation/vtoolmove.h \
+    $$PWD/drawTools/toolcurve/vtoolellipticalarc.h \
+    $$PWD/nodeDetails/vnodeellipticalarc.h \
+    $$PWD/vtoolseamallowance.h \
+    $$PWD/nodeDetails/vtoolpiecepath.h \
+    $$PWD/nodeDetails/vtoolpin.h \
+    $$PWD/vinteractivetool.h
 
 SOURCES += \
-    $$PWD/vtooldetail.cpp \
     $$PWD/vdatatool.cpp \
     $$PWD/vabstracttool.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtooltriangle.cpp \
@@ -90,4 +103,19 @@ SOURCES += \
     $$PWD/drawTools/toolcurve/vtoolarcwithlength.cpp \
     $$PWD/drawTools/toolpoint/vabstractpoint.cpp \
     $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp \
-    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.cpp
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.cpp \
+    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp \
+    $$PWD/drawTools/toolcurve/vtoolcubicbezier.cpp \
+    $$PWD/drawTools/toolcurve/vtoolcubicbezierpath.cpp \
+    $$PWD/drawTools/operation/vtoolrotation.cpp \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyline.cpp \
+    $$PWD/drawTools/operation/vabstractoperation.cpp \
+    $$PWD/drawTools/operation/flipping/vtoolflippingbyaxis.cpp \
+    $$PWD/drawTools/operation/flipping/vabstractflipping.cpp \
+    $$PWD/drawTools/operation/vtoolmove.cpp \
+    $$PWD/drawTools/toolcurve/vtoolellipticalarc.cpp \
+    $$PWD/nodeDetails/vnodeellipticalarc.cpp \
+    $$PWD/vtoolseamallowance.cpp \
+    $$PWD/nodeDetails/vtoolpiecepath.cpp \
+    $$PWD/nodeDetails/vtoolpin.cpp \
+    $$PWD/vinteractivetool.cpp

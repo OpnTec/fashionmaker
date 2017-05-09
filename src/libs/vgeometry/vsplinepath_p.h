@@ -32,25 +32,20 @@
 #include <QSharedData>
 #include "vsplinepoint.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 class VSplinePathData : public QSharedData
 {
 public:
 
     VSplinePathData()
-        : path(QVector<VSplinePoint>()), kCurve(1)
-    {}
-
-    explicit VSplinePathData(qreal kCurve)
-        : path(QVector<VSplinePoint>()), kCurve(kCurve)
+        : path(QVector<VSplinePoint>())
     {}
 
     VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve)
+        : QSharedData(splPath),
+          path(splPath.path)
     {}
 
     virtual ~VSplinePathData();
@@ -59,10 +54,6 @@ public:
      * @brief path list spline point.
      */
     QVector<VSplinePoint> path;
-    /**
-     * @brief kCurve coefficient of curvature spline.
-     */
-    qreal         kCurve;
 
 private:
     VSplinePathData &operator=(const VSplinePathData &) Q_DECL_EQ_DELETE;
@@ -71,8 +62,6 @@ private:
 VSplinePathData::~VSplinePathData()
 {}
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
 
 #endif // VSPLINEPATH_P_H

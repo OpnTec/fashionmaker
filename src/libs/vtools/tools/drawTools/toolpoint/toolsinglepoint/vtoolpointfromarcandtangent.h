@@ -29,18 +29,28 @@
 #ifndef VTOOLPOINTFROMARCANDTANGENT_H
 #define VTOOLPOINTFROMARCANDTANGENT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
+
+template <class T> class QSharedPointer;
 
 class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
-                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointFromArcAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                               VContainer *data);
+    static VToolPointFromArcAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                               VAbstractPattern *doc, VContainer *data);
     static VToolPointFromArcAndTangent *Create(const quint32 _id, const QString &pointName, quint32 arcId,
                                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const qreal &mx,
                                                const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -49,6 +59,9 @@ public:
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointFromArcAndTangent) };
+
+    QString TangentPointName() const;
+    QString ArcName() const;
 
     quint32 GetTangentPointId() const;
     void    SetTangentPointId(const quint32 &value);
@@ -73,6 +86,10 @@ private:
     quint32 arcId;
     quint32 tangentPointId;
     CrossCirclesPoint crossPoint;
+
+    VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
+                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMARCANDTANGENT_H

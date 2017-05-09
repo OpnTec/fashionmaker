@@ -42,7 +42,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     ui->progressBar->setMaximum(maxCount);
     ui->progressBar->setValue(0);
@@ -54,8 +54,8 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     movie->start ();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCancel != nullptr);
-    connect(bCancel, &QPushButton::clicked, this, &DialogLayoutProgress::StopWorking);
+    SCASSERT(bCancel != nullptr)
+    connect(bCancel, &QPushButton::clicked, RECEIVER(this)[this](){emit Abort();});
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -91,11 +91,10 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
         case LayoutErrors::PrepareLayoutError:
             qCritical() << tr("Couldn't prepare data for creation layout");
             break;
-        case LayoutErrors::ProcessStoped:
-            break;
         case LayoutErrors::EmptyPaperError:
             qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
             break;
+        case LayoutErrors::ProcessStoped:
         default:
             break;
     }
@@ -107,12 +106,6 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
 void DialogLayoutProgress::Finished()
 {
     done(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::StopWorking()
-{
-    emit Abort();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

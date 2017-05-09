@@ -27,11 +27,14 @@
  *************************************************************************/
 
 #include "calculator.h"
-#include <QDebug>
-#include <QSettings>
-#include "vcontainer.h"
 
-using namespace qmu;
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QStringList>
+
+#include "../vmisc/def.h"
+#include "../qmuparser/qmuparsererror.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -50,15 +53,10 @@ using namespace qmu;
 Calculator::Calculator()
     :QmuFormulaBase()
 {
-    InitCharacterSets();
+    InitCharSets();
     setAllowSubexpressions(false);//Only one expression per time
 
     SetSepForEval();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Calculator::~Calculator()
-{
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,7 +135,7 @@ void Calculator::InitVariables(const QHash<QString, qreal *> &vars, const QMap<i
 
         if (found == false)
         {
-            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
+            throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
         }
         ++i;
     }

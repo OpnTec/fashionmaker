@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>657</width>
+    <width>727</width>
     <height>532</height>
    </rect>
   </property>
@@ -29,6 +29,58 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayoutPath">
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Path:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditPathToFile">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background: transparent;</string>
+           </property>
+           <property name="frame">
+            <bool>false</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string notr="true">Path to the pattern file.</string>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignRight">
+          <widget class="QPushButton" name="pushButtonShowInExplorer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Show in Explorer</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="label">
@@ -43,20 +95,86 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Pattern description</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Pattern description</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="plainTextEditDescription">
+             <property name="documentTitle">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditDescription">
-           <property name="documentTitle">
-            <string/>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <property name="spacing">
+            <number>6</number>
            </property>
-          </widget>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="imageLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>200</horstretch>
+               <verstretch>200</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Call context menu for edit</string>
+             </property>
+             <property name="text">
+              <string>No image</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="margin">
+              <number>1</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -186,45 +304,7 @@
               <property name="sizeConstraint">
                <enum>QLayout::SetMaximumSize</enum>
               </property>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="checkBoxH92">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">92</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="checkBoxH146">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">146</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
+              <item row="8" column="0">
                <widget class="QCheckBox" name="checkBoxH98">
                 <property name="enabled">
                  <bool>true</bool>
@@ -243,8 +323,58 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="checkBoxH152">
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="checkBoxH50">
+                <property name="text">
+                 <string notr="true">50</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="checkBoxH56">
+                <property name="text">
+                 <string notr="true">56</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="checkBoxH62">
+                <property name="text">
+                 <string notr="true">62</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="checkBoxH68">
+                <property name="text">
+                 <string notr="true">68</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="checkBoxH74">
+                <property name="text">
+                 <string notr="true">74</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QCheckBox" name="checkBoxH92">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -255,14 +385,34 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string notr="true">152</string>
+                 <string notr="true">92</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="checkBoxH86">
+                <property name="text">
+                 <string notr="true">86</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="checkBoxH80">
+                <property name="text">
+                 <string notr="true">80</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
                <widget class="QCheckBox" name="checkBoxH104">
                 <property name="enabled">
                  <bool>true</bool>
@@ -287,26 +437,7 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="checkBoxH158">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">158</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
+              <item row="1" column="1">
                <widget class="QCheckBox" name="checkBoxH110">
                 <property name="enabled">
                  <bool>true</bool>
@@ -325,26 +456,7 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="checkBoxH164">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">164</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
+              <item row="2" column="1">
                <widget class="QCheckBox" name="checkBoxH116">
                 <property name="enabled">
                  <bool>true</bool>
@@ -363,26 +475,7 @@
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="checkBoxH170">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">170</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
+              <item row="3" column="1">
                <widget class="QCheckBox" name="checkBoxH122">
                 <property name="enabled">
                  <bool>true</bool>
@@ -401,26 +494,7 @@
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="checkBoxH176">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">176</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
+              <item row="4" column="1">
                <widget class="QCheckBox" name="checkBoxH128">
                 <property name="enabled">
                  <bool>true</bool>
@@ -439,26 +513,7 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
-               <widget class="QCheckBox" name="checkBoxH182">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">182</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
+              <item row="5" column="1">
                <widget class="QCheckBox" name="checkBoxH134">
                 <property name="enabled">
                  <bool>true</bool>
@@ -477,26 +532,7 @@
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
-               <widget class="QCheckBox" name="checkBoxH188">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">188</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
+              <item row="6" column="1">
                <widget class="QCheckBox" name="checkBoxH140">
                 <property name="enabled">
                  <bool>true</bool>
@@ -515,7 +551,159 @@
                 </property>
                </widget>
               </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="checkBoxH146">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">146</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item row="8" column="1">
+               <widget class="QCheckBox" name="checkBoxH152">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">152</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBoxH158">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">158</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="checkBoxH164">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">164</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="checkBoxH170">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">170</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QCheckBox" name="checkBoxH176">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">176</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="checkBoxH182">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">182</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QCheckBox" name="checkBoxH188">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">188</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
                <widget class="QCheckBox" name="checkBoxH194">
                 <property name="enabled">
                  <bool>true</bool>
@@ -528,6 +716,16 @@
                 </property>
                 <property name="text">
                  <string notr="true">194</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="2">
+               <widget class="QCheckBox" name="checkBoxH200">
+                <property name="text">
+                 <string notr="true">200</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -560,6 +758,63 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QGridLayout" name="gridLayout">
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="checkBoxS46">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">46</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="checkBoxS48">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">48</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QCheckBox" name="checkBoxS38">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">38</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QCheckBox" name="checkBoxS22">
                 <property name="enabled">
@@ -573,25 +828,6 @@
                 </property>
                 <property name="text">
                  <string notr="true">22</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="checkBoxS40">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">40</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -617,8 +853,8 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="checkBoxS42">
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="checkBoxS50">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -629,7 +865,45 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string notr="true">42</string>
+                 <string notr="true">50</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QCheckBox" name="checkBoxS36">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">36</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QCheckBox" name="checkBoxS56">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">56</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -649,6 +923,139 @@
                 </property>
                 <property name="text">
                  <string notr="true">26</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="checkBoxS30">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">30</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="checkBoxS54">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">54</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="checkBoxS40">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">40</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QCheckBox" name="checkBoxS52">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">52</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="checkBoxS32">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">32</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="checkBoxS42">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">42</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="checkBoxS34">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string notr="true">34</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -693,209 +1100,80 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="checkBoxS46">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="checkBoxS60">
                 <property name="text">
-                 <string notr="true">46</string>
+                 <string notr="true">60</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
-               <widget class="QCheckBox" name="checkBoxS30">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="checkBoxS62">
                 <property name="text">
-                 <string notr="true">30</string>
+                 <string notr="true">62</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="checkBoxS48">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="3" column="2">
+               <widget class="QCheckBox" name="checkBoxS64">
                 <property name="text">
-                 <string notr="true">48</string>
+                 <string notr="true">64</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
-               <widget class="QCheckBox" name="checkBoxS32">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="checkBoxS66">
                 <property name="text">
-                 <string notr="true">32</string>
+                 <string notr="true">66</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="checkBoxS50">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="5" column="2">
+               <widget class="QCheckBox" name="checkBoxS68">
                 <property name="text">
-                 <string notr="true">50</string>
+                 <string notr="true">68</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QCheckBox" name="checkBoxS34">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBoxS58">
                 <property name="text">
-                 <string notr="true">34</string>
+                 <string notr="true">58</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
-               <widget class="QCheckBox" name="checkBoxS52">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="6" column="2">
+               <widget class="QCheckBox" name="checkBoxS70">
                 <property name="text">
-                 <string notr="true">52</string>
+                 <string notr="true">70</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="7" column="0">
-               <widget class="QCheckBox" name="checkBoxS36">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+              <item row="7" column="2">
+               <widget class="QCheckBox" name="checkBoxS72">
                 <property name="text">
-                 <string notr="true">36</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QCheckBox" name="checkBoxS54">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">54</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QCheckBox" name="checkBoxS38">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">38</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
-               <widget class="QCheckBox" name="checkBoxS56">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string notr="true">56</string>
+                 <string notr="true">72</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -908,6 +1186,115 @@
           </layout>
          </item>
         </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Security</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item alignment="Qt::AlignTop">
+        <widget class="QCheckBox" name="checkBoxPatternReadOnly">
+         <property name="text">
+          <string>Open only for read</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>General info</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_12">
+       <item>
+        <layout class="QFormLayout" name="formLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Pattern name:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditPatternName">
+           <property name="maxLength">
+            <number>30</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Pattern number:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEditPatternNumber">
+           <property name="maxLength">
+            <number>30</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Company/Designer name:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEditCompanyName">
+           <property name="maxLength">
+            <number>30</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Customer name:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lineEditCustomerName">
+           <property name="maxLength">
+            <number>30</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Pattern size:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEditSize">
+           <property name="maxLength">
+            <number>40</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxShowDate">
+         <property name="text">
+          <string>Show date of layout creation (%1)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxShowMeasurements">
+         <property name="text">
+          <string>Show measurements file</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -936,8 +1323,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>682</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -952,8 +1339,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>682</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

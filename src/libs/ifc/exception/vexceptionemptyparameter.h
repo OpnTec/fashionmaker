@@ -29,6 +29,11 @@
 #ifndef VEXCEPTIONEMPTYPARAMETER_H
 #define VEXCEPTIONEMPTYPARAMETER_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifcdef.h"
 #include "vexception.h"
 
 class QDomElement;
@@ -39,10 +44,10 @@ class QDomElement;
 class VExceptionEmptyParameter : public VException
 {
 public:
-    VExceptionEmptyParameter(const QString &error, const QString &name,
-                             const QDomElement &domElement);
+    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
-    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
+    VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e);
+    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
     virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
     virtual QString DetailedInformation() const Q_DECL_OVERRIDE;
     QString         Name() const;

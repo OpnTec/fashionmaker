@@ -19,15 +19,15 @@
  *************************************************************************/
 
 #include "vobjectproperty.h"
-#include "../vproperty_p.h"
 
 #include <QComboBox>
 #include <QCoreApplication>
-#include <QDebug>
+#include <QLocale>
+#include <QWidget>
 
-using namespace VPE;
+#include "../vproperty_p.h"
 
-VObjectProperty::VObjectProperty(const QString& name)
+VPE::VObjectProperty::VObjectProperty(const QString& name)
     : VProperty(name, QVariant::Int), objects()
 {
     VProperty::d_ptr->VariantValue = 0;
@@ -35,7 +35,7 @@ VObjectProperty::VObjectProperty(const QString& name)
 }
 
 //! Get the data how it should be displayed
-QVariant VObjectProperty::data (int column, int role) const
+QVariant VPE::VObjectProperty::data (int column, int role) const
 {
     if (objects.empty())
     {
@@ -57,11 +57,11 @@ QVariant VObjectProperty::data (int column, int role) const
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+QWidget* VPE::VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
                                        const QAbstractItemDelegate* delegate)
 {
-    Q_UNUSED(options);
-    Q_UNUSED(delegate);
+    Q_UNUSED(options)
+    Q_UNUSED(delegate)
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
@@ -74,7 +74,7 @@ QWidget* VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewI
     return VProperty::d_ptr->editor;
 }
 
-bool VObjectProperty::setEditorData(QWidget *editor)
+bool VPE::VObjectProperty::setEditorData(QWidget *editor)
 {
     if (!editor)
     {
@@ -101,7 +101,7 @@ bool VObjectProperty::setEditorData(QWidget *editor)
 }
 
 //! Gets the data from the widget
-QVariant VObjectProperty::getEditorData(const QWidget *editor) const
+QVariant VPE::VObjectProperty::getEditorData(const QWidget *editor) const
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -114,20 +114,20 @@ QVariant VObjectProperty::getEditorData(const QWidget *editor) const
 
 //! Sets the objects list
 // cppcheck-suppress unusedFunction
-void VObjectProperty::setObjectsList(const QMap<QString, quint32> &objects)
+void VPE::VObjectProperty::setObjectsList(const QMap<QString, quint32> &objects)
 {
     this->objects = objects;
 }
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
 // cppcheck-suppress unusedFunction
-QMap<QString, quint32> VObjectProperty::getObjects() const
+QMap<QString, quint32> VPE::VObjectProperty::getObjects() const
 {
     return objects;
 }
 
 //! Sets the value of the property
-void VObjectProperty::setValue(const QVariant& value)
+void VPE::VObjectProperty::setValue(const QVariant& value)
 {
     VProperty::d_ptr->VariantValue = value;
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
@@ -138,24 +138,24 @@ void VObjectProperty::setValue(const QVariant& value)
     }
 }
 
-QString VObjectProperty::type() const
+QString VPE::VObjectProperty::type() const
 {
     return "objectList";
 }
 
-VProperty* VObjectProperty::clone(bool include_children, VProperty* container) const
+VPE::VProperty* VPE::VObjectProperty::clone(bool include_children, VProperty* container) const
 {
     return VProperty::clone(include_children, container ? container : new VObjectProperty(getName()));
 }
 
-void VObjectProperty::currentIndexChanged(int index)
+void VPE::VObjectProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     UserChangeEvent *event = new UserChangeEvent();
     QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }
 
-void VObjectProperty::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
+void VPE::VObjectProperty::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     box->clear();
 

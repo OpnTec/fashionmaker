@@ -28,6 +28,10 @@
 
 #include "vexceptionconversionerror.h"
 
+#include <QtGlobal>
+
+#include "vexception.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionConversionError exception conversion error
@@ -50,8 +54,16 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError::~VExceptionConversionError() V_NOEXCEPT_EXPR (true)
-{}
+VExceptionConversionError &VExceptionConversionError::operator=(const VExceptionConversionError &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    str = e.String();
+    return *this;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

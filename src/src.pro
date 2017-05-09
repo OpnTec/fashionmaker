@@ -1,8 +1,17 @@
 TEMPLATE = subdirs
-SUBDIRS = \
-    libs \
-    app \
-    test
 
-app.depends = libs
-test.depends = libs
+noTests{ # For enable run qmake with CONFIG+=noTests
+	SUBDIRS = \
+		libs \
+		app
+
+} else {
+	SUBDIRS = \
+		libs \
+		app \
+		test
+
+	test.depends = libs
+}
+
+app.depends = libs 

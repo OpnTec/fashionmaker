@@ -28,6 +28,13 @@
 
 #include "savetooloptions.h"
 
+#include <QDomNode>
+
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc,
                                  const quint32 &id, QUndoCommand *parent)
@@ -83,7 +90,7 @@ void SaveToolOptions::redo()
 bool SaveToolOptions::mergeWith(const QUndoCommand *command)
 {
     const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
+    SCASSERT(saveCommand != nullptr)
     const quint32 id = saveCommand->getToolId();
 
     if (id != nodeId)

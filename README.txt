@@ -1,10 +1,11 @@
 Pattern making program
 Author Roman Telezhynskyi <dismine(at)gmail.com>
 Copyright (C) 2013-2015 Valentina project  
-Valentina Web page: http://www.valentina-project.org/    
+Valentina Web page: http://www.valentina-project.org/ 
+Wiki: https://wiki.valentinaproject.org   
 Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
-Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
+Forum http://forum.valentina-project.org/    
 PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
 Help translate https://www.transifex.com/organization/valentina    
 IRC channel: #valentina on irc.freenode.net.
@@ -24,8 +25,8 @@ The standalone binary packages support the following platforms:
 Windows XP SP2 (32-bit) or later
 Ubuntu Linux 14.04 (32-bit/64-bit) or later
 OpenSUSE 13.02 (32-bit/64-bit) or later
-Fedora 20 (32-bit/64-bit) or later
-Mac OS X 10.7 (64-bit) or later
+Fedora 24 (32-bit/64-bit) or later
+Mac OS X 10.8 (64-bit) or later
 
 Building the sources requires Qt 5.2.0 or later.
 
@@ -35,7 +36,7 @@ Prerequisites:
    * Qt 5.2.0 or later (On Unix development packages needed)   
    * mercurial (only for working with repository)   
    * On Unix:     
-     - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
+     - g++ (at least GCC 4.7 is needed and GCC 4.8 is recommended) or
        clang (clang 3.4 recommended)
      - xpdf package (tool pdftops).    
    * On Windows:   

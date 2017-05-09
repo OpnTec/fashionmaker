@@ -29,14 +29,22 @@
 #ifndef VLAYOUTPAPER_H
 #define VLAYOUTPAPER_H
 
+#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
+#include <QTypeInfo>
+#include <QtGlobal>
+#include <atomic>
+
 #include "vlayoutdef.h"
 
-class VLayoutPaperData;
-class VLayoutDetail;
-class QGraphicsItem;
 class VBestSquare;
+class VLayoutPaperData;
+class VLayoutPiece;
 class QGraphicsRectItem;
+class QRectF;
+class QGraphicsItem;
+template <typename T> class QList;
+template <typename T> class QVector;
 
 class VLayoutPaper
 {
@@ -44,8 +52,16 @@ public:
     VLayoutPaper();
     VLayoutPaper(int height, int width);
     VLayoutPaper(const VLayoutPaper &paper);
-    VLayoutPaper &operator=(const VLayoutPaper &paper);
+
     ~VLayoutPaper();
+
+    VLayoutPaper &operator=(const VLayoutPaper &paper);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW { Swap(paper); return *this; }
+#endif
+
+    void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
+    { std::swap(d, paper.d); }
 
     int  GetHeight() const;
     void SetHeight(int height);
@@ -57,7 +73,7 @@ public:
     void  SetLayoutWidth(qreal width);
 
     quint32 GetShift() const;
-    void         SetShift(quint32 shift);
+    void    SetShift(quint32 shift);
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -70,17 +86,22 @@ public:
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
+    bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
-    QList<QGraphicsItem *> GetDetails() const;
+    QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
+    QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
+
+    QVector<VLayoutPiece> GetDetails() const;
+    void                   SetDetails(const QList<VLayoutPiece>& details);
+
+    QRectF DetailsBoundingRect() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutDetail &detail, volatile bool &stop);
+    bool AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop);
 
-    bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
+    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
 
 };
 

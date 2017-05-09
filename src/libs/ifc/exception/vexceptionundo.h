@@ -29,14 +29,18 @@
 #ifndef VEXCEPTIONUNDO_H
 #define VEXCEPTIONUNDO_H
 
+#include <qcompilerdetection.h>
+#include <QString>
+
+#include "../ifcdef.h"
 #include "vexception.h"
 
 class VExceptionUndo : public VException
 {
 public:
-    explicit VExceptionUndo(const QString &error);
+    explicit VExceptionUndo(const QString &what);
     VExceptionUndo(const VExceptionUndo &e);
-    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
+    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 };
 
 #endif // VEXCEPTIONUNDO_H

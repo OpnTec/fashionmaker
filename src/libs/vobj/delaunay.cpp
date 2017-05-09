@@ -17,20 +17,19 @@
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
-#include <assert.h>
 #include <QtGlobal>
 
+#include "../vmisc/diagnostic.h"
 #include "delaunay.h"
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wold-style-cast"
-    #pragma GCC diagnostic ignored "-Wcast-qual"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wold-style-cast")
+QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
+QT_WARNING_DISABLE_GCC("-Wcast-qual")
 
 #if PREDICATE == EXACT_PREDICATE
 extern void exactinit();
@@ -45,10 +44,10 @@ extern real incircle(real* pa, real* pb, real* pc, real* pd);
 #define	ON_CIRCLE	0
 #define INSIDE		1
 
-struct	point2d_s;
+struct	delaunay_s;
 struct	face_s;
 struct	halfedge_s;
-struct	delaunay_s;
+struct	point2d_s;
 
 
 #ifdef USE_DOUBLE
@@ -134,7 +133,7 @@ static point2d_t* point_alloc()
 
     p	= (point2d_t*)malloc(sizeof(point2d_t));
     assert( p != NULL );
-    // cppcheck-suppress memsetClassFloat
+// cppcheck-suppress memsetClassFloat
     memset(p, 0, sizeof(point2d_t));
 
     return p;
@@ -176,6 +175,7 @@ static void halfedge_free( halfedge_t* d )
 /*
 * free all delaunay halfedges
 */
+void del_free_halfedges( delaunay_t *del );
 void del_free_halfedges( delaunay_t *del )
 {
     quint32		i;
@@ -454,8 +454,8 @@ static int del_init_seg( delaunay_t *del, int start )
     point2d_t		*pt0, *pt1;
 
     /* init delaunay */
-    del->start_point	= start;
-    del->end_point		= start + 1;
+    del->start_point	= static_cast<quint32>(start);
+    del->end_point		= static_cast<quint32>(start + 1);
 
     /* setup pt0 and pt1 */
     pt0			= del->points[start];
@@ -493,8 +493,8 @@ static int del_init_tri( delaunay_t *del, int start )
     point2d_t		*pt0, *pt1, *pt2;
 
     /* initiate delaunay */
-    del->start_point	= start;
-    del->end_point		= start + 2;
+    del->start_point	= static_cast<quint32>(start);
+    del->end_point		= static_cast<quint32>(start + 2);
 
     /* setup the points */
     pt0					= del->points[start];
@@ -918,6 +918,7 @@ static void del_link( delaunay_t *result, delaunay_t *left, delaunay_t *right )
 /*
 * divide and conquer delaunay
 */
+void del_divide_and_conquer( delaunay_t *del, int start, int end );
 void del_divide_and_conquer( delaunay_t *del, int start, int end )
 {
     delaunay_t	left, right;
@@ -979,6 +980,7 @@ static void build_halfedge_face( delaunay_t *del, halfedge_t *d )
 /*
 * build the faces for all the halfedge
 */
+void del_build_faces( delaunay_t *del );
 void del_build_faces( delaunay_t *del )
 {
     quint32	i;
@@ -1035,7 +1037,7 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
         quint32 fbuff_size = 0;
         quint32 j = 0;
 
-        del_divide_and_conquer( &del, 0, num_points - 1 );
+        del_divide_and_conquer( &del, 0, static_cast<int>(num_points - 1) );
         del_build_faces( &del );
 
         for( i = 0; i < del.num_faces; i++ )
@@ -1083,6 +1085,4 @@ void delaunay2d_release(delaunay2d_t *del) {
     free(del);
 }
 
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP

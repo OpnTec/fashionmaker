@@ -21,13 +21,20 @@
 
 #include "qmuparserbase.h"
 
-#include <QDebug>
+#include <QList>
+#include <QMessageLogger>
+#include <QStack>
+#include <QStringList>
+#include <QTextStream>
+#include <QtDebug>
+#include <map>
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
-#include <QtCore/qmath.h>
+#include <assert.h>
 
-using namespace std;
+#include "qmudef.h"
+#include "../vmisc/vmath.h"
 
 /**
  * @file
@@ -55,11 +62,31 @@ const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" <<
  * @brief Constructor.
  */
 QmuParserBase::QmuParserBase()
-    :s_locale(std::locale(std::locale::classic(), new change_dec_sep<char_type>('.'))),
-      m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
-      m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
-      m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
+    : m_locale(QLocale::c()),
+      m_decimalPoint(QLocale::c().decimalPoint()),
+      m_thousandsSeparator(QLocale::c().groupSeparator()),
+      m_pParseFormula(&QmuParserBase::ParseString),
+      m_vRPN(),
+      m_vStringBuf(),
+      m_vStringVarBuf(),
+      m_pTokenReader(),
+      m_FunDef(),
+      m_PostOprtDef(),
+      m_InfixOprtDef(),
+      m_OprtDef(),
+      m_ConstDef(),
+      m_StrVarDef(),
+      m_VarDef(),
+      m_bBuiltInOp(true),
+      m_sNameChars(),
+      m_sOprtChars(),
+      m_sInfixOprtChars(),
+      m_nIfElseCounter(0),
+      m_vStackBuffer(),
+      m_nFinalResultIdx(0),
+      m_Tokens(QMap<int, QString>()),
+      m_Numbers(QMap<int, QString>()),
+      allowSubexpressions(true)
 {
     InitTokenReader();
 }
@@ -71,11 +98,31 @@ QmuParserBase::QmuParserBase()
  * Tha parser can be safely copy constructed but the bytecode is reset during copy construction.
  */
 QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
-    :s_locale(a_Parser.getLocale()), m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(),
-      m_vStringVarBuf(), m_pTokenReader(), m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(),
-      m_StrVarDef(), m_VarDef(), m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(),
-      m_nIfElseCounter(0), m_vStackBuffer(), m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
+    : m_locale(a_Parser.getLocale()),
+      m_decimalPoint(a_Parser.getDecimalPoint()),
+      m_thousandsSeparator(a_Parser.getThousandsSeparator()),
+      m_pParseFormula(&QmuParserBase::ParseString),
+      m_vRPN(),
+      m_vStringBuf(),
+      m_vStringVarBuf(),
+      m_pTokenReader(),
+      m_FunDef(),
+      m_PostOprtDef(),
+      m_InfixOprtDef(),
+      m_OprtDef(),
+      m_ConstDef(),
+      m_StrVarDef(),
+      m_VarDef(),
+      m_bBuiltInOp(true),
+      m_sNameChars(),
+      m_sOprtChars(),
+      m_sInfixOprtChars(),
+      m_nIfElseCounter(0),
+      m_vStackBuffer(),
+      m_nFinalResultIdx(0),
+      m_Tokens(QMap<int, QString>()),
+      m_Numbers(QMap<int, QString>()),
+      allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -145,38 +192,6 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Set the decimal separator.
- * @param cDecSep Decimal separator as a character value.
- * @sa SetThousandsSep
- *
- * By default muparser uses the "C" locale. The decimal separator of this
- * locale is overwritten by the one provided here.
- */
-// cppcheck-suppress unusedFunction
-void QmuParserBase::SetDecSep(char_type cDecSep)
-{
-    char_type cThousandsSep = std::use_facet< change_dec_sep<char_type> >(s_locale).thousands_sep();
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Sets the thousands operator.
- * @param cThousandsSep The thousands separator as a character
- * @sa SetDecSep
- *
- * By default muparser uses the "C" locale. The thousands separator of this
- * locale is overwritten by the one provided here.
- */
-// cppcheck-suppress unusedFunction
-void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
-{
-    char_type cDecSep = std::use_facet< change_dec_sep<char_type> >(s_locale).decimal_point();
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Resets the locale.
  *
  * The default locale used "." as decimal separator, no thousands separator and "," as function argument separator.
@@ -184,8 +199,10 @@ void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ResetLocale()
 {
-    s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>('.'));
-    SetArgSep(',');
+    setLocale(QLocale::c());
+    m_decimalPoint = m_locale.decimalPoint();
+    m_thousandsSeparator = m_locale.groupSeparator();
+    SetArgSep(';');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,9 +226,9 @@ void QmuParserBase::ReInit() const
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-    Q_UNUSED(pExpr);
-    Q_UNUSED(nStart);
-    Q_UNUSED(nEnd);
+    Q_UNUSED(pExpr)
+    Q_UNUSED(nStart)
+    Q_UNUSED(nEnd)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,15 +238,41 @@ void QmuParserBase::setAllowSubexpressions(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-std::locale QmuParserBase::getLocale() const
+QLocale QmuParserBase::getLocale() const
 {
-    return s_locale;
+    return m_locale;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::setLocale(const std::locale &value)
+void QmuParserBase::setLocale(const QLocale &value)
 {
-    s_locale = value;
+    m_locale = value;
+    InitCharSets();
+    InitOprt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar QmuParserBase::getDecimalPoint() const
+{
+    return m_decimalPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setDecimalPoint(const QChar &c)
+{
+    m_decimalPoint = c;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar QmuParserBase::getThousandsSeparator() const
+{
+    return m_thousandsSeparator;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setThousandsSeparator(const QChar &c)
+{
+    m_thousandsSeparator = c;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,9 +403,8 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
 /**
  * @brief Check if a name contains invalid characters.
  *
- * @throw ParserException if the name contains invalid charakters.
+ * @throw ParserException if the name contains invalid characters.
  */
-// cppcheck-suppress
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
     std::wstring a_sNameStd = a_sName.toStdWString();
@@ -387,7 +429,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
     std::locale loc;
-    if (m_pTokenReader->GetArgSep()==std::use_facet<numpunct<char_type> >(loc).decimal_point())
+    if (m_pTokenReader->GetArgSep()==std::use_facet<std::numpunct<char_type> >(loc).decimal_point())
     {
         Error(ecLOCALE);
     }
@@ -440,9 +482,9 @@ const QString &QmuParserBase::ValidInfixOprtChars() const
  * @brief Add a user defined operator.
  * @post Will reset the Parser to string parsing mode.
  */
-void QmuParserBase::DefinePostfixOprt(const QString &a_sName, fun_type1 a_pFun, bool a_bAllowOpt)
+void QmuParserBase::DefinePostfixOprt(const QString &a_sFun, fun_type1 a_pFun, bool a_bAllowOpt)
 {
-    AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, prPOSTFIX, cmOPRT_POSTFIX), m_PostOprtDef,
+    AddCallback(a_sFun, QmuParserCallback(a_pFun, a_bAllowOpt, prPOSTFIX, cmOPRT_POSTFIX), m_PostOprtDef,
                 ValidOprtChars() );
 }
 
@@ -748,7 +790,6 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
     }
 
     token_type funTok = a_stOpt.pop();
-    // cppcheck-suppress assertWithSideEffect
     assert(funTok.GetFuncAddr());
 
     // Binary operators must rely on their internal operator number
@@ -854,7 +895,7 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
         token_type vVal1 = a_stVal.pop();
         token_type vExpr = a_stVal.pop();
 
-        a_stVal.push( (qFuzzyCompare(vExpr.GetVal()+1, 1+0)==false) ? vVal1 : vVal2);
+        a_stVal.push( not qFuzzyIsNull(vExpr.GetVal()) ? vVal1 : vVal2);
 
         token_type opIf = a_stOpt.pop();
         Q_ASSERT(opElse.GetCode()==cmELSE);
@@ -983,11 +1024,11 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 continue;
             case cmNEQ:
                 --sidx;
-                Stack[sidx]  = (qFuzzyCompare(Stack[sidx], Stack[sidx+1])==false);
+                Stack[sidx]  = not QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
                 continue;
             case cmEQ:
                 --sidx;
-                Stack[sidx]  = qFuzzyCompare(Stack[sidx], Stack[sidx+1]);
+                Stack[sidx]  = QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
                 continue;
             case cmLT:
                 --sidx;
@@ -1025,25 +1066,17 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 continue;
             case cmLAND:
                 --sidx;
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wfloat-equal"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wfloat-equal")
                 Stack[sidx] = static_cast<bool>(Stack[sidx]) && static_cast<bool>(Stack[sidx+1]);
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
                 continue;
             case cmLOR:
                 --sidx;
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wfloat-equal"
-#endif
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wfloat-equal")
                 Stack[sidx] = static_cast<bool>(Stack[sidx]) || static_cast<bool>(Stack[sidx+1]);
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
+QT_WARNING_POP
                 continue;
             case cmASSIGN:
                 // Bugfix for Bulkmode:
@@ -1059,7 +1092,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 //Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
                 //continue;
             case cmIF:
-                if (qFuzzyCompare(Stack[sidx--]+1, 1+0))
+                if (qFuzzyIsNull(Stack[sidx--]))
                 {
                     pTok += pTok->Oprt.offset;
                 }
@@ -1096,10 +1129,10 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
             case cmFUNC:
             {
                 int iArgCount = pTok->Fun.argc;
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wundefined-reinterpret-cast"
-#endif
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
+QT_WARNING_DISABLE_MSVC(4191)
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1292,9 +1325,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 return 0;
         } // switch CmdCode
 
-#ifdef Q_CC_CLANG
-    #pragma clang diagnostic pop
-#endif
+QT_WARNING_POP
 
     } // for all bytecode tokens
 
@@ -1323,7 +1354,7 @@ void QmuParserBase::CreateRPN() const
 
     for (;;)
     {
-        opt = m_pTokenReader->ReadNextToken(s_locale);
+        opt = m_pTokenReader->ReadNextToken(m_locale, m_decimalPoint, m_thousandsSeparator);
 
         switch (opt.GetCode())
         {

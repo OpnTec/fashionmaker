@@ -29,7 +29,15 @@
 #ifndef VMEASUREMENTS_H
 #define VMEASUREMENTS_H
 
+#include <qcompilerdetection.h>
+#include <QCoreApplication>
+#include <QDomElement>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>
+
 #include "../ifc/xml/vdomdocument.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
 
 enum class GenderType : char { Male, Female, Unknown };
@@ -41,9 +49,9 @@ public:
     explicit VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
-    virtual ~VMeasurements() Q_DECL_OVERRIDE;
+    virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
 
-    void setXMLContent(const QString &fileName);
+    virtual void setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
@@ -57,7 +65,6 @@ public:
     void ClearForExport();
 
     MeasurementsType Type() const;
-    Unit MUnit() const;
     int BaseSize() const;
     int BaseHeight() const;
 
@@ -82,7 +89,7 @@ public:
     QString Email() const;
     void    SetEmail(const QString &text);
 
-    bool    ReadOnly() const;
+    bool    IsReadOnly() const;
     void    SetReadOnly(bool ro);
 
     void SetMName(const QString &name, const QString &text);
@@ -96,7 +103,6 @@ public:
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
-    static const QString TagUnit;
     static const QString TagNotes;
     static const QString TagSize;
     static const QString TagHeight;

@@ -29,30 +29,44 @@
 #ifndef VISUALIZATION_H
 #define VISUALIZATION_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QGraphicsItem>
+#include <QObject>
+#include <QtGlobal>
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/def.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
+
+enum class Mode : char {Creation, Show};
 
 class Visualization : public QObject
 {
     Q_OBJECT
 public:
     explicit Visualization(const VContainer *data);
-    virtual ~Visualization() Q_DECL_OVERRIDE;
+    virtual ~Visualization() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry()=0;
 
-    void         setPoint1Id(const quint32 &value);
+    void         setObject1Id(const quint32 &value);
     void         setLineStyle(const Qt::PenStyle &value);
     void         setScenePos(const QPointF &value);
     virtual void VisualMode(const quint32 &pointId);
     void         setMainColor(const QColor &value);
+
+    const VContainer *GetData() const;
+    void              SetData(const VContainer *data);
+
+    Mode GetMode() const;
+    void SetMode(const Mode &value);
+
+    static qreal FindLength(const QString &expression, const QHash<QString, qreal *> &vars);
+    static qreal FindVal(const QString &expression, const QHash<QString, qreal *> &vars);
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
@@ -65,16 +79,14 @@ protected:
     QColor           mainColor;
     QColor           supportColor;
     Qt::PenStyle     lineStyle;
-    quint32          point1Id;
+    quint32          object1Id;
     QString          toolTip;
+    Mode             mode;
 
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;
 
-    QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent) const;
-    QRectF       PointRect(const qreal &radius) const;
-    qreal        FindLength(const QString &expression);
-    qreal        FindVal(const QString &expression);
+    QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
@@ -87,17 +99,25 @@ protected:
 
     template <class Item>
     Item         *InitItem(const QColor &color, QGraphicsItem *parent);
+
+    static QRectF                PointRect(qreal radius);
+    static QGraphicsEllipseItem* GetPointItem(const VContainer *data, qreal factor,
+                                              QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
+                                              QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
+
+    static QGraphicsEllipseItem* InitPointItem(const VContainer *data, qreal factor, const QColor &color,
+                                               QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Item>
 inline void Visualization::AddItem(Item *item)
 {
-    SCASSERT(item != nullptr);
+    SCASSERT(item != nullptr)
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 
     scene->addItem(item);
     connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);

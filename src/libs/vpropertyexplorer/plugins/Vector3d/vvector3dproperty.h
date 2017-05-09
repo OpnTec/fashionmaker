@@ -21,8 +21,17 @@
 #ifndef VVECTOR3DPROPERTY_H
 #define VVECTOR3DPROPERTY_H
 
-#include "../../vpropertyexplorer_global.h"
+#include <qcompilerdetection.h>
+#include <stddef.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
 #include "../../vproperty.h"
+#include "../../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -38,9 +47,21 @@ public:
         :X(other.X), Y(other.Y), Z(other.Z)
     {}
 
+    Vector3D &operator=(const Vector3D &other)
+    {
+        if ( &other == this )
+        {
+            return *this;
+        }
+        X = other.X;
+        Y = other.Y;
+        Z = other.Z;
+        return *this;
+    }
+
     ~Vector3D() {}
 
-    float X, Y, Z;
+    double X, Y, Z;
 };
 /*
 }
@@ -61,7 +82,7 @@ public:
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     //! Returns item flags
-    Qt::ItemFlags flags(int column = DPC_Name) const;
+    virtual Qt::ItemFlags flags(int column = DPC_Name) const Q_DECL_OVERRIDE;
 
     //! Returns the Vector3d
     virtual Vector3D getVector() const;
@@ -70,7 +91,7 @@ public:
     virtual void setVector(const Vector3D& vect);
 
     //! Sets the Vector3d
-    virtual void setVector(float x, float y, float z);
+    virtual void setVector(double x, double y, double z);
 
     //! Returns a string containing the type of the property
     virtual QString type() const Q_DECL_OVERRIDE;

@@ -22,14 +22,28 @@
 #ifndef QMUQPARSERBASE_H
 #define QMUQPARSERBASE_H
 
-#include "qmuparser_global.h"
+#include <limits.h>
+#include <qcompilerdetection.h>
+#include <QChar>
+#include <QMap>
 #include <QStack>
 #include <QString>
 #include <QStringList>
+#include <QVector>
+#include <QtGlobal>
+#include <memory>
+#include <string>
+#include <QLocale>
 
-#include "qmuparserdef.h"
-#include "qmuparsertokenreader.h"
+#include "qmuparser_global.h"
 #include "qmuparserbytecode.h"
+#include "qmuparsercallback.h"
+#include "qmuparserdef.h"
+#include "qmuparsererror.h"
+#include "qmuparsertoken.h"
+#include "qmuparsertokenreader.h"
+
+template <class T> class QStack;
 
 namespace qmu
 {
@@ -65,20 +79,18 @@ public:
     int                GetNumResults() const;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
-    void               SetDecSep(char_type cDecSep);
-    void               SetThousandsSep(char_type cThousandsSep = 0);
     void               ResetLocale();
     void               EnableOptimizer(bool a_bIsOn=true);
     void               EnableBuiltInOprt(bool a_bIsOn=true);
     bool               HasBuiltInOprt() const;
     void               AddValIdent(identfun_type a_pCallback);
-    void               DefineOprt(const QString &a_strName, fun_type2 a_pFun, unsigned a_iPri=0,
+    void               DefineOprt(const QString &a_sName, fun_type2 a_pFun, unsigned a_iPrec=0,
                                   EOprtAssociativity a_eAssociativity = oaLEFT, bool a_bAllowOpt = false);
     void               DefineConst(const QString &a_sName, qreal a_fVal);
-    void               DefineStrConst(const QString &a_sName, const QString &a_strVal);
-    void               DefineVar(const QString &a_sName, qreal *a_fVar);
-    void               DefinePostfixOprt(const QString &a_strFun, fun_type1 a_pOprt, bool a_bAllowOpt=true);
-    void               DefineInfixOprt(const QString &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX,
+    void               DefineStrConst(const QString &a_strName, const QString &a_strVal);
+    void               DefineVar(const QString &a_sName, qreal *a_pVar);
+    void               DefinePostfixOprt(const QString &a_sFun, fun_type1 a_pFun, bool a_bAllowOpt=true);
+    void               DefineInfixOprt(const QString &a_sName, fun_type1 a_pFun, int a_iPrec=prINFIX,
                                        bool a_bAllowOpt=true);
     // Clear user defined variables, constants or functions
     void               ClearVar();
@@ -105,19 +117,27 @@ public:
     const QString&     ValidInfixOprtChars() const;
     void               SetArgSep(char_type cArgSep);
     QChar              GetArgSep() const;
-    void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_strTok = QString() ) const;
+    void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
 
     template<typename T>
     void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true);
 
     void setAllowSubexpressions(bool value);
 
-    std::locale getLocale() const;
-    void setLocale(const std::locale &value);
+    QLocale getLocale() const;
+    void    setLocale(const QLocale &value);
+
+    QChar getDecimalPoint() const;
+    void  setDecimalPoint(const QChar &c);
+
+    QChar getThousandsSeparator() const;
+    void  setThousandsSeparator(const QChar &c);
 
 protected:
     static const QStringList c_DefaultOprt;
-    std::locale s_locale;  ///< The locale used by the parser
+    QLocale m_locale;///< The locale used by the parser
+    QChar m_decimalPoint;
+    QChar m_thousandsSeparator;
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
     void Init();
@@ -249,7 +269,7 @@ private:
     qreal              ParseCmdCode() const;
     qreal              ParseCmdCodeBulk(int nOffset, int nThreadID) const;
     // cppcheck-suppress functionStatic
-    void               CheckName(const QString &a_strName, const QString &a_CharSet) const;
+    void               CheckName(const QString &a_sName, const QString &a_szCharSet) const;
     // cppcheck-suppress functionStatic
     void               CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                                  const QString &a_szCharSet) const;

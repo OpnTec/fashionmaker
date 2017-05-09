@@ -27,24 +27,35 @@
  *************************************************************************/
 
 #include "dialogpointofintersectioncircles.h"
-#include "ui_dialogpointofintersectioncircles.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolpointofintersectioncircles.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../support/dialogeditwrongformula.h"
-
+#include <limits.h>
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolpointofintersectioncircles.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogpointofintersectioncircles.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId,
                                                                    QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersectionCircles), flagCircle1Radius(false),
       flagCircle2Radius(false), timerCircle1Radius(nullptr), timerCircle2Radius(nullptr), circle1Radius(),
-      circle2Radius(), formulaBaseHeightCircle1Radius(0), formulaBaseHeightCircle2Radius(0),
-      angleCircle1Radius(INT_MIN), angleCircle2Radius(INT_MIN)
+      circle2Radius(), formulaBaseHeightCircle1Radius(0), formulaBaseHeightCircle2Radius(0)
 {
     ui->setupUi(this);
 
@@ -104,7 +115,6 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::~DialogPointOfIntersectionCircles()
 {
-    DeleteVisualization<VisToolPointOfIntersectionCircles>();
     delete ui;
 }
 
@@ -127,8 +137,8 @@ void DialogPointOfIntersectionCircles::SetFirstCircleCenterId(const quint32 &val
     setCurrentPointId(ui->comboBoxCircle1Center, value);
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr);
-    point->setPoint1Id(value);
+    SCASSERT(point != nullptr)
+    point->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,8 +153,8 @@ void DialogPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &va
     setCurrentPointId(ui->comboBoxCircle2Center, value);
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr);
-    point->setPoint2Id(value);
+    SCASSERT(point != nullptr)
+    point->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,7 +176,7 @@ void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value
     ui->plainTextEditCircle1Radius->setPlainText(formula);
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setC1Radius(formula);
 
     MoveCursorToEnd(ui->plainTextEditCircle1Radius);
@@ -191,7 +201,7 @@ void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &valu
     ui->plainTextEditCircle2Radius->setPlainText(formula);
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setC2Radius(formula);
 
     MoveCursorToEnd(ui->plainTextEditCircle2Radius);
@@ -200,7 +210,7 @@ void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &valu
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointOfIntersectionCircles::GetCrossCirclesPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,7 +222,7 @@ void DialogPointOfIntersectionCircles::SetCrossCirclesPoint(const CrossCirclesPo
         ui->comboBoxResult->setCurrentIndex(index);
 
         VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setCrossPoint(p);
     }
 }
@@ -225,7 +235,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
         if (type == SceneObject::Point)
         {
             VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-            SCASSERT(point != nullptr);
+            SCASSERT(point != nullptr)
 
             switch (number)
             {
@@ -242,7 +252,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                         if (SetObject(id, ui->comboBoxCircle2Center, ""))
                         {
                             number = 0;
-                            point->setPoint2Id(id);
+                            point->setObject2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -293,7 +303,8 @@ void DialogPointOfIntersectionCircles::Circle1RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle1Radius;
     labelResultCalculation = ui->labelResultCircle1Radius;
-    ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +312,8 @@ void DialogPointOfIntersectionCircles::Circle2RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle2Radius;
     labelResultCalculation = ui->labelResultCircle2Radius;
-    ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -388,10 +400,10 @@ void DialogPointOfIntersectionCircles::SaveData()
     c2Radius.replace("\n", " ");
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
 
-    point->setPoint1Id(GetFirstCircleCenterId());
-    point->setPoint2Id(GetSecondCircleCenterId());
+    point->setObject1Id(GetFirstCircleCenterId());
+    point->setObject2Id(GetSecondCircleCenterId());
     point->setC1Radius(c1Radius);
     point->setC2Radius(c2Radius);
     point->setCrossPoint(GetCrossCirclesPoint());
@@ -409,7 +421,7 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula && flagName && flagError && flagCircle1Radius && flagCircle2Radius);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)

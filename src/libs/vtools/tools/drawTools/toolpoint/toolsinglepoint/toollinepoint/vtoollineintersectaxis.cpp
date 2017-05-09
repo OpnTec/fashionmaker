@@ -27,13 +27,31 @@
  *************************************************************************/
 
 #include "vtoollineintersectaxis.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vtranslatevars.h"
+
+#include <QLine>
+#include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <new>
+
 #include "../../../../../dialogs/tools/dialoglineintersectaxis.h"
-#include "../../../../../dialogs/support/dialogeditwrongformula.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../../visualization/line/vistoollineintersectaxis.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoollineintersectaxis.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 const QString VToolLineIntersectAxis::ToolType = QStringLiteral("lineIntersectAxis");
 
@@ -50,16 +68,12 @@ VToolLineIntersectAxis::VToolLineIntersectAxis(VAbstractPattern *doc, VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolLineIntersectAxis::~VToolLineIntersectAxis()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::setDialog()
 {
-    SCASSERT(dialog != nullptr);
-    dialog->setModal(true);
-    DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    m_dialog->setModal(true);
+    QSharedPointer<DialogLineIntersectAxis> dialogTool = m_dialog.objectCast<DialogLineIntersectAxis>();
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
     dialogTool->SetLineColor(lineColor);
@@ -71,13 +85,12 @@ void VToolLineIntersectAxis::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolLineIntersectAxis *VToolLineIntersectAxis::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                                                       VAbstractPattern *doc,
-                                                       VContainer *data)
+VToolLineIntersectAxis *VToolLineIntersectAxis::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                       VAbstractPattern *doc, VContainer *data)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool);
+    SCASSERT(not dialog.isNull())
+    QSharedPointer<DialogLineIntersectAxis> dialogTool = dialog.objectCast<DialogLineIntersectAxis>();
+    SCASSERT(not dialogTool.isNull())
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
@@ -91,7 +104,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(DialogTool *dialog, VMain
                                            scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
-        point->dialog=dialogTool;
+        point->m_dialog = dialogTool;
     }
     return point;
 }
@@ -106,12 +119,12 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
                                                        const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    QLineF axis = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
+    QLineF axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
     axis.setAngle(CheckFormula(_id, formulaAngle, data));
 
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
-    QLineF line(firstPoint->toQPointF(), secondPoint->toQPointF());
+    QLineF line(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
     QPointF fPoint = FindPoint(axis, line);
     quint32 id = _id;
@@ -133,18 +146,16 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::LineIntersectAxis, doc);
+
     if (parse == Document::FullParse)
     {
+        VDrawTool::AddRecord(id, Tool::LineIntersectAxis, doc);
         VToolLineIntersectAxis *point = new VToolLineIntersectAxis(doc, data, id, typeLine, lineColor, formulaAngle,
                                                                    basePointId, firstPointId, secondPointId,
                                                                    typeCreation);
         scene->addItem(point);
-        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersectAxis::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersectAxis::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersectAxis::EnableToolMove);
-        doc->AddTool(id, point);
+        InitToolConnections(scene, point);
+        VAbstractPattern::AddTool(id, point);
         doc->IncrementReferens(basePoint->getIdTool());
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
@@ -174,6 +185,18 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
     {
         return QPointF();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersectAxis::FirstLinePoint() const
+{
+    return VAbstractTool::data.GetGObject(firstPointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersectAxis::SecondLinePoint() const
+{
+    return VAbstractTool::data.GetGObject(secondPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,7 +272,7 @@ void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
     }
     catch(const VExceptionToolWasDeleted &e)
     {
-        Q_UNUSED(e);
+        Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
 }
@@ -257,9 +280,9 @@ void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
 {
-    SCASSERT(dialog != nullptr);
-    DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not m_dialog.isNull())
+    QSharedPointer<DialogLineIntersectAxis> dialogTool = m_dialog.objectCast<DialogLineIntersectAxis>();
+    SCASSERT(not dialogTool.isNull())
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -295,12 +318,12 @@ void VToolLineIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::SetVisualization()
 {
-    if (vis != nullptr)
+    if (not vis.isNull())
     {
         VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
-        SCASSERT(visual != nullptr);
+        SCASSERT(visual != nullptr)
 
-        visual->setPoint1Id(firstPointId);
+        visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));

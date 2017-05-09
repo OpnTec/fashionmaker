@@ -31,8 +31,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class DialogAboutTape;
+namespace Ui
+{
+    class DialogAboutTape;
 }
 
 class DialogAboutTape : public QDialog
@@ -40,15 +41,12 @@ class DialogAboutTape : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogAboutTape(QWidget *parent = 0);
-    ~DialogAboutTape();
+    explicit DialogAboutTape(QWidget *parent = nullptr);
+    virtual ~DialogAboutTape();
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-
-private slots:
-    void WebButtonClicked();
 
 private:
     Q_DISABLE_COPY(DialogAboutTape)

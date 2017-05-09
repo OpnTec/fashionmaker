@@ -11,7 +11,6 @@ HEADERS += \
     $$PWD/tools/dialogcutarc.h \
     $$PWD/tools/dialogcutspline.h \
     $$PWD/tools/dialogcutsplinepath.h \
-    $$PWD/tools/dialogdetail.h \
     $$PWD/tools/dialogendline.h \
     $$PWD/tools/dialogheight.h \
     $$PWD/tools/dialogline.h \
@@ -33,7 +32,20 @@ HEADERS += \
     $$PWD/tools/dialoguniondetails.h \
     $$PWD/support/dialogeditwrongformula.h \
     $$PWD/support/dialogundo.h \
-    $$PWD/tools/dialogtruedarts.h
+    $$PWD/tools/dialogtruedarts.h \
+    $$PWD/tools/dialogpointofintersectioncurves.h \
+    $$PWD/tools/dialogcubicbezier.h \
+    $$PWD/tools/dialogcubicbezierpath.h \
+    $$PWD/tools/dialoggroup.h \
+    $$PWD/tools/dialogrotation.h \
+    $$PWD/tools/dialogflippingbyline.h \
+    $$PWD/tools/dialogflippingbyaxis.h \
+    $$PWD/tools/dialogmove.h \
+    $$PWD/tools/dialogellipticalarc.h \
+    $$PWD/tools/piece/dialogseamallowance.h \
+    $$PWD/tools/dialogpiecepath.h \
+    $$PWD/tools/dialogpin.h \
+    $$PWD/tools/dialoginsertnode.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -44,7 +56,6 @@ SOURCES += \
     $$PWD/tools/dialogcutarc.cpp \
     $$PWD/tools/dialogcutspline.cpp \
     $$PWD/tools/dialogcutsplinepath.cpp \
-    $$PWD/tools/dialogdetail.cpp \
     $$PWD/tools/dialogendline.cpp \
     $$PWD/tools/dialogheight.cpp \
     $$PWD/tools/dialogline.cpp \
@@ -66,7 +77,20 @@ SOURCES += \
     $$PWD/tools/dialoguniondetails.cpp \
     $$PWD/support/dialogeditwrongformula.cpp \
     $$PWD/support/dialogundo.cpp \
-    $$PWD/tools/dialogtruedarts.cpp
+    $$PWD/tools/dialogtruedarts.cpp \
+    $$PWD/tools/dialogpointofintersectioncurves.cpp \
+    $$PWD/tools/dialogcubicbezier.cpp \
+    $$PWD/tools/dialogcubicbezierpath.cpp \
+    $$PWD/tools/dialoggroup.cpp \
+    $$PWD/tools/dialogrotation.cpp \
+    $$PWD/tools/dialogflippingbyline.cpp \
+    $$PWD/tools/dialogflippingbyaxis.cpp \
+    $$PWD/tools/dialogmove.cpp \
+    $$PWD/tools/dialogellipticalarc.cpp \
+    $$PWD/tools/piece/dialogseamallowance.cpp \
+    $$PWD/tools/dialogpiecepath.cpp \
+    $$PWD/tools/dialogpin.cpp \
+    $$PWD/tools/dialoginsertnode.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -77,7 +101,6 @@ FORMS += \
     $$PWD/tools/dialogcutarc.ui \
     $$PWD/tools/dialogcutspline.ui \
     $$PWD/tools/dialogcutsplinepath.ui \
-    $$PWD/tools/dialogdetail.ui \
     $$PWD/tools/dialogendline.ui \
     $$PWD/tools/dialogheight.ui \
     $$PWD/tools/dialogline.ui \
@@ -98,4 +121,22 @@ FORMS += \
     $$PWD/tools/dialoguniondetails.ui \
     $$PWD/support/dialogeditwrongformula.ui \
     $$PWD/support/dialogundo.ui \
-    $$PWD/tools/dialogtruedarts.ui
+    $$PWD/tools/dialogtruedarts.ui \
+    $$PWD/tools/dialogpointofintersectioncurves.ui \
+    $$PWD/tools/dialogcubicbezier.ui \
+    $$PWD/tools/dialogcubicbezierpath.ui \
+    $$PWD/tools/dialoggroup.ui \
+    $$PWD/tools/dialogrotation.ui \
+    $$PWD/tools/dialogflippingbyline.ui \
+    $$PWD/tools/dialogflippingbyaxis.ui \
+    $$PWD/tools/dialogmove.ui \
+    $$PWD/tools/dialogellipticalarc.ui \
+    $$PWD/tools/piece/dialogseamallowance.ui \
+    $$PWD/tools/dialogpiecepath.ui \
+    $$PWD/tools/dialogpin.ui \
+    $$PWD/tools/piece/tabs/tabpaths.ui \
+    $$PWD/tools/piece/tabs/tablabels.ui \
+    $$PWD/tools/piece/tabs/tabgrainline.ui \
+    $$PWD/tools/piece/tabs/tabpins.ui \
+    $$PWD/tools/dialoginsertnode.ui \
+    $$PWD/tools/piece/tabs/tabpassmarks.ui

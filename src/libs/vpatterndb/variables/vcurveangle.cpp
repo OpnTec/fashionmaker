@@ -27,28 +27,56 @@
  *************************************************************************/
 
 #include "vcurveangle.h"
+
+#include <QLatin1String>
+#include <QMessageLogger>
+
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vspline.h"
+#include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle()
     :VCurveVariable()
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle)
     :VCurveVariable(id, parentId)
 {
-    SetType(VarType::Unknown);
-    SCASSERT(curve != nullptr);
+    SetType(VarType::CurveAngle);
+    SCASSERT(curve != nullptr)
     if (angle == CurveAngle::StartAngle)
     {
         SetValue(curve->GetStartAngle());
+        SetName(angle1_V + curve->name());
     }
     else
     {
         SetValue(curve->GetEndAngle());
+        SetName(angle2_V + curve->name());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+                         CurveAngle angle, qint32 segment)
+    :VCurveVariable(id, parentId)
+{
+    SetType(VarType::CurveAngle);
+    if (angle == CurveAngle::StartAngle)
+    {
+        SetValue(spl.GetStartAngle());
+        SetName(angle1_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+    }
+    else
+    {
+        SetValue(spl.GetEndAngle());
+        SetName(angle2_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
     }
 }
 

@@ -29,13 +29,13 @@
 #ifndef TST_VLAYOUTDETAIL_H
 #define TST_VLAYOUTDETAIL_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 
 class TST_VLayoutDetail : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_VLayoutDetail(QObject *parent = 0);
+    explicit TST_VLayoutDetail(QObject *parent = nullptr);
 
 private slots:
     void RemoveDublicates() const;

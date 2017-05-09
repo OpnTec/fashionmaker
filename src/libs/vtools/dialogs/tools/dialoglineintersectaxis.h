@@ -29,6 +29,13 @@
 #ifndef DIALOGLINEINTERSECTAXIS_H
 #define DIALOGLINEINTERSECTAXIS_H
 
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -85,6 +92,8 @@ private:
 
     QString formulaAngle;
     int     formulaBaseHeightAngle;
+
+    bool m_firstRelease;
 };
 
 #endif // DIALOGLINEINTERSECTAXIS_H

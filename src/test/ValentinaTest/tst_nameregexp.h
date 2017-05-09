@@ -35,7 +35,7 @@ class TST_NameRegExp : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_NameRegExp(QObject *parent = 0);
+    explicit TST_NameRegExp(QObject *parent = nullptr);
 
 signals:
 

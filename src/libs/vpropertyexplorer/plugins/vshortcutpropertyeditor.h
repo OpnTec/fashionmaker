@@ -21,12 +21,18 @@
 #ifndef VSHORTCUTPROPERTYEDITOR_H
 #define VSHORTCUTPROPERTYEDITOR_H
 
-#include "../vpropertyexplorer_global.h"
-
-#include <QWidget>
-#include <QToolButton>
+#include <qcompilerdetection.h>
+#include <QKeySequence>
 #include <QLineEdit>
+#include <QMetaObject>
 #include <QMimeData>
+#include <QObject>
+#include <QString>
+#include <QToolButton>
+#include <QWidget>
+#include <QtGlobal>
+
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -41,7 +47,7 @@ public:
     virtual ~VShortcutEditWidget() Q_DECL_OVERRIDE;
 
     //! Needed for proper event handling
-    bool eventFilter(QObject* obj, QEvent* evenvt);
+    virtual bool eventFilter(QObject* obj, QEvent* event) Q_DECL_OVERRIDE;
 
     //! Returns the currently set shortcut
     QString getShortcutAsString() const;

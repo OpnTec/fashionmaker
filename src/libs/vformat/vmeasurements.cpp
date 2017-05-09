@@ -27,18 +27,35 @@
  *************************************************************************/
 
 #include "vmeasurements.h"
-#include "../ifc/xml/vvstconverter.h"
-#include "../ifc/xml/vvitconverter.h"
-#include "../ifc/exception/vexceptionemptyparameter.h"
-#include "../vpatterndb/calculator.h"
-#include "../qmuparser/qmutokenparser.h"
 
+#include <qnumeric.h>
 #include <QDate>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomText>
+#include <QForeachContainer>
+#include <QLatin1Char>
+#include <QMessageLogger>
+#include <QScopedPointer>
+#include <QSet>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QtDebug>
+
+#include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../ifc/ifcdef.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");
-const QString VMeasurements::TagUnit             = QStringLiteral("unit");
 const QString VMeasurements::TagNotes            = QStringLiteral("notes");
 const QString VMeasurements::TagSize             = QStringLiteral("size");
 const QString VMeasurements::TagHeight           = QStringLiteral("height");
@@ -81,7 +98,7 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
       data(data),
       type(MeasurementsType::Individual)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 
     CreateEmptyIndividualFile(unit);
 }
@@ -92,14 +109,9 @@ VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer
       data(data),
       type(MeasurementsType::Standard)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(data != nullptr)
 
     CreateEmptyStandardFile(unit, baseSize, baseHeight);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VMeasurements::~VMeasurements()
-{
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,7 +230,7 @@ void VMeasurements::ReadMeasurements() const
     // That's why we need two containers: one for converted values, second for real data.
 
     // Container for values in measurement file's unit
-    VContainer *tempData = new VContainer(data->GetTrVars(), data->GetPatternUnit());
+    QScopedPointer<VContainer> tempData(new VContainer(data->GetTrVars(), data->GetPatternUnit()));
 
     const QDomNodeList list = elementsByTagName(TagMeasurement);
     for (int i=0; i < list.size(); ++i)
@@ -247,16 +259,16 @@ void VMeasurements::ReadMeasurements() const
             Q_UNUSED(e)
         }
 
-        VMeasurement *meash;
-        VMeasurement *tempMeash;
+        QSharedPointer<VMeasurement> meash;
+        QSharedPointer<VMeasurement> tempMeash;
         if (type == MeasurementsType::Standard)
         {
             qreal base = GetParametrDouble(dom, AttrBase, "0");
             qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
             qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            tempMeash = new VMeasurement(static_cast<quint32>(i), name, BaseSize(), BaseHeight(), base, ksize,
-                                         kheight);
+            tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
+                                                                      BaseHeight(), base, ksize, kheight));
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
             ksize = UnitConvertor(ksize, MUnit(), *data->GetPatternUnit());
@@ -265,26 +277,25 @@ void VMeasurements::ReadMeasurements() const
             const qreal baseSize = UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit());
             const qreal baseHeight = UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit());
 
-            meash = new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight, base, ksize, kheight,
-                                     fullName, description);
+            meash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight,
+                                                                  base, ksize, kheight, fullName, description));
         }
         else
         {
             const QString formula = GetParametrString(dom, AttrValue, "0");
             bool ok = false;
-            qreal value = EvalFormula(tempData, formula, &ok);
+            qreal value = EvalFormula(tempData.data(), formula, &ok);
 
-            tempMeash = new VMeasurement(tempData, static_cast<quint32>(i), name, value, formula, ok);
+            tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(tempData.data(), static_cast<quint32>(i), name,
+                                                                      value, formula, ok));
 
             value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
-            meash = new VMeasurement(data, static_cast<quint32>(i), name, value, formula, ok, fullName,
-                                     description);
+            meash = QSharedPointer<VMeasurement>(new VMeasurement(data, static_cast<quint32>(i), name, value, formula,
+                                                                  ok, fullName, description));
         }
         tempData->AddVariable(name, tempMeash);
         data->AddVariable(name, meash);
     }
-
-    delete tempData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -309,13 +320,6 @@ void VMeasurements::ClearForExport()
 MeasurementsType VMeasurements::Type() const
 {
     return type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit VMeasurements::MUnit() const
-{
-    const QString unit = UniqueTagText(TagUnit, UnitCM);
-    return VDomDocument::StrToUnits(unit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,7 +357,7 @@ QString VMeasurements::Notes() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetNotes(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagNotes, text);
     }
@@ -368,7 +372,7 @@ QString VMeasurements::FamilyName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetFamilyName(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagFamilyName, text);
     }
@@ -383,7 +387,7 @@ QString VMeasurements::GivenName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetGivenName(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagGivenName, text);
     }
@@ -398,7 +402,7 @@ QDate VMeasurements::BirthDate() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetBirthDate(const QDate &date)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagBirthDate, date.toString("yyyy-MM-dd"));
     }
@@ -413,7 +417,7 @@ GenderType VMeasurements::Gender() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetGender(const GenderType &gender)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagGender, GenderToStr(gender));
     }
@@ -428,7 +432,7 @@ QString VMeasurements::PMSystem() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetPMSystem(const QString &system)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagPMSystem, ClearPMCode(system));
     }
@@ -443,23 +447,16 @@ QString VMeasurements::Email() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetEmail(const QString &text)
 {
-    if (not ReadOnly())
+    if (not IsReadOnly())
     {
         setTagText(TagEmail, text);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurements::ReadOnly() const
+bool VMeasurements::IsReadOnly() const
 {
-    if (UniqueTagText(TagReadOnly, "false") == "true")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return UniqueTagText(TagReadOnly, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -467,11 +464,11 @@ void VMeasurements::SetReadOnly(bool ro)
 {
     if (ro)
     {
-        setTagText(TagReadOnly, "true");
+        setTagText(TagReadOnly, trueStr);
     }
     else
     {
-        setTagText(TagReadOnly, "false");
+        setTagText(TagReadOnly, falseStr);
     }
 }
 
@@ -664,13 +661,13 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataSize()
 {
-    data->SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
+    VContainer::SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataHeight()
 {
-    data->SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
+    VContainer::SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -878,11 +875,10 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
             // Replace line return character with spaces for calc if exist
             QString f = formula;
             f.replace("\n", " ");
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
-            delete cal;
 
-            *ok = true;
+            (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;
         }
         catch (qmu::QmuParserError &e)

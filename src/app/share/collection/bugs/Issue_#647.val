@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.6</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.79375" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="7"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="2" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="2"/>
+            <point type="endLine" typeLine="hair" id="4" name="A3" basePoint="1" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="14"/>
+            <point type="endLine" typeLine="hair" id="5" name="A4" basePoint="4" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="16"/>
+            <point type="pointOfIntersection" id="6" name="A5" firstPoint="5" secondPoint="2" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="7" name="A6" basePoint="6" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="2"/>
+            <point type="shoulder" typeLine="hair" id="8" name="A7" p2Line="7" pShoulder="3" mx="0.132292" lineColor="black" my="0.264583" length="15" p1Line="2"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

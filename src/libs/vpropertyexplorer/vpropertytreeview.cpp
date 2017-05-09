@@ -20,20 +20,20 @@
 
 #include "vpropertytreeview.h"
 
+#include <QAbstractItemView>
+#include <QFlags>
+
 #include "vpropertydelegate.h"
 #include "vpropertymodel.h"
-
 #include "vpropertytreeview_p.h"
 
-using namespace VPE;
-
-VPropertyTreeView::VPropertyTreeView(QWidget *parent)
+VPE::VPropertyTreeView::VPropertyTreeView(QWidget *parent)
     : QTreeView(parent), d_ptr(new VPropertyTreeViewPrivate())
 {
     init();
 }
 
-VPropertyTreeView::VPropertyTreeView(VPropertyModel *model, QWidget *parent)
+VPE::VPropertyTreeView::VPropertyTreeView(VPropertyModel *model, QWidget *parent)
     : QTreeView(parent), d_ptr(new VPropertyTreeViewPrivate())
 {
     init();
@@ -44,7 +44,7 @@ VPropertyTreeView::VPropertyTreeView(VPropertyModel *model, QWidget *parent)
     }
 }
 
-VPropertyTreeView::VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init_, QWidget *parent)
+VPE::VPropertyTreeView::VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init_, QWidget *parent)
     : QTreeView(parent), d_ptr(d)
 {
     if (init_)
@@ -53,18 +53,18 @@ VPropertyTreeView::VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init_, QW
     }
 }
 
-VPropertyTreeView::~VPropertyTreeView()
+VPE::VPropertyTreeView::~VPropertyTreeView()
 {
     delete d_ptr;
 }
 
 
-void VPropertyTreeView::setRowHeight(int height, bool add_to_standard)
+void VPE::VPropertyTreeView::setRowHeight(int height, bool add_to_standard)
 {
     d_ptr->PropertyDelegate->setRowHeight(height, add_to_standard);
 }
 
-void VPropertyTreeView::init()
+void VPE::VPropertyTreeView::init()
 {
     setAlternatingRowColors(true);
     setUniformRowHeights(true);

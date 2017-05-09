@@ -21,9 +21,18 @@
 #ifndef VENUMPROPERTY_H
 #define VENUMPROPERTY_H
 
-#include "../vproperty.h"
-
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
 #include <QStringList>
+#include <QStyleOptionViewItem>
+#include <QVariant>
+#include <Qt>
+#include <QtGlobal>
+
+#include "../vproperty.h"
+#include "../vpropertyexplorer_global.h"
 
 namespace VPE
 {
@@ -69,7 +78,8 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const Q_DECL_OVERRIDE;
+    virtual VProperty* clone(bool include_children = true,
+                             VProperty* container = nullptr) const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
 
     //! Sets the settings. Available settings:
     //!

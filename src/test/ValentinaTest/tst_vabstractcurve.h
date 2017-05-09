@@ -29,7 +29,7 @@
 #ifndef TST_VABSTRACTCURVE_H
 #define TST_VABSTRACTCURVE_H
 
-#include "abstracttest.h"
+#include "../vmisc/abstracttest.h"
 
 class TST_VAbstractCurve : public AbstractTest
 {
@@ -38,8 +38,8 @@ public:
     explicit TST_VAbstractCurve(QObject *parent = nullptr);
 
 private slots:
-    void GetSegmentPoints_issue458();
-
+    void IsPointOnCurve_data() const;
+    void IsPointOnCurve() const;
 };
 
 #endif // TST_VABSTRACTCURVE_H

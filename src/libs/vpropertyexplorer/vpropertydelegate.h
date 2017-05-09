@@ -21,9 +21,15 @@
 #ifndef VPROPERTYDELEGATE_H
 #define VPROPERTYDELEGATE_H
 
-#include "vpropertyexplorer_global.h"
-
+#include <qcompilerdetection.h>
+#include <QMetaObject>
+#include <QObject>
+#include <QSize>
+#include <QString>
+#include <QStyleOptionViewItem>
 #include <QStyledItemDelegate>
+
+#include "vpropertyexplorer_global.h"
 
 namespace VPE
 {

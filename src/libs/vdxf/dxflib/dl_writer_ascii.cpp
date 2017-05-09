@@ -33,6 +33,7 @@
 #include <string.h>
 #include <QtGlobal>
 
+#include "../vmisc/diagnostic.h"
 #include "dl_writer_ascii.h"
 
 /**
@@ -64,22 +65,27 @@ bool DL_WriterA::openFailed() const
 void DL_WriterA::dxfReal(int gc, double value) const
 {
     char str[256];
-    if (version==DL_Codes::AC1009_MIN) 
+QT_WARNING_PUSH
+#if defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) < 408
+QT_WARNING_DISABLE_GCC("-Wformat")
+#endif
+    if (version==DL_Codes::AC1009_MIN)
     {
-        sprintf(str, "%.6lf", value);
+        snprintf(str, sizeof(str), "%.6lf", value);
     }
-    else 
+    else
     {
-        sprintf(str, "%.16lf", value);
+        snprintf(str, sizeof(str), "%.16lf", value);
     }
-    
+QT_WARNING_POP
+
     // fix for german locale:
     strReplace(str, ',', '.');
 
     // Cut away those zeros at the end:
     bool dot = false;
     int end = -1;
-    for (quint32 i=0, sz = strlen(str); i<sz; ++i)
+    for (quint32 i=0, sz = static_cast<quint32>(strlen(str)); i<sz; ++i)
     {
         if (str[i]=='.')
         {
@@ -125,7 +131,7 @@ void DL_WriterA::dxfInt(int gc, int value) const
 void DL_WriterA::dxfHex(int gc, int value) const
 {
     char str[12];
-    sprintf(str, "%0X", value);
+    snprintf(str, sizeof(str), "%0X", value);
     dxfString(gc, str);
 }
 

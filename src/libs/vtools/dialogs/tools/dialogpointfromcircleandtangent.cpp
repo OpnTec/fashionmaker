@@ -27,22 +27,34 @@
  *************************************************************************/
 
 #include "dialogpointfromcircleandtangent.h"
-#include "ui_dialogpointfromcircleandtangent.h"
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vcontainer.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolpointfromcircleandtangent.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../support/dialogeditwrongformula.h"
-
+#include <limits.h>
+#include <QColor>
+#include <QComboBox>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QPointer>
+#include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
+#include <Qt>
+
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../visualization/visualization.h"
+#include "../../visualization/line/vistoolpointfromcircleandtangent.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../support/dialogeditwrongformula.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "ui_dialogpointfromcircleandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId,
                                                                  QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointFromCircleAndTangent), flagCircleRadius(false),
-      timerCircleRadius(nullptr), circleRadius(), formulaBaseHeightCircleRadius(0), angleCircleRadius(INT_MIN)
+      timerCircleRadius(nullptr), circleRadius(), formulaBaseHeightCircleRadius(0)
 {
     ui->setupUi(this);
 
@@ -88,7 +100,6 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::~DialogPointFromCircleAndTangent()
 {
-    DeleteVisualization<VisToolPointFromCircleAndTangent>();
     delete ui;
 }
 
@@ -111,8 +122,8 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
     setCurrentPointId(ui->comboBoxCircleCenter, value);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
-    point->setPoint2Id(value);
+    SCASSERT(point != nullptr)
+    point->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,7 +145,7 @@ void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
     ui->plainTextEditRadius->setPlainText(formula);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
     point->setCRadius(formula);
 
     MoveCursorToEnd(ui->plainTextEditRadius);
@@ -152,14 +163,14 @@ void DialogPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
     setCurrentPointId(ui->comboBoxTangentPoint, value);
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
-    point->setPoint1Id(value);
+    SCASSERT(point != nullptr)
+    point->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointFromCircleAndTangent::GetCrossCirclesPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,7 +182,7 @@ void DialogPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoi
         ui->comboBoxResult->setCurrentIndex(index);
 
         VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-        SCASSERT(point != nullptr);
+        SCASSERT(point != nullptr)
         point->setCrossPoint(p);
     }
 }
@@ -184,7 +195,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
         if (type == SceneObject::Point)
         {
             VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-            SCASSERT(point != nullptr);
+            SCASSERT(point != nullptr)
 
             switch (number)
             {
@@ -201,7 +212,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                         if (SetObject(id, ui->comboBoxCircleCenter, ""))
                         {
                             number = 0;
-                            point->setPoint2Id(id);
+                            point->setObject2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -246,7 +257,8 @@ void DialogPointFromCircleAndTangent::CircleRadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultCircleRadius;
-    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,10 +309,10 @@ void DialogPointFromCircleAndTangent::SaveData()
     radius.replace("\n", " ");
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr);
+    SCASSERT(point != nullptr)
 
-    point->setPoint1Id(GetTangentPointId());
-    point->setPoint2Id(GetCircleCenterId());
+    point->setObject1Id(GetTangentPointId());
+    point->setObject2Id(GetCircleCenterId());
     point->setCRadius(radius);
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
@@ -316,7 +328,7 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::CheckState()
 {
-    SCASSERT(bOk != nullptr);
+    SCASSERT(bOk != nullptr)
     bOk->setEnabled(flagFormula && flagName && flagError && flagCircleRadius);
     // In case dialog hasn't apply button
     if ( bApply != nullptr)

@@ -29,7 +29,21 @@
 #ifndef VTOOLHEIGHT_H
 #define VTOOLHEIGHT_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QLineF>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoollinepoint.h"
+
+template <class T> class QSharedPointer;
 
 /**
  * @brief The VToolHeight class tool for creation point of height. Help find point of projection onto line.
@@ -38,13 +52,9 @@ class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                const QString &lineColor,
-                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
-    static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolHeight *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+                               VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
                                const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
@@ -54,6 +64,9 @@ public:
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
+
+    QString FirstLinePointName() const;
+    QString SecondLinePointName() const;
 
     quint32 GetP1LineId() const;
     void    SetP1LineId(const quint32 &value);
@@ -69,11 +82,18 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolHeight)
+
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;
 
     /** @brief p2LineId id second point of line. */
     quint32         p2LineId;
+
+    VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                const QString &lineColor,
+                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLHEIGHT_H

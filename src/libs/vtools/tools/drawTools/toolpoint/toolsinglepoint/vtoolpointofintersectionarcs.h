@@ -29,30 +29,41 @@
 #ifndef VTOOLPOINTOFINTERSECTIONARCS_H
 #define VTOOLPOINTOFINTERSECTIONARCS_H
 
+#include <qcompilerdetection.h>
+#include <QDomElement>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
-class VArc;
+template <class T> class QSharedPointer;
 
 class VToolPointOfIntersectionArcs : public VToolSinglePoint
 {
     Q_OBJECT
 
 public:
-    VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
-                                 const quint32 &secondArcId, CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                 QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersectionArcs *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                                VContainer *data);
+    static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                                VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
-                                                const quint32 &secondArcId, CrossCirclesPoint crossPoint,
+                                                const quint32 &secondArcId, CrossCirclesPoint pType,
                                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                 const Source &typeCreation);
-    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint crossPoint);
+    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
+
+    QString FirstArcName() const;
+    QString SecondArcName() const;
 
     quint32 GetFirstArcId() const;
     void    SetFirstArcId(const quint32 &value);
@@ -81,6 +92,10 @@ private:
     quint32       secondArcId;
 
     CrossCirclesPoint crossPoint;
+
+    VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
+                                 const quint32 &secondArcId, CrossCirclesPoint pType, const Source &typeCreation,
+                                 QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONARCS_H

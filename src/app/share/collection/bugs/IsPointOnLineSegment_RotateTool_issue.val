@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.1</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments>
+        <increment name="#Param1" description="" formula="0.2 "/>
+        <increment name="#Param2" description="" formula="3"/>
+    </increments>
+    <draw name="Test1">
+        <calculation>
+            <point type="single" x="0.79375" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="10"/>
+            <point type="normal" typeLine="hair" id="3" name="A2" firstPoint="2" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="10"/>
+            <point type="alongLine" typeLine="none" id="4" name="A3" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <point type="normal" typeLine="none" id="5" name="A4" firstPoint="4" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="4"/>
+            <spline type="simpleInteractive" point4="3" angle1="267.354" angle2="181.581" id="6" color="black" length1="5.48872" length2="8.92993" point1="1"/>
+            <point type="cutSpline" id="7" name="A5" spline="6" mx="-1.44194" my="-1.42325" length="Spl_A_A2*#Param1"/>
+            <point type="cutSpline" id="8" name="A6" spline="6" mx="-1.44193" my="-0.384582" length="Spl_A_A5+#Param2"/>
+            <line typeLine="hair" id="9" firstPoint="5" secondPoint="7" lineColor="black"/>
+            <line typeLine="hair" id="10" firstPoint="5" secondPoint="8" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="11" name="A7" firstPoint="2" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="5"/>
+            <line typeLine="hair" id="12" firstPoint="5" secondPoint="11" lineColor="black"/>
+            <operation type="rotation" suffix="a1" id="13" center="5" angle="323.758">
+                <source>
+                    <item idObject="8"/>
+                    <item idObject="6"/>
+                    <item idObject="3"/>
+                    <item idObject="11"/>
+                </source>
+                <destination>
+                    <item idObject="14" mx="-2.75649" my="0.70277"/>
+                    <item idObject="15" mx="5.68188e+07" my="5.68188e+07"/>
+                    <item idObject="16" mx="0.132292" my="0.264583"/>
+                    <item idObject="17" mx="0.132292" my="0.264583"/>
+                </destination>
+            </operation>
+            <line typeLine="hair" id="18" firstPoint="5" secondPoint="17" lineColor="black"/>
+            <line typeLine="hair" id="19" firstPoint="17" secondPoint="16" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="20" idObject="16" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="21" idObject="15"/>
+            <point type="modeling" inUse="true" id="22" idObject="14" mx="-2.75649" my="0.70277"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="23" name="Деталь" supplement="1" mx="0" width="1" my="0">
+                <node type="NodePoint" nodeType="Contour" idObject="20" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="21" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="22" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

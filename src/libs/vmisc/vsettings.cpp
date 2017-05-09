@@ -29,52 +29,53 @@
 #include "vsettings.h"
 
 #include <QDir>
-#include <QDebug>
 #include <QLocale>
-#include <QApplication>
+#include <QMetaType>
 #include <QPrinter>
 #include <QSharedPointer>
+#include <QStaticStringData>
+#include <QStringData>
+#include <QStringDataPtr>
+#include <QVariant>
+#include <QPrinterInfo>
 
-#include "../ifc/ifcdef.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/vmath.h"
-#else
-#   include <QtMath>
-#endif
+#include "../vmisc/def.h"
+#include "../vmisc/vmath.h"
 
 Q_DECLARE_METATYPE(QMarginsF)
 
-const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
+const QString settingConfigurationLabelLanguage = QStringLiteral("configuration/label_language");
 
-const QString VSettings::SettingPathsPattern                     = QStringLiteral("paths/pattern");
-const QString VSettings::SettingPathsLayout                      = QStringLiteral("paths/layout");
+const QString settingPathsPattern = QStringLiteral("paths/pattern");
+const QString settingPathsLayout  = QStringLiteral("paths/layout");
 
-const QString VSettings::SettingPatternGraphicalOutput           = QStringLiteral("pattern/graphicalOutput");
+const QString settingPatternGraphicalOutput = QStringLiteral("pattern/graphicalOutput");
 
-const QString VSettings::SettingCommunityServer                  = QStringLiteral("community/server");
-const QString VSettings::SettingCommunityServerSecure            = QStringLiteral("community/serverSecure");
-const QString VSettings::SettingCommunityUseProxy                = QStringLiteral("community/useProxy");
-const QString VSettings::SettingCommunityProxyAddress            = QStringLiteral("community/proxyAddress");
-const QString VSettings::SettingCommunityProxyPort               = QStringLiteral("community/proxyPort");
-const QString VSettings::SettingCommunityProxyUser               = QStringLiteral("community/proxyUser");
-const QString VSettings::SettingCommunityProxyPass               = QStringLiteral("community/proxyPass");
-const QString VSettings::SettingCommunityUsername                = QStringLiteral("community/username");
-const QString VSettings::SettingCommunitySavePassword            = QStringLiteral("community/savePassword");
-const QString VSettings::SettingCommunityUserPassword            = QStringLiteral("community/userpassword");
+const QString settingCommunityServer       = QStringLiteral("community/server");
+const QString settingCommunityServerSecure = QStringLiteral("community/serverSecure");
+const QString settingCommunityUseProxy     = QStringLiteral("community/useProxy");
+const QString settingCommunityProxyAddress = QStringLiteral("community/proxyAddress");
+const QString settingCommunityProxyPort    = QStringLiteral("community/proxyPort");
+const QString settingCommunityProxyUser    = QStringLiteral("community/proxyUser");
+const QString settingCommunityProxyPass    = QStringLiteral("community/proxyPass");
+const QString settingCommunityUsername     = QStringLiteral("community/username");
+const QString settingCommunitySavePassword = QStringLiteral("community/savePassword");
+const QString settingCommunityUserPassword = QStringLiteral("community/userpassword");
 
-const QString VSettings::SettingLayoutWidth                      = QStringLiteral("layout/width");
-const QString VSettings::SettingLayoutSorting                    = QStringLiteral("layout/sorting");
-const QString VSettings::SettingLayoutPaperHeight                = QStringLiteral("layout/paperHeight");
-const QString VSettings::SettingLayoutPaperWidth                 = QStringLiteral("layout/paperWidth");
-const QString VSettings::SettingLayoutShift                      = QStringLiteral("layout/shift");
-const QString VSettings::SettingLayoutRotate                     = QStringLiteral("layout/Rotate");
-const QString VSettings::SettingLayoutRotationIncrease           = QStringLiteral("layout/rotationIncrease");
-const QString VSettings::SettingLayoutAutoCrop                   = QStringLiteral("layout/autoCrop");
-const QString VSettings::SettingLayoutSaveLength                 = QStringLiteral("layout/saveLength");
-const QString VSettings::SettingLayoutUnitePages                 = QStringLiteral("layout/unitePages");
-const QString VSettings::SettingFields                           = QStringLiteral("layout/fields");
-const QString VSettings::SettingIgnoreFields                     = QStringLiteral("layout/ignoreFields");
+const QString settingLayoutWidth            = QStringLiteral("layout/width");
+const QString settingLayoutSorting          = QStringLiteral("layout/sorting");
+const QString settingLayoutPaperHeight      = QStringLiteral("layout/paperHeight");
+const QString settingLayoutPaperWidth       = QStringLiteral("layout/paperWidth");
+const QString settingLayoutShift            = QStringLiteral("layout/shift");
+const QString settingLayoutRotate           = QStringLiteral("layout/Rotate");
+const QString settingLayoutRotationIncrease = QStringLiteral("layout/rotationIncrease");
+const QString settingLayoutAutoCrop         = QStringLiteral("layout/autoCrop");
+const QString settingLayoutSaveLength       = QStringLiteral("layout/saveLength");
+const QString settingLayoutUnitePages       = QStringLiteral("layout/unitePages");
+const QString settingFields                 = QStringLiteral("layout/fields");
+const QString settingIgnoreFields           = QStringLiteral("layout/ignoreFields");
+const QString settingStripOptimization      = QStringLiteral("layout/stripOptimization");
+const QString settingMultiplier             = QStringLiteral("layout/multiplier");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -87,175 +88,187 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetLabelLanguage() const
 {
-    return value(SettingConfigurationLabelLanguage, QLocale::system().bcp47Name()).toString();
+    return value(settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLabelLanguage(const QString &value)
 {
-    setValue(SettingConfigurationLabelLanguage, value);
+    setValue(settingConfigurationLabelLanguage, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetDefPathPattern()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("patterns");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathPattern() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(SettingPathsPattern, QDir::homePath()).toString();
+    return settings.value(settingPathsPattern, GetDefPathPattern()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathPattern(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(SettingPathsPattern, value);
+    settings.setValue(settingPathsPattern, value);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetDefPathLayout()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("layouts");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathLayout() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(SettingPathsLayout, QDir::homePath()).toString();
+    return settings.value(settingPathsLayout, GetDefPathLayout()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathLayout(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(SettingPathsLayout, value);
+    settings.setValue(settingPathsLayout, value);
     settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetGraphicalOutput() const
 {
-    return value(SettingPatternGraphicalOutput, 1).toBool();
+    return value(settingPatternGraphicalOutput, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetGraphicalOutput(const bool &value)
 {
-    setValue(SettingPatternGraphicalOutput, value);
+    setValue(settingPatternGraphicalOutput, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetServer() const
 {
-    return value(SettingCommunityServer, "community.valentina-project.org").toString();
+    return value(settingCommunityServer, "community.valentina-project.org").toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetServer(const QString &value)
 {
-    setValue(SettingCommunityServer, value);
+    setValue(settingCommunityServer, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetServerSecure() const
 {
-    return value(SettingCommunityServerSecure, 0).toBool();
+    return value(settingCommunityServerSecure, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetServerSecure(const bool &value)
 {
-    setValue(SettingCommunityServerSecure, value);
+    setValue(settingCommunityServerSecure, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetProxy() const
 {
-    return value(SettingCommunityUseProxy, 0).toBool();
+    return value(settingCommunityUseProxy, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetProxy(const bool &value)
 {
-    setValue(SettingCommunityUseProxy, value);
+    setValue(settingCommunityUseProxy, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetProxyAddress() const
 {
-    return value(SettingCommunityProxyAddress).toString();
+    return value(settingCommunityProxyAddress).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetProxyAddress(const QString &value)
 {
-    setValue(SettingCommunityProxyAddress, value);
+    setValue(settingCommunityProxyAddress, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetProxyPort() const
 {
-    return value(SettingCommunityProxyPort).toString();
+    return value(settingCommunityProxyPort).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetProxyPort(const QString &value)
 {
-    setValue(SettingCommunityProxyPort, value);
+    setValue(settingCommunityProxyPort, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetProxyUser() const
 {
-    return value(SettingCommunityProxyUser).toString();
+    return value(settingCommunityProxyUser).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetProxyUser(const QString &value)
 {
-    setValue(SettingCommunityProxyUser, value);
+    setValue(settingCommunityProxyUser, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetProxyPass() const
 {
-    return value(SettingCommunityProxyPass).toString();
+    return value(settingCommunityProxyPass).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetProxyPass(const QString &value)
 {
-    setValue(SettingCommunityProxyPass, value);
+    setValue(settingCommunityProxyPass, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetUsername() const
 {
-    return value(SettingCommunityUsername).toString();
+    return value(settingCommunityUsername).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetUsername(const QString &value)
 {
-    setValue(SettingCommunityUsername, value);
+    setValue(settingCommunityUsername, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetSavePassword() const
 {
-    return value(SettingCommunitySavePassword, 0).toBool();
+    return value(settingCommunitySavePassword, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetSavePassword(const bool &value)
 {
-    setValue(SettingCommunitySavePassword, value);
+    setValue(settingCommunitySavePassword, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetUserPassword() const
 {
-    return value(SettingCommunityUserPassword).toString();
+    return value(settingCommunityUserPassword).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetUserPassword(const QString &value)
 {
-    setValue(SettingCommunityUserPassword, value);
+    setValue(settingCommunityUserPassword, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,7 +276,7 @@ qreal VSettings::GetLayoutPaperHeight() const
 {
     const qreal def = UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px);
     bool ok = false;
-    const qreal height = value(SettingLayoutPaperHeight, def).toDouble(&ok);
+    const qreal height = value(settingLayoutPaperHeight, def).toDouble(&ok);
     if (ok)
     {
         return height;
@@ -277,7 +290,7 @@ qreal VSettings::GetLayoutPaperHeight() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutPaperHeight(qreal value)
 {
-    setValue(SettingLayoutPaperHeight, value);
+    setValue(settingLayoutPaperHeight, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -285,7 +298,7 @@ qreal VSettings::GetLayoutPaperWidth() const
 {
     const qreal def = UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px);
     bool ok = false;
-    const qreal width = value(SettingLayoutPaperWidth, def).toDouble(&ok);
+    const qreal width = value(settingLayoutPaperWidth, def).toDouble(&ok);
     if (ok)
     {
         return width;
@@ -299,7 +312,7 @@ qreal VSettings::GetLayoutPaperWidth() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutPaperWidth(qreal value)
 {
-    setValue(SettingLayoutPaperWidth, value);
+    setValue(settingLayoutPaperWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,7 +320,7 @@ qreal VSettings::GetLayoutShift() const
 {
     const qreal def = GetDefLayoutShift();
     bool ok = false;
-    const qreal shift = value(SettingLayoutShift, def).toDouble(&ok);
+    const qreal shift = value(settingLayoutShift, def).toDouble(&ok);
     if (ok)
     {
         return shift;
@@ -321,13 +334,13 @@ qreal VSettings::GetLayoutShift() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSettings::GetDefLayoutShift()
 {
-    return UnitConvertor(50, Unit::Mm, Unit::Px);
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutShift(qreal value)
 {
-    setValue(SettingLayoutShift, value);
+    setValue(settingLayoutShift, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +348,7 @@ qreal VSettings::GetLayoutWidth() const
 {
     const qreal def = GetDefLayoutWidth();
     bool ok = false;
-    const qreal lWidth = value(SettingLayoutWidth, def).toDouble(&ok);
+    const qreal lWidth = value(settingLayoutWidth, def).toDouble(&ok);
     if (ok)
     {
         return lWidth;
@@ -355,14 +368,13 @@ qreal VSettings::GetDefLayoutWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutWidth(qreal value)
 {
-    setValue(SettingLayoutWidth, value);
+    setValue(settingLayoutWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetFields() const
+QMarginsF VSettings::GetFields(const QMarginsF &def) const
 {
-    const QMarginsF def = GetDefFields();
-    const QVariant val = value(SettingFields, QVariant::fromValue(def));
+    const QVariant val = value(settingFields, QVariant::fromValue(def));
     if (val.canConvert<QMarginsF>())
     {
         return val.value<QMarginsF>();
@@ -371,34 +383,9 @@ QMarginsF VSettings::GetFields() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VSettings::GetDefFields()
-{
-    QSharedPointer<QPrinter> printer = DefaultPrinter();
-    if (printer.isNull())
-    {
-        return QMarginsF();
-    }
-
-    qreal left = 0;
-    qreal top = 0;
-    qreal right = 0;
-    qreal bottom = 0;
-    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
-    // We can't use Unit::Px because our dpi in most cases is different
-    QMarginsF def;
-    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
-    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
-    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
-    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
-    return def;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetFields(const QMarginsF &value)
 {
-    QVariant val = QVariant::fromValue(value);
-    QString str = val.toString();
-    setValue(SettingFields, val);
+    setValue(settingFields, QVariant::fromValue(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -406,7 +393,7 @@ Cases VSettings::GetLayoutGroup() const
 {
     const Cases def = GetDefLayoutGroup();
     bool ok = false;
-    const int g = value(SettingLayoutSorting, static_cast<int>(def)).toInt(&ok);
+    const int g = value(settingLayoutSorting, static_cast<int>(def)).toInt(&ok);
     if (ok)
     {
         if (g >= static_cast<int>(Cases::UnknownCase))
@@ -433,25 +420,25 @@ Cases VSettings::GetDefLayoutGroup()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutGroup(const Cases &value)
 {
-    setValue(SettingLayoutSorting, static_cast<int>(value));
+    setValue(settingLayoutSorting, static_cast<int>(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutRotate() const
 {
-    return value(SettingLayoutRotate, GetDefLayoutRotate()).toBool();
+    return value(settingLayoutRotate, GetDefLayoutRotate()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetDefLayoutRotate()
 {
-    return true;
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutRotate(bool value)
 {
-    setValue(SettingLayoutRotate, value);
+    setValue(settingLayoutRotate, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -459,7 +446,7 @@ int VSettings::GetLayoutRotationIncrease() const
 {
     const int def = GetDefLayoutRotationIncrease();
     bool ok = false;
-    const int r = value(SettingLayoutRotationIncrease, def).toInt(&ok);
+    const int r = value(settingLayoutRotationIncrease, def).toInt(&ok);
     if (ok)
     {
         if (not (r >= 1 && r <= 180 && 360 % r == 0))
@@ -486,13 +473,13 @@ int VSettings::GetDefLayoutRotationIncrease()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutRotationIncrease(int value)
 {
-    setValue(SettingLayoutRotationIncrease, value);
+    setValue(settingLayoutRotationIncrease, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutAutoCrop() const
 {
-    return value(SettingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
+    return value(settingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -504,13 +491,13 @@ bool VSettings::GetDefLayoutAutoCrop()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutAutoCrop(bool value)
 {
-    setValue(SettingLayoutAutoCrop, value);
+    setValue(settingLayoutAutoCrop, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutSaveLength() const
 {
-    return value(SettingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
+    return value(settingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,13 +509,13 @@ bool VSettings::GetDefLayoutSaveLength()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutSaveLength(bool value)
 {
-    setValue(SettingLayoutSaveLength, value);
+    setValue(settingLayoutSaveLength, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutUnitePages() const
 {
-    return value(SettingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
+    return value(settingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -540,13 +527,13 @@ bool VSettings::GetDefLayoutUnitePages()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutUnitePages(bool value)
 {
-    setValue(SettingLayoutUnitePages, value);
+    setValue(settingLayoutUnitePages, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetIgnoreAllFields() const
 {
-    return value(SettingIgnoreFields, GetDefIgnoreAllFields()).toBool();
+    return value(settingIgnoreFields, GetDefIgnoreAllFields()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -558,5 +545,42 @@ bool VSettings::GetDefIgnoreAllFields()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetIgnoreAllFields(bool value)
 {
-    setValue(SettingIgnoreFields, value);
+    setValue(settingIgnoreFields, value);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetStripOptimization() const
+{
+    return value(settingStripOptimization, GetDefStripOptimization()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefStripOptimization()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetStripOptimization(bool value)
+{
+    setValue(settingStripOptimization, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 VSettings::GetMultiplier() const
+{
+    return static_cast<quint8>(value(settingMultiplier, GetDefMultiplier()).toUInt());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 VSettings::GetDefMultiplier()
+{
+    return 1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetMultiplier(quint8 value)
+{
+    setValue(settingMultiplier, value);
+}
+

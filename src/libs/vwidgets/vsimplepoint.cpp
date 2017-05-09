@@ -27,31 +27,47 @@
  *************************************************************************/
 
 #include "vsimplepoint.h"
-#include "vgraphicssimpletextitem.h"
+
+#include <QBrush>
+#include <QFlags>
+#include <QFont>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
+#include <QLineF>
+#include <QPen>
+#include <QPoint>
+#include <QRectF>
+#include <Qt>
+
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-
-#include <QGraphicsSceneMouseEvent>
-#include <QStyleOptionGraphicsItem>
-#include <QPen>
+#include "vgraphicssimpletextitem.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr)
+    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
+      QGraphicsEllipseItem(),
+      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
+      namePoint(nullptr),
+      lineName(nullptr),
+      m_onlyPoint(false),
+      m_isHighlight(false),
+      m_visualizationMode(false)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
     connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,24 +75,36 @@ VSimplePoint::~VSimplePoint()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ChangedActivDraw(const bool &flag)
+void VSimplePoint::SetOnlyPoint(bool value)
 {
-    enabled = flag;
-    setEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    m_onlyPoint = value;
+    namePoint->setVisible(not m_onlyPoint);
+    lineName->setVisible(not m_onlyPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+bool VSimplePoint::IsOnlyPoint() const
 {
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsEllipseItem::paint(painter, &myOption, widget);
+    return m_onlyPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetVisualizationMode(bool value)
+{
+    m_visualizationMode = value;
+    this->setFlag(QGraphicsItem::ItemIsFocusable, not m_visualizationMode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSimplePoint::IsVisualizationMode() const
+{
+    return m_visualizationMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::SetPointHighlight(bool value)
+{
+    m_isHighlight = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,7 +119,7 @@ void VSimplePoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
-        SetPen(lineName, QColor(Qt::black), WidthHairLine(patternUnit));
+        SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
 
         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
@@ -112,22 +140,15 @@ void VSimplePoint::RefreshLine()
 void VSimplePoint::RefreshGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPos(point.toQPointF());
+    this->setPos(static_cast<QPointF>(point));
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     namePoint->blockSignals(true);
     QFont font = namePoint->font();
-    if (factor == nullptr)
-    {
-        font.setPointSize(static_cast<qint32>(namePoint->FontSize()));
-    }
-    else
-    {
-        font.setPointSize(static_cast<qint32>(namePoint->FontSize()/ *factor));
-    }
+    font.setPointSize(static_cast<qint32>(namePoint->FontSize()/ *factor));
     namePoint->setFont(font);
     namePoint->setText(point.name());
     namePoint->setPos(QPointF(point.mx(), point.my()));
@@ -139,6 +160,9 @@ void VSimplePoint::RefreshGeometry(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::SetEnabled(bool enabled)
 {
+    VAbstractSimple::SetEnabled(enabled);
+    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
+    SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
     namePoint->setEnabled(enabled);
 }
 
@@ -146,6 +170,25 @@ void VSimplePoint::SetEnabled(bool enabled)
 void VSimplePoint::EnableToolMove(bool move)
 {
     namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::AllowLabelHover(bool enabled)
+{
+    namePoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::AllowLabelSelecting(bool enabled)
+{
+    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::ToolSelectionType(const SelectionType &type)
+{
+    VAbstractSimple::ToolSelectionType(type);
+    namePoint->LabelSelectionType(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,25 +204,63 @@ void VSimplePoint::PointChoosed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ChangedPosition(const QPointF &pos)
+void VSimplePoint::PointSelected(bool selected)
 {
-    emit NameChangedPosition(pos);
+    setSelected(selected);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ContextMenu(QGraphicsSceneContextMenuEvent *event)
+void VSimplePoint::ChangedPosition(const QPointF &pos)
 {
-    emit ShowContextMenu(event);
+    emit NameChangedPosition(pos, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (m_visualizationMode)
+    {
+        event->ignore();
+    }
+    else
+    {
+        // Special for not selectable item first need to call standard mousePressEvent then accept event
+        QGraphicsEllipseItem::mousePressEvent(event);
+
+        // Somehow clicking on notselectable object do not clean previous selections.
+        if (not (flags() & ItemIsSelectable) && scene())
+        {
+            scene()->clearSelection();
+        }
+
+        if (selectionType == SelectionType::ByMouseRelease)
+        {// Special for not selectable item first need to call standard mousePressEvent then accept event
+            event->accept();
+        }
+        else
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (not m_visualizationMode)
     {
-        emit Choosed(id);
+        if (selectionType == SelectionType::ByMouseRelease)
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                emit Choosed(id);
+            }
+        }
+        QGraphicsEllipseItem::mouseReleaseEvent(event);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,15 +278,35 @@ void VSimplePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QColor VSimplePoint::GetCurrentColor() const
+void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
 {
-    return currentColor;
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            emit Delete();
+            return; //Leave this method immediately after call!!!
+        default:
+            break;
+    }
+    QGraphicsEllipseItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::SetCurrentColor(const QColor &value)
+QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    currentColor = value;
-    SetPen(this, CorrectColor(currentColor), pen().widthF());
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        namePoint->blockSignals(true);
+        namePoint->setSelected(value.toBool());
+        namePoint->blockSignals(false);
+        emit Selected(value.toBool(), id);
+    }
+
+    return QGraphicsEllipseItem::itemChange(change, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
 }

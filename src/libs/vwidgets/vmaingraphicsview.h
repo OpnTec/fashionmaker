@@ -29,8 +29,15 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
-#include <QObject>
+#include <qcompilerdetection.h>
 #include <QGraphicsView>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QRectF>
+#include <QString>
+#include <Qt>
+#include <QtGlobal>
 
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
@@ -71,22 +78,32 @@ public:
 signals:
     void zoomed();
 public slots:
-    void scrollingTime(qreal x);
+    void VerticalScrollingTime(qreal x);
+    void HorizontalScrollingTime(qreal x);
     void animFinished();
 protected:
     virtual bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(GraphicsViewZoom)
-    QGraphicsView*        _view;
+    QGraphicsView        *_view;
     Qt::KeyboardModifiers _modifiers;
     double                _zoom_factor_base;
     QPointF               target_scene_pos;
     QPointF               target_viewport_pos;
-    QTimeLine            *anim;
-    /** @brief _numScheduledScalings keep number scheduled scalings. */
-    qint32   _numScheduledScalings;
+    QTimeLine            *verticalScrollAnim;
+    /** @brief _numScheduledVerticalScrollings keep number scheduled vertical scrollings. */
+    qint32                _numScheduledVerticalScrollings;
+    QTimeLine            *horizontalScrollAnim;
+    /** @brief _numScheduledHorizontalScrollings keep number scheduled horizontal scrollings. */
+    qint32                _numScheduledHorizontalScrollings;
+
+    static const int duration;
+    static const int updateInterval;
 
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
+
+    bool StartVerticalScrollings(QWheelEvent* wheel_event);
+    bool StartHorizontalScrollings(QWheelEvent* wheel_event);
 };
 
 /**
@@ -99,9 +116,13 @@ public:
 
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
+    void AllowRubberBand(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     static QRectF SceneVisibleArea(QGraphicsView *view);
+
+    static qreal MinScale();
+    static qreal MaxScale();
 
 signals:
     /**
@@ -122,12 +143,15 @@ public slots:
     void     ZoomOriginal();
     void     ZoomFitBest();
 protected:
-    virtual void mousePressEvent(QMouseEvent *mousePress) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
-    bool     showToolOptions;
+    bool              showToolOptions;
+    bool              isAllowRubberBand;
+    QPoint            m_ptStartPos;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

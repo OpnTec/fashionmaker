@@ -29,9 +29,10 @@
 #ifndef VBANK_H
 #define VBANK_H
 
-#include <QVector>
 #include <QHash>
 #include <QRectF>
+#include <QVector>
+#include <QtGlobal>
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
@@ -41,8 +42,7 @@
 #undef small
 #endif
 
-class QPointF;
-class VLayoutDetail;
+class VLayoutPiece;
 
 enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
 
@@ -54,9 +54,9 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(const qreal &value);
 
-    void SetDetails(const QVector<VLayoutDetail> &details);
+    void SetDetails(const QVector<VLayoutPiece> &details);
     int  GetTiket();
-    VLayoutDetail GetDetail(int i) const;
+    VLayoutPiece GetDetail(int i) const;
 
     void Arranged(int i);
     void NotArranged(int i);
@@ -69,11 +69,11 @@ public:
     int LeftArrange() const;
     int ArrangedCount() const;
 
-    QRectF GetBiggestBoundingRect() const;
+    qreal GetBiggestDiagonal() const;
 
 private:
     Q_DISABLE_COPY(VBank)
-    QVector<VLayoutDetail> details;
+    QVector<VLayoutPiece> details;
     QHash<int, qint64> unsorted;
 
     QHash<int, qint64> big;
@@ -84,7 +84,7 @@ private:
 
     Cases caseType;
     bool prepare;
-    QRectF boundingRect;
+    qreal diagonal;
 
     void PrepareGroup();
 
@@ -97,7 +97,6 @@ private:
     int GetNextDescGroup() const;
 
     void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
-    void BiggestBoundingRect();
 };
 
 #if defined (Q_OS_WIN) && defined (Q_CC_MSVC)

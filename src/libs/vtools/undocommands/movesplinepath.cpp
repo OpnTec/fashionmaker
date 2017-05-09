@@ -27,18 +27,30 @@
  *************************************************************************/
 
 #include "movesplinepath.h"
+
 #include <QDomElement>
+
+#include "../ifc/xml/vabstractpattern.h"
 #include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vgeometry/vsplinepath.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
-                               const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
+                               const quint32 &id, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      oldSplinePath(oldSplPath),
+      newSplinePath(newSplPath),
+      scene(qApp->getCurrentScene())
 {
     setText(tr("move spline path"));
     nodeId = id;
 
-    SCASSERT(scene != nullptr);
+    SCASSERT(scene != nullptr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,6 +63,7 @@ void MoveSplinePath::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSplinePath);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,13 +72,14 @@ void MoveSplinePath::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSplinePath);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool MoveSplinePath::mergeWith(const QUndoCommand *command)
 {
     const MoveSplinePath *moveCommand = static_cast<const MoveSplinePath *>(command);
-    SCASSERT(moveCommand != nullptr);
+    SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSplinePathId();
 
     if (id != nodeId)
@@ -89,8 +103,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
-        VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
+        VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);
 
         emit NeedLiteParsing(Document::LiteParse);
     }

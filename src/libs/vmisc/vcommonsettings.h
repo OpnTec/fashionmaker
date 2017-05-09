@@ -29,7 +29,15 @@
 #ifndef VCOMMONSETTINGS_H
 #define VCOMMONSETTINGS_H
 
+#include <QByteArray>
+#include <QMetaObject>
+#include <QObject>
 #include <QSettings>
+#include <QSize>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>
+
 #include "../vlayout/vbank.h"
 
 class VCommonSettings : public QSettings
@@ -37,17 +45,24 @@ class VCommonSettings : public QSettings
     Q_OBJECT
 public:
     VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-              QObject *parent = 0);
+              QObject *parent = nullptr);
 
-    QString StandardTablesPath() const;
-    QString TemplatesPath() const;
+    static QString SharePath(const QString &shareItem);
+    static QString StandardTablesPath();
+    static QString StandardTemplatesPath();
 
+    static void PrepareStandardTemplates(const QString &currentPath);
+    static void PrepareStandardTables(const QString &currentPath);
+
+    static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
+    static QString GetDefPathStandardMeasurements();
     QString GetPathStandardMeasurements() const;
     void SetPathStandardMeasurements(const QString &value);
 
+    static QString GetDefPathTemplate();
     QString GetPathTemplate() const;
     void SetPathTemplate(const QString &value);
 
@@ -75,6 +90,9 @@ public:
     bool GetConfirmItemDelete() const;
     void SetConfirmItemDelete(const bool &value);
 
+    bool GetConfirmFormatRewriting() const;
+    void SetConfirmFormatRewriting(const bool &value);
+
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 
@@ -99,31 +117,31 @@ public:
     QByteArray GetToolbarsState() const;
     void SetToolbarsState(const QByteArray &value);
 
+    QSize GetPreferenceDialogSize() const;
+    void SetPreferenceDialogSize(const QSize& sz);
+
+    int  GetLatestSkippedVersion() const;
+    void SetLatestSkippedVersion(int value);
+
+    QDate GetDateOfLastRemind() const;
+    void  SetDateOfLastRemind(const QDate &date);
+
+    QStringList GetUserDefinedMaterials() const;
+    void AddUserDefinedMaterial(QString qsMaterial);
+    void ClearUserDefinedMaterial();
+
+    bool GetForbidWorkpieceFlipping() const;
+    void SetForbidWorkpieceFlipping(bool value);
+
+    bool IsDoublePassmark() const;
+    void SetDoublePassmark(bool value);
+
+#if !defined(Q_OS_WIN)
+    static const QString unixStandardSharePath;
+#endif
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
-
-    static const QString SettingPathsIndividualMeasurements;
-    static const QString SettingPathsStandardMeasurements;
-    static const QString SettingPathsTemplates;
-
-    static const QString SettingConfigurationOsSeparator;
-    static const QString SettingConfigurationAutosaveState;
-    static const QString SettingConfigurationAutosaveTime;
-    static const QString SettingConfigurationSendReportState;
-    static const QString SettingConfigurationLocale;
-    static const QString SettingPMSystemCode;
-    static const QString SettingConfigurationUnit;
-    static const QString SettingConfigurationConfirmItemDeletion;
-    static const QString SettingConfigurationToolBarStyle;
-
-    static const QString SettingPatternUser;
-    static const QString SettingPatternUndo;
-
-    static const QString SettingGeneralRecentFileList;
-    static const QString SettingGeneralRestoreFileList;
-    static const QString SettingGeneralGeometry;
-    static const QString SettingGeneralWindowState;
-    static const QString SettingGeneralToolbarsState;
 };
 
 #endif // VCOMMONSETTINGS_H

@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements>Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit</measurements>
+    <increments>
+        <increment name="#Пг" description="" formula="6"/>
+        <increment name="#Рв" description="" formula="2"/>
+        <increment name="#Пб" description="" formula="4"/>
+        <increment name="#Пт" description="" formula="8"/>
+        <increment name="#Св" description="" formula="(@Сг+#Пг-0.75)-(@Ст+#Пт)"/>
+        <increment name="#Сб" description="" formula="(@Сб+#Пб)-(@Сг+#Пг-0.75)"/>
+    </increments>
+    <draw name="ИМК Жакета полуприлегающего силуэта">
+        <calculation>
+            <point type="single" x="-4.20412" y="-5.03123" id="1" name="А" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="А1" basePoint="1" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="@Дс"/>
+            <point type="alongLine" typeLine="none" id="3" name="А2" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="1/4*@Сг+1/4*@Дс"/>
+            <point type="endLine" typeLine="hair" id="4" name="А3" basePoint="2" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="@Ди"/>
+            <point type="alongLine" typeLine="none" id="5" name="А4" firstPoint="2" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" length="@Дб"/>
+            <point type="alongLine" typeLine="none" id="6" name="А5" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="(1/4*@Сг+1/4*@Дс+1)/2"/>
+            <point type="endLine" typeLine="hair" id="7" name="А6" basePoint="1" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="1"/>
+            <point type="endLine" typeLine="none" id="8" name="А7" basePoint="3" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="3"/>
+            <point type="endLine" typeLine="hair" id="9" name="А8" basePoint="2" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="0.75"/>
+            <point type="lineIntersect" id="10" name="А9" p2Line1="9" p2Line2="8" p1Line1="6" p1Line2="3" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="11" firstPoint="3" secondPoint="10" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="12" name="А10" basePoint="10" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1/4*@Сг+5.5+0.25*#Пг"/>
+            <point type="endLine" typeLine="hair" id="13" name="А11" basePoint="12" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1/4*@Сг-1+0.45*#Пг"/>
+            <point type="alongLine" typeLine="none" id="14" name="А12" firstPoint="12" secondPoint="13" mx="0.132292" lineColor="black" my="0.264583" length="0.62*(1/4*@Сг-1+0.45*#Пг)"/>
+            <point type="pointOfIntersection" id="15" name="А13" firstPoint="14" secondPoint="2" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="16" name="А14" firstPoint="15" secondPoint="5" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="17" name="А15" firstPoint="16" secondPoint="4" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="20" firstPoint="9" secondPoint="15" lineColor="black"/>
+            <line typeLine="hair" id="21" firstPoint="5" secondPoint="16" lineColor="black"/>
+            <line typeLine="hair" id="22" firstPoint="4" secondPoint="17" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="24" name="А18" basePoint="7" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1/8*@Сг+1.5"/>
+            <point type="endLine" typeLine="hair" id="25" name="А19" basePoint="24" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="1/10*(1/4*@Сг+1/4*@Дс)+1"/>
+            <point type="pointOfIntersection" id="26" name="А20" firstPoint="12" secondPoint="1" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="27" name="А21" firstPoint="26" secondPoint="12" mx="0.132292" lineColor="black" my="0.264583" length="1"/>
+            <line typeLine="hair" id="28" firstPoint="26" secondPoint="27" lineColor="black"/>
+            <line typeLine="hair" id="29" firstPoint="12" secondPoint="27" lineColor="black"/>
+            <line typeLine="hair" id="30" firstPoint="1" secondPoint="26" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="31" name="А22" basePoint="26" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="2.5"/>
+            <line typeLine="hair" id="32" firstPoint="25" secondPoint="31" lineColor="black"/>
+            <arc type="arcWithLength" angle1="AngleLine_А19_А22" id="33" radius="Line_А19_А22-#Рв" center="25" color="black" length="5"/>
+            <point type="alongLine" typeLine="none" id="34" name="А23" firstPoint="25" secondPoint="31" mx="0.132292" lineColor="black" my="0.264583" length="4.5"/>
+            <point type="alongLine" typeLine="none" id="35" name="А24" firstPoint="34" secondPoint="31" mx="0.132292" lineColor="black" my="0.264583" length="#Рв"/>
+            <point type="endLine" typeLine="none" id="36" name="А25" basePoint="34" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="9"/>
+            <line typeLine="hair" id="37" firstPoint="36" secondPoint="31" lineColor="black"/>
+            <arc type="arcWithLength" angle1="AngleLine_А25_А22" id="38" radius="Line_А25_А22" center="36" color="black" length="7"/>
+            <point type="pointOfIntersectionArcs" crossPoint="1" firstArc="38" id="39" name="А26" secondArc="33" mx="0.132292" my="0.264583"/>
+            <point type="lineIntersect" id="40" name="А27" p2Line1="39" p2Line2="34" p1Line1="25" p1Line2="36" mx="0.132292" my="0.318967"/>
+            <point type="alongLine" typeLine="none" id="41" name="А28" firstPoint="36" secondPoint="35" mx="0.132292" lineColor="black" my="0.264583" length="Line_А25_А27"/>
+            <line typeLine="hair" id="42" firstPoint="25" secondPoint="40" lineColor="black"/>
+            <line typeLine="hair" id="43" firstPoint="40" secondPoint="36" lineColor="black"/>
+            <line typeLine="hair" id="44" firstPoint="36" secondPoint="41" lineColor="black"/>
+            <line typeLine="hair" id="45" firstPoint="41" secondPoint="31" lineColor="black"/>
+            <point type="pointOfIntersection" id="46" name="А29" firstPoint="12" secondPoint="6" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="47" name="А30" basePoint="46" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="0.7"/>
+            <spline point4="25" type="simple" kAsm1="1.33" kAsm2="0.68" angle1="0" angle2="241" id="48" kCurve="1" color="black" point1="7"/>
+            <point type="alongLine" typeLine="none" id="49" name="А31" firstPoint="12" secondPoint="27" mx="0.132292" lineColor="black" my="0.264583" length="Line_А10_А21/4"/>
+            <point type="endLine" typeLine="hair" id="50" name="А32" basePoint="49" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1.5"/>
+            <line typeLine="hair" id="51" firstPoint="14" secondPoint="17" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="52" name="А33" basePoint="13" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1/2*@Сг-4.5+0.3*#Пг"/>
+            <point type="pointOfIntersection" id="53" name="А34" firstPoint="52" secondPoint="15" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="54" name="А35" firstPoint="53" secondPoint="16" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="55" name="А36" firstPoint="54" secondPoint="17" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="56" firstPoint="52" secondPoint="55" lineColor="black"/>
+            <line typeLine="hair" id="57" firstPoint="17" secondPoint="55" lineColor="black"/>
+            <line typeLine="hair" id="58" firstPoint="16" secondPoint="54" lineColor="black"/>
+            <line typeLine="hair" id="59" firstPoint="15" secondPoint="53" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="60" name="А37" basePoint="13" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="1/2*@Сг+1.5"/>
+            <point type="pointOfIntersection" id="61" name="А38" firstPoint="52" secondPoint="60" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="62" firstPoint="60" secondPoint="61" lineColor="black"/>
+            <line typeLine="hair" id="63" firstPoint="61" secondPoint="52" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="64" name="А39" firstPoint="13" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" length="Line_А10_А31-1"/>
+            <point type="alongLine" typeLine="none" id="65" name="А40" firstPoint="13" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" length="Line_А10_А21-3"/>
+            <point type="endLine" typeLine="none" id="66" name="А41" basePoint="65" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="10"/>
+            <point type="alongLine" typeLine="none" id="67" name="А42" firstPoint="61" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" length="1/8*@Сг+1.5+0.5"/>
+            <point type="endLine" typeLine="hair" id="68" name="А43" basePoint="67" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="1"/>
+            <point type="alongLine" typeLine="none" id="69" name="А44" firstPoint="13" secondPoint="52" mx="0.132292" lineColor="black" my="0.264583" length="0.5*(1/2*@Сг-4.5+0.3*#Пг)+1"/>
+            <line typeLine="hair" id="70" firstPoint="68" secondPoint="69" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="71" name="А45" firstPoint="68" secondPoint="69" mx="0.132292" lineColor="black" my="0.264583" length="Line_А43_А44+1"/>
+            <line typeLine="hair" id="72" firstPoint="69" secondPoint="71" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="73" name="А46" basePoint="68" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="1/8*@Сг+1.5+0.5"/>
+            <point type="pointOfIntersection" id="74" name="А47" firstPoint="61" secondPoint="73" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="75" firstPoint="73" secondPoint="74" lineColor="black"/>
+            <point type="pointOfIntersection" id="76" name="А48" firstPoint="61" secondPoint="68" mx="0.132292" my="0.264583"/>
+            <arc type="simple" angle1="180" angle2="270" id="77" radius="1/8*@Сг+1.5+0.5" center="76" color="black"/>
+            <point type="alongLine" typeLine="none" id="78" name="А49" firstPoint="67" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" length="1/5*@Сг-0.5"/>
+            <point type="alongLine" typeLine="none" id="79" name="А50" firstPoint="71" secondPoint="78" mx="-0.228179" lineColor="black" my="-1.47769" length="Line_А43_А44+Line_А44_А45"/>
+            <point type="pointOfContact" id="80" name="А51" radius="Line_А19_А27+Line_А28_А22" center="79" firstPoint="66" secondPoint="65" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="81" firstPoint="80" secondPoint="79" lineColor="black"/>
+            <spline point4="14" type="simple" kAsm1="1.56853" kAsm2="0.793976" angle1="253.87" angle2="180.019" id="83" kCurve="1" color="black" point1="31"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="84" name="А52" curve="83" basePoint="12" mx="0.132292" lineColor="black" angle="45" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="85" name="А53" basePoint="13" mx="0.252449" lineColor="black" angle="135" my="-0.936986" length="0.5*Line_А10_А52"/>
+            <spline point4="80" type="simple" kAsm1="0.45136" kAsm2="2.73446" angle1="359.975" angle2="309.726" id="86" kCurve="1" color="black" point1="14"/>
+            <point type="endLine" typeLine="hair" id="182" name="А77" basePoint="55" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="1.5"/>
+            <line typeLine="hair" id="184" firstPoint="71" secondPoint="79" lineColor="black"/>
+            <line typeLine="hair" id="185" firstPoint="71" secondPoint="68" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="186" name="А78" firstPoint="79" secondPoint="80" mx="0.132292" lineColor="black" my="0.264583" length="Line_А19_А27"/>
+            <line typeLine="hair" id="187" firstPoint="71" secondPoint="186" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="188" name="А79" basePoint="71" mx="0.132292" lineColor="black" angle="AngleLine_А45_А43+(AngleLine_А45_А78-AngleLine_А45_А50)" my="0.264583" length="Line_А45_А78"/>
+            <line typeLine="hair" id="189" firstPoint="188" secondPoint="68" lineColor="black"/>
+            <line typeLine="hair" id="229" firstPoint="6" secondPoint="9" lineColor="black"/>
+            <point type="pointOfIntersection" id="230" name="А16" firstPoint="9" secondPoint="5" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="231" name="А17" firstPoint="230" secondPoint="4" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="232" firstPoint="9" secondPoint="231" lineColor="black"/>
+            <point type="pointOfIntersection" id="233" name="А54" firstPoint="71" secondPoint="15" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="234" name="А55" firstPoint="233" secondPoint="16" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="235" name="А56" firstPoint="71" secondPoint="233" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <point type="alongLine" typeLine="none" id="236" name="А57" firstPoint="9" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="0.08*#Св"/>
+            <point type="pointOfIntersection" id="240" name="А61" firstPoint="36" secondPoint="236" mx="0.186676" my="0.264583"/>
+            <point type="pointOfIntersection" id="241" name="А62" firstPoint="36" secondPoint="8" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="243" name="А64" firstPoint="240" secondPoint="236" mx="0.132292" lineColor="black" my="0.264583" length="0.15*#Св"/>
+            <point type="alongLine" typeLine="none" id="244" name="А65" firstPoint="240" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="0.15*#Св"/>
+            <line typeLine="hair" id="245" firstPoint="241" secondPoint="243" lineColor="black"/>
+            <line typeLine="hair" id="246" firstPoint="241" secondPoint="244" lineColor="black"/>
+            <point type="pointOfIntersection" id="247" name="А63" firstPoint="240" secondPoint="230" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="248" name="А66" firstPoint="233" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="0.1*#Св"/>
+            <point type="alongLine" typeLine="none" id="249" name="А67" firstPoint="233" secondPoint="53" mx="0.132292" lineColor="black" my="0.264583" length="0.1*#Св"/>
+            <line typeLine="hair" id="250" firstPoint="235" secondPoint="248" lineColor="black"/>
+            <line typeLine="hair" id="251" firstPoint="248" secondPoint="234" lineColor="black"/>
+            <line typeLine="hair" id="252" firstPoint="235" secondPoint="249" lineColor="black"/>
+            <line typeLine="hair" id="253" firstPoint="249" secondPoint="234" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="254" name="А68" firstPoint="16" secondPoint="247" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="255" name="А69" firstPoint="16" secondPoint="234" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="256" name="А70" firstPoint="247" secondPoint="230" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="257" name="А71" firstPoint="247" secondPoint="16" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="pointOfIntersection" id="260" name="А72" firstPoint="234" secondPoint="182" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="261" name="А73" firstPoint="247" secondPoint="4" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="262" name="А74" firstPoint="261" secondPoint="231" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="263" name="А75" firstPoint="261" secondPoint="17" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="264" name="А76" firstPoint="17" secondPoint="55" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <point type="alongLine" typeLine="none" id="265" name="А80" firstPoint="17" secondPoint="261" mx="0.132292" lineColor="black" my="0.264583" length="0.25*#Сб"/>
+            <line typeLine="hair" id="266" firstPoint="244" secondPoint="256" lineColor="black"/>
+            <line typeLine="hair" id="267" firstPoint="256" secondPoint="262" lineColor="black"/>
+            <line typeLine="hair" id="268" firstPoint="243" secondPoint="257" lineColor="black"/>
+            <line typeLine="hair" id="269" firstPoint="257" secondPoint="263" lineColor="black"/>
+            <line typeLine="hair" id="270" firstPoint="254" secondPoint="265" lineColor="black"/>
+            <line typeLine="hair" id="271" firstPoint="255" secondPoint="264" lineColor="black"/>
+            <line typeLine="hair" id="272" firstPoint="265" secondPoint="260" lineColor="black"/>
+            <line typeLine="hair" id="273" firstPoint="260" secondPoint="182" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="274" name="А58" firstPoint="15" secondPoint="53" mx="0.132292" lineColor="black" my="0.264583" length="0.21*#Св"/>
+            <point type="alongLine" typeLine="none" id="275" name="А59" firstPoint="15" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="0.21*#Св"/>
+            <spline point4="275" type="simple" kAsm1="1.01991" kAsm2="0.727026" angle1="258.899" angle2="102.011" id="276" kCurve="1" color="black" point1="14"/>
+            <spline point4="255" type="simple" kAsm1="0.701584" kAsm2="0.99" angle1="286.242" angle2="90" id="277" kCurve="1" color="black" point1="275"/>
+            <spline point4="274" type="simple" kAsm1="1" kAsm2="1" angle1="81" angle2="261" id="278" kCurve="1" color="black" point1="254"/>
+            <spline point4="14" type="simple" kAsm1="1" kAsm2="1" angle1="96" angle2="276" id="279" kCurve="1" color="black" point1="274"/>
+            <point type="cutSpline" id="280" name="А60" spline="86" color="black" mx="0.132292" my="0.264583" length="Spl_А12_А51/2"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="291" idObject="14" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="292" idObject="86"/>
+            <point type="modeling" inUse="true" id="293" idObject="280" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="294" idObject="86"/>
+            <point type="modeling" inUse="true" id="295" idObject="235" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="296" name="Деталь" supplement="1" width="1" mx="-0.0650213" my="-6.56834">
+                <node type="NodePoint" nodeType="Contour" idObject="291" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="292" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="293" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="294" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="295" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+    <draw name="ИМК Двухшовного рукава">
+        <calculation>
+            <point type="single" x="59.7831" y="-7.66569" id="87" name="Б" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="88" name="Б1" basePoint="87" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="@Др"/>
+            <point type="alongLine" typeLine="none" id="89" name="Б2" firstPoint="87" secondPoint="88" mx="0.132292" lineColor="black" my="0.264583" length="@Во"/>
+            <point type="alongLine" typeLine="none" id="90" name="Б3" firstPoint="87" secondPoint="88" mx="0.132292" lineColor="black" my="0.264583" length="@Дл"/>
+            <point type="alongLine" typeLine="none" id="91" name="Б4" firstPoint="89" secondPoint="87" mx="0.132292" lineColor="black" my="0.264583" length="Line_А11_А39"/>
+            <point type="endLine" typeLine="hair" id="92" name="Б5" basePoint="87" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="Line_А10_А11+5"/>
+            <point type="pointOfIntersection" id="93" name="Б6" firstPoint="92" secondPoint="88" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="94" name="Б7" firstPoint="92" secondPoint="89" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="95" name="Б8" firstPoint="94" secondPoint="90" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="96" firstPoint="88" secondPoint="93" lineColor="black"/>
+            <line typeLine="hair" id="97" firstPoint="90" secondPoint="95" lineColor="black"/>
+            <line typeLine="hair" id="99" firstPoint="92" secondPoint="93" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="100" name="Б9" firstPoint="92" secondPoint="87" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б_Б5"/>
+            <point type="alongLine" typeLine="none" id="101" name="Б10" firstPoint="100" secondPoint="87" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б5_Б9"/>
+            <line typeLine="hair" id="102" firstPoint="101" secondPoint="91" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="103" name="Б11" firstPoint="101" secondPoint="91" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б10_Б4"/>
+            <line typeLine="hair" id="104" firstPoint="100" secondPoint="103" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="105" name="Б12" firstPoint="100" secondPoint="103" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б9_Б11"/>
+            <point type="normal" typeLine="hair" id="106" name="Б13" firstPoint="105" secondPoint="100" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="1.2"/>
+            <point type="alongLine" typeLine="none" id="107" name="Б14" firstPoint="92" secondPoint="94" mx="0.132292" lineColor="black" my="0.264583" length="@Во/3"/>
+            <line typeLine="hair" id="108" firstPoint="100" secondPoint="107" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="109" name="Б15" firstPoint="100" secondPoint="107" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б9_Б14"/>
+            <point type="normal" typeLine="hair" id="110" name="Б16" firstPoint="109" secondPoint="107" mx="0.170261" lineColor="black" angle="0" my="0.264583" length="1.2"/>
+            <spline point4="100" type="simple" kAsm1="0.782511" kAsm2="0.780007" angle1="69.4162" angle2="180.066" id="111" kCurve="1" color="black" point1="103"/>
+            <spline point4="107" type="simple" kAsm1="1.01631" kAsm2="0.797674" angle1="0.0849729" angle2="132.557" id="112" kCurve="1" color="black" point1="100"/>
+            <point type="pointOfIntersection" id="113" name="Б17" firstPoint="100" secondPoint="89" mx="0.132292" my="0.264583"/>
+            <point type="alongLine" typeLine="none" id="114" name="Б18" firstPoint="113" secondPoint="89" mx="-0.998169" lineColor="black" my="0.303564" length="1"/>
+            <line typeLine="hair" id="115" firstPoint="107" secondPoint="114" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="116" name="Б19" basePoint="114" mx="-0.686318" lineColor="black" angle="135" my="-1.4506" length="1"/>
+            <line typeLine="hair" id="117" firstPoint="89" secondPoint="114" lineColor="black"/>
+            <line typeLine="hair" id="118" firstPoint="114" secondPoint="94" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="119" name="Б20" firstPoint="114" secondPoint="89" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б2_Б18"/>
+            <line typeLine="hair" id="120" firstPoint="91" secondPoint="119" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="121" name="Б21" firstPoint="91" secondPoint="119" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б4_Б20"/>
+            <point type="alongLine" typeLine="none" id="122" name="Б22" firstPoint="121" secondPoint="89" mx="-1.38191" lineColor="black" my="-1.27222" length="1"/>
+            <spline point4="119" type="simple" kAsm1="1.09751" kAsm2="0.806861" angle1="278.386" angle2="173.084" id="124" kCurve="1" color="black" point1="91"/>
+            <line typeLine="hair" id="125" firstPoint="103" secondPoint="91" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="126" name="Б23" firstPoint="90" secondPoint="95" mx="0.132292" lineColor="black" my="0.264583" length="1.5"/>
+            <line typeLine="hair" id="127" firstPoint="89" secondPoint="126" lineColor="black"/>
+            <line typeLine="hair" id="128" firstPoint="126" secondPoint="88" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="129" name="Б24" firstPoint="88" secondPoint="93" mx="0.132292" lineColor="black" my="0.264583" length="3/10*@Сг+1"/>
+            <point type="alongLine" typeLine="none" id="130" name="Б25" firstPoint="95" secondPoint="90" mx="0.132292" lineColor="black" my="0.264583" length="1"/>
+            <line typeLine="hair" id="131" firstPoint="94" secondPoint="130" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="132" name="Б26" basePoint="129" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="3"/>
+            <line typeLine="hair" id="133" firstPoint="130" secondPoint="132" lineColor="black"/>
+            <line typeLine="hair" id="134" firstPoint="88" secondPoint="132" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="190" name="Б27" basePoint="89" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="3"/>
+            <point type="endLine" typeLine="hair" id="191" name="Б28" basePoint="190" mx="-0.774476" lineColor="black" angle="90" my="-1.84041" length="0.3"/>
+            <spline point4="91" type="simple" kAsm1="0.949151" kAsm2="1.07952" angle1="23.0206" angle2="254.091" id="192" kCurve="1" color="black" point1="191"/>
+            <point type="alongLine" typeLine="none" id="193" name="Б29" firstPoint="89" secondPoint="119" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <point type="endLine" typeLine="hair" id="194" name="Б30" basePoint="193" mx="0.132292" lineColor="black" angle="90" my="0.264583" length="0.3"/>
+            <point type="alongLine" typeLine="none" id="195" name="Б31" firstPoint="126" secondPoint="90" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <line typeLine="hair" id="196" firstPoint="195" secondPoint="90" lineColor="black"/>
+            <line typeLine="hair" id="197" firstPoint="191" secondPoint="195" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="198" name="Б32" firstPoint="126" secondPoint="130" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <line typeLine="hair" id="199" firstPoint="194" secondPoint="198" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="200" name="Б33" basePoint="88" mx="0.132292" lineColor="black" angle="180+(AngleLine_Б1_Б6-AngleLine_Б1_Б26)" my="0.264583" length="3"/>
+            <line typeLine="hair" id="201" firstPoint="195" secondPoint="200" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="202" name="Б34" firstPoint="88" secondPoint="132" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <line typeLine="hair" id="203" firstPoint="198" secondPoint="202" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="204" name="Б35" firstPoint="107" secondPoint="94" mx="0.132292" lineColor="black" my="0.264583" length="3"/>
+            <point type="alongLine" typeLine="none" id="205" name="Б36" firstPoint="107" secondPoint="114" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б14_Б18"/>
+            <spline point4="205" type="simple" kAsm1="0.842738" kAsm2="1.28764" angle1="359.734" angle2="229.919" id="206" kCurve="1" color="black" point1="119"/>
+            <point type="lineIntersectAxis" typeLine="hair" id="207" name="Б37" basePoint="204" p2Line="205" mx="0.132292" lineColor="black" angle="180" my="0.264583" p1Line="107"/>
+            <point type="endLine" typeLine="hair" id="208" name="Б38" basePoint="204" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="Line_Б35_Б37"/>
+            <line typeLine="hair" id="209" firstPoint="107" secondPoint="208" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="210" name="Б39" firstPoint="130" secondPoint="198" mx="0.132292" lineColor="black" my="0.264583" length="1.5"/>
+            <point type="alongLine" typeLine="none" id="211" name="Б40" firstPoint="130" secondPoint="95" mx="0.132292" lineColor="black" my="0.264583" length="1.5"/>
+            <line typeLine="hair" id="212" firstPoint="95" secondPoint="211" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="213" name="Б41" firstPoint="132" secondPoint="202" mx="0.132292" lineColor="black" my="0.264583" length="1"/>
+            <point type="alongLine" typeLine="none" id="214" name="Б42" firstPoint="213" secondPoint="132" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <line typeLine="hair" id="215" firstPoint="132" secondPoint="214" lineColor="black"/>
+            <line typeLine="hair" id="216" firstPoint="207" secondPoint="210" lineColor="black"/>
+            <line typeLine="hair" id="217" firstPoint="210" secondPoint="213" lineColor="black"/>
+            <line typeLine="hair" id="218" firstPoint="208" secondPoint="211" lineColor="black"/>
+            <line typeLine="hair" id="219" firstPoint="211" secondPoint="214" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="220" name="Б43" basePoint="195" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="0.5"/>
+            <point type="alongLine" typeLine="none" id="221" name="Б44" firstPoint="198" secondPoint="126" mx="0.132292" lineColor="black" my="0.264583" length="0.5"/>
+            <point type="alongLine" typeLine="none" id="222" name="Б45" firstPoint="88" secondPoint="132" mx="0.132292" lineColor="black" my="0.264583" length="0.5*Line_Б1_Б26"/>
+            <spline point4="200" type="simple" kAsm1="1.2483" kAsm2="0.74004" angle1="168.164" angle2="11.3935" id="223" kCurve="1" color="black" point1="222"/>
+            <spline point4="194" type="simple" kAsm1="1.42" kAsm2="0.85" angle1="86" angle2="274" id="224" kCurve="1" color="black" point1="202"/>
+            <spline point4="191" type="simple" kAsm1="1.42" kAsm2="0.85" angle1="86" angle2="274" id="225" kCurve="1" color="black" point1="200"/>
+            <spline point4="210" type="simple" kAsm1="1.00111" kAsm2="1.00617" angle1="272.697" angle2="86.8999" id="226" kCurve="1" color="black" point1="207"/>
+            <spline point4="211" type="simple" kAsm1="0.947968" kAsm2="1.04565" angle1="268.167" angle2="82.5992" id="227" kCurve="1" color="black" point1="208"/>
+            <spline point4="119" type="simple" kAsm1="1.01587" kAsm2="0.970762" angle1="333.513" angle2="171.978" id="228" kCurve="1" color="black" point1="194"/>
+        </calculation>
+        <modeling/>
+        <details/>
+    </draw>
+</pattern>

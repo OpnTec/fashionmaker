@@ -29,7 +29,17 @@
 #ifndef DIALOGEDITWRONGFORMULA_H
 #define DIALOGEDITWRONGFORMULA_H
 
+#include <qcompilerdetection.h>
+#include <QMap>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QTableWidgetItem>
+#include <QtGlobal>
+
 #include "../tools/dialogtool.h"
+
+template <class T> class QSharedPointer;
 
 namespace Ui
 {
@@ -54,6 +64,7 @@ public:
     QString      GetFormula() const;
     void         SetFormula(const QString &value);
     void         setCheckZero(bool value);
+    void         setCheckLessThanZero(bool value);
     void         setPostfix(const QString &value);
 public slots:
     virtual void DialogAccepted() Q_DECL_OVERRIDE;
@@ -63,23 +74,25 @@ public slots:
      */
     void         DeployFormulaTextEdit();
     virtual void EvalFormula() Q_DECL_OVERRIDE;
-    void         ValChenged(int row);
+    void         ValChanged(int row);
     void         PutHere();
-    void         PutVal(QListWidgetItem * item);
+    void         PutVal(QTableWidgetItem * item);
 
     void         Measurements();
     void         LengthLines();
     void         RadiusArcs();
-    void         AnglesArcs();
     void         AnglesCurves();
-    void         LengthArcs();
     void         LengthCurves();
+    void         CurvesCLength();
     void         AngleLines();
     void         Increments();
+    void         Functions();
 protected:
-    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void CheckState() Q_DECL_FINAL;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+private slots:
+    void FilterVariablesEdited(const QString &filter);
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;
@@ -91,6 +104,7 @@ private:
     int formulaBaseHeight;
 
     bool checkZero;
+    bool checkLessThanZero;
     QString postfix;
     bool restoreCursor;
 
@@ -98,6 +112,8 @@ private:
 
     template <class key, class val>
     void ShowVariable(const QMap<key, val> &var);
+    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
+    void ShowFunctions();
 
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };

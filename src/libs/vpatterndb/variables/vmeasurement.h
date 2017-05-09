@@ -29,14 +29,20 @@
 #ifndef VSTANDARDTABLEROW_H
 #define VSTANDARDTABLEROW_H
 
-#include "vvariable.h"
-#include "../ifc/ifcdef.h"
-
-#include <QStringList>
+#include <qcompilerdetection.h>
 #include <QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QStringList>
+#include <QTypeInfo>
+#include <QtGlobal>
 
-class VMeasurementData;
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+#include "vvariable.h"
+
 class VContainer;
+class VMeasurementData;
 
 /**
  * @brief The VMeasurement class keep data row of standard table
@@ -46,18 +52,26 @@ class VMeasurement :public VVariable
 public:
     VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
                  const qreal &ksize, const qreal &kheight, const QString &gui_text = QString(),
-                 const QString &description = QString(), const QString &TagName = QString());
+                 const QString &description = QString(), const QString &tagName = QString());
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
                  bool ok, const QString &gui_text = QString(), const QString &description = QString(),
-                 const QString &TagName = QString());
+                 const QString &tagName = QString());
     VMeasurement(const VMeasurement &m);
-    VMeasurement &operator=(const VMeasurement &m);
+
     virtual ~VMeasurement() Q_DECL_OVERRIDE;
+
+    VMeasurement &operator=(const VMeasurement &m);
+#ifdef Q_COMPILER_RVALUE_REFS
+    VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW { Swap(m); return *this; }
+#endif
+
+    void Swap(VMeasurement &m) Q_DECL_NOTHROW
+    { VVariable::Swap(m); std::swap(d, m.d); }
 
     QString GetGuiText() const;
 
     QString TagName() const;
-    void    setTagName(const QString &TagName);
+    void    setTagName(const QString &tagName);
 
     QString GetFormula() const;
 

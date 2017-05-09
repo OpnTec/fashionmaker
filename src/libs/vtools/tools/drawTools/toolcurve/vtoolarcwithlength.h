@@ -29,30 +29,38 @@
 #ifndef VTOOLARCWITHLENGTH_H
 #define VTOOLARCWITHLENGTH_H
 
+#include <qcompilerdetection.h>
+#include <QGraphicsItem>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vabstractspline.h"
 
 class VFormula;
+template <class T> class QSharedPointer;
 
 class VToolArcWithLength : public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                       const Source &typeCreation,
-                       QGraphicsItem * parent = nullptr);
-
     virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolArcWithLength* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                      VContainer *data);
+    static VToolArcWithLength* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+                                      VAbstractPattern *doc, VContainer *data);
     static VToolArcWithLength* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1,
-                                      QString &length, const QString &color, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc,
-                                      VContainer *data, const Document &parse, const Source &typeCreation);
-    static const QString TagName;
+                                      QString &length, const QString &color, VMainGraphicsScene *scene,
+                                      VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                      const Source &typeCreation);
+
     static const QString ToolType;
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::ArcWithLength)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
+
+    QString CenterPointName() const;
 
     quint32          getCenter() const;
     void             setCenter(const quint32 &value);
@@ -74,7 +82,12 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
-    void             RefreshGeometry();
+    Q_DISABLE_COPY(VToolArcWithLength)
+
+    VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                       QGraphicsItem * parent = nullptr);
+
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
 };
 
