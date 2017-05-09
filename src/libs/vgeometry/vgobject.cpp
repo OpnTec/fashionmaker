@@ -42,8 +42,6 @@
 
 const double VGObject::accuracyPointOnLine = (0.031/*mm*/ / 25.4) * PrintDPI;
 
-double VGObject::accuracyPointOnLine = (0.5/*mm*/ / 25.4) * PrintDPI;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
