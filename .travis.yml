@@ -62,12 +62,9 @@ script:
 - $CXX --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    # build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
     make -j$(nproc);
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
     xvfb-run -a make --silent check TESTARGS="-silent";
-    cd ..;
-    #sonar-scanner;
   else
     make -j1;
   fi  
