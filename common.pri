@@ -704,8 +704,7 @@ CLANG_DEBUG_CXXFLAGS += \
 unix:!macx{
     #Clang on MAC OS X doesn't support all options
     CLANG_DEBUG_CXXFLAGS += \
-        -Warc-abi \
-        -Wunused-sanitize-argument
+        -Warc-abi
 }
 
 ICC_DEBUG_CXXFLAGS += \
