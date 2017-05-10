@@ -2507,7 +2507,9 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
 
 #ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
+#ifndef Q_CC_CLANG
     QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
+#endif
 #endif
 
     points.clear();
