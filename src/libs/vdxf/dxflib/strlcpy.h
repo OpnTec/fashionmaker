@@ -62,6 +62,11 @@
 #include <sys/types.h>
 #include <string.h>
 
+#include "../vmisc/diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+
 /*
  * Copy src to string dst of size siz.  At most siz-1 characters
  * will be copied.  Always NUL terminates (unless siz == 0).
@@ -138,6 +143,8 @@ inline size_t strlcat(char *dst, const char *src, size_t siz)
 
     return(dlen + (s - src)); /* count does not include NUL */
 }
+
+QT_WARNING_POP
 
 #endif /* ! __*BSD__ */
 #endif // VALENTINA_STRLCPY_H

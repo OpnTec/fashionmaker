@@ -48,15 +48,17 @@
  * Implements functions defined in DL_Writer for writing low
  *   level DXF constructs to an ASCII format DXF file.
  *
- * @para fname File name of the file to be created.
- * @para version DXF version. Defaults to DL_VERSION_2002.
- *
  * @todo What if \c fname is NULL?  Or \c fname can't be opened for
  * another reason?
  */
 class DXFLIB_EXPORT DL_WriterA : public DL_Writer
 {
 public:
+    /**
+     * @brief DL_WriterA contructor
+     * @param fname File name of the file to be created.
+     * @param version DXF version. Defaults to DL_VERSION_2002.
+     */
     explicit DL_WriterA(const char* fname, DL_Codes::version version=DL_VERSION_2000)
         : DL_Writer(version), m_ofile(fname) {}
     virtual ~DL_WriterA() {}

@@ -162,7 +162,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
             break;
     }
 
-    Q_ASSERT("that's impossible!");
+    qFatal("that's impossible!");
 
     return QPoint();
 }
@@ -193,7 +193,7 @@ QRect FancyTabBar::AdjustRect(const QRect& rect, const qint8 offsetOutside, cons
             break;
     }
 
-    Q_ASSERT("that's impossible!");
+    qFatal("that's impossible!");
     return QRect();
 }
 
@@ -216,7 +216,7 @@ QPoint FancyTabBar::AdjustPoint(const QPoint& point, const qint8 offsetInsideOut
             break;
     }
 
-    Q_ASSERT("that's impossible!");
+    qFatal("that's impossible!");
     return QPoint();
 }
 
