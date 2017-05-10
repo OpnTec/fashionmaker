@@ -83,6 +83,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                                       << OutputPointsIssue548Case1();
 
 #ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
+#ifndef Q_CC_CLANG
     QTest::newRow("Issue 548. Case2") << InputPointsIssue548Case2()
                                       << 37.795275590551185 // seam allowance width (1.0 cm)
                                       << OutputPointsIssue548Case2();
@@ -90,6 +91,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::newRow("Issue 548. Case3") << InputPointsIssue548Case3()
                                       << 75.59055118110237 // seam allowance width (2.0 cm)
                                       << OutputPointsIssue548Case3();
+#endif
 #endif
 
     QTest::newRow("Issue 646.") << InputPointsIssue646()
