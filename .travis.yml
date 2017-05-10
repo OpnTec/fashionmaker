@@ -5,7 +5,9 @@ matrix:
     dist: trusty
     sudo: required
     compiler: clang
-    env: DEPLOY=false
+    env: 
+    - DEPLOY=false
+    - CCACHE_CPP2=yes
     cache:
     - ccache
     directories:
@@ -31,6 +33,8 @@ before_install:
     sudo apt-get install -y libqt5xmlpatterns5;
     sudo apt-get install -y xpdf;
     sudo apt-get install -y xvfb;
+    wget https://launchpad.net/ubuntu/+archive/primary/+files/ccache_3.3.4-1_amd64.deb;
+    sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
     brew update > /dev/null;
     brew install qt5;
