@@ -45,6 +45,10 @@
 #   include <QtGui>
 #endif
 
+#ifdef QT_GUI_LIB
+#   include <QtWidgets>
+#endif
+
 #endif/*__cplusplus*/
 
 #endif // STABLE_H

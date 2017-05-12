@@ -4,7 +4,7 @@ unix {
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
@@ -29,7 +29,7 @@ unix {
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
@@ -46,7 +46,7 @@ unix {
     *-icc-*{
         QMAKE_CXXFLAGS += \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+            -isystem "$${OUT_PWD}/$${UI_DIR}" \
             $$ICC_DEBUG_CXXFLAGS
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
