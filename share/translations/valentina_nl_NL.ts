@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="vanished">voeg detail toe</translation>
+        <translation type="vanished">voeg werkstuk toe</translation>
     </message>
 </context>
 <context>
@@ -19,14 +19,14 @@
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation>voeg patroonderdeel %1 toe</translation>
+        <translation>voeg patroondeel %1 toe</translation>
     </message>
 </context>
 <context>
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation>voeg detail toe</translation>
+        <translation>voeg werkstuk toe</translation>
     </message>
 </context>
 <context>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation type="vanished">Maak connectie</translation>
+        <translation type="vanished">Beveiligde verbinding</translation>
     </message>
     <message>
         <source>Proxy settings</source>
@@ -79,11 +79,11 @@
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation type="vanished">Proxy pass</translation>
+        <translation type="vanished">Proxy wachtwoord</translation>
     </message>
     <message>
         <source>User settings</source>
-        <translation type="vanished">Gebruikers instellingen</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation type="vanished">Opslaan paswoord</translation>
+        <translation type="vanished">Sla wachtwoord op</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="vanished">Paswoord</translation>
+        <translation type="vanished">Wachtwoord</translation>
     </message>
     <message>
         <source>Server name/IP:</source>
@@ -130,7 +130,7 @@
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Pas toe</translation>
+        <translation type="vanished">Toepassen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
