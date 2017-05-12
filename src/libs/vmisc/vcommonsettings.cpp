@@ -673,7 +673,6 @@ void VCommonSettings::SetCSVSeparator(const QChar &separator)
         case ' ':
             settings.setValue(settingCSVSeparator, 2);
             break;
-        case ',':
         default:
             settings.setValue(settingCSVSeparator, 3);
             break;
@@ -693,7 +692,6 @@ QChar VCommonSettings::GetCSVSeparator() const
             return QChar(';');
         case 2:
             return QChar(' ');
-        case 3:
         default:
             return QChar(',');
     }
