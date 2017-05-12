@@ -31,17 +31,12 @@
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
-#include <QTextCodec>
 #include <QVariant>
 
 const QString settingDataBaseGeometry = QStringLiteral("database/geometry");
 
 const QString settingDefHeight = QStringLiteral("gradation/defHeight");
 const QString settingDefSize   = QStringLiteral("gradation/defHeight");
-
-const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
-const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
-const QString settingCSVSeparator  = QStringLiteral("csv/withSeparator");
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -84,85 +79,4 @@ void VTapeSettings::SetDefSize(int value)
 int VTapeSettings::GetDefSize() const
 {
     return value(settingDefSize, 50).toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SetCSVWithHeader(bool withHeader)
-{
-    setValue(settingCSVWithHeader, withHeader);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VTapeSettings::GetCSVWithHeader() const
-{
-    return value(settingCSVWithHeader, GetDefCSVWithHeader()).toBool();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VTapeSettings::GetDefCSVWithHeader() const
-{
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SetCSVCodec(int mib)
-{
-    setValue(settingCSVCodec, mib);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VTapeSettings::GetCSVCodec() const
-{
-    return value(settingCSVCodec, GetDefCSVCodec()).toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VTapeSettings::GetDefCSVCodec() const
-{
-    return QTextCodec::codecForLocale()->mibEnum();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SetCSVSeparator(const QChar &separator)
-{
-    switch(separator.toLatin1())
-    {
-        case '\t':
-            setValue(settingCSVSeparator, 0);
-            break;
-        case ';':
-            setValue(settingCSVSeparator, 1);
-            break;
-        case ' ':
-            setValue(settingCSVSeparator, 2);
-            break;
-        case ',':
-        default:
-            setValue(settingCSVSeparator, 3);
-            break;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QChar VTapeSettings::GetCSVSeparator() const
-{
-    const quint8 separator = static_cast<quint8>(value(settingCSVSeparator, 3).toUInt());
-    switch(separator)
-    {
-        case 0:
-            return QChar('\t');
-        case 1:
-            return QChar(';');
-        case 2:
-            return QChar(' ');
-        case 3:
-        default:
-            return QChar(',');
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QChar VTapeSettings::GetDefCSVSeparator() const
-{
-    return QChar(',');
 }

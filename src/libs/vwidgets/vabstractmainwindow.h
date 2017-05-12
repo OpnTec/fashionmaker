@@ -35,6 +35,8 @@
 #include <QObject>
 #include <QString>
 
+class DialogExportToCSV;
+
 class VAbstractMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -47,6 +49,7 @@ public slots:
 
 protected slots:
     void WindowsLocale();
+    void ExportToCSV();
 
 protected:
     int     m_curFileFormatVersion;
@@ -54,6 +57,8 @@ protected:
 
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
     void ToolBarStyle(QToolBar *bar);
+
+    virtual void ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)=0;
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
 };

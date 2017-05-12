@@ -8,7 +8,6 @@ SOURCES  += \
     $$PWD/dialogs/dialogabouttape.cpp \
     $$PWD/dialogs/dialognewmeasurements.cpp \
     $$PWD/dialogs/dialogmdatabase.cpp \
-    $$PWD/dialogs/dialogexporttocsv.cpp \
     $$PWD/vlitepattern.cpp \
     $$PWD/dialogs/dialogtapepreferences.cpp \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
@@ -24,7 +23,6 @@ HEADERS  += \
     $$PWD/dialogs/dialognewmeasurements.h \
     $$PWD/dialogs/dialogmdatabase.h \
     $$PWD/version.h \
-    $$PWD/dialogs/dialogexporttocsv.h \
     $$PWD/vlitepattern.h \
     $$PWD/dialogs/dialogtapepreferences.h \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
@@ -35,7 +33,6 @@ FORMS    += \
     $$PWD/dialogs/dialogabouttape.ui \
     $$PWD/dialogs/dialognewmeasurements.ui \
     $$PWD/dialogs/dialogmdatabase.ui \
-    $$PWD/dialogs/dialogexporttocsv.ui \
     $$PWD/dialogs/dialogtapepreferences.ui \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
     $$PWD/dialogs/configpages/tapepreferencespathpage.ui

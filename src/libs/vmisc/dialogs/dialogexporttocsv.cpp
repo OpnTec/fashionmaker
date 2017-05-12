@@ -29,8 +29,8 @@
 #include "dialogexporttocsv.h"
 #include "ui_dialogexporttocsv.h"
 
-#include "../vmisc/vtapesettings.h"
-#include "../mapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vabstractapplication.h"
 
 #include <QPushButton>
 #include <QShowEvent>
@@ -44,25 +44,25 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetCSVWithHeader());
+    ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetCSVWithHeader());
 
     foreach (int mib, QTextCodec::availableMibs())
     {
         ui->comboBoxCodec->addItem(QTextCodec::codecForMib(mib)->name(), mib);
     }
 
-    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetCSVCodec()));
+    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->Settings()->GetCSVCodec()));
 
-    SetSeparator(qApp->TapeSettings()->GetCSVSeparator());
+    SetSeparator(qApp->Settings()->GetCSVSeparator());
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
-    connect(bDefaults, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(bDefaults, &QPushButton::clicked, this, [this]()
     {
-        ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetDefCSVWithHeader());
-        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetDefCSVCodec()));
+        ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetDefCSVWithHeader());
+        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->Settings()->GetDefCSVCodec()));
 
-        SetSeparator(qApp->TapeSettings()->GetDefCSVSeparator());
+        SetSeparator(qApp->Settings()->GetDefCSVSeparator());
     });
 }
 

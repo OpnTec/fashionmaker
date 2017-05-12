@@ -38,6 +38,7 @@
 #include <QStringDataPtr>
 #include <QVariant>
 #include <QtDebug>
+#include <QTextCodec>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -71,6 +72,10 @@ const QString settingPreferenceDialogSize   = QStringLiteral("preferenceDialogSi
 const QString settingLatestSkippedVersion   = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind       = QStringLiteral("dateOfLastRemind");
 const QString settingUserDefinedMaterials   = QStringLiteral("configuration/userDefinedMaterials");
+
+const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
+const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
+const QString settingCSVSeparator  = QStringLiteral("csv/withSeparator");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -611,4 +616,91 @@ bool VCommonSettings::IsDoublePassmark() const
 void VCommonSettings::SetDoublePassmark(bool value)
 {
     setValue(settingDoublePassmark, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCSVWithHeader(bool withHeader)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(settingCSVWithHeader, withHeader);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetCSVWithHeader() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(settingCSVWithHeader, GetDefCSVWithHeader()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetDefCSVWithHeader() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCSVCodec(int mib)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    settings.setValue(settingCSVCodec, mib);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetCSVCodec() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    return settings.value(settingCSVCodec, GetDefCSVCodec()).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetDefCSVCodec() const
+{
+    return QTextCodec::codecForLocale()->mibEnum();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCSVSeparator(const QChar &separator)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    switch(separator.toLatin1())
+    {
+        case '\t':
+            settings.setValue(settingCSVSeparator, 0);
+            break;
+        case ';':
+            settings.setValue(settingCSVSeparator, 1);
+            break;
+        case ' ':
+            settings.setValue(settingCSVSeparator, 2);
+            break;
+        case ',':
+        default:
+            settings.setValue(settingCSVSeparator, 3);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar VCommonSettings::GetCSVSeparator() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
+    const quint8 separator = static_cast<quint8>(settings.value(settingCSVSeparator, 3).toUInt());
+    switch(separator)
+    {
+        case 0:
+            return QChar('\t');
+        case 1:
+            return QChar(';');
+        case 2:
+            return QChar(' ');
+        case 3:
+        default:
+            return QChar(',');
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar VCommonSettings::GetDefCSVSeparator() const
+{
+    return QChar(',');
 }

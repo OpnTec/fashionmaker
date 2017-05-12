@@ -70,6 +70,7 @@ protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog) Q_DECL_FINAL;
 
 private slots:
     void FileNew();
@@ -82,7 +83,6 @@ private slots:
 
     bool FileSave();
     bool FileSaveAs();
-    void ExportToCSV();
     void AboutToShowWindowMenu();
     void ShowWindow() const;
 

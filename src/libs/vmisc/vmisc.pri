@@ -12,7 +12,8 @@ SOURCES += \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
-    $$PWD/abstracttest.cpp
+    $$PWD/abstracttest.cpp \
+    $$PWD/dialogs/dialogexporttocsv.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -34,7 +35,8 @@ HEADERS += \
     $$PWD/qxtcsvmodel.h \
     $$PWD/vtablesearch.h \
     $$PWD/abstracttest.h \
-    $$PWD/diagnostic.h
+    $$PWD/diagnostic.h \
+    $$PWD/dialogs/dialogexporttocsv.h
 
 # Qt's versions
 # 5.2.0, 5.2.1
@@ -57,3 +59,6 @@ contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
     SOURCES += \
         $$PWD/backport/qmarginsf.cpp
 }
+
+FORMS    += \
+    $$PWD/dialogs/dialogexporttocsv.ui

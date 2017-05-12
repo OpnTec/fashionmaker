@@ -29,9 +29,11 @@
 #include "vabstractmainwindow.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
+#include "dialogs/dialogexporttocsv.h"
 
 #include <QStyle>
 #include <QToolBar>
+#include <QFileDialog>
 
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -88,4 +90,35 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
 void VAbstractMainWindow::WindowsLocale()
 {
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ExportToCSV()
+{
+    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.cvs)");
+    const QString suffix("csv");
+    const QString path = QDir::homePath()  + QLatin1String("/") + tr("values") + QLatin1String(".") + suffix;
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters);
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QLatin1String(".") + suffix;
+    }
+
+    DialogExportToCSV dialog(this);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ExportToCSVData(fileName, dialog);
+
+        qApp->Settings()->SetCSVSeparator(dialog.Separator());
+        qApp->Settings()->SetCSVCodec(dialog.SelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.WithHeader());
+    }
 }

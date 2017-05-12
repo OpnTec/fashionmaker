@@ -659,6 +659,55 @@ bool TMainWindow::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)
+{
+    QxtCsvModel csv;
+    const int columns = ui->tableWidget->columnCount();
+    {
+        int colCount = 0;
+        for (int column = 0; column < columns; ++column)
+        {
+            if (not ui->tableWidget->isColumnHidden(column))
+            {
+                csv.insertColumn(colCount++);
+            }
+        }
+    }
+
+    if (dialog.WithHeader())
+    {
+        int colCount = 0;
+        for (int column = 0; column < columns; ++column)
+        {
+            if (not ui->tableWidget->isColumnHidden(column))
+            {
+                QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(colCount);
+                csv.setHeaderText(colCount, header->text());
+                ++colCount;
+            }
+        }
+    }
+
+    const int rows = ui->tableWidget->rowCount();
+    for (int row = 0; row < rows; ++row)
+    {
+        csv.insertRow(row);
+        int colCount = 0;
+        for (int column = 0; column < columns; ++column)
+        {
+            if (not ui->tableWidget->isColumnHidden(column))
+            {
+                QTableWidgetItem *item = ui->tableWidget->item(row, column);
+                csv.setText(row, colCount, item->text());
+                ++colCount;
+            }
+        }
+    }
+
+    csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool TMainWindow::FileSave()
 {
     if (curFile.isEmpty() || mIsReadOnly)
@@ -873,80 +922,6 @@ bool TMainWindow::FileSaveAs()
     }
     RemoveTempDir();
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ExportToCSV()
-{
-    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.cvs)");
-    const QString suffix("csv");
-    const QString path = QDir::homePath()  + QLatin1String("/") + tr("measurements") + QLatin1String(".") + suffix;
-
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters);
-
-    if (fileName.isEmpty())
-    {
-        return;
-    }
-
-    QFileInfo f( fileName );
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
-    {
-        fileName += QLatin1String(".") + suffix;
-    }
-
-    DialogExportToCSV dialog(this);
-    if (dialog.exec() == QDialog::Accepted)
-    {
-        QxtCsvModel csv;
-        const int columns = ui->tableWidget->columnCount();
-        {
-            int colCount = 0;
-            for (int column = 0; column < columns; ++column)
-            {
-                if (not ui->tableWidget->isColumnHidden(column))
-                {
-                    csv.insertColumn(colCount++);
-                }
-            }
-        }
-
-        if (dialog.WithHeader())
-        {
-            int colCount = 0;
-            for (int column = 0; column < columns; ++column)
-            {
-                if (not ui->tableWidget->isColumnHidden(column))
-                {
-                    QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(colCount);
-                    csv.setHeaderText(colCount, header->text());
-                    ++colCount;
-                }
-            }
-        }
-
-        const int rows = ui->tableWidget->rowCount();
-        for (int row = 0; row < rows; ++row)
-        {
-            csv.insertRow(row);
-            int colCount = 0;
-            for (int column = 0; column < columns; ++column)
-            {
-                if (not ui->tableWidget->isColumnHidden(column))
-                {
-                    QTableWidgetItem *item = ui->tableWidget->item(row, column);
-                    csv.setText(row, colCount, item->text());
-                    ++colCount;
-                }
-            }
-        }
-
-        csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
-
-        qApp->TapeSettings()->SetCSVSeparator(dialog.Separator());
-        qApp->TapeSettings()->SetCSVCodec(dialog.SelectedMib());
-        qApp->TapeSettings()->SetCSVWithHeader(dialog.WithHeader());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

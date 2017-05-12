@@ -39,6 +39,8 @@
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
 #include "../vmisc/def.h"
+#include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -60,6 +62,7 @@
 #include "../vtools/undocommands/addgroup.h"
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../qmuparser/qmuparsererror.h"
 
 #include <QInputDialog>
 #include <QtDebug>
@@ -80,6 +83,7 @@
 #include <thread>
 #include <QFileSystemWatcher>
 #include <QComboBox>
+#include <QTextCodec>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -1415,6 +1419,61 @@ void MainWindow::PrepareSceneList()
         ui->listWidget->setCurrentRow(0);
         SetLayoutModeActions();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)
+{
+    QxtCsvModel csv;
+
+    csv.insertColumn(0);
+    csv.insertColumn(1);
+    csv.insertColumn(2);
+
+    if (dialog.WithHeader())
+    {
+        csv.setHeaderText(0, tr("Name"));
+        csv.setHeaderText(1, tr("The calculated value"));
+        csv.setHeaderText(2, tr("Formula"));
+    }
+
+    const QMap<QString, QSharedPointer<VIncrement> > increments = pattern->DataIncrements();
+    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
+    QMap<quint32, QString> map;
+    //Sorting QHash by id
+    for (i = increments.constBegin(); i != increments.constEnd(); ++i)
+    {
+        QSharedPointer<VIncrement> incr = i.value();
+        map.insert(incr->getIndex(), i.key());
+    }
+
+    qint32 currentRow = -1;
+    QMapIterator<quint32, QString> iMap(map);
+    while (iMap.hasNext())
+    {
+        iMap.next();
+        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
+        currentRow++;
+
+        csv.insertRow(currentRow);
+        csv.setText(currentRow, 0, incr->GetName()); // name
+        csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
+
+        QString formula;
+        try
+        {
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            Q_UNUSED(e)
+            formula = incr->GetFormula();
+        }
+
+        csv.setText(currentRow, 2, formula); // formula
+    }
+
+    csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3821,6 +3880,7 @@ void MainWindow::CreateActions()
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
+    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportToCSV);
 
     connect(ui->actionTable, &QAction::triggered, RECEIVER(this)[this](bool checked)
     {
