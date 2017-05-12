@@ -6,11 +6,11 @@
 #define MyAppPublisher "Roman Telezhynskyi"
 #define MyAppURL "http://www.valentina-project.org/"
 #define MyAppExeName "valentina.exe"
-#define MyAppCopyright "(C) 2013-2016 Valentina project"
+#define MyAppCopyright "(C) 2013-2017 Valentina project"
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)
-#define MyAppStatus "b"
+#define MyAppStatus "a"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.

@@ -23,10 +23,10 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=valentina
-VERSION=${VERSION:-0.4.4}
+VERSION=${VERSION:-0.5.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-dismine}
-COMMIT=610ac13345d7
+COMMIT=31c95eadca8b
 
 # Use parallel building if possible
 if [ -z "$NUMJOBS" ]; then

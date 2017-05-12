@@ -19,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5.0</string>
+	<string>0.6.0</string>
 	<key>CFBundleVersion</key>
-	<string>0.5.0.0</string>
+	<string>0.6.0.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>

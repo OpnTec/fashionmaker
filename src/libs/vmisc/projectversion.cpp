@@ -41,10 +41,10 @@
 #include <QtGlobal>
 
 extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 5;
+extern const int MINOR_VERSION = 6;
 extern const int DEBUG_VERSION = 0;
 
-extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
+extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4a").arg(MAJOR_VERSION).arg(MINOR_VERSION)
                                  .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
 
 //---------------------------------------------------------------------------------------------------------------------
