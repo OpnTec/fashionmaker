@@ -1127,6 +1127,7 @@ QString VPattern::GetLabelBase(quint32 index) const
             break;
         }
         case 5: // hr
+        case 7: // bs
         {
             const QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
             alphabet = al.split(",");
@@ -1135,12 +1136,6 @@ QString VPattern::GetLabelBase(quint32 index) const
         case 6: // sr
         {
             const QString al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
-            alphabet = al.split(",");
-            break;
-        }
-        case 7: // bs
-        {
-            const QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
             alphabet = al.split(",");
             break;
         }

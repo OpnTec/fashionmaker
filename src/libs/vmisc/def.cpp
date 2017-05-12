@@ -1178,49 +1178,28 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // A
         case 0: // A01
-            V_FALLTHROUGH
         case 1: // A02
-            V_FALLTHROUGH
         case 2: // A03
-            V_FALLTHROUGH
         case 3: // A04
-            V_FALLTHROUGH
         case 4: // A05
-            V_FALLTHROUGH
         case 5: // A06
-            V_FALLTHROUGH
         case 6: // A07
-            V_FALLTHROUGH
         case 7: // A08
-            V_FALLTHROUGH
         case 8: // A09
-            V_FALLTHROUGH
         case 9: // A10
-            V_FALLTHROUGH
         case 10: // A11
-            V_FALLTHROUGH
         case 11: // A12
-            V_FALLTHROUGH
         case 12: // A13
-            V_FALLTHROUGH
         case 13: // A14
-            V_FALLTHROUGH
         case 14: // A15
-            V_FALLTHROUGH
         case 15: // A16
-            V_FALLTHROUGH
         case 16: // A17
             return QStringLiteral("Ap1");
         case 17: // A18
-            V_FALLTHROUGH
         case 18: // A19
-            V_FALLTHROUGH
         case 19: // A20
-            V_FALLTHROUGH
         case 20: // A21
-            V_FALLTHROUGH
         case 21: // A22
-            V_FALLTHROUGH
         case 22: // A23
             return QStringLiteral("Ap2");
         default:
@@ -1231,11 +1210,8 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // B
         case 0: // B01
-            V_FALLTHROUGH
         case 1: // B02
-            V_FALLTHROUGH
         case 2: // B03
-            V_FALLTHROUGH
         case 3: // B04
             return QStringLiteral("Bp1");
         case 4: // B05
@@ -1250,7 +1226,6 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 0: // C01
             return QStringLiteral("Cp1");
         case 1: // C02
-            V_FALLTHROUGH
         case 2: // C03
             return QStringLiteral("Cp2");
         default:
@@ -1261,9 +1236,7 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // D
         case 0: // D01
-            V_FALLTHROUGH
         case 1: // D02
-            V_FALLTHROUGH
         case 2: // D03
             return QStringLiteral("Dp1");
         case 3: // D04
@@ -1280,9 +1253,7 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 0: // E01
             return QStringLiteral("Ep1");
         case 1: // E02
-            V_FALLTHROUGH
         case 2: // E03
-            V_FALLTHROUGH
         case 3: // E04
             return QStringLiteral("Ep2");
         default:
@@ -1293,15 +1264,12 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // F
         case 0: // F01
-            V_FALLTHROUGH
         case 1: // F02
-            V_FALLTHROUGH
         case 2: // F03
             return QStringLiteral("Fp1");
         case 3: // F04
             return QStringLiteral("Fp2");
         case 4: // F05
-            V_FALLTHROUGH
         case 5: // F06
             return QStringLiteral("Fp3");
         default:
@@ -1312,91 +1280,54 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // G
         case 0: // G01
-            V_FALLTHROUGH
         case 1: // G02
-            V_FALLTHROUGH
         case 2: // G03
-            V_FALLTHROUGH
         case 3: // G04
-            V_FALLTHROUGH
         case 4: // G05
-            V_FALLTHROUGH
         case 5: // G06
-            V_FALLTHROUGH
         case 6: // G07
-            V_FALLTHROUGH
         case 7: // G08
-            V_FALLTHROUGH
         case 8: // G09
             return QStringLiteral("Gp1");
         case 9: // G10
-            V_FALLTHROUGH
         case 10: // G11
-            V_FALLTHROUGH
         case 11: // G12
-            V_FALLTHROUGH
         case 12: // G13
-            V_FALLTHROUGH
         case 13: // G14
-            V_FALLTHROUGH
         case 14: // G15
-            V_FALLTHROUGH
         case 15: // G16
-            V_FALLTHROUGH
         case 16: // G17
             return QStringLiteral("Gp2");
         case 17: // G18
-            V_FALLTHROUGH
         case 18: // G19
-            V_FALLTHROUGH
         case 19: // G20
-            V_FALLTHROUGH
         case 20: // G21
-            V_FALLTHROUGH
         case 21: // G22
-            V_FALLTHROUGH
         case 22: // G23
-            V_FALLTHROUGH
         case 23: // G24
-            V_FALLTHROUGH
         case 24: // G25
             return QStringLiteral("Gp3");
         case 25: // G26
-            V_FALLTHROUGH
         case 26: // G27
-            V_FALLTHROUGH
         case 27: // G28
-            V_FALLTHROUGH
         case 28: // G29
-            V_FALLTHROUGH
         case 29: // G30
-            V_FALLTHROUGH
         case 30: // G31
-            V_FALLTHROUGH
         case 31: // G32
-            V_FALLTHROUGH
         case 32: // G33
             return QStringLiteral("Gp4");
         case 33: // G34
-            V_FALLTHROUGH
         case 34: // G35
-            V_FALLTHROUGH
         case 35: // G36
-            V_FALLTHROUGH
         case 36: // G37
-            V_FALLTHROUGH
         case 37: // G38
-            V_FALLTHROUGH
         case 38: // G39
-            V_FALLTHROUGH
         case 39: // G40
-            V_FALLTHROUGH
         case 40: // G41
             return QStringLiteral("Gp5");
         case 41: // G42
             return QStringLiteral("Gp6");
         case 42: // G43
-            V_FALLTHROUGH
         case 43: // G44
             return QStringLiteral("Gp7");
         case 44: // G45
@@ -1415,83 +1346,54 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 1: // H02
             return QStringLiteral("Hp2");
         case 2: // H03
-            V_FALLTHROUGH
         case 3: // H04
-            V_FALLTHROUGH
         case 4: // H05
-            V_FALLTHROUGH
         case 5: // H06
             return QStringLiteral("Hp3");
         case 6: // H07
-            V_FALLTHROUGH
         case 7: // H08
-            V_FALLTHROUGH
         case 8: // H09
-            V_FALLTHROUGH
         case 9: // H10
-            V_FALLTHROUGH
         case 10: // H11
-            V_FALLTHROUGH
         case 11: // H12
             return QStringLiteral("Hp4");
         case 12: // H13
-            V_FALLTHROUGH
         case 13: // H14
-            V_FALLTHROUGH
         case 14: // H15
-            V_FALLTHROUGH
         case 15: // H16
             return QStringLiteral("Hp5");
         case 16: // H17
-            V_FALLTHROUGH
         case 17: // H18
-            V_FALLTHROUGH
         case 18: // H19
-            V_FALLTHROUGH
         case 19: // H20
             return QStringLiteral("Hp6");
         case 20: // H21
-            V_FALLTHROUGH
         case 21: // H22
-            V_FALLTHROUGH
         case 22: // H23
-            V_FALLTHROUGH
         case 23: // H24
-            V_FALLTHROUGH
         case 24: // H25
             return QStringLiteral("Hp7");
         case 25: // H26
-            V_FALLTHROUGH
         case 26: // H27
-            V_FALLTHROUGH
         case 27: // H28
-            V_FALLTHROUGH
         case 28: // H29
             return QStringLiteral("Hp8");
         case 29: // H30
-            V_FALLTHROUGH
         case 30: // H31
-            V_FALLTHROUGH
         case 31: // H32
             return QStringLiteral("Hp9");
         case 32: // H33
-            V_FALLTHROUGH
         case 33: // H34
-            V_FALLTHROUGH
         case 34: // H35
             return QStringLiteral("Hp10");
         case 35: // H36
-            V_FALLTHROUGH
         case 36: // H37
-            V_FALLTHROUGH
         case 37: // H38
-            V_FALLTHROUGH
         case 38: // H39
             return QStringLiteral("Hp11");
         case 39: // H40
             return QStringLiteral("Hp12");
         case 40: // H41
-            V_FALLTHROUGH
         case 41: // H42
             return QStringLiteral("Hp13");
         default:
@@ -1502,25 +1404,18 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // I
         case 0: // I01
-            V_FALLTHROUGH
         case 1: // I02
-            V_FALLTHROUGH
         case 2: // I03
-            V_FALLTHROUGH
         case 3: // I04
             return QStringLiteral("Ip1");
         case 4: // I05
-            V_FALLTHROUGH
         case 5: // I06
             return QStringLiteral("Ip2");
         case 6: // I07
-            V_FALLTHROUGH
         case 7: // I08
-            V_FALLTHROUGH
         case 8: // I09
             return QStringLiteral("Ip3");
         case 9: // I10
-            V_FALLTHROUGH
         case 10: // I11
             return QStringLiteral("Ip4");
         case 11: // I12
@@ -1537,11 +1432,8 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // J
         case 0: // J01
-            V_FALLTHROUGH
         case 1: // J02
-            V_FALLTHROUGH
         case 2: // J03
-            V_FALLTHROUGH
         case 3: // J04
             return QStringLiteral("Jp1");
         case 4: // J05
@@ -1549,7 +1441,6 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 5: // J06
             return QStringLiteral("Jp3");
         case 6: // J07
-            V_FALLTHROUGH
         case 7: // J08
             return QStringLiteral("Jp4");
         case 8: // J09
@@ -1566,7 +1457,6 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 0: // K01
             return QStringLiteral("Kp1");
         case 1: // K02
-            V_FALLTHROUGH
         case 2: // K03
             return QStringLiteral("Kp2");
         case 3: // K04
@@ -1574,7 +1464,6 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 4: // K05
             return QStringLiteral("Kp4");
         case 5: // K06
-            V_FALLTHROUGH
         case 6: // K07
             return QStringLiteral("Kp5");
         case 7: // K08
@@ -1597,33 +1486,22 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // L
         case 0: // L01
-            V_FALLTHROUGH
         case 1: // L02
-            V_FALLTHROUGH
         case 2: // L03
-            V_FALLTHROUGH
         case 3: // L04
             return QStringLiteral("Lp1");
         case 4: // L05
-            V_FALLTHROUGH
         case 5: // L06
-            V_FALLTHROUGH
         case 6: // L07
             return QStringLiteral("Lp2");
         case 7: // L08
-            V_FALLTHROUGH
         case 8: // L09
-            V_FALLTHROUGH
         case 9: // L10
             return QStringLiteral("Lp3");
         case 10: // L11
-            V_FALLTHROUGH
         case 11: // L12
-            V_FALLTHROUGH
         case 12: // L13
-            V_FALLTHROUGH
         case 13: // L14
-            V_FALLTHROUGH
         case 14: // L15
             return QStringLiteral("Lp4");
         case 15: // L16
@@ -1633,7 +1511,6 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 17: // L18
             return QStringLiteral("Lp7");
         case 18: // L19
-            V_FALLTHROUGH
         case 19: // L20
             return QStringLiteral("Lp8");
         case 20: // L21
@@ -1648,31 +1525,20 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
     {
         // M
         case 0: // M01
-            V_FALLTHROUGH
         case 1: // M02
             return QStringLiteral("Mp1");
         case 2: // M03
-            V_FALLTHROUGH
         case 3: // M04
-            V_FALLTHROUGH
         case 4: // M05
-            V_FALLTHROUGH
         case 5: // M06
-            V_FALLTHROUGH
         case 6: // M07
-            V_FALLTHROUGH
         case 7: // M08
-            V_FALLTHROUGH
         case 8: // M09
-            V_FALLTHROUGH
         case 9: // M10
-            V_FALLTHROUGH
         case 10: // M11
             return QStringLiteral("Mp2");
         case 11: // M12
-            V_FALLTHROUGH
         case 12: // M13
-            V_FALLTHROUGH
         case 13: // M14
             return QStringLiteral("Mp3");
         default:
@@ -1685,15 +1551,12 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 0: // N01
             return QStringLiteral("Np1");
         case 1: // N02
-            V_FALLTHROUGH
         case 2: // N03
             return QStringLiteral("Np2");
         case 3: // N04
-            V_FALLTHROUGH
         case 4: // N05
             return QStringLiteral("Np3");
         case 5: // N06
-            V_FALLTHROUGH
         case 6: // N07
             return QStringLiteral("Np4");
         case 7: // N08
@@ -1720,15 +1583,12 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 6: // O07
             return QStringLiteral("Op7");
         case 7: // O08
-            V_FALLTHROUGH
         case 8: // O09
             return QStringLiteral("Op8");
         case 9: // O10
-            V_FALLTHROUGH
         case 10: // O11
             return QStringLiteral("Op9");
         case 11: // O12
-            V_FALLTHROUGH
         case 12: // O13
             return QStringLiteral("Op10");
         case 13: // O14
