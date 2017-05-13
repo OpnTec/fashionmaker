@@ -1,6 +1,9 @@
 # Version 0.6.0
 - [#682] New feature. Export increments to Excel .csv.
 
+# Version 0.5.1
+- [#683] Tool Seam allowance's dialog is off screen on small resolutions.
+
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
 - [#24] User can now add labels with different information on the detail

@@ -173,7 +173,6 @@ private:
 
     FancyTabBar* m_ftb;
 
-    bool   dialogIsInitialized;
     bool   applyAllowed;
     bool   flagGPin;
     bool   flagDPin;

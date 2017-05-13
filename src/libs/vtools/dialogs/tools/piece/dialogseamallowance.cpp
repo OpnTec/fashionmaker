@@ -89,7 +89,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_tabPins(new QWidget),
       m_tabPassmarks(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
-      dialogIsInitialized(false),
       applyAllowed(false),// By default disabled
       flagGPin(true),
       flagDPin(true),
@@ -425,21 +424,8 @@ void DialogSeamAllowance::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::showEvent(QShowEvent *event)
 {
-    DialogTool::showEvent( event );
-    if ( event->spontaneous() )
-    {
-        return;
-    }
-    if (dialogIsInitialized)
-    {
-        return;
-    }
-    // do your init stuff here
-
-    m_ftb->setMaximumSize(m_ftb->size());
-    m_ftb->setMinimumSize(m_ftb->size());
-
-    dialogIsInitialized = true;//first show windows are held
+    // Skip DialotTool implementation. For this tool don't need disable resizing because it uses a scroll area.
+    QDialog::showEvent( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
