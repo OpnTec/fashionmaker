@@ -6843,6 +6843,22 @@ Do you want to save your changes?</translation>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open Tape app for creating or editing measurements file</translation>
     </message>
+    <message>
+        <source>Export increments to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Name</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">The calculated value</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Formula</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8264,7 +8280,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation>Comma-Separated Values</translation>
+        <translation type="vanished">Comma-Separated Values</translation>
     </message>
     <message>
         <source>Customer&apos;s name</source>

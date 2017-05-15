@@ -6694,6 +6694,22 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export increments to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Berechneter Wert</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Formel</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8071,10 +8087,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show in Finder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comma-Separated Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

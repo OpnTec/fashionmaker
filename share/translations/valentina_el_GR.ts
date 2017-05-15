@@ -6650,6 +6650,22 @@ Do you want to save your changes?</source>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
     </message>
+    <message>
+        <source>Export increments to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Η υπολογισμένη τιμή</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Φόρμουλα</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6866,7 +6882,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>min</source>
-        <translation type="unfinished"></translation>
+        <translation>λεπτά</translation>
     </message>
     <message>
         <source>Language</source>
@@ -6906,11 +6922,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation type="unfinished">Αποστολή αναφορών απότομης διακοπής</translation>
+        <translation>Αποστολή αναφορών απότομης διακοπής</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Αποστολή αναφορών απότομης διακοπής (προτείνεται)</translation>
+        <translation>Αποστολή αναφορών απότομης διακοπής (συνιστάται)</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -6926,11 +6942,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για τους αρχάριους).</translation>
+        <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
@@ -6957,7 +6973,7 @@ Do you want to save your changes?</source>
     <name>PreferencesPathPage</name>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Type</source>
@@ -7970,7 +7986,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation>Τιμές χωρισμένες με κόμμα</translation>
+        <translation type="vanished">Τιμές χωρισμένες με κόμμα</translation>
     </message>
     <message>
         <source>Customer&apos;s name</source>
@@ -8502,7 +8518,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για τους αρχάριους).</translation>
+        <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -8518,14 +8534,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Type</source>

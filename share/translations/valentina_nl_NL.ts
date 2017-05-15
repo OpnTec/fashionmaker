@@ -6842,6 +6842,22 @@ Do you want to save your changes?</source>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open de Tape app om een matenbestand te wijzigen of aan te maken</translation>
     </message>
+    <message>
+        <source>Export increments to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Berekende waarde</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Formule</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8263,7 +8279,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation>Komma-scheidingsteken waardes</translation>
+        <translation type="vanished">Komma-scheidingsteken waardes</translation>
     </message>
     <message>
         <source>Customer&apos;s name</source>
