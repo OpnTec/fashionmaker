@@ -2463,6 +2463,7 @@ void DialogSeamAllowance::InitFancyTabBar()
 void DialogSeamAllowance::InitMainPathTab()
 {
     uiTabPaths->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+    uiTabPaths->checkBoxHideMainPath->setChecked(qApp->Settings()->IsHideMainPath());
 
     uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
