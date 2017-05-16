@@ -54,6 +54,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
 
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
     ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
+    ui->checkBoxHideMainPath->setChecked(qApp->ValentinaSettings()->IsHideMainPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,6 +80,7 @@ void PreferencesPatternPage::Apply()
     settings->SetUndoCount(ui->undoCount->value());
 
     settings->SetForbidWorkpieceFlipping(ui->forbidFlippingCheck->isChecked());
+    settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
 
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {

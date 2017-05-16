@@ -112,6 +112,18 @@ void VAbstractPiece::SetSeamAllowanceBuiltIn(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsHideMainPath() const
+{
+    return d->m_hideMainPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetHideMainPath(bool value)
+{
+    d->m_hideMainPath = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::GetSAWidth() const
 {
     return d->m_width;

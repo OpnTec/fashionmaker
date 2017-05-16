@@ -200,6 +200,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
         NewMainPathItem(piece.GetPath().at(i));
     }
 
+    uiTabPaths->checkBoxHideMainPath->setChecked(piece.IsHideMainPath());
     uiTabPaths->listWidgetCustomSA->blockSignals(true);
     uiTabPaths->listWidgetCustomSA->clear();
     for (int i = 0; i < piece.GetCustomSARecords().size(); ++i)
@@ -2079,6 +2080,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
+    piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
     piece.SetName(uiTabLabels->lineEditName->text());
     piece.SetMx(m_mx);
     piece.SetMy(m_my);

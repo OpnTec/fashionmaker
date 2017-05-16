@@ -84,6 +84,16 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="checkBoxHideMainPath">
+             <property name="toolTip">
+              <string>Hide the main path if the seam allowance is enabled</string>
+             </property>
+             <property name="text">
+              <string>Hide main path</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QListWidget" name="listWidgetMainPath">
              <property name="dragDropMode">
               <enum>QAbstractItemView::InternalMove</enum>

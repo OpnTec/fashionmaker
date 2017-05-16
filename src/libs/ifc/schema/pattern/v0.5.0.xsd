@@ -609,6 +609,7 @@
                         <xs:attribute name="seamAllowanceBuiltIn" type="xs:boolean"/>
                         <xs:attribute name="united" type="xs:boolean"/>
                         <xs:attribute name="closed" type="xs:unsignedInt"/>
+                        <xs:attribute name="hideMainPath" type="xs:boolean"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>

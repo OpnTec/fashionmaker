@@ -61,6 +61,7 @@ const QString settingConfigurationToolBarStyle           = QStringLiteral("confi
 const QString settingPatternUser           = QStringLiteral("pattern/user");
 const QString settingPatternUndo           = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping = QStringLiteral("pattern/forbidFlipping");
+const QString settingPatternHideMainPath   = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark        = QStringLiteral("pattern/doublePassmark");
 
 const QString settingGeneralRecentFileList  = QStringLiteral("recentFileList");
@@ -604,6 +605,18 @@ bool VCommonSettings::GetForbidWorkpieceFlipping() const
 void VCommonSettings::SetForbidWorkpieceFlipping(bool value)
 {
     setValue(settingPatternForbidFlipping, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsHideMainPath() const
+{
+    return value(settingPatternHideMainPath, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetHideMainPath(bool value)
+{
+    setValue(settingPatternHideMainPath, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -382,7 +382,7 @@ VLayoutPiece::~VLayoutPiece()
 VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
     VLayoutPiece det;
-    det.SetCountourPoints(piece.MainPathPoints(pattern));
+    det.SetCountourPoints(piece.MainPathPoints(pattern), piece.IsHideMainPath());
     det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(),
                                piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
@@ -429,9 +429,10 @@ QVector<QPointF> VLayoutPiece::GetContourPoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points)
+void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath)
 {
     d->contour = RemoveDublicates(RoundPoints(points), false);
+    SetHideMainPath(hideMainPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -862,12 +863,16 @@ QPainterPath VLayoutPiece::ContourPath() const
 
     // contour
     QVector<QPointF> points = GetContourPoints();
-    path.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
+
+    if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path.lineTo(points.at(i));
+        path.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            path.lineTo(points.at(i));
+        }
+        path.lineTo(points.at(0));
     }
-    path.lineTo(points.at(0));
 
     // seam allowance
     if (IsSeamAllowance())

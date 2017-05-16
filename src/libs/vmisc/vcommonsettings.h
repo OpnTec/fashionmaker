@@ -133,6 +133,9 @@ public:
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
 
+    bool IsHideMainPath() const;
+    void SetHideMainPath(bool value);
+
     bool IsDoublePassmark() const;
     void SetDoublePassmark(bool value);
 

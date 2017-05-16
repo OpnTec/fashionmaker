@@ -73,6 +73,7 @@ const QString VToolSeamAllowance::TagPins    = QStringLiteral("pins");
 const QString VToolSeamAllowance::AttrVersion              = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
+const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
 const QString VToolSeamAllowance::AttrHeight               = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited               = QStringLiteral("united");
@@ -218,6 +219,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
+    doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
 
     const bool saBuiltIn = piece.IsSeamAllowanceBuiltIn();
     if (saBuiltIn)
@@ -1164,7 +1166,17 @@ void VToolSeamAllowance::RefreshGeometry()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    QPainterPath path = detail.MainPathPath(this->getData());
+    QPainterPath path;
+
+    if (not detail.IsHideMainPath() || not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
+    {
+        m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
+        path = detail.MainPathPath(this->getData());
+    }
+    else
+    {
+        m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
+    }
 
     {
         QPainterPath mainPath = path;

@@ -47,6 +47,7 @@ public:
           m_forbidFlipping(false),
           m_seamAllowance(false),
           m_seamAllowanceBuiltIn(false),
+          m_hideMainPath(false),
           m_width(0)
     {}
 
@@ -56,6 +57,7 @@ public:
           m_forbidFlipping(piece.m_forbidFlipping),
           m_seamAllowance(piece.m_seamAllowance),
           m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
+          m_hideMainPath(piece.m_hideMainPath),
           m_width(piece.m_width)
     {}
 
@@ -66,6 +68,7 @@ public:
     bool    m_forbidFlipping;
     bool    m_seamAllowance;
     bool    m_seamAllowanceBuiltIn;
+    bool    m_hideMainPath;
     qreal   m_width;
 
 private:

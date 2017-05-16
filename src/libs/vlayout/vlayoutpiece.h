@@ -73,7 +73,7 @@ public:
     static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
 
     QVector<QPointF> GetContourPoints() const;
-    void SetCountourPoints(const QVector<QPointF> &points);
+    void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
 
     QVector<QPointF> GetSeamAllowancePoints() const;
     void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
