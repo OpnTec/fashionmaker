@@ -35,7 +35,7 @@
 class VCurvePathItem : public QGraphicsPathItem
 {
 public:
-    VCurvePathItem(QGraphicsItem *parent = nullptr);
+    explicit VCurvePathItem(QGraphicsItem *parent = nullptr);
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
