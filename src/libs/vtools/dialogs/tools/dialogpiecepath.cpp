@@ -703,7 +703,7 @@ void DialogPiecePath::InitPathTab()
     ui->lineEditName->setClearButtonEnabled(true);
 #endif
 
-    FillComboBoxTypeLine(ui->comboBoxPenType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenType, CurvePenStylesPics());
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 

@@ -370,7 +370,7 @@
                           <xs:attribute name="idTool" type="xs:unsignedInt"/>
                           <xs:attribute name="inUse" type="xs:boolean"/>
                           <xs:attribute name="name" type="xs:string"/>
-                          <xs:attribute name="typeLine" type="xs:string"/>
+                          <xs:attribute name="typeLine" type="curvePenStyle"/>
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">

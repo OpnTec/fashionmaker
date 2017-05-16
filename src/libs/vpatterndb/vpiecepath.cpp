@@ -354,11 +354,7 @@ QPainterPath VPiecePath::PainterPath(const VContainer *data) const
 
     if (not points.isEmpty())
     {
-        path.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            path.lineTo(points.at(i));
-        }
+        path.addPolygon(QPolygonF(points));
         path.setFillRule(Qt::WindingFill);
     }
 
