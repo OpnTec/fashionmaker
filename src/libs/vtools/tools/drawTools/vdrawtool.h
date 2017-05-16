@@ -89,7 +89,7 @@ protected:
     QString      nameActivDraw;
 
     /** @brief typeLine line type. */
-    QString      typeLine;
+    QString      m_lineType;
 
     bool         enabled;
 

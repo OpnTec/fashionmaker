@@ -45,27 +45,25 @@
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
-      QGraphicsPathItem(),
-      m_curve(),
+VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, Unit patternUnit, qreal *factor,
+                           QObject *parent)
+    : VAbstractSimple(id, patternUnit, factor, parent),
+      VCurvePathItem(),
+      m_curve(curve),
       m_isHovered(false)
 {
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve::~VSimpleCurve()
-{
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
+    setPen(QPen(CorrectColor(m_curve->GetColor()), pen().width(), LineStyleToPenStyle(m_curve->GetPenStyle()),
+                Qt::RoundCap));
     ShowPath();
 }
 
@@ -73,7 +71,7 @@ void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 void VSimpleCurve::SetEnabled(bool enabled)
 {
     VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,7 +128,7 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
-    SetPen(this, currentColor, WidthMainLine(patternUnit));
+    SetPen(this, m_curve->GetColor(), WidthMainLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
     ShowPath();
     QGraphicsPathItem::hoverEnterEvent(event);
 }
@@ -139,7 +137,7 @@ void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
     ShowPath();
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
@@ -180,10 +178,8 @@ void VSimpleCurve::ShowPath()
 {
     if (not m_curve.isNull())
     {
-        QPainterPath path;
-        m_isHovered ? path = m_curve->GetPath(PathDirection::Show) : path = m_curve->GetPath(PathDirection::Hide);
-        path.setFillRule( Qt::WindingFill );
-        setPath(path);
+        m_isHovered ? SetDirectionPath(m_curve->GetDirectionPath()) : SetDirectionPath(QPainterPath());
+        setPath(m_curve->GetPath());
     }
     else
     {

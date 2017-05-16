@@ -28,9 +28,17 @@
 
 #include "ifcdef.h"
 
+#include <QBrush>
+#include <QIcon>
+#include <QMap>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
+
+#include "../vmisc/diagnostic.h"
 
 const QString CustomMSign    = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
@@ -119,6 +127,7 @@ const QString AttrCurve1      = QStringLiteral("curve1");
 const QString AttrCurve2      = QStringLiteral("curve2");
 const QString AttrLineColor   = QStringLiteral("lineColor");
 const QString AttrColor       = QStringLiteral("color");
+const QString AttrPenStyle    = QStringLiteral("penStyle");
 const QString AttrFirstArc    = QStringLiteral("firstArc");
 const QString AttrSecondArc   = QStringLiteral("secondArc");
 const QString AttrCrossPoint  = QStringLiteral("crossPoint");
@@ -145,6 +154,106 @@ const QString TypeLineDashLine       = QStringLiteral("dashLine");
 const QString TypeLineDotLine        = QStringLiteral("dotLine");
 const QString TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Styles return list of all line styles.
+ * @return list of all line styles.
+ */
+QStringList StylesList()
+{
+    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
+                                             << TypeLineDotLine << TypeLineDashDotLine
+                                             << TypeLineDashDotDotLine;
+    return styles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineStyle return pen style for current line style.
+ * @return pen style.
+ */
+Qt::PenStyle LineStyleToPenStyle(const QString &typeLine)
+{
+    const QStringList styles = StylesList();
+    switch (styles.indexOf(typeLine))
+    {
+        case 0: // TypeLineNone
+            return Qt::NoPen;
+        case 2: // TypeLineDashLine
+            return Qt::DashLine;
+        case 3: // TypeLineDotLine
+            return Qt::DotLine;
+        case 4: // TypeLineDashDotLine
+            return Qt::DashDotLine;
+        case 5: // TypeLineDashDotDotLine
+            return Qt::DashDotDotLine;
+        case 1: // TypeLineLine
+        default:
+            return Qt::SolidLine;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PenStyleToLineStyle(Qt::PenStyle penStyle)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
+    switch (penStyle)
+    {
+        case Qt::NoPen:
+            return TypeLineNone;
+        case Qt::DashLine:
+            return TypeLineDashLine;
+        case Qt::DotLine:
+            return TypeLineDotLine;
+        case Qt::DashDotLine:
+            return TypeLineDashDotLine;
+        case Qt::DashDotDotLine:
+            return TypeLineDashDotDotLine;
+        case Qt::SolidLine:
+        case Qt::CustomDashLine:
+        default:
+            break;
+    }
+
+    QT_WARNING_POP
+
+    return TypeLineLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> LineStylesPics()
+{
+    QMap<QString, QIcon> map;
+    const QStringList styles = StylesList();
+
+    for (int i=0; i < styles.size(); ++i)
+    {
+        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
+        QPixmap pix(80, 14);
+        pix.fill(Qt::white);
+
+        QBrush brush(Qt::black);
+        QPen pen(brush, 2.5, style);
+
+        QPainter painter(&pix);
+        painter.setPen(pen);
+        painter.drawLine(2, 7, 78, 7);
+
+        map.insert(styles.at(i), QIcon(pix));
+    }
+    return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> CurvePenStylesPics()
+{
+    QMap<QString, QIcon> map = LineStylesPics();
+    map.remove(TypeLineNone);
+    return map;
+}
 
 const QString ColorBlack            = QStringLiteral("black");
 const QString ColorGreen            = QStringLiteral("green");

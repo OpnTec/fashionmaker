@@ -291,85 +291,6 @@ int VAbstractTool::ConfirmDeletion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief LineStyle return pen style for current line style.
- * @return pen style.
- */
-Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
-{
-    const QStringList styles = StylesList();
-    switch (styles.indexOf(typeLine))
-    {
-        case 0: // TypeLineNone
-            return Qt::NoPen;
-        case 2: // TypeLineDashLine
-            return Qt::DashLine;
-        case 3: // TypeLineDotLine
-            return Qt::DotLine;
-        case 4: // TypeLineDashDotLine
-            return Qt::DashDotLine;
-        case 5: // TypeLineDashDotDotLine
-            return Qt::DashDotDotLine;
-        case 1: // TypeLineLine
-        default:
-            return Qt::SolidLine;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VAbstractTool::PenStyleToLineStyle(Qt::PenStyle penStyle)
-{
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
-    switch (penStyle)
-    {
-        case Qt::NoPen:
-            return TypeLineNone;
-        case Qt::DashLine:
-            return TypeLineDashLine;
-        case Qt::DotLine:
-            return TypeLineDotLine;
-        case Qt::DashDotLine:
-            return TypeLineDashDotLine;
-        case Qt::DashDotDotLine:
-            return TypeLineDashDotDotLine;
-        case Qt::SolidLine:
-        case Qt::CustomDashLine:
-        default:
-            break;
-    }
-
-    QT_WARNING_POP
-
-    return TypeLineLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QIcon> VAbstractTool::LineStylesPics()
-{
-    QMap<QString, QIcon> map;
-    const QStringList styles = StylesList();
-
-    for (int i=0; i < styles.size(); ++i)
-    {
-        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
-        QPixmap pix(80, 14);
-        pix.fill(Qt::white);
-
-        QBrush brush(Qt::black);
-        QPen pen(brush, 2.5, style);
-
-        QPainter painter(&pix);
-        painter.setPen(pen);
-        painter.drawLine(2, 7, 78, 7);
-
-        map.insert(styles.at(i), QIcon(pix));
-    }
-    return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 const QStringList VAbstractTool::Colors()
 {
     const QStringList colors = QStringList() << ColorBlack          << ColorGreen           << ColorBlue
@@ -490,19 +411,6 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
     {
         RefreshDataInFile();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Styles return list of all line styles.
- * @return list of all line styles.
- */
-const QStringList VAbstractTool::StylesList()
-{
-    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
-                                             << TypeLineDotLine << TypeLineDashDotLine
-                                             << TypeLineDashDotDotLine;
-    return styles;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

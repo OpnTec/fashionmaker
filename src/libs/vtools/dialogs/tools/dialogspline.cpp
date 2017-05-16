@@ -43,6 +43,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/path/vistoolspline.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -104,6 +105,7 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -606,6 +608,18 @@ void DialogSpline::SetSpline(const VSpline &spline)
     path->SetKAsm1(spl.GetKasm1());
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSpline::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -61,7 +61,7 @@ protected:
     QVector<QGraphicsEllipseItem *> mainPoints;
     QVector<QGraphicsEllipseItem *> ctrlPoints;
     QVector<QGraphicsLineItem *>    lines;
-    QGraphicsPathItem               *newCurveSegment;
+    VCurvePathItem                  *newCurveSegment;
     VCubicBezierPath                path;
     QGraphicsLineItem               *helpLine1;
     QGraphicsLineItem               *helpLine2;

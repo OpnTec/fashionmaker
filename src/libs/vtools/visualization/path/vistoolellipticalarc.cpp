@@ -57,7 +57,7 @@ void VisToolEllipticalArc::RefreshGeometry()
         if (not qFuzzyIsNull(radius1) && not qFuzzyIsNull(radius2) && f1 >= 0 && f2 >= 0 && rotationAngle >= 0)
         {
             VEllipticalArc elArc = VEllipticalArc(*first, radius1, radius2, f1, f2, rotationAngle);
-            DrawPath(this, elArc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, elArc.GetPath(), elArc.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }

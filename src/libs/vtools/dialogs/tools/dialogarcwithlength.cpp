@@ -77,6 +77,7 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
 
     FillComboBoxPoints(ui->comboBoxCenter);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -183,6 +184,18 @@ void DialogArcWithLength::SetLength(const QString &value)
     path->setLength(radius);
 
     MoveCursorToEnd(ui->plainTextEditLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

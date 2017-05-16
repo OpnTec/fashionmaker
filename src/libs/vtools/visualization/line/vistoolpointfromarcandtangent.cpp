@@ -51,7 +51,7 @@ VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *d
     : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),
       point(nullptr), tangent(nullptr), arcPath(nullptr), tangentLine2(nullptr)
 {
-    arcPath = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
     tangentLine2 = InitItem<QGraphicsLineItem>(supportColor, this);

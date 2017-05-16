@@ -46,7 +46,6 @@ VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
       points(),
       curves()
 {
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +81,7 @@ QGraphicsEllipseItem *VisOperation::GetPoint(quint32 i, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
+VCurvePathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
 {
     if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
     {
@@ -90,7 +89,7 @@ QGraphicsPathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
     }
     else
     {
-        auto curve = InitItem<QGraphicsPathItem>(color, this);
+        auto curve = InitItem<VCurvePathItem>(color, this);
         curves.append(curve);
         return curve;
     }

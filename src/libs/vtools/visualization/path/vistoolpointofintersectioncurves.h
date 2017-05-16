@@ -63,7 +63,7 @@ private:
     HCrossCurvesPoint    hCrossPoint;
 
     QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *visCurve2;
+    VCurvePathItem       *visCurve2;
 
 };
 

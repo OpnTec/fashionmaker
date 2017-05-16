@@ -70,7 +70,7 @@ protected:
     Q_DISABLE_COPY(VisToolSplinePath)
     QVector<QGraphicsEllipseItem *> points;
     QVector<VControlPointSpline *>  ctrlPoints;
-    QGraphicsPathItem               *newCurveSegment;
+    VCurvePathItem                  *newCurveSegment;
     VSplinePath                     path;
 
     bool isLeftMousePressed;

@@ -34,7 +34,6 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
-#include <QGraphicsPathItem>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPen>
@@ -53,6 +52,7 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vcurvepathitem.h"
 
 template <class K, class V> class QHash;
 
@@ -221,14 +221,22 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
+{
+    DrawPath(pathItem, path, QPainterPath(), color, style, cap);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
+                             const QColor &color, Qt::PenStyle style, Qt::PenCapStyle cap)
 {
     SCASSERT (pathItem != nullptr)
 
     pathItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style,
                           cap));
     pathItem->setPath(path);
+    pathItem->SetDirectionPath(direction);
     pathItem->setVisible(true);
 }
 

@@ -127,6 +127,8 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
              QLineF(static_cast<QPointF>(center), p2).angle());
     arc.setName(name() + prefix);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
     return arc;
 }
 
@@ -142,6 +144,8 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
              QLineF(static_cast<QPointF>(center), p2).angle());
     arc.setName(name() + prefix);
     arc.SetFlipped(true);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
     return arc;
 }
 
@@ -156,6 +160,8 @@ VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
     VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
              QLineF(static_cast<QPointF>(center), p2).angle());
     arc.setName(name() + prefix);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
     return arc;
 }
 

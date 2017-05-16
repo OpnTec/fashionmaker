@@ -51,10 +51,10 @@ protected:
     QColor           supportColor2;
 
     QVector<QGraphicsEllipseItem *> points;
-    QVector<QGraphicsPathItem *>    curves;
+    QVector<VCurvePathItem *>       curves;
 
     QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
-    QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
+    VCurvePathItem       * GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
     int AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i);
@@ -71,7 +71,7 @@ int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &seco
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
     DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;

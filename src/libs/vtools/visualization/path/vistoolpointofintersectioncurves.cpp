@@ -53,7 +53,7 @@ VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContai
       point(nullptr),
       visCurve2(nullptr)
 {
-    visCurve2 = InitItem<QGraphicsPathItem>(supportColor, this);
+    visCurve2 = InitItem<VCurvePathItem>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
 

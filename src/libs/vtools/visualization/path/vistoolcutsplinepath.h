@@ -53,8 +53,8 @@ public:
 protected:
     Q_DISABLE_COPY(VisToolCutSplinePath)
     QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *splPath1;
-    QGraphicsPathItem    *splPath2;
+    VCurvePathItem       *splPath1;
+    VCurvePathItem       *splPath2;
     qreal                length;
 };
 

@@ -93,7 +93,7 @@ void VToolShoulderPoint::setDialog()
     QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetP1Line(basePointId);
@@ -335,7 +335,7 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 {
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, "");
     basePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
@@ -355,7 +355,7 @@ void VToolShoulderPoint::SetVisualization()
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

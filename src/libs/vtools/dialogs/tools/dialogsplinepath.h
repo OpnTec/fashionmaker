@@ -59,6 +59,9 @@ public:
     VSplinePath GetPath() const;
     void        SetPath(const VSplinePath &value);
 
+    QString GetPenStyle() const;
+    void    SetPenStyle(const QString &value);
+
     QString GetColor() const;
     void    SetColor(const QString &value);
 public slots:

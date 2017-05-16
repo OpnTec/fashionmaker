@@ -72,7 +72,7 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
       lineColor(lineColor)
 {
-    this->typeLine = typeLine;
+    this->m_lineType = typeLine;
     //Line
     const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
@@ -98,7 +98,7 @@ void VToolLine::setDialog()
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
 }
 
@@ -245,7 +245,7 @@ void VToolLine::Disable(bool disable, const QString &namePP)
     this->setEnabled(enabled);
     this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(typeLine)));
+                      LineStyleToPenStyle(m_lineType)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event)
     this->setPen(QPen(CorrectColor(lineColor),
                       qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(typeLine)));
+                      LineStyleToPenStyle(m_lineType)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,7 +333,7 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     {
         this->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
+                          LineStyleToPenStyle(m_lineType)));
     }
 }
 
@@ -415,7 +415,7 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 
     doc->SetAttribute(tag, AttrFirstPoint, firstPoint);
     doc->SetAttribute(tag, AttrSecondPoint, secondPoint);
-    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrTypeLine, m_lineType);
     doc->SetAttribute(tag, AttrLineColor, lineColor);
 }
 
@@ -424,7 +424,7 @@ void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 {
     firstPoint = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPoint = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
 }
 
@@ -438,7 +438,7 @@ void VToolLine::SetVisualization()
 
         visual->setObject1Id(firstPoint);
         visual->setPoint2Id(secondPoint);
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }
@@ -489,7 +489,7 @@ void VToolLine::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SetTypeLine(const QString &value)
 {
-    typeLine = value;
+    m_lineType = value;
 
     QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
     SaveOption(obj);
@@ -544,5 +544,5 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
-    this->setPen(QPen(CorrectColor(lineColor), pen().widthF(), LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(CorrectColor(lineColor), pen().widthF(), LineStyleToPenStyle(m_lineType)));
 }

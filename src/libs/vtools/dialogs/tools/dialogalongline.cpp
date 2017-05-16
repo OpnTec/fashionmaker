@@ -41,7 +41,6 @@
 #include <QToolButton>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolalongline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -85,7 +84,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogAlongLine::FXLength);
@@ -228,7 +227,7 @@ void DialogAlongLine::SaveData()
     line->setObject1Id(GetFirstPointId());
     line->setObject2Id(GetSecondPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -320,7 +319,7 @@ void DialogAlongLine::SetFormula(const QString &value)
 void DialogAlongLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

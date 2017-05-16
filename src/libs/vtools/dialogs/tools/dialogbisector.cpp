@@ -39,7 +39,6 @@
 #include <QSet>
 #include <QToolButton>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolbisector.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -77,7 +76,7 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxPoints(ui->comboBoxThirdPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
@@ -239,7 +238,7 @@ void DialogBisector::SetPointName(const QString &value)
 void DialogBisector::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,7 +332,7 @@ void DialogBisector::SaveData()
     line->setObject2Id(GetSecondPointId());
     line->setObject3Id(GetThirdPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

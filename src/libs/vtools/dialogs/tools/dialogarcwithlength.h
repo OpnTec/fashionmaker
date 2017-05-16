@@ -63,6 +63,9 @@ public:
     QString       GetLength() const;
     void          SetLength(const QString &value);
 
+    QString       GetPenStyle() const;
+    void          SetPenStyle(const QString &value);
+
     QString       GetColor() const;
     void          SetColor(const QString &value);
 

@@ -246,6 +246,10 @@ void VToolCutSpline::SetVisualization()
 
         visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
+
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
+        visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
+
         visual->RefreshGeometry();
     }
 }

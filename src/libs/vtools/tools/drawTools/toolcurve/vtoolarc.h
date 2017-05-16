@@ -54,8 +54,8 @@ public:
     static VToolArc* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                             VContainer *data);
     static VToolArc* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                            const QString &color, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                            const Document &parse, const Source &typeCreation);
+                            const QString &color, const QString &penStyle, VMainGraphicsScene  *scene,
+                            VAbstractPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
 
     static const QString ToolType;
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
@@ -88,8 +88,6 @@ private:
 
     VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
              QGraphicsItem * parent = nullptr);
-
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 };
 
 #endif // VTOOLARC_H

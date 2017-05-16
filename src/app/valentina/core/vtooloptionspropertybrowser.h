@@ -121,6 +121,9 @@ private:
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
     template<class Tool>
+    void AddPropertyCurvePenStyle(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
+
+    template<class Tool>
     void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
                               const QString &id);
 

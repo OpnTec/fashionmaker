@@ -65,8 +65,6 @@ VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, 
 {
     sceneType = SceneObject::Arc;
 
-    this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
@@ -84,6 +82,7 @@ void VToolArcWithLength::setDialog()
     dialogTool->SetLength(arc->GetFormulaLength());
     dialogTool->SetRadius(arc->GetFormulaRadius());
     dialogTool->SetColor(arc->GetColor());
+    dialogTool->SetPenStyle(arc->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,8 +97,9 @@ VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog
     QString f1 = dialogTool->GetF1();
     QString length = dialogTool->GetLength();
     const QString color = dialogTool->GetColor();
-    VToolArcWithLength* point = Create(0, center, radius, f1, length, color, scene, doc, data, Document::FullParse,
-                                       Source::FromGui);
+    const QString penStyle = dialogTool->GetPenStyle();
+    VToolArcWithLength* point = Create(0, center, radius, f1, length, color, penStyle, scene, doc, data,
+                                       Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -109,9 +109,9 @@ VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1,
-                                               QString &length, const QString &color, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                               const Source &typeCreation)
+                                               QString &length, const QString &color, const QString &penStyle,
+                                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                               const Document &parse, const Source &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
 
@@ -122,6 +122,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
     const VPointF c = *data->GeometricObject<VPointF>(center);
     VArc *arc = new VArc(calcLength, length, c, calcRadius, radius, calcF1, f1);
     arc->SetColor(color);
+    arc->SetPenStyle(penStyle);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -306,6 +307,7 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetLength());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,17 +339,7 @@ void VToolArcWithLength::SetVisualization()
         visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), qApp->Settings()->GetOsSeparator()));
         visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
         visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(), qApp->Settings()->GetOsSeparator()));
+        visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
         visual->RefreshGeometry();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::RefreshGeometry()
-{
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    this->setPen(QPen(CorrectColor(arc->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setPath(ToolPath());
-
-    SetVisualization();
 }

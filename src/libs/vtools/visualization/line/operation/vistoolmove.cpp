@@ -165,7 +165,7 @@ QGraphicsPathItem *VisToolMove::AddOriginCurve(quint32 id, int &i)
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
     DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     return path;
@@ -178,7 +178,7 @@ int VisToolMove::AddMovedCurve(qreal angle, qreal length, quint32 id, int i)
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
     const Item moved = curve->Move(length, angle);
     DrawPath(path, moved.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 

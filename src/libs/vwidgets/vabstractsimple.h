@@ -47,14 +47,10 @@ class VAbstractSimple : public QObject
 {
     Q_OBJECT
 public:
-    VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
-                    QObject *parent = nullptr);
+    VAbstractSimple(quint32 id, Unit patternUnit, qreal *factor = nullptr, QObject *parent = nullptr);
     virtual ~VAbstractSimple();
 
     virtual void ToolSelectionType(const SelectionType &type);
-
-    QColor GetCurrentColor() const;
-
     virtual void SetEnabled(bool enabled);
 
     GOType GetType() const;
@@ -74,9 +70,6 @@ protected:
     /** @brief factor scale factor. */
     qreal  *factor;
 
-    /** @brief currentColor current color. */
-    QColor  currentColor;
-
     bool    enabled;
 
     Unit    patternUnit;
@@ -88,7 +81,7 @@ protected:
     QColor CorrectColor(const QColor &color) const;
 
     template <class T>
-    void SetPen(T *item, const QColor &color, qreal width);
+    void SetPen(T *item, const QColor &color, qreal width, Qt::PenStyle penStyle = Qt::SolidLine);
 
 private:
     Q_DISABLE_COPY(VAbstractSimple)
@@ -98,10 +91,10 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
+void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width, Qt::PenStyle penStyle)
 {
     SCASSERT(item)
-    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
+    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, penStyle, Qt::RoundCap));
 }
 
 #endif // VABSTRACTSIMPLE_H

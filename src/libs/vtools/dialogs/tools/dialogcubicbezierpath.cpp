@@ -44,6 +44,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/path/vistoolcubicbezierpath.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
@@ -70,6 +71,7 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint
 
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -112,6 +114,18 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     {
         ui->listWidget->setCurrentRow(0);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCubicBezierPath::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

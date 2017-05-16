@@ -55,11 +55,11 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                VContainer *data);
-    static VToolSpline *Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
-                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                               const Source &typeCreation);
+    static VToolSpline *Create(const quint32 _id, VSpline *spline,
+                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                               const Document &parse, const Source &typeCreation);
     static VToolSpline *Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2, QString &l1,
-                               QString &l2, quint32 duplicate, const QString &color,
+                               QString &l2, quint32 duplicate, const QString &color, const QString &penStyle,
                                VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
@@ -86,6 +86,7 @@ protected:
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;
@@ -94,7 +95,6 @@ private:
                  QGraphicsItem * parent = nullptr );
 
     bool IsMovable() const;
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 };
 

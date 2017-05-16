@@ -65,8 +65,6 @@ VToolCubicBezierPath::VToolCubicBezierPath(VAbstractPattern *doc, VContainer *da
 {
     sceneType = SceneObject::SplinePath;
 
-    this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
@@ -81,6 +79,7 @@ void VToolCubicBezierPath::setDialog()
     const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
+    dialogTool->SetPenStyle(splPath->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,11 +91,15 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> di
     SCASSERT(not dialogTool.isNull())
     auto path = new VCubicBezierPath(dialogTool->GetPath());
     const QString color = dialogTool->GetColor();
+    const QString penStyle = dialogTool->GetPenStyle();
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
         doc->IncrementReferens((*path)[i].getIdTool());
     }
-    VToolCubicBezierPath* spl = Create(0, path, color, scene, doc, data, Document::FullParse, Source::FromGui);
+    path->SetColor(color);
+    path->SetPenStyle(penStyle);
+
+    VToolCubicBezierPath* spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
     if (spl != nullptr)
     {
         spl->m_dialog = dialogTool;
@@ -105,12 +108,11 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> di
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezierPath *VToolCubicBezierPath::Create(const quint32 _id, VCubicBezierPath *path, const QString &color,
-                                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                                   const Document &parse, const Source &typeCreation)
+VToolCubicBezierPath *VToolCubicBezierPath::Create(const quint32 _id, VCubicBezierPath *path, VMainGraphicsScene *scene,
+                                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                                   const Source &typeCreation)
 {
     quint32 id = _id;
-    path->SetColor(color);
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(path);
@@ -202,6 +204,7 @@ void VToolCubicBezierPath::SaveDialog(QDomElement &domElement)
     SCASSERT(dialogTool != nullptr)
 
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     SetSplinePathAttributes(domElement, dialogTool->GetPath());
 }
 
@@ -226,6 +229,7 @@ void VToolCubicBezierPath::SetVisualization()
 
         QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
         visual->setPath(*splPath.data());
+        visual->setLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -234,11 +238,12 @@ void VToolCubicBezierPath::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::RefreshGeometry()
 {
-    isHovered || detailsMode ? setPath(ToolPath(PathDirection::Show)) : setPath(ToolPath());
-
     QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+    setPath(splPath->GetPath());
+
     this->setPen(QPen(CorrectColor(splPath->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(splPath->GetPenStyle())));
 
     SetVisualization();
 }

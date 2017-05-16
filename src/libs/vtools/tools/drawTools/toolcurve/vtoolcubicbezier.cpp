@@ -63,8 +63,6 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
 {
     sceneType = SceneObject::Spline;
 
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setPath(ToolPath());
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
@@ -79,6 +77,7 @@ void VToolCubicBezier::setDialog()
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
     dialogTool->SetSpline(*spl);
     dialogTool->SetColor(spl->GetColor());
+    dialogTool->SetPenStyle(spl->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,8 +88,11 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
     QSharedPointer<DialogCubicBezier> dialogTool = dialog.objectCast<DialogCubicBezier>();
     SCASSERT(not dialogTool.isNull())
 
-    auto spl = Create(0, new VCubicBezier(dialogTool->GetSpline()), dialogTool->GetColor(), scene, doc, data,
-                      Document::FullParse, Source::FromGui);
+    VCubicBezier *spline = new VCubicBezier(dialogTool->GetSpline());
+    spline->SetColor(dialogTool->GetColor());
+    spline->SetPenStyle(dialogTool->GetPenStyle());
+
+    auto spl = Create(0, spline, scene, doc, data, Document::FullParse, Source::FromGui);
 
     if (spl != nullptr)
     {
@@ -100,12 +102,11 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spline, const QString &color,
-                                           VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                           const Document &parse, const Source &typeCreation)
+VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spline, VMainGraphicsScene *scene,
+                                           VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                           const Source &typeCreation)
 {
     quint32 id = _id;
-    spline->SetColor(color);
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
@@ -222,6 +223,7 @@ void VToolCubicBezier::SaveDialog(QDomElement &domElement)
 
     SetSplineAttributes(domElement, spl);
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -247,6 +249,7 @@ void VToolCubicBezier::SetVisualization()
         visual->setObject2Id(spl->GetP2().id());
         visual->setObject3Id(spl->GetP3().id());
         visual->setObject4Id(spl->GetP4().id());
+        visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -257,15 +260,9 @@ void VToolCubicBezier::RefreshGeometry()
 {
     const QSharedPointer<VCubicBezier> spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
     this->setPen(QPen(CorrectColor(spl->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    if (isHovered || detailsMode)
-    {
-        this->setPath(ToolPath(PathDirection::Show));
-    }
-    else
-    {
-        this->setPath(ToolPath());
-    }
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(spl->GetPenStyle())));
+    this->setPath(spl->GetPath());
 
     SetVisualization();
 }

@@ -38,6 +38,7 @@
 #include <QToolButton>
 #include <Qt>
 
+#include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolellipticalarc.h"
@@ -113,6 +114,7 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, const quint32 &
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -324,6 +326,18 @@ void DialogEllipticalArc::SetRotationAngle(const QString &value)
     path->setRotationAngle(rotationAngle);
 
     MoveCursorToEnd(ui->plainTextEditRotationAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -299,7 +299,11 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
         ++i;
     }
 
-    box->setCurrentIndex(4);
+    const int index = box->findData(QVariant(TypeLineLine));
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

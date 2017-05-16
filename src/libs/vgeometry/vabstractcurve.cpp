@@ -92,7 +92,6 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
     return GetSegmentPoints(GetPoints(), begin, end, reverse);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok)
 {
@@ -170,23 +169,26 @@ QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractCurve::GetDirectionPath() const
+{
+    return ShowDirection(GetPoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
 {
     QPainterPath path;
 
-    QVector<QPointF> points = GetPoints();
+    const QVector<QPointF> points = GetPoints();
     if (points.count() >= 2)
     {
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            path.moveTo(points.at(i));
-            path.lineTo(points.at(i+1));
-        }
+        path.addPolygon(QPolygonF(points));
 
-        if (direction == PathDirection::Show && points.count() >= 3)
+        if (direction == PathDirection::Show)
         {
             path.addPath(ShowDirection(points));
         }
+        path.setFillRule(Qt::WindingFill);
     }
     else
     {
@@ -290,6 +292,18 @@ QString VAbstractCurve::GetColor() const
 void VAbstractCurve::SetColor(const QString &color)
 {
     d->color = color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractCurve::GetPenStyle() const
+{
+    return d->penStyle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetPenStyle(const QString &penStyle)
+{
+    d->penStyle = penStyle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

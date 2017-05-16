@@ -65,6 +65,17 @@ VAbstractCubicBezierPath::~VAbstractCubicBezierPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractCubicBezierPath::GetDirectionPath() const
+{
+    QPainterPath painterPath;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        painterPath.addPath(GetSpline(i).GetDirectionPath());
+    }
+    return painterPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetPath return QPainterPath which reprezent spline path.
  * @return path.

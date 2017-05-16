@@ -125,7 +125,7 @@ void VToolBisector::setDialog()
     QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetFirstPointId(firstPointId);
@@ -317,7 +317,7 @@ void VToolBisector::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 {
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, "");
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
@@ -337,7 +337,7 @@ void VToolBisector::SetVisualization()
         visual->setObject2Id(basePointId);
         visual->setObject3Id(thirdPointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vispath.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 8, 2014
+ **  @date   16 5, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,54 +26,39 @@
  **
  *************************************************************************/
 
-#include "vispath.h"
+#include "vcurvepathitem.h"
 
-#include <QPen>
-
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../visualization.h"
-#include "../vwidgets/vsimplepoint.h"
+#include <QPainter>
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
-    : Visualization(data),
-      VCurvePathItem(parent)
+VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
+    : QGraphicsPathItem(parent),
+      m_direction()
 {
-    this->setZValue(1);// Show on top real tool
-    InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::InitPen()
+void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
-                      lineStyle));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisPath::AddOnScene()
-{
-    AddItem(this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color)
-{
-    if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
+    if (m_direction != QPainterPath())
     {
-        return points.at(static_cast<int>(i));
-    }
-    else
-    {
-        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
-        point->SetPointHighlight(true);
-        point->setParentItem(this);
-        point->SetVisualizationMode(true);
-        points.append(point);
+        painter->save();
 
-        return point;
+        QPen arrowPen(pen());
+        arrowPen.setStyle(Qt::SolidLine);
+
+        painter->setPen(arrowPen);
+        painter->setBrush(brush());
+        painter->drawPath(m_direction);
+
+        painter->restore();
     }
-    return nullptr;
+
+    QGraphicsPathItem::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurvePathItem::SetDirectionPath(const QPainterPath &path)
+{
+    m_direction = path;
 }

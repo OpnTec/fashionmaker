@@ -39,6 +39,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vcurvepathitem.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 
@@ -91,8 +92,10 @@ protected:
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
-    void         DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
+                          const QColor &color, Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
     void         AddItem(Item *item);

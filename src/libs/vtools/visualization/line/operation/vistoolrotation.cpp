@@ -64,7 +64,7 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
       xAxis(nullptr)
 {
     point = InitPoint(supportColor2, this);
-    angleArc = InitItem<QGraphicsPathItem>(supportColor2, this);
+    angleArc = InitItem<VCurvePathItem>(supportColor2, this);
     xAxis = InitItem<QGraphicsLineItem>(supportColor2, this);
 }
 
@@ -216,7 +216,7 @@ int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, in
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
     DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;

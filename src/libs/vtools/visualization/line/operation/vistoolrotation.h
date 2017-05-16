@@ -63,7 +63,7 @@ private:
     Q_DISABLE_COPY(VisToolRotation)
     qreal                angle;
     QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *angleArc;
+    VCurvePathItem       *angleArc;
     QGraphicsLineItem    *xAxis;
 
     template <class Item>

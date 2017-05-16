@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vistoolcutspline.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 9, 2014
+ **  @date   16 5, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,36 +26,25 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLCUTSPLINE_H
-#define VISTOOLCUTSPLINE_H
+#ifndef VCURVEPATHITEM_H
+#define VCURVEPATHITEM_H
 
-#include <qcompilerdetection.h>
-#include <QGraphicsItem>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
+#include <QGraphicsPathItem>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
-#include "vispath.h"
-
-class VisToolCutSpline : public VisPath
+class VCurvePathItem : public QGraphicsPathItem
 {
-    Q_OBJECT
 public:
-    explicit VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutSpline() Q_DECL_EQ_DEFAULT;
+    VCurvePathItem(QGraphicsItem *parent = nullptr);
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    void         setLength(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
-protected:
-    Q_DISABLE_COPY(VisToolCutSpline)
-    QGraphicsEllipseItem *point;
-    VCurvePathItem       *spl1;
-    VCurvePathItem       *spl2;
-    qreal                length;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
+    void SetDirectionPath(const QPainterPath &path);
+private:
+    Q_DISABLE_COPY(VCurvePathItem)
+
+    QPainterPath m_direction;
 };
 
-#endif // VISTOOLCUTSPLINE_H
+#endif // VCURVEPATHITEM_H

@@ -35,6 +35,7 @@
 #include <QPointer>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/path/vistoolcubicbezier.h"
 #include "../../visualization/visualization.h"
 #include "../vgeometry/vpointf.h"
@@ -57,6 +58,7 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &tool
     FillComboBoxPoints(ui->comboBoxP3);
     FillComboBoxPoints(ui->comboBoxP4);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     DialogTool::CheckState();
 
@@ -103,6 +105,18 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     path->setObject2Id(spl.GetP2().id());
     path->setObject3Id(spl.GetP3().id());
     path->setObject4Id(spl.GetP4().id());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCubicBezier::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

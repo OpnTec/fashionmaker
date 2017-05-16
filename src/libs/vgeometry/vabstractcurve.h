@@ -68,6 +68,7 @@ public:
                                               bool reverse = false);
     QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
 
+    virtual QPainterPath     GetDirectionPath() const;
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
     qreal                    GetLengthByPoint(const QPointF &point) const;
@@ -86,13 +87,16 @@ public:
     QString                  GetColor() const;
     void                     SetColor(const QString &color);
 
+    QString                  GetPenStyle() const;
+    void                     SetPenStyle(const QString &penStyle);
+
     static qreal             PathLength(const QVector<QPointF> &path);
 
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
-protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+protected:
     virtual void             CreateName() =0;
 private:
     QSharedDataPointer<VAbstractCurveData> d;

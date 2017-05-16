@@ -31,7 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QGraphicsItem>
-#include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -39,10 +38,11 @@
 
 #include "../visualization.h"
 #include "../vmisc/def.h"
+#include "../vwidgets/vcurvepathitem.h"
 
 class VSimplePoint;
 
-class VisPath : public Visualization, public QGraphicsPathItem
+class VisPath : public Visualization, public VCurvePathItem
 {
     Q_OBJECT
 public:

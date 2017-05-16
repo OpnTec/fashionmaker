@@ -40,7 +40,6 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolheight.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/visline.h"
@@ -75,7 +74,7 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
@@ -114,7 +113,7 @@ void DialogHeight::SetPointName(const QString &value)
 void DialogHeight::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,7 +242,7 @@ void DialogHeight::SaveData()
     line->setObject1Id(GetBasePointId());
     line->setLineP1Id(GetP1LineId());
     line->setLineP2Id(GetP2LineId());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

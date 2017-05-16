@@ -87,10 +87,8 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 {
     sceneType = SceneObject::Spline;
 
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-    this->setPath(ToolPath());
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
 
@@ -144,6 +142,7 @@ void VToolSpline::setDialog()
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     dialogTool->SetSpline(*spl);
     dialogTool->SetColor(spl->GetColor());
+    dialogTool->SetPenStyle(spl->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,8 +162,10 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     SCASSERT(not dialogTool.isNull())
 
     VSpline *spline = new VSpline(dialogTool->GetSpline());
+    spline->SetColor(dialogTool->GetColor());
+    spline->SetPenStyle(dialogTool->GetPenStyle());
 
-    auto spl = Create(0, spline, dialogTool->GetColor(), scene, doc, data, Document::FullParse, Source::FromGui);
+    auto spl = Create(0, spline, scene, doc, data, Document::FullParse, Source::FromGui);
 
     if (spl != nullptr)
     {
@@ -185,12 +186,11 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
-                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                 const Source &typeCreation)
+VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
-    spline->SetColor(color);
+
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
@@ -223,8 +223,8 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
 //---------------------------------------------------------------------------------------------------------------------
 VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2,
                                  QString &l1, QString &l2, quint32 duplicate, const QString &color,
-                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                 const Document &parse, const Source &typeCreation)
+                                 const QString &penStyle, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const qreal calcAngle1 = CheckFormula(_id, a1, data);
     const qreal calcAngle2 = CheckFormula(_id, a2, data);
@@ -241,7 +241,10 @@ VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 poin
         spline->SetDuplicate(duplicate);
     }
 
-    return VToolSpline::Create(_id, spline, color, scene, doc, data, parse, typeCreation);
+    spline->SetColor(color);
+    spline->SetPenStyle(penStyle);
+
+    return VToolSpline::Create(_id, spline, scene, doc, data, parse, typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,6 +346,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     SetSplineAttributes(domElement, spl);
     doc->SetAttribute(domElement, AttrColor,   dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -512,6 +516,7 @@ void VToolSpline::SetVisualization()
         visual->SetKAsm1(spl->GetKasm1());
         visual->SetKAsm2(spl->GetKasm2());
         visual->SetKCurve(spl->GetKcurve());
+        visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -543,15 +548,9 @@ void VToolSpline::RefreshGeometry()
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
 
     this->setPen(QPen(CorrectColor(spl->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    if (isHovered || detailsMode)
-    {
-        this->setPath(ToolPath(PathDirection::Show));
-    }
-    else
-    {
-        this->setPath(ToolPath());
-    }
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(spl->GetPenStyle())));
+    this->setPath(spl->GetPath());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);

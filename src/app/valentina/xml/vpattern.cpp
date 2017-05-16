@@ -2120,8 +2120,9 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         {
             spline->SetDuplicate(duplicate);
         }
+        spline->SetColor(color);
 
-        VToolSpline::Create(id, spline, color, scene, this, data, parse, Source::FromFile);
+        VToolSpline::Create(id, spline, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2158,10 +2159,11 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         QString l2 = length2;//need for saving fixed formula;
 
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        VToolSpline *spl = VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, duplicate, color, scene, this,
-                                                data, parse, Source::FromFile);
+        VToolSpline *spl = VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, duplicate, color, penStyle, scene,
+                                               this, data, parse, Source::FromFile);
 
         if (spl != nullptr)
         {
@@ -2212,6 +2214,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const quint32 point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
 
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
         auto p1 = data->GeometricObject<VPointF>(point1);
@@ -2224,8 +2227,10 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         {
             spline->SetDuplicate(duplicate);
         }
+        spline->SetColor(color);
+        spline->SetPenStyle(penStyle);
 
-        VToolCubicBezier::Create(id, spline, color, scene, this, data, parse, Source::FromFile);
+        VToolCubicBezier::Create(id, spline, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2285,8 +2290,9 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         {
             path->SetDuplicate(duplicate);
         }
+        path->SetColor(color);
 
-        VToolSplinePath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
+        VToolSplinePath::Create(id, path, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2308,6 +2314,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 
         ToolsCommonAttributes(domElement, id);
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
         QVector<quint32> points;
@@ -2343,8 +2350,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         l1 = length1;
         l2 = length2;
 
-        VToolSplinePath *spl = VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, duplicate, scene, this, data,
-                                                       parse, Source::FromFile);
+        VToolSplinePath *spl = VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, penStyle, duplicate, scene,
+                                                       this, data, parse, Source::FromFile);
 
         if (spl != nullptr)
         {
@@ -2400,6 +2407,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
 
         ToolsCommonAttributes(domElement, id);
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
         QVector<VPointF> points;
@@ -2429,8 +2437,10 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         {
             path->SetDuplicate(duplicate);
         }
+        path->SetColor(color);
+        path->SetPenStyle(penStyle);
 
-        VToolCubicBezierPath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
+        VToolCubicBezierPath::Create(id, path, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2550,8 +2560,9 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         const QString f2 = GetParametrString(domElement, AttrAngle2, "270");
         QString f2Fix = f2;//need for saving fixed formula;
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
 
-        VToolArc::Create(id, center, r, f1Fix, f2Fix, color, scene, this, data, parse, Source::FromFile);
+        VToolArc::Create(id, center, r, f1Fix, f2Fix, color, penStyle, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (r != radius || f1Fix != f1 || f2Fix != f2)
         {
@@ -2599,9 +2610,10 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         const QString frotation = GetParametrString(domElement, AttrRotationAngle, "0");
         QString frotationFix = frotation;//need for saving fixed formula;
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
 
-        VToolEllipticalArc::Create(id, center, r1, r2, f1Fix, f2Fix, frotationFix, color, scene, this, data, parse,
-                                   Source::FromFile);
+        VToolEllipticalArc::Create(id, center, r1, r2, f1Fix, f2Fix, frotationFix, color, penStyle, scene, this, data,
+                                   parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (r1 != radius1 || r2 != radius2 || f1Fix != f1 || f2Fix != f2 || frotationFix != frotation)
         {
@@ -2717,8 +2729,9 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         const QString length = GetParametrString(domElement, AttrLength, "10");
         QString lengthFix = length;//need for saving fixed length;
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
 
-        VToolArcWithLength::Create(id, center, r, f1Fix, lengthFix, color, scene, this, data, parse,
+        VToolArcWithLength::Create(id, center, r, f1Fix, lengthFix, color, penStyle, scene, this, data, parse,
                                    Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (r != radius || f1Fix != f1 || lengthFix != length)
@@ -3227,7 +3240,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
 
         path.SetType(type);
         path.SetName(name);
-        path.SetPenType(VAbstractTool::LineStyleToPenStyle(penType));
+        path.SetPenType(LineStyleToPenStyle(penType));
 
         VToolPiecePath::Create(id, path, 0, scene, this, data, parse, Source::FromFile, "", idTool);
     }

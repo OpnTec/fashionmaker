@@ -36,7 +36,6 @@
 #include <QPointer>
 #include <QVariant>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
 #include "../ifc/ifcdef.h"
@@ -59,7 +58,7 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    QMap<QString, QIcon> stylesPics = VAbstractTool::LineStylesPics();
+    QMap<QString, QIcon> stylesPics = LineStylesPics();
     stylesPics.remove(TypeLineNone);// Prevent hiding line
     FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
 
@@ -101,7 +100,7 @@ void DialogLine::SetSecondPoint(const quint32 &value)
 void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +162,7 @@ void DialogLine::SaveData()
 
     line->setObject1Id(GetFirstPoint());
     line->setPoint2Id(GetSecondPoint());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

@@ -61,6 +61,8 @@ public:
     VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual ~VAbstractSpline() Q_DECL_EQ_DEFAULT;
 
+    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
     virtual int      type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
@@ -70,6 +72,9 @@ public:
 
     QString GetLineColor() const;
     void    SetLineColor(const QString &value);
+
+    QString GetPenStyle() const;
+    void    SetPenStyle(const QString &value);
 
     QString name() const;
 
@@ -98,7 +103,7 @@ protected:
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
-    virtual void     RefreshGeometry ()=0;
+    virtual void     RefreshGeometry();
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
@@ -106,11 +111,12 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
+
+    void InitDefShape();
 
     template <typename T>
     void ShowToolVisualization(bool show);

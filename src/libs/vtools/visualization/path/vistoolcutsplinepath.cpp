@@ -49,9 +49,9 @@
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
     :VisPath(data, parent), point(nullptr), splPath1(nullptr), splPath2(nullptr), length(0)
 {
-    splPath1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    splPath1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     splPath1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    splPath2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    splPath2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
     splPath2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);
@@ -65,7 +65,7 @@ void VisToolCutSplinePath::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto splPath = Visualization::data->GeometricObject<VAbstractCubicBezierPath>(object1Id);
-        DrawPath(this, splPath->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, splPath->GetPath(), splPath->GetDirectionPath(), supportColor, lineStyle, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
@@ -79,8 +79,8 @@ void VisToolCutSplinePath::RefreshGeometry()
             DrawPoint(point, static_cast<QPointF>(*p), mainColor);
             delete p;
 
-            DrawPath(splPath1, spPath1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(splPath2, spPath2->GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(splPath1, spPath1->GetPath(), spPath1->GetDirectionPath(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(splPath2, spPath2->GetPath(), spPath2->GetDirectionPath(), Qt::darkRed, lineStyle, Qt::RoundCap);
 
             delete spPath1;
             delete spPath2;

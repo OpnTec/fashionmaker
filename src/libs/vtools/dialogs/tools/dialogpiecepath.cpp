@@ -703,7 +703,7 @@ void DialogPiecePath::InitPathTab()
     ui->lineEditName->setClearButtonEnabled(true);
 #endif
 
-    FillComboBoxTypeLine(ui->comboBoxPenType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenType, LineStylesPics());
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
@@ -930,13 +930,13 @@ void DialogPiecePath::SetType(PiecePathType type)
 //---------------------------------------------------------------------------------------------------------------------
 Qt::PenStyle DialogPiecePath::GetPenType() const
 {
-    return VAbstractTool::LineStyleToPenStyle(GetComboBoxCurrentData(ui->comboBoxPenType, TypeLineLine));
+    return LineStyleToPenStyle(GetComboBoxCurrentData(ui->comboBoxPenType, TypeLineLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetPenType(const Qt::PenStyle &type)
 {
-    ChangeCurrentData(ui->comboBoxPenType, VAbstractTool::PenStyleToLineStyle(type));
+    ChangeCurrentData(ui->comboBoxPenType, PenStyleToLineStyle(type));
     vis->setLineStyle(type);
 }
 

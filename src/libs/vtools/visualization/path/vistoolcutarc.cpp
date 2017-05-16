@@ -47,9 +47,9 @@
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
     :VisPath(data, parent), point(nullptr), arc1(nullptr), arc2(nullptr), length(0)
 {
-    arc1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arc1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    arc2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
     arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);
@@ -63,7 +63,7 @@ void VisToolCutArc::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
-        DrawPath(this, arc->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, arc->GetPath(), arc->GetDirectionPath(), supportColor, lineStyle, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
@@ -72,8 +72,8 @@ void VisToolCutArc::RefreshGeometry()
             QPointF p = arc->CutArc(length, ar1, ar2);
             DrawPoint(point, p, mainColor);
 
-            DrawPath(arc1, ar1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(arc2, ar2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arc1, ar1.GetPath(), ar1.GetDirectionPath(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(arc2, ar2.GetPath(), ar2.GetDirectionPath(), Qt::darkRed, lineStyle, Qt::RoundCap);
         }
     }
 }

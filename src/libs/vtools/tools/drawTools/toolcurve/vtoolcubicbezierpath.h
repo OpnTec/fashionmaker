@@ -51,9 +51,9 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCubicBezierPath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                         VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezierPath *Create(const quint32 _id, VCubicBezierPath *path, const QString &color,
-                                        VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                        const Document &parse, const Source &typeCreation);
+    static VToolCubicBezierPath *Create(const quint32 _id, VCubicBezierPath *path, VMainGraphicsScene *scene,
+                                        VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                        const Source &typeCreation);
 
     static const QString ToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path);
@@ -70,13 +70,13 @@ protected:
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
+    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCubicBezierPath)
 
     VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id,
                          const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
-    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint);
     void          SetSplinePathAttributes(QDomElement &domElement, const VCubicBezierPath &path);
 };

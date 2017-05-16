@@ -56,7 +56,7 @@ VisToolCubicBezierPath::VisToolCubicBezierPath(const VContainer *data, QGraphics
     helpLine1 = InitItem<QGraphicsLineItem>(mainColor, this);
     helpLine2 = InitItem<QGraphicsLineItem>(mainColor, this);
 
-    newCurveSegment = InitItem<QGraphicsPathItem>(mainColor, this);
+    newCurveSegment = InitItem<VCurvePathItem>(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,8 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
         if (countSubSpl >= 1)
         {
-            DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, path.GetDirectionPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
 
             for (qint32 i = 1; i<=countSubSpl; ++i)
             {

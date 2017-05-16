@@ -56,7 +56,7 @@ VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *pare
       pointSelected(false),
       ctrlPoint()
 {
-    newCurveSegment = InitItem<QGraphicsPathItem>(mainColor, this);
+    newCurveSegment = InitItem<VCurvePathItem>(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ void VisToolSplinePath::RefreshGeometry()
 
         if (size > 1)
         {
-            DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), path.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
         }
 
         if (path.CountPoints() < 3)

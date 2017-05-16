@@ -111,6 +111,9 @@ private:
     bool m_onlyPoint;
     bool m_isHighlight;
     bool m_visualizationMode;
+
+    /** @brief currentColor current color. */
+    QColor currentColor;
 };
 
 #endif // VSIMPLEPOINT_H

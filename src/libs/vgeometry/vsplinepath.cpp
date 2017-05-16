@@ -119,6 +119,8 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
     return splPath;
 }
 
@@ -141,6 +143,8 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
     return splPath;
 }
 
@@ -163,6 +167,8 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
     return splPath;
 }
 

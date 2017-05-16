@@ -53,7 +53,7 @@ VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGr
 {
     this->mainColor = Qt::red;
 
-    visCurve = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    visCurve = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     basePoint = InitPoint(supportColor, this);
     baseLine = InitItem<QGraphicsLineItem>(supportColor, this);
     axisLine = InitItem<QGraphicsLineItem>(supportColor, this); //-V656

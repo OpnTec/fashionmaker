@@ -73,8 +73,6 @@ VToolEllipticalArc::VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, 
 {
     sceneType = SceneObject::ElArc;
 
-    this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
@@ -97,8 +95,8 @@ void VToolEllipticalArc::setDialog()
     dialogTool->SetRadius2(elArc->GetFormulaRadius2());
     dialogTool->SetRotationAngle(elArc->GetFormulaRotationAngle());
     dialogTool->SetColor(elArc->GetColor());
+    dialogTool->SetPenStyle(elArc->GetPenStyle());
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -122,8 +120,9 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
     QString f2 = dialogTool->GetF2();
     QString rotationAngle = dialogTool->GetRotationAngle();
     const QString color = dialogTool->GetColor();
-    VToolEllipticalArc* point = Create(0, center, radius1, radius2, f1, f2, rotationAngle, color, scene, doc, data,
-                                       Document::FullParse, Source::FromGui);
+    const QString penStyle = dialogTool->GetPenStyle();
+    VToolEllipticalArc* point = Create(0, center, radius1, radius2, f1, f2, rotationAngle, color, penStyle, scene, doc,
+                                       data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -150,8 +149,9 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
  */
 VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 &center, QString &radius1,
                                                QString &radius2, QString &f1, QString &f2, QString &rotationAngle,
-                                               const QString &color, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data, const Document &parse, const Source &typeCreation)
+                                               const QString &color, const QString &penStyle, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                               const Source &typeCreation)
 {
     qreal calcRadius1 = 0, calcRadius2 = 0, calcF1 = 0, calcF2 = 0, calcRotationAngle = 0;
 
@@ -166,6 +166,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 
     VEllipticalArc *elArc = new VEllipticalArc(c, calcRadius1, calcRadius2, radius1, radius2, calcF1, f1, calcF2, f2,
                                                calcRotationAngle, rotationAngle);
     elArc->SetColor(color);
+    elArc->SetPenStyle(penStyle);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -418,6 +419,7 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -454,20 +456,7 @@ void VToolEllipticalArc::SetVisualization()
         visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(), qApp->Settings()->GetOsSeparator()));
         visual->setRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(),
                                                        qApp->Settings()->GetOsSeparator()));
+        visual->setLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
         visual->RefreshGeometry();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry  refresh item on scene.
- */
-void VToolEllipticalArc::RefreshGeometry()
-{
-    const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(id);
-    this->setPen(QPen(CorrectColor(elArc->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setPath(ToolPath());
-
-    SetVisualization();
 }

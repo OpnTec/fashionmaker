@@ -62,8 +62,8 @@ private:
     quint32              arc2Id;
     CrossCirclesPoint    crossPoint;
     QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *arc1Path;
-    QGraphicsPathItem    *arc2Path;
+    VCurvePathItem       *arc1Path;
+    VCurvePathItem       *arc2Path;
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONARCS_H

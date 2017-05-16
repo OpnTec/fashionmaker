@@ -89,7 +89,7 @@ void VToolCurveIntersectAxis::setDialog()
     QSharedPointer<DialogCurveIntersectAxis> dialogTool = m_dialog.objectCast<DialogCurveIntersectAxis>();
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
@@ -303,7 +303,7 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 {
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
     curveId = doc->GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
@@ -321,7 +321,7 @@ void VToolCurveIntersectAxis::SetVisualization()
         visual->setObject1Id(curveId);
         visual->setAxisPointId(basePointId);
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

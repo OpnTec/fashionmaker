@@ -61,7 +61,7 @@ private:
     CrossCirclesPoint    crossPoint;
     QGraphicsEllipseItem *point;
     QGraphicsEllipseItem *tangent;
-    QGraphicsPathItem    *arcPath;
+    VCurvePathItem       *arcPath;
     QGraphicsLineItem    *tangentLine2;
 
     void FindRays(const QPointF &p, const VArc *arc);

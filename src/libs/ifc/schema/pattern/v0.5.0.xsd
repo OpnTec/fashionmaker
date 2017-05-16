@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <!-- XML Schema Generated from XML Document-->
+  <xs:element name="pattern">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="version" type="formatVersion"/>
+        <xs:element name="unit" type="units"/>
+        <xs:element name="image" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="extension" type="imageExtension"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="gradation" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="heights">
+                <xs:complexType>
+                  <xs:attribute name="all" type="xs:boolean" use="required"/>
+                  <xs:attribute name="h50" type="xs:boolean"/>
+                  <xs:attribute name="h56" type="xs:boolean"/>
+                  <xs:attribute name="h62" type="xs:boolean"/>
+                  <xs:attribute name="h68" type="xs:boolean"/>
+                  <xs:attribute name="h74" type="xs:boolean"/>
+                  <xs:attribute name="h80" type="xs:boolean"/>
+                  <xs:attribute name="h86" type="xs:boolean"/>
+                  <xs:attribute name="h92" type="xs:boolean"/>
+                  <xs:attribute name="h98" type="xs:boolean"/>
+                  <xs:attribute name="h104" type="xs:boolean"/>
+                  <xs:attribute name="h110" type="xs:boolean"/>
+                  <xs:attribute name="h116" type="xs:boolean"/>
+                  <xs:attribute name="h122" type="xs:boolean"/>
+                  <xs:attribute name="h128" type="xs:boolean"/>
+                  <xs:attribute name="h134" type="xs:boolean"/>
+                  <xs:attribute name="h140" type="xs:boolean"/>
+                  <xs:attribute name="h146" type="xs:boolean"/>
+                  <xs:attribute name="h152" type="xs:boolean"/>
+                  <xs:attribute name="h158" type="xs:boolean"/>
+                  <xs:attribute name="h164" type="xs:boolean"/>
+                  <xs:attribute name="h170" type="xs:boolean"/>
+                  <xs:attribute name="h176" type="xs:boolean"/>
+                  <xs:attribute name="h182" type="xs:boolean"/>
+                  <xs:attribute name="h188" type="xs:boolean"/>
+                  <xs:attribute name="h194" type="xs:boolean"/>
+                  <xs:attribute name="h200" type="xs:boolean"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="sizes">
+                <xs:complexType>
+                  <xs:attribute name="all" type="xs:boolean" use="required"/>
+                  <xs:attribute name="s22" type="xs:boolean"/>
+                  <xs:attribute name="s24" type="xs:boolean"/>
+                  <xs:attribute name="s26" type="xs:boolean"/>
+                  <xs:attribute name="s28" type="xs:boolean"/>
+                  <xs:attribute name="s30" type="xs:boolean"/>
+                  <xs:attribute name="s32" type="xs:boolean"/>
+                  <xs:attribute name="s34" type="xs:boolean"/>
+                  <xs:attribute name="s36" type="xs:boolean"/>
+                  <xs:attribute name="s38" type="xs:boolean"/>
+                  <xs:attribute name="s40" type="xs:boolean"/>
+                  <xs:attribute name="s42" type="xs:boolean"/>
+                  <xs:attribute name="s44" type="xs:boolean"/>
+                  <xs:attribute name="s46" type="xs:boolean"/>
+                  <xs:attribute name="s48" type="xs:boolean"/>
+                  <xs:attribute name="s50" type="xs:boolean"/>
+                  <xs:attribute name="s52" type="xs:boolean"/>
+                  <xs:attribute name="s54" type="xs:boolean"/>
+                  <xs:attribute name="s56" type="xs:boolean"/>
+                  <xs:attribute name="s58" type="xs:boolean"/>
+                  <xs:attribute name="s60" type="xs:boolean"/>
+                  <xs:attribute name="s62" type="xs:boolean"/>
+                  <xs:attribute name="s64" type="xs:boolean"/>
+                  <xs:attribute name="s66" type="xs:boolean"/>
+                  <xs:attribute name="s68" type="xs:boolean"/>
+                  <xs:attribute name="s70" type="xs:boolean"/>
+                  <xs:attribute name="s72" type="xs:boolean"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="custom" type="xs:boolean"/>
+            <xs:attribute name="defHeight" type="baseHeight"/>
+            <xs:attribute name="defSize" type="baseSize"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="patternName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="patternNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="company" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="customer" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="showMeasurements" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="measurements" type="xs:string"/>
+        <xs:element name="increments" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="increment" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="description" type="xs:string" use="required"/>
+                  <xs:attribute name="name" type="shortName" use="required"/>
+                  <xs:attribute name="formula" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+          <xs:unique name="incrementName">
+            <xs:selector xpath="increment"/>
+            <xs:field xpath="@name"/>
+          </xs:unique>
+        </xs:element>
+        <xs:element name="draw" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="calculation" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="x" type="xs:double"/>
+                          <xs:attribute name="y" type="xs:double"/>
+                          <xs:attribute name="mx" type="xs:double"/>
+                          <xs:attribute name="my" type="xs:double"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="name" type="shortName"/>
+                          <xs:attribute name="firstPoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="secondPoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="thirdPoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="basePoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="pShoulder" type="xs:unsignedInt"/>
+                          <xs:attribute name="p1Line" type="xs:unsignedInt"/>
+                          <xs:attribute name="p2Line" type="xs:unsignedInt"/>
+                          <xs:attribute name="length" type="xs:string"/>
+                          <xs:attribute name="angle" type="xs:string"/>
+                          <xs:attribute name="typeLine" type="linePenStyle"/>
+                          <xs:attribute name="splinePath" type="xs:unsignedInt"/>
+                          <xs:attribute name="spline" type="xs:unsignedInt"/>
+                          <xs:attribute name="p1Line1" type="xs:unsignedInt"/>
+                          <xs:attribute name="p1Line2" type="xs:unsignedInt"/>
+                          <xs:attribute name="p2Line1" type="xs:unsignedInt"/>
+                          <xs:attribute name="p2Line2" type="xs:unsignedInt"/>
+                          <xs:attribute name="center" type="xs:unsignedInt"/>
+                          <xs:attribute name="radius" type="xs:string"/>
+                          <xs:attribute name="axisP1" type="xs:unsignedInt"/>
+                          <xs:attribute name="axisP2" type="xs:unsignedInt"/>
+                          <xs:attribute name="arc" type="xs:unsignedInt"/>
+                          <xs:attribute name="elArc" type="xs:unsignedInt"/>
+                          <xs:attribute name="curve" type="xs:unsignedInt"/>
+                          <xs:attribute name="curve1" type="xs:unsignedInt"/>
+                          <xs:attribute name="curve2" type="xs:unsignedInt"/>
+                          <xs:attribute name="lineColor" type="colors"/>
+                          <xs:attribute name="color" type="colors"/>
+                          <xs:attribute name="firstArc" type="xs:unsignedInt"/>
+                          <xs:attribute name="secondArc" type="xs:unsignedInt"/>
+                          <xs:attribute name="crossPoint" type="crossType"/>
+                          <xs:attribute name="vCrossPoint" type="crossType"/>
+                          <xs:attribute name="hCrossPoint" type="crossType"/>
+                          <xs:attribute name="c1Center" type="xs:unsignedInt"/>
+                          <xs:attribute name="c2Center" type="xs:unsignedInt"/>
+                          <xs:attribute name="c1Radius" type="xs:string"/>
+                          <xs:attribute name="c2Radius" type="xs:string"/>
+                          <xs:attribute name="cRadius" type="xs:string"/>
+                          <xs:attribute name="tangent" type="xs:unsignedInt"/>
+                          <xs:attribute name="cCenter" type="xs:unsignedInt"/>
+                          <xs:attribute name="name1" type="shortName"/>
+                          <xs:attribute name="mx1" type="xs:double"/>
+                          <xs:attribute name="my1" type="xs:double"/>
+                          <xs:attribute name="name2" type="shortName"/>
+                          <xs:attribute name="mx2" type="xs:double"/>
+                          <xs:attribute name="my2" type="xs:double"/>
+                          <xs:attribute name="point1" type="xs:unsignedInt"/>
+                          <xs:attribute name="point2" type="xs:unsignedInt"/>
+                          <xs:attribute name="dartP1" type="xs:unsignedInt"/>
+                          <xs:attribute name="dartP2" type="xs:unsignedInt"/>
+                          <xs:attribute name="dartP3" type="xs:unsignedInt"/>
+                          <xs:attribute name="baseLineP1" type="xs:unsignedInt"/>
+                          <xs:attribute name="baseLineP2" type="xs:unsignedInt"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="firstPoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="secondPoint" type="xs:unsignedInt"/>
+                          <xs:attribute name="typeLine" type="linePenStyle"/>
+                          <xs:attribute name="lineColor" type="colors"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="operation" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="source" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                      <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="destination" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                      <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                      <xs:attribute name="mx" type="xs:double"/>
+                                      <xs:attribute name="my" type="xs:double"/>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="center" type="xs:unsignedInt"/>
+                          <xs:attribute name="angle" type="xs:string"/>
+                          <xs:attribute name="length" type="xs:string"/>
+                          <xs:attribute name="suffix" type="xs:string"/>
+                          <xs:attribute name="type" type="xs:string" use="required"/>
+                          <xs:attribute name="p1Line" type="xs:unsignedInt"/>
+                          <xs:attribute name="p2Line" type="xs:unsignedInt"/>
+                          <xs:attribute name="axisType" type="axisType"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="angle1" type="xs:string"/>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="angle2" type="xs:string"/>
+                          <xs:attribute name="radius" type="xs:string"/>
+                          <xs:attribute name="center" type="xs:unsignedInt"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="color" type="colors"/>
+                          <xs:attribute name="penStyle" type="curvePenStyle"/>
+                          <xs:attribute name="length" type="xs:string"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="elArc" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="angle1" type="xs:string"/>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="angle2" type="xs:string"/>
+                          <xs:attribute name="rotationAngle" type="xs:string"/>
+                          <xs:attribute name="radius1" type="xs:string"/>
+                          <xs:attribute name="radius2" type="xs:string"/>
+                          <xs:attribute name="center" type="xs:unsignedInt"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="color" type="colors"/>
+                          <xs:attribute name="penStyle" type="curvePenStyle"/>
+                          <xs:attribute name="length" type="xs:string"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="pathPoint" minOccurs="0" maxOccurs="unbounded">
+                              <xs:complexType>
+                                <xs:attribute name="kAsm2" type="xs:string"/>
+                                <xs:attribute name="pSpline" type="xs:unsignedInt"/>
+                                <xs:attribute name="angle" type="xs:string"/>
+                                <xs:attribute name="angle1" type="xs:string"/>
+                                <xs:attribute name="angle2" type="xs:string"/>
+                                <xs:attribute name="length1" type="xs:string"/>
+                                <xs:attribute name="length2" type="xs:string"/>
+                                <xs:attribute name="kAsm1" type="xs:string"/>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="kCurve" type="xs:double"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="kAsm1" type="xs:double"/>
+                          <xs:attribute name="kAsm2" type="xs:double"/>
+                          <xs:attribute name="angle1" type="xs:string"/>
+                          <xs:attribute name="angle2" type="xs:string"/>
+                          <xs:attribute name="length1" type="xs:string"/>
+                          <xs:attribute name="length2" type="xs:string"/>
+                          <xs:attribute name="point1" type="xs:unsignedInt"/>
+                          <xs:attribute name="point2" type="xs:unsignedInt"/>
+                          <xs:attribute name="point3" type="xs:unsignedInt"/>
+                          <xs:attribute name="point4" type="xs:unsignedInt"/>
+                          <xs:attribute name="color" type="colors"/>
+                          <xs:attribute name="penStyle" type="curvePenStyle"/>
+                          <xs:attribute name="duplicate" type="xs:unsignedInt"/>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:choice>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="modeling" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="idObject" type="xs:unsignedInt"/>
+                          <xs:attribute name="mx" type="xs:double"/>
+                          <xs:attribute name="my" type="xs:double"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="idTool" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="idObject" type="xs:unsignedInt"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="idTool" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="elArc" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="idObject" type="xs:unsignedInt"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="idTool" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="idObject" type="xs:unsignedInt"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="idTool" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="path" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                      <xs:attribute name="type" type="xs:string" use="required"/>
+                                      <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                      <xs:attribute name="reverse" type="xs:unsignedInt"/>
+                                      <xs:attribute name="excluded" type="xs:boolean"/>
+                                      <xs:attribute name="before" type="xs:double"/>
+                                      <xs:attribute name="after" type="xs:double"/>
+                                      <xs:attribute name="angle" type="nodeAngle"/>
+                                      <xs:attribute name="passmark" type="xs:boolean"/>
+                                      <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                      <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                      <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="type" type="piecePathType"/>
+                          <xs:attribute name="idTool" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                          <xs:attribute name="name" type="xs:string"/>
+                          <xs:attribute name="typeLine" type="xs:string"/>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="det" minOccurs="2" maxOccurs="2">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
+                                          <xs:complexType>
+                                            <xs:attribute name="type" type="xs:string" use="required"/>
+                                            <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                            <xs:attribute name="reverse" type="xs:unsignedInt"/>
+                                            <xs:attribute name="excluded" type="xs:boolean"/>
+                                            <xs:attribute name="before" type="xs:string"/>
+                                            <xs:attribute name="after" type="xs:string"/>
+                                            <xs:attribute name="angle" type="nodeAngle"/>
+                                            <xs:attribute name="passmark" type="xs:boolean"/>
+                                            <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                            <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                            <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="csa" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+                                          <xs:complexType>
+                                            <xs:attribute name="start" type="xs:unsignedInt"/>
+                                            <xs:attribute name="path" type="xs:unsignedInt" use="required"/>
+                                            <xs:attribute name="end" type="xs:unsignedInt"/>
+                                            <xs:attribute name="reverse" type="xs:boolean"/>
+                                            <xs:attribute name="includeAs" type="piecePathIncludeType"/>
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+                                          <xs:complexType>
+                                            <xs:attribute name="path" type="xs:unsignedInt" use="required"/>
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="pins" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="record" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="children" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="nodes" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="child" type="xs:unsignedInt" minOccurs="1" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="csa" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="child" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="child" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="pins" minOccurs="0" maxOccurs="1">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="child" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                          <xs:attribute name="type" type="xs:string"/>
+                          <xs:attribute name="indexD1" type="xs:unsignedInt"/>
+                          <xs:attribute name="indexD2" type="xs:unsignedInt"/>
+                          <xs:attribute name="inUse" type="xs:boolean"/>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:choice>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="details" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="detail" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="data" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="mcp" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="cutNumber" type="xs:unsignedInt"/>
+                                    <xs:attribute name="userDef" type="xs:string"/>
+                                    <xs:attribute name="material" type="materialType"/>
+                                    <xs:attribute name="placement" type="placementType"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="letter" type="xs:string"/>
+                              <xs:attribute name="visible" type="xs:boolean"/>
+                              <xs:attribute name="fontSize" type="xs:unsignedInt"/>
+                              <xs:attribute name="mx" type="xs:double"/>
+                              <xs:attribute name="my" type="xs:double"/>
+                              <xs:attribute name="width" type="xs:string"/>
+                              <xs:attribute name="height" type="xs:string"/>
+                              <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="patternInfo" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="visible" type="xs:boolean"/>
+                              <xs:attribute name="fontSize" type="xs:unsignedInt"/>
+                              <xs:attribute name="mx" type="xs:double"/>
+                              <xs:attribute name="my" type="xs:double"/>
+                              <xs:attribute name="width" type="xs:string"/>
+                              <xs:attribute name="height" type="xs:string"/>
+                              <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="grainline" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="visible" type="xs:boolean"/>
+                              <xs:attribute name="mx" type="xs:double"/>
+                              <xs:attribute name="my" type="xs:double"/>
+                              <xs:attribute name="length" type="xs:string"/>
+                              <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="arrows" type="arrowType"/>
+                              <xs:attribute name="centerPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="topPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="bottomPin" type="xs:unsignedInt"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="node" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="type" type="xs:string" use="required"/>
+                                    <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
+                                    <xs:attribute name="reverse" type="xs:unsignedInt"/>
+                                    <xs:attribute name="excluded" type="xs:boolean"/>
+                                    <xs:attribute name="before" type="xs:string"/>
+                                    <xs:attribute name="after" type="xs:string"/>
+                                    <xs:attribute name="angle" type="nodeAngle"/>
+                                    <xs:attribute name="mx" type="xs:double"/>
+                                    <xs:attribute name="my" type="xs:double"/>
+                                    <xs:attribute name="passmark" type="xs:boolean"/>
+                                    <xs:attribute name="passmarkLine" type="passmarkLineType"/>
+                                    <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
+                                    <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="csa" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="start" type="xs:unsignedInt"/>
+                                    <xs:attribute name="path" type="xs:unsignedInt" use="required"/>
+                                    <xs:attribute name="end" type="xs:unsignedInt"/>
+                                    <xs:attribute name="reverse" type="xs:boolean"/>
+                                    <xs:attribute name="includeAs" type="piecePathIncludeType"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="iPaths" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="record" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="path" type="xs:unsignedInt" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="pins" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="record" type="xs:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                        <xs:attribute name="version" type="pieceVersion"/>
+                        <xs:attribute name="mx" type="xs:double"/>
+                        <xs:attribute name="my" type="xs:double"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="inLayout" type="xs:boolean"/>
+                        <xs:attribute name="forbidFlipping" type="xs:boolean"/>
+                        <xs:attribute name="width" type="xs:string"/>
+                        <xs:attribute name="seamAllowance" type="xs:boolean"/>
+                        <xs:attribute name="seamAllowanceBuiltIn" type="xs:boolean"/>
+                        <xs:attribute name="united" type="xs:boolean"/>
+                        <xs:attribute name="closed" type="xs:unsignedInt"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="groups" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="group" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="object" type="xs:unsignedInt"/>
+                              <xs:attribute name="tool" type="xs:unsignedInt"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="visible" type="xs:boolean"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="readOnly" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="shortName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^([^\p{Nd}\p{Zs}*/&amp;|!&lt;&gt;^\-()–+−=?:;'\&quot;]){1,1}([^\p{Zs}*/&amp;|!&lt;&gt;^\-()–+−=?:;\&quot;]){0,}$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="units">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mm"/>
+      <xs:enumeration value="cm"/>
+      <xs:enumeration value="inch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="measurementsTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="standard"/>
+      <xs:enumeration value="individual"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="imageExtension">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PNG"/>
+      <xs:enumeration value="JPG"/>
+      <xs:enumeration value="BMP"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="colors">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="black"/>
+      <xs:enumeration value="green"/>
+      <xs:enumeration value="blue"/>
+      <xs:enumeration value="darkRed"/>
+      <xs:enumeration value="darkGreen"/>
+      <xs:enumeration value="darkBlue"/>
+      <xs:enumeration value="yellow"/>
+      <xs:enumeration value="lightsalmon"/>
+      <xs:enumeration value="goldenrod"/>
+      <xs:enumeration value="orange"/>
+      <xs:enumeration value="deeppink"/>
+      <xs:enumeration value="violet"/>
+      <xs:enumeration value="darkviolet"/>
+      <xs:enumeration value="mediumseagreen"/>
+      <xs:enumeration value="lime"/>
+      <xs:enumeration value="deepskyblue"/>
+      <xs:enumeration value="cornflowerblue"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="linePenStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="none"/>
+      <xs:enumeration value="hair"/>
+      <xs:enumeration value="dashLine"/>
+      <xs:enumeration value="dotLine"/>
+      <xs:enumeration value="dashDotLine"/>
+      <xs:enumeration value="dashDotDotLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="curvePenStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hair"/>
+      <xs:enumeration value="dashLine"/>
+      <xs:enumeration value="dotLine"/>
+      <xs:enumeration value="dashDotLine"/>
+      <xs:enumeration value="dashDotDotLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="baseHeight">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="50"/>
+      <xs:enumeration value="56"/>
+      <xs:enumeration value="62"/>
+      <xs:enumeration value="68"/>
+      <xs:enumeration value="74"/>
+      <xs:enumeration value="80"/>
+      <xs:enumeration value="86"/>
+      <xs:enumeration value="92"/>
+      <xs:enumeration value="98"/>
+      <xs:enumeration value="104"/>
+      <xs:enumeration value="110"/>
+      <xs:enumeration value="116"/>
+      <xs:enumeration value="122"/>
+      <xs:enumeration value="128"/>
+      <xs:enumeration value="134"/>
+      <xs:enumeration value="140"/>
+      <xs:enumeration value="146"/>
+      <xs:enumeration value="152"/>
+      <xs:enumeration value="158"/>
+      <xs:enumeration value="164"/>
+      <xs:enumeration value="170"/>
+      <xs:enumeration value="176"/>
+      <xs:enumeration value="182"/>
+      <xs:enumeration value="188"/>
+      <xs:enumeration value="194"/>
+      <xs:enumeration value="200"/>
+      <xs:enumeration value="500"/>
+      <xs:enumeration value="560"/>
+      <xs:enumeration value="620"/>
+      <xs:enumeration value="680"/>
+      <xs:enumeration value="740"/>
+      <xs:enumeration value="800"/>
+      <xs:enumeration value="860"/>
+      <xs:enumeration value="920"/>
+      <xs:enumeration value="980"/>
+      <xs:enumeration value="1040"/>
+      <xs:enumeration value="1100"/>
+      <xs:enumeration value="1160"/>
+      <xs:enumeration value="1220"/>
+      <xs:enumeration value="1280"/>
+      <xs:enumeration value="1340"/>
+      <xs:enumeration value="1400"/>
+      <xs:enumeration value="1460"/>
+      <xs:enumeration value="1520"/>
+      <xs:enumeration value="1580"/>
+      <xs:enumeration value="1640"/>
+      <xs:enumeration value="1700"/>
+      <xs:enumeration value="1760"/>
+      <xs:enumeration value="1820"/>
+      <xs:enumeration value="1880"/>
+      <xs:enumeration value="1940"/>
+      <xs:enumeration value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="baseSize">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="22"/>
+      <xs:enumeration value="24"/>
+      <xs:enumeration value="26"/>
+      <xs:enumeration value="28"/>
+      <xs:enumeration value="30"/>
+      <xs:enumeration value="32"/>
+      <xs:enumeration value="34"/>
+      <xs:enumeration value="36"/>
+      <xs:enumeration value="38"/>
+      <xs:enumeration value="40"/>
+      <xs:enumeration value="42"/>
+      <xs:enumeration value="44"/>
+      <xs:enumeration value="46"/>
+      <xs:enumeration value="48"/>
+      <xs:enumeration value="50"/>
+      <xs:enumeration value="52"/>
+      <xs:enumeration value="54"/>
+      <xs:enumeration value="56"/>
+      <xs:enumeration value="58"/>
+      <xs:enumeration value="60"/>
+      <xs:enumeration value="62"/>
+      <xs:enumeration value="64"/>
+      <xs:enumeration value="66"/>
+      <xs:enumeration value="68"/>
+      <xs:enumeration value="70"/>
+      <xs:enumeration value="72"/>
+      <xs:enumeration value="220"/>
+      <xs:enumeration value="240"/>
+      <xs:enumeration value="260"/>
+      <xs:enumeration value="280"/>
+      <xs:enumeration value="300"/>
+      <xs:enumeration value="320"/>
+      <xs:enumeration value="340"/>
+      <xs:enumeration value="360"/>
+      <xs:enumeration value="380"/>
+      <xs:enumeration value="400"/>
+      <xs:enumeration value="420"/>
+      <xs:enumeration value="440"/>
+      <xs:enumeration value="460"/>
+      <xs:enumeration value="480"/>
+      <xs:enumeration value="500"/>
+      <xs:enumeration value="520"/>
+      <xs:enumeration value="540"/>
+      <xs:enumeration value="560"/>
+      <xs:enumeration value="580"/>
+      <xs:enumeration value="600"/>
+      <xs:enumeration value="620"/>
+      <xs:enumeration value="640"/>
+      <xs:enumeration value="660"/>
+      <xs:enumeration value="680"/>
+      <xs:enumeration value="700"/>
+      <xs:enumeration value="720"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="crossType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="axisType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="materialType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--Fabric-->
+      <xs:enumeration value="1"/>
+      <!--Lining-->
+      <xs:enumeration value="2"/>
+      <!--Interfacing-->
+      <xs:enumeration value="3"/>
+      <!--Interlining-->
+      <xs:enumeration value="4"/>
+      <!--UserDefined-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="placementType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--No placement-->
+      <xs:enumeration value="1"/>
+      <!--Cut on Fold-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="arrowType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--Both-->
+      <xs:enumeration value="1"/>
+      <!--Front-->
+      <xs:enumeration value="2"/>
+      <!--Rear-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="pieceVersion">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="1"/>
+      <!--Old version-->
+      <xs:enumeration value="2"/>
+      <!--New version-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="nodeAngle">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--by length-->
+      <xs:enumeration value="1"/>
+      <!--by points intersections-->
+      <xs:enumeration value="2"/>
+      <!--by second edge symmetry-->
+      <xs:enumeration value="3"/>
+      <!--by first edge symmetry-->
+      <xs:enumeration value="4"/>
+      <!--by first edge right angle-->
+      <xs:enumeration value="5"/>
+      <!--by first edge right angle-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="piecePathType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="1"/>
+      <!--custom seam allowance-->
+      <xs:enumeration value="2"/>
+      <!--internal path-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="piecePathIncludeType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--as main path-->
+      <xs:enumeration value="1"/>
+      <!--as custom seam allowance-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="passmarkLineType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="one"/>
+      <xs:enumeration value="two"/>
+      <xs:enumeration value="three"/>
+      <xs:enumeration value="tMark"/>
+      <xs:enumeration value="vMark"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="passmarkAngleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="straightforward"/>
+      <xs:enumeration value="bisector"/>
+      <xs:enumeration value="intersection"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

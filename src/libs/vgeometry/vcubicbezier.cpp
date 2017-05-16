@@ -73,6 +73,8 @@ VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, con
     const VPointF p4 = GetP4().Rotate(originPoint, degrees);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
     return curve;
 }
 
@@ -85,6 +87,8 @@ VCubicBezier VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const
     const VPointF p4 = GetP4().Flip(axis);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
     return curve;
 }
 
@@ -97,6 +101,8 @@ VCubicBezier VCubicBezier::Move(qreal length, qreal angle, const QString &prefix
     const VPointF p4 = GetP4().Move(length, angle);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
     return curve;
 }
 

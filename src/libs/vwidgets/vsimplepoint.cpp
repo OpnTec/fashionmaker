@@ -48,14 +48,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
+    : VAbstractSimple(id, patternUnit, factor, parent),
       QGraphicsEllipseItem(),
       radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
       namePoint(nullptr),
       lineName(nullptr),
       m_onlyPoint(false),
       m_isHighlight(false),
-      m_visualizationMode(false)
+      m_visualizationMode(false),
+      currentColor(currentColor)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);

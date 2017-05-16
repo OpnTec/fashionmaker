@@ -1,5 +1,6 @@
 # Version 0.6.0
 - [#682] New feature. Export increments to Excel .csv.
+- [#681] Enhance feature: Dashed line options for curves, arcs, etc.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

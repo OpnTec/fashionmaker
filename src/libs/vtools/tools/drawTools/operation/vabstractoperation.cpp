@@ -498,7 +498,8 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
 //---------------------------------------------------------------------------------------------------------------------
 VSimpleCurve *VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveType)
 {
-    VSimpleCurve *curve = new VSimpleCurve(id, QColor(baseColor), *data->GetPatternUnit(), &factor);
+    const QSharedPointer<VAbstractCurve> initCurve = data->GeometricObject<VAbstractCurve>(id);
+    VSimpleCurve *curve = new VSimpleCurve(id, initCurve, *data->GetPatternUnit(), &factor);
     curve->setParentItem(this);
     curve->SetType(curveType);
     connect(curve, &VSimpleCurve::Selected, this, &VAbstractOperation::ObjectSelected);

@@ -89,7 +89,7 @@ void VToolEndLine::setDialog()
     QSharedPointer<DialogEndLine> dialogTool = m_dialog.objectCast<DialogEndLine>();
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetAngle(formulaAngle);
@@ -238,7 +238,7 @@ void VToolEndLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
 {
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     formulaLength = doc->GetParametrString(domElement, AttrLength, "");
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
@@ -256,7 +256,7 @@ void VToolEndLine::SetVisualization()
         visual->setObject1Id(basePointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

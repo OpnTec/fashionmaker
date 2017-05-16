@@ -70,7 +70,7 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr), lineColor(lineColor)
 {
-    this->typeLine = typeLine;
+    this->m_lineType = typeLine;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
@@ -95,7 +95,7 @@ void VToolLinePoint::RefreshGeometry()
 {
     mainLine->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
+                          LineStyleToPenStyle(m_lineType)));
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
@@ -117,7 +117,7 @@ void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 {
     VToolSinglePoint::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrTypeLine, m_lineType);
     doc->SetAttribute(tag, AttrLineColor, lineColor);
 }
 
@@ -138,7 +138,7 @@ void VToolLinePoint::Disable(bool disable, const QString &namePP)
     VToolSinglePoint::Disable(disable, namePP);
     mainLine->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
+                          LineStyleToPenStyle(m_lineType)));
     mainLine->setEnabled(enabled);
 }
 

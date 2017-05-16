@@ -77,7 +77,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     InitArrow(ui);
@@ -210,7 +210,7 @@ void DialogNormal::SaveData()
     line->setObject2Id(GetSecondPointId());
     line->setLength(formula);
     line->SetAngle(angle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -306,7 +306,7 @@ void DialogNormal::SetFormula(const QString &value)
 void DialogNormal::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

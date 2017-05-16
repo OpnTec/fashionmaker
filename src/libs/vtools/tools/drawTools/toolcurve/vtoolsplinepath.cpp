@@ -94,8 +94,6 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
 {
     sceneType = SceneObject::SplinePath;
 
-    this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
@@ -154,6 +152,7 @@ void VToolSplinePath::setDialog()
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
+    dialogTool->SetPenStyle(splPath->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,8 +174,11 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
     {
         doc->IncrementReferens((*path)[i].P().getIdTool());
     }
-    VToolSplinePath* spl = Create(0, path, dialogTool->GetColor(), scene, doc, data, Document::FullParse,
-                                  Source::FromGui);
+
+    path->SetColor(dialogTool->GetColor());
+    path->SetPenStyle(dialogTool->GetPenStyle());
+
+    VToolSplinePath* spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
     if (spl != nullptr)
     {
         spl->m_dialog = dialogTool;
@@ -195,12 +197,12 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, const QString &color,
-                                         VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                         const Document &parse, const Source &typeCreation)
+VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene,
+                                         VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                         const Source &typeCreation)
 {
     quint32 id = _id;
-    path->SetColor(color);
+
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(path);
@@ -231,9 +233,9 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
 //---------------------------------------------------------------------------------------------------------------------
 VToolSplinePath *VToolSplinePath::Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
                                          QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
-                                         const QString &color, quint32 duplicate, VMainGraphicsScene *scene,
-                                         VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                         const Source &typeCreation)
+                                         const QString &color, const QString &penStyle, quint32 duplicate,
+                                         VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                         const Document &parse, const Source &typeCreation)
 {
     auto path = new VSplinePath();
 
@@ -256,7 +258,10 @@ VToolSplinePath *VToolSplinePath::Create(const quint32 _id, const QVector<quint3
                                   l2.at(i)));
     }
 
-    return VToolSplinePath::Create(_id, path, color, scene, doc, data, parse, typeCreation);
+    path->SetColor(color);
+    path->SetPenStyle(penStyle);
+
+    return VToolSplinePath::Create(_id, path, scene, doc, data, parse, typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -461,6 +466,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
     }
 
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     SetSplinePathAttributes(domElement, splPath);
 }
 
@@ -632,6 +638,7 @@ void VToolSplinePath::SetVisualization()
 
         QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
         visual->setPath(*splPath.data());
+        visual->setLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -666,18 +673,12 @@ void VToolSplinePath::RefreshGeometry()
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
 
-    if (isHovered || detailsMode)
-    {
-        this->setPath(ToolPath(PathDirection::Show));
-    }
-    else
-    {
-        this->setPath(ToolPath());
-    }
-
     const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    this->setPath(splPath->GetPath());
+
     this->setPen(QPen(CorrectColor(splPath->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(splPath->GetPenStyle())));
 
     for (qint32 i = 1; i<=splPath->CountSubSpl(); ++i)
     {

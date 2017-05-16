@@ -64,11 +64,6 @@ public:
 
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
 
-    static const QStringList    StylesList();
-    static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
-    static QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
-    static QMap<QString, QIcon> LineStylesPics();
-
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 

@@ -84,7 +84,7 @@ void VToolHeight::setDialog()
     QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->SetP1LineId(p1LineId);
@@ -262,7 +262,7 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 {
-    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
     p1LineId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
@@ -280,7 +280,7 @@ void VToolHeight::SetVisualization()
         visual->setObject1Id(basePointId);
         visual->setLineP1Id(p1LineId);
         visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

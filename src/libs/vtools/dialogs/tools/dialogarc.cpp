@@ -82,6 +82,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -155,6 +156,18 @@ void DialogArc::SetF2(const QString &value)
     path->setF2(f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

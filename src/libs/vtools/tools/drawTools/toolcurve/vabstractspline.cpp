@@ -59,7 +59,75 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
       sceneType(SceneObject::Unknown), isHovered(false), detailsMode(false)
 {
+    InitDefShape();
     setAcceptHoverEvents(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractSpline::shape() const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QVector<QPointF> points = curve->GetPoints();
+
+    QPainterPath path;
+    for (qint32 i = 0; i < points.count()-1; ++i)
+    {
+        path.moveTo(points.at(i));
+        path.lineTo(points.at(i+1));
+    }
+
+    if (isHovered || detailsMode)
+    {
+        path.addPath(curve->GetDirectionPath());
+    }
+    path.setFillRule(Qt::WindingFill);
+
+    // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
+    // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
+    const qreal penWidthZero = qreal(0.00000001);
+
+    if (path == QPainterPath() || pen() == Qt::NoPen)
+    {
+        return path;
+    }
+
+    QPainterPathStroker ps;
+    ps.setCapStyle(pen().capStyle());
+    if (pen().widthF() <= 0.0)
+    {
+        ps.setWidth(penWidthZero);
+    }
+    else
+    {
+        ps.setWidth(pen().widthF());
+    }
+    ps.setJoinStyle(pen().joinStyle());
+    ps.setMiterLimit(pen().miterLimit());
+    QPainterPath p = ps.createStroke(path);
+    p.addPath(path);
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    if (isHovered || detailsMode)
+    {
+        painter->save();
+
+        QPen arrowPen(pen());
+        arrowPen.setStyle(Qt::SolidLine);
+
+        painter->setPen(arrowPen);
+        painter->setBrush(brush());
+
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+        painter->drawPath(curve->GetDirectionPath());
+
+        painter->restore();
+    }
+
+    QGraphicsPathItem::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,8 +153,8 @@ void VAbstractSpline::Disable(bool disable, const QString &namePP)
     this->setEnabled(enabled);
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
-                      Qt::RoundCap));
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
     emit setEnabledPoint(enabled);
 }
 
@@ -133,6 +201,13 @@ void VAbstractSpline::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::RefreshGeometry()
+{
+    InitDefShape();
+    SetVisualization();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief hoverEnterEvent handle hover enter events.
  * @param event hover enter event.
@@ -143,9 +218,9 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event)
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
-                      Qt::RoundCap));
-    this->setPath(ToolPath(PathDirection::Show));
+                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
+    this->setPath(curve->GetPath());
     isHovered = true;
     QGraphicsPathItem::hoverEnterEvent(event);
 }
@@ -161,15 +236,9 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event)
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    if (detailsMode)
-    {
-        this->setPath(ToolPath(PathDirection::Show));
-    }
-    else
-    {
-        this->setPath(ToolPath());
-    }
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
+    this->setPath(curve->GetPath());
     isHovered = false;
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
@@ -247,16 +316,6 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
-{
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-    QPainterPath path;
-    path.addPath(curve->GetPath(direction));
-    path.setFillRule( Qt::WindingFill );
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
 {
     Q_UNUSED(domElement)
@@ -269,6 +328,7 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 
     const QSharedPointer<VAbstractCurve> curve = qSharedPointerCast<VAbstractCurve>(obj);
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
+    doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,6 +400,16 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::InitDefShape()
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    this->setPen(QPen(CorrectColor(curve->GetColor()),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(curve->GetPenStyle())));
+    this->setPath(curve->GetPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowHandles(bool show)
 {
     for (int i = 0; i < controlPoints.size(); ++i)
@@ -352,16 +422,19 @@ void VAbstractSpline::ShowHandles(bool show)
 void VAbstractSpline::setEnabled(bool enabled)
 {
     QGraphicsPathItem::setEnabled(enabled);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+
     if (enabled)
     {
-        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
         setPen(QPen(QColor(curve->GetColor()),
-                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                    LineStyleToPenStyle(curve->GetPenStyle())));
     }
     else
     {
         setPen(QPen(Qt::gray,
-                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                    LineStyleToPenStyle(curve->GetPenStyle())));
     }
 }
 
@@ -377,6 +450,22 @@ void VAbstractSpline::SetLineColor(const QString &value)
 {
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     curve->SetColor(value);
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::GetPenStyle() const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    return curve->GetPenStyle();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SetPenStyle(const QString &value)
+{
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    curve->SetPenStyle(value);
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
     SaveOption(obj);
 }

@@ -32,7 +32,6 @@
 #include <qcompilerdetection.h>
 #include <QColor>
 #include <QGraphicsItem>
-#include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QSharedPointer>
@@ -42,17 +41,18 @@
 
 #include "../vmisc/def.h"
 #include "vabstractsimple.h"
+#include "vcurvepathitem.h"
 
 class VAbstractCurve;
 template <class T> class QSharedPointer;
 
-class VSimpleCurve : public VAbstractSimple, public QGraphicsPathItem
+class VSimpleCurve : public VAbstractSimple, public VCurvePathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
+    VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, Unit patternUnit, qreal *factor = nullptr,
                  QObject *parent = nullptr);
-    virtual ~VSimpleCurve();
+    virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};

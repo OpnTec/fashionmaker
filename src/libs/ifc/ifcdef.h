@@ -123,6 +123,7 @@ extern const QString AttrCurve1;
 extern const QString AttrCurve2;
 extern const QString AttrLineColor;
 extern const QString AttrColor;
+extern const QString AttrPenStyle;
 extern const QString AttrFirstArc;
 extern const QString AttrSecondArc;
 extern const QString AttrCrossPoint;
@@ -148,6 +149,12 @@ extern const QString TypeLineDashLine;
 extern const QString TypeLineDotLine;
 extern const QString TypeLineDashDotLine;
 extern const QString TypeLineDashDotDotLine;
+
+QStringList          StylesList();
+Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
+QMap<QString, QIcon> LineStylesPics();
+QMap<QString, QIcon> CurvePenStylesPics();
 
 extern const QString ColorBlack;
 extern const QString ColorGreen;

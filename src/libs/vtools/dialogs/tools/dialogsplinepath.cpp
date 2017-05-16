@@ -47,6 +47,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/path/vistoolsplinepath.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -102,6 +103,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
 
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -164,6 +166,18 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSplinePath::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -55,9 +55,9 @@ VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer 
 {
     this->setPen(QPen(Qt::NoPen)); // don't use parent this time
 
-    arc1Path = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arc1Path = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     arc1Path->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2Path = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    arc2Path = InitItem<VCurvePathItem>(Qt::darkRed, this);
     arc2Path->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);

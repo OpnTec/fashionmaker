@@ -31,12 +31,10 @@
 const qreal VAbstractSimple::m_defFactor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor,
-                                 QObject *parent)
+VAbstractSimple::VAbstractSimple(quint32 id, Unit patternUnit, qreal *factor, QObject *parent)
     : QObject(parent),
       id (id),
       factor(factor),
-      currentColor(currentColor),
       enabled(true),
       patternUnit(patternUnit),
       selectionType(SelectionType::ByMouseRelease),
@@ -69,13 +67,6 @@ QColor VAbstractSimple::CorrectColor(const QColor &color) const
     {
         return Qt::gray;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QColor VAbstractSimple::GetCurrentColor() const
-{
-    return currentColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

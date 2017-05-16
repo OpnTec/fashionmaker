@@ -45,7 +45,6 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolcurveintersectaxis.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -80,7 +79,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxCurves(ui->comboBoxCurve);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
@@ -115,7 +114,7 @@ QString DialogCurveIntersectAxis::GetTypeLine() const
 void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -322,7 +321,7 @@ void DialogCurveIntersectAxis::SaveData()
     line->setObject1Id(getCurveId());
     line->setAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

@@ -133,6 +133,8 @@ VEllipticalArc VEllipticalArc::Rotate(const QPointF &originPoint, qreal degrees,
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle() - GetRotationAngle();
     VEllipticalArc elArc(center, GetRadius1(), GetRadius2(), f1, f2, GetRotationAngle());
     elArc.setName(name() + prefix);
+    elArc.SetColor(GetColor());
+    elArc.SetPenStyle(GetPenStyle());
     return elArc;
 }
 
@@ -147,6 +149,8 @@ VEllipticalArc VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) c
     VEllipticalArc elArc(center, GetRadius1(), GetRadius2(), f1, f2, GetRotationAngle());
     elArc.setName(name() + prefix);
     elArc.SetFlipped(true);
+    elArc.SetColor(GetColor());
+    elArc.SetPenStyle(GetPenStyle());
     return elArc;
 }
 
@@ -160,6 +164,8 @@ VEllipticalArc VEllipticalArc::Move(qreal length, qreal angle, const QString &pr
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle() - GetRotationAngle();
     VEllipticalArc elArc(center, GetRadius1(), GetRadius2(), f1, f2, GetRotationAngle());
     elArc.setName(name() + prefix);
+    elArc.SetColor(GetColor());
+    elArc.SetPenStyle(GetPenStyle());
     return elArc;
 }
 

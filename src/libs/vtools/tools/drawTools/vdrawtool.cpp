@@ -61,7 +61,7 @@ qreal VDrawTool::factor = 1;
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     : VInteractiveTool(doc, data, id, parent),
       nameActivDraw(doc->GetNameActivPP()),
-      typeLine(TypeLineLine),
+      m_lineType(TypeLineLine),
       enabled(true)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
@@ -263,13 +263,13 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 QString VDrawTool::getLineType() const
 {
-    return typeLine;
+    return m_lineType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SetTypeLine(const QString &value)
 {
-    typeLine = value;
+    m_lineType = value;
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);

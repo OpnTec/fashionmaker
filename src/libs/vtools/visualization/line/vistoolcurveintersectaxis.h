@@ -62,7 +62,7 @@ private:
     QGraphicsEllipseItem *basePoint;
     QGraphicsLineItem    *baseLine;
     QGraphicsLineItem    *axisLine;
-    QGraphicsPathItem    *visCurve;
+    VCurvePathItem       *visCurve;
 };
 
 #endif // VISTOOLCURVEINTERSECTAXIS_H

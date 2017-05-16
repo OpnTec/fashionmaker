@@ -55,7 +55,8 @@ public:
                                       VAbstractPattern *doc, VContainer *data);
     static VToolEllipticalArc* Create(const quint32 _id, const quint32 &center, QString &radius1, QString &radius2,
                                       QString &f1, QString &f2, QString &rotationAngle, const QString &color,
-                                      VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
+                                      const QString &penStyle, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                      VContainer *data,
                             const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
@@ -95,8 +96,6 @@ private:
     Q_DISABLE_COPY(VToolEllipticalArc)
     VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                        QGraphicsItem * parent = nullptr);
-
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 };
 
 #endif // VTOOLELLIPTICALARC_H
