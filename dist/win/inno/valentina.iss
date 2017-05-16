@@ -42,6 +42,7 @@ AppComments=Patternmaking program
 AppContact={#MyAppURL}
 AppCopyright={#MyAppCopyright}
 ChangesAssociations=yes
+;MinVersion=6.1
 ;SignTool=MySign
 ;Uncomment the previous string for code signing
 ;The next string is an example of parameter SignTool. Should not be uncommented.
