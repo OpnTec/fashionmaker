@@ -188,7 +188,6 @@ Qt::PenStyle LineStyleToPenStyle(const QString &typeLine)
             return Qt::DashDotLine;
         case 5: // TypeLineDashDotDotLine
             return Qt::DashDotDotLine;
-        case 1: // TypeLineLine
         default:
             return Qt::SolidLine;
     }
@@ -212,8 +211,6 @@ QString PenStyleToLineStyle(Qt::PenStyle penStyle)
             return TypeLineDashDotLine;
         case Qt::DashDotDotLine:
             return TypeLineDashDotDotLine;
-        case Qt::SolidLine:
-        case Qt::CustomDashLine:
         default:
             break;
     }
