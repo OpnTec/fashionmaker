@@ -95,7 +95,7 @@ void VAbstractMainWindow::WindowsLocale()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::ExportToCSV()
 {
-    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.cvs)");
+    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
     const QString path = QDir::homePath()  + QLatin1String("/") + tr("values") + QLatin1String(".") + suffix;
 
