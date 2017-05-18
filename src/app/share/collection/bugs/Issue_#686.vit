@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="ruglengte" name="@RL" value="43.2"/>
+        <m full_name="tussenbeenlengte" name="@TBL" value="78"/>
+        <m description="" full_name="pantalonlengte" name="@PL" value="104.8"/>
+        <m full_name="Opgemeten kniewijdte" name="@KW_O" value="41.9"/>
+        <m full_name="Kniehoogte" name="@KH" value="48"/>
+        <m full_name="Opgemeten enkelwijdte" name="@EW_O" value="26.4"/>
+        <m full_name="armsgatwijdte mouw B" name="@AGW_B" value="49"/>
+        <m full_name="heuphoogte" name="@HH" value="20"/>
+        <m full_name="roklengte" name="@ROKL" value="60"/>
+        <m full_name="armsgatwijdte mouw C" name="@AGW_C" value="51"/>
+        <m full_name="armsgatwijdte mouw A" name="@AGW_A" value="42"/>
+        <m full_name="mouwlengte" name="@MWL" value="61.1"/>
+        <m full_name="polswijdte" name="@PW" value="20"/>
+        <m full_name="mouwwijdte" name="@MW" value="@PW*1.5"/>
+        <m full_name="eerste bovenwijdte" name="@BW_1" value="95.2"/>
+        <m description="&#10;" full_name="tweede bovenwijdte" name="@BW_2" value="@BW_1-6"/>
+        <m full_name="rugbreedte" name="@RB" value="38.7"/>
+        <m full_name="borstbreedte" name="@BB" value="36.2"/>
+        <m full_name="voorlengte" name="@VL" value="43"/>
+        <m full_name="bustehoogte" name="@BH" value="28"/>
+        <m full_name="buste-afstand" name="@BA" value="21"/>
+        <m full_name="schouderbreedte" name="@SB" value="13.5"/>
+        <m full_name="taillewijdte" name="@TW" value="82.6"/>
+        <m full_name="heupwijdte" name="@HW" value="117"/>
+    </body-measurements>
+</vit>

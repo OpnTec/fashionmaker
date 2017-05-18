@@ -292,20 +292,19 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
         if (not p.isEmpty() && p.size() > 1)
         {
             // Path can't be closed
-            if (p.first() == p.last())
+            // See issue #686
+            if ((qAbs(p.first().x() - p.last().x()) < VGObject::accuracyPointOnLine)
+                 && (qAbs(p.first().y() - p.last().y()) < VGObject::accuracyPointOnLine))
             {
-            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                p.remove(p.size() - 1);
-            #else
                 p.removeLast();
-            #endif
             }
         }
     }
 
     for (int i = 0; i < p.size()-1; ++i)
     {
-        if (p.at(i) == p.at(i+1))
+        if ((qAbs(p.at(i).x() - p.at(i+1).x()) < VGObject::accuracyPointOnLine)
+             && (qAbs(p.at(i).y() - p.at(i+1).y()) < VGObject::accuracyPointOnLine))
         {
             if (not removeFirstAndLast && (i == p.size()-1))
             {

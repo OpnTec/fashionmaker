@@ -1793,7 +1793,6 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase3() const
     points += QPointF(297.2141642634996, 148.17665975044923);
     points += QPointF(296.81807124385705, 147.38451061538373);
     points += QPointF(296.5985303999919, 147.07754941478083);
-    points += QPointF(296.486859378041, 146.96500596407506);
     points += QPointF(296.30769954702157, 146.83360641173047);
     points += QPointF(295.85745446032604, 146.59522243594577);
     points += QPointF(294.9800374980412, 146.2693748418327);
@@ -2696,6 +2695,42 @@ void TST_VAbstractPiece::CorrectEquidistantPoints_data() const
     expect.append(QPointF(-283.4579031023758, 1039.1940357173805));
 
     QTest::newRow("Clearing bad main path.") << points << expect << true;
+
+    points.clear();
+    points.append(VSAPoint(1710.822186539242, -337.9528818897638));
+    points.append(VSAPoint(2241.0236220472443, -337.9528818897638));
+    points.append(VSAPoint(2241.0236220472443, -73.38595275590546));
+    points.append(VSAPoint(1756.74661444881, -77.4022977175182));
+    points.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    points.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    points.append(VSAPoint(1452.5774742317267, 17.66797799862358));
+    points.append(VSAPoint(1443.6033514625851, -2.685141373445197));
+    points.append(VSAPoint(1432.9463842425444, -25.199242282717215));
+    points.append(VSAPoint(1420.460146989685, -50.18887828170325));
+    points.append(VSAPoint(1405.9982141220862, -77.96860292291412));
+    points.append(VSAPoint(1389.4141600578282, -108.85296975886055));
+    points.append(VSAPoint(1360.549818901188, -161.20243176452524));
+    points.append(VSAPoint(1337.599051333226, -201.88618662356873));
+    points.append(VSAPoint(1337.599051333226, -201.88618662356873));
+    points.append(VSAPoint(1710.8221865392422, -337.95288188976184));
+
+    expect.clear();
+    expect.append(VSAPoint(1710.822186539242, -337.9528818897638));
+    expect.append(VSAPoint(2241.0236220472443, -337.9528818897638));
+    expect.append(VSAPoint(2241.0236220472443, -73.38595275590546));
+    expect.append(VSAPoint(1756.74661444881, -77.4022977175182));
+    expect.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    expect.append(VSAPoint(1452.5774742317267, 17.66797799862358));
+    expect.append(VSAPoint(1443.6033514625851, -2.685141373445197));
+    expect.append(VSAPoint(1432.9463842425444, -25.199242282717215));
+    expect.append(VSAPoint(1420.460146989685, -50.18887828170325));
+    expect.append(VSAPoint(1405.9982141220862, -77.96860292291412));
+    expect.append(VSAPoint(1389.4141600578282, -108.85296975886055));
+    expect.append(VSAPoint(1360.549818901188, -161.20243176452524));
+    expect.append(VSAPoint(1337.599051333226, -201.88618662356873));
+
+    // See the file "collection/bugs/Issue_#686.val"
+    QTest::newRow("Issue #686.") << points << expect << true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2828,7 +2863,6 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     expect << QPointF(2431.567845112944, 650.353473841431);
     expect << QPointF(2430.8388882820395, 551.3113535235192);
     expect << QPointF(2521.6176598985803, 672.644700521423);
-    expect << QPointF(2521.6176454460388, 672.6446812044021);
     expect << QPointF(2524.825194988043, 676.8586168908913);
     expect << QPointF(2531.556290527688, 684.9826746886265);
     expect << QPointF(2538.6519462028364, 692.7334672321138);
@@ -2860,7 +2894,6 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     expect << QPointF(2792.78632430596, 716.4869857232671);
     expect << QPointF(2795.193441837398, 714.0407970608542);
     expect << QPointF(2797.5205646867075, 711.5183868986292);
-    expect << QPointF(2797.55905511811, 711.5533198040212);
     expect << QPointF(2797.5653033070657, 778.3129219994751);
     expect << QPointF(2798.042165185835, 888.6599947271147);
     expect << QPointF(2799.2551263764, 959.1215703859448);
