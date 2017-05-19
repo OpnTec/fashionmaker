@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="@hip_seat" value="73"/>
+        <m name="@jeans_bottom_width" value="16.5"/>
+        <m name="@body_rise" value="22"/>
+        <m name="@inside_leg" value="61"/>
+        <m name="@waist" value="64"/>
+        <m name="@trouser_bottom_width" value="19"/>
+        <m name="@waist_to_hip" value="15.6"/>
+        <m name="@waist_band_depth" value="3.5"/>
+    </body-measurements>
+</vit>

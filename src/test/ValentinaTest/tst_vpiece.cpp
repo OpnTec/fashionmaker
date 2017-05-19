@@ -138,7 +138,7 @@ void TST_VPiece::ClearLoop()
     origPoints.append(QPointF(773.6735265709667, 824.7970381873482));
     origPoints.append(QPointF(780.6615727577812, 825.0343457026618));
     origPoints.append(QPointF(792.109995909239, 824.8480813766124));
-    origPoints.append(QPointF(826.0032661558732, 877.1274330708662));
+    origPoints.append(QPointF(825.8211754072381, 821.4551806381257));
     origPoints.append(QPointF(828.6858753986579, 1697.305833468011));
     origPoints.append(QPointF(42.46405659601932, 415.2845470563871));
 

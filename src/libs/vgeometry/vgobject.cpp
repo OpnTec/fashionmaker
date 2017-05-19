@@ -40,7 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 
-const double VGObject::accuracyPointOnLine = (0.031/*mm*/ / 25.4) * PrintDPI;
+const double VGObject::accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

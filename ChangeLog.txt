@@ -6,6 +6,7 @@
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
 - [#686] Seam allowance not placed correctly.
+- [#687] Wrong seam allowance.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
