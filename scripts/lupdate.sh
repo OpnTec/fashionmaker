@@ -10,17 +10,21 @@ cd ../share/translations
 RESOURCES=`find . -regextype sed -regex ".*/measurements_p[0-9]\{1,2\}\.ts"`
 cd ../../scripts
 
+# Empty means unstable branch
+MEASUREMENTS_BRANCH='' # For example _05x
+VALENTINA_BRANCH=''    # for example 05x
+
 NUMBER=( $RESOURCES )
 NUMBER=${#NUMBER[@]}
 
 for ((i=0;i<NUMBER;i++)); do
-  tx pull -r valentina-project.measurements_p${i}ts --mode=developer -f --skip &
+  tx pull -r valentina-project.measurements_p${i}${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip &
   sleep 5
 done
 
-tx pull -r valentina-project.valentina_ts --mode=developer -f --skip &
+tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts --mode=developer -f --skip &
 sleep 5
-tx pull -r valentina-project.measurements_p998ts --mode=developer -f --skip &
+tx pull -r valentina-project.measurements_p998${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip &
 
 wait
 
