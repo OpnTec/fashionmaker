@@ -657,6 +657,10 @@
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -759,6 +763,10 @@
     <message>
         <source>Color:</source>
         <translation>Колір:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,6 +938,10 @@
         <source>Tool cubic bezier</source>
         <translation>Інструмент кубічна крива безье</translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -960,6 +972,10 @@
     <message>
         <source>Tool cubic bezier path</source>
         <translation>Інструмент складна кубічна крива безье</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1793,6 +1809,10 @@
     <message>
         <source>Elliptical arc</source>
         <translation>Еліптична дуга</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4988,6 +5008,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5118,6 +5142,10 @@ Apply settings anyway?</source>
     <message>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6844,19 +6872,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export increments to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортувати прибавки до CSV</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Розраховане значення</translation>
+        <translation>Розраховане значення</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Формула</translation>
+        <translation>Формула</translation>
     </message>
 </context>
 <context>
@@ -7313,6 +7341,14 @@ Do you want to save your changes?</source>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>За замовчуванням заборонити віддзеркалення для всіх нових створених деталей</translation>
+    </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8660,6 +8696,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Built in</source>
         <translation>Вбудована</translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10528,6 +10572,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Fourth point:</source>
         <translation>Четверта точка:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

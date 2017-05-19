@@ -657,6 +657,10 @@
         <source>Color:</source>
         <translation>Colore:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -759,6 +763,10 @@
     <message>
         <source>Color:</source>
         <translation>Colore:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,6 +938,10 @@
         <source>Tool cubic bezier</source>
         <translation>Strumento curva di bezier</translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -955,6 +967,10 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -990,7 +1006,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostra la linea dal primo punto a questo punto </translation>
+        <translation type="vanished">Mostra la linea dal primo punto a questo punto</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -1716,6 +1732,10 @@
     </message>
     <message>
         <source>Elliptical arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2651,7 +2671,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostra la linea dal primo punto a questo punto </translation>
+        <translation type="vanished">Mostra la linea dal primo punto a questo punto</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -4896,6 +4916,10 @@ Applicare le impostazioni comunque?</translation>
         <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5025,6 +5049,10 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7207,6 +7235,14 @@ Vuoi salvare i cambiamenti?</translation>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -8552,6 +8588,14 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Built in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10280,6 +10324,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Fourth point:</source>
         <translation type="unfinished">Quarto punto:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

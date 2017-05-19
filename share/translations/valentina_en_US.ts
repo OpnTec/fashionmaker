@@ -657,6 +657,10 @@
         <source>Color:</source>
         <translation>Color:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -759,6 +763,10 @@
     <message>
         <source>Color:</source>
         <translation>Color:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,6 +938,10 @@
         <source>Tool cubic bezier</source>
         <translation>Tool cubic bezier</translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -960,6 +972,10 @@
     <message>
         <source>Tool cubic bezier path</source>
         <translation>Tool cubic bezier path</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1793,6 +1809,10 @@
     <message>
         <source>Elliptical arc</source>
         <translation>Elliptical arc</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4988,6 +5008,10 @@ Apply settings anyway?</translation>
         <source>Calculation</source>
         <translation>Calculation</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5118,6 +5142,10 @@ Apply settings anyway?</translation>
     <message>
         <source>Calculation</source>
         <translation>Calculation</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6845,19 +6873,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Export increments to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Export increments to CSV</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">The calculated value</translation>
+        <translation>The calculated value</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
 </context>
 <context>
@@ -7314,6 +7342,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>By default forbid flipping for all new created workpieces</translation>
+    </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8661,6 +8697,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>Built in</source>
         <translation>Built in</translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10530,6 +10574,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>Fourth point:</source>
         <translation>Fourth point:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

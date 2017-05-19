@@ -657,6 +657,10 @@
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -759,6 +763,10 @@
     <message>
         <source>Color:</source>
         <translation>Kleur:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,6 +938,10 @@
         <source>Tool cubic bezier</source>
         <translation>Kubisachtige bezier gereedschap</translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -960,6 +972,10 @@
     <message>
         <source>Tool cubic bezier path</source>
         <translation>Kubisachtige bezier gereedschaps pad</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1490,7 +1506,7 @@
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="vanished">Het deel spiegelen is in de opmaak modus niet toegestaan</translation>
+        <translation type="vanished">Het deel spiegelen is in de opmaak modus niet toegestaan.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -1793,6 +1809,10 @@
     <message>
         <source>Elliptical arc</source>
         <translation>Ellipsvormige boog</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4988,6 +5008,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5118,6 +5142,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Calculation</source>
         <translation>Berekening</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7314,6 +7342,14 @@ Do you want to save your changes?</source>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>Standaard is het kantelen voor alle nieuwe werkstukken uitgeschakeld</translation>
     </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -8660,6 +8696,14 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Built in</source>
         <translation>Ingebouwd</translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10529,6 +10573,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Fourth point:</source>
         <translation>Vierde punt:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

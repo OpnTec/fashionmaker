@@ -657,6 +657,10 @@
         <source>Color:</source>
         <translation>Farbe:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -759,6 +763,10 @@
     <message>
         <source>Color:</source>
         <translation>Farbe:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,6 +938,10 @@
         <source>Tool cubic bezier</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -959,6 +971,10 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1672,6 +1688,10 @@
     </message>
     <message>
         <source>Elliptical arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4843,6 +4863,10 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Calculation</source>
         <translation type="unfinished">Berechnung</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -4973,6 +4997,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Calculation</source>
         <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7138,6 +7166,14 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -8467,6 +8503,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Built in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10257,6 +10301,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Fourth point:</source>
         <translation type="unfinished">Vierter Punkt:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

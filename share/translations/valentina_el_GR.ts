@@ -645,6 +645,10 @@
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -747,6 +751,10 @@
     <message>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -914,6 +922,10 @@
         <source>Tool cubic bezier</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -939,6 +951,10 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1449,6 +1465,14 @@
         <translation type="vanished">Περιορισμός αντιστροφής</translation>
     </message>
     <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">Γράμμα του κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">Το όνομα δε μπορεί να είναι κενό</translation>
+    </message>
+    <message>
         <source>Grainline</source>
         <translation type="vanished">Ισιάδα</translation>
     </message>
@@ -1637,7 +1661,7 @@
     </message>
     <message>
         <source>Filter list by keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Φιλτράρισμα λίστας με λέξη κλειδί</translation>
     </message>
 </context>
 <context>
@@ -1648,7 +1672,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1729,6 +1753,10 @@
     <message>
         <source>Elliptical arc</source>
         <translation>Ελλειπτικό τόξο</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3549,7 +3577,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3573,7 +3601,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πριν:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -3585,7 +3613,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετά:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -4835,6 +4863,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -4965,6 +4997,10 @@ Apply settings anyway?</source>
     <message>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7074,6 +7110,14 @@ Do you want to save your changes?</source>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
@@ -8061,7 +8105,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8108,7 +8152,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Γράμμα του κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Name of detail:</source>
@@ -8120,7 +8164,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Το όνομα δε μπορεί να είναι κενό</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -8168,7 +8212,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8298,7 +8342,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8322,7 +8366,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πριν:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -8334,7 +8378,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετά:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -8366,6 +8410,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Built in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10075,6 +10127,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Fourth point:</source>
         <translation type="unfinished">Τέταρτο σημείο:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
