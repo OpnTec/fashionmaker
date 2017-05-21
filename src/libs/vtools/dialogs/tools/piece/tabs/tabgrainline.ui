@@ -193,7 +193,7 @@
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string notr="true">1</string>
+               <string notr="true">90</string>
               </property>
              </widget>
             </item>
@@ -382,7 +382,7 @@
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string notr="true">90</string>
+               <string notr="true">1</string>
               </property>
              </widget>
             </item>
