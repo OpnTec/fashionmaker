@@ -659,7 +659,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -766,7 +766,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -940,7 +940,7 @@
     </message>
     <message>
         <source>Pen Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen Style:</translation>
     </message>
 </context>
 <context>
@@ -975,7 +975,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -1812,7 +1812,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -5010,7 +5010,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -5145,7 +5145,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>
@@ -7345,11 +7345,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>By default hide the main path if the seam allowance was enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>By default hide the main path if the seam allowance was enabled</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide main path</translation>
     </message>
 </context>
 <context>
@@ -8700,11 +8700,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Hide the main path if the seam allowance is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide the main path if the seam allowance is enabled</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide main path</translation>
     </message>
 </context>
 <context>
@@ -10577,7 +10577,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen style:</translation>
     </message>
 </context>
 <context>

@@ -1325,6 +1325,10 @@
         <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="vanished">Όλα τα αντικείμενα του μονοπατιού θα πρέπει να ακολουθούν ωρολογιακή φορά.</translation>
+    </message>
+    <message>
         <source>Scroll down the list</source>
         <translation type="vanished">Κύλιση λίστας προς τα κάτω</translation>
     </message>
@@ -1748,7 +1752,7 @@
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
@@ -3549,7 +3553,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Create name for your path</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργία ονόματος για το μονοπάτι σας</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -4548,7 +4552,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτες</translation>
     </message>
     <message>
         <source>Error</source>
@@ -6431,6 +6435,10 @@ Do you want to save your changes?</source>
         <translation>Επιλογή πρώτης καμπύλης</translation>
     </message>
     <message>
+        <source>(read only)</source>
+        <translation type="vanished">(μόνο για ανάγνωση)</translation>
+    </message>
+    <message>
         <source>Curve tool which uses point as control handle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6441,6 +6449,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Select point of cubic bezier path</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
+        <translation type="vanished">Εργαλείο δείκτη</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -6492,7 +6504,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select first circle center</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε το κέντρο του πρώτου κύκλου</translation>
     </message>
     <message>
         <source>Select point on tangent</source>
@@ -6528,7 +6540,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Έγινε αλλαγή των μετρήσεων. Θέλετε να συγχρονίσετε τις μετρήσεις τώρα;</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
@@ -6572,11 +6584,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>read only</source>
@@ -8066,11 +8078,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>read only</source>
@@ -8200,7 +8212,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτες</translation>
     </message>
     <message>
         <source>Detail label visible</source>
@@ -8314,7 +8326,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα αντικείμενα του μονοπατιού θα πρέπει να ακολουθούν ωρολογιακή φορά.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -8390,11 +8402,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχικό σημείο:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τελικό σημείο:</translation>
     </message>
     <message>
         <source>Include as:</source>
@@ -8639,7 +8651,7 @@ Do you want to save your changes?</source>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μη γίνει ερώτηση ξανά</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
@@ -11210,7 +11222,7 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>ΤρέχονΜήκος</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -11250,7 +11262,7 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>ΤρέχονΠεριθώριοΡαφής</translation>
     </message>
     <message>
         <source>degTorad</source>

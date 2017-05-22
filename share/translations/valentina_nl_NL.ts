@@ -659,7 +659,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -766,7 +766,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -940,7 +940,7 @@
     </message>
     <message>
         <source>Pen Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -975,7 +975,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -1812,7 +1812,7 @@
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -5010,7 +5010,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -5145,7 +5145,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -6872,19 +6872,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export increments to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer verkleining/vergroting naar CSV</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Berekende waarde</translation>
+        <translation>De berekende waarde</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Formule</translation>
+        <translation>Formule</translation>
     </message>
 </context>
 <context>
@@ -7344,11 +7344,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>By default hide the main path if the seam allowance was enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg standaard  de hoofdpad als de naadtoeslag is ingeschakeld</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg hoofdpad</translation>
     </message>
 </context>
 <context>
@@ -8699,11 +8699,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Hide the main path if the seam allowance is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg de hoofdpad wanneer naadtoeslag is ingeschakeld</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg hoofdpad</translation>
     </message>
 </context>
 <context>
@@ -10576,7 +10576,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Pen style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
