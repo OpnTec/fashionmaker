@@ -162,6 +162,7 @@ private:
     void InitComboBoxUnits();
     void InitGender(QComboBox *gender);
 
+    void ShowNewMData(bool fresh);
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
     void UpdateRecentFileActions();
