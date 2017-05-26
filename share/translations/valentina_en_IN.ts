@@ -2502,11 +2502,15 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation>Arranged workpieces: %1 from %2</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6340,7 +6344,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</translation>
+        <translation type="vanished">You can&apos;t use now the Detail mode. Please, create at least one workpiece.</translation>
     </message>
     <message>
         <source>Layout mode</source>
@@ -6348,7 +6352,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</translation>
+        <translation type="vanished">You can&apos;t use now the Layout mode. Please, create at least one workpiece.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6669,7 +6673,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</translation>
+        <translation type="vanished">You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</translation>
     </message>
     <message>
         <source>Original zoom</source>
@@ -6865,7 +6869,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode.</source>
-        <translation>You can&apos;t use now the Layout mode.</translation>
+        <translation type="vanished">You can&apos;t use now the Layout mode.</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -6886,6 +6890,22 @@ Do you want to save your changes?</translation>
     <message>
         <source>Formula</source>
         <translation>Formula</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8590,6 +8610,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>Show the second passmark on seam line</source>
         <translation>Show the second passmark on seam line</translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

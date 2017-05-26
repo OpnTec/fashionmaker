@@ -2418,11 +2418,15 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Individuazione della posizione migliore dei pezzi. Attendere prego.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Individuazione della posizione migliore dei pezzi. Attendere prego.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation>Pezzi disposti: %1 da %2</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6248,7 +6252,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>Non puoi utilizzare ora la modalità Dettaglio. Crea almeno un pezzo prima, grazie.</translation>
+        <translation type="vanished">Non puoi utilizzare ora la modalità Dettaglio. Crea almeno un pezzo prima, grazie.</translation>
     </message>
     <message>
         <source>Layout mode</source>
@@ -6256,7 +6260,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Non puoi utilizzare ora la modalità Layout. Crea almeno un pezzo, grazie.</translation>
+        <translation type="vanished">Non puoi utilizzare ora la modalità Layout. Crea almeno un pezzo, grazie.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6577,7 +6581,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation>Non puoi utilizzare la modalità Layout adesso. Per favore, inserisci almeno un dettagli nel layout.</translation>
+        <translation type="vanished">Non puoi utilizzare la modalità Layout adesso. Per favore, inserisci almeno un dettagli nel layout.</translation>
     </message>
     <message>
         <source>Original zoom</source>
@@ -6772,10 +6776,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6794,6 +6794,22 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Formula</source>
         <translation type="unfinished">Formula</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8481,6 +8497,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

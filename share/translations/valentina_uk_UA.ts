@@ -2502,11 +2502,15 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Зачекайте, відбувається пошук найкращої позиції для деталі.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Зачекайте, відбувається пошук найкращої позиції для деталі.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation>Укладання деталей: %1 з %2</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6339,7 +6343,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>Ви не можете використовувати Режим деталі зараз. Будь ласка, створіть хоча б одну деталь.</translation>
+        <translation type="vanished">Ви не можете використовувати Режим деталі зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
         <source>Layout mode</source>
@@ -6347,7 +6351,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
+        <translation type="vanished">Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6668,7 +6672,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation>Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
+        <translation type="vanished">Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
         <source>Original zoom</source>
@@ -6864,7 +6868,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode.</source>
-        <translation>Ви не можете використовувати Режим розкладки зараз.</translation>
+        <translation type="vanished">Ви не можете використовувати Режим розкладки зараз.</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -6885,6 +6889,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula</source>
         <translation>Формула</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8589,6 +8609,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Show the second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

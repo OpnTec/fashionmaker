@@ -2325,7 +2325,7 @@ void MainWindow::ActionDetails(bool checked)
         {
             if (pattern->DataPieces()->count() == 0)
             {
-                QMessageBox::information(this, tr("Detail mode"), tr("You can't use now the Detail mode. "
+                QMessageBox::information(this, tr("Detail mode"), tr("You can't use Detail mode yet. "
                                                                      "Please, create at least one workpiece."),
                                          QMessageBox::Ok, QMessageBox::Ok);
                 ActionDraw(true);
@@ -2404,7 +2404,7 @@ void MainWindow::ActionLayout(bool checked)
             const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
             if (allDetails->count() == 0)
             {
-                QMessageBox::information(this, tr("Layout mode"), tr("You can't use now the Layout mode. "
+                QMessageBox::information(this, tr("Layout mode"), tr("You can't use Layout mode yet. "
                                                                      "Please, create at least one workpiece."),
                                          QMessageBox::Ok, QMessageBox::Ok);
                 ActionDraw(true);
@@ -2424,7 +2424,7 @@ void MainWindow::ActionLayout(bool checked)
 
                 if (details.count() == 0)
                 {
-                    QMessageBox::information(this, tr("Layout mode"),  tr("You can't use now the Layout mode. Please, "
+                    QMessageBox::information(this, tr("Layout mode"),  tr("You can't use Layout mode yet. Please, "
                                                                           "include at least one detail in layout."),
                                              QMessageBox::Ok, QMessageBox::Ok);
                     mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
@@ -2447,7 +2447,7 @@ void MainWindow::ActionLayout(bool checked)
         {
             listDetails.clear();
             QMessageBox::warning(this, tr("Layout mode"),
-                                 tr("You can't use now the Layout mode.") + QLatin1String(" \n") + e.ErrorMessage(),
+                                 tr("You can't use Layout mode yet.") + QLatin1String(" \n") + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
             mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
             return;
