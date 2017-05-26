@@ -48,7 +48,7 @@
 #include <QTimer>
 #include <QtNumeric>
 
-enum TabOrder {Paths=0, Labels=1, Grainline=2, Pins=3, Passmarks=4, Count=5};
+enum TabOrder {Paths=0, Pins=1, Labels=2, Grainline=3,  Passmarks=4, Count=5};
 
 namespace
 {
@@ -179,9 +179,9 @@ void DialogSeamAllowance::EnableApply(bool enable)
 
     uiTabPaths->tabSeamAllowance->setEnabled(applyAllowed);
     uiTabPaths->tabInternalPaths->setEnabled(applyAllowed);
+    m_ftb->SetTabEnabled(TabOrder::Pins, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Labels, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
-    m_ftb->SetTabEnabled(TabOrder::Pins, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
 }
 
@@ -1115,14 +1115,14 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         case TabOrder::Paths:
             m_tabPaths->show();
             break;
+        case TabOrder::Pins:
+            m_tabPins->show();
+            break;
         case TabOrder::Labels:
             m_tabLabels->show();
             break;
         case TabOrder::Grainline:
             m_tabGrainline->show();
-            break;
-        case TabOrder::Pins:
-            m_tabPins->show();
             break;
         case TabOrder::Passmarks:
             m_tabPassmarks->show();
@@ -2426,9 +2426,9 @@ void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 void DialogSeamAllowance::InitFancyTabBar()
 {
     m_ftb->InsertTab(TabOrder::Paths, QIcon("://icon/32x32/paths.png"), tr("Paths"));
+    m_ftb->InsertTab(TabOrder::Pins, QIcon("://icon/32x32/pins.png"), tr("Pins"));
     m_ftb->InsertTab(TabOrder::Labels, QIcon("://icon/32x32/labels.png"), tr("Labels"));
     m_ftb->InsertTab(TabOrder::Grainline, QIcon("://icon/32x32/grainline.png"), tr("Grainline"));
-    m_ftb->InsertTab(TabOrder::Pins, QIcon("://icon/32x32/pins.png"), tr("Pins"));
     m_ftb->InsertTab(TabOrder::Passmarks, QIcon("://icon/32x32/passmark.png"), tr("Passmarks"));
 
     ui->horizontalLayout->addWidget(m_ftb, 0, Qt::AlignLeft);
