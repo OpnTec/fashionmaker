@@ -179,6 +179,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="toolTip">
+          <string>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</string>
+         </property>
          <property name="text">
           <string>Show the second passmark on seam line</string>
          </property>
