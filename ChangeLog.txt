@@ -10,6 +10,7 @@
 - [#689] Grainline default values swapped around.
 - [#688] Difficult to enter numbers in Tape.
 - Fixed bug in Tape app. Tape showed birth date in wrong locale.
+- Fixed bug in dialog Internal Piece Path. Value from the field After rewrited data in the field Before. 
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.

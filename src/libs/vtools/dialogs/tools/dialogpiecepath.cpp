@@ -575,16 +575,17 @@ void DialogPiecePath::EvalWidthBefore()
 {
     labelEditFormula = ui->labelEditBefore;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
+    QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
 
+    formula = GetFormulaSAWidthBefore();
     if (formula != currentSeamAllowance)
     {
         ui->pushButtonDefBefore->setEnabled(true);
     }
 
-    UpdateNodeSABefore(GetFormulaSAWidthBefore());
+    UpdateNodeSABefore(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -592,16 +593,17 @@ void DialogPiecePath::EvalWidthAfter()
 {
     labelEditFormula = ui->labelEditAfter;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
+    QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
 
+    formula = GetFormulaSAWidthAfter();
     if (formula != currentSeamAllowance)
     {
         ui->pushButtonDefAfter->setEnabled(true);
     }
 
-    UpdateNodeSABefore(GetFormulaSAWidthAfter());
+    UpdateNodeSAAfter(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
