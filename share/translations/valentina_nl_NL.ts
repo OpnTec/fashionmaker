@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation type="vanished">Proxy pas:</translation>
+        <translation type="vanished">Proxy wachtwoord:</translation>
     </message>
     <message>
         <source>User Name:</source>
@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>Password:</source>
-        <translation type="vanished">Paswoord:</translation>
+        <translation type="vanished">Wachtwoord:</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Stoppen</translation>
+        <translation type="vanished">&amp;Annuleren</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -142,11 +142,11 @@
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configureer Dialoog</translation>
+        <translation type="vanished">Instellingen Dialoog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="vanished">Configuratie</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -165,11 +165,11 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">De taal van de setup gebruikers interface is opgewaardeerd en zal gebruikt worden bij de volgende start</translation>
+        <translation type="vanished">De taal van de gebruikers interface van de installatie is bijgewerkt en zal gebruikt worden bij de volgende keer dat je het programma opstart.</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt voor de volgende patrooncreatie</translation>
+        <translation type="vanished">De standaardwaarde van de eenheid is bijgewerkt en zal worden gebruikt voor de volgende keer dat je een patroon aanmaakt.</translation>
     </message>
     <message>
         <source>Save</source>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="vanished">Automatisch opslaan van veranderd patroon</translation>
+        <translation type="vanished">Automatisch opslaan na aanpassing patroon</translation>
     </message>
     <message>
         <source>min</source>
@@ -197,15 +197,15 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Decimale gescheiden delen</translation>
+        <translation type="vanished">Decimaal scheidingsteken</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="vanished">Met OS opties (%1)</translation>
+        <translation type="vanished">Volgens besturingssysteem (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
-        <translation type="vanished">Standaardwaarde eenheid</translation>
+        <translation type="vanished">Standaard eenheid</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -225,19 +225,19 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation type="vanished">Verzend crash rapport</translation>
+        <translation type="vanished">Verzend crashrapport</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Verzend crash rapport (aanbevolen)</translation>
+        <translation type="vanished">Verzend crashrapport (aanbevolen)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Na elke crash zal Valentina informatie verzamelen dat ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan informatie verzamelen :&lt;ahref=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;&quot;.</translation>
+        <translation type="vanished">Na elke crash zal Valentina informatie verzamelen die ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;informatie&lt;/a&gt; verzamelen :</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="vanished">Patroon Verandering</translation>
+        <translation type="vanished">Patroon Bewerking</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
@@ -2510,7 +2510,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beste positie zoeken voor de werkstukken. Een moment geduld a.u.b.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6867,10 +6867,6 @@ Do you want to save your changes?</source>
         <translation>Selecteer een of meer objecten, houd &lt;b&gt;%1&lt;/b&gt; vast - voor meerdere selecties, &lt;b&gt;Enter&lt;/b&gt; - bevestig selectie</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
-        <translation type="vanished">Je kunt de opmaak-modus nu niet gebruiken.</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open de Tape app om een matenbestand te wijzigen of aan te maken</translation>
     </message>
@@ -6892,19 +6888,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt Detail mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt Layout mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt Layout mode nog niet gebruiken. Voeg eerst één werkstuk toe aan de layout.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt Layout mode nog niet gebruiken.</translation>
     </message>
 </context>
 <context>
@@ -8612,7 +8608,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
     </message>
 </context>
 <context>
