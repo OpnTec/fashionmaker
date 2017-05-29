@@ -214,13 +214,12 @@ bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern
         {
             const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
 
-            const qreal cLength = ToPixel(length, *pattern->GetPatternUnit());
             QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
-                             centerPinPoint->x() + cLength / 2.0, centerPinPoint->y());
+                             centerPinPoint->x() + length / 2.0, centerPinPoint->y());
 
-            grainline.setAngle(rotationAngle);
+            grainline.setAngle(qRadiansToDegrees(rotationAngle));
             grainline = QLineF(grainline.p2(), grainline.p1());
-            grainline.setLength(cLength);
+            grainline.setLength(length);
 
             pos = grainline.p2();
         }
