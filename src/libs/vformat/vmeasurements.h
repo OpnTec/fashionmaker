@@ -52,6 +52,7 @@ public:
     virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
 
     virtual void setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
+    virtual bool SaveDocument(const QString &fileName, QString &error) Q_DECL_OVERRIDE;
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());

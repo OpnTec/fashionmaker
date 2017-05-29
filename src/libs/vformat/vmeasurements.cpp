@@ -52,6 +52,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vmisc/projectversion.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
@@ -82,6 +83,15 @@ const QString VMeasurements::GenderFemale  = QStringLiteral("female");
 const QString VMeasurements::GenderUnknown = QStringLiteral("unknown");
 
 const QString defBirthDate = QStringLiteral("1800-01-01");
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+QString FileComment()
+{
+    return QString("Measurements created with Valentina v%1 (http://www.valentina-project.org/).").arg(APP_VERSION_STR);
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::VMeasurements(VContainer *data)
@@ -119,6 +129,20 @@ void VMeasurements::setXMLContent(const QString &fileName)
 {
     VDomDocument::setXMLContent(fileName);
     type = ReadType();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurements::SaveDocument(const QString &fileName, QString &error)
+{
+    // Update comment with Valentina version
+    QDomNode commentNode = documentElement().firstChild();
+    if (commentNode.isComment())
+    {
+        QDomComment comment = commentNode.toComment();
+        comment.setData(FileComment());
+    }
+
+    return VDomDocument::SaveDocument(fileName, error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -676,7 +700,7 @@ void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHei
     this->clear();
     QDomElement mElement = this->createElement(TagVST);
 
-    mElement.appendChild(createComment("Measurements created with Valentina (http://www.valentina-project.org/)."));
+    mElement.appendChild(createComment(FileComment()));
 
     QDomElement version = createElement(TagVersion);
     const QDomText newNodeText = createTextNode(VVSTConverter::MeasurementMaxVerStr);
@@ -719,7 +743,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     this->clear();
     QDomElement mElement = this->createElement(TagVIT);
 
-    mElement.appendChild(createComment("Measurements created with Valentina (http://www.valentina-project.org/)."));
+    mElement.appendChild(createComment(FileComment()));
 
     QDomElement version = createElement(TagVersion);
     const QDomText newNodeText = createTextNode(VVITConverter::MeasurementMaxVerStr);

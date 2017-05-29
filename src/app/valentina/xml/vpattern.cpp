@@ -42,6 +42,7 @@
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/projectversion.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
@@ -65,6 +66,15 @@
 
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+QString FileComment()
+{
+    return QString("Pattern created with Valentina v%1 (http://www.valentina-project.org/).").arg(APP_VERSION_STR);
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
@@ -83,8 +93,7 @@ void VPattern::CreateEmptyFile()
     this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
 
-    patternElement.appendChild(
-                createComment(QStringLiteral("Pattern created with Valentina (http://www.valentina-project.org/).")));
+    patternElement.appendChild(createComment(FileComment()));
 
     QDomElement version = createElement(TagVersion);
     QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);
@@ -378,7 +387,7 @@ QVector<quint32> VPattern::GetActivePPPieces() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::SaveDocument(const QString &fileName, QString &error) const
+bool VPattern::SaveDocument(const QString &fileName, QString &error)
 {
     try
     {
@@ -389,6 +398,14 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error) const
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error not unique id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return false;
+    }
+
+    // Update comment with Valentina version
+    QDomNode commentNode = documentElement().firstChild();
+    if (commentNode.isComment())
+    {
+        QDomComment comment = commentNode.toComment();
+        comment.setData(FileComment());
     }
 
     const bool saved = VAbstractPattern::SaveDocument(fileName, error);

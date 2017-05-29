@@ -116,7 +116,7 @@ public:
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
     static QString UnitsHelpString();
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error) const;
+    virtual bool   SaveDocument(const QString &fileName, QString &error);
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;

@@ -728,7 +728,7 @@ QString VDomDocument::UnitsHelpString()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
+bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
 {
     if (fileName.isEmpty())
     {
