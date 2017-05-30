@@ -18,8 +18,15 @@ TEMPLATE = app
 # CONFIG += testcase adds a  'make check' which is great. But by default it also
 # adds a 'make install' that installs the test cases, which we do not want.
 # Can configure it not to do that with 'no_testcase_installs'
-# We use C++11 standard
-CONFIG += c++11 testcase no_testcase_installs
+CONFIG += testcase no_testcase_installs
+
+# Since Q5.4 available support C++14
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
+    CONFIG += c++14
+} else {
+    # We use C++11 standard
+    CONFIG += c++11
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= app_bundle debug_and_release debug_and_release_target
