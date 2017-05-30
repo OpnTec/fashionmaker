@@ -3989,9 +3989,9 @@ void MainWindow::CreateActions()
         QAction *action = new QAction(this);
         action->setVisible(false);
         recentFileActs[i] = action;
-        connect(recentFileActs[i], &QAction::triggered, this, [action, this]()
+        connect(recentFileActs[i], &QAction::triggered, this, [this]()
         {
-            if (action != nullptr)
+            if (QAction *action = qobject_cast<QAction*>(sender()))
             {
                 const QString filePath = action->data().toString();
                 if (not filePath.isEmpty())
