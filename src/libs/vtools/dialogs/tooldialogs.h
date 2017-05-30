@@ -66,7 +66,7 @@
 #include "tools/dialogflippingbyaxis.h"
 #include "tools/dialogmove.h"
 #include "tools/dialogellipticalarc.h"
-#include "tools/dialogpiecepath.h"
+#include "tools/piece/dialogpiecepath.h"
 #include "tools/dialogpin.h"
 #include "tools/dialoginsertnode.h"
 

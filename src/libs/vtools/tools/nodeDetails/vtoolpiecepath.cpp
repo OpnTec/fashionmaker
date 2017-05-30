@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolpiecepath.h"
-#include "../../dialogs/tools/dialogpiecepath.h"
+#include "../../dialogs/tools/piece/dialogpiecepath.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../../undocommands/savepieceoptions.h"

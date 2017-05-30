@@ -29,7 +29,7 @@
 #ifndef DIALOGPIECEPATH_H
 #define DIALOGPIECEPATH_H
 
-#include "dialogtool.h"
+#include "../dialogtool.h"
 
 namespace Ui
 {

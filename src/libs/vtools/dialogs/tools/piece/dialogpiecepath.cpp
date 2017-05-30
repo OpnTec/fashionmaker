@@ -30,9 +30,9 @@
 #include "ui_dialogpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "visualization/path/vistoolpiecepath.h"
-#include "../../tools/vabstracttool.h"
-#include "../../tools/vtoolseamallowance.h"
-#include "../support/dialogeditwrongformula.h"
+#include "../../../tools/vabstracttool.h"
+#include "../../../tools/vtoolseamallowance.h"
+#include "../../support/dialogeditwrongformula.h"
 
 #include <QMenu>
 #include <QTimer>
