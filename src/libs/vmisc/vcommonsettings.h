@@ -120,6 +120,9 @@ public:
     QSize GetPreferenceDialogSize() const;
     void SetPreferenceDialogSize(const QSize& sz);
 
+    QSize GetToolSeamAllowanceDialogSize() const;
+    void  SetToolSeamAllowanceDialogSize(const QSize& sz);
+
     int  GetLatestSkippedVersion() const;
     void SetLatestSkippedVersion(int value);
 

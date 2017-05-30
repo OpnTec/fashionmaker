@@ -64,15 +64,16 @@ const QString settingPatternForbidFlipping = QStringLiteral("pattern/forbidFlipp
 const QString settingPatternHideMainPath   = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark        = QStringLiteral("pattern/doublePassmark");
 
-const QString settingGeneralRecentFileList  = QStringLiteral("recentFileList");
-const QString settingGeneralRestoreFileList = QStringLiteral("restoreFileList");
-const QString settingGeneralGeometry        = QStringLiteral("geometry");
-const QString settingGeneralWindowState     = QStringLiteral("windowState");
-const QString settingGeneralToolbarsState   = QStringLiteral("toolbarsState");
-const QString settingPreferenceDialogSize   = QStringLiteral("preferenceDialogSize");
-const QString settingLatestSkippedVersion   = QStringLiteral("lastestSkippedVersion");
-const QString settingDateOfLastRemind       = QStringLiteral("dateOfLastRemind");
-const QString settingUserDefinedMaterials   = QStringLiteral("configuration/userDefinedMaterials");
+const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
+const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
+const QString settingGeneralGeometry             = QStringLiteral("geometry");
+const QString settingGeneralWindowState          = QStringLiteral("windowState");
+const QString settingGeneralToolbarsState        = QStringLiteral("toolbarsState");
+const QString settingPreferenceDialogSize        = QStringLiteral("preferenceDialogSize");
+const QString settingToolSeamAllowanceDialogSize = QStringLiteral("toolSeamAllowanceDialogSize");
+const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
+const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
+const QString settingUserDefinedMaterials        = QStringLiteral("configuration/userDefinedMaterials");
 
 const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
 const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
@@ -542,6 +543,18 @@ QSize VCommonSettings::GetPreferenceDialogSize() const
 void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
 {
     setValue(settingPreferenceDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetToolSeamAllowanceDialogSize() const
+{
+    return value(settingToolSeamAllowanceDialogSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetToolSeamAllowanceDialogSize(const QSize &sz)
+{
+    setValue(settingToolSeamAllowanceDialogSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

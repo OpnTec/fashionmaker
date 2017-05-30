@@ -89,6 +89,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_tabPins(new QWidget),
       m_tabPassmarks(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
+      m_isInitialized(false),
       applyAllowed(false),// By default disabled
       flagGPin(true),
       flagDPin(true),
@@ -425,8 +426,38 @@ void DialogSeamAllowance::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::showEvent(QShowEvent *event)
 {
-    // Skip DialotTool implementation. For this tool don't need disable resizing because it uses a scroll area.
     QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (m_isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    const QSize sz = qApp->Settings()->GetToolSeamAllowanceDialogSize();
+    if (not sz.isEmpty())
+    {
+        resize(sz);
+    }
+
+    m_isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event)
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (m_isInitialized)
+    {
+        qApp->Settings()->SetToolSeamAllowanceDialogSize(size());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -73,6 +73,7 @@ protected:
     virtual void CheckState() Q_DECL_FINAL;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 protected slots:
     void UpdateList();
@@ -173,6 +174,7 @@ private:
 
     FancyTabBar* m_ftb;
 
+    bool   m_isInitialized;
     bool   applyAllowed;
     bool   flagGPin;
     bool   flagDPin;
