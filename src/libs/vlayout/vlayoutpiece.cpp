@@ -780,11 +780,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
             d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth);
             if (d->layoutAllowance.isEmpty() == false)
             {
-                #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                    d->layoutAllowance.remove(d->layoutAllowance.size() - 1);
-                #else
-                    d->layoutAllowance.removeLast();
-                #endif
+                d->layoutAllowance.removeLast();
             }
         }
         else
@@ -792,11 +788,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
             d->layoutAllowance = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth);
             if (d->layoutAllowance.isEmpty() == false)
             {
-            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                d->layoutAllowance.remove(d->layoutAllowance.size() - 1);
-            #else
                 d->layoutAllowance.removeLast();
-            #endif
             }
         }
     }

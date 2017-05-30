@@ -30,6 +30,7 @@
 
 #include <qcompilerdetection.h>
 #include <qdom.h>
+#include <QSaveFile>
 
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
@@ -38,12 +39,6 @@
 #include "../exception/vexception.h"
 #include "../vmisc/logging.h"
 #include "../ifcdef.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../vmisc/backport/qsavefile.h"
-#else
-#   include <QSaveFile>
-#endif
 
 #include <QAbstractMessageHandler>
 #include <QByteArray>

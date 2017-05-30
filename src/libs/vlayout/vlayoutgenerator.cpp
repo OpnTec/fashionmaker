@@ -230,9 +230,7 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration.store(true);
     state = LayoutErrors::ProcessStoped;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QThreadPool::globalInstance()->clear();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

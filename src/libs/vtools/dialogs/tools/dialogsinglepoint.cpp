@@ -47,9 +47,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &tool
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditName->setClearButtonEnabled(true);
-#endif
 
     ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
     ui->doubleSpinBoxY->setRange(0, qApp->fromPixel(SceneSize));

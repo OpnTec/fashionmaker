@@ -319,7 +319,7 @@ void DialogPiecePath::NodeChanged(int index)
     if (index != -1)
     {
         const VPiecePath path = CreatePath();
-        const int nodeIndex = path.indexOfNode(CURRENT_DATA(ui->comboBoxNodes).toUInt());
+        const int nodeIndex = path.indexOfNode(ui->comboBoxNodes->currentData().toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = path.at(nodeIndex);
@@ -396,7 +396,7 @@ void DialogPiecePath::PassmarkChanged(int index)
     if (index != -1)
     {
         const VPiecePath path = CreatePath();
-        const int nodeIndex = path.indexOfNode(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        const int nodeIndex = path.indexOfNode(ui->comboBoxPassmarks->currentData().toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = path.at(nodeIndex);
@@ -480,7 +480,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
     const int i = ui->comboBoxPassmarks->currentIndex();
     if (i != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -522,7 +522,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
     const int i = ui->comboBoxPassmarks->currentIndex();
     if (i != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxPassmarks).toUInt());
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -701,9 +701,7 @@ void DialogPiecePath::DeployWidthAfterFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTab()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditName->setClearButtonEnabled(true);
-#endif
 
     FillComboBoxTypeLine(ui->comboBoxPenType, CurvePenStylesPics());
 
@@ -799,7 +797,7 @@ void DialogPiecePath::InitPathTypes()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitNodesList()
 {
-    const quint32 id = CURRENT_DATA(ui->comboBoxNodes).toUInt();
+    const quint32 id = ui->comboBoxNodes->currentData().toUInt();
 
     ui->comboBoxNodes->blockSignals(true);
     ui->comboBoxNodes->clear();
@@ -833,7 +831,7 @@ void DialogPiecePath::InitNodesList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPassmarksList()
 {
-    const quint32 id = CURRENT_DATA(ui->comboBoxPassmarks).toUInt();
+    const quint32 id = ui->comboBoxPassmarks->currentData().toUInt();
 
     ui->comboBoxPassmarks->blockSignals(true);
     ui->comboBoxPassmarks->clear();
@@ -870,10 +868,10 @@ void DialogPiecePath::NodeAngleChanged(int index)
     const int i = ui->comboBoxNodes->currentIndex();
     if (i != -1 && index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(CURRENT_DATA(ui->comboBoxAngle).toUInt());
+            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetAngleType(angle);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
@@ -914,7 +912,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 PiecePathType DialogPiecePath::GetType() const
 {
-    return static_cast<PiecePathType>(CURRENT_DATA(ui->comboBoxType).toInt());
+    return static_cast<PiecePathType>(ui->comboBoxType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -994,7 +992,7 @@ void DialogPiecePath::UpdateNodeSABefore(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -1010,7 +1008,7 @@ void DialogPiecePath::UpdateNodeSAAfter(const QString &formula)
     const int index = ui->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(ui->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));

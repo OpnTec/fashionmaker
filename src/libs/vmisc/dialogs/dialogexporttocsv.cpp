@@ -81,7 +81,7 @@ bool DialogExportToCSV::WithHeader() const
 //---------------------------------------------------------------------------------------------------------------------
 int DialogExportToCSV::SelectedMib() const
 {
-    return CURRENT_DATA(ui->comboBoxCodec).toInt();
+    return ui->comboBoxCodec->currentData().toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

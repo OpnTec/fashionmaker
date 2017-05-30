@@ -50,7 +50,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, [this]()
     {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {

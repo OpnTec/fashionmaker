@@ -21,32 +21,7 @@
 #ifndef VMATH_H
 #define VMATH_H
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #include <QtMath>
-#else
-#include "qmath.h"
-
-Q_DECL_CONSTEXPR inline float qDegreesToRadians(float degrees)
-{
-    return degrees * float(M_PI/180);
-}
-
-Q_DECL_CONSTEXPR inline double qDegreesToRadians(double degrees)
-{
-    return degrees * (M_PI / 180);
-}
-
-Q_DECL_CONSTEXPR inline float qRadiansToDegrees(float radians)
-{
-    return radians * float(180/M_PI);
-}
-
-Q_DECL_CONSTEXPR inline double qRadiansToDegrees(double radians)
-{
-    return radians * (180 / M_PI);
-}
-
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 
 #ifndef M_2PI
 #define M_2PI (6.28318530717958647692) /* 2*pi */

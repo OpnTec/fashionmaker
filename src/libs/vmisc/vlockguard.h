@@ -36,16 +36,10 @@
 
 #include "../vmisc/diagnostic.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #include <QFileInfo>
 #include <QLockFile>
 #if defined(Q_OS_WIN)
 #include <windows.h>
-#endif
-#define PEDANT_COMPILER ,lock(nullptr)
-#else
-#define PEDANT_COMPILER
-#pragma message("To have lock-file support you must use Qt 5.1+. Expect collissions when run 2 copies of the program.")
 #endif
 
 /*@brief
@@ -78,10 +72,7 @@ private:
     std::shared_ptr<Guarded> holder;
     int                      lockError;
     QString                  lockFile;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     std::shared_ptr<QLockFile> lock;
-#endif
 
     // cppcheck-suppress functionStatic
     bool TryLock(const QString &lockName, int stale, int timeout);
@@ -90,7 +81,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Guarded>
 VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile() PEDANT_COMPILER
+    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -103,7 +94,7 @@ VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
 //object
 template <typename Guarded> template <typename Alloc>
 VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile() PEDANT_COMPILER
+    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -114,7 +105,7 @@ VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, int stale, int
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Guarded> template <typename Alloc, typename Delete>
 VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, Delete d, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile() PEDANT_COMPILER
+    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -156,8 +147,6 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 {
     bool res = true;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-
     lockFile = lockName + QLatin1String(".lock");
 #if defined(Q_OS_UNIX)
     QFileInfo info(lockFile);
@@ -188,15 +177,8 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
         SetFileAttributesW(lockFile.toStdWString().c_str(), FILE_ATTRIBUTE_HIDDEN);
 #endif
     }
-#else
-    Q_UNUSED(lockName)
-    Q_UNUSED(stale)
-    Q_UNUSED(timeout)
-#endif
     return res;
 }
-
-#undef PEDANT_COMPILER
 
 //use pointer and function below to persistent things like class-member, because lock is taken by constructor
 //helper functions allow to write shorter creating and setting new lock-pointer

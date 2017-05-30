@@ -62,7 +62,7 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     FillTable();
     InitialTable();
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &DialogHistory::cellClicked);
-    connect(this, &DialogHistory::ShowHistoryTool, RECEIVER(doc)[doc](quint32 id, bool enable)
+    connect(this, &DialogHistory::ShowHistoryTool, doc, [doc](quint32 id, bool enable)
     {
         emit doc->ShowTool(id, enable);
     });

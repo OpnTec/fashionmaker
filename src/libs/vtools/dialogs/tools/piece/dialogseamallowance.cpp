@@ -495,7 +495,7 @@ void DialogSeamAllowance::AddUpdate()
     MaterialCutPlacement mcp;
     QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
 
-    const int i = CURRENT_DATA(uiTabLabels->comboBoxMaterial).toInt();
+    const int i = uiTabLabels->comboBoxMaterial->currentData().toInt();
     QString qsMat = uiTabLabels->comboBoxMaterial->currentText();
     if (i < m_qslMaterials.count() && qsMat == m_qslMaterials[i])
     {
@@ -809,7 +809,7 @@ void DialogSeamAllowance::NodeChanged(int index)
     if (index != -1)
     {
         const VPiece piece = CreatePiece();
-        const int nodeIndex = piece.GetPath().indexOfNode(CURRENT_DATA(uiTabPaths->comboBoxNodes).toUInt());
+        const int nodeIndex = piece.GetPath().indexOfNode(uiTabPaths->comboBoxNodes->currentData().toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = piece.GetPath().at(nodeIndex);
@@ -882,7 +882,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     if (index != -1)
     {
         const VPiece piece = CreatePiece();
-        const int nodeIndex = piece.GetPath().indexOfNode(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        const int nodeIndex = piece.GetPath().indexOfNode(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
         if (nodeIndex != -1)
         {
             const VPieceNode &node = piece.GetPath().at(nodeIndex);
@@ -961,7 +961,7 @@ void DialogSeamAllowance::CSAStartPointChanged(int index)
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.startPoint = CURRENT_DATA(uiTabPaths->comboBoxStartPoint).toUInt();
+    record.startPoint = uiTabPaths->comboBoxStartPoint->currentData().toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
@@ -979,7 +979,7 @@ void DialogSeamAllowance::CSAEndPointChanged(int index)
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.endPoint = CURRENT_DATA(uiTabPaths->comboBoxEndPoint).toUInt();
+    record.endPoint = uiTabPaths->comboBoxEndPoint->currentData().toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
@@ -997,7 +997,7 @@ void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
     CustomSARecord record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
-    record.includeType = static_cast<PiecePathIncludeType>(CURRENT_DATA(uiTabPaths->comboBoxIncludeType).toUInt());
+    record.includeType = static_cast<PiecePathIncludeType>(uiTabPaths->comboBoxIncludeType->currentData().toUInt());
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
 }
 
@@ -1007,11 +1007,11 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
     const int i = uiTabPaths->comboBoxNodes->currentIndex();
     if (i != -1 && index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPaths->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-            rowNode.SetAngleType(static_cast<PieceNodeAngle>(CURRENT_DATA(uiTabPaths->comboBoxAngle).toUInt()));
+            rowNode.SetAngleType(static_cast<PieceNodeAngle>(uiTabPaths->comboBoxAngle->currentData().toUInt()));
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
@@ -1198,7 +1198,7 @@ void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
     const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
     if (i != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -1240,7 +1240,7 @@ void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
     const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
     if (i != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -1273,7 +1273,7 @@ void DialogSeamAllowance::PassmarkShowSecondChanged(int state)
     const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
     if (i != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -2310,7 +2310,7 @@ bool DialogSeamAllowance::MainPathIsClockwise() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitNodesList()
 {
-    const quint32 id = CURRENT_DATA(uiTabPaths->comboBoxNodes).toUInt();
+    const quint32 id = uiTabPaths->comboBoxNodes->currentData().toUInt();
 
     uiTabPaths->comboBoxNodes->blockSignals(true);
     uiTabPaths->comboBoxNodes->clear();
@@ -2344,7 +2344,7 @@ void DialogSeamAllowance::InitNodesList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitPassmarksList()
 {
-    const quint32 id = CURRENT_DATA(uiTabPassmarks->comboBoxPassmarks).toUInt();
+    const quint32 id = uiTabPassmarks->comboBoxPassmarks->currentData().toUInt();
 
     uiTabPassmarks->comboBoxPassmarks->blockSignals(true);
     uiTabPassmarks->comboBoxPassmarks->clear();
@@ -2427,7 +2427,7 @@ void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
     const int index = uiTabPaths->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPaths->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -2443,7 +2443,7 @@ void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
     const int index = uiTabPaths->comboBoxNodes->currentIndex();
     if (index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(CURRENT_DATA(uiTabPaths->comboBoxNodes).toUInt());
+        QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
             VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
@@ -2600,7 +2600,7 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
     quint32 currentId = NULL_ID;
     if (box->count() > 0)
     {
-        currentId = CURRENT_DATA(box).toUInt();
+        currentId = box->currentData().toUInt();
     }
 
     box->clear();
@@ -2643,10 +2643,8 @@ void DialogSeamAllowance::InitInternalPathsTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitPatternPieceDataTab()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     uiTabLabels->lineEditName->setClearButtonEnabled(true);
     uiTabLabels->lineEditLetter->setClearButtonEnabled(true);
-#endif
 
     connect(uiTabLabels->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 

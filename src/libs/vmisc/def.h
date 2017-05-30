@@ -48,22 +48,6 @@ template <class T> class QSharedPointer;
     #include <ciso646>
 #endif /* Q_CC_MSVC */
 
-//There is no automatic disconnection when the 'receiver' is destroyed because it's a functor with no QObject. However,
-//since 5.2 there is an overload which adds a "context object". When that object is destroyed, the connection is broken
-//(the context is also used for the thread affinity: the lambda will be called in the thread of the event loop of the
-// object used as context).
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
-#define RECEIVER(obj) (obj),
-#else
-#define RECEIVER(obj)
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#define CURRENT_DATA(box) box->itemData(box->currentIndex())
-#else
-#define CURRENT_DATA(box) box->currentData()
-#endif
-
 class QComboBox;
 class QMarginsF;
 class VTranslateMeasurements;

@@ -361,11 +361,8 @@ QString DialogTool::GetComboBoxCurrentData(const QComboBox *box, const QString &
 {
     SCASSERT(box != nullptr)
     QString value;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    value = box->itemData(box->currentIndex()).toString();
-#else
     value = box->currentData().toString();
-#endif
+
     if (value.isEmpty())
     {
         value = def;

@@ -305,7 +305,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply.data(), &QNetworkReply::readyRead, RECEIVER(this)[this]()
+    connect(m_reply.data(), &QNetworkReply::readyRead, this, [this]()
     {
         // this slot gets called every time the QNetworkReply has new data.
         // We read all of its new data and write it into the file.
@@ -313,7 +313,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
         // signal of the QNetworkReply
         m_xml.addData(m_reply->readAll());
     });
-    connect(m_reply.data(), &QNetworkReply::downloadProgress, RECEIVER(this)[this](qint64 bytesRead, qint64 totalBytes)
+    connect(m_reply.data(), &QNetworkReply::downloadProgress, this, [this](qint64 bytesRead, qint64 totalBytes)
     {
         Q_UNUSED(bytesRead)
         Q_UNUSED(totalBytes)

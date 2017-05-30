@@ -80,13 +80,13 @@ DialogNewMeasurements::~DialogNewMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 MeasurementsType DialogNewMeasurements::Type() const
 {
-    return static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt());
+    return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogNewMeasurements::MUnit() const
 {
-    return static_cast<Unit>(CURRENT_DATA(ui->comboBoxUnit).toInt());
+    return static_cast<Unit>(ui->comboBoxUnit->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
         InitMTypes();
-        InitUnits(static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt()));
+        InitUnits(static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt()));
     }
 
     // remember to call base class implementation
@@ -177,7 +177,7 @@ void DialogNewMeasurements::InitMTypes()
     int val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
-        val = CURRENT_DATA(ui->comboBoxMType).toInt();
+        val = ui->comboBoxMType->currentData().toInt();
     }
 
     ui->comboBoxMType->blockSignals(true);
@@ -215,7 +215,7 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
     int val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
-        val = CURRENT_DATA(ui->comboBoxUnit).toInt();
+        val = ui->comboBoxUnit->currentData().toInt();
     }
 
     ui->comboBoxUnit->blockSignals(true);

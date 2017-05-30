@@ -56,10 +56,8 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFirstNewDartPoint->setClearButtonEnabled(true);
     ui->lineEditSecondNewDartPoint->setClearButtonEnabled(true);
-#endif
 
     const QString name1 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel);
     const QString name2 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel, name1);

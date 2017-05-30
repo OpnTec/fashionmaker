@@ -49,9 +49,7 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;

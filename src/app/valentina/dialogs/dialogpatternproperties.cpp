@@ -67,9 +67,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditAuthor->setClearButtonEnabled(true);
-#endif
 
     SCASSERT(doc != nullptr)
 
@@ -89,7 +87,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, [this]()
     {
         ShowInGraphicalShell(m_filePath);
     });
@@ -140,7 +138,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     const QString size = QString().setNum(doc->GetDefCustomSize());
     SetDefaultSize(size);
 
-    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, RECEIVER(this)[this]()
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, this, [this]()
     {
         ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
         ui->comboBoxSize->setEnabled(ui->radioButtonDefFromP->isChecked());
@@ -148,20 +146,20 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
 
     auto DefValueChanged = [this](){defaultChanged = true;};
 
-    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, RECEIVER(this)DefValueChanged);
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, this, DefValueChanged);
 
     ui->radioButtonDefFromP->setChecked(doc->IsDefCustom());
 
     connect(ui->comboBoxHeight, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            RECEIVER(this)DefValueChanged);
+            this, DefValueChanged);
     connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            RECEIVER(this)DefValueChanged);
+            this, DefValueChanged);
 
     const bool readOnly = doc->IsReadOnly();
     ui->checkBoxPatternReadOnly->setChecked(readOnly);
     if (not readOnly)
     {
-        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, RECEIVER(this)[this](){securityChanged = true;});
+        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this, [this](){securityChanged = true;});
     }
     else
     {
@@ -736,7 +734,7 @@ void DialogPatternProperties::InitImage()
 {
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
-    connect(ui->imageLabel, &QWidget::customContextMenuRequested, RECEIVER(this)[this]()
+    connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, [this]()
     {
         QMenu menu(this);
         menu.addAction(deleteAction);
@@ -752,7 +750,7 @@ void DialogPatternProperties::InitImage()
     saveImageAction   = new QAction(tr("Save image to file"), this);
     showImageAction   = new QAction(tr("Show image"), this);
 
-    connect(deleteAction, &QAction::triggered, RECEIVER(this)[this]()
+    connect(deleteAction, &QAction::triggered, this, [this]()
     {
         doc->DeleteImage();
         ui->imageLabel->setText(tr("Change image"));
@@ -763,7 +761,7 @@ void DialogPatternProperties::InitImage()
 
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
-    connect(showImageAction, &QAction::triggered, RECEIVER(this)[this]()
+    connect(showImageAction, &QAction::triggered, this, [this]()
     {
         QLabel *label = new QLabel(this, Qt::Window);
         const QImage image = GetImage();

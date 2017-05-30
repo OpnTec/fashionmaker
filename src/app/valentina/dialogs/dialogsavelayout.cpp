@@ -51,10 +51,8 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditPath->setClearButtonEnabled(true);
     ui->lineEditFileName->setClearButtonEnabled(true);
-#endif
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
@@ -62,11 +60,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
-#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
     ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(baseFilenameRegExp), this));
-#else
-    ui->lineEditFileName->setValidator( new QRegExpValidator(QRegExp(baseFilenameRegExp), this));
-#endif
 
     const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
@@ -97,10 +91,10 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + Format());
     };
 
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, RECEIVER(this)ShowExample);
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            RECEIVER(this)ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, RECEIVER(this)[this]()
+            this, ShowExample);
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
     {
         const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
         bool usedNotExistedDir = false;
@@ -208,7 +202,7 @@ QString DialogSaveLayout::FileName() const
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::Format() const
 {
-    return CURRENT_DATA(ui->comboBoxFormat).toString();
+    return ui->comboBoxFormat->currentData().toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

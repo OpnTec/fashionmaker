@@ -135,13 +135,11 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmDpiX:
         case QPaintDevice::PdmDpiY:
             return static_cast<int>(engine->getResolution());
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
         case QPaintDevice::PdmDevicePixelRatio:
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         case QPaintDevice::PdmDevicePixelRatioScaled:
 #endif
             return 1;
-#endif
         default:
             qWarning("VDxfPaintDevice::metric(), unhandled metric %d\n", metric);
             break;

@@ -59,25 +59,15 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       doc(nullptr),
       openingPattern(false)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QString rules;
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    // Qt < 5.2 didn't feature categorized logging
-    // Do nothing
-#else
-
     // In Qt 5.2 need manualy enable debug information for categories. This work
     // because Qt doesn't provide debug information for categories itself. And in this
     // case will show our messages. Another situation with Qt 5.3 that has many debug
     // messages itself. We don't need this information and can turn on later if need.
     // But here Qt already show our debug messages without enabling.
     rules += QLatin1String("*.debug=true\n");
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
@@ -91,12 +81,10 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif //defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     if (not rules.isEmpty())
     {
         QLoggingCategory::setFilterRules(rules);
     }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     // Enable support for HiDPI bitmap resources
@@ -115,7 +103,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    connect(this, &QApplication::aboutToQuit, RECEIVER(this)[this]()
+    connect(this, &QApplication::aboutToQuit, this, [this]()
     {
         // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
         // instance. Solution is to call sync() before quit.

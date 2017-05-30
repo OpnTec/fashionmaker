@@ -409,11 +409,8 @@ inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
 {
     int value;
     bool ok = false;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    value = box->itemData(box->currentIndex()).toInt(&ok);
-#else
     value = box->currentData().toInt(&ok);
-#endif
+
     if (not ok)
     {
         return static_cast<T>(1);

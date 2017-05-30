@@ -62,9 +62,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));

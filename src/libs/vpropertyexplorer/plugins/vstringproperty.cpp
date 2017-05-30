@@ -57,9 +57,7 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->installEventFilter(this);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     tmpEditor->setClearButtonEnabled(clearButton);
-#endif
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setText(d_ptr->VariantValue.toString());
 

@@ -42,15 +42,6 @@ HEADERS += \
 # 5.2.0, 5.2.1
 # 5.3.0, 5.3.1, 5.3.2
 
-contains(QT_VERSION, ^5\\.[0-1]\\.[0-2]$) { # Since Qt 5.2.0
-    HEADERS += \
-        $$PWD/backport/qcommandlineoption.h \
-        $$PWD/backport/qcommandlineparser.h
-
-    SOURCES += \
-        $$PWD/backport/qcommandlineoption.cpp \
-        $$PWD/backport/qcommandlineparser.cpp
-}
 
 contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
     HEADERS += \

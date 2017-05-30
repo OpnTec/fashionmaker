@@ -143,7 +143,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
-    connect(doc, &VPattern::CheckLayout, RECEIVER(this)[this]()
+    connect(doc, &VPattern::CheckLayout, this, [this]()
     {
         if (pattern->DataPieces()->count() == 0)
         {
@@ -182,7 +182,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dockWidgetLayoutPages->setVisible(false);
 
     connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
-    connect(qApp, &QApplication::focusChanged, RECEIVER(this)[this](QWidget *old, QWidget *now)
+    connect(qApp, &QApplication::focusChanged, this, [this](QWidget *old, QWidget *now)
     {
         if (old == nullptr && isAncestorOf(now) == true)
         {// focus IN
@@ -232,12 +232,7 @@ MainWindow::MainWindow(QWidget *parent)
     actionPreferences->setMenuRole(QAction::NoRole);
     connect(actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     menu->setAsDockMenu();
-#else
-    extern void qt_mac_set_dock_menu(QMenu *);
-    qt_mac_set_dock_menu(menu);
-#endif
 #endif //defined(Q_OS_MAC)
 }
 
@@ -362,7 +357,7 @@ void MainWindow::InitScenes()
     sceneDetails->setTransform(ui->view->transform());
 
     connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
-    connect(ui->view, &VMainGraphicsView::MouseRelease, RECEIVER(this)[this](){EndVisualization(true);});
+    connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this](){EndVisualization(true);});
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -1817,9 +1812,9 @@ void MainWindow::ToolBarDraws()
     comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     comboBoxDraws->setEnabled(false);
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            RECEIVER(this)[this](int index){ChangePP(index);});
+            this, [this](int index){ChangePP(index);});
 
-    connect(ui->actionOptionDraw, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionOptionDraw, &QAction::triggered, this, [this]()
     {
         const QString activDraw = doc->GetNameActivPP();
         const QString nameDraw = PatternPieceName(activDraw);
@@ -3776,14 +3771,14 @@ void MainWindow::AddDocks()
     //Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
-    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, RECEIVER(this)[this](bool visible)
+    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, this, [this](bool visible)
     {
         isDockToolOptionsVisible = visible;
     });
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetGroups);
-    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, RECEIVER(this)[this](bool visible)
+    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, this, [this](bool visible)
     {
         isDockGroupsVisible = visible;
     });
@@ -3835,14 +3830,14 @@ void MainWindow::CreateActions()
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
 
-    connect(ui->actionHistory, &QAction::triggered, RECEIVER(this)[this](bool checked)
+    connect(ui->actionHistory, &QAction::triggered, this, [this](bool checked)
     {
         if (checked)
         {
             dialogHistory = new DialogHistory(pattern, doc, this);
             dialogHistory->setWindowFlags(Qt::Window);
             connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
-            connect(dialogHistory.data(), &DialogHistory::DialogClosed, RECEIVER(this)[this]()
+            connect(dialogHistory.data(), &DialogHistory::DialogClosed, this, [this]()
             {
                 ui->actionHistory->setChecked(false);
                 delete dialogHistory;
@@ -3858,7 +3853,7 @@ void MainWindow::CreateActions()
         }
     });
 
-    connect(ui->actionNewDraw, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionNewDraw, &QAction::triggered, this, [this]()
     {
         qCDebug(vMainWindow, "New PP.");
         QString patternPieceName = tr("Pattern piece %1").arg(comboBoxDraws->count()+1);
@@ -3882,12 +3877,12 @@ void MainWindow::CreateActions()
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
     connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportToCSV);
 
-    connect(ui->actionTable, &QAction::triggered, RECEIVER(this)[this](bool checked)
+    connect(ui->actionTable, &QAction::triggered, this, [this](bool checked)
     {
         if (checked)
         {
             dialogTable = new DialogIncrements(pattern, doc, this);
-            connect(dialogTable.data(), &DialogIncrements::DialogClosed, RECEIVER(this)[this]()
+            connect(dialogTable.data(), &DialogIncrements::DialogClosed, this, [this]()
             {
                 ui->actionTable->setChecked(false);
                 delete dialogTable;
@@ -3901,12 +3896,12 @@ void MainWindow::CreateActions()
         }
     });
 
-    connect(ui->actionAbout_Qt, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionAbout_Qt, &QAction::triggered, this, [this]()
     {
         QMessageBox::aboutQt(this, tr("About Qt"));
     });
 
-    connect(ui->actionAbout_Valentina, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionAbout_Valentina, &QAction::triggered, this, [this]()
     {
         DialogAboutApp *aboutDialog = new DialogAboutApp(this);
         aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -3916,19 +3911,19 @@ void MainWindow::CreateActions()
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
-    connect(ui->actionReportBug, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionReportBug, &QAction::triggered, this, [this]()
     {
         qCDebug(vMainWindow, "Reporting bug");
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/issues/new")));
     });
 
-    connect(ui->actionWiki, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionWiki, &QAction::triggered, this, [this]()
     {
         qCDebug(vMainWindow, "Showing online help");
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://wiki.valentinaproject.org/wiki/Main_Page")));
     });
 
-    connect(ui->actionForum, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionForum, &QAction::triggered, this, [this]()
     {
         qCDebug(vMainWindow, "Opening forum");
         QDesktopServices::openUrl(QUrl(QStringLiteral("http://forum.valentina-project.org/")));
@@ -3936,10 +3931,10 @@ void MainWindow::CreateActions()
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
 
-    connect(ui->actionPattern_properties, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionPattern_properties, &QAction::triggered, this, [this]()
     {
         DialogPatternProperties proper(curFile, doc, pattern, this);
-        connect(&proper, &DialogPatternProperties::UpdateGradation, RECEIVER(this)[this]()
+        connect(&proper, &DialogPatternProperties::UpdateGradation, this, [this]()
         {
             UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit()));
             UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit()));
@@ -3948,7 +3943,7 @@ void MainWindow::CreateActions()
     });
 
     ui->actionPattern_properties->setEnabled(false);
-    connect(ui->actionClosePattern, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionClosePattern, &QAction::triggered, this, [this]()
     {
         if (MaybeSave())
         {
@@ -3957,7 +3952,7 @@ void MainWindow::CreateActions()
         }
     });
 
-    connect(ui->actionShowCurveDetails, &QAction::triggered, RECEIVER(this)[this](bool checked)
+    connect(ui->actionShowCurveDetails, &QAction::triggered, this, [this](bool checked)
     {
         ui->view->itemClicked(nullptr);
         sceneDraw->EnableDetailsMode(checked);
@@ -3966,7 +3961,7 @@ void MainWindow::CreateActions()
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
 
-    connect(ui->actionOpenTape, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionOpenTape, &QAction::triggered, this, [this]()
     {
         const QString tape = qApp->TapeFilePath();
         const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
@@ -3994,7 +3989,7 @@ void MainWindow::CreateActions()
         QAction *action = new QAction(this);
         action->setVisible(false);
         recentFileActs[i] = action;
-        connect(recentFileActs[i], &QAction::triggered, RECEIVER(this)[action, this]()
+        connect(recentFileActs[i], &QAction::triggered, this, [action, this]()
         {
             if (action != nullptr)
             {
@@ -4244,7 +4239,6 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
 //---------------------------------------------------------------------------------------------------------------------
 QStringList MainWindow::GetUnlokedRestoreFileList() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QStringList restoreFiles;
     //Take all files that need to be restored
     QStringList files = qApp->ValentinaSettings()->GetRestoreFileList();
@@ -4279,9 +4273,6 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
         qApp->ValentinaSettings()->SetRestoreFileList(filtered);
     }
     return restoreFiles;
-#else
-    return qApp->ValentinaSettings()->GetRestoreFileList();
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4930,7 +4921,6 @@ void MainWindow::UpdateWindowTitle()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::IgnoreLocking(int error, const QString &path)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (VApplication::IsGUIMode())
     {
@@ -4993,11 +4983,6 @@ bool MainWindow::IgnoreLocking(int error, const QString &path)
         return false;
     }
     return true;
-#else
-    Q_UNUSED(error)
-    Q_UNUSED(path)
-    return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

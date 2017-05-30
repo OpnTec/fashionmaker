@@ -60,11 +60,7 @@ Q_LOGGING_CATEGORY(mApp, "m.application")
 
 QT_WARNING_POP
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
+#include <QCommandLineParser>
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)

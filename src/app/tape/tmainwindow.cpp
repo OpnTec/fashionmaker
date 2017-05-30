@@ -104,14 +104,12 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFullName->setClearButtonEnabled(true);
     ui->lineEditGivenName->setClearButtonEnabled(true);
     ui->lineEditFamilyName->setClearButtonEnabled(true);
     ui->lineEditEmail->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditFind->installEventFilter(this);
     ui->plainTextEditFormula->installEventFilter(this);
@@ -142,13 +140,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     QMenu *menu = new QMenu(this);
     connect(menu, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowDockMenu);
     AboutToShowDockMenu();
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     menu->setAsDockMenu();
-#else
-    extern void qt_mac_set_dock_menu(QMenu *);
-    qt_mac_set_dock_menu(menu);
-#endif
 #endif //defined(Q_OS_MAC)
 }
 
@@ -1901,7 +1893,7 @@ void TMainWindow::SetupMenu()
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
     connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportToCSV);
-    connect(ui->actionReadOnly, &QAction::triggered, RECEIVER(this)[this](bool ro)
+    connect(ui->actionReadOnly, &QAction::triggered, this, [this](bool ro)
     {
         if (not mIsReadOnly)
         {
@@ -1924,7 +1916,7 @@ void TMainWindow::SetupMenu()
     {
         QAction *action = new QAction(this);
         recentFileActs[i] = action;
-        connect(action, &QAction::triggered, RECEIVER(this)[action, this]()
+        connect(action, &QAction::triggered, this, [action, this]()
         {
             if (action != nullptr)
             {
@@ -1965,11 +1957,11 @@ void TMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
-    connect(ui->actionAboutQt, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionAboutQt, &QAction::triggered, this, [this]()
     {
         QMessageBox::aboutQt(this, tr("About Qt"));
     });
-    connect(ui->actionAboutTape, &QAction::triggered, RECEIVER(this)[this]()
+    connect(ui->actionAboutTape, &QAction::triggered, this, [this]()
     {
         DialogAboutTape *aboutDialog = new DialogAboutTape(this);
         aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
@@ -2118,11 +2110,11 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this] (){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, [this] (){search->FindNext();});
 
-    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
     {
         ui->toolButtonFindPrevious->setEnabled(state);
     });
-    connect(search.data(), &VTableSearch::HasResult, RECEIVER(this)[this] (bool state)
+    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
     {
         ui->toolButtonFindNext->setEnabled(state);
     });
@@ -2149,7 +2141,7 @@ void TMainWindow::InitWindow()
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, [this]()
     {
         ShowInGraphicalShell(curFile);
     });
@@ -2949,7 +2941,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     SCASSERT(menu != nullptr)
 
     QAction *action = menu->addAction(tr("&New Window"));
-    connect(action, &QAction::triggered, RECEIVER(this)[this]()
+    connect(action, &QAction::triggered, this, [this]()
     {
         qApp->NewMainWindow();
         qApp->MainWindow()->activateWindow();
@@ -2983,7 +2975,6 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
 //---------------------------------------------------------------------------------------------------------------------
 bool TMainWindow::IgnoreLocking(int error, const QString &path)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (not qApp->IsTestMode())
     {
@@ -3045,11 +3036,6 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
         return false;
     }
     return true;
-#else
-    Q_UNUSED(error)
-    Q_UNUSED(path)
-    return true;// On older Qt lock assumed always taken. Allow user to ignore warning.
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

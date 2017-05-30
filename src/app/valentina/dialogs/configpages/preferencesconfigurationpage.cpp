@@ -83,11 +83,11 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     connect(ui->systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
-        QString text = qApp->TrVars()->PMSystemAuthor(CURRENT_DATA(ui->systemCombo).toString());
+        QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
         ui->systemAuthorValueLabel->setText(text);
         ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = qApp->TrVars()->PMSystemBook(CURRENT_DATA(ui->systemCombo).toString());
+        text = qApp->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
         ui->systemBookValueLabel->setPlainText(text);
     });
 

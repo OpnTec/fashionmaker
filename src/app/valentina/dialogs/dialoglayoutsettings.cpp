@@ -824,7 +824,7 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
 QSizeF DialogLayoutSettings::Template()
 {
     PaperSizeTemplate temp;
-    temp = static_cast<PaperSizeTemplate>(CURRENT_DATA(ui->comboBoxTemplates).toInt());
+    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
 
     switch (temp)
     {
@@ -976,13 +976,13 @@ QMarginsF DialogLayoutSettings::GetDefPrinterFields() const
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
-    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxPaperSizeUnit).toString());
+    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::LayoutUnit() const
 {
-    return VDomDocument::StrToUnits(CURRENT_DATA(ui->comboBoxLayoutUnit).toString());
+    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

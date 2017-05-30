@@ -81,7 +81,7 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
-            RECEIVER(this)[this](QGraphicsSceneContextMenuEvent *event)
+            this, [this](QGraphicsSceneContextMenuEvent *event)
     {
         emit ShowContextMenu(event);
     });
