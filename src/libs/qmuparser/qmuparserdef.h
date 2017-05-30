@@ -52,6 +52,10 @@
 #    define QMUP_NOEXCEPT_EXPR(x)
 #  endif
 
+#ifndef __has_cpp_attribute
+# define __has_cpp_attribute(x) 0
+#endif
+
 #if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
 #   define QMUP_FALLTHROUGH [[fallthrough]];
 #elif defined(Q_CC_CLANG) && __cplusplus >= 201103L

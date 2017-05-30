@@ -530,6 +530,10 @@ const double dxfColors[][3] =
 #define DL_DCS_TRANS_CODE      2
 #define DL_PCS_TRANS_CODE      3
 
+#ifndef __has_cpp_attribute
+# define __has_cpp_attribute(x) 0
+#endif
+
 #if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
 #   define DL_FALLTHROUGH [[fallthrough]];
 #elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
