@@ -35,6 +35,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QT_WARNING_DISABLE_GCC("-Wsuggest-attribute=noreturn")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 typedef QHash<QString, int> NameHash_t;
 

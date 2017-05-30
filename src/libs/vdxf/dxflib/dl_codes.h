@@ -530,5 +530,23 @@ const double dxfColors[][3] =
 #define DL_DCS_TRANS_CODE      2
 #define DL_PCS_TRANS_CODE      3
 
+#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
+#   define DL_FALLTHROUGH [[fallthrough]];
+#elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
+    /* clang's fallthrough annotations are only available starting in C++11. */
+#   define DL_FALLTHROUGH [[clang::fallthrough]];
+#elif defined(Q_CC_MSVC)
+   /*
+    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
+    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
+    */
+#   include <sal.h>
+#   define DL_FALLTHROUGH __fallthrough;
+#elif defined(Q_CC_GNU) && (__GNUC__ >= 7)
+#   define DL_FALLTHROUGH [[gnu::fallthrough]];
+#else
+#   define DL_FALLTHROUGH
+#endif
+
 #endif
 

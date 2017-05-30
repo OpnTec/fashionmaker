@@ -30,6 +30,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class QCommandLineOptionPrivate;
 

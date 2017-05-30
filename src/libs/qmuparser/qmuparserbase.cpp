@@ -1407,9 +1407,7 @@ void QmuParserBase::CreateRPN() const
                 }
                 ++stArgCount.top();
                 // fallthrough intentional (no break!)
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                QMUP_FALLTHROUGH
             case cmEND:
                 ApplyRemainingOprt(stOpt, stVal);
                 break;
@@ -1466,9 +1464,7 @@ void QmuParserBase::CreateRPN() const
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                QMUP_FALLTHROUGH
             case cmLE:
             case cmGE:
             case cmNEQ:

@@ -5866,14 +5866,10 @@ int DL_Dxf::getLibVersion(const std::string& str)
         {
             case 4:
                 v3 = ver.at(3).toInt();
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+            DL_FALLTHROUGH
             case 3:
                 v2 = ver.at(2).toInt();
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+            DL_FALLTHROUGH
             case 2:
                 v0 = ver.at(0).toInt();
                 v1 = ver.at(1).toInt();

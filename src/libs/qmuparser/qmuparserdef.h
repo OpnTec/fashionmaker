@@ -52,6 +52,24 @@
 #    define QMUP_NOEXCEPT_EXPR(x)
 #  endif
 
+#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
+#   define QMUP_FALLTHROUGH [[fallthrough]];
+#elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
+    /* clang's fallthrough annotations are only available starting in C++11. */
+#   define QMUP_FALLTHROUGH [[clang::fallthrough]];
+#elif defined(Q_CC_MSVC)
+   /*
+    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
+    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
+    */
+#   include <sal.h>
+#   define QMUP_FALLTHROUGH __fallthrough;
+#elif defined(Q_CC_GNU) && (__GNUC__ >= 7)
+#   define QMUP_FALLTHROUGH [[gnu::fallthrough]];
+#else
+#   define QMUP_FALLTHROUGH
+#endif
+
 /** @brief If this macro is defined mathematical exceptions (div by zero) will be thrown as exceptions. */
 //#define QMUP_MATH_EXCEPTIONS
 

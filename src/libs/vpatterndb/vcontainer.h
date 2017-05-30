@@ -62,6 +62,7 @@ class VEllipticalArc;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_INTEL(2021)
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VContainerData : public QSharedData //-V690
 {
