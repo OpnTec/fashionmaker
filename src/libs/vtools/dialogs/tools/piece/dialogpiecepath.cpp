@@ -1134,9 +1134,9 @@ bool DialogPiecePath::PathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
-        else if (not EachPointLabelIsUnique(ui->listWidget))
+        else if (GetType() == PiecePathType::CustomSeamAllowance && not EachPointLabelIsUnique(ui->listWidget))
         {
-            url += tr("Each point in the path must be unique!");
+            url += tr("Each point in the <b>custom seam allowance</b> path must be unique!");
             ui->helpLabel->setText(url);
             return false;
         }
